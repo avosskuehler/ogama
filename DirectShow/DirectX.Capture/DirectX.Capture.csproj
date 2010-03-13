@@ -1,0 +1,161 @@
+﻿<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8C0015DB-69E1-46E7-8705-3A4F8BE2E5E7}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>DirectX.Capture</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>DirectX.Capture</RootNamespace>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>0.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>..\..\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>..\..\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AsfFormat.cs" />
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AudioCapabilities.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AudioSource.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BitmapEventArgs.cs" />
+    <Compile Include="Capture.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CaptureMode.cs" />
+    <Compile Include="CaptureModeEventArgs.cs" />
+    <Compile Include="CrossbarSource.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DeviceInUseException.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DirectShowPropertyPage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Filter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FilterCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Filters.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PropertyPage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PropertyPageCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Source.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SourceCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ThreadSafe.cs" />
+    <Compile Include="Tuner.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TVFineTune.cs" />
+    <Compile Include="VfwCompressorPropertyPage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="VideoCapabilities.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WMLib.cs" />
+    <Compile Include="WMProfileData.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DirectShowLib\DirectShowLib-2005.csproj">
+      <Project>{CE009BFA-5EF6-4153-B2A1-2FA79698A9AE}</Project>
+      <Name>DirectShowLib-2005</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>
