@@ -1,0 +1,1729 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Ogama.DataSet.OgamaDataSet" Collapsed="true">
+    <Position X="1" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BBkQElOEU+AQSQbIRQYQwJZBUA2C4zgWSUCEAVeBBVs=</HashCode>
+      <FileName>DataSet\OgamaDataSet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.DataSet.OgamaDataSetTableAdapters.TadSubjectParameters" Collapsed="true">
+    <Position X="2.5" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAAGAAEAAAAgMAIAAAQAAAACEICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.DataSet.OgamaDataSetTableAdapters.TadSubjects" Collapsed="true">
+    <Position X="4" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAAGAAEAAAAgMAIgAAAAAAASEICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.DataSet.OgamaDataSetTableAdapters.TadTrials" Collapsed="true">
+    <Position X="7" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EARAAGAAEAAAAgMAMAAAQAAAASEICAAAAAAAAAAABDA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.DataSet.OgamaDataSetTableAdapters.TadTrialEvents" Collapsed="true">
+    <Position X="5.5" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAAGAAEAAABgMANIAAQAAAACEICAAAAAAAgAAABJA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.DataSet.OgamaDataSetTableAdapters.TadRawdata" Collapsed="true">
+    <Position X="17.5" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAAGAAEAAAAAMAIAAAAAAAACEICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.DataSet.OgamaDataSetTableAdapters.TadAOIs" Collapsed="true">
+    <Position X="11.5" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAAGAAEAAAAAMAIAAAIAAgICEICAQAAAAAAIAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.DataSet.OgamaDataSetTableAdapters.TadShapeGroups" Collapsed="true">
+    <Position X="1" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAAGAAEAQAAAMAIAAAAAAAACEICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.DataSet.OgamaDataSetTableAdapters.TadGazeFixations" Collapsed="true">
+    <Position X="13" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAAGAAEAAAAgMgMAAAAAAAACEICAAAIAAEAIAABDA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.DataSet.OgamaDataSetTableAdapters.TadMouseFixations" Collapsed="true">
+    <Position X="14.5" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAAGAAEAAAAgMgMAAAAAAAACEICAAAIAAEAIAABDA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.DataSet.OgamaDataSetTableAdapters.TadParams" Collapsed="true">
+    <Position X="16" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAAGAAEAAAAAMAIAAAAAAAACEICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Document" Collapsed="true">
+    <Position X="10" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAREQsIAAABEAAAAEhQEAAACBQAAAAEACBAI=</HashCode>
+      <FileName>Document.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.OgamaInstaller" Collapsed="true">
+    <Position X="2.5" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAEAAACAIAAEEAACIAAADAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>OgamaInstaller.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Program" Collapsed="true">
+    <Position X="11.5" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.ExceptionHandling.ErrorDialog" Collapsed="true">
+    <Position X="14.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAABAAAACAAAACEAAAAcAAEAAAAAACASA=</HashCode>
+      <FileName>ExceptionHandling\ErrorDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.ExceptionHandling.ExceptionDialog" Collapsed="true">
+    <Position X="16" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgCgABACAwABAAAQCBAAAKAgAAAEAAEAIAAAACACA=</HashCode>
+      <FileName>ExceptionHandling\ExceptionDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.ExceptionHandling.ExceptionMethods" Collapsed="true">
+    <Position X="17.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAgEAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>ExceptionHandling\ExceptionMethods.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.ExceptionHandling.InformationDialog" Collapsed="true">
+    <Position X="1" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAKAAAAEAAACAAAACAEAEAUAAEAAAAAAAAAI=</HashCode>
+      <FileName>ExceptionHandling\InformationDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.ExceptionHandling.MessageBoxExceptionHandler" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>ExceptionHandling\MessageBoxExceptionHandler.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Ogama.ExceptionHandling.ShowLogDialog" Collapsed="true">
+    <Position X="4" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAACAAgBAAAACAAAACAAABAQAAEACAAAAQgAA=</HashCode>
+      <FileName>ExceptionHandling\ShowLogDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.ExceptionHandling.PropertyDialog" Collapsed="true">
+    <Position X="13" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAEAAACAAAACEIAAAUAAAAAAAAAAAAA=</HashCode>
+      <FileName>MainWindow\Dialogs\PropertyDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.ExceptionHandling.SQLConnectionDialog" Collapsed="true">
+    <Position X="1" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAMCAAAAEABACAAAACAgAAAkAkACAAAgAAAAA=</HashCode>
+      <FileName>MainWindow\Dialogs\SQLConnectionDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.MainWindow.ContextPanel" Collapsed="true">
+    <Position X="16" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgJgAAAJQyAKpAgAmiGAEAgaIBIECAQAAiACAQNAICs=</HashCode>
+      <FileName>MainWindow\ContextPanel\ContextPanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.MainWindow.AboutBox" Collapsed="true">
+    <Position X="1" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>kIAAAAgAQCAgCBUAAAKAAAgDAAAAEAIAECAABAAAAEA=</HashCode>
+      <FileName>MainWindow\Dialogs\AboutBox.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.MainWindow.CheckForUpdates" Collapsed="true">
+    <Position X="5.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAABISCCAAAgEEAFCEBEICBAUgAEEgEiAAAAgAAAg=</HashCode>
+      <FileName>MainWindow\Dialogs\CheckforUpdates.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.MainWindow.ExperimentSettingsDialog" Collapsed="true">
+    <Position X="2.5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>cBAAIAARICAQIBEQIECAEAAKgQEQgEEBEHIBAAAAAAA=</HashCode>
+      <FileName>MainWindow\Dialogs\ExperimentSettingsDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.MainWindow.FlashMissing" Collapsed="true">
+    <Position X="11.5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAACAAABAAAASAAAgCAAIAAEAAEAAAAAAAAAA=</HashCode>
+      <FileName>MainWindow\Dialogs\FlashMissing.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.MainWindow.HowToActivateAlea" Collapsed="true">
+    <Position X="2.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAABAAAACAAAACAAEAAEAAAAAAggAAAAA=</HashCode>
+      <FileName>MainWindow\Dialogs\HowToActivateAlea.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.MainWindow.HowToActivateTobii" Collapsed="true">
+    <Position X="4" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAABAAAACAAAACAAAAAEAAAAAAAABQQAA=</HashCode>
+      <FileName>MainWindow\Dialogs\HowToActivateTobii.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.MainWindow.InitialSplash" Collapsed="true">
+    <Position X="2.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAgAACAAAAQAAACAAAACAAAAIAAAAAAAAABAAAA=</HashCode>
+      <FileName>MainWindow\Dialogs\InitialSplash.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.MainWindow.LoadDocSplash" Collapsed="true">
+    <Position X="5.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAABAQACAQABAAAACAAAACAAAAIAAAEIAAAABAAAA=</HashCode>
+      <FileName>MainWindow\Dialogs\LoadDocSplash.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.MainWindow.NewExperiment" Collapsed="true">
+    <Position X="16" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAABAACAAAAEAAACAQAgCAAIAAEBAEAAQQAAEAAE=</HashCode>
+      <FileName>MainWindow\Dialogs\NewExperiment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.MainWindow.Options" Collapsed="true">
+    <Position X="4" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>/8WCZ10BLvJ0gftRyn6gxv3ilTHeg9jAVajp/xM5VLw=</HashCode>
+      <FileName>MainWindow\Dialogs\Options.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.MainWindow.StartTask" Collapsed="true">
+    <Position X="2.5" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAACCAAAAAAIACAIAACAAAABAAAMEEAAABAAAE=</HashCode>
+      <FileName>MainWindow\Dialogs\StartTask.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.MainWindow.StartUpDialog" Collapsed="true">
+    <Position X="4" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>DAAAABAFCGAQAAWABBCAAAACCAAAAEAAEBAACAAAEAA=</HashCode>
+      <FileName>MainWindow\Dialogs\StartUpDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.MainWindow.UpgradeDocumentSplash" Collapsed="true">
+    <Position X="10" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAABAQACAQABAAAACAAAACAAAAIAAAEAAAAABACAA=</HashCode>
+      <FileName>MainWindow\Dialogs\UpgradeDocumentSplash.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.MainWindow.MainForm" Collapsed="true">
+    <Position X="0.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>S2wns//cISSBFipvfmHp0e+T3lyi8kx0lUjd3TSIDb8=</HashCode>
+      <FileName>MainWindow\MainForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.AOI.AOIModule" Collapsed="true">
+    <Position X="6.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>aoNj1/8BnGaM0L8HLfngiIv37IC7nwE1AHxF4y1tFwg=</HashCode>
+      <FileName>Modules\AOI\AOIModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.AOI.AOIPicture" Collapsed="true">
+    <Position X="8.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIADJFQACAgxAAIBAKAhIQG0gACxFIEAEDABABgAQA=</HashCode>
+      <FileName>Modules\AOI\AOIPicture.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.AOI.AOIStatistic" Collapsed="true">
+    <Position X="10" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAgAEAAIgCAAAQAxACAAEQAAAAAAAQAA=</HashCode>
+      <FileName>Modules\AOI\AOIStatistic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.AOI.AddGridDlg" Collapsed="true">
+    <Position X="2.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABASgAARECAICAAEACAAAAAUAIEABAAAAAAAA=</HashCode>
+      <FileName>Modules\AOI\Dialogs\AddGridDlg.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.AOI.GroupNameDlg" Collapsed="true">
+    <Position X="17.5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAABQCAAAAEAAACAAAACAAAAAEAAEAAAAAAAAAE=</HashCode>
+      <FileName>Modules\AOI\Dialogs\GroupNameDlg.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.AOI.NameShapeDlg" Collapsed="true">
+    <Position X="13" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABACAQAAEAAACAAAACAAAAAEAAEQAAAAAAAAA=</HashCode>
+      <FileName>Modules\AOI\Dialogs\NameShapeDlg.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.AttentionMap.AttentionMapModule" Collapsed="true">
+    <Position X="9.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>wIAAA/0B8LAcEAcAgaCEIMkPAChAuQIYgQgAPQgQCjU=</HashCode>
+      <FileName>Modules\AttentionMap\AttentionMapModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.AttentionMap.AttentionMapPicture" Collapsed="true">
+    <Position X="1" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgBAAAEgACBAAAAAQACQADACAQAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\AttentionMap\AttentionMapPicture.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.AttentionMap.AttentionMaps" Collapsed="true">
+    <Position X="2.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RAAABAAgABUAAIAACAQAAEAQAAAAEQIQAAAEEUAEFBA=</HashCode>
+      <FileName>Modules\AttentionMap\AttentionMaps.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.AttentionMap.PaletteBitmap" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.5" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACABABEABCgAEgQAwAARIFAAMAEAABgAAAEIAABAEBA=</HashCode>
+      <FileName>Modules\AttentionMap\PaletteBitmap.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Ogama.Modules.Common.DialogTop" Collapsed="true">
+    <Position X="8.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAQAAACAgAAAgAACAAAgCAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Modules\Common\Controls\DialogTop.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.HelpDialog" Collapsed="true">
+    <Position X="1" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAABEAAACAAAACEAAAAUCAEAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Common\Controls\HelpDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.TimeLineFilterDialog" Collapsed="true">
+    <Position X="10" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAACAAAAAAAACgAAECAAIAAVAEEAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Common\Controls\TimeLineFilterDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.TrialTimeLine" Collapsed="true">
+    <Position X="5.5" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAggCAAAgAAAACAAAACAAAAQEgAgEAAAAACAAA=</HashCode>
+      <FileName>Modules\Common\Controls\TrialTimeLine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.CompletedEventArgs" Collapsed="true">
+    <Position X="13" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Common\CustomEventArgs\CompletedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.CounterChangedEventArgs" Collapsed="true">
+    <Position X="17.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAgAAAAAAAAgAAAAIAA=</HashCode>
+      <FileName>Modules\Common\CustomEventArgs\CounterChangedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.GazeDataChangedEventArgs" Collapsed="true">
+    <Position X="14.5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Common\CustomEventArgs\GazeDataChangedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.NewRawDataAvailableEventArgs" Collapsed="true">
+    <Position X="17.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Modules\Common\CustomEventArgs\NewRawDataAvailableEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.ResponseChangedEventArgs" Collapsed="true">
+    <Position X="4" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Common\CustomEventArgs\ResponseChangedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.SlideChangedEventArgs" Collapsed="true">
+    <Position X="5.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAgAAAAoAA=</HashCode>
+      <FileName>Modules\Common\CustomEventArgs\SlideChangedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.SliderValueChangedEventArguments" Collapsed="true">
+    <Position X="10" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Common\CustomEventArgs\SliderValueChangedEventArguments.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.TrialChangedEventArgs" Collapsed="true">
+    <Position X="17.5" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQEAAAEBAAQAAAggAAAIIAAAAAAAAAAAIAAABCAA=</HashCode>
+      <FileName>Modules\Common\CustomEventArgs\TrialChangedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.TrialEventIDFoundEventArgs" Collapsed="true">
+    <Position X="2.5" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Modules\Common\CustomEventArgs\TrialEventIDFoundEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.TrialEventOccuredEventArgs" Collapsed="true">
+    <Position X="4" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAgAEAAAABAAA=</HashCode>
+      <FileName>Modules\Common\CustomEventArgs\TrialEventOccuredEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.CustomRenderer" Collapsed="true">
+    <Position X="15.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAIACAAAAAAABAAAAAAAAAAIACAgAAAAAAAACAQ=</HashCode>
+      <FileName>Modules\Common\CustomRenderer\CustomRenderer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.SlideshowTreeNodeRenderer" Collapsed="true">
+    <Position X="14.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Common\CustomRenderer\SlideshowTreeNodeRenderer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.TrialRenderer" Collapsed="true">
+    <Position X="16" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Common\CustomRenderer\TrialRenderer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.FormWithAccellerators" Collapsed="true">
+    <Position X="5.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAQAAAAAAAAAGBAAAAIAIAAAAAAAABAAIAA=</HashCode>
+      <FileName>Modules\Common\FormTemplates\FormWithAccellerators.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.FormWithInterface" Collapsed="true">
+    <Position X="2.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YIAAIQEAACACQAAGAADkgAAyIAhAIgARBUAGACAAAEA=</HashCode>
+      <FileName>Modules\Common\FormTemplates\FormWithInterface.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.FormWithPicture" Collapsed="true">
+    <Position X="2.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QBAAoAMIAaAAAAgCADCAAAACACAAIggDAEAIAREAQIA=</HashCode>
+      <FileName>Modules\Common\FormTemplates\FormWithPicture.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.FormWithSubjectAndTrialSelection" Collapsed="true">
+    <Position X="1.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAMAAAAAAgAAAAJAQAAEAEAAAAIQAAAAABAAiAA=</HashCode>
+      <FileName>Modules\Common\FormTemplates\FormWithSubjectAndTrialSelection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.FormWithTrialSelection" Collapsed="true">
+    <Position X="8" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAABAQAAEAEAAAAIQAAAAABAACAA=</HashCode>
+      <FileName>Modules\Common\FormTemplates\FormWithTrialSelection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.PictureWithFixations" Collapsed="true">
+    <Position X="9" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AhLAEAeiUDACQhFAEOKI6BQiAYk2BAECAIKgAEAiYIg=</HashCode>
+      <FileName>Modules\Common\PictureTemplates\PictureWithFixations.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.Slideshow" Collapsed="true">
+    <Position X="0.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAACAwAkACAAgCBgBgABABBAgIAAUgAACBBQAgJBI=</HashCode>
+      <FileName>Modules\Common\SlideCollections\Slideshow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.SlideshowTreeNode" Collapsed="true">
+    <Position X="0.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAgAAAAAAAIAAAAKCAABAAAAAAAAEgAAYBDA=</HashCode>
+      <FileName>Modules\Common\SlideCollections\SlideshowTreeNode.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Ogama.Modules.Common.Trial" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAgAAEAAAAAAQAAAAEAAAAAAAAAAAAAhA=</HashCode>
+      <FileName>Modules\Common\SlideCollections\Trial.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Ogama.Modules.Common.TrialCollection" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="1" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Modules\Common\SlideCollections\TrialCollection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Ogama.Modules.Common.AsyncHelper" Collapsed="true">
+    <Position X="17.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Modules\Common\Tools\AsynchronousEvents.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.CollectionUtils&lt;T&gt;" Collapsed="true">
+    <Position X="7" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Modules\Common\Tools\CollectionUtils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.FixationDetection" Collapsed="true">
+    <Position X="8.5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>E1QQYAzgAHCAIagYgAQQBAAAEhgEwCC7ABAAgAAAIQw=</HashCode>
+      <FileName>Modules\Common\Tools\FixationDetection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.IOHelpers" Collapsed="true">
+    <Position X="4" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAg=</HashCode>
+      <FileName>Modules\Common\Tools\IOHelpers.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.PresentationScreen" Collapsed="true">
+    <Position X="8.5" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAEAAAAAAAAAAAAAAQAAAEAAIAAAJAAAAAA=</HashCode>
+      <FileName>Modules\Common\Tools\PresentationScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.Queries" Collapsed="true">
+    <Position X="14.5" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gCogCQDICADSAIRZKGYgMAYAoEQGBAAAkAQACAVCAqA=</HashCode>
+      <FileName>Modules\Common\Tools\Queries.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.SecondaryScreen" Collapsed="true">
+    <Position X="14.5" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Common\Tools\SecondaryScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.InputEvent" Collapsed="true">
+    <Position X="4.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAA=</HashCode>
+      <FileName>Modules\Common\TrialEvents\InputEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.MediaEvent" Collapsed="true">
+    <Position X="6.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAA=</HashCode>
+      <FileName>Modules\Common\TrialEvents\MediaEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.TrialEvent" Collapsed="true">
+    <Position X="5.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACABAAIAAAACAAAAAAAAAAACAAABAgAAIQAAACAAAwA=</HashCode>
+      <FileName>Modules\Common\TrialEvents\TrialEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.NameObjectList&lt;T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CGIAAEAAAAAIABAQCAAQBAQCAABAACAEKAAggABUIAA=</HashCode>
+      <FileName>Modules\Common\Types\NameObjectList.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Ogama.Modules.Common.SelectionsState" Collapsed="true">
+    <Position X="16" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAUAAAgAAAgAAAAAAAAAAAACAAgAAgAAICAAACAAACA=</HashCode>
+      <FileName>Modules\Common\Types\SelectionsState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.StringEnum" Collapsed="true">
+    <Position X="7" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAgAgAAAAAAAAAiAAAAAAAgAAAAIAAAA=</HashCode>
+      <FileName>Modules\Common\Types\StringEnum.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.StringValueAttribute" Collapsed="true">
+    <Position X="8.5" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAgAAAAAAA=</HashCode>
+      <FileName>Modules\Common\Types\StringValueAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.XMLSerializableDictionary&lt;TKey, TValue&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.5" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAABAAAAAAAAAgAAAABA=</HashCode>
+      <FileName>Modules\Common\Types\XMLSerializableDictionary.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Ogama.Modules.Common.XMLSerializableSortedList&lt;TKey, TValue&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAABAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Modules\Common\Types\XMLSerializableSortedList.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Ogama.Modules.Database.DatabaseModule" Collapsed="true">
+    <Position X="5.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QlGIxY0jXXFPE+dDAfGCKZ5GEQGSMNaZiTwQIcICLpI=</HashCode>
+      <FileName>Modules\Database\DatabaseModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Fixations.ExportOptionsDialog" Collapsed="true">
+    <Position X="5.5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACABAIEAAASgMKAGAAAAAEAIkCAAAAAAAAA=</HashCode>
+      <FileName>Modules\Fixations\ExportOptionsDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Fixations.FixationCalculation" Collapsed="true">
+    <Position X="7" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAEAARAAACAIAQAQAAAAAEAAgAAAIgABAAAA=</HashCode>
+      <FileName>Modules\Fixations\FixationCalculation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Fixations.FixationsModule" Collapsed="true">
+    <Position X="1" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>wiADQ/1BwLA0EbcC5eHZvFYmqARGP0CYiJJAMA5IQZY=</HashCode>
+      <FileName>Modules\Fixations\FixationsModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.ImportExport.AOIDataSettings" Collapsed="true">
+    <Position X="7" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\ImportExport\AOIData\AOIDataSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.ImportExport.ImportAOI" Collapsed="true">
+    <Position X="7" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAACAAAAAAgAgCAAEACABAAAgAAAAQAAAAAAA=</HashCode>
+      <FileName>Modules\ImportExport\AOIData\ImportAOI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.ImportExport.ImportAOIAssignColumnsDialog" Collapsed="true">
+    <Position X="4.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAMSBACAAAAMAAASAJAACQBAAQRBBEWAAAAAAAAA=</HashCode>
+      <FileName>Modules\ImportExport\AOIData\ImportAOIAssignColumnsDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.ImportExport.ImportAOIAssistentDialog" Collapsed="true">
+    <Position X="8.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAABEAAACAAAACAAAAAUAAEAAAAAAAAAA=</HashCode>
+      <FileName>Modules\ImportExport\AOIData\ImportAOIAssistentDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.ImportExport.ASCIISettings" Collapsed="true">
+    <Position X="11.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAokBgByoC4EACIAFxCAAAcCBAgAACQQAEAgAAQAA=</HashCode>
+      <FileName>Modules\ImportExport\Common\ASCIISettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.ImportExport.AskForColumTitleDialog" Collapsed="true">
+    <Position X="13" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAACAAABEAAACAAIACAAAAAEBAEAAAAAAAAEA=</HashCode>
+      <FileName>Modules\ImportExport\Common\AskForColumTitleDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.ImportExport.AskForSubjectNameDialog" Collapsed="true">
+    <Position X="14.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAACAABBEAAACAAIACAAAABEAAEAAAACAAAAA=</HashCode>
+      <FileName>Modules\ImportExport\Common\AskForSubjectNameDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.ImportExport.DetectionSettings" Collapsed="true">
+    <Position X="7" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ICAAAAEAAAACAAQAMEAAkCBAAAIAAAAAIQCAgjAghBI=</HashCode>
+      <FileName>Modules\ImportExport\Common\DetectionSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.ImportExport.ImportDataSplash" Collapsed="true">
+    <Position X="10" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAABAQACAQACAAAACAAAACAAABIAAAEAAAAABAAAA=</HashCode>
+      <FileName>Modules\ImportExport\Common\ImportDataSplash.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.ImportExport.ImportImagesDialog" Collapsed="true">
+    <Position X="7.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IoAEkIQBQKOBAREMQgKopAAqADCjMwFIECAAAQqIYAE=</HashCode>
+      <FileName>Modules\ImportExport\Common\ImportImagesDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.ImportExport.ImportParseFileDialog" Collapsed="true">
+    <Position X="10.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BICAgCQBICSBAREASALAIRBTEBChIQBIGCAkkQCIAkA=</HashCode>
+      <FileName>Modules\ImportExport\Common\ImportParseFileDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.ImportExport.ImportTrialsDialog" Collapsed="true">
+    <Position X="5.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QgAhgIQBACuBAREIUhKAkRAqgBAROwFIMCCAgVKIAAg=</HashCode>
+      <FileName>Modules\ImportExport\Common\ImportTrialsDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.ImportExport.ImportFixations" Collapsed="true">
+    <Position X="11.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAgBACACAAQAgAQAgAAAEgIIAgACAAAABAAAgAAAA=</HashCode>
+      <FileName>Modules\ImportExport\FixationData\ImportFixations.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.ImportExport.ImportFixationsAssignColumnsDialog" Collapsed="true">
+    <Position X="8.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>OQAAkAQBACAAABMAAASABBBCQBAwAQBBEIAAAABAAAA=</HashCode>
+      <FileName>Modules\ImportExport\FixationData\ImportFixationsAssignColumnsDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.ImportExport.ImportFixationsAssistentDialog" Collapsed="true">
+    <Position X="13" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAABEAAACAAAACAAAAAUAAEAAAAAAAAAA=</HashCode>
+      <FileName>Modules\ImportExport\FixationData\ImportFixationsAssistentDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.ImportExport.ImportOgamaData" Collapsed="true">
+    <Position X="14.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABEAEBAAAiAAAAAAAAgAACEAIIAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Modules\ImportExport\OgamaData\ImportOgamaData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.ImportExport.ImportRawData" Collapsed="true">
+    <Position X="16" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AECAkBACACAAQAgAQAAAACEgIIAgAAAAAEBAAAgAAAY=</HashCode>
+      <FileName>Modules\ImportExport\RawData\ImportRawData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.ImportExport.ImportRawDataAssignColumnsDialog" Collapsed="true">
+    <Position X="11.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>4wAAwAQBACAAABMAAASABBBCwBAQAQBAEAAAAQAAAAA=</HashCode>
+      <FileName>Modules\ImportExport\RawData\ImportRawDataAssignColumnsDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.ImportExport.ImportRawDataAssistentDialog" Collapsed="true">
+    <Position X="17.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAABEAAACAAAACAAAAAEAAEAAAAAAAAAA=</HashCode>
+      <FileName>Modules\ImportExport\RawData\ImportRawDataAssistentDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.Alea.AleaSetting" Collapsed="true">
+    <Position X="4" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAACACAABAAAFAQABBQAAAUEBACQAACEMBAAhAAQBA=</HashCode>
+      <FileName>Modules\Recording\Alea\AleaSetting.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.Alea.AleaSettingsDialog" Collapsed="true">
+    <Position X="5.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CjABCQCAACAAALEyBACEERGCAAAIBGAAADABCCDYEAA=</HashCode>
+      <FileName>Modules\Recording\Alea\AleaSettingsDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.Alea.AleaTracker" Collapsed="true">
+    <Position X="16" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQEAAAAkACUQgQFgAMEABMggIgGgQApAoCLAAsBMBAA=</HashCode>
+      <FileName>Modules\Recording\Alea\AleaTracker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.Alea.CalibrationDoneEventArgs" Collapsed="true">
+    <Position X="4" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Recording\Alea\CalibrationDoneEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.AskSaveDataDialog" Collapsed="true">
+    <Position X="16" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAKAAAAAAAACAAAACAEAAAAAEEAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Recording\Dialogs\AskSaveDataDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.ConnectionFailedDialog" Collapsed="true">
+    <Position X="14.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAACAAABAAAACAAAACEAAAAEAAEAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Recording\Dialogs\ConnectionFailedDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.SavingSplash" Collapsed="true">
+    <Position X="8.5" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABQQACAwABAAAACAAQQCAAAAAAAAEAAACADAAAA=</HashCode>
+      <FileName>Modules\Recording\Dialogs\SavingSplash.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.SavingSuccessDialog" Collapsed="true">
+    <Position X="10" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAACAAAACAEAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Recording\Dialogs\SavingSuccessDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.ScreenCaptureDialog" Collapsed="true">
+    <Position X="11.5" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EEAAAAAQACAFIBAAAACCCICCAgAAIUAAECQCAACAAAA=</HashCode>
+      <FileName>Modules\Recording\Dialogs\ScreenCaptureDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.SelectTracker" Collapsed="true">
+    <Position X="17.5" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAQAIIGAAAAEAAACAAABKCAAAAUAAFAAAAgBAAAA=</HashCode>
+      <FileName>Modules\Recording\Dialogs\SelectTracker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.SubjectDetailsDialog" Collapsed="true">
+    <Position X="10" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAKAQCAADBGAAECAgYACAAEABGAAEAAAACAALAA=</HashCode>
+      <FileName>Modules\Recording\Dialogs\SubjectDetailsDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.TriggerDialog" Collapsed="true">
+    <Position X="7" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAACAQABEAAECAAAACAAAAAEAAEAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Recording\Dialogs\TriggerDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.VHSettingsDialog" Collapsed="true">
+    <Position X="11.5" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIMAABBACAAABEAAASAABQCQAECgVCAECAAAAAIAEE=</HashCode>
+      <FileName>Modules\Recording\Dialogs\VHSettingsDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.PresenterModule" Collapsed="true">
+    <Position X="10" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YQACTlYByCQIQIPmBMWE0AE2AAPFAAJiEBGCIwABoAE=</HashCode>
+      <FileName>Modules\Recording\Presenter\PresenterModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.ScreenCaptureSetting" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EBAAAAAQARAIAAFYCCAASAAyACxAEAAMBACIgBQAiAA=</HashCode>
+      <FileName>Modules\Recording\Presenter\ScreenCaptureSetting.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Ogama.Modules.Recording.RecordingPicture" Collapsed="true">
+    <Position X="17.5" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAEwACAAEAAAQACEIAACAACAAAAAgAAQAAAIAAA=</HashCode>
+      <FileName>Modules\Recording\RecordingPicture.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.RecordModule" Collapsed="true">
+    <Position X="3.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>95KjUf1jmqiPVLXJgFGXJJFSsEnIZ1M8M3QC529M4N8=</HashCode>
+      <FileName>Modules\Recording\RecordModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.Tracker" Collapsed="true">
+    <Position X="13.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAANICABAQJAgIEAAMCEAoQJBECEqAAgAEAADIE=</HashCode>
+      <FileName>Modules\Recording\TrackerBase\Tracker.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Ogama.Modules.Recording.TrackerWithStatusControls" Collapsed="true">
+    <Position X="16.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AkAQAAAAAEADIQAAAAAEAEAABAAAAAAABiBAAEYsEAA=</HashCode>
+      <FileName>Modules\Recording\TrackerBase\TrackerWithStatusControls.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.UnlockVH" Collapsed="true">
+    <Position X="8.5" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Recording\UnlockVH.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.MouseOnly.MouseOnlySetting" Collapsed="true">
+    <Position X="8.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Recording\MouseOnly\MouseOnlySetting.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.MouseOnly.MouseOnlySettingsDlg" Collapsed="true">
+    <Position X="10" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAhGBAACAAAACAAAAAEAAAgAAAABAAAA=</HashCode>
+      <FileName>Modules\Recording\MouseOnly\MouseOnlySettingsDlg.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.MouseOnly.MouseOnlyTracker" Collapsed="true">
+    <Position X="13" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgABAAABAQDAAAEAAICAIgAgAAMAIAhAAEAABAA=</HashCode>
+      <FileName>Modules\Recording\MouseOnly\MouseOnlyTracker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.Presenter.SlidePresentationContainer" Collapsed="true">
+    <Position X="8.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ARAABAAAAAAAAAAAAAAABACAEAAAAAAAAACAAAAEBAQ=</HashCode>
+      <FileName>Modules\Recording\Presenter\SlidePresentationContainer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.SMI.SMICalibrationForm" Collapsed="true">
+    <Position X="11.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACBAAAAACAAAAAAAACAAAYCAAAAAQACAAEAAgQIAAA=</HashCode>
+      <FileName>Modules\Recording\SMI\SMICalibrationForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.SMI.SMIClient" Collapsed="true">
+    <Position X="13" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IQQAABADIAACAYBALAFACsAQAAIBBAgAggIAABAAQQw=</HashCode>
+      <FileName>Modules\Recording\SMI\SMIClient.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.SMI.SMISetting" Collapsed="true">
+    <Position X="14.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAKAEAABAAAAAQEABAAFAAAAABAAACAAgAAgAIAAA=</HashCode>
+      <FileName>Modules\Recording\SMI\SMISetting.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.SMI.SMISettingsDlg" Collapsed="true">
+    <Position X="16" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACgIAgAACAACJEAQACAAABCIAEEQkAAACAlAAFAAAA=</HashCode>
+      <FileName>Modules\Recording\SMI\SMISettingsDlg.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.SMI.SMITracker" Collapsed="true">
+    <Position X="14.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACACQEAQBACAEBAIAAAgAgAAIAogBAQEAABAA=</HashCode>
+      <FileName>Modules\Recording\SMI\SMITracker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.Tobii.TobiiSetting" Collapsed="true">
+    <Position X="11.5" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AoAAAEACAAAIAAAAAASAAIAAAAJAAAAIAAAAyEAEAAw=</HashCode>
+      <FileName>Modules\Recording\Tobii\TobiiSetting.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.Tobii.TobiiSettingsDialog" Collapsed="true">
+    <Position X="13" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAESAgAAigQABERVACAEAEDACEABEAAACgACADIAGE=</HashCode>
+      <FileName>Modules\Recording\Tobii\TobiiSettingsDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.Tobii.TobiiTracker" Collapsed="true">
+    <Position X="17.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAgAEAAAQBQBgAgEYAKAQAgAiABIAoChACMwIBAA=</HashCode>
+      <FileName>Modules\Recording\Tobii\TobiiTracker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.Tobii.TobiiTrackStatus" Collapsed="true">
+    <Position X="14.5" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQIAAAAACAQAAAAAACAQIiCAAAAAwAAAAAAAABAAAA=</HashCode>
+      <FileName>Modules\Recording\Tobii\TobiiTrackStatus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Replay.ReplayModule" Collapsed="true">
+    <Position X="2.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>8j8Oc/2JjGFFu2daIyzioN7yUNcVbNucBEsr4Rc5dsM=</HashCode>
+      <FileName>Modules\Replay\ReplayModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Replay.ReplayPicture" Collapsed="true">
+    <Position X="1" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>yDwkYNF8KDCBMwCAYeKSIgUnIJvAE8QiiAayBAksIoM=</HashCode>
+      <FileName>Modules\Replay\ReplayPicture.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Replay.GenericSampleSourceFilter" Collapsed="true">
+    <Position X="16" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Replay\Video\DSBitmapSourceFilter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Replay.DSRecord" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAABAAAACAAAAIAIAAGEAAAAAAAAAAAIEAEgADAIBA=</HashCode>
+      <FileName>Modules\Replay\Video\DSRecord.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Ogama.Modules.Replay.ImageFromVectorGraphics" Collapsed="true">
+    <Position X="2.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAEAAgCBQAUAAgQgQBEBAAAAAAAA=</HashCode>
+      <FileName>Modules\Replay\Video\ImageFromVectorGraphics.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Replay.ImageHandler" Collapsed="true">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAIAAAAAAIQAAACgUAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Replay\Video\ImageHandler.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Ogama.Modules.Replay.SaveVideoSplash" Collapsed="true">
+    <Position X="7" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAABAQACAAABAAAACAAAACAAAAAQIAEAAAAABAAAA=</HashCode>
+      <FileName>Modules\Replay\Video\SaveVideoSplash.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Replay.VideoPropertiesDialog" Collapsed="true">
+    <Position X="13" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAgEAAACAAAACAAAAAUgAECAAAAECAAE=</HashCode>
+      <FileName>Modules\Replay\Video\VideoPropertiesDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Saliency.SaliencyModule" Collapsed="true">
+    <Position X="7.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YhyT0e9D4PoHVlcEIcTxCFYyBVsAKaCYrbJkfJQIKEE=</HashCode>
+      <FileName>Modules\Saliency\SaliencyModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Saliency.SaliencyPicture" Collapsed="true">
+    <Position X="9.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAQAAAAACAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Saliency\SaliencyPicture.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Scanpaths.ColorDefinitionDialog" Collapsed="true">
+    <Position X="8.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAIAEAIEiAAAhEAAsCAQBF2AUIBAUYAVCAAQIARQBA=</HashCode>
+      <FileName>Modules\Scanpath\Colorization\ColorDefinitionDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Scanpaths.ColorizationParameters" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAIAAAAAAAAAAAAAEAEAAJABAAAAEBA=</HashCode>
+      <FileName>Modules\Scanpath\Colorization\ColorizationParameters.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Ogama.Modules.Scanpaths.ColorizationStyle" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAIAAAACAAAAAAgAAAAAAgAAABAAAAQQAAEMCABA=</HashCode>
+      <FileName>Modules\Scanpath\Colorization\ColorizationStyle.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Ogama.Modules.Scanpaths.ExportDialog" Collapsed="true">
+    <Position X="4" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAACACAAECAACAAAACAAAAAUAAECBAACAAAgA=</HashCode>
+      <FileName>Modules\Scanpath\ExportDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Scanpaths.EditDistance" Collapsed="true">
+    <Position X="13" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAggAAAACDAAAEAARIAQAAQwAAAAABAAAACAAgBA=</HashCode>
+      <FileName>Modules\Scanpath\Levenshtein.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Scanpaths.ScanpathsModule" Collapsed="true">
+    <Position X="4.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>Y+gBQ/0BiPktEpU4QQDTqFu2GoQEHggcjP5A9AQgEIA=</HashCode>
+      <FileName>Modules\Scanpath\ScanpathsModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Scanpaths.ScanpathsPicture" Collapsed="true">
+    <Position X="8.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>wAAgAEAgACEAgAgAgIGIAAATAQGAAAEAgACAAEIgCAg=</HashCode>
+      <FileName>Modules\Scanpath\ScanpathsPicture.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.SlideshowDesign.PasteAsDialog" Collapsed="true">
+    <Position X="7" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAACAAABEAAACAKAACAAAAAEAAEIAAAAACAAA=</HashCode>
+      <FileName>Modules\SlideshowDesign\DesignModule\PasteAsDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.SlideshowDesign.SlideDesignModule" Collapsed="true">
+    <Position X="4.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>/0eXApkFx+ixZVOSLYHparNXmOn6T123BKkAP5TdhTw=</HashCode>
+      <FileName>Modules\SlideshowDesign\DesignModule\SlideDesignModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.SlideshowDesign.SlidePicture" Collapsed="true">
+    <Position X="7" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAACAAAAAAAACABAgCAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Modules\SlideshowDesign\DesignModule\SlidePicture.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.SlideshowDesign.FlashDialog" Collapsed="true">
+    <Position X="10" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAEAAAABACQAWAEQAACABIACAAAAAVAEFIQAIQAAAAA=</HashCode>
+      <FileName>Modules\SlideshowDesign\DesignModule\StimuliDialogs\FlashDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.SlideshowDesign.ImageDialog" Collapsed="true">
+    <Position X="5.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>wgEKAAABACAQChEAABCoAAACPEIAAUCEFKBAIQAAAAA=</HashCode>
+      <FileName>Modules\SlideshowDesign\DesignModule\StimuliDialogs\ImageDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.SlideshowDesign.RichTextDialog" Collapsed="true">
+    <Position X="5.5" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIACAEHAEAAACAAoACAAAAAUAEFiBBIQAAAAA=</HashCode>
+      <FileName>Modules\SlideshowDesign\DesignModule\StimuliDialogs\RichTextDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.SlideshowDesign.ShapeDialog" Collapsed="true">
+    <Position X="2.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAJEEAACAAAhEAAACCAAADAAAAAUgEFCAIIQAAAAA=</HashCode>
+      <FileName>Modules\SlideshowDesign\DesignModule\StimuliDialogs\ShapeDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.SlideshowDesign.SoundDialog" Collapsed="true">
+    <Position X="17.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAEAAACAAAACAAAAAUAEFCAIIQAAAAA=</HashCode>
+      <FileName>Modules\SlideshowDesign\DesignModule\StimuliDialogs\SoundDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.SlideshowDesign.TextDialog" Collapsed="true">
+    <Position X="8.5" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIBAAkAICAEGAEAIWDIAICKQACSAd0MFGIAIwAAgAA=</HashCode>
+      <FileName>Modules\SlideshowDesign\DesignModule\StimuliDialogs\TextDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.SlideshowDesign.FolderContentSlideImportDialog" Collapsed="true">
+    <Position X="13" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACBAQAAhGDBABEkWACkAMAGAAIIGWCDUCARQAABBAE=</HashCode>
+      <FileName>Modules\SlideshowDesign\Import\FolderContentSlideImportDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.SlideshowDesign.NamingDialog" Collapsed="true">
+    <Position X="14.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEBACAgAAEAAACAAAACAAAAAEAIEAAAAEAAAAQ=</HashCode>
+      <FileName>Modules\SlideshowDesign\NamingDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.SlideshowDesign.CustomShuffleDialog" Collapsed="true">
+    <Position X="1" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAQAAAACAgABEAIACcAABKAgAAAEQAEACEgAAAAAA=</HashCode>
+      <FileName>Modules\SlideshowDesign\Shuffling\CustomShuffleDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.SlideshowDesign.CustomShuffling" Collapsed="true">
+    <Position X="2.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAQAAAAAAAAAAAAAAAAAEEQAMBBAACAAAAAAAEAAAA=</HashCode>
+      <FileName>Modules\SlideshowDesign\Shuffling\CustomShuffling.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.SlideshowDesign.SlideshowModule" Collapsed="true">
+    <Position X="6.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>JERFQL1BmbFsGA6ECkOEokgGsIUsSxSTRIQ5a5DUFsw=</HashCode>
+      <FileName>Modules\SlideshowDesign\SlideshowModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Statistics.Descriptive" Collapsed="true">
+    <Position X="4" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAABCAAAAQAAAAAAAAACAAQAAAAAAA=</HashCode>
+      <FileName>Modules\Statistics\Descriptive.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Statistics.DescriptiveResult" Collapsed="true">
+    <Position X="5.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>kBAAFJAYABAQCAAAFKACAASgAwQABAAEiAQBBIAAAAQ=</HashCode>
+      <FileName>Modules\Statistics\DescriptiveResult.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Statistics.Statistic" Collapsed="true">
+    <Position X="5.5" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>cACogAICQCgEgChAAAABAEoEYAAEACZJQAIAAIoAAAA=</HashCode>
+      <FileName>Modules\Statistics\Statistic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Statistics.StatisticsModule" Collapsed="true">
+    <Position X="4.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>///PqR/j5O6Ws7m4CJ7VQ8suKv6SqZV5+uNNqf/Hnz8=</HashCode>
+      <FileName>Modules\Statistics\StatisticsModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Statistics.DefaultVariable" Collapsed="true">
+    <Position X="15.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQEAAAAAAgAAAAAIAAFAAAAAAiAAAAAIAABAAAEAACA=</HashCode>
+      <FileName>Modules\Statistics\Variables\DefaultVariable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Statistics.GazeVariable" Collapsed="true">
+    <Position X="16" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Modules\Statistics\Variables\GazeVariable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Statistics.MouseVariable" Collapsed="true">
+    <Position X="17.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Modules\Statistics\Variables\MouseVariable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Statistics.SubjectVariable" Collapsed="true">
+    <Position X="13" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Modules\Statistics\Variables\SubjectVariable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Statistics.TrialVariable" Collapsed="true">
+    <Position X="14.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Modules\Statistics\Variables\TrialVariable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Properties.Settings" Collapsed="true">
+    <Position X="1" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>DkBSq8p+WsCuKlMnYkVKqAWTWeJTlARMPFPaLizr4CQ=</HashCode>
+      <FileName>Properties\ApplicationSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Properties.ExperimentSettings" Collapsed="true">
+    <Position X="1" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RqQCAJQAAEARAgQIHEIEKQQCAChgUMAaIHAIigIAAAg=</HashCode>
+      <FileName>Properties\ExperimentSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Properties.RecentFilesList" Collapsed="true">
+    <Position X="16" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAgIAAAAAAAAABAAAABAAAAAEAAAEAAABAAAQIAAI=</HashCode>
+      <FileName>Properties\RecentFileList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Properties.Resources" Collapsed="true">
+    <Position X="2.5" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>47ClACiCuTjETLcL2ZPPlDuN//d/vz7Eu+8viBOrn/c=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Ogama.Modules.Common.SequencedTrial" Collapsed="true">
+    <Position X="17.5" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAEAAAgAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Common\SlideCollections\SequencedTrial.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Ogama.Modules.Fixations.ExportOptions" Collapsed="true">
+    <Position X="5.5" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAEAAAAAAAQAIIIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Fixations\ExportOptions.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Ogama.Modules.Fixations.Fixation" Collapsed="true">
+    <Position X="7" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAwABAMAgAAgAAAAAAACAAAAA=</HashCode>
+      <FileName>Modules\Fixations\Fixation.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Ogama.Modules.ImportExport.MergedSettings" Collapsed="true">
+    <Position X="13" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\ImportExport\Common\ImportStructs.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Ogama.Modules.ImportExport.SubjectsData" Collapsed="true">
+    <Position X="1" Y="18.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAEAAAAAAAAEAAAAAAAAAACAAKAA=</HashCode>
+      <FileName>Modules\ImportExport\Common\ImportStructs.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Ogama.Modules.ImportExport.TrialsData" Collapsed="true">
+    <Position X="5.5" Y="18.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAABAACAAAAAAAAAAAAAAgAEgAAAAAAACAACAA=</HashCode>
+      <FileName>Modules\ImportExport\Common\ImportStructs.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Ogama.Modules.ImportExport.TrialEventsData" Collapsed="true">
+    <Position X="4" Y="18.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAgAAAAAAAAEAACAAgAAAAAAACAIAAA=</HashCode>
+      <FileName>Modules\ImportExport\Common\ImportStructs.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Ogama.Modules.ImportExport.RawData" Collapsed="true">
+    <Position X="14.5" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAIQAAAAAAAAAAAAAAAAAAAgAAQQAAACAACQA=</HashCode>
+      <FileName>Modules\ImportExport\Common\ImportStructs.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Ogama.Modules.ImportExport.AOIData" Collapsed="true">
+    <Position X="1" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAIAAEAAAAgAAAAgAACAAAQAAAAAAAAA=</HashCode>
+      <FileName>Modules\ImportExport\Common\ImportStructs.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Ogama.Modules.ImportExport.FixationData" Collapsed="true">
+    <Position X="8.5" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAwABAIAgAAgAAAAAAACAAAAA=</HashCode>
+      <FileName>Modules\ImportExport\Common\ImportStructs.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Ogama.Modules.Recording.DataToTable" Collapsed="true">
+    <Position X="4" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Recording\DataToTable.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Ogama.Modules.Recording.GazeData" Collapsed="true">
+    <Position X="10" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIQAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAQA=</HashCode>
+      <FileName>Modules\Recording\GazeData.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Ogama.Modules.Replay.LoopState" Collapsed="true">
+    <Position X="11.5" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAIAAAAgAAgAAAQAAQAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Replay\LoopState.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Ogama.Modules.Replay.TimedPoint" Collapsed="true">
+    <Position X="2.5" Y="18.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Modules\Replay\TimedPoint.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Ogama.Modules.Scanpaths.ScanpathProperties" Collapsed="true">
+    <Position X="16" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAABAAAAACAgAAAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>Modules\Scanpath\ScanpathProperties.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Ogama.Modules.Statistics.CustomVariable" Collapsed="true">
+    <Position X="2.5" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAEAEBAAACEAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Statistics\Variables\CustomVariable.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="Ogama.Modules.Common.IObjectWithID" Collapsed="true">
+    <Position X="16" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Common\Types\IObjectWithID.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Ogama.Modules.Recording.ITracker" Collapsed="true">
+    <Position X="17.5" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAABAAAEAAIAAAgAAAAAAIAAAAEAABAA=</HashCode>
+      <FileName>Modules\Recording\TrackerBase\ITracker.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Ogama.Modules.Replay.IGenericSampleCB" Collapsed="true">
+    <Position X="13" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Replay\Video\DSBitmapSourceFilter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Ogama.Modules.Replay.IGenericSampleConfig" Collapsed="true">
+    <Position X="14.5" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAABAAAAAAAAAgAAAABAAAAAAAAA=</HashCode>
+      <FileName>Modules\Replay\Video\DSBitmapSourceFilter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Ogama.MainWindow.Tasks" Collapsed="true">
+    <Position X="1" Y="20.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIACAAAIAAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>MainWindow\Tasks.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Ogama.Modules.AOI.VisualizationModes" Collapsed="true">
+    <Position X="5.5" Y="20.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAAAAAAAAAACAAAAACAAEEgAA=</HashCode>
+      <FileName>Modules\AOI\VisualizationModes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Ogama.Modules.Common.FixationDrawingMode" Collapsed="true">
+    <Position X="11.5" Y="19" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAABAAEAAAAAAAAAAQAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Modules\Common\PictureTemplates\FixationDrawingMode.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Ogama.Modules.Common.EyeMotionState" Collapsed="true">
+    <Position X="10" Y="19" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAIAAA=</HashCode>
+      <FileName>Modules\Common\Tools\FixationDetection.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Ogama.Modules.Common.Monitor" Collapsed="true">
+    <Position X="5.5" Y="19.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Modules\Common\Tools\PresentationScreen.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Ogama.Modules.Common.EventType" Collapsed="true">
+    <Position X="8.5" Y="19" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAQAQAEAAQAAAAAAAQAAAAAAAAEIBAg=</HashCode>
+      <FileName>Modules\Common\TrialEvents\EventType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Ogama.Modules.Common.InputEventTask" Collapsed="true">
+    <Position X="2.5" Y="19.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAI=</HashCode>
+      <FileName>Modules\Common\TrialEvents\InputEventTask.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Ogama.Modules.Common.MediaEventTask" Collapsed="true">
+    <Position X="4" Y="19.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAGAAAAAAAAAAEAAAAIAAAAAEAAAA=</HashCode>
+      <FileName>Modules\Common\TrialEvents\MediaEventTask.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Ogama.Modules.Common.ActiveXMode" Collapsed="true">
+    <Position X="1" Y="19" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAQAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAg=</HashCode>
+      <FileName>Modules\Common\Types\ActiveXMode.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Ogama.Modules.Common.SampleType" Collapsed="true">
+    <Position X="11.5" Y="19.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQgAAAAAAAAgAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Modules\Common\Types\SampleType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Ogama.Modules.Common.SampleValidity" Collapsed="true">
+    <Position X="13" Y="19.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAICBAEAAAA=</HashCode>
+      <FileName>Modules\Common\Types\SampleValidity.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Ogama.Modules.ImportExport.ImportTypes" Collapsed="true">
+    <Position X="1" Y="19.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\ImportExport\Common\ImportStructs.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Ogama.Modules.ImportExport.StimuliImportModes" Collapsed="true">
+    <Position X="14.5" Y="19.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAIACAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\ImportExport\Common\ImportStructs.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Ogama.Modules.ImportExport.TrialSequenceImportModes" Collapsed="true">
+    <Position X="4" Y="20.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAACAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\ImportExport\Common\ImportStructs.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Ogama.Modules.ImportExport.AOIImportModes" Collapsed="true">
+    <Position X="2.5" Y="19" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAE=</HashCode>
+      <FileName>Modules\ImportExport\Common\ImportStructs.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Ogama.Modules.ImportExport.FixationImportModes" Collapsed="true">
+    <Position X="13" Y="19" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\ImportExport\Common\ImportStructs.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Ogama.Modules.Recording.HardwareTracker" Collapsed="true">
+    <Position X="17.5" Y="19" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQgAAABAAQAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Modules\Recording\TrackerBase\HardwareTracker.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Ogama.Modules.Recording.SMI.AvailableEye" Collapsed="true">
+    <Position X="4" Y="19" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAACACAAAEAAAA=</HashCode>
+      <FileName>Modules\Recording\SMI\AvailableEye.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Ogama.Modules.Recording.SMI.CalibrationPointSize" Collapsed="true">
+    <Position X="5.5" Y="19" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Modules\Recording\SMI\CalibrationPointSize.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Ogama.Modules.Replay.ReplayDrawingModes" Collapsed="true">
+    <Position X="10" Y="19.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAQAAAAIEAAAAAAIAAAAAAAAAAAAAAAEAAgA=</HashCode>
+      <FileName>Modules\Replay\ReplayDrawingModes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Ogama.Modules.Scanpaths.ColorizationModes" Collapsed="true">
+    <Position X="7" Y="19" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAIAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Modules\Scanpath\Colorization\ColorizationModes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Ogama.Modules.Scanpaths.GridBase" Collapsed="true">
+    <Position X="16" Y="19" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAIAEAAAA=</HashCode>
+      <FileName>Modules\Scanpath\GridBase.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Ogama.Modules.SlideshowDesign.StimuliTypes" Collapsed="true">
+    <Position X="16" Y="19.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAEAAAAAAAAACAAAAAAAIAAAAAIABAAAAAAAAEIAAA=</HashCode>
+      <FileName>Modules\SlideshowDesign\StimuliTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Ogama.Modules.Statistics.ParamTypes" Collapsed="true">
+    <Position X="8.5" Y="19.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAIAAAAAAgAACAAAAAAACAAAAgA=</HashCode>
+      <FileName>Modules\Statistics\Variables\CustomVariable.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Ogama.Modules.Statistics.SubjectParams" Collapsed="true">
+    <Position X="17.5" Y="19.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAABAAAAEAAAAAAAIEAAAAAAIAAACEAKAA=</HashCode>
+      <FileName>Modules\Statistics\Variables\StatisticalParameters.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Ogama.Modules.Statistics.TrialParams" Collapsed="true">
+    <Position X="2.5" Y="20.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>wACAgAAAAABCBQAAAAAAAAQAIIgAAAQAAIACACEACAA=</HashCode>
+      <FileName>Modules\Statistics\Variables\StatisticalParameters.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Ogama.Modules.Statistics.GazeParams" Collapsed="true">
+    <Position X="14.5" Y="19" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IBAAAACgSAAAAEAAAAISAAEAAAQACAAAAMgAAAEAAAA=</HashCode>
+      <FileName>Modules\Statistics\Variables\StatisticalParameters.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Ogama.Modules.Statistics.MouseParams" Collapsed="true">
+    <Position X="7" Y="19.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>pBAAAACgSAACAEAAAAISAAEAAAQACAAAAMgAQAEAAAA=</HashCode>
+      <FileName>Modules\Statistics\Variables\StatisticalParameters.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Delegate Name="Ogama.Modules.Common.CounterChangedEventHandler" Collapsed="true">
+    <Position X="1" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Common\CustomEventArgs\CounterChangedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Ogama.Modules.Common.GazeDataChangedEventHandler" Collapsed="true">
+    <Position X="2.5" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Modules\Common\CustomEventArgs\GazeDataChangedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Ogama.Modules.Common.NewRawDataAvailableEventHandler" Collapsed="true">
+    <Position X="4" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Common\CustomEventArgs\NewRawDataAvailableEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Ogama.Modules.Common.ResponseChangedEventHandler" Collapsed="true">
+    <Position X="5.5" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Common\CustomEventArgs\ResponseChangedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Ogama.Modules.Common.SlideChangedEventHandler" Collapsed="true">
+    <Position X="7" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Modules\Common\CustomEventArgs\SlideChangedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Ogama.Modules.Common.TrialChangedEventHandler" Collapsed="true">
+    <Position X="8.5" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Common\CustomEventArgs\TrialChangedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Ogama.Modules.Common.TrialEventIDFoundEventHandler" Collapsed="true">
+    <Position X="10" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>Modules\Common\CustomEventArgs\TrialEventIDFoundEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Ogama.Modules.Common.TrialEventOccuredEventHandler" Collapsed="true">
+    <Position X="11.5" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Common\CustomEventArgs\TrialEventOccuredEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
