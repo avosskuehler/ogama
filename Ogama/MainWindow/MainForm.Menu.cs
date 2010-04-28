@@ -489,14 +489,8 @@ namespace Ogama.MainWindow
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void mnuFileExit_Click(object sender, EventArgs e)
     {
-      System.ComponentModel.CancelEventArgs cea = new System.ComponentModel.CancelEventArgs(false);
-      if (Document.ActiveDocument != null && !this.SaveAndDisposeDocument())
-      {
-        // Saving has been cancelled
-        cea.Cancel = true;
-      }
-
-      Application.Exit(cea);
+      // CleanUp is performed in Form_Closing
+      this.Close();
     }
 
     /// <summary>

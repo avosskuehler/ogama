@@ -348,8 +348,11 @@ namespace Ogama.Modules.Recording
     {
       set
       {
-        this.preparedSlideOne.InitializeScreenCapture(value);
-        this.preparedSlideTwo.InitializeScreenCapture(value);
+        if (value.CaptureMode != CaptureMode.None)
+        {
+          this.preparedSlideOne.InitializeScreenCapture(value);
+          this.preparedSlideTwo.InitializeScreenCapture(value);
+        }
       }
     }
 
@@ -401,14 +404,14 @@ namespace Ogama.Modules.Recording
         switch (this.shownContainer)
         {
           case ShownContainer.One:
-            if (this.preparedSlideOne.ScreenCapture.Capturing)
+            if (this.preparedSlideOne.ScreenCapture != null && this.preparedSlideOne.ScreenCapture.Capturing)
             {
               return this.preparedSlideOne.ScreenCapture;
             }
 
             break;
           case ShownContainer.Two:
-            if (this.preparedSlideTwo.ScreenCapture.Capturing)
+            if (this.preparedSlideTwo.ScreenCapture != null && this.preparedSlideTwo.ScreenCapture.Capturing)
             {
               return this.preparedSlideTwo.ScreenCapture;
             }

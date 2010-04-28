@@ -507,26 +507,29 @@ namespace Ogama.Modules.SlideshowDesign
     /// without a question.</param>
     private void SaveToExperimentSettings(bool silent)
     {
-      if (Document.ActiveDocument.ExperimentSettings.SlideShow.IsModified)
+      if (Document.ActiveDocument.ExperimentSettings != null)
       {
-        bool doIt = true;
-        if (!silent)
+        if (Document.ActiveDocument.ExperimentSettings.SlideShow.IsModified)
         {
-          doIt = MessageBox.Show(
-            "The slideshow has changed, would you like to store it to the experiments file ?",
-            Application.ProductName,
-            MessageBoxButtons.YesNo,
-            MessageBoxIcon.Question) == DialogResult.Yes;
-        }
-
-        if (Document.ActiveDocument.ExperimentSettings != null && doIt)
-        {
-          this.Cursor = Cursors.WaitCursor;
-          Document.ActiveDocument.ExperimentSettings.SlideShow = this.slideshow;
-          ((MainForm)this.MdiParent).StatusLabel.Text = "Saving slideshow to file ...";
-          if (!Document.ActiveDocument.SaveSettingsToFile(Document.ActiveDocument.ExperimentSettings.DocumentFilename))
+          bool doIt = true;
+          if (!silent)
           {
-            ExceptionMethods.ProcessErrorMessage("Couldn't save slideshow to experiment settings.");
+            doIt = MessageBox.Show(
+              "The slideshow has changed, would you like to store it to the experiments file ?",
+              Application.ProductName,
+              MessageBoxButtons.YesNo,
+              MessageBoxIcon.Question) == DialogResult.Yes;
+          }
+
+          if (doIt)
+          {
+            this.Cursor = Cursors.WaitCursor;
+            Document.ActiveDocument.ExperimentSettings.SlideShow = this.slideshow;
+            ((MainForm)this.MdiParent).StatusLabel.Text = "Saving slideshow to file ...";
+            if (!Document.ActiveDocument.SaveSettingsToFile(Document.ActiveDocument.ExperimentSettings.DocumentFilename))
+            {
+              ExceptionMethods.ProcessErrorMessage("Couldn't save slideshow to experiment settings.");
+            }
           }
         }
       }

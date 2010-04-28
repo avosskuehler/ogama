@@ -14,7 +14,7 @@
     <RootNamespace>Documentation</RootNamespace>
     <Name>Documentation</Name>
     <!-- SHFB properties -->
-    <OutputPath>C:\Users\VK\VisualStudioProjects\OGAMA\trunk\Help\</OutputPath>
+    <OutputPath>C:\Users\VK\VisualStudioProjects\Ogama@Codeplex\Help\</OutputPath>
     <HtmlHelpName>OgamaSourceDocumentation</HtmlHelpName>
     <ProjectSummary>OGAMA %28OpenGazeAndMouseAnalyzer%29: An open source software designed to record and analyze eye and mouse movements in slideshow study designs.
 
@@ -40,11 +40,11 @@ You can modify and customize it for your needs as long as your product is not in
     <RootNamespaceContainer>True</RootNamespaceContainer>
     <RootNamespaceTitle>Ogama Namespaces</RootNamespaceTitle>
     <HelpTitle>Ogama - open gaze and mouse analyzer source documentation</HelpTitle>
-    <CopyrightText>Adrian Vo&amp;#223%3bk&amp;#252%3bhler, Freie Universit&amp;#228%3bt Berlin, created 18.02.10  --  Please have a look at the source for deeper understanding.</CopyrightText>
+    <CopyrightText>Adrian Vo&amp;#223%3bk&amp;#252%3bhler, Freie Universit&amp;#228%3bt Berlin, created 28.04.10  --  Please have a look at the source for deeper understanding.</CopyrightText>
     <FeedbackEMailAddress>adrian.vosskuehler%40fu-berlin.de</FeedbackEMailAddress>
     <PresentationStyle>vs2005</PresentationStyle>
     <SyntaxFilters>CSharp</SyntaxFilters>
-    <HelpFileVersion>3.0.0.0</HelpFileVersion>
+    <HelpFileVersion>3.2.0.0</HelpFileVersion>
     <ComponentConfigurations>
       <ComponentConfig id="Cached Framework Comments Index Data" enabled="True">
         <component id="Cached Framework Comments Index Data" type="SandcastleBuilder.Components.CachedCopyFromIndexComponent" assembly="{@SHFBFolder}SandcastleBuilder.Components.dll">
@@ -55,50 +55,18 @@ You can modify and customize it for your needs as long as your product is not in
           <copy name="comments" source="*" target="/document/comments" />
         </component>
       </ComponentConfig>
-      <ComponentConfig id="Cached MSDN URL References" enabled="True">
-        <component id="Cached MSDN URL References" type="SandcastleBuilder.Components.CachedResolveReferenceLinksComponent" assembly="{@SHFBFolder}SandcastleBuilder.Components.dll">
-          <cache filename="{@AppDataFolder}Cache\MsdnUrl.cache" />
-          <targets base="{@SandcastlePath}Data\Reflection" recurse="true" files="*.xml" type="{@SDKLinks}" />
-          <targets files="reflection.xml" type="{@ProjectLinks}" />
-        </component>
-      </ComponentConfig>
-      <ComponentConfig id="Code Block Component" enabled="True">
-        <component id="Code Block Component" type="SandcastleBuilder.Components.CodeBlockComponent" assembly="{@SHFBFolder}SandcastleBuilder.Components.dll">
-          <basePath value="{@HtmlEncProjectFolder}" />
-          <languageFilter value="true" />
-          <allowMissingSource value="false" />
-          <removeRegionMarkers value="false" />
-          <colorizer syntaxFile="{@SHFBFolder}Colorizer\highlight.xml" styleFile="{@SHFBFolder}Colorizer\highlight.xsl" copyImageUrl="../icons/CopyCode.gif" language="cs" tabSize="0" numberLines="false" outlining="false" keepSeeTags="false" defaultTitle="true" />
-        </component>
-      </ComponentConfig>
-      <ComponentConfig id="Post-transform Component" enabled="True">
-        <component id="Post-transform Component" type="SandcastleBuilder.Components.PostTransformComponent" assembly="{@SHFBFolder}SandcastleBuilder.Components.dll">
-          <!-- Code colorizer files (required).
+<ComponentConfig id="Cached MSDN URL References" enabled="True"><component id="Cached MSDN URL References" type="SandcastleBuilder.Components.CachedResolveReferenceLinksComponent" assembly="{@SHFBFolder}SandcastleBuilder.Components.dll"><cache filename="{@AppDataFolder}Cache\MsdnUrl.cache" /><targets base="{@SandcastlePath}Data\Reflection" recurse="true" files="*.xml" type="{@SDKLinks}" /><targets files="reflection.xml" type="{@ProjectLinks}" /></component></ComponentConfig>
+<ComponentConfig id="Code Block Component" enabled="True"><component id="Code Block Component" type="SandcastleBuilder.Components.CodeBlockComponent" assembly="{@SHFBFolder}SandcastleBuilder.Components.dll"><basePath value="{@HtmlEncProjectFolder}" /><languageFilter value="true" /><allowMissingSource value="false" /><removeRegionMarkers value="false" /><colorizer syntaxFile="{@SHFBFolder}Colorizer\highlight.xml" styleFile="{@SHFBFolder}Colorizer\highlight.xsl" copyImageUrl="../icons/CopyCode.gif" language="cs" tabSize="0" numberLines="false" outlining="false" keepSeeTags="false" defaultTitle="true" /></component></ComponentConfig>
+<ComponentConfig id="Post-transform Component" enabled="True"><component id="Post-transform Component" type="SandcastleBuilder.Components.PostTransformComponent" assembly="{@SHFBFolder}SandcastleBuilder.Components.dll"><!-- Code colorizer files (required).
                  Attributes:
                     Stylesheet file (required)
                     Script file (required)
-                    "Copy" image file (required) -->
-          <colorizer stylesheet="{@SHFBFolder}Colorizer\highlight.css" scriptFile="{@SHFBFolder}Colorizer\highlight.js" copyImage="{@SHFBFolder}Colorizer\CopyCode.gif" />
-          <!-- Base output path for the files (required).  This should match
+                    "Copy" image file (required) --><colorizer stylesheet="{@SHFBFolder}Colorizer\highlight.css" scriptFile="{@SHFBFolder}Colorizer\highlight.js" copyImage="{@SHFBFolder}Colorizer\CopyCode.gif" /><!-- Base output path for the files (required).  This should match
                  the parent folder of the output path of the HTML files (see
-                 SaveComponent). -->
-          <outputPath value="Output\" />
-          <!-- Logo image file (optional).  Filename is required. The height,
+                 SaveComponent). --><outputPath value="Output\" /><!-- Logo image file (optional).  Filename is required. The height,
                  width, altText, placement, and alignment attributes are
-                 optional. -->
-          <logoFile filename="C:\Users\VK\VisualStudioProjects\OGAMA\trunk\Help\HelpBanner.jpg" height="0" width="0" altText="" placement="right" alignment="left" />
-        </component>
-      </ComponentConfig>
-      <ComponentConfig id="Cached Reflection Index Data" enabled="True">
-        <component id="Cached Reflection Index Data" type="SandcastleBuilder.Components.CachedCopyFromIndexComponent" assembly="{@SHFBFolder}SandcastleBuilder.Components.dll">
-          <index name="reflection" value="/reflection/apis/api" key="@id" cache="10">
-            <cache base="{@SandcastlePath}Data\Reflection" recurse="true" files="*.xml" cacheFile="{@LocalDataFolder}Cache\Reflection.cache" />
-            <data files="reflection.xml" />
-          </index>
-          <copy name="reflection" source="*" target="/document/reference" />
-        </component>
-      </ComponentConfig>
-    </ComponentConfigurations>
+                 optional. --><logoFile filename="C:\Users\VK\VisualStudioProjects\Ogama@Codeplex\Help\HelpBanner.jpg" height="0" width="0" altText="" placement="right" alignment="left" /></component></ComponentConfig>
+<ComponentConfig id="Cached Reflection Index Data" enabled="True"><component id="Cached Reflection Index Data" type="SandcastleBuilder.Components.CachedCopyFromIndexComponent" assembly="{@SHFBFolder}SandcastleBuilder.Components.dll"><index name="reflection" value="/reflection/apis/api" key="@id" cache="10"><cache base="{@SandcastlePath}Data\Reflection" recurse="true" files="*.xml" cacheFile="{@LocalDataFolder}Cache\Reflection.cache" /><data files="reflection.xml" /></index><copy name="reflection" source="*" target="/document/reference" /></component></ComponentConfig></ComponentConfigurations>
     <DocumentationSources>
       <DocumentationSource sourceFile="..\Release\Ogama.exe" />
       <DocumentationSource sourceFile="..\Release\Ogama.xml" />
@@ -202,7 +170,7 @@ That is the mouse movement recording module.</NamespaceSummaryItem>
     </ApiFilter>
     <HelpFileFormat>HtmlHelp1x</HelpFileFormat>
     <IncludeStopWordList>True</IncludeStopWordList>
-    <FooterText>Visit OGAMAs homepage at http://didaktik.physik.fu-berlin.de/ogama !</FooterText>
+    <FooterText>Visit OGAMAs homepage at www.ogama.net !</FooterText>
   </PropertyGroup>
   <!-- There are no properties for these two groups but they need to appear in
        order for Visual Studio to perform the build. -->

@@ -500,8 +500,6 @@ namespace DmoOverlay
       // Check state - if we already have a buffer, we shouldn't be getting another
       Debug.Assert(this.buffer == null, "We already have a buffer, we shouldn't be getting another");
 
-      int byteCounterData;
-
       int hr = mediaBuffer.GetBufferAndLength(out this.bufferPointer, out this.bufferByteCount);
       if (hr >= 0)
       {
@@ -788,7 +786,7 @@ namespace DmoOverlay
     /// video pixel coordinates.</param>
     /// <param name="mousePosition">A <see cref="Point"/> with the mouse position in
     /// video pixel coordinates.</param>
-    private unsafe void DoOverlay(
+    private void DoOverlay(
       IntPtr outputDataPointer,
       int inputByteCount,
       IntPtr inputDataPointer,
@@ -845,7 +843,7 @@ namespace DmoOverlay
       byte[] cursorData,
       bool center)
     {
-      byte* p, m;
+      byte* p;
       long r, g, b;
 
       // Swap coordinates

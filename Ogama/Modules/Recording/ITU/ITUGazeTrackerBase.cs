@@ -370,7 +370,7 @@ namespace Ogama.Modules.Recording.ITUGazeTracker
     }
 
     /// <summary>
-    /// Raises <see cref="GazeTrackerUI.Settings.SettingsWindow"/> to change the settings
+    /// Raises GazeTrackerUI SettingsWindow to change the settings
     /// for this interface.
     /// </summary>
     public override void ChangeSettings()

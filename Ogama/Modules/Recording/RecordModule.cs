@@ -2189,7 +2189,12 @@ namespace Ogama.Modules.Recording
       // Only needed if there is a flash movie.
       if (!Document.ActiveDocument.ExperimentSettings.SlideShow.HasFlashContent())
       {
+        this.captureProperties.CaptureMode = CaptureMode.None;
         return;
+      }
+      else
+      {
+        this.captureProperties.CaptureMode = CaptureMode.Video;
       }
 
       string xmlFile = Path.Combine(Properties.Settings.Default.VHScreenCaptureSettingsPath, "ogamasc.xml");
