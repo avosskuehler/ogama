@@ -550,6 +550,14 @@ namespace Ogama.Modules.Statistics
       }
     }
 
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler for the
+    /// <see cref="Button"/> <see cref="btnGazeAddCustomRegressionVariable"/>.
+    /// User added a custom defined regression variable, so set the flag and add it to
+    /// the list of variables. Show an error, if missing AOI Group.
+    /// </summary>
+    /// <param name="sender">Source of the event</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnGazeAddCustomRegressionVariable_Click(object sender, EventArgs e)
     {
       if (this.rdbGazeRegressionAOISingle.Checked)
@@ -563,6 +571,7 @@ namespace Ogama.Modules.Statistics
 
         this.CreateCustomGazeRegressionParam(true, false);
       }
+
       if (this.rdbGazeRegressionAOIGroup.Checked)
       {
         if (this.cbbGazeRegressionAOIGroups.Text == string.Empty)
@@ -2263,6 +2272,18 @@ namespace Ogama.Modules.Statistics
       {
         newMouseVariable.ParamType = ParamTypes.Clicks;
       }
+      else if (this.rdbMouseSaccadeDuration.Checked)
+      {
+        newMouseVariable.ParamType = ParamTypes.SaccadeDuration;
+      }
+      else if (this.rdbMouseSaccadeLength.Checked)
+      {
+        newMouseVariable.ParamType = ParamTypes.SaccadeLength;
+      }
+      else if (this.rdbMouseSaccadeVelocity.Checked)
+      {
+        newMouseVariable.ParamType = ParamTypes.SaccadeVelocity;
+      }
 
       MouseVariable var = new MouseVariable(
         MouseParams.Custom,
@@ -2309,6 +2330,18 @@ namespace Ogama.Modules.Statistics
       else if (this.rdbGazeFixationDurationMedian.Checked)
       {
         newGazeVariable.ParamType = ParamTypes.FixationDurationMedian;
+      }
+      else if (this.rdbGazeSaccadeDuration.Checked)
+      {
+        newGazeVariable.ParamType = ParamTypes.SaccadeDuration;
+      }
+      else if (this.rdbGazeSaccadeLength.Checked)
+      {
+        newGazeVariable.ParamType = ParamTypes.SaccadeLength;
+      }
+      else if (this.rdbGazeSaccadeVelocity.Checked)
+      {
+        newGazeVariable.ParamType = ParamTypes.SaccadeVelocity;
       }
 
       GazeVariable var = new GazeVariable(

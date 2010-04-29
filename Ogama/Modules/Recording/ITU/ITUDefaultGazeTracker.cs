@@ -61,6 +61,8 @@ namespace Ogama.Modules.Recording.ITUGazeTracker
     /// named "Recalibrate" at the tab page of the ITUDefaultGazeTracker device.</param>
     /// <param name="trackerConnectButton">The <see cref="Button"/>
     /// named "Connect" at the tab page of the ITUDefaultGazeTracker device.</param>
+    /// <param name="trackerCameraButton">The <see cref="Button"/>
+    /// named "Camera" at the tab page of the ITUDefaultGazeTracker device.</param>
     /// <param name="trackerAdjustButton">The <see cref="Button"/>
     /// named "Adjust" at the tab page of the device.</param>
     /// <param name="trackerSubjectButton">The <see cref="Button"/>
@@ -80,6 +82,7 @@ namespace Ogama.Modules.Recording.ITUGazeTracker
       Button trackerAcceptButton,
       Button trackerRecalibrateButton,
       Button trackerConnectButton,
+      Button trackerCameraButton,
       Button trackerAdjustButton,
       Button trackerSubjectButton,
       Button trackerCalibrateButton,
@@ -94,6 +97,7 @@ namespace Ogama.Modules.Recording.ITUGazeTracker
       trackerAcceptButton,
       trackerRecalibrateButton,
       trackerConnectButton,
+      trackerCameraButton,
       trackerAdjustButton,
       trackerSubjectButton,
       trackerCalibrateButton,

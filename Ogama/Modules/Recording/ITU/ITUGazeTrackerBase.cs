@@ -17,10 +17,10 @@ namespace Ogama.Modules.Recording.ITUGazeTracker
   using System.Drawing;
   using System.Windows.Forms;
   using DirectShowLib;
+  using GazeTrackingLibrary.Settings;
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
   using OgamaClient;
-  using GazeTrackingLibrary.Settings;
 
   /// <summary>
   /// This class implements the <see cref="TrackerWithStatusControls"/> class
@@ -72,6 +72,11 @@ namespace Ogama.Modules.Recording.ITUGazeTracker
     /// </summary>
     private Button adjustButton;
 
+    /// <summary>
+    /// This button is used to call the camera settings dialog of the ITU tracker.
+    /// </summary>
+    private Button cameraButton;
+
     #endregion //FIELDS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -103,6 +108,8 @@ namespace Ogama.Modules.Recording.ITUGazeTracker
     /// named "Recalibrate" at the tab page of the device.</param>
     /// <param name="trackerConnectButton">The <see cref="Button"/>
     /// named "Connect" at the tab page of the device.</param>
+    /// <param name="trackerCameraButton">The <see cref="Button"/>
+    /// named "Camera" at the tab page of the device.</param>
     /// <param name="trackerAdjustButton">The <see cref="Button"/>
     /// named "Adjust" at the tab page of the device.</param>
     /// <param name="trackerSubjectButton">The <see cref="Button"/>
@@ -122,6 +129,7 @@ namespace Ogama.Modules.Recording.ITUGazeTracker
       Button trackerAcceptButton,
       Button trackerRecalibrateButton,
       Button trackerConnectButton,
+      Button trackerCameraButton,
       Button trackerAdjustButton,
       Button trackerSubjectButton,
       Button trackerCalibrateButton,
@@ -144,6 +152,8 @@ namespace Ogama.Modules.Recording.ITUGazeTracker
     {
       this.adjustButton = trackerAdjustButton;
       this.adjustButton.Click += new EventHandler(this.adjustButton_Click);
+      this.cameraButton = trackerCameraButton;
+      this.cameraButton.Click += new EventHandler(this.cameraButton_Click);
     }
 
     #endregion //CONSTRUCTION
@@ -252,6 +262,7 @@ namespace Ogama.Modules.Recording.ITUGazeTracker
           this.ituClient.CalibrationFinishedEvent += new EventHandler(this.ituClient_CalibrationFinishedEvent);
 
           this.adjustButton.Enabled = true;
+          this.cameraButton.Enabled = true;
         }
       }
       catch (Exception ex)
@@ -308,6 +319,7 @@ namespace Ogama.Modules.Recording.ITUGazeTracker
         }
 
         this.adjustButton.Enabled = false;
+        this.cameraButton.Enabled = false;
       }
       catch (Exception ex)
       {
@@ -503,6 +515,18 @@ namespace Ogama.Modules.Recording.ITUGazeTracker
     protected virtual void adjustButton_Click(object sender, EventArgs e)
     {
       this.ChangeSettings();
+    }
+
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler for the
+    /// <see cref="Button"/> <see cref="cameraButton"/>.
+    /// Shows up the camera settings dialog with the tracking settings.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/>.</param>
+    protected virtual void cameraButton_Click(object sender, EventArgs e)
+    {
+      this.ituClient.ChangeCameraSettings();
     }
 
     #endregion //WINDOWSEVENTHANDLER

@@ -98,11 +98,16 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\EtApi.dll</HintPath>
     </Reference>
-    <Reference Include="GazeTrackerClient, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="GazeTracker, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <ExecutableExtension>.exe</ExecutableExtension>
+      <HintPath>..\Libs\Managed\GazeTracker.exe</HintPath>
+    </Reference>
+    <Reference Include="GazeTrackerClient, Version=1.1.0.0, Culture=neutral, PublicKeyToken=d2bdf8683767e608, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\GazeTrackerClient.dll</HintPath>
     </Reference>
-    <Reference Include="GazeTrackingLibrary, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="GazeTrackingLibrary, Version=1.1.0.0, Culture=neutral, PublicKeyToken=32fe172c6cdc4823, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\GazeTrackingLibrary.dll</HintPath>
     </Reference>

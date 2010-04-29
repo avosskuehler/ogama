@@ -766,7 +766,6 @@ namespace Ogama.Modules.Scanpaths
       return similarity;
     }
 
-
     /// <summary>
     /// Returns the sequence similarity of two strings,
     /// that means the percent of character sequences that are concordant in both strings.
@@ -932,6 +931,11 @@ namespace Ogama.Modules.Scanpaths
       }
     }
 
+    /// <summary>
+    /// Swap strings if s is shorter than t. Used for lists of strings.
+    /// </summary>
+    /// <param name="s">Ref. The first <see cref="List{String}"/></param>
+    /// <param name="t">Ref. The second <see cref="List{String}"/></param>
     private static void SwapStringsExtended(ref List<string> s, ref List<string> t)
     {
       // Swap strings if s is shorter than t.
@@ -943,7 +947,6 @@ namespace Ogama.Modules.Scanpaths
         t = temp;
       }
     }
-
 
     /// <summary>
     /// This static method removes duplicate sections in the given list of sections.

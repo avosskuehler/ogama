@@ -57,7 +57,22 @@ namespace Ogama.Modules.AOI
     /// The fixation duration median ms on the aoi.
     /// </summary>
     private double fixationDurationMedian;
-    
+
+    /// <summary>
+    /// The saccade duration median in ms on the aoi.
+    /// </summary>
+    private double saccadeDuration;
+
+    /// <summary>
+    /// The saccade length median in ms on the aoi.
+    /// </summary>
+    private double saccadeLength;
+
+    /// <summary>
+    /// The saccade velocity median in ms on the aoi.
+    /// </summary>
+    private double saccadeVelocity;
+
     /// <summary>
     /// The dictionary of times the AOI was hitted for the n-th time.
     /// </summary>
@@ -140,6 +155,33 @@ namespace Ogama.Modules.AOI
     {
       get { return this.fixationDurationMedian; }
       set { this.fixationDurationMedian = value; }
+    }
+
+    /// <summary>
+    /// Gets or sets the saccade duration mean in ms on the aoi.
+    /// </summary>
+    public double SaccadeDuration
+    {
+      get { return this.saccadeDuration; }
+      set { this.saccadeDuration = value; }
+    }
+
+    /// <summary>
+    /// Gets or sets the saccade length mean in ms on the aoi.
+    /// </summary>
+    public double SaccadeLength
+    {
+      get { return this.saccadeLength; }
+      set { this.saccadeLength = value; }
+    }
+
+    /// <summary>
+    /// Gets or sets the saccade velocity mean in ms on the aoi.
+    /// </summary>
+    public double SaccadeVelocity
+    {
+      get { return this.saccadeVelocity; }
+      set { this.saccadeVelocity = value; }
     }
 
     /// <summary>

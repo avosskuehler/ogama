@@ -883,7 +883,7 @@ namespace Ogama.Modules.Recording.Alea
     {
         if (this.RecordModule.InvokeRequired)
         {
-            this.RecordModule.BeginInvoke(new RawDataDelegate(AleaInterface_APIRawDataReceived), new object[] { data, userData });
+            this.RecordModule.BeginInvoke(new RawDataDelegate(this.AleaInterface_APIRawDataReceived), new object[] { data, userData });
         }
         else
         {

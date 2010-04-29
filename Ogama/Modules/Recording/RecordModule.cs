@@ -22,6 +22,7 @@ namespace Ogama.Modules.Recording
   using System.IO;
   using System.Threading;
   using System.Windows.Forms;
+  using DirectX.Capture;
   using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
   using Ogama.DataSet;
   using Ogama.ExceptionHandling;
@@ -39,7 +40,6 @@ namespace Ogama.Modules.Recording
   using VectorGraphics.StopConditions;
   using VectorGraphics.Tools;
   using VectorGraphics.Triggers;
-  using DirectX.Capture;
 
   /// <summary>
   /// Derived from <see cref="FormWithPicture"/>.
@@ -427,24 +427,6 @@ namespace Ogama.Modules.Recording
       }
 
       return true;
-    }
-
-    /// <summary>
-    /// This method checks if there are any unsaved changes to the current slideshow.
-    /// </summary>
-    /// <returns>True if the slideshow has unsaved changes, otherwise false.</returns>
-    private static bool CheckForModifiedSlideshow()
-    {
-      if (Document.ActiveDocument.ExperimentSettings.SlideShow.IsModified)
-      {
-        string message = "You´re current slideshow has unsaved changes." +
-          Environment.NewLine + "Please switch to the Slideshow design module and save them before starting a recording.";
-
-        ExceptionMethods.ProcessMessage("Please save the modified slideshow first.", message);
-        return true;
-      }
-
-      return false;
     }
 
     /// <summary>
@@ -1036,6 +1018,7 @@ namespace Ogama.Modules.Recording
         this.recordingStarttime = this.counterChangedTime;
         this.recordTimerWatch.Start();
         this.tmrRecordClock.Start();
+
         // Start update timer of control panel viewer
         this.Picture.StartAnimation();
       }
@@ -1581,6 +1564,24 @@ namespace Ogama.Modules.Recording
     #region METHODS
 
     /// <summary>
+    /// This method checks if there are any unsaved changes to the current slideshow.
+    /// </summary>
+    /// <returns>True if the slideshow has unsaved changes, otherwise false.</returns>
+    private static bool CheckForModifiedSlideshow()
+    {
+      if (Document.ActiveDocument.ExperimentSettings.SlideShow.IsModified)
+      {
+        string message = "You´re current slideshow has unsaved changes." +
+          Environment.NewLine + "Please switch to the Slideshow design module and save them before starting a recording.";
+
+        ExceptionMethods.ProcessMessage("Please save the modified slideshow first.", message);
+        return true;
+      }
+
+      return false;
+    }
+
+    /// <summary>
     /// Key event handler for the Enter key.
     /// Starts recording if UI is set.
     /// </summary>
@@ -1763,6 +1764,7 @@ namespace Ogama.Modules.Recording
           this.btnITUAcceptCalibration,
           this.btnITURecalibrate,
           this.btnITUConnect,
+          this.btnITUCamera,
           this.btnITUAdjust,
           this.btnITUSubjectName,
           this.btnITUCalibrate,
@@ -1791,6 +1793,7 @@ namespace Ogama.Modules.Recording
           this.btnITUPS3AcceptCalibration,
           this.btnITUPS3Recalibrate,
           this.btnITUPS3Connect,
+          this.btnITUPS3Camera,
           this.btnITUPS3Adjust,
           this.btnITUPS3SubjectName,
           this.btnITUPS3Calibrate,

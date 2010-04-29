@@ -1105,7 +1105,6 @@ namespace Ogama.Modules.Recording
           else
           {
             this.PlaySlideContainer(this.shownSlide);
-
           }
 
           return true;
@@ -1137,7 +1136,7 @@ namespace Ogama.Modules.Recording
           if (this.preparedSlideOne.ScreenCapture != null && trialChange && this.preparedSlideOne.ScreenCapture.Capturing)
           {
             this.preparedSlideOne.ScreenCapture.StopAll();
-            //AsyncHelper.FireAndForget(new MethodInvoker(this.preparedSlideOne.ScreenCapture.StopAll));
+            ////AsyncHelper.FireAndForget(new MethodInvoker(this.preparedSlideOne.ScreenCapture.StopAll));
           }
 
           break;
@@ -1146,7 +1145,7 @@ namespace Ogama.Modules.Recording
           if (this.preparedSlideTwo.ScreenCapture != null && trialChange && this.preparedSlideTwo.ScreenCapture.Capturing)
           {
             this.preparedSlideTwo.ScreenCapture.StopAll();
-            //AsyncHelper.FireAndForget(new MethodInvoker(this.preparedSlideTwo.ScreenCapture.StopAll));
+            ////AsyncHelper.FireAndForget(new MethodInvoker(this.preparedSlideTwo.ScreenCapture.StopAll));
           }
 
           break;
@@ -1199,7 +1198,7 @@ namespace Ogama.Modules.Recording
             if (this.preparedSlideTwo.ScreenCapture != null)
             {
               this.preparedSlideTwo.ScreenCapture.Filename = filename;
-              //this.preparedSlideTwo.ScreenCapture.Cue();
+              ////this.preparedSlideTwo.ScreenCapture.Cue();
             }
 
             break;
@@ -1208,7 +1207,7 @@ namespace Ogama.Modules.Recording
             if (this.preparedSlideOne.ScreenCapture != null)
             {
               this.preparedSlideOne.ScreenCapture.Filename = filename;
-              //this.preparedSlideOne.ScreenCapture.Cue();
+              ////this.preparedSlideOne.ScreenCapture.Cue();
             }
 
             break;
@@ -1307,7 +1306,7 @@ namespace Ogama.Modules.Recording
         switch (this.shownContainer)
         {
           case ShownContainer.One:
-            if (this.preparedSlideOne.ScreenCapture != null)// && this.preparedSlideOne.ScreenCapture.Cued)
+            if (this.preparedSlideOne.ScreenCapture != null)
             {
               this.preparedSlideOne.ScreenCapture.PreviewWindow = this.screenCapturePreviewWindow;
               this.preparedSlideOne.ScreenCapture.Start();
@@ -1315,7 +1314,7 @@ namespace Ogama.Modules.Recording
 
             break;
           case ShownContainer.Two:
-            if (this.preparedSlideTwo.ScreenCapture != null)// && this.preparedSlideTwo.ScreenCapture.Cued)
+            if (this.preparedSlideTwo.ScreenCapture != null)
             {
               this.preparedSlideTwo.ScreenCapture.PreviewWindow = this.screenCapturePreviewWindow;
               this.preparedSlideTwo.ScreenCapture.Start();

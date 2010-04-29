@@ -54,11 +54,15 @@
       this.label17 = new System.Windows.Forms.Label();
       this.label18 = new System.Windows.Forms.Label();
       this.label19 = new System.Windows.Forms.Label();
+      this.label54 = new System.Windows.Forms.Label();
       this.label20 = new System.Windows.Forms.Label();
       this.btnITUSubjectName = new System.Windows.Forms.Button();
+      this.btnITUCamera = new System.Windows.Forms.Button();
       this.btnITUConnect = new System.Windows.Forms.Button();
       this.tbpITUPS3 = new System.Windows.Forms.TabPage();
       this.panel8 = new System.Windows.Forms.Panel();
+      this.label55 = new System.Windows.Forms.Label();
+      this.btnITUPS3Camera = new System.Windows.Forms.Button();
       this.label53 = new System.Windows.Forms.Label();
       this.btnITUPS3Adjust = new System.Windows.Forms.Button();
       this.groupBox9 = new System.Windows.Forms.GroupBox();
@@ -450,9 +454,9 @@
       // 
       this.spcPanelUserCam.Panel2.Controls.Add(this.grpUsercam);
       this.spcPanelUserCam.Panel2.Padding = new System.Windows.Forms.Padding(5);
+      this.spcPanelUserCam.Panel2MinSize = 200;
       this.spcPanelUserCam.Size = new System.Drawing.Size(220, 652);
       this.spcPanelUserCam.SplitterDistance = 448;
-      this.spcPanelUserCam.Panel2MinSize = 200;
       this.spcPanelUserCam.TabIndex = 21;
       // 
       // spcPanelRecordTime
@@ -516,8 +520,10 @@
       this.panel3.Controls.Add(this.label17);
       this.panel3.Controls.Add(this.label18);
       this.panel3.Controls.Add(this.label19);
+      this.panel3.Controls.Add(this.label54);
       this.panel3.Controls.Add(this.label20);
       this.panel3.Controls.Add(this.btnITUSubjectName);
+      this.panel3.Controls.Add(this.btnITUCamera);
       this.panel3.Controls.Add(this.btnITUConnect);
       this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panel3.Location = new System.Drawing.Point(3, 3);
@@ -529,12 +535,12 @@
       // 
       this.label47.AutoSize = true;
       this.label47.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label47.Location = new System.Drawing.Point(5, 226);
+      this.label47.Location = new System.Drawing.Point(5, 256);
       this.label47.Margin = new System.Windows.Forms.Padding(0);
       this.label47.Name = "label47";
       this.label47.Size = new System.Drawing.Size(25, 24);
       this.label47.TabIndex = 22;
-      this.label47.Text = "2.";
+      this.label47.Text = "3.";
       // 
       // btnITUAdjust
       // 
@@ -542,7 +548,7 @@
       this.btnITUAdjust.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
       this.btnITUAdjust.ImageKey = "Adjust";
       this.btnITUAdjust.ImageList = this.imlButtons;
-      this.btnITUAdjust.Location = new System.Drawing.Point(29, 226);
+      this.btnITUAdjust.Location = new System.Drawing.Point(29, 256);
       this.btnITUAdjust.Name = "btnITUAdjust";
       this.btnITUAdjust.Size = new System.Drawing.Size(73, 23);
       this.btnITUAdjust.TabIndex = 21;
@@ -562,6 +568,8 @@
       this.imlButtons.Images.SetKeyName(4, "Video");
       this.imlButtons.Images.SetKeyName(5, "Sound");
       this.imlButtons.Images.SetKeyName(6, "Adjust");
+      this.imlButtons.Images.SetKeyName(7, "ITU");
+      this.imlButtons.Images.SetKeyName(8, "PS3");
       // 
       // groupBox4
       // 
@@ -664,7 +672,7 @@
       // 
       // txbITUSubjectName
       // 
-      this.txbITUSubjectName.Location = new System.Drawing.Point(107, 255);
+      this.txbITUSubjectName.Location = new System.Drawing.Point(107, 285);
       this.txbITUSubjectName.Name = "txbITUSubjectName";
       this.txbITUSubjectName.ReadOnly = true;
       this.txbITUSubjectName.Size = new System.Drawing.Size(91, 20);
@@ -677,7 +685,7 @@
       this.btnITURecord.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
       this.btnITURecord.ImageKey = "Record";
       this.btnITURecord.ImageList = this.imlButtons;
-      this.btnITURecord.Location = new System.Drawing.Point(29, 311);
+      this.btnITURecord.Location = new System.Drawing.Point(29, 341);
       this.btnITURecord.Name = "btnITURecord";
       this.btnITURecord.Size = new System.Drawing.Size(73, 23);
       this.btnITURecord.TabIndex = 17;
@@ -690,7 +698,7 @@
       this.btnITUCalibrate.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
       this.btnITUCalibrate.ImageKey = "Calibrate";
       this.btnITUCalibrate.ImageList = this.imlButtons;
-      this.btnITUCalibrate.Location = new System.Drawing.Point(29, 282);
+      this.btnITUCalibrate.Location = new System.Drawing.Point(29, 312);
       this.btnITUCalibrate.Name = "btnITUCalibrate";
       this.btnITUCalibrate.Size = new System.Drawing.Size(73, 23);
       this.btnITUCalibrate.TabIndex = 17;
@@ -701,31 +709,42 @@
       // 
       this.label17.AutoSize = true;
       this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label17.Location = new System.Drawing.Point(5, 282);
+      this.label17.Location = new System.Drawing.Point(5, 312);
       this.label17.Name = "label17";
       this.label17.Size = new System.Drawing.Size(25, 24);
       this.label17.TabIndex = 13;
-      this.label17.Text = "4.";
+      this.label17.Text = "5.";
       // 
       // label18
       // 
       this.label18.AutoSize = true;
       this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label18.Location = new System.Drawing.Point(5, 311);
+      this.label18.Location = new System.Drawing.Point(5, 341);
       this.label18.Name = "label18";
       this.label18.Size = new System.Drawing.Size(25, 24);
       this.label18.TabIndex = 13;
-      this.label18.Text = "5.";
+      this.label18.Text = "6.";
       // 
       // label19
       // 
       this.label19.AutoSize = true;
       this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label19.Location = new System.Drawing.Point(5, 253);
+      this.label19.Location = new System.Drawing.Point(5, 283);
       this.label19.Name = "label19";
       this.label19.Size = new System.Drawing.Size(25, 24);
       this.label19.TabIndex = 13;
-      this.label19.Text = "3.";
+      this.label19.Text = "4.";
+      // 
+      // label54
+      // 
+      this.label54.AutoSize = true;
+      this.label54.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label54.Location = new System.Drawing.Point(5, 227);
+      this.label54.Margin = new System.Windows.Forms.Padding(0);
+      this.label54.Name = "label54";
+      this.label54.Size = new System.Drawing.Size(25, 24);
+      this.label54.TabIndex = 13;
+      this.label54.Text = "2.";
       // 
       // label20
       // 
@@ -744,7 +763,7 @@
       this.btnITUSubjectName.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
       this.btnITUSubjectName.ImageKey = "Subject";
       this.btnITUSubjectName.ImageList = this.imlButtons;
-      this.btnITUSubjectName.Location = new System.Drawing.Point(29, 254);
+      this.btnITUSubjectName.Location = new System.Drawing.Point(29, 284);
       this.btnITUSubjectName.Name = "btnITUSubjectName";
       this.btnITUSubjectName.Size = new System.Drawing.Size(73, 23);
       this.btnITUSubjectName.TabIndex = 12;
@@ -752,6 +771,21 @@
       this.btnITUSubjectName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
       this.btnITUSubjectName.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.btnITUSubjectName.UseVisualStyleBackColor = true;
+      // 
+      // btnITUCamera
+      // 
+      this.btnITUCamera.Enabled = false;
+      this.btnITUCamera.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnITUCamera.ImageKey = "ITU";
+      this.btnITUCamera.ImageList = this.imlButtons;
+      this.btnITUCamera.Location = new System.Drawing.Point(29, 227);
+      this.btnITUCamera.Name = "btnITUCamera";
+      this.btnITUCamera.Size = new System.Drawing.Size(73, 23);
+      this.btnITUCamera.TabIndex = 12;
+      this.btnITUCamera.Text = "Camera";
+      this.btnITUCamera.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.btnITUCamera.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.btnITUCamera.UseVisualStyleBackColor = true;
       // 
       // btnITUConnect
       // 
@@ -774,13 +808,15 @@
       this.tbpITUPS3.Location = new System.Drawing.Point(4, 23);
       this.tbpITUPS3.Name = "tbpITUPS3";
       this.tbpITUPS3.Padding = new System.Windows.Forms.Padding(3);
-      this.tbpITUPS3.Size = new System.Drawing.Size(212, 357);
+      this.tbpITUPS3.Size = new System.Drawing.Size(212, 392);
       this.tbpITUPS3.TabIndex = 6;
       this.tbpITUPS3.Text = "PS3";
       this.tbpITUPS3.UseVisualStyleBackColor = true;
       // 
       // panel8
       // 
+      this.panel8.Controls.Add(this.label55);
+      this.panel8.Controls.Add(this.btnITUPS3Camera);
       this.panel8.Controls.Add(this.label53);
       this.panel8.Controls.Add(this.btnITUPS3Adjust);
       this.panel8.Controls.Add(this.groupBox9);
@@ -796,19 +832,45 @@
       this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panel8.Location = new System.Drawing.Point(3, 3);
       this.panel8.Name = "panel8";
-      this.panel8.Size = new System.Drawing.Size(206, 351);
+      this.panel8.Size = new System.Drawing.Size(206, 386);
       this.panel8.TabIndex = 11;
+      // 
+      // label55
+      // 
+      this.label55.AutoSize = true;
+      this.label55.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label55.Location = new System.Drawing.Point(5, 227);
+      this.label55.Margin = new System.Windows.Forms.Padding(0);
+      this.label55.Name = "label55";
+      this.label55.Size = new System.Drawing.Size(25, 24);
+      this.label55.TabIndex = 26;
+      this.label55.Text = "2.";
+      // 
+      // btnITUPS3Camera
+      // 
+      this.btnITUPS3Camera.Enabled = false;
+      this.btnITUPS3Camera.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnITUPS3Camera.ImageKey = "PS3";
+      this.btnITUPS3Camera.ImageList = this.imlButtons;
+      this.btnITUPS3Camera.Location = new System.Drawing.Point(29, 227);
+      this.btnITUPS3Camera.Name = "btnITUPS3Camera";
+      this.btnITUPS3Camera.Size = new System.Drawing.Size(73, 23);
+      this.btnITUPS3Camera.TabIndex = 25;
+      this.btnITUPS3Camera.Text = "Camera";
+      this.btnITUPS3Camera.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.btnITUPS3Camera.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.btnITUPS3Camera.UseVisualStyleBackColor = true;
       // 
       // label53
       // 
       this.label53.AutoSize = true;
       this.label53.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label53.Location = new System.Drawing.Point(5, 227);
+      this.label53.Location = new System.Drawing.Point(5, 256);
       this.label53.Margin = new System.Windows.Forms.Padding(0);
       this.label53.Name = "label53";
       this.label53.Size = new System.Drawing.Size(25, 24);
       this.label53.TabIndex = 24;
-      this.label53.Text = "2.";
+      this.label53.Text = "3.";
       // 
       // btnITUPS3Adjust
       // 
@@ -816,7 +878,7 @@
       this.btnITUPS3Adjust.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
       this.btnITUPS3Adjust.ImageKey = "Adjust";
       this.btnITUPS3Adjust.ImageList = this.imlButtons;
-      this.btnITUPS3Adjust.Location = new System.Drawing.Point(29, 227);
+      this.btnITUPS3Adjust.Location = new System.Drawing.Point(29, 256);
       this.btnITUPS3Adjust.Name = "btnITUPS3Adjust";
       this.btnITUPS3Adjust.Size = new System.Drawing.Size(73, 23);
       this.btnITUPS3Adjust.TabIndex = 23;
@@ -926,7 +988,7 @@
       // 
       // txbITUPS3SubjectName
       // 
-      this.txbITUPS3SubjectName.Location = new System.Drawing.Point(107, 257);
+      this.txbITUPS3SubjectName.Location = new System.Drawing.Point(107, 286);
       this.txbITUPS3SubjectName.Name = "txbITUPS3SubjectName";
       this.txbITUPS3SubjectName.ReadOnly = true;
       this.txbITUPS3SubjectName.Size = new System.Drawing.Size(91, 20);
@@ -939,7 +1001,7 @@
       this.btnITUPS3Record.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
       this.btnITUPS3Record.ImageKey = "Record";
       this.btnITUPS3Record.ImageList = this.imlButtons;
-      this.btnITUPS3Record.Location = new System.Drawing.Point(29, 313);
+      this.btnITUPS3Record.Location = new System.Drawing.Point(29, 342);
       this.btnITUPS3Record.Name = "btnITUPS3Record";
       this.btnITUPS3Record.Size = new System.Drawing.Size(73, 23);
       this.btnITUPS3Record.TabIndex = 17;
@@ -952,7 +1014,7 @@
       this.btnITUPS3Calibrate.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
       this.btnITUPS3Calibrate.ImageKey = "Calibrate";
       this.btnITUPS3Calibrate.ImageList = this.imlButtons;
-      this.btnITUPS3Calibrate.Location = new System.Drawing.Point(29, 284);
+      this.btnITUPS3Calibrate.Location = new System.Drawing.Point(29, 313);
       this.btnITUPS3Calibrate.Name = "btnITUPS3Calibrate";
       this.btnITUPS3Calibrate.Size = new System.Drawing.Size(73, 23);
       this.btnITUPS3Calibrate.TabIndex = 17;
@@ -963,31 +1025,31 @@
       // 
       this.label43.AutoSize = true;
       this.label43.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label43.Location = new System.Drawing.Point(5, 284);
+      this.label43.Location = new System.Drawing.Point(5, 313);
       this.label43.Name = "label43";
       this.label43.Size = new System.Drawing.Size(25, 24);
       this.label43.TabIndex = 13;
-      this.label43.Text = "4.";
+      this.label43.Text = "5.";
       // 
       // label44
       // 
       this.label44.AutoSize = true;
       this.label44.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label44.Location = new System.Drawing.Point(5, 313);
+      this.label44.Location = new System.Drawing.Point(5, 342);
       this.label44.Name = "label44";
       this.label44.Size = new System.Drawing.Size(25, 24);
       this.label44.TabIndex = 13;
-      this.label44.Text = "5.";
+      this.label44.Text = "6.";
       // 
       // label45
       // 
       this.label45.AutoSize = true;
       this.label45.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label45.Location = new System.Drawing.Point(5, 255);
+      this.label45.Location = new System.Drawing.Point(5, 284);
       this.label45.Name = "label45";
       this.label45.Size = new System.Drawing.Size(25, 24);
       this.label45.TabIndex = 13;
-      this.label45.Text = "3.";
+      this.label45.Text = "4.";
       // 
       // label46
       // 
@@ -1006,7 +1068,7 @@
       this.btnITUPS3SubjectName.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
       this.btnITUPS3SubjectName.ImageKey = "Subject";
       this.btnITUPS3SubjectName.ImageList = this.imlButtons;
-      this.btnITUPS3SubjectName.Location = new System.Drawing.Point(29, 256);
+      this.btnITUPS3SubjectName.Location = new System.Drawing.Point(29, 285);
       this.btnITUPS3SubjectName.Name = "btnITUPS3SubjectName";
       this.btnITUPS3SubjectName.Size = new System.Drawing.Size(73, 23);
       this.btnITUPS3SubjectName.TabIndex = 12;
@@ -1036,7 +1098,7 @@
       this.tbpTobii.Location = new System.Drawing.Point(4, 23);
       this.tbpTobii.Name = "tbpTobii";
       this.tbpTobii.Padding = new System.Windows.Forms.Padding(3);
-      this.tbpTobii.Size = new System.Drawing.Size(212, 357);
+      this.tbpTobii.Size = new System.Drawing.Size(212, 392);
       this.tbpTobii.TabIndex = 0;
       this.tbpTobii.Text = "Tobii";
       this.tbpTobii.UseVisualStyleBackColor = true;
@@ -1056,7 +1118,7 @@
       this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panel1.Location = new System.Drawing.Point(3, 3);
       this.panel1.Name = "panel1";
-      this.panel1.Size = new System.Drawing.Size(206, 351);
+      this.panel1.Size = new System.Drawing.Size(206, 386);
       this.panel1.TabIndex = 11;
       // 
       // groupBox1
@@ -1279,7 +1341,7 @@
       this.tbpAlea.Location = new System.Drawing.Point(4, 23);
       this.tbpAlea.Name = "tbpAlea";
       this.tbpAlea.Padding = new System.Windows.Forms.Padding(3);
-      this.tbpAlea.Size = new System.Drawing.Size(212, 357);
+      this.tbpAlea.Size = new System.Drawing.Size(212, 392);
       this.tbpAlea.TabIndex = 2;
       this.tbpAlea.Text = "Alea";
       this.tbpAlea.UseVisualStyleBackColor = true;
@@ -1529,7 +1591,7 @@
       this.tbpSMI.Location = new System.Drawing.Point(4, 23);
       this.tbpSMI.Name = "tbpSMI";
       this.tbpSMI.Padding = new System.Windows.Forms.Padding(3);
-      this.tbpSMI.Size = new System.Drawing.Size(212, 357);
+      this.tbpSMI.Size = new System.Drawing.Size(212, 392);
       this.tbpSMI.TabIndex = 4;
       this.tbpSMI.Text = "SMI";
       this.tbpSMI.UseVisualStyleBackColor = true;
@@ -1669,7 +1731,7 @@
       this.tbpMouseOnly.Location = new System.Drawing.Point(4, 23);
       this.tbpMouseOnly.Name = "tbpMouseOnly";
       this.tbpMouseOnly.Padding = new System.Windows.Forms.Padding(3);
-      this.tbpMouseOnly.Size = new System.Drawing.Size(212, 357);
+      this.tbpMouseOnly.Size = new System.Drawing.Size(212, 392);
       this.tbpMouseOnly.TabIndex = 1;
       this.tbpMouseOnly.Text = "MouseOnly";
       this.tbpMouseOnly.UseVisualStyleBackColor = true;
@@ -1738,7 +1800,7 @@
       this.tbpNoDevice.Location = new System.Drawing.Point(4, 23);
       this.tbpNoDevice.Name = "tbpNoDevice";
       this.tbpNoDevice.Padding = new System.Windows.Forms.Padding(3);
-      this.tbpNoDevice.Size = new System.Drawing.Size(212, 357);
+      this.tbpNoDevice.Size = new System.Drawing.Size(212, 392);
       this.tbpNoDevice.TabIndex = 3;
       this.tbpNoDevice.Text = "No tracking device selected";
       this.tbpNoDevice.UseVisualStyleBackColor = true;
@@ -3731,5 +3793,9 @@
     private System.Windows.Forms.Label label52;
     private System.Windows.Forms.Button button36;
     private System.Windows.Forms.Button button37;
+    private System.Windows.Forms.Label label54;
+    private System.Windows.Forms.Button btnITUCamera;
+    private System.Windows.Forms.Label label55;
+    private System.Windows.Forms.Button btnITUPS3Camera;
   }
 }

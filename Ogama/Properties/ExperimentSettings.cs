@@ -786,7 +786,6 @@ namespace Ogama.Properties
       return usedConnection;
     }
 
-
     /// <summary>
     /// Builds the document filename with path.
     /// </summary>

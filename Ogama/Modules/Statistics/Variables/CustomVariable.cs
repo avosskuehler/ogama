@@ -58,6 +58,21 @@ namespace Ogama.Modules.Statistics
     /// Calculate regressions in a specific AOI or AOI group or over all.
     /// </summary>
     Regressions,
+
+    /// <summary>
+    /// Calculate average saccade duration in a specific AOI or AOI group.
+    /// </summary>
+    SaccadeDuration,
+
+    /// <summary>
+    /// Calculate saccade length by using the distance between consecutive fixation centers in a specific AOI or AOI group.
+    /// </summary>
+    SaccadeLength,
+
+    /// <summary>
+    /// Calculate saccade velocity by dividing saccade length by saccade time in a specific AOI or AOI group.
+    /// </summary>
+    SaccadeVelocity,
   }
 
   /// <summary>
@@ -186,6 +201,22 @@ namespace Ogama.Modules.Statistics
             sb.Append(this.IsAOIGroup ? " Group: " : ":");
             sb.Append(this.AOIName);
           }
+
+          break;
+        case ParamTypes.SaccadeDuration:
+          sb.Append("Saccade duration mean at AOI");
+          sb.Append(this.IsAOIGroup ? " Group: " : ":");
+          sb.Append(this.AOIName);
+          break;
+        case ParamTypes.SaccadeLength:
+          sb.Append("Saccade distance mean at AOI");
+          sb.Append(this.IsAOIGroup ? " Group: " : ":");
+          sb.Append(this.AOIName);
+          break;
+        case ParamTypes.SaccadeVelocity:
+          sb.Append("Saccade velocity mean at AOI");
+          sb.Append(this.IsAOIGroup ? " Group: " : ":");
+          sb.Append(this.AOIName);
           break;
       }
 
@@ -243,6 +274,24 @@ namespace Ogama.Modules.Statistics
           sb.AppendLine("gaze/mouse was never over AOI/ AOI group ");
           sb.AppendLine("A value of -2 means: ");
           sb.AppendLine("this AOIs was not definded in this trial ");
+          break;
+        case ParamTypes.SaccadeDuration:
+          sb.AppendLine("A value of -1 means: ");
+          sb.AppendLine("gaze/mouse was never over this AOI");
+          sb.AppendLine("A value of -2 means: ");
+          sb.AppendLine("this AOI/AOI group was not defined.");
+          break;
+        case ParamTypes.SaccadeLength:
+          sb.AppendLine("A value of -1 means: ");
+          sb.AppendLine("gaze/mouse was never over this AOI");
+          sb.AppendLine("A value of -2 means: ");
+          sb.AppendLine("this AOI/AOI group was not defined.");
+          break;
+        case ParamTypes.SaccadeVelocity:
+          sb.AppendLine("A value of -1 means: ");
+          sb.AppendLine("gaze/mouse was never over this AOI");
+          sb.AppendLine("A value of -2 means: ");
+          sb.AppendLine("this AOI/AOI group was not defined.");
           break;
       }
 

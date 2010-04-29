@@ -452,7 +452,7 @@ namespace Ogama.Modules.Scanpaths
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnGazePenStyle_Click(object sender, EventArgs e)
     {
-      ColorDefinitionDialog dlg = new ColorDefinitionDialog();
+      ColorDefinitionDialog dlg = new ColorDefinitionDialog(this.scanpathsPicture.GazeDrawingMode);
       dlg.SubjectNodes = this.trvSubjects.Nodes;
       dlg.ColorParams = this.gazeColorParams;
 
@@ -478,7 +478,7 @@ namespace Ogama.Modules.Scanpaths
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnMousePenStyle_Click(object sender, EventArgs e)
     {
-      ColorDefinitionDialog dlg = new ColorDefinitionDialog();
+      ColorDefinitionDialog dlg = new ColorDefinitionDialog(this.scanpathsPicture.MouseDrawingMode);
       dlg.SubjectNodes = this.trvSubjects.Nodes;
       dlg.ColorParams = this.mouseColorParams;
 
@@ -1605,6 +1605,12 @@ namespace Ogama.Modules.Scanpaths
       this.dgvSequenceSimilarity.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
     }
 
+    /// <summary>
+    /// Returns a <see cref="List{String}"/> that contain the string parts of the extended
+    /// levenshtein string.
+    /// </summary>
+    /// <param name="extendedString">A <see cref="String"/> with the extended string.</param>
+    /// <returns>A <see cref="List{String}"/> to be used in the extended distance calculation.</returns>
     private static List<string> GetStringListForExtendedString(string extendedString)
     {
       List<string> rowString = new List<string>();
@@ -1615,6 +1621,7 @@ namespace Ogama.Modules.Scanpaths
       {
         modulo = 2;
       }
+
       if (identifierCount > 676)
       {
         modulo = 3;

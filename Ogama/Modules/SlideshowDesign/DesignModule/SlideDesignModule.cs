@@ -574,6 +574,7 @@ namespace Ogama.Modules.SlideshowDesign
           {
             e.Shape.Size = Document.ActiveDocument.PresentationSize;
           }
+
           try
           {
             this.nudLayoutLeft.Value = (decimal)e.Shape.Location.X;

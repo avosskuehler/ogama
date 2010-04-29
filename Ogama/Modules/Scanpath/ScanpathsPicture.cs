@@ -61,7 +61,6 @@ namespace Ogama.Modules.Scanpaths
     /// </summary>
     private static string[] identifierListExtraLong;
 
-
     /// <summary>
     /// The currently used list of identifier strings for the grid or AOI elements.
     /// </summary>
@@ -126,6 +125,9 @@ namespace Ogama.Modules.Scanpaths
     ///////////////////////////////////////////////////////////////////////////////
     #region CONSTRUCTION
 
+    /// <summary>
+    /// Initializes static members of the ScanpathsPicture class.
+    /// </summary>
     static ScanpathsPicture()
     {
       InitializeCharacterLists();

@@ -72,6 +72,31 @@ namespace Ogama.Modules.Scanpaths
     /// </summary>
     private Bitmap colorMap;
 
+    /// <summary>
+    /// The <see cref="FixationDrawingMode"/> to use for the preview.
+    /// </summary>
+    private FixationDrawingMode currentDrawingMode;
+
+    /// <summary>
+    /// The font of the numbers of the fixations for the current selected subject.
+    /// </summary>
+    private Font selectedFont;
+
+    /// <summary>
+    /// The color of the numbers of the fixations for the current selected subject.
+    /// </summary>
+    private Color selectedFontColor;
+
+    /// <summary>
+    /// The pen for the fixations for the current selected subject.
+    /// </summary>
+    private Pen selectedFixationsPen;
+
+    /// <summary>
+    /// The pen for the fixation connections for the current selected subject.
+    /// </summary>
+    private Pen selectedConnectionsPen;
+
     #endregion //FIELDS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -83,10 +108,19 @@ namespace Ogama.Modules.Scanpaths
     /// Initializes a new instance of the ColorDefinitionDialog class.
     /// Initializes components and gradients.
     /// </summary>
-    public ColorDefinitionDialog()
+    /// <param name="drawingMode">The used <see cref="FixationDrawingMode"/> for the preview.</param>
+    public ColorDefinitionDialog(FixationDrawingMode drawingMode)
     {
       this.InitializeComponent();
+      this.currentDrawingMode = drawingMode;
       this.InitializeGradients();
+      Ogama.Properties.Settings set = Properties.Settings.Default;
+      this.selectedFont = (Font)set.GazeFixationsFont.Clone();
+      this.selectedFontColor = set.GazeFixationsFontColor;
+      this.selectedFixationsPen = new Pen(set.GazeFixationsPenColor, set.GazeFixationsPenWidth);
+      this.selectedFixationsPen.DashStyle = set.GazeFixationsPenStyle;
+      this.selectedConnectionsPen = new Pen(set.GazeFixationConnectionsPenColor, set.GazeFixationConnectionsPenWidth);
+      this.selectedFixationsPen.DashStyle = set.GazeFixationConnectionsPenStyle;
     }
 
     #endregion //CONSTRUCTION
@@ -148,6 +182,7 @@ namespace Ogama.Modules.Scanpaths
         }
 
         this.trvSubjects.ExpandAll();
+        this.SetColorizationMode();
       }
     }
 
@@ -254,6 +289,7 @@ namespace Ogama.Modules.Scanpaths
     private void rdbColorization_CheckedChanged(object sender, EventArgs e)
     {
       this.SetColorizationMode();
+      this.pnlPreview.Refresh();
       this.trvSubjects.Refresh();
     }
 
@@ -319,22 +355,22 @@ namespace Ogama.Modules.Scanpaths
 
     /// <summary>
     /// The <see cref="Control.Click"/> event handler for
-    /// the <see cref="PenStyleArea"/> <see cref="psaFixationPen"/>.
+    /// the <see cref="Button"/> <see cref="btnFixationsStyle"/>.
     /// Updates the colorization property of the selected subject or group
     /// with the changes made in the <see cref="PenStyleDlg"/> for
     /// the fixation pen.
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void psaFixationPen_Click(object sender, EventArgs e)
+    private void btnFixationsStyle_Click(object sender, EventArgs e)
     {
       if (this.trvSubjects.SelectedNode != null)
       {
         PenStyleDlg dlg = new PenStyleDlg();
-        dlg.Pen = this.psaFixationPen.Pen;
+        dlg.Pen = this.selectedFixationsPen;
         if (dlg.ShowDialog() == DialogResult.OK)
         {
-          this.psaFixationPen.Pen = dlg.Pen;
+          this.selectedFixationsPen = dlg.Pen;
           this.SubmitStyleToSubjectOrCategory();
         }
       }
@@ -342,22 +378,22 @@ namespace Ogama.Modules.Scanpaths
 
     /// <summary>
     /// The <see cref="Control.Click"/> event handler for
-    /// the <see cref="PenStyleArea"/> <see cref="psaConnectionPen"/>.
+    /// the <see cref="Button"/> <see cref="btnConnectionsStyle"/>.
     /// Updates the colorization property of the selected subject or group
     /// with the changes made in the <see cref="PenStyleDlg"/> for
     /// the fixation connection pen.
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void psaConnectionPen_Click(object sender, EventArgs e)
+    private void btnConnectionsStyle_Click(object sender, EventArgs e)
     {
       if (this.trvSubjects.SelectedNode != null)
       {
         PenStyleDlg dlg = new PenStyleDlg();
-        dlg.Pen = this.psaConnectionPen.Pen;
+        dlg.Pen = this.selectedConnectionsPen;
         if (dlg.ShowDialog() == DialogResult.OK)
         {
-          this.psaConnectionPen.Pen = dlg.Pen;
+          this.selectedConnectionsPen = dlg.Pen;
           this.SubmitStyleToSubjectOrCategory();
         }
       }
@@ -365,27 +401,59 @@ namespace Ogama.Modules.Scanpaths
 
     /// <summary>
     /// The <see cref="Control.Click"/> event handler for
-    /// the <see cref="FontStyleArea"/> <see cref="fsaNumbers"/>.
+    /// the <see cref="Button"/> <see cref="btnNumbersStyle"/>.
     /// Updates the colorization property of the selected subject or group
     /// with the changes made in the <see cref="PenStyleDlg"/> for
     /// the fixation number font.
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void fsaNumbers_Click(object sender, EventArgs e)
+    private void btnNumbersStyle_Click(object sender, EventArgs e)
     {
       if (this.trvSubjects.SelectedNode != null)
       {
         FontStyleDlg dlg = new FontStyleDlg();
-        dlg.CurrentFontColor = this.fsaNumbers.FontColor;
-        dlg.CurrentFont = this.fsaNumbers.Font;
+        dlg.CurrentFontColor = this.selectedFontColor;
+        dlg.CurrentFont = this.selectedFont;
         if (dlg.ShowDialog() == DialogResult.OK)
         {
-          this.fsaNumbers.FontColor = dlg.CurrentFontColor;
-          this.fsaNumbers.Font = dlg.CurrentFont;
+          this.selectedFontColor = dlg.CurrentFontColor;
+          this.selectedFont = dlg.CurrentFont;
           this.SubmitStyleToSubjectOrCategory();
         }
       }
+    }
+
+    /// <summary>
+    /// The <see cref="Control.Paint"/> event handler for
+    /// the <see cref="Panel"/> <see cref="pnlPreview"/>.
+    /// Updates the preview of the fixation style
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">A <see cref="PaintEventArgs"/> with the event data.</param>
+    private void pnlPreview_Paint(object sender, PaintEventArgs e)
+    {
+      bool useDots = this.currentDrawingMode == FixationDrawingMode.Dots;
+
+      if (useDots)
+      {
+        SolidBrush dotBrush = new SolidBrush(this.selectedFixationsPen.Color);
+        e.Graphics.FillEllipse(dotBrush, 34, 34, 12, 12);
+        e.Graphics.FillEllipse(dotBrush, 144, 54, 12, 12);
+        e.Graphics.FillEllipse(dotBrush, 274, 24, 12, 12);
+      }
+      else
+      {
+        e.Graphics.DrawEllipse(this.selectedFixationsPen, 10, 10, 60, 60);
+        e.Graphics.DrawEllipse(this.selectedFixationsPen, 90, 0, 120, 120);
+        e.Graphics.DrawEllipse(this.selectedFixationsPen, 260, 10, 40, 40);
+      }
+
+      e.Graphics.DrawString("1", this.selectedFont, new SolidBrush(this.selectedFontColor), new Point(25, 20));
+      e.Graphics.DrawLine(this.selectedConnectionsPen, 40, 40, 150, 60);
+      e.Graphics.DrawString("2", this.selectedFont, new SolidBrush(this.selectedFontColor), new Point(135, 40));
+      e.Graphics.DrawLine(this.selectedConnectionsPen, 150, 60, 280, 30);
+      e.Graphics.DrawString("3", this.selectedFont, new SolidBrush(this.selectedFontColor), new Point(265, 10));
     }
 
     #endregion //WINDOWSEVENTHANDLER
@@ -442,10 +510,11 @@ namespace Ogama.Modules.Scanpaths
     /// <param name="style">The <see cref="ColorizationStyle"/> to be edited in the UI.</param>
     private void PopulateStyleGroup(ColorizationStyle style)
     {
-      this.psaConnectionPen.Pen = style.ConnectionPen;
-      this.psaFixationPen.Pen = style.FixationPen;
-      this.fsaNumbers.Font = style.Font;
-      this.fsaNumbers.FontColor = style.FontColor;
+      this.selectedConnectionsPen = style.ConnectionPen;
+      this.selectedFixationsPen = style.FixationPen;
+      this.selectedFont = style.Font;
+      this.selectedFontColor = style.FontColor;
+      this.pnlPreview.Refresh();
     }
 
     /// <summary>
@@ -518,10 +587,10 @@ namespace Ogama.Modules.Scanpaths
     private void SubmitStyleToSubjectOrCategory()
     {
       ColorizationStyle newStyle = new ColorizationStyle(
-        this.psaFixationPen.Pen,
-        this.psaConnectionPen.Pen,
-        this.fsaNumbers.Font,
-        this.fsaNumbers.FontColor);
+        this.selectedFixationsPen,
+        this.selectedConnectionsPen,
+        this.selectedFont,
+        this.selectedFontColor);
 
       switch (this.colorParams.ColorizationMode)
       {
@@ -529,7 +598,6 @@ namespace Ogama.Modules.Scanpaths
           if (this.trvSubjects.SelectedNode.Level == 1)
           {
             this.colorParams.SubjectStyles[this.trvSubjects.SelectedNode.Text] = newStyle;
-            this.trvSubjects.Refresh();
           }
 
           break;
@@ -538,7 +606,6 @@ namespace Ogama.Modules.Scanpaths
           {
             this.colorParams.CategoryStyles[this.trvSubjects.SelectedNode.Text] = newStyle;
             this.AssignGroupToSubjects();
-            this.trvSubjects.Refresh();
           }
 
           break;
@@ -546,11 +613,13 @@ namespace Ogama.Modules.Scanpaths
           if (this.trvSubjects.SelectedNode.Level == 1)
           {
             this.colorParams.SubjectStyles[this.trvSubjects.SelectedNode.Text] = newStyle;
-            this.trvSubjects.Refresh();
           }
 
           break;
       }
+
+      this.trvSubjects.Refresh();
+      this.pnlPreview.Refresh();
     }
 
     /// <summary>
@@ -562,18 +631,18 @@ namespace Ogama.Modules.Scanpaths
       if (this.rdbColorSubjects.Checked)
       {
         this.colorParams.ColorizationMode = ColorizationModes.Subject;
-        this.cbbPredefinedGradient.Enabled = false;
+        this.spcGradientSingle.Panel1Collapsed = true;
       }
       else if (this.rdbColorGroups.Checked)
       {
         this.colorParams.ColorizationMode = ColorizationModes.Category;
-        this.cbbPredefinedGradient.Enabled = false;
+        this.spcGradientSingle.Panel1Collapsed = true;
         this.AssignGroupToSubjects();
       }
       else if (this.rdbColorAutomatic.Checked)
       {
         this.colorParams.ColorizationMode = ColorizationModes.Gradient;
-        this.cbbPredefinedGradient.Enabled = true;
+        this.spcGradientSingle.Panel2Collapsed = true;
         this.AssignGradientToSubjects();
       }
     }
@@ -593,7 +662,7 @@ namespace Ogama.Modules.Scanpaths
     }
 
     /// <summary>
-    /// Populates the drawing colors for all subjects usin
+    /// Populates the drawing colors for all subjects using
     /// the current gradient.
     /// </summary>
     private void AssignGradientToSubjects()
@@ -605,11 +674,11 @@ namespace Ogama.Modules.Scanpaths
       foreach (KeyValuePair<string, ColorizationStyle> kvp in this.colorParams.SubjectStyles)
       {
         Color newColor = palBmp.GetPixel(i, 0);
-        Pen newFixationPen = (Pen)this.psaFixationPen.Pen.Clone();
+        Pen newFixationPen = (Pen)this.selectedFixationsPen.Clone();
         newFixationPen.Color = newColor;
-        Pen newConnectionPen = (Pen)this.psaConnectionPen.Pen.Clone();
+        Pen newConnectionPen = (Pen)this.selectedConnectionsPen.Clone();
         newConnectionPen.Color = newColor;
-        Font newFont = (Font)this.fsaNumbers.Font.Clone();
+        Font newFont = (Font)this.selectedFont.Clone();
         newStyles.Add(kvp.Key, new ColorizationStyle(newFixationPen, newConnectionPen, newFont, newColor));
         i++;
       }

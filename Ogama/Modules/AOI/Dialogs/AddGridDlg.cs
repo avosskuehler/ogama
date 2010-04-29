@@ -165,6 +165,7 @@ namespace Ogama.Modules.AOI
       {
         description = Scanpaths.ScanpathsPicture.IdentifierListLong;
       }
+
       if (numRows * numColumns > 676)
       {
         description = Scanpaths.ScanpathsPicture.IdentifierListExtraLong;

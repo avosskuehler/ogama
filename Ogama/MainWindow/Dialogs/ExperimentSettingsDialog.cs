@@ -14,21 +14,14 @@
 namespace Ogama.MainWindow
 {
   using System;
-  using System.Collections.Generic;
   using System.ComponentModel;
-  using System.Data;
-  using System.Drawing;
-  using System.IO;
-  using System.Text;
+  using System.Data.SqlClient;
   using System.Windows.Forms;
-
+  using Microsoft.SqlServer.Management.Common;
+  using Microsoft.SqlServer.Management.Smo;
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
   using Ogama.Properties;
-  using System.Data.SqlClient;
-  using Microsoft.SqlServer.Management.Common;
-  using Microsoft.SqlServer.Management.Smo;
-  using System.Collections.Specialized;
 
   /// <summary>
   /// Dialog with experiment settings.
@@ -122,7 +115,7 @@ namespace Ogama.MainWindow
       if (this.DialogResult == DialogResult.OK)
       {
         this.Cursor = Cursors.WaitCursor;
-        if (!TestSQLServerConnection(false))
+        if (!this.TestSQLServerConnection(false))
         {
           e.Cancel = true;
           string message = "Please specify the correct name for the running SQL Server instance.";
@@ -142,7 +135,7 @@ namespace Ogama.MainWindow
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnTestSQLConnection_Click(object sender, EventArgs e)
     {
-      TestSQLServerConnection(true);
+      this.TestSQLServerConnection(true);
     }
 
     /// <summary>
@@ -293,6 +286,8 @@ namespace Ogama.MainWindow
     /// <summary>
     /// This method tries to connect to the given SQL server.
     /// </summary>
+    /// <param name="showMessage">Indicates whether this method should be run
+    /// in silent or verbose mode.</param>
     /// <returns>True if succesfull, otherwise false.</returns>
     private bool TestSQLServerConnection(bool showMessage)
     {

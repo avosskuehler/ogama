@@ -318,6 +318,9 @@ namespace Ogama.Modules.Statistics
       aoiStatistic.FixationCount = -2;
       aoiStatistic.SumOfTimeOfAllFixations = -2;
       aoiStatistic.FirstHitTimeAfterBeeingOutside = -2;
+      aoiStatistic.SaccadeDuration = -2;
+      aoiStatistic.SaccadeLength = -2;
+      aoiStatistic.SaccadeVelocity = -2;
 
       if (aois.Count == 0)
       {
@@ -364,6 +367,17 @@ namespace Ogama.Modules.Statistics
       aoiStatistic.FixationDurationMedian = fixationsDurations.Length == 0 ? -1 : descriptives.Result.Median;
       aoiStatistic.FixationCount = fixationsDurations.Length == 0 ? -1 : (int)descriptives.Result.Count;
       aoiStatistic.SumOfTimeOfAllFixations = fixationsDurations.Length == 0 ? -1 : descriptives.Result.Sum;
+
+      // Saccade Durations
+      double saccadeDuration;
+      double saccadeLength;
+      double saccadeVelocity;
+
+      GetSaccadeArrays(fixationsInAOIs, out saccadeDuration, out saccadeLength, out saccadeVelocity);
+
+      aoiStatistic.SaccadeDuration = saccadeDuration;
+      aoiStatistic.SaccadeLength = saccadeLength;
+      aoiStatistic.SaccadeVelocity = saccadeVelocity;
 
       return aoiStatistic;
     }
@@ -791,6 +805,15 @@ namespace Ogama.Modules.Statistics
                   newRow.Cells[var.ColumnName].Value =
                     CalcNumberOfClicksAtAOIGroup(mousStopConditions, trialID, var.AOIName, var.MouseButton);
                   break;
+                case ParamTypes.SaccadeDuration:
+                  newRow.Cells[var.ColumnName].Value = aoiStatistic.SaccadeDuration;
+                  break;
+                case ParamTypes.SaccadeLength:
+                  newRow.Cells[var.ColumnName].Value = aoiStatistic.SaccadeLength;
+                  break;
+                case ParamTypes.SaccadeVelocity:
+                  newRow.Cells[var.ColumnName].Value = aoiStatistic.SaccadeVelocity;
+                  break;
               }
             }
 
@@ -834,6 +857,15 @@ namespace Ogama.Modules.Statistics
                 case ParamTypes.Clicks:
                   newRow.Cells[var.ColumnName].Value =
                     CalcNumberOfClicksAtAOISingle(mousStopConditions, trialID, var.AOIName, var.MouseButton);
+                  break;
+                case ParamTypes.SaccadeDuration:
+                  newRow.Cells[var.ColumnName].Value = aoiStatistic.SaccadeDuration;
+                  break;
+                case ParamTypes.SaccadeLength:
+                  newRow.Cells[var.ColumnName].Value = aoiStatistic.SaccadeLength;
+                  break;
+                case ParamTypes.SaccadeVelocity:
+                  newRow.Cells[var.ColumnName].Value = aoiStatistic.SaccadeVelocity;
                   break;
               }
             }
@@ -1031,6 +1063,15 @@ namespace Ogama.Modules.Statistics
               case ParamTypes.Regressions:
                 newRow.Cells[var.ColumnName].Value = CalcRegressions(fixationView, aois, var.Number);
                 break;
+              case ParamTypes.SaccadeDuration:
+                newRow.Cells[var.ColumnName].Value = aoiStatistic.SaccadeDuration;
+                break;
+              case ParamTypes.SaccadeLength:
+                newRow.Cells[var.ColumnName].Value = aoiStatistic.SaccadeLength;
+                break;
+              case ParamTypes.SaccadeVelocity:
+                newRow.Cells[var.ColumnName].Value = aoiStatistic.SaccadeVelocity;
+                break;
             }
           }
           else if (var.AOIName != string.Empty)
@@ -1071,12 +1112,29 @@ namespace Ogama.Modules.Statistics
                 case ParamTypes.Regressions:
                   newRow.Cells[var.ColumnName].Value = CalcRegressions(fixationView, aoiContainer, var.Number);
                   break;
+                case ParamTypes.SaccadeDuration:
+                  newRow.Cells[var.ColumnName].Value = aoiStatistic.SaccadeDuration;
+                  break;
+                case ParamTypes.SaccadeLength:
+                  newRow.Cells[var.ColumnName].Value = aoiStatistic.SaccadeLength;
+                  break;
+                case ParamTypes.SaccadeVelocity:
+                  newRow.Cells[var.ColumnName].Value = aoiStatistic.SaccadeVelocity;
+                  break;
               }
+            }
+            else
+            {
+              newRow.Cells[var.ColumnName].Value = -2;
             }
           }
           else if (var.ParamType == ParamTypes.Regressions)
           {
             newRow.Cells[var.ColumnName].Value = CalcRegressions(fixationView, null, var.Number);
+          }
+          else
+          {
+            newRow.Cells[var.ColumnName].Value = -2;
           }
         }
       }
@@ -1656,9 +1714,17 @@ namespace Ogama.Modules.Statistics
 
     #region FixationRelatedCalculations
 
+    /// <summary>
+    /// This static method calculates the number of regressions in the given AOI 
+    /// using the given table of fixations and line height.
+    /// </summary>
+    /// <param name="fixationView">A <see cref="DataView"/> with the list of fixations</param>
+    /// <param name="aois">A <see cref="VGElementCollection"/> with the AOIs.</param>
+    /// <param name="lineHeight">The line height of the textual area.</param>
+    /// <returns>An <see cref="Int32"/> with the number of regressions.</returns>
     private static int CalcRegressions(
-      DataView fixationView, 
-      VGElementCollection aois, 
+      DataView fixationView,
+      VGElementCollection aois,
       int lineHeight)
     {
       int regressionCount = 0;
@@ -2034,6 +2100,84 @@ namespace Ogama.Modules.Statistics
       }
 
       return fixationDurations.ToArray();
+    }
+
+    /// <summary>
+    /// This static methods calculates the mean saccade duration, length and velocity from the given table of fixations
+    /// from the database
+    /// </summary>
+    /// <param name="fixationsInAOIs">A <see cref="DataTable"/> with the fixations.</param>
+    /// <param name="saccadeDuration">The mean saccade duration</param>
+    /// <param name="saccadeLength">The mean saccade length</param>
+    /// <param name="saccadeVelocity">The mean saccade velocity</param>
+    private static void GetSaccadeArrays(
+      DataTable fixationsInAOIs,
+      out double saccadeDuration,
+      out double saccadeLength,
+      out double saccadeVelocity)
+    {
+      List<double> saccadeDurations = new List<double>();
+      List<double> saccadeLengths = new List<double>();
+      List<double> saccadeVelocitys = new List<double>();
+
+      PointF lastFixationCenter = PointF.Empty;
+      double lastFixationEndTime = 0;
+      int lastCountInTrial = 0;
+
+      for (int i = 0; i < fixationsInAOIs.Rows.Count; i++)
+      {
+        DataRow row = fixationsInAOIs.Rows[i];
+        double posX = Convert.ToDouble(row["PosX"]);
+        double posY = Convert.ToDouble(row["PosY"]);
+        PointF fixationCenter = new PointF((float)posX, (float)posY);
+        double fixationDuration = Convert.ToDouble(row["Length"]);
+        double fixationStartTime = Convert.ToDouble(row["StartTime"]);
+        int countInTrial = Convert.ToInt32(row["CountInTrial"]);
+
+        if (i > 0 && (countInTrial == lastCountInTrial + 1))
+        {
+          double currentSaccadeDuration = fixationStartTime - lastFixationEndTime;
+          double currentSaccadeLength = VGPolyline.Distance(fixationCenter, lastFixationCenter);
+          saccadeDurations.Add(currentSaccadeDuration);
+          saccadeLengths.Add(currentSaccadeLength);
+          saccadeVelocitys.Add(currentSaccadeLength / currentSaccadeDuration);
+        }
+
+        lastFixationEndTime = fixationStartTime + fixationDuration;
+        lastFixationCenter = fixationCenter;
+        lastCountInTrial = countInTrial;
+      }
+
+      // -1 : no saccades in AOI
+      // Calculate saccade duration mean
+      Descriptive descriptives = new Descriptive(saccadeDurations.ToArray());
+      if (saccadeDurations.Count > 0)
+      {
+        descriptives.Analyze(); // analyze the data
+      }
+
+      saccadeDuration = saccadeDurations.Count == 0 ? -1 : descriptives.Result.Mean;
+
+      // Calculate saccade length mean
+      descriptives = new Descriptive(saccadeLengths.ToArray());
+
+      if (saccadeLengths.Count > 0)
+      {
+        descriptives.Analyze(); // analyze the data
+      }
+
+      saccadeLength = saccadeLengths.Count == 0 ? -1 : descriptives.Result.Mean;
+
+      // Calculate saccade velocitys mean
+      descriptives = new Descriptive(saccadeVelocitys.ToArray());
+
+      if (saccadeVelocitys.Count > 0)
+      {
+        descriptives.Analyze(); // analyze the data
+      }
+
+      // -1 : no fixations in AOI
+      saccadeVelocity = saccadeVelocitys.Count == 0 ? -1 : descriptives.Result.Mean;
     }
 
     #endregion //HELPER

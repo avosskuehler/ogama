@@ -22,6 +22,7 @@ namespace Ogama
   using System.IO;
   using System.Windows.Forms;
   using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
+  using Microsoft.SqlServer.Management.Common;
   using Microsoft.SqlServer.Management.Smo;
   using Ogama.DataSet;
   using Ogama.ExceptionHandling;
@@ -29,7 +30,6 @@ namespace Ogama
   using Ogama.Modules.Common;
   using Ogama.Properties;
   using VectorGraphics.Elements;
-  using Microsoft.SqlServer.Management.Common;
 
   /// <summary>
   /// This class defines an OGAMA document.

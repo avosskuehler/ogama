@@ -33,13 +33,13 @@ namespace Ogama.Modules.Statistics
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StatisticsModule));
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StatisticsModule));
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
       this.dGVExportTable = new System.Windows.Forms.DataGridView();
       this.cmuDGV = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.cmuRecalculate = new System.Windows.Forms.ToolStripMenuItem();
@@ -170,9 +170,13 @@ namespace Ogama.Modules.Statistics
       this.rdbGazeAOIGroup = new System.Windows.Forms.RadioButton();
       this.btnGazeAddCustomVariable = new System.Windows.Forms.Button();
       this.nudGazeTimeUntilNumberOf = new System.Windows.Forms.NumericUpDown();
+      this.rdbGazeSaccadeVelocity = new System.Windows.Forms.RadioButton();
       this.rdbGazeFixationDurationMedian = new System.Windows.Forms.RadioButton();
+      this.rdbGazeSaccadeLength = new System.Windows.Forms.RadioButton();
+      this.rdbGazeSaccadeDuration = new System.Windows.Forms.RadioButton();
       this.label11 = new System.Windows.Forms.Label();
       this.tbpGazeRegressions = new System.Windows.Forms.TabPage();
+      this.label6 = new System.Windows.Forms.Label();
       this.btnGazeAddCustomRegressionVariable = new System.Windows.Forms.Button();
       this.label5 = new System.Windows.Forms.Label();
       this.nudGazeRegressionLineHeight = new System.Windows.Forms.NumericUpDown();
@@ -191,6 +195,9 @@ namespace Ogama.Modules.Statistics
       this.tbpMouseAOI = new System.Windows.Forms.TabPage();
       this.groupBox11 = new System.Windows.Forms.GroupBox();
       this.groupBox16 = new System.Windows.Forms.GroupBox();
+      this.rdbMouseSaccadeVelocity = new System.Windows.Forms.RadioButton();
+      this.rdbMouseSaccadeLength = new System.Windows.Forms.RadioButton();
+      this.rdbMouseSaccadeDuration = new System.Windows.Forms.RadioButton();
       this.cbbMouseClickButton = new System.Windows.Forms.ComboBox();
       this.rdbMouseAOISingle = new System.Windows.Forms.RadioButton();
       this.rdbMouseAOIGroup = new System.Windows.Forms.RadioButton();
@@ -240,7 +247,6 @@ namespace Ogama.Modules.Statistics
       this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
       this.btnTransitionsExportTable = new System.Windows.Forms.ToolStripButton();
       this.bgwCalculateTransitions = new System.ComponentModel.BackgroundWorker();
-      this.label6 = new System.Windows.Forms.Label();
       ((System.ComponentModel.ISupportInitialize)(this.bsoSubjects)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.bsoFKSubjectsTrials)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.ogamaDataSet)).BeginInit();
@@ -347,26 +353,26 @@ namespace Ogama.Modules.Statistics
       // dGVExportTable
       // 
       this.dGVExportTable.AllowUserToOrderColumns = true;
-      dataGridViewCellStyle1.NullValue = null;
-      this.dGVExportTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-      dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-      dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-      dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-      this.dGVExportTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+      dataGridViewCellStyle7.NullValue = null;
+      this.dGVExportTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+      dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+      dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.dGVExportTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
       this.dGVExportTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.dGVExportTable.ContextMenuStrip = this.cmuDGV;
-      dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.dGVExportTable.DefaultCellStyle = dataGridViewCellStyle3;
+      dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.dGVExportTable.DefaultCellStyle = dataGridViewCellStyle9;
       this.dGVExportTable.Dock = System.Windows.Forms.DockStyle.Fill;
       this.dGVExportTable.Location = new System.Drawing.Point(0, 0);
       this.dGVExportTable.Name = "dGVExportTable";
@@ -1082,26 +1088,26 @@ namespace Ogama.Modules.Statistics
       // dgvTransitions
       // 
       this.dgvTransitions.AllowUserToOrderColumns = true;
-      dataGridViewCellStyle4.NullValue = null;
-      this.dgvTransitions.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
-      dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-      dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-      dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-      this.dgvTransitions.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+      dataGridViewCellStyle1.NullValue = null;
+      this.dgvTransitions.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+      dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+      dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.dgvTransitions.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
       this.dgvTransitions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.dgvTransitions.ContextMenuStrip = this.cmuDGV;
-      dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.dgvTransitions.DefaultCellStyle = dataGridViewCellStyle6;
+      dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.dgvTransitions.DefaultCellStyle = dataGridViewCellStyle3;
       this.dgvTransitions.Dock = System.Windows.Forms.DockStyle.Fill;
       this.dgvTransitions.Location = new System.Drawing.Point(0, 0);
       this.dgvTransitions.Name = "dgvTransitions";
@@ -1193,7 +1199,7 @@ namespace Ogama.Modules.Statistics
       this.cbbGazeAOISingle.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
       this.cbbGazeAOISingle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.cbbGazeAOISingle.FormattingEnabled = true;
-      this.cbbGazeAOISingle.Location = new System.Drawing.Point(254, 62);
+      this.cbbGazeAOISingle.Location = new System.Drawing.Point(415, 62);
       this.cbbGazeAOISingle.Name = "cbbGazeAOISingle";
       this.cbbGazeAOISingle.Size = new System.Drawing.Size(100, 21);
       this.cbbGazeAOISingle.TabIndex = 23;
@@ -1205,7 +1211,7 @@ namespace Ogama.Modules.Statistics
       this.cbbGazeAOIGroups.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
       this.cbbGazeAOIGroups.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.cbbGazeAOIGroups.FormattingEnabled = true;
-      this.cbbGazeAOIGroups.Location = new System.Drawing.Point(254, 40);
+      this.cbbGazeAOIGroups.Location = new System.Drawing.Point(415, 40);
       this.cbbGazeAOIGroups.Name = "cbbGazeAOIGroups";
       this.cbbGazeAOIGroups.Size = new System.Drawing.Size(100, 21);
       this.cbbGazeAOIGroups.TabIndex = 23;
@@ -1915,8 +1921,11 @@ namespace Ogama.Modules.Statistics
       this.groupBox15.Controls.Add(this.rdbGazeAOIGroup);
       this.groupBox15.Controls.Add(this.btnGazeAddCustomVariable);
       this.groupBox15.Controls.Add(this.nudGazeTimeUntilNumberOf);
+      this.groupBox15.Controls.Add(this.rdbGazeSaccadeVelocity);
       this.groupBox15.Controls.Add(this.rdbGazeFixationDurationMedian);
+      this.groupBox15.Controls.Add(this.rdbGazeSaccadeLength);
       this.groupBox15.Controls.Add(this.rdbGazeFixationDurationMean);
+      this.groupBox15.Controls.Add(this.rdbGazeSaccadeDuration);
       this.groupBox15.Controls.Add(this.rdbGazeNumberOfFixations);
       this.groupBox15.Controls.Add(this.label11);
       this.groupBox15.Controls.Add(this.rdbGazeCompleteFixationTime);
@@ -1925,7 +1934,7 @@ namespace Ogama.Modules.Statistics
       this.groupBox15.Controls.Add(this.cbbGazeAOIGroups);
       this.groupBox15.Location = new System.Drawing.Point(162, 6);
       this.groupBox15.Name = "groupBox15";
-      this.groupBox15.Size = new System.Drawing.Size(360, 140);
+      this.groupBox15.Size = new System.Drawing.Size(540, 140);
       this.groupBox15.TabIndex = 27;
       this.groupBox15.TabStop = false;
       this.groupBox15.Text = "Gaze at AOI (custom)";
@@ -1934,7 +1943,7 @@ namespace Ogama.Modules.Statistics
       // 
       this.rdbGazeAOISingle.AutoCheck = false;
       this.rdbGazeAOISingle.AutoSize = true;
-      this.rdbGazeAOISingle.Location = new System.Drawing.Point(162, 63);
+      this.rdbGazeAOISingle.Location = new System.Drawing.Point(323, 63);
       this.rdbGazeAOISingle.Name = "rdbGazeAOISingle";
       this.rdbGazeAOISingle.Size = new System.Drawing.Size(85, 17);
       this.rdbGazeAOISingle.TabIndex = 33;
@@ -1947,7 +1956,7 @@ namespace Ogama.Modules.Statistics
       this.rdbGazeAOIGroup.AutoCheck = false;
       this.rdbGazeAOIGroup.AutoSize = true;
       this.rdbGazeAOIGroup.Checked = true;
-      this.rdbGazeAOIGroup.Location = new System.Drawing.Point(162, 41);
+      this.rdbGazeAOIGroup.Location = new System.Drawing.Point(323, 41);
       this.rdbGazeAOIGroup.Name = "rdbGazeAOIGroup";
       this.rdbGazeAOIGroup.Size = new System.Drawing.Size(86, 17);
       this.rdbGazeAOIGroup.TabIndex = 32;
@@ -1958,7 +1967,7 @@ namespace Ogama.Modules.Statistics
       // 
       // btnGazeAddCustomVariable
       // 
-      this.btnGazeAddCustomVariable.Location = new System.Drawing.Point(216, 112);
+      this.btnGazeAddCustomVariable.Location = new System.Drawing.Point(396, 112);
       this.btnGazeAddCustomVariable.Name = "btnGazeAddCustomVariable";
       this.btnGazeAddCustomVariable.Size = new System.Drawing.Size(138, 23);
       this.btnGazeAddCustomVariable.TabIndex = 27;
@@ -1983,6 +1992,16 @@ namespace Ogama.Modules.Statistics
             0,
             0});
       // 
+      // rdbGazeSaccadeVelocity
+      // 
+      this.rdbGazeSaccadeVelocity.AutoSize = true;
+      this.rdbGazeSaccadeVelocity.Location = new System.Drawing.Point(162, 109);
+      this.rdbGazeSaccadeVelocity.Name = "rdbGazeSaccadeVelocity";
+      this.rdbGazeSaccadeVelocity.Size = new System.Drawing.Size(105, 17);
+      this.rdbGazeSaccadeVelocity.TabIndex = 26;
+      this.rdbGazeSaccadeVelocity.Text = "saccade velocity";
+      this.rdbGazeSaccadeVelocity.UseVisualStyleBackColor = true;
+      // 
       // rdbGazeFixationDurationMedian
       // 
       this.rdbGazeFixationDurationMedian.AutoSize = true;
@@ -1992,6 +2011,26 @@ namespace Ogama.Modules.Statistics
       this.rdbGazeFixationDurationMedian.TabIndex = 26;
       this.rdbGazeFixationDurationMedian.Text = "fixation duration median";
       this.rdbGazeFixationDurationMedian.UseVisualStyleBackColor = true;
+      // 
+      // rdbGazeSaccadeLength
+      // 
+      this.rdbGazeSaccadeLength.AutoSize = true;
+      this.rdbGazeSaccadeLength.Location = new System.Drawing.Point(162, 85);
+      this.rdbGazeSaccadeLength.Name = "rdbGazeSaccadeLength";
+      this.rdbGazeSaccadeLength.Size = new System.Drawing.Size(98, 17);
+      this.rdbGazeSaccadeLength.TabIndex = 26;
+      this.rdbGazeSaccadeLength.Text = "saccade length";
+      this.rdbGazeSaccadeLength.UseVisualStyleBackColor = true;
+      // 
+      // rdbGazeSaccadeDuration
+      // 
+      this.rdbGazeSaccadeDuration.AutoSize = true;
+      this.rdbGazeSaccadeDuration.Location = new System.Drawing.Point(162, 63);
+      this.rdbGazeSaccadeDuration.Name = "rdbGazeSaccadeDuration";
+      this.rdbGazeSaccadeDuration.Size = new System.Drawing.Size(107, 17);
+      this.rdbGazeSaccadeDuration.TabIndex = 26;
+      this.rdbGazeSaccadeDuration.Text = "saccade duration";
+      this.rdbGazeSaccadeDuration.UseVisualStyleBackColor = true;
       // 
       // label11
       // 
@@ -2020,6 +2059,15 @@ namespace Ogama.Modules.Statistics
       this.tbpGazeRegressions.TabIndex = 2;
       this.tbpGazeRegressions.Text = "Regressions";
       this.tbpGazeRegressions.UseVisualStyleBackColor = true;
+      // 
+      // label6
+      // 
+      this.label6.AutoSize = true;
+      this.label6.Location = new System.Drawing.Point(6, 13);
+      this.label6.Name = "label6";
+      this.label6.Size = new System.Drawing.Size(107, 13);
+      this.label6.TabIndex = 41;
+      this.label6.Text = "Calculate regressions";
       // 
       // btnGazeAddCustomRegressionVariable
       // 
@@ -2234,6 +2282,9 @@ namespace Ogama.Modules.Statistics
       // 
       // groupBox16
       // 
+      this.groupBox16.Controls.Add(this.rdbMouseSaccadeVelocity);
+      this.groupBox16.Controls.Add(this.rdbMouseSaccadeLength);
+      this.groupBox16.Controls.Add(this.rdbMouseSaccadeDuration);
       this.groupBox16.Controls.Add(this.cbbMouseClickButton);
       this.groupBox16.Controls.Add(this.rdbMouseAOISingle);
       this.groupBox16.Controls.Add(this.rdbMouseAOIGroup);
@@ -2250,10 +2301,40 @@ namespace Ogama.Modules.Statistics
       this.groupBox16.Controls.Add(this.cbbMouseAOIGroup);
       this.groupBox16.Location = new System.Drawing.Point(162, 6);
       this.groupBox16.Name = "groupBox16";
-      this.groupBox16.Size = new System.Drawing.Size(360, 140);
+      this.groupBox16.Size = new System.Drawing.Size(561, 140);
       this.groupBox16.TabIndex = 28;
       this.groupBox16.TabStop = false;
       this.groupBox16.Text = "Mouse at AOI (custom)";
+      // 
+      // rdbMouseSaccadeVelocity
+      // 
+      this.rdbMouseSaccadeVelocity.AutoSize = true;
+      this.rdbMouseSaccadeVelocity.Location = new System.Drawing.Point(158, 59);
+      this.rdbMouseSaccadeVelocity.Name = "rdbMouseSaccadeVelocity";
+      this.rdbMouseSaccadeVelocity.Size = new System.Drawing.Size(105, 17);
+      this.rdbMouseSaccadeVelocity.TabIndex = 35;
+      this.rdbMouseSaccadeVelocity.Text = "saccade velocity";
+      this.rdbMouseSaccadeVelocity.UseVisualStyleBackColor = true;
+      // 
+      // rdbMouseSaccadeLength
+      // 
+      this.rdbMouseSaccadeLength.AutoSize = true;
+      this.rdbMouseSaccadeLength.Location = new System.Drawing.Point(158, 39);
+      this.rdbMouseSaccadeLength.Name = "rdbMouseSaccadeLength";
+      this.rdbMouseSaccadeLength.Size = new System.Drawing.Size(98, 17);
+      this.rdbMouseSaccadeLength.TabIndex = 34;
+      this.rdbMouseSaccadeLength.Text = "saccade length";
+      this.rdbMouseSaccadeLength.UseVisualStyleBackColor = true;
+      // 
+      // rdbMouseSaccadeDuration
+      // 
+      this.rdbMouseSaccadeDuration.AutoSize = true;
+      this.rdbMouseSaccadeDuration.Location = new System.Drawing.Point(158, 19);
+      this.rdbMouseSaccadeDuration.Name = "rdbMouseSaccadeDuration";
+      this.rdbMouseSaccadeDuration.Size = new System.Drawing.Size(107, 17);
+      this.rdbMouseSaccadeDuration.TabIndex = 33;
+      this.rdbMouseSaccadeDuration.Text = "saccade duration";
+      this.rdbMouseSaccadeDuration.UseVisualStyleBackColor = true;
       // 
       // cbbMouseClickButton
       // 
@@ -2270,7 +2351,7 @@ namespace Ogama.Modules.Statistics
       // 
       this.rdbMouseAOISingle.AutoCheck = false;
       this.rdbMouseAOISingle.AutoSize = true;
-      this.rdbMouseAOISingle.Location = new System.Drawing.Point(162, 63);
+      this.rdbMouseAOISingle.Location = new System.Drawing.Point(363, 60);
       this.rdbMouseAOISingle.Name = "rdbMouseAOISingle";
       this.rdbMouseAOISingle.Size = new System.Drawing.Size(85, 17);
       this.rdbMouseAOISingle.TabIndex = 31;
@@ -2283,7 +2364,7 @@ namespace Ogama.Modules.Statistics
       this.rdbMouseAOIGroup.AutoCheck = false;
       this.rdbMouseAOIGroup.AutoSize = true;
       this.rdbMouseAOIGroup.Checked = true;
-      this.rdbMouseAOIGroup.Location = new System.Drawing.Point(162, 41);
+      this.rdbMouseAOIGroup.Location = new System.Drawing.Point(363, 38);
       this.rdbMouseAOIGroup.Name = "rdbMouseAOIGroup";
       this.rdbMouseAOIGroup.Size = new System.Drawing.Size(86, 17);
       this.rdbMouseAOIGroup.TabIndex = 31;
@@ -2308,14 +2389,14 @@ namespace Ogama.Modules.Statistics
       this.cbbMouseAOISingle.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
       this.cbbMouseAOISingle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.cbbMouseAOISingle.FormattingEnabled = true;
-      this.cbbMouseAOISingle.Location = new System.Drawing.Point(254, 62);
+      this.cbbMouseAOISingle.Location = new System.Drawing.Point(455, 59);
       this.cbbMouseAOISingle.Name = "cbbMouseAOISingle";
       this.cbbMouseAOISingle.Size = new System.Drawing.Size(100, 21);
       this.cbbMouseAOISingle.TabIndex = 29;
       // 
       // btnMouseAddCustomVariable
       // 
-      this.btnMouseAddCustomVariable.Location = new System.Drawing.Point(216, 112);
+      this.btnMouseAddCustomVariable.Location = new System.Drawing.Point(417, 109);
       this.btnMouseAddCustomVariable.Name = "btnMouseAddCustomVariable";
       this.btnMouseAddCustomVariable.Size = new System.Drawing.Size(138, 23);
       this.btnMouseAddCustomVariable.TabIndex = 27;
@@ -2355,7 +2436,7 @@ namespace Ogama.Modules.Statistics
       this.cbbMouseAOIGroup.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
       this.cbbMouseAOIGroup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.cbbMouseAOIGroup.FormattingEnabled = true;
-      this.cbbMouseAOIGroup.Location = new System.Drawing.Point(254, 40);
+      this.cbbMouseAOIGroup.Location = new System.Drawing.Point(455, 37);
       this.cbbMouseAOIGroup.Name = "cbbMouseAOIGroup";
       this.cbbMouseAOIGroup.Size = new System.Drawing.Size(100, 21);
       this.cbbMouseAOIGroup.TabIndex = 23;
@@ -2826,15 +2907,6 @@ namespace Ogama.Modules.Statistics
       this.bgwCalculateTransitions.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwCalculateTransitions_RunWorkerCompleted);
       this.bgwCalculateTransitions.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgwCalculateTransitions_ProgressChanged);
       // 
-      // label6
-      // 
-      this.label6.AutoSize = true;
-      this.label6.Location = new System.Drawing.Point(6, 13);
-      this.label6.Name = "label6";
-      this.label6.Size = new System.Drawing.Size(107, 13);
-      this.label6.TabIndex = 41;
-      this.label6.Text = "Calculate regressions";
-      // 
       // StatisticsModule
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3174,5 +3246,11 @@ namespace Ogama.Modules.Statistics
     private System.Windows.Forms.NumericUpDown nudGazeRegressionLineHeight;
     private System.Windows.Forms.Button btnGazeAddCustomRegressionVariable;
     private System.Windows.Forms.Label label6;
+    private System.Windows.Forms.RadioButton rdbGazeSaccadeVelocity;
+    private System.Windows.Forms.RadioButton rdbGazeSaccadeLength;
+    private System.Windows.Forms.RadioButton rdbGazeSaccadeDuration;
+    private System.Windows.Forms.RadioButton rdbMouseSaccadeVelocity;
+    private System.Windows.Forms.RadioButton rdbMouseSaccadeLength;
+    private System.Windows.Forms.RadioButton rdbMouseSaccadeDuration;
   }
 }
