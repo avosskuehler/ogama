@@ -454,8 +454,8 @@
       // 
       this.spcPanelUserCam.Panel2.Controls.Add(this.grpUsercam);
       this.spcPanelUserCam.Panel2.Padding = new System.Windows.Forms.Padding(5);
-      this.spcPanelUserCam.Panel2MinSize = 200;
       this.spcPanelUserCam.Size = new System.Drawing.Size(220, 652);
+      this.spcPanelUserCam.Panel2MinSize = 20;
       this.spcPanelUserCam.SplitterDistance = 448;
       this.spcPanelUserCam.TabIndex = 21;
       // 
