@@ -14,15 +14,10 @@
 namespace VectorGraphics.Elements
 {
   using System;
-  using System.Collections.Generic;
   using System.ComponentModel;
   using System.Drawing;
   using System.IO;
-  using System.Text;
-  using System.Windows.Forms;
   using System.Xml.Serialization;
-
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
 
   using VectorGraphics.Controls;
   using VectorGraphics.CustomTypeConverter;

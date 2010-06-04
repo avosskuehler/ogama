@@ -24,8 +24,6 @@ namespace Ogama.Modules.Replay
   using System.Text;
   using System.Windows.Forms;
 
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
-
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
   using Ogama.Modules.Common;
@@ -1488,11 +1486,7 @@ namespace Ogama.Modules.Replay
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
     }
 
@@ -1775,11 +1769,7 @@ namespace Ogama.Modules.Replay
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
     }
 

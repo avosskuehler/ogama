@@ -16,18 +16,13 @@ namespace VectorGraphics.Canvas
   using System;
   using System.Collections.Generic;
   using System.ComponentModel;
-  using System.Data;
-  using System.Diagnostics;
   using System.Drawing;
   using System.Drawing.Drawing2D;
   using System.Drawing.Imaging;
-  using System.Text;
   using System.Windows.Forms;
-
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
-
   using VectorGraphics.CustomEventArgs;
   using VectorGraphics.Elements;
+  using VectorGraphics.Tools;
   using VectorGraphics.Win32;
 
   /// <summary>
@@ -365,11 +360,7 @@ namespace VectorGraphics.Canvas
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Log Only Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        VGExceptionMethods.HandleExceptionSilent(ex);
       }
     }
 
@@ -502,11 +493,7 @@ namespace VectorGraphics.Canvas
       }
       catch (InvalidOperationException ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Log Only Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        VGExceptionMethods.HandleExceptionSilent(ex);
       }
     }
 
@@ -622,8 +609,16 @@ namespace VectorGraphics.Canvas
         this.backgroundSlide.Dispose();
       }
 
-      this.foregroundBitmap.Dispose();
-      this.foregroundGraphics.Dispose();
+      if (this.foregroundBitmap != null)
+      {
+        this.foregroundBitmap.Dispose();
+      }
+
+      if (this.foregroundBitmap != null)
+      {
+        this.foregroundGraphics.Dispose();
+      }
+
       this.grayBrush.Dispose();
       this.elements.Clear();
     }
@@ -645,11 +640,7 @@ namespace VectorGraphics.Canvas
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        VGExceptionMethods.HandleException(ex);
       }
     }
 
@@ -693,11 +684,7 @@ namespace VectorGraphics.Canvas
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        VGExceptionMethods.HandleException(ex);
       }
     }
 
@@ -729,11 +716,7 @@ namespace VectorGraphics.Canvas
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        VGExceptionMethods.HandleException(ex);
       }
     }
 

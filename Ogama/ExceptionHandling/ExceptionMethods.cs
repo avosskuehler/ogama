@@ -19,8 +19,6 @@ namespace Ogama.ExceptionHandling
   using System.Text;
   using System.Windows.Forms;
 
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
-
   using Ogama.MainWindow;
 
   /// <summary>
@@ -93,6 +91,58 @@ namespace Ogama.ExceptionHandling
     #region METHODS
 
     /// <summary>
+    /// Creates the error message and logs it to the exception file.
+    /// </summary>
+    /// <param name="ex">The <see cref="Exception"/> to be logged.</param>
+    public static void HandleExceptionSilent(Exception ex)
+    {
+      // Add error to error log
+      string exceptionLogFile = Path.Combine(Properties.Settings.Default.LogfilePath, "exception.log");
+      string message = GetLogEntryForException(ex);
+
+      using (StreamWriter w = File.AppendText(exceptionLogFile))
+      {
+        Log(message, w);
+
+        // Close the writer and underlying file.
+        w.Close();
+      }
+    }
+
+    /// <summary>
+    /// Creates the error message, logs it to file and displays it in 
+    /// an <see cref="ExceptionDialog"/>.
+    /// </summary>
+    /// <param name="e">The <see cref="Exception"/> to show.</param>
+    public static void HandleException(Exception e)
+    {
+      // Add error to error log
+      string exceptionLogFile = Path.Combine(Properties.Settings.Default.LogfilePath, "exception.log");
+      string message = GetLogEntryForException(e);
+
+      using (StreamWriter w = File.AppendText(exceptionLogFile))
+      {
+        Log(message, w);
+
+        // Close the writer and underlying file.
+        w.Close();
+      }
+
+      ExceptionDialog newExceptionDlg = new ExceptionDialog();
+      newExceptionDlg.ExceptionMessage = e.Message;
+      newExceptionDlg.ExceptionDetails = e.ToString();
+      DialogResult result = newExceptionDlg.ShowDialog();
+      switch (result)
+      {
+        case DialogResult.Abort:
+          Application.Exit();
+          break;
+        case DialogResult.OK:
+          break;
+      }
+    }
+
+    /// <summary>
     /// Process any unhandled exceptions that occur in the application.
     /// This code is called by all UI entry points in the application (e.g. button click events)
     /// when an unhandled exception occurs.
@@ -106,12 +156,7 @@ namespace Ogama.ExceptionHandling
       // the 'Global Policy' handler have a try at handling it.
       try
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          // Something has gone very wrong - exit the application.
-          Application.Exit();
-        }
+        ExceptionMethods.HandleException(ex);
       }
       catch
       {
@@ -326,6 +371,23 @@ namespace Ogama.ExceptionHandling
     // Small helping Methods                                                     //
     ///////////////////////////////////////////////////////////////////////////////
     #region HELPER
+
+    /// <summary>
+    /// Returns a human readable string for the exception
+    /// </summary>
+    /// <param name="e">An <see cref="Exception"/> to be processed</param>
+    /// <returns>A human readable <see cref="String"/> for the exception</returns>
+    private static string GetLogEntryForException(Exception e)
+    {
+      StringBuilder sb = new StringBuilder();
+      sb.AppendLine("Message: " + e.Message);
+      sb.AppendLine("Source: " + e.Source);
+      sb.AppendLine("TargetSite: " + e.TargetSite.ToString());
+      sb.AppendLine("StackTrace: " + e.StackTrace);
+
+      return sb.ToString();
+    }
+
     #endregion //HELPER
   }
 }

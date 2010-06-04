@@ -118,28 +118,28 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <metadata name="bsoSubjects.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>453, 56</value>
+    <value>599, 56</value>
   </metadata>
   <metadata name="bsoFKSubjectsTrials.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>570, 56</value>
+    <value>716, 56</value>
   </metadata>
   <metadata name="ogamaDataSet.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>173, 56</value>
+    <value>319, 56</value>
   </metadata>
   <metadata name="bsoFKTrialsEvents.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>305, 56</value>
+    <value>451, 56</value>
   </metadata>
   <metadata name="bsoTrialsAOIs.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 95</value>
+    <value>345, 95</value>
   </metadata>
   <metadata name="bsoTrialsGazeFixations.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>142, 95</value>
+    <value>470, 95</value>
   </metadata>
   <metadata name="bsoTrialsMouseFixations.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>728, 56</value>
+    <value>17, 95</value>
   </metadata>
   <metadata name="bsoShapeGroups.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>912, 56</value>
+    <value>201, 95</value>
   </metadata>
   <metadata name="bsoFKSubjectsSubjectParameters.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>246, 17</value>
@@ -154,10 +154,10 @@
     <value>146, 17</value>
   </metadata>
   <metadata name="bsoGazeFixations.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>858, 17</value>
+    <value>17, 56</value>
   </metadata>
   <metadata name="bsoMouseFixations.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 56</value>
+    <value>163, 56</value>
   </metadata>
   <metadata name="bsoAOIs.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>650, 17</value>
@@ -166,13 +166,13 @@
     <value>747, 17</value>
   </metadata>
   <metadata name="cmuDGV.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>974, 95</value>
+    <value>393, 134</value>
   </metadata>
   <metadata name="toolTipStatistic.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>598, 95</value>
+    <value>17, 134</value>
   </metadata>
   <metadata name="toolTipStatistic.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>598, 95</value>
+    <value>17, 134</value>
   </metadata>
   <data name="chbGAZTime2SecondFixAtTarget.ToolTip" xml:space="preserve">
     <value>Time until subjects second fixation 
@@ -235,10 +235,10 @@ no "Searchrect" AOI is defined
 </value>
   </data>
   <metadata name="bgwCalculateStandards.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>316, 95</value>
+    <value>644, 95</value>
   </metadata>
   <metadata name="sfdExport.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>495, 95</value>
+    <value>823, 95</value>
   </metadata>
   <data name="chbMSETime2SecondFixAtTarget.ToolTip" xml:space="preserve">
     <value>Time until subjects second fixation 
@@ -577,14 +577,14 @@ no such AOI/AOI Group is defined
 </value>
   </data>
   <metadata name="imlTabImages.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>847, 95</value>
+    <value>266, 134</value>
   </metadata>
   <data name="imlTabImages.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACy
-        EwAAAk1TRnQBSQFMAgEBBgEAASwBAAEsAQABEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        EwAAAk1TRnQBSQFMAgEBBgEAATwBAAE8AQABEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABIAMAAQEBAAEYBgABGB4AAcgCAAGJAgABZwIAAZwBWAFQAaUCbwFdAhQByAIAAcinAAHQAgMBwgGc
         AYoB/wHIAckB2QKeAdQBrAGdAf8CxwGQAVcBWAGOAUwBQwFoAiwBkKEAAccCAAF2Ag8BvwGjAY8B/wLC
         Af8CwAH/AsAB/wLAAf4BwAG/Af0BvgG9Af8CwAF7AigB0QsAAbIBngGQAYoBfAJvAWABVQFpAVgBTAFk
@@ -672,7 +672,7 @@ no such AOI/AOI Group is defined
 </value>
   </data>
   <metadata name="tosStandard.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>730, 95</value>
+    <value>149, 134</value>
   </metadata>
   <data name="dialogTop3.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -937,45 +937,45 @@ no such AOI/AOI Group is defined
 </value>
   </data>
   <metadata name="imlTreeViewSubjects.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>327, 134</value>
+    <value>17, 173</value>
   </metadata>
   <data name="imlTreeViewSubjects.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABI
-        CAAAAk1TRnQBSQFMAgEBAgEAASwBAAEsAQABEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        CAAAAk1TRnQBSQFMAgEBAgEAATwBAAE8AQABEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABEAMAAQEBAAEgBgABEGIAAwcBCgMaASUDLAFDAzcBWwM+AWsDQwF3A0MBdwM9AWgDMAFMAxABFowA
-        AwcBCgMnATsDGQEjAwoBDgMAAQEwAAMBAQIDKwFCAVwCWAHRATcBgQE3Af8BRQGIAUUB/wFgAakBYAH/
-        AW4BvAFuAf8BZQG4AWUB/wFaAbIBWgH/AUUBmwFFAf8BKwGBASsB/wNEAXqMAANKAYoBdQG5Ad8B/wFc
-        AlcB3wNUAa8DSAGGAzMBUgMcASgDDgETAwEBAgMAAQEcAAMsAUMBXAGtAVwB/wFzAb8BcwH/AYABwwGA
-        Af8BQwGBAUEB/wE+AYEBPAH/AYEBygGBAf8BgAHDAYAB/wFxAb4BcQH/AWEBtgFhAf8BTQGrAU0B/wNK
-        AYmMAANKAYsE/wGBAdgC/wGBAdgC/wGBAc0B9QH/AUwBrQHcAf8BYgJSAekDVwG4A00BkQM6AWADIAEu
-        AwsBDxQAA1kBxwFzAb8BcwH/AYEBxgGBAf8BgQHRAYEB/wGvAc8BoAP/AewB/wGBAbMBgQH/AYEB0AGB
-        Af8BgQHIAYEB/wFuAbwBbgH/AVIBqAFSAf8DMwFSjAADUQGcAYEBxgHiAf8BgQHiAv8BgQHiAv8BgQHi
-        Av8BgQHiAv8BgQHiAv8BgQHiAv8BgQHeAfwB/wFfAboB4gH/AV8CQQHzA0IBdgMCAQMQAANIAYUBegHC
-        AXoB/wGBAdABgQH/AYIB2gGCA/8B/AX/Ab8B2QG/Af8BggHaAYIB/wGBAc8BgQH/AYABwwGAAf8BZAJJ
-        AfEDDAEQjAADWQHHAUwBqwHeAf8BrAHyAv8BhgHsAv8BhgHsAv8BhgHsAv8BhgHsAv8BhgHsAv8BhgHs
-        Av8BhgHsAv8BgQHUAv8BWwJaAcMDFQEdFAABZAGkAWQB/wGBAdYBgQH/AYEBwgGBAv8B7AHZAv8B6wHX
-        Av8B6AHSAf8BeAGNAWYB/wGBAdYBgQH/ATsBgQE7Af8DFAEckAABXAJbAckBdQG/AfIB/wHxAf4C/wGQ
-        AfYC/wGQAfYC/wGQAfYC/wGQAfYC/wGQAfYC/wGQAfYC/wGQAfYC/wGBAdYC/wFqAb8B3wH/AzoBYgMA
-        AQEUAAFdAlkB0gFgAZUBYAH/ATsBgQGhAf8BQgGBAcwB/wFCAYEBzAH/ATABgQGpAf8BXwJWAegDKAE8
-        lAABUwGsAdkB/wGBAcgB+wH/AY8B0gHpAf8BmQP/AZkD/wGZA/8BmQP/AZkD/wGZA/8BmQP/AYEB2QL/
-        AcMD/wNUAasDDQESGAABWQI9AfUBWAGWAfkB/wFbAZkC/wFaAZgB/QH/AVYBlAH1Af8BQQGBAcoB/wNQ
-        AZoDDQERkAABgQHBAeYB/wGBAdMC/wFfAbYB5gX/AeUD/wHJA/8BswP/AbMD/wGzA/8BswP/AYEB2QL/
-        AdYD/wFtATkBOwH3AzEBTRQAAwkBDAFhAZ4C/wFkAaEC/wFkAaEC/wFkAaEC/wFkAaEC/wFeAZwC/wFs
-        AjgB9wMwAUyQAAGBAcMB5gH/AYEB5AL/AYEB5AL/AYEB5AL/AYEB5AL/AYEBzQHvAf8BgQHEAeIB/wHZ
-        A/8B0QP/AdED/wGBAdkC/wHpA/8B6QP/A08BlwMHAQkQAANKAYwBagGoAv8BbAGqAv8BbAGqAv8BbAGq
-        Av8BbAGqAv8BaAGmAv8BWQGWAewB/wNHAYCQAAGgAdsB8gH/AY8B9QL/AY8B9QL/AY8B9QL/AY8B9QL/
-        AY8B9QL/AY8B9QL/AVYBtwHcAf8BgQG/Ad8B/wGvAd8B7wX/Af4D/wH8A/8BXQJZAdcDEgEZEAADVwG4
-        AXQBsgL/AXUBswL/AXcBtQL/AXcBtQL/AXUBswL/AXEBrwL/AWwBqgL/A04BmAMHAQmMAAGqAd4B8gH/
-        AZkD/wGZA/8BmQP/AZkD/wGZA/8BmQP/AZkD/wGZA/8BmQP/AU4BswHZAf8DHgErAxgBIQMcASgDAAEB
-        EAADSgGJAYEBuwL/AYEBvQL/AYEBwwL/AYEBwQL/AYEBuwL/AXgBtgL/AXQBsgL/A1UBsgMHAQmMAAFZ
-        AlgBwgGkA/8BmQP/AZkD/wHiAfsC/wFgAlsB1gGBAcoB5gH/AbUB4gHyAf8B3AH8Av8BxgH9Av8BYwG5
-        AdwB/wMWAR4cAAMiATIBSwGIAb8B/wFOAYQBtgH/AV8BkgHEAf8BOwGBAbkB/wFSAZAB5gH/AU4BjAHf
-        Af8BQgGBAaUB/wNEAXmUAANaAcUBgQHGAeIB/wGvAd8B7wH/AV4CXAHOAwcBCQ8AAQEDAAEBJAABOAGB
-        AaYB/wF3AaUB1gH/AYEBsQHdAf8BlwHKAegB/wGqAdIB6AH/AYABnAHAAf8BNgGBAaQB/wMhATDgAAMi
-        ATIBZAGSAcAB/wGXAcoB6AH/AZoBzAHpAf8BgQG3AeAB/wFeAZEBwwH/AzoBYQMBAQLoAANOAZQDWQHH
+        AwcBCgMnATsDGQEjAwoBDgMAAQEwAAMBAQIDKwFCAVwCWAHRATUBgQE1Af8BQwGIAUMB/wFeAakBXgH/
+        AWwBvAFsAf8BYwG4AWMB/wFYAbIBWAH/AUMBmwFDAf8BKQGBASkB/wNEAXqMAANKAYoBcwG5Ad8B/wFc
+        AlcB3wNUAa8DSAGGAzMBUgMcASgDDgETAwEBAgMAAQEcAAMsAUMBWgGtAVoB/wFxAb8BcQH/AYABwwGA
+        Af8BQQGBAT8B/wE8AYEBOgH/AYEBygGBAf8BgAHDAYAB/wFvAb4BbwH/AV8BtgFfAf8BSwGrAUsB/wNK
+        AYmMAANKAYsE/wGBAdgC/wGBAdgC/wGBAc0B9QH/AUoBrQHcAf8BYgJWAekDVwG4A00BkQM6AWADIAEu
+        AwsBDxQAA1kBxwFxAb8BcQH/AYEBxgGBAf8BgQHRAYEB/wGvAc8BoAP/AewB/wGBAbMBgQH/AYEB0AGB
+        Af8BgQHIAYEB/wFsAbwBbAH/AVABqAFQAf8DMwFSjAADUQGcAYEBxgHiAf8BgQHiAv8BgQHiAv8BgQHi
+        Av8BgQHiAv8BgQHiAv8BgQHiAv8BgQHeAfwB/wFdAboB4gH/AV8CRwHzA0IBdgMCAQMQAANIAYUBeAHC
+        AXgB/wGBAdABgQH/AYIB2gGCA/8B/AX/Ab8B2QG/Af8BggHaAYIB/wGBAc8BgQH/AYABwwGAAf8BZAJP
+        AfEDDAEQjAADWQHHAUoBqwHeAf8BrAHyAv8BhgHsAv8BhgHsAv8BhgHsAv8BhgHsAv8BhgHsAv8BhgHs
+        Av8BhgHsAv8BgQHUAv8BWwJaAcMDFQEdFAABYgGkAWIB/wGBAdYBgQH/AYEBwgGBAv8B7AHZAv8B6wHX
+        Av8B6AHSAf8BdgGNAWQB/wGBAdYBgQH/ATkBgQE5Af8DFAEckAABXAJbAckBcwG/AfIB/wHxAf4C/wGQ
+        AfYC/wGQAfYC/wGQAfYC/wGQAfYC/wGQAfYC/wGQAfYC/wGQAfYC/wGBAdYC/wFoAb8B3wH/AzoBYgMA
+        AQEUAAFdAlkB0gFeAZUBXgH/ATkBgQGhAf8BQAGBAcwB/wFAAYEBzAH/AS4BgQGpAf8BXwJXAegDKAE8
+        lAABUQGsAdkB/wGBAcgB+wH/AY8B0gHpAf8BmQP/AZkD/wGZA/8BmQP/AZkD/wGZA/8BmQP/AYEB2QL/
+        AcMD/wNUAasDDQESGAABWQJCAfUBVgGWAfkB/wFZAZkC/wFYAZgB/QH/AVQBlAH1Af8BPwGBAcoB/wNQ
+        AZoDDQERkAABgQHBAeYB/wGBAdMC/wFdAbYB5gX/AeUD/wHJA/8BswP/AbMD/wGzA/8BswP/AYEB2QL/
+        AdYD/wFtATsBPQH3AzEBTRQAAwkBDAFfAZ4C/wFiAaEC/wFiAaEC/wFiAaEC/wFiAaEC/wFcAZwC/wFs
+        AjoB9wMwAUyQAAGBAcMB5gH/AYEB5AL/AYEB5AL/AYEB5AL/AYEB5AL/AYEBzQHvAf8BgQHEAeIB/wHZ
+        A/8B0QP/AdED/wGBAdkC/wHpA/8B6QP/A08BlwMHAQkQAANKAYwBaAGoAv8BagGqAv8BagGqAv8BagGq
+        Av8BagGqAv8BZgGmAv8BVwGWAewB/wNHAYCQAAGgAdsB8gH/AY8B9QL/AY8B9QL/AY8B9QL/AY8B9QL/
+        AY8B9QL/AY8B9QL/AVQBtwHcAf8BgQG/Ad8B/wGvAd8B7wX/Af4D/wH8A/8BXQJZAdcDEgEZEAADVwG4
+        AXIBsgL/AXMBswL/AXUBtQL/AXUBtQL/AXMBswL/AW8BrwL/AWoBqgL/A04BmAMHAQmMAAGqAd4B8gH/
+        AZkD/wGZA/8BmQP/AZkD/wGZA/8BmQP/AZkD/wGZA/8BmQP/AUwBswHZAf8DHgErAxgBIQMcASgDAAEB
+        EAADSgGJAYEBuwL/AYEBvQL/AYEBwwL/AYEBwQL/AYEBuwL/AXYBtgL/AXIBsgL/A1UBsgMHAQmMAAFZ
+        AlgBwgGkA/8BmQP/AZkD/wHiAfsC/wFgAlsB1gGBAcoB5gH/AbUB4gHyAf8B3AH8Av8BxgH9Av8BYQG5
+        AdwB/wMWAR4cAAMiATIBSQGIAb8B/wFMAYQBtgH/AV0BkgHEAf8BOQGBAbkB/wFQAZAB5gH/AUwBjAHf
+        Af8BQAGBAaUB/wNEAXmUAANaAcUBgQHGAeIB/wGvAd8B7wH/AV4CXAHOAwcBCQ8AAQEDAAEBJAABNgGB
+        AaYB/wF1AaUB1gH/AYEBsQHdAf8BlwHKAegB/wGqAdIB6AH/AYABnAHAAf8BNAGBAaQB/wMhATDgAAMi
+        ATIBYgGSAcAB/wGXAcoB6AH/AZoBzAHpAf8BgQG3AeAB/wFcAZEBwwH/AzoBYQMBAQLoAANOAZQDWQHH
         A0wBkAMHAQqUAAFCAU0BPgcAAT4DAAEoAwABQAMAARADAAEBAQABAQUAAYAXAAP/AQAC/wHwAQMEAAGD
         Af8BwAEDBAABgAEfAcABAwQAAYABBwHAAQMEAAGAAQMBwAEDBAABgAEDAeABBwQAAYABAQHwAQ8EAAGA
         AQEB+AEHBAABgAEBAfABBwQAAYABAAHwAQcEAAGAAQAB8AEDBAABgAEAAfABAwQAAYABBwHwAQcEAAHB
@@ -1769,10 +1769,10 @@ no such AOI/AOI Group is defined
 </value>
   </data>
   <metadata name="tosTransitions.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>200, 134</value>
+    <value>676, 134</value>
   </metadata>
   <metadata name="bgwCalculateTransitions.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 134</value>
+    <value>493, 134</value>
   </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

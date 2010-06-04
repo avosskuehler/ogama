@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using DirectShowLib;
 using System.Runtime.InteropServices;
+using System.Drawing.Imaging;
 
 namespace OgamaControls
 {
@@ -32,14 +33,18 @@ namespace OgamaControls
     private const int VolumeSilence = -10000;
 
     private IGraphBuilder graphBuilder = null;
+    private ICaptureGraphBuilder2 captureGraphBuilder = null;
     private IMediaControl mediaControl = null;
-    private IMediaEventEx mediaEventEx = null;
+    //private IMediaEventEx mediaEventEx = null;
     private IMediaPosition mediaPosition = null;
-    private IVideoWindow videoWindow = null;
+    //private IVideoWindow videoWindow = null;
     private IBasicAudio basicAudio = null;
     private IBasicVideo basicVideo = null;
     private IMediaSeeking mediaSeeking = null;
     private IVideoFrameStep frameStep = null;
+    private VideoMixingRenderer9 vmr9 = null;
+    private IVMRFilterConfig9 vmrConfig = null;
+    private IVMRWindowlessControl9 windowLessControl = null;
 
     private string filename = string.Empty;
     private bool isAudioOnly = false;
@@ -68,11 +73,6 @@ namespace OgamaControls
     {
       InitializeComponent();
     }
-
-    //~AVPlayer()
-    //{
-    //  //Dispose(false);
-    //}
 
     #endregion //CONSTRUCTION
 
@@ -132,6 +132,110 @@ namespace OgamaControls
       }
     }
 
+    /// <summary>
+    /// Gets the native <see cref="Size"/> of the video stream.
+    /// </summary>
+    public Size VideoSize
+    {
+      get
+      {
+        Size videoSize = new Size();
+        if (this.vmr9 != null)
+        {
+          int width;
+          int height;
+          int aspectRatioX;
+          int aspectRatioY;
+          int hr = this.windowLessControl.GetNativeVideoSize(out width, out height, out aspectRatioX, out aspectRatioY);
+          DsError.ThrowExceptionForHR(hr);
+          videoSize.Width = width;
+          videoSize.Height = height;
+        }
+
+        return videoSize;
+      }
+    }
+
+    /// <summary>
+    /// Gets a <see cref="Bitmap"/> with a screenshot of
+    /// the current video renderer output.
+    /// </summary>
+    public Bitmap Screenshot
+    {
+      get
+      {
+        Bitmap retBmp = null;
+        int hr = 0;
+        IntPtr iDIB = IntPtr.Zero;
+
+        if (this.vmr9 != null)
+        {
+          IVMRWindowlessControl9 imageCaputureInterface = this.vmr9 as IVMRWindowlessControl9;
+
+          while (iDIB == IntPtr.Zero)
+          {
+            hr = imageCaputureInterface.GetCurrentImage(out iDIB);
+          }
+
+          BitmapInfoHeader bih = (BitmapInfoHeader)Marshal.PtrToStructure(iDIB, typeof(BitmapInfoHeader));
+
+          int width = bih.Width;
+          int height = bih.Height;
+          int stride = width * (bih.BitCount / 8);
+          PixelFormat pixelFormat = PixelFormat.Format24bppRgb;
+
+          switch (bih.BitCount)
+          {
+            case 24: pixelFormat = PixelFormat.Format24bppRgb; break;
+            case 32: pixelFormat = PixelFormat.Format32bppRgb; break;
+            case 48: pixelFormat = PixelFormat.Format48bppRgb; break;
+            default: throw new Exception("Unknown BitCount");
+          }
+
+          retBmp = new Bitmap(width, height, stride, pixelFormat, iDIB);
+          retBmp.RotateFlip(RotateFlipType.RotateNoneFlipY);
+
+          if (iDIB != null && iDIB != IntPtr.Zero)
+          {
+            Marshal.FreeCoTaskMem(iDIB);
+            iDIB = IntPtr.Zero;
+          }
+        }
+
+        return retBmp;
+      }
+    }
+
+    //public Bitmap Screenshot
+    //{
+    //  get
+    //  {
+    //    if (this.basicVideo != null)
+    //    {
+    //      int bufferSize = 0;
+    //      int hr = this.basicVideo.GetCurrentImage(ref bufferSize, IntPtr.Zero);
+    //      DsError.ThrowExceptionForHR(hr);
+
+    //      IntPtr bitmapPointer = Marshal.AllocHGlobal(bufferSize);
+
+    //      hr = this.basicVideo.GetCurrentImage(ref bufferSize, bitmapPointer);
+    //      DsError.ThrowExceptionForHR(hr);
+
+    //      Size videoSize = this.VideoSize;
+    //      int stride = -4 * videoSize.Width;
+    //      PixelFormat format = PixelFormat.Format32bppRgb;
+    //      IntPtr scan0 = (IntPtr)(((long)bitmapPointer));// + (bufferSize + stride));
+
+    //      Bitmap bmp = new Bitmap(videoSize.Width, videoSize.Height, stride, format, bitmapPointer);
+    //      bmp.Save(@"c:\Dumps\test.png");
+    //      Marshal.FreeHGlobal(bitmapPointer);
+    //      return bmp;
+    //    }
+
+    //    return null;
+    //  }
+    //}
+
 
     #endregion //PROPERTIES
 
@@ -189,7 +293,7 @@ namespace OgamaControls
           int hr = 0;
           if (timeToStart.HasValue)
           {
-            hr = this.mediaSeeking.SetPositions(timeToStart.Value*10000, AMSeekingSeekingFlags.AbsolutePositioning,
+            hr = this.mediaSeeking.SetPositions(timeToStart.Value * 10000, AMSeekingSeekingFlags.AbsolutePositioning,
               null, AMSeekingSeekingFlags.NoPositioning);
             DsError.ThrowExceptionForHR(hr);
           }
@@ -201,21 +305,7 @@ namespace OgamaControls
             hr = this.mediaControl.GetState(timeout, out state);
             DsError.ThrowExceptionForHR(hr);
             this.StepOneFrame();
-            //this.mediaControl.Stop();
-            //this.currentState = PlayState.Stopped;
           }
-          //Int64 stopTime = 0;
-          //hr = this.mediaSeeking.GetDuration(out stopTime);
-          //DsError.ThrowExceptionForHR(hr);
-
-          //if (timeToStop.HasValue)
-          //{
-          //  stopTime = timeToStop.Value;
-          //}
-
-          //hr = this.mediaSeeking.SetPositions(null, AMSeekingSeekingFlags.NoPositioning,
-          // stopTime, AMSeekingSeekingFlags.AbsolutePositioning);
-          //DsError.ThrowExceptionForHR(hr);
         }
       }
       catch (Exception ex)
@@ -332,10 +422,16 @@ namespace OgamaControls
     private void AVPlayer_Resize(object sender, EventArgs e)
     {
       // Resize the video preview window to match owner window size
-      if (this.videoWindow != null)
+      if (this.windowLessControl != null)
       {
-        this.videoWindow.SetWindowPosition(0, 0, this.Width, this.Height);
+        this.windowLessControl.SetVideoPosition(null, new DsRect(0, 0, this.ClientSize.Width, this.ClientSize.Height));
       }
+
+      //// Resize the video preview window to match owner window size
+      //if (this.videoWindow != null)
+      //{
+      //  this.videoWindow.SetWindowPosition(0, 0, this.Width, this.Height);
+      //}
     }
 
     #endregion //WINDOWSEVENTHANDLER
@@ -416,7 +512,7 @@ namespace OgamaControls
         CloseClip();
       }
     }
-    
+
     private void LoadMovieInWindow(string filename)
     {
       int hr = 0;
@@ -425,35 +521,42 @@ namespace OgamaControls
         return;
 
       this.graphBuilder = (IGraphBuilder)new FilterGraph();
+      this.captureGraphBuilder = (ICaptureGraphBuilder2)new CaptureGraphBuilder2();
+      this.vmr9 = new VideoMixingRenderer9();
+      this.vmrConfig = this.vmr9 as IVMRFilterConfig9;
 
-      //// Get a ICaptureGraphBuilder2 to help build the graph
-      //ICaptureGraphBuilder2 captureGraph = new CaptureGraphBuilder2() as ICaptureGraphBuilder2;
-
-      //// Link the ICaptureGraphBuilder2 to the IFilterGraph2
-      //hr = captureGraph.SetFiltergraph(this.graphBuilder);
-      //DsError.ThrowExceptionForHR(hr);
-
-      //// Add the file input to the graph
-      //IBaseFilter sourceFilter = null;
-      //hr = this.graphBuilder.AddSourceFilter(filename, filename, out sourceFilter);
-      //DsError.ThrowExceptionForHR(hr);
-
-      //// Connect the pieces together, use the default renderer
-      //hr = captureGraph.RenderStream(null, MediaType.Video, sourceFilter, null, null);
-      //DsError.ThrowExceptionForHR(hr);
-
-      // Have the graph builder construct its the appropriate graph automatically
-      hr = this.graphBuilder.RenderFile(filename, null);
+      // Attach the filter graph to the capture graph
+      hr = this.captureGraphBuilder.SetFiltergraph(this.graphBuilder);
       DsError.ThrowExceptionForHR(hr);
-      
+
+      hr = this.graphBuilder.AddFilter(vmr9 as IBaseFilter, "VideoMixingRenderer9");
+      DsError.ThrowExceptionForHR(hr);
+
+      hr = this.vmrConfig.SetRenderingMode(VMR9Mode.Windowless);
+      DsError.ThrowExceptionForHR(hr);
+      this.windowLessControl = this.vmr9 as IVMRWindowlessControl9;
+      this.windowLessControl.SetVideoClippingWindow(this.Handle);
+      this.windowLessControl.SetVideoPosition(null, new DsRect(0, 0, this.ClientSize.Width, this.ClientSize.Height));
+
+      IBaseFilter fileSourceFilter;
+      hr = this.graphBuilder.AddSourceFilter(filename, "WebCamSource", out fileSourceFilter);
+      DsError.ThrowExceptionForHR(hr);
+
+      hr = this.captureGraphBuilder.RenderStream(null, null, fileSourceFilter, null, vmr9 as IBaseFilter);
+      DsError.ThrowExceptionForHR(hr);
+
+      //// Have the graph builder construct its the appropriate graph automatically
+      //hr = this.graphBuilder.RenderFile(filename, null);
+      //DsError.ThrowExceptionForHR(hr);
+
       // QueryInterface for DirectShow interfaces
       this.mediaControl = (IMediaControl)this.graphBuilder;
-      this.mediaEventEx = (IMediaEventEx)this.graphBuilder;
+      //this.mediaEventEx = (IMediaEventEx)this.graphBuilder;
       this.mediaSeeking = (IMediaSeeking)this.graphBuilder;
       //this.mediaPosition = (IMediaPosition)this.graphBuilder;
 
       // Query for video interfaces, which may not be relevant for audio files
-      this.videoWindow = this.graphBuilder as IVideoWindow;
+      ////this.videoWindow = this.graphBuilder as IVideoWindow;
       this.basicVideo = this.graphBuilder as IBasicVideo;
 
       // Query for audio interfaces, which may not be relevant for video-only files
@@ -462,14 +565,18 @@ namespace OgamaControls
       // Is this an audio-only file (no video component)?
       CheckVisibility();
 
-      // Have the graph signal event via window callbacks for performance
-      hr = this.mediaEventEx.SetNotifyWindow(this.Handle, WMGraphNotify, IntPtr.Zero);
-      DsError.ThrowExceptionForHR(hr);
+      //// Have the graph signal event via window callbacks for performance
+      //hr = this.mediaEventEx.SetNotifyWindow(this.Handle, WMGraphNotify, IntPtr.Zero);
+      //DsError.ThrowExceptionForHR(hr);
 
       if (!this.isAudioOnly)
       {
-        hr = InitVideoWindow();
-        DsError.ThrowExceptionForHR(hr);
+        this.windowLessControl = this.vmr9 as IVMRWindowlessControl9;
+        this.windowLessControl.SetVideoClippingWindow(this.Handle);
+        this.windowLessControl.SetVideoPosition(null, new DsRect(0, 0, this.ClientSize.Width, this.ClientSize.Height));
+
+        //hr = InitVideoWindow();
+        //DsError.ThrowExceptionForHR(hr);
 
         GetFrameStepInterface();
       }
@@ -509,34 +616,34 @@ namespace OgamaControls
       UpdateToolTip();
     }
 
-    private int InitVideoWindow()
-    {
-      // Set the owner of the videoWindow to an IntPtr of some sort 
-      // (the Handle of any control - could be a form / button etc.)
-      int hr = this.videoWindow.put_Owner(this.Handle);
-      DsError.ThrowExceptionForHR(hr);
+    //private int InitVideoWindow()
+    //{
+    //  // Set the owner of the videoWindow to an IntPtr of some sort 
+    //  // (the Handle of any control - could be a form / button etc.)
+    //  int hr = this.videoWindow.put_Owner(this.Handle);
+    //  DsError.ThrowExceptionForHR(hr);
 
-      // Set the style of the video window
-      hr = this.videoWindow.put_WindowStyle(WindowStyle.Child | WindowStyle.ClipSiblings | WindowStyle.ClipChildren);
-      DsError.ThrowExceptionForHR(hr);
+    //  // Set the style of the video window
+    //  hr = this.videoWindow.put_WindowStyle(WindowStyle.Child | WindowStyle.ClipSiblings | WindowStyle.ClipChildren);
+    //  DsError.ThrowExceptionForHR(hr);
 
-      // Position video window in client rect
-      hr = this.videoWindow.SetWindowPosition(0, 0, this.Width, this.Height);
-      DsError.ThrowExceptionForHR(hr);
+    //  // Position video window in client rect
+    //  hr = this.videoWindow.SetWindowPosition(0, 0, this.Width, this.Height);
+    //  DsError.ThrowExceptionForHR(hr);
 
-      // Make the video window visible
-      hr = this.videoWindow.put_Visible(OABool.True);
-      DsError.ThrowExceptionForHR(hr);
-      
-      return hr;
-    }
+    //  // Make the video window visible
+    //  hr = this.videoWindow.put_Visible(OABool.True);
+    //  DsError.ThrowExceptionForHR(hr);
+
+    //  return hr;
+    //}
 
     private void CheckVisibility()
     {
-      int hr = 0;
-      OABool lVisible;
+      //int hr = 0;
+      //OABool lVisible;
 
-      if ((this.videoWindow == null) || (this.basicVideo == null))
+      if (this.basicVideo == null)
       {
         // Audio-only files have no video interfaces.  This might also
         // be a file whose video component uses an unknown video codec.
@@ -547,22 +654,6 @@ namespace OgamaControls
       {
         // Clear the global flag
         this.isAudioOnly = false;
-      }
-
-      hr = this.videoWindow.get_Visible(out lVisible);
-      if (hr < 0)
-      {
-        // If this is an audio-only clip, get_Visible() won't work.
-        //
-        // Also, if this video is encoded with an unsupported codec,
-        // we won't see any video, although the audio will work if it is
-        // of a supported format.
-        if (hr == unchecked((int)0x80004002)) //E_NOINTERFACE
-        {
-          this.isAudioOnly = true;
-        }
-        else
-          DsError.ThrowExceptionForHR(hr);
       }
     }
 
@@ -598,26 +689,26 @@ namespace OgamaControls
 
     private void CloseInterfaces()
     {
-      int hr = 0;
+      //int hr = 0;
 
       try
       {
         lock (this)
         {
-          // Relinquish ownership (IMPORTANT!) after hiding video window
-          if (!this.isAudioOnly && this.videoWindow != null)
-          {
-            hr = this.videoWindow.put_Visible(OABool.False);
-            DsError.ThrowExceptionForHR(hr);
-            hr = this.videoWindow.put_Owner(IntPtr.Zero);
-            DsError.ThrowExceptionForHR(hr);
-          }
+          //// Relinquish ownership (IMPORTANT!) after hiding video window
+          //if (!this.isAudioOnly && this.videoWindow != null)
+          //{
+          //  hr = this.videoWindow.put_Visible(OABool.False);
+          //  DsError.ThrowExceptionForHR(hr);
+          //  hr = this.videoWindow.put_Owner(IntPtr.Zero);
+          //  DsError.ThrowExceptionForHR(hr);
+          //}
 
-          if (this.mediaEventEx != null)
-          {
-            hr = this.mediaEventEx.SetNotifyWindow(IntPtr.Zero, 0, IntPtr.Zero);
-            DsError.ThrowExceptionForHR(hr);
-          }
+          //if (this.mediaEventEx != null)
+          //{
+          //  hr = this.mediaEventEx.SetNotifyWindow(IntPtr.Zero, 0, IntPtr.Zero);
+          //  DsError.ThrowExceptionForHR(hr);
+          //}
 
 #if DEBUG
           if (rot != null)
@@ -627,8 +718,8 @@ namespace OgamaControls
           }
 #endif
           // Release and zero DirectShow interfaces
-          if (this.mediaEventEx != null)
-            this.mediaEventEx = null;
+          //if (this.mediaEventEx != null)
+          //  this.mediaEventEx = null;
           if (this.mediaSeeking != null)
             this.mediaSeeking = null;
           if (this.mediaPosition != null)
@@ -639,12 +730,12 @@ namespace OgamaControls
             this.basicAudio = null;
           if (this.basicVideo != null)
             this.basicVideo = null;
-          if (this.videoWindow != null)
-            this.videoWindow = null;
+          //if (this.videoWindow != null)
+          //  this.videoWindow = null;
           if (this.frameStep != null)
             this.frameStep = null;
           if (this.graphBuilder != null)
-            Marshal.ReleaseComObject(this.graphBuilder); 
+            Marshal.ReleaseComObject(this.graphBuilder);
           this.graphBuilder = null;
 
           GC.Collect();
@@ -652,7 +743,7 @@ namespace OgamaControls
       }
       catch (Exception ex)
       {
-        MessageBox.Show(ex.StackTrace,ex.Message);
+        MessageBox.Show(ex.StackTrace, ex.Message);
       }
     }
 
@@ -741,51 +832,51 @@ namespace OgamaControls
     private int ToggleFullScreen()
     {
       int hr = 0;
-      OABool lMode;
+      //OABool lMode;
 
-      // Don't bother with full-screen for audio-only files
-      if ((this.isAudioOnly) || (this.videoWindow == null))
-        return 0;
+      //// Don't bother with full-screen for audio-only files
+      //if ((this.isAudioOnly) || (this.videoWindow == null))
+      //  return 0;
 
-      // Read current state
-      hr = this.videoWindow.get_FullScreenMode(out lMode);
-      DsError.ThrowExceptionForHR(hr);
+      //// Read current state
+      //hr = this.videoWindow.get_FullScreenMode(out lMode);
+      //DsError.ThrowExceptionForHR(hr);
 
-      if (lMode == OABool.False)
-      {
-        // Save current message drain
-        hr = this.videoWindow.get_MessageDrain(out hDrain);
-        DsError.ThrowExceptionForHR(hr);
+      //if (lMode == OABool.False)
+      //{
+      //  // Save current message drain
+      //  hr = this.videoWindow.get_MessageDrain(out hDrain);
+      //  DsError.ThrowExceptionForHR(hr);
 
-        // Set message drain to application main window
-        hr = this.videoWindow.put_MessageDrain(this.Handle);
-        DsError.ThrowExceptionForHR(hr);
+      //  // Set message drain to application main window
+      //  hr = this.videoWindow.put_MessageDrain(this.Handle);
+      //  DsError.ThrowExceptionForHR(hr);
 
-        // Switch to full-screen mode
-        lMode = OABool.True;
-        hr = this.videoWindow.put_FullScreenMode(lMode);
-        DsError.ThrowExceptionForHR(hr);
-        //this.isFullScreen = true;
-      }
-      else
-      {
-        // Switch back to windowed mode
-        lMode = OABool.False;
-        hr = this.videoWindow.put_FullScreenMode(lMode);
-        DsError.ThrowExceptionForHR(hr);
+      //  // Switch to full-screen mode
+      //  lMode = OABool.True;
+      //  hr = this.videoWindow.put_FullScreenMode(lMode);
+      //  DsError.ThrowExceptionForHR(hr);
+      //  //this.isFullScreen = true;
+      //}
+      //else
+      //{
+      //  // Switch back to windowed mode
+      //  lMode = OABool.False;
+      //  hr = this.videoWindow.put_FullScreenMode(lMode);
+      //  DsError.ThrowExceptionForHR(hr);
 
-        // Undo change of message drain
-        hr = this.videoWindow.put_MessageDrain(hDrain);
-        DsError.ThrowExceptionForHR(hr);
+      //  // Undo change of message drain
+      //  hr = this.videoWindow.put_MessageDrain(hDrain);
+      //  DsError.ThrowExceptionForHR(hr);
 
-        // Reset video window
-        hr = this.videoWindow.SetWindowForeground(OABool.True);
-        DsError.ThrowExceptionForHR(hr);
+      //  // Reset video window
+      //  hr = this.videoWindow.SetWindowForeground(OABool.True);
+      //  DsError.ThrowExceptionForHR(hr);
 
-        // Reclaim keyboard focus for player application
-        //this.Focus();
-        //this.isFullScreen = false;
-      }
+      //  // Reclaim keyboard focus for player application
+      //  //this.Focus();
+      //  //this.isFullScreen = false;
+      //}
 
       return hr;
     }
@@ -859,43 +950,43 @@ namespace OgamaControls
 
 
 
-    private void HandleGraphEvent()
-    {
-      int hr = 0;
-      EventCode evCode;
-      IntPtr evParam1, evParam2;
+    //private void HandleGraphEvent()
+    //{
+    //  int hr = 0;
+    //  EventCode evCode;
+    //  IntPtr evParam1, evParam2;
 
-      // Make sure that we don't access the media event interface
-      // after it has already been released.
-      if (this.mediaEventEx == null)
-        return;
+    //  // Make sure that we don't access the media event interface
+    //  // after it has already been released.
+    //  if (this.mediaEventEx == null)
+    //    return;
 
-      // Process all queued events
-      while (this.mediaEventEx.GetEvent(out evCode, out evParam1, out evParam2, 0) == 0)
-      {
-        // Free memory associated with callback, since we're not using it
-        hr = this.mediaEventEx.FreeEventParams(evCode, evParam1, evParam2);
+    //  // Process all queued events
+    //  while (this.mediaEventEx.GetEvent(out evCode, out evParam1, out evParam2, 0) == 0)
+    //  {
+    //    // Free memory associated with callback, since we're not using it
+    //    hr = this.mediaEventEx.FreeEventParams(evCode, evParam1, evParam2);
 
-        // If this is the end of the clip, reset to beginning
-        if (evCode == EventCode.Complete)
-        {
-          DsLong pos = new DsLong(0);
-          // Reset to first frame of movie
-          hr = this.mediaSeeking.SetPositions(pos, AMSeekingSeekingFlags.AbsolutePositioning,
-            null, AMSeekingSeekingFlags.NoPositioning);
-          if (hr < 0)
-          {
-            // Some custom filters (like the Windows CE MIDI filter)
-            // may not implement seeking interfaces (IMediaSeeking)
-            // to allow seeking to the start.  In that case, just stop
-            // and restart for the same effect.  This should not be
-            // necessary in most cases.
-            hr = this.mediaControl.Stop();
-            hr = this.mediaControl.Run();
-          }
-        }
-      }
-    }
+    //    // If this is the end of the clip, reset to beginning
+    //    if (evCode == EventCode.Complete)
+    //    {
+    //      DsLong pos = new DsLong(0);
+    //      // Reset to first frame of movie
+    //      hr = this.mediaSeeking.SetPositions(pos, AMSeekingSeekingFlags.AbsolutePositioning,
+    //        null, AMSeekingSeekingFlags.NoPositioning);
+    //      if (hr < 0)
+    //      {
+    //        // Some custom filters (like the Windows CE MIDI filter)
+    //        // may not implement seeking interfaces (IMediaSeeking)
+    //        // to allow seeking to the start.  In that case, just stop
+    //        // and restart for the same effect.  This should not be
+    //        // necessary in most cases.
+    //        hr = this.mediaControl.Stop();
+    //        hr = this.mediaControl.Run();
+    //      }
+    //    }
+    //  }
+    //}
 
     private string GetClipFileName()
     {
@@ -1065,6 +1156,5 @@ namespace OgamaControls
     }
 
     #endregion //HELPER
-
   }
 }

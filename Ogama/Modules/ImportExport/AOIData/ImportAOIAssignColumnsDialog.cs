@@ -22,8 +22,6 @@ namespace Ogama.Modules.ImportExport
   using System.Text;
   using System.Windows.Forms;
 
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
-
   using Ogama.Modules.Common;
 
   /// <summary>

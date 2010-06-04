@@ -19,11 +19,8 @@ namespace Ogama.Modules.Fixations
   using System.Data;
   using System.Data.SqlClient;
   using System.Drawing;
-  using System.Text;
-
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
-
   using Ogama.DataSet;
+  using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
   using VectorGraphics.Elements;
 
@@ -575,11 +572,7 @@ namespace Ogama.Modules.Fixations
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
     }
 
@@ -637,11 +630,7 @@ namespace Ogama.Modules.Fixations
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
     }
 

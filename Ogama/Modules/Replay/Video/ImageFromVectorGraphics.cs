@@ -21,6 +21,7 @@ namespace Ogama.Modules.Replay
   using DirectShowLib;
   using Ogama.Modules.Common;
   using OgamaControls;
+  using VectorGraphics.CustomEventArgs;
 
   /// <summary>
   /// Class to provide image data for the direct show video.
@@ -144,6 +145,13 @@ namespace Ogama.Modules.Replay
     // Defining Enumerations                                                     //
     ///////////////////////////////////////////////////////////////////////////////
     #region ENUMS
+
+    /// <summary>
+    /// This event occurs, whenever a new frame has arrived, it tells
+    /// the listener the percentage of the progress.
+    /// </summary>
+    public event EventHandler<ProgressEventArgs> Progress;
+
     #endregion ENUMS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -238,6 +246,18 @@ namespace Ogama.Modules.Replay
           {
             // Copy from the bmd to the MediaSample
             Kernel32.CopyMemory(pointer, this.bitmapVGData.Scan0, size);
+          }
+
+          if (this.Progress != null)
+          {
+            int percentComplete = (int)((float)currentTime / (this.sectionEndTime - this.sectionStartTime) * 100);
+            this.Progress(this, new ProgressEventArgs(false, percentComplete, currentTime));
+          }
+
+          if (sampleTime > this.sectionEndTime - this.frameTimeSpan)
+          {
+            // Console.WriteLine("Finish=true");
+            hr = 1; // End of stream
           }
         }
         else

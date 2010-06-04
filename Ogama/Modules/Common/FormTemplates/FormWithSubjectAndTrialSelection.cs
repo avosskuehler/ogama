@@ -22,8 +22,6 @@ namespace Ogama.Modules.Common
   using System.Text;
   using System.Windows.Forms;
 
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
-
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
 
@@ -287,11 +285,7 @@ namespace Ogama.Modules.Common
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
     }
 

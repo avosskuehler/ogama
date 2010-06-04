@@ -19,8 +19,6 @@ namespace Ogama.Modules.SlideshowDesign
   using System.Windows.Forms;
   using System.Xml.Serialization;
 
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
-
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
   using Ogama.Modules.Common;
@@ -587,11 +585,7 @@ namespace Ogama.Modules.SlideshowDesign
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
 
         return DialogResult.Abort;
       }
@@ -665,11 +659,7 @@ namespace Ogama.Modules.SlideshowDesign
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
 
         return DialogResult.Abort;
       }

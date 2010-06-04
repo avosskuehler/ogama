@@ -21,6 +21,7 @@ namespace Ogama.Modules.Recording
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
   using Ogama.Modules.ImportExport;
+  using OgamaControls;
 
   /// <summary>
   /// This abstract class implements <see cref="ITracker"/> and <see cref="IDisposable"/>

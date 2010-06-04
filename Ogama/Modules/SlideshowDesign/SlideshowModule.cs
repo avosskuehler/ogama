@@ -28,8 +28,6 @@ namespace Ogama.Modules.SlideshowDesign
   using System.Xml;
   using System.Xml.Serialization;
 
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
-
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
   using Ogama.Modules.Common;

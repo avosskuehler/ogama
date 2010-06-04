@@ -123,6 +123,7 @@ namespace Ogama.Modules.Recording
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void SelectTracker_Load(object sender, EventArgs e)
     {
+      MessageBox.Show("ITUGazeTrackerBase");
       string error;
 
       string ituDefaultText = "The ITU GazeTracker application which uses a webcam as " +
@@ -142,6 +143,7 @@ namespace Ogama.Modules.Recording
           "Status: GazeTracker found a camera device.";
       }
 
+      MessageBox.Show("ITUPS3GazeTracker");
       string ituPS3DefaultText = "The ITU GazeTracker application with the PlayStationEye3 camera."
         + Environment.NewLine;
 
@@ -158,6 +160,7 @@ namespace Ogama.Modules.Recording
           "Status: GazeTracker found a PlayStation3 Eye device.";
       }
 
+      MessageBox.Show("AleaTracker");
       string aleaDefaultText = "The alea technologies IG-30 Pro Eyetracking-System. " +
           "Needs to have Intelligaze Software 1.2 to be installed." + Environment.NewLine;
       if (!Ogama.Modules.Recording.Alea.AleaTracker.IsAvailable(out error))
@@ -174,6 +177,7 @@ namespace Ogama.Modules.Recording
           "Status: Intelligaze found.";
       }
 
+      MessageBox.Show("TobiiTracker");
       string tobiiDefaultText = "The Tobii technologies T60,T120,X120 gaze tracker series." +
           "Needs to have a purchased Tobii SDK to be installed on the computer." + Environment.NewLine;
 #if TOBII

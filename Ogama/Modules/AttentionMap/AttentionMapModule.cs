@@ -24,8 +24,6 @@ namespace Ogama.Modules.AttentionMap
   using System.Text;
   using System.Windows.Forms;
 
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
-
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
   using Ogama.Modules.Common;
@@ -169,11 +167,7 @@ namespace Ogama.Modules.AttentionMap
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
       finally
       {
@@ -222,11 +216,7 @@ namespace Ogama.Modules.AttentionMap
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
     }
 
@@ -671,11 +661,7 @@ namespace Ogama.Modules.AttentionMap
       // First, handle the case where an exception was thrown.
       if (e.Error != null)
       {
-        bool rethrow = ExceptionPolicy.HandleException(e.Error, "Global Policy");
-        if (rethrow)
-        {
-          throw e.Error;
-        }
+        ExceptionMethods.HandleException(e.Error);
       }
       else if (e.Cancelled)
       {
@@ -787,11 +773,7 @@ namespace Ogama.Modules.AttentionMap
       catch (Exception ex)
       {
         this.btnStartCalculation.Enabled = true;
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
     }
 

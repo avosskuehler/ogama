@@ -15,22 +15,17 @@ namespace Ogama.Modules.Recording
 {
   using System;
   using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Data;
   using System.Diagnostics;
   using System.Drawing;
   using System.IO;
-  using System.Text;
   using System.Threading;
   using System.Windows.Forms;
 
   using DirectX.Capture;
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
 
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
   using Ogama.Modules.Recording.Presenter;
-  using Ogama.Modules.SlideshowDesign;
   using OgamaControls;
 
   using VectorGraphics.Controls;
@@ -501,11 +496,7 @@ namespace Ogama.Modules.Recording
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Log Only Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleExceptionSilent(ex);
       }
 
       if (this.InvokeRequired)
@@ -658,11 +649,7 @@ namespace Ogama.Modules.Recording
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
 
         this.Close();
       }
@@ -1648,11 +1635,7 @@ namespace Ogama.Modules.Recording
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
     }
 

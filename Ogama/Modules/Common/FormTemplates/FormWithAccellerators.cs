@@ -21,8 +21,6 @@ namespace Ogama.Modules.Common
   using System.Text;
   using System.Windows.Forms;
 
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
-
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
 
@@ -157,11 +155,7 @@ namespace Ogama.Modules.Common
       }
       else
       {
-        bool rethrow = ExceptionPolicy.HandleException(e.Exception, "Global Policy");
-        if (rethrow)
-        {
-          throw e.Exception;
-        }
+        ExceptionMethods.HandleException(e.Exception);
       }
     }
 

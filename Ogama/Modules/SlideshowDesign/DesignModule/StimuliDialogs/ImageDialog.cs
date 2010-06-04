@@ -143,6 +143,7 @@ namespace Ogama.Modules.SlideshowDesign
           Path.GetFileName(this.fullFilename),
           Path.GetDirectoryName(this.fullFilename),
           this.ImageLayout,
+          1f,
           new Size(Document.ActiveDocument.ExperimentSettings.WidthStimulusScreen, Document.ActiveDocument.ExperimentSettings.HeightStimulusScreen),
           VGStyleGroup.AOI_NORMAL,
           this.pbcImageBorder.NewName,

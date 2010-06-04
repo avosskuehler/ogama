@@ -14,17 +14,12 @@
 namespace Ogama.Modules.Recording
 {
   using System;
-  using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Data;
   using System.Drawing;
   using System.IO;
-  using System.Text;
   using System.Windows.Forms;
   using System.Xml;
-
   using DirectX.Capture;
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
+  using Ogama.ExceptionHandling;
   using VHScrCapLib;
 
   /// <summary>
@@ -224,11 +219,7 @@ namespace Ogama.Modules.Recording
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
     }
 

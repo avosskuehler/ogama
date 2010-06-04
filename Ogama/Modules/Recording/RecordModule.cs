@@ -23,7 +23,7 @@ namespace Ogama.Modules.Recording
   using System.Threading;
   using System.Windows.Forms;
   using DirectX.Capture;
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
+
   using Ogama.DataSet;
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
@@ -1302,11 +1302,7 @@ namespace Ogama.Modules.Recording
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
     }
 
@@ -1373,11 +1369,7 @@ namespace Ogama.Modules.Recording
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Log Only Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleExceptionSilent(ex);
       }
     }
 
@@ -2077,11 +2069,7 @@ namespace Ogama.Modules.Recording
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
 
         // Hide saving splash.
         if (this.bgwSaveSplash.IsBusy)

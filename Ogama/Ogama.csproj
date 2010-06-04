@@ -89,6 +89,25 @@
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TOBII;VHUNLOCK</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;TOBII;VHUNLOCK</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>..\Release\Docs\Ogama.XML</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AxShockwaveFlashObjects, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -118,18 +137,6 @@
     <Reference Include="Microsoft.Data.ConnectionUI.Dialog, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\Microsoft.Data.ConnectionUI.Dialog.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=3.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Managed\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.EnterpriseLibrary.ExceptionHandling, Version=3.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Managed\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging, Version=3.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Managed\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.ConnectionInfo, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -220,7 +227,6 @@
     <Compile Include="ExceptionHandling\ShowLogDialog.Designer.cs">
       <DependentUpon>ShowLogDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="ExceptionHandling\MessageBoxExceptionHandler.cs" />
     <Compile Include="ExceptionHandling\ExceptionMethods.cs" />
     <Compile Include="MainWindow\Dialogs\HowToActivateITUPS3.cs">
       <SubType>Form</SubType>
@@ -333,7 +339,6 @@
     <Compile Include="Modules\Common\SlideCollections\SequencedTrial.cs" />
     <Compile Include="Modules\Common\SlideCollections\TrialCollection.cs" />
     <Compile Include="Modules\Common\SlideCollections\SlideType.cs" />
-    <Compile Include="Modules\Common\Tools\AsynchronousEvents.cs" />
     <Compile Include="Modules\Common\Types\ActiveXMode.cs" />
     <Compile Include="Modules\Common\Types\SampleValidity.cs" />
     <Compile Include="Modules\Common\Types\StringEnum.cs" />
@@ -447,6 +452,7 @@
     <Compile Include="Modules\Recording\UnlockVH.cs" />
     <Compile Include="Modules\Replay\LoopState.cs" />
     <Compile Include="Modules\Replay\TimedPoint.cs" />
+    <Compile Include="Modules\Replay\Video\DSRecordWithDMO.cs" />
     <Compile Include="Modules\Replay\Video\DSBitmapSourceFilter.cs" />
     <Compile Include="Modules\Replay\Video\DSRecord.cs">
     </Compile>
@@ -458,6 +464,8 @@
     </Compile>
     <Compile Include="Modules\Replay\Video\ImageFromVectorGraphics.cs" />
     <Compile Include="Modules\Replay\Video\ImageHandler.cs" />
+    <Compile Include="Modules\Replay\Video\VideoExportProperties.cs" />
+    <Compile Include="Modules\Replay\Video\VideoStreamProperties.cs" />
     <Compile Include="Modules\Scanpath\Colorization\ColorizationModes.cs" />
     <Compile Include="Modules\Scanpath\Colorization\ColorizationParameters.cs" />
     <Compile Include="Modules\Scanpath\Colorization\ColorizationStyle.cs" />
@@ -1731,7 +1739,7 @@
     </COMReference>
     <COMReference Include="VHScrCapLib">
       <Guid>{B29182EF-8BB0-4C87-91E8-9E25C7E70793}</Guid>
-      <VersionMajor>1</VersionMajor>
+      <VersionMajor>3</VersionMajor>
       <VersionMinor>0</VersionMinor>
       <Lcid>0</Lcid>
       <WrapperTool>tlbimp</WrapperTool>

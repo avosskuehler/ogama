@@ -25,8 +25,6 @@ namespace Ogama.Modules.AOI
   using System.Text;
   using System.Windows.Forms;
 
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
-
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
   using Ogama.Modules.Common;
@@ -116,11 +114,7 @@ namespace Ogama.Modules.AOI
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
       finally
       {
@@ -201,11 +195,7 @@ namespace Ogama.Modules.AOI
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
       finally
       {
@@ -245,11 +235,7 @@ namespace Ogama.Modules.AOI
         }
         catch (Exception ex)
         {
-          bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-          if (rethrow)
-          {
-            throw;
-          }
+          ExceptionMethods.HandleException(ex);
         }
       }
     }
@@ -311,11 +297,7 @@ namespace Ogama.Modules.AOI
         }
         catch (Exception ex)
         {
-          bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-          if (rethrow)
-          {
-            throw;
-          }
+          ExceptionMethods.HandleException(ex);
         }
       }
     }
@@ -394,11 +376,7 @@ namespace Ogama.Modules.AOI
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
     }
 
@@ -1299,11 +1277,7 @@ namespace Ogama.Modules.AOI
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
     }
 
@@ -1374,11 +1348,7 @@ namespace Ogama.Modules.AOI
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
 
       this.ResetButtons();
@@ -1629,11 +1599,7 @@ namespace Ogama.Modules.AOI
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
 
       ((MainForm)this.MdiParent).StatusLabel.Text = "Table selection exported to clipboard.";
@@ -1931,11 +1897,7 @@ namespace Ogama.Modules.AOI
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
     }
 

@@ -72,14 +72,9 @@ namespace Ogama.Modules.Replay
     private IVideoWindow videoWindow;
 
     /// <summary>
-    /// The filename for the video ouput
+    /// A <see cref="VideoExportProperties"/> with the video properties.
     /// </summary>
-    private string fileName;
-
-    /// <summary>
-    /// A <see cref="CaptureDeviceProperties"/> with the video properties.
-    /// </summary>
-    private CaptureDeviceProperties videoProperties;
+    private VideoExportProperties videoExportProperties;
 
     /// <summary>
     /// Saves the <see cref="Control"/> of the preview window.
@@ -105,38 +100,37 @@ namespace Ogama.Modules.Replay
     /// </summary>
     /// <param name="newImageHandler">An <see cref="ImageFromVectorGraphics"/>
     /// with the callback.</param>
-    /// <param name="newVideoFileName">The <see cref="String"/> with the filename for the video.</param>
-    /// <param name="newVideoProperties">A <see cref="CaptureDeviceProperties"/> with 
-    /// the video properties.</param>
+    /// <param name="newVideoExportProperties">A <see cref="VideoExportProperties"/> with 
+    /// the video export properties.</param>
     /// <param name="newPreviewWindow">A <see cref="Control"/> with 
     /// the preview panel.</param>
     public DSRecord(
       ImageFromVectorGraphics newImageHandler,
-      string newVideoFileName,
-      CaptureDeviceProperties newVideoProperties,
+      VideoExportProperties newVideoExportProperties,
       Control newPreviewWindow)
     {
       try
       {
         // Set capture file name
-        this.fileName = newVideoFileName;
+        this.videoExportProperties = newVideoExportProperties;
 
         // set the image provider
         this.imageHandler = newImageHandler;
 
-        // set the video properties
-        this.videoProperties = newVideoProperties;
-
-        if (this.videoProperties.VideoCompressor != string.Empty)
+        if (this.videoExportProperties.OutputVideoProperties.VideoCompressor != string.Empty)
         {
           // Create the filter for the selected video compressor
-          this.videoCompressor = DirectShowUtils.CreateFilter(FilterCategory.VideoCompressorCategory, this.videoProperties.VideoCompressor);
+          this.videoCompressor = DirectShowUtils.CreateFilter(
+            FilterCategory.VideoCompressorCategory, 
+            this.videoExportProperties.OutputVideoProperties.VideoCompressor);
         }
 
-        if (this.videoProperties.AudioCompressor != string.Empty)
+        if (this.videoExportProperties.OutputVideoProperties.AudioCompressor != string.Empty)
         {
           // Create the filter for the selected video compressor
-          this.audioCompressor = DirectShowUtils.CreateFilter(FilterCategory.AudioCompressorCategory, this.videoProperties.AudioCompressor);
+          this.audioCompressor = DirectShowUtils.CreateFilter(
+            FilterCategory.AudioCompressorCategory,
+            this.videoExportProperties.OutputVideoProperties.AudioCompressor);
         }
 
         // Set up preview window
@@ -334,7 +328,11 @@ namespace Ogama.Modules.Replay
           // SetOutputFileName does this for us, and returns the mux and sink
           IBaseFilter mux;
           IFileSinkFilter2 sink;
-          hr = captureGraph.SetOutputFileName(MediaSubType.Avi, this.fileName, out mux, out sink);
+          hr = captureGraph.SetOutputFileName(
+            MediaSubType.Avi, 
+            this.videoExportProperties.OutputVideoProperties.Filename, 
+            out mux, 
+            out sink);
           DsError.ThrowExceptionForHR(hr);
 
           // Connect the device and compressor to the mux to render the capture part of the graph

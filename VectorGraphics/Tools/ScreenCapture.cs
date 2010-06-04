@@ -18,7 +18,6 @@ namespace VectorGraphics.Tools
   using System.Drawing.Imaging;
   using System.Runtime.InteropServices;
 
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
   using VectorGraphics.Win32;
 
   /// <summary>
@@ -175,11 +174,7 @@ namespace VectorGraphics.Tools
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        VGExceptionMethods.HandleException(ex);
 
         return null;
       }
@@ -223,11 +218,7 @@ namespace VectorGraphics.Tools
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        VGExceptionMethods.HandleException(ex);
 
         return null;
       }

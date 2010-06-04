@@ -25,8 +25,6 @@ namespace Ogama.Modules.Fixations
   using System.Text;
   using System.Windows.Forms;
 
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
-
   using Ogama.DataSet;
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
@@ -248,11 +246,7 @@ namespace Ogama.Modules.Fixations
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
       finally
       {
@@ -292,11 +286,7 @@ namespace Ogama.Modules.Fixations
         }
         catch (Exception ex)
         {
-          bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-          if (rethrow)
-          {
-            throw;
-          }
+          ExceptionMethods.HandleException(ex);
         }
       }
     }
@@ -339,11 +329,7 @@ namespace Ogama.Modules.Fixations
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
     }
 
@@ -872,11 +858,7 @@ namespace Ogama.Modules.Fixations
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
     }
 
@@ -910,11 +892,7 @@ namespace Ogama.Modules.Fixations
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
       finally
       {
@@ -941,11 +919,7 @@ namespace Ogama.Modules.Fixations
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
     }
 
@@ -1047,11 +1021,7 @@ namespace Ogama.Modules.Fixations
       // First, handle the case where an exception was thrown.
       if (e.Error != null)
       {
-        bool rethrow = ExceptionPolicy.HandleException(e.Error, "Global Policy");
-        if (rethrow)
-        {
-          throw e.Error;
-        }
+        ExceptionMethods.HandleException(e.Error);
       }
       else if (e.Cancelled)
       {
@@ -1587,11 +1557,7 @@ namespace Ogama.Modules.Fixations
         }
         catch (InvalidOperationException ex)
         {
-          bool rethrow = ExceptionPolicy.HandleException(ex, "Log Only Policy");
-          if (rethrow)
-          {
-            throw;
-          }
+          ExceptionMethods.HandleExceptionSilent(ex);
         }
 
         // Get trial data of current subject

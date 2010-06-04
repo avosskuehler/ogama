@@ -27,8 +27,6 @@ namespace Ogama.MainWindow
   using System.Windows.Forms;
   using System.Xml.Serialization;
 
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
-
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
   using Ogama.Modules.SlideshowDesign;
@@ -713,11 +711,7 @@ namespace Ogama.MainWindow
           this.CleanUpDocument();
         }
 
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
     }
 

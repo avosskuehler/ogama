@@ -25,8 +25,6 @@ namespace Ogama.Modules.ImportExport
   using System.Windows.Forms;
   using System.Xml.Serialization;
 
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
-
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
   using Ogama.Modules.SlideshowDesign;
@@ -668,11 +666,7 @@ namespace Ogama.Modules.ImportExport
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
     }
 
@@ -767,11 +761,7 @@ namespace Ogama.Modules.ImportExport
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
 
         // CleanUp
         Document.ActiveDocument.DocDataSet.RejectChanges();
@@ -901,11 +891,7 @@ namespace Ogama.Modules.ImportExport
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
 
         return false;
       }
@@ -942,11 +928,7 @@ namespace Ogama.Modules.ImportExport
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
 
         return false;
       }

@@ -16,11 +16,9 @@ namespace Ogama.Modules.SlideshowDesign
   using System;
   using System.Drawing;
   using System.Windows.Forms;
-
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
+  using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
   using OgamaControls;
-  using VectorGraphics;
   using VectorGraphics.Elements;
 
   /// <summary>
@@ -179,11 +177,7 @@ namespace Ogama.Modules.SlideshowDesign
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
     }
 

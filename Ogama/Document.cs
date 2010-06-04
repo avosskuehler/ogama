@@ -21,7 +21,7 @@ namespace Ogama
   using System.Drawing;
   using System.IO;
   using System.Windows.Forms;
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
+
   using Microsoft.SqlServer.Management.Common;
   using Microsoft.SqlServer.Management.Smo;
   using Ogama.DataSet;
@@ -241,11 +241,7 @@ namespace Ogama
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
 
       activeDocument = null;
@@ -633,11 +629,7 @@ namespace Ogama
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
 
       return false;
@@ -661,11 +653,7 @@ namespace Ogama
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
 
       return false;

@@ -25,8 +25,6 @@ namespace Ogama.Modules.Database
   using System.Text;
   using System.Windows.Forms;
 
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
-
   using Ogama.DataSet;
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
@@ -230,11 +228,7 @@ namespace Ogama.Modules.Database
         }
         catch (Exception ex)
         {
-          bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-          if (rethrow)
-          {
-            throw;
-          }
+          ExceptionMethods.HandleException(ex);
         }
         finally
         {
@@ -525,11 +519,7 @@ namespace Ogama.Modules.Database
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
       finally
       {
@@ -585,7 +575,7 @@ namespace Ogama.Modules.Database
         {
           // Updating from record thread sometimes is a cross thread call
           // so just log it.
-          ExceptionPolicy.HandleException(ex, "Log Only Policy");
+          ExceptionMethods.HandleExceptionSilent(ex);
         }
       }
     }
@@ -944,11 +934,7 @@ namespace Ogama.Modules.Database
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
     }
 
@@ -1052,11 +1038,7 @@ namespace Ogama.Modules.Database
 
         Document.ActiveDocument.DocDataSet.RejectChanges();
 
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
 
       if (rawTable != null)
@@ -1166,11 +1148,7 @@ namespace Ogama.Modules.Database
         }
         catch (Exception ex)
         {
-          bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-          if (rethrow)
-          {
-            throw;
-          }
+          ExceptionMethods.HandleException(ex);
         }
         finally
         {

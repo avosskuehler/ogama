@@ -27,8 +27,6 @@ namespace Ogama.Modules.Saliency
   using System.Threading;
   using System.Windows.Forms;
 
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
-
   using Ogama.DataSet;
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
@@ -373,11 +371,7 @@ namespace Ogama.Modules.Saliency
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
       finally
       {
@@ -427,11 +421,7 @@ namespace Ogama.Modules.Saliency
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
     }
 
@@ -996,11 +986,7 @@ namespace Ogama.Modules.Saliency
       {
         this.tmrProgress.Stop();
 
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
     }
 
@@ -1153,11 +1139,7 @@ namespace Ogama.Modules.Saliency
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
 
       return null;
@@ -1533,11 +1515,7 @@ namespace Ogama.Modules.Saliency
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Log Only Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleExceptionSilent(ex);
       }
     }
 

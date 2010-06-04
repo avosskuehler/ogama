@@ -14,15 +14,10 @@
 namespace Ogama.Modules.Common
 {
   using System;
-  using System.Collections.Generic;
   using System.Drawing;
-  using System.Drawing.Drawing2D;
-  using System.Text;
   using System.Windows.Forms;
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
-  using Ogama.Modules.Common;
-  using OgamaControls;
-  using VectorGraphics;
+
+  using Ogama.ExceptionHandling;
 
   /// <summary>
   /// This class inherits <see cref="CustomRenderer"/> to extend the list view
@@ -152,11 +147,7 @@ namespace Ogama.Modules.Common
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
 
       // Return true to say that we've handled the drawing

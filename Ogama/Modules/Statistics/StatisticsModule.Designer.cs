@@ -1204,6 +1204,7 @@ namespace Ogama.Modules.Statistics
       this.cbbGazeAOISingle.Size = new System.Drawing.Size(100, 21);
       this.cbbGazeAOISingle.TabIndex = 23;
       this.toolTipStatistic.SetToolTip(this.cbbGazeAOISingle, "Choose an area of interest.");
+      this.cbbGazeAOISingle.DropDown += new System.EventHandler(this.cbbGazeAOISingle_DropDown);
       // 
       // cbbGazeAOIGroups
       // 
@@ -1216,6 +1217,7 @@ namespace Ogama.Modules.Statistics
       this.cbbGazeAOIGroups.Size = new System.Drawing.Size(100, 21);
       this.cbbGazeAOIGroups.TabIndex = 23;
       this.toolTipStatistic.SetToolTip(this.cbbGazeAOIGroups, "Choose an area of interest group.");
+      this.cbbGazeAOIGroups.DropDown += new System.EventHandler(this.cbbGazeAOIGroups_DropDown);
       // 
       // rdbMouseClickAOI
       // 
@@ -1360,6 +1362,7 @@ namespace Ogama.Modules.Statistics
       this.cbbGazeRegressionAOISingle.Size = new System.Drawing.Size(100, 21);
       this.cbbGazeRegressionAOISingle.TabIndex = 34;
       this.toolTipStatistic.SetToolTip(this.cbbGazeRegressionAOISingle, "Choose an area of interest.");
+      this.cbbGazeRegressionAOISingle.DropDown += new System.EventHandler(this.cbbGazeRegressionAOISingle_DropDown);
       // 
       // cbbGazeRegressionAOIGroups
       // 
@@ -1372,6 +1375,7 @@ namespace Ogama.Modules.Statistics
       this.cbbGazeRegressionAOIGroups.Size = new System.Drawing.Size(100, 21);
       this.cbbGazeRegressionAOIGroups.TabIndex = 35;
       this.toolTipStatistic.SetToolTip(this.cbbGazeRegressionAOIGroups, "Choose an area of interest group.");
+      this.cbbGazeRegressionAOIGroups.DropDown += new System.EventHandler(this.cbbGazeRegressionAOIGroups_DropDown);
       // 
       // tacMeta
       // 
@@ -2393,6 +2397,7 @@ namespace Ogama.Modules.Statistics
       this.cbbMouseAOISingle.Name = "cbbMouseAOISingle";
       this.cbbMouseAOISingle.Size = new System.Drawing.Size(100, 21);
       this.cbbMouseAOISingle.TabIndex = 29;
+      this.cbbMouseAOISingle.DropDown += new System.EventHandler(this.cbbMouseAOISingle_DropDown);
       // 
       // btnMouseAddCustomVariable
       // 
@@ -2440,6 +2445,7 @@ namespace Ogama.Modules.Statistics
       this.cbbMouseAOIGroup.Name = "cbbMouseAOIGroup";
       this.cbbMouseAOIGroup.Size = new System.Drawing.Size(100, 21);
       this.cbbMouseAOIGroup.TabIndex = 23;
+      this.cbbMouseAOIGroup.DropDown += new System.EventHandler(this.cbbMouseAOIGroup_DropDown);
       // 
       // tbpOptions
       // 

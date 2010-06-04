@@ -23,8 +23,6 @@ namespace Ogama.Modules.Recording.MouseOnly
   using System.Xml;
   using System.Xml.Serialization;
 
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
-
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
   using OgamaControls;
@@ -210,11 +208,7 @@ namespace Ogama.Modules.Recording.MouseOnly
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
 
         this.stopWatch.Stop();
         this.trackingTimer.Stop();

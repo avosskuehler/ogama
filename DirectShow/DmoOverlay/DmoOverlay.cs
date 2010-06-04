@@ -19,7 +19,7 @@ namespace DmoOverlay
   using DirectShowLib;
   using DirectShowLib.DMO;
 
-  using MediaObjectTemplate;
+  using DmoBase;
 
   /// <summary>
   /// This COM-Visible class is a DMO (digital media object)

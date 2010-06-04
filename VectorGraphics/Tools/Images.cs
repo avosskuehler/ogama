@@ -22,7 +22,6 @@ namespace VectorGraphics.Tools
   using System.Text;
   using System.Windows.Forms;
 
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
   using VectorGraphics.Win32;
 
   /// <summary>
@@ -444,11 +443,7 @@ namespace VectorGraphics.Tools
         }
         catch (Exception ex)
         {
-          bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-          if (rethrow)
-          {
-            throw;
-          }
+          VGExceptionMethods.HandleException(ex);
 
           return false;
         }
@@ -749,11 +744,7 @@ namespace VectorGraphics.Tools
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        VGExceptionMethods.HandleException(ex);
 
         return false;
       }

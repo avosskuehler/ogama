@@ -22,8 +22,6 @@ namespace Ogama.DataSet
   using System.IO;
   using System.Windows.Forms;
 
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
-
   using Ogama.DataSet.OgamaDataSetTableAdapters;
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
@@ -328,11 +326,7 @@ namespace Ogama.DataSet
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
 
         if (this.sqlConnection != null)
         {
@@ -817,6 +811,7 @@ namespace Ogama.DataSet
           stimulus,
           Document.ActiveDocument.ExperimentSettings.SlideResourcesPath,
           ImageLayout.Center,
+          1f,
           Document.ActiveDocument.PresentationSize,
           VGStyleGroup.None,
           string.Empty,

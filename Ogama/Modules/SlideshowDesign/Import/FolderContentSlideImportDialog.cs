@@ -395,6 +395,7 @@ namespace Ogama.Modules.SlideshowDesign
                 file.Name, 
                 Document.ActiveDocument.ExperimentSettings.SlideResourcesPath, 
                 ImageLayout.Stretch,
+                1f,
                 Document.ActiveDocument.PresentationSize, 
                 VGStyleGroup.None, 
                 file.Name,

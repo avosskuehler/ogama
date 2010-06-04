@@ -14,32 +14,23 @@
 namespace Ogama.Modules.Replay
 {
   using System;
-  using System.Collections.Generic;
-  using System.ComponentModel;
   using System.Data;
   using System.Drawing;
-  using System.Drawing.Drawing2D;
-  using System.Drawing.Imaging;
   using System.IO;
   using System.Runtime.InteropServices;
-  using System.Text;
   using System.Threading;
   using System.Windows.Forms;
-
+  using DirectShowLib;
   using DirectX.Capture;
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
-
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
   using Ogama.Modules.Common;
-  using Ogama.Modules.SlideshowDesign;
   using Ogama.Properties;
   using OgamaControls;
   using OgamaControls.Dialogs;
-
+  using OgamaControls.Media;
   using VectorGraphics.CustomEventArgs;
   using VectorGraphics.Elements;
-  using VectorGraphics.StopConditions;
 
   /// <summary>
   /// Derived from <see cref="FormWithSubjectAndTrialSelection"/>.
@@ -74,7 +65,7 @@ namespace Ogama.Modules.Replay
     /// <summary>
     /// This member saves the current trials video start time.
     /// </summary>
-    private long currentVideoStartTime;
+    private long userVideoStartTime;
 
     /// <summary>
     /// The <see cref="AVPlayer"/> of the <see cref="ContextPanel"/>
@@ -95,24 +86,32 @@ namespace Ogama.Modules.Replay
     private bool isUsingTrialVideo;
 
     /// <summary>
-    /// The filename for the video export.
-    /// </summary>
-    private string fileName;
-
-    /// <summary>
-    /// A <see cref="CaptureDeviceProperties"/> with the video export properties
-    /// </summary>
-    private CaptureDeviceProperties videoProperties;
-
-    /// <summary>
     /// A <see cref="DSRecord"/> used to create the avi movie via direct show.
     /// </summary>
     private DSRecord directShowInterface;
 
     /// <summary>
+    /// A <see cref="DSRecordWithDMO"/> used to create the avi movie via direct show
+    /// with an overlaid user video.
+    /// </summary>
+    private DSRecordWithDMO directShowInterfaceWithWebcam;
+
+    /// <summary>
     /// The video export splash window with preview.
     /// </summary>
     private SaveVideoSplash newSplash;
+
+    /// <summary>
+    /// The <see cref="VideoExportProperties"/> to be used in the AVI
+    /// export section.
+    /// </summary>
+    private VideoExportProperties videoExportProperties;
+
+    /// <summary>
+    /// This class performs the cut of the user video to the correct
+    /// length of the selected avi export movie.
+    /// </summary>
+    private DESCombine desCombine;
 
     #endregion //FIELDS
 
@@ -176,67 +175,87 @@ namespace Ogama.Modules.Replay
     /// so start the video recording with the given settings.
     /// Cancel operation if the video stream could not be created.
     /// </summary>
-    /// <param name="sectionStartTime">A <see cref="Int64"/> with the 
-    /// section starting time (beginning of export).</param>
-    /// <param name="sectionEndTime">A <see cref="Int64"/> with the 
-    /// section ending time (end of export).</param>
-    public void Record(long sectionStartTime, long sectionEndTime)
+    public void Record()
     {
-      if (!this.GetVideoProperties())
+      try
       {
-        return;
-      }
+        if (!this.GetVideoProperties(out this.videoExportProperties))
+        {
+          return;
+        }
 
-      this.Cursor = Cursors.WaitCursor;
+        this.Cursor = Cursors.WaitCursor;
+
+        // If we have no DirectShow class open
+        if (this.directShowInterfaceWithWebcam == null)
+        {
+          try
+          {
+            // Create and show splash
+            this.newSplash = new SaveVideoSplash(this);
+            this.newSplash.Show();
+
+            if (File.Exists(this.videoExportProperties.UserVideoProperties.StreamFilename) &&
+              this.videoExportProperties.UserVideoProperties.IsStreamRendered)
+            {
+              // The RenderGazeAndUserVideo() method is called in the 
+              // desCombine_Completed(object sender, EventArgs e) method.
+              this.CreatePartialUserVideo(this.videoExportProperties);
+            }
+            else
+            {
+              this.RenderGazeVideo();
+            }
+          }
+          catch (COMException ce)
+          {
+            this.newSplash.Close();
+            string message = "Video export failed during creating the DirectShow Interface with the following message: "
+              + Environment.NewLine
+              + ce.Message + Environment.NewLine
+              + "Try to choose another compressor.";
+            ExceptionMethods.ProcessErrorMessage(message);
+          }
+        }
+        else
+        {
+          this.directShowInterfaceWithWebcam.Stop();
+        }
+      }
+      catch (Exception ex)
+      {
+        ExceptionMethods.HandleException(ex);
+      }
+      finally
+      {
+        this.Cursor = Cursors.Default;
+      }
+    }
+
+    /// <summary>
+    /// Cancels replay or video export
+    /// </summary>
+    public void OnEscape()
+    {
+      // If we have no DirectShow class open
+      if (this.directShowInterfaceWithWebcam == null)
+      {
+        this.StopPlaying();
+      }
+      else
+      {
+        this.directShowInterfaceWithWebcam.Stop();
+      }
 
       // If we have no DirectShow class open
       if (this.directShowInterface == null)
       {
-        try
-        {
-          // Create and show splash
-          this.newSplash = new SaveVideoSplash();
-          this.newSplash.Show();
-
-          ImageFromVectorGraphics imageHandler =
-            new ImageFromVectorGraphics(
-            this.videoProperties,
-            sectionStartTime,
-            sectionEndTime,
-            this.videoFramePusher,
-            this.replayPicture.RenderFrame);
-          this.directShowInterface = new DSRecord(imageHandler, this.fileName, this.videoProperties, this.newSplash.PreviewWindow);
-          this.directShowInterface.Completed += new EventHandler(this.directShowInterface_Completed);
-
-          this.replayPicture.ResetPicture();
-
-          if (this.replayPicture.InitDrawingElements())
-          {
-            // Update pictures properties
-            this.replayPicture.ReplayPosition = this.currentTrialTime;
-            this.replayPicture.BeginUpdate();
-
-            this.Cursor = Cursors.Default;
-
-            this.directShowInterface.Start();
-          }
-        }
-        catch (COMException ce)
-        {
-          this.newSplash.Close();
-          string message = "Video export failed during creating the DirectShow Interface with the following message: "
-            + Environment.NewLine
-            + ce.Message + Environment.NewLine
-            + "Try to choose another compressor.";
-          ExceptionMethods.ProcessErrorMessage(message);
-        }
+        this.StopPlaying();
       }
       else
       {
         this.directShowInterface.Stop();
       }
-
-      this.Cursor = Cursors.Default;
     }
 
     #endregion //PUBLICMETHODS
@@ -367,11 +386,7 @@ namespace Ogama.Modules.Replay
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
 
         return false;
       }
@@ -382,6 +397,15 @@ namespace Ogama.Modules.Replay
       }
 
       return true;
+    }
+
+    /// <summary>
+    /// Initializes accelerator keys: ESC
+    /// </summary>
+    protected override void InitAccelerators()
+    {
+      base.InitAccelerators();
+      this.SetAccelerator(Keys.Escape, new AcceleratorAction(this.OnEscape));
     }
 
     #endregion //OVERRIDES
@@ -436,11 +460,7 @@ namespace Ogama.Modules.Replay
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
     }
 
@@ -1121,7 +1141,7 @@ namespace Ogama.Modules.Replay
       else
       {
         // Show user video if exists.
-        this.SetVideoStartTime(Document.ActiveDocument.SelectionState.SubjectName, this.currentVideoStartTime);
+        this.SetVideoStartTime(Document.ActiveDocument.SelectionState.SubjectName, this.userVideoStartTime);
       }
     }
 
@@ -1145,11 +1165,7 @@ namespace Ogama.Modules.Replay
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
     }
 
@@ -1432,7 +1448,7 @@ namespace Ogama.Modules.Replay
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnRecord_Click(object sender, EventArgs e)
     {
-      this.Record(this.trialTimeLine.SectionStartTime, this.trialTimeLine.SectionEndTime);
+      this.Record();
     }
 
     #endregion //WINDOWSEVENTHANDLER
@@ -1441,6 +1457,34 @@ namespace Ogama.Modules.Replay
     // Eventhandler for Custom Defined Events                                    //
     ///////////////////////////////////////////////////////////////////////////////
     #region CUSTOMEVENTHANDLER
+
+    /// <summary>
+    /// The event handler for the completed event of the DES class.
+    /// </summary>
+    /// <param name="sender">Source of the event</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void desCombine_Completed(object sender, EventArgs e)
+    {
+      if (this.InvokeRequired)
+      {
+        this.Invoke(new MethodInvoker(this.RenderGazeAndUserVideo));
+      }
+      else
+      {
+        this.RenderGazeAndUserVideo();
+      }
+    }
+
+    /// <summary>
+    /// The event handler for the Progress event of the image handler.
+    /// Notifies the splash with the current progress percentage.
+    /// </summary>
+    /// <param name="sender">Source of the event</param>
+    /// <param name="e">A <see cref="ProgressEventArgs"/> with the progress percentage.</param>
+    private void imageHandler_Progress(object sender, ProgressEventArgs e)
+    {
+      this.newSplash.ProgressPercentage = e.ProgressInPercent;
+    }
 
     /// <summary>
     /// The <see cref="TimeLine.CaretValueChanged"/> event handler
@@ -1461,7 +1505,7 @@ namespace Ogama.Modules.Replay
 
       if (this.btnShowUsercam.Checked)
       {
-        this.usercamVideoPlayer.SeekMovie(this.currentVideoStartTime + e.Millisecond, null);
+        this.usercamVideoPlayer.SeekMovie(this.userVideoStartTime + e.Millisecond, null);
       }
 
       if (this.isUsingTrialVideo)
@@ -1590,11 +1634,7 @@ namespace Ogama.Modules.Replay
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Log Only Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleExceptionSilent(ex);
       }
     }
 
@@ -1627,7 +1667,7 @@ namespace Ogama.Modules.Replay
     /// <param name="data">An <see cref="object"/> with the threads parameters.</param>
     private void VideoThread_DoWork(object data)
     {
-      this.Record(this.trialTimeLine.SectionStartTime, this.trialTimeLine.SectionEndTime);
+      this.Record();
     }
 
     /// <summary>
@@ -1638,19 +1678,44 @@ namespace Ogama.Modules.Replay
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
     private void directShowInterface_Completed(object sender, EventArgs e)
     {
-      if (this.directShowInterface != null)
+      try
       {
-        this.directShowInterface.Completed -= new EventHandler(this.directShowInterface_Completed);
-        this.directShowInterface.Dispose();
-        this.directShowInterface = null;
+        if (this.directShowInterface != null)
+        {
+          this.directShowInterface.Completed -= new EventHandler(this.directShowInterface_Completed);
+          this.directShowInterface.Dispose();
+          this.directShowInterface = null;
+        }
+
+        this.ShowVideoExportResult();
+      }
+      catch (Exception ex)
+      {
+        ExceptionMethods.HandleException(ex);
+      }
+    }
+
+    /// <summary>
+    /// The <see cref="DSRecordWithDMO.Completed"/> event handler for the video
+    /// export.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/>.</param>
+    private void directShowInterfaceWithWebcam_Completed(object sender, EventArgs e)
+    {
+      if (this.directShowInterfaceWithWebcam != null)
+      {
+        this.directShowInterfaceWithWebcam.Completed -= new EventHandler(this.directShowInterfaceWithWebcam_Completed);
+        this.directShowInterfaceWithWebcam.Dispose();
+        this.directShowInterfaceWithWebcam = null;
       }
 
-      this.replayPicture.EndUpdate();
-      ThreadSafe.Close(this.newSplash);
-      this.videoFramePusher.SeekMovie(0);
+      if (this.desCombine != null)
+      {
+        this.desCombine.Dispose();
+      }
 
-      string message = "The video export has been completed succesfully.";
-      ExceptionMethods.ProcessMessage("Export finished.", message);
+      this.ShowVideoExportResult();
     }
 
     #endregion //BACKGROUNDWORKER
@@ -1659,6 +1724,164 @@ namespace Ogama.Modules.Replay
     // Methods for doing main class job                                          //
     ///////////////////////////////////////////////////////////////////////////////
     #region METHODS
+
+    /// <summary>
+    /// This method is called when the video export has finished an pops up
+    /// the media player with the newly created video and 
+    /// reinitializtes the picture of the module.
+    /// </summary>
+    private void ShowVideoExportResult()
+    {
+      this.replayPicture.EndUpdate();
+      ThreadSafe.Close(this.newSplash);
+      this.videoFramePusher.SeekMovie(0);
+
+      // Update pictures properties
+      if (this.InvokeRequired)
+      {
+        this.Invoke(new MethodInvoker(this.ResetControls));
+      }
+      else
+      {
+        this.ResetControls();
+      }
+
+      // Run video
+      System.Diagnostics.Process.Start(this.videoExportProperties.OutputVideoProperties.Filename);
+    }
+
+    /// <summary>
+    /// This method cuts the given user video to the
+    /// appropriate length by copying the selected part to
+    /// a new temporary file with the new output properties
+    /// </summary>
+    /// <param name="videoExportProperties">The <see cref="VideoExportProperties"/>
+    /// to use during export.</param>
+    private void CreatePartialUserVideo(VideoExportProperties videoExportProperties)
+    {
+      this.newSplash.IsPreviewVisible = false;
+      this.newSplash.Header = "Preparing User Video";
+
+      this.desCombine = new DESCombine(
+        this.videoExportProperties.OutputVideoProperties.FrameRate,
+        32,
+        this.videoExportProperties.UserVideoProperties.StreamSize.Width,
+        this.videoExportProperties.UserVideoProperties.StreamSize.Height,
+        true,
+        true);
+
+      this.desCombine.AddAVFile(
+        this.videoExportProperties.UserVideoProperties.StreamFilename,
+        this.videoExportProperties.UserVideoProperties.StreamStartTime * 10000,
+        this.videoExportProperties.UserVideoProperties.StreamEndTime * 10000);
+
+      IBaseFilter videoCompressor = null;
+      if (this.videoExportProperties.OutputVideoProperties.VideoCompressor != string.Empty)
+      {
+        // Create the filter for the selected video compressor
+        videoCompressor = DirectShowUtils.CreateFilter(
+          FilterCategory.VideoCompressorCategory,
+          this.videoExportProperties.OutputVideoProperties.VideoCompressor);
+      }
+
+      IBaseFilter audioCompressor = null;
+      if (this.videoExportProperties.OutputVideoProperties.AudioCompressor != string.Empty)
+      {
+        // Create the filter for the selected video compressor
+        audioCompressor = DirectShowUtils.CreateFilter(
+          FilterCategory.AudioCompressorCategory,
+          this.videoExportProperties.OutputVideoProperties.AudioCompressor);
+      }
+
+      this.desCombine.RenderToAVI(
+        this.videoExportProperties.UserVideoTempFile,
+        videoCompressor,
+        audioCompressor,
+        null,
+        null);
+
+      this.desCombine.Completed += new EventHandler(this.desCombine_Completed);
+      this.desCombine.StartRendering();
+    }
+
+    /// <summary>
+    /// This method renders the gaze and truncated user video
+    /// with the mixer dmo into a new video file.
+    /// </summary>
+    private void RenderGazeAndUserVideo()
+    {
+      this.newSplash.Header = "Rendering gaze and user video";
+      this.newSplash.IsPreviewVisible = true;
+
+      ImageFromVectorGraphics imageHandler =
+        new ImageFromVectorGraphics(
+        this.videoExportProperties.OutputVideoProperties,
+        this.videoExportProperties.GazeVideoProperties.StreamStartTime,
+        this.videoExportProperties.GazeVideoProperties.StreamEndTime,
+        this.videoFramePusher,
+        this.replayPicture.RenderFrame);
+      imageHandler.Progress += new EventHandler<ProgressEventArgs>(this.imageHandler_Progress);
+
+      // Setup usercam video filename.
+      this.directShowInterfaceWithWebcam = new DSRecordWithDMO(
+        imageHandler,
+        this.videoExportProperties,
+        this.newSplash.PreviewWindow);
+
+      this.directShowInterfaceWithWebcam.Completed += new EventHandler(this.directShowInterfaceWithWebcam_Completed);
+
+      this.replayPicture.ResetPicture();
+
+      if (this.replayPicture.InitDrawingElements())
+      {
+        // Update pictures properties
+        this.replayPicture.ReplayPosition = this.currentTrialTime;
+        this.replayPicture.BeginUpdate();
+
+        this.Cursor = Cursors.Default;
+
+        this.directShowInterfaceWithWebcam.Start();
+      }
+    }
+
+    /// <summary>
+    /// This method renders the picture content into an avi file.
+    /// </summary>
+    private void RenderGazeVideo()
+    {
+      this.newSplash.Header = "Rendering gaze and mouse video";
+      this.newSplash.IsPreviewVisible = true;
+
+      ImageFromVectorGraphics imageHandler =
+        new ImageFromVectorGraphics(
+        this.videoExportProperties.OutputVideoProperties,
+        this.videoExportProperties.GazeVideoProperties.StreamStartTime,
+        this.videoExportProperties.GazeVideoProperties.StreamEndTime,
+        this.videoFramePusher,
+        this.replayPicture.RenderFrame);
+      imageHandler.Progress += new EventHandler<ProgressEventArgs>(this.imageHandler_Progress);
+
+      // Setup usercam video filename.
+      this.directShowInterface = new DSRecord(
+        imageHandler,
+        this.videoExportProperties,
+        this.newSplash.PreviewWindow);
+
+      this.directShowInterface.Completed += new EventHandler(this.directShowInterface_Completed);
+
+      this.replayPicture.ResetPicture();
+
+      if (this.replayPicture.InitDrawingElements())
+      {
+        // Update pictures properties
+        this.replayPicture.ReplayPosition = this.currentTrialTime;
+        this.replayPicture.BeginUpdate();
+
+        this.Cursor = Cursors.Default;
+
+        this.directShowInterface.Start();
+      }
+    }
 
     /// <summary>
     /// This method sets the currently selected replay speed to
@@ -1752,29 +1975,41 @@ namespace Ogama.Modules.Replay
     /// a <see cref="VideoPropertiesDialog"/> to define the video
     /// export properties.
     /// </summary>
+    /// <param name="videoExportProperties">Out. A <see cref="VideoExportProperties"/>
+    /// that is generated in this method.</param>
     /// <returns><strong>True</strong> if the user selected valid properties,
     /// otherwise <strong>false</strong>.</returns>
-    private bool GetVideoProperties()
+    private bool GetVideoProperties(out VideoExportProperties videoExportProperties)
     {
+      videoExportProperties = new VideoExportProperties();
+
       if (this.sfdVideo.ShowDialog() == DialogResult.OK)
       {
-        // Save filename in member.
-        this.fileName = this.sfdVideo.FileName;
+        videoExportProperties.UserVideoTempFile = Path.GetTempFileName();
 
-        this.Cursor = Cursors.WaitCursor;
+        videoExportProperties.UserVideoProperties.StreamFilename = this.usercamVideoPlayer.MovieFile;
+        videoExportProperties.UserVideoProperties.StreamSize = this.usercamVideoPlayer.VideoSize;
+        videoExportProperties.UserVideoProperties.StreamScreenshot =
+          this.usercamVideoPlayer.Screenshot;
+        videoExportProperties.UserVideoProperties.StreamName = "Uservideo";
+        videoExportProperties.UserVideoProperties.StreamStartTime = this.userVideoStartTime + this.trialTimeLine.SectionStartTime;
+        videoExportProperties.UserVideoProperties.StreamEndTime = this.userVideoStartTime + this.trialTimeLine.SectionEndTime;
+
+        videoExportProperties.GazeVideoProperties.StreamScreenshot =
+          (Bitmap)this.Picture.RenderToImage();
+        videoExportProperties.GazeVideoProperties.StreamName = "Gaze video";
+        videoExportProperties.GazeVideoProperties.StreamStartTime = this.trialTimeLine.SectionStartTime;
+        videoExportProperties.GazeVideoProperties.StreamEndTime = this.trialTimeLine.SectionEndTime;
 
         VideoPropertiesDialog videoPropertiesDlg = new VideoPropertiesDialog();
+        videoPropertiesDlg.VideoExportProperties = videoExportProperties;
 
-        List<Size> videoSizes = videoPropertiesDlg.VideoStreamSizes;
-        videoSizes.Add(new Size(
-          Document.ActiveDocument.ExperimentSettings.WidthStimulusScreen,
-          Document.ActiveDocument.ExperimentSettings.HeightStimulusScreen));
-        videoPropertiesDlg.VideoStreamSizes = videoSizes;
-
-        this.Cursor = Cursors.Default;
         if (videoPropertiesDlg.ShowDialog() == DialogResult.OK)
         {
-          this.videoProperties = videoPropertiesDlg.Properties;
+          videoExportProperties = videoPropertiesDlg.VideoExportProperties;
+
+          // Save filename in member.
+          videoExportProperties.OutputVideoProperties.Filename = this.sfdVideo.FileName;
           return true;
         }
       }
@@ -1893,8 +2128,8 @@ namespace Ogama.Modules.Replay
       }
 
       TrialEvent cameraEvent = this.TrialEvents[usercamID];
-      this.currentVideoStartTime = Convert.ToInt32(cameraEvent.Param);
-      this.SetVideoStartTime(subjectName, this.currentVideoStartTime);
+      this.userVideoStartTime = Convert.ToInt32(cameraEvent.Param);
+      this.SetVideoStartTime(subjectName, this.userVideoStartTime);
       return true;
     }
 
@@ -1982,7 +2217,7 @@ namespace Ogama.Modules.Replay
 
       if (this.btnShowUsercam.Checked)
       {
-        this.SetVideoStartTime(this.cbbSubject.Text, this.currentVideoStartTime);
+        this.SetVideoStartTime(this.cbbSubject.Text, this.userVideoStartTime);
       }
       else
       {

@@ -19,8 +19,6 @@ namespace Ogama.MainWindow
   using System.Text;
   using System.Windows.Forms;
 
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
-
   using Ogama.ExceptionHandling;
   using Ogama.Properties;
 
@@ -220,11 +218,7 @@ namespace Ogama.MainWindow
           }
           catch (Exception ex)
           {
-            bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-            if (rethrow)
-            {
-              throw;
-            }
+            ExceptionMethods.HandleException(ex);
           }
 
           if (!Document.ActiveDocument.SaveDocument(newExperimentFilename, this.bgwLoad))

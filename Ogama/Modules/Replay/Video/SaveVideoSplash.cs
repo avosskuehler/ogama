@@ -21,13 +21,14 @@ namespace Ogama.Modules.Replay
   using System.Reflection;
   using System.Text;
   using System.Windows.Forms;
+  using Ogama.Modules.Common;
 
   /// <summary>
   /// Splash <see cref="Form"/> with animated gif and marquee progress bar.
   /// Is invoked from <see cref="ReplayModule"/>, when video is beeing exported.
   /// Informs the user, that export is going on.
   /// </summary>
-  public partial class SaveVideoSplash : Form
+  public partial class SaveVideoSplash : FormWithAccellerators
   {
     ///////////////////////////////////////////////////////////////////////////////
     // Defining Constants                                                        //
@@ -39,6 +40,22 @@ namespace Ogama.Modules.Replay
     // Defining Variables, Enumerations, Events                                  //
     ///////////////////////////////////////////////////////////////////////////////
     #region FIELDS
+
+    /// <summary>
+    /// Saves the height of the form with visible video preview
+    /// </summary>
+    private int heightWithPreview;
+
+    /// <summary>
+    /// Saves the height of the form with hidden video preview
+    /// </summary>
+    private int heightWithoutPreview;
+
+    /// <summary>
+    /// Saves the parent <see cref="ReplayModule"/> which handles the ESC button.
+    /// </summary>
+    private ReplayModule replayModule;
+
     #endregion //FIELDS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -49,12 +66,31 @@ namespace Ogama.Modules.Replay
     /// <summary>
     /// Initializes a new instance of the SaveVideoSplash class.
     /// </summary>
-    public SaveVideoSplash()
+    /// <param name="parent">The <see cref="ReplayModule"/> that creates this form.</param>
+    public SaveVideoSplash(ReplayModule parent)
     {
+      this.replayModule = parent;
       this.InitializeComponent();
+      this.InitAccelerators();
+      this.heightWithPreview = this.Height;
+      this.heightWithoutPreview = this.Height - this.previewPanel.Height;
     }
 
     #endregion //CONSTRUCTION
+
+    ///////////////////////////////////////////////////////////////////////////////
+    // Defining events, enums, delegates                                         //
+    ///////////////////////////////////////////////////////////////////////////////
+    #region EVENTS
+
+    /// <summary>
+    /// A delegate to handle cross thread calls to the progressbar.
+    /// </summary>
+    /// <param name="newValue">An <see cref="Int32"/> with the new progress
+    /// bar value in percent.</param>
+    private delegate void SetIntCallback(int newValue);
+
+    #endregion EVENTS
 
     ///////////////////////////////////////////////////////////////////////////////
     // Defining Properties                                                       //
@@ -70,44 +106,137 @@ namespace Ogama.Modules.Replay
       get { return this.previewPanel; }
     }
 
+    /// <summary>
+    /// Sets the <see cref="String"/> header
+    /// of the top dialog
+    /// </summary>
+    public string Header
+    {
+      set { this.dialogTop.Description = value; }
+    }
+
+    /// <summary>
+    /// Sets a value indicating whether the video preview window
+    /// of this form is visible or not.
+    /// </summary>
+    public bool IsPreviewVisible
+    {
+      set
+      {
+        if (value)
+        {
+          this.spcPreviewSplash.Panel1Collapsed = false;
+          this.Height = this.heightWithPreview;
+        }
+        else
+        {
+          this.spcPreviewSplash.Panel1Collapsed = true;
+          this.Height = this.heightWithoutPreview;
+        }
+      }
+    }
+
+    /// <summary>
+    /// Sets the percentage of the progress bar.
+    /// </summary>
+    public int ProgressPercentage
+    {
+      set
+      {
+        this.SetPercentage(value);
+      }
+    }
+
     #endregion //PROPERTIES
 
     ///////////////////////////////////////////////////////////////////////////////
-    // Eventhandler                                                              //
+    // Public methods                                                            //
     ///////////////////////////////////////////////////////////////////////////////
-    #region EVENTS
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Eventhandler for UI, Menu, Buttons, Toolbars etc.                         //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region WINDOWSEVENTHANDLER
-    #endregion //WINDOWSEVENTHANDLER
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Eventhandler for Custom Defined Events                                    //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region CUSTOMEVENTHANDLER
-    #endregion //CUSTOMEVENTHANDLER
-
-    #endregion //EVENTS
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Methods and Eventhandling for Background tasks                            //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region BACKGROUNDWORKER
-    #endregion //BACKGROUNDWORKER
+    #region PUBLICMETHODS
+    #endregion //PUBLICMETHODS
 
     ///////////////////////////////////////////////////////////////////////////////
     // Inherited methods                                                         //
     ///////////////////////////////////////////////////////////////////////////////
     #region OVERRIDES
+
+    /// <summary>
+    /// Overridden. Initializes accelerator keys: ESC.
+    /// </summary>
+    protected override void InitAccelerators()
+    {
+      base.InitAccelerators();
+      this.SetAccelerator(Keys.Escape, new AcceleratorAction(this.OnEscape));
+    }
+
     #endregion //OVERRIDES
+
+    ///////////////////////////////////////////////////////////////////////////////
+    // Eventhandler                                                              //
+    ///////////////////////////////////////////////////////////////////////////////
+    #region EVENTHANDLER
+
+    /// <summary>
+    /// The <see cref="Form.FormClosing"/> event handler which
+    /// cancels the video export if user clicked on the Close button.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">A <see cref="FormClosingEventArgs"/> with the event params.</param>
+    private void SaveVideoSplash_FormClosing(object sender, FormClosingEventArgs e)
+    {
+      if (e.CloseReason == CloseReason.UserClosing)
+      {
+        this.OnEscape();
+      }
+    }
+
+    #endregion //EVENTHANDLER
+
+    ///////////////////////////////////////////////////////////////////////////////
+    // Methods and Eventhandling for Background tasks                            //
+    ///////////////////////////////////////////////////////////////////////////////
+    #region THREAD
+    #endregion //THREAD
 
     ///////////////////////////////////////////////////////////////////////////////
     // Methods for doing main class job                                          //
     ///////////////////////////////////////////////////////////////////////////////
-    #region METHODS
-    #endregion //METHODS
+    #region PRIVATEMETHODS
+
+    /// <summary>
+    /// Thread safe version of this.progressBar.Value = percentage;
+    /// </summary>
+    /// <param name="percentage">An <see cref="Int32"/> with the new progress
+    /// bar value in percent.</param>
+    private void SetPercentage(int percentage)
+    {
+      // InvokeRequired required compares the thread ID of the
+      // calling thread to the thread ID of the creating thread.
+      // If these threads are different, it returns true.
+      if (this.progressBar.InvokeRequired)
+      {
+        SetIntCallback d = new SetIntCallback(this.SetPercentage);
+        this.progressBar.BeginInvoke(d, new object[] { percentage });
+      }
+      else
+      {
+        this.progressBar.Value = percentage;
+      }
+    }
+
+    /// <summary>
+    /// Handles the ESC button, calls the abort method
+    /// in the replay module.
+    /// </summary>
+    private void OnEscape()
+    {
+      if (this.replayModule != null)
+      {
+        this.replayModule.OnEscape();
+      }
+    }
+
+    #endregion //PRIVATEMETHODS
 
     ///////////////////////////////////////////////////////////////////////////////
     // Small helping Methods                                                     //

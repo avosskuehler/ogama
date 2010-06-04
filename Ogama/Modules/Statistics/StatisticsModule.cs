@@ -24,8 +24,6 @@ namespace Ogama.Modules.Statistics
   using System.Text;
   using System.Windows.Forms;
 
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
-
   using Ogama.DataSet;
   using Ogama.DataSet.OgamaDataSetTableAdapters;
   using Ogama.ExceptionHandling;
@@ -196,11 +194,6 @@ namespace Ogama.Modules.Statistics
 
       this.chbSubjectDefault_CheckedChanged(this.chbSUBID, EventArgs.Empty);
       this.tolerance = 10;
-
-      this.GenerateAOIGroups();
-      this.cbbGazeAOIGroups.Items.AddRange(this.aoiGroups.ToArray());
-      this.cbbGazeRegressionAOIGroups.Items.AddRange(this.aoiGroups.ToArray());
-      this.cbbMouseAOIGroup.Items.AddRange(this.aoiGroups.ToArray());
 
       this.cbbMouseClickButton.Items.AddRange(Enum.GetNames(typeof(MouseButtons)));
 
@@ -449,33 +442,72 @@ namespace Ogama.Modules.Statistics
           stimulusNode.Checked = e.Node.Checked;
         }
       }
-      else
-      {
-        // Trial level
-        DataTable aois = Document.ActiveDocument.DocDataSet.AOIsAdapter.GetDataByTrialID(Convert.ToInt32(e.Node.Name));
-        foreach (DataRow row in aois.Rows)
-        {
-          string aoiName = row["ShapeName"].ToString();
-          if (e.Node.Checked)
-          {
-            if (!this.cbbMouseAOISingle.Items.Contains(aoiName))
-            {
-              this.cbbMouseAOISingle.Items.Add(aoiName);
-              this.cbbGazeAOISingle.Items.Add(aoiName);
-              this.cbbGazeRegressionAOISingle.Items.Add(aoiName);
-            }
-          }
-          else
-          {
-            if (this.cbbMouseAOISingle.Items.Contains(aoiName))
-            {
-              this.cbbMouseAOISingle.Items.Remove(aoiName);
-              this.cbbGazeAOISingle.Items.Remove(aoiName);
-              this.cbbGazeRegressionAOISingle.Items.Remove(aoiName);
-            }
-          }
-        }
-      }
+    }
+
+    /// <summary>
+    /// The <see cref="ComboBox.DropDown"/> event handler 
+    /// which updates the aoi groups.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void cbbGazeRegressionAOIGroups_DropDown(object sender, EventArgs e)
+    {
+      this.PopulateAOIGroupCombo();
+    }
+
+    /// <summary>
+    /// The <see cref="ComboBox.DropDown"/> event handler 
+    /// which updates the aoi groups.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void cbbGazeAOIGroups_DropDown(object sender, EventArgs e)
+    {
+      this.PopulateAOIGroupCombo();
+    }
+
+    /// <summary>
+    /// The <see cref="ComboBox.DropDown"/> event handler 
+    /// which updates the aoi groups.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void cbbMouseAOIGroup_DropDown(object sender, EventArgs e)
+    {
+      this.PopulateAOIGroupCombo();
+    }
+
+    /// <summary>
+    /// The <see cref="ComboBox.DropDown"/> event handler 
+    /// which updates the aois.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void cbbGazeAOISingle_DropDown(object sender, EventArgs e)
+    {
+      this.PopulateAOISingleCombo(this.cbbGazeAOISingle);
+    }
+
+    /// <summary>
+    /// The <see cref="ComboBox.DropDown"/> event handler 
+    /// which updates the aois.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void cbbMouseAOISingle_DropDown(object sender, EventArgs e)
+    {
+      this.PopulateAOISingleCombo(this.cbbMouseAOISingle);
+    }
+
+    /// <summary>
+    /// The <see cref="ComboBox.DropDown"/> event handler 
+    /// which updates the aois.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void cbbGazeRegressionAOISingle_DropDown(object sender, EventArgs e)
+    {
+      this.PopulateAOISingleCombo(this.cbbGazeRegressionAOISingle);
     }
 
     /// <summary>
@@ -1060,11 +1092,7 @@ namespace Ogama.Modules.Statistics
       // First, handle the case where an exception was thrown.
       if (e.Error != null)
       {
-        bool rethrow = ExceptionPolicy.HandleException(e.Error, "Global Policy");
-        if (rethrow)
-        {
-          throw e.Error;
-        }
+        ExceptionMethods.HandleException(e.Error);
       }
       else if (e.Cancelled)
       {
@@ -1124,11 +1152,7 @@ namespace Ogama.Modules.Statistics
       // First, handle the case where an exception was thrown.
       if (e.Error != null)
       {
-        bool rethrow = ExceptionPolicy.HandleException(e.Error, "Global Policy");
-        if (rethrow)
-        {
-          throw e.Error;
-        }
+        ExceptionMethods.HandleException(e.Error);
       }
       else if (e.Cancelled)
       {
@@ -1163,6 +1187,31 @@ namespace Ogama.Modules.Statistics
     // Methods for doing main class job                                          //
     ///////////////////////////////////////////////////////////////////////////////
     #region METHODS
+
+    /// <summary>
+    /// Populates the given ComboBox with all available AOI names.
+    /// </summary>
+    /// <param name="aoiSingleCombo">The <see cref="ComboBox"/>
+    /// which items should be filled.</param>
+    private void PopulateAOISingleCombo(ComboBox aoiSingleCombo)
+    {
+      aoiSingleCombo.Items.Clear();
+
+      List<int> selectedTrials = this.GetSelectedTrials();
+      foreach (int trialID in selectedTrials)
+      {
+        // Trial level
+        DataTable aois = Document.ActiveDocument.DocDataSet.AOIsAdapter.GetDataByTrialID(trialID);
+        foreach (DataRow row in aois.Rows)
+        {
+          string aoiName = row["ShapeName"].ToString();
+          if (!aoiSingleCombo.Items.Contains(aoiName))
+          {
+            aoiSingleCombo.Items.Add(aoiName);
+          }
+        }
+      }
+    }
 
     /// <summary>
     /// Checks or unchecks all items in a given 2D <see cref="TreeView"/>.
@@ -1330,19 +1379,7 @@ namespace Ogama.Modules.Statistics
               continue;
             }
 
-            // Get selected trials
-            List<int> trialIDs = new List<int>();
-
-            foreach (TreeNode categoryNode in this.trvTrialsDefault.Nodes)
-            {
-              foreach (TreeNode trialNode in categoryNode.Nodes)
-              {
-                if (trialNode.Checked)
-                {
-                  trialIDs.Add(Convert.ToInt32(trialNode.Name));
-                }
-              }
-            }
+            List<int> trialIDs = this.GetSelectedTrials();
 
             DataTable trialsTable
               = Document.ActiveDocument.DocDataSet.TrialsAdapter.GetDataBySubject(subjectName);
@@ -1421,16 +1458,35 @@ namespace Ogama.Modules.Statistics
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
       finally
       {
         worker.CancelAsync();
       }
+    }
+
+    /// <summary>
+    /// This method returns the ids of the selected trials of the trvTrialsDefault
+    /// </summary>
+    /// <returns>A List with the ids of the selected trials of the trvTrialsDefault.</returns>
+    private List<int> GetSelectedTrials()
+    {
+      // Get selected trials
+      List<int> trialIDs = new List<int>();
+
+      foreach (TreeNode categoryNode in this.trvTrialsDefault.Nodes)
+      {
+        foreach (TreeNode trialNode in categoryNode.Nodes)
+        {
+          if (trialNode.Checked)
+          {
+            trialIDs.Add(Convert.ToInt32(trialNode.Name));
+          }
+        }
+      }
+
+      return trialIDs;
     }
 
     /// <summary>
@@ -2571,6 +2627,20 @@ namespace Ogama.Modules.Statistics
           this.dGVExportTable.Columns.Remove(var.ColumnName);
         }
       }
+    }
+
+    /// <summary>
+    /// Updates the AOI Group combo boxes with the current entries.
+    /// </summary>
+    private void PopulateAOIGroupCombo()
+    {
+      this.GenerateAOIGroups();
+      this.cbbGazeAOIGroups.Items.Clear();
+      this.cbbGazeRegressionAOIGroups.Items.Clear();
+      this.cbbMouseAOIGroup.Items.Clear();
+      this.cbbGazeAOIGroups.Items.AddRange(this.aoiGroups.ToArray());
+      this.cbbGazeRegressionAOIGroups.Items.AddRange(this.aoiGroups.ToArray());
+      this.cbbMouseAOIGroup.Items.AddRange(this.aoiGroups.ToArray());
     }
 
     /// <summary>

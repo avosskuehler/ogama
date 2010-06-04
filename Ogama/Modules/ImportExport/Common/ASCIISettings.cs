@@ -17,14 +17,10 @@ namespace Ogama.Modules.ImportExport
   using System.Collections.Generic;
   using System.ComponentModel;
   using System.IO;
-  using System.Text;
   using System.Windows.Forms;
   using System.Xml.Serialization;
-
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
-
+  using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
-  using Ogama.Modules.SlideshowDesign;
 
   /// <summary>
   /// This class encapsulates fields and methods need for parsing
@@ -535,11 +531,7 @@ namespace Ogama.Modules.ImportExport
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
 
       return fileRows;
@@ -620,11 +612,7 @@ namespace Ogama.Modules.ImportExport
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
 
         return false;
       }
@@ -666,11 +654,7 @@ namespace Ogama.Modules.ImportExport
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
 
       return null;

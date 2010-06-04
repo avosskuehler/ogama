@@ -14,10 +14,10 @@
 namespace VectorGraphics.Elements
 {
   using System;
-  using System.Collections.Generic;
   using System.ComponentModel;
   using System.Drawing;
   using System.Drawing.Drawing2D;
+  using System.Drawing.Imaging;
   using System.IO;
   using System.Text;
   using System.Windows.Forms;
@@ -35,12 +35,18 @@ namespace VectorGraphics.Elements
     // Defining Constants                                                        //
     ///////////////////////////////////////////////////////////////////////////////
     #region CONSTANTS
+
     #endregion //CONSTANTS
 
     ///////////////////////////////////////////////////////////////////////////////
     // Defining Variables, Enumerations, Events                                  //
     ///////////////////////////////////////////////////////////////////////////////
     #region FIELDS
+
+    /// <summary>
+    /// An array for the color matrix containing the transparency values.
+    /// </summary>
+    private float[][] transparencyArray;
 
     /// <summary>
     /// Saves the filename without path of the image.
@@ -58,6 +64,11 @@ namespace VectorGraphics.Elements
     private Image image;
 
     /// <summary>
+    /// Saves the alpha (transparency) value for this image
+    /// </summary>
+    private float alpha = 1f;
+
+    /// <summary>
     /// Saves the <see cref="ImageLayout"/> for this image.
     /// </summary>
     private ImageLayout layout;
@@ -66,6 +77,16 @@ namespace VectorGraphics.Elements
     /// Saves the size to canvas that holds this image.
     /// </summary>
     private Size canvas;
+
+    /// <summary>
+    /// The <see cref="ColorMatrix"/> to use during drawing.
+    /// </summary>
+    private ColorMatrix clrMatrix;
+
+    /// <summary>
+    /// An <see cref="ImageAttributes"/> that helps to draw the images transparent.
+    /// </summary>
+    private ImageAttributes imgAttributes;
 
     #endregion //FIELDS
 
@@ -88,6 +109,7 @@ namespace VectorGraphics.Elements
     /// <param name="newImageFile">filename without path</param>
     /// <param name="newPath">path to image file</param>
     /// <param name="newLayout"><see cref="ImageLayout"/> of the image</param>
+    /// <param name="newAlpha">The transparency alpha for this image.0=transparent,1=opaque</param>
     /// <param name="newCanvas"><see cref="Size"/> of the owning original canvas</param>
     /// <param name="newStyleGroup">Group Enumeration, <see cref="VGStyleGroup"/></param>
     /// <param name="newName">Name of Element</param>
@@ -101,6 +123,7 @@ namespace VectorGraphics.Elements
       string newImageFile,
       string newPath,
       ImageLayout newLayout,
+      float newAlpha,
       Size newCanvas,
       VGStyleGroup newStyleGroup,
       string newName,
@@ -120,6 +143,7 @@ namespace VectorGraphics.Elements
       this.filename = newImageFile;
       this.path = newPath;
       this.canvas = newCanvas;
+      this.alpha = newAlpha;
 
       if (!this.CreateInternalImage())
       {
@@ -129,6 +153,7 @@ namespace VectorGraphics.Elements
       GraphicsUnit unit = new GraphicsUnit();
       this.Bounds = this.image.GetBounds(ref unit);
       this.layout = newLayout;
+      this.InitTransparencyMatrix();
     }
 
     /// <summary>
@@ -149,6 +174,7 @@ namespace VectorGraphics.Elements
       this.image = (Image)newImage.Clone();
       GraphicsUnit unit = new GraphicsUnit();
       this.Bounds = this.image.GetBounds(ref unit);
+      this.InitTransparencyMatrix();
     }
 
     /// <summary>
@@ -159,6 +185,7 @@ namespace VectorGraphics.Elements
     {
       this.path = string.Empty;
       this.filename = string.Empty;
+      this.InitTransparencyMatrix();
     }
 
     /// <summary>
@@ -182,12 +209,14 @@ namespace VectorGraphics.Elements
     {
       this.filename = cloneImage.Filename;
       this.path = cloneImage.Filepath;
+      this.alpha = cloneImage.Alpha;
 
       // Removed because when starting recording that leaded
       // to an cross thread problem (object is in use elsewhere)
       // _image = image.StimulusImage;
       this.layout = cloneImage.Layout;
       this.canvas = cloneImage.Canvas;
+      this.InitTransparencyMatrix();
     }
 
     #endregion //CONSTRUCTION
@@ -306,6 +335,27 @@ namespace VectorGraphics.Elements
       set { this.layout = value; }
     }
 
+    /// <summary>
+    /// Gets or sets a <see cref="Single"/> with the alpha (transparency)
+    /// value for this image 0=transparent, 1=opaque
+    /// </summary>
+    /// <value>An <see cref="Single"/> with the alpha value for this image.</value>
+    [Category("Alpha")]
+    [Description("The transparency value.")]
+    public float Alpha
+    {
+      get
+      {
+        return this.alpha;
+      }
+
+      set
+      {
+        this.alpha = value;
+        this.InitTransparencyMatrix();
+      }
+    }
+
     #endregion //PROPERTIES
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -372,6 +422,7 @@ namespace VectorGraphics.Elements
 
       Rectangle drawingCanvas = new Rectangle(0, 0, this.canvas.Width, this.canvas.Height);
       RectangleF drawing_rectangle = drawingCanvas;
+      GraphicsUnit pixel = GraphicsUnit.Pixel;
 
       if (this.ShapeDrawAction == (this.ShapeDrawAction | ShapeDrawAction.Edge))
       {
@@ -393,7 +444,8 @@ namespace VectorGraphics.Elements
             (int)(drawingCanvas.Height / 2 - this.image.Height / 2));
 
           drawing_rectangle.Size = this.image.Size;
-          graphics.DrawImage(this.image, drawing_rectangle);
+          PointF[] destinationPoints = this.GetPointFArray(drawing_rectangle);
+          graphics.DrawImage(this.image, destinationPoints, this.image.GetBounds(ref pixel), pixel, this.imgAttributes);
           break;
         case ImageLayout.None:
           drawing_rectangle.Location = this.Location;
@@ -418,7 +470,8 @@ namespace VectorGraphics.Elements
             drawing_rectangle.Inflate(-this.Pen.Width, -this.Pen.Width);
           }
 
-          graphics.DrawImage(this.image, drawing_rectangle);
+          destinationPoints = this.GetPointFArray(drawing_rectangle);
+          graphics.DrawImage(this.image, destinationPoints, this.image.GetBounds(ref pixel), pixel, this.imgAttributes);
           break;
         case ImageLayout.Stretch:
           graphics.DrawImage(this.image, drawing_rectangle);
@@ -440,7 +493,8 @@ namespace VectorGraphics.Elements
             drawing_rectangle.Inflate(-this.Pen.Width, -this.Pen.Width);
           }
 
-          graphics.DrawImage(this.image, drawing_rectangle);
+          destinationPoints = this.GetPointFArray(drawing_rectangle);
+          graphics.DrawImage(this.image, destinationPoints, this.image.GetBounds(ref pixel), pixel, this.imgAttributes);
           break;
       }
 
@@ -586,12 +640,54 @@ namespace VectorGraphics.Elements
     // Methods for doing main class job                                          //
     ///////////////////////////////////////////////////////////////////////////////
     #region METHODS
+
+    /// <summary>
+    /// Creates the <see cref="ColorMatrix"/> for the image transparency.
+    /// </summary>
+    private void InitTransparencyMatrix()
+    {
+      this.transparencyArray = new float[][]
+      { 
+        new float[] { 1, 0, 0, 0, 0 },
+        new float[] { 0, 1, 0, 0, 0 },
+        new float[] { 0, 0, 1, 0, 0 },
+        new float[] { 0, 0, 0, this.alpha, 0 }, 
+        new float[] { 0, 0, 0, 0, 1 }
+      };
+
+      this.clrMatrix = new ColorMatrix(this.transparencyArray);
+      this.imgAttributes = new ImageAttributes();
+      this.imgAttributes.SetColorMatrix(
+        this.clrMatrix,
+       ColorMatrixFlag.Default,
+       ColorAdjustType.Bitmap);
+    }
+
     #endregion //METHODS
 
     ///////////////////////////////////////////////////////////////////////////////
     // Small helping Methods                                                     //
     ///////////////////////////////////////////////////////////////////////////////
     #region HELPER
+
+    /// <summary>
+    /// Returns an array of <see cref="PointF"/> for the given
+    /// <see cref="RectangleF"/> with ul, ur, and ll corner.
+    /// </summary>
+    /// <param name="drawing_rectangle">The <see cref="RectangleF"/> to be converted</param>
+    /// <returns>An array of <see cref="PointF"/> for the given
+    /// <see cref="RectangleF"/> with ul, ur, and ll corner.</returns>
+    private PointF[] GetPointFArray(RectangleF drawing_rectangle)
+    {
+      // Create parallelogram for drawing original image.
+      PointF upperLeftCorner = drawing_rectangle.Location;
+      PointF upperRightCorner = new PointF(drawing_rectangle.Right, drawing_rectangle.Top);
+      PointF lowerLeftCorner = new PointF(drawing_rectangle.Left, drawing_rectangle.Bottom);
+      PointF[] returnArray = { upperLeftCorner, upperRightCorner, lowerLeftCorner };
+
+      return returnArray;
+    }
+
     #endregion //HELPER
   }
 }

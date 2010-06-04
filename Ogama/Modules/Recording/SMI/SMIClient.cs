@@ -22,7 +22,7 @@ namespace Ogama.Modules.Recording.SMI
   using System.Text;
   using System.Threading;
   using System.Windows.Forms;
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
+
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
 
@@ -207,11 +207,7 @@ namespace Ogama.Modules.Recording.SMI
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Log Only Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleExceptionSilent(ex);
       }
     }
 
@@ -226,11 +222,7 @@ namespace Ogama.Modules.Recording.SMI
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Log Only Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleExceptionSilent(ex);
       }
     }
 
@@ -268,11 +260,7 @@ namespace Ogama.Modules.Recording.SMI
       catch (Exception ex)
       {
         this.listenThread.Abort();
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Log Only Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleExceptionSilent(ex);
       }
     }
 

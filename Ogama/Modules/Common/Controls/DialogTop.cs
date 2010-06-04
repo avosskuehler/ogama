@@ -70,6 +70,12 @@ namespace Ogama.Modules.Common
     #region PROPERTIES
 
     /// <summary>
+    /// The delegate for the thread safe call to Label.Text
+    /// </summary>
+    /// <param name="newValue">The new <see cref="String"/> to set.</param>
+    private delegate void SetTextCallback(string newValue);
+
+    /// <summary>
     /// Gets or sets the <see cref="Image"/> to display in the logo picture box on the top left corner.
     /// </summary>
     [Category("Appearance")]
@@ -103,7 +109,7 @@ namespace Ogama.Modules.Common
     public string Description
     {
       get { return this.lblDescription.Text; }
-      set { this.lblDescription.Text = value; }
+      set { this.SetDescription(value); }
     }
 
     #endregion //PROPERTIES
@@ -159,6 +165,27 @@ namespace Ogama.Modules.Common
     // Methods for doing main class job                                          //
     ///////////////////////////////////////////////////////////////////////////////
     #region METHODS
+
+    /// <summary>
+    /// Thread safe sets the Description of the <see cref="lblDescription"/>
+    /// </summary>
+    /// <param name="header">A <see cref="String"/> with the new header.</param>
+    private void SetDescription(string header)
+    {
+      // InvokeRequired required compares the thread ID of the
+      // calling thread to the thread ID of the creating thread.
+      // If these threads are different, it returns true.
+      if (this.lblDescription.InvokeRequired)
+      {
+        SetTextCallback d = new SetTextCallback(this.SetDescription);
+        this.lblDescription.BeginInvoke(d, new object[] { header });
+      }
+      else
+      {
+        this.lblDescription.Text = header;
+      }
+    }
+
     #endregion //METHODS
 
     ///////////////////////////////////////////////////////////////////////////////

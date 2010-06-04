@@ -23,8 +23,7 @@ namespace Ogama.MainWindow
     using System.Runtime.Serialization;
     using System.Text;
     using System.Windows.Forms;
-    using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
-
+  
     using Ogama.ExceptionHandling;
     using Ogama.Modules.Common;
     using OgamaControls;

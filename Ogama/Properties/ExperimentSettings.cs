@@ -22,8 +22,6 @@ namespace Ogama.Properties
   using System.Windows.Forms;
   using System.Xml.Serialization;
 
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
-
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
   using Ogama.Modules.Scanpaths;
@@ -563,12 +561,7 @@ namespace Ogama.Properties
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
-
+        ExceptionMethods.HandleException(ex);
         return false;
       }
 
@@ -616,11 +609,7 @@ namespace Ogama.Properties
           throw new WarningException("Upgrading cancelled due to user request");
         }
 
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
 
       return null;

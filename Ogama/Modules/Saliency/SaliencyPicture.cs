@@ -24,8 +24,6 @@ namespace Ogama.Modules.Saliency
   using System.Text;
   using System.Windows.Forms;
 
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
-
   using Ogama.ExceptionHandling;
   using Ogama.Modules.AttentionMap;
   using Ogama.Modules.Common;

@@ -177,6 +177,17 @@ namespace OgamaControls.Media
         // Init the audio group
         m_Audio = new MediaGroup(GetAudioMediaType(), m_pTimeline, FPS);
       }
+
+      this.ThreadFinished += new EventHandler(DESCombine_ThreadFinished);
+    }
+
+    private void DESCombine_ThreadFinished(object sender, EventArgs e)
+    {
+      this.StopRendering();
+      if (this.Completed != null)
+      {
+        this.Completed(this, e);
+      }
     }
 
     /// <exclude></exclude>
@@ -845,7 +856,6 @@ namespace OgamaControls.Media
       return sRet;
     }
 
-
     /// <summary>
     /// Called when the graph has finished running.
     /// </summary>
@@ -857,6 +867,19 @@ namespace OgamaControls.Media
     /// will be EventCode.Complete, EventCode.ErrorAbort or EventCode.UserAbort.
     /// </remarks>
     public event EventHandler Completed = null;
+
+    /// <summary>
+    /// Called when the graph has finished running.
+    /// </summary>
+    /// <remarks>
+    /// The <see cref="DESCompletedArgs"/>
+    /// contains the result of running the graph (Completed, UserAborted,
+    /// out of disk space, etc.)
+    /// This code will be a member of DirectShowLib.EventCode.  Typically it 
+    /// will be EventCode.Complete, EventCode.ErrorAbort or EventCode.UserAbort.
+    /// </remarks>
+    private event EventHandler ThreadFinished = null;
+
     /// <summary>
     /// Called when a file has finished processing.
     /// </summary>
@@ -962,11 +985,6 @@ namespace OgamaControls.Media
         {
           DESError.ThrowExceptionForHR(hr);
         }
-        else
-        {
-          m_State = ClassState.Cancelling;
-          break;
-        }
       } while (m_State < ClassState.GraphCompleting);
 
       // If the user cancelled
@@ -978,10 +996,10 @@ namespace OgamaControls.Media
       }
 
       // Send an event saying we are complete
-      if (Completed != null)
+      if (this.ThreadFinished != null)
       {
         DESCompletedArgs ca = new DESCompletedArgs(exitCode);
-        Completed(this, ca);
+        this.ThreadFinished(this, ca);
       }
 
       if (m_State == ClassState.GraphCompleting)
@@ -1223,6 +1241,8 @@ namespace OgamaControls.Media
     public void Dispose()
     {
       GC.SuppressFinalize(this);
+
+      this.ThreadFinished -= new EventHandler(DESCombine_ThreadFinished);
 
       if (m_Video != null)
       {

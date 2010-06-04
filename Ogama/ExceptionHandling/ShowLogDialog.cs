@@ -22,8 +22,6 @@ namespace Ogama.ExceptionHandling
   using System.Text;
   using System.Windows.Forms;
 
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
-
   /// <summary>
   /// This popup <see cref="Form"/> shows the content of 
   /// a given ascii text file.
@@ -182,11 +180,7 @@ namespace Ogama.ExceptionHandling
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
     }
 

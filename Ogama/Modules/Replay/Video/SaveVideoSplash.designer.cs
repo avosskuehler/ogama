@@ -29,14 +29,14 @@ namespace Ogama.Modules.Replay
     private void InitializeComponent()
     {
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SaveVideoSplash));
-      this.progressBar1 = new System.Windows.Forms.ProgressBar();
+      this.progressBar = new System.Windows.Forms.ProgressBar();
       this.pictureBox1 = new System.Windows.Forms.PictureBox();
       this.pictureBox2 = new System.Windows.Forms.PictureBox();
       this.pictureBox3 = new System.Windows.Forms.PictureBox();
       this.label1 = new System.Windows.Forms.Label();
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop = new Ogama.Modules.Common.DialogTop();
       this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-      this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+      this.spcPreviewSplash = new System.Windows.Forms.SplitContainer();
       this.previewPanel = new System.Windows.Forms.Panel();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -44,20 +44,20 @@ namespace Ogama.Modules.Replay
       this.splitContainer1.Panel1.SuspendLayout();
       this.splitContainer1.Panel2.SuspendLayout();
       this.splitContainer1.SuspendLayout();
-      this.splitContainer2.Panel1.SuspendLayout();
-      this.splitContainer2.Panel2.SuspendLayout();
-      this.splitContainer2.SuspendLayout();
+      this.spcPreviewSplash.Panel1.SuspendLayout();
+      this.spcPreviewSplash.Panel2.SuspendLayout();
+      this.spcPreviewSplash.SuspendLayout();
       this.SuspendLayout();
       // 
-      // progressBar1
+      // progressBar
       // 
-      this.progressBar1.BackColor = System.Drawing.Color.White;
-      this.progressBar1.Location = new System.Drawing.Point(12, 71);
-      this.progressBar1.Name = "progressBar1";
-      this.progressBar1.Size = new System.Drawing.Size(294, 13);
-      this.progressBar1.Step = 1;
-      this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-      this.progressBar1.TabIndex = 3;
+      this.progressBar.BackColor = System.Drawing.Color.White;
+      this.progressBar.Location = new System.Drawing.Point(12, 71);
+      this.progressBar.Name = "progressBar";
+      this.progressBar.Size = new System.Drawing.Size(294, 13);
+      this.progressBar.Step = 1;
+      this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+      this.progressBar.TabIndex = 3;
       // 
       // pictureBox1
       // 
@@ -99,20 +99,20 @@ namespace Ogama.Modules.Replay
       this.label1.TabIndex = 4;
       this.label1.Text = "this may last a while, but you can still use the other interfaces ...";
       // 
-      // dialogTop1
+      // dialogTop
       // 
-      this.dialogTop1.BackColor = System.Drawing.SystemColors.Control;
-      this.dialogTop1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("dialogTop1.BackgroundImage")));
-      this.dialogTop1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-      this.dialogTop1.Description = "Creating video ...";
-      this.dialogTop1.Dock = System.Windows.Forms.DockStyle.Top;
-      this.dialogTop1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-      this.dialogTop1.Location = new System.Drawing.Point(0, 0);
-      this.dialogTop1.Logo = global::Ogama.Properties.Resources.video;
-      this.dialogTop1.Name = "dialogTop1";
-      this.dialogTop1.Size = new System.Drawing.Size(322, 60);
-      this.dialogTop1.TabIndex = 7;
-      this.dialogTop1.TabStop = false;
+      this.dialogTop.BackColor = System.Drawing.SystemColors.Control;
+      this.dialogTop.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("dialogTop.BackgroundImage")));
+      this.dialogTop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+      this.dialogTop.Description = "Creating video ...";
+      this.dialogTop.Dock = System.Windows.Forms.DockStyle.Top;
+      this.dialogTop.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+      this.dialogTop.Location = new System.Drawing.Point(0, 0);
+      this.dialogTop.Logo = global::Ogama.Properties.Resources.video;
+      this.dialogTop.Name = "dialogTop";
+      this.dialogTop.Size = new System.Drawing.Size(322, 60);
+      this.dialogTop.TabIndex = 7;
+      this.dialogTop.TabStop = false;
       // 
       // splitContainer1
       // 
@@ -125,41 +125,41 @@ namespace Ogama.Modules.Replay
       // 
       // splitContainer1.Panel1
       // 
-      this.splitContainer1.Panel1.Controls.Add(this.dialogTop1);
+      this.splitContainer1.Panel1.Controls.Add(this.dialogTop);
       this.splitContainer1.Panel1MinSize = 60;
       // 
       // splitContainer1.Panel2
       // 
-      this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
+      this.splitContainer1.Panel2.Controls.Add(this.spcPreviewSplash);
       this.splitContainer1.Size = new System.Drawing.Size(322, 371);
       this.splitContainer1.SplitterDistance = 60;
       this.splitContainer1.SplitterWidth = 1;
       this.splitContainer1.TabIndex = 8;
       // 
-      // splitContainer2
+      // spcPreviewSplash
       // 
-      this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-      this.splitContainer2.IsSplitterFixed = true;
-      this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-      this.splitContainer2.Name = "splitContainer2";
-      this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+      this.spcPreviewSplash.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.spcPreviewSplash.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+      this.spcPreviewSplash.IsSplitterFixed = true;
+      this.spcPreviewSplash.Location = new System.Drawing.Point(0, 0);
+      this.spcPreviewSplash.Name = "spcPreviewSplash";
+      this.spcPreviewSplash.Orientation = System.Windows.Forms.Orientation.Horizontal;
       // 
-      // splitContainer2.Panel1
+      // spcPreviewSplash.Panel1
       // 
-      this.splitContainer2.Panel1.Controls.Add(this.previewPanel);
+      this.spcPreviewSplash.Panel1.Controls.Add(this.previewPanel);
       // 
-      // splitContainer2.Panel2
+      // spcPreviewSplash.Panel2
       // 
-      this.splitContainer2.Panel2.Controls.Add(this.progressBar1);
-      this.splitContainer2.Panel2.Controls.Add(this.label1);
-      this.splitContainer2.Panel2.Controls.Add(this.pictureBox1);
-      this.splitContainer2.Panel2.Controls.Add(this.pictureBox2);
-      this.splitContainer2.Panel2.Controls.Add(this.pictureBox3);
-      this.splitContainer2.Panel2MinSize = 100;
-      this.splitContainer2.Size = new System.Drawing.Size(322, 310);
-      this.splitContainer2.SplitterDistance = 206;
-      this.splitContainer2.TabIndex = 0;
+      this.spcPreviewSplash.Panel2.Controls.Add(this.progressBar);
+      this.spcPreviewSplash.Panel2.Controls.Add(this.label1);
+      this.spcPreviewSplash.Panel2.Controls.Add(this.pictureBox1);
+      this.spcPreviewSplash.Panel2.Controls.Add(this.pictureBox2);
+      this.spcPreviewSplash.Panel2.Controls.Add(this.pictureBox3);
+      this.spcPreviewSplash.Panel2MinSize = 100;
+      this.spcPreviewSplash.Size = new System.Drawing.Size(322, 310);
+      this.spcPreviewSplash.SplitterDistance = 206;
+      this.spcPreviewSplash.TabIndex = 0;
       // 
       // previewPanel
       // 
@@ -183,16 +183,17 @@ namespace Ogama.Modules.Replay
       this.Name = "SaveVideoSplash";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "Video export";
+      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SaveVideoSplash_FormClosing);
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
       this.splitContainer1.Panel1.ResumeLayout(false);
       this.splitContainer1.Panel2.ResumeLayout(false);
       this.splitContainer1.ResumeLayout(false);
-      this.splitContainer2.Panel1.ResumeLayout(false);
-      this.splitContainer2.Panel2.ResumeLayout(false);
-      this.splitContainer2.Panel2.PerformLayout();
-      this.splitContainer2.ResumeLayout(false);
+      this.spcPreviewSplash.Panel1.ResumeLayout(false);
+      this.spcPreviewSplash.Panel2.ResumeLayout(false);
+      this.spcPreviewSplash.Panel2.PerformLayout();
+      this.spcPreviewSplash.ResumeLayout(false);
       this.ResumeLayout(false);
 
     }
@@ -202,11 +203,11 @@ namespace Ogama.Modules.Replay
     private System.Windows.Forms.PictureBox pictureBox1;
     private System.Windows.Forms.PictureBox pictureBox2;
     private System.Windows.Forms.PictureBox pictureBox3;
-    private System.Windows.Forms.ProgressBar progressBar1;
+    private System.Windows.Forms.ProgressBar progressBar;
     internal System.Windows.Forms.Label label1;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private Ogama.Modules.Common.DialogTop dialogTop;
     private System.Windows.Forms.SplitContainer splitContainer1;
-    private System.Windows.Forms.SplitContainer splitContainer2;
+    private System.Windows.Forms.SplitContainer spcPreviewSplash;
     private System.Windows.Forms.Panel previewPanel;
 
   }

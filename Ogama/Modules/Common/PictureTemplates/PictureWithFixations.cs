@@ -20,15 +20,9 @@ namespace Ogama.Modules.Common
   using System.Drawing;
   using System.Drawing.Drawing2D;
   using System.Drawing.Imaging;
-  using System.Text;
   using System.Windows.Forms;
-
-  using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
-
+  using Ogama.ExceptionHandling;
   using Ogama.Modules.AttentionMap;
-  using Ogama.Modules.Common;
-  using OgamaControls;
-
   using VectorGraphics.Canvas;
   using VectorGraphics.CustomEventArgs;
   using VectorGraphics.CustomTypeConverter;
@@ -861,11 +855,7 @@ namespace Ogama.Modules.Common
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
 
       return aoiList;
@@ -1389,11 +1379,7 @@ namespace Ogama.Modules.Common
       }
       catch (Exception ex)
       {
-        bool rethrow = ExceptionPolicy.HandleException(ex, "Global Policy");
-        if (rethrow)
-        {
-          throw;
-        }
+        ExceptionMethods.HandleException(ex);
       }
     }
 
