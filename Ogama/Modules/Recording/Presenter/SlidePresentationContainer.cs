@@ -40,12 +40,6 @@ namespace Ogama.Modules.Recording.Presenter
     // Defining Variables, Enumerations, Events                                  //
     ///////////////////////////////////////////////////////////////////////////////
     #region FIELDS
-
-    /// <summary>
-    /// Holds the available DirectShow filters.
-    /// </summary>
-    private Filters filters;
-
     #endregion //FIELDS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -58,7 +52,6 @@ namespace Ogama.Modules.Recording.Presenter
     /// </summary>
     public SlidePresentationContainer()
     {
-      this.filters = new Filters();
       this.Timer = new MultimediaTimer();
       this.ElementsWithAudioOnClick = new VGElementCollection();
       this.AudioPlayer = new AudioPlayer();
@@ -108,7 +101,7 @@ namespace Ogama.Modules.Recording.Presenter
     /// a video out of screenshots during recording
     /// of dynamic flash movie content.
     /// </summary>
-    public DXCapture ScreenCapture { get; set; }
+    public DSScreenCapture ScreenCapture { get; set; }
 
     /// <summary>
     /// Gets or sets the <see cref="BufferedGraphics"/> 
@@ -174,50 +167,15 @@ namespace Ogama.Modules.Recording.Presenter
     /// for the screen capturing are set to initialize the <see cref="DXCapture"/>
     /// one time.
     /// </summary>
-    /// <param name="captureProperties">The <see cref="CaptureDeviceProperties"/>
+    /// <param name="screenCaptureProperties">The <see cref="ScreenCaptureProperties"/>
     /// to be used for the screen capturing.</param>
-    public void InitializeScreenCapture(CaptureDeviceProperties captureProperties)
+    public void InitializeScreenCapture(ScreenCaptureProperties screenCaptureProperties)
     {
-      Filter videoDevice = null;
-      Filter videoCompressor = null;
-
-      foreach (Filter inputFilter in this.filters.VideoInputDevices)
-      {
-        if (inputFilter.Name == captureProperties.VideoInputDevice)
-        {
-          videoDevice = inputFilter;
-          break;
-        }
-      }
-
-      foreach (Filter compressorFilter in this.filters.VideoCompressors)
-      {
-        if (compressorFilter.Name == captureProperties.VideoCompressor)
-        {
-          videoCompressor = compressorFilter;
-          break;
-        }
-      }
-
-      if (videoDevice != null)
-      {
-        this.ScreenCapture = new DXCapture(
-          videoDevice, 
-          null,
-          videoCompressor,
-          null,
-          captureProperties.FrameRate,
-          captureProperties.VideoSize,
-          captureProperties.CaptureMode,
-          true);
-      }
-      else
-      {
-        string message = "Could not find screen capture filter." + Environment.NewLine +
-          "Recording of stimuli with dynamic content like flash movies is not available."
-        + Environment.NewLine + "Please install the VHScrCap Filter from http://www.hmelyoff.com";
-        ExceptionMethods.ProcessErrorMessage(message);
-      }
+      this.ScreenCapture = new DSScreenCapture(
+        screenCaptureProperties.VideoCompressor,
+        screenCaptureProperties.FrameRate,
+        screenCaptureProperties.MonitorIndex);
+      this.ScreenCapture.PreviewWindow = screenCaptureProperties.PreviewWindow;
     }
 
     #endregion //PRIVATEMETHODS

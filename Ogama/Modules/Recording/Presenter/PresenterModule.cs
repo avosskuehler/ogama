@@ -86,10 +86,10 @@ namespace Ogama.Modules.Recording
     private CaptureDeviceProperties userCameraProperties;
 
     /// <summary>
-    /// This <see cref="Control"/> can contain the window in which 
-    /// the screen capturing is preview during capturing of flash windows.
+    /// This <see cref="ScreenCaptureProperties"/> contain the 
+    /// screen capture properties.
     /// </summary>
-    private Control screenCapturePreviewWindow;
+    private ScreenCaptureProperties screenCaptureProperties;
 
     /// <summary>
     ///  The main <see cref="BufferedGraphicsContext"/> which is used 
@@ -339,16 +339,9 @@ namespace Ogama.Modules.Recording
     /// Sets the properties of the screen capture
     /// device.
     /// </summary>
-    public CaptureDeviceProperties CaptureProperties
+    public ScreenCaptureProperties ScreenCaptureProperties
     {
-      set
-      {
-        if (value.CaptureMode != CaptureMode.None)
-        {
-          this.preparedSlideOne.InitializeScreenCapture(value);
-          this.preparedSlideTwo.InitializeScreenCapture(value);
-        }
-      }
+      set { this.screenCaptureProperties = value; }
     }
 
     /// <summary>
@@ -369,15 +362,6 @@ namespace Ogama.Modules.Recording
     }
 
     /// <summary>
-    /// Sets the preview window control for the screen capture
-    /// during recording.
-    /// </summary>
-    public Control ScreenCapturePreviewWindow
-    {
-      set { this.screenCapturePreviewWindow = value; }
-    }
-
-    /// <summary>
     /// Sets the  <see cref="RecordModule.GetTimeDelegate"/> which 
     /// can be called to retreive the current sample time
     /// from the recorder.
@@ -392,21 +376,23 @@ namespace Ogama.Modules.Recording
     /// screen capture object or null if none is 
     /// capturing.
     /// </summary>
-    public DXCapture CurrentScreenCapture
+    public DSScreenCapture CurrentScreenCapture
     {
       get
       {
         switch (this.shownContainer)
         {
           case ShownContainer.One:
-            if (this.preparedSlideOne.ScreenCapture != null && this.preparedSlideOne.ScreenCapture.Capturing)
+            if (this.preparedSlideOne.ScreenCapture != null &&
+              this.preparedSlideOne.ScreenCapture.IsRunning)
             {
               return this.preparedSlideOne.ScreenCapture;
             }
 
             break;
           case ShownContainer.Two:
-            if (this.preparedSlideTwo.ScreenCapture != null && this.preparedSlideTwo.ScreenCapture.Capturing)
+            if (this.preparedSlideTwo.ScreenCapture != null &&
+              this.preparedSlideTwo.ScreenCapture.IsRunning)
             {
               return this.preparedSlideTwo.ScreenCapture;
             }
@@ -639,6 +625,12 @@ namespace Ogama.Modules.Recording
         if (this.userCamera != null && this.userCamera.Properties.CaptureMode != CaptureMode.None)
         {
           AsyncHelper.FireAsync(new MethodInvoker(this.userCamera.RunGraph));
+        }
+
+        if (this.screenCaptureProperties.CaptureMode != CaptureMode.None)
+        {
+          this.preparedSlideOne.InitializeScreenCapture(this.screenCaptureProperties);
+          this.preparedSlideTwo.InitializeScreenCapture(this.screenCaptureProperties);
         }
 
         this.presentationBounds = PresentationScreen.GetPresentationWorkingArea();
@@ -1120,18 +1112,22 @@ namespace Ogama.Modules.Recording
       {
         case ShownContainer.One:
           // Stop capturing video
-          if (this.preparedSlideOne.ScreenCapture != null && trialChange && this.preparedSlideOne.ScreenCapture.Capturing)
+          if (this.preparedSlideOne.ScreenCapture != null &&
+            trialChange &&
+            this.preparedSlideOne.ScreenCapture.IsRunning)
           {
-            this.preparedSlideOne.ScreenCapture.StopAll();
+            this.preparedSlideOne.ScreenCapture.Stop();
             ////AsyncHelper.FireAndForget(new MethodInvoker(this.preparedSlideOne.ScreenCapture.StopAll));
           }
 
           break;
         case ShownContainer.Two:
           // Stop capturing video
-          if (this.preparedSlideTwo.ScreenCapture != null && trialChange && this.preparedSlideTwo.ScreenCapture.Capturing)
+          if (this.preparedSlideTwo.ScreenCapture != null &&
+            trialChange &&
+            this.preparedSlideTwo.ScreenCapture.IsRunning)
           {
-            this.preparedSlideTwo.ScreenCapture.StopAll();
+            this.preparedSlideTwo.ScreenCapture.Stop();
             ////AsyncHelper.FireAndForget(new MethodInvoker(this.preparedSlideTwo.ScreenCapture.StopAll));
           }
 
@@ -1185,7 +1181,6 @@ namespace Ogama.Modules.Recording
             if (this.preparedSlideTwo.ScreenCapture != null)
             {
               this.preparedSlideTwo.ScreenCapture.Filename = filename;
-              ////this.preparedSlideTwo.ScreenCapture.Cue();
             }
 
             break;
@@ -1194,7 +1189,6 @@ namespace Ogama.Modules.Recording
             if (this.preparedSlideOne.ScreenCapture != null)
             {
               this.preparedSlideOne.ScreenCapture.Filename = filename;
-              ////this.preparedSlideOne.ScreenCapture.Cue();
             }
 
             break;
@@ -1295,7 +1289,6 @@ namespace Ogama.Modules.Recording
           case ShownContainer.One:
             if (this.preparedSlideOne.ScreenCapture != null)
             {
-              this.preparedSlideOne.ScreenCapture.PreviewWindow = this.screenCapturePreviewWindow;
               this.preparedSlideOne.ScreenCapture.Start();
             }
 
@@ -1303,7 +1296,6 @@ namespace Ogama.Modules.Recording
           case ShownContainer.Two:
             if (this.preparedSlideTwo.ScreenCapture != null)
             {
-              this.preparedSlideTwo.ScreenCapture.PreviewWindow = this.screenCapturePreviewWindow;
               this.preparedSlideTwo.ScreenCapture.Start();
             }
 

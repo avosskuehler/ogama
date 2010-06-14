@@ -71,6 +71,11 @@ namespace Ogama.Modules.Database
     /// </summary>
     private BindingSource bsoRawdata;
 
+    /// <summary>
+    /// Indicates inhibition of database queries if this flag is set.
+    /// </summary>
+    private bool isUpdatingData;
+
     #endregion //FIELDS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -354,7 +359,7 @@ namespace Ogama.Modules.Database
             cell.OwningRow.Selected = true;
           }
         }
-        
+
         // Create subject name list.
         foreach (DataGridViewRow row in this.dgvSubjects.SelectedRows)
         {
@@ -481,6 +486,8 @@ namespace Ogama.Modules.Database
           // Update other changes
           this.UpdateDatabase();
 
+          this.isUpdatingData = true;
+
           // Delete raw data table
           Queries.DeleteRawDataTableInDB(subject);
           this.bsoRawdata.DataSource = null;
@@ -512,6 +519,8 @@ namespace Ogama.Modules.Database
               File.Delete(videoFile.FullName);
             }
           }
+
+          this.isUpdatingData = false;
 
           // Database update is done 
           // when closing or on explicit saving with button.
@@ -1102,7 +1111,7 @@ namespace Ogama.Modules.Database
     private void LoadRawDataIntoDataGridView(int trialTableRowIndex)
     {
       // This avoids update during record update.
-      if (this.InvokeRequired)
+      if (this.InvokeRequired || this.isUpdatingData)
       {
         return;
       }

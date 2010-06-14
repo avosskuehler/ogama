@@ -466,7 +466,8 @@ namespace Ogama.Modules.ImportExport
       int trialCounter = 0;
       int currentTrialSequence = 0;
       bool isLastTrial = false;
-
+      string lastSubjectName = "#";
+      string currentSubjectName = "#";
       SortedList<int, long> trial2Time = detectionSetting.TrialSequenceToStarttimeAssignments;
       if (trial2Time.Count > 0)
       {
@@ -506,8 +507,8 @@ namespace Ogama.Modules.ImportExport
                 // Check for MSG lines containing the trigger string if applicable
                 if (line.Contains(detectionSetting.TrialTriggerString))
                 {
-                  trialCounter++;
                   currentTrialSequence = trialCounter;
+                  trialCounter++;
                 }
 
                 break;
@@ -657,7 +658,14 @@ namespace Ogama.Modules.ImportExport
             // Write subject name value
             if (numSubjectImportColumn != -1)
             {
-              newRawData.SubjectName = items[numSubjectImportColumn];
+              currentSubjectName = items[numSubjectImportColumn];
+              newRawData.SubjectName = currentSubjectName;
+              if (currentSubjectName != lastSubjectName)
+              {
+                lastSubjectName = currentSubjectName;
+                currentTrialSequence = 0;
+                trialCounter = 0;
+              }
             }
             else
             {
@@ -822,11 +830,13 @@ namespace Ogama.Modules.ImportExport
       }
 
       // Initializes variables
-      int currentSequence = -5;
+      int currentSequence = 0;
       int lastSequence = -5;
       string currentSubject = "#";
       string lastSubject = "#";
+      int overallTrialCounter = 0;
       int trialCounter = 0;
+      int subjectCounter = 0;
 
       // Iterate raw data list
       for (int i = 0; i < rawDataList.Count; i++)
@@ -841,7 +851,19 @@ namespace Ogama.Modules.ImportExport
           SubjectsData newSubjectsData = new SubjectsData();
           newSubjectsData.SubjectName = currentSubject;
           subjectList.Add(newSubjectsData);
+
+          if (subjectCounter > 0)
+          {
+            TrialsData tempSubjetData = trialList[overallTrialCounter - 1];
+            tempSubjetData.Duration =
+              (int)(rawDataList[i - 1].Time - tempSubjetData.TrialStartTime);
+            trialList[overallTrialCounter - 1] = tempSubjetData;
+          }
+
           lastSubject = currentSubject;
+          lastSequence = -5;
+          trialCounter = 0;
+          subjectCounter++;
         }
 
         // If trial has changed parse the trial information to 
@@ -850,7 +872,7 @@ namespace Ogama.Modules.ImportExport
         {
           string subject = importRow.SubjectName != null ? importRow.SubjectName : "Subject1";
           string categorie = importRow.Category != null ? importRow.Category : string.Empty;
-          int trialID = lastSequence;
+          int trialID = currentSequence;
           if (detectionSetting.TrialSequenceToTrialIDAssignments.ContainsKey(currentSequence))
           {
             trialID = detectionSetting.TrialSequenceToTrialIDAssignments[currentSequence];
@@ -896,7 +918,7 @@ namespace Ogama.Modules.ImportExport
           {
             if (!detectionSetting.TrialSequenceToTrialIDAssignments.ContainsKey(currentSequence))
             {
-              detectionSetting.TrialSequenceToTrialIDAssignments.Add(currentSequence, -5);
+              detectionSetting.TrialSequenceToTrialIDAssignments.Add(currentSequence, 0);
             }
           }
 
@@ -931,6 +953,7 @@ namespace Ogama.Modules.ImportExport
 
           lastSequence = currentSequence;
           trialCounter++;
+          overallTrialCounter++;
 
           // Calculate trial duration for foregoing trial.
           if (trialCounter > 1)
@@ -966,10 +989,10 @@ namespace Ogama.Modules.ImportExport
       // Reached end of rawdatalist, so add last trial duration value from last entry
       if (trialCounter >= 1)
       {
-        TrialsData tempSubjetData = trialList[trialCounter - 1];
+        TrialsData tempSubjetData = trialList[overallTrialCounter - 1];
         tempSubjetData.Duration =
           (int)(rawDataList[rawDataList.Count - 1].Time - tempSubjetData.TrialStartTime);
-        trialList[trialCounter - 1] = tempSubjetData;
+        trialList[overallTrialCounter - 1] = tempSubjetData;
       }
     }
 

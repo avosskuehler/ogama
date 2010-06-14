@@ -352,16 +352,15 @@ namespace Ogama.Modules.Replay
           // Load an video for the trial
           this.LoadTrialVideo(subjectName, trialSequence);
 
-          // Load trial stimulus into picture, if no video is available
-          if (!this.isUsingTrialVideo)
+          // Load trial stimulus into picture
+          if (!this.LoadTrialStimulus(trialID))
           {
-            if (!this.LoadTrialStimulus(trialID))
-            {
-              this.Picture.ResetBackground();
-              this.LoadSlide(SlideNotFoundSlide, ActiveXMode.Off);
-            }
+            this.Picture.ResetBackground();
+            this.LoadSlide(SlideNotFoundSlide, ActiveXMode.Off);
           }
-          else
+
+          // if video is available reset the slide
+          if (this.isUsingTrialVideo)
           {
             this.Picture.ResetBackground();
           }
@@ -2123,6 +2122,8 @@ namespace Ogama.Modules.Replay
       {
         // No usercam available
         this.usercamVideoPlayer.CloseMovie();
+        ((MainForm)this.MdiParent).ContextPanel.IsUsercamVisible = false;
+        this.btnShowUsercam.Checked = false;
 
         return true;
       }

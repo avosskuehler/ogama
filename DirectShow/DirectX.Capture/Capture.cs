@@ -570,7 +570,7 @@ namespace DirectX.Capture
         }
         else
         {
-          this.FrameRate = this.videoCaps.videoModes[0].MaxFrameRate;
+          this.FrameRate = this.VideoCaps.videoModes[0].MaxFrameRate;
         }
 
         if (newFrameSize.Width > minWidth && newFrameSize.Width < maxWidth &&
@@ -1121,11 +1121,15 @@ namespace DirectX.Capture
       }
       set
       {
-        BitmapInfoHeader bmiHeader;
-        bmiHeader = (BitmapInfoHeader)getStreamConfigSetting(videoStreamConfig, "BmiHeader");
-        bmiHeader.Width = value.Width;
-        bmiHeader.Height = value.Height;
-        setStreamConfigSetting(videoStreamConfig, "BmiHeader", bmiHeader);
+        if (this.videoDevice != null && this.videoDevice.Name != "OgamaScreenCapture Filter")
+        {
+
+          BitmapInfoHeader bmiHeader;
+          bmiHeader = (BitmapInfoHeader)getStreamConfigSetting(videoStreamConfig, "BmiHeader");
+          bmiHeader.Width = value.Width;
+          bmiHeader.Height = value.Height;
+          setStreamConfigSetting(videoStreamConfig, "BmiHeader", bmiHeader);
+        }
       }
     }
 
@@ -1922,6 +1926,8 @@ namespace DirectX.Capture
               if (hr == -2147220969) throw new DeviceInUseException("Video device", hr);
               DsError.ThrowExceptionForHR(hr);
             }
+
+            hr = captureGraphBuilder.RenderStream(null, null, videoDeviceFilter, videoCompressorFilter, muxFilter);
           }
 
           // Render audio (audio -> mux)
@@ -1956,8 +1962,10 @@ namespace DirectX.Capture
           else if (this.useGazeAndMouseOverlayDMO)
           {
             hr = captureGraphBuilder.RenderStream(
-              PinCategory.Preview,
-              MediaType.Video,
+              null,
+              null,
+              //PinCategory.Preview,
+              //MediaType.Video,
               videoDeviceFilter,
               this.dmoFilter,
               null);
@@ -2440,6 +2448,10 @@ namespace DirectX.Capture
     /// </summary>
     protected object getStreamConfigSetting(IAMStreamConfig streamConfig, string fieldName)
     {
+      if (this.videoDevice.Name == "OgamaScreenCapture Filter")
+      {
+        return null;
+      }
       if (streamConfig == null)
         throw new NotSupportedException();
       assertStopped();
@@ -2501,6 +2513,11 @@ namespace DirectX.Capture
     /// </summary>
     protected object setStreamConfigSetting(IAMStreamConfig streamConfig, string fieldName, object newValue)
     {
+      if (this.videoDevice.Name == "OgamaScreenCapture Filter")
+      {
+        return 0;
+      }
+
       if (streamConfig == null)
         throw new NotSupportedException();
       assertStopped();
@@ -2594,12 +2611,7 @@ namespace DirectX.Capture
       minHeight = int.MaxValue;
       maxHeight = 0;
 
-      if (this.VideoCaps == null)
-      {
-        return;
-      }
-
-      if (this.VideoDevice.Name == "VHScrCap")
+      if (this.VideoDevice.Name == "OgamaScreenCapture Filter")
       {
         minFramerate = 1;
         maxFramerate = 100;
@@ -2607,6 +2619,11 @@ namespace DirectX.Capture
         maxWidth = 3000;
         minHeight = 1;
         maxHeight = 3000;
+        return;
+      }
+
+      if (this.VideoCaps == null)
+      {
         return;
       }
 

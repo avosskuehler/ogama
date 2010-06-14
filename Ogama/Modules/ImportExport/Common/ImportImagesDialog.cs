@@ -647,7 +647,7 @@ namespace Ogama.Modules.ImportExport
           this.rdbImportTableImages.Enabled = false;
           this.rdbEnterTableImages.Enabled = false;
           this.txbStimulusFileEndings.Enabled = false;
-          this.txbStimulusFileColumn.Text = this.asciiSetting.ColumnAssignments["StimulusFile"];
+          this.txbStimulusFileColumn.Text = this.asciiSetting.ColumnAssignments["TrialImage"];
           this.SwitchVisibility(false, false);
           break;
         case StimuliImportModes.SearchForImageEnding:

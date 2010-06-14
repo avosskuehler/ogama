@@ -71,7 +71,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>..\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TOBII;VHUNLOCK</DefineConstants>
+    <DefineConstants>DEBUG;TOBII</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DocumentationFile>..\Debug\Ogama.XML</DocumentationFile>
     <DebugType>full</DebugType>
@@ -99,10 +99,10 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
-    <OutputPath>bin\x64\Release\</OutputPath>
+    <OutputPath>..\Release64\</OutputPath>
     <DefineConstants>TRACE;TOBII;VHUNLOCK</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>..\Release\Docs\Ogama.XML</DocumentationFile>
+    <DocumentationFile>..\Release64\Docs\Ogama.XML</DocumentationFile>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x64</PlatformTarget>
@@ -364,14 +364,9 @@
     <Compile Include="Modules\Recording\ITU\ITUDefaultGazeTracker.cs" />
     <Compile Include="Modules\Recording\ITU\ITUPS3GazeTracker.cs" />
     <Compile Include="Modules\Recording\ITU\ITUGazeTrackerBase.cs" />
+    <Compile Include="Modules\Recording\Presenter\DSScreenCapture.cs" />
+    <Compile Include="Modules\Recording\Presenter\ScreenCaptureProperties.cs" />
     <Compile Include="Modules\Recording\TrackerBase\TrackerWithStatusControls.cs" />
-    <Compile Include="Modules\Recording\Dialogs\VHSettingsDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Modules\Recording\Dialogs\VHSettingsDialog.designer.cs">
-      <DependentUpon>VHSettingsDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Recording\Presenter\ScreenCaptureSetting.cs" />
     <Compile Include="Modules\Recording\Alea\AleaTracker.cs">
     </Compile>
     <Compile Include="Modules\Recording\Alea\AleaSetting.cs" />
@@ -449,7 +444,6 @@
       <DependentUpon>SMISettingsDlg.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Recording\TrackerBase\Tracker.cs" />
-    <Compile Include="Modules\Recording\UnlockVH.cs" />
     <Compile Include="Modules\Replay\LoopState.cs" />
     <Compile Include="Modules\Replay\TimedPoint.cs" />
     <Compile Include="Modules\Replay\Video\DSRecordWithDMO.cs" />
@@ -1025,9 +1019,6 @@
     <EmbeddedResource Include="Modules\Recording\Alea\AleaTrackStatus.resx">
       <DependentUpon>AleaTrackStatus.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Recording\Dialogs\VHSettingsDialog.resx">
-      <DependentUpon>VHSettingsDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\Dialogs\SelectTracker.resx">
       <DependentUpon>SelectTracker.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1369,7 +1360,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>OgamaDatabaseTemplate.mdf</DependentUpon>
     </Content>
-    <None Include="ClassDiagram.cd" />
     <None Include="Resources\FolderNew16.png" />
     <None Include="Resources\PS3_61_61.png" />
     <None Include="Resources\ITU_61_61.png" />
@@ -1732,14 +1722,6 @@
     <COMReference Include="TetComp">
       <Guid>{3E10DC16-717F-4A70-9EA9-AD364F61AF6E}</Guid>
       <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
-    <COMReference Include="VHScrCapLib">
-      <Guid>{B29182EF-8BB0-4C87-91E8-9E25C7E70793}</Guid>
-      <VersionMajor>3</VersionMajor>
       <VersionMinor>0</VersionMinor>
       <Lcid>0</Lcid>
       <WrapperTool>tlbimp</WrapperTool>

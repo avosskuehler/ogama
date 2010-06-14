@@ -1711,24 +1711,12 @@ namespace Ogama.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string VHScreenCaptureSettingsPath {
+        public string OgamaScreenCaptureSettingsPath {
             get {
-                return ((string)(this["VHScreenCaptureSettingsPath"]));
+                return ((string)(this["OgamaScreenCaptureSettingsPath"]));
             }
             set {
-                this["VHScreenCaptureSettingsPath"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool VHScreenCaptureUnlocked {
-            get {
-                return ((bool)(this["VHScreenCaptureUnlocked"]));
-            }
-            set {
-                this["VHScreenCaptureUnlocked"] = value;
+                this["OgamaScreenCaptureSettingsPath"] = value;
             }
         }
     }

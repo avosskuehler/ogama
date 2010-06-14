@@ -118,6 +118,7 @@ namespace OgamaControls
     // Defining Properties                                                       //
     ///////////////////////////////////////////////////////////////////////////////
     #region PROPERTIES
+
     /// <summary>
     /// Gets or sets the friendly name of the video input device to use.
     /// </summary>

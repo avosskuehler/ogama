@@ -531,6 +531,13 @@ namespace Ogama.Properties
       set { this.mouseColorParams = value; }
     }
 
+    /// <summary>
+    /// Gets or sets the framerate in frames per second to 
+    /// use in the screen capturing. Default is 10.
+    /// </summary>
+    /// <value>A <see cref="Int32"/> with the framerate in frames per second .</value>
+    public int ScreenCaptureFramerate { get; set; }
+
     #endregion //PROPERTIES
 
     ///////////////////////////////////////////////////////////////////////////////

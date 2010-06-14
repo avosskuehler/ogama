@@ -266,7 +266,7 @@ namespace OgamaControls
       {
         //if (this.eventFilterList.Contains(")
         //{
-          
+
         //}
         this.timeLineEvents = value;
         this.timeLineEvents.Sort();
@@ -395,9 +395,11 @@ namespace OgamaControls
 
           //OnCaretValueChanged(new PositionValueChangedEventArguments(this.CurrentTime));
 
-          // If forcing a refresh the UI freezes when there are too many events displayed in the timeline.
-          //this.Parent.Refresh();
-          this.Invalidate();
+          // If forcing a refresh the UI freezes when there are too many 
+          // events displayed in the timeline.
+          // if not forcing refresh the timeline does not get updated.
+          //this.Invalidate();
+          this.Parent.Refresh();//Invalidate();
         }
       }
     }

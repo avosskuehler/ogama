@@ -195,6 +195,12 @@ namespace OgamaControls
         hr = graphBuilder.AddFilter(sampleGrabberFilter, "Ds.NET Sample Grabber");
         DsError.ThrowExceptionForHR(hr);
 
+        IBaseFilter aviSplitter = new AviSplitter() as IBaseFilter;
+
+        // Add the aviSplitter to the graph
+        hr = graphBuilder.AddFilter(aviSplitter, "Splitter");
+        DsError.ThrowExceptionForHR(hr);
+
         // Have the graph builder construct its appropriate graph automatically
         hr = this.graphBuilder.RenderFile(FileName, null);
         DsError.ThrowExceptionForHR(hr);
@@ -227,9 +233,6 @@ namespace OgamaControls
         {
           // Try other way round because automatic renderer could not build
           // graph including the sample grabber
-          IBaseFilter aviSplitter = null;
-          graphBuilder.FindFilterByName("AVI Splitter", out aviSplitter);
-
           IPin iPinAVISplitterOut = DsFindPin.ByDirection(aviSplitter, PinDirection.Output, 0);
           IPin iPinAVISplitterIn;
           hr = iPinAVISplitterOut.ConnectedTo(out iPinAVISplitterIn);

@@ -282,10 +282,10 @@ namespace Ogama.Modules.Recording
     private UpdateLiveView delegateNewSlideAvailable;
 
     /// <summary>
-    /// Saves the <see cref="CaptureDeviceProperties"/>
+    /// Saves the <see cref="ScreenCaptureProperties"/>
     /// for the screen recorder of the presentation module.
     /// </summary>
-    private CaptureDeviceProperties captureProperties;
+    private ScreenCaptureProperties screenCaptureProperties;
 
     /// <summary>
     /// A diagnostic <see cref="Stopwatch"/> for debugging purposes.
@@ -324,8 +324,6 @@ namespace Ogama.Modules.Recording
 
       this.Picture = this.recordPicture;
       this.InitializeCustomElements();
-
-      this.InitializeVHScrCap();
     }
 
     #endregion //CONSTRUCTION
@@ -655,15 +653,25 @@ namespace Ogama.Modules.Recording
       this.generalTrigger.Value = 255;
       this.generalTrigger.PortAddress = 0x0378;
 
-      this.captureProperties = new CaptureDeviceProperties(
-        "VHScrCap",
+      // Take primary monitor
+      int monitorIndex = 0;
+      if (PresentationScreen.GetPresentationScreen() != Screen.PrimaryScreen)
+      {
+        // otherwise take the secondary sceen.
+        monitorIndex = 1;
+      }
+
+      this.screenCaptureProperties = new ScreenCaptureProperties(
+        "OgamaScreenCapture Filter",
         string.Empty,
         "ffdshow Video Codec",
         string.Empty,
         10,
         Document.ActiveDocument.PresentationSize,
         string.Empty,
-        CaptureMode.Video);
+        CaptureMode.Video,
+        monitorIndex,
+        this.recordPicture);
 
       this.rawDataLists = new List<RawData>[NUMWRITINGTHREADS];
       for (int i = 0; i < NUMWRITINGTHREADS; i++)
@@ -1463,10 +1471,9 @@ namespace Ogama.Modules.Recording
       TrialCollection trials = threadParams[0] as TrialCollection;
       Trigger trigger = threadParams[1] as Trigger;
       bool enableTrigger = (bool)threadParams[2];
-      CaptureDeviceProperties captureProperties = (CaptureDeviceProperties)threadParams[3];
+      ScreenCaptureProperties screenCaptureProperties = (ScreenCaptureProperties)threadParams[3];
       CaptureDeviceProperties userCameraProperties = (CaptureDeviceProperties)threadParams[4];
       Control userCameraPreviewWindow = (Control)threadParams[5];
-      Control screenCapturePreviewWindow = (Control)threadParams[6];
       GetTimeDelegate getTimeMethod = this.GetCurrentTime;
 
       // Set triggering state
@@ -1478,11 +1485,8 @@ namespace Ogama.Modules.Recording
       // Set slide list of presenter
       this.presenterForm.TrialList = trials;
 
-      // Set preview window for screen capture
-      this.presenterForm.ScreenCapturePreviewWindow = screenCapturePreviewWindow;
-
       // Set screen capture device properties
-      this.presenterForm.CaptureProperties = captureProperties;
+      this.presenterForm.ScreenCaptureProperties = screenCaptureProperties;
 
       // Set preview window for user camera
       this.presenterForm.UserCameraPreviewWindow = userCameraPreviewWindow;
@@ -1594,15 +1598,13 @@ namespace Ogama.Modules.Recording
       ScreenCaptureDialog dialog = new ScreenCaptureDialog();
 
       // Initialize dialog with defaults
-      dialog.VideoCompressor = this.captureProperties.VideoCompressor;
-      dialog.VideoDevice = this.captureProperties.VideoInputDevice;
-
+      dialog.VideoCompressor = this.screenCaptureProperties.VideoCompressor;
+      dialog.FrameRate = Document.ActiveDocument.ExperimentSettings.ScreenCaptureFramerate;
       if (dialog.ShowDialog() == DialogResult.OK)
       {
-        this.captureProperties.VideoInputDevice = dialog.VideoDevice;
-        this.captureProperties.VideoCompressor = dialog.VideoCompressor;
-        this.captureProperties.FrameRate = dialog.FrameRate;
-        this.captureProperties.VideoSize = dialog.FrameSize;
+        this.screenCaptureProperties.VideoCompressor = dialog.VideoCompressor;
+        this.screenCaptureProperties.FrameRate = dialog.FrameRate;
+        Document.ActiveDocument.ExperimentSettings.ScreenCaptureFramerate = dialog.FrameRate;
       }
     }
 
@@ -1913,10 +1915,9 @@ namespace Ogama.Modules.Recording
         threadParameters.Add(copyOfTrials);
         threadParameters.Add(this.generalTrigger);
         threadParameters.Add(this.btnTrigger.Checked);
-        threadParameters.Add(this.captureProperties);
+        threadParameters.Add(this.screenCaptureProperties);
         threadParameters.Add(this.webcamPreview.Properties);
         threadParameters.Add(this.webcamPreview.DirectXCapture == null ? null : this.webcamPreview.DirectXCapture.PreviewWindow);
-        threadParameters.Add(this.recordPicture);
 
         // Stop webcam
         this.webcamPreview.Preview = false;
@@ -2156,43 +2157,20 @@ namespace Ogama.Modules.Recording
     }
 
     /// <summary>
-    /// This method is used for one time after installation to
-    /// ensure the ezvision files be available at
-    /// local application data folder to enable writing into this folder.
-    /// </summary>
-    private void InitializeVHScrCap()
-    {
-      // Create ogamasc.xml
-      ScreenCaptureSetting capSettings = new ScreenCaptureSetting();
-      capSettings.Serialize(Path.Combine(Properties.Settings.Default.VHScreenCaptureSettingsPath, "ogamasc.xml"));
-
-#if VHUNLOCK
-      UnlockVH.UnlockVHScrCap();
-#endif
-    }
-
-    /// <summary>
-    /// This method writes the current presentation bounds into the ogamasc.xml
-    /// configuration file for the VHScrCap filter.
+    /// This method sets the capture mode according to flash content.
     /// </summary>
     private void InitializeScreenCapture()
     {
       // Only needed if there is a flash movie.
       if (!Document.ActiveDocument.ExperimentSettings.SlideShow.HasFlashContent())
       {
-        this.captureProperties.CaptureMode = CaptureMode.None;
+        this.screenCaptureProperties.CaptureMode = CaptureMode.None;
         return;
       }
       else
       {
-        this.captureProperties.CaptureMode = CaptureMode.Video;
+        this.screenCaptureProperties.CaptureMode = CaptureMode.Video;
       }
-
-      string xmlFile = Path.Combine(Properties.Settings.Default.VHScreenCaptureSettingsPath, "ogamasc.xml");
-      ScreenCaptureSetting currentSettings = new ScreenCaptureSetting();
-      currentSettings.Deserialize(xmlFile);
-      currentSettings.TrackRectangle = PresentationScreen.GetPresentationBounds();
-      currentSettings.Serialize(xmlFile);
     }
 
     /// <summary>

@@ -66,7 +66,7 @@ namespace Ogama.Properties
       // Do not create directory if it does not already exists
       // because it will be created during first startup
       // of Record Module
-      this.VHScreenCaptureSettingsPath = Directory.GetParent(Application.CommonAppDataPath).FullName +
+      this.OgamaScreenCaptureSettingsPath = Directory.GetParent(Application.CommonAppDataPath).FullName +
         Path.DirectorySeparatorChar;
 
       // Setup SaliencyCalculationPath
