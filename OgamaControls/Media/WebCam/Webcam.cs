@@ -536,7 +536,7 @@ namespace OgamaControls
         this.dxCapture.Dispose();
       }
 
-      if (captureProperties.VideoInputDevice == "VHScrCap")
+      if (captureProperties.VideoInputDevice == "OgamaScreenCapture Filter")
       {
         // We dont want to initialize a webcam with the
         // ScreenCapture Filter

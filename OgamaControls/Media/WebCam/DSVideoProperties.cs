@@ -524,7 +524,7 @@ namespace OgamaControls
       //cbbVideoDevices.Items.Add("Disabled");
       foreach (Filter filter in this.filters.VideoInputDevices)
       {
-        if (filter.Name != "VHScrCap")
+        if (filter.Name != "OgamaScreenCapture Filter")
         {
           cbbVideoDevices.Items.Add(filter.Name);
         }

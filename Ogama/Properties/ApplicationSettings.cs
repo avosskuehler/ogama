@@ -62,7 +62,7 @@ namespace Ogama.Properties
     /// </summary>
     public Settings()
     {
-      // Setup VHScreenCaptureSettingsPath
+      // Setup v
       // Do not create directory if it does not already exists
       // because it will be created during first startup
       // of Record Module

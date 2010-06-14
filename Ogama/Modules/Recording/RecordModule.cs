@@ -739,7 +739,7 @@ namespace Ogama.Modules.Recording
       this.ResizePicture();
 
       // Disable Usercam button, if there is no available webcam
-      // except VHScrCap which should not be used.
+      // except Ogama Screen Capture which should not be used.
       if (this.webcamPreview.DirectXCapture == null)
       {
         this.btnUsercam.Enabled = false;
