@@ -150,13 +150,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\DmoBase\DmoBase.csproj">
-      <Project>{D8704CBE-F446-4AF1-BCA2-FFB0DE267395}</Project>
-      <Name>DmoBase</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DirectShowLib\DirectShowLib-2005.csproj">
       <Project>{CE009BFA-5EF6-4153-B2A1-2FA79698A9AE}</Project>
       <Name>DirectShowLib-2005</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DmoBase\DmoBase.csproj">
+      <Project>{D8704CBE-F446-4AF1-BCA2-FFB0DE267395}</Project>
+      <Name>DmoBase</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

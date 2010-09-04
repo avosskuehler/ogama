@@ -82,14 +82,14 @@
     <Compile Include="TimeFormatFlags.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DirectShow\DirectShowLib\DirectShowLib-2005.csproj">
+    <None Include="app.config" />
+    <None Include="Properties\DmoBaseKey.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DirectShowLib\DirectShowLib-2005.csproj">
       <Project>{CE009BFA-5EF6-4153-B2A1-2FA79698A9AE}</Project>
       <Name>DirectShowLib-2005</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="Properties\DmoBaseKey.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 #include <streams.h>
-
+#include <time.h>
 #include "OgamaScreenCapture.h"
 #include "OgamaScreenCaptureGuids.h"
 #include "DibHelper.h"
@@ -25,9 +25,10 @@ COgamaScreenCapturePin::COgamaScreenCapturePin(HRESULT *phr, CSource *pFilter)
         m_FramesWritten(0),
         m_bZeroMemory(0),
         m_iFrameNumber(0),
-        m_rtFrameLength(FPS_5), // Capture and display desktop 5 times per second
+        m_rtFrameLength(FPS_10), // Capture and display desktop 10 times per second by default
         m_nCurrentBitDepth(32),
-		m_MonitorIndex(0)
+		m_MonitorIndex(0),
+		m_lastSampleTime(0)
 {
 	// The main point of this sample is to demonstrate how to take a DIB
 	// in host memory and insert it into a video stream. 
@@ -36,6 +37,7 @@ COgamaScreenCapturePin::COgamaScreenCapturePin(HRESULT *phr, CSource *pFilter)
     // the AVI file with the video frames we pass to it. In this case, 
     // the end result is a screen capture video (GDI images only, with no
     // support for overlay surfaces).
+	m_Stopwatch.startTimer();
 }
 
 COgamaScreenCapturePin::~COgamaScreenCapturePin()
@@ -217,11 +219,12 @@ HRESULT COgamaScreenCapturePin::GetMediaType(int iPosition, CMediaType *pmt)
     pvi->bmiHeader.biPlanes     = 1;
     pvi->bmiHeader.biSizeImage  = GetBitmapSize(&pvi->bmiHeader);
     pvi->bmiHeader.biClrImportant = 0;
+	pvi->AvgTimePerFrame		= m_rtFrameLength;
 
     SetRectEmpty(&(pvi->rcSource)); // we want the whole image area rendered.
     SetRectEmpty(&(pvi->rcTarget)); // no particular destination rectangle
 
-    pmt->SetType(&MEDIATYPE_Video);
+	pmt->SetType(&MEDIATYPE_Video);
     pmt->SetFormatType(&FORMAT_VideoInfo);
     pmt->SetTemporalCompression(FALSE);
 
@@ -388,6 +391,13 @@ HRESULT COgamaScreenCapturePin::FillBuffer(IMediaSample *pSample)
 	BYTE *pData;
     long cbData;
 
+	double currentTime=m_Stopwatch.getElapsedTime()*1000;
+	if (currentTime-m_lastSampleTime>m_rtFrameLength/UNITS)
+	{
+		m_iFrameNumber++;
+		return S_FALSE;
+	}
+
     CheckPointer(pSample, E_POINTER);
 
     CAutoLock cAutoLockShared(&m_cSharedState);
@@ -411,14 +421,22 @@ HRESULT COgamaScreenCapturePin::FillBuffer(IMediaSample *pSample)
 	// then you'll also need to configure the AVI Mux filter to 
 	// set the Average Time Per Frame for the AVI Header.
     // The current time is the sample's start.
-    REFERENCE_TIME rtStart = m_iFrameNumber * m_rtFrameLength;
-    REFERENCE_TIME rtStop  = rtStart + m_rtFrameLength;
+    //REFERENCE_TIME rtStart = m_iFrameNumber * m_rtFrameLength;
+    //REFERENCE_TIME rtStop  = rtStart + m_rtFrameLength;
 
-    pSample->SetTime(&rtStart, &rtStop);
-    m_iFrameNumber++;
+    //pSample->SetTime(&rtStart, &rtStop);
+    //m_iFrameNumber++;
+
+	CRefTime rtStart;
+	m_pFilter->StreamTime(rtStart);
+	CRefTime rtEnd = rtStart + m_rtFrameLength;
+	pSample->SetTime((REFERENCE_TIME *)&rtStart, (REFERENCE_TIME *)&rtEnd);
+
 
 	// Set TRUE on every sample for uncompressed frames
     pSample->SetSyncPoint(TRUE);
+
+	m_lastSampleTime=currentTime;
 
     return S_OK;
 }

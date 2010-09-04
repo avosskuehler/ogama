@@ -69,12 +69,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_11039375ABE9B9669E4F0FCBBAF98288"
-        "OwnerKey" = "8:_3DA779F9C035F84CC56AF26E4C872DD9"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_147015C1ABE64F25B6275D236408DFDA"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -117,18 +111,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_22402D04C9044C4D7505CF4206017F87"
-        "OwnerKey" = "8:_088CB109699643A095DDB471A3DA72C7"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_22402D04C9044C4D7505CF4206017F87"
-        "OwnerKey" = "8:_276FF946B1794620A2BE0DAAA8BC2A2F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_276FF946B1794620A2BE0DAAA8BC2A2F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -136,12 +118,6 @@
         "Entry"
         {
         "MsmKey" = "8:_2B333ED91082423CA31C8D11D907D5BF"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_3CD9B3D6C7644F5295A02E01AD889888"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -285,6 +261,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_7C6B84A66D14B56AD83B488A0A998BDC"
+        "OwnerKey" = "8:_3DA779F9C035F84CC56AF26E4C872DD9"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_7F4B7CB018088F0C6099BC39282F0112"
         "OwnerKey" = "8:_E280159B539AEB47E06A73694E12DFBD"
         "MsmSig" = "8:_UNDEFINED"
@@ -310,7 +292,7 @@
         "Entry"
         {
         "MsmKey" = "8:_82271D13E1DC14EF8D5CFBF0B20361D9"
-        "OwnerKey" = "8:_22402D04C9044C4D7505CF4206017F87"
+        "OwnerKey" = "8:_088CB109699643A095DDB471A3DA72C7"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -358,7 +340,7 @@
         "Entry"
         {
         "MsmKey" = "8:_82271D13E1DC14EF8D5CFBF0B20361D9"
-        "OwnerKey" = "8:_088CB109699643A095DDB471A3DA72C7"
+        "OwnerKey" = "8:_9C1013C99F2258DFAC54D26DC31282B4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -431,6 +413,18 @@
         {
         "MsmKey" = "8:_9BA79A468BD442DF90FD1C20156E7239"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9C1013C99F2258DFAC54D26DC31282B4"
+        "OwnerKey" = "8:_088CB109699643A095DDB471A3DA72C7"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9C1013C99F2258DFAC54D26DC31282B4"
+        "OwnerKey" = "8:_276FF946B1794620A2BE0DAAA8BC2A2F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -561,6 +555,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_C58D80A0D255453AADF342FD36E07C4E"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_C6F24ED403D04D9197EA9DD425AF043A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -615,12 +615,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_D2B606286B074198B87C320829450E97"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_D31CC1FF43514A8E8D3DDF96B5D6BA95"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -658,6 +652,12 @@
         "Entry"
         {
         "MsmKey" = "8:_E0BDC0E3FCD54D3D82376E96482A3095"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E1CD1D81B1F04AB18446B01840D7C2B5"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -940,7 +940,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_22402D04C9044C4D7505CF4206017F87"
+        "OwnerKey" = "8:_9C1013C99F2258DFAC54D26DC31282B4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -957,7 +957,7 @@
         "DisplayName" = "8:Debug"
         "IsDebugOnly" = "11:TRUE"
         "IsReleaseOnly" = "11:FALSE"
-        "OutputFilename" = "8:..\\Debug\\Setup\\Ogama\\OgamaSetupV3.3.msi"
+        "OutputFilename" = "8:..\\Debug\\Setup\\Ogama\\OgamaSetupV3.4.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -971,7 +971,7 @@
             {
             "Enabled" = "11:TRUE"
             "PromptEnabled" = "11:TRUE"
-            "PrerequisitesLocation" = "2:2"
+            "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
                 "Items"
@@ -999,7 +999,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:..\\Release\\Setup\\Ogama\\OgamaSetupV3.3.msi"
+        "OutputFilename" = "8:..\\Release\\Setup\\Ogama\\OgamaSetupV3.4.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -1013,7 +1013,7 @@
             {
             "Enabled" = "11:TRUE"
             "PromptEnabled" = "11:TRUE"
-            "PrerequisitesLocation" = "2:2"
+            "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
                 "Items"
@@ -1028,10 +1028,10 @@
                     "Name" = "8:SQL Server 2008 Express"
                     "ProductCode" = "8:Microsoft.Sql.Server.Express.10.0"
                     }
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Visual.C++.9.0.x86"
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Visual.C++.10.0.x86"
                     {
-                    "Name" = "8:Visual C++ Runtime Libraries (x86)"
-                    "ProductCode" = "8:Microsoft.Visual.C++.9.0.x86"
+                    "Name" = "8:Visual C++ 2010 Runtime Libraries (x86)"
+                    "ProductCode" = "8:Microsoft.Visual.C++.10.0.x86"
                     }
                     "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.4.5"
                     {
@@ -1351,26 +1351,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_11039375ABE9B9669E4F0FCBBAF98288"
-            {
-            "SourcePath" = "8:Flash10e.ocx"
-            "TargetName" = "8:Flash10e.ocx"
-            "Tag" = "8:"
-            "Folder" = "8:_8FB299A70F114EA6AF4E625DC566059B"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_147015C1ABE64F25B6275D236408DFDA"
             {
             "SourcePath" = "8:Resources\\InfantGraphics\\Cat.png"
@@ -1473,63 +1453,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_22402D04C9044C4D7505CF4206017F87"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:DmoBase, Version=3.3.0.0, Culture=neutral, PublicKeyToken=163be806126850ac, processorArchitecture=x86"
-                "ScatterAssemblies"
-                {
-                    "_22402D04C9044C4D7505CF4206017F87"
-                    {
-                    "Name" = "8:DmoBase.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:DmoBase.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_8FB299A70F114EA6AF4E625DC566059B"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2B333ED91082423CA31C8D11D907D5BF"
             {
             "SourcePath" = "8:Resources\\InfantGraphics\\Mouse.png"
             "TargetName" = "8:Mouse.png"
             "Tag" = "8:"
             "Folder" = "8:_09663109A53B44EDBB46083D04027790"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3CD9B3D6C7644F5295A02E01AD889888"
-            {
-            "SourcePath" = "8:..\\Libs\\Native\\VHScrCapDlg.exe"
-            "TargetName" = "8:VHScrCapDlg.exe"
-            "Tag" = "8:"
-            "Folder" = "8:_623BCECEC3E6476D84B48ADD52A457B9"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1861,6 +1790,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7C6B84A66D14B56AD83B488A0A998BDC"
+            {
+            "SourcePath" = "8:Flash10h.ocx"
+            "TargetName" = "8:Flash10h.ocx"
+            "Tag" = "8:"
+            "Folder" = "8:_8FB299A70F114EA6AF4E625DC566059B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7F4B7CB018088F0C6099BC39282F0112"
             {
             "AssemblyRegister" = "3:1"
@@ -2105,6 +2054,37 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9C1013C99F2258DFAC54D26DC31282B4"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:DmoBase, Version=3.4.0.0, Culture=neutral, PublicKeyToken=163be806126850ac, processorArchitecture=x86"
+                "ScatterAssemblies"
+                {
+                    "_9C1013C99F2258DFAC54D26DC31282B4"
+                    {
+                    "Name" = "8:DmoBase.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:DmoBase.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_8FB299A70F114EA6AF4E625DC566059B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9D395456C38CA5C6BCBA7BB2DF2681BB"
             {
             "AssemblyRegister" = "3:1"
@@ -2140,7 +2120,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:OgamaControls, Version=3.3.3817.17135, Culture=neutral, PublicKeyToken=43078ad6ea7e2b10, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:OgamaControls, Version=3.4.3899.20005, Culture=neutral, PublicKeyToken=43078ad6ea7e2b10, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_9FFE0B901D59EFB3EA69987235CA5C55"
@@ -2324,7 +2304,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:VectorGraphics, Version=3.3.3817.17134, Culture=neutral, PublicKeyToken=c29763027ae5aa3e, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:VectorGraphics, Version=3.4.3899.20004, Culture=neutral, PublicKeyToken=c29763027ae5aa3e, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_AF0B32DBCAF0DEB1B6288672B5EF7A2C"
@@ -2420,6 +2400,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C58D80A0D255453AADF342FD36E07C4E"
+            {
+            "SourcePath" = "8:..\\Release\\OgamaScreenCapture.ax"
+            "TargetName" = "8:OgamaScreenCapture.ax"
+            "Tag" = "8:"
+            "Folder" = "8:_8FB299A70F114EA6AF4E625DC566059B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:4"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C6F24ED403D04D9197EA9DD425AF043A"
@@ -2597,26 +2597,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D2B606286B074198B87C320829450E97"
-            {
-            "SourcePath" = "8:..\\Libs\\Native\\vhscrcapset.xml"
-            "TargetName" = "8:vhscrcapset.xml"
-            "Tag" = "8:"
-            "Folder" = "8:_623BCECEC3E6476D84B48ADD52A457B9"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D31CC1FF43514A8E8D3DDF96B5D6BA95"
             {
             "SourcePath" = "8:..\\Libs\\Native\\cv200.dll"
@@ -2732,6 +2712,26 @@
             {
             "SourcePath" = "8:Resources\\uninstall.bat"
             "TargetName" = "8:uninstall.bat"
+            "Tag" = "8:"
+            "Folder" = "8:_8FB299A70F114EA6AF4E625DC566059B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E1CD1D81B1F04AB18446B01840D7C2B5"
+            {
+            "SourcePath" = "8:Resources\\cleye.config"
+            "TargetName" = "8:cleye.config"
             "Tag" = "8:"
             "Folder" = "8:_8FB299A70F114EA6AF4E625DC566059B"
             "Condition" = "8:"
@@ -2865,7 +2865,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:DirectX.Capture, Version=3.3.3817.17133, Culture=neutral, PublicKeyToken=4c024e18667c50fb, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:DirectX.Capture, Version=3.3.3899.20004, Culture=neutral, PublicKeyToken=4c024e18667c50fb, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_F8EB0D4BC76D8FF4C72BE084C897FD86"
@@ -3060,24 +3060,24 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:OGAMA 3.3"
-        "ProductCode" = "8:{D46BA6C4-1CF1-42D8-B459-BBDE4F6DE4F6}"
-        "PackageCode" = "8:{D58DD033-42D3-48E1-B3F0-E8B92063F57C}"
+        "ProductName" = "8:OGAMA 3.4"
+        "ProductCode" = "8:{5BD40588-AB91-47C4-B895-86095C678597}"
+        "PackageCode" = "8:{4559E26B-665B-4BB1-BD76-7CE49065F693}"
         "UpgradeCode" = "8:{4F9B223A-EE75-489A-8EDD-C8740626D263}"
         "RestartWWWService" = "11:FALSE"
-        "RemovePreviousVersions" = "11:FALSE"
+        "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:3.3"
+        "ProductVersion" = "8:3.4"
         "Manufacturer" = "8:Freie Universität Berlin"
-        "ARPHELPTELEPHONE" = "8:"
-        "ARPHELPLINK" = "8:http://didaktik.physik.fu-berlin.de/ogama"
-        "Title" = "8:OgamaSetupV3.3"
-        "Subject" = "8:This project: Ogama - open gaze and mouse analyzer is intended to be an open source gaze and mouse tracking recording and analysis software. It can record and analyze raw data that is recorded in experimental slide show setups. "
+        "ARPHELPTELEPHONE" = "8:adrian@ogama.net"
+        "ARPHELPLINK" = "8:http://ogama.codeplex.com"
+        "Title" = "8:OgamaSetupV3.4"
+        "Subject" = "8:Ogama - open gaze and mouse analyzer is an open source gaze and mouse tracking recording and analysis software."
         "ARPCONTACT" = "8:Adrian Voßkühler"
         "Keywords" = "8:ogama, eyetracking, mousetracking"
         "ARPCOMMENTS" = "8:Installs OGAMA - open gaze and mouse analyzer"
-        "ARPURLINFOABOUT" = "8:http://didaktik.physik.fu-berlin.de"
+        "ARPURLINFOABOUT" = "8:http://www.ogama.net"
         "ARPPRODUCTICON" = "8:_AA1D320498064D879F8881A03FC848F7"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"

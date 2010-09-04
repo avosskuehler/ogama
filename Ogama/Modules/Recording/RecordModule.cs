@@ -631,7 +631,7 @@ namespace Ogama.Modules.Recording
 
       this.delegateNewSlideAvailable = new UpdateLiveView(this.NewSlideAvailable);
 
-      this.forcePanelViewerUpdate = true;
+      this.forcePanelViewerUpdate = false;
 
       this.trialDataList = new List<TrialsData>();
       this.trialEventList = new List<TrialEvent>();
@@ -748,8 +748,9 @@ namespace Ogama.Modules.Recording
 
       this.InitializeScreenCapture();
       this.CreateTrackerInterfaces();
-
+      this.forcePanelViewerUpdate = true;
       this.NewSlideAvailable();
+      this.forcePanelViewerUpdate = false;
     }
 
     /// <summary>
@@ -1599,12 +1600,19 @@ namespace Ogama.Modules.Recording
 
       // Initialize dialog with defaults
       dialog.VideoCompressor = this.screenCaptureProperties.VideoCompressor;
+      if (Document.ActiveDocument.ExperimentSettings.ScreenCaptureFramerate < 5)
+      {
+        Document.ActiveDocument.ExperimentSettings.ScreenCaptureFramerate = 10;
+        Document.ActiveDocument.Modified = true;
+      }
+
       dialog.FrameRate = Document.ActiveDocument.ExperimentSettings.ScreenCaptureFramerate;
       if (dialog.ShowDialog() == DialogResult.OK)
       {
         this.screenCaptureProperties.VideoCompressor = dialog.VideoCompressor;
         this.screenCaptureProperties.FrameRate = dialog.FrameRate;
         Document.ActiveDocument.ExperimentSettings.ScreenCaptureFramerate = dialog.FrameRate;
+        Document.ActiveDocument.Modified = true;
       }
     }
 
@@ -2152,8 +2160,12 @@ namespace Ogama.Modules.Recording
       this.Picture.StopAnimation();
       this.Picture.ResetPicture();
 
+      this.forcePanelViewerUpdate = true;
+
       // Redraw panel
       this.NewSlideAvailable();
+
+      this.forcePanelViewerUpdate = false;
     }
 
     /// <summary>

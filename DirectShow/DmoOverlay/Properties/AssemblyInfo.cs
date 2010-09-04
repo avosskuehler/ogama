@@ -23,9 +23,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-[assembly: AssemblyVersion("3.3.*")]
+[assembly: AssemblyVersion("3.4.*")]
 
 [assembly: AssemblyDelaySign(false)]
 [assembly: AssemblyKeyName("")]
-[assembly: AssemblyFileVersionAttribute("3.3")]
+[assembly: AssemblyFileVersionAttribute("3.4")]
 [assembly: GuidAttribute("DFF225E1-36D2-4b77-A8CD-907A80B0A698")]

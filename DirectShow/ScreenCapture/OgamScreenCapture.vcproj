@@ -21,8 +21,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="Debug"
-			IntermediateDirectory="Debug"
+			OutputDirectory="$(SolutionDir)Debug"
+			IntermediateDirectory="$(SolutionDir)Debug"
 			ConfigurationType="2"
 			CharacterSet="1"
 			>
@@ -68,6 +68,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="..\BaseClasses\Debug\strmbasd.lib winmm.lib msvcrtd.lib"
 				OutputFile="$(OutDir)\$(ProjectName).ax"
+				Version="3.4"
 				LinkIncremental="1"
 				IgnoreAllDefaultLibraries="true"
 				ModuleDefinitionFile=".\OgamaScreenCapture.def"
@@ -102,8 +103,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="Release"
-			IntermediateDirectory="Release"
+			OutputDirectory="$(SolutionDir)Release"
+			IntermediateDirectory="$(SolutionDir)Release"
 			ConfigurationType="2"
 			CharacterSet="1"
 			>
@@ -146,6 +147,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="..\BaseClasses\Release\strmbase.lib winmm.lib msvcrt.lib"
 				OutputFile="$(OutDir)\$(ProjectName).ax"
+				Version="3.4"
 				LinkIncremental="1"
 				IgnoreAllDefaultLibraries="true"
 				ModuleDefinitionFile="OgamaScreenCapture.def"
@@ -355,6 +357,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\hr_time.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\OgamaScreenCapture.cpp"
 				>
 			</File>
@@ -366,10 +372,6 @@
 				RelativePath=".\setup.cpp"
 				>
 			</File>
-			<File
-				RelativePath=".\VideoSource.cpp"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -378,6 +380,10 @@
 			>
 			<File
 				RelativePath=".\DibHelper.h"
+				>
+			</File>
+			<File
+				RelativePath=".\hr_time.h"
 				>
 			</File>
 			<File

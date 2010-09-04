@@ -130,7 +130,7 @@ namespace Ogama.ExceptionHandling
 
       ExceptionDialog newExceptionDlg = new ExceptionDialog();
       newExceptionDlg.ExceptionMessage = e.Message;
-      newExceptionDlg.ExceptionDetails = e.ToString();
+      newExceptionDlg.ExceptionDetails = message;
       DialogResult result = newExceptionDlg.ShowDialog();
       switch (result)
       {
@@ -162,7 +162,7 @@ namespace Ogama.ExceptionHandling
       {
         // Something has gone wrong during HandleException (e.g. incorrect configuration of the block).
         // Exit the application
-        string errorMsg = "An unexpected exception occured while calling HandleException with policy 'Global Policy'. ";
+        string errorMsg = "An unexpected exception occured while calling HandleException.";
         errorMsg += Environment.NewLine;
 
         MessageBox.Show(errorMsg, "Application Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);

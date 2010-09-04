@@ -1282,6 +1282,7 @@ namespace Ogama.Modules.Recording
         foreach (VGFlash flash in slideContainer.Slide.ActiveXStimuli)
         {
           flash.SendMessagesToParent(true);
+          flash.Play();
         }
 
         switch (this.shownContainer)

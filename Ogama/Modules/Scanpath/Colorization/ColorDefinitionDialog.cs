@@ -211,7 +211,12 @@ namespace Ogama.Modules.Scanpaths
       {
         if (colorParams.ColorizationMode == ColorizationModes.Category)
         {
-          Pen boundsPen = (Pen)colorParams.CategoryStyles[e.Node.Text].ConnectionPen.Clone();
+          Pen boundsPen = (Pen)Pens.Red.Clone();
+          if (colorParams.CategoryStyles.ContainsKey(e.Node.Text))
+          {
+            boundsPen = (Pen)colorParams.CategoryStyles[e.Node.Text].ConnectionPen.Clone();
+          }
+
           boundsPen.Width = 1;
           e.Graphics.DrawRectangle(boundsPen, colorRectBounds);
         }
@@ -220,7 +225,12 @@ namespace Ogama.Modules.Scanpaths
       {
         if (colorParams.ColorizationMode != ColorizationModes.Category)
         {
-          Pen boundsPen = (Pen)colorParams.SubjectStyles[e.Node.Text].ConnectionPen.Clone();
+          Pen boundsPen = (Pen)Pens.Red.Clone();
+          if (colorParams.SubjectStyles.ContainsKey(e.Node.Text))
+          {
+            boundsPen = (Pen)colorParams.SubjectStyles[e.Node.Text].ConnectionPen.Clone();
+          }
+
           boundsPen.Width = 1;
           e.Graphics.DrawRectangle(boundsPen, colorRectBounds);
         }
@@ -235,14 +245,20 @@ namespace Ogama.Modules.Scanpaths
       {
         if (colorParams.ColorizationMode == ColorizationModes.Category)
         {
-          usedColor = colorParams.CategoryStyles[e.Node.Text].FixationPen.Color;
+          if (colorParams.CategoryStyles.ContainsKey(e.Node.Text))
+          {
+            usedColor = colorParams.CategoryStyles[e.Node.Text].FixationPen.Color;
+          }
         }
       }
       else
       {
         if (colorParams.ColorizationMode != ColorizationModes.Category)
         {
-          usedColor = colorParams.SubjectStyles[e.Node.Text].FixationPen.Color;
+          if (colorParams.SubjectStyles.ContainsKey(e.Node.Text))
+          {
+            usedColor = colorParams.SubjectStyles[e.Node.Text].FixationPen.Color;
+          }
         }
       }
 
@@ -308,14 +324,20 @@ namespace Ogama.Modules.Scanpaths
         case ColorizationModes.Subject:
           if (e.Node.Level == 1)
           {
-            this.PopulateStyleGroup(this.colorParams.SubjectStyles[e.Node.Text]);
+            if (this.colorParams.SubjectStyles.ContainsKey(e.Node.Text))
+            {
+              this.PopulateStyleGroup(this.colorParams.SubjectStyles[e.Node.Text]);
+            }
           }
 
           break;
         case ColorizationModes.Category:
           if (e.Node.Level == 0)
           {
-            this.PopulateStyleGroup(this.colorParams.CategoryStyles[e.Node.Text]);
+            if (this.colorParams.CategoryStyles.ContainsKey(e.Node.Text))
+            {
+              this.PopulateStyleGroup(this.colorParams.CategoryStyles[e.Node.Text]);
+            }
           }
 
           break;
@@ -656,7 +678,10 @@ namespace Ogama.Modules.Scanpaths
       {
         foreach (TreeNode subnode in node.Nodes)
         {
-          this.colorParams.SubjectStyles[subnode.Text] = this.colorParams.CategoryStyles[node.Text];
+          if (this.colorParams.CategoryStyles.ContainsKey(node.Text))
+          {
+            this.colorParams.SubjectStyles[subnode.Text] = this.colorParams.CategoryStyles[node.Text];
+          }
         }
       }
     }

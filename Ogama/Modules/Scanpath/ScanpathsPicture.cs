@@ -482,6 +482,8 @@ namespace Ogama.Modules.Scanpaths
           this.MouseFixationsPen = kvp.Value.MouseStyle.FixationPen;
           this.DrawFixationsForCurrentSubject();
         }
+
+        ApplyAttentionMap(SampleType.Both);
       }
 
       this.DrawForeground(resetPicture);

@@ -187,12 +187,12 @@ namespace VectorGraphics.Controls
         return;
       }
 
-      long time = DateTime.Now.Ticks;
-      do
-      {
-        Application.DoEvents();
-      }
-      while ((DateTime.Now.Ticks - time) < 10000);
+      //long time = DateTime.Now.Ticks;
+      //do
+      //{
+      //  Application.DoEvents();
+      //}
+      //while ((DateTime.Now.Ticks - time) < 10000);
 
       // Create graphics for bitmap
       using (Graphics graphics = Graphics.FromImage(thumb))

@@ -9,6 +9,7 @@
 #include <windows.h>
 #include <strsafe.h>
 #include "IOgamaScreenCapture.h"
+#include "hr_time.h"
 
 // UNITS = 10 ^ 7  
 // UNITS / 30 = 30 fps;
@@ -41,7 +42,7 @@ protected:
     int m_FramesWritten;				// To track where we are in the file
     BOOL m_bZeroMemory;                 // Do we need to clear the buffer?
     CRefTime m_rtSampleTime;	        // The time stamp for each sample
-
+	double m_lastSampleTime;
     int m_iFrameNumber;
     REFERENCE_TIME m_rtFrameLength;
 
@@ -57,6 +58,7 @@ protected:
     CMediaType m_MediaType;
     CCritSec m_cSharedState;            // Protects our internal state
     CImageDisplay m_Display;            // Figures out our media type for us
+	CStopWatch m_Stopwatch;
 
 public:
 

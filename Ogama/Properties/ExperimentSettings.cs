@@ -200,6 +200,7 @@ namespace Ogama.Properties
       this.gazeColorParams = new ColorizationParameters();
       this.mouseColorParams = new ColorizationParameters();
       this.ogamaVersion = new Version(); // Assembly.GetExecutingAssembly().GetName().Version;
+      this.ScreenCaptureFramerate = 10;
     }
 
     #endregion //CONSTRUCTION

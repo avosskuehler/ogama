@@ -22,6 +22,7 @@ namespace Ogama.Modules.Recording
   using DirectShowLib.DMO;
   using DirectX.Capture;
   using OgamaControls;
+  using Ogama.ExceptionHandling;
 
   /// <summary>
   /// This class is used to create a DirectShow graph which 
@@ -105,7 +106,7 @@ namespace Ogama.Modules.Recording
     /// <summary>
     /// DShow Filter: selected video device
     /// </summary>
-    private IBaseFilter videoDeviceFilter;
+    private IBaseFilter screenCaptureFilter;
 
     /// <summary>
     /// DShow Filter: selected video compressor
@@ -271,16 +272,19 @@ namespace Ogama.Modules.Recording
     {
       set
       {
-        this.previewWindow = value;
-
-        if (this.previewWindow != null)
+        if (Common.SecondaryScreen.SystemHasSecondaryScreen())
         {
-          // Get the IVideoWindow interface
-          this.videoWindow = (IVideoWindow)this.graphBuilder;
+          this.previewWindow = value;
 
-          // Position video window in client rect of owner window
-          this.previewWindow.Resize += new EventHandler(this.onPreviewWindowResize);
-          this.onPreviewWindowResize(this, null);
+          if (this.previewWindow != null)
+          {
+            // Get the IVideoWindow interface
+            this.videoWindow = (IVideoWindow)this.graphBuilder;
+
+            // Position video window in client rect of owner window
+            this.previewWindow.Resize += new EventHandler(this.onPreviewWindowResize);
+            this.onPreviewWindowResize(this, null);
+          }
         }
       }
     }
@@ -325,14 +329,19 @@ namespace Ogama.Modules.Recording
     /// <summary> Begin capturing. </summary>
     public void Start()
     {
-      // Start the filter graph: begin capturing
-      int hr = this.mediaControl.Run();
-      DsError.ThrowExceptionForHR(hr);
+      if (this.mediaControl != null)
+      {
+        // Start the filter graph: begin capturing
+        int hr = this.mediaControl.Run();
+        DsError.ThrowExceptionForHR(hr);
+
+        this.IsRunning = true;
+      }
 
       if (this.videoWindow != null)
       {
         // Set owner
-        hr = this.videoWindow.put_Owner(ThreadSafe.GetHandle(this.previewWindow));
+        int hr = this.videoWindow.put_Owner(ThreadSafe.GetHandle(this.previewWindow));
         DsError.ThrowExceptionForHR(hr);
 
         // Set video window style
@@ -343,8 +352,6 @@ namespace Ogama.Modules.Recording
         hr = this.videoWindow.put_Visible(OABool.True);
         DsError.ThrowExceptionForHR(hr);
       }
-
-      this.IsRunning = true;
     }
 
     /// <summary> 
@@ -438,10 +445,10 @@ namespace Ogama.Modules.Recording
           this.fileWriterFilter = null;
         }
 
-        if (this.videoDeviceFilter != null)
+        if (this.screenCaptureFilter != null)
         {
-          Marshal.ReleaseComObject(this.videoDeviceFilter);
-          this.videoDeviceFilter = null;
+          Marshal.ReleaseComObject(this.screenCaptureFilter);
+          this.screenCaptureFilter = null;
         }
 
         if (this.videoCompressorFilter != null)
@@ -465,8 +472,9 @@ namespace Ogama.Modules.Recording
         // For unmanaged objects we haven't released explicitly
         GC.Collect();
       }
-      catch
+      catch (Exception ex)
       {
+        ExceptionMethods.HandleExceptionSilent(ex);
       }
     }
 
@@ -569,14 +577,14 @@ namespace Ogama.Modules.Recording
         this.rotCookie = new DsROTEntry(this.graphBuilder);
 #endif
         // Get the ogama screen capture device and add it to the filter graph
-        this.videoDeviceFilter = DirectShowUtils.CreateFilter(
+        this.screenCaptureFilter = DirectShowUtils.CreateFilter(
           FilterCategory.VideoInputDevice,
           "OgamaScreenCapture Filter");
-        hr = this.graphBuilder.AddFilter(this.videoDeviceFilter, "Ogama Screen Capture Filter");
+        hr = this.graphBuilder.AddFilter(this.screenCaptureFilter, "Ogama Screen Capture Filter");
         DsError.ThrowExceptionForHR(hr);
 
         // Query the interface for the screen capture Filter
-        IOgamaScreenCapture ogamaFilter = this.videoDeviceFilter as IOgamaScreenCapture;
+        IOgamaScreenCapture ogamaFilter = this.screenCaptureFilter as IOgamaScreenCapture;
 
         hr = ogamaFilter.set_Monitor(this.monitorIndex);
         DsError.ThrowExceptionForHR(hr);
@@ -588,21 +596,24 @@ namespace Ogama.Modules.Recording
         hr = this.graphBuilder.AddFilter(this.smartTeeFilter, "Smart Tee");
         DsError.ThrowExceptionForHR(hr);
 
-        // Add a DMO Wrapper Filter
-        this.dmoFilter = (IBaseFilter)new DMOWrapperFilter();
-        this.dmoWrapperFilter = (IDMOWrapperFilter)this.dmoFilter;
+        if (Common.SecondaryScreen.SystemHasSecondaryScreen())
+        {
+          // Add a DMO Wrapper Filter
+          this.dmoFilter = (IBaseFilter)new DMOWrapperFilter();
+          this.dmoWrapperFilter = (IDMOWrapperFilter)this.dmoFilter;
 
-        // But it is more useful to show how to scan for the DMO
-        Guid g = this.FindGuid("DmoOverlay", DMOCategory.VideoEffect);
+          // But it is more useful to show how to scan for the DMO
+          Guid g = this.FindGuid("DmoOverlay", DMOCategory.VideoEffect);
 
-        hr = this.dmoWrapperFilter.Init(g, DMOCategory.VideoEffect);
-        DMOError.ThrowExceptionForHR(hr);
+          hr = this.dmoWrapperFilter.Init(g, DMOCategory.VideoEffect);
+          DMOError.ThrowExceptionForHR(hr);
 
-        this.SetDMOParams(this.dmoFilter);
+          this.SetDMOParams(this.dmoFilter);
 
-        // Add it to the Graph
-        hr = this.graphBuilder.AddFilter(this.dmoFilter, "DMO Filter");
-        DsError.ThrowExceptionForHR(hr);
+          // Add it to the Graph
+          hr = this.graphBuilder.AddFilter(this.dmoFilter, "DMO Filter");
+          DsError.ThrowExceptionForHR(hr);
+        }
 
         // Get the video compressor and add it to the filter graph
         // Create the filter for the selected video compressor
@@ -619,6 +630,8 @@ namespace Ogama.Modules.Recording
           out this.muxFilter,
           out this.fileWriterFilter);
         DsError.ThrowExceptionForHR(hr);
+        
+        //this.muxFilter
 
         // Disable overwrite
         hr = this.fileWriterFilter.SetMode(AMFileSinkFlags.None);
@@ -627,36 +640,55 @@ namespace Ogama.Modules.Recording
         hr = this.captureGraphBuilder.AllocCapFile(this.tempFilename, 10000000);
         DsError.ThrowExceptionForHR(hr);
 
-        hr = this.captureGraphBuilder.RenderStream(
-          null,
-          null,
-          this.videoDeviceFilter,
-          null,
-          this.smartTeeFilter);
-        DsError.ThrowExceptionForHR(hr);
+        if (Common.SecondaryScreen.SystemHasSecondaryScreen())
+        {
+          hr = this.captureGraphBuilder.RenderStream(
+            null,
+            null,
+            this.screenCaptureFilter,
+            null,
+            this.smartTeeFilter);
+          DsError.ThrowExceptionForHR(hr);
 
-        hr = this.captureGraphBuilder.RenderStream(
-          null,
-          null,
-          this.smartTeeFilter,
-          this.videoCompressorFilter,
-          this.muxFilter);
-        DsError.ThrowExceptionForHR(hr);
+          hr = this.captureGraphBuilder.RenderStream(
+            null,
+            null,
+            this.smartTeeFilter,
+            this.videoCompressorFilter,
+            this.muxFilter);
+          DsError.ThrowExceptionForHR(hr);
 
-        hr = this.captureGraphBuilder.RenderStream(
-          null,
-          null,
-          this.smartTeeFilter,
-          null,
-          this.dmoFilter);
-        DsError.ThrowExceptionForHR(hr);
+          hr = this.captureGraphBuilder.RenderStream(
+            null,
+            null,
+            this.smartTeeFilter,
+            null,
+            this.dmoFilter);
+          DsError.ThrowExceptionForHR(hr);
 
-        hr = this.captureGraphBuilder.RenderStream(
-          null,
-          null,
-          this.dmoFilter,
-          null,
-          null);
+          hr = this.captureGraphBuilder.RenderStream(
+            null,
+            null,
+            this.dmoFilter,
+            null,
+            null);
+          DsError.ThrowExceptionForHR(hr);
+        }
+        else
+        {
+          hr = this.captureGraphBuilder.RenderStream(
+            null,
+            null,
+            this.screenCaptureFilter,
+            this.videoCompressorFilter,
+            this.muxFilter);
+          DsError.ThrowExceptionForHR(hr);
+        }
+
+        //IMediaFilter filter = this.graphBuilder as IMediaFilter;
+        //IReferenceClock clock;
+        //filter.GetSyncSource(out clock);
+        hr = this.graphBuilder.SetDefaultSyncSource();
         DsError.ThrowExceptionForHR(hr);
 
         // Retreive the media control interface (for starting/stopping graph)
@@ -664,7 +696,7 @@ namespace Ogama.Modules.Recording
       }
       catch (Exception ex)
       {
-        MessageBox.Show(ex.Message, "Error in creating direct show graph");
+        ExceptionMethods.HandleException(ex);
         return false;
       }
 
@@ -754,6 +786,11 @@ namespace Ogama.Modules.Recording
     /// of the dmo wrapper filter.</param>
     private void SetDMOParams(IBaseFilter dmoWrapperFilter)
     {
+      if (dmoWrapperFilter == null)
+      {
+        return;
+      }
+
       int hr;
       this.dmoParams = dmoWrapperFilter as IMediaParams;
 

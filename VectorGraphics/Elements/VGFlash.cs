@@ -708,6 +708,7 @@ namespace VectorGraphics.Elements
       if (File.Exists(this.FullFilename))
       {
         this.flashControl.LoadMovie(0, this.FullFilename);
+        this.flashControl.Stop();
       }
     }
 
