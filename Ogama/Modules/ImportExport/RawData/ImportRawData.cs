@@ -378,6 +378,7 @@ namespace Ogama.Modules.ImportExport
       // Clear existing values
       detectionSetting.ImageDictionary.Clear();
       rawDataList.Clear();
+      double LastTimeInFileTime = 0;
 
       // Retrieve existing slideshow trials (to check matching filenames for 
       // correct trial ID numbering
@@ -640,17 +641,25 @@ namespace Ogama.Modules.ImportExport
               detectionSetting.TrialSequenceToStarttimeAssignments[currentTrialSequence] = timeInMs;
             }
 
-            if (timeInMs == lastTimeInMs)
+            // Check for duplicate time entries
+            if (timeInFileTime == LastTimeInFileTime)
             {
-              string message = "Two consecutive raw data samples had the same sampling time."
-                + Environment.NewLine + "This indicates an logfile error or wrong timescale."
-                + Environment.NewLine + "Please try to change the timescale to milliseconds or seconds.";
+              string message = String.Format(
+                "Two consecutive raw data samples had the same sampling time {0}."
+                + Environment.NewLine + "Time in FileTime is {1}" + Environment.NewLine +
+                "PrevTime in FileTime is {2}" + Environment.NewLine +
+                "This indicates an logfile error or wrong timescale."
+                + Environment.NewLine + "Please try to change the timescale to milliseconds.", 
+                timeInMs, 
+                timeInFileTime, 
+                LastTimeInFileTime);
               ExceptionMethods.ProcessErrorMessage(message);
               return;
             }
 
             // Set time check value
             lastTimeInMs = timeInMs;
+            LastTimeInFileTime = timeInFileTime;
 
             // Save time value
             newRawData.Time = timeInMs - asciiSetting.StartTime;

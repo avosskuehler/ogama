@@ -351,9 +351,18 @@ new GazeDataChangedEventHandler(this.recordModule.ITracker_GazeDataChanged);
     public virtual void Dispose()
     {
       this.CleanUp();
+
+      this.subjectButton.Enabled = true;
+
+      if (this.calibrateButton != null)
+      {
+        this.calibrateButton.Enabled = false;
+      }
+
       if (this.connectButton != null)
       {
         this.connectButton.BackColor = Color.Transparent;
+        this.connectButton.Enabled = true;
       }
 
       this.recordButton.BackColor = Color.Transparent;

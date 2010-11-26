@@ -660,7 +660,7 @@ namespace VectorGraphics.Canvas
 
         if (this.BackgroundImage == null)
         {
-          //pevent.Graphics.Clear(this.BackColor);
+          pevent.Graphics.Clear(this.BackColor);
         }
         else
         {

@@ -627,7 +627,8 @@ namespace Ogama.Modules.Recording
           AsyncHelper.FireAsync(new MethodInvoker(this.userCamera.RunGraph));
         }
 
-        if (this.screenCaptureProperties.CaptureMode != CaptureMode.None)
+        if (this.screenCaptureProperties != null &&
+          this.screenCaptureProperties.CaptureMode != CaptureMode.None)
         {
           this.preparedSlideOne.InitializeScreenCapture(this.screenCaptureProperties);
           this.preparedSlideTwo.InitializeScreenCapture(this.screenCaptureProperties);
