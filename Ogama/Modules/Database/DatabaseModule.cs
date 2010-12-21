@@ -829,26 +829,26 @@ namespace Ogama.Modules.Database
               // Avoid data from empty trials to be exported.
               if (trialRow.Length > 0)
               {
-                exportFileWriter.Write(tableSubjects.Rows[0]["SubjectName"].ToString());
+                exportFileWriter.Write(tableSubjects.Rows[0]["SubjectName"].ToString().Replace(";", ":"));
                 exportFileWriter.Write(separator);
-                exportFileWriter.Write(tableSubjects.Rows[0]["Category"].ToString());
+                exportFileWriter.Write(tableSubjects.Rows[0]["Category"].ToString().Replace(";", ":"));
                 exportFileWriter.Write(separator);
-                exportFileWriter.Write(tableSubjects.Rows[0]["Age"].ToString());
+                exportFileWriter.Write(tableSubjects.Rows[0]["Age"].ToString().Replace(";", ":"));
                 exportFileWriter.Write(separator);
-                exportFileWriter.Write(tableSubjects.Rows[0]["Sex"].ToString());
+                exportFileWriter.Write(tableSubjects.Rows[0]["Sex"].ToString().Replace(";", ":"));
                 exportFileWriter.Write(separator);
-                exportFileWriter.Write(tableSubjects.Rows[0]["Handedness"].ToString());
+                exportFileWriter.Write(tableSubjects.Rows[0]["Handedness"].ToString().Replace(";", ":"));
                 exportFileWriter.Write(separator);
-                exportFileWriter.Write(tableSubjects.Rows[0]["Comments"].ToString());
+                exportFileWriter.Write(tableSubjects.Rows[0]["Comments"].ToString().Replace(";",":"));
                 exportFileWriter.Write(separator);
 
                 exportFileWriter.Write(trialRow[0]["TrialID"].ToString());
                 exportFileWriter.Write(separator);
-                exportFileWriter.Write(trialRow[0]["TrialName"].ToString());
+                exportFileWriter.Write(trialRow[0]["TrialName"].ToString().Replace(";", ":"));
                 exportFileWriter.Write(separator);
                 exportFileWriter.Write(trialRow[0]["TrialSequence"].ToString());
                 exportFileWriter.Write(separator);
-                exportFileWriter.Write(trialRow[0]["Category"].ToString());
+                exportFileWriter.Write(trialRow[0]["Category"].ToString().Replace(";", ":"));
                 exportFileWriter.Write(separator);
                 exportFileWriter.Write(trialRow[0]["TrialStartTime"].ToString());
                 exportFileWriter.Write(separator);
