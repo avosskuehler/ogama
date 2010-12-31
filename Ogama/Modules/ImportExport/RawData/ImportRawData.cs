@@ -378,7 +378,7 @@ namespace Ogama.Modules.ImportExport
       // Clear existing values
       detectionSetting.ImageDictionary.Clear();
       rawDataList.Clear();
-      double LastTimeInFileTime = 0;
+      double lastTimeInFileTime = 0;
 
       // Retrieve existing slideshow trials (to check matching filenames for 
       // correct trial ID numbering
@@ -642,7 +642,7 @@ namespace Ogama.Modules.ImportExport
             }
 
             // Check for duplicate time entries
-            if (timeInFileTime == LastTimeInFileTime)
+            if (timeInFileTime == lastTimeInFileTime)
             {
               string message = String.Format(
                 "Two consecutive raw data samples had the same sampling time {0}."
@@ -652,14 +652,14 @@ namespace Ogama.Modules.ImportExport
                 + Environment.NewLine + "Please try to change the timescale to milliseconds.", 
                 timeInMs, 
                 timeInFileTime, 
-                LastTimeInFileTime);
+                lastTimeInFileTime);
               ExceptionMethods.ProcessErrorMessage(message);
               return;
             }
 
             // Set time check value
             lastTimeInMs = timeInMs;
-            LastTimeInFileTime = timeInFileTime;
+            lastTimeInFileTime = timeInFileTime;
 
             // Save time value
             newRawData.Time = timeInMs - asciiSetting.StartTime;

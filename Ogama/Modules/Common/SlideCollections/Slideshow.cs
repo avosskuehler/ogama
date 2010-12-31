@@ -33,6 +33,7 @@ namespace Ogama.Modules.Common
   /// It also adds a <see cref="CustomShuffling"/> property to the slideshow.
   /// </summary>
   [Serializable]
+  [XmlInclude(typeof(BrowserTreeNode))]
   public class Slideshow : SlideshowTreeNode
   {
     ///////////////////////////////////////////////////////////////////////////////
@@ -149,8 +150,6 @@ namespace Ogama.Modules.Common
     /// <summary>
     /// Gets or sets a value indicating whether this slideshow has unsaved changes.
     /// </summary>
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    [Browsable(false)]
     public bool IsModified
     {
       get { return this.isModified; }
@@ -281,7 +280,7 @@ namespace Ogama.Modules.Common
     {
       foreach (Trial trial in this.GetTrials())
       {
-        if (trial.HasFlashContent)
+        if (trial.HasActiveXContent)
         {
           return true;
         }
@@ -630,7 +629,7 @@ namespace Ogama.Modules.Common
       // Add trial if this node is marked to be a trial
       if (node.Tag != null && node.Tag.ToString() == "Trial")
       {
-        trial = new Trial(node.Text, this.GetIdOfNode(node));
+        trial = new Trial(node.Text, GetIdOfNode(node));
         trials.Add(trial);
       }
 
@@ -641,7 +640,7 @@ namespace Ogama.Modules.Common
         if (slide != null)
         {
           // By default use a new trial for each slide
-          trial = new Trial(subNode.Text, this.GetIdOfNode(subNode));
+          trial = new Trial(subNode.Text, GetIdOfNode(subNode));
 
           // If parent is already marked as trial use this
           // instead.
@@ -801,7 +800,7 @@ namespace Ogama.Modules.Common
 
       if (parentNode.Tag != null && parentNode.Tag.ToString() == "Trial")
       {
-        Trial trial = new Trial(parentNode.Text, this.GetIdOfNode(parentNode));
+        Trial trial = new Trial(parentNode.Text, GetIdOfNode(parentNode));
         foreach (SlideshowTreeNode subNode in parentNode.Nodes)
         {
           Slide slide = subNode.Slide;
@@ -818,16 +817,26 @@ namespace Ogama.Modules.Common
         foreach (TreeNode subNode in node.Nodes)
         {
           SlideshowTreeNode subCollectionNode = subNode as SlideshowTreeNode;
-          Slide slide = subCollectionNode.Slide;
-          if (slide != null)
+          if (subCollectionNode is BrowserTreeNode)
           {
-            Trial trial = new Trial(subNode.Text, this.GetIdOfNode(subNode));
-            trial.Add(slide);
+            Trial trial = new Trial(subNode.Text, GetIdOfNode(subNode));
+            Slide browserSlide = this.CreateBrowserSlide(subCollectionNode as BrowserTreeNode);
+            trial.Add(browserSlide);
             items.Add(trial);
           }
           else
           {
-            items.Add(this.ParseNodeForRandomizedTrials(subNode));
+            Slide slide = subCollectionNode.Slide;
+            if (slide != null)
+            {
+              Trial trial = new Trial(subNode.Text, GetIdOfNode(subNode));
+              trial.Add(slide);
+              items.Add(trial);
+            }
+            else
+            {
+              items.Add(this.ParseNodeForRandomizedTrials(subNode));
+            }
           }
         }
 
@@ -843,6 +852,35 @@ namespace Ogama.Modules.Common
       }
 
       return items;
+    }
+
+    /// <summary>
+    /// This method creates a <see cref="Slide"/> containing the<see cref="VGBrowser"/>
+    /// that can be used to display the website described in the 
+    /// given <see cref="BrowserTreeNode"/>
+    /// </summary>
+    /// <param name="browserSlide">The <see cref="BrowserTreeNode"/> to be converted into a 
+    /// presentation slide.</param>
+    /// <returns>A <see cref="Slide"/> containing the <see cref="VGBrowser"/>
+    /// that displays the web site.</returns>
+    private Slide CreateBrowserSlide(BrowserTreeNode browserSlide)
+    {
+      Slide slide = (Slide)browserSlide.Slide.Clone();
+      slide.VGStimuli.Clear();
+      VGBrowser browser = new VGBrowser(
+        ShapeDrawAction.None,
+        browserSlide.OriginURL,
+        Pens.Black,
+        Brushes.Black,
+        SystemFonts.DefaultFont,
+        Color.Black,
+        PointF.Empty,
+        Document.ActiveDocument.PresentationSize,
+        VGStyleGroup.ACTIVEX,
+        browserSlide.Name,
+        string.Empty);
+      slide.ActiveXStimuli.Add(browser);
+      return slide;
     }
 
     /// <summary>
@@ -883,7 +921,7 @@ namespace Ogama.Modules.Common
     /// </summary>
     /// <param name="node">The <see cref="TreeNode"/> thats id should be returned.</param>
     /// <returns>The <see cref="Int32"/> converted id of the given node</returns>
-    private int GetIdOfNode(TreeNode node)
+    public static int GetIdOfNode(TreeNode node)
     {
       int id = -1;
       string name = node.Name;

@@ -59,6 +59,11 @@ namespace Ogama.Modules.SlideshowDesign
     Flash,
 
     /// <summary>
+    /// Browser based stimuli.
+    /// </summary>
+    Browser,
+
+    /// <summary>
     /// Different types of stimuli
     /// </summary>
     Mixed,

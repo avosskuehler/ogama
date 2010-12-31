@@ -274,7 +274,7 @@ namespace Ogama.Modules.Replay
     {
       // Intialize picture
       this.picPreview.PresentationSize = this.outputVideoSize;
-      this.ResizePicture();
+      this.ResizeCanvas();
 
       this.gazeVideoRect = new VGImage(this.videoExportProperties.GazeVideoProperties.StreamScreenshot, ImageLayout.Stretch, this.outputVideoSize);
       this.gazeVideoRect.Name = this.videoExportProperties.GazeVideoProperties.StreamName;
@@ -423,7 +423,7 @@ namespace Ogama.Modules.Replay
 
       // Reintialize picture
       this.picPreview.PresentationSize = this.outputVideoSize;
-      this.ResizePicture();
+      this.ResizeCanvas();
 
       this.UpdatePositionNumerics();
       this.isInitializing = false;

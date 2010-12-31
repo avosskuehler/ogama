@@ -45,8 +45,10 @@ namespace VectorGraphics.Elements
   XmlInclude(typeof(VGRichText)),
   XmlInclude(typeof(VGSound)),
   XmlInclude(typeof(VGImage)),
+  XmlInclude(typeof(VGScrollImage)),
   XmlInclude(typeof(VGArrow)),
-  XmlInclude(typeof(VGFlash))]
+  XmlInclude(typeof(VGFlash)),
+  XmlInclude(typeof(VGBrowser))]
   [TypeConverter(typeof(VGElementConverter))]
   public abstract class VGElement : ICloneable, IDisposable
   {

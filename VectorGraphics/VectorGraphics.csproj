@@ -117,6 +117,8 @@
     <Compile Include="Canvas\PictureModifiable.Designer.cs">
       <DependentUpon>PictureModifiable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Elements\VGScrollImage.cs" />
+    <Compile Include="Elements\VGBrowser.cs" />
     <Compile Include="Elements\VGAlignment.cs" />
     <Compile Include="Elements\VGArrow.cs" />
     <Compile Include="Elements\ElementCollections\Slide.cs" />
@@ -125,6 +127,7 @@
     <Compile Include="Tools\Controls\Timer\TimerMode.cs" />
     <Compile Include="Tools\Controls\Timer\TimerCaps.cs" />
     <Compile Include="Tools\Controls\Timer\MultimediaTimer.cs" />
+    <Compile Include="Tools\Controls\WebsiteThumbnailGenerator.cs" />
     <Compile Include="Tools\CustomTypeConverter\SlideConverter.cs" />
     <Compile Include="Elements\VGRegion.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

@@ -332,7 +332,7 @@ namespace VectorGraphics.Elements
     [XmlIgnoreAttribute()]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     [Browsable(false)]
-    public bool HasFlashContent
+    public bool HasActiveXContent
     {
       get
       {
@@ -420,6 +420,38 @@ namespace VectorGraphics.Elements
     {
       get { return this.presentationSize; }
       set { this.presentationSize = value; }
+    }
+
+    /// <summary>
+    /// Gets the original size of the stimulus content
+    /// on this slide. (That may be greater than the presentation size
+    /// during web browsing)
+    /// </summary>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    [Browsable(false)]
+    public Size StimulusSize
+    {
+      get
+      {
+        Size stimulusSize = this.PresentationSize;
+        foreach (VGElement element in this.VGStimuli)
+        {
+          if (element is VGScrollImage)
+          {
+            if (element.Size.ToSize().Width > stimulusSize.Width)
+            {
+              stimulusSize.Width = (int)element.Size.Width;
+            }
+
+            if (element.Size.ToSize().Height > stimulusSize.Height)
+            {
+              stimulusSize.Height = (int)element.Size.Height;
+            }
+          }
+        }
+
+        return stimulusSize;
+      }
     }
 
     /// <summary>
@@ -950,6 +982,24 @@ namespace VectorGraphics.Elements
     }
 
     /// <summary>
+    /// Creates a thumbnail for the given website by invoking a dialog,
+    /// loads the url, captures the surface, closes the dialog.
+    /// </summary>
+    /// <param name="url">URL of browser location</param>
+    /// <param name="presentationSize">The <see cref="Size"/> for the thumb.</param>
+    /// <returns>An <see cref="Image"/> with the thumbnail image.</returns>
+    private static Image CreateBrowserThumb(string url, Size presentationSize)
+    {
+      Bitmap bmp = WebsiteThumbnailGenerator.GetWebSiteThumbnail(
+        url,
+        presentationSize.Width,
+        presentationSize.Height,
+        presentationSize);
+
+      return bmp;
+    }
+
+    /// <summary>
     /// Clones given slide object.
     /// </summary>
     /// <returns>A <see cref="Slide"/> with a clone of the current slide.</returns>
@@ -976,12 +1026,22 @@ namespace VectorGraphics.Elements
 
         this.Draw(g);
 
-        foreach (VGFlash flash in this.ActiveXStimuli)
+        foreach (VGElement element in this.ActiveXStimuli)
         {
-          if (File.Exists(flash.FullFilename))
+          if (element is VGFlash)
           {
-            Image flashThumb = CreateFlashThumb(flash.FullFilename, flash.Size.ToSize());
-            g.DrawImage(flashThumb, flash.Location);
+            VGFlash flash = element as VGFlash;
+            if (File.Exists(flash.FullFilename))
+            {
+              Image flashThumb = CreateFlashThumb(flash.FullFilename, flash.Size.ToSize());
+              g.DrawImage(flashThumb, flash.Location);
+            }
+          }
+          else if (element is VGBrowser)
+          {
+            VGBrowser browser = element as VGBrowser;
+            Image browserThumb = CreateBrowserThumb(browser.BrowserURL, this.presentationSize);
+            g.DrawImage(browserThumb, Point.Empty);
           }
         }
       }

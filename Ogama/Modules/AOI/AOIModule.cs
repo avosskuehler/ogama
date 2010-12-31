@@ -78,6 +78,8 @@ namespace Ogama.Modules.AOI
 
       this.Picture = this.aoiPicture;
       this.TrialCombo = this.cbbTrial;
+      this.ZoomTrackBar = this.trbZoom;
+
       this.InitializeDropDowns();
       this.InitializeDataBindings();
       this.InitializeCustomElements();
@@ -366,7 +368,7 @@ namespace Ogama.Modules.AOI
         this.chbArrowBrush.Checked = (this.aoiPicture.ArrowDrawAction & ShapeDrawAction.Fill) == ShapeDrawAction.Fill;
         this.chbArrowFont.Checked = (this.aoiPicture.ArrowDrawAction & ShapeDrawAction.Name) == ShapeDrawAction.Name;
 
-        this.ResizePicture();
+        this.ResizeCanvas();
 
         // Show first stimulus picture with AOIs
         this.InitialDisplay();

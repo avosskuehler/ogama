@@ -55,15 +55,22 @@ namespace Ogama.Modules.SlideshowDesign
 
       SlideshowTreeNode treeNode = item.RowObject as SlideshowTreeNode;
 
-      // If there is a slide open it, otherwise zoom in.
-      Slide currentSlide = treeNode.Slide;
-      if (currentSlide != null)
+      if (treeNode is BrowserTreeNode)
       {
-        this.OpenSlideDesignForm(treeNode, currentSlide);
+        this.OpenBrowserDesignerForm(treeNode as BrowserTreeNode);
       }
       else
       {
-        this.lsvDetails.SetObjects(treeNode.Nodes);
+        // If there is a slide open it, otherwise zoom in.
+        Slide currentSlide = treeNode.Slide;
+        if (currentSlide != null)
+        {
+          this.OpenSlideDesignForm(treeNode, currentSlide);
+        }
+        else
+        {
+          this.lsvDetails.SetObjects(treeNode.Nodes);
+        }
       }
     }
 

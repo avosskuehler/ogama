@@ -698,6 +698,7 @@ namespace Ogama.Modules.Common
       if (resetPicture)
       {
         this.ResetPicture();
+        this.CreateHeatMapBasics();
         this.ResetForegoingFixationLocation();
       }
 
@@ -870,8 +871,8 @@ namespace Ogama.Modules.Common
     protected void ResetForegoingFixationLocation()
     {
       this.foregoingFixationLocation = PointF.Empty;
-      int eyeMonX = Document.ActiveDocument.ExperimentSettings.WidthStimulusScreen;
-      int eyeMonY = Document.ActiveDocument.ExperimentSettings.HeightStimulusScreen;
+      int eyeMonX = this.PresentationSize.Width;
+      int eyeMonY = this.PresentationSize.Height;
 
       // Clear old attentionMaps
       this.distributionArray = new float[eyeMonX, eyeMonY];
@@ -1031,6 +1032,48 @@ namespace Ogama.Modules.Common
     #region METHODS
 
     /// <summary>
+    /// This method creates the attention map with the current 
+    /// visualization settings from the given distribution array.
+    /// </summary>
+    /// <param name="sampleType">The <see cref="SampleType"/>
+    /// the attention map is created for.</param>
+    protected void ApplyAttentionMap(SampleType sampleType)
+    {
+      int eyeMonX = this.PresentationSize.Width;
+      int eyeMonY = this.PresentationSize.Height;
+
+      // Finish attention map drawing if applicable
+      if ((sampleType == (sampleType | SampleType.Gaze) &&
+       this.gazeDrawingMode == FixationDrawingMode.AttentionMap) ||
+      (sampleType == (sampleType | SampleType.Mouse) &&
+      this.mouseDrawingMode == FixationDrawingMode.AttentionMap))
+      {
+        AttentionMaps.RescaleArray(this.distributionArray, -1);
+
+        Bitmap heatMapBitmap = AttentionMaps.CreateHeatMap(
+          this.heatMap,
+          this.colorMap,
+          new Size(eyeMonX, eyeMonY),
+          this.distributionArray);
+
+        VGImage newImage = new VGImage(heatMapBitmap, ImageLayout.Center, new Size(eyeMonX, eyeMonY));
+        newImage.Name = "HeatMap";
+        this.Elements.Remove("HeatMap");
+        this.Elements.Add(newImage);
+        this.Elements.ToHead(newImage);
+      }
+
+      if ((sampleType == (sampleType | SampleType.Gaze) &&
+          this.gazeDrawingMode == FixationDrawingMode.Spotlight) ||
+          (sampleType == (sampleType | SampleType.Mouse) &&
+          this.mouseDrawingMode == FixationDrawingMode.Spotlight))
+      {
+        this.Elements.Add(this.spotlightRegion);
+        this.Elements.ToHead(this.spotlightRegion);
+      }
+    }
+
+    /// <summary>
     /// Initializes standard graphic elements.
     /// </summary>
     private void InitializeElements()
@@ -1074,17 +1117,22 @@ namespace Ogama.Modules.Common
 
       this.colorMap = new PaletteBitmap(colorMapBitmap);
 
+      this.CreateHeatMapBasics();
+    }
+
+    /// <summary>
+    /// Creates the correctly sized heat map and distribution array for the
+    /// current presentation size.
+    /// </summary>
+    private void CreateHeatMapBasics()
+    {
       if (Document.ActiveDocument != null)
       {
-        Bitmap heatMapBitmap = new Bitmap(
-          Document.ActiveDocument.ExperimentSettings.WidthStimulusScreen,
-          Document.ActiveDocument.ExperimentSettings.HeightStimulusScreen,
-          PixelFormat.Format32bppArgb);
+        int eyeMonX = this.PresentationSize.Width;
+        int eyeMonY = this.PresentationSize.Height;
 
+        Bitmap heatMapBitmap = new Bitmap(eyeMonX, eyeMonY, PixelFormat.Format32bppArgb);
         this.heatMap = new PaletteBitmap(heatMapBitmap);
-
-        int eyeMonX = Document.ActiveDocument.ExperimentSettings.WidthStimulusScreen;
-        int eyeMonY = Document.ActiveDocument.ExperimentSettings.HeightStimulusScreen;
         this.distributionArray = new float[eyeMonX, eyeMonY];
       }
     }
@@ -1108,8 +1156,8 @@ namespace Ogama.Modules.Common
         // Initialize variables
         bool drawLine = false;
         bool drawNumber = false;
-        int eyeMonX = Document.ActiveDocument.ExperimentSettings.WidthStimulusScreen;
-        int eyeMonY = Document.ActiveDocument.ExperimentSettings.HeightStimulusScreen;
+        int eyeMonX = this.PresentationSize.Width;
+        int eyeMonY = this.PresentationSize.Height;
 
         // Set used variables
         switch (sampleType)
@@ -1158,13 +1206,9 @@ namespace Ogama.Modules.Common
 
         if (usedFixationDrawingMode == FixationDrawingMode.Circles)
         {
-          Bitmap bkg = new Bitmap(
-            Document.ActiveDocument.PresentationSize.Width,
-            Document.ActiveDocument.PresentationSize.Height);
+          Bitmap bkg = new Bitmap(eyeMonX, eyeMonY);
 
-          Bitmap transparentBkg = new Bitmap(
-            Document.ActiveDocument.PresentationSize.Width,
-            Document.ActiveDocument.PresentationSize.Height);
+          Bitmap transparentBkg = new Bitmap(eyeMonX, eyeMonY);
 
           using (Graphics graphics = Graphics.FromImage(bkg))
           {
@@ -1350,8 +1394,6 @@ namespace Ogama.Modules.Common
           }
         }
 
-        //ApplyAttentionMap(sampleType, eyeMonX, eyeMonY);
-
         if (bkgBrush != null)
         {
           bkgBrush.Dispose();
@@ -1360,42 +1402,6 @@ namespace Ogama.Modules.Common
       catch (Exception ex)
       {
         ExceptionMethods.HandleException(ex);
-      }
-    }
-
-    protected void ApplyAttentionMap(SampleType sampleType)
-    {
-      int eyeMonX = Document.ActiveDocument.ExperimentSettings.WidthStimulusScreen;
-      int eyeMonY = Document.ActiveDocument.ExperimentSettings.HeightStimulusScreen;
-
-      // Finish attention map drawing if applicable
-      if ((sampleType == (sampleType | SampleType.Gaze) &&
-       this.gazeDrawingMode == FixationDrawingMode.AttentionMap) ||
-      (sampleType == (sampleType | SampleType.Mouse) &&
-      this.mouseDrawingMode == FixationDrawingMode.AttentionMap))
-      {
-        AttentionMaps.RescaleArray(this.distributionArray, -1);
-
-        Bitmap heatMapBitmap = AttentionMaps.CreateHeatMap(
-          this.heatMap,
-          this.colorMap,
-          new Size(eyeMonX, eyeMonY),
-          this.distributionArray);
-
-        VGImage newImage = new VGImage(heatMapBitmap, ImageLayout.Center, new Size(eyeMonX, eyeMonY));
-        newImage.Name = "HeatMap";
-        this.Elements.Remove("HeatMap");
-        this.Elements.Add(newImage);
-        this.Elements.ToHead(newImage);
-      }
-
-      if ((sampleType == (sampleType | SampleType.Gaze) &&
-          this.gazeDrawingMode == FixationDrawingMode.Spotlight) ||
-          (sampleType == (sampleType | SampleType.Mouse) &&
-          this.mouseDrawingMode == FixationDrawingMode.Spotlight))
-      {
-        this.Elements.Add(this.spotlightRegion);
-        this.Elements.ToHead(this.spotlightRegion);
       }
     }
 

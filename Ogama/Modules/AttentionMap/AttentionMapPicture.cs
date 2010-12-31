@@ -232,8 +232,8 @@ namespace Ogama.Modules.AttentionMap
       this.Elements.Clear();
 
       // Read Eyetracker settings
-      int eyeMonX = Document.ActiveDocument.ExperimentSettings.WidthStimulusScreen;
-      int eyeMonY = Document.ActiveDocument.ExperimentSettings.HeightStimulusScreen;
+      int eyeMonX = this.PresentationSize.Width;
+      int eyeMonY = this.PresentationSize.Height;
 
       // init DistributionArray
       float[,] distributionArray = new float[eyeMonX, eyeMonY];

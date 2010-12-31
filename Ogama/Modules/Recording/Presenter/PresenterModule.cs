@@ -748,6 +748,37 @@ namespace Ogama.Modules.Recording
     }
 
     /// <summary>
+    /// The <see cref="WebBrowser.Scroll"/> event handler in which the scroll
+    /// position is sent to the recorder as a trial event.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">A <see cref="HtmlElementEventArgs"/> with the event data.</param>
+    private void WebBrowser_Scroll(object sender, HtmlElementEventArgs e)
+    {
+      HtmlWindow browserControl = sender as HtmlWindow;
+      HtmlElement htmlElement = browserControl.Document.GetElementsByTagName("HTML")[0];
+      HtmlElement bodyElement = browserControl.Document.Body;
+
+      int scrollTop = htmlElement.ScrollTop > bodyElement.ScrollTop ?
+        htmlElement.ScrollTop : bodyElement.ScrollTop;
+      int scrollLeft = htmlElement.ScrollLeft > bodyElement.ScrollLeft ?
+        htmlElement.ScrollLeft : bodyElement.ScrollLeft;
+
+      long eventTime = -1;
+      if (this.getTimeMethod != null)
+      {
+        eventTime = this.getTimeMethod();
+      }
+
+      // Store marker event
+      MediaEvent scrollEvent = new MediaEvent();
+      scrollEvent.Type = EventType.Scroll;
+      scrollEvent.Task = MediaEventTask.Seek;
+      scrollEvent.Param = scrollLeft.ToString("N0") + ";" + scrollTop.ToString("N0");
+      this.OnTrialEventOccured(new TrialEventOccuredEventArgs(scrollEvent, eventTime));
+    }
+
+    /// <summary>
     /// This method raises the <see cref="TrialEventOccured"/> 
     /// event by invoking the delegates.
     /// It should be called whenever an event occured in a trial.
@@ -819,6 +850,19 @@ namespace Ogama.Modules.Recording
       {
         AsyncHelper.FireAndForget(this.PresentationDone, this, e);
       }
+    }
+
+    /// <summary>
+    /// The <see cref="WebBrowser.Navigated"/> event handler which reactivates the
+    /// scroll event subscribtion.
+    /// </summary>
+    /// <param name="sender">Source of the event</param>
+    /// <param name="e">A <see cref="WebBrowserNavigatedEventArgs"/> with the event data</param>
+    private void WebBrowser_Navigated(object sender, WebBrowserNavigatedEventArgs e)
+    {
+      WebBrowser browser = sender as WebBrowser;
+      browser.Document.Window.Scroll -= new HtmlElementEventHandler(this.WebBrowser_Scroll);
+      browser.Document.Window.Scroll += new HtmlElementEventHandler(this.WebBrowser_Scroll);
     }
 
     #endregion //CUSTOMEVENTHANDLER
@@ -1170,7 +1214,7 @@ namespace Ogama.Modules.Recording
       nextTrialCounter++;
       Trial nextTrial = this.trials[nextTrialCounter];
 
-      if (nextTrial.HasFlashContent)
+      if (nextTrial.HasActiveXContent)
       {
         string filename = Document.ActiveDocument.SelectionState.SubjectName +
          "-" + nextTrialCounter + ".avi";
@@ -1278,30 +1322,45 @@ namespace Ogama.Modules.Recording
         slideContainer.AudioPlayer.Play();
       }
 
-      if (this.shownSlide.Slide.HasFlashContent)
+      if (this.shownSlide.Slide.HasActiveXContent)
       {
-        foreach (VGFlash flash in slideContainer.Slide.ActiveXStimuli)
+        int countFlash = 0;
+        foreach (VGElement element in slideContainer.Slide.ActiveXStimuli)
         {
-          flash.SendMessagesToParent(true);
-          flash.Play();
+          if (element is VGFlash)
+          {
+            VGFlash flash = element as VGFlash;
+            flash.SendMessagesToParent(true);
+            flash.Play();
+            countFlash++;
+          }
+          else if (element is VGBrowser)
+          {
+            VGBrowser browser = element as VGBrowser;
+            browser.SendMessagesToParent(true);
+          }
         }
 
-        switch (this.shownContainer)
+        // Just do screen capturing on flash content
+        if (countFlash > 0)
         {
-          case ShownContainer.One:
-            if (this.preparedSlideOne.ScreenCapture != null)
-            {
-              this.preparedSlideOne.ScreenCapture.Start();
-            }
+          switch (this.shownContainer)
+          {
+            case ShownContainer.One:
+              if (this.preparedSlideOne.ScreenCapture != null)
+              {
+                this.preparedSlideOne.ScreenCapture.Start();
+              }
 
-            break;
-          case ShownContainer.Two:
-            if (this.preparedSlideTwo.ScreenCapture != null)
-            {
-              this.preparedSlideTwo.ScreenCapture.Start();
-            }
+              break;
+            case ShownContainer.Two:
+              if (this.preparedSlideTwo.ScreenCapture != null)
+              {
+                this.preparedSlideTwo.ScreenCapture.Start();
+              }
 
-            break;
+              break;
+          }
         }
       }
     }
@@ -1622,9 +1681,29 @@ namespace Ogama.Modules.Recording
 
         // Check for flash stimuli and load them into the
         // flashObject activeX control.
-        foreach (VGFlash flash in slideContainer.Slide.ActiveXStimuli)
+        foreach (VGElement element in slideContainer.Slide.ActiveXStimuli)
         {
-          flash.InitializeOnControl(slideContainer.ContainerControl, true, new System.Drawing.Drawing2D.Matrix());
+          if (element is VGFlash)
+          {
+            VGFlash flash = element as VGFlash;
+            flash.InitializeOnControl(
+              slideContainer.ContainerControl,
+              true,
+              new System.Drawing.Drawing2D.Matrix());
+          }
+          else if (element is VGBrowser)
+          {
+            VGBrowser browser = element as VGBrowser;
+            browser.InitializeOnControl(slideContainer.ContainerControl, true);
+            browser.WebBrowser.Navigate(browser.BrowserURL);
+            while (browser.WebBrowser.ReadyState != WebBrowserReadyState.Complete)
+            {
+              Application.DoEvents();
+            }
+
+            browser.WebBrowser.Navigated += new WebBrowserNavigatedEventHandler(this.WebBrowser_Navigated);
+            browser.WebBrowser.Document.Window.Scroll += new HtmlElementEventHandler(this.WebBrowser_Scroll);
+          }
         }
       }
       catch (Exception ex)
@@ -1665,9 +1744,20 @@ namespace Ogama.Modules.Recording
         }
       }
 
-      foreach (VGFlash flash in slideContainer.Slide.ActiveXStimuli)
+      foreach (VGElement element in slideContainer.Slide.ActiveXStimuli)
       {
-        flash.SendMessagesToParent(false);
+        if (element is VGFlash)
+        {
+          VGFlash flash = element as VGFlash;
+          flash.SendMessagesToParent(false);
+        }
+        else if (element is VGBrowser)
+        {
+          VGBrowser browser = element as VGBrowser;
+          browser.SendMessagesToParent(false);
+          browser.WebBrowser.Document.Window.Scroll -= new HtmlElementEventHandler(this.WebBrowser_Scroll);
+          browser.WebBrowser.Navigated += new WebBrowserNavigatedEventHandler(this.WebBrowser_Navigated);
+        }
       }
 
       if (this.InvokeRequired)

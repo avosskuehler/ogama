@@ -1083,6 +1083,11 @@ namespace OgamaControls
           return;
         }
 
+        if (this.mediaControl == null)
+        {
+          return;
+        }
+
         //Need to stop replay, otherwise removing of filters will crash
         this.mediaControl.Stop();
 

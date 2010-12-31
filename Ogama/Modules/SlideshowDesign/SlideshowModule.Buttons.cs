@@ -226,9 +226,22 @@ namespace Ogama.Modules.SlideshowDesign
       SlideDesignModule newFlash = new SlideDesignModule(StimuliTypes.Flash);
       newFlash.Text = "Create new flash movie slide ...";
       newFlash.Icon = Properties.Resources.FlashPlayerIcon;
-      newFlash.Description = "Flash movie stimuli are used to present a shockwave flash object (.swf - file) in fullscreen mode.";
+      newFlash.Description = "Flash movie stimuli are used to present a shockwave flash object (.swf - file).";
       newFlash.SlideName = this.GetUnusedSlideName();
       this.OpenStimulusDesignerForm(newFlash, string.Empty);
+    }
+
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler for the
+    /// <see cref="Button"/> <see cref="btnInternet"/>.
+    /// Raises the <see cref="OpenStimulusDesignerForm(SlideDesignModule,string)"/>
+    /// form with adapted properties for browser stimuli.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void btnInternet_Click(object sender, EventArgs e)
+    {
+      this.OpenBrowserDesignerForm(null);
     }
 
     /// <summary>

@@ -96,6 +96,7 @@ namespace Ogama.Modules.Fixations
       this.Picture = this.fixationsPicture;
       this.SubjectCombo = this.cbbSubject;
       this.TrialCombo = this.cbbTrial;
+      this.ZoomTrackBar = this.trbZoom;
 
       this.InitializeDropDowns();
       this.InitializeCustomElements();
@@ -314,7 +315,7 @@ namespace Ogama.Modules.Fixations
       try
       {
         this.Picture.PresentationSize = Document.ActiveDocument.PresentationSize;
-        this.ResizePicture();
+        this.ResizeCanvas();
 
         this.nudGazeFixDiameterDiv.Value = (decimal)Document.ActiveDocument.ExperimentSettings.GazeDiameterDiv;
         this.fixationsPicture.GazeFixationsDiameterDivisor = Document.ActiveDocument.ExperimentSettings.GazeDiameterDiv;

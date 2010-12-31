@@ -130,6 +130,7 @@ namespace Ogama.Modules.Replay
       this.Picture = this.replayPicture;
       this.SubjectCombo = this.cbbSubject;
       this.TrialCombo = this.cbbTrial;
+      this.ZoomTrackBar = this.trbZoom;
 
       this.InitializeDropDowns();
       this.InitializeDataBindings();
@@ -448,7 +449,7 @@ namespace Ogama.Modules.Replay
         // from the experiment settings.
         this.ReadFixationCalculationSettings();
 
-        this.ResizePicture();
+        this.ResizeCanvas();
 
         this.nudGazeFixDiameterDiv.Value = (decimal)Document.ActiveDocument.ExperimentSettings.GazeDiameterDiv;
         this.nudMouseFixDiameterDiv.Value = (decimal)Document.ActiveDocument.ExperimentSettings.MouseDiameterDiv;
@@ -1628,6 +1629,8 @@ namespace Ogama.Modules.Replay
           case EventType.Usercam:
             break;
           case EventType.Response:
+            break;
+          case EventType.Scroll:
             break;
         }
       }

@@ -454,8 +454,8 @@
       // 
       this.spcPanelUserCam.Panel2.Controls.Add(this.grpUsercam);
       this.spcPanelUserCam.Panel2.Padding = new System.Windows.Forms.Padding(5);
-      this.spcPanelUserCam.Size = new System.Drawing.Size(220, 652);
       this.spcPanelUserCam.Panel2MinSize = 20;
+      this.spcPanelUserCam.Size = new System.Drawing.Size(220, 652);
       this.spcPanelUserCam.SplitterDistance = 448;
       this.spcPanelUserCam.TabIndex = 21;
       // 
@@ -1951,6 +1951,7 @@
       // 
       // pnlCanvas
       // 
+      this.pnlCanvas.AutoSize = true;
       this.pnlCanvas.BackColor = global::Ogama.Properties.Settings.Default.BackgroundColorForms;
       this.pnlCanvas.Controls.Add(this.pnlPicture);
       this.pnlCanvas.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::Ogama.Properties.Settings.Default, "BackgroundColorForms", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
@@ -1972,12 +1973,12 @@
       // 
       this.recordPicture.AnimationInterval = 40;
       this.recordPicture.BackColor = System.Drawing.Color.Black;
-      this.recordPicture.Dock = System.Windows.Forms.DockStyle.Fill;
       this.recordPicture.InvalidateInterval = 500;
       this.recordPicture.Location = new System.Drawing.Point(0, 0);
       this.recordPicture.Name = "recordPicture";
       this.recordPicture.Size = new System.Drawing.Size(200, 100);
       this.recordPicture.TabIndex = 0;
+      this.recordPicture.ZoomFactor = 0F;
       // 
       // toolStrip1
       // 
@@ -3429,6 +3430,7 @@
       this.toolStripContainer1.PerformLayout();
       this.sctRecording.Panel1.ResumeLayout(false);
       this.sctRecording.Panel2.ResumeLayout(false);
+      this.sctRecording.Panel2.PerformLayout();
       this.sctRecording.ResumeLayout(false);
       this.spcPanelUserCam.Panel1.ResumeLayout(false);
       this.spcPanelUserCam.Panel2.ResumeLayout(false);

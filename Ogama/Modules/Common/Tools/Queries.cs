@@ -375,6 +375,17 @@ namespace Ogama.Modules.Common
             newEvent.Type = type;
             returnList.Add(eventID, newEvent);
             break;
+          case EventType.Scroll:
+            newEvent = new MediaEvent();
+            newEvent.SubjectName = subjectName;
+            newEvent.TrialSequence = trialSequence;
+            newEvent.EventID = eventID;
+            newEvent.Param = param;
+            ((MediaEvent)newEvent).Task = (MediaEventTask)Enum.Parse(typeof(MediaEventTask), taskString, true);
+            newEvent.Time = time;
+            newEvent.Type = type;
+            returnList.Add(eventID, newEvent);
+            break;
         }
       }
 
@@ -599,26 +610,28 @@ namespace Ogama.Modules.Common
     /// Reads sampling data from correct columns for gaze data.
     /// </summary>
     /// <param name="row">DataTable row with sampling data</param>
+    /// <param name="stimulusSize">The size of the stimulus..</param>
     /// <param name="newPt">Out. Retrieves new sampling point.</param>
     /// <returns>A <see cref="SampleValidity"/> value indidacting the state of the 
     /// gaze data validity.</returns>
-    public static SampleValidity GetGazeData(DataRow row, out PointF? newPt)
+    public static SampleValidity GetGazeData(DataRow row, Size stimulusSize, out PointF? newPt)
     {
       int numRow = 6;
-      return GetSampleData(row, numRow, out newPt);
+      return GetSampleData(row, numRow, stimulusSize, out newPt);
     }
 
     /// <summary>
     /// Reads sampling data from correct columns for mouse data.
     /// </summary>
     /// <param name="row">DataTable row with sampling data</param>
+    /// <param name="stimulusSize">The size of the stimulus..</param>
     /// <param name="newPt">Out. Retrieves new sampling point.</param>
     /// <returns>A <see cref="SampleValidity"/> value indidacting the state of the 
     /// mouse data validity.</returns>
-    public static SampleValidity GetMouseData(DataRow row, out PointF? newPt)
+    public static SampleValidity GetMouseData(DataRow row, Size stimulusSize, out PointF? newPt)
     {
       int numRow = 8;
-      return GetSampleData(row, numRow, out newPt);
+      return GetSampleData(row, numRow, stimulusSize, out newPt);
     }
 
     /// <summary>
@@ -626,12 +639,13 @@ namespace Ogama.Modules.Common
     /// <see cref="Properties.ExperimentSettings"/> size of eye monitor.
     /// </summary>
     /// <param name="pt">PointF to check</param>
+    /// <param name="stimulusSize">The size of the stimulus..</param>
     /// <returns><strong>True</strong> if given point is in stimulus screen
     /// rectangle, otherwise <strong>false</strong>.</returns>
-    public static bool OutOfScreen(PointF pt)
+    public static bool OutOfScreen(PointF pt, Size stimulusSize)
     {
-      if (pt.X > Document.ActiveDocument.ExperimentSettings.WidthStimulusScreen || pt.X < 0 ||
-          pt.Y > Document.ActiveDocument.ExperimentSettings.HeightStimulusScreen || pt.Y < 0 ||
+      if (pt.X > stimulusSize.Width || pt.X < 0 ||
+          pt.Y > stimulusSize.Height || pt.Y < 0 ||
           (pt.X == 0 && pt.Y == 0))
       {
         return true;
@@ -2613,10 +2627,15 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     /// </summary>
     /// <param name="row">DataTable row with sampling data</param>
     /// <param name="numRow">Number of the X row in the database.</param>
+    /// <param name="stimulusSize">The size of the stimulus.</param>
     /// <param name="newPt">Out. Retrieves new sampling point.</param>
     /// <returns>A <see cref="SampleValidity"/> value indidacting the state of the data
     /// validity.</returns>
-    private static SampleValidity GetSampleData(DataRow row, int numRow, out PointF? newPt)
+    private static SampleValidity GetSampleData(
+      DataRow row,
+      int numRow,
+      Size stimulusSize,
+      out PointF? newPt)
     {
       if (!row.IsNull(numRow) && !row.IsNull(numRow + 1))
       {
@@ -2629,14 +2648,14 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
           return SampleValidity.Empty;
         }
 
-        RectangleF bounds = new RectangleF(PointF.Empty, Document.ActiveDocument.PresentationSize);
+        RectangleF bounds = new RectangleF(PointF.Empty, stimulusSize);
         if (bounds.Contains(newPt.Value))
         {
           return SampleValidity.Valid;
         }
         else
         {
-          return SampleValidity.OutOfMonitor;
+          return SampleValidity.OutOfStimulus;
         }
       }
       else

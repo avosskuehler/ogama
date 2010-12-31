@@ -956,6 +956,23 @@ namespace VectorGraphics.Canvas
       }
     }
 
+    /// <summary>
+    /// Resets the selected element and its dependencies to null.
+    /// If there was a selected element, invokes <see cref="ShapeDeselected"/> event.
+    /// </summary>
+    public void ResetSelectedElement()
+    {
+      if (this.selectedElement != null)
+      {
+        this.selectedElement.IsInEditMode = false;
+
+        // Use property to invoke the ShapeDeselected event
+        this.SelectedElement = null;
+        this.activeGrabHandle = null;
+        this.DrawForeground(false);
+      }
+    }
+
     #endregion //PUBLICMETHODS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -1554,23 +1571,6 @@ namespace VectorGraphics.Canvas
       this.targetTextAlignment = targetTextAlignment;
       this.defaultTextAlignment = defaultTextAlignment;
       this.searchRectTextAlignment = searchRectTextAlignment;
-    }
-
-    /// <summary>
-    /// Resets the selected element and its dependencies to null.
-    /// If there was a selected element, invokes <see cref="ShapeDeselected"/> event.
-    /// </summary>
-    protected void ResetSelectedElement()
-    {
-      if (this.selectedElement != null)
-      {
-        this.selectedElement.IsInEditMode = false;
-
-        // Use property to invoke the ShapeDeselected event
-        this.SelectedElement = null;
-        this.activeGrabHandle = null;
-        this.DrawForeground(false);
-      }
     }
 
     /// <summary>

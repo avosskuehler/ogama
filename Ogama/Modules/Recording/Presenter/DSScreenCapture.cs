@@ -21,8 +21,8 @@ namespace Ogama.Modules.Recording
   using DirectShowLib;
   using DirectShowLib.DMO;
   using DirectX.Capture;
-  using OgamaControls;
   using Ogama.ExceptionHandling;
+  using OgamaControls;
 
   /// <summary>
   /// This class is used to create a DirectShow graph which 
@@ -631,8 +631,6 @@ namespace Ogama.Modules.Recording
           out this.fileWriterFilter);
         DsError.ThrowExceptionForHR(hr);
         
-        //this.muxFilter
-
         // Disable overwrite
         hr = this.fileWriterFilter.SetMode(AMFileSinkFlags.None);
         DsError.ThrowExceptionForHR(hr);
@@ -685,9 +683,9 @@ namespace Ogama.Modules.Recording
           DsError.ThrowExceptionForHR(hr);
         }
 
-        //IMediaFilter filter = this.graphBuilder as IMediaFilter;
-        //IReferenceClock clock;
-        //filter.GetSyncSource(out clock);
+        // IMediaFilter filter = this.graphBuilder as IMediaFilter;
+        // IReferenceClock clock;
+        // filter.GetSyncSource(out clock);
         hr = this.graphBuilder.SetDefaultSyncSource();
         DsError.ThrowExceptionForHR(hr);
 

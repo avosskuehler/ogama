@@ -49,7 +49,7 @@ namespace Ogama.Modules.SlideshowDesign
     /// <summary>
     /// Default <see cref="int"/> value for the slide duration in seconds.
     /// </summary>
-    private const int SLIDEDURATIONINS = 5;
+    public const int SLIDEDURATIONINS = 5;
 
     /// <summary>
     /// Default <see cref="Color"/>value for the slides background color.
@@ -151,7 +151,7 @@ namespace Ogama.Modules.SlideshowDesign
       {
         if (value == null)
         {
-          throw new ArgumentNullException("Setting 'null' for a slide is not allowed in frmStimulusDesign");
+          throw new ArgumentNullException("Setting 'null' for a slide is not allowed in StimulusDesignModule");
         }
 
         // Update the forms fields with slides values
@@ -187,8 +187,8 @@ namespace Ogama.Modules.SlideshowDesign
       // Initialize combo boxes and property pages.
 
       // Timing Tab
-      this.FillMouseButtonCombo(this.cbbMouseButtons);
-      this.FillKeyCombo(this.cbbKeys);
+      FillMouseButtonCombo(this.cbbMouseButtons);
+      FillKeyCombo(this.cbbKeys);
       this.rdbTime.Checked = true;
       this.nudTime.Value = SLIDEDURATIONINS;
 
@@ -200,14 +200,14 @@ namespace Ogama.Modules.SlideshowDesign
       this.psbMouseCursor.StimulusScreenSize = Document.ActiveDocument.PresentationSize;
 
       // Testing Tab
-      this.FillMouseButtonCombo(this.cbbTestingMouseButtons);
-      this.FillKeyCombo(this.cbbTestingKeys);
+      FillMouseButtonCombo(this.cbbTestingMouseButtons);
+      FillKeyCombo(this.cbbTestingKeys);
       this.cbbTestingTargets.Items.Add(string.Empty);
       this.cbbTestingTargets.Items.Add("Any");
 
       // Links Tab
-      this.FillMouseButtonCombo(this.cbbLinksMouseButtons);
-      this.FillKeyCombo(this.cbbLinksKeys);
+      FillMouseButtonCombo(this.cbbLinksMouseButtons);
+      FillKeyCombo(this.cbbLinksKeys);
       this.cbbLinksTargets.Items.Add(string.Empty);
       this.cbbLinksTargets.Items.Add("Any");
       List<Trial> trials = Document.ActiveDocument.ExperimentSettings.SlideShow.Trials;
@@ -297,7 +297,7 @@ namespace Ogama.Modules.SlideshowDesign
         // Intialize picture
         this.designPicture.PresentationSize = Document.ActiveDocument.PresentationSize;
         this.designPicture.DefaultPen = this.pbcElements.NewPen;
-        this.ResizePicture();
+        this.ResizeCanvas();
 
         this.tacProperties.Visible = false;
 
@@ -353,7 +353,7 @@ namespace Ogama.Modules.SlideshowDesign
       switch (e.KeyCode)
       {
         case Keys.Delete:
-          this.DeleteSelectedItems((ListBox)sender);
+          DeleteSelectedItems((ListBox)sender);
           break;
       }
     }
@@ -836,6 +836,11 @@ namespace Ogama.Modules.SlideshowDesign
               VGFlash flash = element as VGFlash;
               flash.InitializeOnControl(this.designPicture.Parent, false, this.Picture.StimulusToScreen);
             }
+            if (element is VGBrowser)
+            {
+              VGBrowser browser = element as VGBrowser;
+              browser.InitializeOnControl(this.designPicture.Parent, false);
+            }
           }
 
           this.designPicture.RedrawAll();
@@ -1104,7 +1109,7 @@ namespace Ogama.Modules.SlideshowDesign
     /// Populates given combo box with <see cref="Keys"/> values.
     /// </summary>
     /// <param name="combo">The <see cref="ComboBox"/> to be populated.</param>
-    private void FillKeyCombo(ComboBox combo)
+    public static void FillKeyCombo(ComboBox combo)
     {
       combo.Items.Clear();
       combo.Items.Add("Any");
@@ -1119,7 +1124,7 @@ namespace Ogama.Modules.SlideshowDesign
     /// Populates given combo box with <see cref="Keys"/> values.
     /// </summary>
     /// <param name="combo">The <see cref="ComboBox"/> to be populated.</param>
-    private void FillMouseButtonCombo(ComboBox combo)
+    public static void FillMouseButtonCombo(ComboBox combo)
     {
       combo.Items.Clear();
       combo.Items.Add("Any");
@@ -1133,7 +1138,7 @@ namespace Ogama.Modules.SlideshowDesign
     /// </summary>
     /// <param name="listBox">The <see cref="ListBox"/> for which
     /// the selected items should be deleted.</param>
-    private void DeleteSelectedItems(ListBox listBox)
+    public static void DeleteSelectedItems(ListBox listBox)
     {
       List<object> selectedObjects = new List<object>();
       foreach (object obj in listBox.SelectedItems)

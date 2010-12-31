@@ -47,6 +47,7 @@ namespace Ogama.MainWindow
       this.pnlContextTabs = new System.Windows.Forms.TabControl();
       this.tbpTrialTreeView = new System.Windows.Forms.TabPage();
       this.trvTrials = new OgamaControls.MultiselectTreeView();
+      this.imlSlideTypes = new System.Windows.Forms.ImageList(this.components);
       this.tbpTrialList = new System.Windows.Forms.TabPage();
       this.lsvTrials = new OgamaControls.ObjectListView();
       this.columnTrials = new OgamaControls.OLVColumn();
@@ -68,7 +69,6 @@ namespace Ogama.MainWindow
       this.spcTabsVideo = new System.Windows.Forms.SplitContainer();
       this.grpUsercam = new System.Windows.Forms.GroupBox();
       this.avpUsercam = new OgamaControls.AVPlayer();
-      this.imlSlideTypes = new System.Windows.Forms.ImageList(this.components);
       columnCategorie = new System.Windows.Forms.ColumnHeader();
       this.pnlContextTabs.SuspendLayout();
       this.tbpTrialTreeView.SuspendLayout();
@@ -135,6 +135,24 @@ namespace Ogama.MainWindow
       this.trvTrials.TabIndex = 0;
       this.trvTrials.DrawNode += new System.Windows.Forms.DrawTreeNodeEventHandler(this.trvTrials_DrawNode);
       this.trvTrials.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.trvTrials_AfterSelect);
+      // 
+      // imlSlideTypes
+      // 
+      this.imlSlideTypes.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imlSlideTypes.ImageStream")));
+      this.imlSlideTypes.TransparentColor = System.Drawing.Color.Transparent;
+      this.imlSlideTypes.Images.SetKeyName(0, "Instructions");
+      this.imlSlideTypes.Images.SetKeyName(1, "Images");
+      this.imlSlideTypes.Images.SetKeyName(2, "Shapes");
+      this.imlSlideTypes.Images.SetKeyName(3, "MixedMedia");
+      this.imlSlideTypes.Images.SetKeyName(4, "Flash");
+      this.imlSlideTypes.Images.SetKeyName(5, "Blank");
+      this.imlSlideTypes.Images.SetKeyName(6, "Slide");
+      this.imlSlideTypes.Images.SetKeyName(7, "CategoryClosed");
+      this.imlSlideTypes.Images.SetKeyName(8, "CategoryOpen");
+      this.imlSlideTypes.Images.SetKeyName(9, "Rtf");
+      this.imlSlideTypes.Images.SetKeyName(10, "Trial");
+      this.imlSlideTypes.Images.SetKeyName(11, "Folder");
+      this.imlSlideTypes.Images.SetKeyName(12, "Browser");
       // 
       // tbpTrialList
       // 
@@ -351,23 +369,6 @@ namespace Ogama.MainWindow
       this.avpUsercam.PlaybackRate = 1;
       this.avpUsercam.Size = new System.Drawing.Size(194, 157);
       this.avpUsercam.TabIndex = 0;
-      // 
-      // imlSlideTypes
-      // 
-      this.imlSlideTypes.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imlSlideTypes.ImageStream")));
-      this.imlSlideTypes.TransparentColor = System.Drawing.Color.Transparent;
-      this.imlSlideTypes.Images.SetKeyName(0, "Instructions");
-      this.imlSlideTypes.Images.SetKeyName(1, "Images");
-      this.imlSlideTypes.Images.SetKeyName(2, "Shapes");
-      this.imlSlideTypes.Images.SetKeyName(3, "MixedMedia");
-      this.imlSlideTypes.Images.SetKeyName(4, "Flash");
-      this.imlSlideTypes.Images.SetKeyName(5, "Blank");
-      this.imlSlideTypes.Images.SetKeyName(6, "Slide");
-      this.imlSlideTypes.Images.SetKeyName(7, "CategoryClosed");
-      this.imlSlideTypes.Images.SetKeyName(8, "CategoryOpen");
-      this.imlSlideTypes.Images.SetKeyName(9, "Rtf");
-      this.imlSlideTypes.Images.SetKeyName(10, "Trial");
-      this.imlSlideTypes.Images.SetKeyName(11, "Folder");
       // 
       // ContextPanel
       // 

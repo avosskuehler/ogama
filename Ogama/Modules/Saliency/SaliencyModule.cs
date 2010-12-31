@@ -116,6 +116,7 @@ namespace Ogama.Modules.Saliency
 
       this.Picture = this.saliencyPicture;
       this.TrialCombo = this.cbbTrial;
+      this.ZoomTrackBar = this.trbZoom;
 
       this.InitAccelerators();
       this.InitializeDataBindings();
@@ -411,7 +412,7 @@ namespace Ogama.Modules.Saliency
         this.saliencyPicture.SampleTypeToDraw = SampleType.Gaze;
 
         this.saliencyPicture.PresentationSize = Document.ActiveDocument.PresentationSize;
-        this.ResizePicture();
+        this.ResizeCanvas();
 
         // Show first stimulus picture
         this.InitialDisplay();

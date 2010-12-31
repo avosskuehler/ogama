@@ -194,7 +194,7 @@ namespace Ogama.Modules.SlideshowDesign
       // Intialize slide preview picture
       this.slidePreviewPicture.OwningForm = this;
       this.slidePreviewPicture.PresentationSize = Document.ActiveDocument.PresentationSize;
-      this.ResizePicture();
+      this.ResizeCanvas();
 
       // Select root node
       this.trvSlideshow.SelectedNodes.Clear();
@@ -330,6 +330,43 @@ namespace Ogama.Modules.SlideshowDesign
     }
 
     /// <summary>
+    /// This method adds the given <see cref="BrowserTreeNode"/> at the
+    /// current treeview position.
+    /// </summary>
+    /// <param name="newBrowserSlideNode">The new <see cref="BrowserTreeNode"/> to be added to the slideshow.</param>
+    private void AddBrowserSlide(BrowserTreeNode newBrowserSlideNode)
+    {
+      // Add node
+      newBrowserSlideNode.Name = this.slideshow.GetUnusedNodeID();
+
+      // Get root node for insertion
+      SlideshowTreeNode firstNode = this.trvSlideshow.Nodes[0] as SlideshowTreeNode;
+
+      // If there is a selected node use this instead
+      NodesCollection selectedNodes = this.trvSlideshow.SelectedNodes;
+      if (selectedNodes.Count > 0)
+      {
+        firstNode = selectedNodes[0] as SlideshowTreeNode;
+        this.trvSlideshow.SelectedNodes.Clear();
+      }
+
+      // Add to node, if it is a slide node add to parent instead
+      if (firstNode.Slide != null)
+      {
+        firstNode.Parent.Nodes.Add(newBrowserSlideNode);
+      }
+      else
+      {
+        firstNode.Nodes.Add(newBrowserSlideNode);
+      }
+
+      // Select added node.
+      this.trvSlideshow.SelectedNodes.Add(newBrowserSlideNode);
+
+      this.UpdateListView(this.trvSlideshow.SelectedNodes);
+    }
+
+    /// <summary>
     /// This method replaces the Slide at the node with the given nodeID
     /// with the new given <see cref="Slide"/>.
     /// </summary>
@@ -358,7 +395,7 @@ namespace Ogama.Modules.SlideshowDesign
 
     /// <summary>
     /// Opens a <see cref="SlideDesignModule"/> form, waits for succesful
-    /// design and slideshow with the designed <see cref="Slide"/>.
+    /// design and updates slideshow with the designed <see cref="Slide"/>.
     /// </summary>
     /// <param name="newDesignForm">A <see cref="SlideDesignModule"/> with the design form to display.</param>
     /// <param name="nodeID">Contains the node ID (which is the Node.Name property) of the node that is 
@@ -378,6 +415,35 @@ namespace Ogama.Modules.SlideshowDesign
         else
         {
           this.AddSlide(newSlide);
+        }
+
+        this.SlideShowModified();
+      }
+    }
+
+    /// <summary>
+    /// Opens a <see cref="BrowserDialog"/> form, waits for succesful
+    /// design and updates slideshow with the designed <see cref="BrowserTreeNode"/>.
+    /// </summary>
+    /// <param name="node">Contains the node that is 
+    /// modified or null if this should be a new slide.</param>
+    private void OpenBrowserDesignerForm(BrowserTreeNode node)
+    {
+      BrowserDialog dlg = new BrowserDialog();
+      if (node != null)
+      {
+        dlg.BrowserNode = node;
+      }
+      if (dlg.ShowDialog() == DialogResult.OK)
+      {
+        BrowserTreeNode newNode = dlg.BrowserNode;
+        if (node != null)
+        {
+          node = newNode;
+        }
+        else
+        {
+          this.AddBrowserSlide(newNode);
         }
 
         this.SlideShowModified();

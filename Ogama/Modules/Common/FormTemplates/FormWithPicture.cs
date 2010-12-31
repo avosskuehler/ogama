@@ -89,6 +89,11 @@ namespace Ogama.Modules.Common
     /// </summary>
     private SortedList<int, TrialEvent> trialEvents;
 
+    /// <summary>
+    /// Saves the zoom trackBar.
+    /// </summary>
+    private ToolStripTrackBar zoomTrackBar;
+
     #endregion //FIELDS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -144,6 +149,18 @@ namespace Ogama.Modules.Common
     }
 
     /// <summary>
+    /// Gets or sets the zoom track bar.
+    /// </summary>
+    /// <value>The <see cref="ToolStripTrackBar"/> that is zoom track bar of the form.</value>
+    [Browsable(false)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    public ToolStripTrackBar ZoomTrackBar
+    {
+      get { return this.zoomTrackBar; }
+      set { this.zoomTrackBar = value; }
+    }
+
+    /// <summary>
     /// Gets or sets the current visited trial with its contained
     /// slides.
     /// </summary>
@@ -184,6 +201,52 @@ namespace Ogama.Modules.Common
     // Public methods                                                            //
     ///////////////////////////////////////////////////////////////////////////////
     #region PUBLICMETHODS
+
+    /// <summary>
+    /// Gets a <see cref="Rectangle"/> with the bounds that are
+    /// centered to the given Panel and are proportional sized 
+    /// to the experiments stimulus screen.
+    /// </summary>
+    /// <param name="canvas">A <see cref="Control"/> in which the rectangle should be
+    /// sized</param>
+    /// <returns>A <see cref="Rectangle"/> that is proportional sized.</returns>
+    protected Rectangle GetProportionalBounds(Control canvas)
+    {
+      // if (Document.ActiveDocument != null)
+      // {
+      //  int width = (int)Document.ActiveDocument.ExperimentSettings.WidthStimulusScreen;
+      //  int height = (int)Document.ActiveDocument.ExperimentSettings.HeightStimulusScreen;
+      //  int canvasWidth = this.Picture.Parent.Parent.Width;
+      //  int canvasHeight = this.Picture.Parent.Parent.Width;
+      //  float screenRatio = width / (float)height;
+      //  if (canvasHeight * screenRatio > canvasWidth)
+      //  {
+      //    // Width is correct
+      //    dstRect.X = 0;
+      //    dstRect.Width = canvas.Width;
+      //    float newHeight = (float)canvas.Width / width * height;
+      //    dstRect.Y = (int)(canvas.Height / 2f - newHeight / 2);
+      //    dstRect.Height = (int)newHeight;
+      //  }
+      //  else
+      //  {
+      //    // Height is correct
+      //    dstRect.Y = 0;
+      //    dstRect.Height = canvas.Height;
+      //    float newWidth = (float)canvas.Height / height * width;
+      //    dstRect.X = (int)(canvas.Width / 2f - newWidth / 2);
+      //    dstRect.Width = (int)newWidth;
+      //  }
+      // }
+      Rectangle dstRect = new Rectangle();
+      dstRect.X = (int)Math.Max(0, (canvas.Width / 2f - this.Picture.Width / 2));
+      dstRect.Width = this.Picture.Width;
+      dstRect.Y = (int)(int)Math.Max(0, (canvas.Height / 2f - this.Picture.Height / 2));
+      dstRect.Height = this.Picture.Height;
+
+      return dstRect;
+    }
+
     #endregion //PUBLICMETHODS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -203,6 +266,12 @@ namespace Ogama.Modules.Common
         this.audioPlayer.Close();
       }
 
+      if (this.zoomTrackBar != null)
+      {
+        this.zoomTrackBar.ValueChanged -= new EventHandler(this.zoomTrackBar_ValueChanged);
+        this.zoomTrackBar.Click -= new EventHandler(this.zoomTrackBar_Click);
+      }
+
       base.CustomDispose();
     }
 
@@ -213,6 +282,19 @@ namespace Ogama.Modules.Common
     {
       base.InitAccelerators();
       this.SetAccelerator(Keys.F, new AcceleratorAction(this.OnPressF));
+    }
+
+    /// <summary>
+    /// Overridden. Initializes zoom trackbar event handler.
+    /// </summary>
+    protected override void InitializeCustomElements()
+    {
+      base.InitializeCustomElements();
+      if (this.zoomTrackBar != null)
+      {
+        this.zoomTrackBar.ValueChanged += new EventHandler(this.zoomTrackBar_ValueChanged);
+        this.zoomTrackBar.Click += new EventHandler(this.zoomTrackBar_Click);
+      }
     }
 
     /// <summary>
@@ -321,6 +403,28 @@ namespace Ogama.Modules.Common
       }
     }
 
+    /// <summary>
+    /// Overridden <see cref="Form.OnResize(EventArgs)"/>. 
+    /// Starts the autozoom procedure for the picture.
+    /// </summary>
+    /// <param name="e">Empty event args</param>
+    protected override void OnResize(EventArgs e)
+    {
+      base.OnResize(e);
+      this.AutoZoomPicture();
+    }
+
+    /// <summary>
+    /// Overridden <see cref="Form.OnLoad(EventArgs)"/>. 
+    /// Starts the autozoom procedure for the picture.
+    /// </summary>
+    /// <param name="e">Empty event args</param>
+    protected override void OnLoad(EventArgs e)
+    {
+      base.OnLoad(e);
+      this.AutoZoomPicture();
+    }
+
     #endregion //OVERRIDES
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -348,7 +452,7 @@ namespace Ogama.Modules.Common
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     protected void pnlCanvas_Resize(object sender, EventArgs e)
     {
-      this.ResizePicture();
+      this.ResizeCanvas();
     }
 
     /// <summary>
@@ -357,6 +461,36 @@ namespace Ogama.Modules.Common
     protected void OnPressF()
     {
       this.picture.Visible = !this.picture.Visible;
+    }
+
+    /// <summary>
+    /// The <see cref="TrackBar.ValueChanged"/> event handler
+    /// for the zoom track bar control. Calls resizing of the picture.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    protected void zoomTrackBar_ValueChanged(object sender, EventArgs e)
+    {
+      float zoomfactor = this.zoomTrackBar.Value / 50f;
+      this.ZoomPicture(zoomfactor);
+    }
+
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler
+    /// for the zoom track bar control. Calls the autozoom procedure
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    protected void zoomTrackBar_Click(object sender, EventArgs e)
+    {
+      if (e is MouseEventArgs)
+      {
+        MouseEventArgs args = e as MouseEventArgs;
+        if (args.Button == MouseButtons.Right)
+        {
+          this.AutoZoomPicture();
+        }
+      }
     }
 
     #endregion //CUSTOMEVENTHANDLER
@@ -373,87 +507,6 @@ namespace Ogama.Modules.Common
     // Methods for doing main class job                                          //
     ///////////////////////////////////////////////////////////////////////////////
     #region METHODS
-
-    /// <summary>
-    /// Gets a <see cref="Rectangle"/> with the bounds that are
-    /// centered to the given Panel and are proportional sized 
-    /// to the experiments stimulus screen.
-    /// </summary>
-    /// <param name="canvas">A <see cref="Control"/> in which the rectangle should be
-    /// sized</param>
-    /// <returns>A <see cref="Rectangle"/> that is proportional sized.</returns>
-    protected Rectangle GetProportionalBounds(Control canvas)
-    {
-      ////float scale = 1.3f;
-      if (Document.ActiveDocument != null)
-      {
-        ////int width = (int)(Document.ActiveDocument.ExperimentSettings.WidthStimulusScreen * scale);
-        ////int height = (int)(Document.ActiveDocument.ExperimentSettings.HeightStimulusScreen * scale);
-        ////Rectangle scaledPanel = new Rectangle(0, 0, width, height);
-
-        ////if (scaledPanel.Width > canvas.Width && scaledPanel.Height > canvas.Height)
-        ////{
-        ////  //return scaledPanel;
-        ////}
-        ////else if (scaledPanel.Width > canvas.Width)
-        ////{
-        ////  scaledPanel.Y = (int)((canvas.Height - scaledPanel.Height) / 2);
-        ////}
-        ////else if (scaledPanel.Height > canvas.Height)
-        ////{
-        ////  scaledPanel.X = (int)((canvas.Width - scaledPanel.Width) / 2);
-        ////}
-        ////else
-        ////{
-        ////  scaledPanel.X = (int)((canvas.Width - scaledPanel.Width) / 2);
-        ////  scaledPanel.Y = (int)((canvas.Height - scaledPanel.Height) / 2);
-        ////}
-
-        ////return scaledPanel;
-
-        int width = (int)Document.ActiveDocument.ExperimentSettings.WidthStimulusScreen;
-        int height = (int)Document.ActiveDocument.ExperimentSettings.HeightStimulusScreen;
-        float screenRatio = width / (float)height;
-        Rectangle dstRect = new Rectangle();
-        if (canvas.Height * screenRatio > canvas.Width)
-        {
-          // Width is correct
-          dstRect.X = 0;
-          dstRect.Width = canvas.Width;
-          float newHeight = (float)canvas.Width / width * height;
-          dstRect.Y = (int)(canvas.Height / 2f - newHeight / 2);
-          dstRect.Height = (int)newHeight;
-        }
-        else
-        {
-          // Height is correct
-          dstRect.Y = 0;
-          dstRect.Height = canvas.Height;
-          float newWidth = (float)canvas.Height / height * width;
-          dstRect.X = (int)(canvas.Width / 2f - newWidth / 2);
-          dstRect.Width = (int)newWidth;
-        }
-
-        ////dstRect.Inflate((int)(dstRect.Width * scale - dstRect.Width), (int)(dstRect.Height * scale - dstRect.Height));
-
-        ////Panel picturesParent = (Panel)this.Picture.Parent;
-        ////Point scrollPosition = picturesParent.AutoScrollPosition;
-
-        ////if (dstRect.X < picturesParent.Location.X)
-        ////{
-        ////  dstRect.Offset(-dstRect.X - scrollPosition.X, 0);
-        ////}
-
-        ////if (dstRect.Y < picturesParent.Location.Y)
-        ////{
-        ////  dstRect.Offset(0, -dstRect.Y - scrollPosition.Y);
-        ////}
-
-        return dstRect;
-      }
-
-      return Rectangle.Empty;
-    }
 
     /// <summary>
     /// This method loads the <see cref="Trial"/> with the given ID
@@ -624,6 +677,15 @@ namespace Ogama.Modules.Common
       // Set presentation size
       slide.PresentationSize = Document.ActiveDocument.PresentationSize;
 
+      if (slide.StimulusSize != null)
+      {
+        this.Picture.PresentationSize = slide.StimulusSize;
+      }
+      else
+      {
+        this.Picture.PresentationSize = slide.PresentationSize;
+      }
+
       Slide slideCopy = (Slide)slide.Clone();
       switch (activeXMode)
       {
@@ -636,10 +698,19 @@ namespace Ogama.Modules.Common
           // set Pictures new background slide
           this.Picture.BGSlide = slideCopy;
 
-          // Initalize activeX objects in background
-          foreach (VGFlash flash in slideCopy.ActiveXStimuli)
+          foreach (VGElement element in slideCopy.ActiveXStimuli)
           {
-            flash.InitializeOnControl(this.Picture.Parent, false, this.Picture.StimulusToScreen);
+            if (element is VGFlash)
+            {
+              VGFlash flash = element as VGFlash;
+              flash.InitializeOnControl(this.Picture.Parent, false, this.Picture.StimulusToScreen);
+            }
+            else if (element is VGBrowser)
+            {
+              // Don´t show browser control, use screenshot of whole website instead.
+              // VGBrowser browser = element as VGBrowser;
+              // browser.InitializeOnControl(this.Picture.Parent, false);
+            }
           }
 
           break;
@@ -647,10 +718,18 @@ namespace Ogama.Modules.Common
           // set Pictures new background slide
           this.Picture.BGSlide = slideCopy;
 
-          // Initalize activeX objects in background
-          foreach (VGFlash flash in slideCopy.ActiveXStimuli)
+          foreach (VGElement element in slideCopy.ActiveXStimuli)
           {
-            flash.InitializeOnControl(this.Picture, false, this.Picture.StimulusToScreen);
+            if (element is VGFlash)
+            {
+              VGFlash flash = element as VGFlash;
+              flash.InitializeOnControl(this.Picture, false, this.Picture.StimulusToScreen);
+            }
+            else if (element is VGBrowser)
+            {
+              VGBrowser browser = element as VGBrowser;
+              browser.InitializeOnControl(this.Picture, false);
+            }
           }
 
           break;
@@ -671,7 +750,7 @@ namespace Ogama.Modules.Common
     /// When this panel is resized, the <see cref="Picture"/> has to be rescaled.
     /// </summary>
     /// <exception cref="ArgumentNullException">Thrown, when canvas of picture (which is the parent of its parent) is null.</exception>
-    protected void ResizePicture()
+    protected void ResizeCanvas()
     {
       if (this.Picture.Parent.Parent == null)
       {
@@ -682,6 +761,61 @@ namespace Ogama.Modules.Common
       {
         this.Picture.Parent.Bounds = this.GetProportionalBounds(this.Picture.Parent.Parent);
         this.Picture.Parent.Invalidate();
+      }
+    }
+
+    /// <summary>
+    /// This method performs an auto zoom procedure to fit the
+    /// picture into the bounds of the canvas, without scoll bars.
+    /// </summary>
+    protected void AutoZoomPicture()
+    {
+      if (Document.ActiveDocument != null && this.Picture != null)
+      {
+        int width = (int)Document.ActiveDocument.ExperimentSettings.WidthStimulusScreen;
+        int height = (int)Document.ActiveDocument.ExperimentSettings.HeightStimulusScreen;
+        int canvasWidth = this.Picture.Parent.Parent.Width;
+        int canvasHeight = this.Picture.Parent.Parent.Height;
+        float screenRatio = width / (float)height;
+
+        float zoomFactor = 1;
+        if (canvasHeight * screenRatio > canvasWidth)
+        {
+          // Width is correct
+          zoomFactor = canvasWidth / (float)width;
+        }
+        else
+        {
+          // Height is correct
+          zoomFactor = canvasHeight / (float)height;
+        }
+
+        // Paranoia Check
+        if (zoomFactor == 0)
+        {
+          zoomFactor = 1;
+        }
+
+        this.ZoomPicture(zoomFactor);
+      }
+    }
+
+    /// <summary>
+    /// Zooms the picture canvas with the given factor.
+    /// </summary>
+    /// <param name="zoomfactor">A <see cref="Single"/>
+    /// with the zoom factor, can be from 0.1 to 2.</param>
+    protected void ZoomPicture(float zoomfactor)
+    {
+      this.Picture.ZoomFactor = zoomfactor;
+      Size presentationSize = this.Picture.PresentationSize;
+      this.Picture.Size = new Size(
+        (int)(presentationSize.Width * zoomfactor),
+        (int)(presentationSize.Height * zoomfactor));
+      this.ResizeCanvas();
+      if (this.zoomTrackBar != null)
+      {
+        this.zoomTrackBar.Value = (int)Math.Max(1, (zoomfactor * 50));
       }
     }
 

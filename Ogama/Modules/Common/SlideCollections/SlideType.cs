@@ -51,5 +51,10 @@ namespace Ogama.Modules.Common
     /// Slides containing only textual stimuli (RTF or default).
     /// </summary>
     Instructions = 16,
+
+    /// <summary>
+    /// Slides containing only an internet browser.
+    /// </summary>
+    Browser = 32,
   }
 }

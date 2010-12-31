@@ -288,9 +288,10 @@ namespace Ogama.Modules.Common
 
       if (trialEvents.Count > 30 && !this.EventFilterList.Contains("MouseUp"))
       {
+        this.EventFilterList.Add("Scroll");
         this.EventFilterList.Add("MouseUp");
         this.EventFilterList.Add("MouseDown");
-        string message = "To provide acceptable performance OGAMA now hides the mouse events in the time line " +
+        string message = "To provide acceptable performance OGAMA now hides the mouse and scroll events in the time line " +
           " at the bottom of the module. You may reactivate them by right-clicking on this timeline.";
         ExceptionMethods.ProcessMessage("Lots of events in that trial ...", message);
       }
@@ -357,6 +358,13 @@ namespace Ogama.Modules.Common
             newTimeLineMarker.EventID = (int)trialEvent.EventID;
             newTimeLineMarker.MarkerColor = Color.Yellow;
             this.TimeLineMarkers.Add(newTimeLineMarker);
+            break;
+          case EventType.Scroll:
+            newTimeLineEvent.Position = TimeLinePosition.Above;
+            newTimeLineEvent.StrokeWidth = 0f;
+            newTimeLineEvent.StrokeColor = Color.Transparent;
+            newTimeLineEvent.ImageKey = "Scroll";
+            this.TimeLineEvents.Add(newTimeLineEvent);
             break;
         }
       }

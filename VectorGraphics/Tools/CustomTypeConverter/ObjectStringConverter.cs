@@ -395,10 +395,14 @@ namespace VectorGraphics.CustomTypeConverter
     public static string PointToString(Point pt)
     {
       StringBuilder output = new StringBuilder();
+
+      NumberFormatInfo nfi = CultureInfo.GetCultureInfo("en-US").NumberFormat;
+      nfi.NumberGroupSeparator = string.Empty;
+
       output.Append("(");
-      output.Append(pt.X.ToString("N0"));
+      output.Append(pt.X.ToString("N0", nfi));
       output.Append(",");
-      output.Append(pt.Y.ToString("N0"));
+      output.Append(pt.Y.ToString("N0", nfi));
       output.Append(")");
 
       return output.ToString();

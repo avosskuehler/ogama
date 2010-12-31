@@ -113,7 +113,7 @@ namespace Ogama.Modules.SlideshowDesign
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnRemoveCondition_Click(object sender, EventArgs e)
     {
-      this.DeleteSelectedItems(this.lsbStopConditions);
+      DeleteSelectedItems(this.lsbStopConditions);
     }
 
     #endregion TimingSection
@@ -272,7 +272,7 @@ namespace Ogama.Modules.SlideshowDesign
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnRemoveCorrectResponse_Click(object sender, EventArgs e)
     {
-      this.DeleteSelectedItems(this.lsbCorrectResponses);
+      DeleteSelectedItems(this.lsbCorrectResponses);
     }
 
     #endregion //Testingsection
@@ -366,7 +366,7 @@ namespace Ogama.Modules.SlideshowDesign
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnRemoveLink_Click(object sender, EventArgs e)
     {
-      this.DeleteSelectedItems(this.lsbLinks);
+      DeleteSelectedItems(this.lsbLinks);
     }
 
     #endregion //Linkssection

@@ -46,6 +46,7 @@
       this.imlEvents.Images.SetKeyName(7, "Marker");
       this.imlEvents.Images.SetKeyName(8, "MouseDown");
       this.imlEvents.Images.SetKeyName(9, "MouseUp");
+      this.imlEvents.Images.SetKeyName(10, "Scroll");
       // 
       // TrialTimeLine
       // 

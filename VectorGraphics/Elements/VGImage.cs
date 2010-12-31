@@ -59,11 +59,6 @@ namespace VectorGraphics.Elements
     private string path;
 
     /// <summary>
-    /// Saves the current image.
-    /// </summary>
-    private Image image;
-
-    /// <summary>
     /// Saves the alpha (transparency) value for this image
     /// </summary>
     private float alpha = 1f;
@@ -82,11 +77,6 @@ namespace VectorGraphics.Elements
     /// The <see cref="ColorMatrix"/> to use during drawing.
     /// </summary>
     private ColorMatrix clrMatrix;
-
-    /// <summary>
-    /// An <see cref="ImageAttributes"/> that helps to draw the images transparent.
-    /// </summary>
-    private ImageAttributes imgAttributes;
 
     #endregion //FIELDS
 
@@ -151,7 +141,7 @@ namespace VectorGraphics.Elements
       }
 
       GraphicsUnit unit = new GraphicsUnit();
-      this.Bounds = this.image.GetBounds(ref unit);
+      this.Bounds = this.Image.GetBounds(ref unit);
       this.layout = newLayout;
       this.InitTransparencyMatrix();
     }
@@ -171,17 +161,17 @@ namespace VectorGraphics.Elements
       this.filename = string.Empty;
       this.layout = newLayout;
       this.canvas = newCanvas;
-      this.image = (Image)newImage.Clone();
+      this.Image = (Image)newImage.Clone();
       GraphicsUnit unit = new GraphicsUnit();
-      this.Bounds = this.image.GetBounds(ref unit);
+      this.Bounds = this.Image.GetBounds(ref unit);
       this.InitTransparencyMatrix();
     }
 
     /// <summary>
-    /// Prevents a default instance of the VGImage class from being created.
+    /// Initializes a new instance of the VGImage class.
     /// Parameterless constructor. Used for serialization.
     /// </summary>
-    private VGImage()
+    protected VGImage()
     {
       this.path = string.Empty;
       this.filename = string.Empty;
@@ -309,17 +299,17 @@ namespace VectorGraphics.Elements
     {
       get
       {
-        if (this.image == null)
+        if (this.Image == null)
         {
           this.CreateInternalImage();
         }
 
-        return this.image;
+        return this.Image;
       }
 
       set
       {
-        this.image = value;
+        this.Image = value;
       }
     }
 
@@ -356,6 +346,19 @@ namespace VectorGraphics.Elements
       }
     }
 
+    /// <summary>
+    /// Gets or sets the current image.
+    /// </summary>
+    [XmlIgnore()]
+    protected Image Image { get; set; }
+
+    /// <summary>
+    /// Gets or sets an <see cref="ImageAttributes"/> that 
+    /// helps to draw the images transparent.
+    /// </summary>
+    [XmlIgnore()]
+    protected ImageAttributes ImageAttributes { get; set; }
+
     #endregion //PROPERTIES
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -380,13 +383,13 @@ namespace VectorGraphics.Elements
           this.Size = this.canvas;
         }
 
-        this.image = Images.CreateNotFoundImage(this.Size.ToSize(), this.Filename);
+        this.Image = Images.CreateNotFoundImage(this.Size.ToSize(), this.Filename);
       }
       else
       {
         // This is the method not to keep the file open,
         // but create a copy in memory from the file 
-        this.image = Images.GetImageOfFile(fullFileName);
+        this.Image = Images.GetImageOfFile(fullFileName);
       }
 
       return true;
@@ -412,7 +415,7 @@ namespace VectorGraphics.Elements
         throw new ArgumentNullException("Graphics object should not be null.");
       }
 
-      if (this.image == null)
+      if (this.Image == null)
       {
         if (!this.CreateInternalImage())
         {
@@ -432,7 +435,7 @@ namespace VectorGraphics.Elements
       switch (this.layout)
       {
         case ImageLayout.Tile:
-          using (TextureBrush b = new TextureBrush(this.image, WrapMode.Tile))
+          using (TextureBrush b = new TextureBrush(this.Image, WrapMode.Tile))
           {
             graphics.FillRectangle(b, drawing_rectangle);
           }
@@ -440,24 +443,24 @@ namespace VectorGraphics.Elements
           break;
         case ImageLayout.Center:
           drawing_rectangle.Location = new Point(
-            (int)(drawingCanvas.Width / 2 - this.image.Width / 2),
-            (int)(drawingCanvas.Height / 2 - this.image.Height / 2));
+            (int)(drawingCanvas.Width / 2 - this.Image.Width / 2),
+            (int)(drawingCanvas.Height / 2 - this.Image.Height / 2));
 
-          drawing_rectangle.Size = this.image.Size;
+          drawing_rectangle.Size = this.Image.Size;
           PointF[] destinationPoints = this.GetPointFArray(drawing_rectangle);
-          graphics.DrawImage(this.image, destinationPoints, this.image.GetBounds(ref pixel), pixel, this.imgAttributes);
+          graphics.DrawImage(this.Image, destinationPoints, this.Image.GetBounds(ref pixel), pixel, this.ImageAttributes);
           break;
         case ImageLayout.None:
           drawing_rectangle.Location = this.Location;
           if (this.ModifierKeys == Keys.Control)
           {
-            drawing_rectangle.Size = this.image.Size;
+            drawing_rectangle.Size = this.Image.Size;
           }
           else if (base.ModifierKeys == Keys.Alt)
           {
             SizeF proportionalSize = new SizeF();
             proportionalSize.Width = base.Bounds.Width;
-            proportionalSize.Height = this.image.Height / (float)this.image.Width * proportionalSize.Width;
+            proportionalSize.Height = this.Image.Height / (float)this.Image.Width * proportionalSize.Width;
             drawing_rectangle.Size = System.Drawing.Size.Round(proportionalSize);
           }
           else
@@ -471,20 +474,20 @@ namespace VectorGraphics.Elements
           }
 
           destinationPoints = this.GetPointFArray(drawing_rectangle);
-          graphics.DrawImage(this.image, destinationPoints, this.image.GetBounds(ref pixel), pixel, this.imgAttributes);
+          graphics.DrawImage(this.Image, destinationPoints, this.Image.GetBounds(ref pixel), pixel, this.ImageAttributes);
           break;
         case ImageLayout.Stretch:
-          graphics.DrawImage(this.image, drawing_rectangle);
+          graphics.DrawImage(this.Image, drawing_rectangle);
           break;
         case ImageLayout.Zoom:
-          if ((float)this.image.Width / (float)this.image.Height < (float)drawing_rectangle.Width / (float)drawing_rectangle.Height)
+          if ((float)this.Image.Width / (float)this.Image.Height < (float)drawing_rectangle.Width / (float)drawing_rectangle.Height)
           {
-            drawing_rectangle.Width = this.image.Width * ((float)drawing_rectangle.Height / (float)this.image.Height);
+            drawing_rectangle.Width = this.Image.Width * ((float)drawing_rectangle.Height / (float)this.Image.Height);
             drawing_rectangle.X = (drawingCanvas.Width - drawing_rectangle.Width) / 2;
           }
           else
           {
-            drawing_rectangle.Height = this.image.Height * ((float)drawing_rectangle.Width / (float)this.image.Width);
+            drawing_rectangle.Height = this.Image.Height * ((float)drawing_rectangle.Width / (float)this.Image.Width);
             drawing_rectangle.Y = (drawingCanvas.Height - drawing_rectangle.Height) / 2;
           }
 
@@ -494,7 +497,7 @@ namespace VectorGraphics.Elements
           }
 
           destinationPoints = this.GetPointFArray(drawing_rectangle);
-          graphics.DrawImage(this.image, destinationPoints, this.image.GetBounds(ref pixel), pixel, this.imgAttributes);
+          graphics.DrawImage(this.Image, destinationPoints, this.Image.GetBounds(ref pixel), pixel, this.ImageAttributes);
           break;
       }
 
@@ -537,7 +540,7 @@ namespace VectorGraphics.Elements
     {
       base.Reset();
       this.canvas = new Size(100, 100);
-      this.image = null;
+      this.Image = null;
       this.layout = ImageLayout.Center;
       this.filename = string.Empty;
     }
@@ -581,10 +584,10 @@ namespace VectorGraphics.Elements
     public override void Dispose()
     {
       base.Dispose();
-      if (this.image != null)
+      if (this.Image != null)
       {
-        this.image.Dispose();
-        this.image = null;
+        this.Image.Dispose();
+        this.Image = null;
       }
     }
 
@@ -607,6 +610,24 @@ namespace VectorGraphics.Elements
     {
       this.Layout = ImageLayout.None;
       base.NewPosition(translationMatrix);
+    }
+
+    /// <summary>
+    /// Returns an array of <see cref="PointF"/> for the given
+    /// <see cref="RectangleF"/> with ul, ur, and ll corner.
+    /// </summary>
+    /// <param name="drawing_rectangle">The <see cref="RectangleF"/> to be converted</param>
+    /// <returns>An array of <see cref="PointF"/> for the given
+    /// <see cref="RectangleF"/> with ul, ur, and ll corner.</returns>
+    protected PointF[] GetPointFArray(RectangleF drawing_rectangle)
+    {
+      // Create parallelogram for drawing original image.
+      PointF upperLeftCorner = drawing_rectangle.Location;
+      PointF upperRightCorner = new PointF(drawing_rectangle.Right, drawing_rectangle.Top);
+      PointF lowerLeftCorner = new PointF(drawing_rectangle.Left, drawing_rectangle.Bottom);
+      PointF[] returnArray = { upperLeftCorner, upperRightCorner, lowerLeftCorner };
+
+      return returnArray;
     }
 
     #endregion //OVERRIDES
@@ -656,8 +677,8 @@ namespace VectorGraphics.Elements
       };
 
       this.clrMatrix = new ColorMatrix(this.transparencyArray);
-      this.imgAttributes = new ImageAttributes();
-      this.imgAttributes.SetColorMatrix(
+      this.ImageAttributes = new ImageAttributes();
+      this.ImageAttributes.SetColorMatrix(
         this.clrMatrix,
        ColorMatrixFlag.Default,
        ColorAdjustType.Bitmap);
@@ -669,25 +690,6 @@ namespace VectorGraphics.Elements
     // Small helping Methods                                                     //
     ///////////////////////////////////////////////////////////////////////////////
     #region HELPER
-
-    /// <summary>
-    /// Returns an array of <see cref="PointF"/> for the given
-    /// <see cref="RectangleF"/> with ul, ur, and ll corner.
-    /// </summary>
-    /// <param name="drawing_rectangle">The <see cref="RectangleF"/> to be converted</param>
-    /// <returns>An array of <see cref="PointF"/> for the given
-    /// <see cref="RectangleF"/> with ul, ur, and ll corner.</returns>
-    private PointF[] GetPointFArray(RectangleF drawing_rectangle)
-    {
-      // Create parallelogram for drawing original image.
-      PointF upperLeftCorner = drawing_rectangle.Location;
-      PointF upperRightCorner = new PointF(drawing_rectangle.Right, drawing_rectangle.Top);
-      PointF lowerLeftCorner = new PointF(drawing_rectangle.Left, drawing_rectangle.Bottom);
-      PointF[] returnArray = { upperLeftCorner, upperRightCorner, lowerLeftCorner };
-
-      return returnArray;
-    }
-
     #endregion //HELPER
   }
 }

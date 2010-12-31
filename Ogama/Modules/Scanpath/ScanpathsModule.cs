@@ -105,6 +105,7 @@ namespace Ogama.Modules.Scanpaths
 
       this.Picture = this.scanpathsPicture;
       this.TrialCombo = this.cbbTrial;
+      this.ZoomTrackBar = this.trbZoom;
 
       this.InitializeDropDowns();
       this.InitializeDataBindings();
@@ -270,7 +271,7 @@ namespace Ogama.Modules.Scanpaths
         this.scanpathsPicture.Progress += new ProgressEventHandler(this.scanpathsPicture_Progress);
 
         this.scanpathsPicture.PresentationSize = Document.ActiveDocument.PresentationSize;
-        this.ResizePicture();
+        this.ResizeCanvas();
 
         // Hide Levensthein toolstrip 
         this.tosLevenshtein.Visible = false;

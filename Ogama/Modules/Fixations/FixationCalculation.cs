@@ -125,9 +125,13 @@ namespace Ogama.Modules.Fixations
     /// Declare a delegate type for getting a data point from table.
     /// </summary>
     /// <param name="row">A <see cref="DataRow"/> with the raw data tables row from which to get the sampling data.</param>
+    /// <param name="stimulusSize">The <see cref="Size"/> of the shown stimulus.</param>
     /// <param name="newPt">OUT An <see cref="PointF"/> with the sampling point or null if one of the values is null.</param>
     /// <returns>A <see cref="SampleValidity"/> value for the row.</returns>
-    private delegate SampleValidity GetDataDelegate(System.Data.DataRow row, out PointF? newPt);
+    private delegate SampleValidity GetDataDelegate(
+      System.Data.DataRow row, 
+      Size stimulusSize, 
+      out PointF? newPt);
 
     #endregion ENUMS
 
@@ -253,7 +257,10 @@ namespace Ogama.Modules.Fixations
         foreach (DataRow rowRaw in rawDataTable.Rows)
         {
           PointF? newPt;
-          SampleValidity isValidData = getDataMethod(rowRaw, out newPt);
+          SampleValidity isValidData = getDataMethod(
+            rowRaw, 
+            Document.ActiveDocument.PresentationSize,
+            out newPt);
 
           bool useSample = false;
           switch (isValidData)
@@ -266,7 +273,8 @@ namespace Ogama.Modules.Fixations
               break;
             case SampleValidity.Null:
               break;
-            case SampleValidity.OutOfMonitor:
+            case SampleValidity.OutOfStimulus:
+              useSample = true;
               break;
           }
 
@@ -303,7 +311,8 @@ namespace Ogama.Modules.Fixations
                 break;
               case EyeMotionState.FIXATION_COMPLETED:
                 PointF fixationCenter = new PointF(x_fix_delayed, y_fix_delayed);
-                if (!Queries.OutOfScreen(fixationCenter))
+
+                // if (!Queries.OutOfScreen(fixationCenter)) TODO
                 {
                   Fixation completedFixation = new Fixation();
                   completedFixation.CountInTrial = counterFix + 1;

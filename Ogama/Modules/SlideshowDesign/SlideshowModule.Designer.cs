@@ -68,6 +68,7 @@
       this.btnImage = new System.Windows.Forms.ToolStripButton();
       this.btnShapes = new System.Windows.Forms.ToolStripButton();
       this.btnMixed = new System.Windows.Forms.ToolStripButton();
+      this.btnInternet = new System.Windows.Forms.ToolStripButton();
       this.btnFlash = new System.Windows.Forms.ToolStripButton();
       this.btnBlank = new System.Windows.Forms.ToolStripButton();
       this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -374,6 +375,7 @@
       this.imlSlideTypes.Images.SetKeyName(9, "CategoryOpen");
       this.imlSlideTypes.Images.SetKeyName(10, "Rtf");
       this.imlSlideTypes.Images.SetKeyName(11, "Trial");
+      this.imlSlideTypes.Images.SetKeyName(12, "Browser");
       // 
       // spcSlidesProperties
       // 
@@ -483,6 +485,7 @@
       // 
       // pnlCanvas
       // 
+      this.pnlCanvas.AutoScroll = true;
       this.pnlCanvas.BackColor = global::Ogama.Properties.Settings.Default.BackgroundColorForms;
       this.pnlCanvas.Controls.Add(this.pnlPicture);
       this.pnlCanvas.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::Ogama.Properties.Settings.Default, "BackgroundColorForms", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
@@ -505,12 +508,12 @@
       // 
       this.slidePreviewPicture.AnimationInterval = 500;
       this.slidePreviewPicture.BackColor = System.Drawing.Color.Black;
-      this.slidePreviewPicture.Dock = System.Windows.Forms.DockStyle.Fill;
       this.slidePreviewPicture.InvalidateInterval = 500;
       this.slidePreviewPicture.Location = new System.Drawing.Point(0, 0);
       this.slidePreviewPicture.Name = "slidePreviewPicture";
       this.slidePreviewPicture.Size = new System.Drawing.Size(417, 250);
       this.slidePreviewPicture.TabIndex = 0;
+      this.slidePreviewPicture.ZoomFactor = 0F;
       this.slidePreviewPicture.DoubleClick += new System.EventHandler(this.slidePreviewPicture_DoubleClick);
       // 
       // tosStimuli
@@ -523,6 +526,7 @@
             this.btnImage,
             this.btnShapes,
             this.btnMixed,
+            this.btnInternet,
             this.btnFlash,
             this.btnBlank,
             this.toolStripSeparator1,
@@ -536,7 +540,7 @@
             this.btnHelp});
       this.tosStimuli.Location = global::Ogama.Properties.Settings.Default.SCRToolbarLocation;
       this.tosStimuli.Name = "tosStimuli";
-      this.tosStimuli.Size = new System.Drawing.Size(329, 25);
+      this.tosStimuli.Size = new System.Drawing.Size(352, 25);
       this.tosStimuli.TabIndex = 0;
       // 
       // btnInstruction
@@ -588,6 +592,16 @@
       this.btnMixed.Size = new System.Drawing.Size(23, 22);
       this.btnMixed.Text = "Add mixed slide ...";
       this.btnMixed.Click += new System.EventHandler(this.btnMixed_Click);
+      // 
+      // btnInternet
+      // 
+      this.btnInternet.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.btnInternet.Image = global::Ogama.Properties.Resources.AlignTableCellMiddleLeftJustHS;
+      this.btnInternet.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.btnInternet.Name = "btnInternet";
+      this.btnInternet.Size = new System.Drawing.Size(23, 22);
+      this.btnInternet.Text = "Add browser slide ...";
+      this.btnInternet.Click += new System.EventHandler(this.btnInternet_Click);
       // 
       // btnFlash
       // 
@@ -845,5 +859,6 @@
     private System.Windows.Forms.ToolStripButton btnCustomShuffling;
     private VectorGraphics.Canvas.Picture slidePreviewPicture;
     private System.Windows.Forms.ToolStripButton btnAddFolder;
+    private System.Windows.Forms.ToolStripButton btnInternet;
   }
 }

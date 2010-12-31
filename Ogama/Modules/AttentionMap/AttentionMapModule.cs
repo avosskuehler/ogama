@@ -73,6 +73,7 @@ namespace Ogama.Modules.AttentionMap
 
       this.Picture = this.attentionMapPicture;
       this.TrialCombo = this.cbbTrial;
+      this.ZoomTrackBar = this.trbZoom;
 
       this.InitializeDropDowns();
       this.InitializeDataBindings();
@@ -207,7 +208,7 @@ namespace Ogama.Modules.AttentionMap
         this.spcPictureGradient.Panel2Collapsed = true;
 
         this.attentionMapPicture.PresentationSize = Document.ActiveDocument.PresentationSize;
-        this.ResizePicture();
+        this.ResizeCanvas();
 
         this.InitialDisplay();
 
@@ -839,6 +840,27 @@ namespace Ogama.Modules.AttentionMap
                     newRow.TrialSequence = trialSequence;
                     clickTable.AddMouseFixationsRow(newRow);
                     break;
+                }
+              }
+              else if (type == EventType.Response)
+              {
+                string taskString = trialEvent["EventTask"].ToString();
+                string paramString = trialEvent["EventParam"].ToString();
+
+                StopCondition sc = (StopCondition)TypeDescriptor.GetConverter(typeof(StopCondition)).ConvertFrom(paramString);
+                if (sc is MouseStopCondition)
+                {
+                  MouseStopCondition msc = sc as MouseStopCondition;
+                  InputEventTask task = (InputEventTask)Enum.Parse(typeof(InputEventTask), taskString, true);
+                  Ogama.DataSet.OgamaDataSet.MouseFixationsRow newRow =
+                    clickTable.NewMouseFixationsRow();
+                  newRow.PosX = msc.ClickLocation.X;
+                  newRow.PosY = msc.ClickLocation.Y;
+                  newRow.SubjectName = entry;
+                  newRow.TrialID = trialID;
+                  newRow.TrialSequence = trialSequence;
+                  clickTable.AddMouseFixationsRow(newRow);
+                  break;
                 }
               }
             }

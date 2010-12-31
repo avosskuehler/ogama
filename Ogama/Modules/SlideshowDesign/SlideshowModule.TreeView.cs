@@ -660,7 +660,7 @@ namespace Ogama.Modules.SlideshowDesign
       else
       {
         string message = "No tree node selected or selected node is a root node." + Environment.NewLine +
-           "The root node is always 'Slideshow'.";
+           "The root node cannot be renamed.";
         ExceptionMethods.ProcessMessage("Invalid selection:", message);
       }
     }

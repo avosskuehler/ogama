@@ -46,6 +46,6 @@ namespace Ogama.Modules.Common
     /// <summary>
     /// The samples are out of the presentation size.
     /// </summary>
-    OutOfMonitor = 8,
+    OutOfStimulus = 8,
   }
 }

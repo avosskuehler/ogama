@@ -41,6 +41,8 @@ namespace Ogama.Modules.Fixations
       this.btnSeekPreviousSlide = new System.Windows.Forms.ToolStripButton();
       this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
       this.trialTimeLine = new Ogama.Modules.Common.TrialTimeLine(this.components);
+      this.trbZoom = new OgamaControls.ToolStripTrackBar();
+      this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
       this.spcGazeMouseTables = new System.Windows.Forms.SplitContainer();
       this.dgvGazeFixations = new System.Windows.Forms.DataGridView();
       this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -172,8 +174,8 @@ namespace Ogama.Modules.Fixations
       // spcPictureTools.Panel2
       // 
       this.spcPictureTools.Panel2.Controls.Add(this.spcGazeMouseTables);
-      this.spcPictureTools.Size = new System.Drawing.Size(1096, 374);
-      this.spcPictureTools.SplitterDistance = 217;
+      this.spcPictureTools.Size = new System.Drawing.Size(1096, 372);
+      this.spcPictureTools.SplitterDistance = 215;
       this.spcPictureTools.TabIndex = 2;
       // 
       // spcPictureSlider
@@ -191,13 +193,14 @@ namespace Ogama.Modules.Fixations
       // spcPictureSlider.Panel2
       // 
       this.spcPictureSlider.Panel2.Controls.Add(this.toolStrip1);
-      this.spcPictureSlider.Size = new System.Drawing.Size(1096, 217);
-      this.spcPictureSlider.SplitterDistance = 191;
+      this.spcPictureSlider.Size = new System.Drawing.Size(1096, 215);
+      this.spcPictureSlider.SplitterDistance = 189;
       this.spcPictureSlider.SplitterWidth = 1;
       this.spcPictureSlider.TabIndex = 1;
       // 
       // pnlCanvas
       // 
+      this.pnlCanvas.AutoScroll = true;
       this.pnlCanvas.BackColor = global::Ogama.Properties.Settings.Default.BackgroundColorForms;
       this.pnlCanvas.Controls.Add(this.pnlPicture);
       this.pnlCanvas.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::Ogama.Properties.Settings.Default, "BackgroundColorForms", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
@@ -205,7 +208,7 @@ namespace Ogama.Modules.Fixations
       this.pnlCanvas.Location = new System.Drawing.Point(0, 0);
       this.pnlCanvas.Margin = new System.Windows.Forms.Padding(0);
       this.pnlCanvas.Name = "pnlCanvas";
-      this.pnlCanvas.Size = new System.Drawing.Size(1096, 191);
+      this.pnlCanvas.Size = new System.Drawing.Size(1096, 189);
       this.pnlCanvas.TabIndex = 3;
       // 
       // pnlPicture
@@ -223,7 +226,6 @@ namespace Ogama.Modules.Fixations
       this.fixationsPicture.BackColor = global::Ogama.Properties.Settings.Default.BackgroundColorForms;
       this.fixationsPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
       this.fixationsPicture.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::Ogama.Properties.Settings.Default, "BackgroundColorForms", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-      this.fixationsPicture.Dock = System.Windows.Forms.DockStyle.Fill;
       this.fixationsPicture.InvalidateInterval = 500;
       this.fixationsPicture.Location = new System.Drawing.Point(0, 0);
       this.fixationsPicture.Margin = new System.Windows.Forms.Padding(0);
@@ -231,6 +233,7 @@ namespace Ogama.Modules.Fixations
       this.fixationsPicture.Size = new System.Drawing.Size(200, 100);
       this.fixationsPicture.TabIndex = 0;
       this.fixationsPicture.TabStop = false;
+      this.fixationsPicture.ZoomFactor = 0F;
       // 
       // toolStrip1
       // 
@@ -239,10 +242,12 @@ namespace Ogama.Modules.Fixations
             this.btnSeekNextSlide,
             this.btnSeekPreviousSlide,
             this.toolStripSeparator2,
-            this.trialTimeLine});
+            this.trialTimeLine,
+            this.toolStripSeparator4,
+            this.trbZoom});
       this.toolStrip1.Location = new System.Drawing.Point(0, 0);
       this.toolStrip1.Name = "toolStrip1";
-      this.toolStrip1.Size = new System.Drawing.Size(1096, 25);
+      this.toolStrip1.Size = new System.Drawing.Size(1096, 26);
       this.toolStrip1.Stretch = true;
       this.toolStrip1.TabIndex = 0;
       this.toolStrip1.Text = "toolStrip1";
@@ -253,7 +258,7 @@ namespace Ogama.Modules.Fixations
       this.btnSeekNextSlide.Image = global::Ogama.Properties.Resources.DataContainer_MoveLastHS;
       this.btnSeekNextSlide.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnSeekNextSlide.Name = "btnSeekNextSlide";
-      this.btnSeekNextSlide.Size = new System.Drawing.Size(23, 22);
+      this.btnSeekNextSlide.Size = new System.Drawing.Size(23, 23);
       this.btnSeekNextSlide.Text = "Seek to next slide";
       this.btnSeekNextSlide.Click += new System.EventHandler(this.btnSeekNextSlide_Click);
       // 
@@ -263,24 +268,40 @@ namespace Ogama.Modules.Fixations
       this.btnSeekPreviousSlide.Image = global::Ogama.Properties.Resources.DataContainer_MoveFirstHS;
       this.btnSeekPreviousSlide.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnSeekPreviousSlide.Name = "btnSeekPreviousSlide";
-      this.btnSeekPreviousSlide.Size = new System.Drawing.Size(23, 22);
+      this.btnSeekPreviousSlide.Size = new System.Drawing.Size(23, 23);
       this.btnSeekPreviousSlide.Text = "Seek to previous slide";
       this.btnSeekPreviousSlide.Click += new System.EventHandler(this.btnSeekPreviousSlide_Click);
       // 
       // toolStripSeparator2
       // 
       this.toolStripSeparator2.Name = "toolStripSeparator2";
-      this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+      this.toolStripSeparator2.Size = new System.Drawing.Size(6, 26);
       // 
       // trialTimeLine
       // 
       this.trialTimeLine.Duration = 0;
       this.trialTimeLine.Name = "trialTimeLine";
       this.trialTimeLine.ShowCaret = false;
-      this.trialTimeLine.Size = new System.Drawing.Size(1012, 22);
+      this.trialTimeLine.Size = new System.Drawing.Size(902, 23);
       this.trialTimeLine.Text = "trialTimeLine";
       this.trialTimeLine.SectionStartValueChanged += new OgamaControls.TimeLine.PositionValueChangedEventHandler(this.TrialTimeLine_SectionStartValueChanged);
       this.trialTimeLine.SectionEndValueChanged += new OgamaControls.TimeLine.PositionValueChangedEventHandler(this.TrialTimeLine_SectionEndValueChanged);
+      // 
+      // trbZoom
+      // 
+      this.trbZoom.Maximum = 100;
+      this.trbZoom.Minimum = 1;
+      this.trbZoom.Name = "trbZoom";
+      this.trbZoom.Size = new System.Drawing.Size(104, 23);
+      this.trbZoom.TickFrequency = 1;
+      this.trbZoom.TickStyle = System.Windows.Forms.TickStyle.BottomRight;
+      this.trbZoom.ToolTipText = "Zoom, right-click for autozoom";
+      this.trbZoom.Value = 1;
+      // 
+      // toolStripSeparator4
+      // 
+      this.toolStripSeparator4.Name = "toolStripSeparator4";
+      this.toolStripSeparator4.Size = new System.Drawing.Size(6, 26);
       // 
       // spcGazeMouseTables
       // 
@@ -398,13 +419,13 @@ namespace Ogama.Modules.Fixations
             this.cmnuSelectAll,
             this.cmnuCopyToClipboard});
       this.cmnuDGV.Name = "mnuContextDGV";
-      this.cmnuDGV.Size = new System.Drawing.Size(168, 48);
+      this.cmnuDGV.Size = new System.Drawing.Size(165, 48);
       // 
       // cmnuSelectAll
       // 
       this.cmnuSelectAll.Name = "cmnuSelectAll";
       this.cmnuSelectAll.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-      this.cmnuSelectAll.Size = new System.Drawing.Size(167, 22);
+      this.cmnuSelectAll.Size = new System.Drawing.Size(164, 22);
       this.cmnuSelectAll.Text = "Select All";
       this.cmnuSelectAll.Click += new System.EventHandler(this.cmnuSelectAll_Click);
       // 
@@ -413,7 +434,7 @@ namespace Ogama.Modules.Fixations
       this.cmnuCopyToClipboard.Image = global::Ogama.Properties.Resources.CopyHS;
       this.cmnuCopyToClipboard.Name = "cmnuCopyToClipboard";
       this.cmnuCopyToClipboard.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-      this.cmnuCopyToClipboard.Size = new System.Drawing.Size(167, 22);
+      this.cmnuCopyToClipboard.Size = new System.Drawing.Size(164, 22);
       this.cmnuCopyToClipboard.Text = "Copy";
       this.cmnuCopyToClipboard.Click += new System.EventHandler(this.cmnuCopyToClipboard_Click);
       // 
@@ -536,14 +557,14 @@ namespace Ogama.Modules.Fixations
             this.btnExport});
       this.tosActions.Location = global::Ogama.Properties.Settings.Default.FIXOptionsToolbarLocation;
       this.tosActions.Name = "tosActions";
-      this.tosActions.Size = new System.Drawing.Size(656, 25);
+      this.tosActions.Size = new System.Drawing.Size(678, 26);
       this.tosActions.TabIndex = 1;
       this.tosActions.Text = "toolStrip2";
       // 
       // toolStripLabel2
       // 
       this.toolStripLabel2.Name = "toolStripLabel2";
-      this.toolStripLabel2.Size = new System.Drawing.Size(97, 22);
+      this.toolStripLabel2.Size = new System.Drawing.Size(105, 23);
       this.toolStripLabel2.Text = "Calculate Fixations";
       // 
       // btnCalculateFix
@@ -551,7 +572,7 @@ namespace Ogama.Modules.Fixations
       this.btnCalculateFix.Image = global::Ogama.Properties.Resources.CalculatorHS;
       this.btnCalculateFix.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnCalculateFix.Name = "btnCalculateFix";
-      this.btnCalculateFix.Size = new System.Drawing.Size(51, 22);
+      this.btnCalculateFix.Size = new System.Drawing.Size(51, 23);
       this.btnCalculateFix.Text = "Start";
       this.btnCalculateFix.ToolTipText = "Start calculating the gaze and mouse fixations \r\nof selected subject for all tria" +
           "ls.";
@@ -560,12 +581,12 @@ namespace Ogama.Modules.Fixations
       // toolStripSeparator5
       // 
       this.toolStripSeparator5.Name = "toolStripSeparator5";
-      this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
+      this.toolStripSeparator5.Size = new System.Drawing.Size(6, 26);
       // 
       // toolStripLabel3
       // 
       this.toolStripLabel3.Name = "toolStripLabel3";
-      this.toolStripLabel3.Size = new System.Drawing.Size(44, 22);
+      this.toolStripLabel3.Size = new System.Drawing.Size(49, 23);
       this.toolStripLabel3.Text = "Options";
       // 
       // btnSelectedSubject
@@ -577,7 +598,7 @@ namespace Ogama.Modules.Fixations
       this.btnSelectedSubject.Image = global::Ogama.Properties.Resources.user;
       this.btnSelectedSubject.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnSelectedSubject.Name = "btnSelectedSubject";
-      this.btnSelectedSubject.Size = new System.Drawing.Size(23, 22);
+      this.btnSelectedSubject.Size = new System.Drawing.Size(23, 23);
       this.btnSelectedSubject.ToolTipText = "Calculate fixations only for selected subject.";
       this.btnSelectedSubject.Click += new System.EventHandler(this.btnSelectedSubject_Click);
       // 
@@ -588,7 +609,7 @@ namespace Ogama.Modules.Fixations
       this.btnAllSubjects.Image = global::Ogama.Properties.Resources.userAccounts;
       this.btnAllSubjects.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnAllSubjects.Name = "btnAllSubjects";
-      this.btnAllSubjects.Size = new System.Drawing.Size(23, 22);
+      this.btnAllSubjects.Size = new System.Drawing.Size(23, 23);
       this.btnAllSubjects.ToolTipText = "Calculate fixations for all subjects.";
       this.btnAllSubjects.Click += new System.EventHandler(this.btnAllSubjects_Click);
       // 
@@ -598,7 +619,7 @@ namespace Ogama.Modules.Fixations
       this.btnShowOptions.Image = global::Ogama.Properties.Resources.otheroptions;
       this.btnShowOptions.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnShowOptions.Name = "btnShowOptions";
-      this.btnShowOptions.Size = new System.Drawing.Size(23, 22);
+      this.btnShowOptions.Size = new System.Drawing.Size(23, 23);
       this.btnShowOptions.Text = "Show options for fixation calculation";
       this.btnShowOptions.ToolTipText = "Show options for fixation calculation";
       this.btnShowOptions.Click += new System.EventHandler(this.btnShowOptions_Click);
@@ -606,12 +627,12 @@ namespace Ogama.Modules.Fixations
       // toolStripSeparator1
       // 
       this.toolStripSeparator1.Name = "toolStripSeparator1";
-      this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+      this.toolStripSeparator1.Size = new System.Drawing.Size(6, 26);
       // 
       // toolStripLabel1
       // 
       this.toolStripLabel1.Name = "toolStripLabel1";
-      this.toolStripLabel1.Size = new System.Drawing.Size(45, 22);
+      this.toolStripLabel1.Size = new System.Drawing.Size(49, 23);
       this.toolStripLabel1.Text = "Specials";
       // 
       // btnDeleteFixations
@@ -620,7 +641,7 @@ namespace Ogama.Modules.Fixations
       this.btnDeleteFixations.Image = global::Ogama.Properties.Resources.DeleteHS;
       this.btnDeleteFixations.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnDeleteFixations.Name = "btnDeleteFixations";
-      this.btnDeleteFixations.Size = new System.Drawing.Size(23, 22);
+      this.btnDeleteFixations.Size = new System.Drawing.Size(23, 23);
       this.btnDeleteFixations.ToolTipText = "Delete all fixations for given subject.";
       this.btnDeleteFixations.Click += new System.EventHandler(this.btnDeleteFixations_Click);
       // 
@@ -630,7 +651,7 @@ namespace Ogama.Modules.Fixations
       this.btnEliminateData.Image = global::Ogama.Properties.Resources.RPLBlink;
       this.btnEliminateData.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnEliminateData.Name = "btnEliminateData";
-      this.btnEliminateData.Size = new System.Drawing.Size(23, 22);
+      this.btnEliminateData.Size = new System.Drawing.Size(23, 23);
       this.btnEliminateData.ToolTipText = "Eliminate data of this trial from statistical analysis.";
       this.btnEliminateData.Click += new System.EventHandler(this.btnEliminateData_Click);
       // 
@@ -641,7 +662,7 @@ namespace Ogama.Modules.Fixations
       this.btnShowHideAOI.Image = global::Ogama.Properties.Resources.AOILogo;
       this.btnShowHideAOI.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnShowHideAOI.Name = "btnShowHideAOI";
-      this.btnShowHideAOI.Size = new System.Drawing.Size(23, 22);
+      this.btnShowHideAOI.Size = new System.Drawing.Size(23, 23);
       this.btnShowHideAOI.ToolTipText = "Shows or hides the underlying AOI.";
       this.btnShowHideAOI.Click += new System.EventHandler(this.btnShowHideAOI_Click);
       // 
@@ -654,7 +675,7 @@ namespace Ogama.Modules.Fixations
       this.btnShowHideTables.Image = global::Ogama.Properties.Resources.TableHS;
       this.btnShowHideTables.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnShowHideTables.Name = "btnShowHideTables";
-      this.btnShowHideTables.Size = new System.Drawing.Size(23, 22);
+      this.btnShowHideTables.Size = new System.Drawing.Size(23, 23);
       this.btnShowHideTables.Text = "Shows or hides the fixation data grid views ...";
       this.btnShowHideTables.ToolTipText = "Uncheck to hide the fixation tables.";
       this.btnShowHideTables.Click += new System.EventHandler(this.btnShowHideTables_Click);
@@ -662,7 +683,7 @@ namespace Ogama.Modules.Fixations
       // toolStripSeparator3
       // 
       this.toolStripSeparator3.Name = "toolStripSeparator3";
-      this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+      this.toolStripSeparator3.Size = new System.Drawing.Size(6, 26);
       // 
       // nudDriftXCorrection
       // 
@@ -683,7 +704,7 @@ namespace Ogama.Modules.Fixations
             0,
             -2147483648});
       this.nudDriftXCorrection.Name = "nudDriftXCorrection";
-      this.nudDriftXCorrection.Size = new System.Drawing.Size(41, 22);
+      this.nudDriftXCorrection.Size = new System.Drawing.Size(41, 23);
       this.nudDriftXCorrection.Text = "0";
       this.nudDriftXCorrection.Value = new decimal(new int[] {
             0,
@@ -711,7 +732,7 @@ namespace Ogama.Modules.Fixations
             0,
             -2147483648});
       this.nudDriftYCorrection.Name = "nudDriftYCorrection";
-      this.nudDriftYCorrection.Size = new System.Drawing.Size(41, 22);
+      this.nudDriftYCorrection.Size = new System.Drawing.Size(41, 23);
       this.nudDriftYCorrection.Text = "0";
       this.nudDriftYCorrection.Value = new decimal(new int[] {
             0,
@@ -726,19 +747,19 @@ namespace Ogama.Modules.Fixations
       this.btnSaveDriftCorrection.Image = global::Ogama.Properties.Resources.saveHS;
       this.btnSaveDriftCorrection.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnSaveDriftCorrection.Name = "btnSaveDriftCorrection";
-      this.btnSaveDriftCorrection.Size = new System.Drawing.Size(23, 22);
+      this.btnSaveDriftCorrection.Size = new System.Drawing.Size(23, 23);
       this.btnSaveDriftCorrection.Text = "Save drift correction to database.";
       this.btnSaveDriftCorrection.Click += new System.EventHandler(this.btnSaveDriftCorrection_Click);
       // 
       // toolStripSeparator6
       // 
       this.toolStripSeparator6.Name = "toolStripSeparator6";
-      this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
+      this.toolStripSeparator6.Size = new System.Drawing.Size(6, 26);
       // 
       // toolStripLabel5
       // 
       this.toolStripLabel5.Name = "toolStripLabel5";
-      this.toolStripLabel5.Size = new System.Drawing.Size(71, 22);
+      this.toolStripLabel5.Size = new System.Drawing.Size(76, 23);
       this.toolStripLabel5.Text = "ImportExport";
       // 
       // btnImport
@@ -747,7 +768,7 @@ namespace Ogama.Modules.Fixations
       this.btnImport.Image = global::Ogama.Properties.Resources.MagicWand;
       this.btnImport.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnImport.Name = "btnImport";
-      this.btnImport.Size = new System.Drawing.Size(23, 22);
+      this.btnImport.Size = new System.Drawing.Size(23, 23);
       this.btnImport.Text = "Import Fixations";
       this.btnImport.ToolTipText = "Imports ascii file with fixation into OGAMAs table.";
       this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
@@ -758,7 +779,7 @@ namespace Ogama.Modules.Fixations
       this.btnExport.Image = global::Ogama.Properties.Resources.ExportData;
       this.btnExport.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnExport.Name = "btnExport";
-      this.btnExport.Size = new System.Drawing.Size(23, 22);
+      this.btnExport.Size = new System.Drawing.Size(23, 23);
       this.btnExport.ToolTipText = "Export fixation table to ascii file.";
       this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
       // 
@@ -768,7 +789,7 @@ namespace Ogama.Modules.Fixations
       // toolStripContainer1.ContentPanel
       // 
       this.toolStripContainer1.ContentPanel.Controls.Add(this.spcPictureTools);
-      this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1096, 374);
+      this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1096, 372);
       this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
       this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
       this.toolStripContainer1.Name = "toolStripContainer1";
@@ -799,7 +820,7 @@ namespace Ogama.Modules.Fixations
             this.nudMouseFixDiameterDiv});
       this.tosMouseDisplay.Location = global::Ogama.Properties.Settings.Default.FIXMouseToolbarLocation;
       this.tosMouseDisplay.Name = "tosMouseDisplay";
-      this.tosMouseDisplay.Size = new System.Drawing.Size(360, 25);
+      this.tosMouseDisplay.Size = new System.Drawing.Size(368, 26);
       this.tosMouseDisplay.TabIndex = 4;
       // 
       // toolStripButton11
@@ -809,24 +830,24 @@ namespace Ogama.Modules.Fixations
       this.toolStripButton11.Image = global::Ogama.Properties.Resources.Mouse;
       this.toolStripButton11.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.toolStripButton11.Name = "toolStripButton11";
-      this.toolStripButton11.Size = new System.Drawing.Size(23, 22);
+      this.toolStripButton11.Size = new System.Drawing.Size(23, 23);
       this.toolStripButton11.ToolTipText = "Mouse display modes.";
       // 
       // toolStripSeparator12
       // 
       this.toolStripSeparator12.Name = "toolStripSeparator12";
-      this.toolStripSeparator12.Size = new System.Drawing.Size(6, 25);
+      this.toolStripSeparator12.Size = new System.Drawing.Size(6, 26);
       // 
       // toolStripLabel7
       // 
       this.toolStripLabel7.Name = "toolStripLabel7";
-      this.toolStripLabel7.Size = new System.Drawing.Size(70, 22);
+      this.toolStripLabel7.Size = new System.Drawing.Size(79, 23);
       this.toolStripLabel7.Text = "Display mode";
       // 
       // cbbMouseDisplayMode
       // 
       this.cbbMouseDisplayMode.Name = "cbbMouseDisplayMode";
-      this.cbbMouseDisplayMode.Size = new System.Drawing.Size(121, 25);
+      this.cbbMouseDisplayMode.Size = new System.Drawing.Size(121, 26);
       this.cbbMouseDisplayMode.Text = global::Ogama.Properties.Settings.Default.MouseFixationsDrawingMode;
       this.cbbMouseDisplayMode.ToolTipText = "Select the display \r\nmode for the mouse fixations.";
       // 
@@ -839,7 +860,7 @@ namespace Ogama.Modules.Fixations
       this.btnMouseConnections.Image = global::Ogama.Properties.Resources.RPLFixCon;
       this.btnMouseConnections.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnMouseConnections.Name = "btnMouseConnections";
-      this.btnMouseConnections.Size = new System.Drawing.Size(23, 22);
+      this.btnMouseConnections.Size = new System.Drawing.Size(23, 23);
       this.btnMouseConnections.Text = "Display mouse fixation connections.";
       this.btnMouseConnections.Click += new System.EventHandler(this.btnMouseConnections_Click);
       // 
@@ -851,14 +872,14 @@ namespace Ogama.Modules.Fixations
       this.btnMouseNumbers.Image = global::Ogama.Properties.Resources.ATMFirst;
       this.btnMouseNumbers.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnMouseNumbers.Name = "btnMouseNumbers";
-      this.btnMouseNumbers.Size = new System.Drawing.Size(23, 22);
+      this.btnMouseNumbers.Size = new System.Drawing.Size(23, 23);
       this.btnMouseNumbers.Text = "Display mouse fixation numbers.";
       this.btnMouseNumbers.Click += new System.EventHandler(this.btnMouseNumbers_Click);
       // 
       // toolStripSeparator13
       // 
       this.toolStripSeparator13.Name = "toolStripSeparator13";
-      this.toolStripSeparator13.Size = new System.Drawing.Size(6, 25);
+      this.toolStripSeparator13.Size = new System.Drawing.Size(6, 26);
       // 
       // btnMousePenStyle
       // 
@@ -866,7 +887,7 @@ namespace Ogama.Modules.Fixations
       this.btnMousePenStyle.Image = global::Ogama.Properties.Resources.Color_fontHS;
       this.btnMousePenStyle.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnMousePenStyle.Name = "btnMousePenStyle";
-      this.btnMousePenStyle.Size = new System.Drawing.Size(23, 22);
+      this.btnMousePenStyle.Size = new System.Drawing.Size(23, 23);
       this.btnMousePenStyle.ToolTipText = "Modify mouse fixation pen style.";
       this.btnMousePenStyle.Click += new System.EventHandler(this.btnMousePenStyle_Click);
       // 
@@ -889,7 +910,7 @@ namespace Ogama.Modules.Fixations
             0,
             65536});
       this.nudMouseFixDiameterDiv.Name = "nudMouseFixDiameterDiv";
-      this.nudMouseFixDiameterDiv.Size = new System.Drawing.Size(51, 22);
+      this.nudMouseFixDiameterDiv.Size = new System.Drawing.Size(50, 23);
       this.nudMouseFixDiameterDiv.Text = "2,0";
       this.nudMouseFixDiameterDiv.ToolTipText = "Increase this value to reduce \r\nmouse fixation diameters.";
       this.nudMouseFixDiameterDiv.Value = new decimal(new int[] {
@@ -927,7 +948,7 @@ namespace Ogama.Modules.Fixations
       this.cbbTrial.AutoSize = false;
       this.cbbTrial.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.cbbTrial.Name = "cbbTrial";
-      this.cbbTrial.Size = new System.Drawing.Size(200, 21);
+      this.cbbTrial.Size = new System.Drawing.Size(200, 23);
       this.cbbTrial.ToolTipText = "Select the trial to display.";
       // 
       // btnEye
@@ -984,7 +1005,7 @@ namespace Ogama.Modules.Fixations
             this.nudGazeFixDiameterDiv});
       this.tosGazeDisplay.Location = global::Ogama.Properties.Settings.Default.FIXGazeToolbarLocation;
       this.tosGazeDisplay.Name = "tosGazeDisplay";
-      this.tosGazeDisplay.Size = new System.Drawing.Size(360, 25);
+      this.tosGazeDisplay.Size = new System.Drawing.Size(368, 26);
       this.tosGazeDisplay.TabIndex = 3;
       // 
       // toolStripButton3
@@ -994,24 +1015,24 @@ namespace Ogama.Modules.Fixations
       this.toolStripButton3.Image = global::Ogama.Properties.Resources.Eye;
       this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.toolStripButton3.Name = "toolStripButton3";
-      this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
+      this.toolStripButton3.Size = new System.Drawing.Size(23, 23);
       this.toolStripButton3.ToolTipText = "Gaze display modes.";
       // 
       // toolStripSeparator7
       // 
       this.toolStripSeparator7.Name = "toolStripSeparator7";
-      this.toolStripSeparator7.Size = new System.Drawing.Size(6, 25);
+      this.toolStripSeparator7.Size = new System.Drawing.Size(6, 26);
       // 
       // toolStripLabel6
       // 
       this.toolStripLabel6.Name = "toolStripLabel6";
-      this.toolStripLabel6.Size = new System.Drawing.Size(70, 22);
+      this.toolStripLabel6.Size = new System.Drawing.Size(79, 23);
       this.toolStripLabel6.Text = "Display mode";
       // 
       // cbbGazeDisplayMode
       // 
       this.cbbGazeDisplayMode.Name = "cbbGazeDisplayMode";
-      this.cbbGazeDisplayMode.Size = new System.Drawing.Size(121, 25);
+      this.cbbGazeDisplayMode.Size = new System.Drawing.Size(121, 26);
       this.cbbGazeDisplayMode.Text = global::Ogama.Properties.Settings.Default.GazeFixationsDrawingMode;
       this.cbbGazeDisplayMode.ToolTipText = "Select the display \r\nmode for the gaze fixations.";
       // 
@@ -1023,7 +1044,7 @@ namespace Ogama.Modules.Fixations
       this.btnGazeConnections.Image = global::Ogama.Properties.Resources.RPLFixCon;
       this.btnGazeConnections.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnGazeConnections.Name = "btnGazeConnections";
-      this.btnGazeConnections.Size = new System.Drawing.Size(23, 22);
+      this.btnGazeConnections.Size = new System.Drawing.Size(23, 23);
       this.btnGazeConnections.Text = "Display gaze fixation connections.";
       this.btnGazeConnections.Click += new System.EventHandler(this.btnGazeConnections_Click);
       // 
@@ -1035,14 +1056,14 @@ namespace Ogama.Modules.Fixations
       this.btnGazeNumbers.Image = global::Ogama.Properties.Resources.ATMFirst;
       this.btnGazeNumbers.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnGazeNumbers.Name = "btnGazeNumbers";
-      this.btnGazeNumbers.Size = new System.Drawing.Size(23, 22);
+      this.btnGazeNumbers.Size = new System.Drawing.Size(23, 23);
       this.btnGazeNumbers.Text = "Display gaze fixation numbers.";
       this.btnGazeNumbers.Click += new System.EventHandler(this.btnGazeNumbers_Click);
       // 
       // toolStripSeparator9
       // 
       this.toolStripSeparator9.Name = "toolStripSeparator9";
-      this.toolStripSeparator9.Size = new System.Drawing.Size(6, 25);
+      this.toolStripSeparator9.Size = new System.Drawing.Size(6, 26);
       // 
       // btnGazePenStyle
       // 
@@ -1050,7 +1071,7 @@ namespace Ogama.Modules.Fixations
       this.btnGazePenStyle.Image = global::Ogama.Properties.Resources.Color_fontHS;
       this.btnGazePenStyle.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnGazePenStyle.Name = "btnGazePenStyle";
-      this.btnGazePenStyle.Size = new System.Drawing.Size(23, 22);
+      this.btnGazePenStyle.Size = new System.Drawing.Size(23, 23);
       this.btnGazePenStyle.ToolTipText = "Modify gaze fixation pen style.";
       this.btnGazePenStyle.Click += new System.EventHandler(this.btnGazePenStyle_Click);
       // 
@@ -1073,7 +1094,7 @@ namespace Ogama.Modules.Fixations
             0,
             65536});
       this.nudGazeFixDiameterDiv.Name = "nudGazeFixDiameterDiv";
-      this.nudGazeFixDiameterDiv.Size = new System.Drawing.Size(51, 22);
+      this.nudGazeFixDiameterDiv.Size = new System.Drawing.Size(50, 23);
       this.nudGazeFixDiameterDiv.Text = "2,0";
       this.nudGazeFixDiameterDiv.ToolTipText = "Increase this value to reduce \r\ngaze fixation diameters.";
       this.nudGazeFixDiameterDiv.Value = new decimal(new int[] {
@@ -1244,5 +1265,7 @@ namespace Ogama.Modules.Fixations
     private System.Windows.Forms.ToolStripButton btnSaveDriftCorrection;
     private OgamaControls.ToolStripNumericUpDown nudDriftXCorrection;
     private OgamaControls.ToolStripNumericUpDown nudDriftYCorrection;
+    private OgamaControls.ToolStripTrackBar trbZoom;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
   }
 }

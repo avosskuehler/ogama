@@ -190,8 +190,15 @@ namespace VectorGraphics.Canvas
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public Slide BGSlide
     {
-      get { return this.backgroundSlide; }
-      set { this.backgroundSlide = value; }
+      get
+      {
+        return this.backgroundSlide;
+      }
+
+      set
+      {
+        this.backgroundSlide = value;
+      }
     }
 
     /// <summary>
@@ -256,6 +263,15 @@ namespace VectorGraphics.Canvas
       get { return this.tmrBackground.Interval; }
       set { this.tmrBackground.Interval = value; }
     }
+
+    /// <summary>
+    /// Gets or sets the zoom factor for the display of this picture
+    /// </summary>
+    /// <value>A <see cref="Single"/> with the zoom factor 
+    /// relative to its parents bounds. A value of 1 = fit to bounds.</value>
+    [Category("Behaviour"), DefaultValue(1f)]
+    [Description("The zoom factor for the picture.")]
+    public float ZoomFactor { get; set; }
 
     /// <summary>
     /// Gets or sets the ScreenToStimulusMatrix

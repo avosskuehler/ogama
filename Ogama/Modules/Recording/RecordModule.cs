@@ -203,6 +203,16 @@ namespace Ogama.Modules.Recording
     private int yPosition;
 
     /// <summary>
+    /// Saves the x-Offset for scrolled pages.
+    /// </summary>
+    private int xScrollOffset;
+
+    /// <summary>
+    /// Saves the y-Offset for scrolled pages.
+    /// </summary>
+    private int yScrollOffset;
+
+    /// <summary>
     /// Saves the current identifier for the current trial.
     /// </summary>
     private Trial currentTrial;
@@ -372,7 +382,7 @@ namespace Ogama.Modules.Recording
     #region PROPERTIES
 
     /// <summary>
-    /// Gets the form of the presenter module if presentation is running-
+    /// Gets the form of the presenter module if presentation is running.
     /// </summary>
     public PresenterModule Presenter
     {
@@ -526,14 +536,15 @@ namespace Ogama.Modules.Recording
 
       // The GazePos data is in values from 0 to 1
       // so scale it to SCREEN COORDINATES
+      // and add optional scroll offset
       if (newRawData.GazePosX != null)
       {
-        newRawData.GazePosX = newRawData.GazePosX * this.xResolution;
+        newRawData.GazePosX = newRawData.GazePosX * this.xResolution + this.xScrollOffset;
       }
 
       if (newRawData.GazePosY != null)
       {
-        newRawData.GazePosY = newRawData.GazePosY * this.yResolution;
+        newRawData.GazePosY = newRawData.GazePosY * this.yResolution + this.yScrollOffset;
       }
 
       newRawData.PupilDiaX = e.Gazedata.PupilDiaX;
@@ -547,8 +558,8 @@ namespace Ogama.Modules.Recording
       PointF? newMousePos = this.GetMousePosition();
       if (this.currentSlide.MouseCursorVisible && newMousePos != null)
       {
-        newRawData.MousePosX = newMousePos.Value.X;
-        newRawData.MousePosY = newMousePos.Value.Y;
+        newRawData.MousePosX = newMousePos.Value.X + this.xScrollOffset;
+        newRawData.MousePosY = newMousePos.Value.Y + this.yScrollOffset;
       }
 
       // Update gaze cursor with reduced update rate
@@ -736,7 +747,7 @@ namespace Ogama.Modules.Recording
       // Intialize replay picture
       this.recordPicture.OwningForm = this;
       this.recordPicture.PresentationSize = Document.ActiveDocument.PresentationSize;
-      this.ResizePicture();
+      this.ResizeCanvas();
 
       // Disable Usercam button, if there is no available webcam
       // except Ogama Screen Capture which should not be used.
@@ -987,7 +998,18 @@ namespace Ogama.Modules.Recording
     {
       lock (this)
       {
-        long time = this.GetCurrentTime() - this.recordingStarttime - this.currentTrialStarttime;
+        // Save scroll offsets for raw data transformation
+        if (e.TrialEvent.Type == EventType.Scroll)
+        {
+          string[] scrollOffsets = e.TrialEvent.Param.Split(';');
+          lock (this)
+          {
+            this.xScrollOffset = Convert.ToInt32(scrollOffsets[0]);
+            this.yScrollOffset = Convert.ToInt32(scrollOffsets[1]);
+          }
+        }
+
+        long time = e.EventTime - this.recordingStarttime - this.currentTrialStarttime;
 
         // Store trial event event
         e.TrialEvent.EventID = this.trialEventList.Count;

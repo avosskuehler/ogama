@@ -1673,7 +1673,7 @@ namespace Ogama.Modules.Replay
             validMouseFixationSamples.Add(
               new TimedPoint(sampleTime, newMouseSamplePoint.Value));
 
-            if (!newMouseSamplePoint.Value.IsEmpty && !Queries.OutOfScreen(newMouseSamplePoint.Value))
+            if (!newMouseSamplePoint.Value.IsEmpty && !Queries.OutOfScreen(newMouseSamplePoint.Value, this.PresentationSize))
             {
               if (Point.Round(newMouseSamplePoint.Value) != Point.Round(lastValidMouseSample.Position))
               {
@@ -1698,7 +1698,8 @@ namespace Ogama.Modules.Replay
               validGazeFixationSamples.Add(
                 new TimedPoint(sampleTime, newGazeSamplePoint.Value));
 
-              if (!newGazeSamplePoint.Value.IsEmpty && !Queries.OutOfScreen(newGazeSamplePoint.Value))
+              if (!newGazeSamplePoint.Value.IsEmpty && !Queries.OutOfScreen(newGazeSamplePoint.Value,
+                this.PresentationSize))
               {
                 if (Point.Round(newGazeSamplePoint.Value) != Point.Round(lastValidGazeSample.Position))
                 {
@@ -2081,7 +2082,7 @@ namespace Ogama.Modules.Replay
       switch (currentState)
       {
         case EyeMotionState.MOVING:
-          if (!Queries.OutOfScreen(newPt))
+          if (!Queries.OutOfScreen(newPt, this.PresentationSize))
           {
             if (lastPointInSampleRange)
             {
@@ -2106,7 +2107,7 @@ namespace Ogama.Modules.Replay
           break;
 
         case EyeMotionState.FIXATION_COMPLETED:
-          if (!Queries.OutOfScreen(fixationCenter))
+          if (!Queries.OutOfScreen(fixationCenter, this.PresentationSize))
           {
             if (this.currentLoopState.IsOutOfMonitor)
             {
@@ -2356,10 +2357,10 @@ namespace Ogama.Modules.Replay
       switch (toDraw)
       {
         case SampleType.Gaze:
-          isValidData = Queries.GetGazeData(row, out newPt);
+          isValidData = Queries.GetGazeData(row, this.PresentationSize, out newPt);
           break;
         case SampleType.Mouse:
-          isValidData = Queries.GetMouseData(row, out newPt);
+          isValidData = Queries.GetMouseData(row, this.PresentationSize, out newPt);
           break;
       }
 
@@ -2382,7 +2383,7 @@ namespace Ogama.Modules.Replay
           return true;
         case SampleValidity.Null:
           return false;
-        case SampleValidity.OutOfMonitor:
+        case SampleValidity.OutOfStimulus:
           return false;
       }
 

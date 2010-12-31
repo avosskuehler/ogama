@@ -1410,7 +1410,10 @@ namespace Ogama.Modules.Statistics
       foreach (DataRow row in rawDataTable.Rows)
       {
         PointF? newGazePoint;
-        SampleValidity isGazeValidData = Queries.GetGazeData(row, out newGazePoint);
+        SampleValidity isGazeValidData = Queries.GetGazeData(
+          row,
+          Document.ActiveDocument.PresentationSize,
+          out newGazePoint);
 
         switch (isGazeValidData)
         {
@@ -1422,27 +1425,26 @@ namespace Ogama.Modules.Statistics
           case SampleValidity.Null:
             countBlinkLoss++;
             break;
-          case SampleValidity.OutOfMonitor:
+          case SampleValidity.OutOfStimulus:
             countOutOfMonitorLoss++;
             break;
         }
 
         PointF? newMousePoint;
-        SampleValidity isMouseValidData = Queries.GetMouseData(row, out newMousePoint);
+        SampleValidity isMouseValidData = Queries.GetMouseData(
+          row,
+          Document.ActiveDocument.PresentationSize,
+          out newMousePoint);
 
         switch (isMouseValidData)
         {
           case SampleValidity.Valid:
-            // mouse is always detected and never out of screen
-            polylineMouse.AddPt(newMousePoint.Value);
-            break;
           case SampleValidity.Empty:
+          case SampleValidity.OutOfStimulus:
             // mouse is always detected and never out of screen
             polylineMouse.AddPt(newMousePoint.Value);
             break;
           case SampleValidity.Null:
-            break;
-          case SampleValidity.OutOfMonitor:
             break;
         }
 

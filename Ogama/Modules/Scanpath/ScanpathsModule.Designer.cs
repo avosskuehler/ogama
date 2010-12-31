@@ -97,6 +97,8 @@ namespace Ogama.Modules.Scanpaths
       this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
       this.btnExport = new System.Windows.Forms.ToolStripButton();
       this.sfdSimiliarity = new System.Windows.Forms.SaveFileDialog();
+      this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+      this.trbZoom = new OgamaControls.ToolStripTrackBar();
       ((System.ComponentModel.ISupportInitialize)(this.bsoSubjects)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.bsoFKSubjectsTrials)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.ogamaDataSet)).BeginInit();
@@ -162,6 +164,7 @@ namespace Ogama.Modules.Scanpaths
       // 
       // pnlCanvas
       // 
+      this.pnlCanvas.AutoScroll = true;
       this.pnlCanvas.BackColor = global::Ogama.Properties.Settings.Default.BackgroundColorForms;
       this.pnlCanvas.Controls.Add(this.pnlPicture);
       this.pnlCanvas.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::Ogama.Properties.Settings.Default, "BackgroundColorForms", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
@@ -187,7 +190,6 @@ namespace Ogama.Modules.Scanpaths
       this.scanpathsPicture.BackColor = global::Ogama.Properties.Settings.Default.BackgroundColorForms;
       this.scanpathsPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
       this.scanpathsPicture.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::Ogama.Properties.Settings.Default, "BackgroundColorForms", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-      this.scanpathsPicture.Dock = System.Windows.Forms.DockStyle.Fill;
       this.scanpathsPicture.GridBasis = Ogama.Modules.Scanpaths.GridBase.Rectangular;
       this.scanpathsPicture.GridFactor = 2;
       this.scanpathsPicture.IgnoreSubsequentFixations = false;
@@ -198,6 +200,7 @@ namespace Ogama.Modules.Scanpaths
       this.scanpathsPicture.Size = new System.Drawing.Size(300, 200);
       this.scanpathsPicture.TabIndex = 0;
       this.scanpathsPicture.TabStop = false;
+      this.scanpathsPicture.ZoomFactor = 0F;
       // 
       // tosTimeLine
       // 
@@ -207,7 +210,9 @@ namespace Ogama.Modules.Scanpaths
             this.btnStart,
             this.btnStop,
             this.btnRewind,
-            this.trialTimeLine});
+            this.trialTimeLine,
+            this.toolStripSeparator10,
+            this.trbZoom});
       this.tosTimeLine.Location = new System.Drawing.Point(0, 0);
       this.tosTimeLine.Name = "tosTimeLine";
       this.tosTimeLine.Size = new System.Drawing.Size(688, 25);
@@ -249,7 +254,7 @@ namespace Ogama.Modules.Scanpaths
       // 
       this.trialTimeLine.Duration = 0;
       this.trialTimeLine.Name = "trialTimeLine";
-      this.trialTimeLine.Size = new System.Drawing.Size(587, 22);
+      this.trialTimeLine.Size = new System.Drawing.Size(477, 22);
       this.trialTimeLine.SectionStartValueChanged += new OgamaControls.TimeLine.PositionValueChangedEventHandler(this.TrialTimeLine_SectionStartValueChanged);
       this.trialTimeLine.SectionEndValueChanged += new OgamaControls.TimeLine.PositionValueChangedEventHandler(this.TrialTimeLine_SectionEndValueChanged);
       this.trialTimeLine.CaretValueChanged += new OgamaControls.TimeLine.PositionValueChangedEventHandler(this.TrialTimeLine_CaretValueChanged);
@@ -771,7 +776,7 @@ namespace Ogama.Modules.Scanpaths
             this.btnExport});
       this.tosLevenshtein.Location = global::Ogama.Properties.Settings.Default.SCALevenshteinToolbarLocation;
       this.tosLevenshtein.Name = "tosLevenshtein";
-      this.tosLevenshtein.Size = new System.Drawing.Size(389, 26);
+      this.tosLevenshtein.Size = new System.Drawing.Size(364, 26);
       this.tosLevenshtein.TabIndex = 6;
       // 
       // toolStripLabel1
@@ -812,7 +817,7 @@ namespace Ogama.Modules.Scanpaths
             0,
             0});
       this.nudGridFactor.Name = "nudGridFactor";
-      this.nudGridFactor.Size = new System.Drawing.Size(35, 23);
+      this.nudGridFactor.Size = new System.Drawing.Size(41, 23);
       this.nudGridFactor.Text = "5";
       this.nudGridFactor.ToolTipText = "Divider for Grid.";
       this.nudGridFactor.Value = new decimal(new int[] {
@@ -918,6 +923,22 @@ namespace Ogama.Modules.Scanpaths
       this.sfdSimiliarity.FileName = "Similarity.txt";
       this.sfdSimiliarity.Filter = "Text files|*.txt";
       this.sfdSimiliarity.Title = "Specify filename for similarity data sheet.";
+      // 
+      // toolStripSeparator10
+      // 
+      this.toolStripSeparator10.Name = "toolStripSeparator10";
+      this.toolStripSeparator10.Size = new System.Drawing.Size(6, 25);
+      // 
+      // trbZoom
+      // 
+      this.trbZoom.Maximum = 100;
+      this.trbZoom.Minimum = 1;
+      this.trbZoom.Name = "trbZoom";
+      this.trbZoom.Size = new System.Drawing.Size(104, 22);
+      this.trbZoom.TickFrequency = 1;
+      this.trbZoom.TickStyle = System.Windows.Forms.TickStyle.None;
+      this.trbZoom.ToolTipText = "Zoom, right-click for autozoom";
+      this.trbZoom.Value = 1;
       // 
       // ScanpathsModule
       // 
@@ -1056,5 +1077,7 @@ namespace Ogama.Modules.Scanpaths
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
     private System.Windows.Forms.ToolStripButton btnTimeLine;
     private System.Windows.Forms.ToolStripButton btnGroupLevenshteinOutput;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
+    private OgamaControls.ToolStripTrackBar trbZoom;
   }
 }

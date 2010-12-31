@@ -48,6 +48,8 @@ namespace Ogama.Modules.Replay
       this.btnAddMarker = new System.Windows.Forms.ToolStripButton();
       this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
       this.trialTimeLine = new Ogama.Modules.Common.TrialTimeLine(this.components);
+      this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
+      this.trbZoom = new OgamaControls.ToolStripTrackBar();
       this.pnlCanvas = new System.Windows.Forms.Panel();
       this.pnlPicture = new System.Windows.Forms.Panel();
       this.replayPicture = new Ogama.Modules.Replay.ReplayPicture();
@@ -152,7 +154,7 @@ namespace Ogama.Modules.Replay
       // toolStripContainer1.ContentPanel
       // 
       this.toolStripContainer1.ContentPanel.Controls.Add(this.pnlCanvas);
-      this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(661, 284);
+      this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(661, 283);
       this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
       this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
       this.toolStripContainer1.Name = "toolStripContainer1";
@@ -189,10 +191,12 @@ namespace Ogama.Modules.Replay
             this.btnSeekToPreviousMarker,
             this.btnAddMarker,
             this.toolStripSeparator13,
-            this.trialTimeLine});
+            this.trialTimeLine,
+            this.toolStripSeparator16,
+            this.trbZoom});
       this.toolStrip5.Location = new System.Drawing.Point(0, 0);
       this.toolStrip5.Name = "toolStrip5";
-      this.toolStrip5.Size = new System.Drawing.Size(685, 25);
+      this.toolStrip5.Size = new System.Drawing.Size(685, 26);
       this.toolStrip5.Stretch = true;
       this.toolStrip5.TabIndex = 2;
       this.toolStrip5.Text = "toolStrip5";
@@ -201,7 +205,7 @@ namespace Ogama.Modules.Replay
       // 
       this.toolStripLabel3.Margin = new System.Windows.Forms.Padding(3, 1, 0, 2);
       this.toolStripLabel3.Name = "toolStripLabel3";
-      this.toolStripLabel3.Size = new System.Drawing.Size(88, 22);
+      this.toolStripLabel3.Size = new System.Drawing.Size(88, 23);
       this.toolStripLabel3.Text = "Replay controls";
       // 
       // btnStart
@@ -210,7 +214,7 @@ namespace Ogama.Modules.Replay
       this.btnStart.Image = ((System.Drawing.Image)(resources.GetObject("btnStart.Image")));
       this.btnStart.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnStart.Name = "btnStart";
-      this.btnStart.Size = new System.Drawing.Size(23, 22);
+      this.btnStart.Size = new System.Drawing.Size(23, 23);
       this.btnStart.ToolTipText = "Play trial";
       this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
       // 
@@ -222,7 +226,7 @@ namespace Ogama.Modules.Replay
       this.btnPause.Image = ((System.Drawing.Image)(resources.GetObject("btnPause.Image")));
       this.btnPause.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnPause.Name = "btnPause";
-      this.btnPause.Size = new System.Drawing.Size(23, 22);
+      this.btnPause.Size = new System.Drawing.Size(23, 23);
       this.btnPause.ToolTipText = "Pause/Continue playing";
       this.btnPause.Visible = false;
       this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
@@ -234,7 +238,7 @@ namespace Ogama.Modules.Replay
       this.btnStop.Image = ((System.Drawing.Image)(resources.GetObject("btnStop.Image")));
       this.btnStop.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnStop.Name = "btnStop";
-      this.btnStop.Size = new System.Drawing.Size(23, 22);
+      this.btnStop.Size = new System.Drawing.Size(23, 23);
       this.btnStop.ToolTipText = "Stop trial";
       this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
       // 
@@ -244,14 +248,14 @@ namespace Ogama.Modules.Replay
       this.btnRewind.Image = ((System.Drawing.Image)(resources.GetObject("btnRewind.Image")));
       this.btnRewind.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnRewind.Name = "btnRewind";
-      this.btnRewind.Size = new System.Drawing.Size(23, 22);
+      this.btnRewind.Size = new System.Drawing.Size(23, 23);
       this.btnRewind.ToolTipText = "Rewind trial";
       this.btnRewind.Click += new System.EventHandler(this.btnRewind_Click);
       // 
       // toolStripSeparator12
       // 
       this.toolStripSeparator12.Name = "toolStripSeparator12";
-      this.toolStripSeparator12.Size = new System.Drawing.Size(6, 25);
+      this.toolStripSeparator12.Size = new System.Drawing.Size(6, 26);
       // 
       // btnSeekToNextEvent
       // 
@@ -259,7 +263,7 @@ namespace Ogama.Modules.Replay
       this.btnSeekToNextEvent.Image = global::Ogama.Properties.Resources.DataContainer_MoveLastHS;
       this.btnSeekToNextEvent.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnSeekToNextEvent.Name = "btnSeekToNextEvent";
-      this.btnSeekToNextEvent.Size = new System.Drawing.Size(23, 22);
+      this.btnSeekToNextEvent.Size = new System.Drawing.Size(23, 23);
       this.btnSeekToNextEvent.Text = "Seek to next event.";
       this.btnSeekToNextEvent.Click += new System.EventHandler(this.btnSeekToNextEvent_Click);
       // 
@@ -269,14 +273,14 @@ namespace Ogama.Modules.Replay
       this.btnSeekToPreviousEvent.Image = global::Ogama.Properties.Resources.DataContainer_MoveFirstHS;
       this.btnSeekToPreviousEvent.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnSeekToPreviousEvent.Name = "btnSeekToPreviousEvent";
-      this.btnSeekToPreviousEvent.Size = new System.Drawing.Size(23, 22);
+      this.btnSeekToPreviousEvent.Size = new System.Drawing.Size(23, 23);
       this.btnSeekToPreviousEvent.Text = "Seek to previous event.";
       this.btnSeekToPreviousEvent.Click += new System.EventHandler(this.btnSeekToPreviousEvent_Click);
       // 
       // toolStripSeparator14
       // 
       this.toolStripSeparator14.Name = "toolStripSeparator14";
-      this.toolStripSeparator14.Size = new System.Drawing.Size(6, 25);
+      this.toolStripSeparator14.Size = new System.Drawing.Size(6, 26);
       // 
       // btnSeekToNextMarker
       // 
@@ -284,7 +288,7 @@ namespace Ogama.Modules.Replay
       this.btnSeekToNextMarker.Image = global::Ogama.Properties.Resources.MoveNext;
       this.btnSeekToNextMarker.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnSeekToNextMarker.Name = "btnSeekToNextMarker";
-      this.btnSeekToNextMarker.Size = new System.Drawing.Size(23, 22);
+      this.btnSeekToNextMarker.Size = new System.Drawing.Size(23, 23);
       this.btnSeekToNextMarker.Text = "Seek to next marker";
       this.btnSeekToNextMarker.Click += new System.EventHandler(this.btnSeekToNextMarker_Click);
       // 
@@ -294,7 +298,7 @@ namespace Ogama.Modules.Replay
       this.btnSeekToPreviousMarker.Image = global::Ogama.Properties.Resources.MoveFirst;
       this.btnSeekToPreviousMarker.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnSeekToPreviousMarker.Name = "btnSeekToPreviousMarker";
-      this.btnSeekToPreviousMarker.Size = new System.Drawing.Size(23, 22);
+      this.btnSeekToPreviousMarker.Size = new System.Drawing.Size(23, 23);
       this.btnSeekToPreviousMarker.Text = "Seek to previous marker";
       this.btnSeekToPreviousMarker.Click += new System.EventHandler(this.btnSeekToPreviousMarker_Click);
       // 
@@ -304,27 +308,45 @@ namespace Ogama.Modules.Replay
       this.btnAddMarker.Image = global::Ogama.Properties.Resources.Event;
       this.btnAddMarker.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnAddMarker.Name = "btnAddMarker";
-      this.btnAddMarker.Size = new System.Drawing.Size(23, 22);
+      this.btnAddMarker.Size = new System.Drawing.Size(23, 23);
       this.btnAddMarker.Text = "Add Marker";
       this.btnAddMarker.Click += new System.EventHandler(this.btnAddMarker_Click);
       // 
       // toolStripSeparator13
       // 
       this.toolStripSeparator13.Name = "toolStripSeparator13";
-      this.toolStripSeparator13.Size = new System.Drawing.Size(6, 25);
+      this.toolStripSeparator13.Size = new System.Drawing.Size(6, 26);
       // 
       // trialTimeLine
       // 
       this.trialTimeLine.Duration = 0;
       this.trialTimeLine.Name = "trialTimeLine";
-      this.trialTimeLine.Size = new System.Drawing.Size(337, 22);
+      this.trialTimeLine.Size = new System.Drawing.Size(251, 23);
       this.trialTimeLine.MarkerDeleted += new OgamaControls.TimeLine.MarkerPositionChangedEventHandler(this.TimeSlider_MarkerDeleted);
       this.trialTimeLine.CaretMovingStarted += new System.EventHandler(this.TimeSlider_CaretMovingStarted);
       this.trialTimeLine.MarkerPositionChanged += new OgamaControls.TimeLine.MarkerPositionChangedEventHandler(this.TimeSlider_MarkerPositionChanged);
       this.trialTimeLine.CaretValueChanged += new OgamaControls.TimeLine.PositionValueChangedEventHandler(this.TimeSlider_CaretValueChanged);
       // 
+      // toolStripSeparator16
+      // 
+      this.toolStripSeparator16.Name = "toolStripSeparator16";
+      this.toolStripSeparator16.Size = new System.Drawing.Size(6, 26);
+      // 
+      // trbZoom
+      // 
+      this.trbZoom.Maximum = 100;
+      this.trbZoom.Minimum = 1;
+      this.trbZoom.Name = "trbZoom";
+      this.trbZoom.Size = new System.Drawing.Size(80, 23);
+      this.trbZoom.Text = "toolStripTrackBar1";
+      this.trbZoom.TickFrequency = 1;
+      this.trbZoom.TickStyle = System.Windows.Forms.TickStyle.None;
+      this.trbZoom.ToolTipText = "Zoom, right-click for autozoom";
+      this.trbZoom.Value = 10;
+      // 
       // pnlCanvas
       // 
+      this.pnlCanvas.AutoScroll = true;
       this.pnlCanvas.BackColor = global::Ogama.Properties.Settings.Default.BackgroundColorForms;
       this.pnlCanvas.Controls.Add(this.pnlPicture);
       this.pnlCanvas.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::Ogama.Properties.Settings.Default, "BackgroundColorForms", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
@@ -332,7 +354,7 @@ namespace Ogama.Modules.Replay
       this.pnlCanvas.Location = new System.Drawing.Point(0, 0);
       this.pnlCanvas.Margin = new System.Windows.Forms.Padding(0);
       this.pnlCanvas.Name = "pnlCanvas";
-      this.pnlCanvas.Size = new System.Drawing.Size(661, 284);
+      this.pnlCanvas.Size = new System.Drawing.Size(661, 283);
       this.pnlCanvas.TabIndex = 2;
       // 
       // pnlPicture
@@ -348,7 +370,6 @@ namespace Ogama.Modules.Replay
       this.replayPicture.AnimationInterval = 40;
       this.replayPicture.BackColor = System.Drawing.Color.Black;
       this.replayPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-      this.replayPicture.Dock = System.Windows.Forms.DockStyle.Fill;
       this.replayPicture.InvalidateInterval = 500;
       this.replayPicture.Location = new System.Drawing.Point(0, 0);
       this.replayPicture.Margin = new System.Windows.Forms.Padding(0);
@@ -356,6 +377,7 @@ namespace Ogama.Modules.Replay
       this.replayPicture.Size = new System.Drawing.Size(200, 100);
       this.replayPicture.TabIndex = 0;
       this.replayPicture.TabStop = false;
+      this.replayPicture.ZoomFactor = 0F;
       this.replayPicture.TrialEventIDFound += new Ogama.Modules.Common.TrialEventIDFoundEventHandler(this.replayPicture_TrialEventIDFound);
       this.replayPicture.Progress += new VectorGraphics.CustomEventArgs.ProgressEventHandler(this.replayPicture_Progress);
       // 
@@ -455,7 +477,7 @@ namespace Ogama.Modules.Replay
             this.btnMouseFixConPenStyle});
       this.toolStrip4.Location = new System.Drawing.Point(0, 158);
       this.toolStrip4.Name = "toolStrip4";
-      this.toolStrip4.Size = new System.Drawing.Size(24, 126);
+      this.toolStrip4.Size = new System.Drawing.Size(24, 125);
       this.toolStrip4.TabIndex = 6;
       // 
       // toolStripButton6
@@ -1161,6 +1183,8 @@ namespace Ogama.Modules.Replay
     private System.Windows.Forms.ToolStripButton btnAddMarker;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
     private System.Windows.Forms.ToolStripButton btnMouseModeClicks;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
+    private OgamaControls.ToolStripTrackBar trbZoom;
 
   }
 }

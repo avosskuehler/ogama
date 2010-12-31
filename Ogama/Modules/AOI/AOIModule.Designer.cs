@@ -49,7 +49,7 @@ namespace Ogama.Modules.AOI
       this.cmnuSelectElement = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
       this.cmuAddShapeGroup = new System.Windows.Forms.ToolStripMenuItem();
-      this.trvSubjects = new OgamaControls.CheckboxTreeView();
+      this.trvSubjects = new OgamaControls.CheckboxTreeView(this.components);
       this.imlTreeViewSubjects = new System.Windows.Forms.ImageList(this.components);
       this.sfdExport = new System.Windows.Forms.SaveFileDialog();
       this.spcPictureTools = new System.Windows.Forms.SplitContainer();
@@ -135,6 +135,8 @@ namespace Ogama.Modules.AOI
       this.btnHelp = new System.Windows.Forms.ToolStripButton();
       this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
       this.saveFileDialogExport = new System.Windows.Forms.SaveFileDialog();
+      this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
+      this.trbZoom = new OgamaControls.ToolStripTrackBar();
       ((System.ComponentModel.ISupportInitialize)(this.bsoSubjects)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.bsoFKSubjectsTrials)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.ogamaDataSet)).BeginInit();
@@ -1004,7 +1006,6 @@ namespace Ogama.Modules.AOI
       this.aoiPicture.BackColor = global::Ogama.Properties.Settings.Default.BackgroundColorForms;
       this.aoiPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
       this.aoiPicture.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::Ogama.Properties.Settings.Default, "BackgroundColorForms", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-      this.aoiPicture.Dock = System.Windows.Forms.DockStyle.Fill;
       this.aoiPicture.InvalidateInterval = 500;
       this.aoiPicture.Location = new System.Drawing.Point(0, 0);
       this.aoiPicture.Margin = new System.Windows.Forms.Padding(0);
@@ -1012,6 +1013,7 @@ namespace Ogama.Modules.AOI
       this.aoiPicture.Size = new System.Drawing.Size(300, 200);
       this.aoiPicture.TabIndex = 0;
       this.aoiPicture.TabStop = false;
+      this.aoiPicture.ZoomFactor = 0F;
       this.aoiPicture.ShapeChanged += new VectorGraphics.CustomEventArgs.ShapeEventHandler(this.aoiPicture_ShapeChanged);
       this.aoiPicture.ShapeDeleted += new VectorGraphics.CustomEventArgs.ShapeEventHandler(this.aoiPicture_ShapeDeleted);
       this.aoiPicture.ShapeAdded += new VectorGraphics.CustomEventArgs.ShapeEventHandler(this.aoiPicture_ShapeAdded);
@@ -1023,10 +1025,12 @@ namespace Ogama.Modules.AOI
             this.btnSeekNextSlide,
             this.btnSeekPreviousSlide,
             this.toolStripSeparator6,
-            this.trialTimeLine});
+            this.trialTimeLine,
+            this.toolStripSeparator12,
+            this.trbZoom});
       this.toolStrip2.Location = new System.Drawing.Point(0, 0);
       this.toolStrip2.Name = "toolStrip2";
-      this.toolStrip2.Size = new System.Drawing.Size(1013, 25);
+      this.toolStrip2.Size = new System.Drawing.Size(1013, 26);
       this.toolStrip2.Stretch = true;
       this.toolStrip2.TabIndex = 0;
       this.toolStrip2.Text = "toolStrip2";
@@ -1037,7 +1041,7 @@ namespace Ogama.Modules.AOI
       this.btnSeekNextSlide.Image = global::Ogama.Properties.Resources.DataContainer_MoveLastHS;
       this.btnSeekNextSlide.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnSeekNextSlide.Name = "btnSeekNextSlide";
-      this.btnSeekNextSlide.Size = new System.Drawing.Size(23, 22);
+      this.btnSeekNextSlide.Size = new System.Drawing.Size(23, 23);
       this.btnSeekNextSlide.Text = "Seek to next slide";
       this.btnSeekNextSlide.Click += new System.EventHandler(this.btnSeekNextSlide_Click);
       // 
@@ -1047,14 +1051,14 @@ namespace Ogama.Modules.AOI
       this.btnSeekPreviousSlide.Image = global::Ogama.Properties.Resources.DataContainer_MoveFirstHS;
       this.btnSeekPreviousSlide.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnSeekPreviousSlide.Name = "btnSeekPreviousSlide";
-      this.btnSeekPreviousSlide.Size = new System.Drawing.Size(23, 22);
+      this.btnSeekPreviousSlide.Size = new System.Drawing.Size(23, 23);
       this.btnSeekPreviousSlide.Text = "Seek to previous slide.";
       this.btnSeekPreviousSlide.Click += new System.EventHandler(this.btnSeekPreviousSlide_Click);
       // 
       // toolStripSeparator6
       // 
       this.toolStripSeparator6.Name = "toolStripSeparator6";
-      this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
+      this.toolStripSeparator6.Size = new System.Drawing.Size(6, 26);
       // 
       // trialTimeLine
       // 
@@ -1062,7 +1066,7 @@ namespace Ogama.Modules.AOI
       this.trialTimeLine.Name = "trialTimeLine";
       this.trialTimeLine.ShowCaret = false;
       this.trialTimeLine.ShowTimes = false;
-      this.trialTimeLine.Size = new System.Drawing.Size(929, 22);
+      this.trialTimeLine.Size = new System.Drawing.Size(819, 23);
       this.trialTimeLine.Text = "trialTimeLine";
       // 
       // toolStrip1
@@ -1348,6 +1352,22 @@ namespace Ogama.Modules.AOI
       this.saveFileDialogExport.Filter = "Text files|*.txt";
       this.saveFileDialogExport.Title = "Save areas of interest table ...";
       // 
+      // toolStripSeparator12
+      // 
+      this.toolStripSeparator12.Name = "toolStripSeparator12";
+      this.toolStripSeparator12.Size = new System.Drawing.Size(6, 26);
+      // 
+      // trbZoom
+      // 
+      this.trbZoom.Maximum = 100;
+      this.trbZoom.Minimum = 1;
+      this.trbZoom.Name = "trbZoom";
+      this.trbZoom.Size = new System.Drawing.Size(104, 23);
+      this.trbZoom.TickFrequency = 1;
+      this.trbZoom.TickStyle = System.Windows.Forms.TickStyle.None;
+      this.trbZoom.ToolTipText = "Zoom, right-click for autozoom";
+      this.trbZoom.Value = 1;
+      // 
       // AOIModule
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1535,5 +1555,7 @@ namespace Ogama.Modules.AOI
     private System.Windows.Forms.DataGridViewTextBoxColumn colShapeNumPts;
     private System.Windows.Forms.DataGridViewTextBoxColumn colShapePts;
     private OgamaControls.DataGridViewQuickComboBoxColumn colShapeGroup;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
+    private OgamaControls.ToolStripTrackBar trbZoom;
   }
 }

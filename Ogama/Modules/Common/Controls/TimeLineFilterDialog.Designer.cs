@@ -37,6 +37,7 @@ namespace Ogama.Modules.Common
       this.chbFlash = new System.Windows.Forms.CheckBox();
       this.chbMouseDown = new System.Windows.Forms.CheckBox();
       this.chbMouseUp = new System.Windows.Forms.CheckBox();
+      this.chbScroll = new System.Windows.Forms.CheckBox();
       this.splitContainer1.Panel1.SuspendLayout();
       this.splitContainer1.Panel2.SuspendLayout();
       this.splitContainer1.SuspendLayout();
@@ -70,6 +71,7 @@ namespace Ogama.Modules.Common
       // 
       // splitContainer1.Panel2
       // 
+      this.splitContainer1.Panel2.Controls.Add(this.chbScroll);
       this.splitContainer1.Panel2.Controls.Add(this.btnOK);
       this.splitContainer1.Panel2.Controls.Add(this.chbSound);
       this.splitContainer1.Panel2.Controls.Add(this.chbKeys);
@@ -140,6 +142,16 @@ namespace Ogama.Modules.Common
       this.chbMouseUp.Text = "MouseUp";
       this.chbMouseUp.UseVisualStyleBackColor = true;
       // 
+      // chbScroll
+      // 
+      this.chbScroll.AutoSize = true;
+      this.chbScroll.Location = new System.Drawing.Point(31, 139);
+      this.chbScroll.Name = "chbScroll";
+      this.chbScroll.Size = new System.Drawing.Size(52, 17);
+      this.chbScroll.TabIndex = 2;
+      this.chbScroll.Text = "Scroll";
+      this.chbScroll.UseVisualStyleBackColor = true;
+      // 
       // TimeLineFilterDialog
       // 
       this.AcceptButton = this.btnOK;
@@ -168,5 +180,6 @@ namespace Ogama.Modules.Common
     private System.Windows.Forms.CheckBox chbMouseUp;
     private System.Windows.Forms.Button btnOK;
     private System.Windows.Forms.CheckBox chbSound;
+    private System.Windows.Forms.CheckBox chbScroll;
   }
 }

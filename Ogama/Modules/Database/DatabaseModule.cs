@@ -839,7 +839,7 @@ namespace Ogama.Modules.Database
                 exportFileWriter.Write(separator);
                 exportFileWriter.Write(tableSubjects.Rows[0]["Handedness"].ToString().Replace(";", ":"));
                 exportFileWriter.Write(separator);
-                exportFileWriter.Write(tableSubjects.Rows[0]["Comments"].ToString().Replace(";",":"));
+                exportFileWriter.Write(tableSubjects.Rows[0]["Comments"].ToString().Replace(";", ":"));
                 exportFileWriter.Write(separator);
 
                 exportFileWriter.Write(trialRow[0]["TrialID"].ToString());

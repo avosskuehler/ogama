@@ -364,6 +364,9 @@
       <DependentUpon>Webcam.cs</DependentUpon>
     </Compile>
     <Compile Include="Media\WMEncode\WMScreenCapture.cs" />
+    <Compile Include="MenuAndToolbarControls\ToolStripTrackBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="MenuAndToolbarControls\ToolStripAlignmentDropDown.cs">
       <SubType>Component</SubType>
     </Compile>

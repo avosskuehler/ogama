@@ -274,6 +274,7 @@ namespace Ogama.Modules.SlideshowDesign
       this.imlCommands.Images.SetKeyName(12, "Link");
       this.imlCommands.Images.SetKeyName(13, "Rtf");
       this.imlCommands.Images.SetKeyName(14, "Trigger");
+      this.imlCommands.Images.SetKeyName(15, "Browser");
       // 
       // ofdFlashMovie
       // 
@@ -489,6 +490,7 @@ namespace Ogama.Modules.SlideshowDesign
       // 
       // btnOK
       // 
+      this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
       this.btnOK.Location = new System.Drawing.Point(745, 3);
       this.btnOK.Name = "btnOK";
@@ -499,6 +501,7 @@ namespace Ogama.Modules.SlideshowDesign
       // 
       // btnCancel
       // 
+      this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
       this.btnCancel.Location = new System.Drawing.Point(831, 3);
       this.btnCancel.Name = "btnCancel";

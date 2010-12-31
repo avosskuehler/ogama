@@ -336,6 +336,7 @@
       <DependentUpon>PictureWithFixations.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Common\PictureTemplates\FixationDrawingMode.cs" />
+    <Compile Include="Modules\Common\SlideCollections\BrowserTreeNode.cs" />
     <Compile Include="Modules\Common\SlideCollections\SequencedTrial.cs" />
     <Compile Include="Modules\Common\SlideCollections\TrialCollection.cs" />
     <Compile Include="Modules\Common\SlideCollections\SlideType.cs" />
@@ -495,6 +496,12 @@
     </Compile>
     <Compile Include="Modules\SlideshowDesign\DesignModule\PasteAsDialog.Designer.cs">
       <DependentUpon>PasteAsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\BrowserDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\BrowserDialog.Designer.cs">
+      <DependentUpon>BrowserDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\SlideshowDesign\SlideshowModule.ListView.cs">
       <DependentUpon>SlideshowModule.cs</DependentUpon>
@@ -1064,6 +1071,10 @@
       <DependentUpon>PasteAsDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\BrowserDialog.resx">
+      <DependentUpon>BrowserDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\SlideshowDesign\Shuffling\CustomShuffleDialog.resx">
       <DependentUpon>CustomShuffleDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1489,6 +1500,7 @@
     <None Include="Resources\StartUpSplash.png" />
     <None Include="Resources\StartUpSplash1.png" />
     <None Include="Resources\ITUBanner.png" />
+    <None Include="Resources\Globe32.png" />
     <Content Include="SaliencyCalculation\cygblas.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

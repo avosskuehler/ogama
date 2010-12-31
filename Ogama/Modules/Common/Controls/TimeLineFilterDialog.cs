@@ -100,6 +100,11 @@ namespace Ogama.Modules.Common
           filter.Add("Sound");
         }
 
+        if (!this.chbScroll.Checked)
+        {
+          filter.Add("Scroll");
+        }
+
         return filter;
       }
 
@@ -128,6 +133,11 @@ namespace Ogama.Modules.Common
         if (!value.Contains("Sound"))
         {
           this.chbSound.Checked = true;
+        }
+
+        if (!value.Contains("Scroll"))
+        {
+          this.chbScroll.Checked = true;
         }
       }
     }

@@ -128,13 +128,42 @@ namespace Ogama.Modules.Common
     /// Gets a value indicating whether one of the slides
     /// contains flash content
     /// </summary>
+    public bool HasActiveXContent
+    {
+      get
+      {
+        foreach (Slide slide in this)
+        {
+          if (slide.HasActiveXContent)
+          {
+            return true;
+          }
+        }
+
+        return false;
+      }
+    }
+
+    /// <summary>
+    /// Gets a value indicating whether one of the slides
+    /// contains flash content
+    /// </summary>
     public bool HasFlashContent
     {
       get
       {
         foreach (Slide slide in this)
         {
-          if (slide.HasFlashContent)
+          int flashCount = 0;
+          foreach (VGElement element in slide.ActiveXStimuli)
+          {
+            if (element is VGFlash)
+            {
+              flashCount++;
+            }
+          }
+
+          if (flashCount > 0)
           {
             return true;
           }

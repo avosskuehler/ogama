@@ -74,5 +74,10 @@ namespace Ogama.Modules.Common
     /// A time marker
     /// </summary>
     Marker,
+
+    /// <summary>
+    /// Scroll event marker for browser pages
+    /// </summary>
+    Scroll,
   }
 }

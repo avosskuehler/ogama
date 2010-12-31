@@ -36,6 +36,7 @@ namespace Ogama.Modules.Common
   /// in the user interface which in place also handles the arrangement and layout
   /// of the slideshow.</remarks>
   [Serializable]
+  [XmlInclude(typeof(BrowserTreeNode))]
   public class SlideshowTreeNode : TreeNode, IXmlSerializable
   {
     ///////////////////////////////////////////////////////////////////////////////
@@ -232,6 +233,12 @@ namespace Ogama.Modules.Common
     /// to set the <see cref="TreeNode.ImageKey"/> value for.</param>
     public void SetTreeNodeImageKey(SlideshowTreeNode newSlideshowTreeNode)
     {
+      if (newSlideshowTreeNode is BrowserTreeNode)
+      {
+        newSlideshowTreeNode.ImageKey = "Browser";
+        return;
+      }
+
       if (newSlideshowTreeNode.Slide != null)
       {
         newSlideshowTreeNode.slide = (Slide)newSlideshowTreeNode.Slide.Clone();
@@ -249,11 +256,6 @@ namespace Ogama.Modules.Common
             newSlideshowTreeNode.ImageKey = "Instructions";
             currentSlideType |= SlideType.Instructions;
           }
-          else if (element is VGFlash)
-          {
-            newSlideshowTreeNode.ImageKey = "Flash";
-            currentSlideType |= SlideType.Flash;
-          }
           else if (element is VGImage)
           {
             newSlideshowTreeNode.ImageKey = "Images";
@@ -266,11 +268,26 @@ namespace Ogama.Modules.Common
           }
         }
 
+        foreach (VGElement element in newSlideshowTreeNode.slide.ActiveXStimuli)
+        {
+          if (element is VGFlash)
+          {
+            newSlideshowTreeNode.ImageKey = "Flash";
+            currentSlideType |= SlideType.Flash;
+          }
+          else if (element is VGBrowser)
+          {
+            newSlideshowTreeNode.ImageKey = "Browser";
+            currentSlideType |= SlideType.Browser;
+          }
+        }
+
         if (currentSlideType != SlideType.None)
         {
           if (currentSlideType != SlideType.Shapes &&
             currentSlideType != SlideType.Instructions &&
             currentSlideType != SlideType.Flash &&
+            currentSlideType != SlideType.Browser &&
             currentSlideType != SlideType.Images &&
             currentSlideType != SlideType.Sound)
           {
@@ -348,7 +365,7 @@ namespace Ogama.Modules.Common
     /// </summary>
     /// <param name="reader">The <see cref="XmlReader"/> to use.</param>
     /// <param name="node">The <see cref="SlideshowTreeNode"/> to deserialize.</param>
-    private void DeserializeNode(XmlReader reader, SlideshowTreeNode node)
+    protected virtual void DeserializeNode(XmlReader reader, SlideshowTreeNode node)
     {
       XmlSerializer slideSerializer = new XmlSerializer(typeof(Slide));
 
@@ -395,12 +412,23 @@ namespace Ogama.Modules.Common
         reader.ReadStartElement("Text");
         node.Text = reader.ReadContentAsString();
         reader.ReadEndElement();
-        while (reader.Name == "SlideshowTreeNode" && reader.NodeType == XmlNodeType.Element)
+        while ((reader.Name == "SlideshowTreeNode" && reader.NodeType == XmlNodeType.Element) ||
+          (reader.Name == "BrowserTreeNode" && reader.NodeType == XmlNodeType.Element))
         {
-          SlideshowTreeNode newNode = new SlideshowTreeNode();
-          this.DeserializeNode(reader, newNode);
-          this.SetTreeNodeImageKey(newNode);
-          node.Nodes.Add(newNode);
+          if (reader.Name == "SlideshowTreeNode")
+          {
+            SlideshowTreeNode newNode = new SlideshowTreeNode();
+            newNode.DeserializeNode(reader, newNode);
+            this.SetTreeNodeImageKey(newNode);
+            node.Nodes.Add(newNode);
+          }
+          else if (reader.Name == "BrowserTreeNode")
+          {
+            BrowserTreeNode newNode = new BrowserTreeNode();
+            newNode.DeserializeNode(reader, newNode);
+            this.SetTreeNodeImageKey(newNode);
+            node.Nodes.Add(newNode);
+          }
         }
 
         reader.ReadEndElement();
@@ -415,7 +443,7 @@ namespace Ogama.Modules.Common
     /// </summary>
     /// <param name="reader">The <see cref="XmlReader"/> with the file to parse.</param>
     /// <param name="slideSerializer">The <see cref="XmlSerializer"/> for deserializing slide nodes.</param>
-    private void ParseOgamaV1Slideshow(XmlReader reader, XmlSerializer slideSerializer)
+    protected void ParseOgamaV1Slideshow(XmlReader reader, XmlSerializer slideSerializer)
     {
       string message = "You are opening an OGAMA 1.X experiment." + Environment.NewLine + Environment.NewLine +
         "The experiment file along with the database need to be converted to the new Ogama 2 format." +
@@ -480,7 +508,7 @@ namespace Ogama.Modules.Common
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to use.</param>
     /// <param name="node">The <see cref="SlideshowTreeNode"/> to serialize.</param>
-    private void SerializeNode(XmlWriter writer, SlideshowTreeNode node)
+    protected virtual void SerializeNode(XmlWriter writer, SlideshowTreeNode node)
     {
       XmlSerializer slideSerializer = new XmlSerializer(typeof(Slide));
 
@@ -515,7 +543,7 @@ namespace Ogama.Modules.Common
       {
         foreach (SlideshowTreeNode subNode in node.Nodes)
         {
-          this.SerializeNode(writer, subNode);
+          subNode.SerializeNode(writer, subNode);
         }
       }
 
