@@ -1698,7 +1698,8 @@ namespace Ogama.Modules.Replay
               validGazeFixationSamples.Add(
                 new TimedPoint(sampleTime, newGazeSamplePoint.Value));
 
-              if (!newGazeSamplePoint.Value.IsEmpty && !Queries.OutOfScreen(newGazeSamplePoint.Value,
+              if (!newGazeSamplePoint.Value.IsEmpty && !Queries.OutOfScreen(
+                newGazeSamplePoint.Value,
                 this.PresentationSize))
               {
                 if (Point.Round(newGazeSamplePoint.Value) != Point.Round(lastValidGazeSample.Position))

@@ -266,7 +266,7 @@ namespace Ogama.Modules.Common
     /// </summary>
     /// <param name="treeView">The <see cref="TreeView"/> to 
     /// be populated with the subjects.</param>
-    protected virtual void PopulateSubjectTreeView(TreeView treeView)
+    public static void PopulateSubjectTreeView(TreeView treeView)
     {
       treeView.BeginUpdate();
       treeView.Nodes.Clear();
@@ -320,7 +320,7 @@ namespace Ogama.Modules.Common
     /// populated with subjects.</param>
     /// <returns>A <see cref="List{String}"/> with the 
     /// checked subjects names of the given treeview.</returns>
-    protected List<string> GetCheckedSubjects(TreeView treeView)
+    public static List<string> GetCheckedSubjects(TreeView treeView)
     {
       List<string> checkedSubjects = new List<string>();
 

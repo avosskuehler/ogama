@@ -162,8 +162,8 @@ namespace Ogama.Modules.Statistics
     public override void ResetDataBindings()
     {
       base.ResetDataBindings();
-      this.PopulateSubjectTreeView(this.trvSubjects);
-      this.PopulateSubjectTreeView(this.trvTransitionsSubjects);
+      PopulateSubjectTreeView(this.trvSubjects);
+      PopulateSubjectTreeView(this.trvTransitionsSubjects);
     }
 
     /// <summary>
@@ -174,8 +174,8 @@ namespace Ogama.Modules.Statistics
     {
       base.InitializeCustomElements();
 
-      this.PopulateSubjectTreeView(this.trvSubjects);
-      this.PopulateSubjectTreeView(this.trvTransitionsSubjects);
+      PopulateSubjectTreeView(this.trvSubjects);
+      PopulateSubjectTreeView(this.trvTransitionsSubjects);
 
       // Designer BUG hack
       this.tosTransitions.Visible = true;
@@ -1197,7 +1197,7 @@ namespace Ogama.Modules.Statistics
     {
       aoiSingleCombo.Items.Clear();
 
-      List<int> selectedTrials = this.GetSelectedTrials();
+      List<int> selectedTrials = GetSelectedTrials(this.trvTrialsDefault);
       foreach (int trialID in selectedTrials)
       {
         // Trial level
@@ -1238,8 +1238,8 @@ namespace Ogama.Modules.Statistics
     {
       DataTable table = Document.ActiveDocument.DocDataSet.TrialsAdapter.GetData();
 
-      this.FillTreeView(this.trvTrialsAOI, table);
-      this.FillTreeView(this.trvTrialsDefault, table);
+      FillTreeView(this.trvTrialsAOI, table);
+      FillTreeView(this.trvTrialsDefault, table);
     }
 
     /// <summary>
@@ -1344,7 +1344,7 @@ namespace Ogama.Modules.Statistics
         DataView subjectView = new DataView(subjectsTable);
         subjectView.Sort = "SubjectName ASC";
 
-        List<string> checkedSubjects = this.GetCheckedSubjects(this.trvSubjects);
+        List<string> checkedSubjects = GetCheckedSubjects(this.trvSubjects);
 
         // Iterate selected subjects
         foreach (DataRowView subjectRow in subjectView)
@@ -1379,7 +1379,7 @@ namespace Ogama.Modules.Statistics
               continue;
             }
 
-            List<int> trialIDs = this.GetSelectedTrials();
+            List<int> trialIDs = GetSelectedTrials(this.trvTrialsDefault);
 
             DataTable trialsTable
               = Document.ActiveDocument.DocDataSet.TrialsAdapter.GetDataBySubject(subjectName);
@@ -1469,13 +1469,15 @@ namespace Ogama.Modules.Statistics
     /// <summary>
     /// This method returns the ids of the selected trials of the trvTrialsDefault
     /// </summary>
+    /// <param name="treeView">A <see cref="TreeView"/> that contains trials that
+    /// are checked or not.</param>
     /// <returns>A List with the ids of the selected trials of the trvTrialsDefault.</returns>
-    private List<int> GetSelectedTrials()
+    public static List<int> GetSelectedTrials(TreeView treeView)
     {
       // Get selected trials
       List<int> trialIDs = new List<int>();
 
-      foreach (TreeNode categoryNode in this.trvTrialsDefault.Nodes)
+      foreach (TreeNode categoryNode in treeView.Nodes)
       {
         foreach (TreeNode trialNode in categoryNode.Nodes)
         {
@@ -1527,7 +1529,7 @@ namespace Ogama.Modules.Statistics
       DataView trialsAOIs = new DataView(aoiTable);
       DataTable subjectsTable = Document.ActiveDocument.DocDataSet.SubjectsAdapter.GetData();
       VGElementCollection trialAOIs = new VGElementCollection();
-      List<string> checkedSubjects = this.GetCheckedSubjects(this.trvTransitionsSubjects);
+      List<string> checkedSubjects = GetCheckedSubjects(this.trvTransitionsSubjects);
 
       if (this.rdbTransitionUseAOIGroups.Checked)
       {
@@ -1591,8 +1593,16 @@ namespace Ogama.Modules.Statistics
                 }
               }
 
-              string hittedAOIGroup;
-              string hittedAOI = Statistic.FixationHitsAOI(trialAOIs, fixationRow, out hittedAOIGroup);
+              string hittedAOIName = string.Empty;
+              string hittedAOIGroup = string.Empty;
+              List<string[]> hittedAOIs = Statistics.Statistic.FixationHitsAOI(trialAOIs, fixationRow);
+              if (hittedAOIs.Count > 0)
+              {
+                // Take only first hitted AOI
+                hittedAOIName = hittedAOIs[0][0];
+                hittedAOIGroup = hittedAOIs[0][1];
+              }
+
               if (foregoingHittedAOIGroup != string.Empty)
               {
                 int indexOfHittedGroup = groupIndexAssignment[hittedAOIGroup];
@@ -2522,7 +2532,7 @@ namespace Ogama.Modules.Statistics
     /// <param name="treeview">A <see cref="TreeView"/> control
     /// that should be filled.</param>
     /// <param name="table">A <see cref="DataTable"/> with the trial Data</param>
-    private void FillTreeView(TreeView treeview, DataTable table)
+    public static void FillTreeView(TreeView treeview, DataTable table)
     {
       treeview.BeginUpdate();
       treeview.Nodes.Clear();

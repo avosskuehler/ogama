@@ -13,9 +13,9 @@
 
 namespace Ogama.Modules.Fixations
 {
-using System;
-using System.Collections.Generic;
-using System.Text;
+  using System;
+  using System.Collections.Generic;
+  using System.Text;
 
   /// <summary>
   /// This class encapsulates properties of how to
@@ -52,15 +52,25 @@ using System.Text;
     /// Indicates whether to export AOI hits and group.
     /// </summary>
     public bool ExportAOIDetails;
-    
+
     /// <summary>
-    /// The fill with full path to the gaze export file.
+    /// The file with full path to the gaze export file.
     /// </summary>
     public string GazeFileName;
 
     /// <summary>
-    /// The fill with full path to the mouse export file.
+    /// The file with full path to the mouse export file.
     /// </summary>
     public string MouseFileName;
+
+    /// <summary>
+    /// The list of subjects that should be included in the export.
+    /// </summary>
+    public List<string> CheckedSubjects;
+
+    /// <summary>
+    /// The list of trials that should be included in the export.
+    /// </summary>
+    public List<int> CheckedTrialIDs;
   }
 }

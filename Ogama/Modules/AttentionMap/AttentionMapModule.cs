@@ -107,7 +107,7 @@ namespace Ogama.Modules.AttentionMap
     public override void ResetDataBindings()
     {
       base.ResetDataBindings();
-      this.PopulateSubjectTreeView(this.trvSubjects);
+      PopulateSubjectTreeView(this.trvSubjects);
     }
 
     /// <summary>
@@ -126,7 +126,7 @@ namespace Ogama.Modules.AttentionMap
     protected override void InitializeCustomElements()
     {
       base.InitializeCustomElements();
-      this.PopulateSubjectTreeView(this.trvSubjects);
+      PopulateSubjectTreeView(this.trvSubjects);
       this.btnHelp.Click += new EventHandler(this.btnHelp_Click);
       this.pnlCanvas.Resize += new EventHandler(this.pnlCanvas_Resize);
     }
@@ -728,7 +728,7 @@ namespace Ogama.Modules.AttentionMap
           return;
         }
 
-        List<string> checkedSubjects = this.GetCheckedSubjects(this.trvSubjects);
+        List<string> checkedSubjects = GetCheckedSubjects(this.trvSubjects);
 
         if (checkedSubjects.Count > 0)
         {

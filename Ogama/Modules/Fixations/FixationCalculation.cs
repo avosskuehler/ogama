@@ -34,7 +34,7 @@ namespace Ogama.Modules.Fixations
   ///            1483 Chain Bridge Road, Suite 104
   ///            McLean, VA 22101
   ///            (703) 385-7133
-  /// that are ported to C# in the class <see cref="Fixation"/>.
+  /// that are ported to C# in the class <see cref="FixationDetection"/>.
   /// </remarks>
   public class FixationCalculation
   {

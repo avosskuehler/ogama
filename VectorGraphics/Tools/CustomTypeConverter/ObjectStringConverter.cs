@@ -396,7 +396,10 @@ namespace VectorGraphics.CustomTypeConverter
     {
       StringBuilder output = new StringBuilder();
 
-      NumberFormatInfo nfi = CultureInfo.GetCultureInfo("en-US").NumberFormat;
+      NumberFormatInfo nfi = new NumberFormatInfo();
+      nfi.CurrencyDecimalSeparator = ".";
+      nfi.CurrencyGroupSeparator = string.Empty;
+      nfi.NumberDecimalSeparator = ".";
       nfi.NumberGroupSeparator = string.Empty;
 
       output.Append("(");

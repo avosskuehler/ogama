@@ -209,15 +209,14 @@ namespace Ogama.Modules.Statistics
     /// </summary>
     /// <param name="aoiCollection"><see cref="VGElementCollection"/> of areas of interest for current trial</param>
     /// <param name="fixationRow">fixational row</param>
-    /// <param name="aoiGroup">Out. The optional group name of the aoi.</param>
-    /// <returns>AOI name that is hitted from fixation.</returns>
-    public static string FixationHitsAOI(
+    /// <returns>List of AOI name/group pairs that are hitted from fixation.</returns>
+    public static List<string[]> FixationHitsAOI(
       VGElementCollection aoiCollection,
-      DataRowView fixationRow,
-      out string aoiGroup)
+      DataRowView fixationRow)
     {
+      List<string[]> hittedAOIs = new List<string[]>();
       string aoiName = "nowhere";
-      aoiGroup = "nowhere";
+      string aoiGroup = "nowhere";
 
       foreach (VGElement aoiElement in aoiCollection)
       {
@@ -230,16 +229,17 @@ namespace Ogama.Modules.Statistics
         {
           aoiGroup = aoiElement.ElementGroup == null ? string.Empty : aoiElement.ElementGroup.Trim();
           aoiName = aoiElement.Name.Trim();
-          break;
+          if (aoiGroup == string.Empty || aoiGroup == " ")
+          {
+            aoiGroup = "nowhere";
+          }
+
+          string[] hittedAOI = { aoiName, aoiGroup };
+          hittedAOIs.Add(hittedAOI);
         }
       }
 
-      if (aoiGroup == string.Empty || aoiGroup == " ")
-      {
-        aoiGroup = "nowhere";
-      }
-
-      return aoiName;
+      return hittedAOIs;
     }
 
     /// <summary>
@@ -283,8 +283,16 @@ namespace Ogama.Modules.Statistics
           foregoingSubjectName = subjectName;
         }
 
-        string hittedAOIGroup;
-        string hittedAOIName = Statistic.FixationHitsAOI(trialsAOIs, fixationRow, out hittedAOIGroup);
+        string hittedAOIName = "nowhere";
+        string hittedAOIGroup = "nowhere";
+        List<string[]> hittedAOIs = Statistic.FixationHitsAOI(trialsAOIs, fixationRow);
+        if (hittedAOIs.Count > 0)
+        {
+          // Take only first hitted AOI
+          hittedAOIName = hittedAOIs[0][0];
+          hittedAOIGroup = hittedAOIs[0][1];
+        }
+
         if (foregoingHittedAOIName != string.Empty)
         {
           int indexOfHittedGroup = groupIndexAssignment[hittedAOIName];

@@ -1074,6 +1074,7 @@ namespace Ogama.Modules.Fixations
     {
       string tableName = string.Empty;
       string fileName = string.Empty;
+
       DataTable dataTable = new DataTable();
       switch (type)
       {
@@ -1193,7 +1194,7 @@ namespace Ogama.Modules.Fixations
         string subjectName = string.Empty;
         string lastsubjectName = "LastSubjectKLSMA";
 
-        DataView trialsAOIs = new DataView(Document.ActiveDocument.DocDataSet.AOIs);
+        DataView trialsAOIsView = new DataView(Document.ActiveDocument.DocDataSet.AOIs);
         SubjectsData subjectData = new SubjectsData();
         Dictionary<string, string> subjectParams = new Dictionary<string, string>();
 
@@ -1213,6 +1214,13 @@ namespace Ogama.Modules.Fixations
         foreach (DataRowView dataRow in fixationsView)
         {
           trialID = (int)dataRow["TrialID"];
+
+          // Skip trials that are not selected.
+          if (!options.CheckedTrialIDs.Contains(trialID))
+          {
+            continue;
+          }
+
           int trialSequence = (int)dataRow["TrialSequence"];
           long startTime = (long)dataRow["StartTime"];
           int length = (int)dataRow["Length"];
@@ -1221,6 +1229,11 @@ namespace Ogama.Modules.Fixations
           PointF fixationCenter = new PointF(posX, posY);
 
           subjectName = dataRow["SubjectName"].ToString();
+          if (!options.CheckedSubjects.Contains(subjectName))
+          {
+            continue;
+          }
+
           if (options.ExportSubjectDetails)
           {
             if (subjectName != lastsubjectName)
@@ -1280,11 +1293,11 @@ namespace Ogama.Modules.Fixations
               }
 
               string filter = "TrialID=" + trialID + string.Empty;
-              trialsAOIs.RowFilter = filter;
+              trialsAOIsView.RowFilter = filter;
               lastTrialID = trialID;
               trialAOIs.Clear();
 
-              foreach (DataRowView row in trialsAOIs)
+              foreach (DataRowView row in trialsAOIsView)
               {
                 string strPtList = row["ShapePts"].ToString();
                 string aoiType = row["ShapeType"].ToString();
@@ -1389,12 +1402,32 @@ namespace Ogama.Modules.Fixations
             if (options.ExportFixations || countInTrial != 0)
             {
               // Retrieve AOI position
-              string group;
-              string name = Statistics.Statistic.FixationHitsAOI(trialAOIs, dataRow, out group);
+              string hittedAOIName = string.Empty;
+              string hittedAOIGroup = string.Empty;
+              List<string[]> hittedAOIs = Statistics.Statistic.FixationHitsAOI(trialAOIs, dataRow);
 
-              exportFileWriter.Write(name);
+              if (hittedAOIs.Count == 0)
+              {
+                hittedAOIName = "nowhere";
+                hittedAOIGroup = "nowhere";
+              }
+
+              foreach (string[] aoi in hittedAOIs)
+              {
+                // Concatenate hitted AOIs
+                hittedAOIName += aoi[0] + "#";
+                hittedAOIGroup += aoi[1] + "#";
+              }
+
+              if (hittedAOIs.Count > 0)
+              {
+                hittedAOIName = hittedAOIName.Substring(0, hittedAOIName.Length - 1);
+                hittedAOIGroup = hittedAOIGroup.Substring(0, hittedAOIGroup.Length - 1);
+              }
+
+              exportFileWriter.Write(hittedAOIName);
               exportFileWriter.Write("\t");
-              exportFileWriter.Write(group);
+              exportFileWriter.Write(hittedAOIGroup);
               exportFileWriter.Write("\t");
             }
           }
@@ -1419,6 +1452,8 @@ namespace Ogama.Modules.Fixations
           "Please re-run a complete fixation calculation for all subjects.";
         ExceptionMethods.ProcessMessage("Old subject fixations found", message);
       }
+
+      ExceptionMethods.ProcessMessage("Export succesful.", "Fixations were successfully exported to file");
     }
 
     /// <summary>

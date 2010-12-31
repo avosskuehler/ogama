@@ -711,6 +711,7 @@ namespace Ogama.Modules.Common
       if (!this.CheckForValidFixations())
       {
         this.DrawForeground(resetPicture);
+        this.Cursor = Cursors.Default;
         return;
       }
 

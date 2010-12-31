@@ -14,20 +14,17 @@
 namespace Ogama.Modules.Fixations
 {
   using System;
-  using System.Collections.Generic;
-  using System.ComponentModel;
   using System.Data;
-  using System.Drawing;
-  using System.Text;
   using System.Windows.Forms;
 
   using Ogama.Modules.Common;
-  using VectorGraphics.Elements;
+  using Ogama.Modules.Statistics;
 
   /// <summary>
-  /// A pop up dialog <see cref="Form"/> to ask user what to export from the fixation table.
+  /// A pop up dialog <see cref="FormWithInterface"/> to ask user what to 
+  /// export from the fixation table.
   /// </summary>
-  public partial class ExportOptionsDialog : Form
+  public partial class ExportOptionsDialog : FormWithInterface
   {
     ///////////////////////////////////////////////////////////////////////////////
     // Defining Constants                                                        //
@@ -58,10 +55,19 @@ namespace Ogama.Modules.Fixations
     public ExportOptionsDialog()
     {
       this.InitializeComponent();
-      this.exportOptions = new ExportOptions();
+
+      this.InitAccelerators();
+      this.InitializeDataBindings();
+      this.InitializeCustomElements();
     }
 
     #endregion //CONSTRUCTION
+
+    ///////////////////////////////////////////////////////////////////////////////
+    // Defining events, enums, delegates                                         //
+    ///////////////////////////////////////////////////////////////////////////////
+    #region EVENTS
+    #endregion EVENTS
 
     ///////////////////////////////////////////////////////////////////////////////
     // Defining Properties                                                       //
@@ -82,14 +88,36 @@ namespace Ogama.Modules.Fixations
     #endregion //PROPERTIES
 
     ///////////////////////////////////////////////////////////////////////////////
-    // Eventhandler                                                              //
+    // Public methods                                                            //
     ///////////////////////////////////////////////////////////////////////////////
-    #region EVENTS
+    #region PUBLICMETHODS
+    #endregion //PUBLICMETHODS
 
     ///////////////////////////////////////////////////////////////////////////////
-    // Eventhandler for UI, Menu, Buttons, Toolbars etc.                         //
+    // Inherited methods                                                         //
     ///////////////////////////////////////////////////////////////////////////////
-    #region WINDOWSEVENTHANDLER
+    #region OVERRIDES
+
+    /// <summary>
+    /// Overridden. This method is used to initialize elements that are not
+    /// initialized in the designer.
+    /// </summary>
+    protected override void InitializeCustomElements()
+    {
+      base.InitializeCustomElements();
+      this.exportOptions = new ExportOptions();
+      PopulateSubjectTreeView(this.trvSubjects);
+
+      DataTable table = Document.ActiveDocument.DocDataSet.TrialsAdapter.GetData();
+      StatisticsModule.FillTreeView(this.trvTrialsDefault, table);
+    }
+
+    #endregion //OVERRIDES
+
+    ///////////////////////////////////////////////////////////////////////////////
+    // Eventhandler                                                              //
+    ///////////////////////////////////////////////////////////////////////////////
+    #region EVENTHANDLER
 
     /// <summary>
     /// The <see cref="Control.Click"/> event handler for the
@@ -142,6 +170,9 @@ namespace Ogama.Modules.Fixations
       {
         this.exportOptions.ExportFixations = false;
       }
+
+      this.exportOptions.CheckedSubjects = GetCheckedSubjects(this.trvSubjects);
+      this.exportOptions.CheckedTrialIDs = StatisticsModule.GetSelectedTrials(this.trvTrialsDefault);
     }
 
     /// <summary>
@@ -159,33 +190,58 @@ namespace Ogama.Modules.Fixations
       }
     }
 
-    #endregion //WINDOWSEVENTHANDLER
+    /// <summary>
+    /// The <see cref="TreeView.AfterCheck"/> event handler for the
+    /// <see cref="TreeView"/> <see cref="trvSubjects"/>.
+    /// Checks or unchecks all subjects in the category node
+    /// that is clicked.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void trvSubjects_AfterCheck(object sender, TreeViewEventArgs e)
+    {
+      if (e.Node.ImageKey == "Category")
+      {
+        foreach (TreeNode subjectNode in e.Node.Nodes)
+        {
+          subjectNode.Checked = e.Node.Checked;
+        }
+      }
+    }
 
-    ///////////////////////////////////////////////////////////////////////////////
-    // Eventhandler for Custom Defined Events                                    //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region CUSTOMEVENTHANDLER
-    #endregion //CUSTOMEVENTHANDLER
+    /// <summary>
+    /// The <see cref="TreeView.AfterCheck"/> event handler for the
+    /// <see cref="TreeView"/> <see cref="trvTrialsDefault"/>.
+    /// Checks or unchecks all trials in the category node
+    /// that is clicked.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void trvTrialsDefault_AfterCheck(object sender, TreeViewEventArgs e)
+    {
+      // Category Level
+      if (e.Node.Level == 0)
+      {
+        foreach (TreeNode stimulusNode in e.Node.Nodes)
+        {
+          stimulusNode.Checked = e.Node.Checked;
+        }
+      }
+    }
 
-    #endregion //EVENTS
+    #endregion //EVENTHANDLER
 
     ///////////////////////////////////////////////////////////////////////////////
     // Methods and Eventhandling for Background tasks                            //
     ///////////////////////////////////////////////////////////////////////////////
-    #region BACKGROUNDWORKER
-    #endregion //BACKGROUNDWORKER
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Inherited methods                                                         //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region OVERRIDES
-    #endregion //OVERRIDES
+    #region THREAD
+    #endregion //THREAD
 
     ///////////////////////////////////////////////////////////////////////////////
     // Methods for doing main class job                                          //
     ///////////////////////////////////////////////////////////////////////////////
-    #region METHODS
-    #endregion //METHODS
+    #region PRIVATEMETHODS
+    #endregion //PRIVATEMETHODS
 
     ///////////////////////////////////////////////////////////////////////////////
     // Small helping Methods                                                     //

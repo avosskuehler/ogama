@@ -14,21 +14,14 @@
 namespace Ogama.Modules.SlideshowDesign
 {
   using System;
-  using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Data;
   using System.Drawing;
-  using System.Drawing.Drawing2D;
   using System.IO;
   using System.Text;
   using System.Windows.Forms;
-
-  using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
-  using VectorGraphics;
+  using VectorGraphics.Controls;
   using VectorGraphics.Elements;
   using VectorGraphics.StopConditions;
-  using VectorGraphics.Controls;
 
   /// <summary>
   /// This dialog <see cref="Form"/> is used to initially define a 
@@ -110,7 +103,6 @@ namespace Ogama.Modules.SlideshowDesign
       }
     }
 
-
     /// <summary>
     /// Gets or sets the <see cref="Uri"/> for the browser target 
     /// specified in this dialog.
@@ -142,6 +134,12 @@ namespace Ogama.Modules.SlideshowDesign
     ///////////////////////////////////////////////////////////////////////////////
     #region WINDOWSEVENTHANDLER
 
+    /// <summary>
+    /// The <see cref="TextBox.TextChanged"/> event handler 
+    /// which updates the browser window
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">A empty <see cref="EventArgs"/></param>
     private void txbURL_TextChanged(object sender, EventArgs e)
     {
       try
@@ -313,10 +311,10 @@ namespace Ogama.Modules.SlideshowDesign
       }
 
       // Store category and name.
-      browserTreeNode.Category = this.cbbCategory.Text;
-      browserTreeNode.Text = this.txbName.Text;
-      browserTreeNode.OriginURL = this.txbURL.Text;
-      browserTreeNode.BrowseDepth = (int)this.nudBrowseDepth.Value;
+      this.browserTreeNode.Category = this.cbbCategory.Text;
+      this.browserTreeNode.Text = this.txbName.Text;
+      this.browserTreeNode.OriginURL = this.txbURL.Text;
+      this.browserTreeNode.BrowseDepth = (int)this.nudBrowseDepth.Value;
 
       // Add standard stop condition if none is specified.
       if (this.lsbStopConditions.Items.Count == 0)
@@ -364,22 +362,18 @@ namespace Ogama.Modules.SlideshowDesign
         string.Empty);
 
       baseURLSlide.VGStimuli.Add(baseURLScreenshot);
-      browserTreeNode.Slide = baseURLSlide;
+      this.browserTreeNode.Slide = baseURLSlide;
 
-      //HtmlElementCollection es = webBrowser1.Document.GetElementsByTagName("a");
-      //if (es != null && es.Count != 0)
-      //{
-
+      // HtmlElementCollection es = webBrowser1.Document.GetElementsByTagName("a");
+      // if (es != null && es.Count != 0)
+      // {
       //  HtmlElement ele = es[0];
       //  //This line is optional, it only visually scolls the first link element into view
       //  ele.ScrollIntoView(true);
       //  ele.Focus();
       // SendKeys.Send("{ENTER}");
-
-      //}
-
-
-      return browserTreeNode;
+      // }
+      return this.browserTreeNode;
     }
 
     #endregion //METHODS

@@ -748,7 +748,7 @@ namespace Ogama.Modules.Recording
     }
 
     /// <summary>
-    /// The <see cref="WebBrowser.Scroll"/> event handler in which the scroll
+    /// The Scroll event handler of the web document in which the scroll
     /// position is sent to the recorder as a trial event.
     /// </summary>
     /// <param name="sender">Source of the event.</param>

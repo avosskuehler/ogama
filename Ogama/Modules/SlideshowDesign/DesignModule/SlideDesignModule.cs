@@ -165,6 +165,54 @@ namespace Ogama.Modules.SlideshowDesign
     // Public methods                                                            //
     ///////////////////////////////////////////////////////////////////////////////
     #region PUBLICMETHODS
+
+    /// <summary>
+    /// Populates given combo box with <see cref="Keys"/> values.
+    /// </summary>
+    /// <param name="combo">The <see cref="ComboBox"/> to be populated.</param>
+    public static void FillKeyCombo(ComboBox combo)
+    {
+      combo.Items.Clear();
+      combo.Items.Add("Any");
+      combo.Items.AddRange(Enum.GetNames(typeof(Keys)));
+      combo.Items.Remove("F12");
+      combo.Items.Remove("ESC");
+      combo.Items.Remove("Escape");
+      combo.Text = Keys.Space.ToString();
+    }
+
+    /// <summary>
+    /// Populates given combo box with <see cref="Keys"/> values.
+    /// </summary>
+    /// <param name="combo">The <see cref="ComboBox"/> to be populated.</param>
+    public static void FillMouseButtonCombo(ComboBox combo)
+    {
+      combo.Items.Clear();
+      combo.Items.Add("Any");
+      combo.Items.AddRange(Enum.GetNames(typeof(MouseButtons)));
+      combo.Text = MouseButtons.Left.ToString();
+    }
+
+    /// <summary>
+    /// This method deletes the <see cref="ListBox.SelectedItems"/>
+    /// collection in the given <see cref="ListBox"/>
+    /// </summary>
+    /// <param name="listBox">The <see cref="ListBox"/> for which
+    /// the selected items should be deleted.</param>
+    public static void DeleteSelectedItems(ListBox listBox)
+    {
+      List<object> selectedObjects = new List<object>();
+      foreach (object obj in listBox.SelectedItems)
+      {
+        selectedObjects.Add(obj);
+      }
+
+      foreach (object obj in selectedObjects)
+      {
+        listBox.Items.Remove(obj);
+      }
+    }
+
     #endregion //PUBLICMETHODS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -836,6 +884,7 @@ namespace Ogama.Modules.SlideshowDesign
               VGFlash flash = element as VGFlash;
               flash.InitializeOnControl(this.designPicture.Parent, false, this.Picture.StimulusToScreen);
             }
+
             if (element is VGBrowser)
             {
               VGBrowser browser = element as VGBrowser;
@@ -1104,53 +1153,6 @@ namespace Ogama.Modules.SlideshowDesign
     // Small helping Methods                                                     //
     ///////////////////////////////////////////////////////////////////////////////
     #region HELPER
-
-    /// <summary>
-    /// Populates given combo box with <see cref="Keys"/> values.
-    /// </summary>
-    /// <param name="combo">The <see cref="ComboBox"/> to be populated.</param>
-    public static void FillKeyCombo(ComboBox combo)
-    {
-      combo.Items.Clear();
-      combo.Items.Add("Any");
-      combo.Items.AddRange(Enum.GetNames(typeof(Keys)));
-      combo.Items.Remove("F12");
-      combo.Items.Remove("ESC");
-      combo.Items.Remove("Escape");
-      combo.Text = Keys.Space.ToString();
-    }
-
-    /// <summary>
-    /// Populates given combo box with <see cref="Keys"/> values.
-    /// </summary>
-    /// <param name="combo">The <see cref="ComboBox"/> to be populated.</param>
-    public static void FillMouseButtonCombo(ComboBox combo)
-    {
-      combo.Items.Clear();
-      combo.Items.Add("Any");
-      combo.Items.AddRange(Enum.GetNames(typeof(MouseButtons)));
-      combo.Text = MouseButtons.Left.ToString();
-    }
-
-    /// <summary>
-    /// This method deletes the <see cref="ListBox.SelectedItems"/>
-    /// collection in the given <see cref="ListBox"/>
-    /// </summary>
-    /// <param name="listBox">The <see cref="ListBox"/> for which
-    /// the selected items should be deleted.</param>
-    public static void DeleteSelectedItems(ListBox listBox)
-    {
-      List<object> selectedObjects = new List<object>();
-      foreach (object obj in listBox.SelectedItems)
-      {
-        selectedObjects.Add(obj);
-      }
-
-      foreach (object obj in selectedObjects)
-      {
-        listBox.Items.Remove(obj);
-      }
-    }
 
     /// <summary>
     /// Removes all <see cref="StopCondition"/>s with a target condition

@@ -434,6 +434,7 @@ namespace Ogama.Modules.SlideshowDesign
       {
         dlg.BrowserNode = node;
       }
+
       if (dlg.ShowDialog() == DialogResult.OK)
       {
         BrowserTreeNode newNode = dlg.BrowserNode;

@@ -150,7 +150,7 @@ namespace Ogama.Modules.AOI
     public override void ResetDataBindings()
     {
       base.ResetDataBindings();
-      this.PopulateSubjectTreeView(this.trvSubjects);
+      PopulateSubjectTreeView(this.trvSubjects);
     }
 
     /// <summary>
@@ -311,7 +311,7 @@ namespace Ogama.Modules.AOI
     protected override void InitializeCustomElements()
     {
       base.InitializeCustomElements();
-      this.PopulateSubjectTreeView(this.trvSubjects);
+      PopulateSubjectTreeView(this.trvSubjects);
       this.btnHelp.Click += new EventHandler(this.btnHelp_Click);
       this.pnlCanvas.Resize += new EventHandler(this.pnlCanvas_Resize);
     }
