@@ -39,9 +39,18 @@ namespace Ogama.Modules.ImportExport
       this.rdbEnterTableImages = new System.Windows.Forms.RadioButton();
       this.rdbImportTableImages = new System.Windows.Forms.RadioButton();
       this.dgvAssignments = new System.Windows.Forms.DataGridView();
+      this.columnAssignTrialID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.columnAssignStimulusFile = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.rdbiViewX = new System.Windows.Forms.RadioButton();
       this.label2 = new System.Windows.Forms.Label();
       this.dgvTrialsPreview = new System.Windows.Forms.DataGridView();
+      this.columnSubjectName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.columnTrialSequence = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.columnTrialID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.columnCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.columnStimulusFile = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.columnTrialStartTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.columnDuration = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.panel3 = new System.Windows.Forms.Panel();
       this.spcTableDropDowns = new System.Windows.Forms.SplitContainer();
       this.cbbTrialIDColumn = new System.Windows.Forms.ComboBox();
@@ -61,15 +70,6 @@ namespace Ogama.Modules.ImportExport
       this.splitContainer3 = new System.Windows.Forms.SplitContainer();
       this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
       this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-      this.columnAssignStimulusFile = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.columnAssignTrialID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.columnDuration = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.columnTrialStartTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.columnStimulusFile = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.columnCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.columnTrialID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.columnTrialSequence = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.columnSubjectName = new System.Windows.Forms.DataGridViewTextBoxColumn();
       ((System.ComponentModel.ISupportInitialize)(this.dataSetImport)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.dgvAssignments)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.dgvTrialsPreview)).BeginInit();
@@ -146,6 +146,7 @@ namespace Ogama.Modules.ImportExport
       this.rdbEnterTableImages.Size = new System.Drawing.Size(75, 17);
       this.rdbEnterTableImages.TabIndex = 23;
       this.rdbEnterTableImages.Text = "enter table";
+      this.toolTip1.SetToolTip(this.rdbEnterTableImages, "Assign custom trial ID to stimulus filenames");
       this.rdbEnterTableImages.UseVisualStyleBackColor = true;
       this.rdbEnterTableImages.CheckedChanged += new System.EventHandler(this.rdbImportMode_CheckedChanged);
       // 
@@ -157,6 +158,8 @@ namespace Ogama.Modules.ImportExport
       this.rdbImportTableImages.Size = new System.Drawing.Size(91, 17);
       this.rdbImportTableImages.TabIndex = 23;
       this.rdbImportTableImages.Text = "import table ...";
+      this.toolTip1.SetToolTip(this.rdbImportTableImages, "Import a table with trial ID to image filename assignments. \r\n(Two column file, f" +
+              "irst column with trial ID, second with image filename including ending)");
       this.rdbImportTableImages.UseVisualStyleBackColor = true;
       this.rdbImportTableImages.CheckedChanged += new System.EventHandler(this.rdbImportMode_CheckedChanged);
       // 
@@ -176,6 +179,19 @@ namespace Ogama.Modules.ImportExport
       this.dgvAssignments.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvAssignments_CellValidating);
       this.dgvAssignments.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvAssignments_EditingControlShowing);
       // 
+      // columnAssignTrialID
+      // 
+      this.columnAssignTrialID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+      this.columnAssignTrialID.HeaderText = "TrialID";
+      this.columnAssignTrialID.Name = "columnAssignTrialID";
+      this.columnAssignTrialID.Width = 50;
+      // 
+      // columnAssignStimulusFile
+      // 
+      this.columnAssignStimulusFile.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+      this.columnAssignStimulusFile.HeaderText = "Stimulus filename";
+      this.columnAssignStimulusFile.Name = "columnAssignStimulusFile";
+      // 
       // rdbiViewX
       // 
       this.rdbiViewX.AutoSize = true;
@@ -186,6 +202,9 @@ namespace Ogama.Modules.ImportExport
       this.rdbiViewX.TabIndex = 22;
       this.rdbiViewX.TabStop = true;
       this.rdbiViewX.Text = "use iViewX MSG lines";
+      this.toolTip1.SetToolTip(this.rdbiViewX, "Triggers for lines containing \"scene image: bitmap.bmp\" or \"# Message: bitmap.bmp" +
+              "\".\r\nAll rows after such an entry are assigned to the trial with the image \"bitma" +
+              "p.bmp\".");
       this.rdbiViewX.UseVisualStyleBackColor = true;
       this.rdbiViewX.CheckedChanged += new System.EventHandler(this.rdbImportMode_CheckedChanged);
       // 
@@ -216,6 +235,41 @@ namespace Ogama.Modules.ImportExport
       this.dgvTrialsPreview.Name = "dgvTrialsPreview";
       this.dgvTrialsPreview.Size = new System.Drawing.Size(685, 151);
       this.dgvTrialsPreview.TabIndex = 15;
+      // 
+      // columnSubjectName
+      // 
+      this.columnSubjectName.HeaderText = "SubjectName";
+      this.columnSubjectName.Name = "columnSubjectName";
+      // 
+      // columnTrialSequence
+      // 
+      this.columnTrialSequence.HeaderText = "Sequence";
+      this.columnTrialSequence.Name = "columnTrialSequence";
+      // 
+      // columnTrialID
+      // 
+      this.columnTrialID.HeaderText = "TrialID";
+      this.columnTrialID.Name = "columnTrialID";
+      // 
+      // columnCategory
+      // 
+      this.columnCategory.HeaderText = "Category";
+      this.columnCategory.Name = "columnCategory";
+      // 
+      // columnStimulusFile
+      // 
+      this.columnStimulusFile.HeaderText = "StimulusFile";
+      this.columnStimulusFile.Name = "columnStimulusFile";
+      // 
+      // columnTrialStartTime
+      // 
+      this.columnTrialStartTime.HeaderText = "TrialStartTime in ms";
+      this.columnTrialStartTime.Name = "columnTrialStartTime";
+      // 
+      // columnDuration
+      // 
+      this.columnDuration.HeaderText = "Duration in ms";
+      this.columnDuration.Name = "columnDuration";
       // 
       // panel3
       // 
@@ -265,6 +319,7 @@ namespace Ogama.Modules.ImportExport
       this.cbbTrialIDColumn.Name = "cbbTrialIDColumn";
       this.cbbTrialIDColumn.Size = new System.Drawing.Size(112, 21);
       this.cbbTrialIDColumn.TabIndex = 4;
+      this.toolTip1.SetToolTip(this.cbbTrialIDColumn, "Specify the column in the import file which contains the trial ids.");
       this.cbbTrialIDColumn.SelectionChangeCommitted += new System.EventHandler(this.cbbTrialIDColumn_SelectionChangeCommitted);
       // 
       // cbbStimulusFileColumn
@@ -274,6 +329,8 @@ namespace Ogama.Modules.ImportExport
       this.cbbStimulusFileColumn.Name = "cbbStimulusFileColumn";
       this.cbbStimulusFileColumn.Size = new System.Drawing.Size(112, 21);
       this.cbbStimulusFileColumn.TabIndex = 5;
+      this.toolTip1.SetToolTip(this.cbbStimulusFileColumn, "Specify the column in the import file which contains the stimulus file name with " +
+              "file ending.");
       this.cbbStimulusFileColumn.SelectionChangeCommitted += new System.EventHandler(this.cbbStimulusFileColumn_SelectionChangeCommitted);
       // 
       // label5
@@ -359,6 +416,8 @@ namespace Ogama.Modules.ImportExport
       this.rdbUseStimulusFileColumn.Size = new System.Drawing.Size(126, 17);
       this.rdbUseStimulusFileColumn.TabIndex = 23;
       this.rdbUseStimulusFileColumn.Text = "use image file column";
+      this.toolTip1.SetToolTip(this.rdbUseStimulusFileColumn, "All consecutive rows containing the image file specified in the image column are " +
+              "assigned to that trial.");
       this.rdbUseStimulusFileColumn.UseVisualStyleBackColor = true;
       this.rdbUseStimulusFileColumn.CheckedChanged += new System.EventHandler(this.rdbImportMode_CheckedChanged);
       // 
@@ -370,6 +429,9 @@ namespace Ogama.Modules.ImportExport
       this.rdbSearchForImageEndings.Size = new System.Drawing.Size(154, 17);
       this.rdbSearchForImageEndings.TabIndex = 23;
       this.rdbSearchForImageEndings.Text = "search for image file ending";
+      this.toolTip1.SetToolTip(this.rdbSearchForImageEndings, "Searches for rows with a string entry ending on \".bmp\" or what ending you specify" +
+              ".\r\nAll rows following this image row are assigned to the trial with the image fi" +
+              "le found in this row.");
       this.rdbSearchForImageEndings.UseVisualStyleBackColor = true;
       this.rdbSearchForImageEndings.CheckedChanged += new System.EventHandler(this.rdbImportMode_CheckedChanged);
       // 
@@ -477,55 +539,7 @@ namespace Ogama.Modules.ImportExport
       this.splitContainer2.SplitterDistance = 170;
       this.splitContainer2.TabIndex = 0;
       // 
-      // columnAssignStimulusFile
-      // 
-      this.columnAssignStimulusFile.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-      this.columnAssignStimulusFile.HeaderText = "Stimulus filename";
-      this.columnAssignStimulusFile.Name = "columnAssignStimulusFile";
-      // 
-      // columnAssignTrialID
-      // 
-      this.columnAssignTrialID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-      this.columnAssignTrialID.HeaderText = "TrialID";
-      this.columnAssignTrialID.Name = "columnAssignTrialID";
-      this.columnAssignTrialID.Width = 50;
-      // 
-      // columnDuration
-      // 
-      this.columnDuration.HeaderText = "Duration in ms";
-      this.columnDuration.Name = "columnDuration";
-      // 
-      // columnTrialStartTime
-      // 
-      this.columnTrialStartTime.HeaderText = "TrialStartTime in ms";
-      this.columnTrialStartTime.Name = "columnTrialStartTime";
-      // 
-      // columnStimulusFile
-      // 
-      this.columnStimulusFile.HeaderText = "StimulusFile";
-      this.columnStimulusFile.Name = "columnStimulusFile";
-      // 
-      // columnCategory
-      // 
-      this.columnCategory.HeaderText = "Category";
-      this.columnCategory.Name = "columnCategory";
-      // 
-      // columnTrialID
-      // 
-      this.columnTrialID.HeaderText = "TrialID";
-      this.columnTrialID.Name = "columnTrialID";
-      // 
-      // columnTrialSequence
-      // 
-      this.columnTrialSequence.HeaderText = "Sequence";
-      this.columnTrialSequence.Name = "columnTrialSequence";
-      // 
-      // columnSubjectName
-      // 
-      this.columnSubjectName.HeaderText = "SubjectName";
-      this.columnSubjectName.Name = "columnSubjectName";
-      // 
-      // frmImportImages
+      // ImportImagesDialog
       // 
       this.AcceptButton = this.btnImport;
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -536,7 +550,7 @@ namespace Ogama.Modules.ImportExport
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.MaximizeBox = false;
       this.MinimizeBox = false;
-      this.Name = "frmImportImages";
+      this.Name = "ImportImagesDialog";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
       this.Text = "Import assistant ... step 5 - Images";
       this.Load += new System.EventHandler(this.frmImportImages_Load);

@@ -377,6 +377,7 @@ namespace Ogama.Modules.ImportExport
     {
       // Clear existing values
       detectionSetting.ImageDictionary.Clear();
+      detectionSetting.TrialIDToImageAssignments.Clear();
       rawDataList.Clear();
       double lastTimeInFileTime = 0;
 
@@ -633,6 +634,15 @@ namespace Ogama.Modules.ImportExport
             double timeInFileTime = Convert.ToDouble(items[numTimeImportColumn], nfi);
             long timeInMs = Convert.ToInt64(timeInFileTime * detectionSetting.TimeFactor);
 
+            // If there is a data < starttime, skip them
+            if (detectionSetting.TrialSequenceToStarttimeAssignments.Count > 0)
+            {
+              if (timeInMs < detectionSetting.TrialSequenceToStarttimeAssignments.Values[0])
+              {
+                continue;
+              }
+            }
+
             // Save starttime
             if (counter == 0 || (asciiSetting.ColumnTitlesAtFirstRow && counter == 1))
             {
@@ -649,9 +659,9 @@ namespace Ogama.Modules.ImportExport
                 + Environment.NewLine + "Time in FileTime is {1}" + Environment.NewLine +
                 "PrevTime in FileTime is {2}" + Environment.NewLine +
                 "This indicates an logfile error or wrong timescale."
-                + Environment.NewLine + "Please try to change the timescale to milliseconds.", 
-                timeInMs, 
-                timeInFileTime, 
+                + Environment.NewLine + "Please try to change the timescale to milliseconds.",
+                timeInMs,
+                timeInFileTime,
                 lastTimeInFileTime);
               ExceptionMethods.ProcessErrorMessage(message);
               return;
@@ -713,26 +723,35 @@ namespace Ogama.Modules.ImportExport
                 break;
             }
 
+            int? columnTrialID = null;
+
             // Write trialID to detection settings.
             if (numTrialIDImportColumn != -1)
             {
+              columnTrialID = Convert.ToInt32(items[numTrialIDImportColumn]);
               if (!detectionSetting.TrialSequenceToTrialIDAssignments.ContainsKey(currentTrialSequence))
               {
-                detectionSetting.TrialSequenceToTrialIDAssignments.Add(currentTrialSequence, Convert.ToInt32(items[numTrialIDImportColumn]));
+                detectionSetting.TrialSequenceToTrialIDAssignments.Add(currentTrialSequence, columnTrialID.Value);
               }
             }
 
             // Write Stimulus file to detection settings.
             if (numTrialImageImportColumn != -1)
             {
-              if (!detectionSetting.TrialIDToImageAssignments.ContainsKey(currentTrialSequence))
+              int usedTrialID = currentTrialSequence;
+              if (columnTrialID.HasValue)
               {
-                detectionSetting.TrialIDToImageAssignments.Add(currentTrialSequence, items[numTrialImageImportColumn]);
+                usedTrialID = columnTrialID.Value;
+              }
+
+              if (!detectionSetting.TrialIDToImageAssignments.ContainsKey(usedTrialID))
+              {
+                detectionSetting.TrialIDToImageAssignments.Add(usedTrialID, items[numTrialImageImportColumn]);
               }
 
               if (!detectionSetting.TrialSequenceToTrialIDAssignments.ContainsKey(currentTrialSequence))
               {
-                detectionSetting.TrialSequenceToTrialIDAssignments.Add(currentTrialSequence, currentTrialSequence);
+                detectionSetting.TrialSequenceToTrialIDAssignments.Add(currentTrialSequence, usedTrialID);
               }
             }
 
@@ -898,6 +917,7 @@ namespace Ogama.Modules.ImportExport
               }
 
               break;
+            case StimuliImportModes.UseImportColumn:
             case StimuliImportModes.UseAssignmentTable:
               if (detectionSetting.TrialSequenceToTrialIDAssignments.ContainsKey(currentSequence))
               {
@@ -907,7 +927,6 @@ namespace Ogama.Modules.ImportExport
                   image = detectionSetting.TrialIDToImageAssignments[trialID];
                 }
               }
-
               break;
             case StimuliImportModes.SearchForImageEnding:
               if (detectionSetting.ImageDictionary.ContainsKey(currentSequence))
@@ -915,9 +934,6 @@ namespace Ogama.Modules.ImportExport
                 image = detectionSetting.ImageDictionary[currentSequence];
               }
 
-              break;
-            case StimuliImportModes.UseImportColumn:
-              // no postprocessing needed, image is set above.
               break;
           }
 

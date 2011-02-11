@@ -472,19 +472,13 @@ namespace Ogama.Modules.ImportExport
           case ImportTypes.Rawdata:
             foreach (TrialsData trial in ImportRawData.GetTrialList(this.numberOfImportLines))
             {
-              string image = "no image detected";
-              if (this.detectionSetting.TrialIDToImageAssignments.ContainsKey(trial.TrialID))
-              {
-                image = this.detectionSetting.TrialIDToImageAssignments[trial.TrialID];
-              }
-
               this.dgvTrialsPreview.Rows.Add(new object[] 
                 {
                   trial.SubjectName,
                   trial.TrialSequence, 
                   trial.TrialID, 
                   trial.Category,
-                  image,
+                  trial.TrialName,
                   trial.TrialStartTime,
                   trial.Duration
                 });

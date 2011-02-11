@@ -33,6 +33,7 @@ namespace Ogama.Modules.ImportExport
       this.btnCancel = new System.Windows.Forms.Button();
       this.btnNext = new System.Windows.Forms.Button();
       this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+      this.txbTrialMSG = new System.Windows.Forms.TextBox();
       this.groupBox2 = new System.Windows.Forms.GroupBox();
       this.spcTableDropDowns = new System.Windows.Forms.SplitContainer();
       this.dgvAssignments = new System.Windows.Forms.DataGridView();
@@ -46,7 +47,6 @@ namespace Ogama.Modules.ImportExport
       this.label5 = new System.Windows.Forms.Label();
       this.label4 = new System.Windows.Forms.Label();
       this.txbTrialSequenceColumn = new System.Windows.Forms.TextBox();
-      this.txbTrialMSG = new System.Windows.Forms.TextBox();
       this.grbFileName = new System.Windows.Forms.GroupBox();
       this.btnOpenAssignFile = new System.Windows.Forms.Button();
       this.txbImportAssignFile = new System.Windows.Forms.TextBox();
@@ -121,6 +121,17 @@ namespace Ogama.Modules.ImportExport
       this.btnNext.Text = "> &Next (Stimuli)";
       this.toolTip1.SetToolTip(this.btnNext, "goto Step 4: specify stimulus images");
       this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+      // 
+      // txbTrialMSG
+      // 
+      this.txbTrialMSG.Location = new System.Drawing.Point(161, 58);
+      this.txbTrialMSG.Name = "txbTrialMSG";
+      this.txbTrialMSG.Size = new System.Drawing.Size(86, 20);
+      this.txbTrialMSG.TabIndex = 42;
+      this.txbTrialMSG.Text = "MSG";
+      this.toolTip1.SetToolTip(this.txbTrialMSG, "This field is case-sensitive !");
+      this.txbTrialMSG.TextChanged += new System.EventHandler(this.txbTrialMSG_TextChanged);
+      this.txbTrialMSG.Leave += new System.EventHandler(this.txbTrialMSG_Leave);
       // 
       // groupBox2
       // 
@@ -204,6 +215,7 @@ namespace Ogama.Modules.ImportExport
       this.cbbAssignTrialSequenceColumn.Name = "cbbAssignTrialSequenceColumn";
       this.cbbAssignTrialSequenceColumn.Size = new System.Drawing.Size(112, 21);
       this.cbbAssignTrialSequenceColumn.TabIndex = 1;
+      this.toolTip1.SetToolTip(this.cbbAssignTrialSequenceColumn, "Choose the column in the text file which contains the sequence numbers.");
       this.cbbAssignTrialSequenceColumn.SelectionChangeCommitted += new System.EventHandler(this.cbbAssignColumn_SelectionChangeCommitted);
       // 
       // cbbAssignTrialIDColumn
@@ -213,6 +225,7 @@ namespace Ogama.Modules.ImportExport
       this.cbbAssignTrialIDColumn.Name = "cbbAssignTrialIDColumn";
       this.cbbAssignTrialIDColumn.Size = new System.Drawing.Size(112, 21);
       this.cbbAssignTrialIDColumn.TabIndex = 1;
+      this.toolTip1.SetToolTip(this.cbbAssignTrialIDColumn, "Specify the column in the import file which contains the trial ids.");
       this.cbbAssignTrialIDColumn.SelectionChangeCommitted += new System.EventHandler(this.cbbAssignColumn_SelectionChangeCommitted);
       // 
       // label1
@@ -231,6 +244,8 @@ namespace Ogama.Modules.ImportExport
       this.cbbAssignStartingTimeColumn.Name = "cbbAssignStartingTimeColumn";
       this.cbbAssignStartingTimeColumn.Size = new System.Drawing.Size(112, 21);
       this.cbbAssignStartingTimeColumn.TabIndex = 1;
+      this.toolTip1.SetToolTip(this.cbbAssignStartingTimeColumn, "Specify the column in the import file which contains the starting times of the tr" +
+              "ials.");
       this.cbbAssignStartingTimeColumn.SelectionChangeCommitted += new System.EventHandler(this.cbbAssignColumn_SelectionChangeCommitted);
       // 
       // label5
@@ -259,17 +274,6 @@ namespace Ogama.Modules.ImportExport
       this.txbTrialSequenceColumn.Size = new System.Drawing.Size(86, 20);
       this.txbTrialSequenceColumn.TabIndex = 42;
       this.txbTrialSequenceColumn.TextChanged += new System.EventHandler(this.txbTrialMSG_TextChanged);
-      // 
-      // txbTrialMSG
-      // 
-      this.txbTrialMSG.Location = new System.Drawing.Point(161, 58);
-      this.txbTrialMSG.Name = "txbTrialMSG";
-      this.txbTrialMSG.Size = new System.Drawing.Size(86, 20);
-      this.txbTrialMSG.TabIndex = 42;
-      this.txbTrialMSG.Text = "MSG";
-      this.toolTip1.SetToolTip(this.txbTrialMSG, "This field is case-sensitive !");
-      this.txbTrialMSG.TextChanged += new System.EventHandler(this.txbTrialMSG_TextChanged);
-      this.txbTrialMSG.Leave += new System.EventHandler(this.txbTrialMSG_Leave);
       // 
       // grbFileName
       // 
@@ -311,6 +315,8 @@ namespace Ogama.Modules.ImportExport
       this.rdbUseTrialColumn.Size = new System.Drawing.Size(148, 17);
       this.rdbUseTrialColumn.TabIndex = 23;
       this.rdbUseTrialColumn.Text = "use trial sequence column";
+      this.toolTip1.SetToolTip(this.rdbUseTrialColumn, "Each raw data row is assigned to the trial that is specified in the trial id row." +
+              "");
       this.rdbUseTrialColumn.UseVisualStyleBackColor = true;
       this.rdbUseTrialColumn.CheckedChanged += new System.EventHandler(this.rdbTrialMode_CheckedChanged);
       // 
@@ -322,6 +328,8 @@ namespace Ogama.Modules.ImportExport
       this.rdbImportTableTrialID.Size = new System.Drawing.Size(170, 17);
       this.rdbImportTableTrialID.TabIndex = 23;
       this.rdbImportTableTrialID.Text = "import table with trial start times";
+      this.toolTip1.SetToolTip(this.rdbImportTableTrialID, "Import a table containing sequence, trial id and starttime assignments (in this o" +
+              "rder)");
       this.rdbImportTableTrialID.UseVisualStyleBackColor = true;
       this.rdbImportTableTrialID.CheckedChanged += new System.EventHandler(this.rdbTrialMode_CheckedChanged);
       // 
@@ -333,6 +341,9 @@ namespace Ogama.Modules.ImportExport
       this.rdbEnterTableTrialID.Size = new System.Drawing.Size(166, 17);
       this.rdbEnterTableTrialID.TabIndex = 23;
       this.rdbEnterTableTrialID.Text = "enter table with trial start times";
+      this.toolTip1.SetToolTip(this.rdbEnterTableTrialID, "Customize the sequence, trial ID to starttime assignment by entering a table whic" +
+              "h tells Ogama at which starttime it should assign new rawdata to a given sequenc" +
+              "e and trial id.");
       this.rdbEnterTableTrialID.UseVisualStyleBackColor = true;
       this.rdbEnterTableTrialID.CheckedChanged += new System.EventHandler(this.rdbTrialMode_CheckedChanged);
       // 
@@ -346,6 +357,8 @@ namespace Ogama.Modules.ImportExport
       this.rdbUseMSGLines.TabIndex = 22;
       this.rdbUseMSGLines.TabStop = true;
       this.rdbUseMSGLines.Text = "use MSG lines containing:";
+      this.toolTip1.SetToolTip(this.rdbUseMSGLines, "A line in the raw data file containing this string increases the trial counter fo" +
+              "r the following data rows.");
       this.rdbUseMSGLines.UseVisualStyleBackColor = true;
       this.rdbUseMSGLines.CheckedChanged += new System.EventHandler(this.rdbTrialMode_CheckedChanged);
       // 
