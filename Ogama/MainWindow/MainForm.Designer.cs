@@ -92,6 +92,7 @@ namespace Ogama.MainWindow
           this.mnuHelpHowToTobii = new System.Windows.Forms.ToolStripMenuItem();
           this.mnuHelpHowToAlea = new System.Windows.Forms.ToolStripMenuItem();
           this.mnuHelpHowToSMI = new System.Windows.Forms.ToolStripMenuItem();
+          this.mnuHelpHowToITU = new System.Windows.Forms.ToolStripMenuItem();
           this.mnuHelpCheckForUpdates = new System.Windows.Forms.ToolStripMenuItem();
           this.mnuHelpIndex = new System.Windows.Forms.ToolStripMenuItem();
           this.mnuHelpSearch = new System.Windows.Forms.ToolStripMenuItem();
@@ -124,8 +125,6 @@ namespace Ogama.MainWindow
           this.btnFIX = new System.Windows.Forms.ToolStripButton();
           this.btnSTA = new System.Windows.Forms.ToolStripButton();
           this.btnAOI = new System.Windows.Forms.ToolStripButton();
-          this.mnuHelpHowToITU = new System.Windows.Forms.ToolStripMenuItem();
-          this.mnuHelpHowToPS3 = new System.Windows.Forms.ToolStripMenuItem();
           this.mnsMain.SuspendLayout();
           this.stsMain.SuspendLayout();
           this.toolStrip1.SuspendLayout();
@@ -663,7 +662,6 @@ namespace Ogama.MainWindow
             this.mnuHelpHowToAlea,
             this.mnuHelpHowToSMI,
             this.mnuHelpHowToITU,
-            this.mnuHelpHowToPS3,
             this.mnuHelpCheckForUpdates,
             this.mnuHelpContents,
             this.mnuHelpIndex,
@@ -707,6 +705,14 @@ namespace Ogama.MainWindow
           this.mnuHelpHowToSMI.Size = new System.Drawing.Size(307, 22);
           this.mnuHelpHowToSMI.Text = "HowTo: Install SMI Recording ...";
           this.mnuHelpHowToSMI.Click += new System.EventHandler(this.mnuHelpHowToSMI_Click);
+          // 
+          // mnuHelpHowToITU
+          // 
+          this.mnuHelpHowToITU.Image = global::Ogama.Properties.Resources.ITU_61_61;
+          this.mnuHelpHowToITU.Name = "mnuHelpHowToITU";
+          this.mnuHelpHowToITU.Size = new System.Drawing.Size(307, 22);
+          this.mnuHelpHowToITU.Text = "HowTo: Install ITU GazeTracker Recording ...";
+          this.mnuHelpHowToITU.Click += new System.EventHandler(this.mnuHelpHowToITU_Click);
           // 
           // mnuHelpCheckForUpdates
           // 
@@ -976,22 +982,6 @@ namespace Ogama.MainWindow
           this.btnAOI.Text = "Shows areas of interest module";
           this.btnAOI.Click += new System.EventHandler(this.btnAOI_Click);
           // 
-          // mnuHelpHowToITU
-          // 
-          this.mnuHelpHowToITU.Image = global::Ogama.Properties.Resources.ITU_61_61;
-          this.mnuHelpHowToITU.Name = "mnuHelpHowToITU";
-          this.mnuHelpHowToITU.Size = new System.Drawing.Size(307, 22);
-          this.mnuHelpHowToITU.Text = "HowTo: Install ITU GazeTracker Recording ...";
-          this.mnuHelpHowToITU.Click += new System.EventHandler(this.mnuHelpHowToITU_Click);
-          // 
-          // mnuHelpHowToPS3
-          // 
-          this.mnuHelpHowToPS3.Image = global::Ogama.Properties.Resources.PS3_61_61;
-          this.mnuHelpHowToPS3.Name = "mnuHelpHowToPS3";
-          this.mnuHelpHowToPS3.Size = new System.Drawing.Size(307, 22);
-          this.mnuHelpHowToPS3.Text = "HowTo: Install PlayStation3 Recording ...";
-          this.mnuHelpHowToPS3.Click += new System.EventHandler(this.mnuHelpHowToPS3_Click);
-          // 
           // MainForm
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1119,7 +1109,6 @@ namespace Ogama.MainWindow
       private System.Windows.Forms.ToolStripMenuItem mnuHelpHowToAlea;
       private System.Windows.Forms.ToolStripMenuItem mnuHelpHowToSMI;
       private System.Windows.Forms.ToolStripMenuItem mnuHelpHowToITU;
-      private System.Windows.Forms.ToolStripMenuItem mnuHelpHowToPS3;
     }
 }
 

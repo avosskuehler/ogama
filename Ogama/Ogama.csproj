@@ -21,7 +21,7 @@
     <ApplicationIcon>Resources\OgamaV3.ico</ApplicationIcon>
     <TargetZone>LocalIntranet</TargetZone>
     <StartupObject>Ogama.Program</StartupObject>
-    <TargetFrameworkVersion>v3.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkSubset>
     </TargetFrameworkSubset>
     <PublishUrl>C:\Dokumente und Einstellungen\Adrian\Eigene Dateien\Universitt\Promotion\VSProjects\GMV\SQLGazeAndMouseViewer\publish\</PublishUrl>
@@ -117,18 +117,25 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\EtApi.dll</HintPath>
     </Reference>
-    <Reference Include="GazeTracker, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <ExecutableExtension>.exe</ExecutableExtension>
-      <HintPath>..\Libs\Managed\GazeTracker.exe</HintPath>
-    </Reference>
     <Reference Include="GazeTrackerClient, Version=1.1.0.0, Culture=neutral, PublicKeyToken=d2bdf8683767e608, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\GazeTrackerClient.dll</HintPath>
     </Reference>
-    <Reference Include="GazeTrackingLibrary, Version=1.1.0.0, Culture=neutral, PublicKeyToken=32fe172c6cdc4823, processorArchitecture=MSIL">
+    <Reference Include="GazeTrackerClientUI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\GazeTrackerClientUI.exe</HintPath>
+    </Reference>
+    <Reference Include="GazeTrackerUI, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\GazeTrackerUI.exe</HintPath>
+    </Reference>
+    <Reference Include="GazeTrackingLibrary, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\GazeTrackingLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="GTCommons, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\GTCommons.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Data.ConnectionUI, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -166,7 +173,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\Microsoft.SqlServer.SqlEnum.dll</HintPath>
     </Reference>
-    <Reference Include="OgamaClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="OgamaClient, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\OgamaClient.dll</HintPath>
     </Reference>
@@ -183,6 +190,9 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
@@ -228,12 +238,6 @@
       <DependentUpon>ShowLogDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="ExceptionHandling\ExceptionMethods.cs" />
-    <Compile Include="MainWindow\Dialogs\HowToActivateITUPS3.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainWindow\Dialogs\HowToActivateITUPS3.Designer.cs">
-      <DependentUpon>HowToActivateITUPS3.cs</DependentUpon>
-    </Compile>
     <Compile Include="MainWindow\Dialogs\HowToActivateITU.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -363,7 +367,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Modules\Recording\ITU\ITUDefaultGazeTracker.cs" />
-    <Compile Include="Modules\Recording\ITU\ITUPS3GazeTracker.cs" />
     <Compile Include="Modules\Recording\ITU\ITUGazeTrackerBase.cs" />
     <Compile Include="Modules\Recording\Presenter\DSScreenCapture.cs" />
     <Compile Include="Modules\Recording\Presenter\ScreenCaptureProperties.cs" />
@@ -962,10 +965,6 @@
     <EmbeddedResource Include="ExceptionHandling\ShowLogDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ShowLogDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateITUPS3.resx">
-      <DependentUpon>HowToActivateITUPS3.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateITU.resx">
       <DependentUpon>HowToActivateITU.cs</DependentUpon>

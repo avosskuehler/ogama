@@ -135,7 +135,7 @@ namespace Ogama.Modules.SlideshowDesign
     #region WINDOWSEVENTHANDLER
 
     /// <summary>
-    /// The <see cref="TextBox.TextChanged"/> event handler 
+    /// The TextBox.TextChanged event handler 
     /// which updates the browser window
     /// </summary>
     /// <param name="sender">Source of the event.</param>

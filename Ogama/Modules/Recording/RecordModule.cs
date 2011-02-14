@@ -1655,7 +1655,6 @@ namespace Ogama.Modules.Recording
       this.tclEyetracker.TabPages.Add(this.tbpSMI);
       this.tclEyetracker.TabPages.Add(this.tbpMouseOnly);
       this.tclEyetracker.TabPages.Add(this.tbpITU);
-      this.tclEyetracker.TabPages.Add(this.tbpITUPS3);
 
       // Read activated tracker value from the application settings
       string activatedTracker = Properties.Settings.Default.ActivatedHardwareTracker;
@@ -1788,7 +1787,6 @@ namespace Ogama.Modules.Recording
           this.btnITUAcceptCalibration,
           this.btnITURecalibrate,
           this.btnITUConnect,
-          this.btnITUCamera,
           this.btnITUAdjust,
           this.btnITUSubjectName,
           this.btnITUCalibrate,
@@ -1802,35 +1800,6 @@ namespace Ogama.Modules.Recording
         if (this.tclEyetracker.TabPages.Contains(this.tbpITU))
         {
           this.tclEyetracker.TabPages.Remove(this.tbpITU);
-        }
-      }
-
-      if (tracker == (tracker | HardwareTracker.ITUPS3))
-      {
-        // Create ITU PS3 GazeTracker
-        ITUGazeTracker.ITUPS3GazeTracker newITUPs3 = new ITUGazeTracker.ITUPS3GazeTracker(
-          this,
-          this.spcITUPS3Controls,
-          this.spcITUPS3TrackStatus.Panel1,
-          this.spcITUPS3CalibPlot.Panel1,
-          this.btnITUPS3ShowOnPresentationScreen,
-          this.btnITUPS3AcceptCalibration,
-          this.btnITUPS3Recalibrate,
-          this.btnITUPS3Connect,
-          this.btnITUPS3Camera,
-          this.btnITUPS3Adjust,
-          this.btnITUPS3SubjectName,
-          this.btnITUPS3Calibrate,
-          this.btnITUPS3Record,
-          this.txbITUPS3SubjectName);
-
-        this.trackerInterfaces.Add(HardwareTracker.ITUPS3, newITUPs3);
-      }
-      else
-      {
-        if (this.tclEyetracker.TabPages.Contains(this.tbpITUPS3))
-        {
-          this.tclEyetracker.TabPages.Remove(this.tbpITUPS3);
         }
       }
 
@@ -2255,13 +2224,6 @@ namespace Ogama.Modules.Recording
           if (this.trackerInterfaces.ContainsKey(HardwareTracker.ITU))
           {
             this.currentTracker = this.trackerInterfaces[HardwareTracker.ITU];
-          }
-
-          break;
-        case "tbpITUPS3":
-          if (this.trackerInterfaces.ContainsKey(HardwareTracker.ITUPS3))
-          {
-            this.currentTracker = this.trackerInterfaces[HardwareTracker.ITUPS3];
           }
 
           break;

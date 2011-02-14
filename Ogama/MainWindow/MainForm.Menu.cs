@@ -1045,20 +1045,6 @@ namespace Ogama.MainWindow
 
     /// <summary>
     /// The <see cref="Control.Click"/> event handler
-    /// for the <see cref="ToolStripMenuItem"/> <see cref="mnuHelpHowToPS3"/>
-    /// Displays instructions to enable gaze tracking with the ITU
-    /// GazeTracker and the PlayStation3 Eye camera.
-    /// </summary>
-    /// <param name="sender">Source of the event</param>
-    /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void mnuHelpHowToPS3_Click(object sender, EventArgs e)
-    {
-      HowToActivateITUPS3 objActivateITUPS3 = new HowToActivateITUPS3();
-      objActivateITUPS3.ShowDialog();
-    }
-
-    /// <summary>
-    /// The <see cref="Control.Click"/> event handler
     /// for the <see cref="ToolStripMenuItem"/> <see cref="mnuHelpHowToITU"/>
     /// Displays instructions to enable gaze tracking with the ITU
     /// GazeTracker and a webcam.

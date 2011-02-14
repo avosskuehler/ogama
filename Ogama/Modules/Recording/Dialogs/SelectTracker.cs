@@ -94,11 +94,6 @@ namespace Ogama.Modules.Recording
           returnValue |= HardwareTracker.ITU;
         }
 
-        if (this.chbItuPS3.Checked)
-        {
-          returnValue |= HardwareTracker.ITUPS3;
-        }
-
         return returnValue;
       }
     }
@@ -140,22 +135,6 @@ namespace Ogama.Modules.Recording
       {
         this.chbITU.Text = ituDefaultText +
           "Status: GazeTracker found a camera device.";
-      }
-
-      string ituPS3DefaultText = "The ITU GazeTracker application with the PlayStationEye3 camera."
-        + Environment.NewLine;
-
-      if (!Ogama.Modules.Recording.ITUGazeTracker.ITUPS3GazeTracker.IsAvailable(out error))
-      {
-        this.chbItuPS3.Enabled = false;
-        this.chbItuPS3.Checked = false;
-        this.chbItuPS3.Text = ituPS3DefaultText +
-          "Status: " + error;
-      }
-      else
-      {
-        this.chbItuPS3.Text = ituPS3DefaultText +
-          "Status: GazeTracker found a PlayStation3 Eye device.";
       }
 
       string aleaDefaultText = "The alea technologies IG-30 Pro Eyetracking-System. " +
@@ -273,20 +252,6 @@ namespace Ogama.Modules.Recording
     }
 
     /// <summary>
-    /// The <see cref="Control.Click"/> event handler for
-    /// the <see cref="PictureBox"/> <see cref="pcbPS3"/>.
-    /// User clicked the PS3 logo,
-    /// so open eyewriter and codelaboratories website.
-    /// </summary>
-    /// <param name="sender">Source of the event.</param>
-    /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void pcbPS3_Click(object sender, EventArgs e)
-    {
-      System.Diagnostics.Process.Start("http://www.eyewriter.org");
-      System.Diagnostics.Process.Start("http://codelaboratories.com");
-    }
-
-    /// <summary>
     /// The <see cref="Control.Click"/> event handler
     /// for the <see cref="PictureBox"/> <see cref="pcbHelpTobii"/>
     /// Displays instructions to activate tobii recording.
@@ -323,20 +288,6 @@ namespace Ogama.Modules.Recording
     {
       HowToActivateSMI objActivateSMI = new HowToActivateSMI();
       objActivateSMI.ShowDialog();
-    }
-
-    /// <summary>
-    /// The <see cref="Control.Click"/> event handler
-    /// for the <see cref="PictureBox"/> <see cref="pcbHelpITUPS3"/>
-    /// Displays instructions to enable gaze tracking with the ITU
-    /// GazeTracker and the PlayStation3 Eye camera.
-    /// </summary>
-    /// <param name="sender">Source of the event</param>
-    /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void pcbHelpITUPS3_Click(object sender, EventArgs e)
-    {
-      HowToActivateITUPS3 objActivateITUPS3 = new HowToActivateITUPS3();
-      objActivateITUPS3.ShowDialog();
     }
 
     /// <summary>

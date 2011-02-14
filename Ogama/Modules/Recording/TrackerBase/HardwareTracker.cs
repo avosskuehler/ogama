@@ -51,10 +51,5 @@ namespace Ogama.Modules.Recording
     /// The ITU GazeTracker.
     /// </summary>
     ITU = 16,
-
-    /// <summary>
-    /// The ITU GazeTracker with the Playstation3 Eye camera
-    /// </summary>
-    ITUPS3 = 32,
   }
 }
