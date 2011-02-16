@@ -952,8 +952,19 @@ namespace VectorGraphics.Elements
     [Description("The size of this shape.")]
     public SizeF Size
     {
-      get { return this.size; }
-      set { this.size = value; }
+      get
+      {
+        return this.size;
+      }
+
+      set
+      {
+        this.size = value;
+        if (this.isInEditMode)
+        {
+          this.AddGrabHandles();
+        }
+      }
     }
 
     /// <summary>

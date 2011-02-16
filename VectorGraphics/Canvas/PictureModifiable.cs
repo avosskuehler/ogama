@@ -1424,6 +1424,12 @@ namespace VectorGraphics.Canvas
             }
           }
         }
+
+        if (this.selectedElement != null)
+        {
+          // Existing GraphicElement Changed, so notify listeners.
+          this.OnShapeChanged(new ShapeEventArgs(this.SelectedElement));
+        }
       }
     }
 

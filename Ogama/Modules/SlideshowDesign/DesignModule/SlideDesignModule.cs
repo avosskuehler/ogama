@@ -542,7 +542,29 @@ namespace Ogama.Modules.SlideshowDesign
         this.cbbLinksTargets.Items.Add(e.Shape.Name);
       }
 
+      UpdateShapePositionAndSizeNumerics(e.Shape);
+
       this.Cursor = Cursors.Default;
+    }
+
+    private void designPicture_ShapeChanged(object sender, ShapeEventArgs e)
+    {
+      UpdateShapePositionAndSizeNumerics(e.Shape);
+    }
+
+    private void UpdateShapePositionAndSizeNumerics(VGElement shape)
+    {
+      try
+      {
+        this.nudLayoutLeft.Value = (decimal)shape.Location.X;
+        this.nudLayoutTop.Value = (decimal)shape.Location.Y;
+        this.nudLayoutWidth.Value = (decimal)shape.Width;
+        this.nudLayoutHeight.Value = (decimal)shape.Height;
+      }
+      catch (ArgumentOutOfRangeException ex)
+      {
+        ExceptionMethods.HandleException(ex);
+      }
     }
 
     /// <summary>
@@ -617,17 +639,7 @@ namespace Ogama.Modules.SlideshowDesign
             e.Shape.Size = Document.ActiveDocument.PresentationSize;
           }
 
-          try
-          {
-            this.nudLayoutLeft.Value = (decimal)e.Shape.Location.X;
-            this.nudLayoutTop.Value = (decimal)e.Shape.Location.Y;
-            this.nudLayoutWidth.Value = (decimal)e.Shape.Width;
-            this.nudLayoutHeight.Value = (decimal)e.Shape.Height;
-          }
-          catch (ArgumentOutOfRangeException ex)
-          {
-            ExceptionMethods.HandleException(ex);
-          }
+          UpdateShapePositionAndSizeNumerics(e.Shape);
 
           if (e.Shape is VGRichText)
           {

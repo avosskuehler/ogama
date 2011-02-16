@@ -707,6 +707,7 @@ namespace Ogama.Modules.SlideshowDesign
         {
           newParent.Tag = "Trial";
         }
+        newParent.SetTreeNodeImageKey(newParent);
 
         firstNode.Parent.Nodes.Insert(insertionIndex, newParent);
         foreach (TreeNode collectionNode in nodes)

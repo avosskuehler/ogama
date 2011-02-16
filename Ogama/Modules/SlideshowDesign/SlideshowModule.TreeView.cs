@@ -541,8 +541,9 @@ namespace Ogama.Modules.SlideshowDesign
 
             // If all nodes of parent were marked to be a trial
             // it is enough to mark the parent with the "Trial" tag,
+            // except it is the base node
             // otherwise create a new "Trial" marked group with the items
-            if (parent.Nodes.Count != nodes.Count)
+            if (parent.Nodes.Count != nodes.Count || parent.Text == "Slideshow")
             {
               this.MoveNodesLevelUp(nodes, true);
             }
@@ -550,6 +551,7 @@ namespace Ogama.Modules.SlideshowDesign
             {
               parent.Tag = "Trial";
               ((SlideshowTreeNode)parent).Randomize = false;
+              ((SlideshowTreeNode)parent).SetTreeNodeImageKey((SlideshowTreeNode)parent);
             }
           }
           else

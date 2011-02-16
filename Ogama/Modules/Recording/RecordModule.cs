@@ -1794,6 +1794,14 @@ namespace Ogama.Modules.Recording
           this.txbITUSubjectName);
 
         this.trackerInterfaces.Add(HardwareTracker.ITU, newITU);
+
+        // Disable Usercam button by default,
+        // because gazetracker often uses the first connected camera device
+        // which would otherwise used by the usercam
+        this.btnUsercam.Checked = false;
+        this.webcamPreview.Preview = this.btnUsercam.Checked;
+        this.btnUsercam.Enabled = false;
+        this.spcPanelUserCam.Panel2Collapsed = true;
       }
       else
       {
@@ -1925,11 +1933,24 @@ namespace Ogama.Modules.Recording
         this.currentTrialVideoStartTime = 0;
         this.currentTracker.Record();
 
+        Stopwatch watch = new Stopwatch();
+        watch.Start();
         // Wait for first sample to be received
         while (this.GetCurrentTime() < 0)
         {
           Application.DoEvents();
+          if (watch.ElapsedMilliseconds > 5000)
+          {
+            string message = "Could not start recording, because we received no gaze samples from the tracking device during 5 seconds." +
+              Environment.NewLine + "Please be sure your tracker is up and running and collecting gaze data, resp. is correct calibrated.";
+            InformationDialog.Show("No incoming tracker data", message, false, MessageBoxIcon.Warning);
+            watch.Stop();
+
+            return false;
+          }
         }
+
+        watch.Stop();
 
         // Set recording flag
         this.recordingBusy = true;
