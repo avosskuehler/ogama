@@ -905,7 +905,10 @@ namespace Ogama.Modules.Recording
         slideCounter++;
       }
 
-      this.PrepareSpecificSlide(trialCounter, slideCounter);
+      if (trialCounter < this.trials.Count)
+      {
+        this.PrepareSpecificSlide(trialCounter, slideCounter);
+      }
     }
 
     #endregion //BACKGROUNDWORKER
@@ -1059,21 +1062,15 @@ namespace Ogama.Modules.Recording
           this.StopScreenCapturing(trialChange);
 
           // Switch to new slide/trial
-          if (this.trialCounter < this.trials.Count - 1)
+          if (this.trialCounter < this.trials.Count)
           {
             // Change the shown container which has
             // already a prepared slide in it
             this.PresentPreparedSlide();
 
             // Invoke the preparation of the next slide
-            // in the trial list
+            // in the trial list if there is one
             this.PrepareNextSlideAsynchronously(trialChange);
-          }
-          else if (this.trialCounter == this.trials.Count - 1)
-          {
-            // Now the last trial is going to be shown
-            // so there is no slide left to be prepared
-            this.PresentPreparedSlide();
           }
           else
           {
@@ -1212,6 +1209,12 @@ namespace Ogama.Modules.Recording
     {
       int nextTrialCounter = shownTrialCounter;
       nextTrialCounter++;
+      
+      if (nextTrialCounter >= this.trials.Count)
+      {
+        return;
+      }
+
       Trial nextTrial = this.trials[nextTrialCounter];
 
       if (nextTrial.HasActiveXContent)
