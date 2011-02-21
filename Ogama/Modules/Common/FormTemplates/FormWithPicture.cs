@@ -592,9 +592,8 @@ namespace Ogama.Modules.Common
         if (this.audioPlayer != null)
         {
           this.audioPlayer.Close();
+          this.audioPlayer = null;
         }
-
-        this.audioPlayer = new DESAudioPlayer();
 
         List<long> slideStartTimes = new List<long>();
         slideStartTimes.Add(0);
@@ -620,6 +619,12 @@ namespace Ogama.Modules.Common
           // Background sound
           if (slide.BackgroundSound != null && slide.BackgroundSound.ShouldPlay)
           {
+            // Create only if needed
+            if (this.audioPlayer == null)
+            {
+              this.audioPlayer = new DESAudioPlayer();
+            }
+
             this.audioPlayer.AddSoundAtPosition(slide.BackgroundSound.FullFilename, slideStartTimes[i]);
           }
 
@@ -628,6 +633,12 @@ namespace Ogama.Modules.Common
           {
             if (element.Sound != null && element.Sound.ShouldPlay && !element.Sound.ShowOnClick)
             {
+              // Create only if needed
+              if (this.audioPlayer == null)
+              {
+                this.audioPlayer = new DESAudioPlayer();
+              }
+
               this.audioPlayer.AddSoundAtPosition(element.Sound.FullFilename, slideStartTimes[i]);
             }
           }
@@ -639,11 +650,21 @@ namespace Ogama.Modules.Common
           string filename = Path.Combine(
             Document.ActiveDocument.ExperimentSettings.SlideResourcesPath,
             Path.GetFileName(Path.GetFileName(audioEvent.Param)));
+
+          // Create only if needed
+          if (this.audioPlayer == null)
+          {
+            this.audioPlayer = new DESAudioPlayer();
+          }
+
           this.audioPlayer.AddSoundAtPosition(filename, audioEvent.Time);
         }
 
         // Initialize audioplayer for replay on time.
-        this.audioPlayer.Initialize();
+        if (this.audioPlayer != null)
+        {
+          this.audioPlayer.Initialize();
+        }
       }
       catch (Exception ex)
       {
@@ -738,6 +759,19 @@ namespace Ogama.Modules.Common
           this.Picture.BGSlide = null;
           break;
       }
+
+      // Reset scroll position
+      if (this.Picture.Parent.Parent != null)
+      {
+        ScrollableControl scrollPanel = this.Picture.Parent.Parent as ScrollableControl;
+        if (scrollPanel != null)
+        {
+          scrollPanel.AutoScrollPosition = Point.Empty;
+        }
+      }
+
+      // Set autozoom, because websites could have changed in size
+      this.AutoZoomPicture();
 
       // Redraw picture
       this.Picture.Invalidate();

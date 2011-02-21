@@ -33,6 +33,7 @@ namespace Ogama.Modules.Recording
   using VectorGraphics.StopConditions;
   using VectorGraphics.Tools;
   using VectorGraphics.Triggers;
+  using System.Globalization;
 
   /// <summary>
   /// A <see cref="Form"/> that is used for stimuli presentation. 
@@ -180,6 +181,8 @@ namespace Ogama.Modules.Recording
     /// </summary>
     private SlidePresentationContainer preparedSlideTwo;
 
+    private NumberFormatInfo nfi;
+
     #endregion //FIELDS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -193,6 +196,9 @@ namespace Ogama.Modules.Recording
     public PresenterModule()
     {
       this.InitializeComponent();
+
+      this.nfi = new CultureInfo("en-US", false).NumberFormat;
+      this.nfi.NumberGroupSeparator = string.Empty;
 
       // Retrieves the BufferedGraphicsContext for the 
       // current application domain.
@@ -770,11 +776,12 @@ namespace Ogama.Modules.Recording
         eventTime = this.getTimeMethod();
       }
 
+
       // Store marker event
       MediaEvent scrollEvent = new MediaEvent();
       scrollEvent.Type = EventType.Scroll;
       scrollEvent.Task = MediaEventTask.Seek;
-      scrollEvent.Param = scrollLeft.ToString("N0") + ";" + scrollTop.ToString("N0");
+      scrollEvent.Param = scrollLeft.ToString("N0", this.nfi) + ";" + scrollTop.ToString("N0", this.nfi);
       this.OnTrialEventOccured(new TrialEventOccuredEventArgs(scrollEvent, eventTime));
     }
 
@@ -1209,7 +1216,7 @@ namespace Ogama.Modules.Recording
     {
       int nextTrialCounter = shownTrialCounter;
       nextTrialCounter++;
-      
+
       if (nextTrialCounter >= this.trials.Count)
       {
         return;
@@ -1255,6 +1262,7 @@ namespace Ogama.Modules.Recording
       {
         case ShownContainer.One:
           this.Controls.SetChildIndex(this.panelTwo, 0);
+          //this.shownSlide
           this.shownSlide = this.preparedSlideTwo;
           this.shownContainer = ShownContainer.Two;
           break;
@@ -1341,6 +1349,19 @@ namespace Ogama.Modules.Recording
           {
             VGBrowser browser = element as VGBrowser;
             browser.SendMessagesToParent(true);
+            if (browser.WebBrowser.InvokeRequired)
+            {
+              Application.DoEvents();
+            }
+
+            while (browser.WebBrowser.ReadyState != WebBrowserReadyState.Complete)
+            {
+              Application.DoEvents();
+            }
+
+            browser.WebBrowser.Capture = true;
+            browser.WebBrowser.Navigated += new WebBrowserNavigatedEventHandler(this.WebBrowser_Navigated);
+            browser.WebBrowser.Document.Window.Scroll += new HtmlElementEventHandler(this.WebBrowser_Scroll);
           }
         }
 
@@ -1699,13 +1720,6 @@ namespace Ogama.Modules.Recording
             VGBrowser browser = element as VGBrowser;
             browser.InitializeOnControl(slideContainer.ContainerControl, true);
             browser.WebBrowser.Navigate(browser.BrowserURL);
-            while (browser.WebBrowser.ReadyState != WebBrowserReadyState.Complete)
-            {
-              Application.DoEvents();
-            }
-
-            browser.WebBrowser.Navigated += new WebBrowserNavigatedEventHandler(this.WebBrowser_Navigated);
-            browser.WebBrowser.Document.Window.Scroll += new HtmlElementEventHandler(this.WebBrowser_Scroll);
           }
         }
       }
@@ -1744,6 +1758,18 @@ namespace Ogama.Modules.Recording
               ctrl.Dispose();
             }
           }
+          else if (ctrl is WebBrowser)
+          {
+            WebBrowser browser = ctrl as WebBrowser;
+            browser.Document.Window.Scroll -= new HtmlElementEventHandler(this.WebBrowser_Scroll);
+            browser.Navigated -= new WebBrowserNavigatedEventHandler(this.WebBrowser_Navigated);
+
+            if (ctrl.InvokeRequired)
+            {
+              MethodInvoker ctrlDisposeDelegate = new MethodInvoker(ctrl.Dispose);
+              ctrl.Invoke(ctrlDisposeDelegate);
+            }
+          }
         }
       }
 
@@ -1758,8 +1784,6 @@ namespace Ogama.Modules.Recording
         {
           VGBrowser browser = element as VGBrowser;
           browser.SendMessagesToParent(false);
-          browser.WebBrowser.Document.Window.Scroll -= new HtmlElementEventHandler(this.WebBrowser_Scroll);
-          browser.WebBrowser.Navigated += new WebBrowserNavigatedEventHandler(this.WebBrowser_Navigated);
         }
       }
 

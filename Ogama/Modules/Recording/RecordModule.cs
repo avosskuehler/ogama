@@ -749,11 +749,11 @@ namespace Ogama.Modules.Recording
       this.recordPicture.PresentationSize = Document.ActiveDocument.PresentationSize;
       this.ResizeCanvas();
 
-      // Disable Usercam button, if there is no available webcam
+      // Uncheck Usercam button, if there is no available webcam
       // except Ogama Screen Capture which should not be used.
       if (this.webcamPreview.DirectXCapture == null)
       {
-        this.btnUsercam.Enabled = false;
+        this.btnUsercam.Checked = false;
         this.spcPanelUserCam.Panel2Collapsed = true;
       }
 
@@ -945,16 +945,11 @@ namespace Ogama.Modules.Recording
         if (!this.webcamPreview.TestCapture())
         {
           this.btnUsercam.Checked = false;
-          this.btnUsercam.Enabled = false;
           string message = "It seems that your system has no webcam plugged in, " +
             "so user camera recording is not available at the moment. " +
             Environment.NewLine +
             "Try again after plugging in a camera or change the capture device.";
           ExceptionMethods.ProcessMessage("No webcam found", message);
-        }
-        else
-        {
-          this.btnUsercam.Enabled = true;
         }
       }
       else
@@ -1143,6 +1138,8 @@ namespace Ogama.Modules.Recording
     {
       // Set time critical values
       long currentTime = this.counterChangedTime;
+      this.xScrollOffset = 0;
+      this.yScrollOffset = 0;
 
       if (e.FinishedTrial.Name != "DummyTrial")
       {
@@ -1800,7 +1797,6 @@ namespace Ogama.Modules.Recording
         // which would otherwise used by the usercam
         this.btnUsercam.Checked = false;
         this.webcamPreview.Preview = this.btnUsercam.Checked;
-        this.btnUsercam.Enabled = false;
         this.spcPanelUserCam.Panel2Collapsed = true;
       }
       else

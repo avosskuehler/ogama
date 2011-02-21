@@ -1266,7 +1266,10 @@ namespace Ogama.Modules.Replay
         // Start sound
         if (this.btnEnableAudio.Checked)
         {
-          this.Player.Play();
+          if (this.Player != null)
+          {
+            this.Player.Play();
+          }
         }
 
         // Update the video positions and start replay.
@@ -1311,7 +1314,10 @@ namespace Ogama.Modules.Replay
 
       if (this.btnEnableAudio.Checked)
       {
-        this.Player.Pause();
+        if (this.Player != null)
+        {
+          this.Player.Pause();
+        }
       }
     }
 
@@ -1515,7 +1521,10 @@ namespace Ogama.Modules.Replay
 
       if (this.btnEnableAudio.Checked)
       {
-        this.Player.Seek(e.Millisecond);
+        if (this.Player != null)
+        {
+          this.Player.Seek(e.Millisecond);
+        }
       }
 
       this.Refresh();
@@ -1631,6 +1640,20 @@ namespace Ogama.Modules.Replay
           case EventType.Response:
             break;
           case EventType.Scroll:
+            // Update scroll position
+            if (this.Picture.Parent.Parent != null)
+            {
+              ScrollableControl scrollPanel = this.Picture.Parent.Parent as ScrollableControl;
+              if (scrollPanel != null)
+              {
+                string[] scrollOffsets = occuredEvent.Param.Split(';');
+                Point newScrollPosition = new Point(
+                  Convert.ToInt32(scrollOffsets[0]),
+                  Convert.ToInt32(scrollOffsets[1]));
+                scrollPanel.AutoScrollPosition = newScrollPosition;
+              }
+            }
+
             break;
         }
       }
@@ -1933,7 +1956,10 @@ namespace Ogama.Modules.Replay
 
         if (this.btnEnableAudio.Checked)
         {
-          this.Player.PlaybackRate = speed;
+          if (this.Player != null)
+          {
+            this.Player.PlaybackRate = speed;
+          }
         }
       }
       catch (System.Runtime.InteropServices.COMException ex)
@@ -2180,7 +2206,10 @@ namespace Ogama.Modules.Replay
 
       if (this.btnEnableAudio.Checked)
       {
-        this.Player.Stop();
+        if (this.Player != null)
+        {
+          this.Player.Stop();
+        }
       }
 
       // Enable the ComboBoxes
@@ -2235,7 +2264,10 @@ namespace Ogama.Modules.Replay
 
       if (this.btnEnableAudio.Checked)
       {
-        this.Player.Seek(0);
+        if (this.Player != null)
+        {
+          this.Player.Seek(0);
+        }
       }
 
       this.replayPicture.ResetPicture();

@@ -28,6 +28,7 @@ namespace VectorGraphics.Elements
 
   using VectorGraphics.Controls;
   using VectorGraphics.Tools;
+  using System.Globalization;
 
   /// <summary>
   /// Inherited from <see cref="VGElement"/>. 

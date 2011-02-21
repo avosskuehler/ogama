@@ -750,8 +750,10 @@ namespace DirectX.Capture
         if (previewWindow != null)
         {
           this.captureMode |= CaptureMode.VideoPreview;
-          renderGraph();
-          startPreviewIfNeeded();
+          try { renderGraph(); }
+          catch { }
+          try { startPreviewIfNeeded(); }
+          catch { }
         }
       }
     }
@@ -2037,8 +2039,9 @@ namespace DirectX.Capture
       }
       catch (Exception)
       {
-        MessageBox.Show("Error in rendering DirectShow graph: " + DsError.GetErrorText(hr), "DirectShowError");
-        return;
+        throw new COMException("Error in rendering DirectShow graph: " + DsError.GetErrorText(hr));
+//        MessageBox.Show("Error in rendering DirectShow graph: " + DsError.GetErrorText(hr), "DirectShowError");
+        //return;
       }
 
       this.hasValidGraph = true;
@@ -2496,8 +2499,11 @@ namespace DirectX.Capture
       {
         DsUtils.FreeAMMediaType(mediaType);
       }
-      renderGraph();
-      startPreviewIfNeeded();
+
+      try { renderGraph(); }
+      catch { }
+      try { startPreviewIfNeeded(); }
+      catch { }
 
       return (returnValue);
     }
