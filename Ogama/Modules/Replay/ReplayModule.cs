@@ -1471,13 +1471,20 @@ namespace Ogama.Modules.Replay
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void desCombine_Completed(object sender, EventArgs e)
     {
-      if (this.InvokeRequired)
+      try
       {
-        this.Invoke(new MethodInvoker(this.RenderGazeAndUserVideo));
+        if (this.InvokeRequired)
+        {
+          this.Invoke(new MethodInvoker(this.RenderGazeAndUserVideo));
+        }
+        else
+        {
+          this.RenderGazeAndUserVideo();
+        }
       }
-      else
+      catch (Exception ex)
       {
-        this.RenderGazeAndUserVideo();
+        ExceptionMethods.HandleException(ex);
       }
     }
 
@@ -1757,22 +1764,32 @@ namespace Ogama.Modules.Replay
     /// </summary>
     private void ShowVideoExportResult()
     {
-      this.replayPicture.EndUpdate();
-      ThreadSafe.Close(this.newSplash);
-      this.videoFramePusher.SeekMovie(0);
-
-      // Update pictures properties
-      if (this.InvokeRequired)
+      try
       {
-        this.Invoke(new MethodInvoker(this.ResetControls));
-      }
-      else
-      {
-        this.ResetControls();
-      }
+        this.replayPicture.EndUpdate();
+        ThreadSafe.Close(this.newSplash);
+        this.videoFramePusher.SeekMovie(0);
 
-      // Run video
-      System.Diagnostics.Process.Start(this.videoExportProperties.OutputVideoProperties.Filename);
+        // Update pictures properties
+        if (this.InvokeRequired)
+        {
+          this.Invoke(new MethodInvoker(this.ResetControls));
+        }
+        else
+        {
+          this.ResetControls();
+        }
+
+        // Run video
+        if (File.Exists(this.videoExportProperties.OutputVideoProperties.Filename))
+        {
+          System.Diagnostics.Process.Start(this.videoExportProperties.OutputVideoProperties.Filename);
+        }
+      }
+      catch (Exception ex)
+      {
+        ExceptionMethods.HandleException(ex);
+      }
     }
 
     /// <summary>
@@ -1787,18 +1804,46 @@ namespace Ogama.Modules.Replay
       this.newSplash.IsPreviewVisible = false;
       this.newSplash.Header = "Preparing User Video";
 
+      string userVideoFile = this.videoExportProperties.UserVideoProperties.StreamFilename;
+
+      MediaInfo videoHeader = new MediaInfo();
+      videoHeader.Open(userVideoFile);
+      bool hasVideo = videoHeader.Get(StreamKind.Video, 0, "ID") != string.Empty;
+      bool hasAudio = videoHeader.Get(StreamKind.Audio, 0, "ID") != string.Empty;
+      videoHeader.Close();
+
+      // Init DESCombine with audio and/or video support depending on
+      // what the user video contains.
+      // audio is "", if there is no audio stream
       this.desCombine = new DESCombine(
         this.videoExportProperties.OutputVideoProperties.FrameRate,
         32,
         this.videoExportProperties.UserVideoProperties.StreamSize.Width,
         this.videoExportProperties.UserVideoProperties.StreamSize.Height,
-        true,
-        true);
+        hasAudio,
+        hasVideo);
 
-      this.desCombine.AddAVFile(
-        this.videoExportProperties.UserVideoProperties.StreamFilename,
-        this.videoExportProperties.UserVideoProperties.StreamStartTime * 10000,
-        this.videoExportProperties.UserVideoProperties.StreamEndTime * 10000);
+      if (hasVideo && hasAudio)
+      {
+        this.desCombine.AddAVFile(
+          this.videoExportProperties.UserVideoProperties.StreamFilename,
+          this.videoExportProperties.UserVideoProperties.StreamStartTime * 10000,
+          this.videoExportProperties.UserVideoProperties.StreamEndTime * 10000);
+      }
+      else if (hasVideo)
+      {
+        this.desCombine.AddVideoFile(
+          this.videoExportProperties.UserVideoProperties.StreamFilename,
+          this.videoExportProperties.UserVideoProperties.StreamStartTime * 10000,
+          this.videoExportProperties.UserVideoProperties.StreamEndTime * 10000);
+      }
+      else if (hasAudio)
+      {
+        this.desCombine.AddAudioFile(
+          this.videoExportProperties.UserVideoProperties.StreamFilename,
+          this.videoExportProperties.UserVideoProperties.StreamStartTime * 10000,
+          this.videoExportProperties.UserVideoProperties.StreamEndTime * 10000);
+      }
 
       IBaseFilter videoCompressor = null;
       if (this.videoExportProperties.OutputVideoProperties.VideoCompressor != string.Empty)

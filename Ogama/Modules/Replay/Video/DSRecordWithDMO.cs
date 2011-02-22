@@ -137,7 +137,11 @@ namespace Ogama.Modules.Replay
         this.previewWindow = newPreviewWindow;
 
         // Set up the graph
-        this.SetupGraph();
+        if (!this.SetupGraph())
+        {
+          throw new OperationCanceledException("The DirectShow graph could not be created,"
+            + " try to use another video or audio compressor.");
+        }
       }
       catch
       {
@@ -265,7 +269,7 @@ namespace Ogama.Modules.Replay
     /// <summary>
     /// Build the filter graph
     /// </summary>
-    private void SetupGraph()
+    private bool SetupGraph()
     {
       int hr;
 
@@ -310,7 +314,8 @@ namespace Ogama.Modules.Replay
           }
           catch (Exception ex)
           {
-            MessageBox.Show("ConfigurePusher: " + ex.Message);
+            ExceptionMethods.HandleException(ex);
+            return false;
           }
           finally
           {
@@ -407,7 +412,8 @@ namespace Ogama.Modules.Replay
         }
         catch (Exception ex)
         {
-          MessageBox.Show("RenderStream: " + ex.Message);
+          ExceptionMethods.HandleException(ex);
+          return false;
         }
         finally
         {
@@ -419,12 +425,15 @@ namespace Ogama.Modules.Replay
       }
       catch (Exception ex)
       {
-        MessageBox.Show("End: " + ex.Message);
+        ExceptionMethods.HandleException(ex);
+        return false;
       }
       finally
       {
         Marshal.ReleaseComObject(captureGraph);
       }
+
+      return true;
     }
 
     /// <summary>
@@ -693,7 +702,7 @@ namespace Ogama.Modules.Replay
         do
         {
           hr = enumDMO.Next(1, g2, sn, IntPtr.Zero);
-        } 
+        }
         while (hr == 0 && sn[0] != filterName);
 
         // Handle any serious errors

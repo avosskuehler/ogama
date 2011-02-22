@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using System;
 using System.Windows.Forms;
 using System.Threading;
+using System.IO;
 
 namespace OgamaControls.Media
 {
@@ -184,6 +185,7 @@ namespace OgamaControls.Media
     private void DESCombine_ThreadFinished(object sender, EventArgs e)
     {
       this.StopRendering();
+      this.Dispose();
       if (this.Completed != null)
       {
         this.Completed(this, e);
@@ -220,6 +222,12 @@ namespace OgamaControls.Media
       {
         throw new Exception("Can't add files since rendering method already selected");
       }
+
+      if (!File.Exists(sFileName))
+      {
+        throw new FileNotFoundException("Can´t add file because its not found at the provided location.");
+      }
+
       if (!supportVideo)
       {
         throw new NotSupportedException("Can´t add files because this player is initialized without video support.");
@@ -995,13 +1003,6 @@ namespace OgamaControls.Media
         exitCode = EventCode.UserAbort;
       }
 
-      // Send an event saying we are complete
-      if (this.ThreadFinished != null)
-      {
-        DESCompletedArgs ca = new DESCompletedArgs(exitCode);
-        this.ThreadFinished(this, ca);
-      }
-
       if (m_State == ClassState.GraphCompleting)
       {
         m_State = ClassState.GraphCompleted;
@@ -1012,6 +1013,13 @@ namespace OgamaControls.Media
       }
 
       threadCompleted = true;
+
+      // Send an event saying we are complete
+      if (this.ThreadFinished != null)
+      {
+        DESCompletedArgs ca = new DESCompletedArgs(exitCode);
+        this.ThreadFinished(this, ca);
+      }
     } // Exit the thread
 
     /// <summary>

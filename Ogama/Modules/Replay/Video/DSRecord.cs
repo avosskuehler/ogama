@@ -121,7 +121,7 @@ namespace Ogama.Modules.Replay
         {
           // Create the filter for the selected video compressor
           this.videoCompressor = DirectShowUtils.CreateFilter(
-            FilterCategory.VideoCompressorCategory, 
+            FilterCategory.VideoCompressorCategory,
             this.videoExportProperties.OutputVideoProperties.VideoCompressor);
         }
 
@@ -137,7 +137,11 @@ namespace Ogama.Modules.Replay
         this.previewWindow = newPreviewWindow;
 
         // Set up the graph
-        this.SetupGraph();
+        if (!this.SetupGraph())
+        {
+          throw new OperationCanceledException("The DirectShow graph could not be created,"
+            + " try to use another video or audio compressor.");
+        }
       }
       catch
       {
@@ -264,7 +268,7 @@ namespace Ogama.Modules.Replay
     /// <summary>
     /// Build the filter graph
     /// </summary>
-    private void SetupGraph()
+    private bool SetupGraph()
     {
       int hr;
 
@@ -300,7 +304,8 @@ namespace Ogama.Modules.Replay
           }
           catch (Exception ex)
           {
-            MessageBox.Show("ConfigurePusher: " + ex.Message);
+            ExceptionMethods.HandleException(ex);
+            return false;
           }
           finally
           {
@@ -329,9 +334,9 @@ namespace Ogama.Modules.Replay
           IBaseFilter mux;
           IFileSinkFilter2 sink;
           hr = captureGraph.SetOutputFileName(
-            MediaSubType.Avi, 
-            this.videoExportProperties.OutputVideoProperties.Filename, 
-            out mux, 
+            MediaSubType.Avi,
+            this.videoExportProperties.OutputVideoProperties.Filename,
+            out mux,
             out sink);
           DsError.ThrowExceptionForHR(hr);
 
@@ -359,7 +364,8 @@ namespace Ogama.Modules.Replay
         }
         catch (Exception ex)
         {
-          MessageBox.Show("RenderStream: " + ex.Message);
+          ExceptionMethods.HandleException(ex);
+          return false;
         }
         finally
         {
@@ -371,12 +377,14 @@ namespace Ogama.Modules.Replay
       }
       catch (Exception ex)
       {
-        MessageBox.Show("End: " + ex.Message);
+        ExceptionMethods.HandleException(ex);
+        return false;
       }
       finally
       {
         Marshal.ReleaseComObject(captureGraph);
       }
+      return true;
     }
 
     /// <summary>

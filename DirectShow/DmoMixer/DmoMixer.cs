@@ -131,6 +131,10 @@ namespace DmoMixer
       for (int i = 0; i < InputPinCount; i++)
       {
         this.inputStreams[i] = new VideoStream();
+        if (i == 1)
+        {
+          this.inputStreams[i].FlipY = true;
+        }
       }
 
       this.outputStream = new VideoStream();
@@ -785,32 +789,31 @@ namespace DmoMixer
     private unsafe void OverlayVideoStream(IntPtr outputDataPointer, VideoStream videoStream)
     {
       RectangleF streamPosition = videoStream.Position;
-      int streamLeft = (int)Math.Abs(streamPosition.Left * this.outputStream.StreamWidth);
-      int streamTop = (int)Math.Abs(streamPosition.Top * this.outputStream.StreamHeight);
+
       int streamWidth = (int)Math.Abs(streamPosition.Width * this.outputStream.StreamWidth);
       int streamHeight = (int)Math.Abs(streamPosition.Height * this.outputStream.StreamHeight);
 
+      bool resizeStream = (streamWidth != Math.Abs(videoStream.StreamWidth) || streamHeight != Math.Abs(videoStream.StreamHeight));
+
+      if (videoStream.FlipY)
+      {
+        float top = resizeStream ? 1 - streamPosition.Height - streamPosition.Top : 1 - streamPosition.Height - streamPosition.Top;
+        streamPosition.Location = new PointF(streamPosition.Left, top);
+      }
+
+      int streamLeft = (int)Math.Abs(streamPosition.Left * this.outputStream.StreamWidth);
+      int streamTop = (int)Math.Abs(streamPosition.Top * this.outputStream.StreamHeight);
+
+
       VideoStream resizedStream = videoStream;
-      bool resized = false;
-      if (streamWidth != Math.Abs(videoStream.StreamWidth) || streamHeight != Math.Abs(videoStream.StreamHeight))
+
+      if (resizeStream)
       {
         resizedStream = this.ResizeBicubic(videoStream, new Size(streamWidth, streamHeight));
-        resized = true;
       }
 
       byte* p;
       long r, g, b;
-
-      bool flip;
-
-      if (resizedStream.StreamHeight < 0)
-      {
-        flip = true;
-      }
-      else
-      {
-        flip = false;
-      }
 
       // For each column in the area of the gaze cursor
       // overlay rectangle
@@ -819,7 +822,7 @@ namespace DmoMixer
         // Calculate the read/write positions
         // of the video stream at the area
         int src = 0;
-        if (flip)
+        if (videoStream.FlipY)
         {
           src = y * resizedStream.StreamStride;
         }
@@ -869,7 +872,7 @@ namespace DmoMixer
         }
       }
 
-      if (resized)
+      if (resizeStream)
       {
         // Free resources of resized stream
         Marshal.FreeHGlobal(resizedStream.BufferPointer);
@@ -894,7 +897,7 @@ namespace DmoMixer
 
       VideoStream resizedStream = new VideoStream();
       resizedStream.StreamBBP = sourceStream.StreamBBP;
-      resizedStream.StreamHeight = newHeight * (sourceStream.StreamHeight < 0 ? -1 : 1);
+      resizedStream.StreamHeight = newHeight;
       resizedStream.StreamWidth = newWidth;
       resizedStream.StreamStride = newWidth * sourceStream.StreamBBP;
       resizedStream.Position = sourceStream.Position;
@@ -933,6 +936,7 @@ namespace DmoMixer
       // RGB
       for (int y = 0; y < newHeight; y++)
       {
+
         // Y coordinates
         oy = (double)((y * factorY) - 0.5f);
         oy1 = (int)oy;

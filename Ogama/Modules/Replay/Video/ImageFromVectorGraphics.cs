@@ -182,7 +182,7 @@ namespace Ogama.Modules.Replay
       // Build a BitmapInfo struct using the parms from the file
       bmi.Size = Marshal.SizeOf(typeof(BitmapInfoHeader));
       bmi.Width = this.videoSize.Width;
-      bmi.Height = this.videoSize.Height * -1;
+      bmi.Height = this.videoSize.Height;// *-1;
       bmi.Planes = 1;
       bmi.BitCount = BPP;
       bmi.Compression = 0;

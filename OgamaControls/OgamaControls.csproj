@@ -259,6 +259,7 @@
     <Compile Include="Media\DES\IDESCombineCB.cs" />
     <Compile Include="Media\DES\MediaFile.cs" />
     <Compile Include="Media\DES\MediaGroup.cs" />
+    <Compile Include="Media\DES\MediaInfo.cs" />
     <Compile Include="Media\EVR\ComImport.cs" />
     <Compile Include="Media\Player\AudioControl.cs">
       <SubType>UserControl</SubType>

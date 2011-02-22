@@ -51,6 +51,7 @@ namespace DmoMixer
       this.Buffer = null;
       this.Position = new RectangleF(0, 0, 1, 1);
       this.Alpha = 0;
+      this.FlipY = false;
     }
 
     #endregion //CONSTRUCTION
@@ -121,6 +122,11 @@ namespace DmoMixer
     /// Gets or sets the alpha value of the video stream.
     /// </summary>
     public float Alpha { get; set; }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether to flip the video stream vertically
+    /// </summary>
+    public bool FlipY { get; set; }
 
     #endregion //PROPERTIES
 

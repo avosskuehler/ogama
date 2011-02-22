@@ -368,6 +368,7 @@
       this.picPreview.Name = "picPreview";
       this.picPreview.Size = new System.Drawing.Size(200, 152);
       this.picPreview.TabIndex = 0;
+      this.picPreview.ZoomFactor = 0F;
       // 
       // grpGazeMouseOptions
       // 
@@ -655,6 +656,7 @@
       this.btnVideoCompressorProperties.Size = new System.Drawing.Size(23, 23);
       this.btnVideoCompressorProperties.TabIndex = 16;
       this.btnVideoCompressorProperties.UseVisualStyleBackColor = true;
+      this.btnVideoCompressorProperties.Click += new System.EventHandler(this.btnVideoCompressorProperties_Click);
       // 
       // cbbVideoCompressor
       // 
@@ -673,6 +675,7 @@
       this.btnAudioCompressorProperties.Size = new System.Drawing.Size(23, 23);
       this.btnAudioCompressorProperties.TabIndex = 21;
       this.btnAudioCompressorProperties.UseVisualStyleBackColor = true;
+      this.btnAudioCompressorProperties.Click += new System.EventHandler(this.btnAudioCompressorProperties_Click);
       // 
       // label2
       // 
@@ -733,6 +736,7 @@
       this.picture1.Name = "picture1";
       this.picture1.Size = new System.Drawing.Size(150, 150);
       this.picture1.TabIndex = 0;
+      this.picture1.ZoomFactor = 0F;
       // 
       // VideoPropertiesDialog
       // 

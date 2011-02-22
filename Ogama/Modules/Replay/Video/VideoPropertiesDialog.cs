@@ -22,6 +22,8 @@ namespace Ogama.Modules.Replay
   using Ogama.Modules.Common;
   using OgamaControls;
   using VectorGraphics.Elements;
+  using DirectShowLib;
+  using System.Runtime.InteropServices;
 
   /// <summary>
   /// Popup <see cref="Form"/>. Asks for the properties of the new video stream.
@@ -214,7 +216,7 @@ namespace Ogama.Modules.Replay
         int counter = 0;
         foreach (string item in this.cbbVideoCompressor.Items)
         {
-          if (item.Contains("ffdshow Video Codec"))
+          if (item.Contains("ffdshow"))
           {
             this.cbbVideoCompressor.SelectedIndex = counter;
             break;
@@ -428,6 +430,36 @@ namespace Ogama.Modules.Replay
       this.UpdatePositionNumerics();
       this.isInitializing = false;
       this.UpdatePreview();
+    }
+
+    private void btnVideoCompressorProperties_Click(object sender, EventArgs e)
+    {
+      // Create the filter for the selected video compressor
+      IBaseFilter compressorFilter = DirectShowUtils.CreateFilter(
+        FilterCategory.VideoCompressorCategory,
+        this.cbbVideoCompressor.Text);
+
+      // Show property page
+      if (compressorFilter != null)
+      {
+        DirectShowUtils.DisplayPropertyPage(this.Handle, compressorFilter);
+        Marshal.ReleaseComObject(compressorFilter);
+      }
+    }
+
+    private void btnAudioCompressorProperties_Click(object sender, EventArgs e)
+    {
+      // Create the filter for the selected video compressor
+      IBaseFilter compressorFilter = DirectShowUtils.CreateFilter(
+        FilterCategory.AudioCompressorCategory,
+        this.cbbAudioCompressor.Text);
+
+      // Show property page
+      if (compressorFilter != null)
+      {
+        DirectShowUtils.DisplayPropertyPage(this.Handle, compressorFilter);
+        Marshal.ReleaseComObject(compressorFilter);
+      }
     }
 
     #endregion //EVENTHANDLER

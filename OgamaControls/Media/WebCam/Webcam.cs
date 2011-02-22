@@ -498,7 +498,7 @@ namespace OgamaControls
         this.properties.VideoInputDevice = this.filters.VideoInputDevices[0].Name;
       }
 
-      this.properties.VideoCompressor = "ffdshow Video Codec";
+      this.properties.VideoCompressor = "ffdshow";
 
       if (this.filters.AudioInputDevices.Count > 0)
       {
