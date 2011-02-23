@@ -179,6 +179,22 @@ namespace Ogama.Modules.AttentionMap
     #region OVERRIDES
 
     /// <summary>
+    /// Overridden <see cref="Picture.InitalizeOverlayGraphics"/>. 
+    /// Creates transparent bitmap for drawing and the corresponding graphics
+    /// with correct transformation matrix.
+    /// Updates heat map size with the presentation size.
+    /// </summary>
+    protected override void InitalizeOverlayGraphics()
+    {
+      base.InitalizeOverlayGraphics();
+      if (this.heatMap.Width != this.PresentationSize.Width ||
+         this.heatMap.Height != this.PresentationSize.Height)
+      {
+        this.CreateHeatMapBitmap(this.PresentationSize);
+      }
+    }
+
+    /// <summary>
     /// Overridden. Frees resources of objects that are not disposed
     /// by the designer, mainly private objects.
     /// Is called during the call to <see cref="Control.Dispose(Boolean)"/>.
@@ -210,14 +226,9 @@ namespace Ogama.Modules.AttentionMap
       Bitmap colorMapBitmap = new Bitmap(AttentionMaps.NUMCOLORS, 1, PixelFormat.Format32bppArgb);
       this.colorMap = new PaletteBitmap(colorMapBitmap);
 
-      if (Document.ActiveDocument != null)
-      {
-        Bitmap heatMapBitmap = new Bitmap(
-          Document.ActiveDocument.ExperimentSettings.WidthStimulusScreen,
-          Document.ActiveDocument.ExperimentSettings.HeightStimulusScreen,
-          PixelFormat.Format32bppArgb);
-        this.heatMap = new PaletteBitmap(heatMapBitmap);
-      }
+      CreateHeatMapBitmap(new Size(
+        Document.ActiveDocument.ExperimentSettings.WidthStimulusScreen,
+        Document.ActiveDocument.ExperimentSettings.HeightStimulusScreen));
     }
 
     /// <summary>
@@ -284,11 +295,32 @@ namespace Ogama.Modules.AttentionMap
         distributionArray);
       VGImage newImage = new VGImage(heatMapBitmap, ImageLayout.Center, new Size(eyeMonX, eyeMonY));
       Elements.Add(newImage);
+      heatMapBitmap.Dispose();
 
       this.DrawForeground(true);
     }
 
-    ////private int valueForMaxColor;
+    /// <summary>
+    ///  Creates a newly sized heatmap template to be filled 
+    ///  with the data
+    /// </summary>
+    /// <param name="stimulusSize">A <see cref="Size"/> containing the new stimulus size.</param>
+    private void CreateHeatMapBitmap(Size stimulusSize)
+    {
+      if (this.heatMap != null)
+      {
+        this.heatMap.Dispose();
+      }
+
+      if (this.heatMap == null ||
+        this.heatMap.Width != stimulusSize.Width ||
+        this.heatMap.Height != stimulusSize.Height)
+      {
+        Bitmap heatMapBitmap = new Bitmap(stimulusSize.Width, stimulusSize.Height, PixelFormat.Format32bppArgb);
+        this.heatMap = new PaletteBitmap(heatMapBitmap);
+        heatMapBitmap.Dispose();
+      }
+    }
 
     #endregion //METHODS
 

@@ -41,7 +41,13 @@ namespace OgamaControls
       : base(new TrackBar())
     {
       this.ToolTipText = "Zoom, right-click for autozoom";
+      this.SendValueChangedEvents = true;
     }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether to send value changed events.
+    /// </summary>
+    public bool SendValueChangedEvents;
 
     /// <summary>
     /// Gets or sets current value
@@ -136,7 +142,7 @@ namespace OgamaControls
     /// <param name="e">EventArgs</param>
     public void TrackBar_ValueChanged(object sender, EventArgs e)
     {
-      if (ValueChanged != null)
+      if (ValueChanged != null && this.SendValueChangedEvents)
       {
         ValueChanged(sender, e);
       }

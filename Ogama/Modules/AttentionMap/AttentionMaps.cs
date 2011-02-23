@@ -429,7 +429,10 @@ namespace Ogama.Modules.AttentionMap
     /// <param name="distributionArray">An 2D array of <see cref="Single"/>
     /// to be filled with the distribution values.</param>
     /// <param name="channelFilename">The filename with the b/w image.</param>
-    internal static void CreateDistributionArrayFromBWImage(ref float[,] distributionArray, string channelFilename)
+    internal static void CreateDistributionArrayFromBWImage(
+      ref float[,] distributionArray, 
+      string channelFilename, 
+      Size stimulusSize)
     {
       if (!System.IO.File.Exists(channelFilename))
       {
@@ -442,12 +445,8 @@ namespace Ogama.Modules.AttentionMap
       int width = srcImage.Width;
       int height = srcImage.Height;
 
-      // get image size
-      int newWidth = Document.ActiveDocument.ExperimentSettings.WidthStimulusScreen;
-      int newHeight = Document.ActiveDocument.ExperimentSettings.HeightStimulusScreen;
-
       // create new image
-      Bitmap dstImage = new Bitmap(newWidth, newHeight, srcImage.PixelFormat);
+      Bitmap dstImage = new Bitmap(stimulusSize.Width, stimulusSize.Height, srcImage.PixelFormat);
 
       using (Graphics grfx = Graphics.FromImage(dstImage))
       {
@@ -456,16 +455,16 @@ namespace Ogama.Modules.AttentionMap
         // necessary setting for proper work with image borders
         grfx.PixelOffsetMode = PixelOffsetMode.HighQuality;
 
-        grfx.DrawImage(srcImage, 0, 0, newWidth, newHeight);
+        grfx.DrawImage(srcImage, 0, 0, stimulusSize.Width, stimulusSize.Height);
       }
 
       PaletteBitmap output = new PaletteBitmap(dstImage);
 
       // for each line
-      for (int y = 0; y < newHeight; y++)
+      for (int y = 0; y < stimulusSize.Height; y++)
       {
         // for each pixel
-        for (int x = 0; x < newWidth; x++)
+        for (int x = 0; x < stimulusSize.Width; x++)
         {
           distributionArray[x, y] = output.GetPixel(x, y).GetBrightness();
         }

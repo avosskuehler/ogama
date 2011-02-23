@@ -1006,8 +1006,15 @@ namespace Ogama.Modules.Common
         this.aoiTable.Dispose();
       }
 
-      this.colorMap.Dispose();
-      this.heatMap.Dispose();
+      if (this.colorMap != null)
+      {
+        this.colorMap.Dispose();
+      }
+
+      if (this.heatMap != null)
+      {
+        this.heatMap.Dispose();
+      }
 
       base.CustomDispose();
     }
@@ -1059,6 +1066,8 @@ namespace Ogama.Modules.Common
 
         VGImage newImage = new VGImage(heatMapBitmap, ImageLayout.Center, new Size(eyeMonX, eyeMonY));
         newImage.Name = "HeatMap";
+        heatMapBitmap.Dispose();
+
         this.Elements.Remove("HeatMap");
         this.Elements.Add(newImage);
         this.Elements.ToHead(newImage);
@@ -1127,13 +1136,20 @@ namespace Ogama.Modules.Common
     /// </summary>
     private void CreateHeatMapBasics()
     {
-      if (Document.ActiveDocument != null)
+      if (this.heatMap != null)
       {
-        int eyeMonX = this.PresentationSize.Width;
-        int eyeMonY = this.PresentationSize.Height;
+        this.heatMap.Dispose();
+        this.heatMap = null;
+      }
 
+      int eyeMonX = this.PresentationSize.Width;
+      int eyeMonY = this.PresentationSize.Height;
+
+      if (this.heatMap == null || this.heatMap.Width != eyeMonX || this.heatMap.Height != eyeMonY)
+      {
         Bitmap heatMapBitmap = new Bitmap(eyeMonX, eyeMonY, PixelFormat.Format32bppArgb);
         this.heatMap = new PaletteBitmap(heatMapBitmap);
+        heatMapBitmap.Dispose();
         this.distributionArray = new float[eyeMonX, eyeMonY];
       }
     }
@@ -1203,36 +1219,36 @@ namespace Ogama.Modules.Common
             break;
         }
 
-        TextureBrush bkgBrush = null;
+        //TextureBrush bkgBrush = null;
 
-        if (usedFixationDrawingMode == FixationDrawingMode.Circles)
-        {
-          Bitmap bkg = new Bitmap(eyeMonX, eyeMonY);
+        //if (usedFixationDrawingMode == FixationDrawingMode.Circles)
+        //{
+        //  Bitmap bkg = new Bitmap(eyeMonX, eyeMonY);
 
-          Bitmap transparentBkg = new Bitmap(eyeMonX, eyeMonY);
+        //  Bitmap transparentBkg = new Bitmap(eyeMonX, eyeMonY);
 
-          using (Graphics graphics = Graphics.FromImage(bkg))
-          {
-            ColorMatrix colorMatrix = new ColorMatrix();
-            colorMatrix.Matrix33 = 0.7f;
-            ImageAttributes attributes = new ImageAttributes();
-            attributes.SetColorMatrix(colorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+        //  using (Graphics graphics = Graphics.FromImage(bkg))
+        //  {
+        //    ColorMatrix colorMatrix = new ColorMatrix();
+        //    colorMatrix.Matrix33 = 0.7f;
+        //    ImageAttributes attributes = new ImageAttributes();
+        //    attributes.SetColorMatrix(colorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
-            if (this.BGSlide != null)
-            {
-              Slide.DrawSlideAsync(this.BGSlide, graphics);
-            }
+        //    if (this.BGSlide != null)
+        //    {
+        //      Slide.DrawSlideAsync(this.BGSlide, graphics);
+        //    }
 
-            using (Graphics transGraphics = Graphics.FromImage(transparentBkg))
-            {
-              transGraphics.DrawImage(bkg, new Rectangle(0, 0, bkg.Width, bkg.Height), 0, 0, bkg.Width, bkg.Height, GraphicsUnit.Pixel, attributes);
-              bkgBrush = new TextureBrush(transparentBkg);
-            }
-          }
+        //    using (Graphics transGraphics = Graphics.FromImage(transparentBkg))
+        //    {
+        //      transGraphics.DrawImage(bkg, new Rectangle(0, 0, bkg.Width, bkg.Height), 0, 0, bkg.Width, bkg.Height, GraphicsUnit.Pixel, attributes);
+        //      bkgBrush = new TextureBrush(transparentBkg);
+        //    }
+        //  }
 
-          bkg.Dispose();
-          transparentBkg.Dispose();
-        }
+        //  bkg.Dispose();
+        //  transparentBkg.Dispose();
+        //}
 
         // Loop Fixations and draw each one
         for (int i = 0; i < usedFixationTable.Count; i++)
@@ -1330,9 +1346,10 @@ namespace Ogama.Modules.Common
             case FixationDrawingMode.Circles:
               RectangleF fixBoundingRect = this.GetBoundingRectFromRow(sampleType, row);
               newEllipse = new VGEllipse(
-                ShapeDrawAction.NameEdgeFill,
+                ShapeDrawAction.NameAndEdge,
                 (Pen)usedPen.Clone(),
-                (TextureBrush)bkgBrush.Clone(),
+                null,
+                //(TextureBrush)bkgBrush.Clone(),
                 (Font)usedFont.Clone(),
                 usedFontColor,
                 fixBoundingRect,
@@ -1395,10 +1412,10 @@ namespace Ogama.Modules.Common
           }
         }
 
-        if (bkgBrush != null)
-        {
-          bkgBrush.Dispose();
-        }
+        //if (bkgBrush != null)
+        //{
+        //  bkgBrush.Dispose();
+        //}
       }
       catch (Exception ex)
       {

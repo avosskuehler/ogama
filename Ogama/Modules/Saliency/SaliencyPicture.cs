@@ -106,16 +106,12 @@ namespace Ogama.Modules.Saliency
     /// filename and full path of the channel image to use.</param>
     public void VisualizeChannelMapOverlay(string channelFilename)
     {
-      // Read Eyetracker settings
-      int eyeMonX = Document.ActiveDocument.ExperimentSettings.WidthStimulusScreen;
-      int eyeMonY = Document.ActiveDocument.ExperimentSettings.HeightStimulusScreen;
-
       Bitmap heatMap = AttentionMaps.CreateHeatMapFromBWImage(
         this.HeatMap,
         this.ColorMap,
-        new Size(eyeMonX, eyeMonY), 
+        this.PresentationSize,
         channelFilename);
-      VGImage newImage = new VGImage(heatMap, ImageLayout.Center, new Size(eyeMonX, eyeMonY));
+      VGImage newImage = new VGImage(heatMap, ImageLayout.Center, this.PresentationSize);
 
       this.Elements.Clear();
       this.Elements.Add(newImage);

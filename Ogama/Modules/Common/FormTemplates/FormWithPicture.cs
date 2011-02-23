@@ -760,16 +760,6 @@ namespace Ogama.Modules.Common
           break;
       }
 
-      // Reset scroll position
-      if (this.Picture.Parent.Parent != null)
-      {
-        ScrollableControl scrollPanel = this.Picture.Parent.Parent as ScrollableControl;
-        if (scrollPanel != null)
-        {
-          scrollPanel.AutoScrollPosition = Point.Empty;
-        }
-      }
-
       // Set autozoom, because websites could have changed in size
       this.AutoZoomPicture();
 
@@ -841,6 +831,16 @@ namespace Ogama.Modules.Common
     /// with the zoom factor, can be from 0.1 to 2.</param>
     protected void ZoomPicture(float zoomfactor)
     {
+      // Reset scroll position
+      if (this.Picture.Parent.Parent != null)
+      {
+        ScrollableControl scrollPanel = this.Picture.Parent.Parent as ScrollableControl;
+        if (scrollPanel != null)
+        {
+          scrollPanel.AutoScrollPosition = Point.Empty;
+        }
+      }
+
       this.Picture.ZoomFactor = zoomfactor;
       Size presentationSize = this.Picture.PresentationSize;
       this.Picture.Size = new Size(
@@ -849,7 +849,9 @@ namespace Ogama.Modules.Common
       this.ResizeCanvas();
       if (this.zoomTrackBar != null)
       {
+        this.zoomTrackBar.SendValueChangedEvents = false;
         this.zoomTrackBar.Value = (int)Math.Max(1, (zoomfactor * 50));
+        this.zoomTrackBar.SendValueChangedEvents = true;
       }
     }
 
