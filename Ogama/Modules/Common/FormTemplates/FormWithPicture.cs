@@ -835,7 +835,7 @@ namespace Ogama.Modules.Common
       if (this.Picture.Parent.Parent != null)
       {
         ScrollableControl scrollPanel = this.Picture.Parent.Parent as ScrollableControl;
-        if (scrollPanel != null)
+        if (scrollPanel != null && !scrollPanel.InvokeRequired)
         {
           scrollPanel.AutoScrollPosition = Point.Empty;
         }

@@ -1492,8 +1492,16 @@ namespace Ogama.Modules.Recording
       Trigger trigger = threadParams[1] as Trigger;
       bool enableTrigger = (bool)threadParams[2];
       ScreenCaptureProperties screenCaptureProperties = (ScreenCaptureProperties)threadParams[3];
-      CaptureDeviceProperties userCameraProperties = (CaptureDeviceProperties)threadParams[4];
-      Control userCameraPreviewWindow = (Control)threadParams[5];
+
+      CaptureDeviceProperties userCameraProperties = null;
+      Control userCameraPreviewWindow = null;
+
+      if (threadParams.Count > 5)
+      {
+        userCameraProperties = (CaptureDeviceProperties)threadParams[4];
+        userCameraPreviewWindow = (Control)threadParams[5];
+      }
+
       GetTimeDelegate getTimeMethod = this.GetCurrentTime;
 
       // Set triggering state
@@ -1919,8 +1927,11 @@ namespace Ogama.Modules.Recording
         threadParameters.Add(this.generalTrigger);
         threadParameters.Add(this.btnTrigger.Checked);
         threadParameters.Add(this.screenCaptureProperties);
-        threadParameters.Add(this.webcamPreview.Properties);
-        threadParameters.Add(this.webcamPreview.DirectXCapture == null ? null : this.webcamPreview.DirectXCapture.PreviewWindow);
+        if (this.btnUsercam.Checked)
+        {
+          threadParameters.Add(this.webcamPreview.Properties);
+          threadParameters.Add(this.webcamPreview.DirectXCapture == null ? null : this.webcamPreview.DirectXCapture.PreviewWindow);
+        }
 
         // Stop webcam
         this.webcamPreview.Preview = false;

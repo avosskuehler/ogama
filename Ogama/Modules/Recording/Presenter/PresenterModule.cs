@@ -627,10 +627,13 @@ namespace Ogama.Modules.Recording
         this.watch.Start();
 
         // Start UserCamera
-        this.InitializeUserCamera(this.userCameraProperties);
-        if (this.userCamera != null && this.userCamera.Properties.CaptureMode != CaptureMode.None)
+        if (this.userCameraProperties != null)
         {
-          AsyncHelper.FireAsync(new MethodInvoker(this.userCamera.RunGraph));
+          this.InitializeUserCamera(this.userCameraProperties);
+          if (this.userCamera != null && this.userCamera.Properties.CaptureMode != CaptureMode.None)
+          {
+            AsyncHelper.FireAsync(new MethodInvoker(this.userCamera.RunGraph));
+          }
         }
 
         if (this.screenCaptureProperties != null &&
@@ -1258,6 +1261,20 @@ namespace Ogama.Modules.Recording
     /// </summary>
     private void PresentPreparedSlide()
     {
+      // Detach scroll event listeners
+      if (this.shownSlide != null)
+      {
+        foreach (VGElement element in this.shownSlide.Slide.ActiveXStimuli)
+        {
+          if (element is VGBrowser)
+          {
+            VGBrowser browser = element as VGBrowser;
+            browser.WebBrowser.Document.Window.Scroll -= new HtmlElementEventHandler(this.WebBrowser_Scroll);
+            browser.WebBrowser.Navigated -= new WebBrowserNavigatedEventHandler(this.WebBrowser_Navigated);
+          }
+        }
+      }
+
       switch (this.shownContainer)
       {
         case ShownContainer.One:
@@ -1760,9 +1777,9 @@ namespace Ogama.Modules.Recording
           }
           else if (ctrl is WebBrowser)
           {
-            WebBrowser browser = ctrl as WebBrowser;
-            browser.Document.Window.Scroll -= new HtmlElementEventHandler(this.WebBrowser_Scroll);
-            browser.Navigated -= new WebBrowserNavigatedEventHandler(this.WebBrowser_Navigated);
+            //WebBrowser browser = ctrl as WebBrowser;
+            //browser.Document.Window.Scroll -= new HtmlElementEventHandler(this.WebBrowser_Scroll);
+            //browser.Navigated -= new WebBrowserNavigatedEventHandler(this.WebBrowser_Navigated);
 
             if (ctrl.InvokeRequired)
             {

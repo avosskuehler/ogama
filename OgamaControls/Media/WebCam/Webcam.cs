@@ -586,14 +586,21 @@ namespace OgamaControls
 
       if (videoDevice != null || audioDevice != null)
       {
-        this.dxCapture = new DXCapture(
-          videoDevice,
-          audioDevice,
-          videoCompressor,
-          audioCompressor,
-          captureProperties.FrameRate,
-          captureProperties.VideoSize,
-          captureProperties.CaptureMode);
+        try
+        {
+          this.dxCapture = new DXCapture(
+            videoDevice,
+            audioDevice,
+            videoCompressor,
+            audioCompressor,
+            captureProperties.FrameRate,
+            captureProperties.VideoSize,
+            captureProperties.CaptureMode);
+        }
+        catch (Exception ex)
+        {
+          MessageBox.Show(ex.ToString());
+        }
 
         this.dxCapture.Filename = captureProperties.Filename;
         try
