@@ -600,6 +600,7 @@ namespace OgamaControls
         catch (Exception ex)
         {
           MessageBox.Show(ex.ToString());
+          return;
         }
 
         this.dxCapture.Filename = captureProperties.Filename;

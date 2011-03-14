@@ -564,7 +564,8 @@ namespace DirectX.Capture
         out minHeight,
         out maxHeight);
 
-        if (newFrameRate > minFramerate && newFrameRate < maxFramerate)
+        if ((newFrameRate >= minFramerate && newFrameRate <= maxFramerate) || 
+          (minFramerate == 0 && maxFramerate==0))
         {
           this.FrameRate = newFrameRate;
         }
@@ -2040,7 +2041,7 @@ namespace DirectX.Capture
       catch (Exception)
       {
         throw new COMException("Error in rendering DirectShow graph: " + DsError.GetErrorText(hr));
-//        MessageBox.Show("Error in rendering DirectShow graph: " + DsError.GetErrorText(hr), "DirectShowError");
+        //        MessageBox.Show("Error in rendering DirectShow graph: " + DsError.GetErrorText(hr), "DirectShowError");
         //return;
       }
 

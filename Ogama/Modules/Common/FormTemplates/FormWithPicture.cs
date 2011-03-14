@@ -843,10 +843,21 @@ namespace Ogama.Modules.Common
 
       this.Picture.ZoomFactor = zoomfactor;
       Size presentationSize = this.Picture.PresentationSize;
+
+      // If this is called from another thread
+      // just exit, because its not important
+      // to be done in this case and would be a cross thread call.
+      if (this.Picture.InvokeRequired)
+      {
+        return;
+      }
+
       this.Picture.Size = new Size(
         (int)(presentationSize.Width * zoomfactor),
         (int)(presentationSize.Height * zoomfactor));
       this.ResizeCanvas();
+
+      // Update track bar
       if (this.zoomTrackBar != null)
       {
         this.zoomTrackBar.SendValueChangedEvents = false;
