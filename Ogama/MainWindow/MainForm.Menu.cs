@@ -1019,6 +1019,19 @@ namespace Ogama.MainWindow
 
     /// <summary>
     /// The <see cref="Control.Click"/> event handler
+    /// for the <see cref="ToolStripMenuItem"/> <see cref="mnuHelpHowToAsl"/>
+    /// Displays instructions to activate ASL recording.
+    /// </summary>
+    /// <param name="sender">Source of the event</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void mnuHelpHowToAsl_Click(object sender, EventArgs e)
+    {
+      HowToActivateAsl objActivateAsl = new HowToActivateAsl();
+      objActivateAsl.ShowDialog();
+    }
+
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler
     /// for the <see cref="ToolStripMenuItem"/> <see cref="mnuHelpHowToAlea"/>
     /// Displays instructions to activate alea recording.
     /// </summary>

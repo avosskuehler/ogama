@@ -118,9 +118,11 @@ namespace Ogama.Properties
         string oldAleaSettingsFile = Path.Combine(Application.StartupPath, "AleaSetting.xml");
         string oldTobiiSettingsFile = Path.Combine(Application.StartupPath, "TobiiSetting.xml");
         string oldMouseOnlySettingsFile = Path.Combine(Application.StartupPath, "MouseOnlySetting.xml");
+        string oldAslSettingsFile = Path.Combine(Application.StartupPath, "AslSetting.xml");
         string newAleaSettingsFile = Path.Combine(this.EyeTrackerSettingsPath, "AleaSetting.xml");
         string newTobiiSettingsFile = Path.Combine(this.EyeTrackerSettingsPath, "TobiiSetting.xml");
         string newMouseOnlySettingsFile = Path.Combine(this.EyeTrackerSettingsPath, "MouseOnlySetting.xml");
+        string newAslSettingsFile = Path.Combine(this.EyeTrackerSettingsPath, "AslSetting.xml");
         if (File.Exists(oldAleaSettingsFile) && !File.Exists(newAleaSettingsFile))
         {
           File.Copy(oldAleaSettingsFile, newAleaSettingsFile);
@@ -134,6 +136,11 @@ namespace Ogama.Properties
         if (File.Exists(oldMouseOnlySettingsFile) && !File.Exists(newMouseOnlySettingsFile))
         {
           File.Copy(oldMouseOnlySettingsFile, newMouseOnlySettingsFile);
+        }
+
+        if (File.Exists(oldAslSettingsFile) && !File.Exists(newAslSettingsFile))
+        {
+          File.Copy(oldAslSettingsFile, newAslSettingsFile);
         }
       }
     }

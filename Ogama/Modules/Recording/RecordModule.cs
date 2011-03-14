@@ -31,6 +31,7 @@ namespace Ogama.Modules.Recording
   using Ogama.Modules.Fixations;
   using Ogama.Modules.ImportExport;
   using Ogama.Modules.Recording.Alea;
+  using Ogama.Modules.Recording.ASL;
   using Ogama.Modules.Recording.MouseOnly;
   using Ogama.Modules.Recording.SMI;
   using Ogama.Modules.Recording.Tobii;
@@ -1658,6 +1659,7 @@ namespace Ogama.Modules.Recording
       this.tclEyetracker.TabPages.Add(this.tbpTobii);
       this.tclEyetracker.TabPages.Add(this.tbpAlea);
       this.tclEyetracker.TabPages.Add(this.tbpSMI);
+      this.tclEyetracker.TabPages.Add(this.tbpAsl);
       this.tclEyetracker.TabPages.Add(this.tbpMouseOnly);
       this.tclEyetracker.TabPages.Add(this.tbpITU);
 
@@ -1779,6 +1781,33 @@ namespace Ogama.Modules.Recording
           this.tclEyetracker.TabPages.Remove(this.tbpSMI);
         }
       }
+
+#if ASL
+      if (tracker == (tracker | HardwareTracker.ASL))
+      {
+        // Create ASL tracker
+        AslTracker newAsl = new AslTracker(
+              this,
+              this.btnAslConnect,
+              this.btnAslSubjectName,
+              this.btnAslCalibrate,
+              this.btnAslRecord,
+              this.txbAslSubjectName);
+        this.trackerInterfaces.Add(HardwareTracker.ASL, newAsl);
+      }
+      else
+      {
+        if (this.tclEyetracker.TabPages.Contains(this.tbpAsl))
+        {
+          this.tclEyetracker.TabPages.Remove(this.tbpAsl);
+        }
+      }
+#else
+      if (this.tclEyetracker.TabPages.Contains(this.tbpAsl))
+      {
+          this.tclEyetracker.TabPages.Remove(this.tbpAsl);
+      }
+#endif
 
       if (tracker == (tracker | HardwareTracker.ITU))
       {
@@ -2225,6 +2254,14 @@ namespace Ogama.Modules.Recording
             this.currentTracker = this.trackerInterfaces[HardwareTracker.Tobii];
           }
 
+          break;
+#endif
+#if ASL
+        case "tbpAsl":
+          if (this.trackerInterfaces.ContainsKey(HardwareTracker.ASL))
+          {
+            this.currentTracker = this.trackerInterfaces[HardwareTracker.ASL];
+          }
           break;
 #endif
         case "tbpAlea":

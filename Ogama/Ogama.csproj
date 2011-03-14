@@ -71,7 +71,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>..\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TOBII</DefineConstants>
+    <DefineConstants>DEBUG;TOBII; ASL</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DocumentationFile>..\Debug\Ogama.XML</DocumentationFile>
     <DebugType>full</DebugType>
@@ -109,6 +109,10 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ASL_Utilities, Version=1.0.5.0, Culture=neutral, PublicKeyToken=762ca3c5061dd97c, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\ASL_Utilities.dll</HintPath>
+    </Reference>
     <Reference Include="AxShockwaveFlashObjects, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\AxShockwaveFlashObjects.dll</HintPath>
@@ -238,6 +242,12 @@
       <DependentUpon>ShowLogDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="ExceptionHandling\ExceptionMethods.cs" />
+    <Compile Include="MainWindow\Dialogs\HowToActivateAsl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\HowToActivateAsl.designer.cs">
+      <DependentUpon>HowToActivateAsl.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow\Dialogs\HowToActivateITU.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -366,6 +376,28 @@
     <Compile Include="Modules\Recording\Alea\AxAleaStatusControl.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Modules\Recording\ASL\AslCalibration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\ASL\AslCalibration.designer.cs">
+      <DependentUpon>AslCalibration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\ASL\AslEnum.cs" />
+    <Compile Include="Modules\Recording\ASL\AslSetting.cs" />
+    <Compile Include="Modules\Recording\ASL\AslSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\ASL\AslSettingsDialog.designer.cs">
+      <DependentUpon>AslSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\ASL\AslTracker.cs" />
+    <Compile Include="Modules\Recording\ASL\AslTrackStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\ASL\AslTrackStatus.designer.cs">
+      <DependentUpon>AslTrackStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\ASL\UserSettings.cs" />
     <Compile Include="Modules\Recording\ITU\ITUDefaultGazeTracker.cs" />
     <Compile Include="Modules\Recording\ITU\ITUGazeTrackerBase.cs" />
     <Compile Include="Modules\Recording\Presenter\DSScreenCapture.cs" />
@@ -966,6 +998,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>ShowLogDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateAsl.resx">
+      <DependentUpon>HowToActivateAsl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateITU.resx">
       <DependentUpon>HowToActivateITU.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1024,6 +1059,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\Alea\AleaTrackStatus.resx">
       <DependentUpon>AleaTrackStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\ASL\AslCalibration.resx">
+      <DependentUpon>AslCalibration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\ASL\AslSettingsDialog.resx">
+      <DependentUpon>AslSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\ASL\AslTrackStatus.resx">
+      <DependentUpon>AslTrackStatus.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\Dialogs\SelectTracker.resx">
       <DependentUpon>SelectTracker.cs</DependentUpon>
@@ -1500,6 +1544,22 @@
     <None Include="Resources\StartUpSplash1.png" />
     <None Include="Resources\ITUBanner.png" />
     <None Include="Resources\Globe32.png" />
+    <None Include="Resources\ASL_61_461.gif" />
+    <None Include="Resources\ASL01.gif" />
+    <None Include="Resources\ASLBanner1.gif" />
+    <None Include="Resources\ASLico1.gif" />
+    <None Include="Resources\ASLlogo1.gif" />
+    <None Include="Resources\ASLmire_1024x7681.bmp" />
+    <None Include="Resources\ASLmire_1280x10241.bmp" />
+    <None Include="Resources\ASLmire_defaultSize1.bmp" />
+    <None Include="Resources\ASL_61_46.gif" />
+    <None Include="Resources\ASL0.gif" />
+    <None Include="Resources\ASLBanner.gif" />
+    <None Include="Resources\ASLico.gif" />
+    <None Include="Resources\ASLlogo.gif" />
+    <None Include="Resources\ASLmire_1024x768.bmp" />
+    <None Include="Resources\ASLmire_1280x1024.bmp" />
+    <None Include="Resources\ASLmire_defaultSize.bmp" />
     <Content Include="SaliencyCalculation\cygblas.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1713,6 +1773,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <COMReference Include="ASLSERIALOUTLIB2Lib">
+      <Guid>{8FF83C13-3622-4CDA-9E8A-939760558BBF}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
     <COMReference Include="AxTetComp">
       <Guid>{3E10DC16-717F-4A70-9EA9-AD364F61AF6E}</Guid>
       <VersionMajor>1</VersionMajor>

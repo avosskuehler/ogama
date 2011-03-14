@@ -823,6 +823,7 @@ namespace Ogama.MainWindow
     }
 
     #endregion //HELPER
+
   }
 }
 

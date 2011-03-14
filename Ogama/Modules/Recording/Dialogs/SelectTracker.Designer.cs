@@ -50,6 +50,9 @@
       this.chbITU = new System.Windows.Forms.CheckBox();
       this.btnCancel = new System.Windows.Forms.Button();
       this.btnOK = new System.Windows.Forms.Button();
+      this.pcbHelpAsl = new System.Windows.Forms.PictureBox();
+      this.chbAsl = new System.Windows.Forms.CheckBox();
+      this.pcbAsl = new System.Windows.Forms.PictureBox();
       this.splitContainer1.Panel1.SuspendLayout();
       this.splitContainer1.Panel2.SuspendLayout();
       this.splitContainer1.SuspendLayout();
@@ -67,6 +70,8 @@
       this.tabPage2.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.pcbHelpITU)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pcbITU)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.pcbHelpAsl)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.pcbAsl)).BeginInit();
       this.SuspendLayout();
       // 
       // splitContainer1
@@ -85,7 +90,7 @@
       // splitContainer1.Panel2
       // 
       this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-      this.splitContainer1.Size = new System.Drawing.Size(515, 422);
+      this.splitContainer1.Size = new System.Drawing.Size(515, 462);
       this.splitContainer1.SplitterDistance = 60;
       this.splitContainer1.SplitterWidth = 1;
       this.splitContainer1.TabIndex = 6;
@@ -121,8 +126,8 @@
       this.splitContainer2.Panel2.Controls.Add(this.btnCancel);
       this.splitContainer2.Panel2.Controls.Add(this.btnOK);
       this.splitContainer2.Panel2MinSize = 35;
-      this.splitContainer2.Size = new System.Drawing.Size(515, 361);
-      this.splitContainer2.SplitterDistance = 322;
+      this.splitContainer2.Size = new System.Drawing.Size(515, 401);
+      this.splitContainer2.SplitterDistance = 362;
       this.splitContainer2.TabIndex = 15;
       // 
       // tabControl1
@@ -133,11 +138,14 @@
       this.tabControl1.Location = new System.Drawing.Point(0, 0);
       this.tabControl1.Name = "tabControl1";
       this.tabControl1.SelectedIndex = 0;
-      this.tabControl1.Size = new System.Drawing.Size(515, 322);
+      this.tabControl1.Size = new System.Drawing.Size(515, 362);
       this.tabControl1.TabIndex = 14;
       // 
       // tabPage1
       // 
+      this.tabPage1.Controls.Add(this.pcbHelpAsl);
+      this.tabPage1.Controls.Add(this.chbAsl);
+      this.tabPage1.Controls.Add(this.pcbAsl);
       this.tabPage1.Controls.Add(this.pcbHelpSMI);
       this.tabPage1.Controls.Add(this.pcbHelpAlea);
       this.tabPage1.Controls.Add(this.pcbHelpTobii);
@@ -150,7 +158,7 @@
       this.tabPage1.Location = new System.Drawing.Point(4, 22);
       this.tabPage1.Name = "tabPage1";
       this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPage1.Size = new System.Drawing.Size(507, 296);
+      this.tabPage1.Size = new System.Drawing.Size(507, 336);
       this.tabPage1.TabIndex = 0;
       this.tabPage1.Text = "Commercial Tracker";
       this.tabPage1.UseVisualStyleBackColor = true;
@@ -347,13 +355,49 @@
       this.btnOK.Text = "OK";
       this.btnOK.UseVisualStyleBackColor = true;
       // 
+      // pcbHelpAsl
+      // 
+      this.pcbHelpAsl.Cursor = System.Windows.Forms.Cursors.Help;
+      this.pcbHelpAsl.Image = global::Ogama.Properties.Resources.HelpBmp;
+      this.pcbHelpAsl.Location = new System.Drawing.Point(483, 277);
+      this.pcbHelpAsl.Name = "pcbHelpAsl";
+      this.pcbHelpAsl.Size = new System.Drawing.Size(16, 16);
+      this.pcbHelpAsl.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+      this.pcbHelpAsl.TabIndex = 19;
+      this.pcbHelpAsl.TabStop = false;
+      this.pcbHelpAsl.Click += new System.EventHandler(this.pcbHelpAsl_Click);
+      // 
+      // chbAsl
+      // 
+      this.chbAsl.Image = global::Ogama.Properties.Resources.ASL_61_46;
+      this.chbAsl.Location = new System.Drawing.Point(100, 248);
+      this.chbAsl.Name = "chbAsl";
+      this.chbAsl.Size = new System.Drawing.Size(370, 72);
+      this.chbAsl.TabIndex = 18;
+      this.chbAsl.Text = "If you have purchased and installed an ASL model 5000 Eye Tracker control unit (m" +
+          "aterials and softwares)";
+      this.chbAsl.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.chbAsl.UseVisualStyleBackColor = true;
+      // 
+      // pcbAsl
+      // 
+      this.pcbAsl.Cursor = System.Windows.Forms.Cursors.Hand;
+      this.pcbAsl.Image = global::Ogama.Properties.Resources.ASL0;
+      this.pcbAsl.Location = new System.Drawing.Point(8, 264);
+      this.pcbAsl.Name = "pcbAsl";
+      this.pcbAsl.Size = new System.Drawing.Size(80, 49);
+      this.pcbAsl.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+      this.pcbAsl.TabIndex = 17;
+      this.pcbAsl.TabStop = false;
+      this.pcbAsl.Click += new System.EventHandler(this.pcbAsl_Click);
+      // 
       // SelectTracker
       // 
       this.AcceptButton = this.btnOK;
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.CancelButton = this.btnCancel;
-      this.ClientSize = new System.Drawing.Size(515, 422);
+      this.ClientSize = new System.Drawing.Size(515, 462);
       this.Controls.Add(this.splitContainer1);
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -384,6 +428,8 @@
       this.tabPage2.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.pcbHelpITU)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.pcbITU)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.pcbHelpAsl)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.pcbAsl)).EndInit();
       this.ResumeLayout(false);
 
     }
@@ -411,5 +457,8 @@
     private System.Windows.Forms.PictureBox pcbHelpSMI;
     private System.Windows.Forms.PictureBox pcbHelpAlea;
     private System.Windows.Forms.PictureBox pcbHelpITU;
+    private System.Windows.Forms.PictureBox pcbHelpAsl;
+    private System.Windows.Forms.CheckBox chbAsl;
+    private System.Windows.Forms.PictureBox pcbAsl;
   }
 }

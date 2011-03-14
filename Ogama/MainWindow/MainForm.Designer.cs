@@ -125,6 +125,7 @@ namespace Ogama.MainWindow
           this.btnFIX = new System.Windows.Forms.ToolStripButton();
           this.btnSTA = new System.Windows.Forms.ToolStripButton();
           this.btnAOI = new System.Windows.Forms.ToolStripButton();
+          this.mnuHelpHowToAsl = new System.Windows.Forms.ToolStripMenuItem();
           this.mnsMain.SuspendLayout();
           this.stsMain.SuspendLayout();
           this.toolStrip1.SuspendLayout();
@@ -660,6 +661,7 @@ namespace Ogama.MainWindow
             this.mnuHelpSource,
             this.mnuHelpHowToTobii,
             this.mnuHelpHowToAlea,
+            this.mnuHelpHowToAsl,
             this.mnuHelpHowToSMI,
             this.mnuHelpHowToITU,
             this.mnuHelpCheckForUpdates,
@@ -982,6 +984,14 @@ namespace Ogama.MainWindow
           this.btnAOI.Text = "Shows areas of interest module";
           this.btnAOI.Click += new System.EventHandler(this.btnAOI_Click);
           // 
+          // mnuHelpHowToAsl
+          // 
+          this.mnuHelpHowToAsl.Image = global::Ogama.Properties.Resources.ASLico;
+          this.mnuHelpHowToAsl.Name = "mnuHelpHowToAsl";
+          this.mnuHelpHowToAsl.Size = new System.Drawing.Size(307, 22);
+          this.mnuHelpHowToAsl.Text = "HowTo: Install ASL Recording ...";
+          this.mnuHelpHowToAsl.Click += new System.EventHandler(this.mnuHelpHowToAsl_Click);
+          // 
           // MainForm
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1109,6 +1119,7 @@ namespace Ogama.MainWindow
       private System.Windows.Forms.ToolStripMenuItem mnuHelpHowToAlea;
       private System.Windows.Forms.ToolStripMenuItem mnuHelpHowToSMI;
       private System.Windows.Forms.ToolStripMenuItem mnuHelpHowToITU;
+      private System.Windows.Forms.ToolStripMenuItem mnuHelpHowToAsl;
     }
 }
 

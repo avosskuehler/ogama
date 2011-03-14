@@ -94,6 +94,16 @@
       this.label10 = new System.Windows.Forms.Label();
       this.btnAleaSubjectName = new System.Windows.Forms.Button();
       this.btnAleaConnect = new System.Windows.Forms.Button();
+      this.tbpAsl = new System.Windows.Forms.TabPage();
+      this.txbAslSubjectName = new System.Windows.Forms.TextBox();
+      this.btnAslRecord = new System.Windows.Forms.Button();
+      this.btnAslCalibrate = new System.Windows.Forms.Button();
+      this.label75 = new System.Windows.Forms.Label();
+      this.recordLabel = new System.Windows.Forms.Label();
+      this.label76 = new System.Windows.Forms.Label();
+      this.connectLabel = new System.Windows.Forms.Label();
+      this.btnAslSubjectName = new System.Windows.Forms.Button();
+      this.btnAslConnect = new System.Windows.Forms.Button();
       this.tbpSMI = new System.Windows.Forms.TabPage();
       this.groupBox3 = new System.Windows.Forms.GroupBox();
       this.textBox1 = new System.Windows.Forms.TextBox();
@@ -246,6 +256,108 @@
       this.label52 = new System.Windows.Forms.Label();
       this.button36 = new System.Windows.Forms.Button();
       this.button37 = new System.Windows.Forms.Button();
+      this.tabPage7 = new System.Windows.Forms.TabPage();
+      this.panel8 = new System.Windows.Forms.Panel();
+      this.label18 = new System.Windows.Forms.Label();
+      this.button29 = new System.Windows.Forms.Button();
+      this.groupBox9 = new System.Windows.Forms.GroupBox();
+      this.splitContainer14 = new System.Windows.Forms.SplitContainer();
+      this.splitContainer15 = new System.Windows.Forms.SplitContainer();
+      this.button38 = new System.Windows.Forms.Button();
+      this.splitContainer16 = new System.Windows.Forms.SplitContainer();
+      this.button39 = new System.Windows.Forms.Button();
+      this.button40 = new System.Windows.Forms.Button();
+      this.textBox9 = new System.Windows.Forms.TextBox();
+      this.button41 = new System.Windows.Forms.Button();
+      this.button42 = new System.Windows.Forms.Button();
+      this.label43 = new System.Windows.Forms.Label();
+      this.label44 = new System.Windows.Forms.Label();
+      this.label45 = new System.Windows.Forms.Label();
+      this.label46 = new System.Windows.Forms.Label();
+      this.label53 = new System.Windows.Forms.Label();
+      this.button43 = new System.Windows.Forms.Button();
+      this.btnITUCamera = new System.Windows.Forms.Button();
+      this.button44 = new System.Windows.Forms.Button();
+      this.tbpITUPS3 = new System.Windows.Forms.TabPage();
+      this.panel9 = new System.Windows.Forms.Panel();
+      this.label55 = new System.Windows.Forms.Label();
+      this.btnITUPS3Camera = new System.Windows.Forms.Button();
+      this.label56 = new System.Windows.Forms.Label();
+      this.btnITUPS3Adjust = new System.Windows.Forms.Button();
+      this.groupBox11 = new System.Windows.Forms.GroupBox();
+      this.spcITUPS3Controls = new System.Windows.Forms.SplitContainer();
+      this.spcITUPS3TrackStatus = new System.Windows.Forms.SplitContainer();
+      this.btnITUPS3ShowOnPresentationScreen = new System.Windows.Forms.Button();
+      this.spcITUPS3CalibPlot = new System.Windows.Forms.SplitContainer();
+      this.btnITUPS3Recalibrate = new System.Windows.Forms.Button();
+      this.btnITUPS3AcceptCalibration = new System.Windows.Forms.Button();
+      this.txbITUPS3SubjectName = new System.Windows.Forms.TextBox();
+      this.btnITUPS3Record = new System.Windows.Forms.Button();
+      this.btnITUPS3Calibrate = new System.Windows.Forms.Button();
+      this.label57 = new System.Windows.Forms.Label();
+      this.label58 = new System.Windows.Forms.Label();
+      this.label59 = new System.Windows.Forms.Label();
+      this.label60 = new System.Windows.Forms.Label();
+      this.btnITUPS3SubjectName = new System.Windows.Forms.Button();
+      this.btnITUPS3Connect = new System.Windows.Forms.Button();
+      this.tabPage8 = new System.Windows.Forms.TabPage();
+      this.panel10 = new System.Windows.Forms.Panel();
+      this.groupBox12 = new System.Windows.Forms.GroupBox();
+      this.splitContainer17 = new System.Windows.Forms.SplitContainer();
+      this.splitContainer18 = new System.Windows.Forms.SplitContainer();
+      this.button45 = new System.Windows.Forms.Button();
+      this.splitContainer19 = new System.Windows.Forms.SplitContainer();
+      this.button46 = new System.Windows.Forms.Button();
+      this.button47 = new System.Windows.Forms.Button();
+      this.textBox10 = new System.Windows.Forms.TextBox();
+      this.button48 = new System.Windows.Forms.Button();
+      this.button49 = new System.Windows.Forms.Button();
+      this.label61 = new System.Windows.Forms.Label();
+      this.label62 = new System.Windows.Forms.Label();
+      this.label63 = new System.Windows.Forms.Label();
+      this.label64 = new System.Windows.Forms.Label();
+      this.button50 = new System.Windows.Forms.Button();
+      this.button51 = new System.Windows.Forms.Button();
+      this.tabPage9 = new System.Windows.Forms.TabPage();
+      this.groupBox13 = new System.Windows.Forms.GroupBox();
+      this.splitContainer20 = new System.Windows.Forms.SplitContainer();
+      this.splitContainer21 = new System.Windows.Forms.SplitContainer();
+      this.button52 = new System.Windows.Forms.Button();
+      this.splitContainer22 = new System.Windows.Forms.SplitContainer();
+      this.label65 = new System.Windows.Forms.Label();
+      this.label66 = new System.Windows.Forms.Label();
+      this.button53 = new System.Windows.Forms.Button();
+      this.button54 = new System.Windows.Forms.Button();
+      this.textBox11 = new System.Windows.Forms.TextBox();
+      this.button55 = new System.Windows.Forms.Button();
+      this.button56 = new System.Windows.Forms.Button();
+      this.label67 = new System.Windows.Forms.Label();
+      this.label68 = new System.Windows.Forms.Label();
+      this.label69 = new System.Windows.Forms.Label();
+      this.label70 = new System.Windows.Forms.Label();
+      this.button57 = new System.Windows.Forms.Button();
+      this.button58 = new System.Windows.Forms.Button();
+      this.tabPage10 = new System.Windows.Forms.TabPage();
+      this.groupBox14 = new System.Windows.Forms.GroupBox();
+      this.textBox12 = new System.Windows.Forms.TextBox();
+      this.textBox13 = new System.Windows.Forms.TextBox();
+      this.button59 = new System.Windows.Forms.Button();
+      this.button60 = new System.Windows.Forms.Button();
+      this.label71 = new System.Windows.Forms.Label();
+      this.label72 = new System.Windows.Forms.Label();
+      this.label73 = new System.Windows.Forms.Label();
+      this.label74 = new System.Windows.Forms.Label();
+      this.button61 = new System.Windows.Forms.Button();
+      this.button62 = new System.Windows.Forms.Button();
+      this.tabPage11 = new System.Windows.Forms.TabPage();
+      this.label77 = new System.Windows.Forms.Label();
+      this.label78 = new System.Windows.Forms.Label();
+      this.button63 = new System.Windows.Forms.Button();
+      this.textBox14 = new System.Windows.Forms.TextBox();
+      this.button64 = new System.Windows.Forms.Button();
+      this.tabPage12 = new System.Windows.Forms.TabPage();
+      this.label79 = new System.Windows.Forms.Label();
+      this.button65 = new System.Windows.Forms.Button();
       ((System.ComponentModel.ISupportInitialize)(this.bsoSubjects)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.bsoFKSubjectsTrials)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.ogamaDataSet)).BeginInit();
@@ -305,6 +417,7 @@
       this.spcAleaCalibPlot.Panel1.SuspendLayout();
       this.spcAleaCalibPlot.Panel2.SuspendLayout();
       this.spcAleaCalibPlot.SuspendLayout();
+      this.tbpAsl.SuspendLayout();
       this.tbpSMI.SuspendLayout();
       this.groupBox3.SuspendLayout();
       this.tbpMouseOnly.SuspendLayout();
@@ -363,6 +476,50 @@
       this.splitContainer12.SuspendLayout();
       this.splitContainer13.Panel2.SuspendLayout();
       this.splitContainer13.SuspendLayout();
+      this.tabPage7.SuspendLayout();
+      this.panel8.SuspendLayout();
+      this.groupBox9.SuspendLayout();
+      this.splitContainer14.Panel1.SuspendLayout();
+      this.splitContainer14.Panel2.SuspendLayout();
+      this.splitContainer14.SuspendLayout();
+      this.splitContainer15.Panel2.SuspendLayout();
+      this.splitContainer15.SuspendLayout();
+      this.splitContainer16.Panel2.SuspendLayout();
+      this.splitContainer16.SuspendLayout();
+      this.tbpITUPS3.SuspendLayout();
+      this.panel9.SuspendLayout();
+      this.groupBox11.SuspendLayout();
+      this.spcITUPS3Controls.Panel1.SuspendLayout();
+      this.spcITUPS3Controls.Panel2.SuspendLayout();
+      this.spcITUPS3Controls.SuspendLayout();
+      this.spcITUPS3TrackStatus.Panel2.SuspendLayout();
+      this.spcITUPS3TrackStatus.SuspendLayout();
+      this.spcITUPS3CalibPlot.Panel2.SuspendLayout();
+      this.spcITUPS3CalibPlot.SuspendLayout();
+      this.tabPage8.SuspendLayout();
+      this.panel10.SuspendLayout();
+      this.groupBox12.SuspendLayout();
+      this.splitContainer17.Panel1.SuspendLayout();
+      this.splitContainer17.Panel2.SuspendLayout();
+      this.splitContainer17.SuspendLayout();
+      this.splitContainer18.Panel2.SuspendLayout();
+      this.splitContainer18.SuspendLayout();
+      this.splitContainer19.Panel2.SuspendLayout();
+      this.splitContainer19.SuspendLayout();
+      this.tabPage9.SuspendLayout();
+      this.groupBox13.SuspendLayout();
+      this.splitContainer20.Panel1.SuspendLayout();
+      this.splitContainer20.Panel2.SuspendLayout();
+      this.splitContainer20.SuspendLayout();
+      this.splitContainer21.Panel2.SuspendLayout();
+      this.splitContainer21.SuspendLayout();
+      this.splitContainer22.Panel1.SuspendLayout();
+      this.splitContainer22.Panel2.SuspendLayout();
+      this.splitContainer22.SuspendLayout();
+      this.tabPage10.SuspendLayout();
+      this.groupBox14.SuspendLayout();
+      this.tabPage11.SuspendLayout();
+      this.tabPage12.SuspendLayout();
       this.SuspendLayout();
       // 
       // toolStripContainer1
@@ -451,6 +608,7 @@
       this.tclEyetracker.Controls.Add(this.tbpTobii);
       this.tclEyetracker.Controls.Add(this.tbpAlea);
       this.tclEyetracker.Controls.Add(this.tbpSMI);
+      this.tclEyetracker.Controls.Add(this.tbpAsl);
       this.tclEyetracker.Controls.Add(this.tbpMouseOnly);
       this.tclEyetracker.Controls.Add(this.tbpNoDevice);
       this.tclEyetracker.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -559,7 +717,7 @@
       // 
       this.spcITUControls.Panel2.Controls.Add(this.spcITUCalibPlot);
       this.spcITUControls.Size = new System.Drawing.Size(190, 211);
-      this.spcITUControls.SplitterDistance = 102;
+      this.spcITUControls.SplitterDistance = 101;
       this.spcITUControls.TabIndex = 22;
       // 
       // spcITUTrackStatus
@@ -579,8 +737,8 @@
       // 
       this.spcITUTrackStatus.Panel2.Controls.Add(this.btnITUShowOnPresentationScreen);
       this.spcITUTrackStatus.Panel2MinSize = 22;
-      this.spcITUTrackStatus.Size = new System.Drawing.Size(190, 102);
-      this.spcITUTrackStatus.SplitterDistance = 76;
+      this.spcITUTrackStatus.Size = new System.Drawing.Size(190, 101);
+      this.spcITUTrackStatus.SplitterDistance = 75;
       this.spcITUTrackStatus.TabIndex = 20;
       // 
       // btnITUShowOnPresentationScreen
@@ -609,8 +767,8 @@
       this.spcITUCalibPlot.Panel2.Controls.Add(this.btnITURecalibrate);
       this.spcITUCalibPlot.Panel2.Controls.Add(this.btnITUAcceptCalibration);
       this.spcITUCalibPlot.Panel2MinSize = 22;
-      this.spcITUCalibPlot.Size = new System.Drawing.Size(190, 105);
-      this.spcITUCalibPlot.SplitterDistance = 79;
+      this.spcITUCalibPlot.Size = new System.Drawing.Size(190, 106);
+      this.spcITUCalibPlot.SplitterDistance = 80;
       this.spcITUCalibPlot.TabIndex = 1;
       // 
       // btnITURecalibrate
@@ -1223,6 +1381,131 @@
       this.btnAleaConnect.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.btnAleaConnect.UseVisualStyleBackColor = true;
       // 
+      // tbpAsl
+      // 
+      this.tbpAsl.Controls.Add(this.txbAslSubjectName);
+      this.tbpAsl.Controls.Add(this.btnAslRecord);
+      this.tbpAsl.Controls.Add(this.btnAslCalibrate);
+      this.tbpAsl.Controls.Add(this.label75);
+      this.tbpAsl.Controls.Add(this.recordLabel);
+      this.tbpAsl.Controls.Add(this.label76);
+      this.tbpAsl.Controls.Add(this.connectLabel);
+      this.tbpAsl.Controls.Add(this.btnAslSubjectName);
+      this.tbpAsl.Controls.Add(this.btnAslConnect);
+      this.tbpAsl.ImageKey = "ASL";
+      this.tbpAsl.Location = new System.Drawing.Point(4, 23);
+      this.tbpAsl.Name = "tbpAsl";
+      this.tbpAsl.Padding = new System.Windows.Forms.Padding(3);
+      this.tbpAsl.Size = new System.Drawing.Size(212, 392);
+      this.tbpAsl.TabIndex = 7;
+      this.tbpAsl.Text = "ASL";
+      this.tbpAsl.UseVisualStyleBackColor = true;
+      // 
+      // txbAslSubjectName
+      // 
+      this.txbAslSubjectName.Location = new System.Drawing.Point(110, 269);
+      this.txbAslSubjectName.Name = "txbAslSubjectName";
+      this.txbAslSubjectName.ReadOnly = true;
+      this.txbAslSubjectName.Size = new System.Drawing.Size(91, 20);
+      this.txbAslSubjectName.TabIndex = 31;
+      this.txbAslSubjectName.Text = "Subject1";
+      // 
+      // btnAslRecord
+      // 
+      this.btnAslRecord.Enabled = false;
+      this.btnAslRecord.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnAslRecord.ImageKey = "Record";
+      this.btnAslRecord.ImageList = this.imlButtons;
+      this.btnAslRecord.Location = new System.Drawing.Point(32, 325);
+      this.btnAslRecord.Name = "btnAslRecord";
+      this.btnAslRecord.Size = new System.Drawing.Size(72, 23);
+      this.btnAslRecord.TabIndex = 38;
+      this.btnAslRecord.Text = "&Record";
+      this.btnAslRecord.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      // 
+      // btnAslCalibrate
+      // 
+      this.btnAslCalibrate.Enabled = false;
+      this.btnAslCalibrate.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnAslCalibrate.ImageKey = "Calibrate";
+      this.btnAslCalibrate.ImageList = this.imlButtons;
+      this.btnAslCalibrate.Location = new System.Drawing.Point(32, 296);
+      this.btnAslCalibrate.Name = "btnAslCalibrate";
+      this.btnAslCalibrate.Size = new System.Drawing.Size(72, 23);
+      this.btnAslCalibrate.TabIndex = 39;
+      this.btnAslCalibrate.Text = "&Calibrate";
+      this.btnAslCalibrate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      // 
+      // label75
+      // 
+      this.label75.AutoSize = true;
+      this.label75.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label75.Location = new System.Drawing.Point(8, 296);
+      this.label75.Name = "label75";
+      this.label75.Size = new System.Drawing.Size(25, 24);
+      this.label75.TabIndex = 37;
+      this.label75.Text = "3.";
+      // 
+      // recordLabel
+      // 
+      this.recordLabel.AutoSize = true;
+      this.recordLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.recordLabel.Location = new System.Drawing.Point(8, 325);
+      this.recordLabel.Name = "recordLabel";
+      this.recordLabel.Size = new System.Drawing.Size(25, 24);
+      this.recordLabel.TabIndex = 36;
+      this.recordLabel.Text = "4.";
+      // 
+      // label76
+      // 
+      this.label76.AutoSize = true;
+      this.label76.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label76.Location = new System.Drawing.Point(8, 267);
+      this.label76.Name = "label76";
+      this.label76.Size = new System.Drawing.Size(25, 24);
+      this.label76.TabIndex = 34;
+      this.label76.Text = "2.";
+      // 
+      // connectLabel
+      // 
+      this.connectLabel.AutoSize = true;
+      this.connectLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.connectLabel.Location = new System.Drawing.Point(8, 238);
+      this.connectLabel.Margin = new System.Windows.Forms.Padding(0);
+      this.connectLabel.Name = "connectLabel";
+      this.connectLabel.Size = new System.Drawing.Size(25, 24);
+      this.connectLabel.TabIndex = 35;
+      this.connectLabel.Text = "1.";
+      // 
+      // btnAslSubjectName
+      // 
+      this.btnAslSubjectName.Enabled = false;
+      this.btnAslSubjectName.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnAslSubjectName.ImageKey = "Subject";
+      this.btnAslSubjectName.ImageList = this.imlButtons;
+      this.btnAslSubjectName.Location = new System.Drawing.Point(32, 268);
+      this.btnAslSubjectName.Name = "btnAslSubjectName";
+      this.btnAslSubjectName.Size = new System.Drawing.Size(72, 23);
+      this.btnAslSubjectName.TabIndex = 32;
+      this.btnAslSubjectName.Text = "Subject";
+      this.btnAslSubjectName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.btnAslSubjectName.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.btnAslSubjectName.UseVisualStyleBackColor = true;
+      // 
+      // btnAslConnect
+      // 
+      this.btnAslConnect.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnAslConnect.ImageKey = "Connect";
+      this.btnAslConnect.ImageList = this.imlButtons;
+      this.btnAslConnect.Location = new System.Drawing.Point(32, 238);
+      this.btnAslConnect.Name = "btnAslConnect";
+      this.btnAslConnect.Size = new System.Drawing.Size(73, 23);
+      this.btnAslConnect.TabIndex = 33;
+      this.btnAslConnect.Text = "Connect";
+      this.btnAslConnect.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.btnAslConnect.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.btnAslConnect.UseVisualStyleBackColor = true;
+      // 
       // tbpSMI
       // 
       this.tbpSMI.Controls.Add(this.groupBox3);
@@ -1483,8 +1766,9 @@
       this.imlEyetracker.Images.SetKeyName(2, "Alea");
       this.imlEyetracker.Images.SetKeyName(3, "None");
       this.imlEyetracker.Images.SetKeyName(4, "SMI");
-      this.imlEyetracker.Images.SetKeyName(5, "ITUPS3");
-      this.imlEyetracker.Images.SetKeyName(6, "ITU");
+      this.imlEyetracker.Images.SetKeyName(5, "ASL");
+      this.imlEyetracker.Images.SetKeyName(6, "ITUPS3");
+      this.imlEyetracker.Images.SetKeyName(7, "ITU");
       // 
       // panel4
       // 
@@ -3040,6 +3324,1320 @@
       this.button37.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.button37.UseVisualStyleBackColor = true;
       // 
+      // tabPage7
+      // 
+      this.tabPage7.Controls.Add(this.panel8);
+      this.tabPage7.ImageKey = "ITU";
+      this.tabPage7.Location = new System.Drawing.Point(4, 23);
+      this.tabPage7.Name = "tabPage7";
+      this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+      this.tabPage7.Size = new System.Drawing.Size(212, 392);
+      this.tabPage7.TabIndex = 5;
+      this.tabPage7.Text = "ITU";
+      this.tabPage7.UseVisualStyleBackColor = true;
+      // 
+      // panel8
+      // 
+      this.panel8.Controls.Add(this.label18);
+      this.panel8.Controls.Add(this.button29);
+      this.panel8.Controls.Add(this.groupBox9);
+      this.panel8.Controls.Add(this.textBox9);
+      this.panel8.Controls.Add(this.button41);
+      this.panel8.Controls.Add(this.button42);
+      this.panel8.Controls.Add(this.label43);
+      this.panel8.Controls.Add(this.label44);
+      this.panel8.Controls.Add(this.label45);
+      this.panel8.Controls.Add(this.label46);
+      this.panel8.Controls.Add(this.label53);
+      this.panel8.Controls.Add(this.button43);
+      this.panel8.Controls.Add(this.btnITUCamera);
+      this.panel8.Controls.Add(this.button44);
+      this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.panel8.Location = new System.Drawing.Point(3, 3);
+      this.panel8.Name = "panel8";
+      this.panel8.Size = new System.Drawing.Size(206, 386);
+      this.panel8.TabIndex = 11;
+      // 
+      // label18
+      // 
+      this.label18.AutoSize = true;
+      this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label18.Location = new System.Drawing.Point(5, 256);
+      this.label18.Margin = new System.Windows.Forms.Padding(0);
+      this.label18.Name = "label18";
+      this.label18.Size = new System.Drawing.Size(25, 24);
+      this.label18.TabIndex = 22;
+      this.label18.Text = "3.";
+      // 
+      // button29
+      // 
+      this.button29.Enabled = false;
+      this.button29.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.button29.ImageKey = "Adjust";
+      this.button29.ImageList = this.imlButtons;
+      this.button29.Location = new System.Drawing.Point(29, 256);
+      this.button29.Name = "button29";
+      this.button29.Size = new System.Drawing.Size(73, 23);
+      this.button29.TabIndex = 21;
+      this.button29.Text = "Adjust";
+      this.button29.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.button29.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.button29.UseVisualStyleBackColor = true;
+      // 
+      // groupBox9
+      // 
+      this.groupBox9.Controls.Add(this.splitContainer14);
+      this.groupBox9.Location = new System.Drawing.Point(5, 3);
+      this.groupBox9.Name = "groupBox9";
+      this.groupBox9.Size = new System.Drawing.Size(196, 183);
+      this.groupBox9.TabIndex = 20;
+      this.groupBox9.TabStop = false;
+      this.groupBox9.Text = "Track status";
+      // 
+      // splitContainer14
+      // 
+      this.splitContainer14.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.splitContainer14.Location = new System.Drawing.Point(3, 16);
+      this.splitContainer14.Name = "splitContainer14";
+      this.splitContainer14.Orientation = System.Windows.Forms.Orientation.Horizontal;
+      // 
+      // splitContainer14.Panel1
+      // 
+      this.splitContainer14.Panel1.Controls.Add(this.splitContainer15);
+      // 
+      // splitContainer14.Panel2
+      // 
+      this.splitContainer14.Panel2.Controls.Add(this.splitContainer16);
+      this.splitContainer14.Size = new System.Drawing.Size(190, 164);
+      this.splitContainer14.SplitterDistance = 80;
+      this.splitContainer14.TabIndex = 22;
+      // 
+      // splitContainer15
+      // 
+      this.splitContainer15.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.splitContainer15.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+      this.splitContainer15.IsSplitterFixed = true;
+      this.splitContainer15.Location = new System.Drawing.Point(0, 0);
+      this.splitContainer15.Name = "splitContainer15";
+      this.splitContainer15.Orientation = System.Windows.Forms.Orientation.Horizontal;
+      // 
+      // splitContainer15.Panel1
+      // 
+      this.splitContainer15.Panel1.BackColor = System.Drawing.Color.Transparent;
+      // 
+      // splitContainer15.Panel2
+      // 
+      this.splitContainer15.Panel2.Controls.Add(this.button38);
+      this.splitContainer15.Panel2MinSize = 22;
+      this.splitContainer15.Size = new System.Drawing.Size(190, 80);
+      this.splitContainer15.SplitterDistance = 54;
+      this.splitContainer15.TabIndex = 20;
+      // 
+      // button38
+      // 
+      this.button38.BackColor = System.Drawing.Color.Transparent;
+      this.button38.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.button38.Enabled = false;
+      this.button38.Location = new System.Drawing.Point(0, 0);
+      this.button38.Name = "button38";
+      this.button38.Size = new System.Drawing.Size(190, 22);
+      this.button38.TabIndex = 21;
+      this.button38.Text = "Show on presentation screen";
+      this.button38.UseVisualStyleBackColor = false;
+      // 
+      // splitContainer16
+      // 
+      this.splitContainer16.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.splitContainer16.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+      this.splitContainer16.IsSplitterFixed = true;
+      this.splitContainer16.Location = new System.Drawing.Point(0, 0);
+      this.splitContainer16.Name = "splitContainer16";
+      this.splitContainer16.Orientation = System.Windows.Forms.Orientation.Horizontal;
+      // 
+      // splitContainer16.Panel2
+      // 
+      this.splitContainer16.Panel2.Controls.Add(this.button39);
+      this.splitContainer16.Panel2.Controls.Add(this.button40);
+      this.splitContainer16.Panel2MinSize = 22;
+      this.splitContainer16.Size = new System.Drawing.Size(190, 80);
+      this.splitContainer16.SplitterDistance = 54;
+      this.splitContainer16.TabIndex = 1;
+      // 
+      // button39
+      // 
+      this.button39.Dock = System.Windows.Forms.DockStyle.Right;
+      this.button39.Location = new System.Drawing.Point(115, 0);
+      this.button39.Name = "button39";
+      this.button39.Size = new System.Drawing.Size(75, 22);
+      this.button39.TabIndex = 0;
+      this.button39.Text = "Recalibrate";
+      this.button39.UseVisualStyleBackColor = true;
+      // 
+      // button40
+      // 
+      this.button40.Dock = System.Windows.Forms.DockStyle.Left;
+      this.button40.Location = new System.Drawing.Point(0, 0);
+      this.button40.Name = "button40";
+      this.button40.Size = new System.Drawing.Size(75, 22);
+      this.button40.TabIndex = 0;
+      this.button40.Text = "Accept";
+      this.button40.UseVisualStyleBackColor = true;
+      // 
+      // textBox9
+      // 
+      this.textBox9.Location = new System.Drawing.Point(107, 285);
+      this.textBox9.Name = "textBox9";
+      this.textBox9.ReadOnly = true;
+      this.textBox9.Size = new System.Drawing.Size(91, 20);
+      this.textBox9.TabIndex = 11;
+      this.textBox9.Text = "Subject1";
+      // 
+      // button41
+      // 
+      this.button41.Enabled = false;
+      this.button41.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.button41.ImageKey = "Record";
+      this.button41.ImageList = this.imlButtons;
+      this.button41.Location = new System.Drawing.Point(29, 341);
+      this.button41.Name = "button41";
+      this.button41.Size = new System.Drawing.Size(73, 23);
+      this.button41.TabIndex = 17;
+      this.button41.Text = "&Record";
+      this.button41.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      // 
+      // button42
+      // 
+      this.button42.Enabled = false;
+      this.button42.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.button42.ImageKey = "Calibrate";
+      this.button42.ImageList = this.imlButtons;
+      this.button42.Location = new System.Drawing.Point(29, 312);
+      this.button42.Name = "button42";
+      this.button42.Size = new System.Drawing.Size(73, 23);
+      this.button42.TabIndex = 17;
+      this.button42.Text = "&Calibrate";
+      this.button42.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      // 
+      // label43
+      // 
+      this.label43.AutoSize = true;
+      this.label43.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label43.Location = new System.Drawing.Point(5, 312);
+      this.label43.Name = "label43";
+      this.label43.Size = new System.Drawing.Size(25, 24);
+      this.label43.TabIndex = 13;
+      this.label43.Text = "5.";
+      // 
+      // label44
+      // 
+      this.label44.AutoSize = true;
+      this.label44.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label44.Location = new System.Drawing.Point(5, 341);
+      this.label44.Name = "label44";
+      this.label44.Size = new System.Drawing.Size(25, 24);
+      this.label44.TabIndex = 13;
+      this.label44.Text = "6.";
+      // 
+      // label45
+      // 
+      this.label45.AutoSize = true;
+      this.label45.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label45.Location = new System.Drawing.Point(5, 283);
+      this.label45.Name = "label45";
+      this.label45.Size = new System.Drawing.Size(25, 24);
+      this.label45.TabIndex = 13;
+      this.label45.Text = "4.";
+      // 
+      // label46
+      // 
+      this.label46.AutoSize = true;
+      this.label46.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label46.Location = new System.Drawing.Point(5, 227);
+      this.label46.Margin = new System.Windows.Forms.Padding(0);
+      this.label46.Name = "label46";
+      this.label46.Size = new System.Drawing.Size(25, 24);
+      this.label46.TabIndex = 13;
+      this.label46.Text = "2.";
+      // 
+      // label53
+      // 
+      this.label53.AutoSize = true;
+      this.label53.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label53.Location = new System.Drawing.Point(5, 198);
+      this.label53.Margin = new System.Windows.Forms.Padding(0);
+      this.label53.Name = "label53";
+      this.label53.Size = new System.Drawing.Size(25, 24);
+      this.label53.TabIndex = 13;
+      this.label53.Text = "1.";
+      // 
+      // button43
+      // 
+      this.button43.Enabled = false;
+      this.button43.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.button43.ImageKey = "Subject";
+      this.button43.ImageList = this.imlButtons;
+      this.button43.Location = new System.Drawing.Point(29, 284);
+      this.button43.Name = "button43";
+      this.button43.Size = new System.Drawing.Size(73, 23);
+      this.button43.TabIndex = 12;
+      this.button43.Text = "Subject";
+      this.button43.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.button43.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.button43.UseVisualStyleBackColor = true;
+      // 
+      // btnITUCamera
+      // 
+      this.btnITUCamera.Enabled = false;
+      this.btnITUCamera.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnITUCamera.ImageKey = "ITU";
+      this.btnITUCamera.ImageList = this.imlButtons;
+      this.btnITUCamera.Location = new System.Drawing.Point(29, 227);
+      this.btnITUCamera.Name = "btnITUCamera";
+      this.btnITUCamera.Size = new System.Drawing.Size(73, 23);
+      this.btnITUCamera.TabIndex = 12;
+      this.btnITUCamera.Text = "Camera";
+      this.btnITUCamera.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.btnITUCamera.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.btnITUCamera.UseVisualStyleBackColor = true;
+      // 
+      // button44
+      // 
+      this.button44.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.button44.ImageKey = "Connect";
+      this.button44.ImageList = this.imlButtons;
+      this.button44.Location = new System.Drawing.Point(29, 198);
+      this.button44.Name = "button44";
+      this.button44.Size = new System.Drawing.Size(73, 23);
+      this.button44.TabIndex = 12;
+      this.button44.Text = "Connect";
+      this.button44.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.button44.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.button44.UseVisualStyleBackColor = true;
+      // 
+      // tbpITUPS3
+      // 
+      this.tbpITUPS3.Controls.Add(this.panel9);
+      this.tbpITUPS3.ImageKey = "ITUPS3";
+      this.tbpITUPS3.Location = new System.Drawing.Point(4, 23);
+      this.tbpITUPS3.Name = "tbpITUPS3";
+      this.tbpITUPS3.Padding = new System.Windows.Forms.Padding(3);
+      this.tbpITUPS3.Size = new System.Drawing.Size(212, 392);
+      this.tbpITUPS3.TabIndex = 6;
+      this.tbpITUPS3.Text = "PS3";
+      this.tbpITUPS3.UseVisualStyleBackColor = true;
+      // 
+      // panel9
+      // 
+      this.panel9.Controls.Add(this.label55);
+      this.panel9.Controls.Add(this.btnITUPS3Camera);
+      this.panel9.Controls.Add(this.label56);
+      this.panel9.Controls.Add(this.btnITUPS3Adjust);
+      this.panel9.Controls.Add(this.groupBox11);
+      this.panel9.Controls.Add(this.txbITUPS3SubjectName);
+      this.panel9.Controls.Add(this.btnITUPS3Record);
+      this.panel9.Controls.Add(this.btnITUPS3Calibrate);
+      this.panel9.Controls.Add(this.label57);
+      this.panel9.Controls.Add(this.label58);
+      this.panel9.Controls.Add(this.label59);
+      this.panel9.Controls.Add(this.label60);
+      this.panel9.Controls.Add(this.btnITUPS3SubjectName);
+      this.panel9.Controls.Add(this.btnITUPS3Connect);
+      this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.panel9.Location = new System.Drawing.Point(3, 3);
+      this.panel9.Name = "panel9";
+      this.panel9.Size = new System.Drawing.Size(206, 386);
+      this.panel9.TabIndex = 11;
+      // 
+      // label55
+      // 
+      this.label55.AutoSize = true;
+      this.label55.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label55.Location = new System.Drawing.Point(5, 227);
+      this.label55.Margin = new System.Windows.Forms.Padding(0);
+      this.label55.Name = "label55";
+      this.label55.Size = new System.Drawing.Size(25, 24);
+      this.label55.TabIndex = 26;
+      this.label55.Text = "2.";
+      // 
+      // btnITUPS3Camera
+      // 
+      this.btnITUPS3Camera.Enabled = false;
+      this.btnITUPS3Camera.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnITUPS3Camera.ImageKey = "PS3";
+      this.btnITUPS3Camera.ImageList = this.imlButtons;
+      this.btnITUPS3Camera.Location = new System.Drawing.Point(29, 227);
+      this.btnITUPS3Camera.Name = "btnITUPS3Camera";
+      this.btnITUPS3Camera.Size = new System.Drawing.Size(73, 23);
+      this.btnITUPS3Camera.TabIndex = 25;
+      this.btnITUPS3Camera.Text = "Camera";
+      this.btnITUPS3Camera.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.btnITUPS3Camera.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.btnITUPS3Camera.UseVisualStyleBackColor = true;
+      // 
+      // label56
+      // 
+      this.label56.AutoSize = true;
+      this.label56.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label56.Location = new System.Drawing.Point(5, 256);
+      this.label56.Margin = new System.Windows.Forms.Padding(0);
+      this.label56.Name = "label56";
+      this.label56.Size = new System.Drawing.Size(25, 24);
+      this.label56.TabIndex = 24;
+      this.label56.Text = "3.";
+      // 
+      // btnITUPS3Adjust
+      // 
+      this.btnITUPS3Adjust.Enabled = false;
+      this.btnITUPS3Adjust.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnITUPS3Adjust.ImageKey = "Adjust";
+      this.btnITUPS3Adjust.ImageList = this.imlButtons;
+      this.btnITUPS3Adjust.Location = new System.Drawing.Point(29, 256);
+      this.btnITUPS3Adjust.Name = "btnITUPS3Adjust";
+      this.btnITUPS3Adjust.Size = new System.Drawing.Size(73, 23);
+      this.btnITUPS3Adjust.TabIndex = 23;
+      this.btnITUPS3Adjust.Text = "Adjust";
+      this.btnITUPS3Adjust.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.btnITUPS3Adjust.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.btnITUPS3Adjust.UseVisualStyleBackColor = true;
+      // 
+      // groupBox11
+      // 
+      this.groupBox11.Controls.Add(this.spcITUPS3Controls);
+      this.groupBox11.Location = new System.Drawing.Point(5, 3);
+      this.groupBox11.Name = "groupBox11";
+      this.groupBox11.Size = new System.Drawing.Size(196, 183);
+      this.groupBox11.TabIndex = 20;
+      this.groupBox11.TabStop = false;
+      this.groupBox11.Text = "Track status";
+      // 
+      // spcITUPS3Controls
+      // 
+      this.spcITUPS3Controls.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.spcITUPS3Controls.Location = new System.Drawing.Point(3, 16);
+      this.spcITUPS3Controls.Name = "spcITUPS3Controls";
+      this.spcITUPS3Controls.Orientation = System.Windows.Forms.Orientation.Horizontal;
+      // 
+      // spcITUPS3Controls.Panel1
+      // 
+      this.spcITUPS3Controls.Panel1.Controls.Add(this.spcITUPS3TrackStatus);
+      // 
+      // spcITUPS3Controls.Panel2
+      // 
+      this.spcITUPS3Controls.Panel2.Controls.Add(this.spcITUPS3CalibPlot);
+      this.spcITUPS3Controls.Size = new System.Drawing.Size(190, 164);
+      this.spcITUPS3Controls.SplitterDistance = 80;
+      this.spcITUPS3Controls.TabIndex = 22;
+      // 
+      // spcITUPS3TrackStatus
+      // 
+      this.spcITUPS3TrackStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.spcITUPS3TrackStatus.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+      this.spcITUPS3TrackStatus.IsSplitterFixed = true;
+      this.spcITUPS3TrackStatus.Location = new System.Drawing.Point(0, 0);
+      this.spcITUPS3TrackStatus.Name = "spcITUPS3TrackStatus";
+      this.spcITUPS3TrackStatus.Orientation = System.Windows.Forms.Orientation.Horizontal;
+      // 
+      // spcITUPS3TrackStatus.Panel1
+      // 
+      this.spcITUPS3TrackStatus.Panel1.BackColor = System.Drawing.Color.Transparent;
+      // 
+      // spcITUPS3TrackStatus.Panel2
+      // 
+      this.spcITUPS3TrackStatus.Panel2.Controls.Add(this.btnITUPS3ShowOnPresentationScreen);
+      this.spcITUPS3TrackStatus.Panel2MinSize = 22;
+      this.spcITUPS3TrackStatus.Size = new System.Drawing.Size(190, 80);
+      this.spcITUPS3TrackStatus.SplitterDistance = 54;
+      this.spcITUPS3TrackStatus.TabIndex = 20;
+      // 
+      // btnITUPS3ShowOnPresentationScreen
+      // 
+      this.btnITUPS3ShowOnPresentationScreen.BackColor = System.Drawing.Color.Transparent;
+      this.btnITUPS3ShowOnPresentationScreen.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.btnITUPS3ShowOnPresentationScreen.Enabled = false;
+      this.btnITUPS3ShowOnPresentationScreen.Location = new System.Drawing.Point(0, 0);
+      this.btnITUPS3ShowOnPresentationScreen.Name = "btnITUPS3ShowOnPresentationScreen";
+      this.btnITUPS3ShowOnPresentationScreen.Size = new System.Drawing.Size(190, 22);
+      this.btnITUPS3ShowOnPresentationScreen.TabIndex = 21;
+      this.btnITUPS3ShowOnPresentationScreen.Text = "Show on presentation screen";
+      this.btnITUPS3ShowOnPresentationScreen.UseVisualStyleBackColor = false;
+      // 
+      // spcITUPS3CalibPlot
+      // 
+      this.spcITUPS3CalibPlot.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.spcITUPS3CalibPlot.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+      this.spcITUPS3CalibPlot.IsSplitterFixed = true;
+      this.spcITUPS3CalibPlot.Location = new System.Drawing.Point(0, 0);
+      this.spcITUPS3CalibPlot.Name = "spcITUPS3CalibPlot";
+      this.spcITUPS3CalibPlot.Orientation = System.Windows.Forms.Orientation.Horizontal;
+      // 
+      // spcITUPS3CalibPlot.Panel2
+      // 
+      this.spcITUPS3CalibPlot.Panel2.Controls.Add(this.btnITUPS3Recalibrate);
+      this.spcITUPS3CalibPlot.Panel2.Controls.Add(this.btnITUPS3AcceptCalibration);
+      this.spcITUPS3CalibPlot.Panel2MinSize = 22;
+      this.spcITUPS3CalibPlot.Size = new System.Drawing.Size(190, 80);
+      this.spcITUPS3CalibPlot.SplitterDistance = 54;
+      this.spcITUPS3CalibPlot.TabIndex = 1;
+      // 
+      // btnITUPS3Recalibrate
+      // 
+      this.btnITUPS3Recalibrate.Dock = System.Windows.Forms.DockStyle.Right;
+      this.btnITUPS3Recalibrate.Location = new System.Drawing.Point(115, 0);
+      this.btnITUPS3Recalibrate.Name = "btnITUPS3Recalibrate";
+      this.btnITUPS3Recalibrate.Size = new System.Drawing.Size(75, 22);
+      this.btnITUPS3Recalibrate.TabIndex = 0;
+      this.btnITUPS3Recalibrate.Text = "Recalibrate";
+      this.btnITUPS3Recalibrate.UseVisualStyleBackColor = true;
+      // 
+      // btnITUPS3AcceptCalibration
+      // 
+      this.btnITUPS3AcceptCalibration.Dock = System.Windows.Forms.DockStyle.Left;
+      this.btnITUPS3AcceptCalibration.Location = new System.Drawing.Point(0, 0);
+      this.btnITUPS3AcceptCalibration.Name = "btnITUPS3AcceptCalibration";
+      this.btnITUPS3AcceptCalibration.Size = new System.Drawing.Size(75, 22);
+      this.btnITUPS3AcceptCalibration.TabIndex = 0;
+      this.btnITUPS3AcceptCalibration.Text = "Accept";
+      this.btnITUPS3AcceptCalibration.UseVisualStyleBackColor = true;
+      // 
+      // txbITUPS3SubjectName
+      // 
+      this.txbITUPS3SubjectName.Location = new System.Drawing.Point(107, 286);
+      this.txbITUPS3SubjectName.Name = "txbITUPS3SubjectName";
+      this.txbITUPS3SubjectName.ReadOnly = true;
+      this.txbITUPS3SubjectName.Size = new System.Drawing.Size(91, 20);
+      this.txbITUPS3SubjectName.TabIndex = 11;
+      this.txbITUPS3SubjectName.Text = "Subject1";
+      // 
+      // btnITUPS3Record
+      // 
+      this.btnITUPS3Record.Enabled = false;
+      this.btnITUPS3Record.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnITUPS3Record.ImageKey = "Record";
+      this.btnITUPS3Record.ImageList = this.imlButtons;
+      this.btnITUPS3Record.Location = new System.Drawing.Point(29, 342);
+      this.btnITUPS3Record.Name = "btnITUPS3Record";
+      this.btnITUPS3Record.Size = new System.Drawing.Size(73, 23);
+      this.btnITUPS3Record.TabIndex = 17;
+      this.btnITUPS3Record.Text = "&Record";
+      this.btnITUPS3Record.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      // 
+      // btnITUPS3Calibrate
+      // 
+      this.btnITUPS3Calibrate.Enabled = false;
+      this.btnITUPS3Calibrate.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnITUPS3Calibrate.ImageKey = "Calibrate";
+      this.btnITUPS3Calibrate.ImageList = this.imlButtons;
+      this.btnITUPS3Calibrate.Location = new System.Drawing.Point(29, 313);
+      this.btnITUPS3Calibrate.Name = "btnITUPS3Calibrate";
+      this.btnITUPS3Calibrate.Size = new System.Drawing.Size(73, 23);
+      this.btnITUPS3Calibrate.TabIndex = 17;
+      this.btnITUPS3Calibrate.Text = "&Calibrate";
+      this.btnITUPS3Calibrate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      // 
+      // label57
+      // 
+      this.label57.AutoSize = true;
+      this.label57.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label57.Location = new System.Drawing.Point(5, 313);
+      this.label57.Name = "label57";
+      this.label57.Size = new System.Drawing.Size(25, 24);
+      this.label57.TabIndex = 13;
+      this.label57.Text = "5.";
+      // 
+      // label58
+      // 
+      this.label58.AutoSize = true;
+      this.label58.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label58.Location = new System.Drawing.Point(5, 342);
+      this.label58.Name = "label58";
+      this.label58.Size = new System.Drawing.Size(25, 24);
+      this.label58.TabIndex = 13;
+      this.label58.Text = "6.";
+      // 
+      // label59
+      // 
+      this.label59.AutoSize = true;
+      this.label59.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label59.Location = new System.Drawing.Point(5, 284);
+      this.label59.Name = "label59";
+      this.label59.Size = new System.Drawing.Size(25, 24);
+      this.label59.TabIndex = 13;
+      this.label59.Text = "4.";
+      // 
+      // label60
+      // 
+      this.label60.AutoSize = true;
+      this.label60.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label60.Location = new System.Drawing.Point(5, 198);
+      this.label60.Margin = new System.Windows.Forms.Padding(0);
+      this.label60.Name = "label60";
+      this.label60.Size = new System.Drawing.Size(25, 24);
+      this.label60.TabIndex = 13;
+      this.label60.Text = "1.";
+      // 
+      // btnITUPS3SubjectName
+      // 
+      this.btnITUPS3SubjectName.Enabled = false;
+      this.btnITUPS3SubjectName.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnITUPS3SubjectName.ImageKey = "Subject";
+      this.btnITUPS3SubjectName.ImageList = this.imlButtons;
+      this.btnITUPS3SubjectName.Location = new System.Drawing.Point(29, 285);
+      this.btnITUPS3SubjectName.Name = "btnITUPS3SubjectName";
+      this.btnITUPS3SubjectName.Size = new System.Drawing.Size(73, 23);
+      this.btnITUPS3SubjectName.TabIndex = 12;
+      this.btnITUPS3SubjectName.Text = "Subject";
+      this.btnITUPS3SubjectName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.btnITUPS3SubjectName.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.btnITUPS3SubjectName.UseVisualStyleBackColor = true;
+      // 
+      // btnITUPS3Connect
+      // 
+      this.btnITUPS3Connect.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnITUPS3Connect.ImageKey = "Connect";
+      this.btnITUPS3Connect.ImageList = this.imlButtons;
+      this.btnITUPS3Connect.Location = new System.Drawing.Point(29, 198);
+      this.btnITUPS3Connect.Name = "btnITUPS3Connect";
+      this.btnITUPS3Connect.Size = new System.Drawing.Size(73, 23);
+      this.btnITUPS3Connect.TabIndex = 12;
+      this.btnITUPS3Connect.Text = "Connect";
+      this.btnITUPS3Connect.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.btnITUPS3Connect.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.btnITUPS3Connect.UseVisualStyleBackColor = true;
+      // 
+      // tabPage8
+      // 
+      this.tabPage8.Controls.Add(this.panel10);
+      this.tabPage8.ImageKey = "Tobii";
+      this.tabPage8.Location = new System.Drawing.Point(4, 23);
+      this.tabPage8.Name = "tabPage8";
+      this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
+      this.tabPage8.Size = new System.Drawing.Size(212, 392);
+      this.tabPage8.TabIndex = 0;
+      this.tabPage8.Text = "Tobii";
+      this.tabPage8.UseVisualStyleBackColor = true;
+      // 
+      // panel10
+      // 
+      this.panel10.Controls.Add(this.groupBox12);
+      this.panel10.Controls.Add(this.textBox10);
+      this.panel10.Controls.Add(this.button48);
+      this.panel10.Controls.Add(this.button49);
+      this.panel10.Controls.Add(this.label61);
+      this.panel10.Controls.Add(this.label62);
+      this.panel10.Controls.Add(this.label63);
+      this.panel10.Controls.Add(this.label64);
+      this.panel10.Controls.Add(this.button50);
+      this.panel10.Controls.Add(this.button51);
+      this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.panel10.Location = new System.Drawing.Point(3, 3);
+      this.panel10.Name = "panel10";
+      this.panel10.Size = new System.Drawing.Size(206, 386);
+      this.panel10.TabIndex = 11;
+      // 
+      // groupBox12
+      // 
+      this.groupBox12.Controls.Add(this.splitContainer17);
+      this.groupBox12.Location = new System.Drawing.Point(5, 3);
+      this.groupBox12.Name = "groupBox12";
+      this.groupBox12.Size = new System.Drawing.Size(196, 183);
+      this.groupBox12.TabIndex = 20;
+      this.groupBox12.TabStop = false;
+      this.groupBox12.Text = "Track status";
+      // 
+      // splitContainer17
+      // 
+      this.splitContainer17.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.splitContainer17.Location = new System.Drawing.Point(3, 16);
+      this.splitContainer17.Name = "splitContainer17";
+      this.splitContainer17.Orientation = System.Windows.Forms.Orientation.Horizontal;
+      // 
+      // splitContainer17.Panel1
+      // 
+      this.splitContainer17.Panel1.Controls.Add(this.splitContainer18);
+      // 
+      // splitContainer17.Panel2
+      // 
+      this.splitContainer17.Panel2.Controls.Add(this.splitContainer19);
+      this.splitContainer17.Size = new System.Drawing.Size(190, 164);
+      this.splitContainer17.SplitterDistance = 80;
+      this.splitContainer17.TabIndex = 22;
+      // 
+      // splitContainer18
+      // 
+      this.splitContainer18.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.splitContainer18.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+      this.splitContainer18.IsSplitterFixed = true;
+      this.splitContainer18.Location = new System.Drawing.Point(0, 0);
+      this.splitContainer18.Name = "splitContainer18";
+      this.splitContainer18.Orientation = System.Windows.Forms.Orientation.Horizontal;
+      // 
+      // splitContainer18.Panel1
+      // 
+      this.splitContainer18.Panel1.BackColor = System.Drawing.Color.Transparent;
+      // 
+      // splitContainer18.Panel2
+      // 
+      this.splitContainer18.Panel2.Controls.Add(this.button45);
+      this.splitContainer18.Panel2MinSize = 22;
+      this.splitContainer18.Size = new System.Drawing.Size(190, 80);
+      this.splitContainer18.SplitterDistance = 54;
+      this.splitContainer18.TabIndex = 20;
+      // 
+      // button45
+      // 
+      this.button45.BackColor = System.Drawing.Color.Transparent;
+      this.button45.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.button45.Enabled = false;
+      this.button45.Location = new System.Drawing.Point(0, 0);
+      this.button45.Name = "button45";
+      this.button45.Size = new System.Drawing.Size(190, 22);
+      this.button45.TabIndex = 21;
+      this.button45.Text = "Show on presentation screen";
+      this.button45.UseVisualStyleBackColor = false;
+      // 
+      // splitContainer19
+      // 
+      this.splitContainer19.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.splitContainer19.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+      this.splitContainer19.IsSplitterFixed = true;
+      this.splitContainer19.Location = new System.Drawing.Point(0, 0);
+      this.splitContainer19.Name = "splitContainer19";
+      this.splitContainer19.Orientation = System.Windows.Forms.Orientation.Horizontal;
+      // 
+      // splitContainer19.Panel2
+      // 
+      this.splitContainer19.Panel2.Controls.Add(this.button46);
+      this.splitContainer19.Panel2.Controls.Add(this.button47);
+      this.splitContainer19.Panel2MinSize = 22;
+      this.splitContainer19.Size = new System.Drawing.Size(190, 80);
+      this.splitContainer19.SplitterDistance = 54;
+      this.splitContainer19.TabIndex = 1;
+      // 
+      // button46
+      // 
+      this.button46.Dock = System.Windows.Forms.DockStyle.Right;
+      this.button46.Location = new System.Drawing.Point(115, 0);
+      this.button46.Name = "button46";
+      this.button46.Size = new System.Drawing.Size(75, 22);
+      this.button46.TabIndex = 0;
+      this.button46.Text = "Recalibrate";
+      this.button46.UseVisualStyleBackColor = true;
+      // 
+      // button47
+      // 
+      this.button47.Dock = System.Windows.Forms.DockStyle.Left;
+      this.button47.Location = new System.Drawing.Point(0, 0);
+      this.button47.Name = "button47";
+      this.button47.Size = new System.Drawing.Size(75, 22);
+      this.button47.TabIndex = 0;
+      this.button47.Text = "Accept";
+      this.button47.UseVisualStyleBackColor = true;
+      // 
+      // textBox10
+      // 
+      this.textBox10.Location = new System.Drawing.Point(107, 229);
+      this.textBox10.Name = "textBox10";
+      this.textBox10.ReadOnly = true;
+      this.textBox10.Size = new System.Drawing.Size(91, 20);
+      this.textBox10.TabIndex = 11;
+      this.textBox10.Text = "Subject1";
+      // 
+      // button48
+      // 
+      this.button48.Enabled = false;
+      this.button48.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.button48.ImageKey = "Record";
+      this.button48.ImageList = this.imlButtons;
+      this.button48.Location = new System.Drawing.Point(29, 285);
+      this.button48.Name = "button48";
+      this.button48.Size = new System.Drawing.Size(72, 23);
+      this.button48.TabIndex = 17;
+      this.button48.Text = "&Record";
+      this.button48.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      // 
+      // button49
+      // 
+      this.button49.Enabled = false;
+      this.button49.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.button49.ImageKey = "Calibrate";
+      this.button49.ImageList = this.imlButtons;
+      this.button49.Location = new System.Drawing.Point(29, 256);
+      this.button49.Name = "button49";
+      this.button49.Size = new System.Drawing.Size(72, 23);
+      this.button49.TabIndex = 17;
+      this.button49.Text = "&Calibrate";
+      this.button49.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      // 
+      // label61
+      // 
+      this.label61.AutoSize = true;
+      this.label61.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label61.Location = new System.Drawing.Point(5, 256);
+      this.label61.Name = "label61";
+      this.label61.Size = new System.Drawing.Size(25, 24);
+      this.label61.TabIndex = 13;
+      this.label61.Text = "3.";
+      // 
+      // label62
+      // 
+      this.label62.AutoSize = true;
+      this.label62.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label62.Location = new System.Drawing.Point(5, 285);
+      this.label62.Name = "label62";
+      this.label62.Size = new System.Drawing.Size(25, 24);
+      this.label62.TabIndex = 13;
+      this.label62.Text = "4.";
+      // 
+      // label63
+      // 
+      this.label63.AutoSize = true;
+      this.label63.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label63.Location = new System.Drawing.Point(5, 227);
+      this.label63.Name = "label63";
+      this.label63.Size = new System.Drawing.Size(25, 24);
+      this.label63.TabIndex = 13;
+      this.label63.Text = "2.";
+      // 
+      // label64
+      // 
+      this.label64.AutoSize = true;
+      this.label64.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label64.Location = new System.Drawing.Point(5, 198);
+      this.label64.Margin = new System.Windows.Forms.Padding(0);
+      this.label64.Name = "label64";
+      this.label64.Size = new System.Drawing.Size(25, 24);
+      this.label64.TabIndex = 13;
+      this.label64.Text = "1.";
+      // 
+      // button50
+      // 
+      this.button50.Enabled = false;
+      this.button50.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.button50.ImageKey = "Subject";
+      this.button50.ImageList = this.imlButtons;
+      this.button50.Location = new System.Drawing.Point(29, 228);
+      this.button50.Name = "button50";
+      this.button50.Size = new System.Drawing.Size(72, 23);
+      this.button50.TabIndex = 12;
+      this.button50.Text = "Subject";
+      this.button50.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.button50.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.button50.UseVisualStyleBackColor = true;
+      // 
+      // button51
+      // 
+      this.button51.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.button51.ImageKey = "Connect";
+      this.button51.ImageList = this.imlButtons;
+      this.button51.Location = new System.Drawing.Point(29, 198);
+      this.button51.Name = "button51";
+      this.button51.Size = new System.Drawing.Size(73, 23);
+      this.button51.TabIndex = 12;
+      this.button51.Text = "Connect";
+      this.button51.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.button51.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.button51.UseVisualStyleBackColor = true;
+      // 
+      // tabPage9
+      // 
+      this.tabPage9.Controls.Add(this.groupBox13);
+      this.tabPage9.Controls.Add(this.textBox11);
+      this.tabPage9.Controls.Add(this.button55);
+      this.tabPage9.Controls.Add(this.button56);
+      this.tabPage9.Controls.Add(this.label67);
+      this.tabPage9.Controls.Add(this.label68);
+      this.tabPage9.Controls.Add(this.label69);
+      this.tabPage9.Controls.Add(this.label70);
+      this.tabPage9.Controls.Add(this.button57);
+      this.tabPage9.Controls.Add(this.button58);
+      this.tabPage9.ImageKey = "Alea";
+      this.tabPage9.Location = new System.Drawing.Point(4, 23);
+      this.tabPage9.Name = "tabPage9";
+      this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
+      this.tabPage9.Size = new System.Drawing.Size(212, 392);
+      this.tabPage9.TabIndex = 2;
+      this.tabPage9.Text = "Alea";
+      this.tabPage9.UseVisualStyleBackColor = true;
+      // 
+      // groupBox13
+      // 
+      this.groupBox13.Controls.Add(this.splitContainer20);
+      this.groupBox13.Location = new System.Drawing.Point(8, 6);
+      this.groupBox13.Name = "groupBox13";
+      this.groupBox13.Size = new System.Drawing.Size(196, 183);
+      this.groupBox13.TabIndex = 27;
+      this.groupBox13.TabStop = false;
+      this.groupBox13.Text = "Track status";
+      // 
+      // splitContainer20
+      // 
+      this.splitContainer20.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.splitContainer20.Location = new System.Drawing.Point(3, 16);
+      this.splitContainer20.Name = "splitContainer20";
+      this.splitContainer20.Orientation = System.Windows.Forms.Orientation.Horizontal;
+      // 
+      // splitContainer20.Panel1
+      // 
+      this.splitContainer20.Panel1.Controls.Add(this.splitContainer21);
+      // 
+      // splitContainer20.Panel2
+      // 
+      this.splitContainer20.Panel2.Controls.Add(this.splitContainer22);
+      this.splitContainer20.Size = new System.Drawing.Size(190, 164);
+      this.splitContainer20.SplitterDistance = 80;
+      this.splitContainer20.TabIndex = 22;
+      // 
+      // splitContainer21
+      // 
+      this.splitContainer21.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.splitContainer21.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+      this.splitContainer21.IsSplitterFixed = true;
+      this.splitContainer21.Location = new System.Drawing.Point(0, 0);
+      this.splitContainer21.Name = "splitContainer21";
+      this.splitContainer21.Orientation = System.Windows.Forms.Orientation.Horizontal;
+      // 
+      // splitContainer21.Panel1
+      // 
+      this.splitContainer21.Panel1.BackColor = System.Drawing.Color.Transparent;
+      // 
+      // splitContainer21.Panel2
+      // 
+      this.splitContainer21.Panel2.Controls.Add(this.button52);
+      this.splitContainer21.Panel2MinSize = 22;
+      this.splitContainer21.Size = new System.Drawing.Size(190, 80);
+      this.splitContainer21.SplitterDistance = 54;
+      this.splitContainer21.TabIndex = 20;
+      // 
+      // button52
+      // 
+      this.button52.BackColor = System.Drawing.Color.Transparent;
+      this.button52.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.button52.Enabled = false;
+      this.button52.Location = new System.Drawing.Point(0, 0);
+      this.button52.Name = "button52";
+      this.button52.Size = new System.Drawing.Size(190, 22);
+      this.button52.TabIndex = 21;
+      this.button52.Text = "Show on presentation screen";
+      this.button52.UseVisualStyleBackColor = false;
+      // 
+      // splitContainer22
+      // 
+      this.splitContainer22.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.splitContainer22.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+      this.splitContainer22.IsSplitterFixed = true;
+      this.splitContainer22.Location = new System.Drawing.Point(0, 0);
+      this.splitContainer22.Name = "splitContainer22";
+      this.splitContainer22.Orientation = System.Windows.Forms.Orientation.Horizontal;
+      // 
+      // splitContainer22.Panel1
+      // 
+      this.splitContainer22.Panel1.BackColor = System.Drawing.Color.Transparent;
+      this.splitContainer22.Panel1.Controls.Add(this.label65);
+      this.splitContainer22.Panel1.Controls.Add(this.label66);
+      // 
+      // splitContainer22.Panel2
+      // 
+      this.splitContainer22.Panel2.Controls.Add(this.button53);
+      this.splitContainer22.Panel2.Controls.Add(this.button54);
+      this.splitContainer22.Panel2MinSize = 22;
+      this.splitContainer22.Size = new System.Drawing.Size(190, 80);
+      this.splitContainer22.SplitterDistance = 54;
+      this.splitContainer22.TabIndex = 1;
+      // 
+      // label65
+      // 
+      this.label65.AutoSize = true;
+      this.label65.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label65.Location = new System.Drawing.Point(69, 32);
+      this.label65.Name = "label65";
+      this.label65.Size = new System.Drawing.Size(50, 13);
+      this.label65.TabIndex = 1;
+      this.label65.Text = "Not Set";
+      // 
+      // label66
+      // 
+      this.label66.AutoSize = true;
+      this.label66.Location = new System.Drawing.Point(50, 10);
+      this.label66.Name = "label66";
+      this.label66.Size = new System.Drawing.Size(89, 13);
+      this.label66.TabIndex = 0;
+      this.label66.Text = "Calibration Result";
+      // 
+      // button53
+      // 
+      this.button53.Dock = System.Windows.Forms.DockStyle.Right;
+      this.button53.Location = new System.Drawing.Point(115, 0);
+      this.button53.Name = "button53";
+      this.button53.Size = new System.Drawing.Size(75, 22);
+      this.button53.TabIndex = 0;
+      this.button53.Text = "Recalibrate";
+      this.button53.UseVisualStyleBackColor = true;
+      // 
+      // button54
+      // 
+      this.button54.Dock = System.Windows.Forms.DockStyle.Left;
+      this.button54.Location = new System.Drawing.Point(0, 0);
+      this.button54.Name = "button54";
+      this.button54.Size = new System.Drawing.Size(75, 22);
+      this.button54.TabIndex = 0;
+      this.button54.Text = "Accept";
+      this.button54.UseVisualStyleBackColor = true;
+      // 
+      // textBox11
+      // 
+      this.textBox11.Location = new System.Drawing.Point(110, 232);
+      this.textBox11.Name = "textBox11";
+      this.textBox11.ReadOnly = true;
+      this.textBox11.Size = new System.Drawing.Size(91, 20);
+      this.textBox11.TabIndex = 18;
+      this.textBox11.Text = "Subject1";
+      // 
+      // button55
+      // 
+      this.button55.Enabled = false;
+      this.button55.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.button55.ImageKey = "Record";
+      this.button55.ImageList = this.imlButtons;
+      this.button55.Location = new System.Drawing.Point(32, 288);
+      this.button55.Name = "button55";
+      this.button55.Size = new System.Drawing.Size(72, 23);
+      this.button55.TabIndex = 26;
+      this.button55.Text = "&Record";
+      this.button55.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      // 
+      // button56
+      // 
+      this.button56.Enabled = false;
+      this.button56.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.button56.ImageKey = "Calibrate";
+      this.button56.ImageList = this.imlButtons;
+      this.button56.Location = new System.Drawing.Point(32, 259);
+      this.button56.Name = "button56";
+      this.button56.Size = new System.Drawing.Size(72, 23);
+      this.button56.TabIndex = 25;
+      this.button56.Text = "&Calibrate";
+      this.button56.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      // 
+      // label67
+      // 
+      this.label67.AutoSize = true;
+      this.label67.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label67.Location = new System.Drawing.Point(8, 259);
+      this.label67.Name = "label67";
+      this.label67.Size = new System.Drawing.Size(25, 24);
+      this.label67.TabIndex = 24;
+      this.label67.Text = "3.";
+      // 
+      // label68
+      // 
+      this.label68.AutoSize = true;
+      this.label68.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label68.Location = new System.Drawing.Point(8, 288);
+      this.label68.Name = "label68";
+      this.label68.Size = new System.Drawing.Size(25, 24);
+      this.label68.TabIndex = 22;
+      this.label68.Text = "4.";
+      // 
+      // label69
+      // 
+      this.label69.AutoSize = true;
+      this.label69.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label69.Location = new System.Drawing.Point(8, 230);
+      this.label69.Name = "label69";
+      this.label69.Size = new System.Drawing.Size(25, 24);
+      this.label69.TabIndex = 23;
+      this.label69.Text = "2.";
+      // 
+      // label70
+      // 
+      this.label70.AutoSize = true;
+      this.label70.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label70.Location = new System.Drawing.Point(8, 201);
+      this.label70.Margin = new System.Windows.Forms.Padding(0);
+      this.label70.Name = "label70";
+      this.label70.Size = new System.Drawing.Size(25, 24);
+      this.label70.TabIndex = 21;
+      this.label70.Text = "1.";
+      // 
+      // button57
+      // 
+      this.button57.Enabled = false;
+      this.button57.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.button57.ImageKey = "Subject";
+      this.button57.ImageList = this.imlButtons;
+      this.button57.Location = new System.Drawing.Point(32, 231);
+      this.button57.Name = "button57";
+      this.button57.Size = new System.Drawing.Size(72, 23);
+      this.button57.TabIndex = 20;
+      this.button57.Text = "Subject";
+      this.button57.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.button57.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.button57.UseVisualStyleBackColor = true;
+      // 
+      // button58
+      // 
+      this.button58.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.button58.ImageKey = "Connect";
+      this.button58.ImageList = this.imlButtons;
+      this.button58.Location = new System.Drawing.Point(32, 201);
+      this.button58.Name = "button58";
+      this.button58.Size = new System.Drawing.Size(73, 23);
+      this.button58.TabIndex = 19;
+      this.button58.Text = "Connect";
+      this.button58.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.button58.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.button58.UseVisualStyleBackColor = true;
+      // 
+      // tabPage10
+      // 
+      this.tabPage10.Controls.Add(this.groupBox14);
+      this.tabPage10.Controls.Add(this.textBox13);
+      this.tabPage10.Controls.Add(this.button59);
+      this.tabPage10.Controls.Add(this.button60);
+      this.tabPage10.Controls.Add(this.label71);
+      this.tabPage10.Controls.Add(this.label72);
+      this.tabPage10.Controls.Add(this.label73);
+      this.tabPage10.Controls.Add(this.label74);
+      this.tabPage10.Controls.Add(this.button61);
+      this.tabPage10.Controls.Add(this.button62);
+      this.tabPage10.ImageKey = "SMI";
+      this.tabPage10.Location = new System.Drawing.Point(4, 23);
+      this.tabPage10.Name = "tabPage10";
+      this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
+      this.tabPage10.Size = new System.Drawing.Size(212, 392);
+      this.tabPage10.TabIndex = 4;
+      this.tabPage10.Text = "SMI";
+      this.tabPage10.UseVisualStyleBackColor = true;
+      // 
+      // groupBox14
+      // 
+      this.groupBox14.Controls.Add(this.textBox12);
+      this.groupBox14.Location = new System.Drawing.Point(8, 8);
+      this.groupBox14.Name = "groupBox14";
+      this.groupBox14.Size = new System.Drawing.Size(196, 183);
+      this.groupBox14.TabIndex = 30;
+      this.groupBox14.TabStop = false;
+      this.groupBox14.Text = "Track status";
+      // 
+      // textBox12
+      // 
+      this.textBox12.Location = new System.Drawing.Point(6, 19);
+      this.textBox12.Multiline = true;
+      this.textBox12.Name = "textBox12";
+      this.textBox12.Size = new System.Drawing.Size(184, 137);
+      this.textBox12.TabIndex = 0;
+      this.textBox12.Text = resources.GetString("textBox12.Text");
+      // 
+      // textBox13
+      // 
+      this.textBox13.Location = new System.Drawing.Point(110, 234);
+      this.textBox13.Name = "textBox13";
+      this.textBox13.ReadOnly = true;
+      this.textBox13.Size = new System.Drawing.Size(91, 20);
+      this.textBox13.TabIndex = 21;
+      this.textBox13.Text = "Subject1";
+      // 
+      // button59
+      // 
+      this.button59.Enabled = false;
+      this.button59.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.button59.ImageKey = "Record";
+      this.button59.ImageList = this.imlButtons;
+      this.button59.Location = new System.Drawing.Point(32, 290);
+      this.button59.Name = "button59";
+      this.button59.Size = new System.Drawing.Size(72, 23);
+      this.button59.TabIndex = 28;
+      this.button59.Text = "&Record";
+      this.button59.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      // 
+      // button60
+      // 
+      this.button60.Enabled = false;
+      this.button60.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.button60.ImageKey = "Calibrate";
+      this.button60.ImageList = this.imlButtons;
+      this.button60.Location = new System.Drawing.Point(32, 261);
+      this.button60.Name = "button60";
+      this.button60.Size = new System.Drawing.Size(72, 23);
+      this.button60.TabIndex = 29;
+      this.button60.Text = "&Calibrate";
+      this.button60.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      // 
+      // label71
+      // 
+      this.label71.AutoSize = true;
+      this.label71.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label71.Location = new System.Drawing.Point(8, 261);
+      this.label71.Name = "label71";
+      this.label71.Size = new System.Drawing.Size(25, 24);
+      this.label71.TabIndex = 27;
+      this.label71.Text = "3.";
+      // 
+      // label72
+      // 
+      this.label72.AutoSize = true;
+      this.label72.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label72.Location = new System.Drawing.Point(8, 290);
+      this.label72.Name = "label72";
+      this.label72.Size = new System.Drawing.Size(25, 24);
+      this.label72.TabIndex = 26;
+      this.label72.Text = "4.";
+      // 
+      // label73
+      // 
+      this.label73.AutoSize = true;
+      this.label73.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label73.Location = new System.Drawing.Point(8, 232);
+      this.label73.Name = "label73";
+      this.label73.Size = new System.Drawing.Size(25, 24);
+      this.label73.TabIndex = 24;
+      this.label73.Text = "2.";
+      // 
+      // label74
+      // 
+      this.label74.AutoSize = true;
+      this.label74.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label74.Location = new System.Drawing.Point(8, 203);
+      this.label74.Margin = new System.Windows.Forms.Padding(0);
+      this.label74.Name = "label74";
+      this.label74.Size = new System.Drawing.Size(25, 24);
+      this.label74.TabIndex = 25;
+      this.label74.Text = "1.";
+      // 
+      // button61
+      // 
+      this.button61.Enabled = false;
+      this.button61.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.button61.ImageKey = "Subject";
+      this.button61.ImageList = this.imlButtons;
+      this.button61.Location = new System.Drawing.Point(32, 233);
+      this.button61.Name = "button61";
+      this.button61.Size = new System.Drawing.Size(72, 23);
+      this.button61.TabIndex = 22;
+      this.button61.Text = "Subject";
+      this.button61.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.button61.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.button61.UseVisualStyleBackColor = true;
+      // 
+      // button62
+      // 
+      this.button62.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.button62.ImageKey = "Connect";
+      this.button62.ImageList = this.imlButtons;
+      this.button62.Location = new System.Drawing.Point(32, 203);
+      this.button62.Name = "button62";
+      this.button62.Size = new System.Drawing.Size(73, 23);
+      this.button62.TabIndex = 23;
+      this.button62.Text = "Connect";
+      this.button62.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.button62.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.button62.UseVisualStyleBackColor = true;
+      // 
+      // tabPage11
+      // 
+      this.tabPage11.Controls.Add(this.label77);
+      this.tabPage11.Controls.Add(this.label78);
+      this.tabPage11.Controls.Add(this.button63);
+      this.tabPage11.Controls.Add(this.textBox14);
+      this.tabPage11.Controls.Add(this.button64);
+      this.tabPage11.ImageKey = "Mouse";
+      this.tabPage11.Location = new System.Drawing.Point(4, 23);
+      this.tabPage11.Name = "tabPage11";
+      this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
+      this.tabPage11.Size = new System.Drawing.Size(212, 392);
+      this.tabPage11.TabIndex = 1;
+      this.tabPage11.Text = "MouseOnly";
+      this.tabPage11.UseVisualStyleBackColor = true;
+      // 
+      // label77
+      // 
+      this.label77.AutoSize = true;
+      this.label77.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label77.Location = new System.Drawing.Point(7, 42);
+      this.label77.Name = "label77";
+      this.label77.Size = new System.Drawing.Size(25, 24);
+      this.label77.TabIndex = 21;
+      this.label77.Text = "2.";
+      // 
+      // label78
+      // 
+      this.label78.AutoSize = true;
+      this.label78.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label78.Location = new System.Drawing.Point(7, 13);
+      this.label78.Name = "label78";
+      this.label78.Size = new System.Drawing.Size(25, 24);
+      this.label78.TabIndex = 20;
+      this.label78.Text = "1.";
+      // 
+      // button63
+      // 
+      this.button63.ImageKey = "Subject";
+      this.button63.ImageList = this.imlButtons;
+      this.button63.Location = new System.Drawing.Point(32, 13);
+      this.button63.Name = "button63";
+      this.button63.Size = new System.Drawing.Size(71, 23);
+      this.button63.TabIndex = 19;
+      this.button63.Text = "Subject";
+      this.button63.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.button63.UseVisualStyleBackColor = true;
+      // 
+      // textBox14
+      // 
+      this.textBox14.Location = new System.Drawing.Point(115, 15);
+      this.textBox14.Name = "textBox14";
+      this.textBox14.ReadOnly = true;
+      this.textBox14.Size = new System.Drawing.Size(87, 20);
+      this.textBox14.TabIndex = 18;
+      this.textBox14.Text = "Subject1";
+      // 
+      // button64
+      // 
+      this.button64.BackColor = System.Drawing.Color.Transparent;
+      this.button64.Enabled = false;
+      this.button64.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.button64.ImageKey = "Record";
+      this.button64.ImageList = this.imlButtons;
+      this.button64.Location = new System.Drawing.Point(32, 42);
+      this.button64.Name = "button64";
+      this.button64.Size = new System.Drawing.Size(71, 23);
+      this.button64.TabIndex = 14;
+      this.button64.Text = "Record";
+      this.button64.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.button64.UseVisualStyleBackColor = false;
+      // 
+      // tabPage12
+      // 
+      this.tabPage12.Controls.Add(this.label79);
+      this.tabPage12.Controls.Add(this.button65);
+      this.tabPage12.ImageKey = "None";
+      this.tabPage12.Location = new System.Drawing.Point(4, 23);
+      this.tabPage12.Name = "tabPage12";
+      this.tabPage12.Padding = new System.Windows.Forms.Padding(3);
+      this.tabPage12.Size = new System.Drawing.Size(212, 392);
+      this.tabPage12.TabIndex = 3;
+      this.tabPage12.Text = "No tracking device selected";
+      this.tabPage12.UseVisualStyleBackColor = true;
+      // 
+      // label79
+      // 
+      this.label79.Location = new System.Drawing.Point(12, 10);
+      this.label79.Name = "label79";
+      this.label79.Size = new System.Drawing.Size(194, 46);
+      this.label79.TabIndex = 1;
+      this.label79.Text = "No tracking device available.\r\nClick the button to see which tracking devices are" +
+          " supported/available.";
+      // 
+      // button65
+      // 
+      this.button65.Image = global::Ogama.Properties.Resources.LegendHS;
+      this.button65.Location = new System.Drawing.Point(27, 59);
+      this.button65.Name = "button65";
+      this.button65.Size = new System.Drawing.Size(149, 34);
+      this.button65.TabIndex = 0;
+      this.button65.Text = "Select tracking device";
+      this.button65.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.button65.UseVisualStyleBackColor = true;
+      // 
       // RecordModule
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3121,6 +4719,8 @@
       this.spcAleaCalibPlot.Panel1.PerformLayout();
       this.spcAleaCalibPlot.Panel2.ResumeLayout(false);
       this.spcAleaCalibPlot.ResumeLayout(false);
+      this.tbpAsl.ResumeLayout(false);
+      this.tbpAsl.PerformLayout();
       this.tbpSMI.ResumeLayout(false);
       this.tbpSMI.PerformLayout();
       this.groupBox3.ResumeLayout(false);
@@ -3191,6 +4791,58 @@
       this.splitContainer12.ResumeLayout(false);
       this.splitContainer13.Panel2.ResumeLayout(false);
       this.splitContainer13.ResumeLayout(false);
+      this.tabPage7.ResumeLayout(false);
+      this.panel8.ResumeLayout(false);
+      this.panel8.PerformLayout();
+      this.groupBox9.ResumeLayout(false);
+      this.splitContainer14.Panel1.ResumeLayout(false);
+      this.splitContainer14.Panel2.ResumeLayout(false);
+      this.splitContainer14.ResumeLayout(false);
+      this.splitContainer15.Panel2.ResumeLayout(false);
+      this.splitContainer15.ResumeLayout(false);
+      this.splitContainer16.Panel2.ResumeLayout(false);
+      this.splitContainer16.ResumeLayout(false);
+      this.tbpITUPS3.ResumeLayout(false);
+      this.panel9.ResumeLayout(false);
+      this.panel9.PerformLayout();
+      this.groupBox11.ResumeLayout(false);
+      this.spcITUPS3Controls.Panel1.ResumeLayout(false);
+      this.spcITUPS3Controls.Panel2.ResumeLayout(false);
+      this.spcITUPS3Controls.ResumeLayout(false);
+      this.spcITUPS3TrackStatus.Panel2.ResumeLayout(false);
+      this.spcITUPS3TrackStatus.ResumeLayout(false);
+      this.spcITUPS3CalibPlot.Panel2.ResumeLayout(false);
+      this.spcITUPS3CalibPlot.ResumeLayout(false);
+      this.tabPage8.ResumeLayout(false);
+      this.panel10.ResumeLayout(false);
+      this.panel10.PerformLayout();
+      this.groupBox12.ResumeLayout(false);
+      this.splitContainer17.Panel1.ResumeLayout(false);
+      this.splitContainer17.Panel2.ResumeLayout(false);
+      this.splitContainer17.ResumeLayout(false);
+      this.splitContainer18.Panel2.ResumeLayout(false);
+      this.splitContainer18.ResumeLayout(false);
+      this.splitContainer19.Panel2.ResumeLayout(false);
+      this.splitContainer19.ResumeLayout(false);
+      this.tabPage9.ResumeLayout(false);
+      this.tabPage9.PerformLayout();
+      this.groupBox13.ResumeLayout(false);
+      this.splitContainer20.Panel1.ResumeLayout(false);
+      this.splitContainer20.Panel2.ResumeLayout(false);
+      this.splitContainer20.ResumeLayout(false);
+      this.splitContainer21.Panel2.ResumeLayout(false);
+      this.splitContainer21.ResumeLayout(false);
+      this.splitContainer22.Panel1.ResumeLayout(false);
+      this.splitContainer22.Panel1.PerformLayout();
+      this.splitContainer22.Panel2.ResumeLayout(false);
+      this.splitContainer22.ResumeLayout(false);
+      this.tabPage10.ResumeLayout(false);
+      this.tabPage10.PerformLayout();
+      this.groupBox14.ResumeLayout(false);
+      this.groupBox14.PerformLayout();
+      this.tabPage11.ResumeLayout(false);
+      this.tabPage11.PerformLayout();
+      this.tabPage12.ResumeLayout(false);
       this.ResumeLayout(false);
 
     }
@@ -3412,5 +5064,117 @@
     private System.Windows.Forms.Button button36;
     private System.Windows.Forms.Button button37;
     private System.Windows.Forms.Label label54;
+    private System.Windows.Forms.TabPage tabPage7;
+    private System.Windows.Forms.Panel panel8;
+    private System.Windows.Forms.Label label18;
+    private System.Windows.Forms.Button button29;
+    private System.Windows.Forms.GroupBox groupBox9;
+    private System.Windows.Forms.SplitContainer splitContainer14;
+    private System.Windows.Forms.SplitContainer splitContainer15;
+    private System.Windows.Forms.Button button38;
+    private System.Windows.Forms.SplitContainer splitContainer16;
+    private System.Windows.Forms.Button button39;
+    private System.Windows.Forms.Button button40;
+    private System.Windows.Forms.TextBox textBox9;
+    private System.Windows.Forms.Button button41;
+    private System.Windows.Forms.Button button42;
+    private System.Windows.Forms.Label label43;
+    private System.Windows.Forms.Label label44;
+    private System.Windows.Forms.Label label45;
+    private System.Windows.Forms.Label label46;
+    private System.Windows.Forms.Label label53;
+    private System.Windows.Forms.Button button43;
+    private System.Windows.Forms.Button btnITUCamera;
+    private System.Windows.Forms.Button button44;
+    private System.Windows.Forms.TabPage tbpITUPS3;
+    private System.Windows.Forms.Panel panel9;
+    private System.Windows.Forms.Label label55;
+    private System.Windows.Forms.Button btnITUPS3Camera;
+    private System.Windows.Forms.Label label56;
+    private System.Windows.Forms.Button btnITUPS3Adjust;
+    private System.Windows.Forms.GroupBox groupBox11;
+    private System.Windows.Forms.SplitContainer spcITUPS3Controls;
+    private System.Windows.Forms.SplitContainer spcITUPS3TrackStatus;
+    private System.Windows.Forms.Button btnITUPS3ShowOnPresentationScreen;
+    private System.Windows.Forms.SplitContainer spcITUPS3CalibPlot;
+    private System.Windows.Forms.Button btnITUPS3Recalibrate;
+    private System.Windows.Forms.Button btnITUPS3AcceptCalibration;
+    private System.Windows.Forms.TextBox txbITUPS3SubjectName;
+    private System.Windows.Forms.Button btnITUPS3Record;
+    private System.Windows.Forms.Button btnITUPS3Calibrate;
+    private System.Windows.Forms.Label label57;
+    private System.Windows.Forms.Label label58;
+    private System.Windows.Forms.Label label59;
+    private System.Windows.Forms.Label label60;
+    private System.Windows.Forms.Button btnITUPS3SubjectName;
+    private System.Windows.Forms.Button btnITUPS3Connect;
+    private System.Windows.Forms.TabPage tabPage8;
+    private System.Windows.Forms.Panel panel10;
+    private System.Windows.Forms.GroupBox groupBox12;
+    private System.Windows.Forms.SplitContainer splitContainer17;
+    private System.Windows.Forms.SplitContainer splitContainer18;
+    private System.Windows.Forms.Button button45;
+    private System.Windows.Forms.SplitContainer splitContainer19;
+    private System.Windows.Forms.Button button46;
+    private System.Windows.Forms.Button button47;
+    private System.Windows.Forms.TextBox textBox10;
+    private System.Windows.Forms.Button button48;
+    private System.Windows.Forms.Button button49;
+    private System.Windows.Forms.Label label61;
+    private System.Windows.Forms.Label label62;
+    private System.Windows.Forms.Label label63;
+    private System.Windows.Forms.Label label64;
+    private System.Windows.Forms.Button button50;
+    private System.Windows.Forms.Button button51;
+    private System.Windows.Forms.TabPage tabPage9;
+    private System.Windows.Forms.GroupBox groupBox13;
+    private System.Windows.Forms.SplitContainer splitContainer20;
+    private System.Windows.Forms.SplitContainer splitContainer21;
+    private System.Windows.Forms.Button button52;
+    private System.Windows.Forms.SplitContainer splitContainer22;
+    private System.Windows.Forms.Label label65;
+    private System.Windows.Forms.Label label66;
+    private System.Windows.Forms.Button button53;
+    private System.Windows.Forms.Button button54;
+    private System.Windows.Forms.TextBox textBox11;
+    private System.Windows.Forms.Button button55;
+    private System.Windows.Forms.Button button56;
+    private System.Windows.Forms.Label label67;
+    private System.Windows.Forms.Label label68;
+    private System.Windows.Forms.Label label69;
+    private System.Windows.Forms.Label label70;
+    private System.Windows.Forms.Button button57;
+    private System.Windows.Forms.Button button58;
+    private System.Windows.Forms.TabPage tabPage10;
+    private System.Windows.Forms.GroupBox groupBox14;
+    private System.Windows.Forms.TextBox textBox12;
+    private System.Windows.Forms.TextBox textBox13;
+    private System.Windows.Forms.Button button59;
+    private System.Windows.Forms.Button button60;
+    private System.Windows.Forms.Label label71;
+    private System.Windows.Forms.Label label72;
+    private System.Windows.Forms.Label label73;
+    private System.Windows.Forms.Label label74;
+    private System.Windows.Forms.Button button61;
+    private System.Windows.Forms.Button button62;
+    private System.Windows.Forms.TabPage tbpAsl;
+    private System.Windows.Forms.TextBox txbAslSubjectName;
+    private System.Windows.Forms.Button btnAslRecord;
+    private System.Windows.Forms.Button btnAslCalibrate;
+    private System.Windows.Forms.Label label75;
+    private System.Windows.Forms.Label recordLabel;
+    private System.Windows.Forms.Label label76;
+    private System.Windows.Forms.Label connectLabel;
+    private System.Windows.Forms.Button btnAslSubjectName;
+    private System.Windows.Forms.Button btnAslConnect;
+    private System.Windows.Forms.TabPage tabPage11;
+    private System.Windows.Forms.Label label77;
+    private System.Windows.Forms.Label label78;
+    private System.Windows.Forms.Button button63;
+    private System.Windows.Forms.TextBox textBox14;
+    private System.Windows.Forms.Button button64;
+    private System.Windows.Forms.TabPage tabPage12;
+    private System.Windows.Forms.Label label79;
+    private System.Windows.Forms.Button button65;
   }
 }

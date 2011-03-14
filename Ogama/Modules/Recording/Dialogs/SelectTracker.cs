@@ -94,6 +94,12 @@ namespace Ogama.Modules.Recording
           returnValue |= HardwareTracker.ITU;
         }
 
+        if (this.chbAsl.Checked)
+        {
+          returnValue |= HardwareTracker.ASL; // = 64
+        }
+
+
         return returnValue;
       }
     }
@@ -176,6 +182,34 @@ namespace Ogama.Modules.Recording
       this.chbTobii.Text = tobiiDefaultText +
         "Status: This version of OGAMA has no Tobii support (TOBII compiler flag not set)."
         + Environment.NewLine;
+#endif
+
+      // ASL 
+      //  "If you have purchased and installed an ASL " +
+      //  "model 5000 Eye Tracker control unit (materials and softwares)" + Environment.NewLine;
+      string aslDefaultText = "The ASL’s series 5000 eye tracker requirs on " +
+          "this computer the library ASLSerialOutLib2.dll, which provides " +
+          "convenient read access to the data sent from Eye Tracker Control " +
+          "Unit Serial Out port. ";
+#if ASL
+        if (!Ogama.Modules.Recording.ASL.AslTracker.IsAvailable(out error))
+        {
+            this.chbAsl.Enabled = false;
+            this.chbAsl.Checked = false;
+            this.pcbAsl.Enabled = false;
+            this.chbAsl.Text = aslDefaultText + error;
+        }
+        else
+        {
+            this.chbAsl.Text = aslDefaultText + "(ASL library found)";
+        }
+#else
+      this.chbAsl.Enabled = false;
+      this.chbAsl.Checked = false;
+      this.pcbAsl.Enabled = false;
+      this.chbAsl.Text = aslDefaultText +
+      "Status : This version of OGAMA has no ASL support (ASL compiler flag not set)."
+          + Environment.NewLine;
 #endif
     }
 
@@ -265,6 +299,19 @@ namespace Ogama.Modules.Recording
     }
 
     /// <summary>
+    /// The <see cref="Control.Click"/> event handler for
+    /// the <see cref="PictureBox"/> <see cref="pcbAsl"/>.
+    /// User clicked the ASL logo,
+    /// so open senso motoric instruments website.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void pcbAsl_Click(object sender, EventArgs e)
+    {
+      System.Diagnostics.Process.Start("http://asleyetracking.com/site/");
+    }
+
+    /// <summary>
     /// The <see cref="Control.Click"/> event handler
     /// for the <see cref="PictureBox"/> <see cref="pcbHelpAlea"/>
     /// Displays instructions to activate alea recording.
@@ -288,6 +335,19 @@ namespace Ogama.Modules.Recording
     {
       HowToActivateSMI objActivateSMI = new HowToActivateSMI();
       objActivateSMI.ShowDialog();
+    }
+
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler
+    /// for the <see cref="PictureBox"/> <see cref="pcbHelpAsl"/>
+    /// Displays instructions to activate ASL recording.
+    /// </summary>
+    /// <param name="sender">Source of the event</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void pcbHelpAsl_Click(object sender, EventArgs e)
+    {
+      HowToActivateAsl objActivateAsl = new HowToActivateAsl();
+      objActivateAsl.ShowDialog();
     }
 
     /// <summary>

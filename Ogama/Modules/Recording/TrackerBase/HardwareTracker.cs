@@ -51,5 +51,10 @@ namespace Ogama.Modules.Recording
     /// The ITU GazeTracker.
     /// </summary>
     ITU = 16,
+
+    /// <summary>
+    /// Applied Science Laboratories (ASL) professional gaze tracker
+    /// </summary>
+    ASL = 64,
   }
 }

@@ -727,4 +727,28 @@
   <data name="Globe32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Globe32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ASL0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ASL0.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ASLBanner" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ASLBanner.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ASLico" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ASLico.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ASLlogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ASLlogo.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ASLmire_1024x768" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ASLmire_1024x768.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ASLmire_1280x1024" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ASLmire_1280x1024.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ASLmire_defaultSize" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ASLmire_defaultSize.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ASL_61_46" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ASL_61_46.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
