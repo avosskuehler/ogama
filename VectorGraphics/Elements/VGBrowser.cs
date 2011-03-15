@@ -290,6 +290,7 @@ namespace VectorGraphics.Elements
       control.Controls.SetChildIndex(this.webBrowser, 0);
 
       this.webBrowser.Url = new Uri(this.browserURL);
+      this.webBrowser.ScriptErrorsSuppressed = true;
     }
 
     /// <summary>

@@ -1544,14 +1544,7 @@
     <None Include="Resources\StartUpSplash1.png" />
     <None Include="Resources\ITUBanner.png" />
     <None Include="Resources\Globe32.png" />
-    <None Include="Resources\ASL_61_461.gif" />
     <None Include="Resources\ASL01.gif" />
-    <None Include="Resources\ASLBanner1.gif" />
-    <None Include="Resources\ASLico1.gif" />
-    <None Include="Resources\ASLlogo1.gif" />
-    <None Include="Resources\ASLmire_1024x7681.bmp" />
-    <None Include="Resources\ASLmire_1280x10241.bmp" />
-    <None Include="Resources\ASLmire_defaultSize1.bmp" />
     <None Include="Resources\ASL_61_46.gif" />
     <None Include="Resources\ASL0.gif" />
     <None Include="Resources\ASLBanner.gif" />
