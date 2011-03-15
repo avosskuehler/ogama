@@ -1353,6 +1353,7 @@ namespace Ogama.Modules.Recording
       if (this.shownSlide.Slide.HasActiveXContent)
       {
         int countFlash = 0;
+        
         foreach (VGElement element in slideContainer.Slide.ActiveXStimuli)
         {
           if (element is VGFlash)
@@ -1365,6 +1366,13 @@ namespace Ogama.Modules.Recording
           else if (element is VGBrowser)
           {
             VGBrowser browser = element as VGBrowser;
+
+            if (browser.WebBrowser.IsDisposed)
+            {
+              throw new ObjectDisposedException("Browser of new slide is already disposed...");
+              break; 
+            }
+
             browser.SendMessagesToParent(true);
             if (browser.WebBrowser.InvokeRequired)
             {

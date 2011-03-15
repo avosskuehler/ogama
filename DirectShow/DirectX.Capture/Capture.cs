@@ -564,24 +564,35 @@ namespace DirectX.Capture
         out minHeight,
         out maxHeight);
 
-        if ((newFrameRate >= minFramerate && newFrameRate <= maxFramerate) || 
-          (minFramerate == 0 && maxFramerate==0))
+        try
         {
-          this.FrameRate = newFrameRate;
-        }
-        else
-        {
-          this.FrameRate = this.VideoCaps.videoModes[0].MaxFrameRate;
-        }
+          if ((newFrameRate >= minFramerate && newFrameRate <= maxFramerate) ||
+            (minFramerate == 0 && maxFramerate == 0))
+          {
+            this.FrameRate = newFrameRate;
+          }
+          else
+          {
+            this.FrameRate = this.VideoCaps.videoModes[0].MaxFrameRate;
+          }
 
-        if (newFrameSize.Width > minWidth && newFrameSize.Width < maxWidth &&
-          newFrameSize.Height > minHeight && newFrameSize.Height < maxHeight)
-        {
-          this.FrameSize = newFrameSize;
+          if (newFrameSize.Width > minWidth && newFrameSize.Width < maxWidth &&
+            newFrameSize.Height > minHeight && newFrameSize.Height < maxHeight)
+          {
+            this.FrameSize = newFrameSize;
+          }
+          else
+          {
+            this.FrameSize = this.videoCaps.videoModes[0].MaxFrameSize;
+          }
         }
-        else
+        catch (Exception)
         {
-          this.FrameSize = this.videoCaps.videoModes[0].MaxFrameSize;
+          // If VideoCaps could not be parsed from the device
+          // try using the given values
+          // even if they might fail
+          this.FrameRate = newFrameRate;
+          this.FrameSize = newFrameSize;
         }
       }
     }
