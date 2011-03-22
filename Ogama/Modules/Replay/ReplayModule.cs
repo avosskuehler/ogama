@@ -21,7 +21,6 @@ namespace Ogama.Modules.Replay
   using System.Threading;
   using System.Windows.Forms;
   using DirectShowLib;
-  using DirectX.Capture;
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
   using Ogama.Modules.Common;

@@ -4,7 +4,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace DirectX.Capture
+namespace OgamaControls
 {
   /// <summary>
   /// Static class providing methods for thread safe calls into

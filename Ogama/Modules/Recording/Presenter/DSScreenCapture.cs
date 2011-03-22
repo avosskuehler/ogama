@@ -20,7 +20,6 @@ namespace Ogama.Modules.Recording
   using System.Windows.Forms;
   using DirectShowLib;
   using DirectShowLib.DMO;
-  using DirectX.Capture;
   using Ogama.ExceptionHandling;
   using OgamaControls;
 

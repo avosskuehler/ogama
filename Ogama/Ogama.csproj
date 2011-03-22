@@ -1752,10 +1752,6 @@
       <Project>{CE009BFA-5EF6-4153-B2A1-2FA79698A9AE}</Project>
       <Name>DirectShowLib-2005</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DirectShow\DirectX.Capture\DirectX.Capture.csproj">
-      <Project>{8C0015DB-69E1-46E7-8705-3A4F8BE2E5E7}</Project>
-      <Name>DirectX.Capture</Name>
-    </ProjectReference>
     <ProjectReference Include="..\OgamaControls\OgamaControls.csproj">
       <Project>{63EF9D30-447A-4F79-9EC8-E4956DC0ABF8}</Project>
       <Name>OgamaControls</Name>

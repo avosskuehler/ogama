@@ -146,7 +146,7 @@ namespace Ogama.Modules.SlideshowDesign
       {
         this.webBrowserPreview.Url = new Uri(this.txbURL.Text);
       }
-      catch (UriFormatException)
+      catch (Exception)
       {
         // Ignore, just wait for valid URL
       }

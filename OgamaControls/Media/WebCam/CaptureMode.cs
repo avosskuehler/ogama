@@ -1,9 +1,9 @@
-// <copyright file="CaptureMode.cs" company="FU Berlin">
+Ôªø// <copyright file="CaptureMode.cs" company="FU Berlin">
 // Copyright (c) 2008 All Rights Reserved
 // </copyright>
-// <author>Adrian Voﬂk¸hler</author>
+// <author>Adrian Vo√ük√ºhler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
-namespace DirectX.Capture
+namespace OgamaControls
 {
   using System;
 

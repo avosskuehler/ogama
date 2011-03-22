@@ -94,16 +94,6 @@
       this.label10 = new System.Windows.Forms.Label();
       this.btnAleaSubjectName = new System.Windows.Forms.Button();
       this.btnAleaConnect = new System.Windows.Forms.Button();
-      this.tbpAsl = new System.Windows.Forms.TabPage();
-      this.txbAslSubjectName = new System.Windows.Forms.TextBox();
-      this.btnAslRecord = new System.Windows.Forms.Button();
-      this.btnAslCalibrate = new System.Windows.Forms.Button();
-      this.label75 = new System.Windows.Forms.Label();
-      this.recordLabel = new System.Windows.Forms.Label();
-      this.label76 = new System.Windows.Forms.Label();
-      this.connectLabel = new System.Windows.Forms.Label();
-      this.btnAslSubjectName = new System.Windows.Forms.Button();
-      this.btnAslConnect = new System.Windows.Forms.Button();
       this.tbpSMI = new System.Windows.Forms.TabPage();
       this.groupBox3 = new System.Windows.Forms.GroupBox();
       this.textBox1 = new System.Windows.Forms.TextBox();
@@ -116,6 +106,16 @@
       this.label16 = new System.Windows.Forms.Label();
       this.btnSMISubjectName = new System.Windows.Forms.Button();
       this.btnSMIConnect = new System.Windows.Forms.Button();
+      this.tbpAsl = new System.Windows.Forms.TabPage();
+      this.txbAslSubjectName = new System.Windows.Forms.TextBox();
+      this.btnAslRecord = new System.Windows.Forms.Button();
+      this.btnAslCalibrate = new System.Windows.Forms.Button();
+      this.label75 = new System.Windows.Forms.Label();
+      this.recordLabel = new System.Windows.Forms.Label();
+      this.label76 = new System.Windows.Forms.Label();
+      this.connectLabel = new System.Windows.Forms.Label();
+      this.btnAslSubjectName = new System.Windows.Forms.Button();
+      this.btnAslConnect = new System.Windows.Forms.Button();
       this.tbpMouseOnly = new System.Windows.Forms.TabPage();
       this.label5 = new System.Windows.Forms.Label();
       this.label6 = new System.Windows.Forms.Label();
@@ -417,9 +417,9 @@
       this.spcAleaCalibPlot.Panel1.SuspendLayout();
       this.spcAleaCalibPlot.Panel2.SuspendLayout();
       this.spcAleaCalibPlot.SuspendLayout();
-      this.tbpAsl.SuspendLayout();
       this.tbpSMI.SuspendLayout();
       this.groupBox3.SuspendLayout();
+      this.tbpAsl.SuspendLayout();
       this.tbpMouseOnly.SuspendLayout();
       this.tbpNoDevice.SuspendLayout();
       this.panel4.SuspendLayout();
@@ -634,6 +634,7 @@
       // 
       // panel3
       // 
+      this.panel3.AutoScroll = true;
       this.panel3.Controls.Add(this.label47);
       this.panel3.Controls.Add(this.btnITUAdjust);
       this.panel3.Controls.Add(this.groupBox4);
@@ -1381,131 +1382,6 @@
       this.btnAleaConnect.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.btnAleaConnect.UseVisualStyleBackColor = true;
       // 
-      // tbpAsl
-      // 
-      this.tbpAsl.Controls.Add(this.txbAslSubjectName);
-      this.tbpAsl.Controls.Add(this.btnAslRecord);
-      this.tbpAsl.Controls.Add(this.btnAslCalibrate);
-      this.tbpAsl.Controls.Add(this.label75);
-      this.tbpAsl.Controls.Add(this.recordLabel);
-      this.tbpAsl.Controls.Add(this.label76);
-      this.tbpAsl.Controls.Add(this.connectLabel);
-      this.tbpAsl.Controls.Add(this.btnAslSubjectName);
-      this.tbpAsl.Controls.Add(this.btnAslConnect);
-      this.tbpAsl.ImageKey = "ASL";
-      this.tbpAsl.Location = new System.Drawing.Point(4, 23);
-      this.tbpAsl.Name = "tbpAsl";
-      this.tbpAsl.Padding = new System.Windows.Forms.Padding(3);
-      this.tbpAsl.Size = new System.Drawing.Size(212, 392);
-      this.tbpAsl.TabIndex = 7;
-      this.tbpAsl.Text = "ASL";
-      this.tbpAsl.UseVisualStyleBackColor = true;
-      // 
-      // txbAslSubjectName
-      // 
-      this.txbAslSubjectName.Location = new System.Drawing.Point(110, 269);
-      this.txbAslSubjectName.Name = "txbAslSubjectName";
-      this.txbAslSubjectName.ReadOnly = true;
-      this.txbAslSubjectName.Size = new System.Drawing.Size(91, 20);
-      this.txbAslSubjectName.TabIndex = 31;
-      this.txbAslSubjectName.Text = "Subject1";
-      // 
-      // btnAslRecord
-      // 
-      this.btnAslRecord.Enabled = false;
-      this.btnAslRecord.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-      this.btnAslRecord.ImageKey = "Record";
-      this.btnAslRecord.ImageList = this.imlButtons;
-      this.btnAslRecord.Location = new System.Drawing.Point(32, 325);
-      this.btnAslRecord.Name = "btnAslRecord";
-      this.btnAslRecord.Size = new System.Drawing.Size(72, 23);
-      this.btnAslRecord.TabIndex = 38;
-      this.btnAslRecord.Text = "&Record";
-      this.btnAslRecord.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-      // 
-      // btnAslCalibrate
-      // 
-      this.btnAslCalibrate.Enabled = false;
-      this.btnAslCalibrate.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-      this.btnAslCalibrate.ImageKey = "Calibrate";
-      this.btnAslCalibrate.ImageList = this.imlButtons;
-      this.btnAslCalibrate.Location = new System.Drawing.Point(32, 296);
-      this.btnAslCalibrate.Name = "btnAslCalibrate";
-      this.btnAslCalibrate.Size = new System.Drawing.Size(72, 23);
-      this.btnAslCalibrate.TabIndex = 39;
-      this.btnAslCalibrate.Text = "&Calibrate";
-      this.btnAslCalibrate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-      // 
-      // label75
-      // 
-      this.label75.AutoSize = true;
-      this.label75.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label75.Location = new System.Drawing.Point(8, 296);
-      this.label75.Name = "label75";
-      this.label75.Size = new System.Drawing.Size(25, 24);
-      this.label75.TabIndex = 37;
-      this.label75.Text = "3.";
-      // 
-      // recordLabel
-      // 
-      this.recordLabel.AutoSize = true;
-      this.recordLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.recordLabel.Location = new System.Drawing.Point(8, 325);
-      this.recordLabel.Name = "recordLabel";
-      this.recordLabel.Size = new System.Drawing.Size(25, 24);
-      this.recordLabel.TabIndex = 36;
-      this.recordLabel.Text = "4.";
-      // 
-      // label76
-      // 
-      this.label76.AutoSize = true;
-      this.label76.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label76.Location = new System.Drawing.Point(8, 267);
-      this.label76.Name = "label76";
-      this.label76.Size = new System.Drawing.Size(25, 24);
-      this.label76.TabIndex = 34;
-      this.label76.Text = "2.";
-      // 
-      // connectLabel
-      // 
-      this.connectLabel.AutoSize = true;
-      this.connectLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.connectLabel.Location = new System.Drawing.Point(8, 238);
-      this.connectLabel.Margin = new System.Windows.Forms.Padding(0);
-      this.connectLabel.Name = "connectLabel";
-      this.connectLabel.Size = new System.Drawing.Size(25, 24);
-      this.connectLabel.TabIndex = 35;
-      this.connectLabel.Text = "1.";
-      // 
-      // btnAslSubjectName
-      // 
-      this.btnAslSubjectName.Enabled = false;
-      this.btnAslSubjectName.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-      this.btnAslSubjectName.ImageKey = "Subject";
-      this.btnAslSubjectName.ImageList = this.imlButtons;
-      this.btnAslSubjectName.Location = new System.Drawing.Point(32, 268);
-      this.btnAslSubjectName.Name = "btnAslSubjectName";
-      this.btnAslSubjectName.Size = new System.Drawing.Size(72, 23);
-      this.btnAslSubjectName.TabIndex = 32;
-      this.btnAslSubjectName.Text = "Subject";
-      this.btnAslSubjectName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.btnAslSubjectName.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-      this.btnAslSubjectName.UseVisualStyleBackColor = true;
-      // 
-      // btnAslConnect
-      // 
-      this.btnAslConnect.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-      this.btnAslConnect.ImageKey = "Connect";
-      this.btnAslConnect.ImageList = this.imlButtons;
-      this.btnAslConnect.Location = new System.Drawing.Point(32, 238);
-      this.btnAslConnect.Name = "btnAslConnect";
-      this.btnAslConnect.Size = new System.Drawing.Size(73, 23);
-      this.btnAslConnect.TabIndex = 33;
-      this.btnAslConnect.Text = "Connect";
-      this.btnAslConnect.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.btnAslConnect.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-      this.btnAslConnect.UseVisualStyleBackColor = true;
-      // 
       // tbpSMI
       // 
       this.tbpSMI.Controls.Add(this.groupBox3);
@@ -1650,6 +1526,131 @@
       this.btnSMIConnect.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
       this.btnSMIConnect.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.btnSMIConnect.UseVisualStyleBackColor = true;
+      // 
+      // tbpAsl
+      // 
+      this.tbpAsl.Controls.Add(this.txbAslSubjectName);
+      this.tbpAsl.Controls.Add(this.btnAslRecord);
+      this.tbpAsl.Controls.Add(this.btnAslCalibrate);
+      this.tbpAsl.Controls.Add(this.label75);
+      this.tbpAsl.Controls.Add(this.recordLabel);
+      this.tbpAsl.Controls.Add(this.label76);
+      this.tbpAsl.Controls.Add(this.connectLabel);
+      this.tbpAsl.Controls.Add(this.btnAslSubjectName);
+      this.tbpAsl.Controls.Add(this.btnAslConnect);
+      this.tbpAsl.ImageKey = "ASL";
+      this.tbpAsl.Location = new System.Drawing.Point(4, 23);
+      this.tbpAsl.Name = "tbpAsl";
+      this.tbpAsl.Padding = new System.Windows.Forms.Padding(3);
+      this.tbpAsl.Size = new System.Drawing.Size(212, 392);
+      this.tbpAsl.TabIndex = 7;
+      this.tbpAsl.Text = "ASL";
+      this.tbpAsl.UseVisualStyleBackColor = true;
+      // 
+      // txbAslSubjectName
+      // 
+      this.txbAslSubjectName.Location = new System.Drawing.Point(110, 269);
+      this.txbAslSubjectName.Name = "txbAslSubjectName";
+      this.txbAslSubjectName.ReadOnly = true;
+      this.txbAslSubjectName.Size = new System.Drawing.Size(91, 20);
+      this.txbAslSubjectName.TabIndex = 31;
+      this.txbAslSubjectName.Text = "Subject1";
+      // 
+      // btnAslRecord
+      // 
+      this.btnAslRecord.Enabled = false;
+      this.btnAslRecord.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnAslRecord.ImageKey = "Record";
+      this.btnAslRecord.ImageList = this.imlButtons;
+      this.btnAslRecord.Location = new System.Drawing.Point(32, 325);
+      this.btnAslRecord.Name = "btnAslRecord";
+      this.btnAslRecord.Size = new System.Drawing.Size(72, 23);
+      this.btnAslRecord.TabIndex = 38;
+      this.btnAslRecord.Text = "&Record";
+      this.btnAslRecord.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      // 
+      // btnAslCalibrate
+      // 
+      this.btnAslCalibrate.Enabled = false;
+      this.btnAslCalibrate.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnAslCalibrate.ImageKey = "Calibrate";
+      this.btnAslCalibrate.ImageList = this.imlButtons;
+      this.btnAslCalibrate.Location = new System.Drawing.Point(32, 296);
+      this.btnAslCalibrate.Name = "btnAslCalibrate";
+      this.btnAslCalibrate.Size = new System.Drawing.Size(72, 23);
+      this.btnAslCalibrate.TabIndex = 39;
+      this.btnAslCalibrate.Text = "&Calibrate";
+      this.btnAslCalibrate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      // 
+      // label75
+      // 
+      this.label75.AutoSize = true;
+      this.label75.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label75.Location = new System.Drawing.Point(8, 296);
+      this.label75.Name = "label75";
+      this.label75.Size = new System.Drawing.Size(25, 24);
+      this.label75.TabIndex = 37;
+      this.label75.Text = "3.";
+      // 
+      // recordLabel
+      // 
+      this.recordLabel.AutoSize = true;
+      this.recordLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.recordLabel.Location = new System.Drawing.Point(8, 325);
+      this.recordLabel.Name = "recordLabel";
+      this.recordLabel.Size = new System.Drawing.Size(25, 24);
+      this.recordLabel.TabIndex = 36;
+      this.recordLabel.Text = "4.";
+      // 
+      // label76
+      // 
+      this.label76.AutoSize = true;
+      this.label76.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label76.Location = new System.Drawing.Point(8, 267);
+      this.label76.Name = "label76";
+      this.label76.Size = new System.Drawing.Size(25, 24);
+      this.label76.TabIndex = 34;
+      this.label76.Text = "2.";
+      // 
+      // connectLabel
+      // 
+      this.connectLabel.AutoSize = true;
+      this.connectLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.connectLabel.Location = new System.Drawing.Point(8, 238);
+      this.connectLabel.Margin = new System.Windows.Forms.Padding(0);
+      this.connectLabel.Name = "connectLabel";
+      this.connectLabel.Size = new System.Drawing.Size(25, 24);
+      this.connectLabel.TabIndex = 35;
+      this.connectLabel.Text = "1.";
+      // 
+      // btnAslSubjectName
+      // 
+      this.btnAslSubjectName.Enabled = false;
+      this.btnAslSubjectName.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnAslSubjectName.ImageKey = "Subject";
+      this.btnAslSubjectName.ImageList = this.imlButtons;
+      this.btnAslSubjectName.Location = new System.Drawing.Point(32, 268);
+      this.btnAslSubjectName.Name = "btnAslSubjectName";
+      this.btnAslSubjectName.Size = new System.Drawing.Size(72, 23);
+      this.btnAslSubjectName.TabIndex = 32;
+      this.btnAslSubjectName.Text = "Subject";
+      this.btnAslSubjectName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.btnAslSubjectName.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.btnAslSubjectName.UseVisualStyleBackColor = true;
+      // 
+      // btnAslConnect
+      // 
+      this.btnAslConnect.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnAslConnect.ImageKey = "Connect";
+      this.btnAslConnect.ImageList = this.imlButtons;
+      this.btnAslConnect.Location = new System.Drawing.Point(32, 238);
+      this.btnAslConnect.Name = "btnAslConnect";
+      this.btnAslConnect.Size = new System.Drawing.Size(73, 23);
+      this.btnAslConnect.TabIndex = 33;
+      this.btnAslConnect.Text = "Connect";
+      this.btnAslConnect.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.btnAslConnect.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.btnAslConnect.UseVisualStyleBackColor = true;
       // 
       // tbpMouseOnly
       // 
@@ -1879,7 +1880,7 @@
       this.webcamPreview.Name = "webcamPreview";
       this.webcamPreview.Size = new System.Drawing.Size(204, 147);
       this.webcamPreview.TabIndex = 0;
-      this.webcamPreview.WebcamAvailable += new DirectX.Capture.CaptureModeEventHandler(this.webcamPreview_WebcamAvailable);
+      this.webcamPreview.WebcamAvailable += new OgamaControls.CaptureModeEventHandler(this.webcamPreview_WebcamAvailable);
       // 
       // pnlCanvas
       // 
@@ -4719,12 +4720,12 @@
       this.spcAleaCalibPlot.Panel1.PerformLayout();
       this.spcAleaCalibPlot.Panel2.ResumeLayout(false);
       this.spcAleaCalibPlot.ResumeLayout(false);
-      this.tbpAsl.ResumeLayout(false);
-      this.tbpAsl.PerformLayout();
       this.tbpSMI.ResumeLayout(false);
       this.tbpSMI.PerformLayout();
       this.groupBox3.ResumeLayout(false);
       this.groupBox3.PerformLayout();
+      this.tbpAsl.ResumeLayout(false);
+      this.tbpAsl.PerformLayout();
       this.tbpMouseOnly.ResumeLayout(false);
       this.tbpMouseOnly.PerformLayout();
       this.tbpNoDevice.ResumeLayout(false);

@@ -8,7 +8,7 @@ namespace OgamaControls
   using System;
   using System.Drawing;
   using System.Windows.Forms;
-  using DirectX.Capture;
+  using GazeTrackingLibrary.Hardware;
 
   /// <summary>
   /// This class holds the properties of a capture device
@@ -30,7 +30,7 @@ namespace OgamaControls
     /// <summary>
     /// Saves the the friendly name of the video input device to use.
     /// </summary>
-    private string videoInputDevice;
+    private CameraInfo videoInputDevice;
 
     /// <summary>
     /// Saves the friendly name of the audio input device to use.
@@ -67,6 +67,12 @@ namespace OgamaControls
     /// </summary>
     private CaptureMode captureMode;
 
+    /// <summary>
+    /// Saves the <see cref="Control"/> for the preview window.
+    /// Null if it should not be previewed.
+    /// </summary>
+    private Control previewWindow;
+
     #endregion //FIELDS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -75,10 +81,45 @@ namespace OgamaControls
     #region CONSTRUCTION
 
     /// <summary>
-    /// Initializes a new instance of the WebcamProperties class.
+    /// Initializes a new instance of the CaptureDeviceProperties class.
     /// </summary>
     public CaptureDeviceProperties()
     {
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the CaptureDeviceProperties class.
+    /// </summary>
+    /// <param name="newVideoInputDevice">The <see cref="CameraInfo"/> with the video input device to use.</param>
+    /// <param name="newAudioInputDevice">The friendly name of the audio input device to use.</param>
+    /// <param name="newVideoCompressor">The friendly name of the video compressor to use.</param>
+    /// <param name="newAudioCompressor">The friendly name of the audio compressor to use.</param>
+    /// <param name="newFrameRate">The frame rate for the video stream.</param>
+    /// <param name="newVideoSize">The size of the video stream.</param>
+    /// <param name="newFilename">The filename for the video recording.</param>
+    /// <param name="newCaptureMode">The <see cref="CaptureMode"/> flags for the recording.</param>
+    /// <param name="newPreviewWindow">The <see cref="Control"/> where the preview
+    /// should be shown or null, if no preview should be shown.</param>
+    public CaptureDeviceProperties(
+      CameraInfo newVideoInputDevice,
+      string newAudioInputDevice,
+      string newVideoCompressor,
+      string newAudioCompressor,
+      int newFrameRate,
+      Size newVideoSize,
+      string newFilename,
+      CaptureMode newCaptureMode,
+      Control newPreviewWindow)
+    {
+      this.videoInputDevice = newVideoInputDevice;
+      this.videoCompressor = newVideoCompressor;
+      this.audioInputDevice = newAudioInputDevice;
+      this.audioCompressor = newAudioCompressor;
+      this.frameRate = newFrameRate;
+      this.videoSize = newVideoSize;
+      this.filename = newFilename;
+      this.captureMode = newCaptureMode;
+      this.previewWindow = newPreviewWindow;
     }
 
     /// <summary>
@@ -92,6 +133,8 @@ namespace OgamaControls
     /// <param name="newVideoSize">The size of the video stream.</param>
     /// <param name="newFilename">The filename for the video recording.</param>
     /// <param name="newCaptureMode">The <see cref="CaptureMode"/> flags for the recording.</param>
+    /// <param name="newPreviewWindow">The <see cref="Control"/> where the preview
+    /// should be shown or null, if no preview should be shown.</param>
     public CaptureDeviceProperties(
       string newVideoInputDevice,
       string newAudioInputDevice,
@@ -100,9 +143,11 @@ namespace OgamaControls
       int newFrameRate,
       Size newVideoSize,
       string newFilename,
-      CaptureMode newCaptureMode)
-    {
-      this.videoInputDevice = newVideoInputDevice;
+      CaptureMode newCaptureMode,
+      Control newPreviewWindow)
+   {
+      this.videoInputDevice = new CameraInfo();
+      this.videoInputDevice.Name = newVideoInputDevice;
       this.videoCompressor = newVideoCompressor;
       this.audioInputDevice = newAudioInputDevice;
       this.audioCompressor = newAudioCompressor;
@@ -110,7 +155,8 @@ namespace OgamaControls
       this.videoSize = newVideoSize;
       this.filename = newFilename;
       this.captureMode = newCaptureMode;
-    }
+      this.previewWindow = newPreviewWindow;
+   }
 
     #endregion //CONSTRUCTION
 
@@ -124,7 +170,7 @@ namespace OgamaControls
     /// </summary>
     /// <value>A <see cref="string"/> with the name of the video input device as
     /// been enumerated via DirectShow.</value>
-    public string VideoInputDevice
+    public CameraInfo VideoInputDevice
     {
       get { return this.videoInputDevice; }
       set { this.videoInputDevice = value; }
@@ -202,6 +248,15 @@ namespace OgamaControls
       set { this.captureMode = value; }
     }
 
+    /// <summary>
+    /// Gets or sets the <see cref="Control"/> which hosts the preview window
+    /// </summary>
+    public Control PreviewWindow
+    {
+      get { return this.previewWindow; }
+      set { this.previewWindow = value; }
+    }
+
     #endregion //PROPERTIES
 
     /// <summary>
@@ -218,7 +273,8 @@ namespace OgamaControls
         this.frameRate,
         this.videoSize,
         this.filename,
-        this.captureMode);
+        this.captureMode,
+        this.previewWindow);
     }
 
     ///////////////////////////////////////////////////////////////////////////////

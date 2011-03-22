@@ -21,8 +21,6 @@ namespace Ogama.Modules.Recording
   using System.Threading;
   using System.Windows.Forms;
 
-  using DirectX.Capture;
-
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
   using Ogama.Modules.Recording.Presenter;
@@ -73,12 +71,12 @@ namespace Ogama.Modules.Recording
     /// </summary>
     private RecordModule.GetTimeDelegate getTimeMethod;
 
-    /// <summary>
-    /// The <see cref="Control"/> in which the preview of the user
-    /// camera should be shown. By default this is the webcam control
-    /// of the record module.
-    /// </summary>
-    private Control userCameraPreviewWindow;
+    ///// <summary>
+    ///// The <see cref="Control"/> in which the preview of the user
+    ///// camera should be shown. By default this is the webcam control
+    ///// of the record module.
+    ///// </summary>
+    //private Control userCameraPreviewWindow;
 
     /// <summary>
     /// A <see cref="CaptureDeviceProperties"/> describing
@@ -358,14 +356,14 @@ namespace Ogama.Modules.Recording
       set { this.userCameraProperties = value; }
     }
 
-    /// <summary>
-    /// Sets the preview window control for the usercamera
-    /// during recording.
-    /// </summary>
-    public Control UserCameraPreviewWindow
-    {
-      set { this.userCameraPreviewWindow = value; }
-    }
+    ///// <summary>
+    ///// Sets the preview window control for the usercamera
+    ///// during recording.
+    ///// </summary>
+    //public Control UserCameraPreviewWindow
+    //{
+    //  set { this.userCameraPreviewWindow = value; }
+    //}
 
     /// <summary>
     /// Sets the  <see cref="RecordModule.GetTimeDelegate"/> which 
@@ -378,7 +376,7 @@ namespace Ogama.Modules.Recording
     }
 
     /// <summary>
-    /// Gets the <see cref="DXCapture"/> with the current
+    /// Gets the <see cref="DSScreenCapture"/> with the current
     /// screen capture object or null if none is 
     /// capturing.
     /// </summary>
@@ -476,7 +474,7 @@ namespace Ogama.Modules.Recording
           this.userCamera.StopCapture();
         }
 
-        this.userCamera.Preview = false;
+        //this.userCamera.Preview = false;
         this.userCamera.Dispose();
       }
 
@@ -1370,7 +1368,6 @@ namespace Ogama.Modules.Recording
             if (browser.WebBrowser.IsDisposed)
             {
               throw new ObjectDisposedException("Browser of new slide is already disposed...");
-              break; 
             }
 
             browser.SendMessagesToParent(true);
@@ -1893,11 +1890,11 @@ namespace Ogama.Modules.Recording
         return;
       }
 
-      this.userCamera = new Webcam(this.userCameraPreviewWindow);
+      this.userCamera = new Webcam();
       this.userCamera.Properties = value;
 
-      // Rebuild graph
-      this.userCamera.Preview = true;
+      //// Rebuild graph
+      //this.userCamera.Preview = true;
     }
 
     #endregion //HELPER

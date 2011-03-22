@@ -18,7 +18,6 @@ namespace Ogama.Modules.Replay
   using System.Drawing;
   using System.IO;
   using System.Windows.Forms;
-  using DirectX.Capture;
   using Ogama.Modules.Common;
   using OgamaControls;
   using VectorGraphics.Elements;
@@ -204,8 +203,7 @@ namespace Ogama.Modules.Replay
       base.InitializeCustomElements();
       this.pnlCanvas.Resize += new EventHandler(this.pnlCanvas_Resize);
 
-      Filters filters = new Filters();
-      foreach (Filter filter in filters.VideoCompressors)
+      foreach (DsDevice filter in DsDevice.GetDevicesOfCat(FilterCategory.VideoCompressorCategory))
       {
         this.cbbVideoCompressor.Items.Add(filter.Name);
       }
@@ -230,7 +228,7 @@ namespace Ogama.Modules.Replay
         this.cbbVideoCompressor.Text = "No video compressors found";
       }
 
-      foreach (Filter filter in filters.AudioCompressors)
+      foreach (DsDevice filter in DsDevice.GetDevicesOfCat(FilterCategory.AudioCompressorCategory))
       {
         this.cbbAudioCompressor.Items.Add(filter.Name);
       }

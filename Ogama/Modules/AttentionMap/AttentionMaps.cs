@@ -429,6 +429,8 @@ namespace Ogama.Modules.AttentionMap
     /// <param name="distributionArray">An 2D array of <see cref="Single"/>
     /// to be filled with the distribution values.</param>
     /// <param name="channelFilename">The filename with the b/w image.</param>
+    /// <param name="stimulusSize">Contains the real size of the stimulus,
+    /// which can be greater than presentation size in webpages.</param>
     internal static void CreateDistributionArrayFromBWImage(
       ref float[,] distributionArray, 
       string channelFilename, 

@@ -14,7 +14,7 @@ namespace OgamaControls
   using System.Text;
   using System.Windows.Forms;
   using DirectShowLib;
-  using DirectX.Capture;
+  using GazeTrackingLibrary.Hardware;
 
   /// <summary>
   /// This <see cref="UserControl"/> encapsulates an dialog for getting, setting
@@ -26,33 +26,6 @@ namespace OgamaControls
     // Defining Constants                                                        //
     ///////////////////////////////////////////////////////////////////////////////
     #region CONSTANTS
-
-    /// <summary>
-    /// This static member defines a video size for the video
-    /// export of 800x600 pixel.
-    /// </summary>
-    private Size VIDEO_SIZE_1 = new Size(800, 600);
-    /// <summary>
-    /// This static member defines a video size for the video
-    /// export of 768x576 pixel.
-    /// </summary>
-    private Size VIDEO_SIZE_2 = new Size(768, 576);
-    /// <summary>
-    /// This static member defines a video size for the video
-    /// export of 640x480 pixel.
-    /// </summary>
-    private Size VIDEO_SIZE_3 = new Size(640, 480);
-    /// <summary>
-    /// This static member defines a video size for the video
-    /// export of 320x240 pixel.
-    /// </summary>
-    private Size VIDEO_SIZE_4 = new Size(320, 240);
-    /// <summary>
-    /// This static member defines a video size for the video
-    /// export of 160x120 pixel.
-    /// </summary>
-    private Size VIDEO_SIZE_5 = new Size(160, 120);
-
     #endregion //CONSTANTS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -65,19 +38,20 @@ namespace OgamaControls
     /// </summary>
     private CaptureDeviceProperties properties;
 
+    ///// <summary>
+    ///// Save the current <see cref="DisplayMode"/>
+    ///// </summary>
+    //private DisplayMode mode;
+
+    ///// <summary>
+    ///// This member indicates the preview mode of the control.
+    ///// </summary>
+    //private bool shouldPreview;
+
+    /// <summary>
+    /// The <see cref="DXCapture"/> which is to be controlled.
+    /// </summary>
     private DXCapture dxCapture;
-
-    private Filters filters;
-
-    /// <summary>
-    /// Save the current <see cref="DisplayMode"/>
-    /// </summary>
-    private DisplayMode mode;
-
-    /// <summary>
-    /// This member indicates the preview mode of the control.
-    /// </summary>
-    private bool shouldPreview;
 
     #endregion //FIELDS
 
@@ -92,8 +66,6 @@ namespace OgamaControls
     public DSVideoProperties()
     {
       InitializeComponent();
-      this.filters = new Filters();
-      this.InitializeUI(false);
     }
 
     #endregion //CONSTRUCTION
@@ -103,62 +75,79 @@ namespace OgamaControls
     ///////////////////////////////////////////////////////////////////////////////
     #region PROPERTIES
 
+    ///// <summary>
+    ///// This <strong>DisplayMode</strong> enumeration desribes
+    ///// the different modes in which the dialog can be run. 
+    ///// </summary>
+    //[Flags]
+    //public enum DisplayMode
+    //{
+    //  /// <summary>
+    //  /// No display at all.
+    //  /// </summary>
+    //  None = 0,
+
+    //  /// <summary>
+    //  /// Displays video playback properties
+    //  /// </summary>
+    //  VideoPlayback = 1,
+
+    //  /// <summary>
+    //  /// Displays audio playback properties
+    //  /// </summary>
+    //  AudioPlayback = 2,
+
+    //  /// <summary>
+    //  /// Displays video recording properties (including preview)
+    //  /// </summary>
+    //  VideoRecord = 4,
+
+    //  /// <summary>
+    //  /// Displays all video properties
+    //  /// </summary>
+    //  Video = 5,
+
+    //  /// <summary>
+    //  /// Displays audio recording properties
+    //  /// </summary>
+    //  AudioRecord = 8,
+
+    //  /// <summary>
+    //  /// Displays all audio properties
+    //  /// </summary>
+    //  Audio = 10,
+
+    //  /// <summary>
+    //  /// Displays audio and video playback properties
+    //  /// </summary>
+    //  Playback = 3,
+
+    //  /// <summary>
+    //  /// Displays audio and video recording properties (including preview)
+    //  /// </summary>
+    //  Record = 12,
+
+    //  /// <summary>
+    //  /// Displays all properties including preview.
+    //  /// </summary>
+    //  All = 15,
+    //}
+
     /// <summary>
-    /// This <strong>DisplayMode</strong> enumeration desribes
-    /// the different modes in which the dialog can be run. 
+    /// Gets or sets the <see cref="DXCapture"/> for this control
     /// </summary>
-    [Flags]
-    public enum DisplayMode
+    public DXCapture DxCapture
     {
-      /// <summary>
-      /// No display at all.
-      /// </summary>
-      None = 0,
-
-      /// <summary>
-      /// Displays video playback properties
-      /// </summary>
-      VideoPlayback = 1,
-
-      /// <summary>
-      /// Displays audio playback properties
-      /// </summary>
-      AudioPlayback = 2,
-
-      /// <summary>
-      /// Displays video recording properties (including preview)
-      /// </summary>
-      VideoRecord = 4,
-
-      /// <summary>
-      /// Displays all video properties
-      /// </summary>
-      Video = 5,
-
-      /// <summary>
-      /// Displays audio recording properties
-      /// </summary>
-      AudioRecord = 8,
-
-      /// <summary>
-      /// Displays all audio properties
-      /// </summary>
-      Audio = 10,
-
-      /// <summary>
-      /// Displays audio and video playback properties
-      /// </summary>
-      Playback = 3,
-
-      /// <summary>
-      /// Displays audio and video recording properties (including preview)
-      /// </summary>
-      Record = 12,
-
-      /// <summary>
-      /// Displays all properties including preview.
-      /// </summary>
-      All = 15,
+      get
+      {
+        return this.dxCapture;
+      }
+      set
+      {
+        this.dxCapture = value;
+        this.properties = value.CaptureDeviceProperties;
+        this.properties.PreviewWindow = this.panelPreview;
+      }
     }
 
     /// <summary>
@@ -172,31 +161,31 @@ namespace OgamaControls
       {
         return this.properties;
       }
-      set
-      {
-        this.properties = value;
-        this.PopulateDlgWithProperties();
-      }
+      //set
+      //{
+      //  this.properties = value;
+      //  this.PopulateDlgWithProperties();
+      //}
     }
 
-    /// <summary>
-    /// Sets the <see cref="DisplayMode"/> for this dialog.
-    /// </summary>
-    /// <value>A <see cref="DisplayMode"/> which indicates the properties to display.</value>
-    [Category("Appearance")]
-    [Description("Sets the displayed properties of this control")]
-    public DisplayMode Mode
-    {
-      get
-      {
-        return mode;
-      }
-      set
-      {
-        mode = value;
-        SwitchDisplayMode(mode);
-      }
-    }
+    ///// <summary>
+    ///// Sets the <see cref="DisplayMode"/> for this dialog.
+    ///// </summary>
+    ///// <value>A <see cref="DisplayMode"/> which indicates the properties to display.</value>
+    //[Category("Appearance")]
+    //[Description("Sets the displayed properties of this control")]
+    //public DisplayMode Mode
+    //{
+    //  get
+    //  {
+    //    return mode;
+    //  }
+    //  set
+    //  {
+    //    mode = value;
+    //    SwitchDisplayMode(mode);
+    //  }
+    //}
 
     /// <summary>
     /// Gets or sets the available video sizes.
@@ -230,18 +219,18 @@ namespace OgamaControls
       }
     }
 
-    /// <summary>
-    /// Gets or sets whether this control should be in preview mode or paused.
-    /// </summary>
-    /// <value><strong>True</strong> when control should running preview,
-    /// otherwise <strong>false</strong>.</value>
-    [Category("Appearance")]
-    [Description("True when of this control should preview on start.")]
-    public bool ShouldPreview
-    {
-      get { return shouldPreview; }
-      set { shouldPreview = value; }
-    }
+    ///// <summary>
+    ///// Gets or sets whether this control should be in preview mode or paused.
+    ///// </summary>
+    ///// <value><strong>True</strong> when control should running preview,
+    ///// otherwise <strong>false</strong>.</value>
+    //[Category("Appearance")]
+    //[Description("True when of this control should preview on start.")]
+    //public bool ShouldPreview
+    //{
+    //  get { return shouldPreview; }
+    //  set { shouldPreview = value; }
+    //}
 
     #endregion //PROPERTIES
 
@@ -269,6 +258,8 @@ namespace OgamaControls
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
     private void DSVideoProperties_Load(object sender, EventArgs e)
     {
+      this.InitializeUI();
+      this.PopulateDlgWithProperties();
       this.RebuildDXCapture(this.properties);
     }
 
@@ -285,10 +276,10 @@ namespace OgamaControls
       this.UpdateProperties();
 
       // Only if the purpose is recording, test the capturing
-      if (this.shouldPreview)
+      //if (this.shouldPreview)
       {
         Form parent = (Form)sender;
-        if (parent.DialogResult == DialogResult.OK && !this.TestCapturing())
+        if (parent.DialogResult == DialogResult.OK && !this.dxCapture.HasValidGraph)
         {
           e.Cancel = true;
           string message = "Sorry, Ogama cannot initialize the capturing, "
@@ -298,8 +289,11 @@ namespace OgamaControls
         }
       }
 
-      this.dxCapture.PreviewWindow = null;
-      this.dxCapture.Dispose();
+      if (this.dxCapture != null)
+      {
+        this.dxCapture.Dispose();
+        this.dxCapture = null;
+      }
     }
 
     private bool TestCapturing()
@@ -311,8 +305,8 @@ namespace OgamaControls
 
       try
       {
-        string temp = System.IO.Path.GetTempFileName();
-        this.dxCapture.Filename = temp;
+        //string temp = System.IO.Path.GetTempFileName();
+        //this.DxCapture.Filename = temp;
         this.dxCapture.Start();
       }
       catch (Exception)
@@ -323,6 +317,7 @@ namespace OgamaControls
       {
         this.dxCapture.Stop();
         this.dxCapture.Dispose();
+        this.dxCapture = null;
       }
 
       return true;
@@ -337,9 +332,9 @@ namespace OgamaControls
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
     private void btnVideoDeviceProperties_Click(object sender, EventArgs e)
     {
-      if (this.dxCapture.VideoDevice.baseFilter != null)
+      if (this.dxCapture.VideoDeviceFilter != null)
       {
-        DirectShowUtils.DisplayPropertyPage(this.Handle, this.dxCapture.VideoDevice.baseFilter);
+        DirectShowUtils.DisplayPropertyPage(this.Handle, this.dxCapture.VideoDeviceFilter);
       }
     }
 
@@ -352,9 +347,9 @@ namespace OgamaControls
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
     private void btnVideoCompressorProperties_Click(object sender, EventArgs e)
     {
-      if (this.dxCapture.VideoCompressor.baseFilter != null)
+      if (this.dxCapture.VideoCompressorFilter != null)
       {
-        DirectShowUtils.DisplayPropertyPage(this.Handle, this.dxCapture.VideoCompressor.baseFilter);
+        DirectShowUtils.DisplayPropertyPage(this.Handle, this.dxCapture.VideoCompressorFilter);
       }
     }
 
@@ -367,9 +362,9 @@ namespace OgamaControls
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
     private void btnAudioDeviceProperties_Click(object sender, EventArgs e)
     {
-      if (this.dxCapture.AudioDevice.baseFilter != null)
+      if (this.dxCapture.AudioDeviceFilter != null)
       {
-        DirectShowUtils.DisplayPropertyPage(this.Handle, this.dxCapture.AudioDevice.baseFilter);
+        DirectShowUtils.DisplayPropertyPage(this.Handle, this.dxCapture.AudioDeviceFilter);
       }
     }
 
@@ -382,9 +377,9 @@ namespace OgamaControls
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
     private void btnAudioCompressorProperties_Click(object sender, EventArgs e)
     {
-      if (this.dxCapture.AudioCompressor.baseFilter != null)
+      if (this.dxCapture.AudioCompressorFilter != null)
       {
-        DirectShowUtils.DisplayPropertyPage(this.Handle, this.dxCapture.AudioCompressor.baseFilter);
+        DirectShowUtils.DisplayPropertyPage(this.Handle, this.dxCapture.AudioCompressorFilter);
       }
     }
 
@@ -397,7 +392,7 @@ namespace OgamaControls
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
     private void CbbVideoDevices_SelectionChangeCommitted(object sender, EventArgs e)
     {
-      this.properties.VideoInputDevice = cbbVideoDevices.SelectedItem.ToString();
+      this.properties.VideoInputDevice = Devices.Current.Cameras[cbbVideoDevices.SelectedIndex];
       this.PopulateVideoProperties(true);
       this.RebuildDXCapture(this.properties);
     }
@@ -424,7 +419,15 @@ namespace OgamaControls
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
     private void cbbAudioDevices_SelectionChangeCommitted(object sender, EventArgs e)
     {
-      this.properties.AudioInputDevice = cbbAudioDevices.SelectedItem.ToString();
+      string audioDevice = cbbAudioDevices.SelectedItem.ToString();
+      if (audioDevice == "Disabled")
+      {
+        this.properties.AudioInputDevice = string.Empty;
+      }
+      else
+      {
+        this.properties.AudioInputDevice = audioDevice;
+      }
       this.RebuildDXCapture(this.properties);
     }
 
@@ -512,9 +515,9 @@ namespace OgamaControls
     /// <summary>
     /// This method populates the combo boxes with valid entries.
     /// </summary>
-    private void InitializeUI(bool initializeForCapturing)
+    private void InitializeUI()
     {
-      this.properties = new CaptureDeviceProperties();
+      //this.properties = new CaptureDeviceProperties();
 
       cbbVideoDevices.Items.Clear();
       cbbVideoCompressor.Items.Clear();
@@ -522,7 +525,7 @@ namespace OgamaControls
       cbbAudioCompressor.Items.Clear();
 
       //cbbVideoDevices.Items.Add("Disabled");
-      foreach (Filter filter in this.filters.VideoInputDevices)
+      foreach (DsDevice filter in DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice))
       {
         if (filter.Name != "OgamaScreenCapture Filter")
         {
@@ -530,41 +533,21 @@ namespace OgamaControls
         }
       }
 
-      foreach (Filter filter in this.filters.VideoCompressors)
+      foreach (DsDevice filter in DsDevice.GetDevicesOfCat(FilterCategory.VideoCompressorCategory))
       {
-        //if (this.dxCapture!=null)
-        //{
-        //  this.dxCapture.Dispose();
-        //}
-        //this.dxCapture = new DXCapture(filter, null);
-        //if (this.TestCapturing())
-        //{
         cbbVideoCompressor.Items.Add(filter.Name);
-        //}
       }
 
-      //this.dxCapture.Dispose();
-
-      //cbbAudioDevices.Items.Add("Disabled");
-      foreach (Filter filter in this.filters.AudioInputDevices)
+      cbbAudioDevices.Items.Add("Disabled");
+      foreach (DsDevice filter in DsDevice.GetDevicesOfCat(FilterCategory.AudioInputDevice))
       {
         cbbAudioDevices.Items.Add(filter.Name);
       }
 
-      foreach (Filter filter in this.filters.AudioCompressors)
+      foreach (DsDevice filter in DsDevice.GetDevicesOfCat(FilterCategory.AudioCompressorCategory))
       {
-        //if (this.dxCapture != null)
-        //{
-        //  this.dxCapture.Dispose();
-        //}
-        //this.dxCapture = new DXCapture(null, filter);
-        //if (this.TestCapturing())
-        //{
         cbbAudioCompressor.Items.Add(filter.Name);
-        //}
       }
-
-      //this.dxCapture.Dispose();
 
       if (cbbVideoDevices.Items.Count > 1)
       {
@@ -621,22 +604,22 @@ namespace OgamaControls
       {
         cbbAudioCompressor.Text = "No audio compressors found";
       }
-      UpdateProperties();
 
+      //UpdateProperties();
 
-      if (initializeForCapturing)
-      {
-        if (cbbVideoDevices.Items.Count > 0)
-        {
-          this.PopulateVideoProperties(true);
-        }
-      }
-      else
-      {
-        this.PopulateDefaultProperties();
-      }
+      //if (initializeForCapturing)
+      //{
+      //  if (cbbVideoDevices.Items.Count > 0)
+      //  {
+      //    this.PopulateVideoProperties(true);
+      //  }
+      //}
+      //else
+      //{
+      //  this.PopulateDefaultProperties();
+      //}
 
-      UpdateProperties();
+      //UpdateProperties();
     }
 
     /// <summary>
@@ -646,12 +629,20 @@ namespace OgamaControls
     {
       if (cbbVideoDevices.SelectedItem != null)
       {
-        this.properties.VideoInputDevice = cbbVideoDevices.SelectedItem.ToString();
+        this.properties.VideoInputDevice = Devices.Current.Cameras[cbbVideoDevices.SelectedIndex];
       }
 
       if (cbbAudioDevices.SelectedItem != null)
       {
-        this.properties.AudioInputDevice = cbbAudioDevices.SelectedItem.ToString();
+        string audioDevice = cbbAudioDevices.SelectedItem.ToString();
+        if (audioDevice == "Disabled")
+        {
+          this.properties.AudioInputDevice = string.Empty;
+        }
+        else
+        {
+          this.properties.AudioInputDevice = audioDevice;
+        }
       }
 
       if (cbbVideoCompressor.SelectedItem != null)
@@ -671,8 +662,7 @@ namespace OgamaControls
       }
 
       this.properties.FrameRate = (int)nudFrameRate.Value;
-
-      //webCamControl.Properties = this.properties;
+      this.properties.PreviewWindow = this.panelPreview;
     }
 
     #endregion //METHODS
@@ -687,8 +677,8 @@ namespace OgamaControls
     /// </summary>
     private void PopulateDlgWithProperties()
     {
-      cbbVideoDevices.Text = this.properties.VideoInputDevice;
-      this.PopulateVideoProperties(false);
+      cbbVideoDevices.Text = this.properties.VideoInputDevice.Name;
+      this.PopulateVideoProperties(true);
       cbbVideoCompressor.Text = this.properties.VideoCompressor;
       cbbAudioDevices.Text = this.properties.AudioInputDevice;
       cbbAudioCompressor.Text = this.properties.AudioCompressor;
@@ -698,72 +688,72 @@ namespace OgamaControls
     }
 
 
-    /// <summary>
-    /// This method changes the display of the user control elements
-    /// according to the given <see cref="DisplayMode"/>
-    /// </summary>
-    /// <param name="mode">The <see cref="DisplayMode"/> flags that specify
-    /// what properties should be shown to the user.</param>
-    private void SwitchDisplayMode(DisplayMode mode)
-    {
-      spcVideoAudio.Panel2Collapsed = true;
-      if ((mode & DisplayMode.AudioPlayback) == DisplayMode.AudioPlayback ||
-        (mode & DisplayMode.AudioRecord) == DisplayMode.AudioRecord)
-      {
-        spcVideoAudio.Panel2Collapsed = false;
-        spcVideoAudio.Panel1Collapsed = true;
-        //spcAudioPropPreview.Panel2Collapsed = true;
-        cbbAudioDevices.Enabled = false;
-        //cbbAudioDevices.Text = "";
-        btnAudioDeviceProperties.Enabled = false;
-        if ((mode & DisplayMode.AudioRecord) == DisplayMode.AudioRecord)
-        {
-          //spcAudioPropPreview.Panel2Collapsed = false;
-          cbbAudioDevices.Enabled = true;
-          btnAudioDeviceProperties.Enabled = true;
-        }
-      }
-      if ((mode & DisplayMode.VideoPlayback) == DisplayMode.VideoPlayback ||
-        (mode & DisplayMode.VideoRecord) == DisplayMode.VideoRecord)
-      {
-        spcVideoAudio.Panel1Collapsed = false;
-        //spcVideoPropPreview.Panel2Collapsed = true;
-        cbbVideoDevices.Enabled = false;
-        //cbbVideoDevices.Text = "";
-        btnVideoDeviceProperties.Enabled = false;
-        if ((mode & DisplayMode.VideoRecord) == DisplayMode.VideoRecord)
-        {
-          //spcVideoPropPreview.Panel2Collapsed = false;
-          cbbVideoDevices.Enabled = true;
-          btnVideoDeviceProperties.Enabled = true;
-        }
-      }
+    ///// <summary>
+    ///// This method changes the display of the user control elements
+    ///// according to the given <see cref="DisplayMode"/>
+    ///// </summary>
+    ///// <param name="mode">The <see cref="DisplayMode"/> flags that specify
+    ///// what properties should be shown to the user.</param>
+    //private void SwitchDisplayMode(DisplayMode mode)
+    //{
+    //  spcVideoAudio.Panel2Collapsed = true;
+    //  if ((mode & DisplayMode.AudioPlayback) == DisplayMode.AudioPlayback ||
+    //    (mode & DisplayMode.AudioRecord) == DisplayMode.AudioRecord)
+    //  {
+    //    spcVideoAudio.Panel2Collapsed = false;
+    //    spcVideoAudio.Panel1Collapsed = true;
+    //    //spcAudioPropPreview.Panel2Collapsed = true;
+    //    cbbAudioDevices.Enabled = false;
+    //    //cbbAudioDevices.Text = "";
+    //    btnAudioDeviceProperties.Enabled = false;
+    //    if ((mode & DisplayMode.AudioRecord) == DisplayMode.AudioRecord)
+    //    {
+    //      //spcAudioPropPreview.Panel2Collapsed = false;
+    //      cbbAudioDevices.Enabled = true;
+    //      btnAudioDeviceProperties.Enabled = true;
+    //    }
+    //  }
+    //  if ((mode & DisplayMode.VideoPlayback) == DisplayMode.VideoPlayback ||
+    //    (mode & DisplayMode.VideoRecord) == DisplayMode.VideoRecord)
+    //  {
+    //    spcVideoAudio.Panel1Collapsed = false;
+    //    //spcVideoPropPreview.Panel2Collapsed = true;
+    //    cbbVideoDevices.Enabled = false;
+    //    //cbbVideoDevices.Text = "";
+    //    btnVideoDeviceProperties.Enabled = false;
+    //    if ((mode & DisplayMode.VideoRecord) == DisplayMode.VideoRecord)
+    //    {
+    //      //spcVideoPropPreview.Panel2Collapsed = false;
+    //      cbbVideoDevices.Enabled = true;
+    //      btnVideoDeviceProperties.Enabled = true;
+    //    }
+    //  }
 
-    }
+    //}
 
-    private void PopulateDefaultProperties()
-    {
-      // Erase old items
-      cbbVideoSize.Items.Clear();
+    //private void PopulateDefaultProperties()
+    //{
+    //  // Erase old items
+    //  cbbVideoSize.Items.Clear();
 
-      List<Size> defaultSizes = new List<Size>();
-      defaultSizes.Add(VIDEO_SIZE_1);
-      defaultSizes.Add(VIDEO_SIZE_2);
-      defaultSizes.Add(VIDEO_SIZE_3);
-      defaultSizes.Add(VIDEO_SIZE_4);
-      defaultSizes.Add(VIDEO_SIZE_5);
+    //  List<Size> defaultSizes = new List<Size>();
+    //  defaultSizes.Add(VIDEO_SIZE_1);
+    //  defaultSizes.Add(VIDEO_SIZE_2);
+    //  defaultSizes.Add(VIDEO_SIZE_3);
+    //  defaultSizes.Add(VIDEO_SIZE_4);
+    //  defaultSizes.Add(VIDEO_SIZE_5);
 
-      foreach (Size entry in defaultSizes)
-      {
-        cbbVideoSize.Items.Add(entry.Width.ToString() + " x " + entry.Height.ToString());
-      }
+    //  foreach (Size entry in defaultSizes)
+    //  {
+    //    cbbVideoSize.Items.Add(entry.Width.ToString() + " x " + entry.Height.ToString());
+    //  }
 
-      cbbVideoSize.SelectedIndex = 0;
-      this.properties.VideoSize = VIDEO_SIZE_1;
+    //  cbbVideoSize.SelectedIndex = 0;
+    //  this.properties.VideoSize = VIDEO_SIZE_1;
 
-      nudFrameRate.Value = 25;
-      this.properties.FrameRate = 25;
-    }
+    //  nudFrameRate.Value = 25;
+    //  this.properties.FrameRate = 25;
+    //}
 
     /// <summary>
     /// This method populates the video property fields of the dialog
@@ -776,36 +766,43 @@ namespace OgamaControls
       // Erase old items
       cbbVideoSize.Items.Clear();
 
-      // Get device capabilities and fill UI
-      this.RebuildDXCapture(this.properties);
+      //// Get device capabilities and fill UI
+      //this.RebuildDXCapture(this.properties);
 
       int minFramerate = int.MaxValue;
       int maxFramerate = 0;
 
-      this.properties.FrameRate = (int)this.dxCapture.FrameRate;
-      this.properties.VideoSize = this.dxCapture.FrameSize;
+      this.properties.FrameRate = (int)this.dxCapture.CaptureDeviceProperties.FrameRate;
+      this.properties.VideoSize = this.dxCapture.CaptureDeviceProperties.VideoSize;
 
-      foreach (VideoCapability cap in this.dxCapture.VideoCaps.videoModes)
+      if (this.dxCapture.VideoDeviceFilter != null)
       {
-        string size = cap.MaxFrameSize.Width.ToString() + " x " + cap.MaxFrameSize.Height.ToString();
-        if (!cbbVideoSize.Items.Contains(size))
+        foreach (CamSizeFPS cap in this.dxCapture.CaptureDeviceProperties.VideoInputDevice.SupportedSizesAndFPS)
         {
-          cbbVideoSize.Items.Add(size);
-        }
-        if (cap.MinFrameRate < minFramerate)
-        {
-          minFramerate = (int)cap.MinFrameRate;
+          string size = cap.Width.ToString() + " x " + cap.Height.ToString();
+          if (!cbbVideoSize.Items.Contains(size))
+          {
+            cbbVideoSize.Items.Add(size);
+          }
+
+          if (cap.FPS < minFramerate)
+          {
+            minFramerate = (int)cap.FPS;
+          }
+
+          if (cap.FPS > maxFramerate)
+          {
+            maxFramerate = (int)cap.FPS;
+          }
         }
 
-        if (cap.MaxFrameRate > maxFramerate)
+        if (minFramerate <= maxFramerate)
         {
-          maxFramerate = (int)cap.MaxFrameRate;
+          nudFrameRate.Minimum = minFramerate;
+          nudFrameRate.Maximum = maxFramerate;
+          nudFrameRate.Value = nudFrameRate.Maximum;
         }
       }
-
-      nudFrameRate.Minimum = minFramerate;
-      nudFrameRate.Maximum = maxFramerate;
-      nudFrameRate.Value = nudFrameRate.Maximum;
 
       if (selectFirstValidEntries)
       {
@@ -830,145 +827,19 @@ namespace OgamaControls
         this.dxCapture.Dispose();
       }
 
-      Filter videoDevice = null;
-      Filter videoCompressor = null;
-      Filter audioDevice = null;
-      Filter audioCompressor = null;
-
-      foreach (Filter inputFilter in this.filters.VideoInputDevices)
+      if (!this.DesignMode)//this.shouldPreview && 
       {
-        if (inputFilter.Name == captureProperties.VideoInputDevice)
-        {
-          videoDevice = inputFilter;
-          break;
-        }
-      }
-
-      foreach (Filter compressorFilter in this.filters.VideoCompressors)
-      {
-        if (compressorFilter.Name == captureProperties.VideoCompressor)
-        {
-          videoCompressor = compressorFilter;
-          break;
-        }
-      }
-
-      foreach (Filter inputFilter in this.filters.AudioInputDevices)
-      {
-        if (inputFilter.Name == captureProperties.AudioInputDevice)
-        {
-          audioDevice = inputFilter;
-          break;
-        }
-      }
-
-      foreach (Filter compressorFilter in this.filters.AudioCompressors)
-      {
-        if (compressorFilter.Name == captureProperties.AudioCompressor)
-        {
-          audioCompressor = compressorFilter;
-          break;
-        }
-      }
-
-
-      if (videoDevice != null || audioDevice != null)
-      {
-        this.dxCapture = new DXCapture(
-          videoDevice,
-          audioDevice,
-          videoCompressor,
-          audioCompressor,
-          captureProperties.FrameRate,
-          captureProperties.VideoSize,
-          captureProperties.CaptureMode);
-
-        if (this.shouldPreview && !this.DesignMode)
-        {
-          if (this.panelPreview != this.dxCapture.PreviewWindow)
-          {
-            this.dxCapture.PreviewWindow = this.panelPreview;
-          }
-        }
+        captureProperties.PreviewWindow = this.panelPreview;
       }
       else
       {
-        string message = "Could not initialize webcam.";
-        MessageBox.Show(message);
+        captureProperties.PreviewWindow = null;
       }
+
+      this.dxCapture = new DXCapture(captureProperties);
+      this.dxCapture.ShowPreviewWindow();
+      //this.dxCapture.Start();
     }
-
-    ///// <summary>
-    ///// This method returns the capabilities of the current selected video device.
-    ///// That is a list of video sizes and a list of frame rates.
-    ///// </summary>
-    ///// <param name="videoDevice">[in] A <see cref="IBaseFilter"/> thats properties should be received.</param>
-    ///// <param name="videoSizes">[out] A <see cref="List{Size}"/> with valid video sizes.</param>
-    ///// <param name="frameRates">[out] A <see cref="List{Int32}"/> with valid frame rates.</param>
-    ///// <returns><strong>True</strong>, if parsing was successfull, otherwise <strong>false</strong></returns>
-    //public bool GetVideoCaps(out List<Size> videoSizes, out List<int> frameRates)
-    //{
-    //  this.RebuildDXCapture(this.properties);
-    //  videoSizes = new List<Size>();
-    //  frameRates = new List<int>();
-
-    //  if (this.dxCapture == null)
-    //  {
-    //    return false;
-    //  }
-
-    //  // Get valid framerates
-    //  foreach (VideoCapability cap in this.dxCapture.VideoCaps.videoModes)
-    //  {
-    //    if (!videoSizes.Contains(cap.MaxFrameSize))
-    //    {
-    //      videoSizes.Add(cap.MaxFrameSize);
-    //    }
-    //    if (!videoSizes.Contains(cap.MinFrameSize))
-    //    {
-    //      videoSizes.Add(cap.MinFrameSize);
-    //    }
-    //    if (frameRates.Contains(cap.MaxFrameRate))
-    //    {
-
-    //    }
-    //  }
-
-    //  for (int j = minRate; j <= maxRate; j++)
-    //  {
-    //    if (!frameRates.Contains(j))
-    //    {
-    //      frameRates.Add(j);
-    //    }
-    //  }
-
-    //  // Get valid video sizes
-    //  if (this.dxCapture.VideoCaps.MinFrameSize != this.dxCapture.VideoCaps.MaxFrameSize && this.dxCapture.VideoCaps.FrameSizeGranularityX != 0)
-    //  {
-    //    int count = (this.dxCapture.VideoCaps.MaxFrameSize.Width - this.dxCapture.VideoCaps.MinFrameSize.Width) / this.dxCapture.VideoCaps.FrameSizeGranularityX;
-    //    for (int j = 0; j <= count; j++)
-    //    {
-    //      Size newSize = this.dxCapture.VideoCaps.MinFrameSize;
-    //      newSize.Width += this.dxCapture.VideoCaps.FrameSizeGranularityX * j;
-    //      newSize.Height += this.dxCapture.VideoCaps.FrameSizeGranularityY * j;
-    //      if (!videoSizes.Contains(newSize))
-    //      {
-    //        videoSizes.Add(newSize);
-    //      }
-    //    }
-    //  }
-    //  else
-    //  {
-    //    if (!videoSizes.Contains(this.dxCapture.VideoCaps.MinFrameSize))
-    //    {
-    //      videoSizes.Add(this.dxCapture.VideoCaps.MinFrameSize);
-    //    }
-    //  }
-
-    //  this.dxCapture.Dispose();
-
-    //  return true;
-    //}
 
     #endregion //HELPER
   }

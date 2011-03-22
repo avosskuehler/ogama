@@ -16,6 +16,7 @@
       if (this.dxCapture != null)
       {
         this.dxCapture.Dispose();
+        this.dxCapture = null;
       }
 
       if (disposing && (components != null))

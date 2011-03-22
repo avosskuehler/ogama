@@ -102,7 +102,16 @@ namespace Ogama.ExceptionHandling
       // Otherwise, display it in a message box.
       if (null != target)
       {
-        System.Diagnostics.Process.Start(target);
+        try
+        {
+          System.Diagnostics.Process.Start(target);
+        }
+        catch (Win32Exception)
+        {
+          ExceptionMethods.ProcessErrorMessage("You have no application associated for sending mails."
+            + " Please send the error.log and exception.log files in your local application data folder "
+            + " to adrian@ogama.net to help debugging.");
+        }
       }
       else
       {

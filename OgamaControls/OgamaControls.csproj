@@ -117,6 +117,10 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GazeTrackingLibrary, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\GazeTrackingLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
@@ -351,13 +355,19 @@
     </Compile>
     <Compile Include="Media\Player\PlayState.cs" />
     <Compile Include="Media\Player\VideoFramePusher.cs" />
+    <Compile Include="Media\WebCam\BitmapEventArgs.cs" />
+    <Compile Include="Media\WebCam\CaptureMode.cs" />
+    <Compile Include="Media\WebCam\CaptureModeEventArgs.cs" />
     <Compile Include="Media\WebCam\DSVideoProperties.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Media\WebCam\DSVideoProperties.Designer.cs">
       <DependentUpon>DSVideoProperties.cs</DependentUpon>
     </Compile>
+    <Compile Include="Media\WebCam\DXCapture.cs" />
     <Compile Include="Media\WebCam\ReferenceClock.cs" />
+    <Compile Include="Media\WebCam\ThreadSafe.cs" />
+    <Compile Include="Media\WebCam\VideoCapability.cs" />
     <Compile Include="Media\WebCam\Webcam.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -547,10 +557,6 @@
     <ProjectReference Include="..\DirectShow\DirectShowLib\DirectShowLib-2005.csproj">
       <Project>{CE009BFA-5EF6-4153-B2A1-2FA79698A9AE}</Project>
       <Name>DirectShowLib-2005</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DirectShow\DirectX.Capture\DirectX.Capture.csproj">
-      <Project>{8C0015DB-69E1-46E7-8705-3A4F8BE2E5E7}</Project>
-      <Name>DirectX.Capture</Name>
     </ProjectReference>
     <ProjectReference Include="..\VectorGraphics\VectorGraphics.csproj">
       <Project>{8230AED9-33A2-42FD-BDF7-4F7E4EFA73DB}</Project>

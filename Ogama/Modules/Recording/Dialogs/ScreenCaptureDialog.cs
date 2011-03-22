@@ -17,12 +17,11 @@ namespace Ogama.Modules.Recording
   using System.Runtime.InteropServices;
   using System.Windows.Forms;
   using DirectShowLib;
-  using DirectX.Capture;
   using OgamaControls;
 
   /// <summary>
   /// This dialog <see cref="Form"/> shows the options available
-  /// for screen capturing using the Hmelyoff labs VHSrcCap filter.
+  /// for screen capturing using the Ogama Screen Capture filter.
   /// </summary>
   public partial class ScreenCaptureDialog : Form
   {
@@ -37,10 +36,7 @@ namespace Ogama.Modules.Recording
     ///////////////////////////////////////////////////////////////////////////////
     #region FIELDS
 
-    /// <summary>
-    /// The <see cref="Filters"/> class containing valid direct show filters.
-    /// </summary>
-    private Filters filters;
+    private DsDevice[] videoCompressors;
 
     #endregion //FIELDS
 
@@ -55,12 +51,12 @@ namespace Ogama.Modules.Recording
     public ScreenCaptureDialog()
     {
       this.InitializeComponent();
-      this.filters = new Filters();
 
       int index = 0;
-      for (int i = 0; i < this.filters.VideoCompressors.Count; i++)
+      this.videoCompressors = DsDevice.GetDevicesOfCat(FilterCategory.VideoCompressorCategory);
+      for (int i = 0; i < videoCompressors.Length; i++)
       {
-        Filter compressor = this.filters.VideoCompressors[i];
+        DsDevice compressor = this.videoCompressors[i];
         this.cbbEncoderFilter.Items.Add(compressor.Name);
         if (compressor.Name.Contains("ffdshow"))
         {
@@ -86,20 +82,20 @@ namespace Ogama.Modules.Recording
     #region PROPERTIES
 
     /// <summary>
-    /// Gets or sets the selected video compressor <see cref="Filter"/>
+    /// Gets or sets the selected video compressor filter
     /// </summary>
     public string VideoCompressor
     {
       get
       {
-        return this.filters.VideoCompressors[this.cbbEncoderFilter.SelectedIndex].Name;
+        return this.videoCompressors[this.cbbEncoderFilter.SelectedIndex].Name;
       }
 
       set
       {
-        for (int i = 0; i < this.filters.VideoCompressors.Count; i++)
+        for (int i = 0; i < this.videoCompressors.Length; i++)
         {
-          if (value == this.filters.VideoCompressors[i].Name)
+          if (value == this.videoCompressors[i].Name)
           {
             this.cbbEncoderFilter.SelectedIndex = i;
             break;

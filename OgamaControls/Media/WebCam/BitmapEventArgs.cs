@@ -1,17 +1,17 @@
-// <copyright file="CaptureModeEventArgs.cs" company="FU Berlin">
+Ôªø// <copyright file="BitmapEventArgs.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voﬂk¸hler  
+// Copyright (C) 2010 Adrian Vo√ük√ºhler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 // You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 // **************************************************************
 // </copyright>
-// <author>Adrian Voﬂk¸hler</author>
+// <author>Adrian Vo√ük√ºhler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace DirectX.Capture
+namespace OgamaControls
 {
   using System;
   using System.Collections.Generic;
@@ -20,27 +20,26 @@ namespace DirectX.Capture
   using System.Text;
 
   /// <summary>
-  /// Delegate. Handles capture mode changed event.
+  /// Delegate. Handles bitmap occured event.
   /// </summary>
   /// <param name="sender">Source of the event.</param>
-  /// <param name="e">A <see cref="CaptureModeEventArgs"/>
-  /// with <see cref="CaptureMode"/> to send. </param>
-  public delegate void CaptureModeEventHandler(object sender, CaptureModeEventArgs e);
+  /// <param name="e">A <see cref="BitmapEventArgs"/> with the bitmap</param>
+  public delegate void BitmapEventHandler(object sender, BitmapEventArgs e);
 
   /// <summary>
   /// Derived from <see cref="System.EventArgs"/>
-  /// Class that contains a <see cref="CaptureMode"/> in its arguments
+  /// Class that contains the data for the TrialEventOccured event. Derives from System.EventArgs.
   /// </summary>
-  public class CaptureModeEventArgs : EventArgs
+  public class BitmapEventArgs : EventArgs
   {
     ///////////////////////////////////////////////////////////////////////////////
     // Defining Variables, Enumerations, Events                                  //
     ///////////////////////////////////////////////////////////////////////////////
     #region FIELDS
     /// <summary>
-    /// A custom CaptureMode to send.
+    /// The <see cref="Bitmap"/> to be send.
     /// </summary>
-    private readonly CaptureMode parameter;
+    private readonly Bitmap bitmap;
 
     #endregion //FIELDS
 
@@ -50,12 +49,12 @@ namespace DirectX.Capture
     #region CONSTRUCTION
 
     /// <summary>
-    /// Initializes a new instance of the CaptureModeEventArgs class.
+    /// Initializes a new instance of the BitmapEventArgs class.
     /// </summary>
-    /// <param name="newParam">A <see cref="CaptureMode"/> with the CaptureMode to send.</param>
-    public CaptureModeEventArgs(CaptureMode newParam)
+    /// <param name="newBitmap">A new available <see cref="Bitmap"/>.</param>
+    public BitmapEventArgs(Bitmap newBitmap)
     {
-      this.parameter = newParam;
+      this.bitmap = newBitmap;
     }
 
     #endregion //CONSTRUCTION
@@ -64,14 +63,16 @@ namespace DirectX.Capture
     // Defining Properties                                                       //
     ///////////////////////////////////////////////////////////////////////////////
     #region PROPERTIES
+
     /// <summary>
-    /// Gets the custom CaptureMode.
+    /// Gets the <see cref="Bitmap"/>.
     /// </summary>
-    /// <value>A <see cref="CaptureMode"/> to send to the listener.</value>
-    public CaptureMode Param
+    /// <value>A new <see cref="Bitmap"/>.</value>
+    public Bitmap Bitmap
     {
-      get { return this.parameter; }
+      get { return this.bitmap; }
     }
+
     #endregion //PROPERTIES
   }
 }
