@@ -1,4 +1,4 @@
-﻿// <copyright file="BitmapEventArgs.cs" company="FU Berlin">
+﻿// <copyright file="CaptureModeEventArgs.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
 // Copyright (C) 2010 Adrian Voßkühler  
@@ -11,7 +11,7 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace DirectX.Capture
+namespace OgamaControls
 {
   using System;
   using System.Collections.Generic;
@@ -20,26 +20,27 @@ namespace DirectX.Capture
   using System.Text;
 
   /// <summary>
-  /// Delegate. Handles bitmap occured event.
+  /// Delegate. Handles capture mode changed event.
   /// </summary>
   /// <param name="sender">Source of the event.</param>
-  /// <param name="e">A <see cref="BitmapEventArgs"/> with the bitmap</param>
-  public delegate void BitmapEventHandler(object sender, BitmapEventArgs e);
+  /// <param name="e">A <see cref="CaptureModeEventArgs"/>
+  /// with <see cref="CaptureMode"/> to send. </param>
+  public delegate void CaptureModeEventHandler(object sender, CaptureModeEventArgs e);
 
   /// <summary>
   /// Derived from <see cref="System.EventArgs"/>
-  /// Class that contains the data for the TrialEventOccured event. Derives from System.EventArgs.
+  /// Class that contains a <see cref="CaptureMode"/> in its arguments
   /// </summary>
-  public class BitmapEventArgs : EventArgs
+  public class CaptureModeEventArgs : EventArgs
   {
     ///////////////////////////////////////////////////////////////////////////////
     // Defining Variables, Enumerations, Events                                  //
     ///////////////////////////////////////////////////////////////////////////////
     #region FIELDS
     /// <summary>
-    /// The <see cref="Bitmap"/> to be send.
+    /// A custom CaptureMode to send.
     /// </summary>
-    private readonly Bitmap bitmap;
+    private readonly CaptureMode parameter;
 
     #endregion //FIELDS
 
@@ -49,12 +50,12 @@ namespace DirectX.Capture
     #region CONSTRUCTION
 
     /// <summary>
-    /// Initializes a new instance of the BitmapEventArgs class.
+    /// Initializes a new instance of the CaptureModeEventArgs class.
     /// </summary>
-    /// <param name="newBitmap">A new available <see cref="Bitmap"/>.</param>
-    public BitmapEventArgs(Bitmap newBitmap)
+    /// <param name="newParam">A <see cref="CaptureMode"/> with the CaptureMode to send.</param>
+    public CaptureModeEventArgs(CaptureMode newParam)
     {
-      this.bitmap = newBitmap;
+      this.parameter = newParam;
     }
 
     #endregion //CONSTRUCTION
@@ -65,12 +66,12 @@ namespace DirectX.Capture
     #region PROPERTIES
 
     /// <summary>
-    /// Gets the <see cref="Bitmap"/>.
+    /// Gets the custom CaptureMode.
     /// </summary>
-    /// <value>A new <see cref="Bitmap"/>.</value>
-    public Bitmap Bitmap
+    /// <value>A <see cref="CaptureMode"/> to send to the listener.</value>
+    public CaptureMode Param
     {
-      get { return this.bitmap; }
+      get { return this.parameter; }
     }
 
     #endregion //PROPERTIES

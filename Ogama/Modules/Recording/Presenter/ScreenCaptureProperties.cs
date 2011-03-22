@@ -15,8 +15,8 @@ namespace Ogama.Modules.Recording
 {
   using System.Drawing;
   using System.Windows.Forms;
-  using DirectX.Capture;
   using OgamaControls;
+  using GazeTrackingLibrary.Hardware;
 
   /// <summary>
   /// This class extends <see cref="CaptureDeviceProperties"/>
@@ -76,7 +76,8 @@ namespace Ogama.Modules.Recording
       newFrameRate,
       newVideoSize,
       newFilename,
-      newCaptureMode)
+      newCaptureMode,
+      newPreviewWindow)
     {
       this.PreviewWindow = newPreviewWindow;
       this.MonitorIndex = newMonitorIndex;
@@ -101,11 +102,11 @@ namespace Ogama.Modules.Recording
     /// </summary>
     public int MonitorIndex { get; set; }
 
-    /// <summary>
-    /// Gets or sets the <see cref="Control"/> on which the preview
-    /// stream of the DirectShow graph should be shown.
-    /// </summary>
-    public Control PreviewWindow { get; set; }
+    ///// <summary>
+    ///// Gets or sets the <see cref="Control"/> on which the preview
+    ///// stream of the DirectShow graph should be shown.
+    ///// </summary>
+    //public Control PreviewWindow { get; set; }
 
     #endregion //PROPERTIES
 

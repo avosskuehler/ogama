@@ -16,7 +16,6 @@ namespace Ogama.Modules.Recording.Presenter
   using System;
   using System.Drawing;
   using System.Windows.Forms;
-  using DirectX.Capture;
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
   using OgamaControls;
@@ -164,7 +163,7 @@ namespace Ogama.Modules.Recording.Presenter
 
     /// <summary>
     /// This method should be called after the <see cref="CaptureDeviceProperties"/>
-    /// for the screen capturing are set to initialize the <see cref="DXCapture"/>
+    /// for the screen capturing are set to initialize the <see cref="DSScreenCapture"/>
     /// one time.
     /// </summary>
     /// <param name="screenCaptureProperties">The <see cref="ScreenCaptureProperties"/>

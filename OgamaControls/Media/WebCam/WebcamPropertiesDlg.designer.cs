@@ -85,12 +85,8 @@
       // 
       this.dsVideoProperties.Dock = System.Windows.Forms.DockStyle.Fill;
       this.dsVideoProperties.Location = new System.Drawing.Point(0, 0);
-      this.dsVideoProperties.Mode = ((OgamaControls.DSVideoProperties.DisplayMode)((((OgamaControls.DSVideoProperties.DisplayMode.VideoPlayback | OgamaControls.DSVideoProperties.DisplayMode.AudioPlayback)
-                  | OgamaControls.DSVideoProperties.DisplayMode.VideoRecord)
-                  | OgamaControls.DSVideoProperties.DisplayMode.AudioRecord)));
       this.dsVideoProperties.Name = "dsVideoProperties";
       this.dsVideoProperties.Padding = new System.Windows.Forms.Padding(5);
-      this.dsVideoProperties.ShouldPreview = false;
       this.dsVideoProperties.Size = new System.Drawing.Size(585, 268);
       this.dsVideoProperties.TabIndex = 0;
       // 

@@ -15,7 +15,6 @@ namespace OgamaControls
   using System.Text;
   using System.Windows.Forms;
   using DirectShowLib;
-using DirectX.Capture;
 
   /// <summary>
   /// This <see cref="Form"/> encapsulates an dialog for getting, setting
@@ -43,9 +42,10 @@ using DirectX.Capture;
     /// <summary>
     /// Initializes a new instance of the WebcamPropertiesDlg class.
     /// </summary>
-    public WebcamPropertiesDlg()
+    public WebcamPropertiesDlg(DXCapture capture)
     {
       InitializeComponent();
+      this.dsVideoProperties.DxCapture = capture;
     }
 
     #endregion //CONSTRUCTION
@@ -64,23 +64,23 @@ using DirectX.Capture;
       {
         return this.dsVideoProperties.Properties;
       }
-      set
-      {
-        this.dsVideoProperties.Properties = value;
-      }
+      //set
+      //{
+      //  this.dsVideoProperties.Properties = value;
+      //}
     }
 
-    /// <summary>
-    /// Sets a value indicating whether the underlying <see cref="DSVideoProperties"/>
-    /// should be initialized for capture mode, that means should preview the video capture.
-    /// </summary>
-    public bool ShouldPreview
-    {
-      set
-      {
-        this.dsVideoProperties.ShouldPreview = value;
-      }
-    }
+    ///// <summary>
+    ///// Sets a value indicating whether the underlying <see cref="DSVideoProperties"/>
+    ///// should be initialized for capture mode, that means should preview the video capture.
+    ///// </summary>
+    //public bool ShouldPreview
+    //{
+    //  set
+    //  {
+    //    this.dsVideoProperties.ShouldPreview = value;
+    //  }
+    //}
 
     #endregion //PROPERTIES
 

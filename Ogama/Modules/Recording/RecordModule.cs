@@ -22,7 +22,6 @@ namespace Ogama.Modules.Recording
   using System.IO;
   using System.Threading;
   using System.Windows.Forms;
-  using DirectX.Capture;
 
   using Ogama.DataSet;
   using Ogama.ExceptionHandling;
@@ -37,10 +36,12 @@ namespace Ogama.Modules.Recording
   using Ogama.Modules.Recording.Tobii;
   using Ogama.Properties;
   using OgamaControls;
+
   using VectorGraphics.Elements;
   using VectorGraphics.StopConditions;
   using VectorGraphics.Tools;
   using VectorGraphics.Triggers;
+  using GazeTrackingLibrary.Hardware;
 
   /// <summary>
   /// Derived from <see cref="FormWithPicture"/>.
@@ -643,7 +644,7 @@ namespace Ogama.Modules.Recording
 
       this.delegateNewSlideAvailable = new UpdateLiveView(this.NewSlideAvailable);
 
-      this.forcePanelViewerUpdate = false;
+      this.forcePanelViewerUpdate = true;
 
       this.trialDataList = new List<TrialsData>();
       this.trialEventList = new List<TrialEvent>();
@@ -750,6 +751,12 @@ namespace Ogama.Modules.Recording
       this.recordPicture.PresentationSize = Document.ActiveDocument.PresentationSize;
       this.ResizeCanvas();
 
+      this.InitializeScreenCapture();
+      this.CreateTrackerInterfaces();
+      this.forcePanelViewerUpdate = true;
+      this.NewSlideAvailable();
+      //this.forcePanelViewerUpdate = false;
+
       // Uncheck Usercam button, if there is no available webcam
       // except Ogama Screen Capture which should not be used.
       if (this.webcamPreview.DirectXCapture == null)
@@ -757,12 +764,6 @@ namespace Ogama.Modules.Recording
         this.btnUsercam.Checked = false;
         this.spcPanelUserCam.Panel2Collapsed = true;
       }
-
-      this.InitializeScreenCapture();
-      this.CreateTrackerInterfaces();
-      this.forcePanelViewerUpdate = true;
-      this.NewSlideAvailable();
-      this.forcePanelViewerUpdate = false;
     }
 
     /// <summary>
@@ -817,14 +818,14 @@ namespace Ogama.Modules.Recording
     /// <summary>
     /// The <see cref="Control.Click"/> event handler for the
     /// <see cref="Button"/> <see cref="btnWebcamSettings"/>.
-    /// Calls the <see cref="Webcam.ShowConfigureDialog()"/> method
+    /// Calls the <see cref="Webcam.ShowConfigureDialog(bool)"/> method
     /// for webcam specific settings modification.
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
     private void btnWebcamSettings_Click(object sender, EventArgs e)
     {
-      this.webcamPreview.ShowConfigureDialog();
+      this.webcamPreview.ShowConfigureDialog(this.btnUsercam.Checked ? true : false);
     }
 
     /// <summary>
@@ -952,14 +953,22 @@ namespace Ogama.Modules.Recording
             "Try again after plugging in a camera or change the capture device.";
           ExceptionMethods.ProcessMessage("No webcam found", message);
         }
+        else
+        {
+          this.webcamPreview.Preview();
+        }
       }
       else
       {
         this.chbRecordVideo.Checked = false;
         this.chbRecordAudio.Checked = false;
+        if (this.webcamPreview.DirectXCapture != null)
+        {
+          this.webcamPreview.DisposeDxCapture();
+        }
       }
 
-      this.webcamPreview.Preview = this.btnUsercam.Checked;
+      //this.webcamPreview.Preview = this.btnUsercam.Checked;
       this.spcPanelUserCam.Panel2Collapsed = !this.btnUsercam.Checked;
     }
 
@@ -1413,20 +1422,20 @@ namespace Ogama.Modules.Recording
       // Show user cam by default
       this.spcPanelUserCam.Panel2Collapsed = false;
 
-      // Disable recording check boxes by default
-      this.chbRecordVideo.Enabled = false;
-      this.chbRecordAudio.Enabled = false;
+      //// Disable recording check boxes by default
+      //this.chbRecordVideo.Enabled = false;
+      //this.chbRecordAudio.Enabled = false;
 
-      // Update checkboxes with respect to available mode
-      if ((e.Param & CaptureMode.VideoCapture) == CaptureMode.VideoCapture)
-      {
-        this.chbRecordVideo.Enabled = true;
-      }
+      //// Update checkboxes with respect to available mode
+      //if ((e.Param & CaptureMode.VideoCapture) == CaptureMode.VideoCapture)
+      //{
+      //  this.chbRecordVideo.Enabled = true;
+      //}
 
-      if ((e.Param & CaptureMode.AudioCapture) == CaptureMode.AudioCapture)
-      {
-        this.chbRecordAudio.Enabled = true;
-      }
+      //if ((e.Param & CaptureMode.AudioCapture) == CaptureMode.AudioCapture)
+      //{
+      //  this.chbRecordAudio.Enabled = true;
+      //}
     }
 
     /// <summary>
@@ -1445,7 +1454,11 @@ namespace Ogama.Modules.Recording
         // Restart usercam preview
         if (this.btnUsercam.Checked)
         {
-          this.webcamPreview.Preview = true;
+          CaptureDeviceProperties currentProperties = this.webcamPreview.Properties;
+          currentProperties.Filename = string.Empty;
+          currentProperties.CaptureMode = CaptureMode.AudioVideoPreview;
+          this.webcamPreview.Properties = currentProperties;
+          this.webcamPreview.RunGraph();
         }
 
         this.OnRecordingFinished(new StringEventArgs(string.Empty));
@@ -1495,12 +1508,10 @@ namespace Ogama.Modules.Recording
       ScreenCaptureProperties screenCaptureProperties = (ScreenCaptureProperties)threadParams[3];
 
       CaptureDeviceProperties userCameraProperties = null;
-      Control userCameraPreviewWindow = null;
 
-      if (threadParams.Count > 5)
+      if (threadParams.Count > 4)
       {
         userCameraProperties = (CaptureDeviceProperties)threadParams[4];
-        userCameraPreviewWindow = (Control)threadParams[5];
       }
 
       GetTimeDelegate getTimeMethod = this.GetCurrentTime;
@@ -1516,9 +1527,6 @@ namespace Ogama.Modules.Recording
 
       // Set screen capture device properties
       this.presenterForm.ScreenCaptureProperties = screenCaptureProperties;
-
-      // Set preview window for user camera
-      this.presenterForm.UserCameraPreviewWindow = userCameraPreviewWindow;
 
       // Set user camera properties
       this.presenterForm.UserCameraProperties = userCameraProperties;
@@ -1833,7 +1841,7 @@ namespace Ogama.Modules.Recording
         // because gazetracker often uses the first connected camera device
         // which would otherwise used by the usercam
         this.btnUsercam.Checked = false;
-        this.webcamPreview.Preview = this.btnUsercam.Checked;
+        //this.webcamPreview.Preview = this.btnUsercam.Checked;
         this.spcPanelUserCam.Panel2Collapsed = true;
       }
       else
@@ -1921,6 +1929,10 @@ namespace Ogama.Modules.Recording
         // Create a hardcopy of the trials.
         TrialCollection copyOfTrials = (TrialCollection)this.trials.Clone();
 
+        // Dispose webcam to be recreated in presentation thread
+        // with old preview window
+        this.webcamPreview.DisposeDxCapture();
+
         // CaptureMode for usercam
         CaptureMode mode = CaptureMode.None;
 
@@ -1959,11 +1971,7 @@ namespace Ogama.Modules.Recording
         if (this.btnUsercam.Checked)
         {
           threadParameters.Add(this.webcamPreview.Properties);
-          threadParameters.Add(this.webcamPreview.DirectXCapture == null ? null : this.webcamPreview.DirectXCapture.PreviewWindow);
         }
-
-        // Stop webcam
-        this.webcamPreview.Preview = false;
 
         // Start recording
         this.currentTrialVideoStartTime = 0;
@@ -2213,7 +2221,7 @@ namespace Ogama.Modules.Recording
       // Redraw panel
       this.NewSlideAvailable();
 
-      this.forcePanelViewerUpdate = false;
+      //this.forcePanelViewerUpdate = false;
     }
 
     /// <summary>

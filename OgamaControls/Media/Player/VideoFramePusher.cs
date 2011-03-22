@@ -8,7 +8,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading;
 using System.Windows.Forms;
-using DirectX.Capture;
 
 namespace OgamaControls
 {

@@ -271,12 +271,6 @@
     <None Include="Resources\RecordingBackground.png" />
     <None Include="Properties\VectorGraphicsKey.snk" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DirectShow\DirectX.Capture\DirectX.Capture.csproj">
-      <Project>{8C0015DB-69E1-46E7-8705-3A4F8BE2E5E7}</Project>
-      <Name>DirectX.Capture</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!--
     <Import Project="$(ProgramFiles)\MSBuild\Microsoft\StyleCop\v4.3\Microsoft.StyleCop.targets" />

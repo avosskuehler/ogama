@@ -44,45 +44,125 @@ using System.Runtime.InteropServices;
 
 namespace OgamaControls.Media
 {
+  /// <summary>
+  /// Describes the kind of media stream
+  /// </summary>
   public enum StreamKind
   {
+    /// <summary>
+    /// 
+    /// </summary>
     General,
+    /// <summary>
+    /// 
+    /// </summary>
     Video,
+    /// <summary>
+    /// 
+    /// </summary>
     Audio,
+    /// <summary>
+    /// 
+    /// </summary>
     Text,
+    /// <summary>
+    /// 
+    /// </summary>
     Chapters,
+    /// <summary>
+    /// 
+    /// </summary>
     Image
   }
-
+  /// <summary>
+  /// 
+  /// </summary>
   public enum InfoKind
   {
+    /// <summary>
+    /// 
+    /// </summary>
     Name,
+    /// <summary>
+    /// 
+    /// </summary>
     Text,
+    /// <summary>
+    /// 
+    /// </summary>
     Measure,
+    /// <summary>
+    /// 
+    /// </summary>
     Options,
+    /// <summary>
+    /// 
+    /// </summary>
     NameText,
+    /// <summary>
+    /// 
+    /// </summary>
     MeasureText,
+    /// <summary>
+    /// 
+    /// </summary>
     Info,
+    /// <summary>
+    /// 
+    /// </summary>
     HowTo
   }
 
+  /// <summary>
+  /// 
+  /// </summary>
   public enum InfoOptions
   {
+    /// <summary>
+    /// 
+    /// </summary>
     ShowInInform,
+    /// <summary>
+    /// 
+    /// </summary>
     Support,
+    /// <summary>
+    /// 
+    /// </summary>
     ShowInSupported,
+    /// <summary>
+    /// 
+    /// </summary>
     TypeOfValue
   }
 
+  /// <summary>
+  /// 
+  /// </summary>
   public enum InfoFileOptions
   {
+    /// <summary>
+    /// 
+    /// </summary>
     FileOption_Nothing = 0x00,
+    /// <summary>
+    /// 
+    /// </summary>
     FileOption_Recursive = 0x01,
+    /// <summary>
+    /// 
+    /// </summary>
     FileOption_CloseAll = 0x02,
+    /// <summary>
+    /// 
+    /// </summary>
     FileOption_Max = 0x04
   };
 
 
+  /// <summary>
+  /// 
+  /// </summary>
   public class MediaInfo
   {
     //Import of DLL functions. DO NOT USE until you know what you do (MediaInfo DLL do NOT use CoTaskMemAlloc to allocate memory)  
@@ -134,6 +214,9 @@ namespace OgamaControls.Media
     private static extern IntPtr MediaInfo_Count_Get(IntPtr Handle, IntPtr StreamKind, IntPtr StreamNumber);
 
     //MediaInfo class
+    /// <summary>
+    /// 
+    /// </summary>
     public MediaInfo()
     {
       Handle = MediaInfo_New();
@@ -142,7 +225,17 @@ namespace OgamaControls.Media
       else
         MustUseAnsi = false;
     }
+    /// <summary>
+    /// 
+    /// </summary>
     ~MediaInfo() { MediaInfo_Delete(Handle); }
+
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="FileName"></param>
+    /// <returns></returns>
     public int Open(String FileName)
     {
       if (MustUseAnsi)
@@ -155,23 +248,56 @@ namespace OgamaControls.Media
       else
         return (int)MediaInfo_Open(Handle, FileName);
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="File_Size"></param>
+    /// <param name="File_Offset"></param>
+    /// <returns></returns>
     public int Open_Buffer_Init(Int64 File_Size, Int64 File_Offset)
     {
       return (int)MediaInfo_Open_Buffer_Init(Handle, File_Size, File_Offset);
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="Buffer"></param>
+    /// <param name="Buffer_Size"></param>
+    /// <returns></returns>
     public int Open_Buffer_Continue(IntPtr Buffer, IntPtr Buffer_Size)
     {
       return (int)MediaInfo_Open_Buffer_Continue(Handle, Buffer, Buffer_Size);
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public Int64 Open_Buffer_Continue_GoTo_Get()
     {
       return (int)MediaInfo_Open_Buffer_Continue_GoTo_Get(Handle);
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public int Open_Buffer_Finalize()
     {
       return (int)MediaInfo_Open_Buffer_Finalize(Handle);
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
     public void Close() { MediaInfo_Close(Handle); }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public String Inform()
     {
       if (MustUseAnsi)
@@ -179,6 +305,16 @@ namespace OgamaControls.Media
       else
         return Marshal.PtrToStringUni(MediaInfo_Inform(Handle, (IntPtr)0));
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="StreamKind"></param>
+    /// <param name="StreamNumber"></param>
+    /// <param name="Parameter"></param>
+    /// <param name="KindOfInfo"></param>
+    /// <param name="KindOfSearch"></param>
+    /// <returns></returns>
     public String Get(StreamKind StreamKind, int StreamNumber, String Parameter, InfoKind KindOfInfo, InfoKind KindOfSearch)
     {
       if (MustUseAnsi)
@@ -191,6 +327,15 @@ namespace OgamaControls.Media
       else
         return Marshal.PtrToStringUni(MediaInfo_Get(Handle, (IntPtr)StreamKind, (IntPtr)StreamNumber, Parameter, (IntPtr)KindOfInfo, (IntPtr)KindOfSearch));
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="StreamKind"></param>
+    /// <param name="StreamNumber"></param>
+    /// <param name="Parameter"></param>
+    /// <param name="KindOfInfo"></param>
+    /// <returns></returns>
     public String Get(StreamKind StreamKind, int StreamNumber, int Parameter, InfoKind KindOfInfo)
     {
       if (MustUseAnsi)
@@ -198,6 +343,13 @@ namespace OgamaControls.Media
       else
         return Marshal.PtrToStringUni(MediaInfo_GetI(Handle, (IntPtr)StreamKind, (IntPtr)StreamNumber, (IntPtr)Parameter, (IntPtr)KindOfInfo));
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="Option"></param>
+    /// <param name="Value"></param>
+    /// <returns></returns>
     public String Option(String Option, String Value)
     {
       if (MustUseAnsi)
@@ -212,35 +364,71 @@ namespace OgamaControls.Media
       else
         return Marshal.PtrToStringUni(MediaInfo_Option(Handle, Option, Value));
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public int State_Get() { return (int)MediaInfo_State_Get(Handle); }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="StreamKind"></param>
+    /// <param name="StreamNumber"></param>
+    /// <returns></returns>
     public int Count_Get(StreamKind StreamKind, int StreamNumber) { return (int)MediaInfo_Count_Get(Handle, (IntPtr)StreamKind, (IntPtr)StreamNumber); }
+
     private IntPtr Handle;
     private bool MustUseAnsi;
 
     //Default values, if you know how to set default values in C#, say me
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="StreamKind"></param>
+    /// <param name="StreamNumber"></param>
+    /// <param name="Parameter"></param>
+    /// <param name="KindOfInfo"></param>
+    /// <returns></returns>
     public String Get(StreamKind StreamKind, int StreamNumber, String Parameter, InfoKind KindOfInfo) { return Get(StreamKind, StreamNumber, Parameter, KindOfInfo, InfoKind.Name); }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="StreamKind"></param>
+    /// <param name="StreamNumber"></param>
+    /// <param name="Parameter"></param>
+    /// <returns></returns>
     public String Get(StreamKind StreamKind, int StreamNumber, String Parameter) { return Get(StreamKind, StreamNumber, Parameter, InfoKind.Text, InfoKind.Name); }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="StreamKind"></param>
+    /// <param name="StreamNumber"></param>
+    /// <param name="Parameter"></param>
+    /// <returns></returns>
     public String Get(StreamKind StreamKind, int StreamNumber, int Parameter) { return Get(StreamKind, StreamNumber, Parameter, InfoKind.Text); }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="Option_"></param>
+    /// <returns></returns>
     public String Option(String Option_) { return Option(Option_, ""); }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="StreamKind"></param>
+    /// <returns></returns>
     public int Count_Get(StreamKind StreamKind) { return Count_Get(StreamKind, -1); }
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  /// <summary>
+  /// 
+  /// </summary>
   public class MediaInfoList
   {
     //Import of DLL functions. DO NOT USE until you know what you do (MediaInfo DLL do NOT use CoTaskMemAlloc to allocate memory)  
@@ -266,25 +454,142 @@ namespace OgamaControls.Media
     private static extern IntPtr MediaInfoList_Count_Get(IntPtr Handle, IntPtr FilePos, IntPtr StreamKind, IntPtr StreamNumber);
 
     //MediaInfo class
+
+    /// <summary>
+    /// 
+    /// </summary>
     public MediaInfoList() { Handle = MediaInfoList_New(); }
+
+    /// <summary>
+    /// 
+    /// </summary>
     ~MediaInfoList() { MediaInfoList_Delete(Handle); }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="FileName"></param>
+    /// <param name="Options"></param>
+    /// <returns></returns>
     public int Open(String FileName, InfoFileOptions Options) { return (int)MediaInfoList_Open(Handle, FileName, (IntPtr)Options); }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="FilePos"></param>
     public void Close(int FilePos) { MediaInfoList_Close(Handle, (IntPtr)FilePos); }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="FilePos"></param>
+    /// <returns></returns>
     public String Inform(int FilePos) { return Marshal.PtrToStringUni(MediaInfoList_Inform(Handle, (IntPtr)FilePos, (IntPtr)0)); }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="FilePos"></param>
+    /// <param name="StreamKind"></param>
+    /// <param name="StreamNumber"></param>
+    /// <param name="Parameter"></param>
+    /// <param name="KindOfInfo"></param>
+    /// <param name="KindOfSearch"></param>
+    /// <returns></returns>
     public String Get(int FilePos, StreamKind StreamKind, int StreamNumber, String Parameter, InfoKind KindOfInfo, InfoKind KindOfSearch) { return Marshal.PtrToStringUni(MediaInfoList_Get(Handle, (IntPtr)FilePos, (IntPtr)StreamKind, (IntPtr)StreamNumber, Parameter, (IntPtr)KindOfInfo, (IntPtr)KindOfSearch)); }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="FilePos"></param>
+    /// <param name="StreamKind"></param>
+    /// <param name="StreamNumber"></param>
+    /// <param name="Parameter"></param>
+    /// <param name="KindOfInfo"></param>
+    /// <returns></returns>
     public String Get(int FilePos, StreamKind StreamKind, int StreamNumber, int Parameter, InfoKind KindOfInfo) { return Marshal.PtrToStringUni(MediaInfoList_GetI(Handle, (IntPtr)FilePos, (IntPtr)StreamKind, (IntPtr)StreamNumber, (IntPtr)Parameter, (IntPtr)KindOfInfo)); }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="Option"></param>
+    /// <param name="Value"></param>
+    /// <returns></returns>
     public String Option(String Option, String Value) { return Marshal.PtrToStringUni(MediaInfoList_Option(Handle, Option, Value)); }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public int State_Get() { return (int)MediaInfoList_State_Get(Handle); }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="FilePos"></param>
+    /// <param name="StreamKind"></param>
+    /// <param name="StreamNumber"></param>
+    /// <returns></returns>
     public int Count_Get(int FilePos, StreamKind StreamKind, int StreamNumber) { return (int)MediaInfoList_Count_Get(Handle, (IntPtr)FilePos, (IntPtr)StreamKind, (IntPtr)StreamNumber); }
     private IntPtr Handle;
 
     //Default values, if you know how to set default values in C#, say me
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="FileName"></param>
     public void Open(String FileName) { Open(FileName, 0); }
+
+    /// <summary>
+    /// 
+    /// </summary>
     public void Close() { Close(-1); }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="FilePos"></param>
+    /// <param name="StreamKind"></param>
+    /// <param name="StreamNumber"></param>
+    /// <param name="Parameter"></param>
+    /// <param name="KindOfInfo"></param>
+    /// <returns></returns>
     public String Get(int FilePos, StreamKind StreamKind, int StreamNumber, String Parameter, InfoKind KindOfInfo) { return Get(FilePos, StreamKind, StreamNumber, Parameter, KindOfInfo, InfoKind.Name); }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="FilePos"></param>
+    /// <param name="StreamKind"></param>
+    /// <param name="StreamNumber"></param>
+    /// <param name="Parameter"></param>
+    /// <returns></returns>
     public String Get(int FilePos, StreamKind StreamKind, int StreamNumber, String Parameter) { return Get(FilePos, StreamKind, StreamNumber, Parameter, InfoKind.Text, InfoKind.Name); }
+   
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="FilePos"></param>
+    /// <param name="StreamKind"></param>
+    /// <param name="StreamNumber"></param>
+    /// <param name="Parameter"></param>
+    /// <returns></returns>
     public String Get(int FilePos, StreamKind StreamKind, int StreamNumber, int Parameter) { return Get(FilePos, StreamKind, StreamNumber, Parameter, InfoKind.Text); }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="Option_"></param>
+    /// <returns></returns>
     public String Option(String Option_) { return Option(Option_, ""); }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="FilePos"></param>
+    /// <param name="StreamKind"></param>
+    /// <returns></returns>
     public int Count_Get(int FilePos, StreamKind StreamKind) { return Count_Get(FilePos, StreamKind, -1); }
   }
 

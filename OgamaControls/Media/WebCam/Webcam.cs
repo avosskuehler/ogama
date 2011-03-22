@@ -5,9 +5,9 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
-using DirectX.Capture;
 using DirectShowLib;
 using System.Diagnostics;
+using GazeTrackingLibrary.Hardware;
 
 namespace OgamaControls
 {
@@ -31,11 +31,11 @@ namespace OgamaControls
     ///////////////////////////////////////////////////////////////////////////////
     #region FIELDS
 
-    /// <summary>
-    /// The <see cref="Filters"/> registered in the system, containing
-    /// Video, AudioDevices and Video, Audiocompressors
-    /// </summary>
-    private Filters filters;
+    ///// <summary>
+    ///// The <see cref="Filters"/> registered in the system, containing
+    ///// Video, AudioDevices and Video, Audiocompressors
+    ///// </summary>
+    //private Filters filters;
 
     /// <summary>
     /// The <see cref="DXCapture"/> object used to capture the webcams
@@ -49,11 +49,11 @@ namespace OgamaControls
     /// </summary>
     private CaptureDeviceProperties properties;
 
-    /// <summary>
-    /// An optional <see cref="Control"/> in which the preview
-    /// window should be shown.
-    /// </summary>
-    private Control previewWindow;
+    ///// <summary>
+    ///// An optional <see cref="Control"/> in which the preview
+    ///// window should be shown.
+    ///// </summary>
+    //private Control previewWindow;
 
     ///// <summary>
     ///// A precise timer for getting local time stamps.
@@ -79,8 +79,7 @@ namespace OgamaControls
     public Webcam()
     {
       InitializeComponent();
-      InitializeCustomComponents();
-      this.previewWindow = this;
+      //this.previewWindow = this;
     }
 
     /// <summary>
@@ -92,8 +91,7 @@ namespace OgamaControls
     public Webcam(Control previewWindow)
     {
       InitializeComponent();
-      InitializeCustomComponents();
-      this.previewWindow = previewWindow;
+      //this.previewWindow = previewWindow;
     }
 
     #endregion //CONSTRUCTION
@@ -144,60 +142,22 @@ namespace OgamaControls
       }
     }
 
-    /// <summary>
-    /// Sets the filename of the current capture.
-    /// </summary>
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    [Browsable(false)]
-    public string Filename
-    {
-      set
-      {
-        if (this.dxCapture != null)
-        {
-          this.dxCapture.Filename = value;
-        }
-      }
-    }
+    ///// <summary>
+    ///// Sets the filename of the current capture.
+    ///// </summary>
+    //[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    //[Browsable(false)]
+    //public string Filename
+    //{
+    //  set
+    //  {
+    //    if (this.dxCapture != null)
+    //    {
+    //      this.dxCapture.Filename = value;
+    //    }
+    //  }
+    //}
 
-    /// <summary>
-    /// Gets or sets a value indicating whether this
-    /// webcam should preview its video stream or not.
-    /// </summary>
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    [Browsable(false)]
-    public bool Preview
-    {
-      set
-      {
-        if (value)
-        {
-          try
-          {
-            if (this.dxCapture != null)
-            {
-              this.dxCapture.PreviewWindow = this.previewWindow;
-            }
-          }
-          catch (Exception)
-          {
-          }
-        }
-        else
-        {
-          try
-          {
-            if (this.dxCapture != null)
-            {
-              this.dxCapture.PreviewWindow = null;
-            }
-          }
-          catch (Exception)
-          {
-          }
-        }
-      }
-    }
 
     #endregion //PROPERTIES
 
@@ -205,6 +165,27 @@ namespace OgamaControls
     // Public methods                                                            //
     ///////////////////////////////////////////////////////////////////////////////
     #region PUBLICMETHODS
+
+    /// <summary>
+    /// Gets or sets a value indicating whether this
+    /// webcam should preview its video stream or not.
+    /// </summary>
+    public void Preview()
+    {
+      this.dxCapture.ShowPreviewWindow();
+    }
+
+    /// <summary>
+    /// Releases the resources used by the DXcapture object
+    /// </summary>
+    public void DisposeDxCapture()
+    {
+      if (this.dxCapture != null)
+      {
+        this.dxCapture.Dispose();
+        this.dxCapture = null;
+      }
+    }
 
     /// <summary>
     /// This method checks for valid capture settings
@@ -216,31 +197,43 @@ namespace OgamaControls
     /// otherwise <strong>false</strong>.</returns>
     public bool TestCapture()
     {
+      //string oldFile = this.properties.Filename;
+
+      //string temp = System.IO.Path.GetTempFileName();
+      //this.properties.Filename = temp;
+
       if (this.dxCapture == null)
       {
-        return false;
+        this.InitializeWebcam(this.properties);
       }
 
-      string temp = System.IO.Path.GetTempFileName();
-      this.dxCapture.Filename = temp;
+      //if (this.dxCapture == null)
+      //{
+      //  this.properties.Filename = oldFile;
+      //  return false;
+      //}
 
-      try
-      {
-        this.dxCapture.Start();
-      }
-      catch (Exception)
-      {
-        return false;
-      }
-      finally
-      {
-        this.dxCapture.Stop();
-      }
+      //try
+      //{
+      //  this.dxCapture.Start();
+      //}
+      //catch (Exception)
+      //{
+      //  this.properties.Filename = oldFile;
+      //  return false;
+      //}
+      //finally
+      //{
+      //  this.dxCapture.Stop();
+      //}
 
       if (!this.dxCapture.HasValidGraph)
       {
+        //this.properties.Filename = oldFile;
         return false;
       }
+
+      //this.properties.Filename = oldFile;
 
       return true;
     }
@@ -259,6 +252,7 @@ namespace OgamaControls
 
       if (this.dxCapture.HasValidGraph)
       {
+        this.dxCapture.ShowPreviewWindow();
         this.dxCapture.Start();
       }
     }
@@ -283,34 +277,31 @@ namespace OgamaControls
     /// to modify the current <see cref="CaptureDeviceProperties"/>
     /// and afterwards reinitializes the webcam.
     /// </summary>
-    public void ShowConfigureDialog()
+    public void ShowConfigureDialog(bool restartCamera)
     {
       if (this.dxCapture == null)
       {
         return;
       }
 
-      try
-      {
-        this.dxCapture.PreviewWindow = null;
-      }
-      catch (Exception)
-      {
-      }
-
-      WebcamPropertiesDlg dialog = new WebcamPropertiesDlg();
-      dialog.Properties = this.properties;
-      dialog.ShouldPreview = true;
+      WebcamPropertiesDlg dialog = new WebcamPropertiesDlg(this.dxCapture);
+      //dialog.Properties = this.properties;
+      //dialog.ShouldPreview = true;
 
       if (dialog.ShowDialog() == DialogResult.OK)
       {
         // Update properties
         // Validation check is within dialog
         this.properties = dialog.Properties;
+        this.properties.PreviewWindow = this;
       }
 
-      // Restart webcam
-      this.InitializeWebcam(this.properties);
+      if (restartCamera)
+      {
+        // Restart webcam
+        this.InitializeWebcam(this.properties);
+        this.RunGraph();
+      }
     }
 
     /// <summary>
@@ -348,9 +339,9 @@ namespace OgamaControls
         return;
       }
 
-      if (this.dxCapture.VideoDevice.baseFilter != null)
+      if (this.dxCapture.VideoDeviceFilter != null)
       {
-        DirectShowUtils.DisplayPropertyPage(this.Handle, this.dxCapture.VideoDevice.baseFilter);
+        DirectShowUtils.DisplayPropertyPage(this.Handle, this.dxCapture.VideoDeviceFilter);
       }
     }
 
@@ -364,9 +355,9 @@ namespace OgamaControls
         return;
       }
 
-      if (this.dxCapture.VideoCompressor.baseFilter != null)
+      if (this.dxCapture.VideoCompressorFilter != null)
       {
-        DirectShowUtils.DisplayPropertyPage(this.Handle, this.dxCapture.VideoCompressor.baseFilter);
+        DirectShowUtils.DisplayPropertyPage(this.Handle, this.dxCapture.VideoCompressorFilter);
       }
     }
 
@@ -380,9 +371,9 @@ namespace OgamaControls
         return;
       }
 
-      if (this.dxCapture.AudioDevice.baseFilter != null)
+      if (this.dxCapture.AudioDeviceFilter != null)
       {
-        DirectShowUtils.DisplayPropertyPage(this.Handle, this.dxCapture.AudioDevice.baseFilter);
+        DirectShowUtils.DisplayPropertyPage(this.Handle, this.dxCapture.AudioDeviceFilter);
       }
     }
 
@@ -396,9 +387,9 @@ namespace OgamaControls
         return;
       }
 
-      if (this.dxCapture.AudioCompressor.baseFilter != null)
+      if (this.dxCapture.AudioCompressorFilter != null)
       {
-        DirectShowUtils.DisplayPropertyPage(this.Handle, this.dxCapture.AudioCompressor.baseFilter);
+        DirectShowUtils.DisplayPropertyPage(this.Handle, this.dxCapture.AudioCompressorFilter);
       }
     }
 
@@ -429,20 +420,21 @@ namespace OgamaControls
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void WebCam2_Load(object sender, EventArgs e)
     {
-      this.InitializeWebcam(this.properties);
+      InitializeCustomComponents();
+      //this.InitializeWebcam(this.properties);
     }
 
     /// <summary>
     /// The <see cref="ToolStripItem.Click"/> event handler
     /// for the <see cref="ContextMenu"/> <see cref="cmuProperties"/>.
-    /// Calls the <see cref="ShowConfigureDialog()"/> that shows
+    /// Calls the <see cref="ShowConfigureDialog(bool)"/> that shows
     /// a configuration dialog.
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void cmuProperties_Click(object sender, EventArgs e)
     {
-      this.ShowConfigureDialog();
+      this.ShowConfigureDialog(true);
     }
 
     #endregion //WINDOWSEVENTHANDLER
@@ -489,23 +481,38 @@ namespace OgamaControls
     /// </summary>
     private void InitializeCustomComponents()
     {
-      this.filters = new Filters();
       this.properties = new CaptureDeviceProperties();
       //this.stopWatch = new Stopwatch();
-
-      if (this.filters.VideoInputDevices.Count > 0)
+      if (Devices.Current.Cameras.Count > 0)
       {
-        this.properties.VideoInputDevice = this.filters.VideoInputDevices[0].Name;
+        this.properties.VideoInputDevice = Devices.Current.Cameras[0];
       }
 
-      this.properties.VideoCompressor = "ffdshow";
-
-      if (this.filters.AudioInputDevices.Count > 0)
+      DsDevice[] videoCompressors = DsDevice.GetDevicesOfCat(FilterCategory.VideoCompressorCategory);
+      foreach (DsDevice compressor in videoCompressors)
       {
-        this.properties.AudioInputDevice = this.filters.AudioInputDevices[0].Name;
+        if (compressor.Name.Contains("ffdshow"))
+        {
+          this.properties.VideoCompressor = compressor.Name;
+          break;
+        }
       }
 
-      this.properties.AudioCompressor = "PCM";
+      DsDevice[] audioInputDevices = DsDevice.GetDevicesOfCat(FilterCategory.AudioInputDevice);
+      if (audioInputDevices.Length > 0)
+      {
+        this.properties.AudioInputDevice = audioInputDevices[0].Name;
+      }
+
+      DsDevice[] audioCompressors = DsDevice.GetDevicesOfCat(FilterCategory.AudioCompressorCategory);
+      foreach (DsDevice compressor in audioCompressors)
+      {
+        if (compressor.Name == "PCM")
+        {
+          this.properties.AudioCompressor = compressor.Name;
+          break;
+        }
+      }
 
       this.properties.FrameRate = 10;
       this.properties.VideoSize = new Size(320, 240);
@@ -531,104 +538,40 @@ namespace OgamaControls
         return;
       }
 
-      if (this.dxCapture != null)
-      {
-        this.dxCapture.Dispose();
-      }
-
-      if (captureProperties.VideoInputDevice == "OgamaScreenCapture Filter")
+      if (captureProperties.VideoInputDevice.Name == "OgamaScreenCapture Filter")
       {
         // We dont want to initialize a webcam with the
         // ScreenCapture Filter
         return;
       }
 
-      Filter videoDevice = null;
-      Filter videoCompressor = null;
-      Filter audioDevice = null;
-      Filter audioCompressor = null;
-
-      foreach (Filter inputFilter in this.filters.VideoInputDevices)
+      if (this.dxCapture != null)
       {
-        if (inputFilter.Name == captureProperties.VideoInputDevice)
-        {
-          videoDevice = inputFilter;
-          break;
-        }
+        this.dxCapture.Dispose();
       }
 
-      foreach (Filter compressorFilter in this.filters.VideoCompressors)
+      // If this control is attached use itself for previewing
+      // otherwise use the given preview window
+      if (this.Parent != null)
       {
-        if (compressorFilter.Name == captureProperties.VideoCompressor)
-        {
-          videoCompressor = compressorFilter;
-          break;
-        }
+        captureProperties.PreviewWindow = this;
       }
 
-      foreach (Filter inputFilter in this.filters.AudioInputDevices)
-      {
-        if (inputFilter.Name == captureProperties.AudioInputDevice)
-        {
-          audioDevice = inputFilter;
-          break;
-        }
-      }
-
-      foreach (Filter compressorFilter in this.filters.AudioCompressors)
-      {
-        if (compressorFilter.Name == captureProperties.AudioCompressor)
-        {
-          audioCompressor = compressorFilter;
-          break;
-        }
-      }
-
-      if (videoDevice != null || audioDevice != null)
-      {
-        try
-        {
-          this.dxCapture = new DXCapture(
-            videoDevice,
-            audioDevice,
-            videoCompressor,
-            audioCompressor,
-            captureProperties.FrameRate,
-            captureProperties.VideoSize,
-            captureProperties.CaptureMode);
-        }
-        catch (Exception ex)
-        {
-          MessageBox.Show(ex.ToString());
-          return;
-        }
-
-        this.dxCapture.Filename = captureProperties.Filename;
-        try
-        {
-          if ((captureProperties.CaptureMode & CaptureMode.VideoPreview) == CaptureMode.VideoPreview)
-          {
-            this.dxCapture.PreviewWindow = this.previewWindow;
-          }
-        }
-        catch (Exception)
-        {
-        }
-      }
+      this.dxCapture = new DXCapture(captureProperties);
 
       // Check the current valid CaptureMode
-      CaptureMode available = CaptureMode.None;
-      if (videoDevice != null)
-      {
-        available |= CaptureMode.Video;
-      }
+      //CaptureMode available = CaptureMode.None;
+      //if ((captureProperties.CaptureMode & CaptureMode.Video) == CaptureMode.VideoPreview)
+      //{
+      //  available |= CaptureMode.Video;
+      //}
 
-      if (audioDevice != null)
-      {
-        available |= CaptureMode.Audio;
-      }
+      //if (audioDevice != null)
+      //{
+      //  available |= CaptureMode.Audio;
+      //}
 
-      this.OnWebcamAvailable(new CaptureModeEventArgs(available));
+      this.OnWebcamAvailable(new CaptureModeEventArgs(captureProperties.CaptureMode));
     }
 
     #endregion //PRIVATEMETHODS
@@ -638,5 +581,6 @@ namespace OgamaControls
     ///////////////////////////////////////////////////////////////////////////////
     #region HELPER
     #endregion //HELPER
+
   }
 }
