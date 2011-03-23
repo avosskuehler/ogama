@@ -367,7 +367,6 @@
     <Compile Include="Media\WebCam\DXCapture.cs" />
     <Compile Include="Media\WebCam\ReferenceClock.cs" />
     <Compile Include="Media\WebCam\ThreadSafe.cs" />
-    <Compile Include="Media\WebCam\VideoCapability.cs" />
     <Compile Include="Media\WebCam\Webcam.cs">
       <SubType>UserControl</SubType>
     </Compile>
