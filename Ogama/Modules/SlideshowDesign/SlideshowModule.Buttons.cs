@@ -518,7 +518,7 @@ namespace Ogama.Modules.SlideshowDesign
     /// without a question.</param>
     private void SaveToExperimentSettings(bool silent)
     {
-      if (Document.ActiveDocument.ExperimentSettings != null)
+      if (Document.ActiveDocument != null && Document.ActiveDocument.ExperimentSettings != null)
       {
         if (Document.ActiveDocument.ExperimentSettings.SlideShow.IsModified)
         {
