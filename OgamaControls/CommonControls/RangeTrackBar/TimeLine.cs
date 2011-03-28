@@ -393,8 +393,6 @@ namespace OgamaControls
           _caretThumbPosition = value / (double)Duration;
           _caretThumbBounds.X = GetXCoordinateForPosition(_caretThumbPosition) - _halfThumbWidth;
 
-          //OnCaretValueChanged(new PositionValueChangedEventArguments(this.CurrentTime));
-
           // If forcing a refresh the UI freezes when there are too many 
           // events displayed in the timeline.
           // if not forcing refresh the timeline does not get updated.

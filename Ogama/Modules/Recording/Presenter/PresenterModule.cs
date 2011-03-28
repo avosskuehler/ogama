@@ -1267,8 +1267,15 @@ namespace Ogama.Modules.Recording
           if (element is VGBrowser)
           {
             VGBrowser browser = element as VGBrowser;
-            browser.WebBrowser.Document.Window.Scroll -= new HtmlElementEventHandler(this.WebBrowser_Scroll);
-            browser.WebBrowser.Navigated -= new WebBrowserNavigatedEventHandler(this.WebBrowser_Navigated);
+            try
+            {
+              browser.WebBrowser.Document.Window.Scroll -= new HtmlElementEventHandler(this.WebBrowser_Scroll);
+              browser.WebBrowser.Navigated -= new WebBrowserNavigatedEventHandler(this.WebBrowser_Navigated);
+            }
+            catch (NullReferenceException ex)
+            {
+              ExceptionMethods.HandleExceptionSilent(ex);
+            }
           }
         }
       }
@@ -1351,7 +1358,7 @@ namespace Ogama.Modules.Recording
       if (this.shownSlide.Slide.HasActiveXContent)
       {
         int countFlash = 0;
-        
+
         foreach (VGElement element in slideContainer.Slide.ActiveXStimuli)
         {
           if (element is VGFlash)
