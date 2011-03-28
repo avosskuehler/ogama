@@ -1583,26 +1583,6 @@ namespace Ogama.Modules.Replay
         this.DrawSamples(rows, false);
         this.currentLoopState.RowCounter += numberOfSamplesToRender;
       }
-      else
-      {
-        // Calculate number of samples to render
-        int numberOfSamplesToRemove = startTimeInSamples - endTimeInSamples;
-        DataRow[] rows = new DataRow[Math.Abs(numberOfSamplesToRemove)];
-
-        for (int i = endTimeInSamples; i < endTimeInSamples + numberOfSamplesToRemove; i++)
-        {
-          if (i == this.replayTable.Rows.Count)
-          {
-            return;
-          }
-
-          rows[i - endTimeInSamples] = this.replayTable.Rows[i];
-        }
-
-        this.DrawSamples(rows, true);
-
-        this.currentLoopState.RowCounter -= numberOfSamplesToRemove;
-      }
     }
 
     /// <summary>
