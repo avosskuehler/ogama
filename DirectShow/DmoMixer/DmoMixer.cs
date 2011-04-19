@@ -131,10 +131,6 @@ namespace DmoMixer
       for (int i = 0; i < InputPinCount; i++)
       {
         this.inputStreams[i] = new VideoStream();
-        if (i == 1)
-        {
-          this.inputStreams[i].FlipY = true;
-        }
       }
 
       this.outputStream = new VideoStream();

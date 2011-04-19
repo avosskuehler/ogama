@@ -41,7 +41,6 @@ namespace Ogama.Modules.Recording
   using VectorGraphics.StopConditions;
   using VectorGraphics.Tools;
   using VectorGraphics.Triggers;
-  using GazeTrackingLibrary.Hardware;
 
   /// <summary>
   /// Derived from <see cref="FormWithPicture"/>.
@@ -755,7 +754,7 @@ namespace Ogama.Modules.Recording
       this.CreateTrackerInterfaces();
       this.forcePanelViewerUpdate = true;
       this.NewSlideAvailable();
-      //this.forcePanelViewerUpdate = false;
+      this.forcePanelViewerUpdate = false;
 
       // Uncheck Usercam button, if there is no available webcam
       // except Ogama Screen Capture which should not be used.
@@ -968,7 +967,6 @@ namespace Ogama.Modules.Recording
         }
       }
 
-      //this.webcamPreview.Preview = this.btnUsercam.Checked;
       this.spcPanelUserCam.Panel2Collapsed = !this.btnUsercam.Checked;
     }
 
@@ -1421,21 +1419,6 @@ namespace Ogama.Modules.Recording
     {
       // Show user cam by default
       this.spcPanelUserCam.Panel2Collapsed = false;
-
-      //// Disable recording check boxes by default
-      //this.chbRecordVideo.Enabled = false;
-      //this.chbRecordAudio.Enabled = false;
-
-      //// Update checkboxes with respect to available mode
-      //if ((e.Param & CaptureMode.VideoCapture) == CaptureMode.VideoCapture)
-      //{
-      //  this.chbRecordVideo.Enabled = true;
-      //}
-
-      //if ((e.Param & CaptureMode.AudioCapture) == CaptureMode.AudioCapture)
-      //{
-      //  this.chbRecordAudio.Enabled = true;
-      //}
     }
 
     /// <summary>
@@ -1841,7 +1824,6 @@ namespace Ogama.Modules.Recording
         // because gazetracker often uses the first connected camera device
         // which would otherwise used by the usercam
         this.btnUsercam.Checked = false;
-        //this.webcamPreview.Preview = this.btnUsercam.Checked;
         this.spcPanelUserCam.Panel2Collapsed = true;
       }
       else
@@ -1979,6 +1961,7 @@ namespace Ogama.Modules.Recording
 
         Stopwatch watch = new Stopwatch();
         watch.Start();
+
         // Wait for first sample to be received
         while (this.GetCurrentTime() < 0)
         {
@@ -2221,7 +2204,7 @@ namespace Ogama.Modules.Recording
       // Redraw panel
       this.NewSlideAvailable();
 
-      //this.forcePanelViewerUpdate = false;
+      this.forcePanelViewerUpdate = false;
     }
 
     /// <summary>

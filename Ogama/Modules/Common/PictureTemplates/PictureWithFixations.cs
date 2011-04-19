@@ -1219,36 +1219,30 @@ namespace Ogama.Modules.Common
             break;
         }
 
-        //TextureBrush bkgBrush = null;
-
-        //if (usedFixationDrawingMode == FixationDrawingMode.Circles)
-        //{
+        // TextureBrush bkgBrush = null;
+        // if (usedFixationDrawingMode == FixationDrawingMode.Circles)
+        // {
         //  Bitmap bkg = new Bitmap(eyeMonX, eyeMonY);
-
         //  Bitmap transparentBkg = new Bitmap(eyeMonX, eyeMonY);
-
         //  using (Graphics graphics = Graphics.FromImage(bkg))
         //  {
         //    ColorMatrix colorMatrix = new ColorMatrix();
         //    colorMatrix.Matrix33 = 0.7f;
         //    ImageAttributes attributes = new ImageAttributes();
         //    attributes.SetColorMatrix(colorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
-
         //    if (this.BGSlide != null)
         //    {
         //      Slide.DrawSlideAsync(this.BGSlide, graphics);
         //    }
-
         //    using (Graphics transGraphics = Graphics.FromImage(transparentBkg))
         //    {
         //      transGraphics.DrawImage(bkg, new Rectangle(0, 0, bkg.Width, bkg.Height), 0, 0, bkg.Width, bkg.Height, GraphicsUnit.Pixel, attributes);
         //      bkgBrush = new TextureBrush(transparentBkg);
         //    }
         //  }
-
         //  bkg.Dispose();
         //  transparentBkg.Dispose();
-        //}
+        // }
 
         // Loop Fixations and draw each one
         for (int i = 0; i < usedFixationTable.Count; i++)
@@ -1349,7 +1343,6 @@ namespace Ogama.Modules.Common
                 ShapeDrawAction.NameAndEdge,
                 (Pen)usedPen.Clone(),
                 null,
-                //(TextureBrush)bkgBrush.Clone(),
                 (Font)usedFont.Clone(),
                 usedFontColor,
                 fixBoundingRect,
@@ -1412,10 +1405,10 @@ namespace Ogama.Modules.Common
           }
         }
 
-        //if (bkgBrush != null)
-        //{
+        // if (bkgBrush != null)
+        // {
         //  bkgBrush.Dispose();
-        //}
+        // }
       }
       catch (Exception ex)
       {

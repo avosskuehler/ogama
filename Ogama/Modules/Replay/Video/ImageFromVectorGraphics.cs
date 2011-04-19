@@ -182,7 +182,7 @@ namespace Ogama.Modules.Replay
       // Build a BitmapInfo struct using the parms from the file
       bmi.Size = Marshal.SizeOf(typeof(BitmapInfoHeader));
       bmi.Width = this.videoSize.Width;
-      bmi.Height = this.videoSize.Height;// *-1;
+      bmi.Height = this.videoSize.Height;
       bmi.Planes = 1;
       bmi.BitCount = BPP;
       bmi.Compression = 0;
@@ -227,6 +227,9 @@ namespace Ogama.Modules.Replay
            ref this.newStartTimeInSamples,
            sampleTime,
            this.videoSize);
+
+          // By default do a vertical flip for the image
+          bmp.RotateFlip(RotateFlipType.RotateNoneFlipY);
 
           Rectangle r = new Rectangle(0, 0, bmp.Width, bmp.Height);
 

@@ -81,7 +81,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>..\Release\</OutputPath>
-    <DefineConstants>TRACE;TOBII</DefineConstants>
+    <DefineConstants>TRACE;TOBII; ASL</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DocumentationFile>..\Release\Ogama.xml</DocumentationFile>
     <Optimize>true</Optimize>

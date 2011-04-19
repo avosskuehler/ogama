@@ -1656,7 +1656,12 @@ namespace Ogama.Modules.Replay
                 Point newScrollPosition = new Point(
                   Convert.ToInt32(scrollOffsets[0]),
                   Convert.ToInt32(scrollOffsets[1]));
-                scrollPanel.AutoScrollPosition = newScrollPosition;
+
+                // TODO: Invoke if required!
+                if (!scrollPanel.InvokeRequired)
+                {
+                  scrollPanel.AutoScrollPosition = newScrollPosition;
+                }
               }
             }
 
@@ -2072,6 +2077,7 @@ namespace Ogama.Modules.Replay
         videoExportProperties.GazeVideoProperties.StreamName = "Gaze video";
         videoExportProperties.GazeVideoProperties.StreamStartTime = this.trialTimeLine.SectionStartTime;
         videoExportProperties.GazeVideoProperties.StreamEndTime = this.trialTimeLine.SectionEndTime;
+        videoExportProperties.GazeVideoProperties.StreamSize = videoExportProperties.GazeVideoProperties.StreamScreenshot.Size;
 
         VideoPropertiesDialog videoPropertiesDlg = new VideoPropertiesDialog();
         videoPropertiesDlg.VideoExportProperties = videoExportProperties;

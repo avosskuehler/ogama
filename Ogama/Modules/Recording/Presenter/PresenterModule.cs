@@ -17,21 +17,19 @@ namespace Ogama.Modules.Recording
   using System.Collections.Generic;
   using System.Diagnostics;
   using System.Drawing;
+  using System.Globalization;
   using System.IO;
   using System.Threading;
   using System.Windows.Forms;
-
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
   using Ogama.Modules.Recording.Presenter;
   using OgamaControls;
-
   using VectorGraphics.Controls;
   using VectorGraphics.Elements;
   using VectorGraphics.StopConditions;
   using VectorGraphics.Tools;
   using VectorGraphics.Triggers;
-  using System.Globalization;
 
   /// <summary>
   /// A <see cref="Form"/> that is used for stimuli presentation. 
@@ -70,13 +68,6 @@ namespace Ogama.Modules.Recording
     /// from the recorder.
     /// </summary>
     private RecordModule.GetTimeDelegate getTimeMethod;
-
-    ///// <summary>
-    ///// The <see cref="Control"/> in which the preview of the user
-    ///// camera should be shown. By default this is the webcam control
-    ///// of the record module.
-    ///// </summary>
-    //private Control userCameraPreviewWindow;
 
     /// <summary>
     /// A <see cref="CaptureDeviceProperties"/> describing
@@ -179,6 +170,10 @@ namespace Ogama.Modules.Recording
     /// </summary>
     private SlidePresentationContainer preparedSlideTwo;
 
+    /// <summary>
+    /// The <see cref="NumberFormatInfo"/> to be used for capturing
+    /// mouse coordinates into the database.
+    /// </summary>
     private NumberFormatInfo nfi;
 
     #endregion //FIELDS
@@ -356,15 +351,6 @@ namespace Ogama.Modules.Recording
       set { this.userCameraProperties = value; }
     }
 
-    ///// <summary>
-    ///// Sets the preview window control for the usercamera
-    ///// during recording.
-    ///// </summary>
-    //public Control UserCameraPreviewWindow
-    //{
-    //  set { this.userCameraPreviewWindow = value; }
-    //}
-
     /// <summary>
     /// Sets the  <see cref="RecordModule.GetTimeDelegate"/> which 
     /// can be called to retreive the current sample time
@@ -474,7 +460,6 @@ namespace Ogama.Modules.Recording
           this.userCamera.StopCapture();
         }
 
-        //this.userCamera.Preview = false;
         this.userCamera.Dispose();
       }
 
@@ -776,7 +761,6 @@ namespace Ogama.Modules.Recording
       {
         eventTime = this.getTimeMethod();
       }
-
 
       // Store marker event
       MediaEvent scrollEvent = new MediaEvent();
@@ -1284,7 +1268,6 @@ namespace Ogama.Modules.Recording
       {
         case ShownContainer.One:
           this.Controls.SetChildIndex(this.panelTwo, 0);
-          //this.shownSlide
           this.shownSlide = this.preparedSlideTwo;
           this.shownContainer = ShownContainer.Two;
           break;
@@ -1789,10 +1772,9 @@ namespace Ogama.Modules.Recording
           }
           else if (ctrl is WebBrowser)
           {
-            //WebBrowser browser = ctrl as WebBrowser;
-            //browser.Document.Window.Scroll -= new HtmlElementEventHandler(this.WebBrowser_Scroll);
-            //browser.Navigated -= new WebBrowserNavigatedEventHandler(this.WebBrowser_Navigated);
-
+            // WebBrowser browser = ctrl as WebBrowser;
+            // browser.Document.Window.Scroll -= new HtmlElementEventHandler(this.WebBrowser_Scroll);
+            // browser.Navigated -= new WebBrowserNavigatedEventHandler(this.WebBrowser_Navigated);
             if (ctrl.InvokeRequired)
             {
               MethodInvoker ctrlDisposeDelegate = new MethodInvoker(ctrl.Dispose);
@@ -1899,9 +1881,6 @@ namespace Ogama.Modules.Recording
 
       this.userCamera = new Webcam();
       this.userCamera.Properties = value;
-
-      //// Rebuild graph
-      //this.userCamera.Preview = true;
     }
 
     #endregion //HELPER

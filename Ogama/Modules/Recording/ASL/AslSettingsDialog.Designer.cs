@@ -1,5 +1,6 @@
 ﻿namespace Ogama.Modules.Recording.ASL
 {
+#if ASL
     partial class aslSettingsDialog
   {
     /// <summary>
@@ -20,7 +21,7 @@
       base.Dispose(disposing);
     }
 
-    #region Windows Form Designer generated code
+  #region Windows Form Designer generated code
 
     /// <summary>
     /// Required method for Designer support - do not modify
@@ -370,4 +371,7 @@
     private System.Windows.Forms.CheckBox cbWarning;
     private System.Windows.Forms.Label lblErrorStreamingMode;
   }
+#endif
+
 }
+

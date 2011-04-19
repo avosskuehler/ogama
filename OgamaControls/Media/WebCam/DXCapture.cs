@@ -665,6 +665,10 @@ namespace OgamaControls
       return true;
     }
 
+    /// <summary>
+    /// This method is called to show the preview of the video stream on
+    /// the preselected this.captureDeviceProperties.PreviewWindow control.
+    /// </summary>
     public void ShowPreviewWindow()
     {
       int hr;
@@ -703,8 +707,7 @@ namespace OgamaControls
     /// <summary>
     /// Set the Framerate, and video size
     /// </summary>
-    /// <param name="capGraph">The <see cref="ICaptureGraphBuilder2"/> interface.</param>
-    /// <param name="capFilter">The <see cref="IBaseFilter"/> of the capture device.</param>
+    /// <param name="videoStreamConfig">The <see cref="IAMStreamConfig"/> of the capture device.</param>
     /// <param name="frameRate">The new framerate to be used.</param>
     /// <param name="width">The new video width to be used.</param>
     /// <param name="height">The new video height to be used.</param>
