@@ -28,6 +28,9 @@ public class UserSettings
   ///////////////////////////////////////////////////////////////////////////////
   #region CONSTANTS
 
+  /// <summary>
+  /// The application path for the serial out viewer.
+  /// </summary>
   private const string APPLICATION_PATH = "SerialOutViewer";
 
   #endregion //CONSTANTS
@@ -89,7 +92,7 @@ public class UserSettings
   public bool displayWarning = true;
 
   /// <summary>
-  /// Baud-rate
+  /// Baud-rate for the connection
   /// </summary>
   public int baudRate;
 
@@ -172,6 +175,7 @@ public class UserSettings
   {
     AslUtil.StoreXml(this, fileName);
   }
+
   #endregion //METHODS
 
 }//UserSettings Class

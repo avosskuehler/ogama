@@ -17,12 +17,12 @@ namespace Ogama.Modules.Replay
   using System.Collections.Generic;
   using System.Drawing;
   using System.IO;
+  using System.Runtime.InteropServices;
   using System.Windows.Forms;
+  using DirectShowLib;
   using Ogama.Modules.Common;
   using OgamaControls;
   using VectorGraphics.Elements;
-  using DirectShowLib;
-  using System.Runtime.InteropServices;
 
   /// <summary>
   /// Popup <see cref="Form"/>. Asks for the properties of the new video stream.
@@ -164,13 +164,20 @@ namespace Ogama.Modules.Replay
           (float)this.nudGazeVideoWidth.Value / this.outputVideoSize.Width,
           (float)this.nudGazeVideoHeight.Value / this.outputVideoSize.Height);
 
-        this.videoExportProperties.UserVideoProperties.IsStreamRendered = this.chbUserVideoVisible.Checked;
-        this.videoExportProperties.UserVideoProperties.StreamAlpha = (float)this.nudUserVideoAlpha.Value;
-        this.videoExportProperties.UserVideoProperties.StreamPosition = new RectangleF(
-          (float)this.nudUserVideoLeft.Value / this.outputVideoSize.Width,
-          (float)this.nudUserVideoTop.Value / this.outputVideoSize.Height,
-          (float)this.nudUserVideoWidth.Value / this.outputVideoSize.Width,
-          (float)this.nudUserVideoHeight.Value / this.outputVideoSize.Height);
+        if (this.chbUserVideoVisible.Checked)
+        {
+          this.videoExportProperties.UserVideoProperties.IsStreamRendered = true;
+          this.videoExportProperties.UserVideoProperties.StreamAlpha = (float)this.nudUserVideoAlpha.Value;
+          this.videoExportProperties.UserVideoProperties.StreamPosition = new RectangleF(
+            (float)this.nudUserVideoLeft.Value / this.outputVideoSize.Width,
+            (float)this.nudUserVideoTop.Value / this.outputVideoSize.Height,
+            (float)this.nudUserVideoWidth.Value / this.outputVideoSize.Width,
+            (float)this.nudUserVideoHeight.Value / this.outputVideoSize.Height);
+        }
+        else
+        {
+          this.videoExportProperties.UserVideoProperties.IsStreamRendered = false;
+        }
 
         return this.videoExportProperties;
       }
@@ -290,6 +297,7 @@ namespace Ogama.Modules.Replay
       else
       {
         this.grbUserVideoOptions.Visible = false;
+        this.chbUserVideoVisible.Checked = false;
         this.isUserVideoAvailable = false;
         this.grpGazeMouseOptions.Visible = false;
         this.chbUserVideoVisible.Visible = false;
@@ -430,6 +438,13 @@ namespace Ogama.Modules.Replay
       this.UpdatePreview();
     }
 
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler for the video
+    /// compressor options button which shows the property page for
+    /// the selected compressor.
+    /// </summary>
+    /// <param name="sender">Source of the event</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnVideoCompressorProperties_Click(object sender, EventArgs e)
     {
       // Create the filter for the selected video compressor
@@ -445,6 +460,13 @@ namespace Ogama.Modules.Replay
       }
     }
 
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler for the audio
+    /// compressor options button which shows the property page for
+    /// the selected compressor.
+    /// </summary>
+    /// <param name="sender">Source of the event</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnAudioCompressorProperties_Click(object sender, EventArgs e)
     {
       // Create the filter for the selected video compressor
@@ -520,6 +542,16 @@ namespace Ogama.Modules.Replay
       if (!defaultSizes.Contains(this.outputVideoSize))
       {
         defaultSizes.Add(this.outputVideoSize);
+      }
+
+      Trial exportTrial =
+        Document.ActiveDocument.ExperimentSettings.SlideShow.GetTrialByID(
+        Document.ActiveDocument.SelectionState.TrialID);
+
+      Size maxSize = exportTrial[0].StimulusSize;
+      if (!defaultSizes.Contains(maxSize))
+      {
+        defaultSizes.Add(maxSize);
       }
 
       foreach (Size entry in defaultSizes)

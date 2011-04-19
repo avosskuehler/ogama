@@ -343,6 +343,7 @@
       // 
       // pnlCanvas
       // 
+      this.pnlCanvas.AutoScroll = true;
       this.pnlCanvas.Controls.Add(this.pnlPicture);
       this.pnlCanvas.Dock = System.Windows.Forms.DockStyle.Fill;
       this.pnlCanvas.Location = new System.Drawing.Point(10, 23);
@@ -362,7 +363,6 @@
       // 
       this.picPreview.AnimationInterval = 10;
       this.picPreview.BackColor = System.Drawing.Color.Black;
-      this.picPreview.Dock = System.Windows.Forms.DockStyle.Fill;
       this.picPreview.InvalidateInterval = 500;
       this.picPreview.Location = new System.Drawing.Point(0, 0);
       this.picPreview.Name = "picPreview";

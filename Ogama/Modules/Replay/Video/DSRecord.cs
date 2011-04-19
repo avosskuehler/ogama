@@ -267,6 +267,7 @@ namespace Ogama.Modules.Replay
     /// <summary>
     /// Build the filter graph
     /// </summary>
+    /// <returns>True if succesful, otherwise false.</returns>
     private bool SetupGraph()
     {
       int hr;
@@ -311,13 +312,13 @@ namespace Ogama.Modules.Replay
             Marshal.ReleaseComObject(ipin);
           }
 
-          // Add the filter to the graph
+          // Add the source filter to the graph
           hr = this.filterGraph.AddFilter(bitmapSource, "GenericSampleSourceFilter");
           Marshal.ThrowExceptionForHR(hr);
 
           IBaseFilter smartTee = new SmartTee() as IBaseFilter;
 
-          // Add the filter to the graph
+          // Add the smart tee filter to the graph
           hr = this.filterGraph.AddFilter(smartTee, "Smart Tee");
           Marshal.ThrowExceptionForHR(hr);
 
@@ -339,20 +340,30 @@ namespace Ogama.Modules.Replay
             out sink);
           DsError.ThrowExceptionForHR(hr);
 
-          // Connect the device and compressor to the mux to render the capture part of the graph
+          // Connect the bitmap source output to the smart tee
           hr = captureGraph.RenderStream(
             null,
             null,
             bitmapSource,
+            null,
+            smartTee);
+          DsError.ThrowExceptionForHR(hr);
+
+          // Render the smart tee capture pin to the capture part including
+          // compressor to the file muxer.
+          hr = captureGraph.RenderStream(
+            null,
+            null,
+            smartTee,
             this.videoCompressor,
             mux);
           DsError.ThrowExceptionForHR(hr);
 
-          // Render the preview pin.
+          // Render the smart tee preview pin to the default video renderer
           hr = captureGraph.RenderStream(
            null,
            null,
-           bitmapSource,
+           smartTee,
            null,
            null);
           DsError.ThrowExceptionForHR(hr);
@@ -383,6 +394,7 @@ namespace Ogama.Modules.Replay
       {
         Marshal.ReleaseComObject(captureGraph);
       }
+
       return true;
     }
 

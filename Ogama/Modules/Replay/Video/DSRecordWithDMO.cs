@@ -268,6 +268,7 @@ namespace Ogama.Modules.Replay
     /// <summary>
     /// Build the filter graph
     /// </summary>
+    /// <returns>True if succesful, otherwise false.</returns>
     private bool SetupGraph()
     {
       int hr;
@@ -355,7 +356,7 @@ namespace Ogama.Modules.Replay
           hr = captureGraph.SetOutputFileName(MediaSubType.Avi, this.videoExportProperties.OutputVideoProperties.Filename, out mux, out sink);
           DsError.ThrowExceptionForHR(hr);
 
-          // Connect the source compressor to the mux to render the capture part of the graph
+          // Connect the bitmap source to the dmo mixer filter
           hr = captureGraph.RenderStream(
             null,
             null,
@@ -364,6 +365,7 @@ namespace Ogama.Modules.Replay
             dmoFilter);
           DsError.ThrowExceptionForHR(hr);
 
+          // If there is a webcam source connect it to the second input of the dmo mixer
           if (webcamSource != null)
           {
             hr = captureGraph.RenderStream(
@@ -375,12 +377,14 @@ namespace Ogama.Modules.Replay
             DsError.ThrowExceptionForHR(hr);
           }
 
+          // Create a smart tee filter to enable preview and capture pins
           IBaseFilter smartTee = new SmartTee() as IBaseFilter;
 
           // Add the filter to the graph
           hr = this.filterGraph.AddFilter(smartTee, "Smart Tee");
           DsError.ThrowExceptionForHR(hr);
 
+          // Connect the dmo mixer output to the smart tee
           hr = captureGraph.RenderStream(
            null,
            null,
@@ -389,6 +393,8 @@ namespace Ogama.Modules.Replay
            smartTee);
           DsError.ThrowExceptionForHR(hr);
 
+          // Render the smart tee capture pin to the capture part including
+          // compressor to the file muxer.
           hr = captureGraph.RenderStream(
            null,
            null,
@@ -397,6 +403,7 @@ namespace Ogama.Modules.Replay
            mux);
           DsError.ThrowExceptionForHR(hr);
 
+          // Render the smart tee preview pin to the default video renderer
           hr = captureGraph.RenderStream(
            null,
            null,

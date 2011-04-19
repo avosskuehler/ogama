@@ -51,7 +51,7 @@ namespace DmoMixer
       this.Buffer = null;
       this.Position = new RectangleF(0, 0, 1, 1);
       this.Alpha = 0;
-      this.FlipY = false;
+      this.FlipY = true;
     }
 
     #endregion //CONSTRUCTION

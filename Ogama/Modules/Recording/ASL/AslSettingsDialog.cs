@@ -30,13 +30,16 @@ namespace Ogama.Modules.Recording.ASL
   using System.IO;
   using System.Runtime.InteropServices;
 
+#if ASL
   using ASLSERIALOUTLIB2Lib;
+#endif 
 
   /// <summary>
   /// A Popup <see cref="Form"/> to specify settings for the ASL System movements.
   /// </summary>
   public partial class aslSettingsDialog : Form
   {
+#if ASL
     ///////////////////////////////////////////////////////////////////////////////
     // Defining Constants                                                        //
     ///////////////////////////////////////////////////////////////////////////////
@@ -568,5 +571,7 @@ namespace Ogama.Modules.Recording.ASL
     ///////////////////////////////////////////////////////////////////////////////
     #region HELPER
     #endregion //HELPER
+#endif
   }
 }
+

@@ -15,6 +15,7 @@
 //  </author>
 // <email>virginie.feraud@univ-tlse2.fr</email>
 
+#if ASL
 namespace Ogama.Modules.Recording.ASL
 {
   using System;
@@ -22,15 +23,11 @@ namespace Ogama.Modules.Recording.ASL
   using System.Drawing;
   using System.IO;
   using System.Windows.Forms;
-  using System.Xml.Serialization;
-#if ASL
+
   using ASLSERIALOUTLIB2Lib;
-#endif
-  using Microsoft.Win32; // for Registry.GetValue
-  ////
+
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
-  using System.Threading;
 
   /// <summary>
   /// This class implements the <see cref="ITracker"/> interface to represent 
@@ -41,21 +38,20 @@ namespace Ogama.Modules.Recording.ASL
   /// </summary>
   public class AslTracker : Tracker
   {
-#if ASL
     /////////////////////////////////////////////////////////////////////////////////
     // Defining Constants                                                          //
     /////////////////////////////////////////////////////////////////////////////////
-    #region CONSTANTS
+#region CONSTANTS
     #endregion //CONSTANTS
     /////////////////////////////////////////////////////////////////////////////////
     // Defining Enumerations                                                       //
     /////////////////////////////////////////////////////////////////////////////////
-    #region ENUMS
+#region ENUMS
     #endregion ENUMS
     /////////////////////////////////////////////////////////////////////////////////
     // Defining Variables, Events                                                  //
     /////////////////////////////////////////////////////////////////////////////////
-    #region FIELDS
+#region FIELDS
 
 
     /// <summary>
@@ -162,7 +158,7 @@ namespace Ogama.Modules.Recording.ASL
     // Construction and Initializing methods                                       //
     /////////////////////////////////////////////////////////////////////////////////
 
-    #region CONSTRUCTION
+#region CONSTRUCTION
 
     /// <summary>
     /// Initializes a new instance of the AslTracker class.
@@ -223,7 +219,7 @@ namespace Ogama.Modules.Recording.ASL
     // Defining Properties                                                         //
     /////////////////////////////////////////////////////////////////////////////////
 
-    #region PROPERTIES
+#region PROPERTIES
 
     /// <summary>
     /// Gets or sets the path to the user settings file
@@ -319,12 +315,12 @@ namespace Ogama.Modules.Recording.ASL
     /////////////////////////////////////////////////////////////////////////////////
     // Inherited methods                                                           //
     /////////////////////////////////////////////////////////////////////////////////
-    #region INHERITEDMETHODS
+#region INHERITEDMETHODS
 
     ///////////////////////////////////////////////////////////////////////////////
     // Public methods                                                            //
     ///////////////////////////////////////////////////////////////////////////////
-    #region PUBLICMETHODS
+#region PUBLICMETHODS
 
     /// <summary>
     /// These class method check if the asl tracker is available in the system.
@@ -612,7 +608,7 @@ namespace Ogama.Modules.Recording.ASL
     ///////////////////////////////////////////////////////////////////////////////
     // Protected methods                                                         //
     ///////////////////////////////////////////////////////////////////////////////
-    #region PROTECTEDMETHODS
+#region PROTECTEDMETHODS
     /// <summary>
     /// Sets up calibration procedure and wires the events. Reads settings from file.
     /// </summary>
@@ -669,18 +665,18 @@ namespace Ogama.Modules.Recording.ASL
     ///////////////////////////////////////////////////////////////////////////////
     // Eventhandler                                                              //
     ///////////////////////////////////////////////////////////////////////////////
-    #region EVENTS
+#region EVENTS
 
     ///////////////////////////////////////////////////////////////////////////////
     // Eventhandler for UI, Menu, Buttons, Toolbars etc.                         //
     ///////////////////////////////////////////////////////////////////////////////
-    #region WINDOWSEVENTHANDLER
+#region WINDOWSEVENTHANDLER
     #endregion //WINDOWSEVENTHANDLER
 
     ///////////////////////////////////////////////////////////////////////////////
     // Eventhandler for Custom Defined Events                                    //
     ///////////////////////////////////////////////////////////////////////////////
-    #region CUSTOMEVENTHANDLER
+#region CUSTOMEVENTHANDLER
 
     /// <summary>
     /// Event handler call when pressing record button
@@ -782,13 +778,13 @@ namespace Ogama.Modules.Recording.ASL
     ///////////////////////////////////////////////////////////////////////////////
     // Methods and Eventhandling for Background tasks                            //
     ///////////////////////////////////////////////////////////////////////////////
-    #region BACKGROUNDWORKER
+#region BACKGROUNDWORKER
     #endregion //BACKGROUNDWORKER
 
     ///////////////////////////////////////////////////////////////////////////////
     // Methods for doing main class job                                          //
     ///////////////////////////////////////////////////////////////////////////////
-    #region METHODS
+#region METHODS
 
     /// <summary>
     /// Method to update the lastTimeStamp value with the time in milliseconds.
@@ -860,7 +856,8 @@ namespace Ogama.Modules.Recording.ASL
     ///////////////////////////////////////////////////////////////////////////////
     #region HELPER
     #endregion //HELPER
-#endif
   } // end of public class AslTracker
 } // end of namespace Ogama.Modules.Recording.ASL
+
+#endif
 

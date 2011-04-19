@@ -711,11 +711,6 @@ namespace Ogama.Modules.AttentionMap
     {
       try
       {
-        //if (!this.NewTrialSelected())
-        //{
-        //  return;
-        //}
-
         this.btnStartCalculation.Enabled = false;
 
         // Read ComboBoxes
