@@ -869,7 +869,7 @@ namespace Ogama.Modules.Common
       slide.VGStimuli.Clear();
       VGBrowser browser = new VGBrowser(
         ShapeDrawAction.None,
-        browserSlide.OriginURL,
+        browserSlide.OriginURL,browserSlide.BrowseDepth,
         Pens.Black,
         Brushes.Black,
         SystemFonts.DefaultFont,

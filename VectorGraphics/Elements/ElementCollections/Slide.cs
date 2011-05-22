@@ -25,6 +25,7 @@ namespace VectorGraphics.Elements
   using VectorGraphics.StopConditions;
   using VectorGraphics.Tools;
   using VectorGraphics.Triggers;
+    using System.Drawing.Drawing2D;
 
   /// <summary>
   /// Class to specify a slide with stimuli that can be 
@@ -871,6 +872,7 @@ namespace VectorGraphics.Elements
         throw new ArgumentNullException("Graphics object should not be null.");
       }
 
+      graphics.SmoothingMode = SmoothingMode.AntiAlias;
       if (this.presentationSize == Size.Empty)
       {
         throw new ArgumentOutOfRangeException("The presentation size of the slide is empty.");

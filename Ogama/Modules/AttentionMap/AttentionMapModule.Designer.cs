@@ -85,6 +85,7 @@ namespace Ogama.Modules.AttentionMap
       this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
       this.toolStripNumericUpDown1 = new OgamaControls.ToolStripNumericUpDown();
       this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+      this.webPageList = new System.Windows.Forms.ToolStripComboBox();
       this.trbZoom = new OgamaControls.ToolStripTrackBar();
       ((System.ComponentModel.ISupportInitialize)(this.bsoSubjects)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.bsoFKSubjectsTrials)).BeginInit();
@@ -183,7 +184,7 @@ namespace Ogama.Modules.AttentionMap
       this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
       this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
       this.toolStripContainer1.Name = "toolStripContainer1";
-      this.toolStripContainer1.Size = new System.Drawing.Size(785, 482);
+      this.toolStripContainer1.Size = new System.Drawing.Size(900, 482);
       this.toolStripContainer1.TabIndex = 1;
       this.toolStripContainer1.Text = "toolStripContainer1";
       // 
@@ -194,10 +195,11 @@ namespace Ogama.Modules.AttentionMap
       // 
       // spcPictureGradient
       // 
-      this.spcPictureGradient.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.spcPictureGradient.Dock = System.Windows.Forms.DockStyle.Left;
       this.spcPictureGradient.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
       this.spcPictureGradient.Location = new System.Drawing.Point(0, 0);
       this.spcPictureGradient.Name = "spcPictureGradient";
+      this.spcPictureGradient.Width = 100;
       this.spcPictureGradient.Orientation = System.Windows.Forms.Orientation.Horizontal;
       // 
       // spcPictureGradient.Panel1
@@ -372,6 +374,7 @@ namespace Ogama.Modules.AttentionMap
       this.tosTrial.Dock = System.Windows.Forms.DockStyle.None;
       this.tosTrial.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cbbTrial,
+            this.webPageList,
             this.toolStripSeparator1,
             this.btnEye,
             this.btnMouse,
@@ -387,7 +390,7 @@ namespace Ogama.Modules.AttentionMap
             this.btnHelp});
       this.tosTrial.Location = global::Ogama.Properties.Settings.Default.ATMTrialToolbarLocation;
       this.tosTrial.Name = "tosTrial";
-      this.tosTrial.Size = new System.Drawing.Size(647, 26);
+      this.tosTrial.Size = new System.Drawing.Size(947, 26);
       this.tosTrial.TabIndex = 0;
       // 
       // cbbTrial
@@ -396,6 +399,14 @@ namespace Ogama.Modules.AttentionMap
       this.cbbTrial.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.cbbTrial.Name = "cbbTrial";
       this.cbbTrial.Size = new System.Drawing.Size(200, 23);
+       //
+       //webPageList
+       //
+      this.webPageList.AutoSize = false;
+      this.webPageList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.webPageList.Name = "webPageList";
+      this.webPageList.Size = new System.Drawing.Size(300, 23);
+
       // 
       // toolStripSeparator1
       // 
@@ -818,6 +829,7 @@ namespace Ogama.Modules.AttentionMap
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
     private System.Windows.Forms.ToolStripButton btnAllFix;
     private System.Windows.Forms.ToolStripButton btnSpecialFix;
+    
     private ToolStripNumericUpDown nudFixNumber;
     private ToolStripNumericUpDown nudKernelSize;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
@@ -838,6 +850,7 @@ namespace Ogama.Modules.AttentionMap
     private System.Windows.Forms.Panel panel1;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
     private ToolStripTrackBar trbZoom;
+    private System.Windows.Forms.ToolStripComboBox webPageList;
 
   }
 }

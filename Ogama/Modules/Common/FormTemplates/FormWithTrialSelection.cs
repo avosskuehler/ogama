@@ -24,6 +24,7 @@ namespace Ogama.Modules.Common
 
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
+    using System.IO;
 
   /// <summary>
   /// Inherits <see cref="FormWithPicture"/>.
@@ -120,6 +121,8 @@ namespace Ogama.Modules.Common
     protected override void InitializeDropDowns()
     {
       base.InitializeDropDowns();
+        
+      
       this.trialCombo.ComboBox.SelectionChangeCommitted += new EventHandler(this.trialCombo_SelectionChangeCommitted);
     }
 

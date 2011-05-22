@@ -79,5 +79,12 @@ namespace Ogama.Modules.Common
     /// Scroll event marker for browser pages
     /// </summary>
     Scroll,
+
+    /// <summary>
+    /// Webpgage event marker for browser pages
+    /// </summary>
+    Webpage,
+
+    WebpageClick
   }
 }

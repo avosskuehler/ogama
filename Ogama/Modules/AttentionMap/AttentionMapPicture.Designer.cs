@@ -45,5 +45,6 @@ namespace Ogama.Modules.AttentionMap
     }
 
     #endregion
+
   }
 }

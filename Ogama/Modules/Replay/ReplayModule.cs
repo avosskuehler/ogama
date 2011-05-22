@@ -30,6 +30,8 @@ namespace Ogama.Modules.Replay
   using OgamaControls.Media;
   using VectorGraphics.CustomEventArgs;
   using VectorGraphics.Elements;
+    using VectorGraphics.StopConditions;
+    using System.ComponentModel;
 
   /// <summary>
   /// Derived from <see cref="FormWithSubjectAndTrialSelection"/>.
@@ -125,17 +127,20 @@ namespace Ogama.Modules.Replay
     public ReplayModule()
     {
       this.InitializeComponent();
-
+       
       this.Picture = this.replayPicture;
       this.SubjectCombo = this.cbbSubject;
       this.TrialCombo = this.cbbTrial;
       this.ZoomTrackBar = this.trbZoom;
-
+        
       this.InitializeDropDowns();
       this.InitializeDataBindings();
       this.InitAccelerators();
       this.InitializeCustomElements();
+      
     }
+
+    VGRectangle visiblepartofscreen = null;
 
     #endregion //CONSTRUCTION
 
@@ -1277,6 +1282,14 @@ namespace Ogama.Modules.Replay
           AsyncHelper.FireAndForget(new MethodInvoker(this.usercamVideoPlayer.PlayMovie));
         }
       }
+      int xres = Document.ActiveDocument.ExperimentSettings.WidthStimulusScreen;
+      int yres = Document.ActiveDocument.ExperimentSettings.HeightStimulusScreen;
+      Ogama.Modules.Replay.ReplayPicture rpc = pnlPicture.Controls[0] as ReplayPicture;
+      visiblepartofscreen = new VGRectangle(ShapeDrawAction.Edge, Brushes.Black, new RectangleF(0, 0, xres, yres));
+      visiblepartofscreen.OnsetTime = 0;
+      visiblepartofscreen.EndTime = long.MaxValue;
+      rpc.Elements.Add(visiblepartofscreen);
+      rpc.RedrawAll();
     }
 
     /// <summary>
@@ -1617,10 +1630,68 @@ namespace Ogama.Modules.Replay
     {
       try
       {
+
+          Ogama.Modules.Replay.ReplayPicture rpcc = pnlPicture.Controls[0] as ReplayPicture;
+
+          if (false)
+          {
+              visiblepartofscreen = new VGRectangle(ShapeDrawAction.Fill, Brushes.Black, new RectangleF(0, 0, 1280, 800));
+              visiblepartofscreen.OnsetTime = 0;
+              visiblepartofscreen.EndTime = long.MaxValue;
+              rpcc.Elements.Add(visiblepartofscreen);
+              rpcc.RedrawAll();
+          }
         TrialEvent occuredEvent = this.TrialEvents[e.EventID];
         string parameter = occuredEvent.Param;
         switch (occuredEvent.Type)
         {
+            case EventType.WebpageClick:
+                Ogama.Modules.Replay.ReplayPicture rpc = pnlPicture.Controls[0] as ReplayPicture;
+                
+                //rpc.DrawMouseClick(new Point(rnd.Next(0,500),rnd.Next(0,500)),MouseButtons.Right);
+                
+                MouseStopCondition msc = (MouseStopCondition)TypeDescriptor.GetConverter(typeof(StopCondition)).ConvertFrom(parameter);
+                VGEllipse ellipse2 = new VGEllipse(ShapeDrawAction.Fill, Brushes.Black, new RectangleF(msc.ClickLocation.X, msc.ClickLocation.Y, 30, 30));
+                ellipse2.OnsetTime = 0;
+                ellipse2.EndTime = long.MaxValue;
+                //rpc.Elements.Add(ellipse2);
+                rpc.DrawMouseClick(new Point(msc.ClickLocation.X, msc.ClickLocation.Y), msc.StopMouseButton);
+                rpc.RedrawAll();
+
+
+
+                break;
+            case EventType.Webpage:
+                VGElementCollection clickElements = (pnlPicture.Controls[0] as ReplayPicture).Elements.FindAllGroupMembers(VGStyleGroup.RPL_MOUSE_CLICK);
+                (pnlPicture.Controls[0] as ReplayPicture).Elements.RemoveAll(clickElements);
+                (pnlPicture.Controls[0] as ReplayPicture).RedrawAll();
+                Slide slide = new Slide();
+
+                //slide.BackgroundImage = new Bitmap(parameter);
+
+
+                VGScrollImage baseURLScreenshot = new VGScrollImage(
+        ShapeDrawAction.None,
+        Pens.Transparent,
+        Brushes.Black,
+        SystemFonts.DefaultFont,
+        Color.Black,
+        parameter,
+        Document.ActiveDocument.ExperimentSettings.SlideResourcesPath,
+        ImageLayout.None,
+        1f,
+        Document.ActiveDocument.PresentationSize,
+        VGStyleGroup.None,
+        slide.Name,
+        string.Empty);
+
+                slide.VGStimuli.Add(baseURLScreenshot);
+
+                this.LoadSlide(slide, ActiveXMode.Off);
+                break;
+            case EventType.Response:
+                break;
+
           case EventType.Mouse:
             break;
           case EventType.Key:
@@ -1633,7 +1704,8 @@ namespace Ogama.Modules.Replay
             {
               this.LoadSlide(newSlide, ActiveXMode.Video);
             }
-
+            visiblepartofscreen.Bounds = new RectangleF(0, 0, visiblepartofscreen.Bounds.Width, visiblepartofscreen.Bounds.Height);
+            
             break;
           case EventType.Flash:
             break;
@@ -1643,8 +1715,7 @@ namespace Ogama.Modules.Replay
             break;
           case EventType.Usercam:
             break;
-          case EventType.Response:
-            break;
+          
           case EventType.Scroll:
             // Update scroll position
             if (this.Picture.Parent.Parent != null)

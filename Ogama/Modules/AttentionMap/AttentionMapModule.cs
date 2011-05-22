@@ -32,6 +32,7 @@ namespace Ogama.Modules.AttentionMap
 
   using VectorGraphics;
   using VectorGraphics.StopConditions;
+    using VectorGraphics.Elements;
 
   /// <summary>
   /// Derived from <see cref="FormWithTrialSelection"/>.
@@ -74,11 +75,26 @@ namespace Ogama.Modules.AttentionMap
       this.Picture = this.attentionMapPicture;
       this.TrialCombo = this.cbbTrial;
       this.ZoomTrackBar = this.trbZoom;
-
+        
       this.InitializeDropDowns();
       this.InitializeDataBindings();
       this.InitAccelerators();
       this.InitializeCustomElements();
+
+      DirectoryInfo slideresdir = new DirectoryInfo(Document.ActiveDocument.ExperimentSettings.SlideResourcesPath);
+      foreach (FileInfo f in slideresdir.GetFiles("http*"))
+      {
+          String s = f.ToString().Substring(0, f.ToString().Length - 4);
+          webPageList.Items.Add(s);
+      }
+        
+        webPageList.SelectedIndex = 0;
+
+      
+        
+      
+      
+
     }
 
     #endregion //CONSTRUCTION
@@ -731,12 +747,12 @@ namespace Ogama.Modules.AttentionMap
 
           if (this.btnMouseClicks.Checked)
           {
-            table = this.GetFilteredMouseClicks(trialID, checkedSubjects);
+            table = this.GetFilteredMouseClicks(trialID, checkedSubjects,webPageList.SelectedItem.ToString());
           }
           else
           {
             // btnEye or btnMouse is checked
-            table = this.GetFilteredFixations(trialID, checkedSubjects);
+              table = this.GetFilteredFixations(trialID, checkedSubjects, webPageList.SelectedItem.ToString());
           }
 
           if (table.Rows.Count == 0)
@@ -756,9 +772,50 @@ namespace Ogama.Modules.AttentionMap
           else
           {
             this.attentionMapPicture.AttentionMapTable = table;
-
+            //this.attentionMapPicture.BGSlide.VGStimuli.Add(new VGRectangle(ShapeDrawAction.Edge, Brushes.Black, new RectangleF(0, 0, this.attentionMapPicture.BGSlide.PresentationSize.Width, this.attentionMapPicture.BGSlide.PresentationSize.Height)));
+            VGScrollImage vgsi = (VGScrollImage)this.attentionMapPicture.BGSlide.VGStimuli[0];
+            vgsi.Filename = webPageList.SelectedItem.ToString() + ".png";
+            vgsi.StimulusImage = new Bitmap(vgsi.FullFilename);
+             
+            DataTable table2 = this.GetFilteredMouseClicks(trialID, checkedSubjects,webPageList.SelectedItem.ToString());
+            List<VGEllipse> ve = new List<VGEllipse>();
+            foreach (VGElement vel in attentionMapPicture.BGSlide.VGStimuli)
+            {
+                if (vel is VGEllipse) ve.Add((VGEllipse) vel);
+            }
+            foreach (VGEllipse vl in ve) attentionMapPicture.BGSlide.VGStimuli.Remove(vl);
+            foreach (DataRow a in table2.Rows)
+            {
+                
+                
+                double c=(double)a.ItemArray[7];
+                double d=(double)a.ItemArray[8];
+                float x=(float)c;
+                float y=(float)d;
+                this.attentionMapPicture.BGSlide.VGStimuli.Add(new VGEllipse(ShapeDrawAction.Fill, Brushes.Black, new RectangleF(x, y, 10,10)));
+                this.attentionMapPicture.BGSlide.VGStimuli.Add(new VGEllipse(ShapeDrawAction.Fill, Brushes.Orange, new RectangleF(x+1, y+1, 8, 8)));
+                
+            }
+            Graphics gr = this.attentionMapPicture.CreateGraphics();
+            gr.SmoothingMode = SmoothingMode.AntiAlias;
+             
+            this.attentionMapPicture.BGSlide.Draw(gr);
+            
+            int g = trbZoom.Value;
+            trbZoom.Value = 1;
+            trbZoom.Value = 2;
+            trbZoom.Value = g;
+            
+            //this.attentionMapPicture.RedrawAll();
             // Start Calculation in background
+            this.bgwCalcMap.RunWorkerCompleted -= drawvisiblerect;
+            this.bgwCalcMap.RunWorkerCompleted += drawvisiblerect;
             this.bgwCalcMap.RunWorkerAsync(this.btnWeight.Checked);
+            trbZoom.ValueChanged -= drawvisiblerect;
+            trbZoom.ValueChanged += drawvisiblerect;
+            this.SizeChanged -= drawvisiblerect;
+            this.SizeChanged += drawvisiblerect;
+            
           }
         }
         else
@@ -773,6 +830,31 @@ namespace Ogama.Modules.AttentionMap
       }
     }
 
+    public void drawvisiblerect(object sender, EventArgs e)
+    {
+
+        
+        for (int i = 0; i < (this.attentionMapPicture.BGSlide.PresentationSize.Width-1)*this.attentionMapPicture.ZoomFactor; i++)
+        {
+
+            if (i < this.attentionMapPicture.ForegroundImage.Width)
+            {
+                this.attentionMapPicture.ForegroundImage.SetPixel(i, 0, Color.Cyan);
+                this.attentionMapPicture.ForegroundImage.SetPixel(i, (int)(this.attentionMapPicture.BGSlide.PresentationSize.Height * this.attentionMapPicture.ZoomFactor), Color.Cyan);
+            }
+            
+        }
+        for (int i = 0; i < this.attentionMapPicture.BGSlide.PresentationSize.Height * this.attentionMapPicture.ZoomFactor; i++)
+        {
+
+            this.attentionMapPicture.ForegroundImage.SetPixel(0, i, Color.Cyan);
+           if ((int)((this.attentionMapPicture.BGSlide.PresentationSize.Width-1) * this.attentionMapPicture.ZoomFactor)<this.attentionMapPicture.ForegroundImage.Width) this.attentionMapPicture.ForegroundImage.SetPixel((int)((this.attentionMapPicture.BGSlide.PresentationSize.Width-1) * this.attentionMapPicture.ZoomFactor), i, Color.Cyan);
+
+        }
+         
+        this.attentionMapPicture.Invalidate();
+    }
+
     /// <summary>
     /// This method returns the mouse clicks for the list of subjects
     /// on the trial with the given trial id.
@@ -781,7 +863,7 @@ namespace Ogama.Modules.AttentionMap
     /// <param name="checkedSubjects">A <see cref="List{String}"/> with the subject names.</param>
     /// <returns>A <see cref="Ogama.DataSet.OgamaDataSet.MouseFixationsDataTable"/>
     /// with the mouse clicks.</returns>
-    private DataTable GetFilteredMouseClicks(int trialID, List<string> checkedSubjects)
+    private DataTable GetFilteredMouseClicks(int trialID, List<string> checkedSubjects, String webpage)
     {
       Ogama.DataSet.OgamaDataSet.MouseFixationsDataTable clickTable =
         new Ogama.DataSet.OgamaDataSet.MouseFixationsDataTable();
@@ -789,8 +871,13 @@ namespace Ogama.Modules.AttentionMap
       foreach (string entry in checkedSubjects)
       {
         // Ignore trials marked to be eliminated in analysis.
+          
         DataTable currentTrial =
           Document.ActiveDocument.DocDataSet.TrialsAdapter.GetDataBySubjectAndTrialID(entry, trialID);
+        Boolean onwebpage = false;
+        VGScrollImage vi=(VGScrollImage) Document.ActiveDocument.ExperimentSettings.SlideShow.Trials[trialID][0].VGStimuli[0];
+        if (vi.Filename == webpage+".png") onwebpage = true;
+        //Object g=Document.ActiveDocument.DocDataSet.Trials[trialID];
         if (currentTrial.Rows.Count > 0)
         {
           if (currentTrial.Rows[0]["EliminateData"] != null && currentTrial.Rows[0]["EliminateData"].ToString() != string.Empty)
@@ -815,8 +902,16 @@ namespace Ogama.Modules.AttentionMap
               {
                 continue;
               }
-
-              if (type == EventType.Mouse)
+              if (type == EventType.Webpage)
+              {
+                  String v = trialEvent["EventParam"].ToString();
+                  if ((Document.ActiveDocument.ExperimentSettings.SlideResourcesPath.ToString() + webpage + ".png") == trialEvent["EventParam"].ToString())
+                  {
+                      onwebpage = true;
+                  }
+                  else onwebpage = false;
+              }
+              else if ((type == EventType.Mouse || type == EventType.WebpageClick) && onwebpage)
               {
                 string taskString = trialEvent["EventTask"].ToString();
                 string paramString = trialEvent["EventParam"].ToString();
@@ -841,7 +936,7 @@ namespace Ogama.Modules.AttentionMap
               {
                 string taskString = trialEvent["EventTask"].ToString();
                 string paramString = trialEvent["EventParam"].ToString();
-
+              
                 StopCondition sc = (StopCondition)TypeDescriptor.GetConverter(typeof(StopCondition)).ConvertFrom(paramString);
                 if (sc is MouseStopCondition)
                 {
@@ -873,7 +968,7 @@ namespace Ogama.Modules.AttentionMap
     /// <param name="trialID">An <see cref="Int32"/> with the trial id.</param>
     /// <param name="checkedSubjects">A <see cref="List{String}"/> with the subject names.</param>
     /// <returns>A <see cref="DataTable"/> filtered gaze or mouse fixations.</returns>
-    private DataTable GetFilteredFixations(int trialID, List<string> checkedSubjects)
+    private DataTable GetFilteredFixations(int trialID, List<string> checkedSubjects,string webpage)
     {
       // Generate WhereStatement for Fixationselection from database
       string searchCondition = " (TrialID = " + trialID + ") ";
@@ -887,6 +982,59 @@ namespace Ogama.Modules.AttentionMap
         {
           continue;
         }
+        Boolean onwebpage = false;
+        List<int> times = new List<int>();
+        VGScrollImage vi = (VGScrollImage)Document.ActiveDocument.ExperimentSettings.SlideShow.Trials[trialID][0].VGStimuli[0];
+        
+        if (vi.Filename == webpage + ".png")
+        {
+            onwebpage = true;
+            times.Add(0);
+        }
+        int trialSequence = (int)currentTrial.Rows[0]["TrialSequence"];
+
+        DataTable trialEvents =
+        Document.ActiveDocument.DocDataSet.TrialEventsAdapter.GetDataBySubjectAndSequence(entry, trialSequence);
+        foreach (DataRow trialEvent in trialEvents.Rows)
+        {
+            string typeString = trialEvent["EventType"].ToString();
+            EventType type = EventType.None;
+            try
+            {
+                type = (EventType)Enum.Parse(typeof(EventType), typeString, true);
+            }
+            catch (ArgumentException)
+            {
+                continue;
+            }
+            if (type == EventType.Webpage)
+            {
+                String v = trialEvent["EventParam"].ToString();
+                if ((Document.ActiveDocument.ExperimentSettings.SlideResourcesPath.ToString() + webpage + ".png") == trialEvent["EventParam"].ToString())
+                {
+                    if (!onwebpage)
+                    {
+                        times.Add(int.Parse(trialEvent["EventTime"].ToString()));
+                    }
+                    onwebpage = true;
+                }
+                else
+                {
+                    if (onwebpage)
+                    {
+                        times.Add(int.Parse(trialEvent["EventTime"].ToString()));
+                    }
+                    onwebpage = false;
+                }
+            }
+        }
+        if (onwebpage)
+        {
+            times.Add(times[times.Count-1]+1000000);
+        }
+        onwebpage = false;
+        
+        
 
         whereStatement += "((SubjectName = '" + entry + "') AND " + searchCondition + ") ";
         if (this.btnSpecialFix.Checked)
@@ -894,8 +1042,20 @@ namespace Ogama.Modules.AttentionMap
           whereStatement = whereStatement.Remove(whereStatement.Length - 2);
           whereStatement += "AND (CountInTrial=" + this.nudFixNumber.Value.ToString() + ")) ";
         }
-
-        whereStatement += "OR ";
+        if (times.Count > 0)
+        {
+            whereStatement += "AND (";
+            for (int x = 0; x < times.Count; x = x + 2)
+            {
+                whereStatement += "( StartTime >=" + times[x].ToString() + "AND StartTime <=" + times[x + 1].ToString() + " )OR";
+            }
+            whereStatement = whereStatement.Substring(0, whereStatement.Length - 2);
+            whereStatement += ") OR ";
+        }
+        else
+        {   
+            whereStatement += " AND StartTime<0 OR ";
+        }
       }
 
       if (whereStatement == string.Empty)
@@ -919,7 +1079,7 @@ namespace Ogama.Modules.AttentionMap
       {
         table = Queries.GetMouseFixDataByWhereStatement(whereStatement);
       }
-
+        
       return table;
     }
 

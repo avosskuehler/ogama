@@ -927,7 +927,6 @@ namespace Ogama.Modules.ImportExport
                   image = detectionSetting.TrialIDToImageAssignments[trialID];
                 }
               }
-
               break;
             case StimuliImportModes.SearchForImageEnding:
               if (detectionSetting.ImageDictionary.ContainsKey(currentSequence))

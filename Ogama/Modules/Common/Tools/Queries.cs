@@ -319,6 +319,28 @@ namespace Ogama.Modules.Common
             newEvent.Type = type;
             returnList.Add(eventID, newEvent);
             break;
+          case EventType.WebpageClick:
+            newEvent = new InputEvent();
+            newEvent.SubjectName = subjectName;
+            newEvent.TrialSequence = trialSequence;
+            newEvent.EventID = eventID;
+            newEvent.Param = param;
+            ((InputEvent)newEvent).Task = (InputEventTask)Enum.Parse(typeof(InputEventTask), taskString, true);
+            newEvent.Time = time;
+            newEvent.Type = type;
+            returnList.Add(eventID, newEvent);
+            break;
+          case EventType.Webpage:
+            newEvent = new MediaEvent();
+            newEvent.SubjectName = subjectName;
+            newEvent.TrialSequence = trialSequence;
+            newEvent.EventID = eventID;
+            newEvent.Param = param;
+            ((MediaEvent)newEvent).Task = (MediaEventTask)Enum.Parse(typeof(MediaEventTask), taskString, true);
+            newEvent.Time = time;
+            newEvent.Type = type;
+            returnList.Add(eventID, newEvent);
+            break;
           case EventType.Flash:
             newEvent = new MediaEvent();
             newEvent.SubjectName = subjectName;
@@ -1093,6 +1115,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
       tableMapping.ColumnMappings.Add("Length", "Length");
       tableMapping.ColumnMappings.Add("PosX", "PosX");
       tableMapping.ColumnMappings.Add("PosY", "PosY");
+      
       adapter.TableMappings.Add(tableMapping);
 
       // Create the SelectCommand.
@@ -1144,6 +1167,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
       tableMapping.ColumnMappings.Add("Length", "Length");
       tableMapping.ColumnMappings.Add("PosX", "PosX");
       tableMapping.ColumnMappings.Add("PosY", "PosY");
+      
       adapter.TableMappings.Add(tableMapping);
 
       // Create the SelectCommand.

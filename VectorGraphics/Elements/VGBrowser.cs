@@ -14,9 +14,12 @@
 namespace VectorGraphics.Elements
 {
   using System;
+  using System.Collections.Generic;
   using System.ComponentModel;
   using System.Drawing;
   using System.Drawing.Drawing2D;
+  using System.IO;
+  using System.Runtime.InteropServices;
   using System.Text;
   using System.Windows.Forms;
   using System.Xml.Serialization;
@@ -24,6 +27,8 @@ namespace VectorGraphics.Elements
   using Microsoft.VisualStudio.OLE.Interop;
 
   using VectorGraphics.Controls;
+  using VectorGraphics.Tools;
+  using System.Globalization;
 
   /// <summary>
   /// Inherited from <see cref="VGElement"/>. 
@@ -120,6 +125,39 @@ namespace VectorGraphics.Elements
       this.browserURL = newBrowserURL;
     }
 
+    public int depth=0;
+
+    public VGBrowser(
+    ShapeDrawAction newShapeDrawAction,
+    string newBrowserURL,int depth,
+    Pen newPen,
+    Brush newBrush,
+    Font newFont,
+    Color newFontColor,
+    PointF position,
+    SizeF size,
+    VGStyleGroup newStyleGroup,
+    string newName,
+    string newElementGroup)
+        : base(
+        newShapeDrawAction,
+        newPen,
+        newBrush,
+        newFont,
+        newFontColor,
+        new RectangleF(position, size),
+        newStyleGroup,
+        newName,
+        newElementGroup,
+        null)
+    {
+        this.depth = depth;
+        this.IntializeFields();
+        this.browserURL = newBrowserURL;
+        
+    }
+
+
     /// <summary>
     /// Initializes a new instance of the VGBrowser class.
     /// Clone Constructor. Creates new VGBrowser that is
@@ -139,8 +177,10 @@ namespace VectorGraphics.Elements
       oldBrowser.ElementGroup,
       oldBrowser.Sound)
     {
+        this.depth = oldBrowser.depth;
       this.IntializeFields();
       this.browserURL = oldBrowser.BrowserURL;
+        
     }
 
     /// <summary>
@@ -523,7 +563,9 @@ namespace VectorGraphics.Elements
     /// </summary>
     private void IntializeFields()
     {
+        
       this.webBrowser = new WebBrowser();
+      if (this.depth > 0) webBrowser.AllowNavigation = false;
       this.currentTransform = new Matrix();
       this.browserURL = "about:blank";
       this.disposing = false;
