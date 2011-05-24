@@ -48,11 +48,10 @@
         this.gbReadOptions = new System.Windows.Forms.GroupBox();
         this.txtBaudRate = new System.Windows.Forms.TextBox();
         this.label3 = new System.Windows.Forms.Label();
-        this.bStreaming = new System.Windows.Forms.CheckBox();
+        this.gbStreaming = new System.Windows.Forms.CheckBox();
         this.bEyeHead = new System.Windows.Forms.CheckBox();
         this.cbPort = new System.Windows.Forms.ComboBox();
         this.label4 = new System.Windows.Forms.Label();
-        this.cbWarning = new System.Windows.Forms.CheckBox();
         this.lblErrorStreamingMode = new System.Windows.Forms.Label();
         ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
         this.gbReadOptions.SuspendLayout();
@@ -203,11 +202,10 @@
         // 
         this.gbReadOptions.Controls.Add(this.txtBaudRate);
         this.gbReadOptions.Controls.Add(this.label3);
-        this.gbReadOptions.Controls.Add(this.bStreaming);
+        this.gbReadOptions.Controls.Add(this.gbStreaming);
         this.gbReadOptions.Controls.Add(this.bEyeHead);
         this.gbReadOptions.Controls.Add(this.cbPort);
         this.gbReadOptions.Controls.Add(this.label4);
-        this.gbReadOptions.Enabled = false;
         this.gbReadOptions.Location = new System.Drawing.Point(11, 86);
         this.gbReadOptions.Name = "gbReadOptions";
         this.gbReadOptions.Size = new System.Drawing.Size(651, 53);
@@ -233,16 +231,17 @@
         this.label3.TabIndex = 53;
         this.label3.Text = "Baud Rate";
         // 
-        // bStreaming
+        // gbStreaming
         // 
-        this.bStreaming.AutoSize = true;
-        this.bStreaming.Location = new System.Drawing.Point(275, 21);
-        this.bStreaming.Name = "bStreaming";
-        this.bStreaming.Size = new System.Drawing.Size(103, 17);
-        this.bStreaming.TabIndex = 52;
-        this.bStreaming.Text = "Streaming Mode";
-        this.bStreaming.UseVisualStyleBackColor = true;
-        this.bStreaming.CheckedChanged += new System.EventHandler(this.bStreaming_CheckedChanged);
+        this.gbStreaming.AutoSize = true;
+        this.gbStreaming.Enabled = false;
+        this.gbStreaming.Location = new System.Drawing.Point(275, 21);
+        this.gbStreaming.Name = "gbStreaming";
+        this.gbStreaming.Size = new System.Drawing.Size(103, 17);
+        this.gbStreaming.TabIndex = 52;
+        this.gbStreaming.Text = "Streaming Mode";
+        this.gbStreaming.UseVisualStyleBackColor = true;
+        this.gbStreaming.CheckedChanged += new System.EventHandler(this.bStreaming_CheckedChanged);
         // 
         // bEyeHead
         // 
@@ -282,19 +281,6 @@
         this.label4.TabIndex = 49;
         this.label4.Text = "Serial Port";
         // 
-        // cbWarning
-        // 
-        this.cbWarning.AutoSize = true;
-        this.cbWarning.Checked = true;
-        this.cbWarning.CheckState = System.Windows.Forms.CheckState.Checked;
-        this.cbWarning.Location = new System.Drawing.Point(135, 54);
-        this.cbWarning.Name = "cbWarning";
-        this.cbWarning.Size = new System.Drawing.Size(281, 17);
-        this.cbWarning.TabIndex = 50;
-        this.cbWarning.Text = "Display a warning when using default configuration file";
-        this.cbWarning.UseVisualStyleBackColor = true;
-        this.cbWarning.CheckedChanged += new System.EventHandler(this.cbWarning_CheckedChanged);
-        // 
         // lblErrorStreamingMode
         // 
         this.lblErrorStreamingMode.AutoSize = true;
@@ -312,7 +298,6 @@
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         this.ClientSize = new System.Drawing.Size(670, 467);
         this.Controls.Add(this.lblErrorStreamingMode);
-        this.Controls.Add(this.cbWarning);
         this.Controls.Add(this.gbReadOptions);
         this.Controls.Add(this.btnBrowseLog);
         this.Controls.Add(this.txtLogFile);
@@ -335,7 +320,9 @@
         this.ShowInTaskbar = false;
         this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
         this.Text = "Select and test ASL configuration file";
+        this.Load += new System.EventHandler(this.Form1_Load);
         this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+        this.Resize += new System.EventHandler(this.Form1_Resize);
         ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
         this.gbReadOptions.ResumeLayout(false);
         this.gbReadOptions.PerformLayout();
@@ -364,11 +351,10 @@
     private System.Windows.Forms.GroupBox gbReadOptions;
     private System.Windows.Forms.TextBox txtBaudRate;
     private System.Windows.Forms.Label label3;
-    private System.Windows.Forms.CheckBox bStreaming;
+    private System.Windows.Forms.CheckBox gbStreaming;
     private System.Windows.Forms.CheckBox bEyeHead;
     private System.Windows.Forms.ComboBox cbPort;
     private System.Windows.Forms.Label label4;
-    private System.Windows.Forms.CheckBox cbWarning;
     private System.Windows.Forms.Label lblErrorStreamingMode;
   }
 #endif

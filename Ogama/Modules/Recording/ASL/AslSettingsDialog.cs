@@ -82,9 +82,10 @@ namespace Ogama.Modules.Recording.ASL
     {
       // call the Windows Form Designer generated method
       this.InitializeComponent();
-
+        
       this.aslTracker = tracker;
       this.userSettings = this.aslTracker.Settings;
+
       this.m_serialOut = aslSerialPort;
 
       // call the additional local initialize method 
@@ -171,16 +172,14 @@ namespace Ogama.Modules.Recording.ASL
             aslTracker.CloseComPort();
             aslTracker.CleanUp();
           }
-
         }
       }
-
       this.btnDisconnect_Click(sender, e);
+        
     }
 
     private void btnConnect_Click(object sender, EventArgs e)
     {
-      this.m_serialOut.Notify += new _IASLSerialOutPort2Events_NotifyEventHandler(OnNotify);
       this.SaveControls();
 
       if (aslTracker.IsConnected)
@@ -207,14 +206,14 @@ namespace Ogama.Modules.Recording.ASL
               out itemNames);
 
           this.cbPort.SelectedIndex = this.userSettings.comPortNo - 1;
-          this.bStreaming.Checked = streamingMode;
+          this.gbStreaming.Checked = streamingMode;
           this.bEyeHead.Checked = this.userSettings.eyeHead;
           this.txtConfigFile.Text = this.userSettings.configFile;
           this.btnDisconnect.Enabled = true;
         }
         else
         {
-          MessageBox.Show("The specified file do not exist !",
+          MessageBox.Show("Eye tracker configuration file does not exist Use browse button to locate the file.",
               "Error",
               MessageBoxButtons.OK,
               MessageBoxIcon.Error);
@@ -294,7 +293,6 @@ namespace Ogama.Modules.Recording.ASL
       m_records.Clear();
       m_connected = false;
       EnableDisable();
-      this.m_serialOut.Notify -= new _IASLSerialOutPort2Events_NotifyEventHandler(OnNotify);
     }
 
     private void btnGetRecord_Click(object sender, EventArgs e)
@@ -393,11 +391,6 @@ namespace Ogama.Modules.Recording.ASL
       }
     }
 
-    private void cbWarning_CheckedChanged(object sender, EventArgs e)
-    {
-      this.somethingChange = true;
-    }
-
     #endregion //WINDOWSEVENTHANDLER
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -430,7 +423,6 @@ namespace Ogama.Modules.Recording.ASL
     {
       this.Text = "Select and test ASL configuration file";
       this.EnableDisable();
-      this.gbReadOptions.Enabled = false;
       this.btnDisconnect.Enabled = false;
       this.continuousModeStarted = false;
       this.somethingChange = false;
@@ -439,23 +431,21 @@ namespace Ogama.Modules.Recording.ASL
     private void InitializeControls()
     {
       this.cbPort.SelectedIndex = this.userSettings.comPortNo - 1;
-      this.bStreaming.Checked = this.userSettings.streaming;
+      this.gbStreaming.Checked = this.userSettings.streaming;
       this.bEyeHead.Checked = this.userSettings.eyeHead;
       this.txtConfigFile.Text = this.userSettings.configFile;
       this.bWriteLogFile.Checked = this.userSettings.writeLogFile;
       this.txtLogFile.Text = this.userSettings.logFile;
-      this.cbWarning.Checked = this.userSettings.displayWarning;
     }
 
     private void SaveControls()
     {
       this.userSettings.comPortNo = this.cbPort.SelectedIndex + 1;
-      this.userSettings.streaming = this.bStreaming.Checked;
+      this.userSettings.streaming = this.gbStreaming.Checked;
       this.userSettings.eyeHead = this.bEyeHead.Checked;
       this.userSettings.configFile = this.txtConfigFile.Text;
       this.userSettings.writeLogFile = this.bWriteLogFile.Checked;
       this.userSettings.logFile = this.txtLogFile.Text;
-      this.userSettings.displayWarning = this.cbWarning.Checked;
 
       this.userSettings.Store();
     }
@@ -470,7 +460,6 @@ namespace Ogama.Modules.Recording.ASL
       // all user entries should be disabled when connected
 
       this.cbPort.Enabled = disconnected;
-      this.bStreaming.Enabled = disconnected;
       this.bEyeHead.Enabled = disconnected;
       this.txtConfigFile.Enabled = disconnected;
       this.bWriteLogFile.Enabled = disconnected;
@@ -480,7 +469,7 @@ namespace Ogama.Modules.Recording.ASL
 
       // disable commands depending on the state
       this.btnConnect.Enabled = disconnected;
-      this.btnStartStopContinuous.Enabled = m_connected && (!this.continuousModeStarted) && this.bStreaming.Checked;
+      this.btnStartStopContinuous.Enabled = m_connected && (!this.continuousModeStarted) && this.gbStreaming.Checked;
       this.btnGetRecord.Enabled = m_connected && (!this.continuousModeStarted);
       this.btnRestoreDefaults.Enabled = disconnected;
     }
@@ -557,7 +546,7 @@ namespace Ogama.Modules.Recording.ASL
 
     private void bStreaming_CheckedChanged(object sender, EventArgs e)
     {
-      if (this.bStreaming.Checked)
+      if (this.gbStreaming.Checked)
       {
         this.lblErrorStreamingMode.Hide();
       }
