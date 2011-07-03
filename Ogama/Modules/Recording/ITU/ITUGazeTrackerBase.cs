@@ -17,10 +17,10 @@ namespace Ogama.Modules.Recording.ITUGazeTracker
   using System.Drawing;
   using System.Windows.Forms;
   using DirectShowLib;
-  using GazeTrackingLibrary.Settings;
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
   using OgamaClient;
+    using System.Runtime.InteropServices;
 
   /// <summary>
   /// This class implements the <see cref="TrackerWithStatusControls"/> class
@@ -248,7 +248,6 @@ namespace Ogama.Modules.Recording.ITUGazeTracker
           this.SetPresentationScreen();
 
           // Video preview window (tracker visualizes image processing) 
-          this.eyeVideo.Tracker = this.ituClient.Tracker;
           this.ituClient.CalibrationFinishedEvent += new EventHandler(this.ituClient_CalibrationFinishedEvent);
 
           this.adjustButton.Enabled = true;
@@ -576,11 +575,11 @@ namespace Ogama.Modules.Recording.ITUGazeTracker
 
       if (Ogama.Properties.Settings.Default.PresentationScreenMonitor == "Secondary")
       {
-        GTSettings.Current.Calibration.IsTrackingOnSecondaryScreen = true;
+        GTSettings.Settings.Instance.Calibration.IsTrackingOnSecondaryScreen = true;
       }
       else
       {
-        GTSettings.Current.Calibration.IsTrackingOnPrimaryScreen = true;
+        GTSettings.Settings.Instance.Calibration.IsTrackingOnPrimaryScreen = true;
       }
     }
 

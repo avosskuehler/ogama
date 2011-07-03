@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using DirectShowLib;
 using System.Drawing;
 using System.Runtime.InteropServices;
-using GazeTrackingLibrary.Hardware;
+using GTHardware.Cameras.DirectShow;
 
 namespace OgamaControls
 {
