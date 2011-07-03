@@ -71,7 +71,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>..\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TOBII; ASL</DefineConstants>
+    <DefineConstants>DEBUG;ASL</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DocumentationFile>..\Debug\Ogama.XML</DocumentationFile>
     <DebugType>full</DebugType>
@@ -1414,6 +1414,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>OgamaDatabaseTemplate.mdf</DependentUpon>
     </Content>
+    <Content Include="Modules\Recording\ASL\ASLStandardStreaming.cfg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\FolderNew16.png" />
     <None Include="Resources\PS3_61_61.png" />
     <None Include="Resources\ITU_61_61.png" />
@@ -1762,14 +1765,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="ASLSERIALOUTLIB2Lib">
-      <Guid>{8FF83C13-3622-4CDA-9E8A-939760558BBF}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
     <COMReference Include="AxTetComp">
       <Guid>{3E10DC16-717F-4A70-9EA9-AD364F61AF6E}</Guid>
       <VersionMajor>1</VersionMajor>

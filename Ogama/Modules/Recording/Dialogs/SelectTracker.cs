@@ -187,10 +187,7 @@ namespace Ogama.Modules.Recording
       // ASL 
       //  "If you have purchased and installed an ASL " +
       //  "model 5000 Eye Tracker control unit (materials and softwares)" + Environment.NewLine;
-      string aslDefaultText = "The ASL’s series 5000 eye tracker requirs on " +
-          "this computer the library ASLSerialOutLib2.dll, which provides " +
-          "convenient read access to the data sent from Eye Tracker Control " +
-          "Unit Serial Out port. ";
+      string aslDefaultText = "ASL software must be installed on this computer.";
 #if ASL
         if (!Ogama.Modules.Recording.ASL.AslTracker.IsAvailable(out error))
         {

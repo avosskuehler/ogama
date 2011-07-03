@@ -189,12 +189,12 @@ namespace Ogama.Modules.Recording.ASL
       trackerCalibrateButton,
       trackerRecordButton,
       trackerSubjectNameTextBox,
-      Properties.Settings.Default.EyeTrackerSettingsPath + "AslUserSettings.xml")
+      Application.StartupPath + "\\Modules\\Recording\\ASL\\ASLUserSettings.cfg")
     {
       this.UserSettingsFile = Properties.Settings.Default.EyeTrackerSettingsPath + "ASLUserSettings.cfg";
       this.Settings = UserSettings.Load(this.UserSettingsFile);
 
-      this.Settings.defaultConfigFile = Properties.Settings.Default.EyeTrackerSettingsPath + "ASL5000Settings.cfg";
+      this.Settings.defaultConfigFile = Application.StartupPath + "\\Modules\\Recording\\ASL\\ASLStandardStreaming.cfg";
 
       if (this.Settings.configFile == null)
         this.Settings.configFile = this.Settings.defaultConfigFile;
@@ -394,14 +394,6 @@ namespace Ogama.Modules.Recording.ASL
     /// otherwise <strong>false</strong>.</returns>
     public override bool Connect()
     {
-      if (this.Settings.displayWarning)
-      {
-        if (this.Settings.configFile == this.Settings.defaultConfigFile)
-        {
-          MessageBox.Show("You currently use default configuration file, you can specify your own configuration file into <Tracker Settings> menu.",
-              "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        }
-      }
       isConnected = true;
 
       // type of each item that the eye tracker should return
