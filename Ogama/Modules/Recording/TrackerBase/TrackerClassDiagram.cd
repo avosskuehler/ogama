@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Ogama.Modules.Recording.Tracker" Collapsed="true">
+    <Position X="3" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAANICABAQJAgIEAAMCEAoQJBECEqAAgAEAADIE=</HashCode>
+      <FileName>Modules\Recording\TrackerBase\Tracker.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.7" />
+  </Class>
+  <Class Name="Ogama.Modules.Recording.TrackerWithStatusControls" Collapsed="true">
+    <Position X="3" Y="4.25" Width="2" />
+    <InheritanceLine Type="Ogama.Modules.Recording.Tracker" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.75" Y="3.812" />
+        <Point X="3.75" Y="4.25" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AkAQAAAAAEADIQAAAAAEAEAABAAAAAAABiBAAEYsEAA=</HashCode>
+      <FileName>Modules\Recording\TrackerBase\TrackerWithStatusControls.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.Alea.AleaTracker" Collapsed="true">
+    <Position X="3" Y="5.5" Width="1.5" />
+    <InheritanceLine Type="Ogama.Modules.Recording.TrackerWithStatusControls" ManuallyRouted="true" FixedFromPoint="true">
+      <Path>
+        <Point X="3.75" Y="4.941" />
+        <Point X="3.75" Y="5.047" />
+        <Point X="3.75" Y="5.047" />
+        <Point X="3.75" Y="5.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AQEAAAAkACUQgQFgAMEABMggIgGgQApAoCLAAsBMBAA=</HashCode>
+      <FileName>Modules\Recording\Alea\AleaTracker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.Tobii.TobiiTracker" Collapsed="true">
+    <Position X="4.75" Y="5.5" Width="1.5" />
+    <InheritanceLine Type="Ogama.Modules.Recording.TrackerWithStatusControls" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.75" Y="4.941" />
+        <Point X="3.75" Y="5.04" />
+        <Point X="3.76" Y="5.04" />
+        <Point X="3.76" Y="5.241" />
+        <Point X="5.562" Y="5.241" />
+        <Point X="5.562" Y="5.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AIAAAgAEAAAQBQBgAgEYAKAQAgAiABIAoChACMwIBAA=</HashCode>
+      <FileName>Modules\Recording\Tobii\TobiiTracker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.MouseOnly.MouseOnlyTracker" Collapsed="true">
+    <Position X="6.5" Y="5.5" Width="1.5" />
+    <InheritanceLine Type="Ogama.Modules.Recording.Tracker" FixedFromPoint="true">
+      <Path>
+        <Point X="3.75" Y="3.812" />
+        <Point X="3.75" Y="4.052" />
+        <Point X="7.25" Y="4.052" />
+        <Point X="7.25" Y="5.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAgABAAABAQDAAAEAAICAIgAgAAMAIAhAAEAABAA=</HashCode>
+      <FileName>Modules\Recording\MouseOnly\MouseOnlyTracker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.SMI.SMITracker" Collapsed="true">
+    <Position X="8.25" Y="5.5" Width="1.5" />
+    <InheritanceLine Type="Ogama.Modules.Recording.Tracker" FixedFromPoint="true">
+      <Path>
+        <Point X="3.75" Y="3.812" />
+        <Point X="3.75" Y="4.052" />
+        <Point X="9" Y="4.052" />
+        <Point X="9" Y="5.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAACACQEAQBACAEBAIAAAgAgAAIAogBAQEAABAA=</HashCode>
+      <FileName>Modules\Recording\SMI\SMITracker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Ogama.Modules.Recording.ITracker">
+    <Position X="1.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAABAAAEAAIAAAgAAAAAAIAAAAEAABAA=</HashCode>
+      <FileName>Modules\Recording\TrackerBase\ITracker.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,66 @@
+<StyleCopSettings Version="4.3">
+  <GlobalSettings>
+    <BooleanProperty Name="WriteCache">False</BooleanProperty>
+  </GlobalSettings>
+  <Parsers>
+    <Parser ParserId="Microsoft.StyleCop.CSharp.CsParser">
+      <ParserSettings>
+        <BooleanProperty Name="AnalyzeDesignerFiles">False</BooleanProperty>
+      </ParserSettings>
+    </Parser>
+  </Parsers>
+  <Analyzers>
+    <Analyzer AnalyzerId="Microsoft.StyleCop.CSharp.NamingRules">
+      <Rules>
+        <Rule Name="ElementMustBeginWithUpperCaseLetter">
+          <RuleSettings>
+            <BooleanProperty Name="Enabled">False</BooleanProperty>
+          </RuleSettings>
+        </Rule>
+      </Rules>
+      <AnalyzerSettings>
+        <CollectionProperty Name="Hungarian">
+          <Value>ds</Value>
+          <Value>lP</Value>
+          <Value>mk</Value>
+          <Value>v</Value>
+          <Value>w</Value>
+          <Value>wm</Value>
+          <Value>wP</Value>
+          <Value>x</Value>
+          <Value>y</Value>
+        </CollectionProperty>
+      </AnalyzerSettings>
+    </Analyzer>
+    <Analyzer AnalyzerId="Microsoft.StyleCop.CSharp.MaintainabilityRules">
+      <Rules>
+        <Rule Name="ArithmeticExpressionsMustDeclarePrecedence">
+          <RuleSettings>
+            <BooleanProperty Name="Enabled">False</BooleanProperty>
+          </RuleSettings>
+        </Rule>
+      </Rules>
+      <AnalyzerSettings />
+    </Analyzer>
+    <Analyzer AnalyzerId="Microsoft.StyleCop.CSharp.ReadabilityRules">
+      <Rules>
+        <Rule Name="BlockStatementsMustNotContainEmbeddedComments">
+          <RuleSettings>
+            <BooleanProperty Name="Enabled">False</BooleanProperty>
+          </RuleSettings>
+        </Rule>
+      </Rules>
+      <AnalyzerSettings />
+    </Analyzer>
+    <Analyzer AnalyzerId="Microsoft.StyleCop.CSharp.OrderingRules">
+      <Rules>
+        <Rule Name="StaticElementsMustAppearBeforeInstanceElements">
+          <RuleSettings>
+            <BooleanProperty Name="Enabled">False</BooleanProperty>
+          </RuleSettings>
+        </Rule>
+      </Rules>
+      <AnalyzerSettings />
+    </Analyzer>
+  </Analyzers>
+</StyleCopSettings>
