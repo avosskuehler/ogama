@@ -49,7 +49,7 @@ namespace Ogama.MainWindow
             this.InitializeComponent();
 
             // call the additional local initialize method 
-            this.initialize();
+            this.CustomInitialize();
         }
 
         #endregion //CONSTRUCTION
@@ -122,7 +122,7 @@ namespace Ogama.MainWindow
         /// <summary>
         /// Sets up Asl system settings
         /// </summary>
-        protected void initialize()
+        private void CustomInitialize()
         {
             this.Text = "HowTo : Activate Asl recording...";
             this.label1.Text = "To enable the recording with Asl Eye Tracker please perform the following steps :";

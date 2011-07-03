@@ -36,6 +36,9 @@ namespace Ogama.Modules.Recording
     ///////////////////////////////////////////////////////////////////////////////
     #region FIELDS
 
+    /// <summary>
+    /// Contains the array of possible videocompressors.
+    /// </summary>
     private DsDevice[] videoCompressors;
 
     #endregion //FIELDS
@@ -54,7 +57,7 @@ namespace Ogama.Modules.Recording
 
       int index = 0;
       this.videoCompressors = DsDevice.GetDevicesOfCat(FilterCategory.VideoCompressorCategory);
-      for (int i = 0; i < videoCompressors.Length; i++)
+      for (int i = 0; i < this.videoCompressors.Length; i++)
       {
         DsDevice compressor = this.videoCompressors[i];
         this.cbbEncoderFilter.Items.Add(compressor.Name);

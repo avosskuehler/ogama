@@ -596,20 +596,6 @@ namespace Ogama
             return false;
           }
 
-          //// Check for correct naming.
-          //string[] parentFolders = directory.Split(Path.DirectorySeparatorChar);
-          //string parentFolder = parentFolders[parentFolders.Length - 1];
-
-          //if (filename != parentFolder)
-          //{
-          //  string message = "It seems that you have renamed your experiment name."
-          //    + Environment.NewLine + "Please also rename the parent folder and the "
-          //    + "Database files in the subfolder 'Database' otherwise "
-          //    + "OGAMA could not load succesfully your experiment.";
-          //  ExceptionMethods.ProcessMessage("Renamed experiment ?", message);
-          //  return false;
-          //}
-
           this.experimentSettings.Name = filename;
 
           // Check if database file is correct located in the connection string
