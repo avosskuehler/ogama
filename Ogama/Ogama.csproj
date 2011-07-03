@@ -1765,6 +1765,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <COMReference Include="ASLSERIALOUTLIB2Lib">
+      <Guid>{8FF83C13-3622-4CDA-9E8A-939760558BBF}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
     <COMReference Include="AxTetComp">
       <Guid>{3E10DC16-717F-4A70-9EA9-AD364F61AF6E}</Guid>
       <VersionMajor>1</VersionMajor>
