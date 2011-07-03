@@ -378,6 +378,7 @@ namespace Ogama.Modules.ImportExport
       // Clear existing values
       detectionSetting.ImageDictionary.Clear();
       detectionSetting.TrialIDToImageAssignments.Clear();
+      detectionSetting.TrialSequenceToTrialIDAssignments.Clear();
       rawDataList.Clear();
       double lastTimeInFileTime = 0;
 
