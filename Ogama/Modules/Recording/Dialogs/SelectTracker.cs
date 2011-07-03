@@ -99,7 +99,6 @@ namespace Ogama.Modules.Recording
           returnValue |= HardwareTracker.ASL; // = 64
         }
 
-
         return returnValue;
       }
     }

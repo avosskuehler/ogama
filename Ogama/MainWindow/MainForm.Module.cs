@@ -37,6 +37,15 @@ namespace Ogama.MainWindow
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnRPL_Click(object sender, EventArgs e)
     {
+      this.CreateOrActivateReplayModule();
+    }
+
+    /// <summary>
+    /// Creates a new replay module. If there is already one open
+    /// it is brought to top.
+    /// </summary>
+    private void CreateOrActivateReplayModule()
+    {
       if (Document.ActiveDocument != null)
       {
         bool found = false;
@@ -65,6 +74,15 @@ namespace Ogama.MainWindow
     /// <param name="sender">Source of the event</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnATM_Click(object sender, EventArgs e)
+    {
+      this.CreateOrActivateAttentionMapModule();
+    }
+
+    /// <summary>
+    /// Creates a new attentionmap module. If there is already one open
+    /// it is brought to top.
+    /// </summary>
+    private void CreateOrActivateAttentionMapModule()
     {
       if (Document.ActiveDocument != null)
       {
@@ -95,6 +113,15 @@ namespace Ogama.MainWindow
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnDTB_Click(object sender, EventArgs e)
     {
+      this.CreateOrActivateDatabaseModule();
+    }
+
+    /// <summary>
+    /// Creates a new database module. If there is already one open
+    /// it is brought to top.
+    /// </summary>
+    private void CreateOrActivateDatabaseModule()
+    {
       if (Document.ActiveDocument != null)
       {
         bool found = false;
@@ -123,6 +150,15 @@ namespace Ogama.MainWindow
     /// <param name="sender">Source of the event</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnFIX_Click(object sender, EventArgs e)
+    {
+      this.CreateOrActivateFixationModule();
+    }
+
+    /// <summary>
+    /// Creates a new fixation module. If there is already one open
+    /// it is brought to top.
+    /// </summary>
+    private void CreateOrActivateFixationModule()
     {
       if (Document.ActiveDocument != null)
       {
@@ -153,6 +189,15 @@ namespace Ogama.MainWindow
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnSTA_Click(object sender, EventArgs e)
     {
+      this.CreateOrActivateStatistikModule();
+    }
+
+    /// <summary>
+    /// Creates a new statistik module. If there is already one open
+    /// it is brought to top.
+    /// </summary>
+    private void CreateOrActivateStatistikModule()
+    {
       if (Document.ActiveDocument != null)
       {
         bool found = false;
@@ -181,6 +226,15 @@ namespace Ogama.MainWindow
     /// <param name="sender">Source of the event</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnAOI_Click(object sender, EventArgs e)
+    {
+      this.CreateOrActivateAreasOfInterestModule();
+    }
+
+    /// <summary>
+    /// Creates a new AOI module. If there is already one open
+    /// it is brought to top.
+    /// </summary>
+    private void CreateOrActivateAreasOfInterestModule()
     {
       if (Document.ActiveDocument != null)
       {
@@ -211,6 +265,15 @@ namespace Ogama.MainWindow
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnSAL_Click(object sender, EventArgs e)
     {
+      this.CreateOrActivateSaliencyModule();
+    }
+
+    /// <summary>
+    /// Creates a new saliency module. If there is already one open
+    /// it is brought to top.
+    /// </summary>
+    private void CreateOrActivateSaliencyModule()
+    {
       if (Document.ActiveDocument != null)
       {
         bool found = false;
@@ -239,6 +302,15 @@ namespace Ogama.MainWindow
     /// <param name="sender">Source of the event</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnSCR_Click(object sender, EventArgs e)
+    {
+      this.CreateOrActivateStimuliDesignModule();
+    }
+
+    /// <summary>
+    /// Creates a new stimuli design module. If there is already one open
+    /// it is brought to top.
+    /// </summary>
+    private void CreateOrActivateStimuliDesignModule()
     {
       if (Document.ActiveDocument != null)
       {
@@ -269,6 +341,15 @@ namespace Ogama.MainWindow
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnREC_Click(object sender, EventArgs e)
     {
+      this.CreateOrActivateRecordModule();
+    }
+
+    /// <summary>
+    /// Creates a new record module. If there is already one open
+    /// it is brought to top.
+    /// </summary>
+    private void CreateOrActivateRecordModule()
+    {
       if (Document.ActiveDocument != null)
       {
         bool found = false;
@@ -297,6 +378,15 @@ namespace Ogama.MainWindow
     /// <param name="sender">Source of the event</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnSCA_Click(object sender, EventArgs e)
+    {
+      this.CreateOrActivateScanpathModule();
+    }
+
+    /// <summary>
+    /// Creates a new scanpath module. If there is already one open
+    /// it is brought to top.
+    /// </summary>
+    private void CreateOrActivateScanpathModule()
     {
       if (Document.ActiveDocument != null)
       {

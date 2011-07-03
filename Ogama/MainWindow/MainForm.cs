@@ -494,14 +494,13 @@ namespace Ogama.MainWindow
       {
         if (Document.ActiveDocument.Modified)
         {
-          string message = "The Settings of this document has been modified. "
+          string message = "This document has been modified. "
             + Environment.NewLine +
             "Do you want to save ?";
           switch (InformationDialog.Show("Save document ?", message, true, MessageBoxIcon.Question))
           {
             case DialogResult.Yes:
-              Document.ActiveDocument.SaveDocument(Document.ActiveDocument.ExperimentSettings.DocumentFilename, null);
-              Document.ActiveDocument.Modified = false;
+              this.SaveExperimentToFile();
               break;
             case DialogResult.No:
               break;
@@ -823,7 +822,6 @@ namespace Ogama.MainWindow
     }
 
     #endregion //HELPER
-
   }
 }
 

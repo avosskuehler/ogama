@@ -91,6 +91,7 @@ namespace Ogama.MainWindow
           this.mnuHelpSource = new System.Windows.Forms.ToolStripMenuItem();
           this.mnuHelpHowToTobii = new System.Windows.Forms.ToolStripMenuItem();
           this.mnuHelpHowToAlea = new System.Windows.Forms.ToolStripMenuItem();
+          this.mnuHelpHowToAsl = new System.Windows.Forms.ToolStripMenuItem();
           this.mnuHelpHowToSMI = new System.Windows.Forms.ToolStripMenuItem();
           this.mnuHelpHowToITU = new System.Windows.Forms.ToolStripMenuItem();
           this.mnuHelpCheckForUpdates = new System.Windows.Forms.ToolStripMenuItem();
@@ -125,7 +126,6 @@ namespace Ogama.MainWindow
           this.btnFIX = new System.Windows.Forms.ToolStripButton();
           this.btnSTA = new System.Windows.Forms.ToolStripButton();
           this.btnAOI = new System.Windows.Forms.ToolStripButton();
-          this.mnuHelpHowToAsl = new System.Windows.Forms.ToolStripMenuItem();
           this.mnsMain.SuspendLayout();
           this.stsMain.SuspendLayout();
           this.toolStrip1.SuspendLayout();
@@ -409,8 +409,7 @@ namespace Ogama.MainWindow
           // 
           this.mnuViewsNewStimuliCreation.Image = global::Ogama.Properties.Resources.Design;
           this.mnuViewsNewStimuliCreation.Name = "mnuViewsNewStimuliCreation";
-          this.mnuViewsNewStimuliCreation.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-          this.mnuViewsNewStimuliCreation.Size = new System.Drawing.Size(254, 22);
+          this.mnuViewsNewStimuliCreation.Size = new System.Drawing.Size(214, 22);
           this.mnuViewsNewStimuliCreation.Text = "New Study Design module";
           this.mnuViewsNewStimuliCreation.Click += new System.EventHandler(this.mnuViewsNewStimuliCreation_Click);
           // 
@@ -418,8 +417,7 @@ namespace Ogama.MainWindow
           // 
           this.mnuViewsNewRecording.Image = global::Ogama.Properties.Resources.Record;
           this.mnuViewsNewRecording.Name = "mnuViewsNewRecording";
-          this.mnuViewsNewRecording.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-          this.mnuViewsNewRecording.Size = new System.Drawing.Size(254, 22);
+          this.mnuViewsNewRecording.Size = new System.Drawing.Size(214, 22);
           this.mnuViewsNewRecording.Text = "New Recording module";
           this.mnuViewsNewRecording.Click += new System.EventHandler(this.mnuViewsNewRecording_Click);
           // 
@@ -444,8 +442,7 @@ namespace Ogama.MainWindow
           this.mnuViewsNewAOI.Image = global::Ogama.Properties.Resources.AOILogo;
           this.mnuViewsNewAOI.ImageTransparentColor = System.Drawing.Color.Magenta;
           this.mnuViewsNewAOI.Name = "mnuViewsNewAOI";
-          this.mnuViewsNewAOI.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-          this.mnuViewsNewAOI.Size = new System.Drawing.Size(263, 22);
+          this.mnuViewsNewAOI.Size = new System.Drawing.Size(222, 22);
           this.mnuViewsNewAOI.Text = "New &AOI Module";
           this.mnuViewsNewAOI.Click += new System.EventHandler(this.mnuViewsNewAOI_Click);
           // 
@@ -453,8 +450,7 @@ namespace Ogama.MainWindow
           // 
           this.mnuViewsNewAttentionMap.Image = global::Ogama.Properties.Resources.AttentionMapLogo;
           this.mnuViewsNewAttentionMap.Name = "mnuViewsNewAttentionMap";
-          this.mnuViewsNewAttentionMap.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
-          this.mnuViewsNewAttentionMap.Size = new System.Drawing.Size(263, 22);
+          this.mnuViewsNewAttentionMap.Size = new System.Drawing.Size(222, 22);
           this.mnuViewsNewAttentionMap.Text = "New A&ttention Map Module";
           this.mnuViewsNewAttentionMap.Click += new System.EventHandler(this.mnuViewsNewAttentionMap_Click);
           // 
@@ -462,8 +458,7 @@ namespace Ogama.MainWindow
           // 
           this.mnuViewsNewSaliency.Image = global::Ogama.Properties.Resources.Saliency;
           this.mnuViewsNewSaliency.Name = "mnuViewsNewSaliency";
-          this.mnuViewsNewSaliency.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-          this.mnuViewsNewSaliency.Size = new System.Drawing.Size(263, 22);
+          this.mnuViewsNewSaliency.Size = new System.Drawing.Size(222, 22);
           this.mnuViewsNewSaliency.Text = "New Salienc&y Module";
           this.mnuViewsNewSaliency.Click += new System.EventHandler(this.mnuViewsNewSaliency_Click);
           // 
@@ -472,8 +467,7 @@ namespace Ogama.MainWindow
           this.mnuViewsNewReplay.Image = global::Ogama.Properties.Resources.RPL;
           this.mnuViewsNewReplay.ImageTransparentColor = System.Drawing.Color.Magenta;
           this.mnuViewsNewReplay.Name = "mnuViewsNewReplay";
-          this.mnuViewsNewReplay.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
-          this.mnuViewsNewReplay.Size = new System.Drawing.Size(263, 22);
+          this.mnuViewsNewReplay.Size = new System.Drawing.Size(222, 22);
           this.mnuViewsNewReplay.Text = "New &Replay Module";
           this.mnuViewsNewReplay.Click += new System.EventHandler(this.mnuViewsNewReplay_Click);
           // 
@@ -481,8 +475,7 @@ namespace Ogama.MainWindow
           // 
           this.mnuViewsNewDatabase.Image = global::Ogama.Properties.Resources.DatabaseLogo;
           this.mnuViewsNewDatabase.Name = "mnuViewsNewDatabase";
-          this.mnuViewsNewDatabase.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-          this.mnuViewsNewDatabase.Size = new System.Drawing.Size(263, 22);
+          this.mnuViewsNewDatabase.Size = new System.Drawing.Size(222, 22);
           this.mnuViewsNewDatabase.Text = "New &Database Module";
           this.mnuViewsNewDatabase.Click += new System.EventHandler(this.mnuViewsNewDatabase_Click);
           // 
@@ -490,8 +483,7 @@ namespace Ogama.MainWindow
           // 
           this.mnuViewsNewScanpaths.Image = global::Ogama.Properties.Resources.Scanpath;
           this.mnuViewsNewScanpaths.Name = "mnuViewsNewScanpaths";
-          this.mnuViewsNewScanpaths.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-          this.mnuViewsNewScanpaths.Size = new System.Drawing.Size(263, 22);
+          this.mnuViewsNewScanpaths.Size = new System.Drawing.Size(222, 22);
           this.mnuViewsNewScanpaths.Text = "New Scan&path Module";
           this.mnuViewsNewScanpaths.Click += new System.EventHandler(this.mnuViewsNewScanpaths_Click);
           // 
@@ -499,8 +491,7 @@ namespace Ogama.MainWindow
           // 
           this.mnuViewsNewFixations.Image = global::Ogama.Properties.Resources.FixationsLogo;
           this.mnuViewsNewFixations.Name = "mnuViewsNewFixations";
-          this.mnuViewsNewFixations.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-          this.mnuViewsNewFixations.Size = new System.Drawing.Size(263, 22);
+          this.mnuViewsNewFixations.Size = new System.Drawing.Size(222, 22);
           this.mnuViewsNewFixations.Text = "New &Fixations Module";
           this.mnuViewsNewFixations.Click += new System.EventHandler(this.mnuViewsNewFixations_Click);
           // 
@@ -508,8 +499,7 @@ namespace Ogama.MainWindow
           // 
           this.mnuViewsNewStatistics.Image = global::Ogama.Properties.Resources.StatisticsLogo;
           this.mnuViewsNewStatistics.Name = "mnuViewsNewStatistics";
-          this.mnuViewsNewStatistics.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
-          this.mnuViewsNewStatistics.Size = new System.Drawing.Size(263, 22);
+          this.mnuViewsNewStatistics.Size = new System.Drawing.Size(222, 22);
           this.mnuViewsNewStatistics.Text = "New &Statistics Module";
           this.mnuViewsNewStatistics.Click += new System.EventHandler(this.mnuViewsNewStatistics_Click);
           // 
@@ -636,14 +626,14 @@ namespace Ogama.MainWindow
           // 
           this.mnuWindowCascade.Image = global::Ogama.Properties.Resources.CascadeWindowsHS;
           this.mnuWindowCascade.Name = "mnuWindowCascade";
-          this.mnuWindowCascade.Size = new System.Drawing.Size(151, 22);
+          this.mnuWindowCascade.Size = new System.Drawing.Size(152, 22);
           this.mnuWindowCascade.Text = "&Cascade";
           this.mnuWindowCascade.Click += new System.EventHandler(this.mnuWindowCascade_Click);
           // 
           // mnuWindowTileVertical
           // 
           this.mnuWindowTileVertical.Name = "mnuWindowTileVertical";
-          this.mnuWindowTileVertical.Size = new System.Drawing.Size(151, 22);
+          this.mnuWindowTileVertical.Size = new System.Drawing.Size(152, 22);
           this.mnuWindowTileVertical.Text = "Tile &Vertical";
           this.mnuWindowTileVertical.Click += new System.EventHandler(this.mnuWindowTileVertical_Click);
           // 
@@ -651,7 +641,7 @@ namespace Ogama.MainWindow
           // 
           this.mnuWindowTileHorizontal.Image = global::Ogama.Properties.Resources.TileWindowsHorizontallyHS;
           this.mnuWindowTileHorizontal.Name = "mnuWindowTileHorizontal";
-          this.mnuWindowTileHorizontal.Size = new System.Drawing.Size(151, 22);
+          this.mnuWindowTileHorizontal.Size = new System.Drawing.Size(152, 22);
           this.mnuWindowTileHorizontal.Text = "Tile &Horizontal";
           this.mnuWindowTileHorizontal.Click += new System.EventHandler(this.mnuWindowTileHorizontal_Click);
           // 
@@ -699,6 +689,14 @@ namespace Ogama.MainWindow
           this.mnuHelpHowToAlea.Size = new System.Drawing.Size(307, 22);
           this.mnuHelpHowToAlea.Text = "HowTo: Install Alea Recording ...";
           this.mnuHelpHowToAlea.Click += new System.EventHandler(this.mnuHelpHowToAlea_Click);
+          // 
+          // mnuHelpHowToAsl
+          // 
+          this.mnuHelpHowToAsl.Image = global::Ogama.Properties.Resources.ASLico;
+          this.mnuHelpHowToAsl.Name = "mnuHelpHowToAsl";
+          this.mnuHelpHowToAsl.Size = new System.Drawing.Size(307, 22);
+          this.mnuHelpHowToAsl.Text = "HowTo: Install ASL Recording ...";
+          this.mnuHelpHowToAsl.Click += new System.EventHandler(this.mnuHelpHowToAsl_Click);
           // 
           // mnuHelpHowToSMI
           // 
@@ -983,14 +981,6 @@ namespace Ogama.MainWindow
           this.btnAOI.Size = new System.Drawing.Size(23, 22);
           this.btnAOI.Text = "Shows areas of interest module";
           this.btnAOI.Click += new System.EventHandler(this.btnAOI_Click);
-          // 
-          // mnuHelpHowToAsl
-          // 
-          this.mnuHelpHowToAsl.Image = global::Ogama.Properties.Resources.ASLico;
-          this.mnuHelpHowToAsl.Name = "mnuHelpHowToAsl";
-          this.mnuHelpHowToAsl.Size = new System.Drawing.Size(307, 22);
-          this.mnuHelpHowToAsl.Text = "HowTo: Install ASL Recording ...";
-          this.mnuHelpHowToAsl.Click += new System.EventHandler(this.mnuHelpHowToAsl_Click);
           // 
           // MainForm
           // 

@@ -10,167 +10,212 @@
 //  </author>
 // <email>virginie.feraud@univ-tlse2.fr</email>
 
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
-
-using ASL_Utilities;
 using System.Windows.Forms;
+using ASL_Utilities;
 
 /// <summary>
 /// Class to save and load settings for the eye tracking system.
 /// </summary> 
 public class UserSettings
 {
-    ///////////////////////////////////////////////////////////////////////////////
-    // Defining Constants                                                        //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region CONSTANTS
+  ///////////////////////////////////////////////////////////////////////////////
+  // Defining Constants                                                        //
+  ///////////////////////////////////////////////////////////////////////////////
+  #region CONSTANTS
 
-    /// <summary>
-    /// The application path for the serial out viewer.
-    /// </summary>
-    private const string APPLICATION_PATH = "SerialOutViewer";
+  /// <summary>
+  /// The application path for the serial out viewer.
+  /// </summary>
+  private const string APPLICATIONPATH = "SerialOutViewer";
 
-    #endregion //CONSTANTS
+  #endregion //CONSTANTS
 
-    ///////////////////////////////////////////////////////////////////////////////
-    // Defining Enumerations                                                     //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region ENUMS
-    #endregion // ENUMS
+  ///////////////////////////////////////////////////////////////////////////////
+  // Defining Variables, Enumerations, Events                                  //
+  ///////////////////////////////////////////////////////////////////////////////
+  #region FIELDS
 
-    ///////////////////////////////////////////////////////////////////////////////
-    // Defining Variables, Enumerations, Events                                  //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region FIELDS
+  /// <summary>
+  /// Settings file name
+  /// </summary>
+  private string settingsFile;
 
-    /// <summary>
-    /// Settings file name
-    /// </summary>
-    private string settingsFile;
+  #endregion //FIELDS
 
-    /// <summary>
-    /// COM port number
-    /// </summary>
-    public int comPortNo = 1;
+  ///////////////////////////////////////////////////////////////////////////////
+  // Construction and Initializing methods                                     //
+  ///////////////////////////////////////////////////////////////////////////////
+  #region CONSTRUCTION
 
-    /// <summary>
-    /// Indicates that Eye Tracker is in Streaming-mode
-    /// </summary>
-    public bool streaming = true;
+  /// <summary>
+  /// Initializes a new instance of the UserSettings class with Default parameters.
+  /// </summary>
+  public UserSettings()
+  {
+    this.ComPortNo = 1;
+    this.Streaming = true;
+    this.EyeHead = false;
+    this.ConfigFile = null;
+    this.WriteLogFile = false;
 
-    /// <summary>
-    /// Indicates that Eye Tracker is in EyeHead integration mode 
-    /// </summary>
-    public bool eyeHead = false;
+    this.DefaultConfigFile = Application.StartupPath + "\\Modules\\Recording\\ASL\\ASLStandardStreaming.cfg";
+    this.settingsFile = Ogama.Properties.Settings.Default.EyeTrackerSettingsPath + "ASLUserSettings.cfg";
 
-    /// <summary>
-    /// Configuration file name
-    /// </summary>
-    public string configFile = null;
+    string logPath = Path.Combine(
+            AslUtil.GetCommonDataFolder(),
+            APPLICATIONPATH);
+    Directory.CreateDirectory(logPath);
+    this.LogFile = Path.Combine(logPath, "log.csv");
+  }
 
-    /// <summary>
-    /// Default configuration file name
-    /// </summary>
-    public string defaultConfigFile = null;
+  #endregion //CONSTRUCTION
 
-    /// <summary>
-    /// Indicates if read data must been write into log-file 
-    /// </summary>
-    public bool writeLogFile = false;
+  ///////////////////////////////////////////////////////////////////////////////
+  // Defining events, enums, delegates                                         //
+  ///////////////////////////////////////////////////////////////////////////////
+  #region EVENTS
+  #endregion EVENTS
 
-    /// <summary>
-    /// Log-file name
-    /// </summary>
-    public string logFile = null;
+  ///////////////////////////////////////////////////////////////////////////////
+  // Defining Properties                                                       //
+  ///////////////////////////////////////////////////////////////////////////////
+  #region PROPERTIES
 
-    /// <summary>
-    /// Baud-rate for the connection
-    /// </summary>
-    public int baudRate;
+  /// <summary>
+  /// Gets or sets COM port number
+  /// </summary>
+  public int ComPortNo { get; set; }
 
-    /// <summary>
-    /// Eye-tracker update rate
-    /// </summary>
-    public int updateRate;
+  /// <summary>
+  /// Gets or sets a value indicating whether that Eye Tracker is in Streaming-mode
+  /// </summary>
+  public bool Streaming { get; set; }
 
-    #endregion //FIELDS
+  /// <summary>
+  /// Gets or sets a value indicating whether that Eye Tracker is in EyeHead integration mode 
+  /// </summary>
+  public bool EyeHead { get; set; }
 
-    #region CONSTRUCTION
+  /// <summary>
+  /// Gets or sets the Configuration file name
+  /// </summary>
+  public string ConfigFile { get; set; }
 
-    /// <summary>
-    /// Initializes a new instance of the UserSettings class with Default parameters.
-    /// </summary>
-    public UserSettings()
+  /// <summary>
+  /// Gets or sets the Default configuration file name
+  /// </summary>
+  public string DefaultConfigFile { get; set; }
+
+  /// <summary>
+  /// Gets or sets a value indicating whether read data must been written into log-file 
+  /// </summary>
+  public bool WriteLogFile { get; set; }
+
+  /// <summary>
+  /// Gets or sets the Log-file name
+  /// </summary>
+  public string LogFile { get; set; }
+
+  /// <summary>
+  /// Gets or sets the Baud-rate for the connection
+  /// </summary>
+  public int BaudRate { get; set; }
+
+  /// <summary>
+  /// Gets or sets the Eye-tracker update rate
+  /// </summary>
+  public int UpdateRate { get; set; }
+
+  #endregion //PROPERTIES
+
+  ///////////////////////////////////////////////////////////////////////////////
+  // Public methods                                                            //
+  ///////////////////////////////////////////////////////////////////////////////
+  #region PUBLICMETHODS
+
+  /// <summary>
+  /// Unserialize an UserSettings object
+  /// </summary>
+  /// <param name="fileName">Target file name </param>
+  /// <returns>UserSettings object</returns>
+  public static UserSettings Load(string fileName)
+  {
+    string errorMsg;
+    UserSettings result = (UserSettings)AslUtil.LoadXml(typeof(UserSettings), fileName, true/*create new*/, out errorMsg);
+    if (result == null)
     {
-        this.defaultConfigFile = Application.StartupPath + "\\Modules\\Recording\\ASL\\ASLStandardStreaming.cfg";
-        this.settingsFile = Ogama.Properties.Settings.Default.EyeTrackerSettingsPath + "ASLUserSettings.cfg";
-
-        string logPath = Path.Combine(
-                AslUtil.GetCommonDataFolder(),
-                APPLICATION_PATH);
-        Directory.CreateDirectory(logPath);
-        this.logFile = Path.Combine(logPath, "log.csv");
+      MessageBox.Show(errorMsg, "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+      result = new UserSettings();
     }
 
-    #endregion //CONSTRUCTION
+    return result;
+  }
 
-    #region METHODS
-    /// <summary>
-    /// Unserialize an UserSettings object
-    /// </summary>
-    /// <returns>UserSettings object</returns>
-    public UserSettings Load()
+  /// <summary>
+  /// Unserialize an UserSettings object
+  /// </summary>
+  /// <returns>UserSettings object</returns>
+  public UserSettings Load()
+  {
+    this.settingsFile = Ogama.Properties.Settings.Default.EyeTrackerSettingsPath + "ASLUserSettings.cfg";
+    string errorMsg;
+    UserSettings result = (UserSettings)AslUtil.LoadXml(typeof(UserSettings), this.settingsFile, true/*create new*/, out errorMsg);
+    if (result == null)
     {
-        this.settingsFile = Ogama.Properties.Settings.Default.EyeTrackerSettingsPath + "ASLUserSettings.cfg";
-        string errorMsg;
-        UserSettings result = (UserSettings)AslUtil.LoadXml(typeof(UserSettings), settingsFile, true/*create new*/, out errorMsg);
-        if (result == null)
-        {
-            MessageBox.Show(errorMsg, "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            result = new UserSettings();
-        }
-
-        return result;
+      MessageBox.Show(errorMsg, "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+      result = new UserSettings();
     }
 
-    /// <summary>
-    /// Unserialize an UserSettings object
-    /// </summary>
-    /// <param name="fileName">Target file name </param>
-    /// <returns>UserSettings object</returns>
-    public static UserSettings Load(string fileName)
-    {
-        string errorMsg;
-        UserSettings result = (UserSettings)AslUtil.LoadXml(typeof(UserSettings), fileName, true/*create new*/, out errorMsg);
-        if (result == null)
-        {
-            MessageBox.Show(errorMsg, "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            result = new UserSettings();
-        }
+    return result;
+  }
 
-        return result;
-    }
+  /// <summary>
+  /// Serialize an UserSettings object
+  /// </summary>
+  public void Store()
+  {
+    AslUtil.StoreXml(this, this.settingsFile);
+  }
 
-    /// <summary>
-    /// Serialize an UserSettings object
-    /// </summary>
-    public void Store()
-    {
-        AslUtil.StoreXml(this, settingsFile);
-    }
+  /// <summary>
+  /// Serialize an UserSettings object
+  /// </summary>
+  /// <param name="fileName">Target file name</param>
+  public void Store(string fileName)
+  {
+    AslUtil.StoreXml(this, fileName);
+  }
 
-    /// <summary>
-    /// Serialize an UserSettings object
-    /// </summary>
-    /// <param name="fileName">Target file name</param>
-    public void Store(string fileName)
-    {
-        AslUtil.StoreXml(this, fileName);
-    }
+  #endregion //PUBLICMETHODS
 
-    #endregion //METHODS
+  ///////////////////////////////////////////////////////////////////////////////
+  // Inherited methods                                                         //
+  ///////////////////////////////////////////////////////////////////////////////
+  #region OVERRIDES
+  #endregion //OVERRIDES
 
-}//UserSettings Class
+  ///////////////////////////////////////////////////////////////////////////////
+  // Eventhandler                                                              //
+  ///////////////////////////////////////////////////////////////////////////////
+  #region EVENTHANDLER
+  #endregion //EVENTHANDLER
+
+  ///////////////////////////////////////////////////////////////////////////////
+  // Methods and Eventhandling for Background tasks                            //
+  ///////////////////////////////////////////////////////////////////////////////
+  #region THREAD
+  #endregion //THREAD
+
+  ///////////////////////////////////////////////////////////////////////////////
+  // Methods for doing main class job                                          //
+  ///////////////////////////////////////////////////////////////////////////////
+  #region PRIVATEMETHODS
+  #endregion //PRIVATEMETHODS
+
+  ///////////////////////////////////////////////////////////////////////////////
+  // Small helping Methods                                                     //
+  ///////////////////////////////////////////////////////////////////////////////
+  #region HELPER
+  #endregion //HELPER
+} // UserSettings Class
