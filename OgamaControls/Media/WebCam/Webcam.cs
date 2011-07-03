@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using DirectShowLib;
 using System.Diagnostics;
-using GazeTrackingLibrary.Hardware;
+using GTHardware.Cameras.DirectShow;
 
 namespace OgamaControls
 {
@@ -483,9 +483,9 @@ namespace OgamaControls
     {
       this.properties = new CaptureDeviceProperties();
       //this.stopWatch = new Stopwatch();
-      if (Devices.Current.Cameras.Count > 0)
+      if (DirectShowDevices.Instance.Cameras.Count > 0)
       {
-        this.properties.VideoInputDevice = Devices.Current.Cameras[0];
+        this.properties.VideoInputDevice = DirectShowDevices.Instance.Cameras[0];
       }
 
       DsDevice[] videoCompressors = DsDevice.GetDevicesOfCat(FilterCategory.VideoCompressorCategory);
