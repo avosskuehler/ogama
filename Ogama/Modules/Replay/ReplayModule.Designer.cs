@@ -36,6 +36,7 @@ namespace Ogama.Modules.Replay
       this.toolStrip5 = new System.Windows.Forms.ToolStrip();
       this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
       this.btnStart = new System.Windows.Forms.ToolStripButton();
+      this.btnStartContinous = new System.Windows.Forms.ToolStripButton();
       this.btnPause = new System.Windows.Forms.ToolStripButton();
       this.btnStop = new System.Windows.Forms.ToolStripButton();
       this.btnRewind = new System.Windows.Forms.ToolStripButton();
@@ -79,6 +80,8 @@ namespace Ogama.Modules.Replay
       this.btnEnableAudio = new System.Windows.Forms.ToolStripButton();
       this.btnShowUsercam = new System.Windows.Forms.ToolStripButton();
       this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+      this.btnShowVisiblePartOfScreen = new System.Windows.Forms.ToolStripButton();
+      this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
       this.btnRecord = new System.Windows.Forms.ToolStripButton();
       this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
       this.btnHelp = new System.Windows.Forms.ToolStripButton();
@@ -180,6 +183,7 @@ namespace Ogama.Modules.Replay
       this.toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel3,
             this.btnStart,
+            this.btnStartContinous,
             this.btnPause,
             this.btnStop,
             this.btnRewind,
@@ -217,6 +221,16 @@ namespace Ogama.Modules.Replay
       this.btnStart.Size = new System.Drawing.Size(23, 23);
       this.btnStart.ToolTipText = "Play trial";
       this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+      // 
+      // btnStartContinous
+      // 
+      this.btnStartContinous.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.btnStartContinous.Image = ((System.Drawing.Image)(resources.GetObject("btnStartContinous.Image")));
+      this.btnStartContinous.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.btnStartContinous.Name = "btnStartContinous";
+      this.btnStartContinous.Size = new System.Drawing.Size(23, 23);
+      this.btnStartContinous.Text = "Play trials continously";
+      this.btnStartContinous.Click += new System.EventHandler(this.btnStartContinous_Click);
       // 
       // btnPause
       // 
@@ -321,7 +335,7 @@ namespace Ogama.Modules.Replay
       // 
       this.trialTimeLine.Duration = 0;
       this.trialTimeLine.Name = "trialTimeLine";
-      this.trialTimeLine.Size = new System.Drawing.Size(251, 23);
+      this.trialTimeLine.Size = new System.Drawing.Size(228, 23);
       this.trialTimeLine.MarkerDeleted += new OgamaControls.TimeLine.MarkerPositionChangedEventHandler(this.TimeSlider_MarkerDeleted);
       this.trialTimeLine.CaretMovingStarted += new System.EventHandler(this.TimeSlider_CaretMovingStarted);
       this.trialTimeLine.MarkerPositionChanged += new OgamaControls.TimeLine.MarkerPositionChangedEventHandler(this.TimeSlider_MarkerPositionChanged);
@@ -379,6 +393,7 @@ namespace Ogama.Modules.Replay
       this.replayPicture.TabStop = false;
       this.replayPicture.ZoomFactor = 0F;
       this.replayPicture.TrialEventIDFound += new Ogama.Modules.Common.TrialEventIDFoundEventHandler(this.replayPicture_TrialEventIDFound);
+      this.replayPicture.TrialSequenceChanged += new Ogama.Modules.Common.TrialSequenceChangedEventHandler(this.replayPicture_TrialSequenceChanged);
       this.replayPicture.Progress += new VectorGraphics.CustomEventArgs.ProgressEventHandler(this.replayPicture_Progress);
       // 
       // toolStrip2
@@ -560,13 +575,15 @@ namespace Ogama.Modules.Replay
             this.btnEnableAudio,
             this.btnShowUsercam,
             this.toolStripSeparator11,
+            this.btnShowVisiblePartOfScreen,
+            this.toolStripSeparator17,
             this.btnRecord,
             this.toolStripSeparator2,
             this.btnHelp});
       this.tosTrial.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
       this.tosTrial.Location = global::Ogama.Properties.Settings.Default.RPLTrialToolbarLocation;
       this.tosTrial.Name = "tosTrial";
-      this.tosTrial.Size = new System.Drawing.Size(590, 25);
+      this.tosTrial.Size = new System.Drawing.Size(619, 25);
       this.tosTrial.TabIndex = 0;
       // 
       // cbbSubject
@@ -648,6 +665,22 @@ namespace Ogama.Modules.Replay
       // 
       this.toolStripSeparator11.Name = "toolStripSeparator11";
       this.toolStripSeparator11.Size = new System.Drawing.Size(6, 25);
+      // 
+      // btnShowVisiblePartOfScreen
+      // 
+      this.btnShowVisiblePartOfScreen.CheckOnClick = true;
+      this.btnShowVisiblePartOfScreen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.btnShowVisiblePartOfScreen.Image = ((System.Drawing.Image)(resources.GetObject("btnShowVisiblePartOfScreen.Image")));
+      this.btnShowVisiblePartOfScreen.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.btnShowVisiblePartOfScreen.Name = "btnShowVisiblePartOfScreen";
+      this.btnShowVisiblePartOfScreen.Size = new System.Drawing.Size(23, 22);
+      this.btnShowVisiblePartOfScreen.Text = "Show visible part of screen";
+      this.btnShowVisiblePartOfScreen.Click += new System.EventHandler(this.btnShowVisiblePartOfScreen_Click);
+      // 
+      // toolStripSeparator17
+      // 
+      this.toolStripSeparator17.Name = "toolStripSeparator17";
+      this.toolStripSeparator17.Size = new System.Drawing.Size(6, 25);
       // 
       // btnRecord
       // 
@@ -1185,6 +1218,9 @@ namespace Ogama.Modules.Replay
     private System.Windows.Forms.ToolStripButton btnMouseModeClicks;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
     private OgamaControls.ToolStripTrackBar trbZoom;
+    private System.Windows.Forms.ToolStripButton btnShowVisiblePartOfScreen;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
+    private System.Windows.Forms.ToolStripButton btnStartContinous;
 
   }
 }

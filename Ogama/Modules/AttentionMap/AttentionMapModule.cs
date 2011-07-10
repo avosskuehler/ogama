@@ -913,7 +913,7 @@ namespace Ogama.Modules.AttentionMap
                 }
                 else onwebpage = false;
               }
-              else if ((type == EventType.Mouse || type == EventType.WebpageClick) && onwebpage)
+              else if ((type == EventType.Mouse) && onwebpage)
               {
                 string taskString = trialEvent["EventTask"].ToString();
                 string paramString = trialEvent["EventParam"].ToString();
