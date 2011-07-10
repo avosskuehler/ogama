@@ -30,8 +30,6 @@ namespace Ogama.Modules.Replay
   using OgamaControls.Media;
   using VectorGraphics.CustomEventArgs;
   using VectorGraphics.Elements;
-    using VectorGraphics.StopConditions;
-    using System.ComponentModel;
 
   /// <summary>
   /// Derived from <see cref="FormWithSubjectAndTrialSelection"/>.
@@ -56,6 +54,12 @@ namespace Ogama.Modules.Replay
     // Defining Variables, Enumerations, Events                                  //
     ///////////////////////////////////////////////////////////////////////////////
     #region FIELDS
+
+    /// <summary>
+    /// Indicates that the replay module is currently replaying the
+    /// complete experiment, not only the selected trial.
+    /// </summary>
+    private bool isInContinuousMode;
 
     /// <summary>
     /// This member save the current viewed time of the trial 
@@ -127,20 +131,17 @@ namespace Ogama.Modules.Replay
     public ReplayModule()
     {
       this.InitializeComponent();
-       
+
       this.Picture = this.replayPicture;
       this.SubjectCombo = this.cbbSubject;
       this.TrialCombo = this.cbbTrial;
       this.ZoomTrackBar = this.trbZoom;
-        
+
       this.InitializeDropDowns();
       this.InitializeDataBindings();
       this.InitAccelerators();
       this.InitializeCustomElements();
-      
     }
-
-    VGRectangle visiblepartofscreen = null;
 
     #endregion //CONSTRUCTION
 
@@ -1129,6 +1130,19 @@ namespace Ogama.Modules.Replay
 
     /// <summary>
     /// The <see cref="Control.Click"/> event handler for the
+    /// <see cref="Button"/> <see cref="btnShowVisiblePartOfScreen"/>.
+    /// Shows or hides the rectangle indicating the visible part of the screen.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void btnShowVisiblePartOfScreen_Click(object sender, EventArgs e)
+    {
+      this.replayPicture.ShowVisiblePartOfScreen = this.btnShowVisiblePartOfScreen.Checked;
+      this.RedrawPicture();
+    }
+
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler for the
     /// <see cref="Button"/> <see cref="btnShowUsercam"/>.
     /// Shows or hides the user cam in the context panel.
     /// </summary>
@@ -1282,14 +1296,79 @@ namespace Ogama.Modules.Replay
           AsyncHelper.FireAndForget(new MethodInvoker(this.usercamVideoPlayer.PlayMovie));
         }
       }
-      int xres = Document.ActiveDocument.ExperimentSettings.WidthStimulusScreen;
-      int yres = Document.ActiveDocument.ExperimentSettings.HeightStimulusScreen;
-      Ogama.Modules.Replay.ReplayPicture rpc = pnlPicture.Controls[0] as ReplayPicture;
-      visiblepartofscreen = new VGRectangle(ShapeDrawAction.Edge, Brushes.Black, new RectangleF(0, 0, xres, yres));
-      visiblepartofscreen.OnsetTime = 0;
-      visiblepartofscreen.EndTime = long.MaxValue;
-      rpc.Elements.Add(visiblepartofscreen);
-      rpc.RedrawAll();
+    }
+
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler for the
+    /// <see cref="Button"/> <see cref="btnStartContinous"/>.
+    /// User pressed Playbutton for continuous mode, 
+    /// so start picture animation, modify UI and call new trials if
+    /// trial ended.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void btnStartContinous_Click(object sender, EventArgs e)
+    {
+      // Set continuous mode
+      this.isInContinuousMode = true;
+
+      // Populate the picture with the whole subjects raw data...
+      this.ReadWholeSubjectsData();
+
+      // Read the current fixation calculation settings
+      // from the experiment settings.
+      this.ReadFixationCalculationSettings();
+
+      if (this.trialTimeLine.CurrentTime > this.trialTimeLine.SectionEndTime - 15)
+      {
+        this.ResetControls();
+      }
+
+      // Paranoia check for empty trials.
+      if (this.trialTimeLine.SectionEndTime == this.trialTimeLine.SectionStartTime)
+      {
+        return;
+      }
+
+      // Disable the ComboBoxes control until 
+      // the replay operation is done.
+      this.cbbSubject.Enabled = false;
+      this.cbbTrial.Enabled = false;
+
+      // Disable the Start and rewind button
+      this.btnStart.Enabled = false;
+      this.btnRewind.Enabled = false;
+
+      // Enable the Cancel button while 
+      // the operation runs.
+      this.btnStop.Enabled = true;
+      this.btnPause.Enabled = true;
+
+      // Update pictures properties
+      this.replayPicture.ReplayPosition = this.currentTrialTime;
+
+      // Start the timer updating operation.
+      this.replayPicture.StartAnimation();
+
+      if (this.isUsingTrialVideo)
+      {
+        AsyncHelper.FireAndForget(new MethodInvoker(this.videoFramePusher.Start));
+      }
+
+      // Start sound
+      if (this.btnEnableAudio.Checked)
+      {
+        if (this.Player != null)
+        {
+          this.Player.Play();
+        }
+      }
+
+      // Update the video positions and start replay.
+      if (this.btnShowUsercam.Checked && ((MainForm)this.MdiParent).ContextPanel.Visible)
+      {
+        AsyncHelper.FireAndForget(new MethodInvoker(this.usercamVideoPlayer.PlayMovie));
+      }
     }
 
     /// <summary>
@@ -1630,68 +1709,14 @@ namespace Ogama.Modules.Replay
     {
       try
       {
-
-          Ogama.Modules.Replay.ReplayPicture rpcc = pnlPicture.Controls[0] as ReplayPicture;
-
-          if (false)
-          {
-              visiblepartofscreen = new VGRectangle(ShapeDrawAction.Fill, Brushes.Black, new RectangleF(0, 0, 1280, 800));
-              visiblepartofscreen.OnsetTime = 0;
-              visiblepartofscreen.EndTime = long.MaxValue;
-              rpcc.Elements.Add(visiblepartofscreen);
-              rpcc.RedrawAll();
-          }
         TrialEvent occuredEvent = this.TrialEvents[e.EventID];
         string parameter = occuredEvent.Param;
         switch (occuredEvent.Type)
         {
-            case EventType.WebpageClick:
-                Ogama.Modules.Replay.ReplayPicture rpc = pnlPicture.Controls[0] as ReplayPicture;
-                
-                //rpc.DrawMouseClick(new Point(rnd.Next(0,500),rnd.Next(0,500)),MouseButtons.Right);
-                
-                MouseStopCondition msc = (MouseStopCondition)TypeDescriptor.GetConverter(typeof(StopCondition)).ConvertFrom(parameter);
-                VGEllipse ellipse2 = new VGEllipse(ShapeDrawAction.Fill, Brushes.Black, new RectangleF(msc.ClickLocation.X, msc.ClickLocation.Y, 30, 30));
-                ellipse2.OnsetTime = 0;
-                ellipse2.EndTime = long.MaxValue;
-                //rpc.Elements.Add(ellipse2);
-                rpc.DrawMouseClick(new Point(msc.ClickLocation.X, msc.ClickLocation.Y), msc.StopMouseButton);
-                rpc.RedrawAll();
-
-
-
-                break;
-            case EventType.Webpage:
-                VGElementCollection clickElements = (pnlPicture.Controls[0] as ReplayPicture).Elements.FindAllGroupMembers(VGStyleGroup.RPL_MOUSE_CLICK);
-                (pnlPicture.Controls[0] as ReplayPicture).Elements.RemoveAll(clickElements);
-                (pnlPicture.Controls[0] as ReplayPicture).RedrawAll();
-                Slide slide = new Slide();
-
-                //slide.BackgroundImage = new Bitmap(parameter);
-
-
-                VGScrollImage baseURLScreenshot = new VGScrollImage(
-        ShapeDrawAction.None,
-        Pens.Transparent,
-        Brushes.Black,
-        SystemFonts.DefaultFont,
-        Color.Black,
-        parameter,
-        Document.ActiveDocument.ExperimentSettings.SlideResourcesPath,
-        ImageLayout.None,
-        1f,
-        Document.ActiveDocument.PresentationSize,
-        VGStyleGroup.None,
-        slide.Name,
-        string.Empty);
-
-                slide.VGStimuli.Add(baseURLScreenshot);
-
-                this.LoadSlide(slide, ActiveXMode.Off);
-                break;
-            case EventType.Response:
-                break;
-
+          case EventType.Webpage:
+            break;
+          case EventType.Response:
+            break;
           case EventType.Mouse:
             break;
           case EventType.Key:
@@ -1704,8 +1729,7 @@ namespace Ogama.Modules.Replay
             {
               this.LoadSlide(newSlide, ActiveXMode.Video);
             }
-            visiblepartofscreen.Bounds = new RectangleF(0, 0, visiblepartofscreen.Bounds.Width, visiblepartofscreen.Bounds.Height);
-            
+
             break;
           case EventType.Flash:
             break;
@@ -1715,7 +1739,7 @@ namespace Ogama.Modules.Replay
             break;
           case EventType.Usercam:
             break;
-          
+
           case EventType.Scroll:
             // Update scroll position
             if (this.Picture.Parent.Parent != null)
@@ -1742,6 +1766,42 @@ namespace Ogama.Modules.Replay
       catch (Exception ex)
       {
         ExceptionMethods.HandleExceptionSilent(ex);
+      }
+    }
+
+    /// <summary>
+    /// The <see cref="ReplayPicture.TrialSequenceChanged"/> event handler for
+    /// the <see cref="VectorGraphics.Canvas.Picture"/> <see cref="replayPicture"/>.
+    /// Updates the picture with the new trials slide, if we are in continous mode,
+    /// that means replaying the whole experiment.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">A <see cref="TrialSequenceChangedEventArgs"/> with the event data.</param>
+    private void replayPicture_TrialSequenceChanged(object sender, TrialSequenceChangedEventArgs e)
+    {
+      // Load new trial stimulus during replay if we are in continous mode
+      if (this.isInContinuousMode)
+      {
+        string subjectName = Document.ActiveDocument.SelectionState.SubjectName;
+
+        // Load an video for the trial
+        this.LoadTrialVideo(subjectName, e.TrialSequence);
+
+        // Get the trial id for the current subject and sequence
+        int trialID = Queries.GetTrialIDForSequence(subjectName, e.TrialSequence);
+
+        // Load trial stimulus into picture
+        if (!this.LoadTrialStimulus(trialID))
+        {
+          this.Picture.ResetBackground();
+          this.LoadSlide(SlideNotFoundSlide, ActiveXMode.Off);
+        }
+
+        // if video is available reset the slide
+        if (this.isUsingTrialVideo)
+        {
+          this.Picture.ResetBackground();
+        }
       }
     }
 
@@ -1831,6 +1891,90 @@ namespace Ogama.Modules.Replay
     // Methods for doing main class job                                          //
     ///////////////////////////////////////////////////////////////////////////////
     #region METHODS
+
+    /// <summary>
+    /// This methods loads the whole raw data for the current subject
+    /// to display a smooth replay for the whole experiment only updating
+    /// the trial slides.
+    /// </summary>
+    /// <returns><strong>True</strong> if data could be succesfully loaded,
+    /// otherwise <strong>false</strong></returns>
+    private bool ReadWholeSubjectsData()
+    {
+      try
+      {
+        // Stop if no trial is selected.
+        if (!Document.ActiveDocument.SelectionState.IsSet)
+        {
+          return false;
+        }
+
+        // Read current selection state
+        string subjectName = Document.ActiveDocument.SelectionState.SubjectName;
+        int trialID = Document.ActiveDocument.SelectionState.TrialID;
+        int trialSequence = Document.ActiveDocument.SelectionState.TrialSequence;
+
+        // Switch to WaitCursor
+        this.Cursor = Cursors.WaitCursor;
+
+        // Read settings
+        ExperimentSettings set = Document.ActiveDocument.ExperimentSettings;
+        if (set != null)
+        {
+          int usercamID;
+
+          this.LoadTrialEvents(subjectName, out usercamID);
+
+          // Load the user camera
+          this.LoadUsercam(subjectName, usercamID);
+
+          // Load an video for the trial
+          this.LoadTrialVideo(subjectName, trialSequence);
+
+          // Load trial stimulus into picture
+          if (!this.LoadTrialStimulus(trialID))
+          {
+            this.Picture.ResetBackground();
+            this.LoadSlide(SlideNotFoundSlide, ActiveXMode.Off);
+          }
+
+          // if video is available reset the slide
+          if (this.isUsingTrialVideo)
+          {
+            this.Picture.ResetBackground();
+          }
+
+          // Load trial stimulus into picture
+          this.LoadAudioStimuli(this.TrialEvents);
+
+          // Load the whole trial data
+          if (!this.LoadRawData(subjectName))
+          {
+            return false;
+          }
+
+          // Initializes usercam, video etc. with currently selected replay speed.
+          this.SetupReplaySpeed();
+
+          this.replayPicture.InitDrawingElements();
+        }
+
+        // Reset data state label
+        ((MainForm)this.MdiParent).StatusRightLabel.Text = string.Empty;
+      }
+      catch (Exception ex)
+      {
+        ExceptionMethods.HandleException(ex);
+        return false;
+      }
+      finally
+      {
+        // Reset Cursor
+        Cursor = Cursors.Default;
+      }
+
+      return true;
+    }
 
     /// <summary>
     /// This method is called when the video export has finished an pops up
@@ -2119,6 +2263,23 @@ namespace Ogama.Modules.Replay
     }
 
     /// <summary>
+    /// This method loads the trial events from the database into the timeline
+    /// for the whole subjects data.
+    /// </summary>
+    /// <param name="subjectName">A <see cref="String"/> with the subject name.</param>
+    /// <param name="usercamID">Out. An <see cref="Int32"/> with an optional usercamID event.</param>
+    private void LoadTrialEvents(string subjectName, out int usercamID)
+    {
+      // Get the events for the current trial indexed by type
+      this.TrialEvents = Queries.GetTrialEvents(
+        subjectName,
+        out usercamID);
+
+      // Update time line with events
+      this.trialTimeLine.TrialEvents = this.TrialEvents;
+    }
+
+    /// <summary>
     /// This method asks the user for a video filename and raises
     /// a <see cref="VideoPropertiesDialog"/> to define the video
     /// export properties.
@@ -2230,6 +2391,41 @@ namespace Ogama.Modules.Replay
     }
 
     /// <summary>
+    /// This method loads the raw data for the given subject 
+    /// and submits it to the underlying picture.
+    /// </summary>
+    /// <param name="subjectName">A <see cref="String"/> with the subject name.</param>
+    /// <returns><strong>True</strong> if raw data could be succesfully found and loaded,
+    /// otherwise <strong>false</strong>.</returns>
+    private bool LoadRawData(string subjectName)
+    {
+      // Load raw data
+      DataTable rawDataTable = Queries.GetRawDataBySubject(subjectName);
+
+      if (rawDataTable.Rows.Count == 0)
+      {
+        return false;
+      }
+
+      long firstSamplesTime = Convert.ToInt64(rawDataTable.Rows[0]["Time"]);
+      long lastSamplesTime = Convert.ToInt64(rawDataTable.Rows[rawDataTable.Rows.Count - 1]["Time"]);
+      int duration = (int)(lastSamplesTime - firstSamplesTime);
+
+      // Update Replayslider
+      this.trialTimeLine.Duration = duration;
+      this.currentTrialTime = 0;
+      this.trialTimeLine.ResetTimeLine();
+
+      if (rawDataTable != null)
+      {
+        this.replayPicture.ReplayDataTable = rawDataTable;
+        return true;
+      }
+
+      return false;
+    }
+
+    /// <summary>
     /// This method loads the user camera video into the viewer,
     /// if there is any and seeks it to the start tine of the current trial.
     /// </summary>
@@ -2312,6 +2508,9 @@ namespace Ogama.Modules.Replay
     /// </summary>
     private void StopPlaying()
     {
+      // Reset continuous mode
+      this.isInContinuousMode = false;
+
       // Stop update timer
       this.replayPicture.StopAnimation();
 

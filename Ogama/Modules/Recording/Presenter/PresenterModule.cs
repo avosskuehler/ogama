@@ -30,7 +30,7 @@ namespace Ogama.Modules.Recording
   using VectorGraphics.StopConditions;
   using VectorGraphics.Tools;
   using VectorGraphics.Triggers;
-using System.Text.RegularExpressions;
+  using System.Text.RegularExpressions;
 
   /// <summary>
   /// A <see cref="Form"/> that is used for stimuli presentation. 
@@ -841,24 +841,24 @@ using System.Text.RegularExpressions;
       }
     }
 
-     static string lastscreen = null;
+    static string lastscreen = null;
 
     private static void UlozScreen()
     {
-        string screenshotFilename;
-        Bitmap screenshot = WebsiteThumbnailGenerator.GetWebSiteScreenshot(
-          //browser.Url.ToString(),
-          lastscreen,
-          Document.ActiveDocument.PresentationSize,
-          out screenshotFilename);
-        screenshotFilename += ".png";
-        string screenshotFilenameWithPath = Path.Combine(
-          Document.ActiveDocument.ExperimentSettings.SlideResourcesPath,
-          screenshotFilename);
-        screenshot.Save(screenshotFilenameWithPath, System.Drawing.Imaging.ImageFormat.Png);
+      string screenshotFilename;
+      Bitmap screenshot = WebsiteThumbnailGenerator.GetWebSiteScreenshot(
+        //browser.Url.ToString(),
+        lastscreen,
+        Document.ActiveDocument.PresentationSize,
+        out screenshotFilename);
+      screenshotFilename += ".png";
+      string screenshotFilenameWithPath = Path.Combine(
+        Document.ActiveDocument.ExperimentSettings.SlideResourcesPath,
+        screenshotFilename);
+      screenshot.Save(screenshotFilenameWithPath, System.Drawing.Imaging.ImageFormat.Png);
     }
 
-      
+
 
     /// <summary>
     /// The <see cref="WebBrowser.Navigated"/> event handler which reactivates the
@@ -868,84 +868,85 @@ using System.Text.RegularExpressions;
     /// <param name="e">A <see cref="WebBrowserNavigatedEventArgs"/> with the event data</param>
     private void WebBrowser_Navigated(object sender, WebBrowserNavigatedEventArgs e)
     {
-        WebBrowser browser = sender as WebBrowser;
-                
-        string filename = Regex.Replace(browser.Url.ToString(), @"(\\|\/|\:|\*|\?|\""|\<|\>|\|)?", string.Empty);
-        filename += ".png";
-        filename = Path.Combine(
-        Document.ActiveDocument.ExperimentSettings.SlideResourcesPath,
-        filename);
-        if (!File.Exists(filename) && lastscreen!=browser.Url.ToString())
-        {
-            lastscreen = browser.Url.ToString();
-            Thread thread = new Thread(UlozScreen);
-            thread.Start();
-            
-        }
+      WebBrowser browser = sender as WebBrowser;
 
-        long eventTime = -1;
-        if (this.getTimeMethod != null)
-        {
-            eventTime = this.getTimeMethod();
-        }
+      string filename = Regex.Replace(browser.Url.ToString(), @"(\\|\/|\:|\*|\?|\""|\<|\>|\|)?", string.Empty);
+      filename += ".png";
+      filename = Path.Combine(
+      Document.ActiveDocument.ExperimentSettings.SlideResourcesPath,
+      filename);
+      if (!File.Exists(filename) && lastscreen != browser.Url.ToString())
+      {
+        lastscreen = browser.Url.ToString();
+        Thread thread = new Thread(UlozScreen);
+        thread.Start();
+      }
 
-        MediaEvent webpagechangedEvent = new MediaEvent();
-        webpagechangedEvent.Type = EventType.Webpage;
-        webpagechangedEvent.Task = MediaEventTask.Seek;
-        webpagechangedEvent.Param = filename;
-        this.OnTrialEventOccured(new TrialEventOccuredEventArgs(webpagechangedEvent, eventTime));
+      long eventTime = -1;
+      if (this.getTimeMethod != null)
+      {
+        eventTime = this.getTimeMethod();
+      }
 
-        browser.Document.Window.Scroll -= new HtmlElementEventHandler(this.WebBrowser_Scroll);
-        browser.Document.Window.Scroll += new HtmlElementEventHandler(this.WebBrowser_Scroll);
-        browser.Document.MouseDown -= new HtmlElementEventHandler(this.WebBrowser_Clicked);
-        browser.Document.MouseDown += new HtmlElementEventHandler(this.WebBrowser_Clicked);
-        browser.PreviewKeyDown -= new PreviewKeyDownEventHandler(this.WebBrowser_KeyDown);
-        browser.PreviewKeyDown += new PreviewKeyDownEventHandler(this.WebBrowser_KeyDown);
+      MediaEvent webpagechangedEvent = new MediaEvent();
+      webpagechangedEvent.Type = EventType.Webpage;
+      webpagechangedEvent.Task = MediaEventTask.Seek;
+      webpagechangedEvent.Param = filename;
+      this.OnTrialEventOccured(new TrialEventOccuredEventArgs(webpagechangedEvent, eventTime));
+
+      browser.Document.Window.Scroll -= new HtmlElementEventHandler(this.WebBrowser_Scroll);
+      browser.Document.Window.Scroll += new HtmlElementEventHandler(this.WebBrowser_Scroll);
+      browser.Document.MouseDown -= new HtmlElementEventHandler(this.WebBrowser_Clicked);
+      browser.Document.MouseDown += new HtmlElementEventHandler(this.WebBrowser_Clicked);
+      browser.PreviewKeyDown -= new PreviewKeyDownEventHandler(this.WebBrowser_KeyDown);
+      browser.PreviewKeyDown += new PreviewKeyDownEventHandler(this.WebBrowser_KeyDown);
     }
 
 
-    
+
     private void WebBrowser_KeyDown(object sender, PreviewKeyDownEventArgs e)
     {
-        /*if (e.KeyValue == 8)
-        {
-            WebBrowser wb = (WebBrowser)sender;
-            if (wb.CanGoBack)
-            {
-                wb.GoBack();
-                //wb.GoForward();
-            }
+      /*if (e.KeyValue == 8)
+      {
+          WebBrowser wb = (WebBrowser)sender;
+          if (wb.CanGoBack)
+          {
+              wb.GoBack();
+              //wb.GoForward();
+          }
             
 
-        }*/
+      }*/
     }
 
     private void WebBrowser_Clicked(object sender, HtmlElementEventArgs e)
     {
-        
-        long eventTime = -1;
-        if (this.getTimeMethod != null)
-        {
-            eventTime = this.getTimeMethod();
-        }
-        HtmlDocument browserControl = sender as HtmlDocument;
-        
-        //HtmlWindow browserControl = sender as HtmlWindow;
-        HtmlElement htmlElement = browserControl.GetElementsByTagName("HTML")[0];
-        HtmlElement bodyElement = browserControl.Body;
+      long eventTime = -1;
+      if (this.getTimeMethod != null)
+      {
+        eventTime = this.getTimeMethod();
+      }
 
-        int scrollTop = htmlElement.ScrollTop > bodyElement.ScrollTop ?
-          htmlElement.ScrollTop : bodyElement.ScrollTop;
-        int scrollLeft = htmlElement.ScrollLeft > bodyElement.ScrollLeft ?
-          htmlElement.ScrollLeft : bodyElement.ScrollLeft;
-        InputEvent mouseEvent = new InputEvent();
-        mouseEvent.Type = EventType.WebpageClick;
-        mouseEvent.Task = InputEventTask.Down;
-        MouseStopCondition msc = new MouseStopCondition(e.MouseButtonsPressed, false, string.Empty, null, new Point(e.ClientMousePosition.X+scrollLeft,e.ClientMousePosition.Y+scrollTop));
-        mouseEvent.Param = msc.ToString();
-        
-        this.OnTrialEventOccured(new TrialEventOccuredEventArgs(mouseEvent, eventTime));
+      HtmlDocument browserControl = sender as HtmlDocument;
+      HtmlElement htmlElement = browserControl.GetElementsByTagName("HTML")[0];
+      HtmlElement bodyElement = browserControl.Body;
 
+      int scrollTop = htmlElement.ScrollTop > bodyElement.ScrollTop ?
+        htmlElement.ScrollTop : bodyElement.ScrollTop;
+      int scrollLeft = htmlElement.ScrollLeft > bodyElement.ScrollLeft ?
+        htmlElement.ScrollLeft : bodyElement.ScrollLeft;
+      InputEvent mouseEvent = new InputEvent();
+      mouseEvent.Type = EventType.Mouse;
+      mouseEvent.Task = InputEventTask.Down;
+      MouseStopCondition msc = new MouseStopCondition(
+        e.MouseButtonsPressed, 
+        false, 
+        string.Empty, 
+        null,
+        new Point(e.ClientMousePosition.X + scrollLeft, e.ClientMousePosition.Y + scrollTop));
+      mouseEvent.Param = msc.ToString();
+
+      this.OnTrialEventOccured(new TrialEventOccuredEventArgs(mouseEvent, eventTime));
     }
 
     #endregion //CUSTOMEVENTHANDLER
@@ -1344,12 +1345,12 @@ using System.Text.RegularExpressions;
             VGBrowser browser = element as VGBrowser;
             try
             {
-                if (browser.depth > 0) browser.WebBrowser.AllowNavigation = false;
-                browser.WebBrowser.Document.Window.Scroll -= new HtmlElementEventHandler(this.WebBrowser_Scroll);
-                browser.WebBrowser.Navigated -= new WebBrowserNavigatedEventHandler(this.WebBrowser_Navigated);
-                browser.WebBrowser.Document.MouseDown -= new HtmlElementEventHandler(this.WebBrowser_Clicked);
-                browser.WebBrowser.PreviewKeyDown -= new PreviewKeyDownEventHandler(this.WebBrowser_KeyDown);
-                browser.WebBrowser.PreviewKeyDown += new PreviewKeyDownEventHandler(this.WebBrowser_KeyDown);
+              if (browser.depth > 0) browser.WebBrowser.AllowNavigation = false;
+              browser.WebBrowser.Document.Window.Scroll -= new HtmlElementEventHandler(this.WebBrowser_Scroll);
+              browser.WebBrowser.Navigated -= new WebBrowserNavigatedEventHandler(this.WebBrowser_Navigated);
+              browser.WebBrowser.Document.MouseDown -= new HtmlElementEventHandler(this.WebBrowser_Clicked);
+              browser.WebBrowser.PreviewKeyDown -= new PreviewKeyDownEventHandler(this.WebBrowser_KeyDown);
+              browser.WebBrowser.PreviewKeyDown += new PreviewKeyDownEventHandler(this.WebBrowser_KeyDown);
             }
             catch (NullReferenceException ex)
             {

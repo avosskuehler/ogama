@@ -84,7 +84,5 @@ namespace Ogama.Modules.Common
     /// Webpgage event marker for browser pages
     /// </summary>
     Webpage,
-
-    WebpageClick
   }
 }

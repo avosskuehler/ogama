@@ -198,6 +198,13 @@ namespace Ogama.Modules.Replay
     // Predefined vector graphic elements//////////////////////////////////////
 
     /// <summary>
+    /// A rectangle which displays the visible part of the screen, when stimuli
+    /// are greater then monitor resolution and are to be scrolled.
+    /// Used for web pages mainly.
+    /// </summary>
+    private VGRectangle visiblePartOfScreen;
+
+    /// <summary>
     /// Semi-transparent rectangle, that grays scene, when overlayed on scene.
     /// </summary>
     /// <remarks>Used for displaying blinks and out of monitors</remarks>
@@ -343,6 +350,12 @@ namespace Ogama.Modules.Replay
     /// </summary>
     private long onsetTime;
 
+    /// <summary>
+    /// Contains the value of the currently displayed trial sequence
+    /// to keep track of changes for sending trial sequence changed events.
+    /// </summary>
+    private int currentTrialSequence;
+
     #endregion //FIELDS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -382,6 +395,12 @@ namespace Ogama.Modules.Replay
     /// Event. Raised when event id was found.
     /// </summary>
     public event TrialEventIDFoundEventHandler TrialEventIDFound;
+
+    /// <summary>
+    /// Event. Raised whenever a new trial sequence is found in the raw data.
+    /// This occurs only during continous replay mode.
+    /// </summary>
+    public event TrialSequenceChangedEventHandler TrialSequenceChanged;
 
     /// <summary>
     /// Event. Raised when recorded mouse position has moved.
@@ -480,6 +499,20 @@ namespace Ogama.Modules.Replay
     {
       get { return this.speed; }
       set { this.speed = value; }
+    }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether the rectangle showing the visible
+    /// part of the screen will be show or not.
+    /// </summary>
+    /// <value>A <see cref="Boolean"/> value that is <strong>true</strong>,
+    /// when the rectangle should be shown.</value>
+    [Browsable(false)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    public bool ShowVisiblePartOfScreen
+    {
+      get { return this.visiblePartOfScreen.Visible; }
+      set { this.visiblePartOfScreen.Visible = value; }
     }
 
     /// <summary>
@@ -937,6 +970,9 @@ namespace Ogama.Modules.Replay
 
         this.Elements.Add(this.rectBlink);
 
+        // Readd the visible bounds rectangle
+        this.Elements.Add(this.visiblePartOfScreen);
+
         this.DrawForeground(true);
 
         return true;
@@ -1281,6 +1317,19 @@ namespace Ogama.Modules.Replay
     }
 
     /// <summary>
+    /// The <see cref="TrialSequenceChanged"/> event handler.
+    /// Raised when trial sequence change was found in the raw data.
+    /// </summary>
+    /// <param name="e">A <see cref="TrialSequenceChangedEventArgs"/> with the new trial sequence.</param>.
+    private void OnTrialSequenceChanged(TrialSequenceChangedEventArgs e)
+    {
+      if (this.TrialSequenceChanged != null)
+      {
+        this.TrialSequenceChanged(this, e);
+      }
+    }
+
+    /// <summary>
     /// The <see cref="MouseMoved"/> event handler.
     /// Raised when mouse movement was found in the raw data.
     /// </summary>
@@ -1483,6 +1532,14 @@ namespace Ogama.Modules.Replay
           typeof(VGCursor.DrawingCursors), Properties.Settings.Default.MouseCursorType);
         this.mouseCursor = new VGCursor(this.penMouseCursor, mouseCursorType, mouseCursorSize, VGStyleGroup.RPL_PEN_MOUSE_CURSOR);
         this.mouseCursor.ElementGroup = "Default";
+
+        if (Document.ActiveDocument != null)
+        {
+          this.visiblePartOfScreen = new VGRectangle(
+            ShapeDrawAction.Edge,
+            Brushes.Black,
+            Document.ActiveDocument.PresentationSizeRectangle);
+        }
       }
       catch (Exception ex)
       {
@@ -1615,8 +1672,24 @@ namespace Ogama.Modules.Replay
         List<PointF> validMousePathSamples = new List<PointF>();
         List<MouseStopCondition> validMouseClicks = new List<MouseStopCondition>();
 
+        // Check trial sequence change
+        if (rows.Length > 0)
+        {
+          int trialSequence = (int)rows[0]["TrialSequence"];
+          this.currentTrialSequence = trialSequence;
+        }
+
         foreach (DataRow row in rows)
         {
+          // Check trial sequence change
+          int trialSequence = (int)row["TrialSequence"];
+
+          if (trialSequence != this.currentTrialSequence)
+          {
+            this.OnTrialSequenceChanged(new TrialSequenceChangedEventArgs(trialSequence));
+            this.currentTrialSequence = trialSequence;
+          }
+
           // Check events
           if (!row.IsNull("EventID"))
           {
@@ -1629,10 +1702,10 @@ namespace Ogama.Modules.Replay
 
             TrialEvent occuredEvent = ((ReplayModule)this.OwningForm).TrialEvents[eventID];
             string parameter = occuredEvent.Param;
+            MouseStopCondition msc = (MouseStopCondition)TypeDescriptor.GetConverter(typeof(StopCondition)).ConvertFrom(parameter);
             switch (occuredEvent.Type)
             {
               case EventType.Mouse:
-                MouseStopCondition msc = (MouseStopCondition)TypeDescriptor.GetConverter(typeof(StopCondition)).ConvertFrom(parameter);
                 switch (((InputEvent)occuredEvent).Task)
                 {
                   case InputEventTask.Down:

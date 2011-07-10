@@ -158,6 +158,24 @@ namespace Ogama
     }
 
     /// <summary>
+    /// Gets a <see cref="RectangleF"/> with the presentation screen size
+    /// located at 0,0.
+    /// </summary>
+    /// <value>A <see cref="RectangleF"/> with the presentation screen size
+    /// located at 0,0..</value>
+    public RectangleF PresentationSizeRectangle
+    {
+      get
+      {
+        return new RectangleF(
+          0,
+          0,
+          this.experimentSettings.WidthStimulusScreen,
+          this.experimentSettings.HeightStimulusScreen);
+      }
+    }
+
+    /// <summary>
     /// Gets or sets the presentation screen size.
     /// </summary>
     public Size PresentationSize

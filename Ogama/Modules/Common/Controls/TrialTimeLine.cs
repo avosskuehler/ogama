@@ -350,8 +350,6 @@ namespace Ogama.Modules.Common
             break;
           case EventType.Webpage:
             break;
-          case EventType.WebpageClick:
-            break;
           case EventType.Usercam:
             break;
           case EventType.Response:

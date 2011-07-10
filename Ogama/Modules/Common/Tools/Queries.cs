@@ -248,6 +248,22 @@ namespace Ogama.Modules.Common
     /// <see cref="SortedList{Int32, TrialEvent}"/>.
     /// </summary>
     /// <param name="subjectName">A <see cref="String"/> with the subject name.</param>
+    /// <param name="usercamID">Out. The event id of the user camera start time.</param>
+    /// <returns>A <see cref="SortedList{Int32, TrialEvent}"/>
+    /// with the events occured in this experiment.</returns>
+    public static SortedList<int, TrialEvent> GetTrialEvents(string subjectName, out int usercamID)
+    {
+      DataTable table =
+        Document.ActiveDocument.DocDataSet.TrialEventsAdapter.GetDataBySubject(subjectName);
+
+      return ExtractEvents(subjectName, table, out usercamID);
+    }
+
+    /// <summary>
+    /// This method parses the trial events table and returns it as a 
+    /// <see cref="SortedList{Int32, TrialEvent}"/>.
+    /// </summary>
+    /// <param name="subjectName">A <see cref="String"/> with the subject name.</param>
     /// <param name="trialSequence">The <see cref="Int32"/> with the sequence number
     /// of this trial for the given subject.</param>
     /// <param name="usercamID">Out. The event id of the user camera start time.</param>
@@ -258,160 +274,9 @@ namespace Ogama.Modules.Common
       int trialSequence,
       out int usercamID)
     {
-      usercamID = -1;
-      SortedList<int, TrialEvent> returnList = new SortedList<int, TrialEvent>();
-
       DataTable table =
         Document.ActiveDocument.DocDataSet.TrialEventsAdapter.GetDataBySubjectAndSequence(subjectName, trialSequence);
-
-      foreach (DataRow row in table.Rows)
-      {
-        string typeString = row["EventType"].ToString();
-        EventType type = EventType.None;
-        try
-        {
-          type = (EventType)Enum.Parse(typeof(EventType), typeString, true);
-        }
-        catch (ArgumentException)
-        {
-          continue;
-        }
-
-        int eventID = Convert.ToInt32(row["EventID"]);
-        long time = Convert.ToInt64(row["EventTime"]);
-        string taskString = row["EventTask"].ToString();
-        string param = row["EventParam"].ToString();
-
-        TrialEvent newEvent = null;
-
-        switch (type)
-        {
-          case EventType.Mouse:
-            newEvent = new InputEvent();
-            newEvent.SubjectName = subjectName;
-            newEvent.TrialSequence = trialSequence;
-            newEvent.EventID = eventID;
-            newEvent.Param = param;
-            ((InputEvent)newEvent).Task = (InputEventTask)Enum.Parse(typeof(InputEventTask), taskString, true);
-            newEvent.Time = time;
-            newEvent.Type = type;
-            returnList.Add(eventID, newEvent);
-            break;
-          case EventType.Key:
-            newEvent = new InputEvent();
-            newEvent.SubjectName = subjectName;
-            newEvent.TrialSequence = trialSequence;
-            newEvent.EventID = eventID;
-            newEvent.Param = param;
-            ((InputEvent)newEvent).Task = (InputEventTask)Enum.Parse(typeof(InputEventTask), taskString, true);
-            newEvent.Time = time;
-            newEvent.Type = type;
-            returnList.Add(eventID, newEvent);
-            break;
-          case EventType.Slide:
-            newEvent = new MediaEvent();
-            newEvent.SubjectName = subjectName;
-            newEvent.TrialSequence = trialSequence;
-            newEvent.EventID = eventID;
-            newEvent.Param = param;
-            ((MediaEvent)newEvent).Task = (MediaEventTask)Enum.Parse(typeof(MediaEventTask), taskString, true);
-            newEvent.Time = time;
-            newEvent.Type = type;
-            returnList.Add(eventID, newEvent);
-            break;
-          case EventType.WebpageClick:
-            newEvent = new InputEvent();
-            newEvent.SubjectName = subjectName;
-            newEvent.TrialSequence = trialSequence;
-            newEvent.EventID = eventID;
-            newEvent.Param = param;
-            ((InputEvent)newEvent).Task = (InputEventTask)Enum.Parse(typeof(InputEventTask), taskString, true);
-            newEvent.Time = time;
-            newEvent.Type = type;
-            returnList.Add(eventID, newEvent);
-            break;
-          case EventType.Webpage:
-            newEvent = new MediaEvent();
-            newEvent.SubjectName = subjectName;
-            newEvent.TrialSequence = trialSequence;
-            newEvent.EventID = eventID;
-            newEvent.Param = param;
-            ((MediaEvent)newEvent).Task = (MediaEventTask)Enum.Parse(typeof(MediaEventTask), taskString, true);
-            newEvent.Time = time;
-            newEvent.Type = type;
-            returnList.Add(eventID, newEvent);
-            break;
-          case EventType.Flash:
-            newEvent = new MediaEvent();
-            newEvent.SubjectName = subjectName;
-            newEvent.TrialSequence = trialSequence;
-            newEvent.EventID = eventID;
-            newEvent.Param = param;
-            ((MediaEvent)newEvent).Task = (MediaEventTask)Enum.Parse(typeof(MediaEventTask), taskString, true);
-            newEvent.Time = time;
-            newEvent.Type = type;
-            returnList.Add(eventID, newEvent);
-            break;
-          case EventType.Audio:
-            newEvent = new MediaEvent();
-            newEvent.SubjectName = subjectName;
-            newEvent.TrialSequence = trialSequence;
-            newEvent.EventID = eventID;
-            newEvent.Param = param;
-            ((MediaEvent)newEvent).Task = (MediaEventTask)Enum.Parse(typeof(MediaEventTask), taskString, true);
-            newEvent.Time = time;
-            newEvent.Type = type;
-            returnList.Add(eventID, newEvent);
-            break;
-          case EventType.Video:
-            newEvent = new MediaEvent();
-            newEvent.SubjectName = subjectName;
-            newEvent.TrialSequence = trialSequence;
-            newEvent.EventID = eventID;
-            newEvent.Param = param;
-            ((MediaEvent)newEvent).Task = (MediaEventTask)Enum.Parse(typeof(MediaEventTask), taskString, true);
-            newEvent.Time = time;
-            newEvent.Type = type;
-            returnList.Add(eventID, newEvent);
-            break;
-          case EventType.Usercam:
-            newEvent = new MediaEvent();
-            newEvent.SubjectName = subjectName;
-            newEvent.TrialSequence = trialSequence;
-            newEvent.EventID = eventID;
-            newEvent.Param = param;
-            ((MediaEvent)newEvent).Task = (MediaEventTask)Enum.Parse(typeof(MediaEventTask), taskString, true);
-            newEvent.Time = time;
-            newEvent.Type = type;
-            usercamID = eventID;
-            returnList.Add(eventID, newEvent);
-            break;
-          case EventType.Marker:
-            newEvent = new MediaEvent();
-            newEvent.SubjectName = subjectName;
-            newEvent.TrialSequence = trialSequence;
-            newEvent.EventID = eventID;
-            newEvent.Param = param;
-            ((MediaEvent)newEvent).Task = (MediaEventTask)Enum.Parse(typeof(MediaEventTask), taskString, true);
-            newEvent.Time = time;
-            newEvent.Type = type;
-            returnList.Add(eventID, newEvent);
-            break;
-          case EventType.Scroll:
-            newEvent = new MediaEvent();
-            newEvent.SubjectName = subjectName;
-            newEvent.TrialSequence = trialSequence;
-            newEvent.EventID = eventID;
-            newEvent.Param = param;
-            ((MediaEvent)newEvent).Task = (MediaEventTask)Enum.Parse(typeof(MediaEventTask), taskString, true);
-            newEvent.Time = time;
-            newEvent.Type = type;
-            returnList.Add(eventID, newEvent);
-            break;
-        }
-      }
-
-      return returnList;
+      return ExtractEvents(subjectName, table, out usercamID);
     }
 
     /// <summary>
@@ -847,6 +712,25 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     }
 
     /// <summary>
+    /// This method returns the ID for the given trial sequence of the
+    /// given subject.
+    /// </summary>
+    /// <param name="subjectName">A <see cref="String"/> with the subject name</param>
+    /// <param name="trialSequence">An <see cref="int"/> with the unique trial sequence</param>
+    /// <returns>An <see cref="Int32"/> with the trial ID, or -1 if this sequence wasn´t found
+    /// for this subject.</returns>
+    public static int GetTrialIDForSequence(string subjectName, int trialSequence)
+    {
+      DataTable table = Document.ActiveDocument.DocDataSet.TrialsAdapter.GetDataBySubjectAndSequence(subjectName, trialSequence);
+      if (table.Rows.Count > 0)
+      {
+        return (int)table.Rows[0]["TrialID"];
+      }
+
+      return -1;
+    }
+
+    /// <summary>
     /// Gets raw data table with rows found for the Query:
     /// SELECT * WHERE Trial=Param1 AND Response=Param2 ORDER BY Time
     /// Uses given subjects raw data table.
@@ -1115,7 +999,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
       tableMapping.ColumnMappings.Add("Length", "Length");
       tableMapping.ColumnMappings.Add("PosX", "PosX");
       tableMapping.ColumnMappings.Add("PosY", "PosY");
-      
+
       adapter.TableMappings.Add(tableMapping);
 
       // Create the SelectCommand.
@@ -1167,7 +1051,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
       tableMapping.ColumnMappings.Add("Length", "Length");
       tableMapping.ColumnMappings.Add("PosX", "PosX");
       tableMapping.ColumnMappings.Add("PosY", "PosY");
-      
+
       adapter.TableMappings.Add(tableMapping);
 
       // Create the SelectCommand.
@@ -2232,6 +2116,160 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     }
 
     #endregion //DataSetUpdates
+
+    /// <summary>
+    /// Extracts the events in a sorted trial events list for the given subject and trial
+    /// events data table.
+    /// </summary>
+    /// <param name="subjectName">A <see cref="String"/> with the subject name.</param>
+    /// <param name="table">The trial events data table containing the data from
+    /// the database, can be for one or more trials.</param>
+    /// <param name="usercamID">Out. The event id of the user camera start time.</param>
+    /// <returns>A <see cref="SortedList{Int32, TrialEvent}"/>
+    /// with the events occured in this experiment.</returns>
+    private static SortedList<int, TrialEvent> ExtractEvents(string subjectName, DataTable table, out int usercamID)
+    {
+      usercamID = -1;
+      SortedList<int, TrialEvent> returnList = new SortedList<int, TrialEvent>();
+
+      foreach (DataRow row in table.Rows)
+      {
+        string typeString = row["EventType"].ToString();
+        EventType type = EventType.None;
+        try
+        {
+          type = (EventType)Enum.Parse(typeof(EventType), typeString, true);
+        }
+        catch (ArgumentException)
+        {
+          continue;
+        }
+
+        int trialSequence = Convert.ToInt32(row["TrialSequence"]);
+        int eventID = Convert.ToInt32(row["EventID"]);
+        long time = Convert.ToInt64(row["EventTime"]);
+        string taskString = row["EventTask"].ToString();
+        string param = row["EventParam"].ToString();
+
+        TrialEvent newEvent = null;
+
+        switch (type)
+        {
+          case EventType.Mouse:
+            newEvent = new InputEvent();
+            newEvent.SubjectName = subjectName;
+            newEvent.TrialSequence = trialSequence;
+            newEvent.EventID = eventID;
+            newEvent.Param = param;
+            ((InputEvent)newEvent).Task = (InputEventTask)Enum.Parse(typeof(InputEventTask), taskString, true);
+            newEvent.Time = time;
+            newEvent.Type = type;
+            returnList.Add(eventID, newEvent);
+            break;
+          case EventType.Key:
+            newEvent = new InputEvent();
+            newEvent.SubjectName = subjectName;
+            newEvent.TrialSequence = trialSequence;
+            newEvent.EventID = eventID;
+            newEvent.Param = param;
+            ((InputEvent)newEvent).Task = (InputEventTask)Enum.Parse(typeof(InputEventTask), taskString, true);
+            newEvent.Time = time;
+            newEvent.Type = type;
+            returnList.Add(eventID, newEvent);
+            break;
+          case EventType.Slide:
+            newEvent = new MediaEvent();
+            newEvent.SubjectName = subjectName;
+            newEvent.TrialSequence = trialSequence;
+            newEvent.EventID = eventID;
+            newEvent.Param = param;
+            ((MediaEvent)newEvent).Task = (MediaEventTask)Enum.Parse(typeof(MediaEventTask), taskString, true);
+            newEvent.Time = time;
+            newEvent.Type = type;
+            returnList.Add(eventID, newEvent);
+            break;
+          case EventType.Webpage:
+            newEvent = new MediaEvent();
+            newEvent.SubjectName = subjectName;
+            newEvent.TrialSequence = trialSequence;
+            newEvent.EventID = eventID;
+            newEvent.Param = param;
+            ((MediaEvent)newEvent).Task = (MediaEventTask)Enum.Parse(typeof(MediaEventTask), taskString, true);
+            newEvent.Time = time;
+            newEvent.Type = type;
+            returnList.Add(eventID, newEvent);
+            break;
+          case EventType.Flash:
+            newEvent = new MediaEvent();
+            newEvent.SubjectName = subjectName;
+            newEvent.TrialSequence = trialSequence;
+            newEvent.EventID = eventID;
+            newEvent.Param = param;
+            ((MediaEvent)newEvent).Task = (MediaEventTask)Enum.Parse(typeof(MediaEventTask), taskString, true);
+            newEvent.Time = time;
+            newEvent.Type = type;
+            returnList.Add(eventID, newEvent);
+            break;
+          case EventType.Audio:
+            newEvent = new MediaEvent();
+            newEvent.SubjectName = subjectName;
+            newEvent.TrialSequence = trialSequence;
+            newEvent.EventID = eventID;
+            newEvent.Param = param;
+            ((MediaEvent)newEvent).Task = (MediaEventTask)Enum.Parse(typeof(MediaEventTask), taskString, true);
+            newEvent.Time = time;
+            newEvent.Type = type;
+            returnList.Add(eventID, newEvent);
+            break;
+          case EventType.Video:
+            newEvent = new MediaEvent();
+            newEvent.SubjectName = subjectName;
+            newEvent.TrialSequence = trialSequence;
+            newEvent.EventID = eventID;
+            newEvent.Param = param;
+            ((MediaEvent)newEvent).Task = (MediaEventTask)Enum.Parse(typeof(MediaEventTask), taskString, true);
+            newEvent.Time = time;
+            newEvent.Type = type;
+            returnList.Add(eventID, newEvent);
+            break;
+          case EventType.Usercam:
+            newEvent = new MediaEvent();
+            newEvent.SubjectName = subjectName;
+            newEvent.TrialSequence = trialSequence;
+            newEvent.EventID = eventID;
+            newEvent.Param = param;
+            ((MediaEvent)newEvent).Task = (MediaEventTask)Enum.Parse(typeof(MediaEventTask), taskString, true);
+            newEvent.Time = time;
+            newEvent.Type = type;
+            usercamID = eventID;
+            returnList.Add(eventID, newEvent);
+            break;
+          case EventType.Marker:
+            newEvent = new MediaEvent();
+            newEvent.SubjectName = subjectName;
+            newEvent.TrialSequence = trialSequence;
+            newEvent.EventID = eventID;
+            newEvent.Param = param;
+            ((MediaEvent)newEvent).Task = (MediaEventTask)Enum.Parse(typeof(MediaEventTask), taskString, true);
+            newEvent.Time = time;
+            newEvent.Type = type;
+            returnList.Add(eventID, newEvent);
+            break;
+          case EventType.Scroll:
+            newEvent = new MediaEvent();
+            newEvent.SubjectName = subjectName;
+            newEvent.TrialSequence = trialSequence;
+            newEvent.EventID = eventID;
+            newEvent.Param = param;
+            ((MediaEvent)newEvent).Task = (MediaEventTask)Enum.Parse(typeof(MediaEventTask), taskString, true);
+            newEvent.Time = time;
+            newEvent.Type = type;
+            returnList.Add(eventID, newEvent);
+            break;
+        }
+      }
+      return returnList;
+    }
 
     #endregion //METHODS
 
