@@ -56,6 +56,12 @@ namespace VectorGraphics.Elements
     private string browserURL;
 
     /// <summary>
+    /// Indicates the number of links the user is allowed to follow,
+    /// including backward links.
+    /// </summary>
+    private int browseDepth;
+
+    /// <summary>
     /// A <see cref="Matrix"/> with the current graphics transformation.
     /// </summary>
     private Matrix currentTransform;
@@ -64,11 +70,6 @@ namespace VectorGraphics.Elements
     /// The <see cref="WebBrowser"/> control that is displayed via this class.
     /// </summary>
     private WebBrowser webBrowser;
-
-    /// <summary>
-    /// Indicates running disposal of this element.
-    /// </summary>
-    private bool disposing;
 
     /// <summary>
     /// A <see cref="FlashMessageFilter"/> that is inserted in the 
@@ -88,6 +89,8 @@ namespace VectorGraphics.Elements
     /// </summary>
     /// <param name="newShapeDrawAction"><see cref="ShapeDrawAction"/> for the bounds.</param>
     /// <param name="newBrowserURL"><see cref="Uri"/> for the browser start location</param>
+    /// <param name="newBrowseDepth">The number of links the user is allowed to follow,
+    /// including backward links.</param>
     /// <param name="newPen">Pen to use</param>
     /// <param name="newBrush">Brush for drawing</param>
     /// <param name="newFont">Font for drawing name</param>
@@ -100,6 +103,7 @@ namespace VectorGraphics.Elements
     public VGBrowser(
       ShapeDrawAction newShapeDrawAction,
       string newBrowserURL,
+      int newBrowseDepth,
       Pen newPen,
       Brush newBrush,
       Font newFont,
@@ -121,42 +125,10 @@ namespace VectorGraphics.Elements
       newElementGroup,
       null)
     {
-      this.IntializeFields();
+      this.InitializeFields();
       this.browserURL = newBrowserURL;
+      this.browseDepth = newBrowseDepth;
     }
-
-    public int depth=0;
-
-    public VGBrowser(
-    ShapeDrawAction newShapeDrawAction,
-    string newBrowserURL,int depth,
-    Pen newPen,
-    Brush newBrush,
-    Font newFont,
-    Color newFontColor,
-    PointF position,
-    SizeF size,
-    VGStyleGroup newStyleGroup,
-    string newName,
-    string newElementGroup)
-        : base(
-        newShapeDrawAction,
-        newPen,
-        newBrush,
-        newFont,
-        newFontColor,
-        new RectangleF(position, size),
-        newStyleGroup,
-        newName,
-        newElementGroup,
-        null)
-    {
-        this.depth = depth;
-        this.IntializeFields();
-        this.browserURL = newBrowserURL;
-        
-    }
-
 
     /// <summary>
     /// Initializes a new instance of the VGBrowser class.
@@ -177,10 +149,9 @@ namespace VectorGraphics.Elements
       oldBrowser.ElementGroup,
       oldBrowser.Sound)
     {
-        this.depth = oldBrowser.depth;
-      this.IntializeFields();
+      this.InitializeFields();
       this.browserURL = oldBrowser.BrowserURL;
-        
+      this.browseDepth = oldBrowser.browseDepth;
     }
 
     /// <summary>
@@ -189,7 +160,7 @@ namespace VectorGraphics.Elements
     /// </summary>
     private VGBrowser()
     {
-      this.IntializeFields();
+      this.InitializeFields();
     }
 
     #endregion //CONSTRUCTION
@@ -259,8 +230,22 @@ namespace VectorGraphics.Elements
     }
 
     /// <summary>
+    /// Gets or sets the number of links the user is allowed to follow,
+    /// including backward links
+    /// </summary>
+    /// <value>A <see cref="Int32"/> with the number of links the user is allowed to follow,
+    /// including backward links.</value>
+    [Category("Content")]
+    [Description("The number of links the user is allowed to follow, including backward links.")]
+    public int BrowseDepth
+    {
+      get { return this.browseDepth; }
+      set { this.browseDepth = value; }
+    }
+
+    /// <summary>
     /// Gets or sets the bounding rectangle of this
-    /// <see cref="VGFlash"/>. Setting this property has no effect, 
+    /// <see cref="VGBrowser"/>. Setting this property has no effect, 
     /// because the control is always full sized
     /// </summary>
     public override RectangleF Bounds
@@ -326,6 +311,10 @@ namespace VectorGraphics.Elements
 
       this.webBrowser.Url = new Uri(this.browserURL);
       this.webBrowser.ScriptErrorsSuppressed = true;
+      if (this.browseDepth == 0)
+      {
+        this.webBrowser.AllowNavigation = false;
+      }
     }
 
     /// <summary>
@@ -362,8 +351,11 @@ namespace VectorGraphics.Elements
 
     /// <summary>
     /// Overridden <see cref="VGElement.Draw(Graphics)"/>.  
-    /// Draws text with the owning brush and font onto given 
-    /// graphics context.
+    /// Draws webbrowser onto given graphics context. 
+    /// This method does only basic drawing, because the
+    /// webbrowser is only used during recording, afterwards the screenshots
+    /// are used. In recording mode, there will be the activex control on top, 
+    /// so no gdi drawing.
     /// </summary>
     /// <param name="graphics">Graphics context to draw on.</param>
     /// <exception cref="ArgumentNullException">Thrown, when graphics object is null.</exception>
@@ -374,16 +366,14 @@ namespace VectorGraphics.Elements
         throw new ArgumentNullException("Graphics object should not be null.");
       }
 
-      // this.DrawFlashObject(graphics);
-
       // Draw name and selection frame if applicable
       base.Draw(graphics);
     }
 
     /// <summary>
     /// Overridden <see cref="VGElement.Reset()"/>. 
-    /// Resets the current text element to
-    /// default values (empty instruction).
+    /// Resets the current browser element to
+    /// default values (empty url).
     /// </summary>
     public override void Reset()
     {
@@ -393,9 +383,9 @@ namespace VectorGraphics.Elements
 
     /// <summary>
     /// Overridden <see cref="Object.ToString()"/> method.
-    /// Returns the <see cref="VGText"/> properties as a human readable string.
+    /// Returns the <see cref="VGBrowser"/> properties as a human readable string.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents this <see cref="VGText"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents this <see cref="VGBrowser"/>.</returns>
     public override string ToString()
     {
       StringBuilder sb = new StringBuilder();
@@ -408,10 +398,10 @@ namespace VectorGraphics.Elements
 
     /// <summary>
     /// Overridden <see cref="VGElement.ToShortString()"/> method.
-    /// Returns the main <see cref="VGText"/> properties as a human readable string.
+    /// Returns the main <see cref="VGBrowser"/> properties as a human readable string.
     /// </summary>
     /// <returns>A <see cref="string"/> that represents the 
-    /// current <see cref="VGText"/> in short form with its main properties.</returns>
+    /// current <see cref="VGBrowser"/> in short form with its main properties.</returns>
     public override string ToShortString()
     {
       StringBuilder sb = new StringBuilder();
@@ -427,7 +417,6 @@ namespace VectorGraphics.Elements
     /// </summary>
     public override void Dispose()
     {
-      this.disposing = true;
       base.Dispose();
 
       if (this.webBrowser.Parent != null)
@@ -499,76 +488,14 @@ namespace VectorGraphics.Elements
     }
 
     /// <summary>
-    /// This method is the kernel of this class and draws the flash activeX
-    /// com object surface in the current state to the given <see cref="Graphics"/>.
-    /// </summary>
-    /// <remarks>Note that the <see cref="IViewObject"/> is the key to
-    /// provide us with a method to draw a com object on a graphics, without beeing visible itself.</remarks>
-    /// <param name="graphics">The <see cref="Graphics"/> to draw to.</param>
-    private void DrawFlashObject(Graphics graphics)
-    {
-      // Sanity check
-      if (this.webBrowser == null)
-      {
-        return;
-      }
-
-      // Some painting calls can occur when this object is beeing disposed.
-      if (this.disposing)
-      {
-        return;
-      }
-
-      // Grab IViewObject interface from the ocx.  
-      Interfaces.IViewObject viewObject =
-        (Interfaces.IViewObject)this.webBrowser.ActiveXInstance;
-
-      // Check for success
-      if (viewObject == null)
-      {
-        return;
-      }
-
-      int hr = -1;
-
-      // Set up RECTL structure
-      RECTL bounds = new RECTL();
-      bounds.left = 0;
-      bounds.top = 0;
-      bounds.right = this.webBrowser.Right;
-      bounds.bottom = this.webBrowser.Bottom;
-
-      // get hdc
-      IntPtr hdc = graphics.GetHdc();
-
-      // Draw
-      hr = viewObject.Draw(
-        DVASPECT.DVASPECT_CONTENT,
-        -1,
-        IntPtr.Zero,
-        IntPtr.Zero,
-        IntPtr.Zero,
-        hdc,
-        ref bounds,
-        ref bounds,
-        IntPtr.Zero,
-        (uint)0);
-
-      // Release HDC
-      graphics.ReleaseHdc(hdc);
-    }
-
-    /// <summary>
     /// This method initializes member of this class.
     /// </summary>
-    private void IntializeFields()
+    private void InitializeFields()
     {
-        
       this.webBrowser = new WebBrowser();
-      if (this.depth > 0) webBrowser.AllowNavigation = false;
       this.currentTransform = new Matrix();
       this.browserURL = "about:blank";
-      this.disposing = false;
+      this.browseDepth = 0;
       this.webBrowser.Url = new Uri(this.browserURL);
     }
 

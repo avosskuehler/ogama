@@ -19,6 +19,7 @@ namespace Ogama.Modules.Recording
   using System.Drawing;
   using System.Globalization;
   using System.IO;
+  using System.Text.RegularExpressions;
   using System.Threading;
   using System.Windows.Forms;
   using Ogama.ExceptionHandling;
@@ -30,7 +31,6 @@ namespace Ogama.Modules.Recording
   using VectorGraphics.StopConditions;
   using VectorGraphics.Tools;
   using VectorGraphics.Triggers;
-  using System.Text.RegularExpressions;
 
   /// <summary>
   /// A <see cref="Form"/> that is used for stimuli presentation. 
@@ -171,7 +171,29 @@ namespace Ogama.Modules.Recording
     /// </summary>
     private SlidePresentationContainer preparedSlideTwo;
 
+    /// <summary>
+    /// The <see cref="NumberFormatInfo"/> to be used for capturing
+    /// mouse coordinates into the database.
+    /// </summary>   
     private NumberFormatInfo nfi;
+
+    /// <summary>
+    /// Counts the number of links clicked during web browsing.
+    /// Is used to stop browsing, after maximal allowed
+    /// browse depth is reached.
+    /// </summary>
+    private int numberOfTimesNavigated;
+
+    /// <summary>
+    /// The maximal allowed number of links that can be clicked
+    /// during presentation of the webbrowser slide.
+    /// </summary>
+    private int maxBrowseDepth;
+
+    /// <summary>
+    /// Keeps track of the last visited URL.
+    /// </summary>
+    private string lastWebpageURL;
 
     #endregion //FIELDS
 
@@ -841,25 +863,6 @@ namespace Ogama.Modules.Recording
       }
     }
 
-    static string lastscreen = null;
-
-    private static void UlozScreen()
-    {
-      string screenshotFilename;
-      Bitmap screenshot = WebsiteThumbnailGenerator.GetWebSiteScreenshot(
-        //browser.Url.ToString(),
-        lastscreen,
-        Document.ActiveDocument.PresentationSize,
-        out screenshotFilename);
-      screenshotFilename += ".png";
-      string screenshotFilenameWithPath = Path.Combine(
-        Document.ActiveDocument.ExperimentSettings.SlideResourcesPath,
-        screenshotFilename);
-      screenshot.Save(screenshotFilenameWithPath, System.Drawing.Imaging.ImageFormat.Png);
-    }
-
-
-
     /// <summary>
     /// The <see cref="WebBrowser.Navigated"/> event handler which reactivates the
     /// scroll event subscribtion.
@@ -870,15 +873,25 @@ namespace Ogama.Modules.Recording
     {
       WebBrowser browser = sender as WebBrowser;
 
+      // Disable navigation, if max browse depth is reached
+      this.numberOfTimesNavigated++;
+      if (this.numberOfTimesNavigated >= this.maxBrowseDepth)
+      {
+        browser.AllowNavigation = false;
+      }
+
       string filename = Regex.Replace(browser.Url.ToString(), @"(\\|\/|\:|\*|\?|\""|\<|\>|\|)?", string.Empty);
       filename += ".png";
       filename = Path.Combine(
       Document.ActiveDocument.ExperimentSettings.SlideResourcesPath,
       filename);
-      if (!File.Exists(filename) && lastscreen != browser.Url.ToString())
+
+      // Make screenshot of newly navigated web page in 
+      // separate thread, if it is not already there.
+      if (!File.Exists(filename) && this.lastWebpageURL != browser.Url.ToString())
       {
-        lastscreen = browser.Url.ToString();
-        Thread thread = new Thread(UlozScreen);
+        this.lastWebpageURL = browser.Url.ToString();
+        Thread thread = new Thread(this.CreateWebsiteScreenshot);
         thread.Start();
       }
 
@@ -888,37 +901,47 @@ namespace Ogama.Modules.Recording
         eventTime = this.getTimeMethod();
       }
 
-      MediaEvent webpagechangedEvent = new MediaEvent();
-      webpagechangedEvent.Type = EventType.Webpage;
-      webpagechangedEvent.Task = MediaEventTask.Seek;
-      webpagechangedEvent.Param = filename;
-      this.OnTrialEventOccured(new TrialEventOccuredEventArgs(webpagechangedEvent, eventTime));
+      // Now update slideshow with new trial
+      Slideshow documentsSlideshow = Document.ActiveDocument.ExperimentSettings.SlideShow;
+
+      Trial newWebpageTrial = (Trial)this.shownSlide.Trial.Clone();
+      Slide newWebpageSlide = newWebpageTrial[0];
+
+      // TODO: Update slide with new VGScrollImage
+
+      // Add node
+      string newName = this.shownSlide.Trial.Name + this.numberOfTimesNavigated.ToString();
+      SlideshowTreeNode slideNode = new SlideshowTreeNode(newName);
+      slideNode.Name = documentsSlideshow.GetUnusedNodeID();
+      newWebpageTrial.ID = Convert.ToInt32(slideNode.Name);
+      slideNode.Slide = newWebpageSlide;
+
+      // TODO: Get browser node for insertion
+      documentsSlideshow.Nodes.Add(slideNode);
+
+      long webcamTime = this.userCamera != null ? this.userCamera.GetCurrentTime() : -1;
+
+      NavigatedStopCondition navigatedCondition = new NavigatedStopCondition(e.Url);
+      this.OnTrialChanged(new TrialChangedEventArgs(
+        this.shownSlide.Trial,
+        newWebpageTrial,
+        navigatedCondition,
+        this.shownSlide.Slide.Category,
+        this.trialCounter,
+        webcamTime));
 
       browser.Document.Window.Scroll -= new HtmlElementEventHandler(this.WebBrowser_Scroll);
       browser.Document.Window.Scroll += new HtmlElementEventHandler(this.WebBrowser_Scroll);
       browser.Document.MouseDown -= new HtmlElementEventHandler(this.WebBrowser_Clicked);
       browser.Document.MouseDown += new HtmlElementEventHandler(this.WebBrowser_Clicked);
-      browser.PreviewKeyDown -= new PreviewKeyDownEventHandler(this.WebBrowser_KeyDown);
-      browser.PreviewKeyDown += new PreviewKeyDownEventHandler(this.WebBrowser_KeyDown);
     }
 
-
-
-    private void WebBrowser_KeyDown(object sender, PreviewKeyDownEventArgs e)
-    {
-      /*if (e.KeyValue == 8)
-      {
-          WebBrowser wb = (WebBrowser)sender;
-          if (wb.CanGoBack)
-          {
-              wb.GoBack();
-              //wb.GoForward();
-          }
-            
-
-      }*/
-    }
-
+    /// <summary>
+    /// The <see cref="Control.Clicked"/> event handler which sends
+    /// a mouse clicked event.
+    /// </summary>
+    /// <param name="sender">Source of the event</param>
+    /// <param name="e">A <see cref="HtmlElementEventArgs"/> with the event data</param>
     private void WebBrowser_Clicked(object sender, HtmlElementEventArgs e)
     {
       long eventTime = -1;
@@ -939,9 +962,9 @@ namespace Ogama.Modules.Recording
       mouseEvent.Type = EventType.Mouse;
       mouseEvent.Task = InputEventTask.Down;
       MouseStopCondition msc = new MouseStopCondition(
-        e.MouseButtonsPressed, 
-        false, 
-        string.Empty, 
+        e.MouseButtonsPressed,
+        false,
+        string.Empty,
         null,
         new Point(e.ClientMousePosition.X + scrollLeft, e.ClientMousePosition.Y + scrollTop));
       mouseEvent.Param = msc.ToString();
@@ -1345,12 +1368,9 @@ namespace Ogama.Modules.Recording
             VGBrowser browser = element as VGBrowser;
             try
             {
-              if (browser.depth > 0) browser.WebBrowser.AllowNavigation = false;
               browser.WebBrowser.Document.Window.Scroll -= new HtmlElementEventHandler(this.WebBrowser_Scroll);
               browser.WebBrowser.Navigated -= new WebBrowserNavigatedEventHandler(this.WebBrowser_Navigated);
               browser.WebBrowser.Document.MouseDown -= new HtmlElementEventHandler(this.WebBrowser_Clicked);
-              browser.WebBrowser.PreviewKeyDown -= new PreviewKeyDownEventHandler(this.WebBrowser_KeyDown);
-              browser.WebBrowser.PreviewKeyDown += new PreviewKeyDownEventHandler(this.WebBrowser_KeyDown);
             }
             catch (NullReferenceException ex)
             {
@@ -1467,7 +1487,6 @@ namespace Ogama.Modules.Recording
               Application.DoEvents();
             }
 
-            if (browser.depth > 0) browser.WebBrowser.AllowNavigation = false;
             browser.WebBrowser.Capture = true;
             browser.WebBrowser.Navigated += new WebBrowserNavigatedEventHandler(this.WebBrowser_Navigated);
             browser.WebBrowser.Document.Window.Scroll += new HtmlElementEventHandler(this.WebBrowser_Scroll);
@@ -1705,6 +1724,24 @@ namespace Ogama.Modules.Recording
     }
 
     /// <summary>
+    /// This method creates a screenshot of the website navigated and
+    /// saves it to the slide resources directory.
+    /// </summary>
+    private void CreateWebsiteScreenshot()
+    {
+      string screenshotFilename;
+      Bitmap screenshot = WebsiteThumbnailGenerator.GetWebSiteScreenshot(
+        this.lastWebpageURL,
+        Document.ActiveDocument.PresentationSize,
+        out screenshotFilename);
+      screenshotFilename += ".png";
+      string screenshotFilenameWithPath = Path.Combine(
+        Document.ActiveDocument.ExperimentSettings.SlideResourcesPath,
+        screenshotFilename);
+      screenshot.Save(screenshotFilenameWithPath, System.Drawing.Imaging.ImageFormat.Png);
+    }
+
+    /// <summary>
     /// This method creates the initialization trial.
     /// </summary>
     private void InitializeFirstTrial()
@@ -1830,6 +1867,8 @@ namespace Ogama.Modules.Recording
             VGBrowser browser = element as VGBrowser;
             browser.InitializeOnControl(slideContainer.ContainerControl, true);
             browser.WebBrowser.Navigate(browser.BrowserURL);
+            this.numberOfTimesNavigated = 0;
+            this.maxBrowseDepth = browser.BrowseDepth;
           }
         }
       }
@@ -1870,10 +1909,6 @@ namespace Ogama.Modules.Recording
           }
           else if (ctrl is WebBrowser)
           {
-            //WebBrowser browser = ctrl as WebBrowser;
-            //browser.Document.Window.Scroll -= new HtmlElementEventHandler(this.WebBrowser_Scroll);
-            //browser.Navigated -= new WebBrowserNavigatedEventHandler(this.WebBrowser_Navigated);
-
             if (ctrl.InvokeRequired)
             {
               MethodInvoker ctrlDisposeDelegate = new MethodInvoker(ctrl.Dispose);
