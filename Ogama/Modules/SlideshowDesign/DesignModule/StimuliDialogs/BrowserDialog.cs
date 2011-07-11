@@ -249,6 +249,67 @@ namespace Ogama.Modules.SlideshowDesign
       SlideDesignModule.DeleteSelectedItems(this.lsbStopConditions);
     }
 
+    /// <summary>
+    /// <see cref="Control.Click"/> event handler 
+    /// for the <see cref="PictureBox"/> <see cref="pcbHelpTiming"/>
+    /// Shows a <see cref="HelpDialog"/> with help information on
+    /// how to define timing conditions.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void pcbHelpTiming_Click(object sender, EventArgs e)
+    {
+      HelpDialog dlg = new HelpDialog();
+      dlg.HelpCaption = "How to: Stop web browser from beeing displayed";
+      StringBuilder sb = new StringBuilder();
+      sb.AppendLine("Specify the response that the webbrowser slide waits for.");
+      sb.Append("This can be a mouse button or a key or an elapsed time, or ");
+      sb.AppendLine("a combination.");
+      sb.AppendLine("Use the button 'Add condition' to add the condition to the list.");
+      dlg.HelpMessage = sb.ToString();
+      dlg.ShowDialog();
+    }
+
+    /// <summary>
+    /// <see cref="Control.Click"/> event handler 
+    /// for the <see cref="PictureBox"/> <see cref="pcbHelpNaming"/>
+    /// Shows a <see cref="HelpDialog"/> with help information.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void pcbHelpNaming_Click(object sender, EventArgs e)
+    {
+      HelpDialog dlg = new HelpDialog();
+      dlg.HelpCaption = "How to: Name web browser slides.";
+      StringBuilder sb = new StringBuilder();
+      sb.Append("Specify a name for the starting browser page.");
+      sb.Append("The category is an optional grouping possibility at slide level, ");
+      sb.Append("that can be used in the statistics output.");
+
+      dlg.HelpMessage = sb.ToString();
+      dlg.ShowDialog();
+    }
+
+    /// <summary>
+    /// <see cref="Control.Click"/> event handler 
+    /// for the <see cref="PictureBox"/> <see cref="pcbHelpBrowseDepth"/>
+    /// Shows a <see cref="HelpDialog"/> with help information on
+    /// how to define slide groups.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void pcbHelpBrowseDepth_Click(object sender, EventArgs e)
+    {
+      HelpDialog dlg = new HelpDialog();
+      dlg.HelpCaption = "How to: Allow or disable browsing.";
+      StringBuilder sb = new StringBuilder();
+      sb.AppendLine("Set the depth to zero disables browsing for the subject at all.");
+      sb.AppendLine("The depth otherwise indicates the maximum number of navigations (links clicked) the subject is allowed to make.");
+      sb.AppendLine("Please note, that this also includes backward and forward links available on lots of web pages.");
+
+      dlg.HelpMessage = sb.ToString();
+      dlg.ShowDialog();
+    }
     #endregion //WINDOWSEVENTHANDLER
 
     ///////////////////////////////////////////////////////////////////////////////

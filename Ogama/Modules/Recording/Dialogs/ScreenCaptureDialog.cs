@@ -36,6 +36,10 @@ namespace Ogama.Modules.Recording
     ///////////////////////////////////////////////////////////////////////////////
     #region FIELDS
 
+    /// <summary>
+    /// The array of <see cref="DsDevice"/> containing the available
+    /// video compressors of the system.
+    /// </summary>
     private DsDevice[] videoCompressors;
 
     #endregion //FIELDS

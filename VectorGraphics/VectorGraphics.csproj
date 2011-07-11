@@ -122,6 +122,7 @@
     <Compile Include="Elements\VGAlignment.cs" />
     <Compile Include="Elements\VGArrow.cs" />
     <Compile Include="Elements\ElementCollections\Slide.cs" />
+    <Compile Include="StopConditions\NavigatedStopCondition.cs" />
     <Compile Include="Tools\Controls\Flash\FlashMouseLeaveMessageFilter.cs" />
     <Compile Include="Tools\Controls\Timer\TimerStartException.cs" />
     <Compile Include="Tools\Controls\Timer\TimerMode.cs" />
