@@ -360,6 +360,17 @@ namespace Ogama.Modules.Common
     }
 
     /// <summary>
+    /// This method iterates the slideshow recursively to find the
+    /// <see cref="SlideshowTreeNode"/> with the given ID.
+    /// </summary>
+    /// <param name="trialID">An <see cref="Int32"/> with the trial id to search for.</param>
+    /// <returns>The <see cref="SlideshowTreeNode"/> that matches the trial id.</returns>
+    public SlideshowTreeNode GetNodeByID(int trialID)
+    {
+      return IterateTreeNodes(trialID.ToString(), this, true);
+    }
+
+    /// <summary>
     /// Returns the current <see cref="TrialCollection"/> that was randomized
     /// according to the shuffling settings defined.
     /// </summary>
