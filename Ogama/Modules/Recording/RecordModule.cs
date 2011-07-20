@@ -116,7 +116,7 @@ namespace Ogama.Modules.Recording
     /// <summary>
     /// Saves the trial count.
     /// </summary>
-    private volatile int trialCounter;
+    private volatile int trialSequenceCounter;
 
     /// <summary>
     /// local lock for GetTime method
@@ -331,9 +331,10 @@ namespace Ogama.Modules.Recording
     public RecordModule()
     {
       this.InitializeComponent();
-      this.InitAccelerators();
-
       this.Picture = this.recordPicture;
+      this.ZoomTrackBar = this.trbZoom;
+
+      this.InitAccelerators();
       this.InitializeCustomElements();
     }
 
@@ -389,6 +390,11 @@ namespace Ogama.Modules.Recording
     {
       get { return this.presenterForm; }
     }
+
+    /// <summary>
+    /// Gets the trials that are currently presented.
+    /// </summary>
+    public TrialCollection Trials;
 
     #endregion //PROPERTIES
 
@@ -553,7 +559,7 @@ namespace Ogama.Modules.Recording
 
       long gazeTime = e.Gazedata.Time - this.recordingStarttime;
       newRawData.Time = gazeTime;
-      newRawData.TrialSequence = this.trialCounter;
+      newRawData.TrialSequence = this.trialSequenceCounter;
 
       // Retrieve mouse position, this is already in SCREEN COORDINATES
       PointF? newMousePos = this.GetMousePosition();
@@ -643,13 +649,11 @@ namespace Ogama.Modules.Recording
 
       this.delegateNewSlideAvailable = new UpdateLiveView(this.NewSlideAvailable);
 
-      this.forcePanelViewerUpdate = true;
-
       this.trialDataList = new List<TrialsData>();
       this.trialEventList = new List<TrialEvent>();
 
       this.slideCounter = 0;
-      this.trialCounter = -1;
+      this.trialSequenceCounter = -1;
       this.recordingStarttime = -5;
       this.timeLock = new object();
       this.lastTimeStamp = -1;
@@ -754,7 +758,7 @@ namespace Ogama.Modules.Recording
       this.CreateTrackerInterfaces();
       this.forcePanelViewerUpdate = true;
       this.NewSlideAvailable();
-      this.forcePanelViewerUpdate = false;
+      //this.forcePanelViewerUpdate = false;
 
       // Uncheck Usercam button, if there is no available webcam
       // except Ogama Screen Capture which should not be used.
@@ -999,34 +1003,34 @@ namespace Ogama.Modules.Recording
     /// <param name="e">A <see cref="TrialEventOccuredEventArgs"/> with the event data.</param>
     private void objPresenter_TrialEventOccured(object sender, TrialEventOccuredEventArgs e)
     {
-      lock (this)
+      // Save scroll offsets for raw data transformation
+      if (e.TrialEvent.Type == EventType.Scroll)
       {
-        // Save scroll offsets for raw data transformation
-        if (e.TrialEvent.Type == EventType.Scroll)
+        string[] scrollOffsets = e.TrialEvent.Param.Split(';');
+        lock (this)
         {
-          string[] scrollOffsets = e.TrialEvent.Param.Split(';');
-          lock (this)
-          {
-            this.xScrollOffset = Convert.ToInt32(scrollOffsets[0]);
-            this.yScrollOffset = Convert.ToInt32(scrollOffsets[1]);
-          }
+          this.xScrollOffset = Convert.ToInt32(scrollOffsets[0]);
+          this.yScrollOffset = Convert.ToInt32(scrollOffsets[1]);
         }
 
-        long time = e.EventTime - this.recordingStarttime - this.currentTrialStarttime;
+        Point newScrollPosition = new Point(this.xScrollOffset, this.yScrollOffset);
+        this.ThreadSafeSetAutoScrollPosition(newScrollPosition);
+      }
 
-        // Store trial event event
-        e.TrialEvent.EventID = this.trialEventList.Count;
-        e.TrialEvent.Time = time;
-        e.TrialEvent.TrialSequence = this.trialCounter;
-        e.TrialEvent.SubjectName = this.currentTracker.Subject.SubjectName;
+      long time = e.EventTime - this.recordingStarttime - this.currentTrialStarttime;
 
-        if (this.trialCounter >= 0)
+      // Store trial event event
+      e.TrialEvent.EventID = this.trialEventList.Count;
+      e.TrialEvent.Time = time;
+      e.TrialEvent.TrialSequence = this.trialSequenceCounter;
+      e.TrialEvent.SubjectName = this.currentTracker.Subject.SubjectName;
+
+      if (this.trialSequenceCounter >= 0)
+      {
+        this.trialEventList.Add(e.TrialEvent);
+        if (e.TrialEvent.Type != EventType.Marker)
         {
-          this.trialEventList.Add(e.TrialEvent);
-          if (e.TrialEvent.Type != EventType.Marker)
-          {
-            this.WriteTrialEventToRawData(e.TrialEvent);
-          }
+          this.WriteTrialEventToRawData(e.TrialEvent);
         }
       }
     }
@@ -1061,7 +1065,7 @@ namespace Ogama.Modules.Recording
       {
         // Don´t use presenters trialCounter
         // Because of using links between trials.
-        this.trialCounter++;
+        this.trialSequenceCounter++;
         this.slideCounter = e.SlideCounter;
 
         // Set current trial
@@ -1104,9 +1108,9 @@ namespace Ogama.Modules.Recording
       slideChangedEvent.Time = time;
       slideChangedEvent.Type = EventType.Slide;
       slideChangedEvent.SubjectName = this.currentTracker.Subject.SubjectName;
-      slideChangedEvent.TrialSequence = this.trialCounter;
+      slideChangedEvent.TrialSequence = this.trialSequenceCounter;
 
-      if (this.trialCounter >= 0)
+      if (this.trialSequenceCounter >= 0)
       {
         this.trialEventList.Add(slideChangedEvent);
         this.WriteTrialEventToRawData(slideChangedEvent);
@@ -1123,10 +1127,10 @@ namespace Ogama.Modules.Recording
       inputEvent.SubjectName = this.currentTracker.Subject.SubjectName;
       inputEvent.Task = InputEventTask.SlideChange;
       inputEvent.Time = time;
-      inputEvent.TrialSequence = this.trialCounter;
+      inputEvent.TrialSequence = this.trialSequenceCounter;
       inputEvent.Type = EventType.Response;
 
-      if (this.trialCounter >= 0)
+      if (this.trialSequenceCounter >= 0)
       {
         this.trialEventList.Add(inputEvent);
         this.WriteTrialEventToRawData(slideChangedEvent);
@@ -1189,13 +1193,13 @@ namespace Ogama.Modules.Recording
         TrialsData trialData = new TrialsData();
         trialData.SubjectName = this.currentTracker.Subject.SubjectName;
         trialData.TrialName = this.precedingTrial.Name;
-        trialData.TrialSequence = this.trialCounter - 1;
+        trialData.TrialSequence = this.trialSequenceCounter - 1;
         trialData.TrialID = this.precedingTrial.ID;
         trialData.Category = e.Category;
         trialData.TrialStartTime = this.currentTrialStarttime;
         trialData.Duration = (int)(currentTime - this.recordingStarttime - this.currentTrialStarttime);
 
-        if (this.trialCounter > 0)
+        if (this.trialSequenceCounter > 0)
         {
           this.trialDataList.Add(trialData);
         }
@@ -1210,8 +1214,8 @@ namespace Ogama.Modules.Recording
           usercamVideoEvent.Time = 0;
           usercamVideoEvent.Type = EventType.Usercam;
           usercamVideoEvent.SubjectName = this.currentTracker.Subject.SubjectName;
-          usercamVideoEvent.TrialSequence = this.trialCounter - 1;
-          if (this.trialCounter > 0)
+          usercamVideoEvent.TrialSequence = this.trialSequenceCounter - 1;
+          if (this.trialSequenceCounter > 0)
           {
             this.trialEventList.Add(usercamVideoEvent);
           }
@@ -1228,10 +1232,10 @@ namespace Ogama.Modules.Recording
         inputEvent.SubjectName = this.currentTracker.Subject.SubjectName;
         inputEvent.Task = InputEventTask.SlideChange;
         inputEvent.Time = trialData.Duration;
-        inputEvent.TrialSequence = this.trialCounter - 1;
+        inputEvent.TrialSequence = this.trialSequenceCounter - 1;
         inputEvent.Type = EventType.Response;
 
-        if (this.trialCounter >= 0)
+        if (this.trialSequenceCounter >= 0)
         {
           this.trialEventList.Add(inputEvent);
         }
@@ -1245,6 +1249,7 @@ namespace Ogama.Modules.Recording
         this.currentTrialVideoStartTime = e.WebcamTime;
       }
 
+      // Update recorder modules viewer
       Thread updateLiveViewerThread = new Thread(new ThreadStart(this.NewSlideAvailable));
       updateLiveViewerThread.SetApartmentState(ApartmentState.STA);
       updateLiveViewerThread.Start();
@@ -1908,9 +1913,6 @@ namespace Ogama.Modules.Recording
         // Create a newly randomized trial list.
         this.trials = slideshow.GetRandomizedTrials();
 
-        // Create a hardcopy of the trials.
-        TrialCollection copyOfTrials = (TrialCollection)this.trials.Clone();
-
         // Dispose webcam to be recreated in presentation thread
         // with old preview window
         this.webcamPreview.DisposeDxCapture();
@@ -1946,7 +1948,7 @@ namespace Ogama.Modules.Recording
         this.webcamPreview.Properties.CaptureMode = mode;
 
         List<object> threadParameters = new List<object>();
-        threadParameters.Add(copyOfTrials);
+        threadParameters.Add(this.trials);
         threadParameters.Add(this.generalTrigger);
         threadParameters.Add(this.btnTrigger.Checked);
         threadParameters.Add(this.screenCaptureProperties);
@@ -2015,18 +2017,74 @@ namespace Ogama.Modules.Recording
     /// if it is 1 the initialization slide is shown.</remarks>
     private void NewSlideAvailable()
     {
-      if (this.currentTrial != null)
-      {
-        // Set current slide
-        this.currentSlide = this.currentTrial[this.slideCounter];
-      }
-      else
+      //if (this.currentTrial != null)
+      //{
+      //  // Set current slide
+      //  this.currentSlide = this.currentTrial[this.slideCounter];
+      //}
+      //else
+      //{
+      //  this.currentSlide = defaultSlide;
+      //}
+      if (this.currentTrial == null)
       {
         this.currentSlide = defaultSlide;
       }
 
       if (this.systemHasSecondaryScreen || this.forcePanelViewerUpdate)
       {
+        // Wait for finished screenshot of newly navigated page
+        // before updating recorder viewer,
+        // otherwise we would have a blank screen
+        if (this.currentSlide.VGStimuli.Count > 0)
+        {
+          if (this.currentSlide.VGStimuli[0] is VGScrollImage)
+          {
+            VGScrollImage webpageScreenshot = (VGScrollImage)this.currentSlide.VGStimuli[0];
+            while (!File.Exists(webpageScreenshot.FullFilename))
+            {
+              Application.DoEvents();
+            }
+
+            // When the file exists it must be ensured, that it is released
+            // by its creator...
+            FileStream fs = null;
+            int attempts = 0;
+
+            // Loop allow multiple attempts
+            while (true)
+            {
+              try
+              {
+                fs = File.OpenRead(webpageScreenshot.FullFilename);
+
+                //If we get here, the File.Open succeeded, so break out of the loop
+                fs.Dispose();
+                break;
+              }
+              catch (IOException)
+              {
+                // IOExcception is thrown if the file is in use by another process.
+
+                // Check the numbere of attempts to ensure no infinite loop
+                attempts++;
+                if (attempts > 20)
+                {
+                  // Too many attempts,cannot Open File, break
+                  MessageBox.Show("Wait Time did not was enough");
+                  //                  break;
+                }
+                else
+                {
+                  // Sleep before making another attempt
+                  Thread.Sleep(200);
+                }
+              }
+            }
+            webpageScreenshot.CreateInternalImage();
+          }
+        }
+
         // Load Slide into picture
         this.LoadSlide(this.currentSlide, ActiveXMode.Off);
 
@@ -2179,7 +2237,7 @@ namespace Ogama.Modules.Recording
       this.currentSlide = null;
 
       // Reset counters
-      this.trialCounter = -1;
+      this.trialSequenceCounter = -1;
       this.slideCounter = 0;
       this.recordingStarttime = -5;
       this.lastTimeStamp = -1;
@@ -2204,7 +2262,7 @@ namespace Ogama.Modules.Recording
       // Redraw panel
       this.NewSlideAvailable();
 
-      this.forcePanelViewerUpdate = false;
+      //this.forcePanelViewerUpdate = false;
     }
 
     /// <summary>
@@ -2359,7 +2417,7 @@ namespace Ogama.Modules.Recording
 
       // Fill its members with current values.
       newRawData.SubjectName = this.currentTracker.Subject.SubjectName;
-      newRawData.TrialSequence = this.trialCounter;
+      newRawData.TrialSequence = this.trialSequenceCounter;
       newRawData.Time = inputEvent.Time + this.currentTrialStarttime;
       newRawData.EventID = inputEvent.EventID;
 

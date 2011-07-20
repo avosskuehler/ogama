@@ -361,7 +361,6 @@ namespace Ogama.Modules.Replay
           // Load trial stimulus into picture
           if (!this.LoadTrialStimulus(trialID))
           {
-            this.Picture.ResetBackground();
             this.LoadSlide(SlideNotFoundSlide, ActiveXMode.Off);
           }
 
@@ -1742,23 +1741,12 @@ namespace Ogama.Modules.Replay
 
           case EventType.Scroll:
             // Update scroll position
-            if (this.Picture.Parent.Parent != null)
-            {
-              ScrollableControl scrollPanel = this.Picture.Parent.Parent as ScrollableControl;
-              if (scrollPanel != null)
-              {
-                string[] scrollOffsets = occuredEvent.Param.Split(';');
-                Point newScrollPosition = new Point(
-                  Convert.ToInt32(scrollOffsets[0]),
-                  Convert.ToInt32(scrollOffsets[1]));
+            string[] scrollOffsets = occuredEvent.Param.Split(';');
+            Point newScrollPosition = new Point(
+              Convert.ToInt32(scrollOffsets[0]),
+              Convert.ToInt32(scrollOffsets[1]));
 
-                // TODO: Invoke if required!
-                if (!scrollPanel.InvokeRequired)
-                {
-                  scrollPanel.AutoScrollPosition = newScrollPosition;
-                }
-              }
-            }
+            this.ThreadSafeSetAutoScrollPosition(newScrollPosition);
 
             break;
         }

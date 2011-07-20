@@ -675,11 +675,30 @@ namespace Ogama.Modules.SlideshowDesign
     private void DeleteNode(SlideshowTreeNode treeNode)
     {
       Slide deleteSlide = treeNode.Slide;
+      deleteSlide.Dispose();
       foreach (SlideshowTreeNode subNode in treeNode.Nodes)
       {
         this.DeleteNode(subNode);
       }
 
+      // Update UrlToID dictionary of BrowserTreeNodes
+      if (treeNode.Parent is BrowserTreeNode)
+      {
+        BrowserTreeNode parent = (BrowserTreeNode)treeNode.Parent;
+        string keyToRemove = string.Empty;
+        foreach (KeyValuePair<string, int> urlToID in parent.UrlToID)
+        {
+          if (urlToID.Value == Convert.ToInt32(treeNode.Name))
+          {
+            keyToRemove = urlToID.Key;
+          }
+        }
+
+        if (keyToRemove != string.Empty)
+        {
+          parent.UrlToID.Remove(keyToRemove);
+        }
+      }
       // Update TreeView.
       treeNode.Remove();
       this.UpdateListView(this.trvSlideshow.SelectedNodes);

@@ -14,21 +14,14 @@
 namespace VectorGraphics.Elements
 {
   using System;
-  using System.Collections.Generic;
   using System.ComponentModel;
   using System.Drawing;
   using System.Drawing.Drawing2D;
-  using System.IO;
-  using System.Runtime.InteropServices;
   using System.Text;
   using System.Windows.Forms;
   using System.Xml.Serialization;
-
-  using Microsoft.VisualStudio.OLE.Interop;
-
+  
   using VectorGraphics.Controls;
-  using VectorGraphics.Tools;
-  using System.Globalization;
 
   /// <summary>
   /// Inherited from <see cref="VGElement"/>. 

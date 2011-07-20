@@ -52,7 +52,7 @@ namespace VectorGraphics.StopConditions
     #region CONSTRUCTION
 
     /// <summary>
-    /// Initializes a new instance of the KeyStopCondition class.
+    /// Initializes a new instance of the NavigatedStopCondition class.
     /// </summary>
     public NavigatedStopCondition()
     {
@@ -117,9 +117,7 @@ namespace VectorGraphics.StopConditions
     public override string ToString()
     {
       StringBuilder sb = new StringBuilder();
-      sb.Append("Uri: ");
-      string text = this.link.ToString();
-      sb.Append(text.Substring(0, text.Length > 12 ? Math.Max(12, text.Length - 1) : text.Length));
+      sb.Append(this.link.ToString());
       return sb.ToString();
     }
 

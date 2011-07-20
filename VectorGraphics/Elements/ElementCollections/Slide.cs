@@ -16,16 +16,15 @@ namespace VectorGraphics.Elements
   using System;
   using System.ComponentModel;
   using System.Drawing;
+  using System.Drawing.Drawing2D;
   using System.IO;
   using System.Xml.Serialization;
-
   using VectorGraphics.Controls;
   using VectorGraphics.CustomTypeConverter;
   using VectorGraphics.Interfaces;
   using VectorGraphics.StopConditions;
   using VectorGraphics.Tools;
   using VectorGraphics.Triggers;
-    using System.Drawing.Drawing2D;
 
   /// <summary>
   /// Class to specify a slide with stimuli that can be 

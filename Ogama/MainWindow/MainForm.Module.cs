@@ -278,7 +278,13 @@ namespace Ogama.MainWindow
           {
             form.Select();
             found = true;
-            break;
+          }
+
+          // Close slideshow module, because we need
+          // exclusive access to the slideshow
+          if (form is Modules.SlideshowDesign.SlideshowModule)
+          {
+            form.Close();
           }
         }
 

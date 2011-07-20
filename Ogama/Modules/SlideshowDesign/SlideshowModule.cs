@@ -337,7 +337,9 @@ namespace Ogama.Modules.SlideshowDesign
     private void AddBrowserSlide(BrowserTreeNode newBrowserSlideNode)
     {
       // Add node
-      newBrowserSlideNode.Name = this.slideshow.GetUnusedNodeID();
+      string newID = this.slideshow.GetUnusedNodeID();
+      newBrowserSlideNode.Name = newID;
+      newBrowserSlideNode.UrlToID.Add(newBrowserSlideNode.OriginURL, Convert.ToInt32(newID));
 
       // Get root node for insertion
       SlideshowTreeNode firstNode = this.trvSlideshow.Nodes[0] as SlideshowTreeNode;
@@ -440,6 +442,8 @@ namespace Ogama.Modules.SlideshowDesign
         BrowserTreeNode newNode = dlg.BrowserNode;
         if (node != null)
         {
+          newNode.UrlToID.Clear();
+          newNode.UrlToID.Add(newNode.OriginURL, Convert.ToInt32(node.Name));
           node = newNode;
         }
         else
