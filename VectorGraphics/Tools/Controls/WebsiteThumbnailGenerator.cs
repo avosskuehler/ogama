@@ -83,13 +83,31 @@ namespace VectorGraphics.Controls
     /// </summary>
     /// <param name="url">The url string of the adress</param>
     /// <param name="presentationSize">Size of the presentation screen</param>
-    /// <param name="filename">Out. Contains a screenshot filename.</param>
     /// <returns>A <see cref="Bitmap"/> with the web sites screenshot</returns>
-    public static Bitmap GetWebSiteScreenshot(string url, Size presentationSize, out string filename)
+    public static Bitmap GetWebSiteScreenshot(string url, Size presentationSize)
     {
       WebsiteImage thumbnailGenerator =
         new WebsiteImage(url, presentationSize);
-      Bitmap screenshot = thumbnailGenerator.GenerateWebSiteScreenshot(out filename);
+      Bitmap screenshot = thumbnailGenerator.GenerateWebSiteScreenshot();
+      return screenshot;
+    }
+
+    /// <summary>
+    /// Static method to create a website screenshot including full height
+    /// including navigation to frames
+    /// </summary>
+    /// <param name="baseUrl">The url string of the base web adress</param>
+    /// <param name="navigatingArgs">The url and target frame to navigate to.</param>
+    /// <param name="presentationSize">Size of the presentation screen</param>
+    /// <returns>A <see cref="Bitmap"/> with the web sites screenshot</returns>
+    public static Bitmap GetWebSiteScreenshot(
+      string baseUrl,
+      WebBrowserNavigatingEventArgs navigatingArgs,
+      Size presentationSize)
+    {
+      WebsiteImage thumbnailGenerator =
+        new WebsiteImage(baseUrl, navigatingArgs, presentationSize);
+      Bitmap screenshot = thumbnailGenerator.GenerateWebSiteScreenshot();
       return screenshot;
     }
 
@@ -124,6 +142,7 @@ namespace VectorGraphics.Controls
     ///////////////////////////////////////////////////////////////////////////////
     #region HELPER
     #endregion //HELPER
+
     /// <summary>
     /// Class that contains images of websites.
     /// </summary>
@@ -138,7 +157,8 @@ namespace VectorGraphics.Controls
       /// <param name="thumbnailSize">Size of the thumbnail</param>
       public WebsiteImage(string url, int browserWidth, int browserHeight, Size thumbnailSize)
       {
-        this.Url = url;
+        this.BaseUrl = url;
+        this.NavigatingArgs = null;
         this.BrowserWidth = browserWidth;
         this.BrowserHeight = browserHeight;
         this.ThumbnailSize = thumbnailSize;
@@ -147,11 +167,27 @@ namespace VectorGraphics.Controls
       /// <summary>
       /// Initializes a new instance of the WebsiteImage class.
       /// </summary>
-      /// <param name="url">The url string of the adress</param>
+      /// <param name="baseUrl">The url string of the base web adress</param>
       /// <param name="presentationSize">Size of the presentation screen</param>
-      public WebsiteImage(string url, Size presentationSize)
+      public WebsiteImage(string baseUrl, Size presentationSize)
       {
-        this.Url = url;
+        this.BaseUrl = baseUrl;
+        this.NavigatingArgs = null;
+        this.BrowserWidth = presentationSize.Width;
+        this.BrowserHeight = presentationSize.Height;
+        this.ThumbnailSize = presentationSize;
+      }
+
+      /// <summary>
+      /// Initializes a new instance of the WebsiteImage class.
+      /// </summary>
+      /// <param name="baseUrl">The url string of the base web adress</param>
+      /// <param name="navigatingArgs">The url string and target frame to navigate to.</param>
+      /// <param name="presentationSize">Size of the presentation screen</param>
+      public WebsiteImage(string baseUrl, WebBrowserNavigatingEventArgs navigatingArgs, Size presentationSize)
+      {
+        this.BaseUrl = baseUrl;
+        this.NavigatingArgs = navigatingArgs;
         this.BrowserWidth = presentationSize.Width;
         this.BrowserHeight = presentationSize.Height;
         this.ThumbnailSize = presentationSize;
@@ -160,12 +196,12 @@ namespace VectorGraphics.Controls
       /// <summary>
       /// Gets or sets the URL for the website.
       /// </summary>
-      public string Url { get; set; }
+      public string BaseUrl { get; set; }
 
       /// <summary>
-      /// Gets or sets a filename for the screenshot of the website.
+      /// Gets or sets the URL for the website to navigate to.
       /// </summary>
-      public string Filename { get; set; }
+      public WebBrowserNavigatingEventArgs NavigatingArgs { get; set; }
 
       /// <summary>
       /// Gets or sets the screenshot or thumbnail of the website
@@ -203,15 +239,13 @@ namespace VectorGraphics.Controls
       /// <summary>
       /// Starts a thread that creates a websites thumbnail.
       /// </summary>
-      /// <param name="filename">Out. Returns a string with the filename</param>
       /// <returns>A <see cref="Bitmap"/> with the websites thumbnail</returns>
-      public Bitmap GenerateWebSiteScreenshot(out string filename)
+      public Bitmap GenerateWebSiteScreenshot()
       {
         Thread m_thread = new Thread(new ThreadStart(this._GenerateWebSiteScreenshot));
         m_thread.SetApartmentState(ApartmentState.STA);
         m_thread.Start();
         m_thread.Join();
-        filename = this.Filename;
         return this.WebSiteImage;
       }
 
@@ -223,7 +257,17 @@ namespace VectorGraphics.Controls
       {
         WebBrowser webBrowser = new WebBrowser();
         webBrowser.ScrollBarsEnabled = false;
-        webBrowser.Navigate(this.Url);
+        webBrowser.Navigate(this.BaseUrl);
+        if (this.NavigatingArgs != null)
+        {
+          while (webBrowser.ReadyState != WebBrowserReadyState.Complete)
+          {
+            Application.DoEvents();
+          }
+
+          webBrowser.Navigate(this.NavigatingArgs.Url, this.NavigatingArgs.TargetFrameName);
+        }
+
         webBrowser.DocumentCompleted +=
           new WebBrowserDocumentCompletedEventHandler(this.WebBrowser_DocumentCompletedThumbnail);
         while (webBrowser.ReadyState != WebBrowserReadyState.Complete)
@@ -242,7 +286,12 @@ namespace VectorGraphics.Controls
       {
         WebBrowser webBrowser = new WebBrowser();
         webBrowser.ScrollBarsEnabled = true;
-        webBrowser.Navigate(this.Url);
+        webBrowser.Navigate(this.BaseUrl);
+        if (this.NavigatingArgs != null)
+        {
+          webBrowser.Navigate(this.NavigatingArgs.Url, this.NavigatingArgs.TargetFrameName);
+        }
+
         webBrowser.DocumentCompleted +=
           new WebBrowserDocumentCompletedEventHandler(this.WebBrowser_DocumentCompletedScreenshot);
         while (webBrowser.ReadyState != WebBrowserReadyState.Complete)
@@ -294,8 +343,6 @@ namespace VectorGraphics.Controls
         int height = (int)Math.Max(htmlHeight, scrollHeight);
 
         webBrowser.ClientSize = new Size(width, height);
-        this.Filename = Regex.Replace(webBrowser.Url.ToString(), @"(\\|\/|\:|\*|\?|\""|\<|\>|\|)?", string.Empty);
-
         webBrowser.ScrollBarsEnabled = true;
         this.WebSiteImage = new Bitmap(width, height);
         webBrowser.BringToFront();

@@ -950,7 +950,7 @@ namespace VectorGraphics.Elements
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     [Category("Layout")]
     [Description("The size of this shape.")]
-    public SizeF Size
+    public virtual SizeF Size
     {
       get
       {

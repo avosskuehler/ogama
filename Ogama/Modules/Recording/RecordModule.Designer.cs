@@ -135,6 +135,9 @@
       this.chbRecordAudio = new System.Windows.Forms.CheckBox();
       this.chbRecordVideo = new System.Windows.Forms.CheckBox();
       this.webcamPreview = new OgamaControls.Webcam();
+      this.toolStripContainer2 = new System.Windows.Forms.ToolStripContainer();
+      this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+      this.trbZoom = new OgamaControls.ToolStripTrackBar();
       this.pnlCanvas = new System.Windows.Forms.Panel();
       this.pnlPicture = new System.Windows.Forms.Panel();
       this.recordPicture = new Ogama.Modules.Recording.RecordingPicture();
@@ -428,6 +431,10 @@
       this.splitContainer2.Panel2.SuspendLayout();
       this.splitContainer2.SuspendLayout();
       this.panel2.SuspendLayout();
+      this.toolStripContainer2.BottomToolStripPanel.SuspendLayout();
+      this.toolStripContainer2.ContentPanel.SuspendLayout();
+      this.toolStripContainer2.SuspendLayout();
+      this.toolStrip2.SuspendLayout();
       this.pnlCanvas.SuspendLayout();
       this.pnlPicture.SuspendLayout();
       this.toolStrip1.SuspendLayout();
@@ -528,11 +535,11 @@
       // toolStripContainer1.ContentPanel
       // 
       this.toolStripContainer1.ContentPanel.Controls.Add(this.sctRecording);
-      this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(863, 652);
+      this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(863, 645);
       this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
       this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
       this.toolStripContainer1.Name = "toolStripContainer1";
-      this.toolStripContainer1.Size = new System.Drawing.Size(863, 677);
+      this.toolStripContainer1.Size = new System.Drawing.Size(863, 670);
       this.toolStripContainer1.TabIndex = 0;
       this.toolStripContainer1.Text = "toolStripContainer1";
       // 
@@ -555,8 +562,8 @@
       // 
       // sctRecording.Panel2
       // 
-      this.sctRecording.Panel2.Controls.Add(this.pnlCanvas);
-      this.sctRecording.Size = new System.Drawing.Size(863, 652);
+      this.sctRecording.Panel2.Controls.Add(this.toolStripContainer2);
+      this.sctRecording.Size = new System.Drawing.Size(863, 645);
       this.sctRecording.SplitterDistance = 220;
       this.sctRecording.TabIndex = 2;
       // 
@@ -578,8 +585,8 @@
       this.spcPanelUserCam.Panel2.Controls.Add(this.grpUsercam);
       this.spcPanelUserCam.Panel2.Padding = new System.Windows.Forms.Padding(5);
       this.spcPanelUserCam.Panel2MinSize = 20;
-      this.spcPanelUserCam.Size = new System.Drawing.Size(220, 652);
-      this.spcPanelUserCam.SplitterDistance = 448;
+      this.spcPanelUserCam.Size = new System.Drawing.Size(220, 645);
+      this.spcPanelUserCam.SplitterDistance = 441;
       this.spcPanelUserCam.TabIndex = 21;
       // 
       // spcPanelRecordTime
@@ -598,8 +605,8 @@
       // spcPanelRecordTime.Panel2
       // 
       this.spcPanelRecordTime.Panel2.Controls.Add(this.panel4);
-      this.spcPanelRecordTime.Size = new System.Drawing.Size(220, 448);
-      this.spcPanelRecordTime.SplitterDistance = 419;
+      this.spcPanelRecordTime.Size = new System.Drawing.Size(220, 441);
+      this.spcPanelRecordTime.SplitterDistance = 412;
       this.spcPanelRecordTime.TabIndex = 1;
       // 
       // tclEyetracker
@@ -616,7 +623,7 @@
       this.tclEyetracker.Location = new System.Drawing.Point(0, 0);
       this.tclEyetracker.Name = "tclEyetracker";
       this.tclEyetracker.SelectedIndex = 0;
-      this.tclEyetracker.Size = new System.Drawing.Size(220, 419);
+      this.tclEyetracker.Size = new System.Drawing.Size(220, 412);
       this.tclEyetracker.TabIndex = 1;
       this.tclEyetracker.SelectedIndexChanged += new System.EventHandler(this.tclEyetracker_SelectedIndexChanged);
       // 
@@ -627,7 +634,7 @@
       this.tbpITU.Location = new System.Drawing.Point(4, 23);
       this.tbpITU.Name = "tbpITU";
       this.tbpITU.Padding = new System.Windows.Forms.Padding(3);
-      this.tbpITU.Size = new System.Drawing.Size(212, 392);
+      this.tbpITU.Size = new System.Drawing.Size(212, 385);
       this.tbpITU.TabIndex = 5;
       this.tbpITU.Text = "ITU";
       this.tbpITU.UseVisualStyleBackColor = true;
@@ -650,7 +657,7 @@
       this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panel3.Location = new System.Drawing.Point(3, 3);
       this.panel3.Name = "panel3";
-      this.panel3.Size = new System.Drawing.Size(206, 386);
+      this.panel3.Size = new System.Drawing.Size(206, 379);
       this.panel3.TabIndex = 11;
       // 
       // label47
@@ -905,7 +912,7 @@
       this.tbpTobii.Location = new System.Drawing.Point(4, 23);
       this.tbpTobii.Name = "tbpTobii";
       this.tbpTobii.Padding = new System.Windows.Forms.Padding(3);
-      this.tbpTobii.Size = new System.Drawing.Size(212, 392);
+      this.tbpTobii.Size = new System.Drawing.Size(212, 385);
       this.tbpTobii.TabIndex = 0;
       this.tbpTobii.Text = "Tobii";
       this.tbpTobii.UseVisualStyleBackColor = true;
@@ -925,7 +932,7 @@
       this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panel1.Location = new System.Drawing.Point(3, 3);
       this.panel1.Name = "panel1";
-      this.panel1.Size = new System.Drawing.Size(206, 386);
+      this.panel1.Size = new System.Drawing.Size(206, 379);
       this.panel1.TabIndex = 11;
       // 
       // groupBox1
@@ -1148,7 +1155,7 @@
       this.tbpAlea.Location = new System.Drawing.Point(4, 23);
       this.tbpAlea.Name = "tbpAlea";
       this.tbpAlea.Padding = new System.Windows.Forms.Padding(3);
-      this.tbpAlea.Size = new System.Drawing.Size(212, 392);
+      this.tbpAlea.Size = new System.Drawing.Size(212, 385);
       this.tbpAlea.TabIndex = 2;
       this.tbpAlea.Text = "Alea";
       this.tbpAlea.UseVisualStyleBackColor = true;
@@ -1398,7 +1405,7 @@
       this.tbpSMI.Location = new System.Drawing.Point(4, 23);
       this.tbpSMI.Name = "tbpSMI";
       this.tbpSMI.Padding = new System.Windows.Forms.Padding(3);
-      this.tbpSMI.Size = new System.Drawing.Size(212, 392);
+      this.tbpSMI.Size = new System.Drawing.Size(212, 385);
       this.tbpSMI.TabIndex = 4;
       this.tbpSMI.Text = "SMI";
       this.tbpSMI.UseVisualStyleBackColor = true;
@@ -1542,7 +1549,7 @@
       this.tbpAsl.Location = new System.Drawing.Point(4, 23);
       this.tbpAsl.Name = "tbpAsl";
       this.tbpAsl.Padding = new System.Windows.Forms.Padding(3);
-      this.tbpAsl.Size = new System.Drawing.Size(212, 392);
+      this.tbpAsl.Size = new System.Drawing.Size(212, 385);
       this.tbpAsl.TabIndex = 7;
       this.tbpAsl.Text = "ASL";
       this.tbpAsl.UseVisualStyleBackColor = true;
@@ -1663,7 +1670,7 @@
       this.tbpMouseOnly.Location = new System.Drawing.Point(4, 23);
       this.tbpMouseOnly.Name = "tbpMouseOnly";
       this.tbpMouseOnly.Padding = new System.Windows.Forms.Padding(3);
-      this.tbpMouseOnly.Size = new System.Drawing.Size(212, 392);
+      this.tbpMouseOnly.Size = new System.Drawing.Size(212, 385);
       this.tbpMouseOnly.TabIndex = 1;
       this.tbpMouseOnly.Text = "MouseOnly";
       this.tbpMouseOnly.UseVisualStyleBackColor = true;
@@ -1732,7 +1739,7 @@
       this.tbpNoDevice.Location = new System.Drawing.Point(4, 23);
       this.tbpNoDevice.Name = "tbpNoDevice";
       this.tbpNoDevice.Padding = new System.Windows.Forms.Padding(3);
-      this.tbpNoDevice.Size = new System.Drawing.Size(212, 392);
+      this.tbpNoDevice.Size = new System.Drawing.Size(212, 385);
       this.tbpNoDevice.TabIndex = 3;
       this.tbpNoDevice.Text = "No tracking device selected";
       this.tbpNoDevice.UseVisualStyleBackColor = true;
@@ -1882,16 +1889,60 @@
       this.webcamPreview.TabIndex = 0;
       this.webcamPreview.WebcamAvailable += new OgamaControls.CaptureModeEventHandler(this.webcamPreview_WebcamAvailable);
       // 
+      // toolStripContainer2
+      // 
+      // 
+      // toolStripContainer2.BottomToolStripPanel
+      // 
+      this.toolStripContainer2.BottomToolStripPanel.Controls.Add(this.toolStrip2);
+      // 
+      // toolStripContainer2.ContentPanel
+      // 
+      this.toolStripContainer2.ContentPanel.Controls.Add(this.pnlCanvas);
+      this.toolStripContainer2.ContentPanel.Size = new System.Drawing.Size(639, 594);
+      this.toolStripContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.toolStripContainer2.Location = new System.Drawing.Point(0, 0);
+      this.toolStripContainer2.Name = "toolStripContainer2";
+      this.toolStripContainer2.Size = new System.Drawing.Size(639, 645);
+      this.toolStripContainer2.TabIndex = 1;
+      this.toolStripContainer2.Text = "toolStripContainer2";
+      // 
+      // toolStrip2
+      // 
+      this.toolStrip2.Dock = System.Windows.Forms.DockStyle.None;
+      this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+      this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.trbZoom});
+      this.toolStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+      this.toolStrip2.Location = new System.Drawing.Point(0, 0);
+      this.toolStrip2.Name = "toolStrip2";
+      this.toolStrip2.Size = new System.Drawing.Size(639, 26);
+      this.toolStrip2.Stretch = true;
+      this.toolStrip2.TabIndex = 0;
+      this.toolStrip2.Text = "toolStrip2";
+      // 
+      // trbZoom
+      // 
+      this.trbZoom.Maximum = 100;
+      this.trbZoom.Minimum = 1;
+      this.trbZoom.Name = "trbZoom";
+      this.trbZoom.Size = new System.Drawing.Size(80, 23);
+      this.trbZoom.Text = "toolStripTrackBar1";
+      this.trbZoom.TickFrequency = 1;
+      this.trbZoom.TickStyle = System.Windows.Forms.TickStyle.None;
+      this.trbZoom.ToolTipText = "Zoom, right-click for autozoom";
+      this.trbZoom.Value = 10;
+      // 
       // pnlCanvas
       // 
-      this.pnlCanvas.AutoSize = true;
+      this.pnlCanvas.AutoScroll = true;
       this.pnlCanvas.BackColor = global::Ogama.Properties.Settings.Default.BackgroundColorForms;
       this.pnlCanvas.Controls.Add(this.pnlPicture);
       this.pnlCanvas.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::Ogama.Properties.Settings.Default, "BackgroundColorForms", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
       this.pnlCanvas.Dock = System.Windows.Forms.DockStyle.Fill;
       this.pnlCanvas.Location = new System.Drawing.Point(0, 0);
       this.pnlCanvas.Name = "pnlCanvas";
-      this.pnlCanvas.Size = new System.Drawing.Size(639, 652);
+      this.pnlCanvas.Size = new System.Drawing.Size(639, 594);
       this.pnlCanvas.TabIndex = 4;
       // 
       // pnlPicture
@@ -1906,11 +1957,13 @@
       // 
       this.recordPicture.AnimationInterval = 40;
       this.recordPicture.BackColor = System.Drawing.Color.Black;
+      this.recordPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
       this.recordPicture.InvalidateInterval = 500;
       this.recordPicture.Location = new System.Drawing.Point(0, 0);
       this.recordPicture.Name = "recordPicture";
       this.recordPicture.Size = new System.Drawing.Size(200, 100);
       this.recordPicture.TabIndex = 0;
+      this.recordPicture.TabStop = false;
       this.recordPicture.ZoomFactor = 0F;
       // 
       // toolStrip1
@@ -4643,7 +4696,7 @@
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(863, 677);
+      this.ClientSize = new System.Drawing.Size(863, 670);
       this.Controls.Add(this.toolStripContainer1);
       this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::Ogama.Properties.Settings.Default, "RecordingModuleLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
       this.DoubleBuffered = true;
@@ -4677,7 +4730,6 @@
       this.toolStripContainer1.PerformLayout();
       this.sctRecording.Panel1.ResumeLayout(false);
       this.sctRecording.Panel2.ResumeLayout(false);
-      this.sctRecording.Panel2.PerformLayout();
       this.sctRecording.ResumeLayout(false);
       this.spcPanelUserCam.Panel1.ResumeLayout(false);
       this.spcPanelUserCam.Panel2.ResumeLayout(false);
@@ -4736,6 +4788,13 @@
       this.splitContainer2.Panel2.ResumeLayout(false);
       this.splitContainer2.ResumeLayout(false);
       this.panel2.ResumeLayout(false);
+      this.toolStripContainer2.BottomToolStripPanel.ResumeLayout(false);
+      this.toolStripContainer2.BottomToolStripPanel.PerformLayout();
+      this.toolStripContainer2.ContentPanel.ResumeLayout(false);
+      this.toolStripContainer2.ResumeLayout(false);
+      this.toolStripContainer2.PerformLayout();
+      this.toolStrip2.ResumeLayout(false);
+      this.toolStrip2.PerformLayout();
       this.pnlCanvas.ResumeLayout(false);
       this.pnlPicture.ResumeLayout(false);
       this.toolStrip1.ResumeLayout(false);
@@ -5177,5 +5236,8 @@
     private System.Windows.Forms.TabPage tabPage12;
     private System.Windows.Forms.Label label79;
     private System.Windows.Forms.Button button65;
+    private System.Windows.Forms.ToolStripContainer toolStripContainer2;
+    private System.Windows.Forms.ToolStrip toolStrip2;
+    private OgamaControls.ToolStripTrackBar trbZoom;
   }
 }

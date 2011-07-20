@@ -56,6 +56,7 @@ namespace Ogama.Modules.Common
       this.OriginURL = "about:blank";
       this.ImageKey = "Browser";
       this.BrowseDepth = 0;
+      this.UrlToID = new XMLSerializableDictionary<string, int>();
     }
 
     /// <summary>
@@ -70,6 +71,7 @@ namespace Ogama.Modules.Common
       this.Text = browserTreeNode.Text;
       this.BrowseDepth = browserTreeNode.BrowseDepth;
       this.ImageKey = browserTreeNode.ImageKey;
+      this.UrlToID = browserTreeNode.UrlToID;
       foreach (SlideshowTreeNode node in browserTreeNode.Nodes)
       {
         this.Nodes.Add((SlideshowTreeNode)node.Clone());
@@ -95,6 +97,12 @@ namespace Ogama.Modules.Common
     // Defining Properties                                                       //
     ///////////////////////////////////////////////////////////////////////////////
     #region PROPERTIES
+
+    /// <summary>
+    /// Gets or sets the url to id assignments of the subnodes of
+    /// this browser tree node
+    /// </summary>
+    public XMLSerializableDictionary<string, int> UrlToID { get; set; }
 
     /// <summary>
     /// Gets or sets the <see cref="OriginURL"/> for this browser slide.
@@ -144,12 +152,18 @@ namespace Ogama.Modules.Common
     protected override void DeserializeNode(XmlReader reader, SlideshowTreeNode node)
     {
       XmlSerializer slideSerializer = new XmlSerializer(typeof(Slide));
+      XmlSerializer dictionarySerializer = new XmlSerializer(typeof(XMLSerializableDictionary<string, int>));
       BrowserTreeNode browserTreeNode = node as BrowserTreeNode;
 
       reader.ReadStartElement("BrowserTreeNode");
       reader.ReadStartElement("Name");
       browserTreeNode.Name = reader.ReadString();
       reader.ReadEndElement();
+      if (reader.Name == "XMLSerializableDictionaryOfStringInt32")
+      {
+        browserTreeNode.UrlToID = (XMLSerializableDictionary<string, int>)dictionarySerializer.Deserialize(reader);
+      }
+
       reader.ReadStartElement("OriginURL");
       browserTreeNode.OriginURL = reader.ReadString();
       reader.ReadEndElement();
@@ -205,7 +219,7 @@ namespace Ogama.Modules.Common
     protected override void SerializeNode(XmlWriter writer, SlideshowTreeNode node)
     {
       XmlSerializer slideSerializer = new XmlSerializer(typeof(Slide));
-
+      XmlSerializer dictionarySerializer = new XmlSerializer(typeof(XMLSerializableDictionary<string, int>));
       BrowserTreeNode browserTreeNode = node as BrowserTreeNode;
 
       writer.WriteStartElement("BrowserTreeNode");
@@ -213,6 +227,9 @@ namespace Ogama.Modules.Common
       writer.WriteStartElement("Name");
       writer.WriteValue(browserTreeNode.Name);
       writer.WriteEndElement();
+
+      dictionarySerializer.Serialize(writer, browserTreeNode.UrlToID);
+
       writer.WriteStartElement("OriginURL");
       writer.WriteValue(browserTreeNode.OriginURL);
       writer.WriteEndElement();

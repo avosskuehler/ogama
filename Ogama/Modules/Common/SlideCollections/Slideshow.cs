@@ -877,10 +877,11 @@ namespace Ogama.Modules.Common
     private Slide CreateBrowserSlide(BrowserTreeNode browserSlide)
     {
       Slide slide = (Slide)browserSlide.Slide.Clone();
-      slide.VGStimuli.Clear();
+      //slide.VGStimuli.Clear();
       VGBrowser browser = new VGBrowser(
         ShapeDrawAction.None,
-        browserSlide.OriginURL,browserSlide.BrowseDepth,
+        browserSlide.OriginURL,
+        browserSlide.BrowseDepth,
         Pens.Black,
         Brushes.Black,
         SystemFonts.DefaultFont,

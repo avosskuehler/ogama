@@ -59,13 +59,13 @@ namespace Ogama.Modules.Common
     /// <summary>
     /// Initializes a new instance of the CounterChangedEventArgs class.
     /// </summary>
-    /// <param name="newTrialCounter">The ID of the current visible trial
+    /// <param name="newTrialID">The ID of the current visible trial
     /// in the current slideshow.</param>
     /// <param name="newSlideCounter">The index of the current visible slide
     /// in the current trial.</param>
-    public CounterChangedEventArgs(int newTrialCounter, int newSlideCounter)
+    public CounterChangedEventArgs(int newTrialID, int newSlideCounter)
     {
-      this.trialID = newTrialCounter;
+      this.trialID = newTrialID;
       this.slideCounter = newSlideCounter;
     }
 

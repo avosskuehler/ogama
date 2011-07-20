@@ -722,7 +722,7 @@ namespace VectorGraphics.Canvas
         {
           pe.Graphics.DrawImage(this.foregroundBitmap, 0, 0);
 
-          // this.foregroundBitmap.Save(@"c:\Dumps\test.bmp");
+          //this.foregroundBitmap.Save(@"c:\test.png",ImageFormat.Png);
         }
       }
       catch (InvalidOperationException)

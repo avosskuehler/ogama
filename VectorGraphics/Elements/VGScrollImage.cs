@@ -151,21 +151,41 @@ namespace VectorGraphics.Elements
     ///////////////////////////////////////////////////////////////////////////////
     #region PROPERTIES
 
-    /// <summary>
-    /// Gets or sets the vertical scroll position for this image.
-    /// </summary>
-    /// <value>A <see cref="Int32"/> with the ScrollRectangle.Top value</value>
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    [Browsable(false)]
-    public int VerticalScrollposition { get; set; }
+    ///// <summary>
+    ///// Gets or sets the vertical scroll position for this image.
+    ///// </summary>
+    ///// <value>A <see cref="Int32"/> with the ScrollRectangle.Top value</value>
+    //[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    //[Browsable(false)]
+    //public int VerticalScrollposition { get; set; }
 
-    /// <summary>
-    /// Gets or sets the horizontal scroll position for this image.
-    /// </summary>
-    /// <value>A <see cref="Int32"/> with the ScrollRectangle.Left value</value>
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    [Browsable(false)]
-    public int HorizontalScrollposition { get; set; }
+    ///// <summary>
+    ///// Gets or sets the horizontal scroll position for this image.
+    ///// </summary>
+    ///// <value>A <see cref="Int32"/> with the ScrollRectangle.Left value</value>
+    //[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    //[Browsable(false)]
+    //public int HorizontalScrollposition { get; set; }
+
+    public override SizeF Size
+    {
+      get
+      {
+        if (this.Image != null)
+        {
+          return this.Image.Size;
+        }
+        else
+        {
+          return base.Size;
+        }
+      }
+
+      set
+      {
+        base.Size = value;
+      }
+    }
 
     #endregion //PROPERTIES
 

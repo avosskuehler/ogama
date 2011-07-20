@@ -690,10 +690,7 @@ namespace Ogama.Modules.Common
     {
       // This releases the resources of the used slide
       // including explicit disposing of flash objects
-      if (this.Picture.BGSlide != null)
-      {
-        this.Picture.BGSlide.Dispose();
-      }
+      this.Picture.ResetBackground();
 
       // Set presentation size
       slide.PresentationSize = Document.ActiveDocument.PresentationSize;
@@ -783,7 +780,7 @@ namespace Ogama.Modules.Common
 
       if (this.Picture != null && this.Picture.Parent != null)
       {
-        this.Picture.Parent.Bounds = this.GetProportionalBounds(this.Picture.Parent.Parent);
+        this.ThreadSafeSetBounds(this.GetProportionalBounds(this.Picture.Parent.Parent));
         this.Picture.Parent.Invalidate();
       }
     }
@@ -832,33 +829,18 @@ namespace Ogama.Modules.Common
     protected void ZoomPicture(float zoomfactor)
     {
       // Reset scroll position
-      if (this.Picture.Parent.Parent != null)
-      {
-        ScrollableControl scrollPanel = this.Picture.Parent.Parent as ScrollableControl;
-        if (scrollPanel != null && !scrollPanel.InvokeRequired)
-        {
-          scrollPanel.AutoScrollPosition = Point.Empty;
-        }
-      }
+      this.ThreadSafeSetAutoScrollPosition(Point.Empty);
 
       this.Picture.ZoomFactor = zoomfactor;
       Size presentationSize = this.Picture.PresentationSize;
 
-      // If this is called from another thread
-      // just exit, because its not important
-      // to be done in this case and would be a cross thread call.
-      if (this.Picture.InvokeRequired)
-      {
-        return;
-      }
-
-      this.Picture.Size = new Size(
+      this.ThreadSafeSetSize(new Size(
         (int)(presentationSize.Width * zoomfactor),
-        (int)(presentationSize.Height * zoomfactor));
+        (int)(presentationSize.Height * zoomfactor)));
       this.ResizeCanvas();
 
       // Update track bar
-      if (this.zoomTrackBar != null)
+      if (this.zoomTrackBar != null && !this.zoomTrackBar.TrackBar.InvokeRequired)
       {
         this.zoomTrackBar.SendValueChangedEvents = false;
         this.zoomTrackBar.Value = (int)Math.Max(1, (zoomfactor * 50));
@@ -872,6 +854,91 @@ namespace Ogama.Modules.Common
     // Small helping Methods                                                     //
     ///////////////////////////////////////////////////////////////////////////////
     #region HELPER
+
+    /// <summary>
+    /// The delegate for the thread safe call to a rectangle set method.
+    /// </summary>
+    /// <param name="newValue">The new <see cref="Rectangle"/> to set.</param>
+    private delegate void SetRectangleCallback(Rectangle newValue);
+
+    /// <summary>
+    /// Thread safe set of the bounds of the pictures parent of this form.
+    /// </summary>
+    /// <param name="newSize">A <see cref="Rectangle"/> with the new bounds.</param>
+    protected void ThreadSafeSetBounds(Rectangle newBounds)
+    {
+      if (this.Picture == null || this.Picture.Parent == null)
+      {
+        return;
+      }
+
+      if (this.Picture.Parent.InvokeRequired)
+      {
+        SetRectangleCallback d = new SetRectangleCallback(this.ThreadSafeSetBounds);
+        this.Picture.Parent.Invoke(d, new object[] { newBounds });
+      }
+      else
+      {
+        this.Picture.Parent.Bounds = newBounds;
+      }
+    }
+
+    /// <summary>
+    /// The delegate for the thread safe call to a size set method.
+    /// </summary>
+    /// <param name="newValue">The new <see cref="Size"/> to set.</param>
+    private delegate void SetSizeCallback(Size newValue);
+
+    /// <summary>
+    /// Thread safe set of the size of the picture of this form.
+    /// </summary>
+    /// <param name="newSize">A <see cref="Size"/> with the new size.</param>
+    protected void ThreadSafeSetSize(Size newSize)
+    {
+      if (this.Picture.InvokeRequired)
+      {
+        SetSizeCallback d = new SetSizeCallback(this.ThreadSafeSetSize);
+        this.Picture.Invoke(d, new object[] { newSize });
+      }
+      else
+      {
+        this.Picture.Size = newSize;
+      }
+    }
+
+    /// <summary>
+    /// The delegate for the thread safe call to a point set method.
+    /// </summary>
+    /// <param name="newValue">The new <see cref="Point"/> to set.</param>
+    private delegate void SetPointCallback(Point newValue);
+
+    /// <summary>
+    /// Thread safe set of the autoscrollposition of the the scroll panel.
+    /// </summary>
+    /// <param name="scrollPosition">A <see cref="Point"/> with the new scroll position.</param>
+    protected void ThreadSafeSetAutoScrollPosition(Point scrollPosition)
+    {
+      if (this.Picture.Parent.Parent == null)
+      {
+        return;
+      }
+
+      ScrollableControl scrollPanel = this.Picture.Parent.Parent as ScrollableControl;
+      if (scrollPanel == null)
+      {
+        return;
+      }
+
+      if (scrollPanel.InvokeRequired)
+      {
+        SetPointCallback d = new SetPointCallback(this.ThreadSafeSetAutoScrollPosition);
+        scrollPanel.Invoke(d, new object[] { scrollPosition });
+      }
+      else
+      {
+        scrollPanel.AutoScrollPosition = scrollPosition;
+      }
+    }
 
     /// <summary>
     /// This method converts the coordinates of a specific point in screen coordinates

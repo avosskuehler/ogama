@@ -17,6 +17,7 @@ namespace Ogama.Modules.SlideshowDesign
   using System.Drawing;
   using System.IO;
   using System.Text;
+  using System.Text.RegularExpressions;
   using System.Windows.Forms;
   using Ogama.Modules.Common;
   using VectorGraphics.Controls;
@@ -75,6 +76,12 @@ namespace Ogama.Modules.SlideshowDesign
     #endregion //CONSTRUCTION
 
     ///////////////////////////////////////////////////////////////////////////////
+    // Defining events, enums, delegates                                         //
+    ///////////////////////////////////////////////////////////////////////////////
+    #region EVENTS
+    #endregion EVENTS
+
+    ///////////////////////////////////////////////////////////////////////////////
     // Defining Properties                                                       //
     ///////////////////////////////////////////////////////////////////////////////
     #region PROPERTIES
@@ -125,14 +132,36 @@ namespace Ogama.Modules.SlideshowDesign
     #endregion //PROPERTIES
 
     ///////////////////////////////////////////////////////////////////////////////
-    // Eventhandler                                                              //
+    // Public methods                                                            //
     ///////////////////////////////////////////////////////////////////////////////
-    #region EVENTS
+    #region PUBLICMETHODS
+
+    /// <summary>
+    /// Create a unique filename from the given <see cref="Uri"/>
+    /// with path to the slide resources folder of the experiment
+    /// </summary>
+    /// <param name="url">The <see cref="Uri"/> to be converted to a filename</param>
+    /// <returns>A <see cref="String"/> with a valid and unique filename.</returns>
+    public static string GetFilenameFromUrl(Uri url)
+    {
+      string filename = Regex.Replace(url.ToString(), @"(\\|\/|\:|\*|\?|\""|\<|\>|\|)?", string.Empty);
+      filename += ".png";
+      filename = Path.Combine(Document.ActiveDocument.ExperimentSettings.SlideResourcesPath, filename);
+      return filename;
+    }
+
+    #endregion //PUBLICMETHODS
 
     ///////////////////////////////////////////////////////////////////////////////
-    // Eventhandler for UI, Menu, Buttons, Toolbars etc.                         //
+    // Inherited methods                                                         //
     ///////////////////////////////////////////////////////////////////////////////
-    #region WINDOWSEVENTHANDLER
+    #region OVERRIDES
+    #endregion //OVERRIDES
+
+    ///////////////////////////////////////////////////////////////////////////////
+    // Eventhandler                                                              //
+    ///////////////////////////////////////////////////////////////////////////////
+    #region EVENTHANDLER
 
     /// <summary>
     /// The TextBox.TextChanged event handler 
@@ -310,32 +339,19 @@ namespace Ogama.Modules.SlideshowDesign
       dlg.HelpMessage = sb.ToString();
       dlg.ShowDialog();
     }
-    #endregion //WINDOWSEVENTHANDLER
 
-    ///////////////////////////////////////////////////////////////////////////////
-    // Eventhandler for Custom Defined Events                                    //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region CUSTOMEVENTHANDLER
-    #endregion //CUSTOMEVENTHANDLER
-
-    #endregion //EVENTS
+    #endregion //EVENTHANDLER
 
     ///////////////////////////////////////////////////////////////////////////////
     // Methods and Eventhandling for Background tasks                            //
     ///////////////////////////////////////////////////////////////////////////////
-    #region BACKGROUNDWORKER
-    #endregion //BACKGROUNDWORKER
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Inherited methods                                                         //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region OVERRIDES
-    #endregion //OVERRIDES
+    #region THREAD
+    #endregion //THREAD
 
     ///////////////////////////////////////////////////////////////////////////////
     // Methods for doing main class job                                          //
     ///////////////////////////////////////////////////////////////////////////////
-    #region METHODS
+    #region PRIVATEMETHODS
 
     /// <summary>
     /// Update the dialog forms fields with the content from the given <see cref="BrowserTreeNode"/>.
@@ -396,16 +412,11 @@ namespace Ogama.Modules.SlideshowDesign
         baseURLSlide.StopConditions.Add(cond);
       }
 
-      string screenshotFilename;
       Bitmap screenshot = WebsiteThumbnailGenerator.GetWebSiteScreenshot(
         this.txbURL.Text,
-        Document.ActiveDocument.PresentationSize,
-        out screenshotFilename);
-      screenshotFilename += ".png";
-      string screenshotFilenameWithPath = Path.Combine(
-        Document.ActiveDocument.ExperimentSettings.SlideResourcesPath,
-        screenshotFilename);
-      screenshot.Save(screenshotFilenameWithPath, System.Drawing.Imaging.ImageFormat.Png);
+        Document.ActiveDocument.PresentationSize);
+      string screenshotFilename = GetFilenameFromUrl(new Uri(this.txbURL.Text));
+      screenshot.Save(screenshotFilename, System.Drawing.Imaging.ImageFormat.Png);
 
       VGScrollImage baseURLScreenshot = new VGScrollImage(
         ShapeDrawAction.None,
@@ -413,7 +424,7 @@ namespace Ogama.Modules.SlideshowDesign
         Brushes.Black,
         SystemFonts.DefaultFont,
         Color.Black,
-        screenshotFilename,
+        Path.GetFileName(screenshotFilename),
         Document.ActiveDocument.ExperimentSettings.SlideResourcesPath,
         ImageLayout.None,
         1f,
@@ -437,7 +448,7 @@ namespace Ogama.Modules.SlideshowDesign
       return this.browserTreeNode;
     }
 
-    #endregion //METHODS
+    #endregion //PRIVATEMETHODS
 
     ///////////////////////////////////////////////////////////////////////////////
     // Small helping Methods                                                     //
