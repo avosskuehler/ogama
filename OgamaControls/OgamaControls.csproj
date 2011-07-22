@@ -249,7 +249,6 @@
     <Compile Include="DataGridViewControls\DataGridViewWithBackground\DataGridViewWithBackground.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Helpers\AsynchronousEvents.cs" />
     <Compile Include="Helpers\StringEventArgs.cs" />
     <Compile Include="IO\TriggerControl.cs">
       <SubType>UserControl</SubType>

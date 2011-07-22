@@ -605,6 +605,11 @@ namespace Ogama.Modules.Replay
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public DataTable ReplayDataTable
     {
+      get
+      {
+        return this.replayTable;
+      }
+
       set
       {
         this.replayTable = value;
@@ -994,6 +999,11 @@ namespace Ogama.Modules.Replay
     /// <param name="endTime">end time in milliseconds</param>
     public void RenderUpToGivenTime(long endTime)
     {
+      if (endTime == 0)
+      {
+        return;
+      }
+
       this.RenderTimeRange((int)0, endTime);
     }
 
@@ -1227,7 +1237,7 @@ namespace Ogama.Modules.Replay
         this.gazeFixEllipse.Bounds = RectangleF.Empty;
         this.objFixGazeDetection.InitFixation(this.gazeMinSamples);
         this.objFixMouseDetection.InitFixation(this.mouseMinSamples);
-
+        this.visiblePartOfScreen.Location = PointF.Empty;
         this.Invalidate();
       }
     }
@@ -1537,8 +1547,9 @@ namespace Ogama.Modules.Replay
         {
           this.visiblePartOfScreen = new VGRectangle(
             ShapeDrawAction.Edge,
-            Brushes.Black,
+            Pens.Red,
             Document.ActiveDocument.PresentationSizeRectangle);
+          this.visiblePartOfScreen.Visible = false;
         }
       }
       catch (Exception ex)
@@ -1672,12 +1683,12 @@ namespace Ogama.Modules.Replay
         List<PointF> validMousePathSamples = new List<PointF>();
         List<MouseStopCondition> validMouseClicks = new List<MouseStopCondition>();
 
-        // Check trial sequence change
-        if (rows.Length > 0)
-        {
-          int trialSequence = (int)rows[0]["TrialSequence"];
-          this.currentTrialSequence = trialSequence;
-        }
+        //// Check trial sequence change
+        //if (rows.Length > 0)
+        //{
+        //  int trialSequence = (int)rows[0]["TrialSequence"];
+        //  this.currentTrialSequence = trialSequence;
+        //}
 
         foreach (DataRow row in rows)
         {
@@ -1701,18 +1712,49 @@ namespace Ogama.Modules.Replay
             }
 
             TrialEvent occuredEvent = ((ReplayModule)this.OwningForm).TrialEvents[eventID];
-            string parameter = occuredEvent.Param;
-            MouseStopCondition msc = (MouseStopCondition)TypeDescriptor.GetConverter(typeof(StopCondition)).ConvertFrom(parameter);
             switch (occuredEvent.Type)
             {
+              case EventType.None:
+                break;
               case EventType.Mouse:
                 switch (((InputEvent)occuredEvent).Task)
                 {
                   case InputEventTask.Down:
+                    string parameter = occuredEvent.Param;
+                    MouseStopCondition msc =
+                      (MouseStopCondition)TypeDescriptor.GetConverter(typeof(StopCondition)).ConvertFrom(parameter);
                     validMouseClicks.Add(msc);
                     break;
                 }
 
+                break;
+              case EventType.Key:
+                break;
+              case EventType.Slide:
+                break;
+              case EventType.Flash:
+                break;
+              case EventType.Audio:
+                break;
+              case EventType.Video:
+                break;
+              case EventType.Usercam:
+                break;
+              case EventType.Response:
+                break;
+              case EventType.Marker:
+                break;
+              case EventType.Scroll:
+                // Update scroll position
+                string[] scrollOffsets = occuredEvent.Param.Split(';');
+                Point newScrollPosition = new Point(
+                  Convert.ToInt32(scrollOffsets[0]),
+                  Convert.ToInt32(scrollOffsets[1]));
+                this.visiblePartOfScreen.Location = newScrollPosition;
+                break;
+              case EventType.Webpage:
+                break;
+              default:
                 break;
             }
           }

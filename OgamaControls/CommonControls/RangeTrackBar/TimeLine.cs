@@ -396,9 +396,23 @@ namespace OgamaControls
           // If forcing a refresh the UI freezes when there are too many 
           // events displayed in the timeline.
           // if not forcing refresh the timeline does not get updated.
+          VectorGraphics.Tools.AsyncHelper.FireAsync(new MethodInvoker(this.RefreshParentThreadSafe));
           //this.Invalidate();
-          this.Parent.Refresh();//Invalidate();
+
+          //this.Parent.Refresh();//Invalidate();
         }
+      }
+    }
+
+    private void RefreshParentThreadSafe()
+    {
+      if (this.Parent.InvokeRequired)
+      {
+        this.Parent.Invoke(new MethodInvoker(this.RefreshParentThreadSafe));
+      }
+      else
+      {
+        this.Parent.Refresh();
       }
     }
 

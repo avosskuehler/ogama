@@ -167,6 +167,10 @@ namespace VectorGraphics.Elements
     //[Browsable(false)]
     //public int HorizontalScrollposition { get; set; }
 
+    /// <summary>
+    /// Overridden. Returns the images size if it is available otherwise
+    /// the elements size.
+    /// </summary>
     public override SizeF Size
     {
       get
@@ -223,11 +227,12 @@ namespace VectorGraphics.Elements
 
       Rectangle drawingCanvas = new Rectangle(0, 0, this.Image.Width, this.Image.Height);
       RectangleF drawing_rectangle = drawingCanvas;
-      GraphicsUnit pixel = GraphicsUnit.Pixel;
-      drawing_rectangle.Location = this.Location;
-      RectangleF sourceRectangle = this.Image.GetBounds(ref pixel);
-      PointF[] destinationPoints = this.GetPointFArray(drawing_rectangle);
-      graphics.DrawImage(this.Image, destinationPoints, sourceRectangle, pixel, this.ImageAttributes);
+      //GraphicsUnit pixel = GraphicsUnit.Pixel;
+      //drawing_rectangle.Location = this.Location;
+      //RectangleF sourceRectangle = this.Image.GetBounds(ref pixel);
+      //PointF[] destinationPoints = this.GetPointFArray(drawing_rectangle);
+      graphics.DrawImage(this.Image, this.Location);
+      //graphics.DrawImage(this.Image, destinationPoints, sourceRectangle, pixel, this.ImageAttributes);
 
       if (this.ShapeDrawAction == (this.ShapeDrawAction | ShapeDrawAction.Fill))
       {
@@ -235,7 +240,7 @@ namespace VectorGraphics.Elements
       }
 
       // Draw name and selection frame if applicable
-      base.Draw(graphics);
+      //((VGElement)base).Draw(graphics);
     }
 
     /// <summary>

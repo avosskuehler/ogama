@@ -460,8 +460,6 @@ namespace Ogama.Modules.Recording
     {
       this.closing = true;
 
-      WebsiteScreenshot.Instance.Dispose();
-
       if (sendBreakTrigger)
       {
         long webcamTime = this.userCamera != null ? this.userCamera.GetCurrentTime() : -1;
@@ -1045,6 +1043,7 @@ namespace Ogama.Modules.Recording
           // Add node to slideshow at browser tree node subgroup
           this.currentBrowserTreeNode.Nodes.Add(slideNode);
           documentsSlideshow.IsModified = true;
+          Document.ActiveDocument.Modified = true;
 
           long webcamTime = this.userCamera != null ? this.userCamera.GetCurrentTime() : -1;
 

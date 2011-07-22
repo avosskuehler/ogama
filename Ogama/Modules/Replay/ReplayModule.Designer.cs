@@ -157,9 +157,11 @@ namespace Ogama.Modules.Replay
       // toolStripContainer1.ContentPanel
       // 
       this.toolStripContainer1.ContentPanel.Controls.Add(this.pnlCanvas);
+      this.toolStripContainer1.ContentPanel.Margin = new System.Windows.Forms.Padding(0);
       this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(661, 283);
       this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
       this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
+      this.toolStripContainer1.Margin = new System.Windows.Forms.Padding(0);
       this.toolStripContainer1.Name = "toolStripContainer1";
       // 
       // toolStripContainer1.RightToolStripPanel

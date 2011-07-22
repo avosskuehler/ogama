@@ -22,6 +22,7 @@ namespace Ogama.Modules.Recording
   using Ogama.Modules.Common;
   using Ogama.Modules.ImportExport;
   using OgamaControls;
+  using VectorGraphics.Tools;
 
   /// <summary>
   /// This abstract class implements <see cref="ITracker"/> and <see cref="IDisposable"/>

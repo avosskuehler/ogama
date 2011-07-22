@@ -198,7 +198,7 @@ namespace Ogama.Modules.Common
       while (reader.Name == "SlideshowTreeNode" && reader.NodeType == XmlNodeType.Element)
       {
         SlideshowTreeNode newNode = new SlideshowTreeNode();
-        this.DeserializeNode(reader, newNode);
+        base.DeserializeNode(reader, newNode);
         this.SetTreeNodeImageKey(newNode);
         node.Nodes.Add(newNode);
       }
@@ -265,7 +265,9 @@ namespace Ogama.Modules.Common
       {
         foreach (SlideshowTreeNode subNode in browserTreeNode.Nodes)
         {
-          this.SerializeNode(writer, subNode);
+          // Use base serializer for subnodes, because
+          // they are basically scroll image slides
+          base.SerializeNode(writer, subNode);
         }
       }
 

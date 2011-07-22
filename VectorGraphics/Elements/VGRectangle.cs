@@ -40,6 +40,14 @@ namespace VectorGraphics.Elements
     // Defining Variables, Enumerations, Events                                  //
     ///////////////////////////////////////////////////////////////////////////////
     #region FIELDS
+
+    /// <summary>
+    /// This indicates whether this shape should be drawn inverted,
+    /// that means all outside the bounds of the rectangle is filled with the
+    /// brush.
+    /// </summary>
+    private bool inverted;
+
     #endregion //FIELDS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -234,6 +242,17 @@ namespace VectorGraphics.Elements
     // Defining Properties                                                       //
     ///////////////////////////////////////////////////////////////////////////////
     #region PROPERTIES
+
+    /// <summary>
+    /// Gets or sets a value indicating whether this rectangle should be drawn
+    /// inverted, that is the fill fills the region outside this rectangle.
+    /// </summary>
+    public bool Inverted
+    {
+      get { return this.inverted; }
+      set { this.inverted = value; }
+    }
+
     #endregion //PROPERTIES
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -285,7 +304,40 @@ namespace VectorGraphics.Elements
         throw new ArgumentNullException("Graphics object should not be null.");
       }
 
-      this.DrawFillAndEdge(graphics);
+      RectangleF innerBounds = this.Bounds;
+      if ((ShapeDrawAction & ShapeDrawAction.Edge) == ShapeDrawAction.Edge)
+      {
+        innerBounds.Inflate(-this.Pen.Width, -this.Pen.Width);
+      }
+
+      if ((ShapeDrawAction & ShapeDrawAction.Fill) == ShapeDrawAction.Fill)
+      {
+        if (this.Brush != null)
+        {
+          if (this.inverted)
+          {
+            Region region = new Region();
+            region.MakeEmpty();
+            region.Union(graphics.Clip);
+            region.Exclude(this.Bounds);
+            graphics.FillRegion(this.Brush, region);
+            region.Dispose();
+          }
+          else
+          {
+            graphics.FillRectangle(Brush, innerBounds);
+          }
+        }
+      }
+
+      // Draw rectangle
+      if ((ShapeDrawAction & ShapeDrawAction.Edge) == ShapeDrawAction.Edge)
+      {
+        RectangleF halfInlineRect = this.Bounds;
+        halfInlineRect.Inflate(-this.Pen.Width / 2, -this.Pen.Width / 2);
+
+        graphics.DrawRectangle(Pen, halfInlineRect.X, halfInlineRect.Y, halfInlineRect.Width, halfInlineRect.Height);
+      }
 
       // Draw name and selection frame if applicable
       base.Draw(graphics);
