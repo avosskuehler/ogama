@@ -197,7 +197,7 @@ namespace Ogama.Modules.AttentionMap
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void frmAttentionMap_Load(object sender, EventArgs e)
+    private void AttentionMapModule_Load(object sender, EventArgs e)
     {
       try
       {
@@ -212,8 +212,8 @@ namespace Ogama.Modules.AttentionMap
 
         this.InitialDisplay();
 
-        // Resize picture
-        this.pnlPicture.Bounds = GetProportionalBounds(this.pnlCanvas);
+        //// Resize picture
+        //this.pnlPicture.Bounds = GetProportionalBounds(this.pnlCanvas);
       }
       catch (Exception ex)
       {

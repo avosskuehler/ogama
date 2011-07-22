@@ -33,8 +33,8 @@ namespace Ogama.Modules.AttentionMap
     {
       this.components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AttentionMapModule));
-      OgamaControls.Gradient gradient1 = new OgamaControls.Gradient();
-      System.Drawing.Drawing2D.ColorBlend colorBlend1 = new System.Drawing.Drawing2D.ColorBlend();
+      OgamaControls.Gradient gradient2 = new OgamaControls.Gradient();
+      System.Drawing.Drawing2D.ColorBlend colorBlend2 = new System.Drawing.Drawing2D.ColorBlend();
       this.bgwCalcMap = new System.ComponentModel.BackgroundWorker();
       this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
       this.trvSubjects = new OgamaControls.CheckboxTreeView(this.components);
@@ -43,11 +43,7 @@ namespace Ogama.Modules.AttentionMap
       this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
       this.spcPictureGradient = new System.Windows.Forms.SplitContainer();
       this.spcPicAndList = new System.Windows.Forms.SplitContainer();
-      this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-      this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-      this.pnlCanvas = new System.Windows.Forms.Panel();
-      this.pnlPicture = new System.Windows.Forms.Panel();
-      this.attentionMapPicture = new Ogama.Modules.AttentionMap.AttentionMapPicture();
+      this.toolStripContainer2 = new System.Windows.Forms.ToolStripContainer();
       this.toolStrip2 = new System.Windows.Forms.ToolStrip();
       this.btnSeekNextSlide = new System.Windows.Forms.ToolStripButton();
       this.btnSeekPreviousSlide = new System.Windows.Forms.ToolStripButton();
@@ -55,10 +51,11 @@ namespace Ogama.Modules.AttentionMap
       this.trialTimeLine = new Ogama.Modules.Common.TrialTimeLine(this.components);
       this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
       this.trbZoom = new OgamaControls.ToolStripTrackBar();
-      this.panel1 = new System.Windows.Forms.Panel();
+      this.pnlCanvas = new System.Windows.Forms.Panel();
+      this.pnlPicture = new System.Windows.Forms.Panel();
+      this.attentionMapPicture = new Ogama.Modules.AttentionMap.AttentionMapPicture();
       this.tosTrial = new System.Windows.Forms.ToolStrip();
       this.cbbTrial = new System.Windows.Forms.ToolStripComboBox();
-      this.webPageList = new System.Windows.Forms.ToolStripComboBox();
       this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
       this.btnEye = new System.Windows.Forms.ToolStripButton();
       this.btnMouse = new System.Windows.Forms.ToolStripButton();
@@ -112,15 +109,12 @@ namespace Ogama.Modules.AttentionMap
       this.spcPicAndList.Panel1.SuspendLayout();
       this.spcPicAndList.Panel2.SuspendLayout();
       this.spcPicAndList.SuspendLayout();
-      this.splitContainer2.Panel1.SuspendLayout();
-      this.splitContainer2.Panel2.SuspendLayout();
-      this.splitContainer2.SuspendLayout();
-      this.splitContainer1.Panel1.SuspendLayout();
-      this.splitContainer1.Panel2.SuspendLayout();
-      this.splitContainer1.SuspendLayout();
+      this.toolStripContainer2.BottomToolStripPanel.SuspendLayout();
+      this.toolStripContainer2.ContentPanel.SuspendLayout();
+      this.toolStripContainer2.SuspendLayout();
+      this.toolStrip2.SuspendLayout();
       this.pnlCanvas.SuspendLayout();
       this.pnlPicture.SuspendLayout();
-      this.toolStrip2.SuspendLayout();
       this.tosTrial.SuspendLayout();
       this.tosCalculation.SuspendLayout();
       this.SuspendLayout();
@@ -156,15 +150,15 @@ namespace Ogama.Modules.AttentionMap
       // 
       // gradientControl
       // 
-      colorBlend1.Colors = new System.Drawing.Color[] {
+      colorBlend2.Colors = new System.Drawing.Color[] {
         System.Drawing.Color.Transparent,
         System.Drawing.Color.Transparent};
-      colorBlend1.Positions = new float[] {
+      colorBlend2.Positions = new float[] {
         0F,
         1F};
-      gradient1.ColorBlend = colorBlend1;
-      gradient1.GradientDirection = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
-      this.gradientControl.Gradient = gradient1;
+      gradient2.ColorBlend = colorBlend2;
+      gradient2.GradientDirection = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
+      this.gradientControl.Gradient = gradient2;
       this.gradientControl.Location = new System.Drawing.Point(0, 0);
       this.gradientControl.Name = "gradientControl";
       this.gradientControl.Size = new System.Drawing.Size(660, 86);
@@ -195,7 +189,7 @@ namespace Ogama.Modules.AttentionMap
       // 
       // spcPictureGradient
       // 
-      this.spcPictureGradient.Dock = System.Windows.Forms.DockStyle.Left;
+      this.spcPictureGradient.Dock = System.Windows.Forms.DockStyle.Fill;
       this.spcPictureGradient.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
       this.spcPictureGradient.Location = new System.Drawing.Point(0, 0);
       this.spcPictureGradient.Name = "spcPictureGradient";
@@ -225,91 +219,37 @@ namespace Ogama.Modules.AttentionMap
       // 
       // spcPicAndList.Panel2
       // 
-      this.spcPicAndList.Panel2.Controls.Add(this.splitContainer2);
+      this.spcPicAndList.Panel2.Controls.Add(this.toolStripContainer2);
       this.spcPicAndList.Size = new System.Drawing.Size(785, 341);
       this.spcPicAndList.SplitterDistance = 150;
       this.spcPicAndList.TabIndex = 0;
       // 
-      // splitContainer2
+      // toolStripContainer2
       // 
-      this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-      this.splitContainer2.IsSplitterFixed = true;
-      this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-      this.splitContainer2.Name = "splitContainer2";
       // 
-      // splitContainer2.Panel1
+      // toolStripContainer2.BottomToolStripPanel
       // 
-      this.splitContainer2.Panel1.Controls.Add(this.splitContainer1);
+      this.toolStripContainer2.BottomToolStripPanel.Controls.Add(this.toolStrip2);
       // 
-      // splitContainer2.Panel2
+      // toolStripContainer2.ContentPanel
       // 
-      this.splitContainer2.Panel2.Controls.Add(this.panel1);
-      this.splitContainer2.Panel2MinSize = 50;
-      this.splitContainer2.Size = new System.Drawing.Size(631, 341);
-      this.splitContainer2.SplitterDistance = 577;
-      this.splitContainer2.TabIndex = 1;
-      // 
-      // splitContainer1
-      // 
-      this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-      this.splitContainer1.IsSplitterFixed = true;
-      this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-      this.splitContainer1.Name = "splitContainer1";
-      this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-      // 
-      // splitContainer1.Panel1
-      // 
-      this.splitContainer1.Panel1.Controls.Add(this.pnlCanvas);
-      // 
-      // splitContainer1.Panel2
-      // 
-      this.splitContainer1.Panel2.Controls.Add(this.toolStrip2);
-      this.splitContainer1.Size = new System.Drawing.Size(577, 341);
-      this.splitContainer1.SplitterDistance = 315;
-      this.splitContainer1.SplitterWidth = 1;
-      this.splitContainer1.TabIndex = 1;
-      // 
-      // pnlCanvas
-      // 
-      this.pnlCanvas.AutoScroll = true;
-      this.pnlCanvas.BackColor = global::Ogama.Properties.Settings.Default.BackgroundColorForms;
-      this.pnlCanvas.Controls.Add(this.pnlPicture);
-      this.pnlCanvas.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::Ogama.Properties.Settings.Default, "BackgroundColorForms", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-      this.pnlCanvas.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.pnlCanvas.Location = new System.Drawing.Point(0, 0);
-      this.pnlCanvas.Margin = new System.Windows.Forms.Padding(0);
-      this.pnlCanvas.Name = "pnlCanvas";
-      this.pnlCanvas.Size = new System.Drawing.Size(577, 315);
-      this.pnlCanvas.TabIndex = 2;
-      // 
-      // pnlPicture
-      // 
-      this.pnlPicture.Controls.Add(this.attentionMapPicture);
-      this.pnlPicture.Location = new System.Drawing.Point(113, 79);
-      this.pnlPicture.Margin = new System.Windows.Forms.Padding(0);
-      this.pnlPicture.Name = "pnlPicture";
-      this.pnlPicture.Size = new System.Drawing.Size(300, 200);
-      this.pnlPicture.TabIndex = 0;
-      // 
-      // attentionMapPicture
-      // 
-      this.attentionMapPicture.AnimationInterval = 10;
-      this.attentionMapPicture.BackColor = global::Ogama.Properties.Settings.Default.BackgroundColorForms;
-      this.attentionMapPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-      this.attentionMapPicture.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::Ogama.Properties.Settings.Default, "BackgroundColorForms", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-      this.attentionMapPicture.InvalidateInterval = 500;
-      this.attentionMapPicture.Location = new System.Drawing.Point(0, 0);
-      this.attentionMapPicture.Margin = new System.Windows.Forms.Padding(0);
-      this.attentionMapPicture.Name = "attentionMapPicture";
-      this.attentionMapPicture.Size = new System.Drawing.Size(300, 200);
-      this.attentionMapPicture.TabIndex = 0;
-      this.attentionMapPicture.TabStop = false;
-      this.attentionMapPicture.ZoomFactor = 0F;
+      this.toolStripContainer2.ContentPanel.Controls.Add(this.pnlCanvas);
+      this.toolStripContainer2.ContentPanel.Margin = new System.Windows.Forms.Padding(0);
+      this.toolStripContainer2.ContentPanel.Size = new System.Drawing.Size(631, 315);
+      this.toolStripContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.toolStripContainer2.LeftToolStripPanelVisible = false;
+      this.toolStripContainer2.Location = new System.Drawing.Point(0, 0);
+      this.toolStripContainer2.Margin = new System.Windows.Forms.Padding(0);
+      this.toolStripContainer2.Name = "toolStripContainer2";
+      this.toolStripContainer2.RightToolStripPanelVisible = false;
+      this.toolStripContainer2.Size = new System.Drawing.Size(631, 341);
+      this.toolStripContainer2.TabIndex = 1;
+      this.toolStripContainer2.Text = "toolStripContainer2";
+      this.toolStripContainer2.TopToolStripPanelVisible = false;
       // 
       // toolStrip2
       // 
+      this.toolStrip2.Dock = System.Windows.Forms.DockStyle.None;
       this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
       this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnSeekNextSlide,
@@ -320,7 +260,7 @@ namespace Ogama.Modules.AttentionMap
             this.trbZoom});
       this.toolStrip2.Location = new System.Drawing.Point(0, 0);
       this.toolStrip2.Name = "toolStrip2";
-      this.toolStrip2.Size = new System.Drawing.Size(577, 26);
+      this.toolStrip2.Size = new System.Drawing.Size(631, 26);
       this.toolStrip2.Stretch = true;
       this.toolStrip2.TabIndex = 1;
       this.toolStrip2.Text = "toolStrip2";
@@ -356,7 +296,7 @@ namespace Ogama.Modules.AttentionMap
       this.trialTimeLine.Name = "trialTimeLine";
       this.trialTimeLine.ShowCaret = false;
       this.trialTimeLine.ShowTimes = false;
-      this.trialTimeLine.Size = new System.Drawing.Size(383, 23);
+      this.trialTimeLine.Size = new System.Drawing.Size(437, 23);
       this.trialTimeLine.Text = "trialTimeLine";
       // 
       // toolStripSeparator10
@@ -375,13 +315,41 @@ namespace Ogama.Modules.AttentionMap
       this.trbZoom.ToolTipText = "Zoom, right-click for autozoom";
       this.trbZoom.Value = 1;
       // 
-      // panel1
+      // pnlCanvas
       // 
-      this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.panel1.Location = new System.Drawing.Point(0, 0);
-      this.panel1.Name = "panel1";
-      this.panel1.Size = new System.Drawing.Size(50, 341);
-      this.panel1.TabIndex = 0;
+      this.pnlCanvas.AutoScroll = true;
+      this.pnlCanvas.BackColor = global::Ogama.Properties.Settings.Default.BackgroundColorForms;
+      this.pnlCanvas.Controls.Add(this.pnlPicture);
+      this.pnlCanvas.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::Ogama.Properties.Settings.Default, "BackgroundColorForms", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+      this.pnlCanvas.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.pnlCanvas.Location = new System.Drawing.Point(0, 0);
+      this.pnlCanvas.Margin = new System.Windows.Forms.Padding(0);
+      this.pnlCanvas.Name = "pnlCanvas";
+      this.pnlCanvas.Size = new System.Drawing.Size(631, 315);
+      this.pnlCanvas.TabIndex = 2;
+      // 
+      // pnlPicture
+      // 
+      this.pnlPicture.Controls.Add(this.attentionMapPicture);
+      this.pnlPicture.Location = new System.Drawing.Point(113, 79);
+      this.pnlPicture.Margin = new System.Windows.Forms.Padding(0);
+      this.pnlPicture.Name = "pnlPicture";
+      this.pnlPicture.Size = new System.Drawing.Size(300, 200);
+      this.pnlPicture.TabIndex = 0;
+      // 
+      // attentionMapPicture
+      // 
+      this.attentionMapPicture.AnimationInterval = 10;
+      this.attentionMapPicture.BackColor = System.Drawing.Color.Black;
+      this.attentionMapPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+      this.attentionMapPicture.InvalidateInterval = 500;
+      this.attentionMapPicture.Location = new System.Drawing.Point(0, 0);
+      this.attentionMapPicture.Margin = new System.Windows.Forms.Padding(0);
+      this.attentionMapPicture.Name = "attentionMapPicture";
+      this.attentionMapPicture.Size = new System.Drawing.Size(300, 200);
+      this.attentionMapPicture.TabIndex = 0;
+      this.attentionMapPicture.TabStop = false;
+      this.attentionMapPicture.ZoomFactor = 0F;
       // 
       // tosTrial
       // 
@@ -389,7 +357,6 @@ namespace Ogama.Modules.AttentionMap
       this.tosTrial.Dock = System.Windows.Forms.DockStyle.None;
       this.tosTrial.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cbbTrial,
-            this.webPageList,
             this.toolStripSeparator1,
             this.btnEye,
             this.btnMouse,
@@ -405,7 +372,7 @@ namespace Ogama.Modules.AttentionMap
             this.btnHelp});
       this.tosTrial.Location = global::Ogama.Properties.Settings.Default.ATMTrialToolbarLocation;
       this.tosTrial.Name = "tosTrial";
-      this.tosTrial.Size = new System.Drawing.Size(782, 26);
+      this.tosTrial.Size = new System.Drawing.Size(647, 26);
       this.tosTrial.TabIndex = 0;
       // 
       // cbbTrial
@@ -414,13 +381,6 @@ namespace Ogama.Modules.AttentionMap
       this.cbbTrial.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.cbbTrial.Name = "cbbTrial";
       this.cbbTrial.Size = new System.Drawing.Size(200, 23);
-      // 
-      // webPageList
-      // 
-      this.webPageList.AutoSize = false;
-      this.webPageList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-      this.webPageList.Name = "webPageList";
-      this.webPageList.Size = new System.Drawing.Size(300, 23);
       // 
       // toolStripSeparator1
       // 
@@ -558,7 +518,7 @@ namespace Ogama.Modules.AttentionMap
       // toolStripLabel1
       // 
       this.toolStripLabel1.Name = "toolStripLabel1";
-      this.toolStripLabel1.Size = new System.Drawing.Size(111, 15);
+      this.toolStripLabel1.Size = new System.Drawing.Size(111, 23);
       this.toolStripLabel1.Text = "Gaussian kernel size";
       // 
       // nudKernelSize
@@ -602,7 +562,7 @@ namespace Ogama.Modules.AttentionMap
       this.btnHelp.Image = global::Ogama.Properties.Resources.HelpBmp;
       this.btnHelp.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnHelp.Name = "btnHelp";
-      this.btnHelp.Size = new System.Drawing.Size(23, 20);
+      this.btnHelp.Size = new System.Drawing.Size(23, 23);
       this.btnHelp.ToolTipText = "Display help for this module.";
       // 
       // tosCalculation
@@ -747,7 +707,7 @@ namespace Ogama.Modules.AttentionMap
       this.Name = "AttentionMapModule";
       this.Text = "Attention Map Module";
       this.toolTip1.SetToolTip(this, "You can export this image via Edit-Copy or  Edit-SaveImage.");
-      this.Load += new System.EventHandler(this.frmAttentionMap_Load);
+      this.Load += new System.EventHandler(this.AttentionMapModule_Load);
       ((System.ComponentModel.ISupportInitialize)(this.bsoSubjects)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.bsoFKSubjectsTrials)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.ogamaDataSet)).EndInit();
@@ -775,17 +735,15 @@ namespace Ogama.Modules.AttentionMap
       this.spcPicAndList.Panel1.ResumeLayout(false);
       this.spcPicAndList.Panel2.ResumeLayout(false);
       this.spcPicAndList.ResumeLayout(false);
-      this.splitContainer2.Panel1.ResumeLayout(false);
-      this.splitContainer2.Panel2.ResumeLayout(false);
-      this.splitContainer2.ResumeLayout(false);
-      this.splitContainer1.Panel1.ResumeLayout(false);
-      this.splitContainer1.Panel2.ResumeLayout(false);
-      this.splitContainer1.Panel2.PerformLayout();
-      this.splitContainer1.ResumeLayout(false);
-      this.pnlCanvas.ResumeLayout(false);
-      this.pnlPicture.ResumeLayout(false);
+      this.toolStripContainer2.BottomToolStripPanel.ResumeLayout(false);
+      this.toolStripContainer2.BottomToolStripPanel.PerformLayout();
+      this.toolStripContainer2.ContentPanel.ResumeLayout(false);
+      this.toolStripContainer2.ResumeLayout(false);
+      this.toolStripContainer2.PerformLayout();
       this.toolStrip2.ResumeLayout(false);
       this.toolStrip2.PerformLayout();
+      this.pnlCanvas.ResumeLayout(false);
+      this.pnlPicture.ResumeLayout(false);
       this.tosTrial.ResumeLayout(false);
       this.tosTrial.PerformLayout();
       this.tosCalculation.ResumeLayout(false);
@@ -832,7 +790,6 @@ namespace Ogama.Modules.AttentionMap
     private ToolStripNumericUpDown nudKernelSize;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-    private System.Windows.Forms.SplitContainer splitContainer1;
     private System.Windows.Forms.ToolStrip toolStrip2;
     private System.Windows.Forms.ToolStripButton btnSeekNextSlide;
     private System.Windows.Forms.ToolStripButton btnSeekPreviousSlide;
@@ -844,11 +801,9 @@ namespace Ogama.Modules.AttentionMap
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
     private System.Windows.Forms.ToolStripLabel toolStripLabel2;
     private ToolStripNumericUpDown toolStripNumericUpDown1;
-    private System.Windows.Forms.SplitContainer splitContainer2;
-    private System.Windows.Forms.Panel panel1;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
     private ToolStripTrackBar trbZoom;
-    private System.Windows.Forms.ToolStripComboBox webPageList;
+    private System.Windows.Forms.ToolStripContainer toolStripContainer2;
 
   }
 }

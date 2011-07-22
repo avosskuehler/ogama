@@ -11,7 +11,7 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace OgamaControls
+namespace VectorGraphics.Tools
 {
   using System;
   using System.Collections.Generic;

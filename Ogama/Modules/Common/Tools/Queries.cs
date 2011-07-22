@@ -2130,7 +2130,13 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     private static SortedList<int, TrialEvent> ExtractEvents(string subjectName, DataTable table, out int usercamID)
     {
       usercamID = -1;
+      int lastTrialSequence = -1;
+      long timeToAdd = 0;
       SortedList<int, TrialEvent> returnList = new SortedList<int, TrialEvent>();
+      if (table.Rows.Count > 0)
+      {
+        lastTrialSequence = Convert.ToInt32(table.Rows[0]["TrialSequence"]);
+      }
 
       foreach (DataRow row in table.Rows)
       {
@@ -2146,8 +2152,17 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
         }
 
         int trialSequence = Convert.ToInt32(row["TrialSequence"]);
+        if (trialSequence != lastTrialSequence)
+        {
+          lastTrialSequence = trialSequence;
+          DataTable trialTable =
+  Document.ActiveDocument.DocDataSet.TrialsAdapter.GetDataBySubjectAndSequence(subjectName, trialSequence);
+          long trialStartTime = Convert.ToInt64(trialTable.Rows[0]["TrialStartTime"]);
+          timeToAdd = trialStartTime;
+        }
+
         int eventID = Convert.ToInt32(row["EventID"]);
-        long time = Convert.ToInt64(row["EventTime"]);
+        long time = Convert.ToInt64(row["EventTime"]) + timeToAdd;
         string taskString = row["EventTask"].ToString();
         string param = row["EventParam"].ToString();
 
@@ -2155,6 +2170,8 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
 
         switch (type)
         {
+          case EventType.None:
+            break;
           case EventType.Mouse:
             newEvent = new InputEvent();
             newEvent.SubjectName = subjectName;
@@ -2178,17 +2195,6 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
             returnList.Add(eventID, newEvent);
             break;
           case EventType.Slide:
-            newEvent = new MediaEvent();
-            newEvent.SubjectName = subjectName;
-            newEvent.TrialSequence = trialSequence;
-            newEvent.EventID = eventID;
-            newEvent.Param = param;
-            ((MediaEvent)newEvent).Task = (MediaEventTask)Enum.Parse(typeof(MediaEventTask), taskString, true);
-            newEvent.Time = time;
-            newEvent.Type = type;
-            returnList.Add(eventID, newEvent);
-            break;
-          case EventType.Webpage:
             newEvent = new MediaEvent();
             newEvent.SubjectName = subjectName;
             newEvent.TrialSequence = trialSequence;
@@ -2244,6 +2250,17 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
             usercamID = eventID;
             returnList.Add(eventID, newEvent);
             break;
+          case EventType.Response:
+            newEvent = new InputEvent();
+            newEvent.SubjectName = subjectName;
+            newEvent.TrialSequence = trialSequence;
+            newEvent.EventID = eventID;
+            newEvent.Param = param;
+            ((InputEvent)newEvent).Task = (InputEventTask)Enum.Parse(typeof(InputEventTask), taskString, true);
+            newEvent.Time = time;
+            newEvent.Type = type;
+            returnList.Add(eventID, newEvent);
+            break;
           case EventType.Marker:
             newEvent = new MediaEvent();
             newEvent.SubjectName = subjectName;
@@ -2266,8 +2283,22 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
             newEvent.Type = type;
             returnList.Add(eventID, newEvent);
             break;
+          case EventType.Webpage:
+            newEvent = new MediaEvent();
+            newEvent.SubjectName = subjectName;
+            newEvent.TrialSequence = trialSequence;
+            newEvent.EventID = eventID;
+            newEvent.Param = param;
+            ((MediaEvent)newEvent).Task = (MediaEventTask)Enum.Parse(typeof(MediaEventTask), taskString, true);
+            newEvent.Time = time;
+            newEvent.Type = type;
+            returnList.Add(eventID, newEvent);
+            break;
+          default:
+            break;
         }
       }
+
       return returnList;
     }
 

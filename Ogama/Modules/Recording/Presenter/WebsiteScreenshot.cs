@@ -278,7 +278,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     private void CreateBrowserObject()
     {
-      if (this.webBrowser == null)
+      if (this.webBrowser == null || !this.webBrowser.IsAccessible)
       {
         // The webbrowser is not docked, because
         // the screenshot works if its client size is correctly sized

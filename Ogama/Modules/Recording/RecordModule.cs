@@ -1340,6 +1340,9 @@ namespace Ogama.Modules.Recording
 
         // Reset recording flag
         this.recordingBusy = false;
+
+        // Cleanup website screenshot creator
+        WebsiteScreenshot.Instance.Dispose();
       }
       catch (Exception ex)
       {

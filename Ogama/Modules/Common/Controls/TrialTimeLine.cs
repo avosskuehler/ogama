@@ -291,6 +291,8 @@ namespace Ogama.Modules.Common
         this.EventFilterList.Add("Scroll");
         this.EventFilterList.Add("MouseUp");
         this.EventFilterList.Add("MouseDown");
+        this.EventFilterList.Add("KeyDown");
+        this.EventFilterList.Add("KeyUp");
         string message = "To provide acceptable performance OGAMA now hides the mouse and scroll events in the time line " +
           " at the bottom of the module. You may reactivate them by right-clicking on this timeline.";
         ExceptionMethods.ProcessMessage("Lots of events in that trial ...", message);
@@ -353,6 +355,11 @@ namespace Ogama.Modules.Common
           case EventType.Usercam:
             break;
           case EventType.Response:
+            newTimeLineEvent.Position = TimeLinePosition.Above;
+            newTimeLineEvent.StrokeWidth = 2f;
+            newTimeLineEvent.StrokeColor = Color.Blue;
+            newTimeLineEvent.ImageKey = "Slide";
+            this.TimeLineEvents.Add(newTimeLineEvent);
             break;
           case EventType.Marker:
             TimeLineMarker newTimeLineMarker = new TimeLineMarker();

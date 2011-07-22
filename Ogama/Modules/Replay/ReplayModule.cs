@@ -30,6 +30,7 @@ namespace Ogama.Modules.Replay
   using OgamaControls.Media;
   using VectorGraphics.CustomEventArgs;
   using VectorGraphics.Elements;
+  using VectorGraphics.Tools;
 
   /// <summary>
   /// Derived from <see cref="FormWithSubjectAndTrialSelection"/>.
@@ -1262,6 +1263,7 @@ namespace Ogama.Modules.Replay
 
         // Disable the Start and rewind button
         this.btnStart.Enabled = false;
+        this.btnStartContinous.Enabled = false;
         this.btnRewind.Enabled = false;
 
         // Enable the Cancel button while 
@@ -1336,6 +1338,7 @@ namespace Ogama.Modules.Replay
 
       // Disable the Start and rewind button
       this.btnStart.Enabled = false;
+      this.btnStartContinous.Enabled = false;
       this.btnRewind.Enabled = false;
 
       // Enable the Cancel button while 
@@ -2322,7 +2325,9 @@ namespace Ogama.Modules.Replay
     private void RedrawPicture()
     {
       this.replayPicture.ResetPicture();
-      if (this.currentTrialTime > 0)
+
+      // if (this.currentTrialTime > 0)
+      if (this.replayPicture.ReplayDataTable != null)
       {
         this.replayPicture.InitDrawingElements();
         this.replayPicture.RenderUpToGivenTime(this.currentTrialTime);
@@ -2526,6 +2531,7 @@ namespace Ogama.Modules.Replay
 
       // Activate and deactivate buttons
       this.btnStart.Enabled = true;
+      this.btnStartContinous.Enabled = true;
       this.btnStop.Enabled = false;
       this.btnRewind.Enabled = true;
       this.btnPause.Enabled = false;

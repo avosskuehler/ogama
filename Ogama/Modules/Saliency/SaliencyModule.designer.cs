@@ -84,7 +84,6 @@ namespace Ogama.Modules.Saliency
       this.label6 = new System.Windows.Forms.Label();
       this.cbbSaliencyType = new System.Windows.Forms.ComboBox();
       this.label5 = new System.Windows.Forms.Label();
-      this.splitContainer1 = new System.Windows.Forms.SplitContainer();
       this.pnlCanvas = new System.Windows.Forms.Panel();
       this.pnlPicture = new System.Windows.Forms.Panel();
       this.saliencyPicture = new Ogama.Modules.Saliency.SaliencyPicture();
@@ -93,6 +92,8 @@ namespace Ogama.Modules.Saliency
       this.btnSeekPreviousSlide = new System.Windows.Forms.ToolStripButton();
       this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
       this.trialTimeLine = new Ogama.Modules.Common.TrialTimeLine(this.components);
+      this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+      this.trbZoom = new OgamaControls.ToolStripTrackBar();
       this.tacChannels = new System.Windows.Forms.TabControl();
       this.tabChannels = new System.Windows.Forms.TabPage();
       this.lsvChannels = new System.Windows.Forms.ListView();
@@ -125,8 +126,7 @@ namespace Ogama.Modules.Saliency
       this.rdbLargeIcon = new OgamaControls.ToolStripRadioButton();
       this.rdbList = new OgamaControls.ToolStripRadioButton();
       this.tmrProgress = new System.Windows.Forms.Timer(this.components);
-      this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-      this.trbZoom = new OgamaControls.ToolStripTrackBar();
+      this.toolStripContainer2 = new System.Windows.Forms.ToolStripContainer();
       ((System.ComponentModel.ISupportInitialize)(this.bsoSubjects)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.bsoFKSubjectsTrials)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.ogamaDataSet)).BeginInit();
@@ -172,9 +172,6 @@ namespace Ogama.Modules.Saliency
       ((System.ComponentModel.ISupportInitialize)(this.nudChannelIntensityWeight)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.nudChannelColorWeight)).BeginInit();
       this.tabOptions.SuspendLayout();
-      this.splitContainer1.Panel1.SuspendLayout();
-      this.splitContainer1.Panel2.SuspendLayout();
-      this.splitContainer1.SuspendLayout();
       this.pnlCanvas.SuspendLayout();
       this.pnlPicture.SuspendLayout();
       this.toolStrip1.SuspendLayout();
@@ -185,6 +182,9 @@ namespace Ogama.Modules.Saliency
       this.tosTrial.SuspendLayout();
       this.tosGazeDisplay.SuspendLayout();
       this.tosCalculation.SuspendLayout();
+      this.toolStripContainer2.BottomToolStripPanel.SuspendLayout();
+      this.toolStripContainer2.ContentPanel.SuspendLayout();
+      this.toolStripContainer2.SuspendLayout();
       this.SuspendLayout();
       // 
       // toolStripContainer1
@@ -256,7 +256,7 @@ namespace Ogama.Modules.Saliency
       // 
       // spcPicAndList.Panel2
       // 
-      this.spcPicAndList.Panel2.Controls.Add(this.splitContainer1);
+      this.spcPicAndList.Panel2.Controls.Add(this.toolStripContainer2);
       this.spcPicAndList.Size = new System.Drawing.Size(628, 388);
       this.spcPicAndList.SplitterDistance = 199;
       this.spcPicAndList.TabIndex = 0;
@@ -906,26 +906,6 @@ namespace Ogama.Modules.Saliency
       this.label5.TabIndex = 0;
       this.label5.Text = "Type of Saliency Map";
       // 
-      // splitContainer1
-      // 
-      this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-      this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-      this.splitContainer1.Name = "splitContainer1";
-      this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-      // 
-      // splitContainer1.Panel1
-      // 
-      this.splitContainer1.Panel1.Controls.Add(this.pnlCanvas);
-      // 
-      // splitContainer1.Panel2
-      // 
-      this.splitContainer1.Panel2.Controls.Add(this.toolStrip1);
-      this.splitContainer1.Size = new System.Drawing.Size(425, 388);
-      this.splitContainer1.SplitterDistance = 362;
-      this.splitContainer1.SplitterWidth = 1;
-      this.splitContainer1.TabIndex = 1;
-      // 
       // pnlCanvas
       // 
       this.pnlCanvas.AutoScroll = true;
@@ -951,9 +931,8 @@ namespace Ogama.Modules.Saliency
       // saliencyPicture
       // 
       this.saliencyPicture.AnimationInterval = 10;
-      this.saliencyPicture.BackColor = global::Ogama.Properties.Settings.Default.BackgroundColorForms;
+      this.saliencyPicture.BackColor = System.Drawing.Color.Black;
       this.saliencyPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-      this.saliencyPicture.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::Ogama.Properties.Settings.Default, "BackgroundColorForms", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
       this.saliencyPicture.InvalidateInterval = 500;
       this.saliencyPicture.Location = new System.Drawing.Point(0, 0);
       this.saliencyPicture.Margin = new System.Windows.Forms.Padding(0);
@@ -965,6 +944,7 @@ namespace Ogama.Modules.Saliency
       // 
       // toolStrip1
       // 
+      this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
       this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
       this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnSeekNextSlide,
@@ -1013,6 +993,22 @@ namespace Ogama.Modules.Saliency
       this.trialTimeLine.ShowTimes = false;
       this.trialTimeLine.Size = new System.Drawing.Size(231, 23);
       this.trialTimeLine.Text = "trialTimeLine";
+      // 
+      // toolStripSeparator4
+      // 
+      this.toolStripSeparator4.Name = "toolStripSeparator4";
+      this.toolStripSeparator4.Size = new System.Drawing.Size(6, 26);
+      // 
+      // trbZoom
+      // 
+      this.trbZoom.Maximum = 100;
+      this.trbZoom.Minimum = 1;
+      this.trbZoom.Name = "trbZoom";
+      this.trbZoom.Size = new System.Drawing.Size(104, 23);
+      this.trbZoom.TickFrequency = 1;
+      this.trbZoom.TickStyle = System.Windows.Forms.TickStyle.None;
+      this.trbZoom.ToolTipText = "Zoom, right-click for autozoom";
+      this.trbZoom.Value = 1;
       // 
       // tacChannels
       // 
@@ -1352,21 +1348,28 @@ namespace Ogama.Modules.Saliency
       this.tmrProgress.Interval = 400;
       this.tmrProgress.Tick += new System.EventHandler(this.tmrProgress_Tick);
       // 
-      // toolStripSeparator4
+      // toolStripContainer2
       // 
-      this.toolStripSeparator4.Name = "toolStripSeparator4";
-      this.toolStripSeparator4.Size = new System.Drawing.Size(6, 26);
       // 
-      // trbZoom
+      // toolStripContainer2.BottomToolStripPanel
       // 
-      this.trbZoom.Maximum = 100;
-      this.trbZoom.Minimum = 1;
-      this.trbZoom.Name = "trbZoom";
-      this.trbZoom.Size = new System.Drawing.Size(104, 23);
-      this.trbZoom.TickFrequency = 1;
-      this.trbZoom.TickStyle = System.Windows.Forms.TickStyle.None;
-      this.trbZoom.ToolTipText = "Zoom, right-click for autozoom";
-      this.trbZoom.Value = 1;
+      this.toolStripContainer2.BottomToolStripPanel.Controls.Add(this.toolStrip1);
+      // 
+      // toolStripContainer2.ContentPanel
+      // 
+      this.toolStripContainer2.ContentPanel.Controls.Add(this.pnlCanvas);
+      this.toolStripContainer2.ContentPanel.Margin = new System.Windows.Forms.Padding(0);
+      this.toolStripContainer2.ContentPanel.Size = new System.Drawing.Size(425, 362);
+      this.toolStripContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.toolStripContainer2.LeftToolStripPanelVisible = false;
+      this.toolStripContainer2.Location = new System.Drawing.Point(0, 0);
+      this.toolStripContainer2.Margin = new System.Windows.Forms.Padding(0);
+      this.toolStripContainer2.Name = "toolStripContainer2";
+      this.toolStripContainer2.RightToolStripPanelVisible = false;
+      this.toolStripContainer2.Size = new System.Drawing.Size(425, 388);
+      this.toolStripContainer2.TabIndex = 1;
+      this.toolStripContainer2.Text = "toolStripContainer2";
+      this.toolStripContainer2.TopToolStripPanelVisible = false;
       // 
       // SaliencyModule
       // 
@@ -1437,10 +1440,6 @@ namespace Ogama.Modules.Saliency
       ((System.ComponentModel.ISupportInitialize)(this.nudChannelColorWeight)).EndInit();
       this.tabOptions.ResumeLayout(false);
       this.tabOptions.PerformLayout();
-      this.splitContainer1.Panel1.ResumeLayout(false);
-      this.splitContainer1.Panel2.ResumeLayout(false);
-      this.splitContainer1.Panel2.PerformLayout();
-      this.splitContainer1.ResumeLayout(false);
       this.pnlCanvas.ResumeLayout(false);
       this.pnlPicture.ResumeLayout(false);
       this.toolStrip1.ResumeLayout(false);
@@ -1456,6 +1455,11 @@ namespace Ogama.Modules.Saliency
       this.tosGazeDisplay.PerformLayout();
       this.tosCalculation.ResumeLayout(false);
       this.tosCalculation.PerformLayout();
+      this.toolStripContainer2.BottomToolStripPanel.ResumeLayout(false);
+      this.toolStripContainer2.BottomToolStripPanel.PerformLayout();
+      this.toolStripContainer2.ContentPanel.ResumeLayout(false);
+      this.toolStripContainer2.ResumeLayout(false);
+      this.toolStripContainer2.PerformLayout();
       this.ResumeLayout(false);
 
     }
@@ -1548,7 +1552,6 @@ namespace Ogama.Modules.Saliency
     private System.Windows.Forms.ToolStripLabel toolStripLabel1;
     private System.Windows.Forms.ToolStripButton btnGazeConnections;
     private System.Windows.Forms.ToolStripButton btnGazeNumbers;
-    private System.Windows.Forms.SplitContainer splitContainer1;
     private System.Windows.Forms.ToolStrip toolStrip1;
     private System.Windows.Forms.ToolStripButton btnSeekNextSlide;
     private System.Windows.Forms.ToolStripButton btnSeekPreviousSlide;
@@ -1556,6 +1559,7 @@ namespace Ogama.Modules.Saliency
     private Ogama.Modules.Common.TrialTimeLine trialTimeLine;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
     private ToolStripTrackBar trbZoom;
+    private System.Windows.Forms.ToolStripContainer toolStripContainer2;
 
   }
 }

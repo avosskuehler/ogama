@@ -795,8 +795,10 @@ namespace Ogama.Modules.Common
       {
         int width = (int)Document.ActiveDocument.ExperimentSettings.WidthStimulusScreen;
         int height = (int)Document.ActiveDocument.ExperimentSettings.HeightStimulusScreen;
-        int canvasWidth = this.Picture.Parent.Parent.Width;
-        int canvasHeight = this.Picture.Parent.Parent.Height;
+
+        // Care of side scrollbars... (-17)
+        int canvasWidth = this.Picture.Parent.Parent.Width-17;
+        int canvasHeight = this.Picture.Parent.Parent.Height-17;
         float screenRatio = width / (float)height;
 
         float zoomFactor = 1;
@@ -828,6 +830,8 @@ namespace Ogama.Modules.Common
     /// with the zoom factor, can be from 0.1 to 2.</param>
     protected void ZoomPicture(float zoomfactor)
     {
+      this.Picture.BeginUpdate();
+
       // Reset scroll position
       this.ThreadSafeSetAutoScrollPosition(Point.Empty);
 
@@ -846,6 +850,8 @@ namespace Ogama.Modules.Common
         this.zoomTrackBar.Value = (int)Math.Max(1, (zoomfactor * 50));
         this.zoomTrackBar.SendValueChangedEvents = true;
       }
+
+      this.Picture.EndUpdate();
     }
 
     #endregion //METHODS
@@ -864,7 +870,7 @@ namespace Ogama.Modules.Common
     /// <summary>
     /// Thread safe set of the bounds of the pictures parent of this form.
     /// </summary>
-    /// <param name="newSize">A <see cref="Rectangle"/> with the new bounds.</param>
+    /// <param name="newBounds">A <see cref="Rectangle"/> with the new bounds.</param>
     protected void ThreadSafeSetBounds(Rectangle newBounds)
     {
       if (this.Picture == null || this.Picture.Parent == null)
