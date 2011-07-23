@@ -598,7 +598,7 @@ namespace Ogama.Modules.Replay
     }
 
     /// <summary>
-    /// Sets new data table with sampling information from
+    /// Gets or sets new data table with sampling information from
     /// <see cref="Ogama.DataSet.OgamaDataSet.RawdataDataTable"/></summary>
     /// <value>A <see cref="DataTable"/> that holds the samples for replay.</value>
     [Browsable(false)]
@@ -1682,13 +1682,6 @@ namespace Ogama.Modules.Replay
         List<TimedPoint> validMouseFixationSamples = new List<TimedPoint>();
         List<PointF> validMousePathSamples = new List<PointF>();
         List<MouseStopCondition> validMouseClicks = new List<MouseStopCondition>();
-
-        //// Check trial sequence change
-        //if (rows.Length > 0)
-        //{
-        //  int trialSequence = (int)rows[0]["TrialSequence"];
-        //  this.currentTrialSequence = trialSequence;
-        //}
 
         foreach (DataRow row in rows)
         {
