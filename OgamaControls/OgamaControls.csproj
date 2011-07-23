@@ -117,9 +117,9 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GazeTrackingLibrary, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="GTHardware, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bf600965c04ba845, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Managed\GazeTrackingLibrary.dll</HintPath>
+      <HintPath>..\Libs\Managed\GTHardware.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>

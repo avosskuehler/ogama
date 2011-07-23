@@ -2301,6 +2301,7 @@ namespace Ogama.Modules.Recording
           {
             this.currentTracker = this.trackerInterfaces[HardwareTracker.ASL];
           }
+
           break;
 #endif
         case "tbpAlea":

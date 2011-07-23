@@ -487,6 +487,7 @@ namespace Ogama.Modules.SlideshowDesign
     /// </summary>
     private void SlideShowModified()
     {
+      Document.ActiveDocument.Modified = true;
       Document.ActiveDocument.ExperimentSettings.SlideShow.IsModified = true;
     }
 

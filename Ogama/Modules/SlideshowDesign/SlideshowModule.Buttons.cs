@@ -33,6 +33,31 @@ namespace Ogama.Modules.SlideshowDesign
   /// </summary>
   public partial class SlideshowModule
   {
+    /// <summary>
+    /// This method updates the experiments document with the designed slideshow
+    /// of this module, but does not itself writes the slideshow to file.
+    /// This is done via MainModule File-Save.
+    /// </summary>
+    public void SaveSlideshowToDocument()
+    {
+      this.Cursor = Cursors.WaitCursor;
+
+      if (!this.MdiParent.IsDisposed)
+      {
+        Document.ActiveDocument.ExperimentSettings.SlideShow = this.slideshow;
+
+        ((MainForm)this.MdiParent).StatusLabel.Text = "Refreshing context panel ...";
+        ((MainForm)this.MdiParent).RefreshContextPanelImageTabs();
+        ((MainForm)this.MdiParent).StatusLabel.Text = "Ready ...";
+        ((MainForm)this.MdiParent).StatusProgressbar.Value = 0;
+
+        Document.ActiveDocument.Modified = true;
+        Document.ActiveDocument.ExperimentSettings.SlideShow.IsModified = false;
+      }
+
+      this.Cursor = Cursors.Default;
+    }
+
     ///////////////////////////////////////////////////////////////////////////////
     // Eventhandler for UI, Menu, Buttons, Toolbars etc.                         //
     ///////////////////////////////////////////////////////////////////////////////
@@ -99,26 +124,7 @@ namespace Ogama.Modules.SlideshowDesign
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnSaveSlideshow_Click(object sender, EventArgs e)
     {
-      this.Cursor = Cursors.WaitCursor;
-
-      if (!this.MdiParent.IsDisposed)
-      {
-        Document.ActiveDocument.ExperimentSettings.SlideShow = this.slideshow;
-        ((MainForm)this.MdiParent).StatusLabel.Text = "Saving slideshow to file ...";
-        if (!Document.ActiveDocument.SaveSettingsToFile(Document.ActiveDocument.ExperimentSettings.DocumentFilename))
-        {
-          ExceptionMethods.ProcessErrorMessage("Couldn't save slideshow to experiment settings.");
-        }
-
-        ((MainForm)this.MdiParent).StatusLabel.Text = "Refreshing context panel ...";
-        ((MainForm)this.MdiParent).RefreshContextPanelImageTabs();
-        ((MainForm)this.MdiParent).StatusLabel.Text = "Ready ...";
-        ((MainForm)this.MdiParent).StatusProgressbar.Value = 0;
-
-        Document.ActiveDocument.ExperimentSettings.SlideShow.IsModified = false;
-      }
-
-      this.Cursor = Cursors.Default;
+      this.SaveSlideshowToDocument();
     }
 
     /// <summary>
@@ -707,6 +713,7 @@ namespace Ogama.Modules.SlideshowDesign
         {
           newParent.Tag = "Trial";
         }
+
         newParent.SetTreeNodeImageKey(newParent);
 
         firstNode.Parent.Nodes.Insert(insertionIndex, newParent);

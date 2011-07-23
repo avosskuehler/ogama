@@ -8,7 +8,8 @@ namespace OgamaControls
   using System;
   using System.Drawing;
   using System.Windows.Forms;
-  using GazeTrackingLibrary.Hardware;
+  using GTHardware;
+  using GTHardware.Cameras.DirectShow;
 
   /// <summary>
   /// This class holds the properties of a capture device
