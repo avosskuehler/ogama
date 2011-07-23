@@ -203,6 +203,8 @@ namespace Ogama.Modules.Statistics
         this.clbSUBCustomparameters.Items.Add(row["Param"], false);
       }
 
+      this.PopulateAOIGroupCombo();
+
       this.InitTrialTreeViews();
     }
 
@@ -1025,6 +1027,32 @@ namespace Ogama.Modules.Statistics
 
     #endregion ToolbarButtons
 
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler for the
+    /// <see cref="Button"/> <see cref="btnEye"/>.
+    /// </summary>
+    /// <remarks>If neither gaze nor mouse buttons would be
+    /// active check the mouse button.</remarks>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void btnEye_Click(object sender, EventArgs e)
+    {
+      this.btnMouse.Checked = !this.btnEye.Checked;
+    }
+
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler for the
+    /// <see cref="Button"/> <see cref="btnMouse"/>.
+    /// </summary>
+    /// <remarks>If neither gaze nor mouse buttons would be
+    /// active check the gaze button.</remarks>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void btnMouse_Click(object sender, EventArgs e)
+    {
+      this.btnEye.Checked = !this.btnMouse.Checked;
+    }
+
     #endregion //WINDOWSEVENTHANDLER
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -1564,7 +1592,16 @@ namespace Ogama.Modules.Statistics
 
           if (checkedSubjects.Contains(subjectName))
           {
-            DataView fixations = new DataView(Document.ActiveDocument.DocDataSet.GazeFixationsAdapter.GetDataBySubject(subjectName));
+            DataView fixations = null;
+            if (btnEye.Checked)
+            {
+              fixations = new DataView(Document.ActiveDocument.DocDataSet.GazeFixationsAdapter.GetDataBySubject(subjectName));
+            }
+            else if (btnMouse.Checked)
+            {
+              fixations = new DataView(Document.ActiveDocument.DocDataSet.MouseFixationsAdapter.GetDataBySubject(subjectName));
+            }
+
             string foregoingHittedAOIGroup = string.Empty;
             int foregoingTrialID = -1;
 
@@ -1668,9 +1705,19 @@ namespace Ogama.Modules.Statistics
         gazeFixations.RowFilter = filterString;
         mouseFixations.RowFilter = filterString;
 
-        Array transitionMatrix = Statistic.CreateTransitionMatrixForSingleAOIs(
-          gazeFixations,
-          trialAOIs);
+        Array transitionMatrix = null;
+        if (btnEye.Checked)
+        {
+          transitionMatrix = Statistic.CreateTransitionMatrixForSingleAOIs(
+            gazeFixations,
+            trialAOIs);
+        }
+        else if (btnMouse.Checked)
+        {
+          transitionMatrix = Statistic.CreateTransitionMatrixForSingleAOIs(
+            mouseFixations,
+            trialAOIs);
+        }
 
         // Write transitionMatrix to dgv
         for (int i = transitionMatrix.GetLowerBound(0); i <= transitionMatrix.GetUpperBound(0); i++)

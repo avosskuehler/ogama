@@ -2012,23 +2012,10 @@ namespace Ogama.Modules.Recording
 
     /// <summary>
     /// This method updates the live viewer of the presentation module.
-    /// It sets the <see cref="currentSlide"/> according to <see cref="trialCounter"/>,
-    /// loads flash objects and invalidates itself.
+    /// It sets the <see cref="currentSlide"/> according to <see cref="currentTrial"/>
     /// </summary>
-    /// <remarks>If the <see cref="trialCounter"/> is 0 the panel 
-    /// will show the <see cref="defaultSlide"/> which has a recording instruction,
-    /// if it is 1 the initialization slide is shown.</remarks>
     private void NewSlideAvailable()
     {
-      //if (this.currentTrial != null)
-      //{
-      //  // Set current slide
-      //  this.currentSlide = this.currentTrial[this.slideCounter];
-      //}
-      //else
-      //{
-      //  this.currentSlide = defaultSlide;
-      //}
       if (this.currentTrial == null)
       {
         this.currentSlide = defaultSlide;

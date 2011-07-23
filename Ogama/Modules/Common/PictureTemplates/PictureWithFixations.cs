@@ -698,7 +698,6 @@ namespace Ogama.Modules.Common
       if (resetPicture)
       {
         this.ResetPicture();
-        this.CreateHeatMapBasics();
         this.ResetForegoingFixationLocation();
       }
 
@@ -939,8 +938,7 @@ namespace Ogama.Modules.Common
     /// </summary>
     protected void DrawFixationsForCurrentSubject()
     {
-      this.spotlightRegion = new VGRegion(ShapeDrawAction.NameAndFill, this.GrayBrush);
-      this.spotlightRegion.Inverted = true;
+      this.spotlightRegion.Region.MakeEmpty();
 
       if ((this.sampleTypeToDraw == (this.sampleTypeToDraw | SampleType.Gaze))
         && this.gazeFixations != null)
@@ -961,6 +959,22 @@ namespace Ogama.Modules.Common
     // Inherited methods                                                         //
     ///////////////////////////////////////////////////////////////////////////////
     #region OVERRIDES
+
+    /// <summary>
+    /// Overridden <see cref="Picture.InitalizeOverlayGraphics"/>. 
+    /// Creates transparent bitmap for drawing and the corresponding graphics
+    /// with correct transformation matrix.
+    /// Updates heat map size with the presentation size.
+    /// </summary>
+    protected override void InitalizeOverlayGraphics()
+    {
+      base.InitalizeOverlayGraphics();
+      if (this.heatMap.Width != this.PresentationSize.Width ||
+         this.heatMap.Height != this.PresentationSize.Height)
+      {
+        this.CreateHeatMapBitmap(this.PresentationSize);
+      }
+    }
 
     /// <summary>
     /// Overridden. Frees resources of objects that are not disposed
@@ -1073,10 +1087,8 @@ namespace Ogama.Modules.Common
         this.Elements.ToHead(newImage);
       }
 
-      if ((sampleType == (sampleType | SampleType.Gaze) &&
-          this.gazeDrawingMode == FixationDrawingMode.Spotlight) ||
-          (sampleType == (sampleType | SampleType.Mouse) &&
-          this.mouseDrawingMode == FixationDrawingMode.Spotlight))
+      if (this.gazeDrawingMode == FixationDrawingMode.Spotlight ||
+this.mouseDrawingMode == FixationDrawingMode.Spotlight)
       {
         this.Elements.Add(this.spotlightRegion);
         this.Elements.ToHead(this.spotlightRegion);
@@ -1108,6 +1120,8 @@ namespace Ogama.Modules.Common
         this.mouseFixationsFontColor = set.MouseFixationsFontColor;
         this.mouseConnections = set.MouseConnections;
         this.mouseNumbers = set.MouseNumbers;
+        this.spotlightRegion = new VGRegion(ShapeDrawAction.Fill, this.GrayBrush);
+        this.spotlightRegion.Inverted = true;
 
         this.gazeDrawingMode = (FixationDrawingMode)Enum.Parse(typeof(FixationDrawingMode), set.GazeFixationsDrawingMode);
         this.mouseDrawingMode = (FixationDrawingMode)Enum.Parse(typeof(FixationDrawingMode), set.MouseFixationsDrawingMode);
@@ -1127,14 +1141,15 @@ namespace Ogama.Modules.Common
 
       this.colorMap = new PaletteBitmap(colorMapBitmap);
 
-      this.CreateHeatMapBasics();
+      this.CreateHeatMapBitmap(new Size(100, 100));
     }
 
     /// <summary>
-    /// Creates the correctly sized heat map and distribution array for the
-    /// current presentation size.
+    ///  Creates a newly sized heatmap template to be filled 
+    ///  with the data
     /// </summary>
-    private void CreateHeatMapBasics()
+    /// <param name="stimulusSize">A <see cref="Size"/> containing the new stimulus size.</param>
+    private void CreateHeatMapBitmap(Size stimulusSize)
     {
       if (this.heatMap != null)
       {
@@ -1142,15 +1157,13 @@ namespace Ogama.Modules.Common
         this.heatMap = null;
       }
 
-      int eyeMonX = this.PresentationSize.Width;
-      int eyeMonY = this.PresentationSize.Height;
-
-      if (this.heatMap == null || this.heatMap.Width != eyeMonX || this.heatMap.Height != eyeMonY)
+      if (this.heatMap == null ||
+        this.heatMap.Width != stimulusSize.Width ||
+        this.heatMap.Height != stimulusSize.Height)
       {
-        Bitmap heatMapBitmap = new Bitmap(eyeMonX, eyeMonY, PixelFormat.Format32bppArgb);
+        Bitmap heatMapBitmap = new Bitmap(stimulusSize.Width, stimulusSize.Height, PixelFormat.Format32bppArgb);
         this.heatMap = new PaletteBitmap(heatMapBitmap);
         heatMapBitmap.Dispose();
-        this.distributionArray = new float[eyeMonX, eyeMonY];
       }
     }
 
@@ -1219,36 +1232,30 @@ namespace Ogama.Modules.Common
             break;
         }
 
-        //TextureBrush bkgBrush = null;
-
-        //if (usedFixationDrawingMode == FixationDrawingMode.Circles)
-        //{
+        // TextureBrush bkgBrush = null;
+        // if (usedFixationDrawingMode == FixationDrawingMode.Circles)
+        // {
         //  Bitmap bkg = new Bitmap(eyeMonX, eyeMonY);
-
         //  Bitmap transparentBkg = new Bitmap(eyeMonX, eyeMonY);
-
         //  using (Graphics graphics = Graphics.FromImage(bkg))
         //  {
         //    ColorMatrix colorMatrix = new ColorMatrix();
         //    colorMatrix.Matrix33 = 0.7f;
         //    ImageAttributes attributes = new ImageAttributes();
         //    attributes.SetColorMatrix(colorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
-
         //    if (this.BGSlide != null)
         //    {
         //      Slide.DrawSlideAsync(this.BGSlide, graphics);
         //    }
-
         //    using (Graphics transGraphics = Graphics.FromImage(transparentBkg))
         //    {
         //      transGraphics.DrawImage(bkg, new Rectangle(0, 0, bkg.Width, bkg.Height), 0, 0, bkg.Width, bkg.Height, GraphicsUnit.Pixel, attributes);
         //      bkgBrush = new TextureBrush(transparentBkg);
         //    }
         //  }
-
         //  bkg.Dispose();
         //  transparentBkg.Dispose();
-        //}
+        // }
 
         // Loop Fixations and draw each one
         for (int i = 0; i < usedFixationTable.Count; i++)
@@ -1348,8 +1355,7 @@ namespace Ogama.Modules.Common
               newEllipse = new VGEllipse(
                 ShapeDrawAction.NameAndEdge,
                 (Pen)usedPen.Clone(),
-                null,
-                //(TextureBrush)bkgBrush.Clone(),
+                null,                // (TextureBrush)bkgBrush.Clone(),
                 (Font)usedFont.Clone(),
                 usedFontColor,
                 fixBoundingRect,
@@ -1412,10 +1418,10 @@ namespace Ogama.Modules.Common
           }
         }
 
-        //if (bkgBrush != null)
-        //{
+        // if (bkgBrush != null)
+        // {
         //  bkgBrush.Dispose();
-        //}
+        // }
       }
       catch (Exception ex)
       {

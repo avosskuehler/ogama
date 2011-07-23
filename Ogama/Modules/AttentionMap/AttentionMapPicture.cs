@@ -226,7 +226,7 @@ namespace Ogama.Modules.AttentionMap
       Bitmap colorMapBitmap = new Bitmap(AttentionMaps.NUMCOLORS, 1, PixelFormat.Format32bppArgb);
       this.colorMap = new PaletteBitmap(colorMapBitmap);
 
-      CreateHeatMapBitmap(new Size(100,100));
+      this.CreateHeatMapBitmap(new Size(100, 100));
     }
 
     /// <summary>
@@ -308,6 +308,7 @@ namespace Ogama.Modules.AttentionMap
       if (this.heatMap != null)
       {
         this.heatMap.Dispose();
+        this.heatMap = null;
       }
 
       if (this.heatMap == null ||

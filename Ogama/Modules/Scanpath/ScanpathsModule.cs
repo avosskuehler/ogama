@@ -280,7 +280,7 @@ namespace Ogama.Modules.Scanpaths
         this.spcPicTable.Panel2Collapsed = true;
 
         // Hide timeline
-        this.spcPictureSlider.Panel2Collapsed = true;
+        this.tscPictureTimeline.BottomToolStripPanelVisible = false;
 
         this.tosGazeDisplay.Visible = this.btnEye.Checked;
         this.tosMouseDisplay.Visible = this.btnMouse.Checked;
@@ -953,7 +953,7 @@ namespace Ogama.Modules.Scanpaths
     private void btnTimeLine_Click(object sender, EventArgs e)
     {
       this.nudTimeSpan.Visible = this.btnTimeLine.Checked;
-      this.spcPictureSlider.Panel2Collapsed = !this.btnTimeLine.Checked;
+      this.tscPictureTimeline.BottomToolStripPanelVisible = this.btnTimeLine.Checked;
       this.scanpathsPicture.ResetTimeSpan(this.btnTimeLine.Checked);
       this.ResetControls();
       this.scanpathsPicture.DrawFixations(true);

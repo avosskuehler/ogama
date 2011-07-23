@@ -31,7 +31,6 @@ namespace Ogama.Modules.Scanpaths
     {
       this.components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ScanpathsModule));
-      this.spcPictureSlider = new System.Windows.Forms.SplitContainer();
       this.pnlCanvas = new System.Windows.Forms.Panel();
       this.pnlPicture = new System.Windows.Forms.Panel();
       this.scanpathsPicture = new Ogama.Modules.Scanpaths.ScanpathsPicture();
@@ -40,12 +39,15 @@ namespace Ogama.Modules.Scanpaths
       this.btnStop = new System.Windows.Forms.ToolStripButton();
       this.btnRewind = new System.Windows.Forms.ToolStripButton();
       this.trialTimeLine = new Ogama.Modules.Common.TrialTimeLine(this.components);
+      this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+      this.trbZoom = new OgamaControls.ToolStripTrackBar();
       this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
       this.trvSubjects = new OgamaControls.CheckboxTreeView(this.components);
       this.imlTreeViewSubjects = new System.Windows.Forms.ImageList(this.components);
       this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
       this.spcListPic = new System.Windows.Forms.SplitContainer();
       this.spcPicTable = new System.Windows.Forms.SplitContainer();
+      this.tscPictureTimeline = new System.Windows.Forms.ToolStripContainer();
       this.spcTables = new System.Windows.Forms.SplitContainer();
       this.grbLociSimilarity = new System.Windows.Forms.GroupBox();
       this.dgvLociSimilarity = new System.Windows.Forms.DataGridView();
@@ -97,8 +99,6 @@ namespace Ogama.Modules.Scanpaths
       this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
       this.btnExport = new System.Windows.Forms.ToolStripButton();
       this.sfdSimiliarity = new System.Windows.Forms.SaveFileDialog();
-      this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
-      this.trbZoom = new OgamaControls.ToolStripTrackBar();
       ((System.ComponentModel.ISupportInitialize)(this.bsoSubjects)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.bsoFKSubjectsTrials)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.ogamaDataSet)).BeginInit();
@@ -115,9 +115,6 @@ namespace Ogama.Modules.Scanpaths
       ((System.ComponentModel.ISupportInitialize)(this.bsoMouseFixations)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.bsoAOIs)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.bsoParams)).BeginInit();
-      this.spcPictureSlider.Panel1.SuspendLayout();
-      this.spcPictureSlider.Panel2.SuspendLayout();
-      this.spcPictureSlider.SuspendLayout();
       this.pnlCanvas.SuspendLayout();
       this.pnlPicture.SuspendLayout();
       this.tosTimeLine.SuspendLayout();
@@ -130,6 +127,9 @@ namespace Ogama.Modules.Scanpaths
       this.spcPicTable.Panel1.SuspendLayout();
       this.spcPicTable.Panel2.SuspendLayout();
       this.spcPicTable.SuspendLayout();
+      this.tscPictureTimeline.BottomToolStripPanel.SuspendLayout();
+      this.tscPictureTimeline.ContentPanel.SuspendLayout();
+      this.tscPictureTimeline.SuspendLayout();
       this.spcTables.Panel1.SuspendLayout();
       this.spcTables.Panel2.SuspendLayout();
       this.spcTables.SuspendLayout();
@@ -143,25 +143,6 @@ namespace Ogama.Modules.Scanpaths
       this.tosLevenshtein.SuspendLayout();
       this.SuspendLayout();
       // 
-      // spcPictureSlider
-      // 
-      this.spcPictureSlider.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.spcPictureSlider.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-      this.spcPictureSlider.Location = new System.Drawing.Point(0, 0);
-      this.spcPictureSlider.Name = "spcPictureSlider";
-      this.spcPictureSlider.Orientation = System.Windows.Forms.Orientation.Horizontal;
-      // 
-      // spcPictureSlider.Panel1
-      // 
-      this.spcPictureSlider.Panel1.Controls.Add(this.pnlCanvas);
-      // 
-      // spcPictureSlider.Panel2
-      // 
-      this.spcPictureSlider.Panel2.Controls.Add(this.tosTimeLine);
-      this.spcPictureSlider.Size = new System.Drawing.Size(688, 233);
-      this.spcPictureSlider.SplitterDistance = 204;
-      this.spcPictureSlider.TabIndex = 1;
-      // 
       // pnlCanvas
       // 
       this.pnlCanvas.AutoScroll = true;
@@ -172,7 +153,7 @@ namespace Ogama.Modules.Scanpaths
       this.pnlCanvas.Location = new System.Drawing.Point(0, 0);
       this.pnlCanvas.Margin = new System.Windows.Forms.Padding(0);
       this.pnlCanvas.Name = "pnlCanvas";
-      this.pnlCanvas.Size = new System.Drawing.Size(688, 204);
+      this.pnlCanvas.Size = new System.Drawing.Size(688, 207);
       this.pnlCanvas.TabIndex = 3;
       // 
       // pnlPicture
@@ -186,10 +167,9 @@ namespace Ogama.Modules.Scanpaths
       // 
       // scanpathsPicture
       // 
-      this.scanpathsPicture.AnimationInterval = 10;
-      this.scanpathsPicture.BackColor = global::Ogama.Properties.Settings.Default.BackgroundColorForms;
+      this.scanpathsPicture.AnimationInterval = 100;
+      this.scanpathsPicture.BackColor = System.Drawing.Color.Black;
       this.scanpathsPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-      this.scanpathsPicture.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::Ogama.Properties.Settings.Default, "BackgroundColorForms", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
       this.scanpathsPicture.GridBasis = Ogama.Modules.Scanpaths.GridBase.Rectangular;
       this.scanpathsPicture.GridFactor = 2;
       this.scanpathsPicture.IgnoreSubsequentFixations = false;
@@ -204,7 +184,7 @@ namespace Ogama.Modules.Scanpaths
       // 
       // tosTimeLine
       // 
-      this.tosTimeLine.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.tosTimeLine.Dock = System.Windows.Forms.DockStyle.None;
       this.tosTimeLine.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
       this.tosTimeLine.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnStart,
@@ -213,9 +193,9 @@ namespace Ogama.Modules.Scanpaths
             this.trialTimeLine,
             this.toolStripSeparator10,
             this.trbZoom});
-      this.tosTimeLine.Location = new System.Drawing.Point(0, 0);
+      this.tosTimeLine.Location = new System.Drawing.Point(3, 0);
       this.tosTimeLine.Name = "tosTimeLine";
-      this.tosTimeLine.Size = new System.Drawing.Size(688, 25);
+      this.tosTimeLine.Size = new System.Drawing.Size(476, 26);
       this.tosTimeLine.TabIndex = 3;
       this.tosTimeLine.Text = "toolStrip5";
       // 
@@ -225,7 +205,7 @@ namespace Ogama.Modules.Scanpaths
       this.btnStart.Image = ((System.Drawing.Image)(resources.GetObject("btnStart.Image")));
       this.btnStart.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnStart.Name = "btnStart";
-      this.btnStart.Size = new System.Drawing.Size(23, 22);
+      this.btnStart.Size = new System.Drawing.Size(23, 23);
       this.btnStart.ToolTipText = "Play trial";
       this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
       // 
@@ -236,7 +216,7 @@ namespace Ogama.Modules.Scanpaths
       this.btnStop.Image = ((System.Drawing.Image)(resources.GetObject("btnStop.Image")));
       this.btnStop.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnStop.Name = "btnStop";
-      this.btnStop.Size = new System.Drawing.Size(23, 22);
+      this.btnStop.Size = new System.Drawing.Size(23, 23);
       this.btnStop.ToolTipText = "Stop trial";
       this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
       // 
@@ -246,7 +226,7 @@ namespace Ogama.Modules.Scanpaths
       this.btnRewind.Image = ((System.Drawing.Image)(resources.GetObject("btnRewind.Image")));
       this.btnRewind.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnRewind.Name = "btnRewind";
-      this.btnRewind.Size = new System.Drawing.Size(23, 22);
+      this.btnRewind.Size = new System.Drawing.Size(23, 23);
       this.btnRewind.ToolTipText = "Rewind trial";
       this.btnRewind.Click += new System.EventHandler(this.btnRewind_Click);
       // 
@@ -254,10 +234,26 @@ namespace Ogama.Modules.Scanpaths
       // 
       this.trialTimeLine.Duration = 0;
       this.trialTimeLine.Name = "trialTimeLine";
-      this.trialTimeLine.Size = new System.Drawing.Size(477, 22);
+      this.trialTimeLine.Size = new System.Drawing.Size(265, 23);
       this.trialTimeLine.SectionStartValueChanged += new OgamaControls.TimeLine.PositionValueChangedEventHandler(this.TrialTimeLine_SectionStartValueChanged);
       this.trialTimeLine.SectionEndValueChanged += new OgamaControls.TimeLine.PositionValueChangedEventHandler(this.TrialTimeLine_SectionEndValueChanged);
       this.trialTimeLine.CaretValueChanged += new OgamaControls.TimeLine.PositionValueChangedEventHandler(this.TrialTimeLine_CaretValueChanged);
+      // 
+      // toolStripSeparator10
+      // 
+      this.toolStripSeparator10.Name = "toolStripSeparator10";
+      this.toolStripSeparator10.Size = new System.Drawing.Size(6, 26);
+      // 
+      // trbZoom
+      // 
+      this.trbZoom.Maximum = 100;
+      this.trbZoom.Minimum = 1;
+      this.trbZoom.Name = "trbZoom";
+      this.trbZoom.Size = new System.Drawing.Size(104, 23);
+      this.trbZoom.TickFrequency = 1;
+      this.trbZoom.TickStyle = System.Windows.Forms.TickStyle.None;
+      this.trbZoom.ToolTipText = "Zoom, right-click for autozoom";
+      this.trbZoom.Value = 1;
       // 
       // trvSubjects
       // 
@@ -329,7 +325,7 @@ namespace Ogama.Modules.Scanpaths
       // 
       // spcPicTable.Panel1
       // 
-      this.spcPicTable.Panel1.Controls.Add(this.spcPictureSlider);
+      this.spcPicTable.Panel1.Controls.Add(this.tscPictureTimeline);
       // 
       // spcPicTable.Panel2
       // 
@@ -337,6 +333,29 @@ namespace Ogama.Modules.Scanpaths
       this.spcPicTable.Size = new System.Drawing.Size(688, 346);
       this.spcPicTable.SplitterDistance = 233;
       this.spcPicTable.TabIndex = 1;
+      // 
+      // tscPictureTimeline
+      // 
+      // 
+      // tscPictureTimeline.BottomToolStripPanel
+      // 
+      this.tscPictureTimeline.BottomToolStripPanel.Controls.Add(this.tosTimeLine);
+      // 
+      // tscPictureTimeline.ContentPanel
+      // 
+      this.tscPictureTimeline.ContentPanel.Controls.Add(this.pnlCanvas);
+      this.tscPictureTimeline.ContentPanel.Margin = new System.Windows.Forms.Padding(0);
+      this.tscPictureTimeline.ContentPanel.Size = new System.Drawing.Size(688, 207);
+      this.tscPictureTimeline.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.tscPictureTimeline.LeftToolStripPanelVisible = false;
+      this.tscPictureTimeline.Location = new System.Drawing.Point(0, 0);
+      this.tscPictureTimeline.Margin = new System.Windows.Forms.Padding(0);
+      this.tscPictureTimeline.Name = "tscPictureTimeline";
+      this.tscPictureTimeline.RightToolStripPanelVisible = false;
+      this.tscPictureTimeline.Size = new System.Drawing.Size(688, 233);
+      this.tscPictureTimeline.TabIndex = 1;
+      this.tscPictureTimeline.Text = "toolStripContainer2";
+      this.tscPictureTimeline.TopToolStripPanelVisible = false;
       // 
       // spcTables
       // 
@@ -924,22 +943,6 @@ namespace Ogama.Modules.Scanpaths
       this.sfdSimiliarity.Filter = "Text files|*.txt";
       this.sfdSimiliarity.Title = "Specify filename for similarity data sheet.";
       // 
-      // toolStripSeparator10
-      // 
-      this.toolStripSeparator10.Name = "toolStripSeparator10";
-      this.toolStripSeparator10.Size = new System.Drawing.Size(6, 25);
-      // 
-      // trbZoom
-      // 
-      this.trbZoom.Maximum = 100;
-      this.trbZoom.Minimum = 1;
-      this.trbZoom.Name = "trbZoom";
-      this.trbZoom.Size = new System.Drawing.Size(104, 22);
-      this.trbZoom.TickFrequency = 1;
-      this.trbZoom.TickStyle = System.Windows.Forms.TickStyle.None;
-      this.trbZoom.ToolTipText = "Zoom, right-click for autozoom";
-      this.trbZoom.Value = 1;
-      // 
       // ScanpathsModule
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -971,10 +974,6 @@ namespace Ogama.Modules.Scanpaths
       ((System.ComponentModel.ISupportInitialize)(this.bsoMouseFixations)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.bsoAOIs)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.bsoParams)).EndInit();
-      this.spcPictureSlider.Panel1.ResumeLayout(false);
-      this.spcPictureSlider.Panel2.ResumeLayout(false);
-      this.spcPictureSlider.Panel2.PerformLayout();
-      this.spcPictureSlider.ResumeLayout(false);
       this.pnlCanvas.ResumeLayout(false);
       this.pnlPicture.ResumeLayout(false);
       this.tosTimeLine.ResumeLayout(false);
@@ -990,6 +989,11 @@ namespace Ogama.Modules.Scanpaths
       this.spcPicTable.Panel1.ResumeLayout(false);
       this.spcPicTable.Panel2.ResumeLayout(false);
       this.spcPicTable.ResumeLayout(false);
+      this.tscPictureTimeline.BottomToolStripPanel.ResumeLayout(false);
+      this.tscPictureTimeline.BottomToolStripPanel.PerformLayout();
+      this.tscPictureTimeline.ContentPanel.ResumeLayout(false);
+      this.tscPictureTimeline.ResumeLayout(false);
+      this.tscPictureTimeline.PerformLayout();
       this.spcTables.Panel1.ResumeLayout(false);
       this.spcTables.Panel2.ResumeLayout(false);
       this.spcTables.ResumeLayout(false);
@@ -1022,7 +1026,6 @@ namespace Ogama.Modules.Scanpaths
     private System.Windows.Forms.ToolStripButton btnEye;
     private System.Windows.Forms.ToolStripButton btnMouse;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
-    private System.Windows.Forms.SplitContainer spcPictureSlider;
     private System.Windows.Forms.ToolStrip tosGazeDisplay;
     private System.Windows.Forms.ToolStripButton toolStripButton3;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
@@ -1079,5 +1082,6 @@ namespace Ogama.Modules.Scanpaths
     private System.Windows.Forms.ToolStripButton btnGroupLevenshteinOutput;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
     private OgamaControls.ToolStripTrackBar trbZoom;
+    private System.Windows.Forms.ToolStripContainer tscPictureTimeline;
   }
 }

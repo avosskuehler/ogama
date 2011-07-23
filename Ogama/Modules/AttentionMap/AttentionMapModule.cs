@@ -211,9 +211,6 @@ namespace Ogama.Modules.AttentionMap
         this.ResizeCanvas();
 
         this.InitialDisplay();
-
-        //// Resize picture
-        //this.pnlPicture.Bounds = GetProportionalBounds(this.pnlCanvas);
       }
       catch (Exception ex)
       {

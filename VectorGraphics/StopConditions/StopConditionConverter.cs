@@ -188,6 +188,10 @@ namespace VectorGraphics.StopConditions
                 }
               }
             }
+            else if (type == "http")
+            {
+              stopCondition = new NavigatedStopCondition(new Uri(s));
+            }
 
             // Parse correct answer.
             if (s.Contains("."))
