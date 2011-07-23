@@ -542,29 +542,21 @@ namespace Ogama.Modules.SlideshowDesign
         this.cbbLinksTargets.Items.Add(e.Shape.Name);
       }
 
-      UpdateShapePositionAndSizeNumerics(e.Shape);
+      this.UpdateShapePositionAndSizeNumerics(e.Shape);
 
       this.Cursor = Cursors.Default;
     }
 
+    /// <summary>
+    /// <see cref="VectorGraphics.Canvas.PictureModifiable.ShapeChanged"/> event handler of the
+    /// <see cref="VectorGraphics.Canvas.PictureModifiable"/> <see cref="designPicture"/>.
+    /// Updates the shapes position and soze properties.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">A <see cref="ShapeEventArgs"/> with the new shape.</param>
     private void designPicture_ShapeChanged(object sender, ShapeEventArgs e)
     {
-      UpdateShapePositionAndSizeNumerics(e.Shape);
-    }
-
-    private void UpdateShapePositionAndSizeNumerics(VGElement shape)
-    {
-      try
-      {
-        this.nudLayoutLeft.Value = (decimal)shape.Location.X;
-        this.nudLayoutTop.Value = (decimal)shape.Location.Y;
-        this.nudLayoutWidth.Value = (decimal)shape.Width;
-        this.nudLayoutHeight.Value = (decimal)shape.Height;
-      }
-      catch (ArgumentOutOfRangeException ex)
-      {
-        ExceptionMethods.HandleException(ex);
-      }
+      this.UpdateShapePositionAndSizeNumerics(e.Shape);
     }
 
     /// <summary>
@@ -639,7 +631,7 @@ namespace Ogama.Modules.SlideshowDesign
             e.Shape.Size = Document.ActiveDocument.PresentationSize;
           }
 
-          UpdateShapePositionAndSizeNumerics(e.Shape);
+          this.UpdateShapePositionAndSizeNumerics(e.Shape);
 
           if (e.Shape is VGRichText)
           {
@@ -835,6 +827,28 @@ namespace Ogama.Modules.SlideshowDesign
     // Methods for doing main class job                                          //
     ///////////////////////////////////////////////////////////////////////////////
     #region METHODS
+
+    /// <summary>
+    /// This method updates the forms numeric up and downs
+    /// for the shapes position and size with the given
+    /// elements new values.
+    /// </summary>
+    /// <param name="shape">A <see cref="VGElement"/> thats values
+    /// should be available on the form.</param>
+    private void UpdateShapePositionAndSizeNumerics(VGElement shape)
+    {
+      try
+      {
+        this.nudLayoutLeft.Value = (decimal)shape.Location.X;
+        this.nudLayoutTop.Value = (decimal)shape.Location.Y;
+        this.nudLayoutWidth.Value = (decimal)shape.Width;
+        this.nudLayoutHeight.Value = (decimal)shape.Height;
+      }
+      catch (ArgumentOutOfRangeException ex)
+      {
+        ExceptionMethods.HandleException(ex);
+      }
+    }
 
     /// <summary>
     /// When properties changed the selected element in the picture

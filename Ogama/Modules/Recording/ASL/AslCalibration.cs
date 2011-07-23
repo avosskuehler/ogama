@@ -11,7 +11,7 @@
 // <author>
 //  University Toulouse 2 - CLLE-LTC UMR5263
 //  Yves Lecourt
-//</author>
+// </author>
 // <email>virginie.feraud@univ-tlse2.fr</email>
 
 namespace Ogama.Modules.Recording.ASL
@@ -60,10 +60,17 @@ namespace Ogama.Modules.Recording.ASL
       experimentHeight = Document.ActiveDocument.ExperimentSettings.HeightStimulusScreen;
 
       if ((experimentWidth == 1280) && (experimentHeight == 1024))
+      {
         this.calibrationPictureBox.Image = global::Ogama.Properties.Resources.ASLmire_1280x1024;
+      }
       else if ((experimentWidth == 1024) && (experimentHeight == 768))
+      {
         this.calibrationPictureBox.Image = global::Ogama.Properties.Resources.ASLmire_1024x768;
-      else this.calibrationPictureBox.Image = global::Ogama.Properties.Resources.ASLmire_defaultSize;
+      }
+      else
+      {
+        this.calibrationPictureBox.Image = global::Ogama.Properties.Resources.ASLmire_defaultSize;
+      }
 
       // We must set KeyPreview object to true to allow the form to process 
       // the key before the control with focus processes it.

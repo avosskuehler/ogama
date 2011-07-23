@@ -14,8 +14,9 @@ namespace OgamaControls
   using System.Text;
   using System.Windows.Forms;
   using DirectShowLib;
-  using GazeTrackingLibrary.Hardware;
-
+  using GTHardware;
+  using GTHardware.Cameras.DirectShow;
+  
   /// <summary>
   /// This <see cref="UserControl"/> encapsulates an dialog for getting, setting
   /// and previewing the properties of a direct show video including audio input.
@@ -392,7 +393,7 @@ namespace OgamaControls
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
     private void CbbVideoDevices_SelectionChangeCommitted(object sender, EventArgs e)
     {
-      this.properties.VideoInputDevice = Devices.Current.Cameras[cbbVideoDevices.SelectedIndex];
+      this.properties.VideoInputDevice = DirectShowDevices.Instance.Cameras[cbbVideoDevices.SelectedIndex];
       this.PopulateVideoProperties(true);
       this.RebuildDXCapture(this.properties);
     }
@@ -629,7 +630,7 @@ namespace OgamaControls
     {
       if (cbbVideoDevices.SelectedItem != null)
       {
-        this.properties.VideoInputDevice = Devices.Current.Cameras[cbbVideoDevices.SelectedIndex];
+        this.properties.VideoInputDevice = DirectShowDevices.Instance.Cameras[cbbVideoDevices.SelectedIndex];
       }
 
       if (cbbAudioDevices.SelectedItem != null)

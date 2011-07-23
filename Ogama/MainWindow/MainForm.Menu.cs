@@ -331,18 +331,40 @@ namespace Ogama.MainWindow
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void mnuFileSaveExperiment_Click(object sender, EventArgs e)
     {
+      this.SaveExperimentToFile();
+    }
+
+    /// <summary>
+    /// This method checks for updates on the slideshow and
+    /// afterwards saves all changes of the experiment to file.
+    /// </summary>
+    private void SaveExperimentToFile()
+    {
+      // Display Wait Cursor
+      this.Cursor = Cursors.WaitCursor;
+
       if (Document.ActiveDocument != null && Document.ActiveDocument.ExperimentSettings != null)
       {
-        // Display Wait Cursor
-        this.Cursor = Cursors.WaitCursor;
+        this.StatusLabel.Text = "Saving experiment to file ...";
+
+        // Check for modified slideshow in the slideshow module
+        foreach (Form form in this.MdiChildren)
+        {
+          if (form is Modules.SlideshowDesign.SlideshowModule)
+          {
+            (form as Modules.SlideshowDesign.SlideshowModule).SaveSlideshowToDocument();
+          }
+        }
+
+        // Save document to disk
         if (!Document.ActiveDocument.SaveDocument(Document.ActiveDocument.ExperimentSettings.DocumentFilename, null))
         {
           ExceptionMethods.ProcessErrorMessage("Couldn't save experiment.");
         }
-
-        // Reset Cursor
-        this.Cursor = Cursors.Default;
       }
+
+      // Reset Cursor
+      this.Cursor = Cursors.Default;
     }
 
     /// <summary>
@@ -613,10 +635,7 @@ namespace Ogama.MainWindow
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void mnuViewsNewDatabase_Click(object sender, EventArgs e)
     {
-      if (Document.ActiveDocument != null)
-      {
-        this.CreateDatabaseView();
-      }
+      this.CreateOrActivateDatabaseModule();
     }
 
     /// <summary>
@@ -628,10 +647,7 @@ namespace Ogama.MainWindow
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void mnuViewsNewReplay_Click(object sender, EventArgs e)
     {
-      if (Document.ActiveDocument != null)
-      {
-        this.CreateReplayView();
-      }
+      this.CreateOrActivateReplayModule();
     }
 
     /// <summary>
@@ -643,10 +659,7 @@ namespace Ogama.MainWindow
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void mnuViewsNewAttentionMap_Click(object sender, EventArgs e)
     {
-      if (Document.ActiveDocument != null)
-      {
-        this.CreateAttentionMapView();
-      }
+      this.CreateOrActivateAttentionMapModule();
     }
 
     /// <summary>
@@ -658,10 +671,7 @@ namespace Ogama.MainWindow
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void mnuViewsNewAOI_Click(object sender, EventArgs e)
     {
-      if (Document.ActiveDocument != null)
-      {
-        this.CreateAOIView();
-      }
+      this.CreateOrActivateAreasOfInterestModule();
     }
 
     /// <summary>
@@ -673,10 +683,7 @@ namespace Ogama.MainWindow
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void mnuViewsNewFixations_Click(object sender, EventArgs e)
     {
-      if (Document.ActiveDocument != null)
-      {
-        this.CreateFixationsView();
-      }
+      this.CreateOrActivateFixationModule();
     }
 
     /// <summary>
@@ -688,10 +695,7 @@ namespace Ogama.MainWindow
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void mnuViewsNewStatistics_Click(object sender, EventArgs e)
     {
-      if (Document.ActiveDocument != null)
-      {
-        this.CreateStatisticsView();
-      }
+      this.CreateOrActivateStatistikModule();
     }
 
     /// <summary>
@@ -703,10 +707,7 @@ namespace Ogama.MainWindow
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void mnuViewsNewSaliency_Click(object sender, EventArgs e)
     {
-      if (Document.ActiveDocument != null)
-      {
-        this.CreateSaliencyView();
-      }
+      this.CreateOrActivateSaliencyModule();
     }
 
     /// <summary>
@@ -718,10 +719,7 @@ namespace Ogama.MainWindow
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void mnuViewsNewStimuliCreation_Click(object sender, EventArgs e)
     {
-      if (Document.ActiveDocument != null)
-      {
-        this.CreateStimuliDesignView();
-      }
+      this.CreateOrActivateStimuliDesignModule();
     }
 
     /// <summary>
@@ -733,10 +731,7 @@ namespace Ogama.MainWindow
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void mnuViewsNewRecording_Click(object sender, EventArgs e)
     {
-      if (Document.ActiveDocument != null)
-      {
-        this.CreateRecordingView();
-      }
+      this.CreateOrActivateRecordModule();
     }
 
     /// <summary>
@@ -748,10 +743,7 @@ namespace Ogama.MainWindow
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void mnuViewsNewScanpaths_Click(object sender, EventArgs e)
     {
-      if (Document.ActiveDocument != null)
-      {
-        this.CreateScanpathsView();
-      }
+      this.CreateOrActivateScanpathModule();
     }
 
     /// <summary>
