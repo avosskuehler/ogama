@@ -1593,11 +1593,11 @@ namespace Ogama.Modules.Statistics
           if (checkedSubjects.Contains(subjectName))
           {
             DataView fixations = null;
-            if (this.btnEye.Checked)
+            if (btnEye.Checked)
             {
               fixations = new DataView(Document.ActiveDocument.DocDataSet.GazeFixationsAdapter.GetDataBySubject(subjectName));
             }
-            else if (this.btnMouse.Checked)
+            else if (btnMouse.Checked)
             {
               fixations = new DataView(Document.ActiveDocument.DocDataSet.MouseFixationsAdapter.GetDataBySubject(subjectName));
             }
@@ -1706,13 +1706,13 @@ namespace Ogama.Modules.Statistics
         mouseFixations.RowFilter = filterString;
 
         Array transitionMatrix = null;
-        if (this.btnEye.Checked)
+        if (btnEye.Checked)
         {
           transitionMatrix = Statistic.CreateTransitionMatrixForSingleAOIs(
             gazeFixations,
             trialAOIs);
         }
-        else if (this.btnMouse.Checked)
+        else if (btnMouse.Checked)
         {
           transitionMatrix = Statistic.CreateTransitionMatrixForSingleAOIs(
             mouseFixations,

@@ -20,6 +20,7 @@ namespace Ogama.Modules.Recording.ITUGazeTracker
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
   using OgamaClient;
+    using System.Runtime.InteropServices;
 
   /// <summary>
   /// This class implements the <see cref="TrackerWithStatusControls"/> class

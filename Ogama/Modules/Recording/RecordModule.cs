@@ -391,6 +391,11 @@ namespace Ogama.Modules.Recording
       get { return this.presenterForm; }
     }
 
+    /// <summary>
+    /// Gets the trials that are currently presented.
+    /// </summary>
+    public TrialCollection Trials;
+
     #endregion //PROPERTIES
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -751,11 +756,9 @@ namespace Ogama.Modules.Recording
 
       this.InitializeScreenCapture();
       this.CreateTrackerInterfaces();
-
+      this.forcePanelViewerUpdate = true;
       this.NewSlideAvailable();
-
-      // this.forcePanelViewerUpdate = true;
-      this.forcePanelViewerUpdate = false;
+      //this.forcePanelViewerUpdate = false;
 
       // Uncheck Usercam button, if there is no available webcam
       // except Ogama Screen Capture which should not be used.
@@ -1753,7 +1756,7 @@ namespace Ogama.Modules.Recording
 #else
       if (this.tclEyetracker.TabPages.Contains(this.tbpTobii))
       {
-        this.tclEyetracker.TabPages.Remove(this.tbpTobii);
+          this.tclEyetracker.TabPages.Remove(this.tbpTobii);
       }
 #endif
 
@@ -2045,20 +2048,21 @@ namespace Ogama.Modules.Recording
               {
                 fs = File.OpenRead(webpageScreenshot.FullFilename);
 
-                // If we get here, the File.Open succeeded, so break out of the loop
+                //If we get here, the File.Open succeeded, so break out of the loop
                 fs.Dispose();
                 break;
               }
               catch (IOException)
               {
                 // IOExcception is thrown if the file is in use by another process.
+
                 // Check the numbere of attempts to ensure no infinite loop
                 attempts++;
                 if (attempts > 20)
                 {
                   // Too many attempts,cannot Open File, break
                   MessageBox.Show("Wait Time did not was enough");
-                  break;
+                  //                  break;
                 }
                 else
                 {
@@ -2067,7 +2071,6 @@ namespace Ogama.Modules.Recording
                 }
               }
             }
-
             webpageScreenshot.CreateInternalImage();
           }
         }
@@ -2244,11 +2247,12 @@ namespace Ogama.Modules.Recording
       this.Picture.StopAnimation();
       this.Picture.ResetPicture();
 
+      this.forcePanelViewerUpdate = true;
+
       // Redraw panel
       this.NewSlideAvailable();
 
-      // this.forcePanelViewerUpdate = false;
-      this.forcePanelViewerUpdate = false;
+      //this.forcePanelViewerUpdate = false;
     }
 
     /// <summary>
