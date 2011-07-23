@@ -356,7 +356,7 @@ namespace Ogama.Modules.Recording
     #region PROPERTIES
 
     /// <summary>
-    /// Sets the list of trials that should be presented.
+    /// Gets or sets the list of trials that should be presented.
     /// </summary>
     /// <value>A <see cref="TrialCollection"/> with the slides to present.</value>
     public TrialCollection TrialList
@@ -1022,6 +1022,7 @@ namespace Ogama.Modules.Recording
 
           // Update trial lists with new trial
           this.recorderTrials.Add(newWebpageTrial);
+          //this.trials.Add(newWebpageTrial);
 
           // Reset slide counter
           // but do not increase trial counter, otherwise
@@ -1065,10 +1066,11 @@ namespace Ogama.Modules.Recording
           // This forces multiple screenshot on webpages with frames
           // but because using only the first url for the filename
           // overwrites the unused frame parts.
-          Thread navigateThread = new Thread(this.NavigateMirror);
+          Thread navigateThread = new Thread(NavigateMirror);
           navigateThread.SetApartmentState(ApartmentState.STA);
           navigateThread.Start(e);
         }
+        //NavigateMirror(e);
       }
       catch (Exception ex)
       {
@@ -1367,6 +1369,7 @@ namespace Ogama.Modules.Recording
           AsyncHelper.FireAndForget(new SendTriggerDelegate(this.SendTrigger), this.shownSlideContainer);
 
           // Send counter update in synchronous call
+          //int trialID = this.trialCounter < this.trials.Count ? this.trials[this.trialCounter].ID : -5;
           int trialID = this.trialCounter < this.trials.Count ? this.shownSlideContainer.Trial.ID : -5;
           this.OnCounterChanged(new CounterChangedEventArgs(
             trialID,
