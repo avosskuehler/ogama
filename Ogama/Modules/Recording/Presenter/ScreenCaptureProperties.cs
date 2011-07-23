@@ -16,7 +16,6 @@ namespace Ogama.Modules.Recording
   using System.Drawing;
   using System.Windows.Forms;
   using OgamaControls;
-  using GazeTrackingLibrary.Hardware;
 
   /// <summary>
   /// This class extends <see cref="CaptureDeviceProperties"/>

@@ -699,6 +699,7 @@ namespace Ogama.Modules.SlideshowDesign
           parent.UrlToID.Remove(keyToRemove);
         }
       }
+
       // Update TreeView.
       treeNode.Remove();
       this.UpdateListView(this.trvSlideshow.SelectedNodes);
