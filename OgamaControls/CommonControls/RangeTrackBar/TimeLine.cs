@@ -408,7 +408,7 @@ namespace OgamaControls
     {
       if (this.Parent.InvokeRequired)
       {
-        this.Parent.Invoke(new MethodInvoker(this.RefreshParentThreadSafe));
+        this.Parent.BeginInvoke(new MethodInvoker(this.RefreshParentThreadSafe));
       }
       else
       {

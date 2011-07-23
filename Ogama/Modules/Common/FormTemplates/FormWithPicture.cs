@@ -115,6 +115,25 @@ namespace Ogama.Modules.Common
     // Defining Enumerations                                                     //
     ///////////////////////////////////////////////////////////////////////////////
     #region ENUMS
+
+    /// <summary>
+    /// The delegate for the thread safe call to a point set method.
+    /// </summary>
+    /// <param name="newValue">The new <see cref="Point"/> to set.</param>
+    private delegate void SetPointCallback(Point newValue);
+
+    /// <summary>
+    /// The delegate for the thread safe call to a size set method.
+    /// </summary>
+    /// <param name="newValue">The new <see cref="Size"/> to set.</param>
+    private delegate void SetSizeCallback(Size newValue);
+
+    /// <summary>
+    /// The delegate for the thread safe call to a rectangle set method.
+    /// </summary>
+    /// <param name="newValue">The new <see cref="Rectangle"/> to set.</param>
+    private delegate void SetRectangleCallback(Rectangle newValue);
+
     #endregion ENUMS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -797,8 +816,8 @@ namespace Ogama.Modules.Common
         int height = (int)Document.ActiveDocument.ExperimentSettings.HeightStimulusScreen;
 
         // Care of side scrollbars... (-17)
-        int canvasWidth = this.Picture.Parent.Parent.Width-17;
-        int canvasHeight = this.Picture.Parent.Parent.Height-17;
+        int canvasWidth = this.Picture.Parent.Parent.Width - 17;
+        int canvasHeight = this.Picture.Parent.Parent.Height - 17;
         float screenRatio = width / (float)height;
 
         float zoomFactor = 1;
@@ -862,12 +881,6 @@ namespace Ogama.Modules.Common
     #region HELPER
 
     /// <summary>
-    /// The delegate for the thread safe call to a rectangle set method.
-    /// </summary>
-    /// <param name="newValue">The new <see cref="Rectangle"/> to set.</param>
-    private delegate void SetRectangleCallback(Rectangle newValue);
-
-    /// <summary>
     /// Thread safe set of the bounds of the pictures parent of this form.
     /// </summary>
     /// <param name="newBounds">A <see cref="Rectangle"/> with the new bounds.</param>
@@ -890,12 +903,6 @@ namespace Ogama.Modules.Common
     }
 
     /// <summary>
-    /// The delegate for the thread safe call to a size set method.
-    /// </summary>
-    /// <param name="newValue">The new <see cref="Size"/> to set.</param>
-    private delegate void SetSizeCallback(Size newValue);
-
-    /// <summary>
     /// Thread safe set of the size of the picture of this form.
     /// </summary>
     /// <param name="newSize">A <see cref="Size"/> with the new size.</param>
@@ -911,12 +918,6 @@ namespace Ogama.Modules.Common
         this.Picture.Size = newSize;
       }
     }
-
-    /// <summary>
-    /// The delegate for the thread safe call to a point set method.
-    /// </summary>
-    /// <param name="newValue">The new <see cref="Point"/> to set.</param>
-    private delegate void SetPointCallback(Point newValue);
 
     /// <summary>
     /// Thread safe set of the autoscrollposition of the the scroll panel.

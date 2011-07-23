@@ -919,7 +919,7 @@ namespace Ogama.Modules.Recording
       browser.Document.Window.Scroll += new HtmlElementEventHandler(this.WebBrowser_Scroll);
       browser.Document.MouseDown -= new HtmlElementEventHandler(this.WebBrowser_MouseDown);
       browser.Document.MouseDown += new HtmlElementEventHandler(this.WebBrowser_MouseDown);
-      this.AttachMouseDownHandler(browser.Document.Window.Frames);
+      this.AttachEventHandlerForFrames(browser.Document.Window.Frames);
     }
 
     /// <summary>
@@ -1226,13 +1226,15 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="htmlWindows">The first <see cref="HtmlWindowCollection"/>
     /// to start parsing. You get it from browser.Document.Window.Frames</param>
-    private void AttachMouseDownHandler(HtmlWindowCollection htmlWindows)
+    private void AttachEventHandlerForFrames(HtmlWindowCollection htmlWindows)
     {
       foreach (HtmlWindow window in htmlWindows)
       {
+        window.Scroll -= new HtmlElementEventHandler(this.WebBrowser_Scroll);
+        window.Scroll += new HtmlElementEventHandler(this.WebBrowser_Scroll);
         window.Document.MouseDown -= new HtmlElementEventHandler(this.WebBrowser_MouseDown);
         window.Document.MouseDown += new HtmlElementEventHandler(this.WebBrowser_MouseDown);
-        this.AttachMouseDownHandler(window.Document.Window.Frames);
+        this.AttachEventHandlerForFrames(window.Document.Window.Frames);
       }
     }
 

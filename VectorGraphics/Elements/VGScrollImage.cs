@@ -151,22 +151,6 @@ namespace VectorGraphics.Elements
     ///////////////////////////////////////////////////////////////////////////////
     #region PROPERTIES
 
-    ///// <summary>
-    ///// Gets or sets the vertical scroll position for this image.
-    ///// </summary>
-    ///// <value>A <see cref="Int32"/> with the ScrollRectangle.Top value</value>
-    //[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    //[Browsable(false)]
-    //public int VerticalScrollposition { get; set; }
-
-    ///// <summary>
-    ///// Gets or sets the horizontal scroll position for this image.
-    ///// </summary>
-    ///// <value>A <see cref="Int32"/> with the ScrollRectangle.Left value</value>
-    //[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    //[Browsable(false)]
-    //public int HorizontalScrollposition { get; set; }
-
     /// <summary>
     /// Overridden. Returns the images size if it is available otherwise
     /// the elements size.
@@ -225,22 +209,14 @@ namespace VectorGraphics.Elements
         }
       }
 
-      Rectangle drawingCanvas = new Rectangle(0, 0, this.Image.Width, this.Image.Height);
-      RectangleF drawing_rectangle = drawingCanvas;
-      //GraphicsUnit pixel = GraphicsUnit.Pixel;
-      //drawing_rectangle.Location = this.Location;
-      //RectangleF sourceRectangle = this.Image.GetBounds(ref pixel);
-      //PointF[] destinationPoints = this.GetPointFArray(drawing_rectangle);
       graphics.DrawImage(this.Image, this.Location);
-      //graphics.DrawImage(this.Image, destinationPoints, sourceRectangle, pixel, this.ImageAttributes);
 
       if (this.ShapeDrawAction == (this.ShapeDrawAction | ShapeDrawAction.Fill))
       {
+        Rectangle drawingCanvas = new Rectangle(0, 0, this.Image.Width, this.Image.Height);
+        RectangleF drawing_rectangle = drawingCanvas;
         graphics.FillRectangle(this.Brush, drawing_rectangle);
       }
-
-      // Draw name and selection frame if applicable
-      //((VGElement)base).Draw(graphics);
     }
 
     /// <summary>

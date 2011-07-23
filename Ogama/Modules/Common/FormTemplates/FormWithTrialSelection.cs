@@ -14,17 +14,10 @@
 namespace Ogama.Modules.Common
 {
   using System;
-  using System.Collections;
-  using System.Collections.Generic;
   using System.ComponentModel;
-  using System.Data;
-  using System.Drawing;
-  using System.Text;
   using System.Windows.Forms;
 
   using Ogama.ExceptionHandling;
-  using Ogama.MainWindow;
-    using System.IO;
 
   /// <summary>
   /// Inherits <see cref="FormWithPicture"/>.
@@ -121,8 +114,7 @@ namespace Ogama.Modules.Common
     protected override void InitializeDropDowns()
     {
       base.InitializeDropDowns();
-        
-      
+
       this.trialCombo.ComboBox.SelectionChangeCommitted += new EventHandler(this.trialCombo_SelectionChangeCommitted);
     }
 

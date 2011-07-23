@@ -119,6 +119,12 @@ namespace VectorGraphics.Canvas
     /// </summary>
     private int sectionEndTime;
 
+    /// <summary>
+    /// Indicates redrawing of the picture, prevents
+    /// double calls to the drawing routines.
+    /// </summary>
+    private bool isRedrawing;
+
     #endregion //FIELDS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -367,8 +373,8 @@ namespace VectorGraphics.Canvas
     {
       try
       {
-        //AsyncHelper.FireAsync(new MethodInvoker(RedrawAndInvalidate));
-        RedrawAndInvalidate();
+        // AsyncHelper.FireAsync(new MethodInvoker(RedrawAndInvalidate));
+        this.RedrawAndInvalidate();
       }
       catch (Exception ex)
       {
@@ -496,20 +502,16 @@ namespace VectorGraphics.Canvas
     public virtual void ResetPicture()
     {
       this.elements.Clear();
+
+      if (this.foregroundGraphics == null)
+      {
+        return;
+      }
+
       lock (this.foregroundGraphics)
       {
         this.foregroundGraphics.Clear(Color.Transparent);
       }
-      //try
-      //{
-      //  if (this.foregroundGraphics != null)
-      //  {
-      //  }
-      //}
-      //catch (InvalidOperationException ex)
-      //{
-      //  VGExceptionMethods.HandleExceptionSilent(ex);
-      //}
     }
 
     /// <summary>
@@ -530,15 +532,13 @@ namespace VectorGraphics.Canvas
       }
     }
 
-    private bool IsRedrawing;
-
     /// <summary>
     /// Redraws every visible element that is in the elements collection onto
     /// the transparent foregroundGraphics.
     /// </summary>
     public void RedrawAll()
     {
-      if (this.IsRedrawing)
+      if (this.isRedrawing || this.foregroundGraphics == null)
       {
         return;
       }
@@ -546,28 +546,22 @@ namespace VectorGraphics.Canvas
       // If the graphics is currently working elsewhere just return
       // cause there can me multiple simultaneous calls to redraw all
       // which will be of no use...
-      //try
-      //{
-        lock (this.foregroundGraphics)
-        {
-          this.IsRedrawing = true;
-          this.foregroundGraphics.Clear(Color.Transparent);
+      lock (this.foregroundGraphics)
+      {
+        this.isRedrawing = true;
+        this.foregroundGraphics.Clear(Color.Transparent);
 
-          foreach (VGElement element in this.elements)
+        foreach (VGElement element in this.elements)
+        {
+          if (element.Visible)
           {
-            if (element.Visible)
-            {
-              element.ModifierKeys = Control.ModifierKeys;
-              element.Draw(this.foregroundGraphics);
-            }
+            element.ModifierKeys = Control.ModifierKeys;
+            element.Draw(this.foregroundGraphics);
           }
-          this.IsRedrawing = false;
         }
-      //}
-      //catch (InvalidOperationException)
-      //{
-      //  return;
-      //}
+
+        this.isRedrawing = false;
+      }
     }
 
     #endregion //PUBLICMETHODS
@@ -733,28 +727,11 @@ namespace VectorGraphics.Canvas
     /// <param name="pe">A <see cref="PaintEventArgs"/> with the event data.</param>
     protected override void OnPaint(PaintEventArgs pe)
     {
-      //try
-      //{
-      // Standard drawing routine
-      //base.OnPaint(pe);
-
       // draw the foreground image
       if (this.foregroundBitmap != null)
       {
         pe.Graphics.DrawImage(this.foregroundBitmap, 0, 0);
-
-        //this.foregroundBitmap.Save(@"c:\test.png",ImageFormat.Png);
       }
-      //}
-      //catch (InvalidOperationException)
-      //{
-      //  // this occurs when the graphics object is in use elsewhere,
-      //  // what is not a problem here
-      //}
-      //catch (Exception ex)
-      //{
-      //  VGExceptionMethods.HandleException(ex);
-      //}
     }
 
     #endregion //OVERRIDES
@@ -816,15 +793,6 @@ namespace VectorGraphics.Canvas
       return true;
     }
 
-    /// <summary>
-    /// Does a redraw all followed by an invalidate.
-    /// </summary>
-    private void RedrawAndInvalidate()
-    {
-      this.RedrawAll();
-      this.Invalidate();
-    }
-
     #endregion //METHODS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -856,6 +824,15 @@ namespace VectorGraphics.Canvas
       }
 
       return new Matrix();
+    }
+
+    /// <summary>
+    /// Does a redraw all followed by an invalidate.
+    /// </summary>
+    private void RedrawAndInvalidate()
+    {
+      this.RedrawAll();
+      this.Invalidate();
     }
 
     /// <summary>

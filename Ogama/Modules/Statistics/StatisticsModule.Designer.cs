@@ -33,13 +33,13 @@ namespace Ogama.Modules.Statistics
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StatisticsModule));
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StatisticsModule));
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
       this.dGVExportTable = new System.Windows.Forms.DataGridView();
       this.cmuDGV = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.cmuRecalculate = new System.Windows.Forms.ToolStripMenuItem();
@@ -242,6 +242,9 @@ namespace Ogama.Modules.Statistics
       this.label2 = new System.Windows.Forms.Label();
       this.rdbTransitionsUseTrial = new System.Windows.Forms.RadioButton();
       this.tosTransitions = new System.Windows.Forms.ToolStrip();
+      this.btnEye = new System.Windows.Forms.ToolStripButton();
+      this.btnMouse = new System.Windows.Forms.ToolStripButton();
+      this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
       this.btnTransitionsStartCalculation = new System.Windows.Forms.ToolStripButton();
       this.btnTransitionsAbortCalculation = new System.Windows.Forms.ToolStripButton();
       this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -353,26 +356,26 @@ namespace Ogama.Modules.Statistics
       // dGVExportTable
       // 
       this.dGVExportTable.AllowUserToOrderColumns = true;
-      dataGridViewCellStyle7.NullValue = null;
-      this.dGVExportTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
-      dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-      dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-      dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-      this.dGVExportTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+      dataGridViewCellStyle4.NullValue = null;
+      this.dGVExportTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+      dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+      dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.dGVExportTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
       this.dGVExportTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.dGVExportTable.ContextMenuStrip = this.cmuDGV;
-      dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.dGVExportTable.DefaultCellStyle = dataGridViewCellStyle9;
+      dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.dGVExportTable.DefaultCellStyle = dataGridViewCellStyle6;
       this.dGVExportTable.Dock = System.Windows.Forms.DockStyle.Fill;
       this.dGVExportTable.Location = new System.Drawing.Point(0, 0);
       this.dGVExportTable.Name = "dGVExportTable";
@@ -1088,26 +1091,26 @@ namespace Ogama.Modules.Statistics
       // dgvTransitions
       // 
       this.dgvTransitions.AllowUserToOrderColumns = true;
-      dataGridViewCellStyle1.NullValue = null;
-      this.dgvTransitions.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-      dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-      dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-      dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-      this.dgvTransitions.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+      dataGridViewCellStyle7.NullValue = null;
+      this.dgvTransitions.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+      dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+      dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.dgvTransitions.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
       this.dgvTransitions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.dgvTransitions.ContextMenuStrip = this.cmuDGV;
-      dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.dgvTransitions.DefaultCellStyle = dataGridViewCellStyle3;
+      dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.dgvTransitions.DefaultCellStyle = dataGridViewCellStyle9;
       this.dgvTransitions.Dock = System.Windows.Forms.DockStyle.Fill;
       this.dgvTransitions.Location = new System.Drawing.Point(0, 0);
       this.dgvTransitions.Name = "dgvTransitions";
@@ -2859,6 +2862,9 @@ namespace Ogama.Modules.Statistics
       this.tosTransitions.Dock = System.Windows.Forms.DockStyle.None;
       this.tosTransitions.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
       this.tosTransitions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnEye,
+            this.btnMouse,
+            this.toolStripSeparator4,
             this.btnTransitionsStartCalculation,
             this.btnTransitionsAbortCalculation,
             this.toolStripSeparator2,
@@ -2869,6 +2875,35 @@ namespace Ogama.Modules.Statistics
       this.tosTransitions.Size = new System.Drawing.Size(775, 25);
       this.tosTransitions.Stretch = true;
       this.tosTransitions.TabIndex = 1;
+      // 
+      // btnEye
+      // 
+      this.btnEye.Checked = true;
+      this.btnEye.CheckOnClick = true;
+      this.btnEye.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.btnEye.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.btnEye.Image = global::Ogama.Properties.Resources.Eye;
+      this.btnEye.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.btnEye.Name = "btnEye";
+      this.btnEye.Size = new System.Drawing.Size(23, 22);
+      this.btnEye.Text = "Check to show gaze fixations.";
+      this.btnEye.Click += new System.EventHandler(this.btnEye_Click);
+      // 
+      // btnMouse
+      // 
+      this.btnMouse.CheckOnClick = true;
+      this.btnMouse.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.btnMouse.Image = global::Ogama.Properties.Resources.Mouse;
+      this.btnMouse.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.btnMouse.Name = "btnMouse";
+      this.btnMouse.Size = new System.Drawing.Size(23, 22);
+      this.btnMouse.Text = "Check to show mouse fixations.";
+      this.btnMouse.Click += new System.EventHandler(this.btnMouse_Click);
+      // 
+      // toolStripSeparator4
+      // 
+      this.toolStripSeparator4.Name = "toolStripSeparator4";
+      this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
       // 
       // btnTransitionsStartCalculation
       // 
@@ -3258,5 +3293,8 @@ namespace Ogama.Modules.Statistics
     private System.Windows.Forms.RadioButton rdbMouseSaccadeVelocity;
     private System.Windows.Forms.RadioButton rdbMouseSaccadeLength;
     private System.Windows.Forms.RadioButton rdbMouseSaccadeDuration;
+    private System.Windows.Forms.ToolStripButton btnEye;
+    private System.Windows.Forms.ToolStripButton btnMouse;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
   }
 }
