@@ -114,6 +114,19 @@ namespace Ogama.Modules.Recording
     }
 
     /// <summary>
+    /// Gets the singleton instance of this class.
+    /// </summary>
+    /// <value>A <see cref="WebsiteScreenshot"/> with the 
+    /// singleton instance of this class.</value>
+    public static bool HasBeenUsed
+    {
+      get
+      {
+        return instance != null;
+      }
+    }
+
+    /// <summary>
     /// Gets or sets the filename with full path to the screenshot 
     /// this class should write to.
     /// </summary>

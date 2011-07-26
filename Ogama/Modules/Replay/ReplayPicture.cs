@@ -1698,57 +1698,59 @@ namespace Ogama.Modules.Replay
           if (!row.IsNull("EventID"))
           {
             int eventID = (int)row["EventID"];
-
-            if (!remove)
+            if (((ReplayModule)this.OwningForm).TrialEvents.ContainsKey(eventID))
             {
-              this.OnTrialEventIDFound(new TrialEventIDFoundEventArgs(eventID));
-            }
+              if (!remove)
+              {
+                this.OnTrialEventIDFound(new TrialEventIDFoundEventArgs(eventID));
+              }
 
-            TrialEvent occuredEvent = ((ReplayModule)this.OwningForm).TrialEvents[eventID];
-            switch (occuredEvent.Type)
-            {
-              case EventType.None:
-                break;
-              case EventType.Mouse:
-                switch (((InputEvent)occuredEvent).Task)
-                {
-                  case InputEventTask.Down:
-                    string parameter = occuredEvent.Param;
-                    MouseStopCondition msc =
-                      (MouseStopCondition)TypeDescriptor.GetConverter(typeof(StopCondition)).ConvertFrom(parameter);
-                    validMouseClicks.Add(msc);
-                    break;
-                }
+              TrialEvent occuredEvent = ((ReplayModule)this.OwningForm).TrialEvents[eventID];
+              switch (occuredEvent.Type)
+              {
+                case EventType.None:
+                  break;
+                case EventType.Mouse:
+                  switch (((InputEvent)occuredEvent).Task)
+                  {
+                    case InputEventTask.Down:
+                      string parameter = occuredEvent.Param;
+                      MouseStopCondition msc =
+                        (MouseStopCondition)TypeDescriptor.GetConverter(typeof(StopCondition)).ConvertFrom(parameter);
+                      validMouseClicks.Add(msc);
+                      break;
+                  }
 
-                break;
-              case EventType.Key:
-                break;
-              case EventType.Slide:
-                break;
-              case EventType.Flash:
-                break;
-              case EventType.Audio:
-                break;
-              case EventType.Video:
-                break;
-              case EventType.Usercam:
-                break;
-              case EventType.Response:
-                break;
-              case EventType.Marker:
-                break;
-              case EventType.Scroll:
-                // Update scroll position
-                string[] scrollOffsets = occuredEvent.Param.Split(';');
-                Point newScrollPosition = new Point(
-                  Convert.ToInt32(scrollOffsets[0]),
-                  Convert.ToInt32(scrollOffsets[1]));
-                this.visiblePartOfScreen.Location = newScrollPosition;
-                break;
-              case EventType.Webpage:
-                break;
-              default:
-                break;
+                  break;
+                case EventType.Key:
+                  break;
+                case EventType.Slide:
+                  break;
+                case EventType.Flash:
+                  break;
+                case EventType.Audio:
+                  break;
+                case EventType.Video:
+                  break;
+                case EventType.Usercam:
+                  break;
+                case EventType.Response:
+                  break;
+                case EventType.Marker:
+                  break;
+                case EventType.Scroll:
+                  // Update scroll position
+                  string[] scrollOffsets = occuredEvent.Param.Split(';');
+                  Point newScrollPosition = new Point(
+                    Convert.ToInt32(scrollOffsets[0]),
+                    Convert.ToInt32(scrollOffsets[1]));
+                  this.visiblePartOfScreen.Location = newScrollPosition;
+                  break;
+                case EventType.Webpage:
+                  break;
+                default:
+                  break;
+              }
             }
           }
 

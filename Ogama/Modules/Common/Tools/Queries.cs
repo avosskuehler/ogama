@@ -2540,7 +2540,10 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     /// <param name="usercamID">Out. The event id of the user camera start time.</param>
     /// <returns>A <see cref="SortedList{Int32, TrialEvent}"/>
     /// with the events occured in this experiment.</returns>
-    private static SortedList<int, TrialEvent> ExtractEvents(string subjectName, DataTable table, out int usercamID)
+    private static SortedList<int, TrialEvent> ExtractEvents(
+      string subjectName, 
+      DataTable table,
+      out int usercamID)
     {
       usercamID = -1;
       int lastTrialSequence = -1;
@@ -2567,9 +2570,16 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
         int trialSequence = Convert.ToInt32(row["TrialSequence"]);
         if (trialSequence != lastTrialSequence)
         {
-          lastTrialSequence = trialSequence;
           DataTable trialTable =
   Document.ActiveDocument.DocDataSet.TrialsAdapter.GetDataBySubjectAndSequence(subjectName, trialSequence);
+
+          // Check for deleted trials, but left raw data...
+          if (trialTable.Rows.Count == 0)
+          {
+            continue;
+          }
+
+          lastTrialSequence = trialSequence;
           long trialStartTime = Convert.ToInt64(trialTable.Rows[0]["TrialStartTime"]);
           timeToAdd = trialStartTime;
         }
