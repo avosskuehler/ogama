@@ -700,6 +700,12 @@ namespace Ogama.Modules.Recording
     private void frmPresenter_FormClosing(object sender, FormClosingEventArgs e)
     {
       this.watch.Stop();
+
+      // Cleanup website screenshot creator
+      if (WebsiteScreenshot.HasBeenUsed)
+      {
+        WebsiteScreenshot.Instance.Dispose();
+      }
     }
 
     /// <summary>

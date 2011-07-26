@@ -31,6 +31,8 @@ namespace Ogama.Modules.Replay
   using VectorGraphics.CustomEventArgs;
   using VectorGraphics.Elements;
   using VectorGraphics.Tools;
+  using System.Collections;
+  using System.Collections.Generic;
 
   /// <summary>
   /// Derived from <see cref="FormWithSubjectAndTrialSelection"/>.
@@ -1711,6 +1713,11 @@ namespace Ogama.Modules.Replay
     {
       try
       {
+        if (!this.TrialEvents.ContainsKey(e.EventID))
+        {
+          return;
+        }
+
         TrialEvent occuredEvent = this.TrialEvents[e.EventID];
         string parameter = occuredEvent.Param;
         switch (occuredEvent.Type)
@@ -1775,6 +1782,8 @@ namespace Ogama.Modules.Replay
       {
         string subjectName = Document.ActiveDocument.SelectionState.SubjectName;
 
+        this.StopTrialVideoAndTrialAudio();
+
         // Load an video for the trial
         this.LoadTrialVideo(subjectName, e.TrialSequence);
 
@@ -1792,6 +1801,19 @@ namespace Ogama.Modules.Replay
         if (this.isUsingTrialVideo)
         {
           this.Picture.ResetBackground();
+          AsyncHelper.FireAndForget(new MethodInvoker(this.videoFramePusher.Start));
+        }
+
+        // Load trial stimulus into picture
+        this.LoadAudioStimuli(FilterTrialEvents(this.TrialEvents, e.TrialSequence));
+
+        // Start sound
+        if (this.btnEnableAudio.Checked)
+        {
+          if (this.Player != null)
+          {
+            this.Player.Play();
+          }
         }
       }
     }
@@ -2512,18 +2534,7 @@ namespace Ogama.Modules.Replay
         this.usercamVideoPlayer.StopMovie();
       }
 
-      if (this.isUsingTrialVideo)
-      {
-        this.videoFramePusher.Stop();
-      }
-
-      if (this.btnEnableAudio.Checked)
-      {
-        if (this.Player != null)
-        {
-          this.Player.Stop();
-        }
-      }
+      StopTrialVideoAndTrialAudio();
 
       // Enable the ComboBoxes
       this.cbbSubject.Enabled = true;
@@ -2536,6 +2547,25 @@ namespace Ogama.Modules.Replay
       this.btnRewind.Enabled = true;
       this.btnPause.Enabled = false;
       this.btnPause.Checked = false;
+    }
+
+    /// <summary>
+    /// Stops current trial video and audio player.
+    /// </summary>
+    private void StopTrialVideoAndTrialAudio()
+    {
+      if (this.isUsingTrialVideo)
+      {
+        this.videoFramePusher.Stop();
+      }
+
+      if (this.btnEnableAudio.Checked)
+      {
+        if (this.Player != null)
+        {
+          this.Player.Stop();
+        }
+      }
     }
 
     /// <summary>
@@ -2624,6 +2654,30 @@ namespace Ogama.Modules.Replay
           Queries.UpdateMarkerEventByID(trialEvent);
         }
       }
+    }
+
+    /// <summary>
+    /// Filters the list of trial events to return only the events
+    /// occured in the given trial sequence of the current subject.
+    /// </summary>
+    /// <param name="sortedList">A list of all trial events of the whole experiment
+    /// for this subject.</param>
+    /// <param name="trialSequence">The trial sequence filter.</param>
+    /// <returns>The filtered list of trial events.</returns>
+    private SortedList<int, TrialEvent> FilterTrialEvents(
+      SortedList<int, TrialEvent> sortedList,
+      int trialSequence)
+    {
+      SortedList<int, TrialEvent> returnList = new SortedList<int, TrialEvent>();
+      foreach (KeyValuePair<int, TrialEvent> trialEvent in sortedList)
+      {
+        if (trialEvent.Value.TrialSequence == trialSequence)
+        {
+          returnList.Add(trialEvent.Value.EventID, trialEvent.Value);
+        }
+      }
+
+      return returnList;
     }
 
     #endregion //HELPER

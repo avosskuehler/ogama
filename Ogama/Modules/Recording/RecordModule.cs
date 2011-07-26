@@ -751,8 +751,13 @@ namespace Ogama.Modules.Recording
 
       this.InitializeScreenCapture();
       this.CreateTrackerInterfaces();
+      
+      // Use panel update always at start
+      this.forcePanelViewerUpdate = true;
+
       this.NewSlideAvailable();
 
+      // Reset the panel update, only used in debugging mode
       // this.forcePanelViewerUpdate = true;
       this.forcePanelViewerUpdate = false;
 
@@ -1059,10 +1064,16 @@ namespace Ogama.Modules.Recording
 
       lock (this)
       {
+        this.slideCounter = e.SlideCounter;
+
         // Don´t use presenters trialCounter
         // Because of using links between trials.
-        this.trialSequenceCounter++;
-        this.slideCounter = e.SlideCounter;
+        // and care of trials with multiple slides
+        // don´t increase trial sequence counter on this.
+        if (this.slideCounter == 0)
+        {
+          this.trialSequenceCounter++;
+        }
 
         // Set current trial
         if (e.TrialID != -5)
@@ -1336,9 +1347,6 @@ namespace Ogama.Modules.Recording
 
         // Reset recording flag
         this.recordingBusy = false;
-
-        // Cleanup website screenshot creator
-        WebsiteScreenshot.Instance.Dispose();
       }
       catch (Exception ex)
       {

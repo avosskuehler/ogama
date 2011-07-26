@@ -470,6 +470,7 @@ namespace Ogama.Modules.Scanpaths
       {
         foreach (KeyValuePair<string, ScanpathProperties> kvp in this.subjects)
         {
+          // this.SetSubjectFilter(kvp.Key, this.playTime - 500 > 0 ? this.playTime - 1000 : 0, this.playTime);
           this.SetSubjectFilter(kvp.Key, this.lastPlayTime, this.playTime);
 
           this.GazeFixationConnectionsPen = kvp.Value.GazeStyle.ConnectionPen;

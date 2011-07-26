@@ -17,7 +17,7 @@ namespace OgamaControls.Media
     /// </summary>
     public int TimelineLength
     {
-      get { return (int)(ds.AudioLength/10000f); }
+      get { return (int)(ds.AudioLength / 10000f); }
     }
 
     /// <summary>
@@ -35,7 +35,7 @@ namespace OgamaControls.Media
     public DESAudioPlayer()
     {
       // FPS, BPP, Width, Height
-      ds = new DESCombine(25, 24, 10, 10,true,false);
+      ds = new DESCombine(25, 24, 10, 10, true, false);
 
       // Wire events
       ds.Completed += new EventHandler(Completed);
@@ -86,11 +86,23 @@ namespace OgamaControls.Media
     }
 
     /// <summary>
+    /// This method adds the given sound file to the timeline at the
+    /// position given in millisecónds in the second parameter.
+    /// </summary>
+    /// <param name="filename"></param>
+    /// <param name="startPosition">The initial time in milliseconds that this sound should be started.</param>
+    /// <param name="endPosition">The time in milliseconds that this sound should be stopped.</param>
+    public void AddSoundAtRange(string filename, long startPosition, long endPosition)
+    {
+      ds.AddAudioFile(filename, startPosition * 10000, endPosition * 10000);
+    }
+
+    /// <summary>
     /// 
     /// </summary>
     public void Play()
     {
-      if (ds.MediaLength>0)
+      if (ds.MediaLength > 0)
       {
         ds.StartRendering();
       }
