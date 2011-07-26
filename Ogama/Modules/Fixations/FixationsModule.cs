@@ -512,7 +512,7 @@ namespace Ogama.Modules.Fixations
     private void btnSeekNextSlide_Click(object sender, EventArgs e)
     {
       this.trialTimeLine.HighlightNextSlide(true);
-      this.LoadSlide(this.CurrentTrial[this.trialTimeLine.HighlightedSlideIndex], ActiveXMode.Video);
+      this.LoadSlide(this.CurrentTrial[this.trialTimeLine.HighlightedSlideIndex], ActiveXMode.Off);
       this.FilterFixationsBySlide();
     }
 
@@ -526,7 +526,7 @@ namespace Ogama.Modules.Fixations
     private void btnSeekPreviousSlide_Click(object sender, EventArgs e)
     {
       this.trialTimeLine.HighlightNextSlide(false);
-      this.LoadSlide(this.CurrentTrial[this.trialTimeLine.HighlightedSlideIndex], ActiveXMode.Video);
+      this.LoadSlide(this.CurrentTrial[this.trialTimeLine.HighlightedSlideIndex], ActiveXMode.Off);
       this.FilterFixationsBySlide();
     }
 
