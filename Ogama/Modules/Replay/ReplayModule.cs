@@ -1736,7 +1736,7 @@ namespace Ogama.Modules.Replay
             Slide newSlide = this.CurrentTrial[slideCounter];
             if (this.replayPicture.BGSlide != newSlide)
             {
-              this.LoadSlide(newSlide, ActiveXMode.Video);
+              this.LoadSlide(newSlide, ActiveXMode.Off);
             }
 
             break;
@@ -2584,6 +2584,16 @@ namespace Ogama.Modules.Replay
     private void ResetControls()
     {
       this.StopPlaying();
+
+      // Load first slide of multiple slides on trial
+      if (this.CurrentTrial.Count > 1)
+      {
+        Slide newSlide = this.CurrentTrial[0];
+        if (this.replayPicture.BGSlide != newSlide)
+        {
+          this.LoadSlide(newSlide, ActiveXMode.Off);
+        }
+      }
 
       ((MainForm)this.MdiParent).StatusLabel.Text = "Ready";
       ((MainForm)this.MdiParent).StatusProgressbar.Value = 0;
