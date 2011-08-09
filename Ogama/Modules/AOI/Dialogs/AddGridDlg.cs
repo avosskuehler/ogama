@@ -159,6 +159,11 @@ namespace Ogama.Modules.AOI
     private void CreateDataGridView()
     {
       string[] description = Scanpaths.ScanpathsPicture.CurrentIdentifierList;
+      if (description == null)
+      {
+        description = Scanpaths.ScanpathsPicture.IdentifierList;
+      }
+
       int numColumns = (int)this.nudColumns.Value;
       int numRows = (int)this.nudRows.Value;
       if (numRows * numColumns > 26)

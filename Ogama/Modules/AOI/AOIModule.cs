@@ -1118,6 +1118,7 @@ namespace Ogama.Modules.AOI
       this.btnNewEllipse.Checked = false;
       this.btnNewPolyline.Checked = false;
       this.btnNewAOIGrid.Checked = true;
+
       AddGridDlg gridDialog = new AddGridDlg();
       Bitmap screenShot = new Bitmap(Document.ActiveDocument.PresentationSize.Width, Document.ActiveDocument.PresentationSize.Height);
       Image screenshot2 = this.aoiPicture.RenderToImage();
