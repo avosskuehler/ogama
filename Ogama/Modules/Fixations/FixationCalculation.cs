@@ -95,6 +95,12 @@ namespace Ogama.Modules.Fixations
     /// </summary>
     private int limitForFirstFixation;
 
+    /// <summary>
+    /// Indicates whether to simply eliminate first fixation without any additional 
+    /// conditions.
+    /// </summary>
+    private bool eliminateFirstFixationSimple;
+
     #endregion //FIELDS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -325,14 +331,18 @@ namespace Ogama.Modules.Fixations
                   completedFixation.TrialID = (int)trialRow["TrialID"];
                   completedFixation.TrialSequence = (int)trialRow["TrialSequence"];
 
-                  if (this.eliminateFirstFixation && counterFix == 0 && VGPolyline.Distance(fixationCenter, trialLastFixCenter) < maxDistance && fix_duration_delayed_milliseconds < this.limitForFirstFixation)
+                  if (this.eliminateFirstFixation && !eliminateFirstFixationSimple && counterFix == 0 && VGPolyline.Distance(fixationCenter, trialLastFixCenter) < maxDistance && fix_duration_delayed_milliseconds < this.limitForFirstFixation)
                   {
-                    // Eliminate if applicable
+                      // Eliminate if applicable
+                  }
+                  else if (this.eliminateFirstFixationSimple && counterFix == 0)
+                  {
+                      counterFix++; //do nothing, just go on with the next fixation eliminating this one
                   }
                   else
                   {
-                    fixations.Add(completedFixation);
-                    counterFix++;
+                      fixations.Add(completedFixation);
+                      counterFix++;
                   }
                 }
 
@@ -658,6 +668,7 @@ namespace Ogama.Modules.Fixations
       this.mergeConsecutiveFixations = Document.ActiveDocument.ExperimentSettings.MergeConsecutiveFixations;
       this.eliminateFirstFixation = Document.ActiveDocument.ExperimentSettings.EliminateFirstFixation;
       this.limitForFirstFixation = Document.ActiveDocument.ExperimentSettings.LimitForFirstFixation;
+      this.eliminateFirstFixationSimple = Document.ActiveDocument.ExperimentSettings.EliminateFirstFixationSimple;
     }
 
     #endregion //PRIVATEMETHODS

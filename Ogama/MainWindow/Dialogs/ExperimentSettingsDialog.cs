@@ -68,6 +68,7 @@ namespace Ogama.MainWindow
         this.nudMouseDiameterDiv.Value = (decimal)settings.MouseDiameterDiv;
         this.nudFixationRingSize.Value = (decimal)settings.FixationRingSize;
         this.chbEliminateFirstFixationOfGivenLength.Checked = settings.EliminateFirstFixation;
+        this.chbEliminateFirstFixationSimple.Checked = settings.EliminateFirstFixationSimple;
         this.chbMergeConsecutiveFixations.Checked = settings.MergeConsecutiveFixations;
         this.nudFixationLimit.Value = (decimal)settings.LimitForFirstFixation;
       }
@@ -276,6 +277,7 @@ namespace Ogama.MainWindow
       settings.MouseSamplingRate = Convert.ToInt32(this.txbSamplingRateMouse.Text);
       settings.LimitForFirstFixation = (int)this.nudFixationLimit.Value;
       settings.EliminateFirstFixation = this.chbEliminateFirstFixationOfGivenLength.Checked;
+      settings.EliminateFirstFixationSimple = this.chbEliminateFirstFixationSimple.Checked;
       settings.MergeConsecutiveFixations = this.chbMergeConsecutiveFixations.Checked;
       settings.FixationRingSize = (int)this.nudFixationRingSize.Value;
       settings.SqlInstanceName = this.txbSQLInstanceName.Text;
@@ -326,8 +328,34 @@ namespace Ogama.MainWindow
       return true;
     }
 
-    #endregion //METHODS
+    /// <summary>
+    /// This method checks the state of chbEliminateFirstFixationSimple_CheckedChanged checkbox
+    /// and controls another checkbox chbEliminateFirstFixationOfGivenLength
+    /// so there is ony one checkbox could be checked.
+    /// </summary>
+    private void chbEliminateFirstFixationSimple_CheckedChanged(object sender, EventArgs e)
+    {
+        if (chbEliminateFirstFixationSimple.Checked)
+        {
+            chbEliminateFirstFixationOfGivenLength.Checked = false;
+        }
+    }
+    
+    /// <summary>
+    /// This method checks the state of chbEliminateFirstFixationOfGivenLength_CheckedChanged checkbox
+    /// and controls another checkbox chbEliminateFirstFixationSimple
+    /// so there is ony one checkbox could be checked.
+    /// </summary>
+    private void chbEliminateFirstFixationOfGivenLength_CheckedChanged(object sender, EventArgs e)
+    {
+        if (chbEliminateFirstFixationOfGivenLength.Checked)
+        {
+            chbEliminateFirstFixationSimple.Checked = false;
+        }
+    }
 
+    #endregion //METHODS
+      
     ///////////////////////////////////////////////////////////////////////////////
     // Small helping Methods                                                     //
     ///////////////////////////////////////////////////////////////////////////////

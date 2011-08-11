@@ -121,6 +121,12 @@ namespace Ogama.Properties
     private int limitForFirstFixation;
 
     /// <summary>
+    /// Indicates whether to simply eliminate first fixation without any additional 
+    /// conditions.
+    /// </summary>
+    private bool eliminateFirstFixationSimple;
+
+    /// <summary>
     /// Width of Stimulus Presentation Monitor.
     /// </summary>
     private int widthStimulusScreen;
@@ -195,6 +201,7 @@ namespace Ogama.Properties
       this.mergeConsecutiveFixations = true;
       this.eliminateFirstFixation = false;
       this.limitForFirstFixation = 300;
+      this.eliminateFirstFixationSimple = false;
       this.slideShow = new Slideshow();
       this.customConnectionString = string.Empty;
       this.gazeColorParams = new ColorizationParameters();
@@ -259,6 +266,16 @@ namespace Ogama.Properties
     {
       get { return this.limitForFirstFixation; }
       set { this.limitForFirstFixation = value; }
+    }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether to simply eliminate fixations without any
+    /// additional conditions.
+    /// </summary>
+    public bool EliminateFirstFixationSimple
+    {
+        get { return this.eliminateFirstFixationSimple; }
+        set { this.eliminateFirstFixationSimple = value; }
     }
 
     /// <summary>
