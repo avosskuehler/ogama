@@ -333,11 +333,13 @@ namespace Ogama.MainWindow
     /// and controls another checkbox chbEliminateFirstFixationOfGivenLength
     /// so there is ony one checkbox could be checked.
     /// </summary>
+    /// <param name="sender">Indicates the sender of an event.</param>
+    /// <param name="e">Event arguments.</param>
     private void chbEliminateFirstFixationSimple_CheckedChanged(object sender, EventArgs e)
     {
-        if (chbEliminateFirstFixationSimple.Checked)
+        if (this.chbEliminateFirstFixationSimple.Checked)
         {
-            chbEliminateFirstFixationOfGivenLength.Checked = false;
+            this.chbEliminateFirstFixationOfGivenLength.Checked = false;
         }
     }
     
@@ -346,11 +348,13 @@ namespace Ogama.MainWindow
     /// and controls another checkbox chbEliminateFirstFixationSimple
     /// so there is ony one checkbox could be checked.
     /// </summary>
+    /// <param name="sender">Indicates the sender of an event.</param>
+    /// <param name="e">Event arguments.</param>
     private void chbEliminateFirstFixationOfGivenLength_CheckedChanged(object sender, EventArgs e)
     {
-        if (chbEliminateFirstFixationOfGivenLength.Checked)
+        if (this.chbEliminateFirstFixationOfGivenLength.Checked)
         {
-            chbEliminateFirstFixationSimple.Checked = false;
+            this.chbEliminateFirstFixationSimple.Checked = false;
         }
     }
 

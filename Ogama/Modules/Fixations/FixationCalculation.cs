@@ -331,13 +331,14 @@ namespace Ogama.Modules.Fixations
                   completedFixation.TrialID = (int)trialRow["TrialID"];
                   completedFixation.TrialSequence = (int)trialRow["TrialSequence"];
 
-                  if (this.eliminateFirstFixation && !eliminateFirstFixationSimple && counterFix == 0 && VGPolyline.Distance(fixationCenter, trialLastFixCenter) < maxDistance && fix_duration_delayed_milliseconds < this.limitForFirstFixation)
+                  if (this.eliminateFirstFixation && this.eliminateFirstFixationSimple == false && counterFix == 0 && VGPolyline.Distance(fixationCenter, trialLastFixCenter) < maxDistance && fix_duration_delayed_milliseconds < this.limitForFirstFixation)
                   {
                       // Eliminate if applicable
                   }
                   else if (this.eliminateFirstFixationSimple && counterFix == 0)
                   {
-                      counterFix++; //do nothing, just go on with the next fixation eliminating this one
+                      // do nothing, just go on with the next fixation eliminating this one
+                      counterFix++;
                   }
                   else
                   {

@@ -220,7 +220,7 @@ namespace Ogama.Properties
     /// <summary>
     /// Gets or sets the OGAMA version that this experiment is currently working with.
     /// </summary>
-    [XmlIgnore()]
+    [XmlIgnore]
     public Version OgamaVersion
     {
       get
@@ -413,7 +413,7 @@ namespace Ogama.Properties
     /// Gets or sets file path for this document (XML) file
     /// </summary>
     /// <value>A <see cref="string"/> with the path to the experiment file.</value>
-    [XmlIgnore()]
+    [XmlIgnore]
     public string DocumentPath
     {
       get { return this.documentPath; }
