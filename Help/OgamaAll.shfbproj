@@ -40,7 +40,7 @@ You can modify and customize it for your needs as long as your product is not in
     <RootNamespaceContainer>True</RootNamespaceContainer>
     <RootNamespaceTitle>Ogama Namespaces</RootNamespaceTitle>
     <HelpTitle>Ogama - open gaze and mouse analyzer source documentation</HelpTitle>
-    <CopyrightText>Adrian Vo&amp;#223%3bk&amp;#252%3bhler, Freie Universit&amp;#228%3bt Berlin, created 14.06.10  --  Please have a look at the source for deeper understanding.</CopyrightText>
+    <CopyrightText>Adrian Vo&amp;#223%3bk&amp;#252%3bhler, Freie Universit&amp;#228%3bt Berlin, created 28.08.11  --  Please have a look at the source for deeper understanding.</CopyrightText>
     <FeedbackEMailAddress>adrian%40ogama.net</FeedbackEMailAddress>
     <PresentationStyle>vs2005</PresentationStyle>
     <SyntaxFilters>CSharp</SyntaxFilters>
@@ -202,7 +202,7 @@ That is the mouse movement recording module.</NamespaceSummaryItem>
     </ApiFilter>
     <HelpFileFormat>HtmlHelp1x</HelpFileFormat>
     <IncludeStopWordList>True</IncludeStopWordList>
-    <FooterText>Visit OGAMAs homepage at www.ogama.net !</FooterText>
+    <FooterText>Visit OGAMAs homepage at www.ogama.net or http://ogama.codeplex.com!</FooterText>
   </PropertyGroup>
   <!-- There are no properties for these two groups but they need to appear in
        order for Visual Studio to perform the build. -->
