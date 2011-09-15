@@ -2001,7 +2001,7 @@
       this.btnPrimary.Size = new System.Drawing.Size(23, 22);
       this.btnPrimary.Text = "Primary Screen";
       this.btnPrimary.ToolTipText = "Show slide show on primary screen";
-      this.btnPrimary.Click += new System.EventHandler(this.btnPrimary_Click);
+      this.btnPrimary.Click += new System.EventHandler(this.BtnPrimaryClick);
       // 
       // btnSecondary
       // 
@@ -2013,7 +2013,7 @@
       this.btnSecondary.Size = new System.Drawing.Size(23, 22);
       this.btnSecondary.Text = "Secondary Screen";
       this.btnSecondary.ToolTipText = "Show slide show on secondary screen";
-      this.btnSecondary.Click += new System.EventHandler(this.btnSecondary_Click);
+      this.btnSecondary.Click += new System.EventHandler(this.BtnSecondaryClick);
       // 
       // btnScreenCaptureSettings
       // 
@@ -4705,8 +4705,8 @@
       this.Logo = global::Ogama.Properties.Resources.Record;
       this.Name = "RecordModule";
       this.Text = "Recording module";
-      this.Load += new System.EventHandler(this.RecordModule_Load);
-      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RecordModule_FormClosing);
+      this.Load += new System.EventHandler(this.RecordModuleLoad);
+      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RecordModuleFormClosing);
       ((System.ComponentModel.ISupportInitialize)(this.bsoSubjects)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.bsoFKSubjectsTrials)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.ogamaDataSet)).EndInit();

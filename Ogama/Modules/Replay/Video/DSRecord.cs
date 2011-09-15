@@ -521,7 +521,7 @@ namespace Ogama.Modules.Replay
             hr >= 0;
             hr = mediaEvent.GetEvent(out ec, out p1, out p2, 100))
         {
-          Debug.WriteLine(ec);
+          // Debug.WriteLine(ec);
           switch (ec)
           {
             // If the clip is finished playing
