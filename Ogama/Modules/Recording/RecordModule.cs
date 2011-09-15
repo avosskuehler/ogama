@@ -86,7 +86,7 @@ namespace Ogama.Modules.Recording
     /// This is a slide that shows a short recording instruction
     /// when starting the module.
     /// </summary>
-    private static Slide defaultSlide = new Slide(
+    private static readonly Slide defaultSlide = new Slide(
       "Background",
       Color.Black,
       Images.CreateRecordInstructionImage(Document.ActiveDocument.ExperimentSettings.WidthStimulusScreen, Document.ActiveDocument.ExperimentSettings.HeightStimulusScreen),
@@ -657,16 +657,18 @@ namespace Ogama.Modules.Recording
       this.recordTimerWatch = new Stopwatch();
       ////this.watch.Start();
 
-      this.generalTrigger = new Trigger();
-      this.generalTrigger.OutputDevice = TriggerOutputDevices.LPT;
-      this.generalTrigger.Signaling = TriggerSignaling.None;
-      this.generalTrigger.SignalingTime = 10;
-      this.generalTrigger.Value = 255;
-      this.generalTrigger.PortAddress = 0x0378;
+      this.generalTrigger = new Trigger
+        {
+          OutputDevice = TriggerOutputDevices.LPT,
+          Signaling = TriggerSignaling.None,
+          SignalingTime = 10,
+          Value = 255,
+          PortAddress = 0x0378
+        };
 
       // Take primary monitor
-      int monitorIndex = 0;
-      if (PresentationScreen.GetPresentationScreen() != Screen.PrimaryScreen)
+      var monitorIndex = 0;
+      if (PresentationScreen.GetPresentationScreen() != Screen.PrimaryScreen) 
       {
         // otherwise take the secondary sceen.
         monitorIndex = 1;
@@ -675,7 +677,7 @@ namespace Ogama.Modules.Recording
       this.screenCaptureProperties = new ScreenCaptureProperties(
         "OgamaScreenCapture Filter",
         string.Empty,
-        "ffdshow",
+        "ffdshow video encoder",
         string.Empty,
         10,
         Document.ActiveDocument.PresentationSize,
@@ -685,7 +687,7 @@ namespace Ogama.Modules.Recording
         this.recordPicture);
 
       this.rawDataLists = new List<RawData>[NUMWRITINGTHREADS];
-      for (int i = 0; i < NUMWRITINGTHREADS; i++)
+      for (var i = 0; i < NUMWRITINGTHREADS; i++)
       {
         this.rawDataLists[i] = new List<RawData>();
       }
@@ -740,7 +742,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void RecordModule_Load(object sender, EventArgs e)
+    private void RecordModuleLoad(object sender, EventArgs e)
     {
       this.smoothing = false;
 
@@ -776,7 +778,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">A <see cref="FormClosingEventArgs"/> with the event data.</param>
-    private void RecordModule_FormClosing(object sender, FormClosingEventArgs e)
+    private void RecordModuleFormClosing(object sender, FormClosingEventArgs e)
     {
       if (this.presentationThread != null && this.presentationThread.IsAlive)
       {
@@ -800,7 +802,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
-    private void btnPrimary_Click(object sender, EventArgs e)
+    private void BtnPrimaryClick(object sender, EventArgs e)
     {
       this.btnSecondary.Checked = !this.btnPrimary.Checked;
       this.SubmitPresentationScreenToSettings();
@@ -813,7 +815,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
-    private void btnSecondary_Click(object sender, EventArgs e)
+    private void BtnSecondaryClick(object sender, EventArgs e)
     {
       this.btnPrimary.Checked = !this.btnSecondary.Checked;
       this.SubmitPresentationScreenToSettings();
@@ -877,7 +879,7 @@ namespace Ogama.Modules.Recording
       }
       else
       {
-        string message = "Please choose a tracker system before changing settings, "
+        var message = "Please choose a tracker system before changing settings, "
         + "by selecting a tracker tab at the left side of the module";
         ExceptionMethods.ProcessMessage("No tracker selected", message);
       }
@@ -1968,25 +1970,25 @@ namespace Ogama.Modules.Recording
         this.currentTrialVideoStartTime = 0;
         this.currentTracker.Record();
 
-        Stopwatch watch = new Stopwatch();
-        watch.Start();
+        var stopwatch = new Stopwatch();
+        stopwatch.Start();
 
         // Wait for first sample to be received
         while (this.GetCurrentTime() < 0)
         {
           Application.DoEvents();
-          if (watch.ElapsedMilliseconds > 5000)
+          if (stopwatch.ElapsedMilliseconds > 5000)
           {
-            string message = "Could not start recording, because we received no gaze samples from the tracking device during 5 seconds." +
+            var message = "Could not start recording, because we received no gaze samples from the tracking device during 5 seconds." +
               Environment.NewLine + "Please be sure your tracker is up and running and collecting gaze data, resp. is correct calibrated.";
             InformationDialog.Show("No incoming tracker data", message, false, MessageBoxIcon.Warning);
-            watch.Stop();
+            stopwatch.Stop();
 
             return false;
           }
         }
 
-        watch.Stop();
+        stopwatch.Stop();
 
         // Set recording flag
         this.recordingBusy = true;

@@ -839,7 +839,7 @@ namespace Ogama.DataSet
 
       if (Queries.ColumnExists("Trials", "StimulusFile"))
       {
-        string trialQueryString = "SELECT Trials.* FROM [dbo].[Trials]";
+        const string trialQueryString = "SELECT Trials.* FROM [dbo].[Trials]";
         SqlDataAdapter trialAdapter = new SqlDataAdapter();
         trialAdapter.SelectCommand = new SqlCommand(trialQueryString, this.sqlConnection);
         DataTable trialsTable = new DataTable("Trials");
@@ -905,47 +905,45 @@ namespace Ogama.DataSet
     /// </summary>
     private void UpgradeAOITable()
     {
-      if (Queries.ColumnExists("AOIs", "Target"))
+      if (!Queries.ColumnExists("AOIs", "Target")) return;
+
+      const string queryString = "SELECT AOIs.* FROM [dbo].[AOIs] WHERE [Target] <> ''";
+      var adapter = new SqlDataAdapter {SelectCommand = new SqlCommand(queryString, this.sqlConnection)};
+      var aoiTable = new DataTable("AOIs");
+      adapter.Fill(aoiTable);
+
+      var shapeGroups = new List<string>();
+
+      // Get all named shapegroups from the aoi table
+      foreach (DataRow aoiRow in aoiTable.Rows)
       {
-        string queryString = "SELECT AOIs.* FROM [dbo].[AOIs] WHERE [Target] <> ''";
-        SqlDataAdapter adapter = new SqlDataAdapter();
-        adapter.SelectCommand = new SqlCommand(queryString, this.sqlConnection);
-        DataTable aoiTable = new DataTable("AOIs");
-        adapter.Fill(aoiTable);
-
-        List<string> shapeGroups = new List<string>();
-
-        // Get all named shapegroups from the aoi table
-        foreach (DataRow aoiRow in aoiTable.Rows)
+        string shapeGroup = aoiRow["Target"].ToString();
+        if (!shapeGroups.Contains(shapeGroup))
         {
-          string shapeGroup = aoiRow["Target"].ToString();
-          if (!shapeGroups.Contains(shapeGroup))
-          {
-            shapeGroups.Add(shapeGroup);
-          }
+          shapeGroups.Add(shapeGroup);
         }
+      }
 
-        // Insert default values
-        if (!shapeGroups.Contains(string.Empty))
-        {
-          shapeGroups.Add(string.Empty);
-        }
+      // Insert default values
+      if (!shapeGroups.Contains(string.Empty))
+      {
+        shapeGroups.Add(string.Empty);
+      }
 
-        if (!shapeGroups.Contains("Target"))
-        {
-          shapeGroups.Add("Target");
-        }
+      if (!shapeGroups.Contains("Target"))
+      {
+        shapeGroups.Add("Target");
+      }
 
-        if (!shapeGroups.Contains("SearchRect"))
-        {
-          shapeGroups.Add("SearchRect");
-        }
+      if (!shapeGroups.Contains("SearchRect"))
+      {
+        shapeGroups.Add("SearchRect");
+      }
 
-        // Insert shape groups into database
-        foreach (string group in shapeGroups)
-        {
-          this.tadShapeGroups.Insert(group);
-        }
+      // Insert shape groups into database
+      foreach (string group in shapeGroups)
+      {
+        this.tadShapeGroups.Insert(group);
       }
     }
 
@@ -956,7 +954,7 @@ namespace Ogama.DataSet
     private void RenamePolygonToPolylineInAOITable()
     {
       // Rename Polygon -> Polyline
-      string queryString = "SELECT AOIs.* FROM [dbo].[AOIs]";
+      const string queryString = "SELECT AOIs.* FROM [dbo].[AOIs]";
       SqlDataAdapter adapter = new SqlDataAdapter();
       adapter.SelectCommand = new SqlCommand(queryString, this.sqlConnection);
       AOIsDataTable aoiTable = new AOIsDataTable();
