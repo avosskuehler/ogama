@@ -158,30 +158,10 @@ namespace Ogama.Modules.Recording
           "Status: Intelligaze found.";
       }
 
-      string tobiiDefaultText = "The Tobii technologies T60,T120,X120 gaze tracker series." +
-          "Needs to have a purchased Tobii SDK to be installed on the computer." + Environment.NewLine;
-#if TOBII
-      if (!Ogama.Modules.Recording.Tobii.TobiiTracker.IsAvailable(out error))
-      {
-        this.chbTobii.Enabled = false;
-        this.chbTobii.Checked = false;
-        this.pcbTobii.Enabled = false;
-        this.chbTobii.Text = tobiiDefaultText +
-          "Status: " + error;
-      }
-      else
-      {
-        this.chbTobii.Text = tobiiDefaultText +
-          "Status: Tobii SDK found.";
-      }
-#else
-      this.chbTobii.Enabled = false;
-      this.chbTobii.Checked = false;
-      this.pcbTobii.Enabled = false;
-      this.chbTobii.Text = tobiiDefaultText +
-        "Status: This version of OGAMA has no Tobii support (TOBII compiler flag not set)."
-        + Environment.NewLine;
-#endif
+      this.UpdateTobiiStatus();
+
+      TobiiDevice.TobiiTracker.TrackerBrowser.EyetrackerFound += new EventHandler<Tobii.Eyetracking.Sdk.EyetrackerInfoEventArgs>(TrackerBrowser_EyetrackerFound);
+      TobiiDevice.TobiiTracker.TrackerBrowser.EyetrackerRemoved += new EventHandler<Tobii.Eyetracking.Sdk.EyetrackerInfoEventArgs>(TrackerBrowser_EyetrackerRemoved);
 
       // ASL 
       //  "If you have purchased and installed an ASL " +
@@ -207,6 +187,31 @@ namespace Ogama.Modules.Recording
       "Status : This version of OGAMA has no ASL support (ASL compiler flag not set)."
           + Environment.NewLine;
 #endif
+    }
+
+    private void UpdateTobiiStatus()
+    {
+      string error;
+      string tobiiDefaultText = "The Tobii technologies T60,T120,X120 gaze tracker series."
+                                + Environment.NewLine;
+      if (!Ogama.Modules.Recording.TobiiDevice.TobiiTracker.IsAvailable(out error))
+      {
+        this.chbTobii.Enabled = false;
+        this.chbTobii.Checked = false;
+        this.pcbTobii.Enabled = false;
+      }
+
+      this.chbTobii.Text = tobiiDefaultText + "Status: " + error;
+    }
+
+    void TrackerBrowser_EyetrackerRemoved(object sender, Tobii.Eyetracking.Sdk.EyetrackerInfoEventArgs e)
+    {
+      this.UpdateTobiiStatus();
+    }
+
+    void TrackerBrowser_EyetrackerFound(object sender, Tobii.Eyetracking.Sdk.EyetrackerInfoEventArgs e)
+    {
+      this.UpdateTobiiStatus();
     }
 
     /// <summary>

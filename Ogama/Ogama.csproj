@@ -222,6 +222,10 @@
     <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.XML" />
+    <Reference Include="Tobii.Eyetracking.Sdk, Version=3.0.2.0, Culture=neutral, PublicKeyToken=8f83ae3e0f6e46ef, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\Tobii.Eyetracking.Sdk.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -423,6 +427,25 @@
     <Compile Include="Modules\Recording\Presenter\WebsiteScreenshot.cs" />
     <Compile Include="Modules\Recording\Presenter\DSScreenCapture.cs" />
     <Compile Include="Modules\Recording\Presenter\ScreenCaptureProperties.cs" />
+    <Compile Include="Modules\Recording\Tobii\CalibrationRunner.cs" />
+    <Compile Include="Modules\Recording\Tobii\TobiiCalibrationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\Tobii\TobiiCalibrationForm.designer.cs">
+      <DependentUpon>TobiiCalibrationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\Tobii\TobiiCalibrationResultPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\Tobii\TobiiCalibrationResultPanel.designer.cs">
+      <DependentUpon>TobiiCalibrationResultPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\Tobii\TobiiTrackStatusControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\Tobii\TobiiTrackStatusControl.designer.cs">
+      <DependentUpon>TobiiTrackStatusControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Recording\TrackerBase\TrackerWithStatusControls.cs" />
     <Compile Include="Modules\Recording\Alea\AleaTracker.cs">
     </Compile>
@@ -1115,6 +1138,15 @@
     <EmbeddedResource Include="Modules\Recording\SMI\SMISettingsDlg.resx">
       <DependentUpon>SMISettingsDlg.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\Tobii\TobiiCalibrationForm.resx">
+      <DependentUpon>TobiiCalibrationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\Tobii\TobiiCalibrationResultPanel.resx">
+      <DependentUpon>TobiiCalibrationResultPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\Tobii\TobiiTrackStatusControl.resx">
+      <DependentUpon>TobiiTrackStatusControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Replay\Video\SaveVideoSplash.resx">
       <DependentUpon>SaveVideoSplash.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1794,14 +1826,6 @@
       <WrapperTool>tlbimp</WrapperTool>
       <Isolated>False</Isolated>
     </COMReference>
-    <COMReference Include="AxTetComp">
-      <Guid>{3E10DC16-717F-4A70-9EA9-AD364F61AF6E}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>aximp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
     <COMReference Include="stdole">
       <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>2</VersionMajor>
@@ -1810,14 +1834,6 @@
       <WrapperTool>primary</WrapperTool>
       <Isolated>False</Isolated>
       <Private>True</Private>
-    </COMReference>
-    <COMReference Include="TetComp">
-      <Guid>{3E10DC16-717F-4A70-9EA9-AD364F61AF6E}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
     </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

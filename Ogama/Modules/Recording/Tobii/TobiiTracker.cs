@@ -11,11 +11,10 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-#if TOBII
-
-namespace Ogama.Modules.Recording.Tobii
+namespace Ogama.Modules.Recording.TobiiDevice
 {
   using System;
+  using System.Collections.Generic;
   using System.Drawing;
   using System.IO;
   using System.Runtime.InteropServices;
@@ -25,7 +24,11 @@ namespace Ogama.Modules.Recording.Tobii
   using Microsoft.Win32;
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
-  using TetComp;
+  using Ogama.Properties;
+
+  using Tobii.Eyetracking.Sdk;
+  using Tobii.Eyetracking.Sdk.Exceptions;
+  using Tobii.Eyetracking.Sdk.Time;
 
   /// <summary>
   /// This class implements the <see cref="TrackerWithStatusControls"/> class
@@ -48,6 +51,15 @@ namespace Ogama.Modules.Recording.Tobii
     #region FIELDS
 
     /// <summary>
+    /// 
+    /// </summary>
+    public static EyetrackerBrowser TrackerBrowser { get; private set; }
+    private SyncManager syncManager;
+    private bool isTracking;
+
+    private static List<EyetrackerInfo> availableEyetracker;
+
+    /// <summary>
     /// The TetTrackStatus is a help tool to provide a real time display 
     /// of the tracking ability of the subject being eye tracked and 
     /// to make it easy to verify that the subject is advantageous 
@@ -59,7 +71,7 @@ namespace Ogama.Modules.Recording.Tobii
     /// control and it is internally using the functionality of the TetClient.
     /// </summary>
     /// <remarks>That is from the TobiiSDK documentation.</remarks>
-    private ITetTrackStatus tetTrackStatus;
+    private TobiiTrackStatus tetTrackStatus;
 
     /// <summary>
     /// It displays the result of a calibration, and can be used to provide
@@ -67,22 +79,9 @@ namespace Ogama.Modules.Recording.Tobii
     /// rejected or improved. It is implemented as an ActiveX control.
     /// </summary>
     /// <remarks>That is from the TobiiSDK documentation.</remarks>
-    private ITetCalibPlot tetCalibPlot;
+    private TobiiCalibrationResultPanel tetCalibPlot;
 
-    /// <summary>
-    /// Handles the calls to the lower software abstraction layer. 
-    /// Thus, it exposes the full functionality of the TETServer 
-    /// and it is possible to build a complete eye tracking 
-    /// application by using this object only.
-    /// </summary>
-    private TetClient tetClient;
-
-    /// <summary>
-    /// This object is used to calibrate the subject. 
-    /// To do that it opens its own window to display
-    /// an appropriate calibration stimulus.
-    /// </summary>
-    private TetCalibProc tetCalibProc;
+    private static IEyetracker connectedTracker;
 
     /// <summary>
     /// Saves the tobii settings.
@@ -92,7 +91,7 @@ namespace Ogama.Modules.Recording.Tobii
     /// <summary>
     /// Saves the time stamp object.
     /// </summary>
-    private TetTimeStamp timeStamp;
+    private Clock tobiiClock;
 
     /// <summary>
     /// Saves the track status dialog that can be shown
@@ -104,12 +103,12 @@ namespace Ogama.Modules.Recording.Tobii
     /// <summary>
     /// The tobii track status ActiveX object
     /// </summary>
-    private AxTetComp.AxTetTrackStatus tobiiTrackStatus;
+    private TobiiTrackStatusControl tobiiTrackStatus;
 
     /// <summary>
     /// The tobii calibration plot ActiveX object.
     /// </summary>
-    private AxTetComp.AxTetCalibPlot tobiiCalibPlot;
+    private TobiiCalibrationResultPanel tobiiCalibPlot;
 
     #endregion //FIELDS
 
@@ -117,6 +116,22 @@ namespace Ogama.Modules.Recording.Tobii
     // Construction and Initializing methods                                     //
     ///////////////////////////////////////////////////////////////////////////////
     #region CONSTRUCTION
+
+    public static void StaticInitialize()
+    {
+      Library.Init();
+      availableEyetracker = new List<EyetrackerInfo>();
+      TrackerBrowser = new EyetrackerBrowser();
+      TrackerBrowser.EyetrackerFound += EyetrackerFound;
+      TrackerBrowser.EyetrackerUpdated += EyetrackerUpdated;
+      TrackerBrowser.EyetrackerRemoved += EyetrackerRemoved;
+      TrackerBrowser.Start();
+    }
+
+    public static void StaticDispose()
+    {
+      TrackerBrowser.Stop();
+    }
 
     /// <summary>
     /// Initializes a new instance of the TobiiTracker class.
@@ -206,7 +221,7 @@ namespace Ogama.Modules.Recording.Tobii
     /// </summary>
     public override bool IsConnected
     {
-      get { return this.tetTrackStatus.IsConnected; }
+      get { return connectedTracker != null; }
     }
 
     #endregion //PROPERTIES
@@ -224,34 +239,21 @@ namespace Ogama.Modules.Recording.Tobii
     /// is available in the system, otherwise <strong>false</strong></returns>
     public static bool IsAvailable(out string errorMessage)
     {
-      errorMessage = string.Empty;
-
-      RegistryKey clsid = Registry.ClassesRoot.OpenSubKey("CLSID");
-      string[] clsIDs = clsid.GetSubKeyNames();
-      string subkey = string.Empty;
-      for (int i = 0; i < clsIDs.Length; i++)
+      if (availableEyetracker.Count > 0)
       {
-        subkey = clsIDs[i];
-        if (subkey.Substring(0, 1) != "{")
+        var name = availableEyetracker[0].GivenName;
+        errorMessage = "Tobii: " + availableEyetracker[0].Model;
+        if (name != string.Empty)
         {
-          continue;
+          errorMessage += ", Name: " + name;
         }
 
-        RegistryKey cls = Registry.ClassesRoot.OpenSubKey("CLSID\\" + subkey + "\\InprocServer32");
-        if (cls == null)
-        {
-          continue;
-        }
+        errorMessage += " is found";
 
-        string value = cls.GetValue(string.Empty, string.Empty).ToString();
-        if (value.Contains("tetcomp.dll") || value.Contains("TetComp.dll"))
-        {
-          return true;
-        }
+        return true;
       }
 
-      errorMessage = "The 'tetcomp.dll' is not installed. " +
-        "Please install the Tobii Studio or Tobii SDK V 2.0.1.";
+      errorMessage = "No tobii eyetracker has been found on the system. ";
       return false;
     }
 
@@ -261,8 +263,7 @@ namespace Ogama.Modules.Recording.Tobii
     /// <returns>A <see cref="Int64"/> with the time in milliseconds.</returns>
     public long GetCurrentTime()
     {
-      this.timeStamp = this.tetClient.GetTimeStamp();
-      return this.timeStamp.second * 1000 + (long)(this.timeStamp.microsecond / 1000f);
+      return tobiiClock.GetTime();
     }
 
     #endregion //PUBLICMETHODS
@@ -281,19 +282,26 @@ namespace Ogama.Modules.Recording.Tobii
     {
       try
       {
-        // Connect to the TET server if necessary
-        if (!this.tetTrackStatus.IsConnected)
+        if (availableEyetracker.Count == 0)
         {
-          this.tetTrackStatus.Connect(
-            this.tobiiSettings.TetServerAddress,
-            this.tobiiSettings.TetServerPort);
+          throw new EyetrackerException(1, "No tobii eyetracker system found");
         }
 
-        // Start the track status meter
-        if (!this.tetTrackStatus.IsTracking)
-        {
-          this.tetTrackStatus.Start();
-        }
+        this.ConnectToTracker(availableEyetracker[0]);
+
+        //// Connect to the TET server if necessary
+        //if (!this.tetTrackStatus.IsConnected)
+        //{
+        //  this.tetTrackStatus.Connect(
+        //    this.tobiiSettings.TetServerAddress,
+        //    this.tobiiSettings.TetServerPort);
+        //}
+
+        //// Start the track status meter
+        //if (!this.tetTrackStatus.IsTracking)
+        //{
+        //  this.tetTrackStatus.Start();
+        //}
       }
       catch (Exception ex)
       {
@@ -317,60 +325,39 @@ namespace Ogama.Modules.Recording.Tobii
     {
       try
       {
-        // Connect the calibration procedure if necessary
-        if (!this.tetCalibProc.IsConnected)
+        var runner = new TobiiCalibrationRunner();
+
+        try
         {
-          this.tetCalibProc.Connect(this.tobiiSettings.TetServerAddress, this.tobiiSettings.TetServerPort);
-        }
-
-        // Reset calibration monitor, if changed after opening record module
-        this.tetCalibProc.DisplayMonitor = PresentationScreen.GetPresentationScreen().DeviceName;
-
-        // Always delete old calibration samples when new calibration point
-        // positions are set
-        this.tetCalibProc.CalibManager.UseIdealCalibGrid = true;
-
-        if (isRecalibrating)
-        {
-          // Mark points from which the samples of the calibration in
-          // use should be deleted (Delete bad samples from calibration
-          // that are marked in the calibration plot)
-          this.tetCalibProc.CalibManager.SetRemovePoints(this.tetCalibPlot.SelectedPoints);
-
-          try
+          // Should hide TrackStatusDlg
+          if (this.dlgTrackStatus != null)
           {
-            // Delete the samples from the above marked points.
-            this.tetCalibProc.CalibManager.RemoveCalibrationPoints();
-          }
-          catch (Exception)
-          {
-            InformationDialog.Show(
-              "Calibration error",
-              "Calibration point selection failed. A new calibration is started.",
-              false,
-              MessageBoxIcon.Information);
-            isRecalibrating = false;
+            this.ShowOnSecondaryScreenButton.BackColor = Color.Transparent;
+            this.ShowOnSecondaryScreenButton.Text = "Show on presentation screen";
+            this.dlgTrackStatus.Close();
           }
 
-          // Now create the points for recalibration
-          TetPointDArray recalibpoints = new TetPointDArray();
+          // Start a new calibration procedure
+          var result = runner.RunCalibration(connectedTracker);
 
-          // Add the default recalibration points
-          recalibpoints = this.tetCalibProc.CalibManager.GetRecalibPoints();
-
-          // Add the manually selected points.
-          recalibpoints.AddArray(this.tetCalibPlot.SelectedPoints);
-
-          // Set the points to recalibrate
-          this.tetCalibProc.CalibManager.SetRecalibPoints(recalibpoints);
+          // Show a calibration plot if everything went OK
+          if (result != null)
+          {
+            tobiiCalibPlot.Initialize(result.Plot);
+            this.ShowCalibPlot();
+          }
+          else
+          {
+            MessageBox.Show("Not enough data to create a calibration (or calibration aborted).");
+          }
         }
-
-        this.tetCalibProc.WindowTopmost = true;
-        this.tetCalibProc.WindowVisible = true;
-        this.tetCalibProc.StartCalibration(
-          isRecalibrating ?
-          TetCalibType.TetCalibType_Recalib : TetCalibType.TetCalibType_Calib,
-          this.tobiiSettings.TetRandomizeCalibPointOrder);
+        catch (EyetrackerException ee)
+        {
+          MessageBox.Show("Failed to calibrate. Got exception " + ee,
+              "Calibration Failed",
+              MessageBoxButtons.OK,
+              MessageBoxIcon.Error);
+        }
       }
       catch (Exception ex)
       {
@@ -395,31 +382,31 @@ namespace Ogama.Modules.Recording.Tobii
       try
       {
         this.Stop();
+        this.DisconnectTracker();
+        //if (this.tetTrackStatus.IsConnected)
+        //{
+        //  if (this.tetTrackStatus.IsTracking)
+        //  {
+        //    this.tetTrackStatus.Stop();
+        //  }
 
-        if (this.tetTrackStatus.IsConnected)
-        {
-          if (this.tetTrackStatus.IsTracking)
-          {
-            this.tetTrackStatus.Stop();
-          }
+        //  this.tetTrackStatus.Disconnect();
+        //}
 
-          this.tetTrackStatus.Disconnect();
-        }
+        //if (this.tetCalibPlot.IsConnected)
+        //{
+        //  this.tetCalibPlot.Disconnect();
+        //}
 
-        if (this.tetCalibPlot.IsConnected)
-        {
-          this.tetCalibPlot.Disconnect();
-        }
+        //if (this.tetCalibProc.IsConnected)
+        //{
+        //  this.tetCalibProc.Disconnect();
+        //}
 
-        if (this.tetCalibProc.IsConnected)
-        {
-          this.tetCalibProc.Disconnect();
-        }
-
-        if (this.tetClient.IsConnected)
-        {
-          this.tetClient.Disconnect();
-        }
+        //if (this.tetClient.IsConnected)
+        //{
+        //  this.tetClient.Disconnect();
+        //}
       }
       catch (Exception ex)
       {
@@ -440,19 +427,11 @@ namespace Ogama.Modules.Recording.Tobii
     {
       try
       {
-        // Connect to the TET server if necessary
-        if (!this.tetClient.IsConnected)
+        if (!isTracking)
         {
-          this.tetClient.Connect(
-            this.tobiiSettings.TetServerAddress,
-            this.tobiiSettings.TetServerPort,
-            TetSynchronizationMode.TetSynchronizationMode_Local);
-        }
-
-        if (!this.tetClient.IsTracking)
-        {
-          // Start tracking gaze data
-          this.tetClient.StartTracking();
+          // Start subscribing to gaze data stream
+          connectedTracker.StartTracking();
+          isTracking = true;
         }
       }
       catch (Exception ex)
@@ -473,21 +452,12 @@ namespace Ogama.Modules.Recording.Tobii
     {
       try
       {
-        if (this.tetCalibProc.IsConnected)
+        if (connectedTracker == null)
         {
-          if (this.tetCalibProc.IsCalibrating)
-          {
-            this.tetCalibProc.InterruptCalibration();
-          }
+          return;
         }
 
-        if (this.tetClient.IsConnected)
-        {
-          if (this.tetClient.IsTracking)
-          {
-            this.tetClient.StopTracking();
-          }
-        }
+        connectedTracker.StopTracking();
       }
       catch (Exception ex)
       {
@@ -505,13 +475,14 @@ namespace Ogama.Modules.Recording.Tobii
     /// </summary>
     public override void ChangeSettings()
     {
-      TobiiSettingsDialog dlg = new TobiiSettingsDialog();
-      dlg.TobiiSettings = this.tobiiSettings;
-      if (dlg.ShowDialog() == DialogResult.OK)
+      var dlg = new TobiiSettingsDialog { TobiiSettings = this.tobiiSettings };
+      switch (dlg.ShowDialog())
       {
-        this.tobiiSettings = dlg.TobiiSettings;
-        this.UpdateSettings();
-        this.SerializeSettings(this.tobiiSettings, this.SettingsFile);
+        case DialogResult.OK:
+          this.tobiiSettings = dlg.TobiiSettings;
+          this.UpdateSettings();
+          this.SerializeSettings(this.tobiiSettings, this.SettingsFile);
+          break;
       }
     }
 
@@ -521,25 +492,6 @@ namespace Ogama.Modules.Recording.Tobii
     /// </summary>
     protected override void Initialize()
     {
-      // Set up the TET client object and it's events
-      this.tetClient = new TetClientClass();
-      this.tetClient.GazeDataDelivery = TetGazeDataDelivery.TetGazeDataDelivery_RealTime;
-      _ITetClientEvents_Event tetClientEvents = (_ITetClientEvents_Event)this.tetClient;
-      tetClientEvents.OnTrackingStarted += new _ITetClientEvents_OnTrackingStartedEventHandler(this.tetClientEvents_OnTrackingStarted);
-      tetClientEvents.OnTrackingStopped += new _ITetClientEvents_OnTrackingStoppedEventHandler(this.tetClientEvents_OnTrackingStopped);
-      tetClientEvents.OnGazeData += new _ITetClientEvents_OnGazeDataEventHandler(this.tetClientEvents_OnGazeData);
-
-      // Set up the calibration procedure object and it's events
-      this.tetCalibProc = new TetCalibProcClass();
-      _ITetCalibProcEvents_Event tetCalibProcEvents = (_ITetCalibProcEvents_Event)this.tetCalibProc;
-      tetCalibProcEvents.OnCalibrationEnd += new _ITetCalibProcEvents_OnCalibrationEndEventHandler(this.tetCalibProcEvents_OnCalibrationEnd);
-      tetCalibProcEvents.OnKeyDown += new _ITetCalibProcEvents_OnKeyDownEventHandler(this.tetCalibProcEvents_OnKeyDown);
-
-      // Initiate window properties 
-      this.tetCalibProc.DisplayMonitor = PresentationScreen.GetPresentationScreen().DeviceName;
-
-      this.timeStamp = new TetTimeStamp();
-
       // Load tobii tracker settings.
       if (File.Exists(this.SettingsFile))
       {
@@ -565,7 +517,6 @@ namespace Ogama.Modules.Recording.Tobii
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
     protected override void btnShowOnPresentationScreen_Click(object sender, EventArgs e)
     {
-#if TOBII
       if (this.ShowOnSecondaryScreenButton.Text.Contains("Show"))
       {
         // Should show TrackStatusDlg
@@ -600,7 +551,6 @@ namespace Ogama.Modules.Recording.Tobii
           this.dlgTrackStatus.Close();
         }
       }
-#endif
     }
 
     /// <summary>
@@ -626,24 +576,19 @@ namespace Ogama.Modules.Recording.Tobii
     /// </summary>
     protected override void InitializeStatusControls()
     {
-#if TOBII
       if (this.tobiiTrackStatus == null && this.tobiiCalibPlot == null)
       {
         System.ComponentModel.ComponentResourceManager resources =
           new System.ComponentModel.ComponentResourceManager(typeof(RecordModule));
 
-        this.tobiiTrackStatus = new AxTetComp.AxTetTrackStatus();
-        this.tobiiCalibPlot = new AxTetComp.AxTetCalibPlot();
-
-        ((System.ComponentModel.ISupportInitialize)this.tobiiTrackStatus).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)this.tobiiCalibPlot).BeginInit();
+        this.tobiiTrackStatus = new TobiiTrackStatusControl();
+        this.tobiiCalibPlot = new TobiiCalibrationResultPanel();
 
         // TobiiTrackStatus
         this.tobiiTrackStatus.Dock = System.Windows.Forms.DockStyle.Fill;
         this.tobiiTrackStatus.Enabled = true;
         this.tobiiTrackStatus.Location = new System.Drawing.Point(0, 0);
         this.tobiiTrackStatus.Name = "tobiiTrackStatus";
-        this.tobiiTrackStatus.OcxState = (System.Windows.Forms.AxHost.State)resources.GetObject("tobiiTrackStatus.OcxState");
         this.tobiiTrackStatus.Size = new System.Drawing.Size(190, 54);
         this.tobiiTrackStatus.TabIndex = 0;
 
@@ -652,12 +597,8 @@ namespace Ogama.Modules.Recording.Tobii
         this.tobiiCalibPlot.Enabled = true;
         this.tobiiCalibPlot.Location = new System.Drawing.Point(0, 0);
         this.tobiiCalibPlot.Name = "tobiiCalibPlot";
-        this.tobiiCalibPlot.OcxState = (System.Windows.Forms.AxHost.State)resources.GetObject("tobiiCalibPlot.OcxState");
         this.tobiiCalibPlot.Size = new System.Drawing.Size(190, 54);
         this.tobiiCalibPlot.TabIndex = 0;
-
-        ((System.ComponentModel.ISupportInitialize)this.tobiiTrackStatus).EndInit();
-        ((System.ComponentModel.ISupportInitialize)this.tobiiCalibPlot).EndInit();
 
         try
         {
@@ -665,12 +606,6 @@ namespace Ogama.Modules.Recording.Tobii
           this.CalibrationResultPanel.Controls.Add(this.tobiiCalibPlot);
 
           this.ShowCalibPlot();
-
-          // Retreive underlying references to ActiveX controls
-          this.tetTrackStatus = (ITetTrackStatus)this.tobiiTrackStatus.GetOcx();
-          this.tetCalibPlot = (ITetCalibPlot)this.tobiiCalibPlot.GetOcx();
-          this.tetCalibPlot.AllowMouseInteraction = true;
-
           this.ShowTrackStatus();
         }
         catch (COMException)
@@ -680,7 +615,6 @@ namespace Ogama.Modules.Recording.Tobii
           throw;
         }
       }
-#endif
     }
 
     #endregion //OVERRIDES
@@ -701,86 +635,101 @@ namespace Ogama.Modules.Recording.Tobii
     ///////////////////////////////////////////////////////////////////////////////
     #region CUSTOMEVENTHANDLER
 
+    private static void EyetrackerFound(object sender, EyetrackerInfoEventArgs e)
+    {
+      // When an eyetracker is found on the network we add it to the listview
+      availableEyetracker.Add(e.EyetrackerInfo);
+    }
+
+    private static void EyetrackerRemoved(object sender, EyetrackerInfoEventArgs e)
+    {
+      // When an eyetracker disappears from the network we remove it from the listview
+      availableEyetracker.Remove(e.EyetrackerInfo);
+    }
+
+    private static void EyetrackerUpdated(object sender, EyetrackerInfoEventArgs e)
+    {
+      // When an eyetracker is updated we simply create a new 
+      // listviewitem and replace the old one
+    }
+
     #region TrackingEvents
 
-    /// <summary>
-    /// <see cref="TetCalibProcClass.OnCalibrationEnd"/> event handler for
-    /// the <see cref="tetCalibProc"/> <see cref="TetCalibProcClass"/>
-    /// Gets fired when the calibration has ended,
-    /// so hide the calibration window 
-    /// and update the calibration plot
-    /// </summary>
-    /// <param name="result">Result. Zero (ITF_S_OK) for success or specific error code.</param>
-    private void tetCalibProcEvents_OnCalibrationEnd(int result)
-    {
-      this.tetCalibProc.WindowVisible = false;
-      this.tetCalibPlot.SelectedPoints = new TetPointDArray();
+    ///// <summary>
+    ///// <see cref="TetCalibProcClass.OnCalibrationEnd"/> event handler for
+    ///// the <see cref="tetCalibProc"/> <see cref="TetCalibProcClass"/>
+    ///// Gets fired when the calibration has ended,
+    ///// so hide the calibration window 
+    ///// and update the calibration plot
+    ///// </summary>
+    ///// <param name="result">Result. Zero (ITF_S_OK) for success or specific error code.</param>
+    //private void tetCalibProcEvents_OnCalibrationEnd(int result)
+    //{
+    //  // Update the calibration plot.
+    //  this.UpdateCalibrationPlot();
 
-      // Update the calibration plot.
-      this.UpdateCalibrationPlot();
+    //  // Hide the track status and show the calibration plot.
+    //  this.ShowCalibPlot();
+    //}
 
-      // Hide the track status and show the calibration plot.
-      this.ShowCalibPlot();
-    }
+    ///// <summary>
+    ///// <see cref="TetCalibProcClass.OnKeyDown"/> event handler for
+    ///// the <see cref="tetCalibProc"/> <see cref="TetCalibProcClass"/>
+    ///// Interrupt the calibration on key events.
+    ///// The event is fired when the calibration window gets the Windows message
+    ///// KeyDown. The parameter passed along with the event is the virtual-key 
+    ///// code of the key pressed.
+    ///// </summary>
+    ///// <param name="virtualKeyCode">The virtual-key code of the key pressed.
+    ///// The code is actual keyboard key identifiers, but includes also other 
+    ///// "virtual" elements such as the three mouse buttons. 
+    ///// It does not change when modifier keys (Ctrl, Alt, Shift, etc.) 
+    ///// are held, e.g. the “1” key has the same virtual-key code when ‘1’
+    ///// or ‘!’ is pressed.</param>
+    //private void tetCalibProcEvents_OnKeyDown(int virtualKeyCode)
+    //{
+    //  if (this.tetCalibProc.IsCalibrating)
+    //  {
+    //    // Will trigger OnCalibrationEnd
+    //    this.tetCalibProc.InterruptCalibration();
+    //  }
+    //}
 
-    /// <summary>
-    /// <see cref="TetCalibProcClass.OnKeyDown"/> event handler for
-    /// the <see cref="tetCalibProc"/> <see cref="TetCalibProcClass"/>
-    /// Interrupt the calibration on key events.
-    /// The event is fired when the calibration window gets the Windows message
-    /// KeyDown. The parameter passed along with the event is the virtual-key 
-    /// code of the key pressed.
-    /// </summary>
-    /// <param name="virtualKeyCode">The virtual-key code of the key pressed.
-    /// The code is actual keyboard key identifiers, but includes also other 
-    /// "virtual" elements such as the three mouse buttons. 
-    /// It does not change when modifier keys (Ctrl, Alt, Shift, etc.) 
-    /// are held, e.g. the “1” key has the same virtual-key code when ‘1’
-    /// or ‘!’ is pressed.</param>
-    private void tetCalibProcEvents_OnKeyDown(int virtualKeyCode)
-    {
-      if (this.tetCalibProc.IsCalibrating)
-      {
-        // Will trigger OnCalibrationEnd
-        this.tetCalibProc.InterruptCalibration();
-      }
-    }
+    ///// <summary>
+    ///// OnTrackingStarted event handler for
+    ///// the <see cref="tetClient"/> <see cref="TetClient"/>
+    ///// Fired when the tracking was successfully started by the StartTracking method.
+    ///// </summary>
+    //private void tetClientEvents_OnTrackingStarted()
+    //{
+    //}
 
-    /// <summary>
-    /// OnTrackingStarted event handler for
-    /// the <see cref="tetClient"/> <see cref="TetClient"/>
-    /// Fired when the tracking was successfully started by the StartTracking method.
-    /// </summary>
-    private void tetClientEvents_OnTrackingStarted()
-    {
-    }
+    ///// <summary>
+    ///// OnTrackingStopped event handler for
+    ///// the <see cref="tetClient"/> <see cref="TetClient"/>
+    ///// The event is fired when tracking stops, 
+    ///// either as a result of calling the method StopTracking 
+    ///// or due to an error. The argument tells something 
+    ///// about the reason of why tracking was stopped.
+    ///// </summary>
+    ///// <param name="hr">Result. Zero (ITF_S_OK) for success 
+    ///// or specific error code.</param>
+    //private void tetClientEvents_OnTrackingStopped(int hr)
+    //{
+    //  if (hr != (int)TetHResults.ITF_S_OK)
+    //  {
+    //    InformationDialog.Show(
+    //      "Error",
+    //      string.Format("Error {0} occured while tracking.", hr),
+    //      false,
+    //      MessageBoxIcon.Error);
+    //  }
 
-    /// <summary>
-    /// OnTrackingStopped event handler for
-    /// the <see cref="tetClient"/> <see cref="TetClient"/>
-    /// The event is fired when tracking stops, 
-    /// either as a result of calling the method StopTracking 
-    /// or due to an error. The argument tells something 
-    /// about the reason of why tracking was stopped.
-    /// </summary>
-    /// <param name="hr">Result. Zero (ITF_S_OK) for success 
-    /// or specific error code.</param>
-    private void tetClientEvents_OnTrackingStopped(int hr)
-    {
-      if (hr != (int)TetHResults.ITF_S_OK)
-      {
-        InformationDialog.Show(
-          "Error",
-          string.Format("Error {0} occured while tracking.", hr),
-          false,
-          MessageBoxIcon.Error);
-      }
-
-      while (this.tetClient.GetNumPendingPostGazeData() > 0)
-      {
-        Application.DoEvents();
-      }
-    }
+    //  while (this.tetClient.GetNumPendingPostGazeData() > 0)
+    //  {
+    //    Application.DoEvents();
+    //  }
+    //}
 
     /// <summary>
     /// OnGazeData event handler for
@@ -793,13 +742,29 @@ namespace Ogama.Modules.Recording.Tobii
     /// event to the recorder.
     /// </summary>
     /// <param name="gazeData">The gaze data.</param>
-    private void tetClientEvents_OnGazeData(ref TetGazeData gazeData)
+    private void connectedTracker_GazeDataReceived(object sender, GazeDataEventArgs e)
     {
-      GazeData newGazeData = new GazeData();
+      // Send the gaze data to the track status control.
+      GazeDataItem gd = e.GazeDataItem;
+      this.tobiiTrackStatus.OnGazeData(gd);
+      if (this.dlgTrackStatus != null && this.dlgTrackStatus.Visible)
+      {
+        this.dlgTrackStatus.Update(gd);
+      }
+
+      if (this.syncManager.SyncState.StateFlag == SyncStateFlag.Synchronized)
+      {
+        var convertedTime = this.syncManager.RemoteToLocal(gd.TimeStamp);
+        var localTime = this.tobiiClock.GetTime();
+      }
+      else
+      {
+        Console.WriteLine("Warning. Sync state is " + this.syncManager.SyncState.StateFlag);
+      }
+
+      var newGazeData = new GazeData { Time = gd.TimeStamp };
 
       // Convert Tobii gazestamp in milliseconds.
-      newGazeData.Time = gazeData.timestamp_sec * 1000
-        + (int)(gazeData.timestamp_microsec / 1000f);
 
       // The validity code takes one of five values for each eye ranging from 0 to 4, with the
       // following interpretation:
@@ -826,55 +791,55 @@ namespace Ogama.Modules.Recording.Tobii
       // It is recommended that the validity codes are always used for data filtering, 
       // to remove data points which are obviously incorrect. 
       // Normally, we recommend removing all data points with a validity code of 2 or higher.
-      if (gazeData.validity_lefteye == 0 && gazeData.validity_righteye == 0)
+      if (gd.LeftValidity == 0 && gd.RightValidity == 0)
       {
         // Let the x, y and distance be the right and left eye average
-        newGazeData.GazePosX = (gazeData.x_gazepos_lefteye + gazeData.x_gazepos_righteye) / 2;
-        newGazeData.GazePosY = (gazeData.y_gazepos_lefteye + gazeData.y_gazepos_righteye) / 2;
-        newGazeData.PupilDiaX = gazeData.diameter_pupil_lefteye;
-        newGazeData.PupilDiaY = gazeData.diameter_pupil_righteye;
+        newGazeData.GazePosX = (float)((gd.LeftGazePoint2D.X + gd.RightGazePoint2D.X) / 2);
+        newGazeData.GazePosY = (float)((gd.LeftGazePoint2D.Y + gd.RightGazePoint2D.Y) / 2);
+        newGazeData.PupilDiaX = gd.LeftPupilDiameter;
+        newGazeData.PupilDiaY = gd.RightPupilDiameter;
       }
-      else if (gazeData.validity_lefteye == 4 && gazeData.validity_righteye == 4)
+      else if (gd.LeftValidity == 4 && gd.RightValidity == 4)
       {
         newGazeData.GazePosX = 0;
         newGazeData.GazePosY = 0;
         newGazeData.PupilDiaX = 0;
         newGazeData.PupilDiaY = 0;
       }
-      else if (gazeData.validity_lefteye == 2 && gazeData.validity_righteye == 2)
+      else if (gd.LeftValidity == 2 && gd.RightValidity == 2)
       {
         newGazeData.GazePosX = 0;
         newGazeData.GazePosY = 0;
         newGazeData.PupilDiaX = 0;
         newGazeData.PupilDiaY = 0;
       }
-      else if (gazeData.validity_lefteye == 1 && gazeData.validity_righteye == 3)
+      else if (gd.LeftValidity == 1 && gd.RightValidity == 3)
       {
-        newGazeData.GazePosX = gazeData.x_gazepos_lefteye;
-        newGazeData.GazePosY = gazeData.y_gazepos_lefteye;
-        newGazeData.PupilDiaX = gazeData.diameter_pupil_lefteye;
+        newGazeData.GazePosX = (float)gd.LeftGazePoint2D.X;
+        newGazeData.GazePosY = (float)gd.LeftGazePoint2D.Y;
+        newGazeData.PupilDiaX = gd.LeftPupilDiameter;
         newGazeData.PupilDiaY = null;
       }
-      else if (gazeData.validity_lefteye == 3 && gazeData.validity_righteye == 1)
+      else if (gd.LeftValidity == 3 && gd.RightValidity == 1)
       {
-        newGazeData.GazePosX = gazeData.x_gazepos_righteye;
-        newGazeData.GazePosY = gazeData.y_gazepos_righteye;
+        newGazeData.GazePosX = (float)gd.RightGazePoint2D.X;
+        newGazeData.GazePosY = (float)gd.RightGazePoint2D.Y;
         newGazeData.PupilDiaX = null;
-        newGazeData.PupilDiaY = gazeData.diameter_pupil_righteye;
+        newGazeData.PupilDiaY = gd.RightPupilDiameter;
       }
-      else if (gazeData.validity_lefteye == 0 && gazeData.validity_righteye == 4)
+      else if (gd.LeftValidity == 0 && gd.RightValidity == 4)
       {
-        newGazeData.GazePosX = gazeData.x_gazepos_lefteye;
-        newGazeData.GazePosY = gazeData.y_gazepos_lefteye;
-        newGazeData.PupilDiaX = gazeData.diameter_pupil_lefteye;
+        newGazeData.GazePosX = (float)gd.LeftGazePoint2D.X;
+        newGazeData.GazePosY = (float)gd.LeftGazePoint2D.Y;
+        newGazeData.PupilDiaX = gd.LeftPupilDiameter;
         newGazeData.PupilDiaY = null;
       }
-      else if (gazeData.validity_lefteye == 4 && gazeData.validity_righteye == 0)
+      else if (gd.LeftValidity == 4 && gd.RightValidity == 0)
       {
-        newGazeData.GazePosX = gazeData.x_gazepos_righteye;
-        newGazeData.GazePosY = gazeData.y_gazepos_righteye;
+        newGazeData.GazePosX = (float)gd.RightGazePoint2D.X;
+        newGazeData.GazePosY = (float)gd.RightGazePoint2D.Y;
         newGazeData.PupilDiaX = null;
-        newGazeData.PupilDiaY = gazeData.diameter_pupil_righteye;
+        newGazeData.PupilDiaY = gd.RightPupilDiameter;
       }
       else
       {
@@ -907,7 +872,6 @@ namespace Ogama.Modules.Recording.Tobii
     /// <param name="data">A <see cref="object"/> with the  tobii settings.</param>
     private void TrackStatusThread_DoWork(object data)
     {
-#if TOBII
       // Cast thread data.
       TobiiSetting setting = (TobiiSetting)data;
 
@@ -920,7 +884,6 @@ namespace Ogama.Modules.Recording.Tobii
         presentationBounds.Top + presentationBounds.Height / 2 - this.dlgTrackStatus.Height / 2);
 
       dlgTrackStatus.ShowDialog();
-#endif
     }
 
     #endregion //BACKGROUNDWORKER
@@ -930,17 +893,65 @@ namespace Ogama.Modules.Recording.Tobii
     ///////////////////////////////////////////////////////////////////////////////
     #region METHODS
 
+    private void ConnectToTracker(EyetrackerInfo info)
+    {
+      try
+      {
+        connectedTracker = EyetrackerFactory.CreateEyetracker(info);
+        connectedTracker.ConnectionError += this.HandleConnectionError;
+
+        this.tobiiClock = new Clock();
+        this.syncManager = new SyncManager(this.tobiiClock, info);
+
+        connectedTracker.GazeDataReceived += this.connectedTracker_GazeDataReceived;
+        connectedTracker.StartTracking();
+      }
+      catch (EyetrackerException ee)
+      {
+        if (ee.ErrorCode == 0x20000402)
+        {
+          MessageBox.Show(Resources.TobiiTracker_ConnectToTrackerFailed, "Upgrade Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        else
+        {
+          MessageBox.Show("Eyetracker responded with error " + ee, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        this.DisconnectTracker();
+      }
+      catch (Exception)
+      {
+        MessageBox.Show("Could not connect to eyetracker.", "Connection Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        this.DisconnectTracker();
+      }
+    }
+
+    private void DisconnectTracker()
+    {
+      if (connectedTracker == null)
+      {
+        return;
+      }
+
+      connectedTracker.GazeDataReceived -= this.connectedTracker_GazeDataReceived;
+      connectedTracker.Dispose();
+      connectedTracker = null;
+      this.isTracking = false;
+
+      this.syncManager.Dispose();
+    }
+
     /// <summary>
     /// Update the <see cref="tetCalibProc"/> object with the new
     /// settings.
     /// </summary>
     private void UpdateSettings()
     {
-      this.tetCalibProc.PointColor = (uint)ColorTranslator.ToOle(this.tobiiSettings.TetCalibPointColor);
-      this.tetCalibProc.PointSize = this.tobiiSettings.TetCalibPointSizes;
-      this.tetCalibProc.PointSpeed = this.tobiiSettings.TetCalibPointSpeeds;
-      this.tetCalibProc.NumPoints = this.tobiiSettings.TetNumCalibPoint;
-      this.tetCalibProc.BackgroundColor = (uint)ColorTranslator.ToOle(this.tobiiSettings.TetCalibBackgroundColor);
+      //this.tobiiCalibPlot.PointColor = (uint)ColorTranslator.ToOle(this.tobiiSettings.TetCalibPointColor);
+      //this.tetCalibProc.PointSize = this.tobiiSettings.TetCalibPointSizes;
+      //this.tetCalibProc.PointSpeed = this.tobiiSettings.TetCalibPointSpeeds;
+      //this.tetCalibProc.NumPoints = this.tobiiSettings.TetNumCalibPoint;
+      //this.tetCalibProc.BackgroundColor = (uint)ColorTranslator.ToOle(this.tobiiSettings.TetCalibBackgroundColor);
     }
 
     /// <summary>
@@ -1017,27 +1028,27 @@ namespace Ogama.Modules.Recording.Tobii
     /// </summary>
     private void UpdateCalibrationPlot()
     {
-      try
-      {
-        if (!this.tetCalibPlot.IsConnected)
-        {
-          this.tetCalibPlot.Connect(this.tobiiSettings.TetServerAddress, this.tobiiSettings.TetServerPort);
+      //try
+      //{
+      //  if (!this.tetCalibPlot.IsConnected)
+      //  {
+      //    this.tetCalibPlot.Connect(this.tobiiSettings.TetServerAddress, this.tobiiSettings.TetServerPort);
 
-          // Will use the currently stored calibration data
-          this.tetCalibPlot.SetData(null);
-        }
+      //    // Will use the currently stored calibration data
+      //    this.tetCalibPlot.SetData(null);
+      //  }
 
-        this.tetCalibPlot.UpdateData();
-      }
-      catch (Exception ex)
-      {
-        InformationDialog.Show(
-          "Update Calibration failed.",
-          "Tobii update of calibration plot failed with the following message: " + Environment.NewLine + ex.Message,
-          false,
-          MessageBoxIcon.Error);
-        this.CleanUp();
-      }
+      //  this.tetCalibPlot.UpdateData();
+      //}
+      //catch (Exception ex)
+      //{
+      //  InformationDialog.Show(
+      //    "Update Calibration failed.",
+      //    "Tobii update of calibration plot failed with the following message: " + Environment.NewLine + ex.Message,
+      //    false,
+      //    MessageBoxIcon.Error);
+      //  this.CleanUp();
+      //}
     }
 
     #endregion //METHODS
@@ -1046,8 +1057,20 @@ namespace Ogama.Modules.Recording.Tobii
     // Small helping Methods                                                     //
     ///////////////////////////////////////////////////////////////////////////////
     #region HELPER
+
+    /// <summary>
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void HandleConnectionError(object sender, ConnectionErrorEventArgs e)
+    {
+      // If the connection goes down we dispose 
+      // the IAsyncEyetracker instance. This will release 
+      // all resources held by the connection
+      this.DisconnectTracker();
+    }
+
     #endregion //HELPER
   }
 }
 
-#endif

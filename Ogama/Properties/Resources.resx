@@ -751,4 +751,7 @@
   <data name="ASL_61_46" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ASL_61_46.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="TobiiTracker_ConnectToTrackerFailed">
+    <value xml:space="preserve">Failed to upgrade protocol. This probably means that the firmware needs to be upgraded to a version that supports the new sdk.</value>
+  </data>
 </root>

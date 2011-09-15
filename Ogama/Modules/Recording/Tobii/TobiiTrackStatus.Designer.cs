@@ -1,6 +1,5 @@
-﻿#if TOBII
-
-namespace Ogama.Modules.Recording.Tobii
+﻿
+namespace Ogama.Modules.Recording.TobiiDevice
 {
   partial class TobiiTrackStatus
   {
@@ -35,7 +34,7 @@ namespace Ogama.Modules.Recording.Tobii
       this.lblDescription = new System.Windows.Forms.Label();
       this.splitContainer1 = new System.Windows.Forms.SplitContainer();
       this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-      this.axTobiiTrackStatus = new AxTetComp.AxTetTrackStatus();
+      this.tobiiTrackStatusControl = new Ogama.Modules.Recording.TobiiDevice.TobiiTrackStatusControl();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
       this.splitContainer1.Panel1.SuspendLayout();
       this.splitContainer1.Panel2.SuspendLayout();
@@ -43,7 +42,6 @@ namespace Ogama.Modules.Recording.Tobii
       this.splitContainer2.Panel1.SuspendLayout();
       this.splitContainer2.Panel2.SuspendLayout();
       this.splitContainer2.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.axTobiiTrackStatus)).BeginInit();
       this.SuspendLayout();
       // 
       // pictureBox1
@@ -79,7 +77,7 @@ namespace Ogama.Modules.Recording.Tobii
       // 
       // splitContainer1.Panel2
       // 
-      this.splitContainer1.Panel2.Controls.Add(this.axTobiiTrackStatus);
+      this.splitContainer1.Panel2.Controls.Add(this.tobiiTrackStatusControl);
       this.splitContainer1.Size = new System.Drawing.Size(407, 385);
       this.splitContainer1.SplitterDistance = 100;
       this.splitContainer1.TabIndex = 4;
@@ -104,15 +102,14 @@ namespace Ogama.Modules.Recording.Tobii
       this.splitContainer2.SplitterDistance = 40;
       this.splitContainer2.TabIndex = 4;
       // 
-      // axTobiiTrackStatus
+      // tobiiTrackStatusControl
       // 
-      this.axTobiiTrackStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.axTobiiTrackStatus.Enabled = true;
-      this.axTobiiTrackStatus.Location = new System.Drawing.Point(0, 0);
-      this.axTobiiTrackStatus.Name = "axTobiiTrackStatus";
-      this.axTobiiTrackStatus.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axTobiiTrackStatus.OcxState")));
-      this.axTobiiTrackStatus.Size = new System.Drawing.Size(407, 281);
-      this.axTobiiTrackStatus.TabIndex = 3;
+      this.tobiiTrackStatusControl.BackColor = System.Drawing.Color.Black;
+      this.tobiiTrackStatusControl.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.tobiiTrackStatusControl.Location = new System.Drawing.Point(0, 0);
+      this.tobiiTrackStatusControl.Name = "tobiiTrackStatusControl";
+      this.tobiiTrackStatusControl.Size = new System.Drawing.Size(407, 281);
+      this.tobiiTrackStatusControl.TabIndex = 0;
       // 
       // TobiiTrackStatus
       // 
@@ -125,7 +122,7 @@ namespace Ogama.Modules.Recording.Tobii
       this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
       this.Text = "Track status ...";
       this.TopMost = true;
-      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmTrackStatus_FormClosing);
+      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TobiiTrackStatusFormClosing);
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
       this.splitContainer1.Panel1.ResumeLayout(false);
       this.splitContainer1.Panel2.ResumeLayout(false);
@@ -133,7 +130,6 @@ namespace Ogama.Modules.Recording.Tobii
       this.splitContainer2.Panel1.ResumeLayout(false);
       this.splitContainer2.Panel2.ResumeLayout(false);
       this.splitContainer2.ResumeLayout(false);
-      ((System.ComponentModel.ISupportInitialize)(this.axTobiiTrackStatus)).EndInit();
       this.ResumeLayout(false);
 
     }
@@ -144,8 +140,7 @@ namespace Ogama.Modules.Recording.Tobii
     private System.Windows.Forms.Label lblDescription;
     private System.Windows.Forms.SplitContainer splitContainer1;
     private System.Windows.Forms.SplitContainer splitContainer2;
-    private AxTetComp.AxTetTrackStatus axTobiiTrackStatus;
+    private TobiiTrackStatusControl tobiiTrackStatusControl;
   }
 }
 
-#endif

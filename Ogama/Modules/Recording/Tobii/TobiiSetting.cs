@@ -11,9 +11,8 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-#if TOBII
 
-namespace Ogama.Modules.Recording.Tobii
+namespace Ogama.Modules.Recording.TobiiDevice
 {
   using System;
   using System.Collections.Generic;
@@ -21,7 +20,6 @@ namespace Ogama.Modules.Recording.Tobii
   using System.Text;
   using System.Xml.Serialization;
 
-  using TetComp;
   using VectorGraphics;
   using VectorGraphics.CustomTypeConverter;
 
@@ -58,17 +56,17 @@ namespace Ogama.Modules.Recording.Tobii
     /// <summary>
     /// Saves the number of calibration points.
     /// </summary>
-    private TetNumCalibPoints tetNumCalibPoints;
+    private int tetNumCalibPoints;
 
     /// <summary>
     /// Saves the calibration point size.
     /// </summary>
-    private TetCalibPointSize tetCalibPointSize;
+    private int tetCalibPointSize;
 
     /// <summary>
     /// Saves the calibration speed.
     /// </summary>
-    private TetCalibPointSpeed tetCalibPointSpeed;
+    private int tetCalibPointSpeed;
 
     /// <summary>
     /// Saves the color for the calibration points.
@@ -99,10 +97,10 @@ namespace Ogama.Modules.Recording.Tobii
     public TobiiSetting()
     {
       this.tetServerAddress = "169.254.4.217";
-      this.tetServerPort = (int)TetConstants.TetConstants_DefaultServerPort;
-      this.tetNumCalibPoints = TetNumCalibPoints.TetNumCalibPoints_5;
-      this.tetCalibPointSize = TetCalibPointSize.TetCalibPointSize_Medium;
-      this.tetCalibPointSpeed = TetCalibPointSpeed.TetCalibPointSpeed_MediumSlow;
+      this.tetServerPort = 4455;
+      this.tetNumCalibPoints = 5;
+      this.tetCalibPointSize = 22;
+      this.tetCalibPointSpeed = 2;
       this.tetPointColor = Color.Red;
       this.tetBackgroundColor = SystemColors.ControlLight;
       this.tetRandomizeCalibPointOrder = true;
@@ -140,8 +138,8 @@ namespace Ogama.Modules.Recording.Tobii
     /// Gets or sets the number of calibration points that are shown.
     /// </summary>
     /// <remarks>5 are standard, 9 gives higher precision, 2 are for uncooperative subjects.</remarks>
-    /// <value>A <see cref="TetNumCalibPoints"/> with the number of points, can be  (2,5,9).</value>
-    public TetNumCalibPoints TetNumCalibPoint
+    /// <value>A <see cref="Int32"/> with the number of points, can be  (2,5,9).</value>
+    public int TetNumCalibPoint
     {
       get { return this.tetNumCalibPoints; }
       set { this.tetNumCalibPoints = value; }
@@ -150,8 +148,8 @@ namespace Ogama.Modules.Recording.Tobii
     /// <summary>
     /// Gets or sets the size of the calibration point to change its place.
     /// </summary>
-    /// <value>A <see cref="TetCalibPointSize"/> which is small, medium or large.</value>
-    public TetCalibPointSize TetCalibPointSizes
+    /// <value>A <see cref="Int32"/> which is small, medium or large.</value>
+    public int TetCalibPointSizes
     {
       get { return this.tetCalibPointSize; }
       set { this.tetCalibPointSize = value; }
@@ -160,8 +158,8 @@ namespace Ogama.Modules.Recording.Tobii
     /// <summary>
     /// Gets or sets the speed of the Calibration point.
     /// </summary>
-    /// <value>A <see cref="TetCalibPointSpeed"/> which is between fast and slow.</value>
-    public TetCalibPointSpeed TetCalibPointSpeeds
+    /// <value>A <see cref="Int32"/> which is between fast and slow.</value>
+    public int TetCalibPointSpeeds
     {
       get { return this.tetCalibPointSpeed; }
       set { this.tetCalibPointSpeed = value; }
@@ -271,4 +269,3 @@ namespace Ogama.Modules.Recording.Tobii
   }
 }
 
-#endif

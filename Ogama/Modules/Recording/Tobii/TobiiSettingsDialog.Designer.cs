@@ -1,6 +1,5 @@
-﻿#if TOBII
-
-namespace Ogama.Modules.Recording.Tobii
+﻿
+namespace Ogama.Modules.Recording.TobiiDevice
 {
   partial class TobiiSettingsDialog
   {
@@ -439,4 +438,3 @@ namespace Ogama.Modules.Recording.Tobii
   }
 }
 
-#endif

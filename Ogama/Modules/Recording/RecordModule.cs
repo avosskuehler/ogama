@@ -33,7 +33,7 @@ namespace Ogama.Modules.Recording
   using Ogama.Modules.Recording.ASL;
   using Ogama.Modules.Recording.MouseOnly;
   using Ogama.Modules.Recording.SMI;
-  using Ogama.Modules.Recording.Tobii;
+  using Ogama.Modules.Recording.TobiiDevice;
   using Ogama.Properties;
   using OgamaControls;
 
@@ -1732,11 +1732,10 @@ namespace Ogama.Modules.Recording
         }
       }
 
-#if TOBII
       if (tracker == (tracker | HardwareTracker.Tobii))
       {
-        // Create mouse only tracker
-        TobiiTracker newTobii = new TobiiTracker(
+        // Create tobii tracker
+        var newTobii = new TobiiTracker(
           this,
           this.spcTobiiControls,
           this.spcTobiiTrackStatus.Panel1,
@@ -1759,17 +1758,11 @@ namespace Ogama.Modules.Recording
           this.tclEyetracker.TabPages.Remove(this.tbpTobii);
         }
       }
-#else
-      if (this.tclEyetracker.TabPages.Contains(this.tbpTobii))
-      {
-        this.tclEyetracker.TabPages.Remove(this.tbpTobii);
-      }
-#endif
 
       if (tracker == (tracker | HardwareTracker.SMI))
       {
         // Create mouse only tracker
-        SMITracker newSMI = new SMITracker(
+        var newSMI = new SMITracker(
           this,
           this.btnSMIConnect,
           this.btnSMISubjectName,
@@ -2291,7 +2284,6 @@ namespace Ogama.Modules.Recording
 
       switch (this.tclEyetracker.SelectedTab.Name)
       {
-#if TOBII
         case "tbpTobii":
           if (this.trackerInterfaces.ContainsKey(HardwareTracker.Tobii))
           {
@@ -2299,7 +2291,6 @@ namespace Ogama.Modules.Recording
           }
 
           break;
-#endif
 #if ASL
         case "tbpAsl":
           if (this.trackerInterfaces.ContainsKey(HardwareTracker.ASL))

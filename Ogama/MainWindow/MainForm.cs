@@ -88,6 +88,7 @@ namespace Ogama.MainWindow
 
       this.InitializeComponent();
       this.InitAccelerators();
+      Modules.Recording.TobiiDevice.TobiiTracker.StaticInitialize();
     }
 
     #endregion //CONSTRUCTION

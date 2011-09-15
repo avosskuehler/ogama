@@ -11,7 +11,7 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Recording.Tobii
+namespace Ogama.Modules.Recording.TobiiDevice
 {
   using System;
   using System.Collections.Generic;
@@ -23,16 +23,12 @@ namespace Ogama.Modules.Recording.Tobii
 
   using Ogama.Properties;
 
-#if TOBII
-  using TetComp;
-#endif
 
   /// <summary>
   /// Popup form to specify settings for the tobii system.
   /// </summary>
   public partial class TobiiSettingsDialog : Form
   {
-#if TOBII
    ///////////////////////////////////////////////////////////////////////////////
     // Defining Constants                                                        //
     ///////////////////////////////////////////////////////////////////////////////
@@ -235,13 +231,13 @@ namespace Ogama.Modules.Recording.Tobii
     {
       switch (this.tobiiSettings.TetCalibPointSizes)
       {
-        case TetComp.TetCalibPointSize.TetCalibPointSize_Large:
+        case 44:
           this.rdbTobiiSizeLarge.Checked = true;
           break;
-        case TetComp.TetCalibPointSize.TetCalibPointSize_Medium:
+        case 22:
           this.rdbTobiiSizeMedium.Checked = true;
           break;
-        case TetComp.TetCalibPointSize.TetCalibPointSize_Small:
+        case 11:
           this.rdbTobiiSizeSmall.Checked = true;
           break;
         default:
@@ -251,19 +247,19 @@ namespace Ogama.Modules.Recording.Tobii
 
       switch (this.tobiiSettings.TetCalibPointSpeeds)
       {
-        case TetComp.TetCalibPointSpeed.TetCalibPointSpeed_Fast:
+        case 5:
           this.rdbTobiiSpeedFast.Checked = true;
           break;
-        case TetComp.TetCalibPointSpeed.TetCalibPointSpeed_Medium:
+        case 4:
           this.rdbTobiiSpeedMedium.Checked = true;
           break;
-        case TetComp.TetCalibPointSpeed.TetCalibPointSpeed_MediumFast:
+        case 3:
           this.rdbTobiiSpeedMediumFast.Checked = true;
           break;
-        case TetComp.TetCalibPointSpeed.TetCalibPointSpeed_MediumSlow:
+        case 2:
           this.rdbTobiiSpeedMediumSlow.Checked = true;
           break;
-        case TetComp.TetCalibPointSpeed.TetCalibPointSpeed_Slow:
+        case 1:
           this.rdbTobiiSpeedSlow.Checked = true;
           break;
         default:
@@ -273,13 +269,13 @@ namespace Ogama.Modules.Recording.Tobii
 
       switch (this.tobiiSettings.TetNumCalibPoint)
       {
-        case TetComp.TetNumCalibPoints.TetNumCalibPoints_2:
+        case 2:
           this.rdbTobii2PtsCalib.Checked = true;
           break;
-        case TetComp.TetNumCalibPoints.TetNumCalibPoints_5:
+        case 5:
           this.rdbTobii5PtsCalib.Checked = true;
           break;
-        case TetComp.TetNumCalibPoints.TetNumCalibPoints_9:
+        case 9:
           this.rdbTobii9PtsCalib.Checked = true;
           break;
         default:
@@ -302,15 +298,15 @@ namespace Ogama.Modules.Recording.Tobii
     {
       if (this.rdbTobii9PtsCalib.Checked)
       {
-        this.tobiiSettings.TetNumCalibPoint = TetNumCalibPoints.TetNumCalibPoints_9;
+        this.tobiiSettings.TetNumCalibPoint = 9;
       }
       else if (this.rdbTobii5PtsCalib.Checked)
       {
-        this.tobiiSettings.TetNumCalibPoint = TetNumCalibPoints.TetNumCalibPoints_5;
+        this.tobiiSettings.TetNumCalibPoint = 5;
       }
       else if (this.rdbTobii2PtsCalib.Checked)
       {
-        this.tobiiSettings.TetNumCalibPoint = TetNumCalibPoints.TetNumCalibPoints_2;
+        this.tobiiSettings.TetNumCalibPoint = 2;
       }
     }
 
@@ -322,15 +318,15 @@ namespace Ogama.Modules.Recording.Tobii
     {
       if (this.rdbTobiiSizeLarge.Checked)
       {
-        this.tobiiSettings.TetCalibPointSizes = TetCalibPointSize.TetCalibPointSize_Large;
+        this.tobiiSettings.TetCalibPointSizes = 44;
       }
       else if (this.rdbTobiiSizeMedium.Checked)
       {
-        this.tobiiSettings.TetCalibPointSizes = TetCalibPointSize.TetCalibPointSize_Medium;
+        this.tobiiSettings.TetCalibPointSizes = 22;
       }
       else if (this.rdbTobiiSizeSmall.Checked)
       {
-        this.tobiiSettings.TetCalibPointSizes = TetCalibPointSize.TetCalibPointSize_Small;
+        this.tobiiSettings.TetCalibPointSizes = 11;
       }
     }
 
@@ -342,23 +338,23 @@ namespace Ogama.Modules.Recording.Tobii
     {
       if (this.rdbTobiiSpeedFast.Checked)
       {
-        this.tobiiSettings.TetCalibPointSpeeds = TetCalibPointSpeed.TetCalibPointSpeed_Fast;
+        this.tobiiSettings.TetCalibPointSpeeds = 5;
       }
       else if (this.rdbTobiiSpeedMediumFast.Checked)
       {
-        this.tobiiSettings.TetCalibPointSpeeds = TetCalibPointSpeed.TetCalibPointSpeed_MediumFast;
+        this.tobiiSettings.TetCalibPointSpeeds = 4;
       }
       else if (this.rdbTobiiSpeedMedium.Checked)
       {
-        this.tobiiSettings.TetCalibPointSpeeds = TetCalibPointSpeed.TetCalibPointSpeed_Medium;
+        this.tobiiSettings.TetCalibPointSpeeds = 3;
       }
       else if (this.rdbTobiiSpeedMediumSlow.Checked)
       {
-        this.tobiiSettings.TetCalibPointSpeeds = TetCalibPointSpeed.TetCalibPointSpeed_MediumSlow;
+        this.tobiiSettings.TetCalibPointSpeeds = 2;
       }
       else if (this.rdbTobiiSpeedSlow.Checked)
       {
-        this.tobiiSettings.TetCalibPointSpeeds = TetCalibPointSpeed.TetCalibPointSpeed_Slow;
+        this.tobiiSettings.TetCalibPointSpeeds = 1;
       }
     }
 
@@ -369,7 +365,6 @@ namespace Ogama.Modules.Recording.Tobii
     ///////////////////////////////////////////////////////////////////////////////
     #region HELPER
     #endregion //HELPER
-#endif
   }
 }
 

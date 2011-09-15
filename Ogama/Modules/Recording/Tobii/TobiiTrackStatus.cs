@@ -11,7 +11,7 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Recording.Tobii
+namespace Ogama.Modules.Recording.TobiiDevice
 {
   using System;
   using System.Collections.Generic;
@@ -20,17 +20,14 @@ namespace Ogama.Modules.Recording.Tobii
   using System.Drawing;
   using System.Text;
   using System.Windows.Forms;
-#if TOBII
-  using TetComp;
-#endif
   using VectorGraphics;
+  using Tobii.Eyetracking.Sdk;
 
   /// <summary>
   /// A dialog which exposes a track status meter to the subject.
   /// </summary>
   public partial class TobiiTrackStatus : Form
   {
-#if TOBII
     ///////////////////////////////////////////////////////////////////////////////
     // Defining Constants                                                        //
     ///////////////////////////////////////////////////////////////////////////////
@@ -42,20 +39,20 @@ namespace Ogama.Modules.Recording.Tobii
     ///////////////////////////////////////////////////////////////////////////////
     #region FIELDS
 
-    /// <summary>
-    /// The TetStatusObject to show on the presentation screen.
-    /// </summary>
-    private ITetTrackStatus tetTrackStatusSubject;
+    ///// <summary>
+    ///// The TetStatusObject to show on the presentation screen.
+    ///// </summary>
+    //private TobiiTrackStatusControl tetTrackStatusSubject;
 
-    /// <summary>
-    /// Saves the current active <see cref="TobiiSetting"/> to use.
-    /// </summary>
-    private TobiiSetting tobiiSettings;
+    ///// <summary>
+    ///// Saves the current active <see cref="TobiiSetting"/> to use.
+    ///// </summary>
+    //private TobiiSetting tobiiSettings;
 
-    /// <summary>
-    /// Saves whether this dialog is connected to the tracker.
-    /// </summary>
-    private bool isConnected;
+    ///// <summary>
+    ///// Saves whether this dialog is connected to the tracker.
+    ///// </summary>
+    //private bool isConnected;
 
     #endregion //FIELDS
 
@@ -72,8 +69,8 @@ namespace Ogama.Modules.Recording.Tobii
     public TobiiTrackStatus(TobiiSetting setting)
     {
       this.InitializeComponent();
-      this.tobiiSettings = setting;
-      this.Connect();
+      //this.tobiiSettings = setting;
+      //this.Connect();
     }
 
     #endregion //CONSTRUCTION
@@ -89,6 +86,11 @@ namespace Ogama.Modules.Recording.Tobii
     ///////////////////////////////////////////////////////////////////////////////
     #region EVENTS
 
+    public void Update(GazeDataItem gd)
+    {
+      this.tobiiTrackStatusControl.OnGazeData(gd);
+    }
+
     ///////////////////////////////////////////////////////////////////////////////
     // Eventhandler for UI, Menu, Buttons, Toolbars etc.                         //
     ///////////////////////////////////////////////////////////////////////////////
@@ -100,12 +102,12 @@ namespace Ogama.Modules.Recording.Tobii
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">A <see cref="FormClosingEventArgs"/> with the event data.</param>
-    private void frmTrackStatus_FormClosing(object sender, FormClosingEventArgs e)
+    private void TobiiTrackStatusFormClosing(object sender, FormClosingEventArgs e)
     {
-      if (this.isConnected)
-      {
-        this.Disconnect();
-      }
+      //if (this.isConnected)
+      //{
+      //  this.Disconnect();
+      //}
     }
 
     #endregion //WINDOWSEVENTHANDLER
@@ -143,23 +145,23 @@ namespace Ogama.Modules.Recording.Tobii
     {
       try
       {
-        this.tetTrackStatusSubject = (ITetTrackStatus)this.axTobiiTrackStatus.GetOcx();
+        //this.tetTrackStatusSubject = (ITetTrackStatus)this.axTobiiTrackStatus.GetOcx();
 
-        // Connect to the TET server if necessary
-        if (!this.tetTrackStatusSubject.IsConnected)
-        {
-          this.tetTrackStatusSubject.Connect(
-            this.tobiiSettings.TetServerAddress,
-            this.tobiiSettings.TetServerPort);
-        }
+        //// Connect to the TET server if necessary
+        //if (!this.tetTrackStatusSubject.IsConnected)
+        //{
+        //  this.tetTrackStatusSubject.Connect(
+        //    this.tobiiSettings.TetServerAddress,
+        //    this.tobiiSettings.TetServerPort);
+        //}
 
-        // Start the track status meter
-        if (!this.tetTrackStatusSubject.IsTracking)
-        {
-          this.tetTrackStatusSubject.Start();
-        }
+        //// Start the track status meter
+        //if (!this.tetTrackStatusSubject.IsTracking)
+        //{
+        //  this.tetTrackStatusSubject.Start();
+        //}
 
-        this.isConnected = true;
+        //this.isConnected = true;
       }
       catch (Exception)
       {
@@ -174,15 +176,15 @@ namespace Ogama.Modules.Recording.Tobii
     /// </summary>
     private void Disconnect()
     {
-      if (this.tetTrackStatusSubject.IsConnected)
-      {
-        if (this.tetTrackStatusSubject.IsTracking)
-        {
-          this.tetTrackStatusSubject.Stop();
-        }
+      //if (this.tetTrackStatusSubject.IsConnected)
+      //{
+      //  if (this.tetTrackStatusSubject.IsTracking)
+      //  {
+      //    this.tetTrackStatusSubject.Stop();
+      //  }
 
-        this.tetTrackStatusSubject.Disconnect();
-      }
+      //  this.tetTrackStatusSubject.Disconnect();
+      //}
     }
 
     #endregion //METHODS
@@ -192,6 +194,5 @@ namespace Ogama.Modules.Recording.Tobii
     ///////////////////////////////////////////////////////////////////////////////
     #region HELPER
     #endregion //HELPER
-#endif
   }
 }
