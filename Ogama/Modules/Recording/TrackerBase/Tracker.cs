@@ -154,7 +154,7 @@ namespace Ogama.Modules.Recording
       // to the record modules
       // event handler.
       this.GazeDataChanged +=
-new GazeDataChangedEventHandler(this.recordModule.ITracker_GazeDataChanged);
+new GazeDataChangedEventHandler(this.recordModule.TrackerGazeDataChanged);
 
       // Create new empty subject
       this.subject = new SubjectsData();
@@ -368,7 +368,7 @@ new GazeDataChangedEventHandler(this.recordModule.ITracker_GazeDataChanged);
 
       this.recordButton.BackColor = Color.Transparent;
 
-      this.GazeDataChanged -= new GazeDataChangedEventHandler(this.recordModule.ITracker_GazeDataChanged);
+      this.GazeDataChanged -= new GazeDataChangedEventHandler(this.recordModule.TrackerGazeDataChanged);
     }
 
     /// <summary>

@@ -125,37 +125,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\GazeTrackerClient.dll</HintPath>
     </Reference>
-    <Reference Include="GazeTrackerClientUI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Managed\GazeTrackerClientUI.exe</HintPath>
-    </Reference>
-    <Reference Include="GazeTrackerUI, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Managed\GazeTrackerUI.exe</HintPath>
-    </Reference>
     <Reference Include="GazeTrackingLibrary, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\GazeTrackingLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="GTCommons, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Managed\GTCommons.dll</HintPath>
-    </Reference>
-    <Reference Include="GTCommunication, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Managed\GTCommunication.dll</HintPath>
-    </Reference>
     <Reference Include="GTHardware, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bf600965c04ba845, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\GTHardware.dll</HintPath>
-    </Reference>
-    <Reference Include="GTSettings, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d1fdb187d7e10584, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Managed\GTSettings.dll</HintPath>
-    </Reference>
-    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Managed\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Data.ConnectionUI, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -192,10 +168,6 @@
     <Reference Include="Microsoft.SqlServer.SqlEnum, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\Microsoft.SqlServer.SqlEnum.dll</HintPath>
-    </Reference>
-    <Reference Include="OgamaClient, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Managed\OgamaClient.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
@@ -418,8 +390,8 @@
       <DependentUpon>AslTrackStatus.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Recording\ASL\UserSettings.cs" />
-    <Compile Include="Modules\Recording\ITU\ITUDefaultGazeTracker.cs" />
-    <Compile Include="Modules\Recording\ITU\ITUGazeTrackerBase.cs" />
+    <Compile Include="Modules\Recording\ITU\ITUGazeTracker.cs" />
+    <Compile Include="Modules\Recording\ITU\ITUClient.cs" />
     <Compile Include="Modules\Recording\Presenter\WebsiteScreenshot.cs" />
     <Compile Include="Modules\Recording\Presenter\DSScreenCapture.cs" />
     <Compile Include="Modules\Recording\Presenter\ScreenCaptureProperties.cs" />

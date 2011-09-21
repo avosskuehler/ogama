@@ -22,6 +22,7 @@ namespace Ogama.Modules.Recording
   using System.Windows.Forms;
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
+  using Ogama.Modules.Recording.ITU;
 
   /// <summary>
   /// A small popup <see cref="Form"/> for showing a dialog 
@@ -129,7 +130,7 @@ namespace Ogama.Modules.Recording
         "an eye tracker and can be used in both remote and head-mounted setup."
         + Environment.NewLine;
 
-      if (!Ogama.Modules.Recording.ITUGazeTracker.ITUGazeTrackerBase.IsAvailable(out error))
+      if (!ITUGazeTracker.IsAvailable(out error))
       {
         this.chbITU.Enabled = false;
         this.chbITU.Checked = false;

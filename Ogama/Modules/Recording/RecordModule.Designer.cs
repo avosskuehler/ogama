@@ -38,22 +38,15 @@
       this.tclEyetracker = new System.Windows.Forms.TabControl();
       this.tbpITU = new System.Windows.Forms.TabPage();
       this.panel3 = new System.Windows.Forms.Panel();
-      this.label47 = new System.Windows.Forms.Label();
-      this.btnITUAdjust = new System.Windows.Forms.Button();
-      this.imlButtons = new System.Windows.Forms.ImageList(this.components);
       this.groupBox4 = new System.Windows.Forms.GroupBox();
-      this.spcITUControls = new System.Windows.Forms.SplitContainer();
-      this.spcITUTrackStatus = new System.Windows.Forms.SplitContainer();
-      this.btnITUShowOnPresentationScreen = new System.Windows.Forms.Button();
-      this.spcITUCalibPlot = new System.Windows.Forms.SplitContainer();
-      this.btnITURecalibrate = new System.Windows.Forms.Button();
-      this.btnITUAcceptCalibration = new System.Windows.Forms.Button();
+      this.txbITUStatus = new System.Windows.Forms.TextBox();
+      this.label47 = new System.Windows.Forms.Label();
       this.txbITUSubjectName = new System.Windows.Forms.TextBox();
       this.btnITURecord = new System.Windows.Forms.Button();
+      this.imlButtons = new System.Windows.Forms.ImageList(this.components);
       this.btnITUCalibrate = new System.Windows.Forms.Button();
       this.label17 = new System.Windows.Forms.Label();
       this.label19 = new System.Windows.Forms.Label();
-      this.label54 = new System.Windows.Forms.Label();
       this.label20 = new System.Windows.Forms.Label();
       this.btnITUSubjectName = new System.Windows.Forms.Button();
       this.btnITUConnect = new System.Windows.Forms.Button();
@@ -393,13 +386,6 @@
       this.tbpITU.SuspendLayout();
       this.panel3.SuspendLayout();
       this.groupBox4.SuspendLayout();
-      this.spcITUControls.Panel1.SuspendLayout();
-      this.spcITUControls.Panel2.SuspendLayout();
-      this.spcITUControls.SuspendLayout();
-      this.spcITUTrackStatus.Panel2.SuspendLayout();
-      this.spcITUTrackStatus.SuspendLayout();
-      this.spcITUCalibPlot.Panel2.SuspendLayout();
-      this.spcITUCalibPlot.SuspendLayout();
       this.tbpTobii.SuspendLayout();
       this.panel1.SuspendLayout();
       this.groupBox1.SuspendLayout();
@@ -625,7 +611,7 @@
       this.tclEyetracker.SelectedIndex = 0;
       this.tclEyetracker.Size = new System.Drawing.Size(220, 412);
       this.tclEyetracker.TabIndex = 1;
-      this.tclEyetracker.SelectedIndexChanged += new System.EventHandler(this.tclEyetracker_SelectedIndexChanged);
+      this.tclEyetracker.SelectedIndexChanged += new System.EventHandler(this.TclEyetrackerSelectedIndexChanged);
       // 
       // tbpITU
       // 
@@ -642,15 +628,13 @@
       // panel3
       // 
       this.panel3.AutoScroll = true;
-      this.panel3.Controls.Add(this.label47);
-      this.panel3.Controls.Add(this.btnITUAdjust);
       this.panel3.Controls.Add(this.groupBox4);
+      this.panel3.Controls.Add(this.label47);
       this.panel3.Controls.Add(this.txbITUSubjectName);
       this.panel3.Controls.Add(this.btnITURecord);
       this.panel3.Controls.Add(this.btnITUCalibrate);
       this.panel3.Controls.Add(this.label17);
       this.panel3.Controls.Add(this.label19);
-      this.panel3.Controls.Add(this.label54);
       this.panel3.Controls.Add(this.label20);
       this.panel3.Controls.Add(this.btnITUSubjectName);
       this.panel3.Controls.Add(this.btnITUConnect);
@@ -660,31 +644,61 @@
       this.panel3.Size = new System.Drawing.Size(206, 379);
       this.panel3.TabIndex = 11;
       // 
+      // groupBox4
+      // 
+      this.groupBox4.Controls.Add(this.txbITUStatus);
+      this.groupBox4.Dock = System.Windows.Forms.DockStyle.Top;
+      this.groupBox4.Location = new System.Drawing.Point(0, 0);
+      this.groupBox4.Name = "groupBox4";
+      this.groupBox4.Size = new System.Drawing.Size(206, 120);
+      this.groupBox4.TabIndex = 31;
+      this.groupBox4.TabStop = false;
+      this.groupBox4.Text = "Track status";
+      // 
+      // txbITUStatus
+      // 
+      this.txbITUStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.txbITUStatus.Location = new System.Drawing.Point(3, 16);
+      this.txbITUStatus.Multiline = true;
+      this.txbITUStatus.Name = "txbITUStatus";
+      this.txbITUStatus.Size = new System.Drawing.Size(200, 101);
+      this.txbITUStatus.TabIndex = 0;
+      this.txbITUStatus.Text = "Please note:\r\n- The track status and the quality of\r\n   the calibration are shown" +
+          " in the \r\n   ITU gazetracker application.\r\n- Turn off the firewalls if connectin" +
+          "g\r\n   fails.";
+      // 
       // label47
       // 
       this.label47.AutoSize = true;
       this.label47.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label47.Location = new System.Drawing.Point(5, 297);
+      this.label47.Location = new System.Drawing.Point(4, 156);
       this.label47.Margin = new System.Windows.Forms.Padding(0);
       this.label47.Name = "label47";
       this.label47.Size = new System.Drawing.Size(25, 24);
       this.label47.TabIndex = 22;
-      this.label47.Text = "3.";
+      this.label47.Text = "2.";
       // 
-      // btnITUAdjust
+      // txbITUSubjectName
       // 
-      this.btnITUAdjust.Enabled = false;
-      this.btnITUAdjust.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-      this.btnITUAdjust.ImageKey = "Adjust";
-      this.btnITUAdjust.ImageList = this.imlButtons;
-      this.btnITUAdjust.Location = new System.Drawing.Point(29, 266);
-      this.btnITUAdjust.Name = "btnITUAdjust";
-      this.btnITUAdjust.Size = new System.Drawing.Size(73, 23);
-      this.btnITUAdjust.TabIndex = 21;
-      this.btnITUAdjust.Text = "Adjust";
-      this.btnITUAdjust.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.btnITUAdjust.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-      this.btnITUAdjust.UseVisualStyleBackColor = true;
+      this.txbITUSubjectName.Location = new System.Drawing.Point(106, 154);
+      this.txbITUSubjectName.Name = "txbITUSubjectName";
+      this.txbITUSubjectName.ReadOnly = true;
+      this.txbITUSubjectName.Size = new System.Drawing.Size(91, 20);
+      this.txbITUSubjectName.TabIndex = 11;
+      this.txbITUSubjectName.Text = "Subject1";
+      // 
+      // btnITURecord
+      // 
+      this.btnITURecord.Enabled = false;
+      this.btnITURecord.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnITURecord.ImageKey = "Record";
+      this.btnITURecord.ImageList = this.imlButtons;
+      this.btnITURecord.Location = new System.Drawing.Point(28, 210);
+      this.btnITURecord.Name = "btnITURecord";
+      this.btnITURecord.Size = new System.Drawing.Size(73, 23);
+      this.btnITURecord.TabIndex = 17;
+      this.btnITURecord.Text = "&Record";
+      this.btnITURecord.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       // 
       // imlButtons
       // 
@@ -700,134 +714,13 @@
       this.imlButtons.Images.SetKeyName(7, "ITU");
       this.imlButtons.Images.SetKeyName(8, "PS3");
       // 
-      // groupBox4
-      // 
-      this.groupBox4.Controls.Add(this.spcITUControls);
-      this.groupBox4.Location = new System.Drawing.Point(5, 3);
-      this.groupBox4.Name = "groupBox4";
-      this.groupBox4.Size = new System.Drawing.Size(196, 230);
-      this.groupBox4.TabIndex = 20;
-      this.groupBox4.TabStop = false;
-      this.groupBox4.Text = "Track status";
-      // 
-      // spcITUControls
-      // 
-      this.spcITUControls.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.spcITUControls.Location = new System.Drawing.Point(3, 16);
-      this.spcITUControls.Name = "spcITUControls";
-      this.spcITUControls.Orientation = System.Windows.Forms.Orientation.Horizontal;
-      // 
-      // spcITUControls.Panel1
-      // 
-      this.spcITUControls.Panel1.Controls.Add(this.spcITUTrackStatus);
-      // 
-      // spcITUControls.Panel2
-      // 
-      this.spcITUControls.Panel2.Controls.Add(this.spcITUCalibPlot);
-      this.spcITUControls.Size = new System.Drawing.Size(190, 211);
-      this.spcITUControls.SplitterDistance = 101;
-      this.spcITUControls.TabIndex = 22;
-      // 
-      // spcITUTrackStatus
-      // 
-      this.spcITUTrackStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.spcITUTrackStatus.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-      this.spcITUTrackStatus.IsSplitterFixed = true;
-      this.spcITUTrackStatus.Location = new System.Drawing.Point(0, 0);
-      this.spcITUTrackStatus.Name = "spcITUTrackStatus";
-      this.spcITUTrackStatus.Orientation = System.Windows.Forms.Orientation.Horizontal;
-      // 
-      // spcITUTrackStatus.Panel1
-      // 
-      this.spcITUTrackStatus.Panel1.BackColor = System.Drawing.Color.Transparent;
-      // 
-      // spcITUTrackStatus.Panel2
-      // 
-      this.spcITUTrackStatus.Panel2.Controls.Add(this.btnITUShowOnPresentationScreen);
-      this.spcITUTrackStatus.Panel2MinSize = 22;
-      this.spcITUTrackStatus.Size = new System.Drawing.Size(190, 101);
-      this.spcITUTrackStatus.SplitterDistance = 75;
-      this.spcITUTrackStatus.TabIndex = 20;
-      // 
-      // btnITUShowOnPresentationScreen
-      // 
-      this.btnITUShowOnPresentationScreen.BackColor = System.Drawing.Color.Transparent;
-      this.btnITUShowOnPresentationScreen.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.btnITUShowOnPresentationScreen.Enabled = false;
-      this.btnITUShowOnPresentationScreen.Location = new System.Drawing.Point(0, 0);
-      this.btnITUShowOnPresentationScreen.Name = "btnITUShowOnPresentationScreen";
-      this.btnITUShowOnPresentationScreen.Size = new System.Drawing.Size(190, 22);
-      this.btnITUShowOnPresentationScreen.TabIndex = 21;
-      this.btnITUShowOnPresentationScreen.Text = "Show on presentation screen";
-      this.btnITUShowOnPresentationScreen.UseVisualStyleBackColor = false;
-      // 
-      // spcITUCalibPlot
-      // 
-      this.spcITUCalibPlot.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.spcITUCalibPlot.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-      this.spcITUCalibPlot.IsSplitterFixed = true;
-      this.spcITUCalibPlot.Location = new System.Drawing.Point(0, 0);
-      this.spcITUCalibPlot.Name = "spcITUCalibPlot";
-      this.spcITUCalibPlot.Orientation = System.Windows.Forms.Orientation.Horizontal;
-      // 
-      // spcITUCalibPlot.Panel2
-      // 
-      this.spcITUCalibPlot.Panel2.Controls.Add(this.btnITURecalibrate);
-      this.spcITUCalibPlot.Panel2.Controls.Add(this.btnITUAcceptCalibration);
-      this.spcITUCalibPlot.Panel2MinSize = 22;
-      this.spcITUCalibPlot.Size = new System.Drawing.Size(190, 106);
-      this.spcITUCalibPlot.SplitterDistance = 80;
-      this.spcITUCalibPlot.TabIndex = 1;
-      // 
-      // btnITURecalibrate
-      // 
-      this.btnITURecalibrate.Dock = System.Windows.Forms.DockStyle.Right;
-      this.btnITURecalibrate.Location = new System.Drawing.Point(115, 0);
-      this.btnITURecalibrate.Name = "btnITURecalibrate";
-      this.btnITURecalibrate.Size = new System.Drawing.Size(75, 22);
-      this.btnITURecalibrate.TabIndex = 0;
-      this.btnITURecalibrate.Text = "Recalibrate";
-      this.btnITURecalibrate.UseVisualStyleBackColor = true;
-      // 
-      // btnITUAcceptCalibration
-      // 
-      this.btnITUAcceptCalibration.Dock = System.Windows.Forms.DockStyle.Left;
-      this.btnITUAcceptCalibration.Location = new System.Drawing.Point(0, 0);
-      this.btnITUAcceptCalibration.Name = "btnITUAcceptCalibration";
-      this.btnITUAcceptCalibration.Size = new System.Drawing.Size(75, 22);
-      this.btnITUAcceptCalibration.TabIndex = 0;
-      this.btnITUAcceptCalibration.Text = "Accept";
-      this.btnITUAcceptCalibration.UseVisualStyleBackColor = true;
-      // 
-      // txbITUSubjectName
-      // 
-      this.txbITUSubjectName.Location = new System.Drawing.Point(107, 295);
-      this.txbITUSubjectName.Name = "txbITUSubjectName";
-      this.txbITUSubjectName.ReadOnly = true;
-      this.txbITUSubjectName.Size = new System.Drawing.Size(91, 20);
-      this.txbITUSubjectName.TabIndex = 11;
-      this.txbITUSubjectName.Text = "Subject1";
-      // 
-      // btnITURecord
-      // 
-      this.btnITURecord.Enabled = false;
-      this.btnITURecord.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-      this.btnITURecord.ImageKey = "Record";
-      this.btnITURecord.ImageList = this.imlButtons;
-      this.btnITURecord.Location = new System.Drawing.Point(29, 351);
-      this.btnITURecord.Name = "btnITURecord";
-      this.btnITURecord.Size = new System.Drawing.Size(73, 23);
-      this.btnITURecord.TabIndex = 17;
-      this.btnITURecord.Text = "&Record";
-      this.btnITURecord.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-      // 
       // btnITUCalibrate
       // 
       this.btnITUCalibrate.Enabled = false;
       this.btnITUCalibrate.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
       this.btnITUCalibrate.ImageKey = "Calibrate";
       this.btnITUCalibrate.ImageList = this.imlButtons;
-      this.btnITUCalibrate.Location = new System.Drawing.Point(29, 322);
+      this.btnITUCalibrate.Location = new System.Drawing.Point(28, 181);
       this.btnITUCalibrate.Name = "btnITUCalibrate";
       this.btnITUCalibrate.Size = new System.Drawing.Size(73, 23);
       this.btnITUCalibrate.TabIndex = 17;
@@ -838,38 +731,27 @@
       // 
       this.label17.AutoSize = true;
       this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label17.Location = new System.Drawing.Point(5, 353);
+      this.label17.Location = new System.Drawing.Point(4, 212);
       this.label17.Name = "label17";
       this.label17.Size = new System.Drawing.Size(25, 24);
       this.label17.TabIndex = 13;
-      this.label17.Text = "5.";
+      this.label17.Text = "4.";
       // 
       // label19
       // 
       this.label19.AutoSize = true;
       this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label19.Location = new System.Drawing.Point(5, 324);
+      this.label19.Location = new System.Drawing.Point(4, 183);
       this.label19.Name = "label19";
       this.label19.Size = new System.Drawing.Size(25, 24);
       this.label19.TabIndex = 13;
-      this.label19.Text = "4.";
-      // 
-      // label54
-      // 
-      this.label54.AutoSize = true;
-      this.label54.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label54.Location = new System.Drawing.Point(5, 268);
-      this.label54.Margin = new System.Windows.Forms.Padding(0);
-      this.label54.Name = "label54";
-      this.label54.Size = new System.Drawing.Size(25, 24);
-      this.label54.TabIndex = 13;
-      this.label54.Text = "2.";
+      this.label19.Text = "3.";
       // 
       // label20
       // 
       this.label20.AutoSize = true;
       this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label20.Location = new System.Drawing.Point(5, 239);
+      this.label20.Location = new System.Drawing.Point(4, 126);
       this.label20.Margin = new System.Windows.Forms.Padding(0);
       this.label20.Name = "label20";
       this.label20.Size = new System.Drawing.Size(25, 24);
@@ -882,7 +764,7 @@
       this.btnITUSubjectName.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
       this.btnITUSubjectName.ImageKey = "Subject";
       this.btnITUSubjectName.ImageList = this.imlButtons;
-      this.btnITUSubjectName.Location = new System.Drawing.Point(29, 294);
+      this.btnITUSubjectName.Location = new System.Drawing.Point(28, 153);
       this.btnITUSubjectName.Name = "btnITUSubjectName";
       this.btnITUSubjectName.Size = new System.Drawing.Size(73, 23);
       this.btnITUSubjectName.TabIndex = 12;
@@ -896,7 +778,7 @@
       this.btnITUConnect.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
       this.btnITUConnect.ImageKey = "Connect";
       this.btnITUConnect.ImageList = this.imlButtons;
-      this.btnITUConnect.Location = new System.Drawing.Point(29, 239);
+      this.btnITUConnect.Location = new System.Drawing.Point(28, 126);
       this.btnITUConnect.Name = "btnITUConnect";
       this.btnITUConnect.Size = new System.Drawing.Size(73, 23);
       this.btnITUConnect.TabIndex = 12;
@@ -1763,7 +1645,7 @@
       this.btnNoDeviceTabSelectTracker.Text = "Select tracking device";
       this.btnNoDeviceTabSelectTracker.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.btnNoDeviceTabSelectTracker.UseVisualStyleBackColor = true;
-      this.btnNoDeviceTabSelectTracker.Click += new System.EventHandler(this.btnNoDeviceTabSelectTracker_Click);
+      this.btnNoDeviceTabSelectTracker.Click += new System.EventHandler(this.BtnNoDeviceTabSelectTrackerClick);
       // 
       // imlEyetracker
       // 
@@ -2024,7 +1906,7 @@
       this.btnScreenCaptureSettings.Size = new System.Drawing.Size(136, 22);
       this.btnScreenCaptureSettings.Text = "Screen Capture Settings";
       this.btnScreenCaptureSettings.ToolTipText = "Modify Screen Capture Settings";
-      this.btnScreenCaptureSettings.Click += new System.EventHandler(this.btnScreenCaptureSettings_Click);
+      this.btnScreenCaptureSettings.Click += new System.EventHandler(this.BtnScreenCaptureSettingsClick);
       // 
       // toolStripSeparator2
       // 
@@ -2039,7 +1921,7 @@
       this.btnSelectTracker.Name = "btnSelectTracker";
       this.btnSelectTracker.Size = new System.Drawing.Size(23, 22);
       this.btnSelectTracker.Text = "Select installed tracking device";
-      this.btnSelectTracker.Click += new System.EventHandler(this.btnSelectTracker_Click);
+      this.btnSelectTracker.Click += new System.EventHandler(this.BtnSelectTrackerClick);
       // 
       // btnTrackerSettings
       // 
@@ -2050,7 +1932,7 @@
       this.btnTrackerSettings.Size = new System.Drawing.Size(94, 22);
       this.btnTrackerSettings.Text = "Tracker settings";
       this.btnTrackerSettings.ToolTipText = "Change tracker settings ..";
-      this.btnTrackerSettings.Click += new System.EventHandler(this.btnTrackerSettings_Click);
+      this.btnTrackerSettings.Click += new System.EventHandler(this.BtnTrackerSettingsClick);
       // 
       // toolStripSeparator4
       // 
@@ -2069,7 +1951,7 @@
       this.btnUsercam.Size = new System.Drawing.Size(23, 22);
       this.btnUsercam.Text = "User camera On/off";
       this.btnUsercam.ToolTipText = "Show or hide user camera.";
-      this.btnUsercam.Click += new System.EventHandler(this.btnUsercam_Click);
+      this.btnUsercam.Click += new System.EventHandler(this.BtnUsercamClick);
       // 
       // btnWebcamSettings
       // 
@@ -2079,7 +1961,7 @@
       this.btnWebcamSettings.Name = "btnWebcamSettings";
       this.btnWebcamSettings.Size = new System.Drawing.Size(96, 22);
       this.btnWebcamSettings.Text = "Camera settings";
-      this.btnWebcamSettings.Click += new System.EventHandler(this.btnWebcamSettings_Click);
+      this.btnWebcamSettings.Click += new System.EventHandler(this.BtnWebcamSettingsClick);
       // 
       // toolStripSeparator1
       // 
@@ -2105,7 +1987,7 @@
       this.btnTriggerSettings.Name = "btnTriggerSettings";
       this.btnTriggerSettings.Size = new System.Drawing.Size(93, 22);
       this.btnTriggerSettings.Text = "Trigger settings";
-      this.btnTriggerSettings.Click += new System.EventHandler(this.btnTriggerSettings_Click);
+      this.btnTriggerSettings.Click += new System.EventHandler(this.BtnTriggerSettingsClick);
       // 
       // toolStripSeparator3
       // 
@@ -2121,7 +2003,7 @@
       this.btnSmoothing.Name = "btnSmoothing";
       this.btnSmoothing.Size = new System.Drawing.Size(70, 22);
       this.btnSmoothing.Text = "Smoothing";
-      this.btnSmoothing.Click += new System.EventHandler(this.btnSmoothing_Click);
+      this.btnSmoothing.Click += new System.EventHandler(this.BtnSmoothingClick);
       // 
       // btnHelp
       // 
@@ -4742,13 +4624,7 @@
       this.panel3.ResumeLayout(false);
       this.panel3.PerformLayout();
       this.groupBox4.ResumeLayout(false);
-      this.spcITUControls.Panel1.ResumeLayout(false);
-      this.spcITUControls.Panel2.ResumeLayout(false);
-      this.spcITUControls.ResumeLayout(false);
-      this.spcITUTrackStatus.Panel2.ResumeLayout(false);
-      this.spcITUTrackStatus.ResumeLayout(false);
-      this.spcITUCalibPlot.Panel2.ResumeLayout(false);
-      this.spcITUCalibPlot.ResumeLayout(false);
+      this.groupBox4.PerformLayout();
       this.tbpTobii.ResumeLayout(false);
       this.panel1.ResumeLayout(false);
       this.panel1.PerformLayout();
@@ -5005,13 +4881,6 @@
     private System.Windows.Forms.TextBox textBox1;
     private System.Windows.Forms.TabPage tbpITU;
     private System.Windows.Forms.Panel panel3;
-    private System.Windows.Forms.GroupBox groupBox4;
-    private System.Windows.Forms.SplitContainer spcITUControls;
-    private System.Windows.Forms.SplitContainer spcITUTrackStatus;
-    private System.Windows.Forms.Button btnITUShowOnPresentationScreen;
-    private System.Windows.Forms.SplitContainer spcITUCalibPlot;
-    private System.Windows.Forms.Button btnITURecalibrate;
-    private System.Windows.Forms.Button btnITUAcceptCalibration;
     private System.Windows.Forms.TextBox txbITUSubjectName;
     private System.Windows.Forms.Button btnITURecord;
     private System.Windows.Forms.Button btnITUCalibrate;
@@ -5104,7 +4973,6 @@
     private System.Windows.Forms.Label label42;
     private System.Windows.Forms.Button button28;
     private System.Windows.Forms.Label label47;
-    private System.Windows.Forms.Button btnITUAdjust;
     private System.Windows.Forms.Label label48;
     private System.Windows.Forms.Button button30;
     private System.Windows.Forms.GroupBox groupBox10;
@@ -5123,7 +4991,6 @@
     private System.Windows.Forms.Label label52;
     private System.Windows.Forms.Button button36;
     private System.Windows.Forms.Button button37;
-    private System.Windows.Forms.Label label54;
     private System.Windows.Forms.TabPage tabPage7;
     private System.Windows.Forms.Panel panel8;
     private System.Windows.Forms.Label label18;
@@ -5239,5 +5106,7 @@
     private System.Windows.Forms.ToolStripContainer toolStripContainer2;
     private System.Windows.Forms.ToolStrip toolStrip2;
     private OgamaControls.ToolStripTrackBar trbZoom;
+    private System.Windows.Forms.GroupBox groupBox4;
+    private System.Windows.Forms.TextBox txbITUStatus;
   }
 }
