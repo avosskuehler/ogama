@@ -1,4 +1,4 @@
-﻿namespace Ogama.Modules.Recording
+﻿namespace Ogama.Modules.Recording.Dialogs
 {
   partial class SelectTracker
   {
@@ -34,6 +34,9 @@
       this.splitContainer2 = new System.Windows.Forms.SplitContainer();
       this.tabControl1 = new System.Windows.Forms.TabControl();
       this.tabPage1 = new System.Windows.Forms.TabPage();
+      this.pcbHelpAsl = new System.Windows.Forms.PictureBox();
+      this.chbAsl = new System.Windows.Forms.CheckBox();
+      this.pcbAsl = new System.Windows.Forms.PictureBox();
       this.pcbHelpSMI = new System.Windows.Forms.PictureBox();
       this.pcbHelpAlea = new System.Windows.Forms.PictureBox();
       this.pcbHelpTobii = new System.Windows.Forms.PictureBox();
@@ -47,12 +50,9 @@
       this.pcbHelpITU = new System.Windows.Forms.PictureBox();
       this.pcbITU = new System.Windows.Forms.PictureBox();
       this.chbMouseOnly = new System.Windows.Forms.CheckBox();
-      this.chbITU = new System.Windows.Forms.CheckBox();
+      this.chbGazetrackerIPClient = new System.Windows.Forms.CheckBox();
       this.btnCancel = new System.Windows.Forms.Button();
       this.btnOK = new System.Windows.Forms.Button();
-      this.pcbHelpAsl = new System.Windows.Forms.PictureBox();
-      this.chbAsl = new System.Windows.Forms.CheckBox();
-      this.pcbAsl = new System.Windows.Forms.PictureBox();
       this.splitContainer1.Panel1.SuspendLayout();
       this.splitContainer1.Panel2.SuspendLayout();
       this.splitContainer1.SuspendLayout();
@@ -61,6 +61,8 @@
       this.splitContainer2.SuspendLayout();
       this.tabControl1.SuspendLayout();
       this.tabPage1.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.pcbHelpAsl)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.pcbAsl)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pcbHelpSMI)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pcbHelpAlea)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pcbHelpTobii)).BeginInit();
@@ -70,8 +72,6 @@
       this.tabPage2.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.pcbHelpITU)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pcbITU)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.pcbHelpAsl)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.pcbAsl)).BeginInit();
       this.SuspendLayout();
       // 
       // splitContainer1
@@ -162,6 +162,42 @@
       this.tabPage1.TabIndex = 0;
       this.tabPage1.Text = "Commercial Tracker";
       this.tabPage1.UseVisualStyleBackColor = true;
+      // 
+      // pcbHelpAsl
+      // 
+      this.pcbHelpAsl.Cursor = System.Windows.Forms.Cursors.Help;
+      this.pcbHelpAsl.Image = global::Ogama.Properties.Resources.HelpBmp;
+      this.pcbHelpAsl.Location = new System.Drawing.Point(483, 277);
+      this.pcbHelpAsl.Name = "pcbHelpAsl";
+      this.pcbHelpAsl.Size = new System.Drawing.Size(16, 16);
+      this.pcbHelpAsl.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+      this.pcbHelpAsl.TabIndex = 19;
+      this.pcbHelpAsl.TabStop = false;
+      this.pcbHelpAsl.Click += new System.EventHandler(this.pcbHelpAsl_Click);
+      // 
+      // chbAsl
+      // 
+      this.chbAsl.Image = global::Ogama.Properties.Resources.ASL_61_46;
+      this.chbAsl.Location = new System.Drawing.Point(100, 248);
+      this.chbAsl.Name = "chbAsl";
+      this.chbAsl.Size = new System.Drawing.Size(370, 72);
+      this.chbAsl.TabIndex = 18;
+      this.chbAsl.Text = "If you have purchased and installed an ASL model 5000 Eye Tracker control unit (m" +
+          "aterials and softwares)";
+      this.chbAsl.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.chbAsl.UseVisualStyleBackColor = true;
+      // 
+      // pcbAsl
+      // 
+      this.pcbAsl.Cursor = System.Windows.Forms.Cursors.Hand;
+      this.pcbAsl.Image = global::Ogama.Properties.Resources.ASL0;
+      this.pcbAsl.Location = new System.Drawing.Point(8, 264);
+      this.pcbAsl.Name = "pcbAsl";
+      this.pcbAsl.Size = new System.Drawing.Size(80, 49);
+      this.pcbAsl.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+      this.pcbAsl.TabIndex = 17;
+      this.pcbAsl.TabStop = false;
+      this.pcbAsl.Click += new System.EventHandler(this.pcbAsl_Click);
       // 
       // pcbHelpSMI
       // 
@@ -275,11 +311,11 @@
       this.tabPage2.Controls.Add(this.pcbHelpITU);
       this.tabPage2.Controls.Add(this.pcbITU);
       this.tabPage2.Controls.Add(this.chbMouseOnly);
-      this.tabPage2.Controls.Add(this.chbITU);
+      this.tabPage2.Controls.Add(this.chbGazetrackerIPClient);
       this.tabPage2.Location = new System.Drawing.Point(4, 22);
       this.tabPage2.Name = "tabPage2";
       this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPage2.Size = new System.Drawing.Size(507, 296);
+      this.tabPage2.Size = new System.Drawing.Size(507, 336);
       this.tabPage2.TabIndex = 1;
       this.tabPage2.Text = "Open Source Tracker";
       this.tabPage2.UseVisualStyleBackColor = true;
@@ -288,7 +324,7 @@
       // 
       this.pcbHelpITU.Cursor = System.Windows.Forms.Cursors.Help;
       this.pcbHelpITU.Image = global::Ogama.Properties.Resources.HelpBmp;
-      this.pcbHelpITU.Location = new System.Drawing.Point(483, 44);
+      this.pcbHelpITU.Location = new System.Drawing.Point(483, 124);
       this.pcbHelpITU.Name = "pcbHelpITU";
       this.pcbHelpITU.Size = new System.Drawing.Size(16, 16);
       this.pcbHelpITU.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -300,7 +336,7 @@
       // 
       this.pcbITU.Cursor = System.Windows.Forms.Cursors.Hand;
       this.pcbITU.Image = global::Ogama.Properties.Resources.ITU_Logo;
-      this.pcbITU.Location = new System.Drawing.Point(6, 10);
+      this.pcbITU.Location = new System.Drawing.Point(6, 90);
       this.pcbITU.Name = "pcbITU";
       this.pcbITU.Size = new System.Drawing.Size(88, 97);
       this.pcbITU.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -311,7 +347,7 @@
       // chbMouseOnly
       // 
       this.chbMouseOnly.Image = global::Ogama.Properties.Resources.Maus_61_61;
-      this.chbMouseOnly.Location = new System.Drawing.Point(100, 110);
+      this.chbMouseOnly.Location = new System.Drawing.Point(100, 181);
       this.chbMouseOnly.Name = "chbMouseOnly";
       this.chbMouseOnly.Size = new System.Drawing.Size(341, 57);
       this.chbMouseOnly.TabIndex = 1;
@@ -320,17 +356,16 @@
       this.chbMouseOnly.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.chbMouseOnly.UseVisualStyleBackColor = true;
       // 
-      // chbITU
+      // chbGazetrackerIPClient
       // 
-      this.chbITU.Image = global::Ogama.Properties.Resources.ITU_61_61;
-      this.chbITU.Location = new System.Drawing.Point(100, 10);
-      this.chbITU.Name = "chbITU";
-      this.chbITU.Size = new System.Drawing.Size(341, 86);
-      this.chbITU.TabIndex = 11;
-      this.chbITU.Text = "The ITU GazeTracker application which uses a webcam as an eye tracker and can be " +
-          "used in both remote and head-mounted setup.";
-      this.chbITU.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-      this.chbITU.UseVisualStyleBackColor = true;
+      this.chbGazetrackerIPClient.Image = global::Ogama.Properties.Resources.ITU_61_61;
+      this.chbGazetrackerIPClient.Location = new System.Drawing.Point(100, 90);
+      this.chbGazetrackerIPClient.Name = "chbGazetrackerIPClient";
+      this.chbGazetrackerIPClient.Size = new System.Drawing.Size(341, 86);
+      this.chbGazetrackerIPClient.TabIndex = 11;
+      this.chbGazetrackerIPClient.Text = resources.GetString("chbGazetrackerIPClient.Text");
+      this.chbGazetrackerIPClient.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.chbGazetrackerIPClient.UseVisualStyleBackColor = true;
       // 
       // btnCancel
       // 
@@ -355,42 +390,6 @@
       this.btnOK.Text = "OK";
       this.btnOK.UseVisualStyleBackColor = true;
       // 
-      // pcbHelpAsl
-      // 
-      this.pcbHelpAsl.Cursor = System.Windows.Forms.Cursors.Help;
-      this.pcbHelpAsl.Image = global::Ogama.Properties.Resources.HelpBmp;
-      this.pcbHelpAsl.Location = new System.Drawing.Point(483, 277);
-      this.pcbHelpAsl.Name = "pcbHelpAsl";
-      this.pcbHelpAsl.Size = new System.Drawing.Size(16, 16);
-      this.pcbHelpAsl.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-      this.pcbHelpAsl.TabIndex = 19;
-      this.pcbHelpAsl.TabStop = false;
-      this.pcbHelpAsl.Click += new System.EventHandler(this.pcbHelpAsl_Click);
-      // 
-      // chbAsl
-      // 
-      this.chbAsl.Image = global::Ogama.Properties.Resources.ASL_61_46;
-      this.chbAsl.Location = new System.Drawing.Point(100, 248);
-      this.chbAsl.Name = "chbAsl";
-      this.chbAsl.Size = new System.Drawing.Size(370, 72);
-      this.chbAsl.TabIndex = 18;
-      this.chbAsl.Text = "If you have purchased and installed an ASL model 5000 Eye Tracker control unit (m" +
-          "aterials and softwares)";
-      this.chbAsl.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-      this.chbAsl.UseVisualStyleBackColor = true;
-      // 
-      // pcbAsl
-      // 
-      this.pcbAsl.Cursor = System.Windows.Forms.Cursors.Hand;
-      this.pcbAsl.Image = global::Ogama.Properties.Resources.ASL0;
-      this.pcbAsl.Location = new System.Drawing.Point(8, 264);
-      this.pcbAsl.Name = "pcbAsl";
-      this.pcbAsl.Size = new System.Drawing.Size(80, 49);
-      this.pcbAsl.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-      this.pcbAsl.TabIndex = 17;
-      this.pcbAsl.TabStop = false;
-      this.pcbAsl.Click += new System.EventHandler(this.pcbAsl_Click);
-      // 
       // SelectTracker
       // 
       this.AcceptButton = this.btnOK;
@@ -406,7 +405,7 @@
       this.Name = "SelectTracker";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
       this.Text = "Please select the tracking devices ...";
-      this.Load += new System.EventHandler(this.SelectTracker_Load);
+      this.Load += new System.EventHandler(this.SelectTrackerLoad);
       this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SelectTracker_FormClosing);
       this.splitContainer1.Panel1.ResumeLayout(false);
       this.splitContainer1.Panel2.ResumeLayout(false);
@@ -418,6 +417,8 @@
       this.tabControl1.ResumeLayout(false);
       this.tabPage1.ResumeLayout(false);
       this.tabPage1.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.pcbHelpAsl)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.pcbAsl)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.pcbHelpSMI)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.pcbHelpAlea)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.pcbHelpTobii)).EndInit();
@@ -428,8 +429,6 @@
       this.tabPage2.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.pcbHelpITU)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.pcbITU)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.pcbHelpAsl)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.pcbAsl)).EndInit();
       this.ResumeLayout(false);
 
     }
@@ -446,7 +445,7 @@
     private System.Windows.Forms.PictureBox pcbAlea;
     private System.Windows.Forms.CheckBox chbSMI;
     private System.Windows.Forms.PictureBox pcbSMI;
-    private System.Windows.Forms.CheckBox chbITU;
+    private System.Windows.Forms.CheckBox chbGazetrackerIPClient;
     private System.Windows.Forms.PictureBox pcbTobii;
     private System.Windows.Forms.SplitContainer splitContainer2;
     private System.Windows.Forms.TabControl tabControl1;

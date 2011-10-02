@@ -180,12 +180,12 @@ namespace Ogama.Modules.Recording.ASL
       trackerCalibrateButton,
       trackerRecordButton,
       trackerSubjectNameTextBox,
-      Application.StartupPath + "\\Modules\\Recording\\ASL\\ASLUserSettings.cfg")
+      Properties.Settings.Default.EyeTrackerSettingsPath + "ASLUserSettings.cfg")
     {
       this.UserSettingsFile = Properties.Settings.Default.EyeTrackerSettingsPath + "ASLUserSettings.cfg";
       this.Settings = UserSettings.Load(this.UserSettingsFile);
-
-      this.Settings.DefaultConfigFile = Application.StartupPath + "\\Modules\\Recording\\ASL\\ASLStandardStreaming.cfg";
+      this.CreateDefaultConfigFile();
+      this.Settings.DefaultConfigFile = Properties.Settings.Default.EyeTrackerSettingsPath + "ASLStandardStreaming.cfg";
 
       if (this.Settings.ConfigFile == null)
       {
@@ -853,8 +853,34 @@ namespace Ogama.Modules.Recording.ASL
     // Small helping Methods                                                     //
     ///////////////////////////////////////////////////////////////////////////////
     #region HELPER
+
+    /// <summary>
+    /// This method creates the default standardStreaming configuration file.
+    /// </summary>
+    private void CreateDefaultConfigFile()
+    {
+      var defaultFile = Properties.Settings.Default.EyeTrackerSettingsPath + "ASLStandardStreaming.cfg";
+      if (File.Exists(defaultFile))
+      {
+        return;
+      }
+
+      using (var sw = new StreamWriter(defaultFile))
+      {
+        // Add some text to the file.
+        sw.WriteLine("[System Settings]");
+        sw.WriteLine("using_6000_serial_out_format=1");
+        sw.WriteLine("serial_out_streaming=1");
+        sw.WriteLine("eye_camera_update_rate=60");
+        sw.WriteLine("serial_out_baud_rate=57600");
+        sw.WriteLine("serial_out_std_sel_1=7201");
+        sw.WriteLine("serial_out_std_sel_2=0");
+        sw.WriteLine("serial_out_ehi_sel_1=14680097");
+        sw.WriteLine("serial_out_ehi_sel_2=0");
+      }
+    }
+
     #endregion //HELPER
   } // end of public class AslTracker
 } // end of namespace Ogama.Modules.Recording.ASL
 #endif
-

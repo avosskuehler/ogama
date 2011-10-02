@@ -28,6 +28,32 @@ namespace OgamaControls
     private delegate Rectangle GetRectangleInvoker(Control control);
 
     /// <summary>
+    /// This delegate enables asynchronous calls for getting
+    /// a string property on a RichTextBox control.
+    /// </summary>
+    /// <returns>An <see cref="String"/> for the Text or RTF property
+    /// of the <see cref="RichTextBox"/>.</returns>
+    private delegate string GetStringInvoker(TextBox control);
+
+    /// <summary>
+    /// This delegate enables asynchronous calls for setting
+    /// a string property on a Textbox control.
+    /// </summary>
+    /// <param name="control">The Textbox for which to set the text asynchronously.</param>
+    /// <param name="stringToSet">A <see cref="String"/> for the Text property
+    /// of the <see cref="TextBox"/>.</param>
+    private delegate void SetStringInvoker(TextBox control, string stringToSet);
+
+    /// <summary>
+    /// This delegate enables asynchronous calls for setting
+    /// the enabled property on a Button control.
+    /// </summary>
+    /// <param name="control">The Button for which to set the enabled property asynchronously.</param>
+    /// <param name="enable">A <see cref="Boolean"/> for the Enabled property
+    /// of the <see cref="Button"/>.</param>
+    private delegate void EnableDisableButtonInvoker(Button control, bool enable);
+
+    /// <summary>
     /// A thread safe version to receive the <see cref="Control.Handle"/>
     /// property of the control.
     /// </summary>
@@ -37,7 +63,7 @@ namespace OgamaControls
     {
       if (control.InvokeRequired)
       {
-        GetHandleCallback d = new GetHandleCallback(ThreadSafe.GetHandle);
+        var d = new GetHandleCallback(GetHandle);
         return (IntPtr)control.Invoke(d, control);
       }
 
@@ -83,5 +109,53 @@ namespace OgamaControls
       return control.ClientRectangle;
     }
 
+    /// <summary>
+    /// Thread safe version to set the <see cref="TextBox.Text"/> property
+    /// </summary>
+    /// <param name="control">The TextBox control.</param>
+    /// <param name="stringToSet">The string to set.</param>
+    public static void ThreadSafeSetText(TextBox control, string stringToSet)
+    {
+      if (control.InvokeRequired)
+      {
+        control.Invoke(new SetStringInvoker(ThreadSafeSetText), control, stringToSet);
+        return;
+      }
+
+      control.Text = stringToSet;
+    }
+
+    /// <summary>
+    /// Thread safe version to get the <see cref="TextBox.Text"/> property
+    /// </summary>
+    /// <param name="control">The TextBox control.</param>
+    /// <returns>
+    /// The <see cref="String"/> with the string to
+    /// be set to the RichTextBox.
+    /// </returns>
+    public static string ThreadSafeGetText(TextBox control)
+    {
+      if (control.InvokeRequired)
+      {
+        return (string)control.Invoke(new GetStringInvoker(ThreadSafeGetText), control);
+      }
+
+      return control.Text;
+    }
+
+    /// <summary>
+    /// Thread safe version to enable or disable a button.
+    /// </summary>
+    /// <param name="button">The <see cref="Button"/> control to be enabled or disabled.</param>
+    /// <param name="enable">True, if the button should be enabled, otherwise false.</param>
+    public static void EnableDisableButton(Button button, bool enable)
+    {
+      if (button.InvokeRequired)
+      {
+        button.Invoke(new EnableDisableButtonInvoker(EnableDisableButton), button, enable);
+      }
+
+      button.Enabled = enable;
+    }
   }
 }
