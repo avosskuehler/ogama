@@ -1,4 +1,4 @@
-﻿// <copyright file="HowToActivateITU.cs" company="FU Berlin">
+﻿// <copyright file="HowToActivateGazetracker.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
 // Copyright (C) 2010 Adrian Voßkühler  
@@ -11,7 +11,7 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.MainWindow
+namespace Ogama.MainWindow.Dialogs
 {
   using System;
   using System.Windows.Forms;
@@ -20,7 +20,7 @@ namespace Ogama.MainWindow
   /// A small popup <see cref="Form"/> for showing a dialog on how to
   /// install the ITU Gazetracker recording option.
   /// </summary>
-  public partial class HowToActivateITU : Form
+  public partial class HowToActivateGazetracker : Form
   {
     ///////////////////////////////////////////////////////////////////////////////
     // Defining Constants                                                        //
@@ -40,9 +40,9 @@ namespace Ogama.MainWindow
     #region CONSTRUCTION
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="HowToActivateITU"/> class.
+    /// Initializes a new instance of the <see cref="HowToActivateGazetracker"/> class.
     /// </summary>
-    public HowToActivateITU()
+    public HowToActivateGazetracker()
     {
       this.InitializeComponent();
     }
@@ -72,7 +72,7 @@ namespace Ogama.MainWindow
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void pcbITULogo_Click(object sender, EventArgs e)
+    private void PcbITULogoClick(object sender, EventArgs e)
     {
       System.Diagnostics.Process.Start("http://www.gazegroup.org/index.php");
     }
@@ -84,7 +84,7 @@ namespace Ogama.MainWindow
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">A <see cref="LinkLabelLinkClickedEventArgs"/> with the event data.</param>
-    private void llbITUManual_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+    private void LlbITUManualLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
     {
       System.Diagnostics.Process.Start("http://www.gazegroup.org/software/GT_Users_Guide.pdf");
     }
@@ -96,7 +96,7 @@ namespace Ogama.MainWindow
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">A <see cref="LinkLabelLinkClickedEventArgs"/> with the event data.</param>
-    private void llbITUWebsite_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+    private void LlbITUWebsiteLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
     {
       System.Diagnostics.Process.Start("http://www.gazegroup.org/downloads/23-gazetracker");
     }

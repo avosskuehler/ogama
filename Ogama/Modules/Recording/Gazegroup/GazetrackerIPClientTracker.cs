@@ -27,6 +27,7 @@ namespace Ogama.Modules.Recording.Gazegroup
 
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Recording.TrackerBase;
 
   using OgamaControls;
 
@@ -441,9 +442,9 @@ namespace Ogama.Modules.Recording.Gazegroup
     ///  </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
-    protected override void btnSubjectName_Click(object sender, EventArgs e)
+    protected override void BtnSubjectNameClick(object sender, EventArgs e)
     {
-      base.btnSubjectName_Click(sender, e);
+      base.BtnSubjectNameClick(sender, e);
 
       // Activate the record button
       // if the subject name is OK and we receive a correct calibration.
@@ -460,7 +461,7 @@ namespace Ogama.Modules.Recording.Gazegroup
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
-    protected override void btnRecord_Click(object sender, EventArgs e)
+    protected override void BtnRecordClick(object sender, EventArgs e)
     {
       if (!this.clientStatus.IsCalibrated)
       {
@@ -478,7 +479,7 @@ namespace Ogama.Modules.Recording.Gazegroup
         return;
       }
 
-      base.btnRecord_Click(sender, e);
+      base.BtnRecordClick(sender, e);
     }
 
     #endregion //OVERRIDES
@@ -685,8 +686,8 @@ namespace Ogama.Modules.Recording.Gazegroup
       // If the XML document has been altered with unknown 
       // nodes or attributes, handle them with the 
       // UnknownNode and UnknownAttribute events.
-      serializer.UnknownNode += this.serializer_UnknownNode;
-      serializer.UnknownAttribute += this.serializer_UnknownAttribute;
+      serializer.UnknownNode += this.SerializerUnknownNode;
+      serializer.UnknownAttribute += this.SerializerUnknownAttribute;
 
       try
       {

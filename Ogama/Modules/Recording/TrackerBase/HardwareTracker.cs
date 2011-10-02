@@ -50,7 +50,7 @@ namespace Ogama.Modules.Recording.TrackerBase
     /// <summary>
     /// The Gazegroup GazeTracker using the ogama client.
     /// </summary>
-    GazetrackerOgamaClient = 16,
+    GazetrackerDirectClient = 16,
 
     /// <summary>
     /// The Gazegroup GazeTracker using an IP connection.
