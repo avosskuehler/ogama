@@ -11,17 +11,15 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Recording
+namespace Ogama.Modules.Recording.Dialogs
 {
   using System;
-  using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Data;
-  using System.Drawing;
-  using System.Text;
   using System.Windows.Forms;
+
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
+  using Ogama.Modules.Recording.Gazegroup;
+  using Ogama.Modules.Recording.TrackerBase;
 
   /// <summary>
   /// A small popup <see cref="Form"/> for showing a dialog 
@@ -89,9 +87,9 @@ namespace Ogama.Modules.Recording
           returnValue |= HardwareTracker.SMI;
         }
 
-        if (this.chbITU.Checked)
+        if (this.chbGazetrackerIPClient.Checked)
         {
-          returnValue |= HardwareTracker.ITU;
+          returnValue |= HardwareTracker.GazetrackerIPClient;
         }
 
         if (this.chbAsl.Checked)
@@ -121,24 +119,23 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void SelectTracker_Load(object sender, EventArgs e)
+    private void SelectTrackerLoad(object sender, EventArgs e)
     {
       string error;
 
-      string ituDefaultText = "The ITU GazeTracker application which uses a webcam as " +
-        "an eye tracker and can be used in both remote and head-mounted setup."
+      string ituDefaultText = "Gazetracker IP CLIENT which uses a webcam as an eye tracker and can be used in both remote and head-mounted setup. This version is to connect with a separate instance of the gazetracker via UDP."
         + Environment.NewLine;
 
-      if (!Ogama.Modules.Recording.ITUGazeTracker.ITUGazeTrackerBase.IsAvailable(out error))
+      if (!GazetrackerIPClientTracker.IsAvailable(out error))
       {
-        this.chbITU.Enabled = false;
-        this.chbITU.Checked = false;
-        this.chbITU.Text = ituDefaultText +
+        this.chbGazetrackerIPClient.Enabled = false;
+        this.chbGazetrackerIPClient.Checked = false;
+        this.chbGazetrackerIPClient.Text = ituDefaultText +
           "Status: " + error;
       }
       else
       {
-        this.chbITU.Text = ituDefaultText +
+        this.chbGazetrackerIPClient.Text = ituDefaultText +
           "Status: GazeTracker found a camera device.";
       }
 

@@ -36,27 +36,7 @@
       this.spcPanelUserCam = new System.Windows.Forms.SplitContainer();
       this.spcPanelRecordTime = new System.Windows.Forms.SplitContainer();
       this.tclEyetracker = new System.Windows.Forms.TabControl();
-      this.tbpITU = new System.Windows.Forms.TabPage();
-      this.panel3 = new System.Windows.Forms.Panel();
-      this.label47 = new System.Windows.Forms.Label();
-      this.btnITUAdjust = new System.Windows.Forms.Button();
       this.imlButtons = new System.Windows.Forms.ImageList(this.components);
-      this.groupBox4 = new System.Windows.Forms.GroupBox();
-      this.spcITUControls = new System.Windows.Forms.SplitContainer();
-      this.spcITUTrackStatus = new System.Windows.Forms.SplitContainer();
-      this.btnITUShowOnPresentationScreen = new System.Windows.Forms.Button();
-      this.spcITUCalibPlot = new System.Windows.Forms.SplitContainer();
-      this.btnITURecalibrate = new System.Windows.Forms.Button();
-      this.btnITUAcceptCalibration = new System.Windows.Forms.Button();
-      this.txbITUSubjectName = new System.Windows.Forms.TextBox();
-      this.btnITURecord = new System.Windows.Forms.Button();
-      this.btnITUCalibrate = new System.Windows.Forms.Button();
-      this.label17 = new System.Windows.Forms.Label();
-      this.label19 = new System.Windows.Forms.Label();
-      this.label54 = new System.Windows.Forms.Label();
-      this.label20 = new System.Windows.Forms.Label();
-      this.btnITUSubjectName = new System.Windows.Forms.Button();
-      this.btnITUConnect = new System.Windows.Forms.Button();
       this.tbpTobii = new System.Windows.Forms.TabPage();
       this.panel1 = new System.Windows.Forms.Panel();
       this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -361,6 +341,19 @@
       this.tabPage12 = new System.Windows.Forms.TabPage();
       this.label79 = new System.Windows.Forms.Label();
       this.button65 = new System.Windows.Forms.Button();
+      this.tbpGazetrackerIPClient = new System.Windows.Forms.TabPage();
+      this.panel11 = new System.Windows.Forms.Panel();
+      this.groupBox15 = new System.Windows.Forms.GroupBox();
+      this.txbGazetrackerIPStatus = new System.Windows.Forms.TextBox();
+      this.label54 = new System.Windows.Forms.Label();
+      this.txbGazetrackerIPSubject = new System.Windows.Forms.TextBox();
+      this.btnGazetrackerIPRecord = new System.Windows.Forms.Button();
+      this.label80 = new System.Windows.Forms.Label();
+      this.label82 = new System.Windows.Forms.Label();
+      this.btnGazetrackerIPSubject = new System.Windows.Forms.Button();
+      this.btnGazetrackerIPConnect = new System.Windows.Forms.Button();
+      this.label17 = new System.Windows.Forms.Label();
+      this.btnGazetrackerIPLaunch = new System.Windows.Forms.Button();
       ((System.ComponentModel.ISupportInitialize)(this.bsoSubjects)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.bsoFKSubjectsTrials)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.ogamaDataSet)).BeginInit();
@@ -390,16 +383,6 @@
       this.spcPanelRecordTime.Panel2.SuspendLayout();
       this.spcPanelRecordTime.SuspendLayout();
       this.tclEyetracker.SuspendLayout();
-      this.tbpITU.SuspendLayout();
-      this.panel3.SuspendLayout();
-      this.groupBox4.SuspendLayout();
-      this.spcITUControls.Panel1.SuspendLayout();
-      this.spcITUControls.Panel2.SuspendLayout();
-      this.spcITUControls.SuspendLayout();
-      this.spcITUTrackStatus.Panel2.SuspendLayout();
-      this.spcITUTrackStatus.SuspendLayout();
-      this.spcITUCalibPlot.Panel2.SuspendLayout();
-      this.spcITUCalibPlot.SuspendLayout();
       this.tbpTobii.SuspendLayout();
       this.panel1.SuspendLayout();
       this.groupBox1.SuspendLayout();
@@ -527,6 +510,9 @@
       this.groupBox14.SuspendLayout();
       this.tabPage11.SuspendLayout();
       this.tabPage12.SuspendLayout();
+      this.tbpGazetrackerIPClient.SuspendLayout();
+      this.panel11.SuspendLayout();
+      this.groupBox15.SuspendLayout();
       this.SuspendLayout();
       // 
       // toolStripContainer1
@@ -611,7 +597,7 @@
       // 
       // tclEyetracker
       // 
-      this.tclEyetracker.Controls.Add(this.tbpITU);
+      this.tclEyetracker.Controls.Add(this.tbpGazetrackerIPClient);
       this.tclEyetracker.Controls.Add(this.tbpTobii);
       this.tclEyetracker.Controls.Add(this.tbpAlea);
       this.tclEyetracker.Controls.Add(this.tbpSMI);
@@ -625,66 +611,7 @@
       this.tclEyetracker.SelectedIndex = 0;
       this.tclEyetracker.Size = new System.Drawing.Size(220, 412);
       this.tclEyetracker.TabIndex = 1;
-      this.tclEyetracker.SelectedIndexChanged += new System.EventHandler(this.tclEyetracker_SelectedIndexChanged);
-      // 
-      // tbpITU
-      // 
-      this.tbpITU.Controls.Add(this.panel3);
-      this.tbpITU.ImageKey = "ITU";
-      this.tbpITU.Location = new System.Drawing.Point(4, 23);
-      this.tbpITU.Name = "tbpITU";
-      this.tbpITU.Padding = new System.Windows.Forms.Padding(3);
-      this.tbpITU.Size = new System.Drawing.Size(212, 385);
-      this.tbpITU.TabIndex = 5;
-      this.tbpITU.Text = "ITU";
-      this.tbpITU.UseVisualStyleBackColor = true;
-      // 
-      // panel3
-      // 
-      this.panel3.AutoScroll = true;
-      this.panel3.Controls.Add(this.label47);
-      this.panel3.Controls.Add(this.btnITUAdjust);
-      this.panel3.Controls.Add(this.groupBox4);
-      this.panel3.Controls.Add(this.txbITUSubjectName);
-      this.panel3.Controls.Add(this.btnITURecord);
-      this.panel3.Controls.Add(this.btnITUCalibrate);
-      this.panel3.Controls.Add(this.label17);
-      this.panel3.Controls.Add(this.label19);
-      this.panel3.Controls.Add(this.label54);
-      this.panel3.Controls.Add(this.label20);
-      this.panel3.Controls.Add(this.btnITUSubjectName);
-      this.panel3.Controls.Add(this.btnITUConnect);
-      this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.panel3.Location = new System.Drawing.Point(3, 3);
-      this.panel3.Name = "panel3";
-      this.panel3.Size = new System.Drawing.Size(206, 379);
-      this.panel3.TabIndex = 11;
-      // 
-      // label47
-      // 
-      this.label47.AutoSize = true;
-      this.label47.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label47.Location = new System.Drawing.Point(5, 297);
-      this.label47.Margin = new System.Windows.Forms.Padding(0);
-      this.label47.Name = "label47";
-      this.label47.Size = new System.Drawing.Size(25, 24);
-      this.label47.TabIndex = 22;
-      this.label47.Text = "3.";
-      // 
-      // btnITUAdjust
-      // 
-      this.btnITUAdjust.Enabled = false;
-      this.btnITUAdjust.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-      this.btnITUAdjust.ImageKey = "Adjust";
-      this.btnITUAdjust.ImageList = this.imlButtons;
-      this.btnITUAdjust.Location = new System.Drawing.Point(29, 266);
-      this.btnITUAdjust.Name = "btnITUAdjust";
-      this.btnITUAdjust.Size = new System.Drawing.Size(73, 23);
-      this.btnITUAdjust.TabIndex = 21;
-      this.btnITUAdjust.Text = "Adjust";
-      this.btnITUAdjust.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.btnITUAdjust.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-      this.btnITUAdjust.UseVisualStyleBackColor = true;
+      this.tclEyetracker.SelectedIndexChanged += new System.EventHandler(this.TclEyetrackerSelectedIndexChanged);
       // 
       // imlButtons
       // 
@@ -699,211 +626,6 @@
       this.imlButtons.Images.SetKeyName(6, "Adjust");
       this.imlButtons.Images.SetKeyName(7, "ITU");
       this.imlButtons.Images.SetKeyName(8, "PS3");
-      // 
-      // groupBox4
-      // 
-      this.groupBox4.Controls.Add(this.spcITUControls);
-      this.groupBox4.Location = new System.Drawing.Point(5, 3);
-      this.groupBox4.Name = "groupBox4";
-      this.groupBox4.Size = new System.Drawing.Size(196, 230);
-      this.groupBox4.TabIndex = 20;
-      this.groupBox4.TabStop = false;
-      this.groupBox4.Text = "Track status";
-      // 
-      // spcITUControls
-      // 
-      this.spcITUControls.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.spcITUControls.Location = new System.Drawing.Point(3, 16);
-      this.spcITUControls.Name = "spcITUControls";
-      this.spcITUControls.Orientation = System.Windows.Forms.Orientation.Horizontal;
-      // 
-      // spcITUControls.Panel1
-      // 
-      this.spcITUControls.Panel1.Controls.Add(this.spcITUTrackStatus);
-      // 
-      // spcITUControls.Panel2
-      // 
-      this.spcITUControls.Panel2.Controls.Add(this.spcITUCalibPlot);
-      this.spcITUControls.Size = new System.Drawing.Size(190, 211);
-      this.spcITUControls.SplitterDistance = 101;
-      this.spcITUControls.TabIndex = 22;
-      // 
-      // spcITUTrackStatus
-      // 
-      this.spcITUTrackStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.spcITUTrackStatus.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-      this.spcITUTrackStatus.IsSplitterFixed = true;
-      this.spcITUTrackStatus.Location = new System.Drawing.Point(0, 0);
-      this.spcITUTrackStatus.Name = "spcITUTrackStatus";
-      this.spcITUTrackStatus.Orientation = System.Windows.Forms.Orientation.Horizontal;
-      // 
-      // spcITUTrackStatus.Panel1
-      // 
-      this.spcITUTrackStatus.Panel1.BackColor = System.Drawing.Color.Transparent;
-      // 
-      // spcITUTrackStatus.Panel2
-      // 
-      this.spcITUTrackStatus.Panel2.Controls.Add(this.btnITUShowOnPresentationScreen);
-      this.spcITUTrackStatus.Panel2MinSize = 22;
-      this.spcITUTrackStatus.Size = new System.Drawing.Size(190, 101);
-      this.spcITUTrackStatus.SplitterDistance = 75;
-      this.spcITUTrackStatus.TabIndex = 20;
-      // 
-      // btnITUShowOnPresentationScreen
-      // 
-      this.btnITUShowOnPresentationScreen.BackColor = System.Drawing.Color.Transparent;
-      this.btnITUShowOnPresentationScreen.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.btnITUShowOnPresentationScreen.Enabled = false;
-      this.btnITUShowOnPresentationScreen.Location = new System.Drawing.Point(0, 0);
-      this.btnITUShowOnPresentationScreen.Name = "btnITUShowOnPresentationScreen";
-      this.btnITUShowOnPresentationScreen.Size = new System.Drawing.Size(190, 22);
-      this.btnITUShowOnPresentationScreen.TabIndex = 21;
-      this.btnITUShowOnPresentationScreen.Text = "Show on presentation screen";
-      this.btnITUShowOnPresentationScreen.UseVisualStyleBackColor = false;
-      // 
-      // spcITUCalibPlot
-      // 
-      this.spcITUCalibPlot.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.spcITUCalibPlot.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-      this.spcITUCalibPlot.IsSplitterFixed = true;
-      this.spcITUCalibPlot.Location = new System.Drawing.Point(0, 0);
-      this.spcITUCalibPlot.Name = "spcITUCalibPlot";
-      this.spcITUCalibPlot.Orientation = System.Windows.Forms.Orientation.Horizontal;
-      // 
-      // spcITUCalibPlot.Panel2
-      // 
-      this.spcITUCalibPlot.Panel2.Controls.Add(this.btnITURecalibrate);
-      this.spcITUCalibPlot.Panel2.Controls.Add(this.btnITUAcceptCalibration);
-      this.spcITUCalibPlot.Panel2MinSize = 22;
-      this.spcITUCalibPlot.Size = new System.Drawing.Size(190, 106);
-      this.spcITUCalibPlot.SplitterDistance = 80;
-      this.spcITUCalibPlot.TabIndex = 1;
-      // 
-      // btnITURecalibrate
-      // 
-      this.btnITURecalibrate.Dock = System.Windows.Forms.DockStyle.Right;
-      this.btnITURecalibrate.Location = new System.Drawing.Point(115, 0);
-      this.btnITURecalibrate.Name = "btnITURecalibrate";
-      this.btnITURecalibrate.Size = new System.Drawing.Size(75, 22);
-      this.btnITURecalibrate.TabIndex = 0;
-      this.btnITURecalibrate.Text = "Recalibrate";
-      this.btnITURecalibrate.UseVisualStyleBackColor = true;
-      // 
-      // btnITUAcceptCalibration
-      // 
-      this.btnITUAcceptCalibration.Dock = System.Windows.Forms.DockStyle.Left;
-      this.btnITUAcceptCalibration.Location = new System.Drawing.Point(0, 0);
-      this.btnITUAcceptCalibration.Name = "btnITUAcceptCalibration";
-      this.btnITUAcceptCalibration.Size = new System.Drawing.Size(75, 22);
-      this.btnITUAcceptCalibration.TabIndex = 0;
-      this.btnITUAcceptCalibration.Text = "Accept";
-      this.btnITUAcceptCalibration.UseVisualStyleBackColor = true;
-      // 
-      // txbITUSubjectName
-      // 
-      this.txbITUSubjectName.Location = new System.Drawing.Point(107, 295);
-      this.txbITUSubjectName.Name = "txbITUSubjectName";
-      this.txbITUSubjectName.ReadOnly = true;
-      this.txbITUSubjectName.Size = new System.Drawing.Size(91, 20);
-      this.txbITUSubjectName.TabIndex = 11;
-      this.txbITUSubjectName.Text = "Subject1";
-      // 
-      // btnITURecord
-      // 
-      this.btnITURecord.Enabled = false;
-      this.btnITURecord.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-      this.btnITURecord.ImageKey = "Record";
-      this.btnITURecord.ImageList = this.imlButtons;
-      this.btnITURecord.Location = new System.Drawing.Point(29, 351);
-      this.btnITURecord.Name = "btnITURecord";
-      this.btnITURecord.Size = new System.Drawing.Size(73, 23);
-      this.btnITURecord.TabIndex = 17;
-      this.btnITURecord.Text = "&Record";
-      this.btnITURecord.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-      // 
-      // btnITUCalibrate
-      // 
-      this.btnITUCalibrate.Enabled = false;
-      this.btnITUCalibrate.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-      this.btnITUCalibrate.ImageKey = "Calibrate";
-      this.btnITUCalibrate.ImageList = this.imlButtons;
-      this.btnITUCalibrate.Location = new System.Drawing.Point(29, 322);
-      this.btnITUCalibrate.Name = "btnITUCalibrate";
-      this.btnITUCalibrate.Size = new System.Drawing.Size(73, 23);
-      this.btnITUCalibrate.TabIndex = 17;
-      this.btnITUCalibrate.Text = "&Calibrate";
-      this.btnITUCalibrate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-      // 
-      // label17
-      // 
-      this.label17.AutoSize = true;
-      this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label17.Location = new System.Drawing.Point(5, 353);
-      this.label17.Name = "label17";
-      this.label17.Size = new System.Drawing.Size(25, 24);
-      this.label17.TabIndex = 13;
-      this.label17.Text = "5.";
-      // 
-      // label19
-      // 
-      this.label19.AutoSize = true;
-      this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label19.Location = new System.Drawing.Point(5, 324);
-      this.label19.Name = "label19";
-      this.label19.Size = new System.Drawing.Size(25, 24);
-      this.label19.TabIndex = 13;
-      this.label19.Text = "4.";
-      // 
-      // label54
-      // 
-      this.label54.AutoSize = true;
-      this.label54.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label54.Location = new System.Drawing.Point(5, 268);
-      this.label54.Margin = new System.Windows.Forms.Padding(0);
-      this.label54.Name = "label54";
-      this.label54.Size = new System.Drawing.Size(25, 24);
-      this.label54.TabIndex = 13;
-      this.label54.Text = "2.";
-      // 
-      // label20
-      // 
-      this.label20.AutoSize = true;
-      this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label20.Location = new System.Drawing.Point(5, 239);
-      this.label20.Margin = new System.Windows.Forms.Padding(0);
-      this.label20.Name = "label20";
-      this.label20.Size = new System.Drawing.Size(25, 24);
-      this.label20.TabIndex = 13;
-      this.label20.Text = "1.";
-      // 
-      // btnITUSubjectName
-      // 
-      this.btnITUSubjectName.Enabled = false;
-      this.btnITUSubjectName.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-      this.btnITUSubjectName.ImageKey = "Subject";
-      this.btnITUSubjectName.ImageList = this.imlButtons;
-      this.btnITUSubjectName.Location = new System.Drawing.Point(29, 294);
-      this.btnITUSubjectName.Name = "btnITUSubjectName";
-      this.btnITUSubjectName.Size = new System.Drawing.Size(73, 23);
-      this.btnITUSubjectName.TabIndex = 12;
-      this.btnITUSubjectName.Text = "Subject";
-      this.btnITUSubjectName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.btnITUSubjectName.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-      this.btnITUSubjectName.UseVisualStyleBackColor = true;
-      // 
-      // btnITUConnect
-      // 
-      this.btnITUConnect.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-      this.btnITUConnect.ImageKey = "Connect";
-      this.btnITUConnect.ImageList = this.imlButtons;
-      this.btnITUConnect.Location = new System.Drawing.Point(29, 239);
-      this.btnITUConnect.Name = "btnITUConnect";
-      this.btnITUConnect.Size = new System.Drawing.Size(73, 23);
-      this.btnITUConnect.TabIndex = 12;
-      this.btnITUConnect.Text = "Connect";
-      this.btnITUConnect.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.btnITUConnect.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-      this.btnITUConnect.UseVisualStyleBackColor = true;
       // 
       // tbpTobii
       // 
@@ -1763,7 +1485,7 @@
       this.btnNoDeviceTabSelectTracker.Text = "Select tracking device";
       this.btnNoDeviceTabSelectTracker.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.btnNoDeviceTabSelectTracker.UseVisualStyleBackColor = true;
-      this.btnNoDeviceTabSelectTracker.Click += new System.EventHandler(this.btnNoDeviceTabSelectTracker_Click);
+      this.btnNoDeviceTabSelectTracker.Click += new System.EventHandler(this.BtnNoDeviceTabSelectTrackerClick);
       // 
       // imlEyetracker
       // 
@@ -1887,7 +1609,7 @@
       this.webcamPreview.Name = "webcamPreview";
       this.webcamPreview.Size = new System.Drawing.Size(204, 147);
       this.webcamPreview.TabIndex = 0;
-      this.webcamPreview.WebcamAvailable += new OgamaControls.CaptureModeEventHandler(this.webcamPreview_WebcamAvailable);
+      this.webcamPreview.WebcamAvailable += new OgamaControls.CaptureModeEventHandler(this.WebcamPreviewWebcamAvailable);
       // 
       // toolStripContainer2
       // 
@@ -2024,7 +1746,7 @@
       this.btnScreenCaptureSettings.Size = new System.Drawing.Size(136, 22);
       this.btnScreenCaptureSettings.Text = "Screen Capture Settings";
       this.btnScreenCaptureSettings.ToolTipText = "Modify Screen Capture Settings";
-      this.btnScreenCaptureSettings.Click += new System.EventHandler(this.btnScreenCaptureSettings_Click);
+      this.btnScreenCaptureSettings.Click += new System.EventHandler(this.BtnScreenCaptureSettingsClick);
       // 
       // toolStripSeparator2
       // 
@@ -2039,7 +1761,7 @@
       this.btnSelectTracker.Name = "btnSelectTracker";
       this.btnSelectTracker.Size = new System.Drawing.Size(23, 22);
       this.btnSelectTracker.Text = "Select installed tracking device";
-      this.btnSelectTracker.Click += new System.EventHandler(this.btnSelectTracker_Click);
+      this.btnSelectTracker.Click += new System.EventHandler(this.BtnSelectTrackerClick);
       // 
       // btnTrackerSettings
       // 
@@ -2050,7 +1772,7 @@
       this.btnTrackerSettings.Size = new System.Drawing.Size(94, 22);
       this.btnTrackerSettings.Text = "Tracker settings";
       this.btnTrackerSettings.ToolTipText = "Change tracker settings ..";
-      this.btnTrackerSettings.Click += new System.EventHandler(this.btnTrackerSettings_Click);
+      this.btnTrackerSettings.Click += new System.EventHandler(this.BtnTrackerSettingsClick);
       // 
       // toolStripSeparator4
       // 
@@ -2069,7 +1791,7 @@
       this.btnUsercam.Size = new System.Drawing.Size(23, 22);
       this.btnUsercam.Text = "User camera On/off";
       this.btnUsercam.ToolTipText = "Show or hide user camera.";
-      this.btnUsercam.Click += new System.EventHandler(this.btnUsercam_Click);
+      this.btnUsercam.Click += new System.EventHandler(this.BtnUsercamClick);
       // 
       // btnWebcamSettings
       // 
@@ -2079,7 +1801,7 @@
       this.btnWebcamSettings.Name = "btnWebcamSettings";
       this.btnWebcamSettings.Size = new System.Drawing.Size(96, 22);
       this.btnWebcamSettings.Text = "Camera settings";
-      this.btnWebcamSettings.Click += new System.EventHandler(this.btnWebcamSettings_Click);
+      this.btnWebcamSettings.Click += new System.EventHandler(this.BtnWebcamSettingsClick);
       // 
       // toolStripSeparator1
       // 
@@ -2105,7 +1827,7 @@
       this.btnTriggerSettings.Name = "btnTriggerSettings";
       this.btnTriggerSettings.Size = new System.Drawing.Size(93, 22);
       this.btnTriggerSettings.Text = "Trigger settings";
-      this.btnTriggerSettings.Click += new System.EventHandler(this.btnTriggerSettings_Click);
+      this.btnTriggerSettings.Click += new System.EventHandler(this.BtnTriggerSettingsClick);
       // 
       // toolStripSeparator3
       // 
@@ -2121,7 +1843,7 @@
       this.btnSmoothing.Name = "btnSmoothing";
       this.btnSmoothing.Size = new System.Drawing.Size(70, 22);
       this.btnSmoothing.Text = "Smoothing";
-      this.btnSmoothing.Click += new System.EventHandler(this.btnSmoothing_Click);
+      this.btnSmoothing.Click += new System.EventHandler(this.BtnSmoothingClick);
       // 
       // btnHelp
       // 
@@ -2141,23 +1863,23 @@
       // bgwSaveSplash
       // 
       this.bgwSaveSplash.WorkerSupportsCancellation = true;
-      this.bgwSaveSplash.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwSaveSplash_DoWork);
+      this.bgwSaveSplash.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BgwSaveSplashDoWork);
       // 
       // bgwCalcFixations
       // 
       this.bgwCalcFixations.WorkerReportsProgress = true;
       this.bgwCalcFixations.WorkerSupportsCancellation = true;
-      this.bgwCalcFixations.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwSaveSplash_DoWork);
+      this.bgwCalcFixations.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BgwSaveSplashDoWork);
       // 
       // tmrWaitForPresentationEnd
       // 
       this.tmrWaitForPresentationEnd.Interval = 1000;
-      this.tmrWaitForPresentationEnd.Tick += new System.EventHandler(this.tmrWaitForPresentationEnd_Tick);
+      this.tmrWaitForPresentationEnd.Tick += new System.EventHandler(this.TmrWaitForPresentationEndTick);
       // 
       // tmrRecordClock
       // 
       this.tmrRecordClock.Interval = 1000;
-      this.tmrRecordClock.Tick += new System.EventHandler(this.tmrRecordClock_Tick);
+      this.tmrRecordClock.Tick += new System.EventHandler(this.TmrRecordClockTick);
       // 
       // tabPage1
       // 
@@ -4692,6 +4414,168 @@
       this.button65.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.button65.UseVisualStyleBackColor = true;
       // 
+      // tbpGazetrackerIPClient
+      // 
+      this.tbpGazetrackerIPClient.Controls.Add(this.panel11);
+      this.tbpGazetrackerIPClient.ImageKey = "ITU";
+      this.tbpGazetrackerIPClient.Location = new System.Drawing.Point(4, 23);
+      this.tbpGazetrackerIPClient.Name = "tbpGazetrackerIPClient";
+      this.tbpGazetrackerIPClient.Padding = new System.Windows.Forms.Padding(3);
+      this.tbpGazetrackerIPClient.Size = new System.Drawing.Size(212, 385);
+      this.tbpGazetrackerIPClient.TabIndex = 8;
+      this.tbpGazetrackerIPClient.Text = "Gazetracker via UDP";
+      this.tbpGazetrackerIPClient.UseVisualStyleBackColor = true;
+      // 
+      // panel11
+      // 
+      this.panel11.AutoScroll = true;
+      this.panel11.Controls.Add(this.label17);
+      this.panel11.Controls.Add(this.btnGazetrackerIPLaunch);
+      this.panel11.Controls.Add(this.groupBox15);
+      this.panel11.Controls.Add(this.label54);
+      this.panel11.Controls.Add(this.txbGazetrackerIPSubject);
+      this.panel11.Controls.Add(this.btnGazetrackerIPRecord);
+      this.panel11.Controls.Add(this.label80);
+      this.panel11.Controls.Add(this.label82);
+      this.panel11.Controls.Add(this.btnGazetrackerIPSubject);
+      this.panel11.Controls.Add(this.btnGazetrackerIPConnect);
+      this.panel11.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.panel11.Location = new System.Drawing.Point(3, 3);
+      this.panel11.Name = "panel11";
+      this.panel11.Size = new System.Drawing.Size(206, 379);
+      this.panel11.TabIndex = 11;
+      // 
+      // groupBox15
+      // 
+      this.groupBox15.Controls.Add(this.txbGazetrackerIPStatus);
+      this.groupBox15.Dock = System.Windows.Forms.DockStyle.Top;
+      this.groupBox15.Location = new System.Drawing.Point(0, 0);
+      this.groupBox15.Name = "groupBox15";
+      this.groupBox15.Size = new System.Drawing.Size(206, 120);
+      this.groupBox15.TabIndex = 31;
+      this.groupBox15.TabStop = false;
+      this.groupBox15.Text = "Track status";
+      // 
+      // txbGazetrackerIPStatus
+      // 
+      this.txbGazetrackerIPStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.txbGazetrackerIPStatus.Location = new System.Drawing.Point(3, 16);
+      this.txbGazetrackerIPStatus.Multiline = true;
+      this.txbGazetrackerIPStatus.Name = "txbGazetrackerIPStatus";
+      this.txbGazetrackerIPStatus.Size = new System.Drawing.Size(200, 101);
+      this.txbGazetrackerIPStatus.TabIndex = 0;
+      this.txbGazetrackerIPStatus.Text = "Please note:\r\n- The track status and the quality of\r\n   the calibration are shown" +
+          " in the \r\n   ITU gazetracker application.\r\n- Turn off the firewalls if connectin" +
+          "g\r\n   fails.";
+      // 
+      // label54
+      // 
+      this.label54.AutoSize = true;
+      this.label54.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label54.Location = new System.Drawing.Point(4, 183);
+      this.label54.Margin = new System.Windows.Forms.Padding(0);
+      this.label54.Name = "label54";
+      this.label54.Size = new System.Drawing.Size(25, 24);
+      this.label54.TabIndex = 22;
+      this.label54.Text = "3.";
+      // 
+      // txbGazetrackerIPSubject
+      // 
+      this.txbGazetrackerIPSubject.Location = new System.Drawing.Point(106, 185);
+      this.txbGazetrackerIPSubject.Name = "txbGazetrackerIPSubject";
+      this.txbGazetrackerIPSubject.ReadOnly = true;
+      this.txbGazetrackerIPSubject.Size = new System.Drawing.Size(91, 20);
+      this.txbGazetrackerIPSubject.TabIndex = 11;
+      this.txbGazetrackerIPSubject.Text = "Subject1";
+      // 
+      // btnGazetrackerIPRecord
+      // 
+      this.btnGazetrackerIPRecord.Enabled = false;
+      this.btnGazetrackerIPRecord.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnGazetrackerIPRecord.ImageKey = "Record";
+      this.btnGazetrackerIPRecord.ImageList = this.imlButtons;
+      this.btnGazetrackerIPRecord.Location = new System.Drawing.Point(28, 212);
+      this.btnGazetrackerIPRecord.Name = "btnGazetrackerIPRecord";
+      this.btnGazetrackerIPRecord.Size = new System.Drawing.Size(73, 23);
+      this.btnGazetrackerIPRecord.TabIndex = 17;
+      this.btnGazetrackerIPRecord.Text = "&Record";
+      this.btnGazetrackerIPRecord.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      // 
+      // label80
+      // 
+      this.label80.AutoSize = true;
+      this.label80.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label80.Location = new System.Drawing.Point(4, 210);
+      this.label80.Name = "label80";
+      this.label80.Size = new System.Drawing.Size(25, 24);
+      this.label80.TabIndex = 13;
+      this.label80.Text = "4.";
+      // 
+      // label82
+      // 
+      this.label82.AutoSize = true;
+      this.label82.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label82.Location = new System.Drawing.Point(4, 157);
+      this.label82.Margin = new System.Windows.Forms.Padding(0);
+      this.label82.Name = "label82";
+      this.label82.Size = new System.Drawing.Size(25, 24);
+      this.label82.TabIndex = 13;
+      this.label82.Text = "2.";
+      // 
+      // btnGazetrackerIPSubject
+      // 
+      this.btnGazetrackerIPSubject.Enabled = false;
+      this.btnGazetrackerIPSubject.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnGazetrackerIPSubject.ImageKey = "Subject";
+      this.btnGazetrackerIPSubject.ImageList = this.imlButtons;
+      this.btnGazetrackerIPSubject.Location = new System.Drawing.Point(28, 184);
+      this.btnGazetrackerIPSubject.Name = "btnGazetrackerIPSubject";
+      this.btnGazetrackerIPSubject.Size = new System.Drawing.Size(73, 23);
+      this.btnGazetrackerIPSubject.TabIndex = 12;
+      this.btnGazetrackerIPSubject.Text = "Subject";
+      this.btnGazetrackerIPSubject.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.btnGazetrackerIPSubject.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.btnGazetrackerIPSubject.UseVisualStyleBackColor = true;
+      // 
+      // btnGazetrackerIPConnect
+      // 
+      this.btnGazetrackerIPConnect.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnGazetrackerIPConnect.ImageKey = "Connect";
+      this.btnGazetrackerIPConnect.ImageList = this.imlButtons;
+      this.btnGazetrackerIPConnect.Location = new System.Drawing.Point(28, 157);
+      this.btnGazetrackerIPConnect.Name = "btnGazetrackerIPConnect";
+      this.btnGazetrackerIPConnect.Size = new System.Drawing.Size(73, 23);
+      this.btnGazetrackerIPConnect.TabIndex = 12;
+      this.btnGazetrackerIPConnect.Text = "Connect";
+      this.btnGazetrackerIPConnect.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.btnGazetrackerIPConnect.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.btnGazetrackerIPConnect.UseVisualStyleBackColor = true;
+      // 
+      // label17
+      // 
+      this.label17.AutoSize = true;
+      this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label17.Location = new System.Drawing.Point(4, 131);
+      this.label17.Margin = new System.Windows.Forms.Padding(0);
+      this.label17.Name = "label17";
+      this.label17.Size = new System.Drawing.Size(25, 24);
+      this.label17.TabIndex = 33;
+      this.label17.Text = "1.";
+      // 
+      // btnGazetrackerIPLaunch
+      // 
+      this.btnGazetrackerIPLaunch.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnGazetrackerIPLaunch.ImageKey = "ITU";
+      this.btnGazetrackerIPLaunch.ImageList = this.imlButtons;
+      this.btnGazetrackerIPLaunch.Location = new System.Drawing.Point(28, 131);
+      this.btnGazetrackerIPLaunch.Name = "btnGazetrackerIPLaunch";
+      this.btnGazetrackerIPLaunch.Size = new System.Drawing.Size(73, 23);
+      this.btnGazetrackerIPLaunch.TabIndex = 32;
+      this.btnGazetrackerIPLaunch.Text = "Launch";
+      this.btnGazetrackerIPLaunch.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.btnGazetrackerIPLaunch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.btnGazetrackerIPLaunch.UseVisualStyleBackColor = true;
+      // 
       // RecordModule
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4738,17 +4622,6 @@
       this.spcPanelRecordTime.Panel2.ResumeLayout(false);
       this.spcPanelRecordTime.ResumeLayout(false);
       this.tclEyetracker.ResumeLayout(false);
-      this.tbpITU.ResumeLayout(false);
-      this.panel3.ResumeLayout(false);
-      this.panel3.PerformLayout();
-      this.groupBox4.ResumeLayout(false);
-      this.spcITUControls.Panel1.ResumeLayout(false);
-      this.spcITUControls.Panel2.ResumeLayout(false);
-      this.spcITUControls.ResumeLayout(false);
-      this.spcITUTrackStatus.Panel2.ResumeLayout(false);
-      this.spcITUTrackStatus.ResumeLayout(false);
-      this.spcITUCalibPlot.Panel2.ResumeLayout(false);
-      this.spcITUCalibPlot.ResumeLayout(false);
       this.tbpTobii.ResumeLayout(false);
       this.panel1.ResumeLayout(false);
       this.panel1.PerformLayout();
@@ -4903,6 +4776,11 @@
       this.tabPage11.ResumeLayout(false);
       this.tabPage11.PerformLayout();
       this.tabPage12.ResumeLayout(false);
+      this.tbpGazetrackerIPClient.ResumeLayout(false);
+      this.panel11.ResumeLayout(false);
+      this.panel11.PerformLayout();
+      this.groupBox15.ResumeLayout(false);
+      this.groupBox15.PerformLayout();
       this.ResumeLayout(false);
 
     }
@@ -5003,23 +4881,6 @@
     private System.Windows.Forms.Button btnSMISubjectName;
     private System.Windows.Forms.Button btnSMIConnect;
     private System.Windows.Forms.TextBox textBox1;
-    private System.Windows.Forms.TabPage tbpITU;
-    private System.Windows.Forms.Panel panel3;
-    private System.Windows.Forms.GroupBox groupBox4;
-    private System.Windows.Forms.SplitContainer spcITUControls;
-    private System.Windows.Forms.SplitContainer spcITUTrackStatus;
-    private System.Windows.Forms.Button btnITUShowOnPresentationScreen;
-    private System.Windows.Forms.SplitContainer spcITUCalibPlot;
-    private System.Windows.Forms.Button btnITURecalibrate;
-    private System.Windows.Forms.Button btnITUAcceptCalibration;
-    private System.Windows.Forms.TextBox txbITUSubjectName;
-    private System.Windows.Forms.Button btnITURecord;
-    private System.Windows.Forms.Button btnITUCalibrate;
-    private System.Windows.Forms.Label label17;
-    private System.Windows.Forms.Label label19;
-    private System.Windows.Forms.Label label20;
-    private System.Windows.Forms.Button btnITUSubjectName;
-    private System.Windows.Forms.Button btnITUConnect;
     private System.Windows.Forms.SplitContainer spcPanelRecordTime;
     private System.Windows.Forms.Panel panel4;
     private System.Windows.Forms.Label lblRecordedTime;
@@ -5103,8 +4964,6 @@
     private System.Windows.Forms.TabPage tabPage6;
     private System.Windows.Forms.Label label42;
     private System.Windows.Forms.Button button28;
-    private System.Windows.Forms.Label label47;
-    private System.Windows.Forms.Button btnITUAdjust;
     private System.Windows.Forms.Label label48;
     private System.Windows.Forms.Button button30;
     private System.Windows.Forms.GroupBox groupBox10;
@@ -5123,7 +4982,6 @@
     private System.Windows.Forms.Label label52;
     private System.Windows.Forms.Button button36;
     private System.Windows.Forms.Button button37;
-    private System.Windows.Forms.Label label54;
     private System.Windows.Forms.TabPage tabPage7;
     private System.Windows.Forms.Panel panel8;
     private System.Windows.Forms.Label label18;
@@ -5239,5 +5097,18 @@
     private System.Windows.Forms.ToolStripContainer toolStripContainer2;
     private System.Windows.Forms.ToolStrip toolStrip2;
     private OgamaControls.ToolStripTrackBar trbZoom;
+    private System.Windows.Forms.TabPage tbpGazetrackerIPClient;
+    private System.Windows.Forms.Panel panel11;
+    private System.Windows.Forms.GroupBox groupBox15;
+    private System.Windows.Forms.TextBox txbGazetrackerIPStatus;
+    private System.Windows.Forms.Label label54;
+    private System.Windows.Forms.TextBox txbGazetrackerIPSubject;
+    private System.Windows.Forms.Button btnGazetrackerIPRecord;
+    private System.Windows.Forms.Label label80;
+    private System.Windows.Forms.Label label82;
+    private System.Windows.Forms.Button btnGazetrackerIPSubject;
+    private System.Windows.Forms.Button btnGazetrackerIPConnect;
+    private System.Windows.Forms.Label label17;
+    private System.Windows.Forms.Button btnGazetrackerIPLaunch;
   }
 }
