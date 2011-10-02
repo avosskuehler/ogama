@@ -11,19 +11,15 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.MainWindow
+namespace Ogama.MainWindow.Dialogs
 {
-  using System;
-  using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Drawing;
   using System.Reflection;
   using System.Windows.Forms;
 
   /// <summary>
   /// A <see cref="Form"/> for displaying the about box.
   /// </summary>
-  public partial class AboutBox : Form
+  public sealed partial class AboutBox : Form
   {
     ///////////////////////////////////////////////////////////////////////////////
     // Defining Constants                                                        //
@@ -76,14 +72,14 @@ namespace Ogama.MainWindow
       get
       {
         // Get all Title attributes on this assembly
-        object[] attributes = 
+        object[] attributes =
           Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
 
         // If there is at least one Title attribute
         if (attributes.Length > 0)
         {
           // Select the first one
-          AssemblyTitleAttribute titleAttribute = (AssemblyTitleAttribute)attributes[0];
+          var titleAttribute = (AssemblyTitleAttribute)attributes[0];
 
           // If it is not an empty string, return it
           if (titleAttribute.Title != string.Empty)
@@ -113,7 +109,7 @@ namespace Ogama.MainWindow
       get
       {
         // Get all Description attributes on this assembly
-        object[] attributes = 
+        object[] attributes =
           Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);
 
         // If there aren't any Description attributes, return an empty string
@@ -121,7 +117,7 @@ namespace Ogama.MainWindow
         {
           return string.Empty;
         }
-        
+
         // If there is a Description attribute, return its value
         return ((AssemblyDescriptionAttribute)attributes[0]).Description;
       }
@@ -135,7 +131,7 @@ namespace Ogama.MainWindow
       get
       {
         // Get all Product attributes on this assembly
-        object[] attributes = 
+        object[] attributes =
           Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
 
         // If there aren't any Product attributes, return an empty string
@@ -143,7 +139,7 @@ namespace Ogama.MainWindow
         {
           return string.Empty;
         }
-        
+
         // If there is a Product attribute, return its value
         return ((AssemblyProductAttribute)attributes[0]).Product;
       }
@@ -157,7 +153,7 @@ namespace Ogama.MainWindow
       get
       {
         // Get all Copyright attributes on this assembly
-        object[] attributes = 
+        object[] attributes =
           Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
 
         // If there aren't any Copyright attributes, return an empty string
@@ -165,7 +161,7 @@ namespace Ogama.MainWindow
         {
           return string.Empty;
         }
-        
+
         // If there is a Copyright attribute, return its value
         return ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
       }
@@ -187,7 +183,7 @@ namespace Ogama.MainWindow
         {
           return string.Empty;
         }
-        
+
         // If there is a Company attribute, return its value
         return ((AssemblyCompanyAttribute)attributes[0]).Company;
       }
@@ -212,24 +208,20 @@ namespace Ogama.MainWindow
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">A <see cref="LinkLabelLinkClickedEventArgs"/> with the event data.</param>
-    private void link_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+    private void LinkLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
     {
       // Determine which link was clicked within the LinkLabel.
       this.link.Links[this.link.Links.IndexOf(e.Link)].Visited = true;
 
       // Display the appropriate link based on the value of the 
       // LinkData property of the Link object.
-      string target = e.Link.LinkData as string;
+      var target = e.Link.LinkData as string;
 
       // If the value looks like a URL, navigate to it.
       // Otherwise, display it in a message box.
-      if (null != target)
+      if (target != null)
       {
         System.Diagnostics.Process.Start(target);
-      }
-      else
-      {
-        MessageBox.Show("Item clicked: " + target);
       }
     }
 

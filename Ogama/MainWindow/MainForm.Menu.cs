@@ -20,6 +20,7 @@ namespace Ogama.MainWindow
   using System.Windows.Forms;
 
   using Ogama.ExceptionHandling;
+  using Ogama.MainWindow.Dialogs;
   using Ogama.Properties;
 
   /// <summary>

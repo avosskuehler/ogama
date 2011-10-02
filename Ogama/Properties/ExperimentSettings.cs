@@ -396,7 +396,7 @@ namespace Ogama.Properties
     /// Gets or sets file path for this document (XML) file
     /// </summary>
     /// <value>A <see cref="string"/> with the path to the experiment file.</value>
-    [XmlIgnore()]
+    [XmlIgnore]
     public string DocumentPath
     {
       get { return this.documentPath; }
@@ -587,7 +587,7 @@ namespace Ogama.Properties
     {
       try
       {
-        ExperimentSettings settings = new ExperimentSettings();
+        ExperimentSettings settings;
 
         // A FileStream is needed to read the XML document.
         using (FileStream fs = new FileStream(filePath, FileMode.Open))

@@ -121,17 +121,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\EtApi.dll</HintPath>
     </Reference>
-    <Reference Include="GazeTrackerClient, Version=1.1.0.0, Culture=neutral, PublicKeyToken=d2bdf8683767e608, processorArchitecture=MSIL">
+    <Reference Include="GazeTrackerClient, Version=1.1.0.0, Culture=neutral, PublicKeyToken=d2bdf8683767e608, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Managed\GazeTrackerClient.dll</HintPath>
-    </Reference>
-    <Reference Include="GazeTrackingLibrary, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Managed\GazeTrackingLibrary.dll</HintPath>
+      <HintPath>..\Libs\Gazetracker\GazeTrackerClient.dll</HintPath>
     </Reference>
     <Reference Include="GTHardware, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bf600965c04ba845, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Managed\GTHardware.dll</HintPath>
+      <HintPath>..\Libs\Gazetracker\GTHardware.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Data.ConnectionUI, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -390,8 +386,15 @@
       <DependentUpon>AslTrackStatus.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Recording\ASL\UserSettings.cs" />
-    <Compile Include="Modules\Recording\ITU\ITUGazeTracker.cs" />
-    <Compile Include="Modules\Recording\ITU\ITUClient.cs" />
+    <Compile Include="Modules\Recording\Gazegroup\GazetrackerIPClientSetting.cs" />
+    <Compile Include="Modules\Recording\Gazegroup\GazetrackerIPClientSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\Gazegroup\GazetrackerIPClientSettingsDialog.Designer.cs">
+      <DependentUpon>GazetrackerIPClientSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\Gazegroup\GazetrackerIPClientStatus.cs" />
+    <Compile Include="Modules\Recording\Gazegroup\GazetrackerIPClientTracker.cs" />
     <Compile Include="Modules\Recording\Presenter\WebsiteScreenshot.cs" />
     <Compile Include="Modules\Recording\Presenter\DSScreenCapture.cs" />
     <Compile Include="Modules\Recording\Presenter\ScreenCaptureProperties.cs" />
@@ -1078,6 +1081,10 @@
       <DependentUpon>SavingSplash.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\Gazegroup\GazetrackerIPClientSettingsDialog.resx">
+      <DependentUpon>GazetrackerIPClientSettingsDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\RecordingPicture.resx">
       <DependentUpon>RecordingPicture.cs</DependentUpon>
     </EmbeddedResource>
@@ -1406,9 +1413,6 @@
     <Content Include="DataSet\OgamaDatabaseTemplate_log.ldf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>OgamaDatabaseTemplate.mdf</DependentUpon>
-    </Content>
-    <Content Include="Modules\Recording\ASL\ASLStandardStreaming.cfg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\FolderNew16.png" />
     <None Include="Resources\PS3_61_61.png" />
@@ -1804,7 +1808,8 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>copy "$(SolutionDir)Libs\Native\*.*" "$(OutDir)"</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(SolutionDir)Libs\Native\*.*" "$(OutDir)" /E /Y
+xcopy "$(SolutionDir)Libs\Gazetracker\*.*" "$(OutDir)Gazetracker\" /E /Y</PostBuildEvent>
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>

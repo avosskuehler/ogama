@@ -143,12 +143,16 @@ namespace OgamaControls
       return control.Text;
     }
 
-
+    /// <summary>
+    /// Thread safe version to enable or disable a button.
+    /// </summary>
+    /// <param name="button">The <see cref="Button"/> control to be enabled or disabled.</param>
+    /// <param name="enable">True, if the button should be enabled, otherwise false.</param>
     public static void EnableDisableButton(Button button, bool enable)
     {
       if (button.InvokeRequired)
       {
-        button.Invoke(new EnableDisableButtonInvoker(EnableDisableButton), button);
+        button.Invoke(new EnableDisableButtonInvoker(EnableDisableButton), button, enable);
       }
 
       button.Enabled = enable;
