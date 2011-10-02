@@ -125,6 +125,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Gazetracker\GazeTrackerClient.dll</HintPath>
     </Reference>
+    <Reference Include="GazeTrackingLibrary, Version=2.1.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Gazetracker\GazeTrackingLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="GTHardware, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bf600965c04ba845, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Gazetracker\GTHardware.dll</HintPath>
@@ -164,6 +168,10 @@
     <Reference Include="Microsoft.SqlServer.SqlEnum, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\Microsoft.SqlServer.SqlEnum.dll</HintPath>
+    </Reference>
+    <Reference Include="OgamaClient, Version=2.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Gazetracker\OgamaClient.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
@@ -235,11 +243,11 @@
     <Compile Include="MainWindow\Dialogs\HowToActivateAsl.designer.cs">
       <DependentUpon>HowToActivateAsl.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow\Dialogs\HowToActivateITU.cs">
+    <Compile Include="MainWindow\Dialogs\HowToActivateGazetracker.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainWindow\Dialogs\HowToActivateITU.Designer.cs">
-      <DependentUpon>HowToActivateITU.cs</DependentUpon>
+    <Compile Include="MainWindow\Dialogs\HowToActivateGazetracker.Designer.cs">
+      <DependentUpon>HowToActivateGazetracker.cs</DependentUpon>
     </Compile>
     <Compile Include="MainWindow\Dialogs\HowToActivateSMI.cs">
       <SubType>Form</SubType>
@@ -395,6 +403,7 @@
     </Compile>
     <Compile Include="Modules\Recording\Gazegroup\GazetrackerIPClientStatus.cs" />
     <Compile Include="Modules\Recording\Gazegroup\GazetrackerIPClientTracker.cs" />
+    <Compile Include="Modules\Recording\Gazegroup\GazetrackerDirectClientTracker.cs" />
     <Compile Include="Modules\Recording\Presenter\WebsiteScreenshot.cs" />
     <Compile Include="Modules\Recording\Presenter\DSScreenCapture.cs" />
     <Compile Include="Modules\Recording\Presenter\ScreenCaptureProperties.cs" />
@@ -997,8 +1006,8 @@
     <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateAsl.resx">
       <DependentUpon>HowToActivateAsl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateITU.resx">
-      <DependentUpon>HowToActivateITU.cs</DependentUpon>
+    <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateGazetracker.resx">
+      <DependentUpon>HowToActivateGazetracker.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateSMI.resx">

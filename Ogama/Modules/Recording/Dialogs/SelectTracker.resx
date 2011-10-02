@@ -380,8 +380,13 @@
         +kf3v9lfwf8ACef8I5/218nP/oef/Hq9TXl/v8p9Rryf9PvZ/O3+f6n/2Q==
 </value>
   </data>
+  <data name="chbGazetrackerDirectClient.Text" xml:space="preserve">
+    <value>Gazetracker DIRECT client: 
+The Gazegroup GazeTracker application which uses a webcam as an eye tracker and can be used in both remote and head-mounted setup.
+This version is the default choice if you wish to use the gazetracker.</value>
+  </data>
   <data name="chbGazetrackerIPClient.Text" xml:space="preserve">
-    <value>Gazetracker IP CLIENT: 
+    <value>Gazetracker IP client: 
 The Gazegroup GazeTracker application which uses a webcam as an eye tracker and can be used in both remote and head-mounted setup.
 This version is to connect with a separate instance of the gazetracker via UDP.</value>
   </data>

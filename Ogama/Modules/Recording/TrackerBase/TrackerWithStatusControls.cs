@@ -11,7 +11,7 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Recording
+namespace Ogama.Modules.Recording.TrackerBase
 {
   using System;
   using System.Drawing;
@@ -42,39 +42,39 @@ namespace Ogama.Modules.Recording
     /// contains two <see cref="SplitContainer"/>s with
     /// track status and calibration plot controls and buttons.
     /// </summary>
-    private SplitContainer trackerControlsContainer;
+    private readonly SplitContainer trackerControlsContainer;
 
     /// <summary>
     /// This <see cref="Panel"/> should contain the
     /// track status object of the implementation.
     /// </summary>
-    private Panel trackStatusPanel;
+    private readonly Panel trackStatusPanel;
 
     /// <summary>
     /// This <see cref="Panel"/> should contain the
     /// calibration result object of the implementation.
     /// </summary>
-    private Panel calibrationResultPanel;
+    private readonly Panel calibrationResultPanel;
 
     /// <summary>
     /// This <see cref="Button"/> is placed at the bottom of
     /// the track status <see cref="SplitContainer"/>.
     /// </summary>
-    private Button showOnPresentationScreenButton;
+    private readonly Button showOnPresentationScreenButton;
 
     /// <summary>
     /// This <see cref="Button"/> is placed at the bottom of
     /// the calibration result <see cref="SplitContainer"/>
     /// and named "Accept".
     /// </summary>
-    private Button acceptButton;
+    private readonly Button acceptButton;
 
     /// <summary>
     /// This <see cref="Button"/> is placed at the bottom of
     /// the calibration result <see cref="SplitContainer"/>
     /// and named "Recalibrate".
     /// </summary>
-    private Button recalibrateButton;
+    private readonly Button recalibrateButton;
 
     #endregion //FIELDS
 
@@ -113,7 +113,7 @@ namespace Ogama.Modules.Recording
     /// which should contain the subject name at the tab page of the tracking device.</param>
     /// <param name="trackerSettingsFile">The file with full path to the settings
     /// xml file of the tracking device.</param>
-    public TrackerWithStatusControls(
+    protected TrackerWithStatusControls(
       RecordModule owningRecordModule,
       SplitContainer trackerTrackerControlsContainer,
       Panel trackerTrackStatusPanel,
@@ -143,9 +143,9 @@ namespace Ogama.Modules.Recording
       this.acceptButton = trackerAcceptButton;
       this.recalibrateButton = trackerRecalibrateButton;
 
-      this.showOnPresentationScreenButton.Click += new EventHandler(this.btnShowOnPresentationScreen_Click);
-      this.recalibrateButton.Click += new System.EventHandler(this.btnRecalibrate_Click);
-      this.acceptButton.Click += new System.EventHandler(this.btnAcceptCalibration_Click);
+      this.showOnPresentationScreenButton.Click += this.BtnShowOnPresentationScreenClick;
+      this.recalibrateButton.Click += this.BtnRecalibrateClick;
+      this.acceptButton.Click += this.BtnAcceptCalibrationClick;
     }
 
     #endregion //CONSTRUCTION
@@ -268,7 +268,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
-    protected override void btnConnect_Click(object sender, EventArgs e)
+    protected override void BtnConnectClick(object sender, EventArgs e)
     {
       // Cancel presentation and recording and
       // disconnect if connect button is
@@ -310,7 +310,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
-    protected virtual void btnShowOnPresentationScreen_Click(object sender, EventArgs e)
+    protected virtual void BtnShowOnPresentationScreenClick(object sender, EventArgs e)
     {
     }
 
@@ -322,7 +322,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
-    protected virtual void btnAcceptCalibration_Click(object sender, EventArgs e)
+    protected virtual void BtnAcceptCalibrationClick(object sender, EventArgs e)
     {
       this.CalibrateButton.Enabled = true;
       this.RecordButton.Enabled = true;
@@ -337,7 +337,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
-    protected virtual void btnRecalibrate_Click(object sender, EventArgs e)
+    protected virtual void BtnRecalibrateClick(object sender, EventArgs e)
     {
       this.ShowTrackStatus();
       this.Calibrate(true);
@@ -397,7 +397,7 @@ namespace Ogama.Modules.Recording
 
       if (this.showOnPresentationScreenButton.BackColor == Color.Red)
       {
-        this.btnShowOnPresentationScreen_Click(this, EventArgs.Empty);
+        this.BtnShowOnPresentationScreenClick(this, EventArgs.Empty);
       }
 
       this.showOnPresentationScreenButton.Enabled = false;

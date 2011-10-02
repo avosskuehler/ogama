@@ -21,6 +21,9 @@ namespace Ogama.Modules.Recording.Alea
   using System.Runtime.InteropServices;
   using System.Windows.Forms;
   using System.Xml.Serialization;
+
+  using Ogama.Modules.Recording.TrackerBase;
+
   using global::Alea.Api;
   using Microsoft.Win32;
   using Ogama.ExceptionHandling;
@@ -618,7 +621,7 @@ namespace Ogama.Modules.Recording.Alea
     /// </summary>
     protected override void InitializeStatusControls()
     {
-      ComponentResourceManager resources = new ComponentResourceManager(typeof(RecordModule));
+      var resources = new ComponentResourceManager(typeof(RecordModule));
 
       try
       {
@@ -637,9 +640,9 @@ namespace Ogama.Modules.Recording.Alea
         ((ISupportInitialize)this.aleaTrackStatus).BeginInit();
 
         // AleaTrackStatus
-        this.aleaTrackStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+        this.aleaTrackStatus.Dock = DockStyle.Fill;
         this.aleaTrackStatus.Enabled = true;
-        this.aleaTrackStatus.Location = new System.Drawing.Point(0, 0);
+        this.aleaTrackStatus.Location = new Point(0, 0);
         this.aleaTrackStatus.Name = "aleaTrackStatus";
         this.aleaTrackStatus.OcxState = (AxHost.State)resources.GetObject("aleaTrackStatus.OcxState");
         this.aleaTrackStatus.TabIndex = 0;
@@ -667,7 +670,7 @@ namespace Ogama.Modules.Recording.Alea
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
-    protected override void btnShowOnPresentationScreen_Click(object sender, EventArgs e)
+    protected override void BtnShowOnPresentationScreenClick(object sender, EventArgs e)
     {
       if (this.ShowOnSecondaryScreenButton.Text.Contains("Show"))
       {
@@ -713,9 +716,9 @@ namespace Ogama.Modules.Recording.Alea
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
-    protected override void btnCalibrate_Click(object sender, EventArgs e)
+    protected override void BtnCalibrateClick(object sender, EventArgs e)
     {
-      base.btnCalibrate_Click(sender, e);
+      base.BtnCalibrateClick(sender, e);
       this.resultLabel.Text = "Not Set";
       this.CalibrationResultPanel.BackColor = Color.Transparent;
     }
@@ -993,8 +996,8 @@ namespace Ogama.Modules.Recording.Alea
       // If the XML document has been altered with unknown 
       // nodes or attributes, handle them with the 
       // UnknownNode and UnknownAttribute events.
-      serializer.UnknownNode += new XmlNodeEventHandler(this.serializer_UnknownNode);
-      serializer.UnknownAttribute += new XmlAttributeEventHandler(this.serializer_UnknownAttribute);
+      serializer.UnknownNode += new XmlNodeEventHandler(this.SerializerUnknownNode);
+      serializer.UnknownAttribute += new XmlAttributeEventHandler(this.SerializerUnknownAttribute);
 
       try
       {

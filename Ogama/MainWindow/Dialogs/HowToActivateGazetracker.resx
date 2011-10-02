@@ -120,9 +120,10 @@
   <data name="label3.Text" xml:space="preserve">
     <value>1. Plug-In a webcam with infrared capabilities.
 2. Start the recording module.
-3. Click the "select tracking device" button and check the ITU GazeTracker checkbox.
+3. Click the "select tracking device" button and check one of the GazeTracker checkboxes on the open source tracker tab.
+TIP: Choose the direct client if you have are running the gazetracker on the samen computer as ogama and use the ip client, if you have problems with the direct client or if gazetracker is running on another computer in the network.
 
-If you followed these steps, a new section called "ITU" with recording option will appear at the left side of the recording module.
-To succesfully track with the ITU GazeTracker there is extensive documentation on their website.</value>
+If you followed these steps, a new section called "Gazetracker" with recording option will appear at the left side of the recording module.
+To succesfully track with the GazeTracker there is extensive documentation on their website.</value>
   </data>
 </root>

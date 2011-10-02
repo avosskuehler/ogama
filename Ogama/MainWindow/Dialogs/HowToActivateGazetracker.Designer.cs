@@ -1,6 +1,6 @@
-﻿namespace Ogama.MainWindow
+﻿namespace Ogama.MainWindow.Dialogs
 {
-  partial class HowToActivateITU
+  partial class HowToActivateGazetracker
   {
     /// <summary>
     /// Required designer variable.
@@ -28,7 +28,7 @@
     /// </summary>
     private void InitializeComponent()
     {
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HowToActivateITU));
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HowToActivateGazetracker));
       this.label3 = new System.Windows.Forms.Label();
       this.btnOK = new System.Windows.Forms.Button();
       this.label1 = new System.Windows.Forms.Label();
@@ -45,7 +45,7 @@
       this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.label3.Location = new System.Drawing.Point(143, 166);
       this.label3.Name = "label3";
-      this.label3.Size = new System.Drawing.Size(354, 182);
+      this.label3.Size = new System.Drawing.Size(354, 251);
       this.label3.TabIndex = 11;
       this.label3.Text = resources.GetString("label3.Text");
       // 
@@ -54,7 +54,7 @@
       this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.btnOK.AutoSize = true;
       this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-      this.btnOK.Location = new System.Drawing.Point(421, 378);
+      this.btnOK.Location = new System.Drawing.Point(421, 420);
       this.btnOK.Name = "btnOK";
       this.btnOK.Size = new System.Drawing.Size(76, 23);
       this.btnOK.TabIndex = 10;
@@ -94,35 +94,35 @@
       this.pcbITULogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
       this.pcbITULogo.TabIndex = 12;
       this.pcbITULogo.TabStop = false;
-      this.pcbITULogo.Click += new System.EventHandler(this.pcbITULogo_Click);
+      this.pcbITULogo.Click += new System.EventHandler(this.PcbITULogoClick);
       // 
       // llbITUWebsite
       // 
       this.llbITUWebsite.AutoSize = true;
-      this.llbITUWebsite.Location = new System.Drawing.Point(143, 348);
+      this.llbITUWebsite.Location = new System.Drawing.Point(8, 289);
       this.llbITUWebsite.Name = "llbITUWebsite";
       this.llbITUWebsite.Size = new System.Drawing.Size(129, 13);
       this.llbITUWebsite.TabIndex = 13;
       this.llbITUWebsite.TabStop = true;
       this.llbITUWebsite.Text = "ITU GazeTacker Website";
-      this.llbITUWebsite.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbITUWebsite_LinkClicked);
+      this.llbITUWebsite.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LlbITUWebsiteLinkClicked);
       // 
       // llbITUManual
       // 
       this.llbITUManual.AutoSize = true;
-      this.llbITUManual.Location = new System.Drawing.Point(143, 372);
+      this.llbITUManual.Location = new System.Drawing.Point(9, 312);
       this.llbITUManual.Name = "llbITUManual";
       this.llbITUManual.Size = new System.Drawing.Size(125, 13);
       this.llbITUManual.TabIndex = 13;
       this.llbITUManual.TabStop = true;
       this.llbITUManual.Text = "ITU GazeTacker Manual";
-      this.llbITUManual.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbITUManual_LinkClicked);
+      this.llbITUManual.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LlbITUManualLinkClicked);
       // 
-      // HowToActivateITU
+      // HowToActivateGazetracker
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(509, 413);
+      this.ClientSize = new System.Drawing.Size(509, 455);
       this.Controls.Add(this.llbITUManual);
       this.Controls.Add(this.llbITUWebsite);
       this.Controls.Add(this.label3);
@@ -133,10 +133,10 @@
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
       this.MaximizeBox = false;
       this.MinimizeBox = false;
-      this.Name = "HowToActivateITU";
+      this.Name = "HowToActivateGazetracker";
       this.ShowInTaskbar = false;
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-      this.Text = "HowTo: Activate ITU GazeTracker recording...";
+      this.Text = "HowTo: Activate GazeTracker recording...";
       ((System.ComponentModel.ISupportInitialize)(this.pcbITU)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.pcbITULogo)).EndInit();
       this.ResumeLayout(false);

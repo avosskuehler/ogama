@@ -47,12 +47,16 @@
       this.pcbAlea = new System.Windows.Forms.PictureBox();
       this.chbSMI = new System.Windows.Forms.CheckBox();
       this.tabPage2 = new System.Windows.Forms.TabPage();
-      this.pcbHelpITU = new System.Windows.Forms.PictureBox();
+      this.pcbHelpGazetrackerIPClient = new System.Windows.Forms.PictureBox();
       this.pcbITU = new System.Windows.Forms.PictureBox();
       this.chbMouseOnly = new System.Windows.Forms.CheckBox();
       this.chbGazetrackerIPClient = new System.Windows.Forms.CheckBox();
       this.btnCancel = new System.Windows.Forms.Button();
       this.btnOK = new System.Windows.Forms.Button();
+      this.pcbHelpGazetrackerDirectClient = new System.Windows.Forms.PictureBox();
+      this.chbGazetrackerDirectClient = new System.Windows.Forms.CheckBox();
+      this.pictureBox1 = new System.Windows.Forms.PictureBox();
+      this.pictureBox2 = new System.Windows.Forms.PictureBox();
       this.splitContainer1.Panel1.SuspendLayout();
       this.splitContainer1.Panel2.SuspendLayout();
       this.splitContainer1.SuspendLayout();
@@ -70,8 +74,11 @@
       ((System.ComponentModel.ISupportInitialize)(this.pcbSMI)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pcbAlea)).BeginInit();
       this.tabPage2.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.pcbHelpITU)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.pcbHelpGazetrackerIPClient)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pcbITU)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.pcbHelpGazetrackerDirectClient)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
       this.SuspendLayout();
       // 
       // splitContainer1
@@ -173,7 +180,7 @@
       this.pcbHelpAsl.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
       this.pcbHelpAsl.TabIndex = 19;
       this.pcbHelpAsl.TabStop = false;
-      this.pcbHelpAsl.Click += new System.EventHandler(this.pcbHelpAsl_Click);
+      this.pcbHelpAsl.Click += new System.EventHandler(this.PcbHelpAslClick);
       // 
       // chbAsl
       // 
@@ -197,7 +204,7 @@
       this.pcbAsl.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
       this.pcbAsl.TabIndex = 17;
       this.pcbAsl.TabStop = false;
-      this.pcbAsl.Click += new System.EventHandler(this.pcbAsl_Click);
+      this.pcbAsl.Click += new System.EventHandler(this.PcbAslClick);
       // 
       // pcbHelpSMI
       // 
@@ -209,7 +216,7 @@
       this.pcbHelpSMI.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
       this.pcbHelpSMI.TabIndex = 11;
       this.pcbHelpSMI.TabStop = false;
-      this.pcbHelpSMI.Click += new System.EventHandler(this.pcbHelpSMI_Click);
+      this.pcbHelpSMI.Click += new System.EventHandler(this.PcbHelpSMIClick);
       // 
       // pcbHelpAlea
       // 
@@ -221,7 +228,7 @@
       this.pcbHelpAlea.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
       this.pcbHelpAlea.TabIndex = 11;
       this.pcbHelpAlea.TabStop = false;
-      this.pcbHelpAlea.Click += new System.EventHandler(this.pcbHelpAlea_Click);
+      this.pcbHelpAlea.Click += new System.EventHandler(this.PcbHelpAleaClick);
       // 
       // pcbHelpTobii
       // 
@@ -233,7 +240,7 @@
       this.pcbHelpTobii.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
       this.pcbHelpTobii.TabIndex = 11;
       this.pcbHelpTobii.TabStop = false;
-      this.pcbHelpTobii.Click += new System.EventHandler(this.pcbHelpTobii_Click);
+      this.pcbHelpTobii.Click += new System.EventHandler(this.PcbHelpTobiiClick);
       // 
       // chbTobii
       // 
@@ -270,7 +277,7 @@
       this.pcbTobii.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
       this.pcbTobii.TabIndex = 9;
       this.pcbTobii.TabStop = false;
-      this.pcbTobii.Click += new System.EventHandler(this.pcbTobii_Click);
+      this.pcbTobii.Click += new System.EventHandler(this.PcbTobiiClick);
       // 
       // pcbSMI
       // 
@@ -280,7 +287,7 @@
       this.pcbSMI.Size = new System.Drawing.Size(52, 48);
       this.pcbSMI.TabIndex = 10;
       this.pcbSMI.TabStop = false;
-      this.pcbSMI.Click += new System.EventHandler(this.pcbSMI_Click);
+      this.pcbSMI.Click += new System.EventHandler(this.PcbSMIClick);
       // 
       // pcbAlea
       // 
@@ -292,7 +299,7 @@
       this.pcbAlea.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
       this.pcbAlea.TabIndex = 9;
       this.pcbAlea.TabStop = false;
-      this.pcbAlea.Click += new System.EventHandler(this.pcbAlea_Click);
+      this.pcbAlea.Click += new System.EventHandler(this.PcbAleaClick);
       // 
       // chbSMI
       // 
@@ -308,7 +315,11 @@
       // 
       // tabPage2
       // 
-      this.tabPage2.Controls.Add(this.pcbHelpITU);
+      this.tabPage2.Controls.Add(this.pictureBox2);
+      this.tabPage2.Controls.Add(this.pcbHelpGazetrackerDirectClient);
+      this.tabPage2.Controls.Add(this.chbGazetrackerDirectClient);
+      this.tabPage2.Controls.Add(this.pcbHelpGazetrackerIPClient);
+      this.tabPage2.Controls.Add(this.pictureBox1);
       this.tabPage2.Controls.Add(this.pcbITU);
       this.tabPage2.Controls.Add(this.chbMouseOnly);
       this.tabPage2.Controls.Add(this.chbGazetrackerIPClient);
@@ -320,29 +331,29 @@
       this.tabPage2.Text = "Open Source Tracker";
       this.tabPage2.UseVisualStyleBackColor = true;
       // 
-      // pcbHelpITU
+      // pcbHelpGazetrackerIPClient
       // 
-      this.pcbHelpITU.Cursor = System.Windows.Forms.Cursors.Help;
-      this.pcbHelpITU.Image = global::Ogama.Properties.Resources.HelpBmp;
-      this.pcbHelpITU.Location = new System.Drawing.Point(483, 124);
-      this.pcbHelpITU.Name = "pcbHelpITU";
-      this.pcbHelpITU.Size = new System.Drawing.Size(16, 16);
-      this.pcbHelpITU.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-      this.pcbHelpITU.TabIndex = 13;
-      this.pcbHelpITU.TabStop = false;
-      this.pcbHelpITU.Click += new System.EventHandler(this.pcbHelpITU_Click);
+      this.pcbHelpGazetrackerIPClient.Cursor = System.Windows.Forms.Cursors.Help;
+      this.pcbHelpGazetrackerIPClient.Image = global::Ogama.Properties.Resources.HelpBmp;
+      this.pcbHelpGazetrackerIPClient.Location = new System.Drawing.Point(483, 124);
+      this.pcbHelpGazetrackerIPClient.Name = "pcbHelpGazetrackerIPClient";
+      this.pcbHelpGazetrackerIPClient.Size = new System.Drawing.Size(16, 16);
+      this.pcbHelpGazetrackerIPClient.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+      this.pcbHelpGazetrackerIPClient.TabIndex = 13;
+      this.pcbHelpGazetrackerIPClient.TabStop = false;
+      this.pcbHelpGazetrackerIPClient.Click += new System.EventHandler(this.PcbHelpGazetrackerClientClick);
       // 
       // pcbITU
       // 
       this.pcbITU.Cursor = System.Windows.Forms.Cursors.Hand;
       this.pcbITU.Image = global::Ogama.Properties.Resources.ITU_Logo;
-      this.pcbITU.Location = new System.Drawing.Point(6, 90);
+      this.pcbITU.Location = new System.Drawing.Point(6, 98);
       this.pcbITU.Name = "pcbITU";
-      this.pcbITU.Size = new System.Drawing.Size(88, 97);
+      this.pcbITU.Size = new System.Drawing.Size(75, 78);
       this.pcbITU.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
       this.pcbITU.TabIndex = 12;
       this.pcbITU.TabStop = false;
-      this.pcbITU.Click += new System.EventHandler(this.pcbITU_Click);
+      this.pcbITU.Click += new System.EventHandler(this.PcbITUClick);
       // 
       // chbMouseOnly
       // 
@@ -390,6 +401,50 @@
       this.btnOK.Text = "OK";
       this.btnOK.UseVisualStyleBackColor = true;
       // 
+      // pcbHelpGazetrackerDirectClient
+      // 
+      this.pcbHelpGazetrackerDirectClient.Cursor = System.Windows.Forms.Cursors.Help;
+      this.pcbHelpGazetrackerDirectClient.Image = global::Ogama.Properties.Resources.HelpBmp;
+      this.pcbHelpGazetrackerDirectClient.Location = new System.Drawing.Point(483, 40);
+      this.pcbHelpGazetrackerDirectClient.Name = "pcbHelpGazetrackerDirectClient";
+      this.pcbHelpGazetrackerDirectClient.Size = new System.Drawing.Size(16, 16);
+      this.pcbHelpGazetrackerDirectClient.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+      this.pcbHelpGazetrackerDirectClient.TabIndex = 15;
+      this.pcbHelpGazetrackerDirectClient.TabStop = false;
+      this.pcbHelpGazetrackerDirectClient.Click += new System.EventHandler(this.PcbHelpGazetrackerDirectClientClick);
+      // 
+      // chbGazetrackerDirectClient
+      // 
+      this.chbGazetrackerDirectClient.Image = global::Ogama.Properties.Resources.ITU_61_61;
+      this.chbGazetrackerDirectClient.Location = new System.Drawing.Point(100, 6);
+      this.chbGazetrackerDirectClient.Name = "chbGazetrackerDirectClient";
+      this.chbGazetrackerDirectClient.Size = new System.Drawing.Size(341, 86);
+      this.chbGazetrackerDirectClient.TabIndex = 14;
+      this.chbGazetrackerDirectClient.Text = resources.GetString("chbGazetrackerDirectClient.Text");
+      this.chbGazetrackerDirectClient.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.chbGazetrackerDirectClient.UseVisualStyleBackColor = true;
+      // 
+      // pictureBox1
+      // 
+      this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+      this.pictureBox1.Image = global::Ogama.Properties.Resources.ITU_Logo;
+      this.pictureBox1.Location = new System.Drawing.Point(6, 6);
+      this.pictureBox1.Name = "pictureBox1";
+      this.pictureBox1.Size = new System.Drawing.Size(75, 78);
+      this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+      this.pictureBox1.TabIndex = 12;
+      this.pictureBox1.TabStop = false;
+      this.pictureBox1.Click += new System.EventHandler(this.PcbITUClick);
+      // 
+      // pictureBox2
+      // 
+      this.pictureBox2.Image = global::Ogama.Properties.Resources.lanconnect;
+      this.pictureBox2.Location = new System.Drawing.Point(56, 131);
+      this.pictureBox2.Name = "pictureBox2";
+      this.pictureBox2.Size = new System.Drawing.Size(20, 20);
+      this.pictureBox2.TabIndex = 16;
+      this.pictureBox2.TabStop = false;
+      // 
       // SelectTracker
       // 
       this.AcceptButton = this.btnOK;
@@ -406,7 +461,7 @@
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
       this.Text = "Please select the tracking devices ...";
       this.Load += new System.EventHandler(this.SelectTrackerLoad);
-      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SelectTracker_FormClosing);
+      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SelectTrackerFormClosing);
       this.splitContainer1.Panel1.ResumeLayout(false);
       this.splitContainer1.Panel2.ResumeLayout(false);
       this.splitContainer1.ResumeLayout(false);
@@ -427,8 +482,11 @@
       ((System.ComponentModel.ISupportInitialize)(this.pcbAlea)).EndInit();
       this.tabPage2.ResumeLayout(false);
       this.tabPage2.PerformLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.pcbHelpITU)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.pcbHelpGazetrackerIPClient)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.pcbITU)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.pcbHelpGazetrackerDirectClient)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
       this.ResumeLayout(false);
 
     }
@@ -455,9 +513,13 @@
     private System.Windows.Forms.PictureBox pcbHelpTobii;
     private System.Windows.Forms.PictureBox pcbHelpSMI;
     private System.Windows.Forms.PictureBox pcbHelpAlea;
-    private System.Windows.Forms.PictureBox pcbHelpITU;
+    private System.Windows.Forms.PictureBox pcbHelpGazetrackerIPClient;
     private System.Windows.Forms.PictureBox pcbHelpAsl;
     private System.Windows.Forms.CheckBox chbAsl;
     private System.Windows.Forms.PictureBox pcbAsl;
+    private System.Windows.Forms.PictureBox pcbHelpGazetrackerDirectClient;
+    private System.Windows.Forms.CheckBox chbGazetrackerDirectClient;
+    private System.Windows.Forms.PictureBox pictureBox2;
+    private System.Windows.Forms.PictureBox pictureBox1;
   }
 }

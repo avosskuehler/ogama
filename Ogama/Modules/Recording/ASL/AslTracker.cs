@@ -28,6 +28,7 @@ namespace Ogama.Modules.Recording.ASL
 
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Recording.TrackerBase;
 
   /// <summary>
   /// This class implements the <see cref="ITracker"/> interface to represent 
@@ -109,7 +110,7 @@ namespace Ogama.Modules.Recording.ASL
     /// An array of data feild returned by the Eye Tracker : status, Pupil diameter,
     /// Point of gaze horizontal and vertical coordinates.
     /// </summary>
-    private System.Array items;
+    private Array items;
 
     /// <summary>
     /// Number of data in the items array. Out parameter of the GetDataRecord dll method.
@@ -588,7 +589,7 @@ namespace Ogama.Modules.Recording.ASL
     /// </summary>
     /// <param name="sender">Source of the event</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    protected override void btnConnect_Click(object sender, EventArgs e)
+    protected override void BtnConnectClick(object sender, EventArgs e)
     {
       // Cancel presentation and recording and
       // disconnect if connect button is
@@ -656,7 +657,7 @@ namespace Ogama.Modules.Recording.ASL
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
-    protected override void btnCalibrate_Click(object sender, EventArgs e)
+    protected override void BtnCalibrateClick(object sender, EventArgs e)
     {
       this.Calibrate(false);
       this.RecordButton.Enabled = true;
@@ -680,7 +681,7 @@ namespace Ogama.Modules.Recording.ASL
     /// </summary>
     /// <param name="sender">Source of the event</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    protected override void btnRecord_Click(object sender, EventArgs e)
+    protected override void BtnRecordClick(object sender, EventArgs e)
     {
       this.aslPort.GetScaledData(
               out this.items,
@@ -689,7 +690,7 @@ namespace Ogama.Modules.Recording.ASL
 
       if (this.available)
       {
-        base.btnRecord_Click(sender, e);
+        base.BtnRecordClick(sender, e);
       }
       else
       {
