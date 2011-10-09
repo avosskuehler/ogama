@@ -24,6 +24,8 @@ namespace Ogama.Modules.Recording
   using System.Threading;
   using System.Windows.Forms;
 
+  using GTCommons.Events;
+
   using Ogama.DataSet;
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
@@ -1450,7 +1452,7 @@ namespace Ogama.Modules.Recording
           this.webcamPreview.RunGraph();
         }
 
-        this.OnRecordingFinished(new GazeTrackerClient.StringEventArgs(string.Empty));
+        this.OnRecordingFinished(new StringEventArgs(string.Empty));
 
         Cursor.Current = Cursors.Default;
 

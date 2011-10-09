@@ -23,6 +23,8 @@ namespace Ogama.Modules.Recording.Gazegroup
 
   using DirectShowLib;
 
+  using GTCommons.Events;
+
   using GazeTrackerClient;
 
   using Ogama.ExceptionHandling;
@@ -507,7 +509,7 @@ namespace Ogama.Modules.Recording.Gazegroup
       if (!this.IsGazeTrackerApplicationRunning())
       {
         var gazetrackerPath = Path.Combine(
-          Application.StartupPath, "Gazetracker" + Path.DirectorySeparatorChar + "GazeTrackerUI.exe");
+          Application.StartupPath, "GazeTrackerUI.exe");
         Process.Start(gazetrackerPath);
       }
       else

@@ -352,7 +352,7 @@ namespace Ogama.Modules.Recording.TrackerBase
     {
       this.CleanUp();
 
-      this.subjectButton.Enabled = true;
+      this.subjectButton.Enabled = false;
 
       if (this.calibrateButton != null)
       {
