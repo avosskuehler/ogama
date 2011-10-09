@@ -54,6 +54,7 @@
       this.panel3 = new System.Windows.Forms.Panel();
       this.groupBox4 = new System.Windows.Forms.GroupBox();
       this.splitContainer23 = new System.Windows.Forms.SplitContainer();
+      this.eyeVideoControlGazetracker = new OgamaClient.Controls.EyeVideoControl();
       this.btnGazetrackerDirectClientShowOnPresentationScreen = new System.Windows.Forms.Button();
       this.txbGazetrackerDirectClientSubject = new System.Windows.Forms.TextBox();
       this.btnGazetrackerDirectClientRecord = new System.Windows.Forms.Button();
@@ -61,8 +62,10 @@
       this.label19 = new System.Windows.Forms.Label();
       this.label20 = new System.Windows.Forms.Label();
       this.label47 = new System.Windows.Forms.Label();
+      this.label83 = new System.Windows.Forms.Label();
       this.label81 = new System.Windows.Forms.Label();
       this.btnGazetrackerDirectClientSubject = new System.Windows.Forms.Button();
+      this.btnGazetrackerDirectClientAdjust = new System.Windows.Forms.Button();
       this.btnGazetrackerDirectClientConnect = new System.Windows.Forms.Button();
       this.tbpTobii = new System.Windows.Forms.TabPage();
       this.panel1 = new System.Windows.Forms.Panel();
@@ -368,9 +371,6 @@
       this.tabPage12 = new System.Windows.Forms.TabPage();
       this.label79 = new System.Windows.Forms.Label();
       this.button65 = new System.Windows.Forms.Button();
-      this.eyeVideoControlGazetracker = new OgamaClient.EyeVideoControl();
-      this.btnGazetrackerDirectClientAdjust = new System.Windows.Forms.Button();
-      this.label83 = new System.Windows.Forms.Label();
       ((System.ComponentModel.ISupportInitialize)(this.bsoSubjects)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.bsoFKSubjectsTrials)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.ogamaDataSet)).BeginInit();
@@ -727,8 +727,8 @@
       this.txbGazetrackerIPStatus.Size = new System.Drawing.Size(200, 101);
       this.txbGazetrackerIPStatus.TabIndex = 0;
       this.txbGazetrackerIPStatus.Text = "Please note:\r\n- The track status and the quality of\r\n   the calibration are shown" +
-          " in the \r\n   ITU gazetracker application.\r\n- Turn off the firewalls if connectin" +
-          "g\r\n   fails.";
+          " in the \r\n   gazetracker application.\r\n- Turn off the firewalls if connecting\r\n " +
+          "  fails.";
       // 
       // label54
       // 
@@ -822,7 +822,7 @@
       this.tbpGazetrackerDirectClient.Padding = new System.Windows.Forms.Padding(3);
       this.tbpGazetrackerDirectClient.Size = new System.Drawing.Size(212, 385);
       this.tbpGazetrackerDirectClient.TabIndex = 9;
-      this.tbpGazetrackerDirectClient.Text = "Tobii";
+      this.tbpGazetrackerDirectClient.Text = "Gazetracker";
       this.tbpGazetrackerDirectClient.UseVisualStyleBackColor = true;
       // 
       // panel3
@@ -875,11 +875,19 @@
       this.splitContainer23.SplitterDistance = 135;
       this.splitContainer23.TabIndex = 22;
       // 
+      // eyeVideoControlGazetracker
+      // 
+      this.eyeVideoControlGazetracker.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.eyeVideoControlGazetracker.IsNativeResolution = false;
+      this.eyeVideoControlGazetracker.Location = new System.Drawing.Point(0, 0);
+      this.eyeVideoControlGazetracker.Name = "eyeVideoControlGazetracker";
+      this.eyeVideoControlGazetracker.Size = new System.Drawing.Size(190, 135);
+      this.eyeVideoControlGazetracker.TabIndex = 0;
+      // 
       // btnGazetrackerDirectClientShowOnPresentationScreen
       // 
       this.btnGazetrackerDirectClientShowOnPresentationScreen.BackColor = System.Drawing.Color.Transparent;
       this.btnGazetrackerDirectClientShowOnPresentationScreen.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.btnGazetrackerDirectClientShowOnPresentationScreen.Enabled = false;
       this.btnGazetrackerDirectClientShowOnPresentationScreen.Location = new System.Drawing.Point(0, 0);
       this.btnGazetrackerDirectClientShowOnPresentationScreen.Name = "btnGazetrackerDirectClientShowOnPresentationScreen";
       this.btnGazetrackerDirectClientShowOnPresentationScreen.Size = new System.Drawing.Size(190, 25);
@@ -952,6 +960,17 @@
       this.label47.TabIndex = 13;
       this.label47.Text = "3.";
       // 
+      // label83
+      // 
+      this.label83.AutoSize = true;
+      this.label83.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label83.Location = new System.Drawing.Point(5, 227);
+      this.label83.Margin = new System.Windows.Forms.Padding(0);
+      this.label83.Name = "label83";
+      this.label83.Size = new System.Drawing.Size(25, 24);
+      this.label83.TabIndex = 13;
+      this.label83.Text = "2.";
+      // 
       // label81
       // 
       this.label81.AutoSize = true;
@@ -977,6 +996,20 @@
       this.btnGazetrackerDirectClientSubject.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
       this.btnGazetrackerDirectClientSubject.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.btnGazetrackerDirectClientSubject.UseVisualStyleBackColor = true;
+      // 
+      // btnGazetrackerDirectClientAdjust
+      // 
+      this.btnGazetrackerDirectClientAdjust.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnGazetrackerDirectClientAdjust.ImageKey = "Adjust";
+      this.btnGazetrackerDirectClientAdjust.ImageList = this.imlButtons;
+      this.btnGazetrackerDirectClientAdjust.Location = new System.Drawing.Point(29, 227);
+      this.btnGazetrackerDirectClientAdjust.Name = "btnGazetrackerDirectClientAdjust";
+      this.btnGazetrackerDirectClientAdjust.Size = new System.Drawing.Size(73, 23);
+      this.btnGazetrackerDirectClientAdjust.TabIndex = 12;
+      this.btnGazetrackerDirectClientAdjust.Text = "Adjust";
+      this.btnGazetrackerDirectClientAdjust.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.btnGazetrackerDirectClientAdjust.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.btnGazetrackerDirectClientAdjust.UseVisualStyleBackColor = true;
       // 
       // btnGazetrackerDirectClientConnect
       // 
@@ -4779,40 +4812,6 @@
       this.button65.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.button65.UseVisualStyleBackColor = true;
       // 
-      // eyeVideoControlGazetracker
-      // 
-      this.eyeVideoControlGazetracker.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.eyeVideoControlGazetracker.IsNativeResolution = false;
-      this.eyeVideoControlGazetracker.Location = new System.Drawing.Point(0, 0);
-      this.eyeVideoControlGazetracker.Name = "eyeVideoControlGazetracker";
-      this.eyeVideoControlGazetracker.Size = new System.Drawing.Size(190, 135);
-      this.eyeVideoControlGazetracker.TabIndex = 0;
-      // 
-      // btnGazetrackerDirectClientAdjust
-      // 
-      this.btnGazetrackerDirectClientAdjust.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-      this.btnGazetrackerDirectClientAdjust.ImageKey = "Adjust";
-      this.btnGazetrackerDirectClientAdjust.ImageList = this.imlButtons;
-      this.btnGazetrackerDirectClientAdjust.Location = new System.Drawing.Point(29, 227);
-      this.btnGazetrackerDirectClientAdjust.Name = "btnGazetrackerDirectClientAdjust";
-      this.btnGazetrackerDirectClientAdjust.Size = new System.Drawing.Size(73, 23);
-      this.btnGazetrackerDirectClientAdjust.TabIndex = 12;
-      this.btnGazetrackerDirectClientAdjust.Text = "Adjust";
-      this.btnGazetrackerDirectClientAdjust.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.btnGazetrackerDirectClientAdjust.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-      this.btnGazetrackerDirectClientAdjust.UseVisualStyleBackColor = true;
-      // 
-      // label83
-      // 
-      this.label83.AutoSize = true;
-      this.label83.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label83.Location = new System.Drawing.Point(5, 227);
-      this.label83.Margin = new System.Windows.Forms.Padding(0);
-      this.label83.Name = "label83";
-      this.label83.Size = new System.Drawing.Size(25, 24);
-      this.label83.TabIndex = 13;
-      this.label83.Text = "2.";
-      // 
       // RecordModule
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5368,7 +5367,7 @@
     private System.Windows.Forms.Label label81;
     private System.Windows.Forms.Button btnGazetrackerDirectClientSubject;
     private System.Windows.Forms.Button btnGazetrackerDirectClientConnect;
-    private OgamaClient.EyeVideoControl eyeVideoControlGazetracker;
+    private OgamaClient.Controls.EyeVideoControl eyeVideoControlGazetracker;
     private System.Windows.Forms.Label label83;
     private System.Windows.Forms.Button btnGazetrackerDirectClientAdjust;
   }

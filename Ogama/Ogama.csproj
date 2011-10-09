@@ -129,9 +129,17 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Gazetracker\GazeTrackingLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="GTCommons, Version=2.1.0.0, Culture=neutral, PublicKeyToken=0394c3dfe9da180e, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Gazetracker\GTCommons.dll</HintPath>
+    </Reference>
     <Reference Include="GTHardware, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bf600965c04ba845, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Gazetracker\GTHardware.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.ASLSERIALOUTLIB2Lib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\Interop.ASLSERIALOUTLIB2Lib.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Data.ConnectionUI, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -1771,14 +1779,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="ASLSERIALOUTLIB2Lib">
-      <Guid>{8FF83C13-3622-4CDA-9E8A-939760558BBF}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
     <COMReference Include="AxTetComp">
       <Guid>{3E10DC16-717F-4A70-9EA9-AD364F61AF6E}</Guid>
       <VersionMajor>1</VersionMajor>
@@ -1818,7 +1818,7 @@
   -->
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(SolutionDir)Libs\Native\*.*" "$(OutDir)" /E /Y
-xcopy "$(SolutionDir)Libs\Gazetracker\*.*" "$(OutDir)Gazetracker\" /E /Y</PostBuildEvent>
+xcopy "$(SolutionDir)Libs\Gazetracker\*.*" "$(OutDir)" /E /Y</PostBuildEvent>
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>

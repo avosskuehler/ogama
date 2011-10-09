@@ -26,6 +26,9 @@ namespace Ogama.Modules.Recording.Gazegroup
 
   using OgamaClient;
   using OgamaClient.API;
+  using OgamaClient.Controls;
+
+  using OgamaControls;
 
   /// <summary>
   /// This class implements the <see cref="TrackerWithStatusControls"/> class
@@ -125,12 +128,12 @@ namespace Ogama.Modules.Recording.Gazegroup
       trackerSubjectNameTextBox,
       Properties.Settings.Default.EyeTrackerSettingsPath + "GazetrackerDirectClientSetting.xml")
     {
-      this.Initialize();
       this.adjustButton = trackerAdjustButton;
       this.adjustButton.Click += this.AdjustButtonClick;
       this.showOnSecondaryScreenButton = trackerShowOnSecondaryScreenButton;
       this.showOnSecondaryScreenButton.Click += this.BtnShowOnPresentationScreenClick;
       this.eyeVideo = trackerEyeVideoControl;
+      this.Initialize();
     }
 
     #endregion //CONSTRUCTION
@@ -231,6 +234,7 @@ namespace Ogama.Modules.Recording.Gazegroup
           return false;
         }
 
+        this.eyeVideo.Start();
         this.SetPresentationScreen();
 
         // Video preview window (tracker visualizes image processing) 
@@ -287,9 +291,11 @@ namespace Ogama.Modules.Recording.Gazegroup
         if (this.gazeTrackerApiClient != null)
         {
           this.gazeTrackerApiClient.CleanUp();
+          //this.gazeTrackerApiClient.ShowInitialImage();
         }
 
         this.adjustButton.Enabled = false;
+        this.SubjectButton.Enabled = false;
       }
       catch (Exception ex)
       {
@@ -333,7 +339,7 @@ namespace Ogama.Modules.Recording.Gazegroup
         if (this.eyeVideo != null)
         {
           // Stop updating images in small preview box
-          this.eyeVideo.Stop();
+          // this.eyeVideo.Stop();
         }
 
         if (this.gazeTrackerApiClient != null)
@@ -369,8 +375,8 @@ namespace Ogama.Modules.Recording.Gazegroup
     {
       this.presentationScreenSize = Document.ActiveDocument.PresentationSize;
       this.gazeTrackerApiClient = new GazeTrackerAPI();
-      this.gazeTrackerApiClient.GTExtendedDataChanged += this.OnGTExtendedDataChanged;
       this.gazeTrackerApiClient.Initialize(this.eyeVideo);
+      this.gazeTrackerApiClient.GTExtendedDataChanged += this.OnGTExtendedDataChanged;
     }
 
     /// <summary>
@@ -380,6 +386,18 @@ namespace Ogama.Modules.Recording.Gazegroup
     protected override void PrepareRecording()
     {
       this.gazeTrackerApiClient.ShowOrHideTrackStatusOnPresentationScreen(false);
+    }
+
+    /// <summary>
+    /// Raised when the recorder has finished a recording.
+    /// Resets the button states.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/>.</param>
+    protected override void RecordModuleNewRecordingFinished(object sender, EventArgs e)
+    {
+      base.RecordModuleNewRecordingFinished(sender, e);
+      this.adjustButton.Enabled = true;
     }
 
     #endregion //OVERRIDES
@@ -449,7 +467,8 @@ namespace Ogama.Modules.Recording.Gazegroup
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
     private void GazeTrackerApiClientCalibrationFinishedEvent(object sender, EventArgs e)
     {
-      // Hide the track status and show the calibration plot.
+      // Enable Record button
+      ThreadSafe.EnableDisableButton(this.RecordButton, true);
     }
 
     /// <summary>

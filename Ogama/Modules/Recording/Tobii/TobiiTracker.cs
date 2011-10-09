@@ -25,6 +25,8 @@ namespace Ogama.Modules.Recording.Tobii
   using Microsoft.Win32;
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Recording.TrackerBase;
+
   using TetComp;
 
   /// <summary>
@@ -563,7 +565,7 @@ namespace Ogama.Modules.Recording.Tobii
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
-    protected override void btnShowOnPresentationScreen_Click(object sender, EventArgs e)
+    protected override void BtnShowOnPresentationScreenClick(object sender, EventArgs e)
     {
 #if TOBII
       if (this.ShowOnSecondaryScreenButton.Text.Contains("Show"))
@@ -959,8 +961,8 @@ namespace Ogama.Modules.Recording.Tobii
       // If the XML document has been altered with unknown 
       // nodes or attributes, handle them with the 
       // UnknownNode and UnknownAttribute events.
-      serializer.UnknownNode += new XmlNodeEventHandler(this.serializer_UnknownNode);
-      serializer.UnknownAttribute += new XmlAttributeEventHandler(this.serializer_UnknownAttribute);
+      serializer.UnknownNode += new XmlNodeEventHandler(this.SerializerUnknownNode);
+      serializer.UnknownAttribute += new XmlAttributeEventHandler(this.SerializerUnknownAttribute);
 
       try
       {
