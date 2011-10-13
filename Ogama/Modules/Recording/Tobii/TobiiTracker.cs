@@ -24,6 +24,7 @@ namespace Ogama.Modules.Recording.TobiiDevice
   using Microsoft.Win32;
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Recording.Tobii;
   using Ogama.Properties;
 
   using Tobii.Eyetracking.Sdk;
@@ -599,6 +600,7 @@ namespace Ogama.Modules.Recording.TobiiDevice
         this.tobiiCalibPlot.Name = "tobiiCalibPlot";
         this.tobiiCalibPlot.Size = new System.Drawing.Size(190, 54);
         this.tobiiCalibPlot.TabIndex = 0;
+        this.tobiiCalibPlot.EyeOption = EyeOption.Left;
 
         try
         {

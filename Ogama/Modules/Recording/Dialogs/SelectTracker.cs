@@ -39,6 +39,13 @@ namespace Ogama.Modules.Recording
     // Defining Variables, Enumerations, Events                                  //
     ///////////////////////////////////////////////////////////////////////////////
     #region FIELDS
+
+    /// <summary>
+    /// Provides an <see cref="Timer"/> which updates the tracker status
+    /// of the connected devices every second.
+    /// </summary>
+    private Timer eyetrackerUpdateTimer;
+
     #endregion //FIELDS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -52,6 +59,8 @@ namespace Ogama.Modules.Recording
     public SelectTracker()
     {
       this.InitializeComponent();
+      this.eyetrackerUpdateTimer = new Timer() { Interval = 1000, Enabled = true };
+      this.eyetrackerUpdateTimer.Tick += this.eyetrackerUpdateTimer_Tick;
     }
 
     #endregion //CONSTRUCTION
@@ -123,95 +132,17 @@ namespace Ogama.Modules.Recording
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void SelectTracker_Load(object sender, EventArgs e)
     {
-      string error;
-
-      string ituDefaultText = "The ITU GazeTracker application which uses a webcam as " +
-        "an eye tracker and can be used in both remote and head-mounted setup."
-        + Environment.NewLine;
-
-      if (!Ogama.Modules.Recording.ITUGazeTracker.ITUGazeTrackerBase.IsAvailable(out error))
-      {
-        this.chbITU.Enabled = false;
-        this.chbITU.Checked = false;
-        this.chbITU.Text = ituDefaultText +
-          "Status: " + error;
-      }
-      else
-      {
-        this.chbITU.Text = ituDefaultText +
-          "Status: GazeTracker found a camera device.";
-      }
-
-      string aleaDefaultText = "The alea technologies IG-30 Pro Eyetracking-System. " +
-          "Needs to have Intelligaze Software 1.2 to be installed." + Environment.NewLine;
-      if (!Ogama.Modules.Recording.Alea.AleaTracker.IsAvailable(out error))
-      {
-        this.chbAlea.Enabled = false;
-        this.chbAlea.Checked = false;
-        this.pcbAlea.Enabled = false;
-        this.chbAlea.Text = aleaDefaultText +
-          "Status: " + error;
-      }
-      else
-      {
-        this.chbAlea.Text = aleaDefaultText +
-          "Status: Intelligaze found.";
-      }
-
-      this.UpdateTobiiStatus();
-
-      TobiiDevice.TobiiTracker.TrackerBrowser.EyetrackerFound += new EventHandler<Tobii.Eyetracking.Sdk.EyetrackerInfoEventArgs>(TrackerBrowser_EyetrackerFound);
-      TobiiDevice.TobiiTracker.TrackerBrowser.EyetrackerRemoved += new EventHandler<Tobii.Eyetracking.Sdk.EyetrackerInfoEventArgs>(TrackerBrowser_EyetrackerRemoved);
-
-      // ASL 
-      //  "If you have purchased and installed an ASL " +
-      //  "model 5000 Eye Tracker control unit (materials and softwares)" + Environment.NewLine;
-      string aslDefaultText = "ASL software must be installed on this computer.";
-#if ASL
-        if (!Ogama.Modules.Recording.ASL.AslTracker.IsAvailable(out error))
-        {
-            this.chbAsl.Enabled = false;
-            this.chbAsl.Checked = false;
-            this.pcbAsl.Enabled = false;
-            this.chbAsl.Text = aslDefaultText + error;
-        }
-        else
-        {
-            this.chbAsl.Text = aslDefaultText + "(ASL library found)";
-        }
-#else
-      this.chbAsl.Enabled = false;
-      this.chbAsl.Checked = false;
-      this.pcbAsl.Enabled = false;
-      this.chbAsl.Text = aslDefaultText +
-      "Status : This version of OGAMA has no ASL support (ASL compiler flag not set)."
-          + Environment.NewLine;
-#endif
+      this.UpdateTrackerStatus();
     }
 
-    private void UpdateTobiiStatus()
+    /// <summary>
+    /// Updates the connected tracker status.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void eyetrackerUpdateTimer_Tick(object sender, EventArgs e)
     {
-      string error;
-      string tobiiDefaultText = "The Tobii technologies T60,T120,X120 gaze tracker series."
-                                + Environment.NewLine;
-      if (!Ogama.Modules.Recording.TobiiDevice.TobiiTracker.IsAvailable(out error))
-      {
-        this.chbTobii.Enabled = false;
-        this.chbTobii.Checked = false;
-        this.pcbTobii.Enabled = false;
-      }
-
-      this.chbTobii.Text = tobiiDefaultText + "Status: " + error;
-    }
-
-    void TrackerBrowser_EyetrackerRemoved(object sender, Tobii.Eyetracking.Sdk.EyetrackerInfoEventArgs e)
-    {
-      this.UpdateTobiiStatus();
-    }
-
-    void TrackerBrowser_EyetrackerFound(object sender, Tobii.Eyetracking.Sdk.EyetrackerInfoEventArgs e)
-    {
-      this.UpdateTobiiStatus();
+      this.UpdateTrackerStatus();
     }
 
     /// <summary>
@@ -391,6 +322,112 @@ namespace Ogama.Modules.Recording
     // Methods for doing main class job                                          //
     ///////////////////////////////////////////////////////////////////////////////
     #region METHODS
+
+    /// <summary>
+    /// Updates the status of all connected devices.
+    /// </summary>
+    private void UpdateTrackerStatus()
+    {
+      this.UpdateGazetrackerDirectClientStatus();
+      this.UpdateAleaTrackStatus();
+      this.UpdateTobiiStatus();
+      this.UpdateASLStatus();
+    }
+
+    /// <summary>
+    /// Updates the status of the Tobii tracking devices
+    /// </summary>
+    private void UpdateTobiiStatus()
+    {
+      string error;
+      string tobiiDefaultText = "The Tobii technologies T60,T120,X120 gaze tracker series."
+                                + Environment.NewLine;
+      if (!Ogama.Modules.Recording.TobiiDevice.TobiiTracker.IsAvailable(out error))
+      {
+        this.chbTobii.Enabled = false;
+        this.chbTobii.Checked = false;
+        this.pcbTobii.Enabled = false;
+      }
+
+      this.chbTobii.Text = tobiiDefaultText + "Status: " + error;
+    }
+
+    /// <summary>
+    /// Updates the status of the ASL tracking devices
+    /// </summary>
+    private void UpdateASLStatus()
+    {
+      string error;
+      // ASL 
+      //  "If you have purchased and installed an ASL " +
+      //  "model 5000 Eye Tracker control unit (materials and softwares)" + Environment.NewLine;
+      string aslDefaultText = "ASL software must be installed on this computer.";
+#if ASL
+      if (!Ogama.Modules.Recording.ASL.AslTracker.IsAvailable(out error))
+      {
+        this.chbAsl.Enabled = false;
+        this.chbAsl.Checked = false;
+        this.pcbAsl.Enabled = false;
+        this.chbAsl.Text = aslDefaultText + error;
+      }
+      else
+      {
+        this.chbAsl.Text = aslDefaultText + "(ASL library found)";
+      }
+#else
+      this.chbAsl.Enabled = false;
+      this.chbAsl.Checked = false;
+      this.pcbAsl.Enabled = false;
+      this.chbAsl.Text = aslDefaultText +
+      "Status : This version of OGAMA has no ASL support (ASL compiler flag not set)."
+          + Environment.NewLine;
+#endif
+    }
+
+    /// <summary>
+    /// Updates the status of the Alea tracking devices
+    /// </summary>
+    private void UpdateAleaTrackStatus()
+    {
+      string error;
+      string aleaDefaultText = "The alea technologies IG-30 Pro Eyetracking-System. "
+                               + "Needs to have Intelligaze Software 1.2 to be installed." + Environment.NewLine;
+      if (!Ogama.Modules.Recording.Alea.AleaTracker.IsAvailable(out error))
+      {
+        this.chbAlea.Enabled = false;
+        this.chbAlea.Checked = false;
+        this.pcbAlea.Enabled = false;
+        this.chbAlea.Text = aleaDefaultText + "Status: " + error;
+      }
+      else
+      {
+        this.chbAlea.Text = aleaDefaultText + "Status: Intelligaze found.";
+      }
+    }
+
+    /// <summary>
+    /// Updates the status of the gazetracker direct client devices.
+    /// </summary>
+    private void UpdateGazetrackerDirectClientStatus()
+    {
+      string error;
+      string ituDefaultText = "The ITU GazeTracker application which uses a webcam as "
+                              + "an eye tracker and can be used in both remote and head-mounted setup."
+                              + Environment.NewLine;
+
+      if (!Ogama.Modules.Recording.ITUGazeTracker.ITUGazeTrackerBase.IsAvailable(out error))
+      {
+        this.chbITU.Enabled = false;
+        this.chbITU.Checked = false;
+        this.chbITU.Text = ituDefaultText + "Status: " + error;
+      }
+      else
+      {
+        this.chbITU.Text = ituDefaultText + "Status: GazeTracker found a camera device.";
+      }
+    }
+
+
     #endregion //METHODS
 
     ///////////////////////////////////////////////////////////////////////////////
