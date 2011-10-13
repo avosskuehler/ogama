@@ -21,6 +21,7 @@ namespace Ogama.Modules.Recording.Dialogs
   using Ogama.MainWindow.Dialogs;
   using Ogama.Modules.Recording.Gazegroup;
   using Ogama.Modules.Recording.TrackerBase;
+  using GTHardware.Cameras.PS3Eye;
 
   /// <summary>
   /// A small popup <see cref="Form"/> for showing a dialog 
@@ -129,34 +130,20 @@ namespace Ogama.Modules.Recording.Dialogs
     {
       string error;
 
-      var gazetrackerIPClientDefaultText = "Gazetracker IP CLIENT which uses a webcam as an eye tracker and can be used in both remote and head-mounted setup. This version is to connect with a separate instance of the gazetracker via UDP."
-        + Environment.NewLine;
-
-      if (!GazetrackerIPClientTracker.IsAvailable(out error))
-      {
-        this.chbGazetrackerIPClient.Enabled = false;
-        this.chbGazetrackerIPClient.Checked = false;
-        this.chbGazetrackerIPClient.Text = gazetrackerIPClientDefaultText +
-          "Status: " + error;
-      }
-      else
-      {
-        this.chbGazetrackerIPClient.Text = gazetrackerIPClientDefaultText +
-          "Status: GazeTracker found a camera device.";
-      }
-
+      // No check fot availability og gazetracker IP client, because
+      // this would make no sense.
       string gazetrackerDirectClientDefaultText = "Gazetracker DIRECT client which uses a webcam as an eye tracker and can be used in both remote and head-mounted setup. This version is the default choice if you wish to use the gazetracker." + Environment.NewLine;
 
-      if (!GazetrackerIPClientTracker.IsAvailable(out error))
+      if (!GazetrackerDirectClientTracker.IsAvailable(out error))
       {
-        this.chbGazetrackerIPClient.Enabled = false;
-        this.chbGazetrackerIPClient.Checked = false;
-        this.chbGazetrackerIPClient.Text = gazetrackerDirectClientDefaultText +
+          this.chbGazetrackerDirectClient.Enabled = false;
+          this.chbGazetrackerDirectClient.Checked = false;
+          this.chbGazetrackerDirectClient.Text = gazetrackerDirectClientDefaultText +
           "Status: " + error;
       }
       else
       {
-        this.chbGazetrackerIPClient.Text = gazetrackerDirectClientDefaultText +
+        this.chbGazetrackerDirectClient.Text = gazetrackerDirectClientDefaultText +
           "Status: GazeTracker found a camera device.";
       }
 

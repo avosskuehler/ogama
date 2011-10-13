@@ -63,7 +63,7 @@
     /// <summary>
     /// DShow Filter: file writer
     /// </summary>
-    private IFileSinkFilter2 fileWriterFilter;
+    private IFileSinkFilter fileWriterFilter;
 
     /// <summary>
     /// The <see cref="IReferenceClock"/> of the current graph

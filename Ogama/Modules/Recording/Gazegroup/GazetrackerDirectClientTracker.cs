@@ -29,6 +29,7 @@ namespace Ogama.Modules.Recording.Gazegroup
   using OgamaClient.Controls;
 
   using OgamaControls;
+  using GTHardware;
 
   /// <summary>
   /// This class implements the <see cref="TrackerWithStatusControls"/> class
@@ -184,9 +185,7 @@ namespace Ogama.Modules.Recording.Gazegroup
 
       try
       {
-        DsDevice[] capDevices = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice);
-
-        if (capDevices.Length == 0)
+        if (Camera.GetConnectedDevice() == Camera.DeviceTypeEnum.None)
         {
           errorMessage = "The GazeTracker was unable to connect a camera. " + Environment.NewLine +
             "Make sure that the device is connected and that the device drivers are installed. " +
