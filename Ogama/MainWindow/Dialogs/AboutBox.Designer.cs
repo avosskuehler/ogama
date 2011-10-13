@@ -1,6 +1,6 @@
-namespace Ogama.MainWindow
+namespace Ogama.MainWindow.Dialogs
 {
-  partial class AboutBox
+  sealed partial class AboutBox
   {
     /// <summary>
     /// Required designer variable.
@@ -76,7 +76,8 @@ namespace Ogama.MainWindow
       this.textBoxDescription.Size = new System.Drawing.Size(413, 67);
       this.textBoxDescription.TabIndex = 23;
       this.textBoxDescription.TabStop = false;
-      this.textBoxDescription.Text = resources.GetString("textBoxDescription.Text");
+      this.textBoxDescription.Text = "It is developed by Adrian Voßkühler and written in C#.NET. It is published under " +
+          "GPL, uses .NET Framework 3.5 and SQL Databases and is open source.\r\n";
       // 
       // labelProductName
       // 
@@ -141,9 +142,11 @@ namespace Ogama.MainWindow
       this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
       this.label1.Location = new System.Drawing.Point(3, 16);
       this.label1.Name = "label1";
-      this.label1.Size = new System.Drawing.Size(211, 81);
+      this.label1.Size = new System.Drawing.Size(240, 81);
       this.label1.TabIndex = 25;
-      this.label1.Text = resources.GetString("label1.Text");
+      this.label1.Text = "- Dixon Cleveland from LC Technologies allowed us to use their fixation detection" +
+          " algorithm.\r\n- The Gazegroup for creating the Gazetracker.\r\n- Many users providi" +
+          "ng bug fixes and improvement requests.";
       // 
       // link
       // 
@@ -156,7 +159,7 @@ namespace Ogama.MainWindow
       this.link.TabIndex = 30;
       this.link.TabStop = true;
       this.link.Text = "Homepage";
-      this.link.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_LinkClicked);
+      this.link.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLinkClicked);
       // 
       // grpAssembly
       // 
@@ -166,7 +169,7 @@ namespace Ogama.MainWindow
       this.grpAssembly.Controls.Add(this.labelVersion);
       this.grpAssembly.Location = new System.Drawing.Point(15, 168);
       this.grpAssembly.Name = "grpAssembly";
-      this.grpAssembly.Size = new System.Drawing.Size(210, 100);
+      this.grpAssembly.Size = new System.Drawing.Size(181, 100);
       this.grpAssembly.TabIndex = 31;
       this.grpAssembly.TabStop = false;
       this.grpAssembly.Text = "Assembly information";
@@ -183,9 +186,9 @@ namespace Ogama.MainWindow
       // groupBox2
       // 
       this.groupBox2.Controls.Add(this.label1);
-      this.groupBox2.Location = new System.Drawing.Point(231, 168);
+      this.groupBox2.Location = new System.Drawing.Point(202, 168);
       this.groupBox2.Name = "groupBox2";
-      this.groupBox2.Size = new System.Drawing.Size(217, 100);
+      this.groupBox2.Size = new System.Drawing.Size(246, 100);
       this.groupBox2.TabIndex = 33;
       this.groupBox2.TabStop = false;
       this.groupBox2.Text = "Acknowledgements";

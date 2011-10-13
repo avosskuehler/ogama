@@ -117,9 +117,13 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DirectShowLib-2005, Version=2.1.0.0, Culture=neutral, PublicKeyToken=67e7b740cdfc2d3f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\DirectShowLib-2005.dll</HintPath>
+    </Reference>
     <Reference Include="GTHardware, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bf600965c04ba845, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Managed\GTHardware.dll</HintPath>
+      <HintPath>..\Libs\Gazetracker\GTHardware.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
@@ -249,7 +253,6 @@
     <Compile Include="DataGridViewControls\DataGridViewWithBackground\DataGridViewWithBackground.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Helpers\StringEventArgs.cs" />
     <Compile Include="IO\TriggerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -552,10 +555,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DirectShow\DirectShowLib\DirectShowLib-2005.csproj">
-      <Project>{CE009BFA-5EF6-4153-B2A1-2FA79698A9AE}</Project>
-      <Name>DirectShowLib-2005</Name>
-    </ProjectReference>
     <ProjectReference Include="..\VectorGraphics\VectorGraphics.csproj">
       <Project>{8230AED9-33A2-42FD-BDF7-4F7E4EFA73DB}</Project>
       <Name>VectorGraphics</Name>

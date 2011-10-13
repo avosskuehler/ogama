@@ -120,7 +120,7 @@ namespace Ogama.Modules.Recording
     /// <summary>
     /// DShow Filter: file writer
     /// </summary>
-    private IFileSinkFilter2 fileWriterFilter;
+    private IFileSinkFilter fileWriterFilter;
 
     /// <summary>
     /// The human readable string for the video compressor.
@@ -631,8 +631,8 @@ namespace Ogama.Modules.Recording
         DsError.ThrowExceptionForHR(hr);
         
         // Disable overwrite
-        hr = this.fileWriterFilter.SetMode(AMFileSinkFlags.None);
-        DsError.ThrowExceptionForHR(hr);
+        // hr = this.fileWriterFilter.SetMode(AMFileSinkFlags.None);
+        // DsError.ThrowExceptionForHR(hr);
 
         hr = this.captureGraphBuilder.AllocCapFile(this.tempFilename, 10000000);
         DsError.ThrowExceptionForHR(hr);

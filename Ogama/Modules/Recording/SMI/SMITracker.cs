@@ -14,15 +14,13 @@
 namespace Ogama.Modules.Recording.SMI
 {
   using System;
-  using System.Collections.Generic;
   using System.IO;
-  using System.Text;
   using System.Windows.Forms;
-  using System.Xml;
   using System.Xml.Serialization;
 
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Recording.TrackerBase;
 
   /// <summary>
   /// This class implements the <see cref="ITracker"/> interface to represent 
@@ -177,8 +175,7 @@ namespace Ogama.Modules.Recording.SMI
       }
       catch (Exception ex)
       {
-        ConnectionFailedDialog dlg = new ConnectionFailedDialog();
-        dlg.ErrorMessage = ex.Message;
+        var dlg = new ConnectionFailedDialog { ErrorMessage = ex.Message };
         dlg.ShowDialog();
         this.CleanUp();
         return false;
@@ -208,7 +205,7 @@ namespace Ogama.Modules.Recording.SMI
       catch (Exception ex)
       {
         string message = "SMI iViewX calibration failed with the following message: " +
-          Environment.NewLine + ex.ToString();
+          Environment.NewLine + ex;
         ExceptionMethods.ProcessErrorMessage(message);
         this.CleanUp();
         return false;
@@ -234,7 +231,7 @@ namespace Ogama.Modules.Recording.SMI
       catch (Exception ex)
       {
         string message = "SMI CleanUp failed with the following message: " +
-         Environment.NewLine + ex.ToString();
+         Environment.NewLine + ex;
         ExceptionMethods.ProcessErrorMessage(message);
       }
 
@@ -265,7 +262,7 @@ namespace Ogama.Modules.Recording.SMI
       catch (Exception ex)
       {
         string message = "SMI iViewX record failed with the following message: " +
-         Environment.NewLine + ex.ToString();
+         Environment.NewLine + ex;
         ExceptionMethods.ProcessErrorMessage(message);
         this.CleanUp();
       }
@@ -289,7 +286,7 @@ namespace Ogama.Modules.Recording.SMI
       catch (Exception ex)
       {
         string message = "SMI Stop failed with the following message: " +
-         Environment.NewLine + ex.ToString();
+         Environment.NewLine + ex;
         ExceptionMethods.ProcessErrorMessage(message);
       }
     }
@@ -300,8 +297,7 @@ namespace Ogama.Modules.Recording.SMI
     /// </summary>
     public override void ChangeSettings()
     {
-      SMISettingsDlg dlg = new SMISettingsDlg();
-      dlg.SMISettings = this.smiSettings;
+      var dlg = new SMISettingsDlg { SMISettings = this.smiSettings };
       if (dlg.ShowDialog() == DialogResult.OK)
       {
         this.smiSettings = dlg.SMISettings;
@@ -317,21 +313,21 @@ namespace Ogama.Modules.Recording.SMI
     public override void Dispose()
     {
       base.Dispose();
-      this.CalibrationFinished -= new EventHandler(this.smiInterface_CalibrationFinished);
+      this.CalibrationFinished -= this.SMIInterfaceCalibrationFinished;
     }
 
     /// <summary>
     /// Sets up calibration procedure and the tracking client
     /// and wires the events. Reads settings from file.
     /// </summary>
-    protected override void Initialize()
+    protected override sealed void Initialize()
     {
-      this.CalibrationFinished += new EventHandler(this.smiInterface_CalibrationFinished);
+      this.CalibrationFinished += this.SMIInterfaceCalibrationFinished;
 
       // Set up the SMI client object and it's events
       this.smiClient = new SMIClient();
-      this.smiClient.GazeDataAvailable += new GazeDataChangedEventHandler(this.smiClient_GazeDataAvailable);
-      this.smiClient.CalibrationFinished += new EventHandler(this.smiClient_CalibrationFinished);
+      this.smiClient.GazeDataAvailable += this.SMIClientGazeDataAvailable;
+      this.smiClient.CalibrationFinished += this.SMIClientCalibrationFinished;
 
       // Load SMI tracker settings.
       if (File.Exists(this.SettingsFile))
@@ -373,7 +369,7 @@ namespace Ogama.Modules.Recording.SMI
     /// </summary>
     /// <param name="sender">Sender of the event</param>
     /// <param name="e">Empty <see cref="EventArgs"/></param>
-    private void smiInterface_CalibrationFinished(object sender, EventArgs e)
+    private void SMIInterfaceCalibrationFinished(object sender, EventArgs e)
     {
       this.RecordButton.Enabled = true;
     }
@@ -384,7 +380,7 @@ namespace Ogama.Modules.Recording.SMI
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">A <see cref="GazeDataChangedEventArgs"/> with the event data.</param>
-    private void smiClient_GazeDataAvailable(object sender, GazeDataChangedEventArgs e)
+    private void SMIClientGazeDataAvailable(object sender, GazeDataChangedEventArgs e)
     {
       this.OnGazeDataChanged(new GazeDataChangedEventArgs(e.Gazedata));
     }
@@ -395,7 +391,7 @@ namespace Ogama.Modules.Recording.SMI
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void smiClient_CalibrationFinished(object sender, EventArgs e)
+    private void SMIClientCalibrationFinished(object sender, EventArgs e)
     {
       this.OnCalibrationFinished(e);
     }
@@ -434,22 +430,22 @@ namespace Ogama.Modules.Recording.SMI
     /// <returns>A <see cref="SMISetting"/> object.</returns>
     private SMISetting DeserializeSettings(string filePath)
     {
-      SMISetting settings = new SMISetting();
+      var settings = new SMISetting();
 
       // Create an instance of the XmlSerializer class;
       // specify the type of object to be deserialized 
-      XmlSerializer serializer = new XmlSerializer(typeof(SMISetting));
+      var serializer = new XmlSerializer(typeof(SMISetting));
 
       // * If the XML document has been altered with unknown 
       // nodes or attributes, handle them with the 
       // UnknownNode and UnknownAttribute events.*/
-      serializer.UnknownNode += new XmlNodeEventHandler(this.serializer_UnknownNode);
-      serializer.UnknownAttribute += new XmlAttributeEventHandler(this.serializer_UnknownAttribute);
+      serializer.UnknownNode += this.SerializerUnknownNode;
+      serializer.UnknownAttribute += this.SerializerUnknownAttribute;
 
       try
       {
         // A FileStream is needed to read the XML document.
-        FileStream fs = new FileStream(filePath, FileMode.Open);
+        var fs = new FileStream(filePath, FileMode.Open);
 
         // Use the Deserialize method to restore the object's state with
         // data from the XML document. 
@@ -475,7 +471,7 @@ namespace Ogama.Modules.Recording.SMI
     {
       // Create an instance of the XmlSerializer class;
       // specify the type of object to serialize 
-      XmlSerializer serializer = new XmlSerializer(typeof(SMISetting));
+      var serializer = new XmlSerializer(typeof(SMISetting));
 
       // Serialize the SMISetting, and close the TextWriter.
       try

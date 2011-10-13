@@ -117,45 +117,33 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\AxShockwaveFlashObjects.dll</HintPath>
     </Reference>
+    <Reference Include="DirectShowLib-2005, Version=2.1.0.0, Culture=neutral, PublicKeyToken=67e7b740cdfc2d3f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\DirectShowLib-2005.dll</HintPath>
+    </Reference>
     <Reference Include="EtApi, Version=1.0.3154.19330, Culture=neutral, PublicKeyToken=3c8a8059c193781b, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\EtApi.dll</HintPath>
     </Reference>
-    <Reference Include="GazeTrackerClient, Version=1.1.0.0, Culture=neutral, PublicKeyToken=d2bdf8683767e608, processorArchitecture=MSIL">
+    <Reference Include="GazeTrackerClient, Version=1.1.0.0, Culture=neutral, PublicKeyToken=d2bdf8683767e608, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Managed\GazeTrackerClient.dll</HintPath>
+      <HintPath>..\Libs\Gazetracker\GazeTrackerClient.dll</HintPath>
     </Reference>
-    <Reference Include="GazeTrackerClientUI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="GazeTrackingLibrary, Version=2.1.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Managed\GazeTrackerClientUI.exe</HintPath>
+      <HintPath>..\Libs\Gazetracker\GazeTrackingLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="GazeTrackerUI, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="GTCommons, Version=2.1.0.0, Culture=neutral, PublicKeyToken=0394c3dfe9da180e, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Managed\GazeTrackerUI.exe</HintPath>
-    </Reference>
-    <Reference Include="GazeTrackingLibrary, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Managed\GazeTrackingLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="GTCommons, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Managed\GTCommons.dll</HintPath>
-    </Reference>
-    <Reference Include="GTCommunication, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Managed\GTCommunication.dll</HintPath>
+      <HintPath>..\Libs\Gazetracker\GTCommons.dll</HintPath>
     </Reference>
     <Reference Include="GTHardware, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bf600965c04ba845, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Managed\GTHardware.dll</HintPath>
+      <HintPath>..\Libs\Gazetracker\GTHardware.dll</HintPath>
     </Reference>
-    <Reference Include="GTSettings, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d1fdb187d7e10584, processorArchitecture=x86">
+    <Reference Include="Interop.ASLSERIALOUTLIB2Lib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Managed\GTSettings.dll</HintPath>
-    </Reference>
-    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Managed\log4net.dll</HintPath>
+      <HintPath>..\Libs\Managed\Interop.ASLSERIALOUTLIB2Lib.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Data.ConnectionUI, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -193,9 +181,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\Microsoft.SqlServer.SqlEnum.dll</HintPath>
     </Reference>
-    <Reference Include="OgamaClient, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="OgamaClient, Version=2.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Managed\OgamaClient.dll</HintPath>
+      <HintPath>..\Libs\Gazetracker\OgamaClient.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
@@ -271,11 +259,11 @@
     <Compile Include="MainWindow\Dialogs\HowToActivateAsl.designer.cs">
       <DependentUpon>HowToActivateAsl.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow\Dialogs\HowToActivateITU.cs">
+    <Compile Include="MainWindow\Dialogs\HowToActivateGazetracker.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainWindow\Dialogs\HowToActivateITU.Designer.cs">
-      <DependentUpon>HowToActivateITU.cs</DependentUpon>
+    <Compile Include="MainWindow\Dialogs\HowToActivateGazetracker.Designer.cs">
+      <DependentUpon>HowToActivateGazetracker.cs</DependentUpon>
     </Compile>
     <Compile Include="MainWindow\Dialogs\HowToActivateSMI.cs">
       <SubType>Form</SubType>
@@ -422,8 +410,16 @@
       <DependentUpon>AslTrackStatus.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Recording\ASL\UserSettings.cs" />
-    <Compile Include="Modules\Recording\ITU\ITUDefaultGazeTracker.cs" />
-    <Compile Include="Modules\Recording\ITU\ITUGazeTrackerBase.cs" />
+    <Compile Include="Modules\Recording\Gazegroup\GazetrackerIPClientSetting.cs" />
+    <Compile Include="Modules\Recording\Gazegroup\GazetrackerIPClientSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\Gazegroup\GazetrackerIPClientSettingsDialog.Designer.cs">
+      <DependentUpon>GazetrackerIPClientSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\Gazegroup\GazetrackerIPClientStatus.cs" />
+    <Compile Include="Modules\Recording\Gazegroup\GazetrackerIPClientTracker.cs" />
+    <Compile Include="Modules\Recording\Gazegroup\GazetrackerDirectClientTracker.cs" />
     <Compile Include="Modules\Recording\Presenter\WebsiteScreenshot.cs" />
     <Compile Include="Modules\Recording\Presenter\DSScreenCapture.cs" />
     <Compile Include="Modules\Recording\Presenter\ScreenCaptureProperties.cs" />
@@ -1045,8 +1041,8 @@
     <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateAsl.resx">
       <DependentUpon>HowToActivateAsl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateITU.resx">
-      <DependentUpon>HowToActivateITU.cs</DependentUpon>
+    <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateGazetracker.resx">
+      <DependentUpon>HowToActivateGazetracker.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateSMI.resx">
@@ -1127,6 +1123,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\Dialogs\SavingSplash.resx">
       <DependentUpon>SavingSplash.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\Gazegroup\GazetrackerIPClientSettingsDialog.resx">
+      <DependentUpon>GazetrackerIPClientSettingsDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\RecordingPicture.resx">
@@ -1467,9 +1467,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>OgamaDatabaseTemplate.mdf</DependentUpon>
     </Content>
-    <Content Include="Modules\Recording\ASL\ASLStandardStreaming.cfg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="Resources\FolderNew16.png" />
     <None Include="Resources\PS3_61_61.png" />
     <None Include="Resources\ITU_61_61.png" />
@@ -1804,10 +1801,6 @@
     <None Include="Resources\Ellipse.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DirectShow\DirectShowLib\DirectShowLib-2005.csproj">
-      <Project>{CE009BFA-5EF6-4153-B2A1-2FA79698A9AE}</Project>
-      <Name>DirectShowLib-2005</Name>
-    </ProjectReference>
     <ProjectReference Include="..\OgamaControls\OgamaControls.csproj">
       <Project>{63EF9D30-447A-4F79-9EC8-E4956DC0ABF8}</Project>
       <Name>OgamaControls</Name>
@@ -1818,14 +1811,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="ASLSERIALOUTLIB2Lib">
-      <Guid>{8FF83C13-3622-4CDA-9E8A-939760558BBF}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
     <COMReference Include="stdole">
       <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>2</VersionMajor>
@@ -1848,7 +1833,8 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>copy "$(SolutionDir)Libs\Native\*.*" "$(OutDir)"</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(SolutionDir)Libs\Native\*.*" "$(OutDir)" /E /Y
+xcopy "$(SolutionDir)Libs\Gazetracker\*.*" "$(OutDir)" /E /Y</PostBuildEvent>
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>

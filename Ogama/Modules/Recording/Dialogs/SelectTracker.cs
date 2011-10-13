@@ -11,17 +11,17 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Recording
+namespace Ogama.Modules.Recording.Dialogs
 {
   using System;
-  using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Data;
-  using System.Drawing;
-  using System.Text;
   using System.Windows.Forms;
+
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
+  using Ogama.MainWindow.Dialogs;
+  using Ogama.Modules.Recording.Gazegroup;
+  using Ogama.Modules.Recording.TrackerBase;
+  using GTHardware.Cameras.PS3Eye;
 
   /// <summary>
   /// A small popup <see cref="Form"/> for showing a dialog 
@@ -98,9 +98,14 @@ namespace Ogama.Modules.Recording
           returnValue |= HardwareTracker.SMI;
         }
 
-        if (this.chbITU.Checked)
+        if (this.chbGazetrackerIPClient.Checked)
         {
-          returnValue |= HardwareTracker.ITU;
+          returnValue |= HardwareTracker.GazetrackerIPClient;
+        }
+
+        if (this.chbGazetrackerDirectClient.Checked)
+        {
+          returnValue |= HardwareTracker.GazetrackerDirectClient;
         }
 
         if (this.chbAsl.Checked)
@@ -130,7 +135,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void SelectTracker_Load(object sender, EventArgs e)
+    private void SelectTrackerLoad(object sender, EventArgs e)
     {
       this.UpdateTrackerStatus();
     }
@@ -153,7 +158,7 @@ namespace Ogama.Modules.Recording
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">The <see cref="FormClosingEventArgs"/>
     /// with the event data.</param>
-    private void SelectTracker_FormClosing(object sender, FormClosingEventArgs e)
+    private void SelectTrackerFormClosing(object sender, FormClosingEventArgs e)
     {
       if (this.SelectedTracker == HardwareTracker.None && this.DialogResult == DialogResult.OK)
       {
@@ -173,7 +178,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void pcbTobii_Click(object sender, EventArgs e)
+    private void PcbTobiiClick(object sender, EventArgs e)
     {
       System.Diagnostics.Process.Start("http://www.tobii.com");
     }
@@ -186,7 +191,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void pcbAlea_Click(object sender, EventArgs e)
+    private void PcbAleaClick(object sender, EventArgs e)
     {
       System.Diagnostics.Process.Start("http://www.alea-technologies.com");
     }
@@ -199,7 +204,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void pcbSMI_Click(object sender, EventArgs e)
+    private void PcbSMIClick(object sender, EventArgs e)
     {
       System.Diagnostics.Process.Start("http://www.smivision.com");
     }
@@ -212,7 +217,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void pcbITU_Click(object sender, EventArgs e)
+    private void PcbITUClick(object sender, EventArgs e)
     {
       System.Diagnostics.Process.Start("http://www.gazegroup.org/downloads/23-gazetracker");
     }
@@ -224,9 +229,9 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void pcbHelpTobii_Click(object sender, EventArgs e)
+    private void PcbHelpTobiiClick(object sender, EventArgs e)
     {
-      HowToActivateTobii objActivateTobii = new HowToActivateTobii();
+      var objActivateTobii = new HowToActivateTobii();
       objActivateTobii.ShowDialog();
     }
 
@@ -238,7 +243,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void pcbAsl_Click(object sender, EventArgs e)
+    private void PcbAslClick(object sender, EventArgs e)
     {
       System.Diagnostics.Process.Start("http://asleyetracking.com/site/");
     }
@@ -250,9 +255,9 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void pcbHelpAlea_Click(object sender, EventArgs e)
+    private void PcbHelpAleaClick(object sender, EventArgs e)
     {
-      HowToActivateAlea objActivateAlea = new HowToActivateAlea();
+      var objActivateAlea = new HowToActivateAlea();
       objActivateAlea.ShowDialog();
     }
 
@@ -263,9 +268,9 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void pcbHelpSMI_Click(object sender, EventArgs e)
+    private void PcbHelpSMIClick(object sender, EventArgs e)
     {
-      HowToActivateSMI objActivateSMI = new HowToActivateSMI();
+      var objActivateSMI = new HowToActivateSMI();
       objActivateSMI.ShowDialog();
     }
 
@@ -276,24 +281,36 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void pcbHelpAsl_Click(object sender, EventArgs e)
+    private void PcbHelpAslClick(object sender, EventArgs e)
     {
-      HowToActivateAsl objActivateAsl = new HowToActivateAsl();
+      var objActivateAsl = new HowToActivateAsl();
       objActivateAsl.ShowDialog();
     }
 
     /// <summary>
     /// The <see cref="Control.Click"/> event handler
-    /// for the <see cref="PictureBox"/> <see cref="pcbHelpITU"/>
-    /// Displays instructions to enable gaze tracking with the ITU
-    /// GazeTracker and a webcam.
+    /// for the <see cref="PictureBox"/> <see cref="pcbHelpGazetrackerIPClient"/>
+    /// Displays instructions to enable gaze tracking with the GazeTracker and a webcam.
     /// </summary>
     /// <param name="sender">Source of the event</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void pcbHelpITU_Click(object sender, EventArgs e)
+    private void PcbHelpGazetrackerClientClick(object sender, EventArgs e)
     {
-      HowToActivateITU objActivateITU = new HowToActivateITU();
+      var objActivateITU = new HowToActivateGazetracker();
       objActivateITU.ShowDialog();
+    }
+
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler
+    /// for the <see cref="PictureBox"/> <see cref="pcbHelpGazetrackerDirectClient"/>
+    /// Displays instructions to enable gaze tracking with the GazeTracker and a webcam.
+    /// </summary>
+    /// <param name="sender">Source of the event</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void PcbHelpGazetrackerDirectClientClick(object sender, EventArgs e)
+    {
+      var objHowToActivateGazetracker = new HowToActivateGazetracker();
+      objHowToActivateGazetracker.ShowDialog();
     }
 
     #endregion //WINDOWSEVENTHANDLER
