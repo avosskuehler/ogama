@@ -332,7 +332,7 @@ namespace Ogama.Modules.Replay
           // Create the file writer part of the graph. 
           // SetOutputFileName does this for us, and returns the mux and sink
           IBaseFilter mux;
-          IFileSinkFilter2 sink;
+          IFileSinkFilter sink;
           hr = captureGraph.SetOutputFileName(
             MediaSubType.Avi,
             this.videoExportProperties.OutputVideoProperties.Filename,

@@ -219,33 +219,14 @@ namespace Ogama.Modules.Recording.Gazegroup
     #region PUBLICMETHODS
 
     /// <summary>
-    /// Checks if the ITU GazeTracker has a camera available.
+    /// This method always returns true, because we do not check the ip
+    /// connection until we connected.
     /// </summary>
     /// <param name="errorMessage">Out. A <see cref="String"/> with an error message.</param>
-    /// <returns><strong>True</strong>, if ITU Gazetracker with an camera
-    /// is available in the system, otherwise <strong>false</strong></returns>
+    /// <returns>Always true.</returns>
     public static bool IsAvailable(out string errorMessage)
     {
       errorMessage = string.Empty;
-
-      try
-      {
-        DsDevice[] capDevices = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice);
-
-        if (capDevices.Length == 0)
-        {
-          errorMessage = "The GazeTracker was unable to connect a camera. " + Environment.NewLine +
-            "Make sure that the device is connected and that the device drivers are installed. " +
-            "Verified configurations can be found in our forum located at http://forum.gazegroup.org";
-          return false;
-        }
-      }
-      catch (Exception)
-      {
-        errorMessage = "Initialization of the Gazegroup GazeTracker failed.";
-        return false;
-      }
-
       return true;
     }
 
@@ -334,10 +315,10 @@ namespace Ogama.Modules.Recording.Gazegroup
       try
       {
         this.Stop();
-        this.client.Disconnect();
         this.clientStatus.Reset();
         if (this.client != null)
         {
+          this.client.Disconnect();
           this.client.ClientConnectionChanged -= this.ClientClientConnectionChanged;
           this.client.ErrorOccured -= this.ClientErrorOccured;
           this.client.Calibration.OnEnd -= this.Calibration_OnEnd;

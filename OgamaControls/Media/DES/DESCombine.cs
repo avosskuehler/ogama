@@ -550,7 +550,7 @@ namespace OgamaControls.Media
 
         // Create the file writer
         IBaseFilter pMux;
-        IFileSinkFilter2 pFilter;
+        IFileSinkFilter pFilter;
         hr = icgb.SetOutputFileName(MediaSubType.Avi, sOutputFile, out pMux, out pFilter);
         DESError.ThrowExceptionForHR(hr);
 

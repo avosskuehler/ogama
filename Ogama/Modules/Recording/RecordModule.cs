@@ -26,6 +26,8 @@ namespace Ogama.Modules.Recording
 
   using GTCommons.Events;
 
+  using GTHardware.Cameras.PS3Eye;
+
   using Ogama.DataSet;
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
@@ -330,7 +332,14 @@ namespace Ogama.Modules.Recording
     /// </summary>
     public RecordModule()
     {
+      // Touching this method at this point avoids an application crash of the 
+      // PS3EyeAxFilter.ax at connection to the gazetracker client
+      // with exactly this mehtod.
+      // TODO: Find the reason...
+      int count = PS3Camera.CLEyeGetCameraCount();
+
       this.InitializeComponent();
+
       this.Picture = this.recordPicture;
       this.ZoomTrackBar = this.trbZoom;
 
