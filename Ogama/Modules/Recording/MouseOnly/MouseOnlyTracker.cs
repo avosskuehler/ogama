@@ -14,19 +14,15 @@
 namespace Ogama.Modules.Recording.MouseOnly
 {
   using System;
-  using System.Collections.Generic;
   using System.Diagnostics;
-  using System.Drawing;
   using System.IO;
-  using System.Text;
   using System.Windows.Forms;
-  using System.Xml;
   using System.Xml.Serialization;
 
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
-  using OgamaControls;
-  using VectorGraphics;
+  using Ogama.Modules.Recording.TrackerBase;
+
   using VectorGraphics.Controls;
 
   /// <summary>
@@ -236,8 +232,7 @@ namespace Ogama.Modules.Recording.MouseOnly
     /// </summary>
     public override void ChangeSettings()
     {
-      MouseOnlySettingsDlg dlg = new MouseOnlySettingsDlg();
-      dlg.MouseOnlySettings = this.mouseOnlySettings;
+      var dlg = new MouseOnlySettingsDlg { MouseOnlySettings = this.mouseOnlySettings };
       if (dlg.ShowDialog() == DialogResult.OK)
       {
         this.mouseOnlySettings = dlg.MouseOnlySettings;
@@ -250,13 +245,13 @@ namespace Ogama.Modules.Recording.MouseOnly
     /// Sets up calibration procedure and the tracking client
     /// and wires the events. Then reads settings from file.
     /// </summary>
-    protected override void Initialize()
+    protected override sealed void Initialize()
     {
       this.counter = 0;
       this.trackingTimer = new Timer();
       this.stopWatch = new Stopwatch();
       this.multimediaTimer = new MultimediaTimer();
-      this.multimediaTimer.Tick += new EventHandler(this.TrackingTimer_Tick);
+      this.multimediaTimer.Tick += this.TrackingTimerTick;
 
       if (File.Exists(this.SettingsFile))
       {
@@ -279,9 +274,9 @@ namespace Ogama.Modules.Recording.MouseOnly
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
-    protected override void btnSubjectName_Click(object sender, EventArgs e)
+    protected override void BtnSubjectNameClick(object sender, EventArgs e)
     {
-      base.btnSubjectName_Click(sender, e);
+      base.BtnSubjectNameClick(sender, e);
 
       // This tracker does not need a calibration
       // so activate immediately the record button
@@ -320,16 +315,16 @@ namespace Ogama.Modules.Recording.MouseOnly
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
-    private void TrackingTimer_Tick(object sender, EventArgs e)
+    private void TrackingTimerTick(object sender, EventArgs e)
     {
-      GazeData newGazeData = new GazeData();
-
-      // Convert Tobii gazestamp in milliseconds.
-      newGazeData.Time = this.GetCurrentTime();
-      newGazeData.GazePosX = null;
-      newGazeData.GazePosY = null;
-      newGazeData.PupilDiaX = null;
-      newGazeData.PupilDiaY = null;
+      var newGazeData = new GazeData
+        {
+          Time = this.GetCurrentTime(),
+          GazePosX = null,
+          GazePosY = null,
+          PupilDiaX = null,
+          PupilDiaY = null
+        };
 
       this.OnGazeDataChanged(new GazeDataChangedEventArgs(newGazeData));
       this.counter++;
@@ -373,22 +368,22 @@ namespace Ogama.Modules.Recording.MouseOnly
     /// <returns>A <see cref="MouseOnlySetting"/> object.</returns>
     private MouseOnlySetting DeserializeSettings(string filePath)
     {
-      MouseOnlySetting settings = new MouseOnlySetting();
+      var settings = new MouseOnlySetting();
 
       // Create an instance of the XmlSerializer class;
       // specify the type of object to be deserialized 
-      XmlSerializer serializer = new XmlSerializer(typeof(MouseOnlySetting));
+      var serializer = new XmlSerializer(typeof(MouseOnlySetting));
 
       // If the XML document has been altered with unknown 
       // nodes or attributes, handle them with the 
       // UnknownNode and UnknownAttribute events.
-      serializer.UnknownNode += new XmlNodeEventHandler(this.serializer_UnknownNode);
-      serializer.UnknownAttribute += new XmlAttributeEventHandler(this.serializer_UnknownAttribute);
+      serializer.UnknownNode += this.SerializerUnknownNode;
+      serializer.UnknownAttribute += this.SerializerUnknownAttribute;
 
       try
       {
         // A FileStream is needed to read the XML document.
-        FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+        var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
 
         /* Use the Deserialize method to restore the object's state with
         data from the XML document. */
@@ -416,14 +411,14 @@ namespace Ogama.Modules.Recording.MouseOnly
     {
       // Create an instance of the XmlSerializer class;
       // specify the type of object to serialize 
-      XmlSerializer serializer = new XmlSerializer(typeof(MouseOnlySetting));
+      var serializer = new XmlSerializer(typeof(MouseOnlySetting));
 
       // Serialize the TobiiSetting, and close the TextWriter.
       try
       {
         // Create an instance of StreamWriter to write text to a file.
         // The using statement also closes the StreamWriter.
-        using (StreamWriter writer = new StreamWriter(filePath))
+        using (var writer = new StreamWriter(filePath))
         {
           serializer.Serialize(writer, settings);
         }

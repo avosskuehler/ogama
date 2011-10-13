@@ -11,7 +11,7 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Recording
+namespace Ogama.Modules.Recording.TrackerBase
 {
   using System;
 
@@ -48,9 +48,14 @@ namespace Ogama.Modules.Recording
     SMI = 8,
 
     /// <summary>
-    /// The ITU GazeTracker.
+    /// The Gazegroup GazeTracker using the ogama client.
     /// </summary>
-    ITU = 16,
+    GazetrackerDirectClient = 16,
+
+    /// <summary>
+    /// The Gazegroup GazeTracker using an IP connection.
+    /// </summary>
+    GazetrackerIPClient = 32,
 
     /// <summary>
     /// Applied Science Laboratories (ASL) professional gaze tracker

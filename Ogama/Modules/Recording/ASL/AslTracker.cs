@@ -28,6 +28,7 @@ namespace Ogama.Modules.Recording.ASL
 
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Recording.TrackerBase;
 
   /// <summary>
   /// This class implements the <see cref="ITracker"/> interface to represent 
@@ -109,7 +110,7 @@ namespace Ogama.Modules.Recording.ASL
     /// An array of data feild returned by the Eye Tracker : status, Pupil diameter,
     /// Point of gaze horizontal and vertical coordinates.
     /// </summary>
-    private System.Array items;
+    private Array items;
 
     /// <summary>
     /// Number of data in the items array. Out parameter of the GetDataRecord dll method.
@@ -180,12 +181,12 @@ namespace Ogama.Modules.Recording.ASL
       trackerCalibrateButton,
       trackerRecordButton,
       trackerSubjectNameTextBox,
-      Application.StartupPath + "\\Modules\\Recording\\ASL\\ASLUserSettings.cfg")
+      Properties.Settings.Default.EyeTrackerSettingsPath + "ASLUserSettings.cfg")
     {
       this.UserSettingsFile = Properties.Settings.Default.EyeTrackerSettingsPath + "ASLUserSettings.cfg";
       this.Settings = UserSettings.Load(this.UserSettingsFile);
-
-      this.Settings.DefaultConfigFile = Application.StartupPath + "\\Modules\\Recording\\ASL\\ASLStandardStreaming.cfg";
+      this.CreateDefaultConfigFile();
+      this.Settings.DefaultConfigFile = Properties.Settings.Default.EyeTrackerSettingsPath + "ASLStandardStreaming.cfg";
 
       if (this.Settings.ConfigFile == null)
       {
@@ -588,7 +589,7 @@ namespace Ogama.Modules.Recording.ASL
     /// </summary>
     /// <param name="sender">Source of the event</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    protected override void btnConnect_Click(object sender, EventArgs e)
+    protected override void BtnConnectClick(object sender, EventArgs e)
     {
       // Cancel presentation and recording and
       // disconnect if connect button is
@@ -656,7 +657,7 @@ namespace Ogama.Modules.Recording.ASL
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
-    protected override void btnCalibrate_Click(object sender, EventArgs e)
+    protected override void BtnCalibrateClick(object sender, EventArgs e)
     {
       this.Calibrate(false);
       this.RecordButton.Enabled = true;
@@ -680,7 +681,7 @@ namespace Ogama.Modules.Recording.ASL
     /// </summary>
     /// <param name="sender">Source of the event</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    protected override void btnRecord_Click(object sender, EventArgs e)
+    protected override void BtnRecordClick(object sender, EventArgs e)
     {
       this.aslPort.GetScaledData(
               out this.items,
@@ -689,7 +690,7 @@ namespace Ogama.Modules.Recording.ASL
 
       if (this.available)
       {
-        base.btnRecord_Click(sender, e);
+        base.BtnRecordClick(sender, e);
       }
       else
       {
@@ -853,8 +854,34 @@ namespace Ogama.Modules.Recording.ASL
     // Small helping Methods                                                     //
     ///////////////////////////////////////////////////////////////////////////////
     #region HELPER
+
+    /// <summary>
+    /// This method creates the default standardStreaming configuration file.
+    /// </summary>
+    private void CreateDefaultConfigFile()
+    {
+      var defaultFile = Properties.Settings.Default.EyeTrackerSettingsPath + "ASLStandardStreaming.cfg";
+      if (File.Exists(defaultFile))
+      {
+        return;
+      }
+
+      using (var sw = new StreamWriter(defaultFile))
+      {
+        // Add some text to the file.
+        sw.WriteLine("[System Settings]");
+        sw.WriteLine("using_6000_serial_out_format=1");
+        sw.WriteLine("serial_out_streaming=1");
+        sw.WriteLine("eye_camera_update_rate=60");
+        sw.WriteLine("serial_out_baud_rate=57600");
+        sw.WriteLine("serial_out_std_sel_1=7201");
+        sw.WriteLine("serial_out_std_sel_2=0");
+        sw.WriteLine("serial_out_ehi_sel_1=14680097");
+        sw.WriteLine("serial_out_ehi_sel_2=0");
+      }
+    }
+
     #endregion //HELPER
   } // end of public class AslTracker
 } // end of namespace Ogama.Modules.Recording.ASL
 #endif
-

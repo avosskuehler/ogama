@@ -69,6 +69,10 @@
     <DocumentationFile>..\..\Release64\Docs\DmoBase.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DirectShowLib-2005, Version=2.1.0.0, Culture=neutral, PublicKeyToken=67e7b740cdfc2d3f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libs\Managed\DirectShowLib-2005.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -84,12 +88,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Properties\DmoBaseKey.snk" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DirectShowLib\DirectShowLib-2005.csproj">
-      <Project>{CE009BFA-5EF6-4153-B2A1-2FA79698A9AE}</Project>
-      <Name>DirectShowLib-2005</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

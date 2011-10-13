@@ -20,6 +20,7 @@ namespace Ogama.MainWindow
   using System.Windows.Forms;
 
   using Ogama.ExceptionHandling;
+  using Ogama.MainWindow.Dialogs;
   using Ogama.Properties;
 
   /// <summary>
@@ -1058,8 +1059,8 @@ namespace Ogama.MainWindow
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void mnuHelpHowToITU_Click(object sender, EventArgs e)
     {
-      HowToActivateITU objActivateITU = new HowToActivateITU();
-      objActivateITU.ShowDialog();
+      HowToActivateGazetracker objActivateGazetracker = new HowToActivateGazetracker();
+      objActivateGazetracker.ShowDialog();
     }
 
     /// <summary>

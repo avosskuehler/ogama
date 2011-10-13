@@ -11,17 +11,17 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Recording
+namespace Ogama.Modules.Recording.TrackerBase
 {
   using System;
   using System.Drawing;
   using System.Windows.Forms;
-  using System.Xml;
   using System.Xml.Serialization;
+
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
   using Ogama.Modules.ImportExport;
-  using OgamaControls;
+
   using VectorGraphics.Tools;
 
   /// <summary>
@@ -50,49 +50,49 @@ namespace Ogama.Modules.Recording
     /// This <see cref="Button"/> is the first available button on the
     /// tab page for the tracker. It should be named "Connect".
     /// </summary>
-    private Button connectButton;
+    private readonly Button connectButton;
 
     /// <summary>
     /// This <see cref="Button"/> is the second button on the
     /// tab page for the tracker. It should be named "Subject".
     /// </summary>
-    private Button subjectButton;
+    private readonly Button subjectButton;
 
     /// <summary>
     /// This <see cref="Button"/> is the third button on the
     /// tab page for the tracker. It should be named "Calibrate".
     /// </summary>
-    private Button calibrateButton;
+    private readonly Button calibrateButton;
 
     /// <summary>
     /// This <see cref="Button"/> is the fourth button on the
     /// tab page for the tracker. It should be named "Record".
     /// </summary>
-    private Button recordButton;
+    private readonly Button recordButton;
 
     /// <summary>
     /// This <see cref="TextBox"/> is beneath the subject button
     /// and shows the name of the currently recorded subject.
     /// </summary>
-    private TextBox subjectNameTextBox;
+    private readonly TextBox subjectNameTextBox;
 
     /// <summary>
     /// This is the <see cref="RecordModule"/> control which can
     /// be used to get access to the public methods of the
     /// recording module.
     /// </summary>
-    private RecordModule recordModule;
-
-    /// <summary>
-    /// Saves the <see cref="SubjectsData"/> of the current subject.
-    /// </summary>
-    private SubjectsData subject;
+    private readonly RecordModule recordModule;
 
     /// <summary>
     /// Saves the settings file with full path for the custom settings of
     /// the hardware device
     /// </summary>
-    private string settingsFile;
+    private readonly string settingsFile;
+
+    /// <summary>
+    /// Saves the <see cref="SubjectsData"/> of the current subject.
+    /// </summary>
+    private SubjectsData subject;
 
     #endregion //FIELDS
 
@@ -118,7 +118,7 @@ namespace Ogama.Modules.Recording
     /// which should contain the subject name at the tab page of the tracking device.</param>
     /// <param name="trackerSettingsFile">The file with full path to the settings
     /// xml file of the tracking device.</param>
-    public Tracker(
+    protected Tracker(
       RecordModule owningRecordModule,
       Button trackerConnectButton,
       Button trackerSubjectButton,
@@ -129,12 +129,12 @@ namespace Ogama.Modules.Recording
     {
       if (trackerSubjectButton == null)
       {
-        throw new ArgumentNullException("All custom devices should have a subject button on their tab pages.");
+        throw new ArgumentNullException("trackerSubjectButton", "All custom devices should have a subject button on their tab pages.");
       }
 
       if (trackerRecordButton == null)
       {
-        throw new ArgumentNullException("All custom devices should have a record button on their tab pages.");
+        throw new ArgumentNullException("trackerRecordButton", "All custom devices should have a record button on their tab pages.");
       }
 
       this.recordModule = owningRecordModule;
@@ -148,30 +148,29 @@ namespace Ogama.Modules.Recording
       // Wires the recording finished event from the record module
       // to wait for resetting the button states after recording
       // stopped
-      this.recordModule.RecordingFinished += new EventHandler(this.recordModule_NewRecordingFinished);
+      this.recordModule.RecordingFinished += this.RecordModuleNewRecordingFinished;
 
       // Wires the GazeDataChanged event of this tracking device
       // to the record modules
       // event handler.
-      this.GazeDataChanged +=
-new GazeDataChangedEventHandler(this.recordModule.ITracker_GazeDataChanged);
+      this.GazeDataChanged += this.recordModule.TrackerGazeDataChanged;
 
       // Create new empty subject
       this.subject = new SubjectsData();
 
       // Wire button events.
-      this.recordButton.Click += new System.EventHandler(this.btnRecord_Click);
+      this.recordButton.Click += this.BtnRecordClick;
 
       if (this.calibrateButton != null)
       {
-        this.calibrateButton.Click += new System.EventHandler(this.btnCalibrate_Click);
+        this.calibrateButton.Click += this.BtnCalibrateClick;
       }
 
-      this.subjectButton.Click += new System.EventHandler(this.btnSubjectName_Click);
+      this.subjectButton.Click += this.BtnSubjectNameClick;
 
       if (this.connectButton != null)
       {
-        this.connectButton.Click += new System.EventHandler(this.btnConnect_Click);
+        this.connectButton.Click += this.BtnConnectClick;
       }
     }
 
@@ -353,7 +352,7 @@ new GazeDataChangedEventHandler(this.recordModule.ITracker_GazeDataChanged);
     {
       this.CleanUp();
 
-      this.subjectButton.Enabled = true;
+      this.subjectButton.Enabled = false;
 
       if (this.calibrateButton != null)
       {
@@ -368,7 +367,7 @@ new GazeDataChangedEventHandler(this.recordModule.ITracker_GazeDataChanged);
 
       this.recordButton.BackColor = Color.Transparent;
 
-      this.GazeDataChanged -= new GazeDataChangedEventHandler(this.recordModule.ITracker_GazeDataChanged);
+      this.GazeDataChanged -= this.recordModule.TrackerGazeDataChanged;
     }
 
     /// <summary>
@@ -450,8 +449,7 @@ new GazeDataChangedEventHandler(this.recordModule.ITracker_GazeDataChanged);
     /// <returns><strong>True</strong>if succesfull, otherswise <strong>false</strong>.</returns>
     protected bool OpenSubjectDialog(ref string subjectname)
     {
-      SubjectDetailsDialog dlg = new SubjectDetailsDialog();
-      dlg.SubjectName = subjectname;
+      var dlg = new SubjectDetailsDialog { SubjectName = subjectname };
       if (dlg.ShowDialog() == DialogResult.OK)
       {
         this.subject.SubjectName = dlg.SubjectName;
@@ -476,7 +474,7 @@ new GazeDataChangedEventHandler(this.recordModule.ITracker_GazeDataChanged);
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">A <see cref="XmlNodeEventArgs"/> that contains the event data.</param>
-    protected void serializer_UnknownNode(object sender, XmlNodeEventArgs e)
+    protected void SerializerUnknownNode(object sender, XmlNodeEventArgs e)
     {
       string message = "Unknown Node:" + e.Name + "\t" + e.Text
         + Environment.NewLine + " in tracker settings file."
@@ -493,10 +491,10 @@ new GazeDataChangedEventHandler(this.recordModule.ITracker_GazeDataChanged);
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">A <see cref="XmlAttributeEventArgs"/> that contains the event data.</param>
-    protected void serializer_UnknownAttribute(object sender, XmlAttributeEventArgs e)
+    protected void SerializerUnknownAttribute(object sender, XmlAttributeEventArgs e)
     {
-      XmlAttribute attr = e.Attr;
-      string message = "Unknown attribute " + attr.Name + "='"
+      var attr = e.Attr;
+      var message = "Unknown attribute " + attr.Name + "='"
         + attr.Value + "'" + Environment.NewLine
         + " in tracker settings file." + Environment.NewLine
         + "I try to ignore it.";
@@ -524,7 +522,7 @@ new GazeDataChangedEventHandler(this.recordModule.ITracker_GazeDataChanged);
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
-    protected virtual void btnConnect_Click(object sender, EventArgs e)
+    protected virtual void BtnConnectClick(object sender, EventArgs e)
     {
       // Cancel presentation and recording and
       // disconnect if connect button is
@@ -570,7 +568,7 @@ new GazeDataChangedEventHandler(this.recordModule.ITracker_GazeDataChanged);
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
-    protected virtual void btnSubjectName_Click(object sender, EventArgs e)
+    protected virtual void BtnSubjectNameClick(object sender, EventArgs e)
     {
       string subjectName = this.subjectNameTextBox.Text;
       if (this.OpenSubjectDialog(ref subjectName))
@@ -593,7 +591,7 @@ new GazeDataChangedEventHandler(this.recordModule.ITracker_GazeDataChanged);
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
-    protected virtual void btnCalibrate_Click(object sender, EventArgs e)
+    protected virtual void BtnCalibrateClick(object sender, EventArgs e)
     {
       this.Calibrate(false);
     }
@@ -612,7 +610,7 @@ new GazeDataChangedEventHandler(this.recordModule.ITracker_GazeDataChanged);
     /// <remarks>The button can be used for starting and
     /// stopping and is changed to red backgroundcolor as
     /// long as the recording is active.</remarks>
-    protected virtual void btnRecord_Click(object sender, EventArgs e)
+    protected virtual void BtnRecordClick(object sender, EventArgs e)
     {
       this.StartRecording();
     }
@@ -643,7 +641,7 @@ new GazeDataChangedEventHandler(this.recordModule.ITracker_GazeDataChanged);
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
-    protected virtual void recordModule_NewRecordingFinished(object sender, EventArgs e)
+    protected virtual void RecordModuleNewRecordingFinished(object sender, EventArgs e)
     {
       this.recordButton.BackColor = Color.Transparent;
       if (this.connectButton != null)

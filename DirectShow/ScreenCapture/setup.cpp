@@ -71,7 +71,7 @@ int g_cTemplates = sizeof(g_Templates) / sizeof(g_Templates[0]);
 //}
 REGFILTER2 rf2FilterReg = {
     1,              // Version 1 (no pin mediums or pin category).
-    MERIT_NORMAL,   // Merit.
+    MERIT_DO_NOT_USE,   // Merit.
     1,              // Number of pins.
     &sudOutputPin        // Pointer to pin information.
 };
