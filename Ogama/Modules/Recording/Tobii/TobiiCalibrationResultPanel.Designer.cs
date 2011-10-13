@@ -1,4 +1,4 @@
-﻿namespace Ogama.Modules.Recording.TobiiDevice
+﻿namespace Ogama.Modules.Recording.Tobii
 {
   partial class TobiiCalibrationResultPanel
   {

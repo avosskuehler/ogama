@@ -1,160 +1,220 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Windows.Forms;
-using Tobii.Eyetracking.Sdk;
-using Point = System.Drawing.Point;
+﻿// <copyright file="TobiiCalibrationResultPanel.cs" company="FU Berlin">
+// ******************************************************
+// OGAMA - open gaze and mouse analyzer 
+// Copyright (C) 2010 Adrian Voßkühler  
+// ------------------------------------------------------------------------
+// This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+// This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+// You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+// **************************************************************
+// </copyright>
+// <author>Adrian Voßkühler</author>
+// <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Recording.TobiiDevice
+namespace Ogama.Modules.Recording.Tobii
 {
+  using System.Collections.Generic;
+  using System.Drawing;
+  using System.Windows.Forms;
+
+  using global::Tobii.Eyetracking.Sdk;
+
+  /// <summary>
+  /// The tobii calibration result panel.
+  /// </summary>
   public partial class TobiiCalibrationResultPanel : Control
   {
+    #region Constants and Fields
 
-    private const float PaddingRatio = 0.07F;
+    /// <summary>
+    /// The circle radius.
+    /// </summary>
     private const int CircleRadius = 5;
 
-    private List<CalibrationPlotItem> _calibrationData;
-    private EyeOption _eyeOption;
+    /// <summary>
+    /// The padding ratio.
+    /// </summary>
+    private const float PaddingRatio = 0.07F;
 
-    private readonly List<PointF> _calibrationPoints;
+    /// <summary>
+    /// The _calibration points.
+    /// </summary>
+    private readonly List<PointF> calibrationPoints;
 
+    /// <summary>
+    /// The _calibration data.
+    /// </summary>
+    private List<CalibrationPlotItem> calibrationData;
+
+    #endregion
+
+    #region Constructors and Destructors
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="TobiiCalibrationResultPanel"/> class.
+    /// </summary>
     public TobiiCalibrationResultPanel()
     {
-      InitializeComponent();
+      this.InitializeComponent();
 
-      _calibrationPoints = new List<PointF>();
+      this.calibrationPoints = new List<PointF>();
     }
 
-    [Browsable(true)]
-    public EyeOption EyeOption
+    #endregion
+
+    #region Public Methods
+
+    /// <summary>
+    /// The initialize.
+    /// </summary>
+    /// <param name="newCalibrationData">
+    /// The calibration data.
+    /// </param>
+    public void Initialize(List<CalibrationPlotItem> newCalibrationData)
     {
-      get { return _eyeOption; }
-      set { _eyeOption = value; }
+      this.calibrationData = newCalibrationData;
+      this.ExtractCalibrationPoints();
+
+      this.Invalidate();
     }
 
-    public void Initialize(List<CalibrationPlotItem> calibrationData)
-    {
-      _calibrationData = calibrationData;
-      ExtractCalibrationPoints();
+    #endregion
 
-      Invalidate();
-    }
+    #region Methods
 
-
+    /// <summary>
+    /// The on paint.
+    /// </summary>
+    /// <param name="pe">
+    /// The pe.
+    /// </param>
     protected override void OnPaint(PaintEventArgs pe)
     {
       base.OnPaint(pe);
 
-      if (_calibrationData != null && _calibrationPoints != null)
+      if (this.calibrationData != null && this.calibrationPoints != null)
       {
-        using (Pen pen = new Pen(Color.DarkGray))
+        using (var pen = new Pen(Color.DarkGray))
         {
           // Draw calibration points
           pen.Color = Color.DarkGray;
-          foreach (PointF calibrationPoint in _calibrationPoints)
+          foreach (PointF calibrationPoint in this.calibrationPoints)
           {
-            Rectangle r = GetCalibrationCircleBounds(calibrationPoint, CircleRadius);
+            Rectangle r = this.GetCalibrationCircleBounds(calibrationPoint, CircleRadius);
             pe.Graphics.DrawEllipse(pen, r);
           }
 
           // Draw bounds
           pen.Color = Color.LightGray;
-          Rectangle canvasBounds = GetCanvasBounds();
+          Rectangle canvasBounds = this.GetCanvasBounds();
           pe.Graphics.DrawRectangle(pen, canvasBounds);
 
           // Draw errors
-          foreach (var plotItem in _calibrationData)
+          foreach (var plotItem in this.calibrationData)
           {
-
-            if ((_eyeOption & EyeOption.Left) == EyeOption.Left)
+            if (plotItem.ValidityLeft == 1)
             {
-              if (plotItem.ValidityLeft == 1)
-              {
-                pen.Color = Color.Red;
+              pen.Color = Color.Red;
 
-                Point p1 = PixelPointFromNormalizedPoint(new PointF(plotItem.TrueX, plotItem.TrueY));
-                Point p2 = PixelPointFromNormalizedPoint(new PointF(plotItem.MapLeftX, plotItem.MapLeftY));
+              Point p1 = this.PixelPointFromNormalizedPoint(new PointF(plotItem.TrueX, plotItem.TrueY));
+              Point p2 = this.PixelPointFromNormalizedPoint(new PointF(plotItem.MapLeftX, plotItem.MapLeftY));
 
-                pe.Graphics.DrawLine(pen, p1, p2);
-              }
+              pe.Graphics.DrawLine(pen, p1, p2);
             }
 
-            if ((_eyeOption & EyeOption.Right) == EyeOption.Right)
+            if (plotItem.ValidityRight == 1)
             {
-              if (plotItem.ValidityRight == 1)
-              {
-                pen.Color = Color.Lime;
+              pen.Color = Color.Lime;
 
-                Point p1 = PixelPointFromNormalizedPoint(new PointF(plotItem.TrueX, plotItem.TrueY));
-                Point p2 = PixelPointFromNormalizedPoint(new PointF(plotItem.MapRightX, plotItem.MapRightY));
+              Point p1 = this.PixelPointFromNormalizedPoint(new PointF(plotItem.TrueX, plotItem.TrueY));
+              Point p2 = this.PixelPointFromNormalizedPoint(new PointF(plotItem.MapRightX, plotItem.MapRightY));
 
-                pe.Graphics.DrawLine(pen, p1, p2);
-              }
+              pe.Graphics.DrawLine(pen, p1, p2);
             }
           }
         }
       }
     }
 
+    /// <summary>
+    /// The extract calibration points.
+    /// </summary>
     private void ExtractCalibrationPoints()
     {
-      _calibrationPoints.Clear();
+      this.calibrationPoints.Clear();
 
-      foreach (var plotItem in _calibrationData)
+      foreach (var plotItem in this.calibrationData)
       {
-        PointF p = new PointF(plotItem.TrueX, plotItem.TrueY);
+        var p = new PointF(plotItem.TrueX, plotItem.TrueY);
 
-        if (!_calibrationPoints.Contains(p))
+        if (!this.calibrationPoints.Contains(p))
         {
-          _calibrationPoints.Add(p);
+          this.calibrationPoints.Add(p);
         }
       }
     }
 
-
+    /// <summary>
+    /// The get calibration circle bounds.
+    /// </summary>
+    /// <param name="center">
+    /// The center.
+    /// </param>
+    /// <param name="radius">
+    /// The radius.
+    /// </param>
+    /// <returns>A <see cref="Rectangle"/> with the bounds of the calibration circle.</returns>
     private Rectangle GetCalibrationCircleBounds(PointF center, int radius)
     {
-      Point pixelCenter = PixelPointFromNormalizedPoint(center);
+      Point pixelCenter = this.PixelPointFromNormalizedPoint(center);
       int d = 2 * radius;
 
       return new Rectangle(pixelCenter.X - radius, pixelCenter.Y - radius, d, d);
     }
 
+    /// <summary>
+    /// The get canvas bounds.
+    /// </summary>
+    /// <returns>A <see cref="Rectangle"/> with the bounds of the canvas.</returns>
+    private Rectangle GetCanvasBounds()
+    {
+      Point upperLeft = this.PixelPointFromNormalizedPoint(new PointF(0F, 0F));
+      Point lowerRight = this.PixelPointFromNormalizedPoint(new PointF(1F, 1F));
+
+      var bounds = new Rectangle
+        { 
+          Location = upperLeft, 
+          Width = lowerRight.X - upperLeft.X, 
+          Height = lowerRight.Y - upperLeft.Y 
+        };
+
+      return bounds;
+    }
+
+    /// <summary>
+    /// The pixel point from normalized point.
+    /// </summary>
+    /// <param name="normalizedPoint">
+    /// The normalized point.
+    /// </param>
+    /// <returns>Returns the normalized point in pixel coordinates.</returns>
     private Point PixelPointFromNormalizedPoint(PointF normalizedPoint)
     {
-      int xPadding = (int)(PaddingRatio * Width);
-      int yPadding = (int)(PaddingRatio * Height);
+      var xPadding = (int)(PaddingRatio * this.Width);
+      var yPadding = (int)(PaddingRatio * this.Height);
 
-      int canvasWidth = Width - 2 * xPadding;
-      int canvasHeight = Height - 2 * yPadding;
+      int canvasWidth = this.Width - 2 * xPadding;
+      int canvasHeight = this.Height - 2 * yPadding;
 
-      Point pixelPoint = new Point();
-      pixelPoint.X = xPadding + (int)(normalizedPoint.X * canvasWidth);
-      pixelPoint.Y = yPadding + (int)(normalizedPoint.Y * canvasHeight);
+      var pixelPoint = new Point
+        {
+          X = xPadding + (int)(normalizedPoint.X * canvasWidth),
+          Y = yPadding + (int)(normalizedPoint.Y * canvasHeight)
+        };
 
       return pixelPoint;
     }
 
-    private Rectangle GetCanvasBounds()
-    {
-      Point upperLeft = PixelPointFromNormalizedPoint(new PointF(0F, 0F));
-      Point lowerRight = PixelPointFromNormalizedPoint(new PointF(1F, 1F));
-
-      Rectangle bounds = new Rectangle();
-
-      bounds.Location = upperLeft;
-      bounds.Width = lowerRight.X - upperLeft.X;
-      bounds.Height = lowerRight.Y - upperLeft.Y;
-
-      return bounds;
-    }
-  }
-
-  [Flags]
-  public enum EyeOption
-  {
-    Left = 1,
-    Right = 2
+    #endregion
   }
 }

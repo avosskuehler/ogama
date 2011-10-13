@@ -1,6 +1,6 @@
-﻿namespace Ogama.Modules.Recording.TobiiDevice
+﻿namespace Ogama.Modules.Recording.Tobii
 {
-    partial class CalibrationForm
+    partial class TobiiCalibrationForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,15 +30,15 @@
         {
             this.SuspendLayout();
             // 
-            // CalibrationForm
+            // TobiiCalibrationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
             this.ClientSize = new System.Drawing.Size(705, 598);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "CalibrationForm";
-            this.Text = "CalibrationForm";
+            this.Name = "TobiiCalibrationForm";
+            this.Text = "TobiiCalibrationForm";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.ResumeLayout(false);
 
