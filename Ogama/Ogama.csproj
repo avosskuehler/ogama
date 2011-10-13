@@ -71,7 +71,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>..\Debug\</OutputPath>
-    <DefineConstants>DEBUG;ASL</DefineConstants>
+    <DefineConstants>DEBUG</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DocumentationFile>..\Debug\Ogama.XML</DocumentationFile>
     <DebugType>full</DebugType>
@@ -81,7 +81,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>..\Release\</OutputPath>
-    <DefineConstants>TRACE;TOBII; ASL</DefineConstants>
+    <DefineConstants>TRACE</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DocumentationFile>..\Release\Ogama.xml</DocumentationFile>
     <Optimize>true</Optimize>
@@ -379,80 +379,80 @@
       <DependentUpon>ExportOptionsDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Fixations\ExportOptions.cs" />
-    <Compile Include="Modules\Recording\Alea\AleaTrackStatus.cs">
+    <Compile Include="Modules\Recording\AleaInterface\AleaTrackStatus.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Modules\Recording\Alea\AleaTrackStatus.Designer.cs">
+    <Compile Include="Modules\Recording\AleaInterface\AleaTrackStatus.Designer.cs">
       <DependentUpon>AleaTrackStatus.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Recording\Alea\AxAleaStatusControl.cs">
+    <Compile Include="Modules\Recording\AleaInterface\AxAleaStatusControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Modules\Recording\ASL\AslCalibration.cs">
+    <Compile Include="Modules\Recording\ASLInterface\AslCalibration.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Modules\Recording\ASL\AslCalibration.designer.cs">
+    <Compile Include="Modules\Recording\ASLInterface\AslCalibration.designer.cs">
       <DependentUpon>AslCalibration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Recording\ASL\AslEnum.cs" />
-    <Compile Include="Modules\Recording\ASL\AslSetting.cs" />
-    <Compile Include="Modules\Recording\ASL\AslSettingsDialog.cs">
+    <Compile Include="Modules\Recording\ASLInterface\AslEnum.cs" />
+    <Compile Include="Modules\Recording\ASLInterface\AslSetting.cs" />
+    <Compile Include="Modules\Recording\ASLInterface\AslSettingsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Modules\Recording\ASL\AslSettingsDialog.designer.cs">
+    <Compile Include="Modules\Recording\ASLInterface\AslSettingsDialog.designer.cs">
       <DependentUpon>AslSettingsDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Recording\ASL\AslTracker.cs" />
-    <Compile Include="Modules\Recording\ASL\AslTrackStatus.cs">
+    <Compile Include="Modules\Recording\ASLInterface\AslTracker.cs" />
+    <Compile Include="Modules\Recording\ASLInterface\AslTrackStatus.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Modules\Recording\ASL\AslTrackStatus.designer.cs">
+    <Compile Include="Modules\Recording\ASLInterface\AslTrackStatus.designer.cs">
       <DependentUpon>AslTrackStatus.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Recording\ASL\UserSettings.cs" />
-    <Compile Include="Modules\Recording\Gazegroup\GazetrackerIPClientSetting.cs" />
-    <Compile Include="Modules\Recording\Gazegroup\GazetrackerIPClientSettingsDialog.cs">
+    <Compile Include="Modules\Recording\ASLInterface\UserSettings.cs" />
+    <Compile Include="Modules\Recording\GazegroupInterface\GazetrackerIPClientSetting.cs" />
+    <Compile Include="Modules\Recording\GazegroupInterface\GazetrackerIPClientSettingsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Modules\Recording\Gazegroup\GazetrackerIPClientSettingsDialog.Designer.cs">
+    <Compile Include="Modules\Recording\GazegroupInterface\GazetrackerIPClientSettingsDialog.Designer.cs">
       <DependentUpon>GazetrackerIPClientSettingsDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Recording\Gazegroup\GazetrackerIPClientStatus.cs" />
-    <Compile Include="Modules\Recording\Gazegroup\GazetrackerIPClientTracker.cs" />
-    <Compile Include="Modules\Recording\Gazegroup\GazetrackerDirectClientTracker.cs" />
+    <Compile Include="Modules\Recording\GazegroupInterface\GazetrackerIPClientStatus.cs" />
+    <Compile Include="Modules\Recording\GazegroupInterface\GazetrackerIPClientTracker.cs" />
+    <Compile Include="Modules\Recording\GazegroupInterface\GazetrackerDirectClientTracker.cs" />
     <Compile Include="Modules\Recording\Presenter\WebsiteScreenshot.cs" />
     <Compile Include="Modules\Recording\Presenter\DSScreenCapture.cs" />
     <Compile Include="Modules\Recording\Presenter\ScreenCaptureProperties.cs" />
-    <Compile Include="Modules\Recording\Tobii\CalibrationRunner.cs" />
-    <Compile Include="Modules\Recording\Tobii\TobiiCalibrationForm.cs">
+    <Compile Include="Modules\Recording\TobiiInterface\CalibrationRunner.cs" />
+    <Compile Include="Modules\Recording\TobiiInterface\TobiiCalibrationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Modules\Recording\Tobii\TobiiCalibrationForm.designer.cs">
+    <Compile Include="Modules\Recording\TobiiInterface\TobiiCalibrationForm.designer.cs">
       <DependentUpon>TobiiCalibrationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Recording\Tobii\TobiiCalibrationResultPanel.cs">
+    <Compile Include="Modules\Recording\TobiiInterface\TobiiCalibrationResultPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Modules\Recording\Tobii\TobiiCalibrationResultPanel.designer.cs">
+    <Compile Include="Modules\Recording\TobiiInterface\TobiiCalibrationResultPanel.designer.cs">
       <DependentUpon>TobiiCalibrationResultPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Recording\Tobii\TobiiTrackStatusControl.cs">
+    <Compile Include="Modules\Recording\TobiiInterface\TobiiTrackStatusControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Modules\Recording\Tobii\TobiiTrackStatusControl.designer.cs">
+    <Compile Include="Modules\Recording\TobiiInterface\TobiiTrackStatusControl.designer.cs">
       <DependentUpon>TobiiTrackStatusControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Recording\TrackerBase\TrackerWithStatusControls.cs" />
-    <Compile Include="Modules\Recording\Alea\AleaTracker.cs">
+    <Compile Include="Modules\Recording\AleaInterface\AleaTracker.cs">
     </Compile>
-    <Compile Include="Modules\Recording\Alea\AleaSetting.cs" />
-    <Compile Include="Modules\Recording\Alea\AleaSettingsDialog.cs">
+    <Compile Include="Modules\Recording\AleaInterface\AleaSetting.cs" />
+    <Compile Include="Modules\Recording\AleaInterface\AleaSettingsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Modules\Recording\Alea\AleaSettingsDialog.Designer.cs">
+    <Compile Include="Modules\Recording\AleaInterface\AleaSettingsDialog.Designer.cs">
       <DependentUpon>AleaSettingsDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Recording\Alea\CalibrationDoneEventArgs.cs" />
+    <Compile Include="Modules\Recording\AleaInterface\CalibrationDoneEventArgs.cs" />
     <Compile Include="Modules\Recording\TrackerBase\HardwareTracker.cs" />
     <Compile Include="Modules\Recording\DataToTable.cs" />
     <Compile Include="Modules\Recording\Dialogs\SelectTracker.cs">
@@ -502,21 +502,21 @@
     <Compile Include="Modules\Common\Types\IObjectWithID.cs" />
     <Compile Include="Modules\Common\Types\NameObjectList.cs" />
     <Compile Include="Modules\ImportExport\OgamaData\ImportOgamaData.cs" />
-    <Compile Include="Modules\Recording\SMI\AvailableEye.cs" />
-    <Compile Include="Modules\Recording\SMI\CalibrationPointSize.cs" />
-    <Compile Include="Modules\Recording\SMI\SMICalibrationForm.cs">
+    <Compile Include="Modules\Recording\SMIInterface\AvailableEye.cs" />
+    <Compile Include="Modules\Recording\SMIInterface\CalibrationPointSize.cs" />
+    <Compile Include="Modules\Recording\SMIInterface\SMICalibrationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Modules\Recording\SMI\SMICalibrationForm.Designer.cs">
+    <Compile Include="Modules\Recording\SMIInterface\SMICalibrationForm.Designer.cs">
       <DependentUpon>SMICalibrationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Recording\SMI\SMIClient.cs" />
-    <Compile Include="Modules\Recording\SMI\SMITracker.cs" />
-    <Compile Include="Modules\Recording\SMI\SMISetting.cs" />
-    <Compile Include="Modules\Recording\SMI\SMISettingsDlg.cs">
+    <Compile Include="Modules\Recording\SMIInterface\SMIClient.cs" />
+    <Compile Include="Modules\Recording\SMIInterface\SMITracker.cs" />
+    <Compile Include="Modules\Recording\SMIInterface\SMISetting.cs" />
+    <Compile Include="Modules\Recording\SMIInterface\SMISettingsDlg.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Modules\Recording\SMI\SMISettingsDlg.designer.cs">
+    <Compile Include="Modules\Recording\SMIInterface\SMISettingsDlg.designer.cs">
       <DependentUpon>SMISettingsDlg.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Recording\TrackerBase\Tracker.cs" />
@@ -738,22 +738,22 @@
     </Compile>
     <Compile Include="Modules\Recording\GazeData.cs" />
     <Compile Include="Modules\Recording\TrackerBase\ITracker.cs" />
-    <Compile Include="Modules\Recording\MouseOnly\MouseOnlySettingsDlg.cs">
+    <Compile Include="Modules\Recording\MouseOnlyInterface\MouseOnlySettingsDlg.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Modules\Recording\MouseOnly\MouseOnlySettingsDlg.Designer.cs">
+    <Compile Include="Modules\Recording\MouseOnlyInterface\MouseOnlySettingsDlg.Designer.cs">
       <DependentUpon>MouseOnlySettingsDlg.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Recording\MouseOnly\MouseOnlyTracker.cs" />
-    <Compile Include="Modules\Recording\MouseOnly\MouseOnlySetting.cs" />
+    <Compile Include="Modules\Recording\MouseOnlyInterface\MouseOnlyTracker.cs" />
+    <Compile Include="Modules\Recording\MouseOnlyInterface\MouseOnlySetting.cs" />
     <Compile Include="Modules\Common\Tools\SecondaryScreen.cs" />
-    <Compile Include="Modules\Recording\Tobii\TobiiTrackStatus.cs">
+    <Compile Include="Modules\Recording\TobiiInterface\TobiiTrackStatus.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Modules\Recording\Tobii\TobiiTrackStatus.Designer.cs">
+    <Compile Include="Modules\Recording\TobiiInterface\TobiiTrackStatus.Designer.cs">
       <DependentUpon>TobiiTrackStatus.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Recording\Tobii\TobiiTracker.cs" />
+    <Compile Include="Modules\Recording\TobiiInterface\TobiiTracker.cs" />
     <Compile Include="Modules\Replay\ReplayDrawingModes.cs" />
     <Compile Include="Modules\Saliency\SaliencyPicture.cs">
       <SubType>UserControl</SubType>
@@ -866,10 +866,10 @@
     <Compile Include="MainWindow\Dialogs\StartUpDialog.Designer.cs">
       <DependentUpon>StartUpDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Recording\Tobii\TobiiSettingsDialog.cs">
+    <Compile Include="Modules\Recording\TobiiInterface\TobiiSettingsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Modules\Recording\Tobii\TobiiSettingsDialog.Designer.cs">
+    <Compile Include="Modules\Recording\TobiiInterface\TobiiSettingsDialog.Designer.cs">
       <DependentUpon>TobiiSettingsDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Replay\Video\VideoPropertiesDialog.cs">
@@ -1093,20 +1093,20 @@
       <DependentUpon>ExportOptionsDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Recording\Alea\AleaSettingsDialog.resx">
+    <EmbeddedResource Include="Modules\Recording\AleaInterface\AleaSettingsDialog.resx">
       <DependentUpon>AleaSettingsDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Recording\Alea\AleaTrackStatus.resx">
+    <EmbeddedResource Include="Modules\Recording\AleaInterface\AleaTrackStatus.resx">
       <DependentUpon>AleaTrackStatus.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Recording\ASL\AslCalibration.resx">
+    <EmbeddedResource Include="Modules\Recording\ASLInterface\AslCalibration.resx">
       <DependentUpon>AslCalibration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Recording\ASL\AslSettingsDialog.resx">
+    <EmbeddedResource Include="Modules\Recording\ASLInterface\AslSettingsDialog.resx">
       <DependentUpon>AslSettingsDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Recording\ASL\AslTrackStatus.resx">
+    <EmbeddedResource Include="Modules\Recording\ASLInterface\AslTrackStatus.resx">
       <DependentUpon>AslTrackStatus.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\Dialogs\SelectTracker.resx">
@@ -1125,26 +1125,26 @@
       <DependentUpon>SavingSplash.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Recording\Gazegroup\GazetrackerIPClientSettingsDialog.resx">
+    <EmbeddedResource Include="Modules\Recording\GazegroupInterface\GazetrackerIPClientSettingsDialog.resx">
       <DependentUpon>GazetrackerIPClientSettingsDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\RecordingPicture.resx">
       <DependentUpon>RecordingPicture.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Recording\SMI\SMICalibrationForm.resx">
+    <EmbeddedResource Include="Modules\Recording\SMIInterface\SMICalibrationForm.resx">
       <DependentUpon>SMICalibrationForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Recording\SMI\SMISettingsDlg.resx">
+    <EmbeddedResource Include="Modules\Recording\SMIInterface\SMISettingsDlg.resx">
       <DependentUpon>SMISettingsDlg.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Recording\Tobii\TobiiCalibrationForm.resx">
+    <EmbeddedResource Include="Modules\Recording\TobiiInterface\TobiiCalibrationForm.resx">
       <DependentUpon>TobiiCalibrationForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Recording\Tobii\TobiiCalibrationResultPanel.resx">
+    <EmbeddedResource Include="Modules\Recording\TobiiInterface\TobiiCalibrationResultPanel.resx">
       <DependentUpon>TobiiCalibrationResultPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Recording\Tobii\TobiiTrackStatusControl.resx">
+    <EmbeddedResource Include="Modules\Recording\TobiiInterface\TobiiTrackStatusControl.resx">
       <DependentUpon>TobiiTrackStatusControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Replay\Video\SaveVideoSplash.resx">
@@ -1243,11 +1243,11 @@
       <DependentUpon>AskSaveDataDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Recording\MouseOnly\MouseOnlySettingsDlg.resx">
+    <EmbeddedResource Include="Modules\Recording\MouseOnlyInterface\MouseOnlySettingsDlg.resx">
       <DependentUpon>MouseOnlySettingsDlg.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Recording\Tobii\TobiiTrackStatus.resx">
+    <EmbeddedResource Include="Modules\Recording\TobiiInterface\TobiiTrackStatus.resx">
       <SubType>Designer</SubType>
       <DependentUpon>TobiiTrackStatus.cs</DependentUpon>
     </EmbeddedResource>
@@ -1331,7 +1331,7 @@
       <SubType>Designer</SubType>
       <DependentUpon>StartUpDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Recording\Tobii\TobiiSettingsDialog.resx">
+    <EmbeddedResource Include="Modules\Recording\TobiiInterface\TobiiSettingsDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>TobiiSettingsDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -1419,7 +1419,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Properties\ApplicationSettings.cs" />
-    <Compile Include="Modules\Recording\Tobii\TobiiSetting.cs" />
+    <Compile Include="Modules\Recording\TobiiInterface\TobiiSetting.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

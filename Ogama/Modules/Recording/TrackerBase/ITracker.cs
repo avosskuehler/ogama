@@ -14,17 +14,20 @@
 namespace Ogama.Modules.Recording
 {
   using Ogama.Modules.Common;
+  using Ogama.Modules.Recording.AleaInterface;
+  using Ogama.Modules.Recording.MouseOnlyInterface;
+  using Ogama.Modules.Recording.SMIInterface;
 
   /// <summary>
   /// This interface introduces a possibility to add new tracking hardware
   /// to the <see cref="RecordModule"/> <see cref="System.Windows.Forms.Form"/>.
   /// </summary>
   /// <remarks>For an example how to implement this interface have a look
-  /// at the four existing implementations <see cref="MouseOnly.MouseOnlyTracker"/>
+  /// at the four existing implementations <see cref="MouseOnlyTracker"/>
   /// for the tracking of mouse data and Tobii.TobiiTracker for
-  /// tracking with a Tobii (www.tobii.com) system, <see cref="Alea.AleaTracker"/> for
+  /// tracking with a Tobii (www.tobii.com) system, <see cref="AleaTracker"/> for
   /// tracking with a Alea Technologies (www.alea-technologies.com) system
-  /// and  <see cref="SMI.SMITracker"/> for
+  /// and  <see cref="SMITracker"/> for
   /// tracking with a SMI iViewX (www.smivision.com) system.
   /// Please also refer to the <see cref="RecordModule"/> source to add the
   /// new tracker to the user interface. Each tracker should have its own
