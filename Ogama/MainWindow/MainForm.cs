@@ -29,6 +29,7 @@ namespace Ogama.MainWindow
 
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Recording.TobiiInterface;
   using Ogama.Modules.SlideshowDesign;
   using Ogama.Properties;
   using OgamaControls;
@@ -88,7 +89,7 @@ namespace Ogama.MainWindow
 
       this.InitializeComponent();
       this.InitAccelerators();
-      Modules.Recording.TobiiDevice.TobiiTracker.StaticInitialize();
+      TobiiTracker.StaticInitialize();
     }
 
     #endregion //CONSTRUCTION
