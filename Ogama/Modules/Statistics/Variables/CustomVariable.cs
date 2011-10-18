@@ -194,7 +194,7 @@ namespace Ogama.Modules.Statistics
           sb.Append(this.AOIName);
           break;
         case ParamTypes.Regressions:
-          sb.AppendLine("Number of regressions ");
+          sb.Append("Number of regressions ");
           if (this.AOIName != string.Empty)
           {
             sb.Append("in AOI");
