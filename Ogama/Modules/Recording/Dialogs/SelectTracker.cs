@@ -421,20 +421,18 @@ namespace Ogama.Modules.Recording.Dialogs
     private void UpdateGazetrackerDirectClientStatus()
     {
       string error;
-      string ituDefaultText = "The Gazegroup GazeTracker application which uses a webcam as "
-                              + "an eye tracker and can be used in both remote and head-mounted setup."
+      string ituDefaultText = "Gazetracker DIRECT connection." +
+        Environment.NewLine + "This is the Gazetracker which uses a webcam as "
+                              + "an eye tracker and can be used in both remote and head-mounted setups."
                               + Environment.NewLine;
 
       if (!GazetrackerDirectClientTracker.IsAvailable(out error))
       {
         this.chbGazetrackerDirectClient.Enabled = false;
         this.chbGazetrackerDirectClient.Checked = false;
-        this.chbGazetrackerDirectClient.Text = ituDefaultText + "Status: " + error;
       }
-      else
-      {
-        this.chbGazetrackerDirectClient.Text = ituDefaultText + "Status: GazeTracker found a camera device.";
-      }
+
+      this.chbGazetrackerDirectClient.Text = ituDefaultText + "Status: " + error;
     }
 
     #endregion //METHODS
