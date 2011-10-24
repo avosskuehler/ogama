@@ -184,12 +184,25 @@ namespace Ogama.Modules.Recording.GazegroupInterface
 
       try
       {
-        if (Camera.GetConnectedDevice() == Camera.DeviceTypeEnum.None)
+        switch (Camera.GetConnectedDevice())
         {
-          errorMessage = "The GazeTracker was unable to connect a camera. " + Environment.NewLine +
-            "Make sure that the device is connected and that the device drivers are installed. " +
-            "Verified configurations can be found in our forum located at http://forum.gazegroup.org";
-          return false;
+          case Camera.DeviceTypeEnum.None:
+            errorMessage = "Gazetracker was unable to connect a camera. " + Environment.NewLine +
+              "Make sure that the device is connected and that the device drivers are installed. " +
+              "Verified configurations can be found in the forum located at http://forum.gazegroup.org";
+            return false;
+          case Camera.DeviceTypeEnum.DirectShow:
+            errorMessage = "Gazetracker found a camera. ";
+            return true;
+          case Camera.DeviceTypeEnum.Thorlabs:
+            errorMessage = "Gazetracker found a thorlabs camera. ";
+            return true;
+          case Camera.DeviceTypeEnum.Kinect:
+            errorMessage = "Gazetracker found a kinect camera. ";
+            return true;
+          case Camera.DeviceTypeEnum.PS3Eye:
+            errorMessage = "Gazetracker found a PS3 eye camera. ";
+            return true;
         }
       }
       catch (Exception)
