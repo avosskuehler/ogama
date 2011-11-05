@@ -11,12 +11,12 @@ namespace DmoMixer
 {
   using System;
   using System.Diagnostics;
-  using System.Drawing;
   using System.Runtime.InteropServices;
 
   using DirectShowLib;
   using DirectShowLib.DMO;
   using DmoBase;
+  using System.Drawing;
 
   /// <summary>
   /// This COM-Visible class is a DMO (digital media object)
@@ -882,7 +882,7 @@ namespace DmoMixer
     /// <param name="newStreamSize">New stream size.</param>
     /// <returns>The resized and newly allocated <see cref="VideoStream"/>.</returns>
     /// <remarks>The stream pointer has to be released after use with a call
-    /// to <see cref="Marshal.ReleaseHGlobal(IntPtr)"/>.</remarks>
+    /// to ReleaseHGlobal(IntPtr).</remarks>
     private unsafe VideoStream ResizeBicubic(VideoStream sourceStream, Size newStreamSize)
     {
       // get image sizes

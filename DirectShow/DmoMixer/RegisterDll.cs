@@ -7,14 +7,12 @@
 // *****************************************************************************/
 // </copyright>
 
-namespace DmoOverlay
+namespace DmoMixer
 {
   using System.Collections;
   using System.ComponentModel;
   using System.Configuration.Install;
-  using System.Runtime.InteropServices;
   using System.Security.Permissions;
-  using System.Windows.Forms;
 
   /// <summary>
   /// This class customizes the installation of the overlay DMO
