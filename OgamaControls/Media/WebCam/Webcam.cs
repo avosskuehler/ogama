@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 using DirectShowLib;
 using System.Diagnostics;
-using GTHardware.Cameras.DirectShow;
 
 namespace OgamaControls
 {
+  using GTHardware.Cameras.DirectShow;
+
   /// <summary>
   /// This class encapsulates a webcam <see cref="UserControl"/>.
   /// It can be used to show a preview of any capture device on the

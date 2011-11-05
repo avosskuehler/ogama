@@ -66,7 +66,7 @@
 				Name="VCLibrarianTool"
 				AdditionalDependencies="strmiids.lib"
 				OutputFile="$(OutDir)\strmbasd.lib"
-				AdditionalLibraryDirectories="&quot;C:\Program Files\Microsoft SDKs\Windows\v7.0A\Lib&quot;"
+				AdditionalLibraryDirectories=""
 			/>
 			<Tool
 				Name="VCALinkTool"
