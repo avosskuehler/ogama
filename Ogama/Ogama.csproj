@@ -226,6 +226,7 @@
   <ItemGroup>
     <Compile Include="DataSet\OgamaDataSet.cs">
       <DependentUpon>OgamaDataSet.xsd</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="DataSet\OgamaDataSet.Designer.cs">
       <AutoGen>True</AutoGen>

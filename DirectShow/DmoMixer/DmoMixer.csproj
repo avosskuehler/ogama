@@ -81,13 +81,15 @@
     <PlatformTarget>x86</PlatformTarget>
     <OutputPath>..\..\Debug86\</OutputPath>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>..\..\Debug86\Docs\DmoMixer.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
-    <OutputPath>..\..\Release\</OutputPath>
+    <OutputPath>..\..\Release86\</OutputPath>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
+    <DocumentationFile>..\..\Release86\Docs\DmoMixer.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
     <DebugSymbols>true</DebugSymbols>
