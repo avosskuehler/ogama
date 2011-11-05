@@ -48,6 +48,16 @@ namespace Ogama.DataSet {
         
         private global::System.Data.DataRelation relationFK_Subjects_Trials;
         
+        private global::System.Data.DataRelation relationFK_Trials_Events;
+        
+        private global::System.Data.DataRelation relationTrials_AOIs;
+        
+        private global::System.Data.DataRelation relationTrials_GazeFixations;
+        
+        private global::System.Data.DataRelation relationTrials_MouseFixations;
+        
+        private global::System.Data.DataRelation relationShapeGroups_AOIs;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -416,6 +426,11 @@ namespace Ogama.DataSet {
             }
             this.relationFK_Subjects_SubjectParameters = this.Relations["FK_Subjects_SubjectParameters"];
             this.relationFK_Subjects_Trials = this.Relations["FK_Subjects_Trials"];
+            this.relationFK_Trials_Events = this.Relations["FK_Trials_Events"];
+            this.relationTrials_AOIs = this.Relations["Trials_AOIs"];
+            this.relationTrials_GazeFixations = this.Relations["Trials_GazeFixations"];
+            this.relationTrials_MouseFixations = this.Relations["Trials_MouseFixations"];
+            this.relationShapeGroups_AOIs = this.Relations["ShapeGroups_AOIs"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -476,6 +491,36 @@ namespace Ogama.DataSet {
                         this.tableSubjects.SubjectNameColumn}, new global::System.Data.DataColumn[] {
                         this.tableTrials.SubjectNameColumn}, false);
             this.Relations.Add(this.relationFK_Subjects_Trials);
+            this.relationFK_Trials_Events = new global::System.Data.DataRelation("FK_Trials_Events", new global::System.Data.DataColumn[] {
+                        this.tableTrials.SubjectNameColumn,
+                        this.tableTrials.TrialSequenceColumn}, new global::System.Data.DataColumn[] {
+                        this.tableTrialEvents.SubjectNameColumn,
+                        this.tableTrialEvents.TrialSequenceColumn}, false);
+            this.Relations.Add(this.relationFK_Trials_Events);
+            this.relationTrials_AOIs = new global::System.Data.DataRelation("Trials_AOIs", new global::System.Data.DataColumn[] {
+                        this.tableTrials.TrialIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableAOIs.TrialIDColumn}, false);
+            this.Relations.Add(this.relationTrials_AOIs);
+            this.relationTrials_GazeFixations = new global::System.Data.DataRelation("Trials_GazeFixations", new global::System.Data.DataColumn[] {
+                        this.tableTrials.SubjectNameColumn,
+                        this.tableTrials.TrialIDColumn,
+                        this.tableTrials.TrialSequenceColumn}, new global::System.Data.DataColumn[] {
+                        this.tableGazeFixations.SubjectNameColumn,
+                        this.tableGazeFixations.TrialIDColumn,
+                        this.tableGazeFixations.TrialSequenceColumn}, false);
+            this.Relations.Add(this.relationTrials_GazeFixations);
+            this.relationTrials_MouseFixations = new global::System.Data.DataRelation("Trials_MouseFixations", new global::System.Data.DataColumn[] {
+                        this.tableTrials.SubjectNameColumn,
+                        this.tableTrials.TrialIDColumn,
+                        this.tableTrials.TrialSequenceColumn}, new global::System.Data.DataColumn[] {
+                        this.tableMouseFixations.SubjectNameColumn,
+                        this.tableMouseFixations.TrialIDColumn,
+                        this.tableMouseFixations.TrialSequenceColumn}, false);
+            this.Relations.Add(this.relationTrials_MouseFixations);
+            this.relationShapeGroups_AOIs = new global::System.Data.DataRelation("ShapeGroups_AOIs", new global::System.Data.DataColumn[] {
+                        this.tableShapeGroups.ShapeGroupColumn}, new global::System.Data.DataColumn[] {
+                        this.tableAOIs.ShapeGroupColumn}, false);
+            this.Relations.Add(this.relationShapeGroups_AOIs);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2606,17 +2651,23 @@ namespace Ogama.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public AOIsRow AddAOIsRow(int TrialID, int SlideNr, string ShapeName, string ShapeType, int ShapeNumPts, string ShapePts, string ShapeGroup) {
+            public AOIsRow AddAOIsRow(TrialsRow parentTrialsRowByTrials_AOIs, int SlideNr, string ShapeName, string ShapeType, int ShapeNumPts, string ShapePts, ShapeGroupsRow parentShapeGroupsRowByShapeGroups_AOIs) {
                 AOIsRow rowAOIsRow = ((AOIsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
-                        TrialID,
+                        null,
                         SlideNr,
                         ShapeName,
                         ShapeType,
                         ShapeNumPts,
                         ShapePts,
-                        ShapeGroup};
+                        null};
+                if ((parentTrialsRowByTrials_AOIs != null)) {
+                    columnValuesArray[1] = parentTrialsRowByTrials_AOIs[2];
+                }
+                if ((parentShapeGroupsRowByShapeGroups_AOIs != null)) {
+                    columnValuesArray[7] = parentShapeGroupsRowByShapeGroups_AOIs[1];
+                }
                 rowAOIsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowAOIsRow);
                 return rowAOIsRow;
@@ -4634,6 +4685,50 @@ namespace Ogama.DataSet {
             public void SetEliminateDataNull() {
                 this[this.tableTrials.EliminateDataColumn] = global::System.Convert.DBNull;
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public TrialEventsRow[] GetTrialEventsRows() {
+                if ((this.Table.ChildRelations["FK_Trials_Events"] == null)) {
+                    return new TrialEventsRow[0];
+                }
+                else {
+                    return ((TrialEventsRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Trials_Events"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public AOIsRow[] GetAOIsRows() {
+                if ((this.Table.ChildRelations["Trials_AOIs"] == null)) {
+                    return new AOIsRow[0];
+                }
+                else {
+                    return ((AOIsRow[])(base.GetChildRows(this.Table.ChildRelations["Trials_AOIs"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public GazeFixationsRow[] GetGazeFixationsRows() {
+                if ((this.Table.ChildRelations["Trials_GazeFixations"] == null)) {
+                    return new GazeFixationsRow[0];
+                }
+                else {
+                    return ((GazeFixationsRow[])(base.GetChildRows(this.Table.ChildRelations["Trials_GazeFixations"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public MouseFixationsRow[] GetMouseFixationsRows() {
+                if ((this.Table.ChildRelations["Trials_MouseFixations"] == null)) {
+                    return new MouseFixationsRow[0];
+                }
+                else {
+                    return ((MouseFixationsRow[])(base.GetChildRows(this.Table.ChildRelations["Trials_MouseFixations"])));
+                }
+            }
         }
         
         /// <summary>
@@ -4745,6 +4840,17 @@ namespace Ogama.DataSet {
                 }
                 set {
                     this[this.tableTrialEvents.EventParamColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public TrialsRow TrialsRowParent {
+                get {
+                    return ((TrialsRow)(this.GetParentRow(this.Table.ParentRelations["FK_Trials_Events"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_Trials_Events"]);
                 }
             }
             
@@ -5157,6 +5263,28 @@ namespace Ogama.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public TrialsRow TrialsRow {
+                get {
+                    return ((TrialsRow)(this.GetParentRow(this.Table.ParentRelations["Trials_AOIs"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["Trials_AOIs"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public ShapeGroupsRow ShapeGroupsRow {
+                get {
+                    return ((ShapeGroupsRow)(this.GetParentRow(this.Table.ParentRelations["ShapeGroups_AOIs"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["ShapeGroups_AOIs"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsShapeNameNull() {
                 return this.IsNull(this.tableAOIs.ShapeNameColumn);
             }
@@ -5249,6 +5377,17 @@ namespace Ogama.DataSet {
                 }
                 set {
                     this[this.tableShapeGroups.ShapeGroupColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public AOIsRow[] GetAOIsRows() {
+                if ((this.Table.ChildRelations["ShapeGroups_AOIs"] == null)) {
+                    return new AOIsRow[0];
+                }
+                else {
+                    return ((AOIsRow[])(base.GetChildRows(this.Table.ChildRelations["ShapeGroups_AOIs"])));
                 }
             }
         }
@@ -5388,6 +5527,17 @@ namespace Ogama.DataSet {
                 }
                 set {
                     this[this.tableGazeFixations.PosYColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public TrialsRow TrialsRowParent {
+                get {
+                    return ((TrialsRow)(this.GetParentRow(this.Table.ParentRelations["Trials_GazeFixations"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["Trials_GazeFixations"]);
                 }
             }
             
@@ -5587,6 +5737,17 @@ namespace Ogama.DataSet {
                 }
                 set {
                     this[this.tableMouseFixations.PosYColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public TrialsRow TrialsRowParent {
+                get {
+                    return ((TrialsRow)(this.GetParentRow(this.Table.ParentRelations["Trials_MouseFixations"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["Trials_MouseFixations"]);
                 }
             }
             
