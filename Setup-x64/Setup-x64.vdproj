@@ -111,12 +111,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_2CE5DBCA3E5647DF9B3A06276E03DB57"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_2F35CF8F18791024611511351AD91CDC"
         "OwnerKey" = "8:_EE60998B87C1089D0A08383F7599B260"
         "MsmSig" = "8:_UNDEFINED"
@@ -215,6 +209,12 @@
         {
         "MsmKey" = "8:_484306B1FAA72D34D4913FBED72A3667"
         "OwnerKey" = "8:_EF4F51A11D1FC1E0C6F8881C65568083"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_486E5DFA11D0442DA8B362F719904CB1"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -335,12 +335,6 @@
         {
         "MsmKey" = "8:_600300E74A819AAD4E5F22883BFE66F2"
         "OwnerKey" = "8:_EA38EC2C3BD34EA99A524E30CCA2405E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_62C546468EF841A3B0E0587F512F4302"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -573,12 +567,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_A2CE7514A8D642AE9932D239A958DC0A"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_A469BE8B82893AFFF76C3E8AEA120BBF"
         "OwnerKey" = "8:_EA38EC2C3BD34EA99A524E30CCA2405E"
         "MsmSig" = "8:_UNDEFINED"
@@ -629,6 +617,12 @@
         {
         "MsmKey" = "8:_B52C3F0C565874C93A948EDD41C96BB2"
         "OwnerKey" = "8:_EA38EC2C3BD34EA99A524E30CCA2405E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B5ABF6E5CDCE4265B59E51F980494AE3"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1179,49 +1173,7 @@
         "DisplayName" = "8:Debug"
         "IsDebugOnly" = "11:TRUE"
         "IsReleaseOnly" = "11:FALSE"
-        "OutputFilename" = "8:..\\Debug86\\Setup\\Ogama\\OgamaSetupV4.0.msi"
-        "PackageFilesAs" = "3:2"
-        "PackageFileSize" = "3:-2147483648"
-        "CabType" = "3:1"
-        "Compression" = "3:2"
-        "SignOutput" = "11:FALSE"
-        "CertificateFile" = "8:"
-        "PrivateKeyFile" = "8:"
-        "TimeStampServer" = "8:"
-        "InstallerBootstrapper" = "3:2"
-            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
-            {
-            "Enabled" = "11:TRUE"
-            "PromptEnabled" = "11:TRUE"
-            "PrerequisitesLocation" = "2:1"
-            "Url" = "8:"
-            "ComponentsUrl" = "8:"
-                "Items"
-                {
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Net.Framework.3.5.SP1"
-                    {
-                    "Name" = "8:.NET Framework 3.5 SP1"
-                    "ProductCode" = "8:Microsoft.Net.Framework.3.5.SP1"
-                    }
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Sql.Server.Express.10.0"
-                    {
-                    "Name" = "8:SQL Server 2008 Express"
-                    "ProductCode" = "8:Microsoft.Sql.Server.Express.10.0"
-                    }
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.4.5"
-                    {
-                    "Name" = "8:Windows Installer 4.5"
-                    "ProductCode" = "8:Microsoft.Windows.Installer.4.5"
-                    }
-                }
-            }
-        }
-        "Release"
-        {
-        "DisplayName" = "8:Release"
-        "IsDebugOnly" = "11:FALSE"
-        "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:..\\Release64\\Setup\\Ogama\\OgamaSetupV4.0.msi"
+        "OutputFilename" = "8:..\\Debug64\\Setup\\Ogama\\OgamaSetupV4.0.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -1250,10 +1202,62 @@
                     "Name" = "8:SQL Server 2008 Express"
                     "ProductCode" = "8:Microsoft.Sql.Server.Express.10.0"
                     }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.4.5"
+                    {
+                    "Name" = "8:Windows Installer 4.5"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.4.5"
+                    }
+                }
+            }
+        }
+        "Release"
+        {
+        "DisplayName" = "8:Release"
+        "IsDebugOnly" = "11:FALSE"
+        "IsReleaseOnly" = "11:TRUE"
+        "OutputFilename" = "8:..\\Release64\\Setup\\Ogama\\OgamaSetupV4.0x64.msi"
+        "PackageFilesAs" = "3:2"
+        "PackageFileSize" = "3:-2147483648"
+        "CabType" = "3:1"
+        "Compression" = "3:2"
+        "SignOutput" = "11:FALSE"
+        "CertificateFile" = "8:"
+        "PrivateKeyFile" = "8:"
+        "TimeStampServer" = "8:"
+        "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:2"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.0"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Apple.Bonjour"
+                    {
+                    "Name" = "8:Apple Bonjour"
+                    "ProductCode" = "8:Apple.Bonjour"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Sql.Server.Express.10.0"
+                    {
+                    "Name" = "8:SQL Server 2008 Express"
+                    "ProductCode" = "8:Microsoft.Sql.Server.Express.10.0"
+                    }
                     "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Visual.C++.10.0.x64"
                     {
                     "Name" = "8:Visual C++ 2010 Runtime Libraries (x64)"
                     "ProductCode" = "8:Microsoft.Visual.C++.10.0.x64"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Visual.C++.9.0.x64"
+                    {
+                    "Name" = "8:Visual C++ 2008 SP1 Runtime Libraries (x64)"
+                    "ProductCode" = "8:Microsoft.Visual.C++.9.0.x64"
                     }
                     "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.4.5"
                     {
@@ -1646,26 +1650,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2CE5DBCA3E5647DF9B3A06276E03DB57"
-            {
-            "SourcePath" = "8:..\\Release86\\OgamaScreenCapture.ax"
-            "TargetName" = "8:OgamaScreenCapture.ax"
-            "Tag" = "8:"
-            "Folder" = "8:_8FB299A70F114EA6AF4E625DC566059B"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:4"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2F35CF8F18791024611511351AD91CDC"
             {
             "AssemblyRegister" = "3:1"
@@ -1783,7 +1767,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:DmoBase, Version=4.0.4326.38265, Culture=neutral, PublicKeyToken=163be806126850ac, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:DmoBase, Version=4.0.4339.38580, Culture=neutral, PublicKeyToken=163be806126850ac, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_335FC866C554DE189EDDE306F542AFBB"
@@ -1901,6 +1885,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_486E5DFA11D0442DA8B362F719904CB1"
+            {
+            "SourcePath" = "8:..\\Release64\\OgamaScreenCapture.ax"
+            "TargetName" = "8:OgamaScreenCapture.ax"
+            "Tag" = "8:"
+            "Folder" = "8:_8FB299A70F114EA6AF4E625DC566059B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:4"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4E53A8DD6D0D7AC1C8E28BE95A391C0E"
@@ -2056,26 +2060,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_62C546468EF841A3B0E0587F512F4302"
-            {
-            "SourcePath" = "8:..\\Libs\\Native\\msvcr71.dll"
-            "TargetName" = "8:msvcr71.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_8FB299A70F114EA6AF4E625DC566059B"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6C082C3C5CAD48BDA163518582EEC974"
@@ -2368,7 +2352,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:OgamaControls, Version=4.0.4326.38246, Culture=neutral, PublicKeyToken=43078ad6ea7e2b10, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:OgamaControls, Version=4.0.4339.38580, Culture=neutral, PublicKeyToken=43078ad6ea7e2b10, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_8A2346C91DAC17984F61FB07092BA533"
@@ -2570,26 +2554,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A2CE7514A8D642AE9932D239A958DC0A"
-            {
-            "SourcePath" = "8:..\\Libs\\Native\\GSSF.ax"
-            "TargetName" = "8:GSSF.ax"
-            "Tag" = "8:"
-            "Folder" = "8:_8FB299A70F114EA6AF4E625DC566059B"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:4"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A469BE8B82893AFFF76C3E8AEA120BBF"
             {
             "AssemblyRegister" = "3:1"
@@ -2676,7 +2640,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:VectorGraphics, Version=4.0.4326.38245, Culture=neutral, PublicKeyToken=c29763027ae5aa3e, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:VectorGraphics, Version=4.0.4339.38579, Culture=neutral, PublicKeyToken=c29763027ae5aa3e, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_B386CFDDE83C9A4F5F8AD51504B37184"
@@ -2734,6 +2698,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B5ABF6E5CDCE4265B59E51F980494AE3"
+            {
+            "SourcePath" = "8:..\\Release64\\GenericSampleSourceFilter.ax"
+            "TargetName" = "8:GenericSampleSourceFilter.ax"
+            "Tag" = "8:"
+            "Folder" = "8:_8FB299A70F114EA6AF4E625DC566059B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:4"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C10F27940E40D7341C5C71B6B3846250"
             {
             "AssemblyRegister" = "3:1"
@@ -2770,7 +2754,7 @@
             "SourcePath" = "8:..\\Help\\OgamaSourceDocumentation.chm"
             "TargetName" = "8:OgamaSourceDocumentation.chm"
             "Tag" = "8:"
-            "Folder" = "8:_1FD5D77EC8644DF187B02F5FA82D3449"
+            "Folder" = "8:_45AE9B8FA6DC4E28B17325BB075E77E1"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -3016,7 +3000,7 @@
             "SourcePath" = "8:..\\Setup-x86\\Resources\\Help\\FixationSourceCodePermission.txt"
             "TargetName" = "8:FixationSourceCodePermission.txt"
             "Tag" = "8:"
-            "Folder" = "8:_1FD5D77EC8644DF187B02F5FA82D3449"
+            "Folder" = "8:_45AE9B8FA6DC4E28B17325BB075E77E1"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -3149,7 +3133,7 @@
             "SourcePath" = "8:..\\Setup-x86\\Resources\\help.ico"
             "TargetName" = "8:help.ico"
             "Tag" = "8:"
-            "Folder" = "8:_1FD5D77EC8644DF187B02F5FA82D3449"
+            "Folder" = "8:_45AE9B8FA6DC4E28B17325BB075E77E1"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -3258,32 +3242,9 @@
                 {
                 }
             }
-            "{994432C3-9487-495D-8656-3E829A8DBDDE}:_623BCECEC3E6476D84B48ADD52A457B9"
-            {
-            "DefaultLocation" = "8:[CommonAppDataFolder][Manufacturer]\\Ogama"
-            "Name" = "8:Common Application Data"
-            "AlwaysCreate" = "11:TRUE"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Property" = "8:COMMONAPPDATAFOLDER"
-                "Folders"
-                {
-                }
-            }
-            "{1525181F-901A-416C-8A58-119130FE478E}:_753282C8C2AB4A829D094975AF0912CE"
-            {
-            "Name" = "8:#1914"
-            "AlwaysCreate" = "11:FALSE"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Property" = "8:SystemFolder"
-                "Folders"
-                {
-                }
-            }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_8FB299A70F114EA6AF4E625DC566059B"
             {
-            "DefaultLocation" = "8:[ProgramFilesFolder]\\[ProductName]"
+            "DefaultLocation" = "8:[ProgramFiles64Folder]\\[ProductName]"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -3291,7 +3252,7 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
-                    "{9EF0B969-E518-4E46-987F-47570745A589}:_1FD5D77EC8644DF187B02F5FA82D3449"
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_45AE9B8FA6DC4E28B17325BB075E77E1"
                     {
                     "Name" = "8:Help"
                     "AlwaysCreate" = "11:FALSE"
@@ -3341,7 +3302,7 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:OGAMA 4.0"
+        "ProductName" = "8:OGAMA 4.0 (x64)"
         "ProductCode" = "8:{F93D4ECE-92CC-4E71-BCE9-B9B3FA946865}"
         "PackageCode" = "8:{1FB1B44D-EE59-42A8-ABD7-ED52F74A706C}"
         "UpgradeCode" = "8:{0215E178-A4A2-4785-A392-F0F048DF44DD}"
@@ -3431,13 +3392,13 @@
             "Transitive" = "11:FALSE"
             "Target" = "8:_C17A929414554B51A04BBB6C933DE10D"
             "Folder" = "8:_4F653744A0E141539B45E6C2B2F0FCEB"
-            "WorkingFolder" = "8:_1FD5D77EC8644DF187B02F5FA82D3449"
+            "WorkingFolder" = "8:_45AE9B8FA6DC4E28B17325BB075E77E1"
             "Icon" = "8:_EFFF706E06DC4088A4CC7343EDF8D655"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_A07C5294E7E24F4CB7D6F426AE6326AB"
             {
-            "Name" = "8:Ogama"
+            "Name" = "8:Ogama (x64)"
             "Arguments" = "8:"
             "Description" = "8:Launches Ogama"
             "ShowCmd" = "3:1"
@@ -4269,7 +4230,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_088CB109699643A095DDB471A3DA72C7"
             {
-            "SourcePath" = "8:..\\DirectShow\\DmoMixer\\obj\\x86\\Release\\DmoMixer.dll"
+            "SourcePath" = "8:..\\DirectShow\\DmoMixer\\obj\\x64\\Release\\DmoMixer.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_8FB299A70F114EA6AF4E625DC566059B"
@@ -4297,7 +4258,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_276FF946B1794620A2BE0DAAA8BC2A2F"
             {
-            "SourcePath" = "8:..\\DirectShow\\DmoOverlay\\obj\\x86\\Release\\DmoOverlay.dll"
+            "SourcePath" = "8:..\\DirectShow\\DmoOverlay\\obj\\x64\\Release\\DmoOverlay.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_8FB299A70F114EA6AF4E625DC566059B"
