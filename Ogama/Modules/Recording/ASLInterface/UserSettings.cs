@@ -9,13 +9,14 @@
 //  Modifications : Smaïl KHAMED
 //  </author>
 // <email>virginie.feraud@univ-tlse2.fr</email>
-
 namespace Ogama.Modules.Recording.ASLInterface
 {
   using System.IO;
   using System.Windows.Forms;
 
+#if ASL
   using ASL_Utilities;
+#endif
 
   /// <summary>
   /// Class to save and load settings for the eye tracking system.
@@ -65,11 +66,13 @@ namespace Ogama.Modules.Recording.ASLInterface
       this.DefaultConfigFile = Properties.Settings.Default.EyeTrackerSettingsPath + "ASLStandardStreaming.cfg";
       this.settingsFile = Properties.Settings.Default.EyeTrackerSettingsPath + "ASLUserSettings.cfg";
 
-      var logPath = Path.Combine(
+ #if ASL
+     var logPath = Path.Combine(
         AslUtil.GetCommonDataFolder(),
         Applicationpath);
       Directory.CreateDirectory(logPath);
       this.LogFile = Path.Combine(logPath, "log.csv");
+#endif
     }
 
     #endregion //CONSTRUCTION
@@ -137,6 +140,7 @@ namespace Ogama.Modules.Recording.ASLInterface
     ///////////////////////////////////////////////////////////////////////////////
     #region PUBLICMETHODS
 
+#if ASL
     /// <summary>
     /// Unserialize an UserSettings object
     /// </summary>
@@ -151,7 +155,6 @@ namespace Ogama.Modules.Recording.ASLInterface
         MessageBox.Show(errorMsg, "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         result = new UserSettings();
       }
-
       return result;
     }
 
@@ -189,6 +192,7 @@ namespace Ogama.Modules.Recording.ASLInterface
     {
       AslUtil.StoreXml(this, fileName);
     }
+#endif
 
     #endregion //PUBLICMETHODS
 

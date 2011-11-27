@@ -90,30 +90,6 @@ namespace Ogama.Modules.Recording.TobiiInterface
     #region WINDOWSEVENTHANDLER
 
     /// <summary>
-    /// The <see cref="Control.TextChanged"/> event handler for
-    /// the <see cref="TextBox"/> <see cref="txbServerAddress"/>.
-    /// Updates current tobii settings with the new server address.
-    /// </summary>
-    /// <param name="sender">Source of the event.</param>
-    /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void txbServerAddress_TextChanged(object sender, EventArgs e)
-    {
-      this.tobiiSettings.TetServerAddress = this.txbServerAddress.Text;
-    }
-
-    /// <summary>
-    /// The <see cref="Control.TextChanged"/> event handler for
-    /// the <see cref="TextBox"/> <see cref="txbServerPort"/>.
-    /// Updates current tobii settings with the new server port.
-    /// </summary>
-    /// <param name="sender">Source of the event.</param>
-    /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void txbServerPort_TextChanged(object sender, EventArgs e)
-    {
-      this.tobiiSettings.TetServerPort = Convert.ToInt32(this.txbServerPort.Text);
-    }
-
-    /// <summary>
     /// The <see cref="RadioButton.CheckedChanged"/> event handler for
     /// the num points <see cref="RadioButton"/>s.
     /// Updates current tobii number of calibration point setting by calling
@@ -275,8 +251,7 @@ namespace Ogama.Modules.Recording.TobiiInterface
           break;
       }
 
-      this.txbServerAddress.Text = this.tobiiSettings.TetServerAddress;
-      this.txbServerPort.Text = this.tobiiSettings.TetServerPort.ToString();
+      this.txbDevice.Text = this.tobiiSettings.ConnectedTrackerName;
       this.clbTobiiBackColor.CurrentColor = this.tobiiSettings.TetCalibBackgroundColor;
       this.clbTobiiPointColor.CurrentColor = this.tobiiSettings.TetCalibPointColor;
       this.chbRandomizePointOrder.Checked = this.tobiiSettings.TetRandomizeCalibPointOrder;

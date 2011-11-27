@@ -112,22 +112,21 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="label3.Text" xml:space="preserve">
-    <value>1. Purchase the Tobii SDK (Sorry, but unfortunately we could not convince 
-    Tobii Technology to allow us providing the SDK dlls with OGAMA)
-    and a Tobii tracker.
-2. Install the SDK Version 2.4.3 or higher.
-3. Start the recording module.
-4. Press the "select tracking device" button and check the Tobii checkbox and click OK.
+    <value>1. Since there is the TobiiSDK 3, you just have to connect the 
+    tracking device (T60, T120, etc.) to your computer.
+2. Then start the recording module.
+3. Press the "select tracking device" button, 
+    check the Tobii checkbox and click OK.
 
 If you followed these steps, a new section called "Tobii" with track status window and recording option will appear at the left side of the recording module.</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAwAMDAQAAAAAABoBgAAxgAAACAgEAAAAAAA6AIAAC4HAAAYGBAAAAAAAOgBAAAWCgAAEBAQAAAA

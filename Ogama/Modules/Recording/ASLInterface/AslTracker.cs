@@ -183,6 +183,7 @@ namespace Ogama.Modules.Recording.ASLInterface
       Properties.Settings.Default.EyeTrackerSettingsPath + "ASLUserSettings.cfg")
     {
       this.UserSettingsFile = Properties.Settings.Default.EyeTrackerSettingsPath + "ASLUserSettings.cfg";
+#if ASL
       this.Settings = UserSettings.Load(this.UserSettingsFile);
       this.CreateDefaultConfigFile();
       this.Settings.DefaultConfigFile = Properties.Settings.Default.EyeTrackerSettingsPath + "ASLStandardStreaming.cfg";
@@ -193,6 +194,7 @@ namespace Ogama.Modules.Recording.ASLInterface
       }
 
       this.Settings.Store(this.UserSettingsFile);
+#endif
 
       // Call the "local" initialize method of derived class
       this.Initialize();
@@ -414,7 +416,9 @@ namespace Ogama.Modules.Recording.ASLInterface
           this.Settings.BaudRate = baudRate;
           this.Settings.UpdateRate = updateRate;
           this.Settings.Streaming = streamingMode;
+#if ASL
           this.Settings.Store(this.SettingsFile);
+#endif
         }
 
         return this.IsConnected;
@@ -636,6 +640,7 @@ namespace Ogama.Modules.Recording.ASLInterface
       // ???
       this.stopwatch2 = new Stopwatch();
 
+#if ASL
       // Load Asl tracker settings.
       if (File.Exists(this.UserSettingsFile))
       {
@@ -646,6 +651,7 @@ namespace Ogama.Modules.Recording.ASLInterface
         this.settings = new UserSettings();
         this.settings.Store(this.UserSettingsFile);
       }
+#endif
     }
 
     /// <summary>

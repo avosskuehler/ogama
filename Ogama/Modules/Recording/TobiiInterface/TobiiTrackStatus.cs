@@ -151,7 +151,7 @@ namespace Ogama.Modules.Recording.TobiiInterface
         //if (!this.tetTrackStatusSubject.IsConnected)
         //{
         //  this.tetTrackStatusSubject.Connect(
-        //    this.tobiiSettings.TetServerAddress,
+        //    this.tobiiSettings.connectedTrackerName,
         //    this.tobiiSettings.TetServerPort);
         //}
 
