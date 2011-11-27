@@ -687,6 +687,7 @@ namespace Ogama.Modules.Recording.TobiiInterface
       {
         connectedTracker = EyetrackerFactory.CreateEyetracker(info);
         connectedTracker.ConnectionError += this.HandleConnectionError;
+        this.tobiiSettings.ConnectedTrackerName = connectedTracker.GetUnitName();
 
         this.tobiiClock = new Clock();
         this.syncManager = new SyncManager(this.tobiiClock, info);

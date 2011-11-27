@@ -53,9 +53,7 @@ namespace Ogama.Modules.Recording.TobiiInterface
       this.clbTobiiPointColor = new OgamaControls.ColorButton(this.components);
       this.btnOK = new System.Windows.Forms.Button();
       this.btnCancel = new System.Windows.Forms.Button();
-      this.txbServerAddress = new System.Windows.Forms.TextBox();
-      this.txbServerPort = new System.Windows.Forms.TextBox();
-      this.label4 = new System.Windows.Forms.Label();
+      this.txbDevice = new System.Windows.Forms.TextBox();
       this.label5 = new System.Windows.Forms.Label();
       this.chbRandomizePointOrder = new System.Windows.Forms.CheckBox();
       this.groupBox1.SuspendLayout();
@@ -240,8 +238,8 @@ namespace Ogama.Modules.Recording.TobiiInterface
       this.label1.Size = new System.Drawing.Size(235, 72);
       this.label1.TabIndex = 24;
       this.label1.Text = "Please specify the calibration settings for the Tobii.\r\nThat is the number of cal" +
-          "ibration points, their size, the speed of display, their color and the backgroun" +
-          "d color.";
+    "ibration points, their size, the speed of display, their color and the backgroun" +
+    "d color.";
       // 
       // groupBox4
       // 
@@ -316,39 +314,22 @@ namespace Ogama.Modules.Recording.TobiiInterface
       this.btnCancel.Text = "&Cancel";
       this.btnCancel.UseVisualStyleBackColor = true;
       // 
-      // txbServerAddress
+      // txbDevice
       // 
-      this.txbServerAddress.Location = new System.Drawing.Point(93, 95);
-      this.txbServerAddress.Name = "txbServerAddress";
-      this.txbServerAddress.Size = new System.Drawing.Size(133, 20);
-      this.txbServerAddress.TabIndex = 27;
-      this.txbServerAddress.TextChanged += new System.EventHandler(this.txbServerAddress_TextChanged);
-      // 
-      // txbServerPort
-      // 
-      this.txbServerPort.Location = new System.Drawing.Point(273, 95);
-      this.txbServerPort.Name = "txbServerPort";
-      this.txbServerPort.Size = new System.Drawing.Size(52, 20);
-      this.txbServerPort.TabIndex = 27;
-      this.txbServerPort.TextChanged += new System.EventHandler(this.txbServerPort_TextChanged);
-      // 
-      // label4
-      // 
-      this.label4.AutoSize = true;
-      this.label4.Location = new System.Drawing.Point(238, 98);
-      this.label4.Name = "label4";
-      this.label4.Size = new System.Drawing.Size(29, 13);
-      this.label4.TabIndex = 28;
-      this.label4.Text = "Port:";
+      this.txbDevice.Location = new System.Drawing.Point(109, 95);
+      this.txbDevice.Name = "txbDevice";
+      this.txbDevice.ReadOnly = true;
+      this.txbDevice.Size = new System.Drawing.Size(216, 20);
+      this.txbDevice.TabIndex = 27;
       // 
       // label5
       // 
       this.label5.AutoSize = true;
       this.label5.Location = new System.Drawing.Point(9, 98);
       this.label5.Name = "label5";
-      this.label5.Size = new System.Drawing.Size(78, 13);
+      this.label5.Size = new System.Drawing.Size(96, 13);
       this.label5.TabIndex = 29;
-      this.label5.Text = "Serveraddress:";
+      this.label5.Text = "Connected Device";
       // 
       // chbRandomizePointOrder
       // 
@@ -369,12 +350,10 @@ namespace Ogama.Modules.Recording.TobiiInterface
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.CancelButton = this.btnCancel;
-      this.ClientSize = new System.Drawing.Size(335, 415);
+      this.ClientSize = new System.Drawing.Size(335, 365);
       this.Controls.Add(this.chbRandomizePointOrder);
       this.Controls.Add(this.label5);
-      this.Controls.Add(this.label4);
-      this.Controls.Add(this.txbServerPort);
-      this.Controls.Add(this.txbServerAddress);
+      this.Controls.Add(this.txbDevice);
       this.Controls.Add(this.btnCancel);
       this.Controls.Add(this.btnOK);
       this.Controls.Add(this.groupBox4);
@@ -430,9 +409,7 @@ namespace Ogama.Modules.Recording.TobiiInterface
     private OgamaControls.ColorButton clbTobiiPointColor;
     private System.Windows.Forms.Button btnOK;
     private System.Windows.Forms.Button btnCancel;
-    private System.Windows.Forms.TextBox txbServerAddress;
-    private System.Windows.Forms.TextBox txbServerPort;
-    private System.Windows.Forms.Label label4;
+    private System.Windows.Forms.TextBox txbDevice;
     private System.Windows.Forms.Label label5;
     private System.Windows.Forms.CheckBox chbRandomizePointOrder;
   }

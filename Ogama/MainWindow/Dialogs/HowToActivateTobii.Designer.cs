@@ -56,7 +56,7 @@
       this.label1.Size = new System.Drawing.Size(366, 37);
       this.label1.TabIndex = 1;
       this.label1.Text = "To enable the recording with Tobii Technology tracking systems please perform the" +
-          " following steps:";
+    " following steps:";
       // 
       // btnOK
       // 

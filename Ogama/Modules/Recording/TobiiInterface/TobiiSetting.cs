@@ -40,14 +40,9 @@ namespace Ogama.Modules.Recording.TobiiInterface
     #region FIELDS
 
     /// <summary>
-    /// Saves the server adress of the tobii tracking system.
+    /// Saves the name of the connected tobii tracking system.
     /// </summary>
-    private string tetServerAddress;
-
-    /// <summary>
-    /// Saves the port for the server adress of the tobii tracking system.
-    /// </summary>
-    private int tetServerPort;
+    private string connectedTrackerName;
 
     /// <summary>
     /// Saves the number of calibration points.
@@ -92,8 +87,7 @@ namespace Ogama.Modules.Recording.TobiiInterface
     /// </summary>
     public TobiiSetting()
     {
-      this.tetServerAddress = "169.254.4.217";
-      this.tetServerPort = 4455;
+      this.connectedTrackerName = "None";
       this.tetNumCalibPoints = 5;
       this.tetCalibPointSize = 22;
       this.tetCalibPointSpeed = 2;
@@ -110,24 +104,13 @@ namespace Ogama.Modules.Recording.TobiiInterface
     #region PROPERTIES
 
     /// <summary>
-    /// Gets or sets the TETServer IP host address.
+    /// Gets or sets the connected Tobii trackers name.
     /// </summary>
-    /// <value>A <see cref="string"/> with the server address.</value>
-    /// <remarks>This can be detected via a ping to the serial number in the command line.</remarks>
-    public string TetServerAddress
+    /// <value>A <see cref="string"/> with the tracker name.</value>
+    public string ConnectedTrackerName
     {
-      get { return this.tetServerAddress; }
-      set { this.tetServerAddress = value; }
-    }
-
-    /// <summary>
-    /// Gets or sets the TETServer IP port number.
-    /// </summary>
-    /// <value>A <see cref="int"/> with the port number, default is 4455.</value>
-    public int TetServerPort
-    {
-      get { return this.tetServerPort; }
-      set { this.tetServerPort = value; }
+      get { return this.connectedTrackerName; }
+      set { this.connectedTrackerName = value; }
     }
 
     /// <summary>

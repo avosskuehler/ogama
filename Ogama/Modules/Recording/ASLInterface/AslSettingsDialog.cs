@@ -175,7 +175,9 @@ namespace Ogama.Modules.Recording.ASLInterface
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void AslSettingsDialog_Load(object sender, EventArgs e)
     {
-      this.userSettings = UserSettings.Load(this.aslTracker.SettingsFile);
+ #if ASL
+     this.userSettings = UserSettings.Load(this.aslTracker.SettingsFile);
+#endif 
       this.InitializeControls();
 
       // Initialize interface
@@ -584,7 +586,9 @@ namespace Ogama.Modules.Recording.ASLInterface
       this.userSettings.WriteLogFile = this.bWriteLogFile.Checked;
       this.userSettings.LogFile = this.txtLogFile.Text;
 
-      this.userSettings.Store();
+ #if ASL
+     this.userSettings.Store();
+#endif
     }
 
     /// <summary>
