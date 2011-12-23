@@ -1,4 +1,4 @@
-﻿// <copyright file="RecordModule.cs" company="FU Berlin">
+// <copyright file="RecordModule.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
 // Copyright (C) 2010 Adrian Voßkühler  
@@ -41,6 +41,7 @@ namespace Ogama.Modules.Recording
   using Ogama.Modules.Recording.MouseOnlyInterface;
   using Ogama.Modules.Recording.SMIInterface;
   using Ogama.Modules.Recording.TobiiInterface;
+  using Ogama.Modules.Recording.MirametrixInterface;
   using Ogama.Modules.Recording.TrackerBase;
   using Ogama.Properties;
   using OgamaControls;
@@ -1666,6 +1667,7 @@ namespace Ogama.Modules.Recording
 
       // Reset tab control
       this.tclEyetracker.TabPages.Clear();
+      this.tclEyetracker.TabPages.Add(this.tbpMirametrix);
       this.tclEyetracker.TabPages.Add(this.tbpTobii);
       this.tclEyetracker.TabPages.Add(this.tbpAlea);
       this.tclEyetracker.TabPages.Add(this.tbpSMI);
@@ -1763,6 +1765,35 @@ namespace Ogama.Modules.Recording
         {
           this.tclEyetracker.TabPages.Remove(this.tbpTobii);
         }
+      }
+
+      if (tracker == (tracker | HardwareTracker.Mirametrix))
+      {
+          // Create Mirametrix tracker
+          var newMirametrix = new MirametrixTracker(
+              ref this.labelCalibrationResultMirametrix,
+              this.tbpMirametrix,
+              this,
+              this.spcMirametrixControls,
+              this.spcMirametrixTrackStatus.Panel1,
+              this.spcMirametrixCalibPlot.Panel1,
+              this.btnMirametrixShowOnPresentationScreen,
+              this.btnMirametrixAcceptCalibration,
+              this.btnMirametrixRecalibrate,
+              this.btnMirametrixConnect,
+              this.btnMirametrixSubjectName,
+              this.btnMirametrixCalibrate,
+              this.btnMirametrixRecord,
+              this.txbMirametrixSubjectName);
+
+          this.trackerInterfaces.Add(HardwareTracker.Mirametrix, newMirametrix);
+      }
+      else
+      {
+          if (this.tclEyetracker.TabPages.Contains(this.tbpMirametrix))
+          {
+              this.tclEyetracker.TabPages.Remove(this.tbpMirametrix);
+          }
       }
 
       if (tracker == (tracker | HardwareTracker.SMI))
@@ -2299,6 +2330,13 @@ namespace Ogama.Modules.Recording
 
       switch (this.tclEyetracker.SelectedTab.Name)
       {
+        case "tbpMirametrix":
+              if (this.trackerInterfaces.ContainsKey(HardwareTracker.Mirametrix))
+              {
+                  this.currentTracker = this.trackerInterfaces[HardwareTracker.Mirametrix];
+              }
+
+              break;
         case "tbpTobii":
           if (this.trackerInterfaces.ContainsKey(HardwareTracker.Tobii))
           {
