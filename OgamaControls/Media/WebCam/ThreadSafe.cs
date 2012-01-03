@@ -91,6 +91,26 @@ namespace OgamaControls
     }
 
     /// <summary>
+    /// Thread safe version to call the <see cref="Control.Dispose()"/> method
+    /// </summary>
+    /// <param name="control">A <see cref="Control"/> that should be disposed.</param>
+    public static void Dispose(Control control)
+    {
+      if (control == null)
+      {
+        throw new ArgumentNullException("control");
+      }
+
+      if (control.InvokeRequired)
+      {
+        control.Invoke(new MethodInvoker(control.Dispose));
+        return;
+      }
+
+      control.Dispose();
+    }
+
+    /// <summary>
     /// Thread safe version to get the <see cref="Control.ClientRectangle"/> property
     /// </summary>
     /// <returns>The <see cref="Rectangle"/> of the given control.</returns>
@@ -98,7 +118,7 @@ namespace OgamaControls
     {
       if (control == null)
       {
-        throw new ArgumentNullException("Control is null");
+        throw new ArgumentNullException("control");
       }
 
       if (control.InvokeRequired)

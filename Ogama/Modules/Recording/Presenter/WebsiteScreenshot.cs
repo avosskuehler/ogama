@@ -21,6 +21,8 @@ namespace Ogama.Modules.Recording
 
   using Ogama.ExceptionHandling;
 
+  using OgamaControls;
+
   /// <summary>
   /// This class creates screenshots of websites.
   /// </summary>
@@ -152,7 +154,7 @@ namespace Ogama.Modules.Recording
       {
         try
         {
-          this.webBrowser.Dispose();
+          ThreadSafe.Dispose(this.webBrowser);
         }
         catch (InvalidComObjectException ex)
         {
@@ -160,6 +162,20 @@ namespace Ogama.Modules.Recording
         }
 
         this.webBrowser = null;
+      }
+
+      if (this.dummyForm != null)
+      {
+        try
+        {
+          ThreadSafe.Close(this.dummyForm);
+        }
+        catch (Exception ex)
+        {
+          ExceptionMethods.HandleExceptionSilent(ex);
+        }
+
+        this.dummyForm = null;
       }
     }
 
@@ -178,12 +194,12 @@ namespace Ogama.Modules.Recording
       if (navigatingArgs.TargetFrameName == string.Empty)
       {
         // There is no frame navigated
-        this.webBrowser.Navigate(navigatingArgs.Url);
+        this.ThreadSafeNavigate(navigatingArgs.Url);
       }
       else
       {
         // The url is called in a specific target frame.
-        this.webBrowser.Navigate(navigatingArgs.Url, navigatingArgs.TargetFrameName);
+        this.ThreadSafeNavigate(navigatingArgs.Url, navigatingArgs.TargetFrameName);
       }
     }
 
@@ -252,6 +268,54 @@ namespace Ogama.Modules.Recording
     #region PRIVATEMETHODS
 
     /// <summary>
+    /// The delegate for the thread safe call to a navigate.
+    /// </summary>
+    /// <param name="newUri">The new <see cref="Uri"/> to navigate to.</param>
+    private delegate void NavigateCallback(Uri newUri);
+
+    /// <summary>
+    /// The delegate for the thread safe call to a navigate.
+    /// </summary>
+    /// <param name="newUri">The new <see cref="Uri"/> to navigate to.</param>
+    /// <param name="newFrame">The frame <see cref="String"/> to navigate to.</param>
+    private delegate void NavigateFrameCallback(Uri newUri, string newFrame);
+
+    /// <summary>
+    /// Thread safe navigate to a uri with frame.
+    /// </summary>
+    /// <param name="newUri">A <see cref="Uri"/> to navigate to.</param>
+    protected void ThreadSafeNavigate(Uri newUri)
+    {
+      if (this.webBrowser.InvokeRequired)
+      {
+        var d = new NavigateCallback(this.ThreadSafeNavigate);
+        this.webBrowser.Invoke(d, new object[] { newUri });
+      }
+      else
+      {
+        this.webBrowser.Navigate(newUri);
+      }
+    }
+
+    /// <summary>
+    /// Thread safe navigate to a uri with frame.
+    /// </summary>
+    /// <param name="newUri">A <see cref="Size"/> to navigate to.</param>
+    /// <param name="newFrame">The frame <see cref="String"/> to navigate to.</param>
+    protected void ThreadSafeNavigate(Uri newUri, string newFrame)
+    {
+      if (this.webBrowser.InvokeRequired)
+      {
+        var d = new NavigateFrameCallback(this.ThreadSafeNavigate);
+        this.webBrowser.Invoke(d, new object[] { newUri, newFrame });
+      }
+      else
+      {
+        this.webBrowser.Navigate(newUri, newFrame);
+      }
+    }
+
+    /// <summary>
     /// Static method to parse the current <see cref="HtmlDocument"/> of the
     /// <see cref="WebBrowser"/> for its maximal scrollsize.
     /// Returns the maximum of the given scrollsize and the documents scrollsize.
@@ -265,13 +329,13 @@ namespace Ogama.Modules.Recording
     {
       if (document.GetElementsByTagName("HTML").Count > 0 && document.Body != null)
       {
-        int htmlWidth = document.GetElementsByTagName("HTML")[0].ScrollRectangle.Width;
-        int htmlHeight = document.GetElementsByTagName("HTML")[0].ScrollRectangle.Height;
-        int scrollWidth = document.Body.ScrollRectangle.Width;
-        int scrollHeight = document.Body.ScrollRectangle.Height;
+        var htmlWidth = document.GetElementsByTagName("HTML")[0].ScrollRectangle.Width;
+        var htmlHeight = document.GetElementsByTagName("HTML")[0].ScrollRectangle.Height;
+        var scrollWidth = document.Body.ScrollRectangle.Width;
+        var scrollHeight = document.Body.ScrollRectangle.Height;
 
-        int maxWidth = (int)Math.Max(htmlWidth, scrollWidth);
-        int maxHeight = (int)Math.Max(htmlHeight, scrollHeight);
+        var maxWidth = (int)Math.Max(htmlWidth, scrollWidth);
+        var maxHeight = (int)Math.Max(htmlHeight, scrollHeight);
 
         currentScrollsize.Width = Math.Max(currentScrollsize.Width, maxWidth);
         currentScrollsize.Height = Math.Max(currentScrollsize.Height, maxHeight);
@@ -302,22 +366,24 @@ namespace Ogama.Modules.Recording
     /// </summary>
     private void CreateBrowserObject()
     {
-      if (this.webBrowser == null || !this.webBrowser.IsAccessible)
+      if (this.webBrowser == null)// || !this.webBrowser.IsAccessible)
       {
         // The webbrowser is not docked, because
         // the screenshot works if its client size is correctly sized
         // but the form does not have to.
         this.webBrowser = new WebBrowser();
-        this.dummyForm = new Form();
-        this.dummyForm.ClientSize = new Size(1, 1);
-        this.dummyForm.FormBorderStyle = FormBorderStyle.None;
+        this.dummyForm = new Form
+          {
+            ClientSize = new Size(1, 1),
+            FormBorderStyle = FormBorderStyle.None
+          };
+
         this.dummyForm.Controls.Add(this.webBrowser);
         this.dummyForm.SendToBack();
         this.dummyForm.Show();
         this.dummyForm.ShowInTaskbar = false;
         this.webBrowser.ScrollBarsEnabled = true;
-        this.webBrowser.DocumentCompleted +=
-          new WebBrowserDocumentCompletedEventHandler(this.WebBrowser_DocumentCompleted);
+        this.webBrowser.DocumentCompleted += this.WebBrowser_DocumentCompleted;
       }
     }
 

@@ -976,29 +976,28 @@ namespace Ogama.Modules.Recording
           string screenshotFilename = Ogama.Modules.SlideshowDesign.BrowserDialog.GetFilenameFromUrl(e.Url);
           WebsiteScreenshot.Instance.ScreenshotFilename = screenshotFilename;
 
-          if (!File.Exists(screenshotFilename))
+          if (!File.Exists(screenshotFilename) || this.currentBrowserTreeNode.UrlToID.ContainsKey(screenshotFilename))
           {
-            int newTrialID = Convert.ToInt32(documentsSlideshow.GetUnusedNodeID());
-            this.currentBrowserTreeNode.UrlToID.Add(screenshotFilename, newTrialID);
+            var newTrialId = Convert.ToInt32(documentsSlideshow.GetUnusedNodeID());
+            this.currentBrowserTreeNode.UrlToID.Add(screenshotFilename, newTrialId);
           }
 
           // Now update slideshow with new trial
-          long eventTime = -1;
           if (this.getTimeMethod != null)
           {
-            eventTime = this.getTimeMethod();
+            this.getTimeMethod();
           }
 
           // Get the corrent trial ID
           // use the existing, if we have already a screenshot of this url
-          int trialID = this.currentBrowserTreeNode.UrlToID[screenshotFilename];
+          var trialID = this.currentBrowserTreeNode.UrlToID[screenshotFilename];
 
           // Create new trial
           string newName = Path.GetFileNameWithoutExtension(screenshotFilename);
-          Trial newWebpageTrial = new Trial(newName, trialID);
+          var newWebpageTrial = new Trial(newName, trialID);
 
           // Create VGScrollImageSlide
-          Slide newWebpageSlide = (Slide)this.shownSlideContainer.Slide.Clone();
+          var newWebpageSlide = (Slide)this.shownSlideContainer.Slide.Clone();
           newWebpageSlide.Modified = true;
           newWebpageSlide.Thumb.Dispose();
           newWebpageSlide.Thumb = null;
@@ -1006,7 +1005,7 @@ namespace Ogama.Modules.Recording
           newWebpageSlide.ActiveXStimuli.Clear();
           newWebpageSlide.VGStimuli.Clear();
 
-          VGScrollImage baseURLScreenshot = new VGScrollImage(
+          var baseURLScreenshot = new VGScrollImage(
             ShapeDrawAction.None,
             Pens.Transparent,
             Brushes.Black,
