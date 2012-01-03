@@ -1502,6 +1502,12 @@ namespace Ogama.Modules.Replay
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnAddMarker_Click(object sender, EventArgs e)
     {
+      // Skip if there is no data
+      if (Document.ActiveDocument.SelectionState.SubjectName == null)
+      {
+        return;
+      }
+
       long time = this.currentTrialTime;
 
       MediaEvent markerEvent = new MediaEvent();
@@ -2584,7 +2590,8 @@ namespace Ogama.Modules.Replay
     private void ResetControls()
     {
       this.StopPlaying();
-
+      //Skip if there is no data
+      if (this.CurrentTrial == null) { return; }
       // Load first slide of multiple slides on trial
       if (this.CurrentTrial.Count > 1)
       {

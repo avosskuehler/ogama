@@ -511,6 +511,9 @@ namespace Ogama.Modules.Fixations
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnSeekNextSlide_Click(object sender, EventArgs e)
     {
+      // Skip if no data available
+      if (this.CurrentTrial == null) { return; }
+
       this.trialTimeLine.HighlightNextSlide(true);
       this.LoadSlide(this.CurrentTrial[this.trialTimeLine.HighlightedSlideIndex], ActiveXMode.Off);
       this.FilterFixationsBySlide();
@@ -525,6 +528,9 @@ namespace Ogama.Modules.Fixations
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnSeekPreviousSlide_Click(object sender, EventArgs e)
     {
+      // Skip if no data available
+      if (this.CurrentTrial == null) { return; }
+
       this.trialTimeLine.HighlightNextSlide(false);
       this.LoadSlide(this.CurrentTrial[this.trialTimeLine.HighlightedSlideIndex], ActiveXMode.Off);
       this.FilterFixationsBySlide();

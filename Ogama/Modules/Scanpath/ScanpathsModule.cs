@@ -1378,6 +1378,9 @@ namespace Ogama.Modules.Scanpaths
         return;
       }
 
+      // Skip if no data available
+      if (this.scanpathsPicture.GazeFixations == null) { return; }
+
       if (this.aggregateDistancesByCategory)
       {
         List<string> categories = new List<string>();

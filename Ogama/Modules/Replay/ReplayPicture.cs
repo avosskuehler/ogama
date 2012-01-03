@@ -2390,6 +2390,9 @@ namespace Ogama.Modules.Replay
     /// to the given time in ms.</returns>
     private int GetSynchronizedSampleCount(long timeInMS)
     {
+      // Skip if there is no data
+      if (this.replayTable == null) { return 0; }
+
       // Get number of sample data rows.
       int rowsCount = this.replayTable.Rows.Count;
 

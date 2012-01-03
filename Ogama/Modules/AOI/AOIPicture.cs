@@ -661,6 +661,9 @@ namespace Ogama.Modules.AOI
     /// <param name="sampleType">The <see cref="SampleType"/> of the data.</param>
     public void DrawAOIStatistics(VisualizationModes mode, SampleType sampleType)
     {
+      // Skip if no data available
+      if (this.aoiStatistics == null) { return; }
+
       // Get all statistical elements
       VGElementCollection statisticalElements =
         this.Elements.FindAllGroupMembers(VGStyleGroup.AOI_STATISTICS_ARROW);
