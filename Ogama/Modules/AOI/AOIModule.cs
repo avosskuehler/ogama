@@ -1063,6 +1063,9 @@ namespace Ogama.Modules.AOI
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnNewRectangle_Click(object sender, EventArgs e)
     {
+      // Skip if no data available
+      if (this.cbbTrial.SelectedItem == null) { return; }
+      
       this.btnNewRectangle.Checked = true;
       this.btnNewEllipse.Checked = false;
       this.btnNewPolyline.Checked = false;
@@ -1080,6 +1083,9 @@ namespace Ogama.Modules.AOI
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnNewEllipse_Click(object sender, EventArgs e)
     {
+      // Skip if no data available
+      if (this.cbbTrial.SelectedItem == null) { return; }
+
       this.btnNewRectangle.Checked = false;
       this.btnNewEllipse.Checked = true;
       this.btnNewPolyline.Checked = false;
@@ -1097,6 +1103,9 @@ namespace Ogama.Modules.AOI
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnNewPolyline_Click(object sender, EventArgs e)
     {
+      // Skip if no data available
+      if (this.cbbTrial.SelectedItem == null) { return; }
+
       this.btnNewRectangle.Checked = false;
       this.btnNewEllipse.Checked = false;
       this.btnNewPolyline.Checked = true;
@@ -1114,6 +1123,9 @@ namespace Ogama.Modules.AOI
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnNewAOIGrid_Click(object sender, EventArgs e)
     {
+      // Skip if no data available
+      if (this.cbbTrial.SelectedItem == null) { return; }
+      
       this.btnNewRectangle.Checked = false;
       this.btnNewEllipse.Checked = false;
       this.btnNewPolyline.Checked = false;
@@ -1177,6 +1189,9 @@ namespace Ogama.Modules.AOI
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnSeekNextSlide_Click(object sender, EventArgs e)
     {
+      // Skip if there is no data
+      if (this.CurrentTrial == null) { return; }
+
       this.trialTimeLine.HighlightNextSlide(true);
       int slideIndex = this.trialTimeLine.HighlightedSlideIndex;
       this.LoadSlide(this.CurrentTrial[slideIndex], ActiveXMode.BehindPicture);
@@ -1191,8 +1206,11 @@ namespace Ogama.Modules.AOI
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void btnSeekPreviousSlide_Click(object sender, EventArgs e)
+    private void BtnSeekPreviousSlideClick(object sender, EventArgs e)
     {
+      // Skip if there is no data
+      if (this.CurrentTrial == null) { return; }
+
       this.trialTimeLine.HighlightNextSlide(false);
       int slideIndex = this.trialTimeLine.HighlightedSlideIndex;
       this.LoadSlide(this.CurrentTrial[slideIndex], ActiveXMode.BehindPicture);
@@ -1294,6 +1312,9 @@ namespace Ogama.Modules.AOI
     /// <param name="e">A <see cref="ShapeEventArgs"/> with the event data.</param>
     private void aoiPicture_ShapeAdded(object sender, ShapeEventArgs e)
     {
+      // Skip if no data available
+      if (this.cbbTrial.SelectedItem == null) { return; }
+      
       string shapeName = e.Shape.Name;
       int shapePointCount = e.Shape.GetPointCount();
       string shapeType = e.Shape.GetType().ToString().Replace("VectorGraphics.Elements.VG", string.Empty);
@@ -1324,6 +1345,9 @@ namespace Ogama.Modules.AOI
     /// <param name="e">A <see cref="ShapeEventArgs"/> with the event data.</param>
     private void aoiPicture_ShapeChanged(object sender, ShapeEventArgs e)
     {
+      // Skip if no data available
+      if (this.cbbTrial.SelectedItem == null) { return; }
+
       string shapeName = e.Shape.Name;
       int shapePointCount = e.Shape.GetPointCount();
       string shapeType = e.Shape.GetType().ToString().Replace("VectorGraphics.Elements.VG", string.Empty);

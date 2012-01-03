@@ -342,6 +342,9 @@ namespace Ogama.Modules.AttentionMap
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnSeekNextSlide_Click(object sender, EventArgs e)
     {
+      // Skip if there is no data
+      if (this.CurrentTrial == null) { return; }
+
       this.trialTimeLine.HighlightNextSlide(true);
       int slideIndex = this.trialTimeLine.HighlightedSlideIndex;
       this.LoadSlide(this.CurrentTrial[slideIndex], ActiveXMode.BehindPicture);
@@ -356,6 +359,9 @@ namespace Ogama.Modules.AttentionMap
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnSeekPreviousSlide_Click(object sender, EventArgs e)
     {
+      // Skip if there is no data
+      if (this.CurrentTrial == null) { return; }
+
       this.trialTimeLine.HighlightNextSlide(false);
       int slideIndex = this.trialTimeLine.HighlightedSlideIndex;
       this.LoadSlide(this.CurrentTrial[slideIndex], ActiveXMode.BehindPicture);
@@ -717,6 +723,7 @@ namespace Ogama.Modules.AttentionMap
         // Check if any subject is selected
         if (this.trvSubjects.Nodes.Count == 0)
         {
+          this.btnStartCalculation.Enabled = true;
           return;
         }
 

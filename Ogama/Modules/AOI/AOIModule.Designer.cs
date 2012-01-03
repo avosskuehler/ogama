@@ -1053,7 +1053,7 @@ namespace Ogama.Modules.AOI
       this.btnSeekPreviousSlide.Name = "btnSeekPreviousSlide";
       this.btnSeekPreviousSlide.Size = new System.Drawing.Size(23, 23);
       this.btnSeekPreviousSlide.Text = "Seek to previous slide.";
-      this.btnSeekPreviousSlide.Click += new System.EventHandler(this.btnSeekPreviousSlide_Click);
+      this.btnSeekPreviousSlide.Click += new System.EventHandler(this.BtnSeekPreviousSlideClick);
       // 
       // toolStripSeparator6
       // 

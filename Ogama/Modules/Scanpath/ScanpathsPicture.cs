@@ -677,6 +677,9 @@ namespace Ogama.Modules.Scanpaths
 
           break;
         case GridBase.AOIs:
+          // Skip if no data available
+          if (this.AOITable == null) { return; }
+
           int aoiCount = this.AOITable.Rows.Count;
           for (int i = 0; i < aoiCount; i++)
           {
@@ -710,6 +713,9 @@ namespace Ogama.Modules.Scanpaths
 
           break;
         case GridBase.AOIs:
+          // Skip if no data available
+          if (this.AOITable == null) { return; }
+
           int aoiCount = this.AOITable.Rows.Count;
           if (aoiCount > 26)
           {

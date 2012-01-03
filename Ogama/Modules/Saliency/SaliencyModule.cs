@@ -592,6 +592,9 @@ namespace Ogama.Modules.Saliency
     {
       this.ResetForm();
 
+      // Return if we have no data
+      if (!Document.ActiveDocument.SelectionState.IsSet) { return; }
+
       // Update status bar of main form.
       ((MainForm)this.MdiParent).StatusLabel.Text = "Calculating salient locations ...";
       ((MainForm)this.MdiParent).StatusProgressbar.Style = ProgressBarStyle.Marquee;
