@@ -46,6 +46,7 @@
       this.panel1 = new System.Windows.Forms.Panel();
       this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
       this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
       this.splitContainer1.Panel1.SuspendLayout();
       this.splitContainer1.Panel2.SuspendLayout();
       this.splitContainer1.SuspendLayout();
@@ -111,15 +112,17 @@
       this.audioControl.ShouldPlay = false;
       this.audioControl.Size = new System.Drawing.Size(249, 72);
       this.audioControl.TabIndex = 29;
+      this.audioControl.Visible = false;
       // 
       // pbcBorder
       // 
-      this.pbcBorder.DrawAction = VectorGraphics.Elements.ShapeDrawAction.Edge;
+      this.pbcBorder.DrawAction = VectorGraphics.Elements.ShapeDrawAction.None;
       this.pbcBorder.Location = new System.Drawing.Point(226, 181);
       this.pbcBorder.Name = "pbcBorder";
       this.pbcBorder.NewFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.pbcBorder.NewFontColor = System.Drawing.SystemColors.GrayText;
       this.pbcBorder.NewName = "";
+      this.pbcBorder.NewTextAlignment = VectorGraphics.Elements.VGAlignment.None;
       this.pbcBorder.Size = new System.Drawing.Size(246, 85);
       this.pbcBorder.TabIndex = 28;
       // 
@@ -251,6 +254,7 @@
       this.Text = "Add new flash movie ...";
       this.splitContainer1.Panel1.ResumeLayout(false);
       this.splitContainer1.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
       this.splitContainer1.ResumeLayout(false);
       this.grpImageProperties.ResumeLayout(false);
       this.grpImageProperties.PerformLayout();

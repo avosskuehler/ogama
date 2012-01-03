@@ -2356,16 +2356,27 @@ namespace Ogama.Modules.Replay
     /// <param name="toDraw">The <see cref="SampleType"/> to draw.</param>
     private void DrawSpotlight(TimedPoint newPt, SampleType toDraw)
     {
-      RectangleF bubbleRect = new RectangleF(newPt.Position.X - 75, newPt.Position.Y - 75, 150, 150);
       switch (toDraw)
       {
         case SampleType.Gaze:
           // Draw circle
-          this.gazePicEllipse.Bounds = bubbleRect;
+          var gazeRadius = this.gazeFixDiameterDiv * 10;
+          var gazeBubbleRect = new RectangleF(
+            newPt.Position.X - gazeRadius,
+            newPt.Position.Y - gazeRadius,
+            2 * gazeRadius,
+            2 * gazeRadius);
+          this.gazePicEllipse.Bounds = gazeBubbleRect;
           break;
         case SampleType.Mouse:
           // Draw circle
-          this.mousePicEllipse.Bounds = bubbleRect;
+          var mouseRadius = this.mouseFixDiameterDiv * 10;
+          var mouseBubbleRect = new RectangleF(
+            newPt.Position.X - mouseRadius,
+            newPt.Position.Y - mouseRadius,
+            2 * mouseRadius,
+            2 * mouseRadius);
+          this.mousePicEllipse.Bounds = mouseBubbleRect;
           break;
       }
     }

@@ -336,7 +336,9 @@ namespace Ogama.Modules.Recording
       // PS3EyeAxFilter.ax at connection to the gazetracker client
       // with exactly this mehtod.
       // TODO: Find the reason...
+#if !WIN64
       int count = PS3Camera.CameraCount;
+#endif
 
       this.InitializeComponent();
 

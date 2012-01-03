@@ -97,7 +97,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>..\Debug64\</OutputPath>
-    <DefineConstants>DEBUG</DefineConstants>
+    <DefineConstants>DEBUG;WIN64</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
@@ -1838,8 +1838,15 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(SolutionDir)Libs\Native\*.*" "$(OutDir)" /E /Y
-xcopy "$(SolutionDir)Libs\Gazetracker\*.*" "$(OutDir)" /E /Y</PostBuildEvent>
+    <PostBuildEvent>if $(PlatformName) == x64 (
+  xcopy "$(SolutionDir)Libs\Native\x64\*.*" "$(OutDir)" /E /Y
+  xcopy "$(SolutionDir)Libs\Gazetracker\*.*" "$(OutDir)" /E /Y
+) ELSE (
+  xcopy "$(SolutionDir)Libs\Native\x86\*.*" "$(OutDir)" /E /Y
+  xcopy "$(SolutionDir)Libs\Gazetracker\*.*" "$(OutDir)" /E /Y
+)
+
+</PostBuildEvent>
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>

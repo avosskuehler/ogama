@@ -145,6 +145,7 @@ namespace Ogama.Modules.SlideshowDesign
     public static string GetFilenameFromUrl(Uri url)
     {
       string filename = Regex.Replace(url.ToString(), @"(\\|\/|\:|\*|\?|\""|\<|\>|\|)?", string.Empty);
+      filename = filename.Substring(0, Math.Min(filename.Length, 100));
       filename += ".png";
       filename = Path.Combine(Document.ActiveDocument.ExperimentSettings.SlideResourcesPath, filename);
       return filename;
