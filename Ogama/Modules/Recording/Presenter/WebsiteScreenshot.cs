@@ -16,7 +16,10 @@ namespace Ogama.Modules.Recording
   using System;
   using System.Drawing;
   using System.Drawing.Imaging;
+  using System.Runtime.InteropServices;
   using System.Windows.Forms;
+
+  using Ogama.ExceptionHandling;
 
   /// <summary>
   /// This class creates screenshots of websites.
@@ -147,7 +150,15 @@ namespace Ogama.Modules.Recording
     {
       if (this.webBrowser != null)
       {
-        this.webBrowser.Dispose();
+        try
+        {
+          this.webBrowser.Dispose();
+        }
+        catch (InvalidComObjectException ex)
+        {
+          ExceptionMethods.HandleExceptionSilent(ex);
+        }
+
         this.webBrowser = null;
       }
     }
