@@ -54,7 +54,7 @@
       this.panel3 = new System.Windows.Forms.Panel();
       this.groupBox4 = new System.Windows.Forms.GroupBox();
       this.splitContainer23 = new System.Windows.Forms.SplitContainer();
-      this.eyeVideoControlGazetracker = new OgamaClient.Controls.EyeVideoControl();
+      this.eyeVideoControlGazetracker = new GTOgamaClient.Controls.EyeVideoControl();
       this.btnGazetrackerDirectClientShowOnPresentationScreen = new System.Windows.Forms.Button();
       this.txbGazetrackerDirectClientSubject = new System.Windows.Forms.TextBox();
       this.btnGazetrackerDirectClientRecord = new System.Windows.Forms.Button();
@@ -5367,7 +5367,7 @@
     private System.Windows.Forms.Label label81;
     private System.Windows.Forms.Button btnGazetrackerDirectClientSubject;
     private System.Windows.Forms.Button btnGazetrackerDirectClientConnect;
-    private OgamaClient.Controls.EyeVideoControl eyeVideoControlGazetracker;
+    private GTOgamaClient.Controls.EyeVideoControl eyeVideoControlGazetracker;
     private System.Windows.Forms.Label label83;
     private System.Windows.Forms.Button btnGazetrackerDirectClientAdjust;
   }

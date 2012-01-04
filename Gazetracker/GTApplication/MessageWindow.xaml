@@ -1,0 +1,53 @@
+﻿<Window
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" xmlns:GazeGUIVelocity="clr-namespace:GazeGUIVelocity;assembly=GazeGUIVelocity"
+	x:Class="GTApplication.MessageWindow"
+	x:Name="Window"
+	Title="MessageWindow"
+    Background="Transparent"
+	WindowStyle="None" AllowsTransparency="True"
+    WindowStartupLocation="CenterScreen"
+	Width="541" Height="312">
+
+	<Grid x:Name="LayoutRoot">
+	
+            <Grid x:Name="GridContent" Visibility="Visible" Margin="0">
+				
+            	<Rectangle RadiusX="7" RadiusY="7" MouseLeftButtonDown="DragWindow" x:Name="RectBG2" Margin="0" Fill="#D8000000">
+            		<Rectangle.Stroke>
+            			<LinearGradientBrush EndPoint="0.379,0.448" StartPoint="0.918,0.929">
+            				<GradientStop Color="#FF787878" Offset="0"/>
+            				<GradientStop Color="#FFB1B1B1" Offset="1"/>
+            			</LinearGradientBrush>
+            		</Rectangle.Stroke>
+            	</Rectangle>
+				
+            	<Grid x:Name="GridTop" Margin="8,-3,5,0" VerticalAlignment="Top" Height="40.41">
+				
+            		<Label Content="x" MouseDown="AppClose" Background="{x:Null}" FontFamily="Verdana" FontSize="18" Foreground="#FF989898" HorizontalAlignment="Right" x:Name="LabelCloseX" Width="Auto" Height="Auto" Margin="0,0.533,0,8" d:LayoutOverrides="Height" />
+            		<Label MouseLeftButtonDown="DragWindow" Background="#00FBFBFB" FontFamily="Lithos Pro" FontSize="18.667" Foreground="DarkGray" Margin="0,2.998,0,3.996" Height="Auto" Content="GT2" HorizontalAlignment="Center" x:Name="LabelTitle" d:LayoutOverrides="Height"/>
+		
+            	</Grid>
+				
+				
+            	<Grid x:Name="GridMessage" Margin="8,29.998,8,0" VerticalAlignment="Top" Height="121.002">
+            		<Rectangle Fill="#D9161616" Stroke="#FF474747" RadiusX="2" RadiusY="2" Margin="0"/>
+					<TextBlock x:Name="TextBlockMessage" Foreground="White" TextWrapping="Wrap" Margin="8,8,8,3" FontSize="13.333"/>
+            	</Grid>
+            	<Grid Margin="8,155,8,8">
+            		<Rectangle Fill="#D8161616" Stroke="#FF474747" RadiusX="2" RadiusY="2"/>
+            		<TextBlock Margin="16,11,16,0" VerticalAlignment="Top" Height="67" Foreground="#FFAFAFAF" TextWrapping="Wrap" d:LayoutOverrides="VerticalAlignment" FontSize="10.667"><Run Text="The Gaze Tracker is a open source community driven effort continuously improving the platform. We hope that you will contribute your experience in our user community. "/><LineBreak/><Run Text=""/><LineBreak/><Run Text="Available resources:"/></TextBlock>
+            		<WrapPanel Margin="6,73,10,4" Orientation="Horizontal" ItemWidth="85" d:LayoutOverrides="VerticalAlignment">
+            			<GazeGUIVelocity:Button x:Name="BtnForum" Action="VisitForum" Background="#FF343434" Foreground="#FFB7B7B7" ActivationMethod="Mouse" Icon="Graphics/users.png" Label="Forum" Width="70" Height="65" VerticalAlignment="Center"/>
+            			<GazeGUIVelocity:Button x:Name="BtnManual" Action="ReadDocumentation" Width="70" Background="#FF343434" Foreground="Black" ActivationMethod="Mouse" Icon="Graphics/book.png" Label="Manual" Height="65" VerticalAlignment="Center"/>
+            			<GazeGUIVelocity:Button x:Name="BtnVideoInstruction" Action="VideoInstructions" Background="#FF343434" Foreground="Black" ActivationMethod="Mouse" Icon="Graphics/little_tv_256.png" Label="Videos" Height="65" VerticalAlignment="Center" Width="70"/>
+            		</WrapPanel>
+            	</Grid>
+		
+		</Grid>
+		
+	</Grid>
+	
+</Window>

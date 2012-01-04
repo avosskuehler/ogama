@@ -976,7 +976,7 @@ namespace Ogama.Modules.Recording
           string screenshotFilename = Ogama.Modules.SlideshowDesign.BrowserDialog.GetFilenameFromUrl(e.Url);
           WebsiteScreenshot.Instance.ScreenshotFilename = screenshotFilename;
 
-          if (!File.Exists(screenshotFilename) || this.currentBrowserTreeNode.UrlToID.ContainsKey(screenshotFilename))
+          if (!File.Exists(screenshotFilename) || !this.currentBrowserTreeNode.UrlToID.ContainsKey(screenshotFilename))
           {
             var newTrialId = Convert.ToInt32(documentsSlideshow.GetUnusedNodeID());
             this.currentBrowserTreeNode.UrlToID.Add(screenshotFilename, newTrialId);

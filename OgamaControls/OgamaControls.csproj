@@ -83,7 +83,7 @@
     <OutputPath>..\Debug86\</OutputPath>
     <DefineConstants>DEBUG</DefineConstants>
     <BaseAddress>285212672</BaseAddress>
-    <DocumentationFile>..\Debug86\OgamaControls.xml</DocumentationFile>
+    <DocumentationFile>..\Debug86\Docs\OgamaControls.xml</DocumentationFile>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
@@ -125,9 +125,6 @@
     <Reference Include="DirectShowLib-2005, Version=2.1.0.0, Culture=neutral, PublicKeyToken=67e7b740cdfc2d3f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\DirectShowLib-2005.dll</HintPath>
-    </Reference>
-    <Reference Include="GTHardware">
-      <HintPath>..\Libs\Gazetracker\GTHardware.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
@@ -370,7 +367,6 @@
     </Compile>
     <Compile Include="Media\WebCam\DXCapture.cs" />
     <Compile Include="Media\WebCam\ReferenceClock.cs" />
-    <Compile Include="Media\WebCam\ThreadSafe.cs" />
     <Compile Include="Media\WebCam\Webcam.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -475,6 +471,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ThreadSafe.cs" />
     <EmbeddedResource Include="CommonControls\Buttons\ColorButton\ColorButton.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ColorButton.cs</DependentUpon>
@@ -557,6 +554,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Gazetracker\GTHardware\GTHardware.csproj">
+      <Project>{4EF59290-9005-460E-8919-5003414BDC92}</Project>
+      <Name>GTHardware</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VectorGraphics\VectorGraphics.csproj">
       <Project>{8230AED9-33A2-42FD-BDF7-4F7E4EFA73DB}</Project>
       <Name>VectorGraphics</Name>

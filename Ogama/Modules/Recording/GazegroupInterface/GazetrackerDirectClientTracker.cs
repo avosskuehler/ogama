@@ -17,14 +17,14 @@ namespace Ogama.Modules.Recording.GazegroupInterface
   using System.Drawing;
   using System.Windows.Forms;
 
-  using GazeTrackingLibrary.Utils;
+  using GTLibrary.Utils;
 
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
   using Ogama.Modules.Recording.TrackerBase;
 
-  using OgamaClient.API;
-  using OgamaClient.Controls;
+  using GTOgamaClient.API;
+  using GTOgamaClient.Controls;
 
   using OgamaControls;
 
@@ -369,7 +369,7 @@ namespace Ogama.Modules.Recording.GazegroupInterface
     }
 
     /// <summary>
-    /// Raises GazeTrackerUI SettingsWindow to change the settings
+    /// Raises GTApplication SettingsWindow to change the settings
     /// for this interface.
     /// </summary>
     public override void ChangeSettings()
