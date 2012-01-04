@@ -23,7 +23,7 @@ namespace Ogama.Modules.Recording.GazegroupInterface
 
   using GTCommons.Events;
 
-  using GazeTrackerClient;
+  using GTNetworkClient;
 
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
@@ -366,7 +366,7 @@ namespace Ogama.Modules.Recording.GazegroupInterface
     }
 
     /// <summary>
-    /// Raises GazeTrackerUI SettingsWindow to change the settings
+    /// Raises GTApplication SettingsWindow to change the settings
     /// for this interface.
     /// </summary>
     public override void ChangeSettings()
@@ -488,7 +488,7 @@ namespace Ogama.Modules.Recording.GazegroupInterface
       if (!this.IsGazeTrackerApplicationRunning())
       {
         var gazetrackerPath = Path.Combine(
-          Application.StartupPath, "GazeTrackerUI.exe");
+          Application.StartupPath, "GTApplication.exe");
         Process.Start(gazetrackerPath);
       }
       else
@@ -541,13 +541,13 @@ namespace Ogama.Modules.Recording.GazegroupInterface
     ///////////////////////////////////////////////////////////////////////////////
     #region CUSTOMEVENTHANDLER
     /// <summary>
-    /// The <see cref="GazeTrackerClient.GazeData.OnGazeData"/> event handler
+    /// The <see cref="GTNetworkClient.GazeData.OnGazeData"/> event handler
     /// which is called whenever there is a new frame arrived.
     /// Sends the GazeDataChanged event to the recording module.
     /// </summary>
-    /// <param name="gazeData">The <see cref="GazeTrackerClient.GazeData"/> with the gaze data
+    /// <param name="gazeData">The <see cref="GTNetworkClient.GazeData"/> with the gaze data
     /// which are the mapped gaze coordinates in pixel units.</param>
-    private void GazeData_OnGazeData(GazeTrackerClient.GazeData gazeData)
+    private void GazeData_OnGazeData(GTNetworkClient.GazeData gazeData)
     {
       this.clientStatus.IsStreaming = true;
 
@@ -735,7 +735,7 @@ namespace Ogama.Modules.Recording.GazegroupInterface
     private bool IsGazeTrackerApplicationRunning()
     {
       Process[] gazetrackerProcesses =
-        Process.GetProcessesByName("GazeTrackerUI");
+        Process.GetProcessesByName("GTApplication");
       return gazetrackerProcesses.Length != 0;
     }
 

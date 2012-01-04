@@ -29,6 +29,11 @@
     <ClCompile Include="GSSFBitmap.cpp" />
     <ClCompile Include="setup.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BaseClasses\baseclasses.vcxproj">
+      <Project>{e8a3f6fa-ae1c-4c8e-a0b6-9c8480324eaa}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6DF2C2D9-9751-4245-ACB2-5D3F41345932}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>

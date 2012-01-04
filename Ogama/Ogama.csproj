@@ -78,7 +78,7 @@
     <OutputPath>..\Debug86\</OutputPath>
     <DefineConstants>DEBUG</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>..\Debug86\Ogama.XML</DocumentationFile>
+    <DocumentationFile>..\Debug86\Docs\Ogama.XML</DocumentationFile>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
@@ -130,22 +130,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\EtApi.dll</HintPath>
     </Reference>
-    <Reference Include="GazeTrackerClient, Version=1.1.0.0, Culture=neutral, PublicKeyToken=d2bdf8683767e608, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Gazetracker\GazeTrackerClient.dll</HintPath>
-    </Reference>
-    <Reference Include="GazeTrackingLibrary, Version=2.1.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Gazetracker\GazeTrackingLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="GTCommons, Version=2.1.0.0, Culture=neutral, PublicKeyToken=0394c3dfe9da180e, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Gazetracker\GTCommons.dll</HintPath>
-    </Reference>
-    <Reference Include="GTHardware, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bf600965c04ba845, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Gazetracker\GTHardware.dll</HintPath>
-    </Reference>
     <Reference Include="Interop.ASLSERIALOUTLIB2Lib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\Interop.ASLSERIALOUTLIB2Lib.dll</HintPath>
@@ -185,10 +169,6 @@
     <Reference Include="Microsoft.SqlServer.SqlEnum, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\Microsoft.SqlServer.SqlEnum.dll</HintPath>
-    </Reference>
-    <Reference Include="OgamaClient, Version=2.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Gazetracker\OgamaClient.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
@@ -1806,6 +1786,26 @@
     <None Include="Resources\Ellipse.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Gazetracker\GTCommons\GTCommons.csproj">
+      <Project>{02E8476C-305D-4FAD-83BC-3A70CCA37260}</Project>
+      <Name>GTCommons</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gazetracker\GTHardware\GTHardware.csproj">
+      <Project>{4EF59290-9005-460E-8919-5003414BDC92}</Project>
+      <Name>GTHardware</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gazetracker\GTLibrary\GTLibrary.csproj">
+      <Project>{BF8D4E7F-F8E1-4204-B438-55B35233F590}</Project>
+      <Name>GTLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gazetracker\GTNetworkClient\GTNetworkClient.csproj">
+      <Project>{BD8916FF-DE52-4932-A71B-5E748AF559F0}</Project>
+      <Name>GTNetworkClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gazetracker\GTOgamaClient\GTOgamaClient.csproj">
+      <Project>{2F1306D9-F01D-4431-8122-9DBC888480CD}</Project>
+      <Name>GTOgamaClient</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OgamaControls\OgamaControls.csproj">
       <Project>{63EF9D30-447A-4F79-9EC8-E4956DC0ABF8}</Project>
       <Name>OgamaControls</Name>
@@ -1839,11 +1839,9 @@
   -->
   <PropertyGroup>
     <PostBuildEvent>if $(PlatformName) == x64 (
-  xcopy "$(SolutionDir)Libs\Native\x64\*.*" "$(OutDir)" /E /Y
-  xcopy "$(SolutionDir)Libs\Gazetracker\*.*" "$(OutDir)" /E /Y
+  xcopy "$(SolutionDir)Libs\Native\x64\*.*" "$(TargetDir)" /E /Y /s /f
 ) ELSE (
-  xcopy "$(SolutionDir)Libs\Native\x86\*.*" "$(OutDir)" /E /Y
-  xcopy "$(SolutionDir)Libs\Gazetracker\*.*" "$(OutDir)" /E /Y
+  xcopy "$(SolutionDir)Libs\Native\x86\*.*" "$(TargetDir)" /E /Y /s /f
 )
 
 </PostBuildEvent>

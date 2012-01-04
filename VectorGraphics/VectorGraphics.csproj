@@ -53,7 +53,7 @@
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>..\Debug86\</OutputPath>
     <DefineConstants>DEBUG</DefineConstants>
-    <DocumentationFile>..\Debug86\VectorGraphics.xml</DocumentationFile>
+    <DocumentationFile>..\Debug86\Docs\VectorGraphics.xml</DocumentationFile>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
