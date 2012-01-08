@@ -170,6 +170,10 @@ namespace Ogama.Modules.Recording.Dialogs
           "you can use the mouse only tracker.";
         ExceptionMethods.ProcessMessage("Please select a device ...", message);
       }
+      else
+      {
+        this.eyetrackerUpdateTimer.Stop();
+      }
     }
 
     /// <summary>

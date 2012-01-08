@@ -44,7 +44,7 @@ namespace GTHardware.Cameras.Thorlabs
 
     private ThorlabDevice m_uc480;
     private ThorlabSettings settings;
-   
+
     private Window messageDummyWindow;
     private HwndSource hwndSource;
     private IntPtr hwnd = (IntPtr)0;
@@ -107,8 +107,21 @@ namespace GTHardware.Cameras.Thorlabs
     {
       // hwndSource must be set to addhook to messageloop for thorlab messages
       this.messageDummyWindow = new Window();
+      this.messageDummyWindow.Width = 1;
+      this.messageDummyWindow.Height = 1;
+      this.messageDummyWindow.Left = 2000;
+      this.messageDummyWindow.Show();
+
       var wih = new WindowInteropHelper(this.messageDummyWindow);
       this.hwndSource = HwndSource.FromHwnd(wih.Handle);
+      if (this.hwndSource != null)
+      {
+        this.hwnd = this.hwndSource.Handle;
+      }
+      else
+      {
+        throw new Exception("HwndSource of Thorlabs=null");
+      }
 
       //var curProc = Process.GetCurrentProcess();
       //this.hwndSource = HwndSource.FromHwnd(curProc.MainWindowHandle);

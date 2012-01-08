@@ -351,14 +351,9 @@ namespace GTNetworkClient
 
         if (this.socketUdpReceive != null && this.socketUdpReceive.Connected)
         {
-          this.socketUdpReceive.Shutdown(SocketShutdown.Both);
           this.socketUdpReceive.Disconnect(true);
-          this.socketUdpReceive.Close();
-        }
-
-        if (this.threadReceiveUdp != null)
-        {
-          this.threadReceiveUdp.Join();
+          this.socketUdpReceive.Shutdown(SocketShutdown.Both);
+          this.socketUdpReceive.Close(2);
         }
 
         this.OnClientConnectionChanged(false);

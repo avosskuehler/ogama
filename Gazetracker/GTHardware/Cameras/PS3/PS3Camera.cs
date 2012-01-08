@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Runtime.InteropServices;
-using System.Windows.Interop;
 using System.Threading;
-using System.Windows.Media.Imaging;
-using System.Windows.Controls;
-using System.Windows;
-using System.Windows.Media;
-using Emgu.CV;
 using Emgu.CV.Structure;
-using System.IO;
 
 namespace GTHardware.Cameras.PS3Eye
 {
