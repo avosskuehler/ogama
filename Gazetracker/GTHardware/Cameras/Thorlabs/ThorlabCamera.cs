@@ -14,7 +14,12 @@ using System.Diagnostics;
 
 namespace GTHardware.Cameras.Thorlabs
 {
+  using System.Windows;
+
   using GTCommons;
+
+  using Point = System.Drawing.Point;
+  using Size = System.Drawing.Size;
 
   public class ThorlabCamera : CameraBase
   {
@@ -39,8 +44,11 @@ namespace GTHardware.Cameras.Thorlabs
 
     private ThorlabDevice m_uc480;
     private ThorlabSettings settings;
-    public HwndSource hwndSource;
+   
+    private Window messageDummyWindow;
+    private HwndSource hwndSource;
     private IntPtr hwnd = (IntPtr)0;
+
     private string defaultParametersFile = "uc480.ini";
     private int cpuSpeedMHz = 0; // Limit ROI fps if cpu is too slow
     private int maxFPS = 250;
@@ -97,10 +105,14 @@ namespace GTHardware.Cameras.Thorlabs
 
     public ThorlabCamera()
     {
-      // Must be set
-      var curProc = Process.GetCurrentProcess();
-      this.hwndSource = HwndSource.FromHwnd(curProc.MainWindowHandle);
-      this.hwnd = this.hwndSource.Handle;
+      // hwndSource must be set to addhook to messageloop for thorlab messages
+      this.messageDummyWindow = new Window();
+      var wih = new WindowInteropHelper(this.messageDummyWindow);
+      this.hwndSource = HwndSource.FromHwnd(wih.Handle);
+
+      //var curProc = Process.GetCurrentProcess();
+      //this.hwndSource = HwndSource.FromHwnd(curProc.MainWindowHandle);
+      //this.hwnd = this.hwndSource.Handle;
 
       // Settings file
       // string dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase);
@@ -246,7 +258,6 @@ namespace GTHardware.Cameras.Thorlabs
 
     #region Inititialize and start camera
 
-
     public override bool Start()
     {
       // Must have the hwnd to start camera
@@ -256,7 +267,7 @@ namespace GTHardware.Cameras.Thorlabs
       hwndSource.AddHook(WndProc);
 
       workerInit.DoWork += workerInit_DoWork;
-      workerInit.RunWorkerCompleted += new RunWorkerCompletedEventHandler(workerInit_RunWorkerCompleted);
+      workerInit.RunWorkerCompleted += this.workerInit_RunWorkerCompleted;
       workerInit.RunWorkerAsync(hwndSource);
 
       return true; ///m_bLive;
