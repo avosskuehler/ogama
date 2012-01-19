@@ -1,0 +1,1894 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{84DE2C81-CE99-4ED3-B4F3-3C47CDD85E3D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ogama</RootNamespace>
+    <AssemblyName>Ogama</AssemblyName>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <ManifestCertificateThumbprint>878A9DFECB151123BEEC507826D111BC0E7CD32E</ManifestCertificateThumbprint>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
+    <GenerateManifests>false</GenerateManifests>
+    <SignManifests>false</SignManifests>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <ApplicationIcon>Resources\OgamaV3.ico</ApplicationIcon>
+    <TargetZone>LocalIntranet</TargetZone>
+    <StartupObject>Ogama.Program</StartupObject>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <PublishUrl>C:\Dokumente und Einstellungen\Adrian\Eigene Dateien\Universitt\Promotion\VSProjects\GMV\SQLGazeAndMouseViewer\publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>false</MapFileExtensions>
+    <TargetCulture>en</TargetCulture>
+    <ProductName>Gaze and Mouse Viewer</ProductName>
+    <PublisherName>Freie Universitaet Berlin</PublisherName>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <BootstrapperComponentsLocation>Relative</BootstrapperComponentsLocation>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TOBII;VHUNLOCK</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PlatformTarget>x86</PlatformTarget>
+    <DocumentationFile>
+    </DocumentationFile>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Release\</OutputPath>
+    <DefineConstants>TRACE;TOBII;VHUNLOCK</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\Release\Docs\Ogama.XML</DocumentationFile>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\Debug86\</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>..\Debug86\Docs\Ogama.XML</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>..\Release86\</OutputPath>
+    <DefineConstants>TRACE;ASL</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>..\Release86\Ogama.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\Debug64\</OutputPath>
+    <DefineConstants>DEBUG;WIN64</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <OutputPath>..\Release64\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>..\Release64\Docs\Ogama.XML</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ASL_Utilities, Version=1.0.5.0, Culture=neutral, PublicKeyToken=762ca3c5061dd97c, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\ASL_Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="AxShockwaveFlashObjects, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\AxShockwaveFlashObjects.dll</HintPath>
+    </Reference>
+    <Reference Include="DirectShowLib-2005, Version=2.1.0.0, Culture=neutral, PublicKeyToken=67e7b740cdfc2d3f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\DirectShowLib-2005.dll</HintPath>
+    </Reference>
+    <Reference Include="EtApi, Version=1.0.3154.19330, Culture=neutral, PublicKeyToken=3c8a8059c193781b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\EtApi.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.ASLSERIALOUTLIB2Lib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\Interop.ASLSERIALOUTLIB2Lib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.ConnectionUI, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\Microsoft.Data.ConnectionUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.ConnectionUI.Dialog, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\Microsoft.Data.ConnectionUI.Dialog.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.ConnectionInfo, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\Microsoft.SqlServer.ConnectionInfo.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Dmf, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\Microsoft.SqlServer.Dmf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Management.Sdk.Sfc, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\Microsoft.SqlServer.Management.Sdk.Sfc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.ServiceBrokerEnum, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\Microsoft.SqlServer.ServiceBrokerEnum.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Smo, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\Microsoft.SqlServer.Smo.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.SqlClrProvider, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\Microsoft.SqlServer.SqlClrProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.SqlEnum, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\Microsoft.SqlServer.SqlEnum.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="ShockwaveFlashObjects, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\ShockwaveFlashObjects.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.XML" />
+    <Reference Include="Tobii.Eyetracking.Sdk, Version=3.0.2.0, Culture=neutral, PublicKeyToken=8f83ae3e0f6e46ef, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\Tobii.Eyetracking.Sdk.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataSet\OgamaDataSet.cs">
+      <DependentUpon>OgamaDataSet.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataSet\OgamaDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OgamaDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ExceptionHandling\InformationDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExceptionHandling\InformationDialog.Designer.cs">
+      <DependentUpon>InformationDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExceptionHandling\ExceptionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExceptionHandling\ExceptionDialog.Designer.cs">
+      <DependentUpon>ExceptionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExceptionHandling\ErrorDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExceptionHandling\ErrorDialog.Designer.cs">
+      <DependentUpon>ErrorDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExceptionHandling\ShowLogDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExceptionHandling\ShowLogDialog.Designer.cs">
+      <DependentUpon>ShowLogDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExceptionHandling\ExceptionMethods.cs" />
+    <Compile Include="MainWindow\Dialogs\HowToActivateAsl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\HowToActivateAsl.designer.cs">
+      <DependentUpon>HowToActivateAsl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\HowToActivateGazetracker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\HowToActivateGazetracker.Designer.cs">
+      <DependentUpon>HowToActivateGazetracker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\HowToActivateMirametrix.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\HowToActivateMirametrix.Designer.cs">
+      <DependentUpon>HowToActivateMirametrix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\HowToActivateSMI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\HowToActivateSMI.Designer.cs">
+      <DependentUpon>HowToActivateSMI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\HowToActivateAlea.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\HowToActivateAlea.Designer.cs">
+      <DependentUpon>HowToActivateAlea.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\UpgradeDocumentSplash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\UpgradeDocumentSplash.designer.cs">
+      <DependentUpon>UpgradeDocumentSplash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow\MainForm.Menu.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow\MainForm.Module.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\AOI\AOIStatistic.cs" />
+    <Compile Include="Modules\AOI\Dialogs\AddGridDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\AOI\Dialogs\AddGridDlg.Designer.cs">
+      <DependentUpon>AddGridDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\AOI\VisualizationModes.cs" />
+    <Compile Include="Modules\AOI\Dialogs\GroupNameDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\AOI\Dialogs\GroupNameDlg.Designer.cs">
+      <DependentUpon>GroupNameDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Common\Controls\TimeLineFilterDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\Controls\TimeLineFilterDialog.Designer.cs">
+      <DependentUpon>TimeLineFilterDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Common\Controls\TrialTimeLine.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\Controls\TrialTimeLine.Designer.cs">
+      <DependentUpon>TrialTimeLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Common\CustomEventArgs\TrialSequenceChangedEventArgs.cs" />
+    <Compile Include="Modules\Common\CustomEventArgs\CounterChangedEventArgs.cs" />
+    <Compile Include="Modules\Common\CustomEventArgs\SliderValueChangedEventArguments.cs" />
+    <Compile Include="Modules\Common\CustomEventArgs\CompletedEventArgs.cs" />
+    <Compile Include="Modules\Common\CustomEventArgs\NewRawDataAvailableEventArgs.cs" />
+    <Compile Include="Modules\Common\CustomEventArgs\GazeDataChangedEventArgs.cs" />
+    <Compile Include="Modules\Common\CustomEventArgs\ResponseChangedEventArgs.cs" />
+    <Compile Include="Modules\Common\CustomEventArgs\TrialEventIDFoundEventArgs.cs" />
+    <Compile Include="Modules\Common\CustomEventArgs\TrialEventOccuredEventArgs.cs" />
+    <Compile Include="Modules\Common\CustomEventArgs\SlideChangedEventArgs.cs" />
+    <Compile Include="Modules\Common\FormTemplates\FormWithPicture.Designer.cs">
+      <DependentUpon>FormWithPicture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Common\FormTemplates\FormWithTrialSelection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\CustomRenderer\CustomRenderer.cs" />
+    <Compile Include="Modules\Common\FormTemplates\FormWithInterface.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\FormTemplates\FormWithInterface.Designer.cs">
+      <DependentUpon>FormWithInterface.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Common\FormTemplates\FormWithPicture.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\FormTemplates\FormWithAccellerators.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\FormTemplates\FormWithSubjectAndTrialSelection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\PictureTemplates\PictureWithFixations.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\PictureTemplates\PictureWithFixations.Designer.cs">
+      <DependentUpon>PictureWithFixations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Common\PictureTemplates\FixationDrawingMode.cs" />
+    <Compile Include="Modules\Common\SlideCollections\BrowserTreeNode.cs" />
+    <Compile Include="Modules\Common\SlideCollections\SequencedTrial.cs" />
+    <Compile Include="Modules\Common\SlideCollections\TrialCollection.cs" />
+    <Compile Include="Modules\Common\SlideCollections\SlideType.cs" />
+    <Compile Include="Modules\Common\Types\ActiveXMode.cs" />
+    <Compile Include="Modules\Common\Types\SampleValidity.cs" />
+    <Compile Include="Modules\Common\Types\StringEnum.cs" />
+    <Compile Include="Modules\Common\Types\StringValueAttribute.cs" />
+    <Compile Include="Modules\Fixations\Fixation.cs" />
+    <Compile Include="Modules\Fixations\FixationCalculation.cs" />
+    <Compile Include="Modules\Fixations\ExportOptionsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Fixations\ExportOptionsDialog.Designer.cs">
+      <DependentUpon>ExportOptionsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Fixations\ExportOptions.cs" />
+    <Compile Include="Modules\Recording\AleaInterface\AleaTrackStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\AleaInterface\AleaTrackStatus.Designer.cs">
+      <DependentUpon>AleaTrackStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\AleaInterface\AxAleaStatusControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\ASLInterface\AslCalibration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\ASLInterface\AslCalibration.designer.cs">
+      <DependentUpon>AslCalibration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\ASLInterface\AslEnum.cs" />
+    <Compile Include="Modules\Recording\ASLInterface\AslSetting.cs" />
+    <Compile Include="Modules\Recording\ASLInterface\AslSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\ASLInterface\AslSettingsDialog.designer.cs">
+      <DependentUpon>AslSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\ASLInterface\AslTracker.cs" />
+    <Compile Include="Modules\Recording\ASLInterface\AslTrackStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\ASLInterface\AslTrackStatus.designer.cs">
+      <DependentUpon>AslTrackStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\ASLInterface\UserSettings.cs" />
+    <Compile Include="Modules\Recording\GazegroupInterface\GazetrackerIPClientSetting.cs" />
+    <Compile Include="Modules\Recording\GazegroupInterface\GazetrackerIPClientSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\GazegroupInterface\GazetrackerIPClientSettingsDialog.Designer.cs">
+      <DependentUpon>GazetrackerIPClientSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\GazegroupInterface\GazetrackerIPClientStatus.cs" />
+    <Compile Include="Modules\Recording\GazegroupInterface\GazetrackerIPClientTracker.cs" />
+    <Compile Include="Modules\Recording\GazegroupInterface\GazetrackerDirectClientTracker.cs" />
+    <Compile Include="Modules\Recording\MirametrixInterface\ClientNetworkManager.cs" />
+    <Compile Include="Modules\Recording\MirametrixInterface\MirametrixSetting.cs" />
+    <Compile Include="Modules\Recording\MirametrixInterface\MirametrixSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\MirametrixInterface\MirametrixSettingsDialog.Designer.cs">
+      <DependentUpon>MirametrixSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\MirametrixInterface\MirametrixTracker.cs" />
+    <Compile Include="Modules\Recording\MirametrixInterface\MirametrixTrackStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\MirametrixInterface\MirametrixTrackStatus.Designer.cs">
+      <DependentUpon>MirametrixTrackStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\MirametrixInterface\MirametrixTrackStatusControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\MirametrixInterface\MirametrixTrackStatusControl.Designer.cs">
+      <DependentUpon>MirametrixTrackStatusControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\Presenter\WebsiteScreenshot.cs" />
+    <Compile Include="Modules\Recording\Presenter\DSScreenCapture.cs" />
+    <Compile Include="Modules\Recording\Presenter\ScreenCaptureProperties.cs" />
+    <Compile Include="Modules\Recording\TobiiInterface\CalibrationRunner.cs" />
+    <Compile Include="Modules\Recording\TobiiInterface\TobiiCalibrationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\TobiiInterface\TobiiCalibrationForm.designer.cs">
+      <DependentUpon>TobiiCalibrationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\TobiiInterface\TobiiCalibrationResultPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\TobiiInterface\TobiiCalibrationResultPanel.designer.cs">
+      <DependentUpon>TobiiCalibrationResultPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\TobiiInterface\TobiiTrackStatusControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\TobiiInterface\TobiiTrackStatusControl.designer.cs">
+      <DependentUpon>TobiiTrackStatusControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\TrackerBase\TrackerWithStatusControls.cs" />
+    <Compile Include="Modules\Recording\AleaInterface\AleaTracker.cs">
+    </Compile>
+    <Compile Include="Modules\Recording\AleaInterface\AleaSetting.cs" />
+    <Compile Include="Modules\Recording\AleaInterface\AleaSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\AleaInterface\AleaSettingsDialog.Designer.cs">
+      <DependentUpon>AleaSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\AleaInterface\CalibrationDoneEventArgs.cs" />
+    <Compile Include="Modules\Recording\TrackerBase\HardwareTracker.cs" />
+    <Compile Include="Modules\Recording\DataToTable.cs" />
+    <Compile Include="Modules\Recording\Dialogs\SelectTracker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\Dialogs\SelectTracker.Designer.cs">
+      <DependentUpon>SelectTracker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\Dialogs\ScreenCaptureDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\Dialogs\ScreenCaptureDialog.designer.cs">
+      <DependentUpon>ScreenCaptureDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Common\Tools\PresentationScreen.cs" />
+    <Compile Include="Modules\Recording\Presenter\SlidePresentationContainer.cs" />
+    <Compile Include="Modules\Recording\RecordingPicture.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\RecordingPicture.Designer.cs">
+      <DependentUpon>RecordingPicture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\Dialogs\TriggerDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\Dialogs\TriggerDialog.Designer.cs">
+      <DependentUpon>TriggerDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\Dialogs\SavingSplash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\Dialogs\SavingSplash.designer.cs">
+      <DependentUpon>SavingSplash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Common\TrialEvents\MediaEvent.cs" />
+    <Compile Include="Modules\Common\TrialEvents\InputEvent.cs" />
+    <Compile Include="Modules\Common\TrialEvents\InputEventTask.cs" />
+    <Compile Include="Modules\Common\TrialEvents\MediaEventTask.cs" />
+    <Compile Include="Modules\Common\TrialEvents\EventType.cs" />
+    <Compile Include="Modules\Common\TrialEvents\TrialEvent.cs" />
+    <Compile Include="Modules\Common\Controls\HelpDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\Controls\HelpDialog.Designer.cs">
+      <DependentUpon>HelpDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Common\Types\IObjectWithID.cs" />
+    <Compile Include="Modules\Common\Types\NameObjectList.cs" />
+    <Compile Include="Modules\ImportExport\OgamaData\ImportOgamaData.cs" />
+    <Compile Include="Modules\Recording\SMIInterface\AvailableEye.cs" />
+    <Compile Include="Modules\Recording\SMIInterface\CalibrationPointSize.cs" />
+    <Compile Include="Modules\Recording\SMIInterface\SMICalibrationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\SMIInterface\SMICalibrationForm.Designer.cs">
+      <DependentUpon>SMICalibrationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\SMIInterface\SMIClient.cs" />
+    <Compile Include="Modules\Recording\SMIInterface\SMITracker.cs" />
+    <Compile Include="Modules\Recording\SMIInterface\SMISetting.cs" />
+    <Compile Include="Modules\Recording\SMIInterface\SMISettingsDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\SMIInterface\SMISettingsDlg.designer.cs">
+      <DependentUpon>SMISettingsDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\TrackerBase\Tracker.cs" />
+    <Compile Include="Modules\Replay\LoopState.cs" />
+    <Compile Include="Modules\Replay\TimedPoint.cs" />
+    <Compile Include="Modules\Replay\Video\DSRecordWithDMO.cs" />
+    <Compile Include="Modules\Replay\Video\DSBitmapSourceFilter.cs" />
+    <Compile Include="Modules\Replay\Video\DSRecord.cs">
+    </Compile>
+    <Compile Include="Modules\Replay\Video\SaveVideoSplash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Replay\Video\SaveVideoSplash.designer.cs">
+      <DependentUpon>SaveVideoSplash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Replay\Video\ImageFromVectorGraphics.cs" />
+    <Compile Include="Modules\Replay\Video\ImageHandler.cs" />
+    <Compile Include="Modules\Replay\Video\VideoExportProperties.cs" />
+    <Compile Include="Modules\Replay\Video\VideoStreamProperties.cs" />
+    <Compile Include="Modules\Scanpath\Colorization\ColorizationModes.cs" />
+    <Compile Include="Modules\Scanpath\Colorization\ColorizationParameters.cs" />
+    <Compile Include="Modules\Scanpath\Colorization\ColorizationStyle.cs" />
+    <Compile Include="Modules\Scanpath\Colorization\ColorDefinitionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Scanpath\Colorization\ColorDefinitionDialog.Designer.cs">
+      <DependentUpon>ColorDefinitionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Scanpath\ScanpathsModule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Scanpath\ScanpathsModule.Designer.cs">
+      <DependentUpon>ScanpathsModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Scanpath\GridBase.cs" />
+    <Compile Include="Modules\Scanpath\ExportDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Scanpath\ExportDialog.Designer.cs">
+      <DependentUpon>ExportDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Scanpath\Levenshtein.cs" />
+    <Compile Include="Modules\Scanpath\ScanpathProperties.cs" />
+    <Compile Include="Modules\Scanpath\ScanpathsPicture.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Scanpath\ScanpathsPicture.Designer.cs">
+      <DependentUpon>ScanpathsPicture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\DesignModule\PasteAsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\DesignModule\PasteAsDialog.Designer.cs">
+      <DependentUpon>PasteAsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\BrowserDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\BrowserDialog.Designer.cs">
+      <DependentUpon>BrowserDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\SlideshowModule.ListView.cs">
+      <DependentUpon>SlideshowModule.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\SlideshowModule.TreeView.cs">
+      <DependentUpon>SlideshowModule.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\DesignModule\SlideDesignModule.Help.cs">
+      <DependentUpon>SlideDesignModule.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\SlideshowModule.Buttons.cs">
+      <DependentUpon>SlideshowModule.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Statistics\DescriptiveResult.cs" />
+    <Compile Include="Modules\Statistics\Descriptive.cs" />
+    <Compile Include="Modules\Statistics\Variables\MouseVariable.cs" />
+    <Compile Include="Modules\Statistics\Variables\GazeVariable.cs" />
+    <Compile Include="Modules\Statistics\Variables\TrialVariable.cs" />
+    <Compile Include="Modules\Statistics\Variables\SubjectVariable.cs" />
+    <Compile Include="Modules\Statistics\Variables\DefaultVariable.cs" />
+    <Compile Include="Modules\Statistics\Variables\CustomVariable.cs" />
+    <Compile Include="Modules\Common\CustomRenderer\SlideshowTreeNodeRenderer.cs" />
+    <Compile Include="Modules\Common\SlideCollections\Trial.cs" />
+    <Compile Include="Modules\Common\SlideCollections\SlideshowTreeNode.cs" />
+    <Compile Include="Modules\Common\SlideCollections\Slideshow.cs" />
+    <Compile Include="Modules\SlideshowDesign\Shuffling\CustomShuffleDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\Shuffling\CustomShuffleDialog.Designer.cs">
+      <DependentUpon>CustomShuffleDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\Import\FolderContentSlideImportDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\Import\FolderContentSlideImportDialog.Designer.cs">
+      <DependentUpon>FolderContentSlideImportDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\Shuffling\CustomShuffling.cs" />
+    <Compile Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\TextDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\TextDialog.Designer.cs">
+      <DependentUpon>TextDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\SoundDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\SoundDialog.Designer.cs">
+      <DependentUpon>SoundDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\FlashDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\FlashDialog.Designer.cs">
+      <DependentUpon>FlashDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\ShapeDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\ShapeDialog.Designer.cs">
+      <DependentUpon>ShapeDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\ImageDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\ImageDialog.Designer.cs">
+      <DependentUpon>ImageDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\RichTextDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\RichTextDialog.Designer.cs">
+      <DependentUpon>RichTextDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\DesignModule\SlideDesignModule.StimuliTabs.cs">
+      <DependentUpon>SlideDesignModule.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\DesignModule\SlideDesignModule.Common.cs">
+      <DependentUpon>SlideDesignModule.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\StimuliTypes.cs" />
+    <Compile Include="Modules\Common\CustomRenderer\TrialRenderer.cs" />
+    <Compile Include="MainWindow\Dialogs\CheckforUpdates.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\CheckforUpdates.Designer.cs">
+      <DependentUpon>CheckforUpdates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\PropertyDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\PropertyDialog.Designer.cs">
+      <DependentUpon>PropertyDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\SQLConnectionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\SQLConnectionDialog.Designer.cs">
+      <DependentUpon>SQLConnectionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Common\Tools\CollectionUtils.cs" />
+    <Compile Include="Modules\Common\Controls\DialogTop.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Common\Controls\DialogTop.Designer.cs">
+      <DependentUpon>DialogTop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Common\Types\XMLSerializableSortedList.cs" />
+    <Compile Include="Modules\Common\Tools\Queries.cs" />
+    <Compile Include="Modules\Common\Types\SampleType.cs" />
+    <Compile Include="Modules\Common\Types\XMLSerializableDictionary.cs" />
+    <Compile Include="Modules\Saliency\SaliencyModule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Saliency\SaliencyModule.designer.cs">
+      <DependentUpon>SaliencyModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ImportExport\AOIData\AOIDataSettings.cs" />
+    <Compile Include="Modules\ImportExport\AOIData\ImportAOIAssistentDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\ImportExport\AOIData\ImportAOIAssistentDialog.Designer.cs">
+      <DependentUpon>ImportAOIAssistentDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ImportExport\AOIData\ImportAOI.cs" />
+    <Compile Include="Modules\ImportExport\Common\ASCIISettings.cs" />
+    <Compile Include="Modules\ImportExport\Common\ImportStructs.cs" />
+    <Compile Include="Modules\ImportExport\FixationData\ImportFixationsAssistentDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\ImportExport\FixationData\ImportFixationsAssistentDialog.Designer.cs">
+      <DependentUpon>ImportFixationsAssistentDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ImportExport\FixationData\ImportFixations.cs" />
+    <Compile Include="Modules\ImportExport\Common\DetectionSettings.cs" />
+    <Compile Include="Modules\Recording\Dialogs\SavingSuccessDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\Dialogs\SavingSuccessDialog.Designer.cs">
+      <DependentUpon>SavingSuccessDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\Dialogs\AskSaveDataDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\Dialogs\AskSaveDataDialog.Designer.cs">
+      <DependentUpon>AskSaveDataDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\Dialogs\ConnectionFailedDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\Dialogs\ConnectionFailedDialog.Designer.cs">
+      <DependentUpon>ConnectionFailedDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\GazeData.cs" />
+    <Compile Include="Modules\Recording\TrackerBase\ITracker.cs" />
+    <Compile Include="Modules\Recording\MouseOnlyInterface\MouseOnlySettingsDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\MouseOnlyInterface\MouseOnlySettingsDlg.Designer.cs">
+      <DependentUpon>MouseOnlySettingsDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\MouseOnlyInterface\MouseOnlyTracker.cs" />
+    <Compile Include="Modules\Recording\MouseOnlyInterface\MouseOnlySetting.cs" />
+    <Compile Include="Modules\Common\Tools\SecondaryScreen.cs" />
+    <Compile Include="Modules\Recording\TobiiInterface\TobiiTrackStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\TobiiInterface\TobiiTrackStatus.Designer.cs">
+      <DependentUpon>TobiiTrackStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\TobiiInterface\TobiiTracker.cs" />
+    <Compile Include="Modules\Replay\ReplayDrawingModes.cs" />
+    <Compile Include="Modules\Saliency\SaliencyPicture.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Saliency\SaliencyPicture.designer.cs">
+      <DependentUpon>SaliencyPicture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Statistics\Statistic.cs" />
+    <Compile Include="Modules\Statistics\Variables\StatisticalParameters.cs" />
+    <Compile Include="Modules\SlideshowDesign\DesignModule\SlidePicture.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\DesignModule\SlidePicture.Designer.cs">
+      <DependentUpon>SlidePicture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow\ContextPanel\ContextPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MainWindow\ContextPanel\ContextPanel.Designer.cs">
+      <DependentUpon>ContextPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ImportExport\RawData\ImportRawDataAssistentDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\ImportExport\RawData\ImportRawDataAssistentDialog.Designer.cs">
+      <DependentUpon>ImportRawDataAssistentDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ImportExport\Common\ImportImagesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\ImportExport\Common\ImportImagesDialog.Designer.cs">
+      <DependentUpon>ImportImagesDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ImportExport\Common\AskForColumTitleDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\ImportExport\Common\AskForColumTitleDialog.Designer.cs">
+      <DependentUpon>AskForColumTitleDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ImportExport\Common\AskForSubjectNameDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\ImportExport\Common\AskForSubjectNameDialog.Designer.cs">
+      <DependentUpon>AskForSubjectNameDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ImportExport\RawData\ImportRawDataAssignColumnsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\ImportExport\RawData\ImportRawDataAssignColumnsDialog.Designer.cs">
+      <DependentUpon>ImportRawDataAssignColumnsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ImportExport\Common\ImportTrialsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\ImportExport\Common\ImportTrialsDialog.Designer.cs">
+      <DependentUpon>ImportTrialsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ImportExport\RawData\ImportRawData.cs" />
+    <Compile Include="Modules\ImportExport\FixationData\ImportFixationsAssignColumnsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\ImportExport\FixationData\ImportFixationsAssignColumnsDialog.Designer.cs">
+      <DependentUpon>ImportFixationsAssignColumnsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\Dialogs\SubjectDetailsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\Dialogs\SubjectDetailsDialog.Designer.cs">
+      <DependentUpon>SubjectDetailsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ImportExport\Common\ImportDataSplash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\ImportExport\Common\ImportDataSplash.Designer.cs">
+      <DependentUpon>ImportDataSplash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\HowToActivateTobii.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\HowToActivateTobii.Designer.cs">
+      <DependentUpon>HowToActivateTobii.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\FlashMissing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\FlashMissing.Designer.cs">
+      <DependentUpon>FlashMissing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\LoadDocSplash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\LoadDocSplash.designer.cs">
+      <DependentUpon>LoadDocSplash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\NewExperiment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\NewExperiment.Designer.cs">
+      <DependentUpon>NewExperiment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\Options.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\Options.Designer.cs">
+      <DependentUpon>Options.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\StartUpDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\StartUpDialog.Designer.cs">
+      <DependentUpon>StartUpDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\TobiiInterface\TobiiSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\TobiiInterface\TobiiSettingsDialog.Designer.cs">
+      <DependentUpon>TobiiSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Replay\Video\VideoPropertiesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Replay\Video\VideoPropertiesDialog.Designer.cs">
+      <DependentUpon>VideoPropertiesDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\AOI\Dialogs\NameShapeDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\AOI\Dialogs\NameShapeDlg.Designer.cs">
+      <DependentUpon>NameShapeDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\DesignModule\SlideDesignModule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\DesignModule\SlideDesignModule.Designer.cs">
+      <DependentUpon>SlideDesignModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\Presenter\PresenterModule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\Presenter\PresenterModule.Designer.cs">
+      <DependentUpon>PresenterModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\SlideshowModule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\SlideshowModule.Designer.cs">
+      <DependentUpon>SlideshowModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\RecordModule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\RecordModule.Designer.cs">
+      <DependentUpon>RecordModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\AttentionMap\AttentionMaps.cs" />
+    <Compile Include="Modules\AttentionMap\PaletteBitmap.cs" />
+    <Compile Include="Modules\Common\Types\SelectionsState.cs" />
+    <Compile Include="Modules\AOI\AOIPicture.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\AOI\AOIPicture.Designer.cs">
+      <DependentUpon>AOIPicture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\AttentionMap\AttentionMapPicture.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\AttentionMap\AttentionMapPicture.Designer.cs">
+      <DependentUpon>AttentionMapPicture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Replay\ReplayPicture.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Replay\ReplayPicture.Designer.cs">
+      <DependentUpon>ReplayPicture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\StartTask.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\StartTask.Designer.cs">
+      <DependentUpon>StartTask.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow\Tasks.cs" />
+    <Compile Include="OgamaInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="OgamaInstaller.Designer.cs">
+      <DependentUpon>OgamaInstaller.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\ExperimentSettings.cs" />
+    <Compile Include="Modules\ImportExport\Common\ImportParseFileDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\ImportExport\Common\ImportParseFileDialog.Designer.cs">
+      <DependentUpon>ImportParseFileDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ImportExport\AOIData\ImportAOIAssignColumnsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\ImportExport\AOIData\ImportAOIAssignColumnsDialog.Designer.cs">
+      <DependentUpon>ImportAOIAssignColumnsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\NamingDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\NamingDialog.Designer.cs">
+      <DependentUpon>NamingDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Common\CustomEventArgs\TrialChangedEventArgs.cs" />
+    <Compile Include="Modules\Common\Tools\FixationDetection.cs" />
+    <Compile Include="Document.cs" />
+    <Compile Include="Modules\Common\Tools\IOHelpers.cs" />
+    <Compile Include="Properties\RecentFileList.cs" />
+    <Compile Include="MainWindow\Dialogs\AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\AboutBox.Designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\ExperimentSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\ExperimentSettingsDialog.Designer.cs">
+      <DependentUpon>ExperimentSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\AttentionMap\AttentionMapModule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\AttentionMap\AttentionMapModule.Designer.cs">
+      <DependentUpon>AttentionMapModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Statistics\StatisticsModule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Statistics\StatisticsModule.Designer.cs">
+      <DependentUpon>StatisticsModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Fixations\FixationsModule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Fixations\FixationsModule.Designer.cs">
+      <DependentUpon>FixationsModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Replay\ReplayModule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Replay\ReplayModule.Designer.cs">
+      <DependentUpon>ReplayModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Database\DatabaseModule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Database\DatabaseModule.Designer.cs">
+      <DependentUpon>DatabaseModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\InitialSplash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\InitialSplash.Designer.cs">
+      <DependentUpon>InitialSplash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Modules\AOI\AOIModule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\AOI\AOIModule.Designer.cs">
+      <DependentUpon>AOIModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ExceptionHandling\InformationDialog.resx">
+      <DependentUpon>InformationDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExceptionHandling\ExceptionDialog.resx">
+      <DependentUpon>ExceptionDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExceptionHandling\ErrorDialog.resx">
+      <DependentUpon>ErrorDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExceptionHandling\ShowLogDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ShowLogDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateAsl.resx">
+      <DependentUpon>HowToActivateAsl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateGazetracker.resx">
+      <DependentUpon>HowToActivateGazetracker.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateMirametrix.resx">
+      <DependentUpon>HowToActivateMirametrix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateSMI.resx">
+      <DependentUpon>HowToActivateSMI.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateAlea.resx">
+      <DependentUpon>HowToActivateAlea.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow\Dialogs\UpgradeDocumentSplash.resx">
+      <DependentUpon>UpgradeDocumentSplash.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\AOI\Dialogs\AddGridDlg.resx">
+      <DependentUpon>AddGridDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\AOI\Dialogs\GroupNameDlg.resx">
+      <DependentUpon>GroupNameDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Common\Controls\TimeLineFilterDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>TimeLineFilterDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Common\Controls\TrialTimeLine.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>TrialTimeLine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Common\FormTemplates\FormWithInterface.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormWithInterface.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Common\FormTemplates\FormWithPicture.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormWithPicture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Common\Controls\HelpDialog.resx">
+      <DependentUpon>HelpDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Fixations\ExportOptionsDialog.resx">
+      <DependentUpon>ExportOptionsDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\AleaInterface\AleaSettingsDialog.resx">
+      <DependentUpon>AleaSettingsDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\AleaInterface\AleaTrackStatus.resx">
+      <DependentUpon>AleaTrackStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\ASLInterface\AslCalibration.resx">
+      <DependentUpon>AslCalibration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\ASLInterface\AslSettingsDialog.resx">
+      <DependentUpon>AslSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\ASLInterface\AslTrackStatus.resx">
+      <DependentUpon>AslTrackStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\Dialogs\SelectTracker.resx">
+      <DependentUpon>SelectTracker.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\Dialogs\ScreenCaptureDialog.resx">
+      <DependentUpon>ScreenCaptureDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\Dialogs\TriggerDialog.resx">
+      <DependentUpon>TriggerDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\Dialogs\SavingSplash.resx">
+      <DependentUpon>SavingSplash.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\GazegroupInterface\GazetrackerIPClientSettingsDialog.resx">
+      <DependentUpon>GazetrackerIPClientSettingsDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\MirametrixInterface\MirametrixSettingsDialog.resx">
+      <DependentUpon>MirametrixSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\MirametrixInterface\MirametrixTrackStatus.resx">
+      <DependentUpon>MirametrixTrackStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\MirametrixInterface\MirametrixTrackStatusControl.resx">
+      <DependentUpon>MirametrixTrackStatusControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\RecordingPicture.resx">
+      <DependentUpon>RecordingPicture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\SMIInterface\SMICalibrationForm.resx">
+      <DependentUpon>SMICalibrationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\SMIInterface\SMISettingsDlg.resx">
+      <DependentUpon>SMISettingsDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\TobiiInterface\TobiiCalibrationForm.resx">
+      <DependentUpon>TobiiCalibrationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\TobiiInterface\TobiiCalibrationResultPanel.resx">
+      <DependentUpon>TobiiCalibrationResultPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\TobiiInterface\TobiiTrackStatusControl.resx">
+      <DependentUpon>TobiiTrackStatusControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Replay\Video\SaveVideoSplash.resx">
+      <DependentUpon>SaveVideoSplash.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Scanpath\Colorization\ColorDefinitionDialog.resx">
+      <DependentUpon>ColorDefinitionDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Scanpath\ScanpathsModule.resx">
+      <DependentUpon>ScanpathsModule.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Scanpath\ExportDialog.resx">
+      <DependentUpon>ExportDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\SlideshowDesign\DesignModule\PasteAsDialog.resx">
+      <DependentUpon>PasteAsDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\BrowserDialog.resx">
+      <DependentUpon>BrowserDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\SlideshowDesign\Shuffling\CustomShuffleDialog.resx">
+      <DependentUpon>CustomShuffleDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\SlideshowDesign\Import\FolderContentSlideImportDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FolderContentSlideImportDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\TextDialog.resx">
+      <DependentUpon>TextDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\SoundDialog.resx">
+      <DependentUpon>SoundDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\FlashDialog.resx">
+      <DependentUpon>FlashDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\ShapeDialog.resx">
+      <DependentUpon>ShapeDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\ImageDialog.resx">
+      <DependentUpon>ImageDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\RichTextDialog.resx">
+      <DependentUpon>RichTextDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow\Dialogs\CheckforUpdates.resx">
+      <DependentUpon>CheckforUpdates.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow\Dialogs\PropertyDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PropertyDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow\Dialogs\SQLConnectionDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SQLConnectionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Common\Controls\DialogTop.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DialogTop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Saliency\SaliencyModule.resx">
+      <DependentUpon>SaliencyModule.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\ImportExport\AOIData\ImportAOIAssistentDialog.resx">
+      <DependentUpon>ImportAOIAssistentDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\ImportExport\FixationData\ImportFixationsAssistentDialog.resx">
+      <DependentUpon>ImportFixationsAssistentDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\Dialogs\SavingSuccessDialog.resx">
+      <DependentUpon>SavingSuccessDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\Dialogs\ConnectionFailedDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ConnectionFailedDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\Dialogs\AskSaveDataDialog.resx">
+      <DependentUpon>AskSaveDataDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\MouseOnlyInterface\MouseOnlySettingsDlg.resx">
+      <DependentUpon>MouseOnlySettingsDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\TobiiInterface\TobiiTrackStatus.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>TobiiTrackStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow\ContextPanel\ContextPanel.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ContextPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\ImportExport\RawData\ImportRawDataAssistentDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ImportRawDataAssistentDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\ImportExport\Common\ImportImagesDialog.resx">
+      <DependentUpon>ImportImagesDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\ImportExport\Common\AskForColumTitleDialog.resx">
+      <DependentUpon>AskForColumTitleDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\ImportExport\Common\AskForSubjectNameDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>AskForSubjectNameDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\ImportExport\RawData\ImportRawDataAssignColumnsDialog.resx">
+      <DependentUpon>ImportRawDataAssignColumnsDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\ImportExport\Common\ImportTrialsDialog.resx">
+      <DependentUpon>ImportTrialsDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\ImportExport\Common\ImportParseFileDialog.resx">
+      <DependentUpon>ImportParseFileDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\ImportExport\FixationData\ImportFixationsAssignColumnsDialog.resx">
+      <DependentUpon>ImportFixationsAssignColumnsDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateTobii.resx">
+      <DependentUpon>HowToActivateTobii.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow\Dialogs\AboutBox.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\Dialogs\SubjectDetailsDialog.resx">
+      <DependentUpon>SubjectDetailsDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow\Dialogs\FlashMissing.resx">
+      <DependentUpon>FlashMissing.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow\Dialogs\ExperimentSettingsDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ExperimentSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\ImportExport\Common\ImportDataSplash.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ImportDataSplash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\SlideshowDesign\NamingDialog.resx">
+      <DependentUpon>NamingDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow\Dialogs\LoadDocSplash.resx">
+      <DependentUpon>LoadDocSplash.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow\Dialogs\NewExperiment.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>NewExperiment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow\Dialogs\Options.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Options.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow\Dialogs\StartUpDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>StartUpDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\TobiiInterface\TobiiSettingsDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>TobiiSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Replay\Video\VideoPropertiesDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>VideoPropertiesDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\AOI\Dialogs\NameShapeDlg.resx">
+      <DependentUpon>NameShapeDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\SlideshowDesign\DesignModule\SlideDesignModule.resx">
+      <DependentUpon>SlideDesignModule.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\AttentionMap\AttentionMapModule.resx">
+      <DependentUpon>AttentionMapModule.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\ImportExport\AOIData\ImportAOIAssignColumnsDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ImportAOIAssignColumnsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\Presenter\PresenterModule.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PresenterModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Statistics\StatisticsModule.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>StatisticsModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Fixations\FixationsModule.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FixationsModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Replay\ReplayModule.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ReplayModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Database\DatabaseModule.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DatabaseModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow\Dialogs\InitialSplash.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>InitialSplash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\AOI\AOIModule.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>AOIModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\SlideshowDesign\SlideshowModule.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SlideshowModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\RecordModule.resx">
+      <DependentUpon>RecordModule.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\AOI\AOIPicture.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>AOIPicture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow\Dialogs\StartTask.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>StartTask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Properties\ApplicationSettings.cs" />
+    <Compile Include="Modules\Recording\TobiiInterface\TobiiSetting.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Sql.Server.Express.1.0">
+      <Visible>False</Visible>
+      <ProductName>SQL Server 2005 Express Edition</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <Content Include="DataSet\OgamaDatabaseTemplate.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DataSet\OgamaDatabaseTemplate_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>OgamaDatabaseTemplate.mdf</DependentUpon>
+    </Content>
+    <None Include="Resources\FolderNew16.png" />
+    <None Include="Resources\PS3_61_61.png" />
+    <None Include="Resources\ITU_61_61.png" />
+    <None Include="Resources\Tempt_Logo.png" />
+    <None Include="Resources\ITU_Logo.png" />
+    <Content Include="Help\AOI.rtf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\ATM.rtf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\DTB.rtf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\FIX.rtf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\STA.rtf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="DataSet\OgamaDataSet.xsc">
+      <DependentUpon>OgamaDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="DataSet\OgamaDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>OgamaDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSet\OgamaDataSet.xss">
+      <DependentUpon>OgamaDataSet.xsd</DependentUpon>
+    </None>
+    <Content Include="Help\SCR.rtf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\REC.rtf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\RPL.rtf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\SCA.rtf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Modules\Common\FormTemplates\ModuleClassDiagram.cd" />
+    <None Include="Modules\Recording\TrackerBase\TrackerClassDiagram.cd" />
+    <None Include="Resources\DialogBackground.jpg" />
+    <None Include="Resources\VSObject_Object.bmp" />
+    <None Include="Resources\Edit_UndoHS.png" />
+    <None Include="Resources\Edit_RedoHS.png" />
+    <None Include="Resources\CascadeWindowsHS.png" />
+    <None Include="Resources\WindowsHS.png" />
+    <None Include="Resources\TileWindowsHorizontallyHS.png" />
+    <None Include="Resources\SearchWebHS.png" />
+    <None Include="Resources\searchweb.ico" />
+    <None Include="Resources\ChainHS.png" />
+    <None Include="Resources\DiceHS16.png" />
+    <None Include="Resources\ChainNotHS.png" />
+    <None Include="Resources\DiceNotHS16.png" />
+    <None Include="Resources\ChainRightPart.png" />
+    <None Include="Resources\ChainLeftPart.png" />
+    <None Include="Resources\MultiplePagesHS.png" />
+    <None Include="Resources\ShowGridlinesHS.png" />
+    <None Include="Resources\ThumbnailView.png" />
+    <None Include="Resources\rc_tif2.ico" />
+    <None Include="Resources\CheckBoard.gif" />
+    <None Include="Resources\ellipse.cur" />
+    <None Include="Resources\TextboxHS.png" />
+    <None Include="Resources\IgnoreDoubles.png" />
+    <None Include="Resources\CharacterSimilarity.ico" />
+    <None Include="Resources\SequenceSimilarity.ico" />
+    <None Include="Resources\CharacterSimilarity.png" />
+    <None Include="Resources\SequenceSimilarity.png" />
+    <None Include="Resources\Scanpath.ico" />
+    <None Include="Resources\PropertiesHS.png" />
+    <None Include="Resources\lanconnect.ico" />
+    <None Include="Resources\user1.ico" />
+    <None Include="Resources\RadialChartHS.png" />
+    <None Include="Resources\user16.ico" />
+    <None Include="Resources\Sharp.png" />
+    <None Include="Resources\sound.ico" />
+    <None Include="Resources\IndentHS.png" />
+    <None Include="Resources\OutdentHS.png" />
+    <None Include="Resources\TopArrowHS.png" />
+    <None Include="Resources\DownArrowHS.png" />
+    <None Include="Resources\DiceLeftPart.png" />
+    <None Include="Resources\DiceRightPart.png" />
+    <None Include="Resources\OrgChartHS.png" />
+    <None Include="Resources\AlignTableCellMiddleLeftJustHS.png" />
+    <None Include="Resources\AlignTableCellMiddleLeftHS.png" />
+    <None Include="Resources\FontHS.png" />
+    <None Include="Resources\AlignTableCellMiddleRightHS.png" />
+    <None Include="Resources\Rtf.png" />
+    <None Include="Resources\Event.png" />
+    <None Include="Resources\Filter2HS.png" />
+    <None Include="Resources\sound16.ico" />
+    <None Include="Resources\UserVideo.png" />
+    <None Include="Resources\DataContainer_MoveFirstHS.png" />
+    <None Include="Resources\DataContainer_MoveLastHS.png" />
+    <None Include="Resources\DatabaseSaving.gif" />
+    <None Include="Resources\DiceHS.png" />
+    <None Include="Resources\Control_TrackBar.bmp" />
+    <None Include="Resources\VSObject_Class.bmp" />
+    <None Include="Resources\UpdateOgama1.png" />
+    <None Include="Resources\Alea_54_75.png" />
+    <None Include="Resources\Alea_16_16.png" />
+    <None Include="Resources\alea_banner3.png" />
+    <None Include="Resources\MoveNext.png" />
+    <None Include="Resources\MoveFirst.png" />
+    <None Include="Resources\MouseDown.png" />
+    <None Include="Resources\HandCursor.png" />
+    <None Include="Resources\Libra.png" />
+    <None Include="Resources\Weight.png" />
+    <None Include="Resources\Monitor1.png" />
+    <None Include="Resources\Monitor2.png" />
+    <None Include="Resources\search.png" />
+    <None Include="Resources\ShowGridlines2HS.png" />
+    <None Include="Resources\ItalicHS.png" />
+    <None Include="Resources\boldhs.png" />
+    <None Include="Resources\StrikeoutHS.png" />
+    <None Include="Resources\underlineHS.png" />
+    <Content Include="Help\SAL.rtf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\SMILogo.gif" />
+    <None Include="Resources\SMI_61_25.png" />
+    <None Include="Resources\OgamaV3.ico" />
+    <None Include="Resources\StartUpSplash.png" />
+    <None Include="Resources\StartUpSplash1.png" />
+    <None Include="Resources\ITUBanner.png" />
+    <None Include="Resources\Globe32.png" />
+    <None Include="Resources\ASL01.gif" />
+    <None Include="Resources\ASL_61_46.gif" />
+    <None Include="Resources\ASL0.gif" />
+    <None Include="Resources\ASLBanner.gif" />
+    <None Include="Resources\ASLico.gif" />
+    <None Include="Resources\ASLlogo.gif" />
+    <None Include="Resources\ASLmire_1024x768.bmp" />
+    <None Include="Resources\ASLmire_1280x1024.bmp" />
+    <None Include="Resources\ASLmire_defaultSize.bmp" />
+    <Content Include="Resources\MirametrixLogo.png" />
+    <Content Include="Resources\MirametrixLogo_150_33.png" />
+    <Content Include="Resources\Mirametrix_S2.png" />
+    <Content Include="Resources\Mirametrix_S2_16_8.png" />
+    <Content Include="SaliencyCalculation\cygblas.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SaliencyCalculation\cygbz2-1.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SaliencyCalculation\cygexpat-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SaliencyCalculation\cygfftw3-3.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SaliencyCalculation\cygfontconfig-1.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SaliencyCalculation\cygfreetype-6.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SaliencyCalculation\cygGL-1.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SaliencyCalculation\cygICE-6.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SaliencyCalculation\cygiconv-2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SaliencyCalculation\cygjpeg-62.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SaliencyCalculation\cyglapack.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SaliencyCalculation\cygminires.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SaliencyCalculation\cygpng12.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SaliencyCalculation\cygqt-mt-3.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SaliencyCalculation\cygSM-6.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SaliencyCalculation\cygwin1.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SaliencyCalculation\cygX11-6.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SaliencyCalculation\cygXcursor-1.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SaliencyCalculation\cygXext-6.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SaliencyCalculation\cygXfixes-3.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SaliencyCalculation\cygXft-2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SaliencyCalculation\cygXi-6.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SaliencyCalculation\cygxml2-2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SaliencyCalculation\cygXmu-6.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SaliencyCalculation\cygXrandr-2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SaliencyCalculation\cygXrender-1.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SaliencyCalculation\cygXt-6.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SaliencyCalculation\cygz.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SaliencyCalculation\ezvision.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\AleaLogo.png" />
+    <None Include="Resources\TobiiLogoText.png" />
+    <None Include="Resources\Alea_61_75.png" />
+    <None Include="Resources\Maus_61_61.png" />
+    <None Include="Resources\Tobii_61_75.png" />
+    <None Include="Resources\Saliency.ico" />
+    <None Include="Resources\ATM.ico" />
+    <None Include="Resources\LineColorHS.png" />
+    <None Include="Resources\Line.png" />
+    <None Include="Resources\FormRunHS.png" />
+    <None Include="Resources\getflash.jpg" />
+    <None Include="Resources\Polyline.png" />
+    <None Include="Resources\TobiiLogo.png" />
+    <None Include="Resources\RecolorPictureHS.png" />
+    <None Include="Resources\RPL.ico" />
+    <None Include="Resources\warning.ico" />
+    <None Include="Resources\globe.ico" />
+    <None Include="Resources\PasteHS.png" />
+    <None Include="Resources\CopyHS.png" />
+    <None Include="Resources\ThumbnailLoadingHS.png" />
+    <None Include="Resources\VSObject_Type.bmp" />
+    <None Include="Resources\clickRight.wav" />
+    <None Include="Resources\clickLeft.wav" />
+    <None Include="Resources\error.ico" />
+    <None Include="Resources\GenericShape.ico" />
+    <None Include="Resources\Shape.ico" />
+    <None Include="Resources\TableHS.png" />
+    <None Include="Resources\rc_tif1.ico" />
+    <None Include="Resources\Blank.ico" />
+    <None Include="Resources\Images.ico" />
+    <None Include="Resources\Instruction.ico" />
+    <None Include="Resources\MixedMedia.ico" />
+    <None Include="Resources\document.ico" />
+    <None Include="Resources\textdoc.ico" />
+    <None Include="Resources\cursor.jpg" />
+    <None Include="Resources\Tasks.ICO" />
+    <None Include="Resources\lan disconnect.ico" />
+    <None Include="Resources\fonfile.ico" />
+    <None Include="Resources\ExpirationHS.png" />
+    <None Include="Resources\DisplayInColorHS.png" />
+    <None Include="Resources\folderopen.ico" />
+    <None Include="Resources\MagicWand.png" />
+    <None Include="Resources\Ogama.ico" />
+    <None Include="Resources\LegendHS.png" />
+    <None Include="Resources\flash.jpg" />
+    <None Include="Resources\FlashPlayer.ico" />
+    <None Include="Resources\t60.png" />
+    <None Include="Resources\StopHS.png" />
+    <None Include="Resources\Run.ico" />
+    <None Include="Resources\Design.ico" />
+    <None Include="Resources\Record.ico" />
+    <None Include="Resources\Import Picture Document.ico" />
+    <None Include="Resources\Export To Picture Document.ico" />
+    <None Include="Resources\Import Document.ico" />
+    <None Include="Resources\Export To Document.ico" />
+    <None Include="Resources\GazeCursor.gif" />
+    <None Include="Resources\GazeCursor.png" />
+    <None Include="Resources\GenericPicDoc.ico" />
+    <None Include="Resources\textdoc1.ico" />
+    <None Include="Resources\GenMixedMediaDoc.ico" />
+    <None Include="Resources\OgamaDocNew.ico" />
+    <None Include="Resources\Data_Dataset.ico" />
+    <None Include="Resources\user.ico" />
+    <None Include="Resources\video.ico" />
+    <BaseApplicationManifest Include="Properties\app.manifest" />
+    <None Include="Resources\click.wav" />
+    <None Include="Resources\DatabaseLogo.png" />
+    <None Include="Resources\AOILogo.png" />
+    <None Include="Resources\AttentionMapLogo.png" />
+    <None Include="Resources\FixationsLogo.png" />
+    <None Include="Resources\Eye.png" />
+    <None Include="Resources\CalculatorHS.png" />
+    <None Include="Resources\DeleteHS.png" />
+    <None Include="Resources\CheckGrammarHS.png" />
+    <None Include="Resources\CutHS.png" />
+    <None Include="Resources\Color_fontHS.png" />
+    <None Include="Resources\ATMAll.ico" />
+    <None Include="Resources\ATMFirst.ico" />
+    <None Include="Resources\ExportData.png" />
+    <None Include="Resources\CheckBoxHS.png" />
+    <None Include="Resources\Color_fontHS_T.png" />
+    <None Include="Resources\Color_fontHS_S.png" />
+    <None Include="Resources\AOIFontIcon.ico" />
+    <None Include="Resources\RecordHS.png" />
+    <None Include="Resources\helpdoc.ico" />
+    <None Include="Resources\otheroptions.ico" />
+    <None Include="Resources\rc_tif.ico" />
+    <None Include="Resources\users.ico" />
+    <None Include="Resources\OpenSelectedItemHS.png" />
+    <None Include="Resources\SQLDatabase.png" />
+    <None Include="Resources\openfolderHS.png" />
+    <None Include="Resources\propertiesORoptions.ico" />
+    <None Include="Resources\update2_00.gif" />
+    <None Include="Resources\userAccounts.bmp" />
+    <None Include="Resources\user.bmp" />
+    <None Include="Resources\ImportData.png" />
+    <None Include="Resources\Mouse.ico" />
+    <None Include="Resources\StatisticsLogo.png" />
+    <None Include="Resources\ReplayLogo.png" />
+    <None Include="Resources\help.ico" />
+    <None Include="Resources\saveHS.png" />
+    <None Include="Resources\LogoAbout.bmp" />
+    <None Include="Resources\LogoTop.bmp" />
+    <None Include="Resources\LogoFU.bmp" />
+    <None Include="Resources\Rectangle.png" />
+    <None Include="Resources\Ellipse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Gazetracker\GTCommons\GTCommons.csproj">
+      <Project>{02E8476C-305D-4FAD-83BC-3A70CCA37260}</Project>
+      <Name>GTCommons</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gazetracker\GTHardware\GTHardware.csproj">
+      <Project>{4EF59290-9005-460E-8919-5003414BDC92}</Project>
+      <Name>GTHardware</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gazetracker\GTLibrary\GTLibrary.csproj">
+      <Project>{BF8D4E7F-F8E1-4204-B438-55B35233F590}</Project>
+      <Name>GTLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gazetracker\GTNetworkClient\GTNetworkClient.csproj">
+      <Project>{BD8916FF-DE52-4932-A71B-5E748AF559F0}</Project>
+      <Name>GTNetworkClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gazetracker\GTOgamaClient\GTOgamaClient.csproj">
+      <Project>{2F1306D9-F01D-4431-8122-9DBC888480CD}</Project>
+      <Name>GTOgamaClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OgamaControls\OgamaControls.csproj">
+      <Project>{63EF9D30-447A-4F79-9EC8-E4956DC0ABF8}</Project>
+      <Name>OgamaControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VectorGraphics\VectorGraphics.csproj">
+      <Project>{8230AED9-33A2-42FD-BDF7-4F7E4EFA73DB}</Project>
+      <Name>VectorGraphics</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <Private>True</Private>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- 
+	<Import Project="$(ProgramFiles)\MSBuild\Microsoft\StyleCop\v4.3\Microsoft.StyleCop.targets" />
+  -->
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>if $(PlatformName) == x64 (
+  xcopy "$(SolutionDir)Libs\Native\x64\*.*" "$(TargetDir)" /E /Y /s /f
+) ELSE (
+  xcopy "$(SolutionDir)Libs\Native\x86\*.*" "$(TargetDir)" /E /Y /s /f
+)
+
+</PostBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+</Project>

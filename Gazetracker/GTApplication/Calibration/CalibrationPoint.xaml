@@ -1,0 +1,55 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    x:Class="GTApplication.CalibrationUI.CalibrationPoint"
+    Height="Auto" Width="Auto" mc:Ignorable="d">
+
+  <UserControl.Resources>
+    <Storyboard x:Key="ScaleCalibrationPoint">
+      <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="TargetGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+        <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+        <SplineDoubleKeyFrame KeyTime="00:00:01" Value="0.1"/>
+      </DoubleAnimationUsingKeyFrames>
+      <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="TargetGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+        <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+        <SplineDoubleKeyFrame KeyTime="00:00:01" Value="0.1"/>
+      </DoubleAnimationUsingKeyFrames>
+    </Storyboard>
+
+
+    <Storyboard x:Key="ScaleCalibrationPointReverse">
+      <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="TargetGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+        <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.1"/>
+        <SplineDoubleKeyFrame KeyTime="00:00:00.5" Value="1"/>
+      </DoubleAnimationUsingKeyFrames>
+      <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="TargetGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+        <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.1"/>
+        <SplineDoubleKeyFrame KeyTime="00:00:00.5" Value="1"/>
+      </DoubleAnimationUsingKeyFrames>
+    </Storyboard>
+  </UserControl.Resources>
+
+  <UserControl.Triggers>
+    <EventTrigger RoutedEvent="FrameworkElement.RequestBringIntoView">
+      <BeginStoryboard Storyboard="{StaticResource ScaleCalibrationPoint}"/>
+    </EventTrigger>
+  </UserControl.Triggers>
+
+  <Grid x:Name="TargetGrid" MouseLeftButtonDown="OnMouseRightDown" RenderTransformOrigin="0.5,0.5">
+  	<Grid.RenderTransform>
+  		<TransformGroup>
+  			<ScaleTransform ScaleX="1" ScaleY="1"/>
+  			<SkewTransform/>
+  			<RotateTransform/>
+  			<TranslateTransform/>
+  		</TransformGroup>
+  	</Grid.RenderTransform>
+
+    <Image x:Name="Image" HorizontalAlignment="Center" Margin="8" VerticalAlignment="Center" Stretch="Uniform"/>
+  	<Ellipse x:Name="Target"  Margin="2" Fill="White"/>
+  	<Ellipse Margin="0" Fill="White" Stroke="Black" Width="8" Height="8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+  </Grid>
+
+</UserControl>

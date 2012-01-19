@@ -1,0 +1,78 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+    <!-- Resource dictionary entries should be defined here. -->
+    <Style x:Key="iPhoneCheckBox" TargetType="{x:Type CheckBox}">
+        <Setter Property="FocusVisualStyle">
+            <Setter.Value>
+                <Style>
+                    <Setter Property="Control.Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Rectangle Stroke="#FF000000" StrokeDashArray="1 2" StrokeThickness="1" Margin="0,0,0,0" SnapsToDevicePixels="True"/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CheckBox}">
+                    <Border x:Name="border" CornerRadius="1,1,1,1" BorderThickness="1,1,1,1" BorderBrush="#FF353535">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FFD6D6D6" Offset="0"/>
+                                <GradientStop Color="#FFF7F7F7" Offset="0.991"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Grid x:Name="grid" Height="Auto" Width="Auto" Background="{x:Null}" VerticalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" x:Name="columnDefinition"/>
+                                <ColumnDefinition Width="Auto" x:Name="columnDefinition2"/>
+                                <ColumnDefinition Width="Auto" x:Name="columnDefinition1"/>
+                            </Grid.ColumnDefinitions>
+                            <Rectangle Stroke="#FF919191" Margin="0,0,0,0" Grid.Column="1" Grid.ColumnSpan="1" Width="28" x:Name="rectangle" StrokeThickness="1" RadiusY="1" RadiusX="1">
+                                <Rectangle.Fill>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FFA1A1A1" Offset="0"/>
+                                        <GradientStop Color="#FFDEDEDE" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Stretch" Text="ON" TextWrapping="Wrap" Grid.Column="0" Width="30" TextAlignment="Center" Visibility="Collapsed" x:Name="ON" FontFamily="Calibri" FontSize="14" FontWeight="Bold" Foreground="#FFFFFFFF">
+								<TextBlock.Background>
+									<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+										<GradientStop Color="#FF7DA9DE" Offset="0"/>
+										<GradientStop Color="#FF417AF5" Offset="0.996"/>
+									</LinearGradientBrush>
+								</TextBlock.Background>
+							</TextBlock>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Stretch" Text="OFF" TextWrapping="Wrap" Margin="0,0,0,0" d:LayoutOverrides="Height" Grid.Column="2" Width="30" TextAlignment="Center" x:Name="OFF" Foreground="#FF474747" FontWeight="Bold" FontFamily="Calibri" FontSize="14"/>
+						</Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Visibility" TargetName="ON" Value="Visible"/>
+                            <Setter Property="Visibility" TargetName="OFF" Value="Collapsed"/>
+                            <Setter Property="Background" TargetName="ON">
+                                <Setter.Value>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FF1C406A" Offset="0"/>
+                                        <GradientStop Color="#FF5C8BF2" Offset="0.996"/>
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True"/>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
