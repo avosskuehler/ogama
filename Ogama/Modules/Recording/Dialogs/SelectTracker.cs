@@ -1,4 +1,4 @@
-﻿// <copyright file="SelectTracker.cs" company="FU Berlin">
+// <copyright file="SelectTracker.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
 // Copyright (C) 2010 Adrian Voßkühler  
@@ -19,9 +19,10 @@ namespace Ogama.Modules.Recording.Dialogs
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
   using Ogama.MainWindow.Dialogs;
-  using Ogama.Modules.Recording.ASLInterface;
   using Ogama.Modules.Recording.AleaInterface;
+  using Ogama.Modules.Recording.ASLInterface;  
   using Ogama.Modules.Recording.GazegroupInterface;
+  using Ogama.Modules.Recording.MirametrixInterface;
   using Ogama.Modules.Recording.TobiiInterface;
   using Ogama.Modules.Recording.TrackerBase;
 
@@ -115,6 +116,11 @@ namespace Ogama.Modules.Recording.Dialogs
           returnValue |= HardwareTracker.ASL; // = 64
         }
 
+        if (this.chbMirametrix.Checked)
+        {
+            returnValue |= HardwareTracker.Mirametrix; 
+        }
+
         return returnValue;
       }
     }
@@ -190,6 +196,16 @@ namespace Ogama.Modules.Recording.Dialogs
     }
 
     /// <summary>
+    /// The event handler for the User clicked the mirametrix logo, so open mirametrix website
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void PcbMirametrixClick(object sender, EventArgs e)
+    {
+        System.Diagnostics.Process.Start("http://www.mirametrix.com");
+    }
+
+    /// <summary>
     /// The <see cref="Control.Click"/> event handler for
     /// the <see cref="PictureBox"/> <see cref="pcbAlea"/>.
     /// User clicked the alea logo,
@@ -239,6 +255,17 @@ namespace Ogama.Modules.Recording.Dialogs
     {
       var objActivateTobii = new HowToActivateTobii();
       objActivateTobii.ShowDialog();
+    }
+
+    /// <summary>
+    /// The event handler for the User clicked the mirametrix logo, so open mirametrix website
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void PcbHelpMirametrixClick(object sender, EventArgs e)
+    {
+        var objActivateMirametrix = new HowToActivateMirametrix();
+        System.Diagnostics.Process.Start("http://www.mirametrix.com");
     }
 
     /// <summary>
@@ -355,6 +382,7 @@ namespace Ogama.Modules.Recording.Dialogs
       this.UpdateAleaTrackStatus();
       this.UpdateTobiiStatus();
       this.UpdateASLStatus();
+      this.UpdateMirametrixStatus();
     }
 
     /// <summary>
@@ -373,6 +401,25 @@ namespace Ogama.Modules.Recording.Dialogs
       }
 
       this.chbTobii.Text = tobiiDefaultText + "Status: " + error;
+    }
+
+    /// <summary>
+    /// Updates the status of the Mirametrix tracking devices
+    /// </summary>
+    private void UpdateMirametrixStatus()
+    {
+        string error;
+        if (!MirametrixTracker.IsAvailable(out error))
+        {
+            this.chbMirametrix.Text = "Mirametrix S2 Eye tracker. Need to have Mirametrix S2 installed on this computer ! \n" + error;
+            this.chbMirametrix.Enabled = false;
+            this.chbMirametrix.Checked = false;
+            this.pcbMirametrix.Enabled = false;
+        }
+        else 
+        {
+            this.chbMirametrix.Text = "Mirametrix S2 installed on this computer ! \n" + error;
+        }
     }
 
     /// <summary>

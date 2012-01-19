@@ -1,4 +1,4 @@
-﻿// <copyright file="HardwareTracker.cs" company="FU Berlin">
+// <copyright file="HardwareTracker.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
 // Copyright (C) 2010 Adrian Voßkühler  
@@ -61,5 +61,10 @@ namespace Ogama.Modules.Recording.TrackerBase
     /// Applied Science Laboratories (ASL) professional gaze tracker
     /// </summary>
     ASL = 64,
+
+    /// <summary>
+    /// Mirametrix S2 Tracker available
+    /// </summary>
+    Mirametrix = 128,
   }
 }

@@ -1012,6 +1012,19 @@ namespace Ogama.MainWindow
 
     /// <summary>
     /// The <see cref="Control.Click"/> event handler
+    /// for the <see cref="ToolStripMenuItem"/> <see cref="mnuHelpHowToMirametrix"/>
+    /// Displays instructions to activate mirametrix recording.
+    /// </summary>
+    /// <param name="sender">Source of the event</param>
+    /// <param name="e">An empty</param>
+    private void mnuHelpHowToMirametrix_Click(object sender, EventArgs e)
+    {
+        HowToActivateMirametrix objActivateMirametrix = new HowToActivateMirametrix();
+        objActivateMirametrix.ShowDialog();
+    }
+
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler
     /// for the <see cref="ToolStripMenuItem"/> <see cref="mnuHelpHowToAsl"/>
     /// Displays instructions to activate ASL recording.
     /// </summary>

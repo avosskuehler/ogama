@@ -848,6 +848,27 @@ namespace Ogama.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Mirametrix_S2 {
+            get {
+                object obj = ResourceManager.GetObject("Mirametrix_S2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap MirametrixLogo {
+            get {
+                object obj = ResourceManager.GetObject("MirametrixLogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap MirametrixLogo_150_33 {
+            get {
+                object obj = ResourceManager.GetObject("MirametrixLogo_150_33", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Icon MixedMedia {
             get {
                 object obj = ResourceManager.GetObject("MixedMedia", resourceCulture);

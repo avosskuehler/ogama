@@ -250,6 +250,12 @@
     <Compile Include="MainWindow\Dialogs\HowToActivateGazetracker.Designer.cs">
       <DependentUpon>HowToActivateGazetracker.cs</DependentUpon>
     </Compile>
+    <Compile Include="MainWindow\Dialogs\HowToActivateMirametrix.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\HowToActivateMirametrix.Designer.cs">
+      <DependentUpon>HowToActivateMirametrix.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow\Dialogs\HowToActivateSMI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -405,6 +411,27 @@
     <Compile Include="Modules\Recording\GazegroupInterface\GazetrackerIPClientStatus.cs" />
     <Compile Include="Modules\Recording\GazegroupInterface\GazetrackerIPClientTracker.cs" />
     <Compile Include="Modules\Recording\GazegroupInterface\GazetrackerDirectClientTracker.cs" />
+    <Compile Include="Modules\Recording\MirametrixInterface\ClientNetworkManager.cs" />
+    <Compile Include="Modules\Recording\MirametrixInterface\MirametrixSetting.cs" />
+    <Compile Include="Modules\Recording\MirametrixInterface\MirametrixSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\MirametrixInterface\MirametrixSettingsDialog.Designer.cs">
+      <DependentUpon>MirametrixSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\MirametrixInterface\MirametrixTracker.cs" />
+    <Compile Include="Modules\Recording\MirametrixInterface\MirametrixTrackStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\MirametrixInterface\MirametrixTrackStatus.Designer.cs">
+      <DependentUpon>MirametrixTrackStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\MirametrixInterface\MirametrixTrackStatusControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\MirametrixInterface\MirametrixTrackStatusControl.Designer.cs">
+      <DependentUpon>MirametrixTrackStatusControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Recording\Presenter\WebsiteScreenshot.cs" />
     <Compile Include="Modules\Recording\Presenter\DSScreenCapture.cs" />
     <Compile Include="Modules\Recording\Presenter\ScreenCaptureProperties.cs" />
@@ -1030,6 +1057,9 @@
       <DependentUpon>HowToActivateGazetracker.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateMirametrix.resx">
+      <DependentUpon>HowToActivateMirametrix.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateSMI.resx">
       <DependentUpon>HowToActivateSMI.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1113,6 +1143,15 @@
     <EmbeddedResource Include="Modules\Recording\GazegroupInterface\GazetrackerIPClientSettingsDialog.resx">
       <DependentUpon>GazetrackerIPClientSettingsDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\MirametrixInterface\MirametrixSettingsDialog.resx">
+      <DependentUpon>MirametrixSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\MirametrixInterface\MirametrixTrackStatus.resx">
+      <DependentUpon>MirametrixTrackStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\MirametrixInterface\MirametrixTrackStatusControl.resx">
+      <DependentUpon>MirametrixTrackStatusControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\RecordingPicture.resx">
       <DependentUpon>RecordingPicture.cs</DependentUpon>
@@ -1591,6 +1630,10 @@
     <None Include="Resources\ASLmire_1024x768.bmp" />
     <None Include="Resources\ASLmire_1280x1024.bmp" />
     <None Include="Resources\ASLmire_defaultSize.bmp" />
+    <Content Include="Resources\MirametrixLogo.png" />
+    <Content Include="Resources\MirametrixLogo_150_33.png" />
+    <Content Include="Resources\Mirametrix_S2.png" />
+    <Content Include="Resources\Mirametrix_S2_16_8.png" />
     <Content Include="SaliencyCalculation\cygblas.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
