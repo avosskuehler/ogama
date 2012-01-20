@@ -379,6 +379,7 @@ namespace Ogama.Modules.ImportExport
       detectionSetting.ImageDictionary.Clear();
       detectionSetting.TrialIDToImageAssignments.Clear();
       detectionSetting.TrialSequenceToTrialIDAssignments.Clear();
+      detectionSetting.TrialSequenceToStarttimeAssignments.Clear();
       rawDataList.Clear();
       double lastTimeInFileTime = 0;
 
@@ -1356,15 +1357,19 @@ namespace Ogama.Modules.ImportExport
       ASCIISettings logFileImportSettings,
       DetectionSettings rawdataSettings)
     {
-      SaveFileDialog ofdSaveSettings = new SaveFileDialog();
-      ofdSaveSettings.DefaultExt = "ois";
-      ofdSaveSettings.FileName = "*.ois";
-      ofdSaveSettings.FilterIndex = 1;
-      ofdSaveSettings.Filter = "Ogama import settings files|*.ois";
-      ofdSaveSettings.Title = "Please specify settings filename";
+      var ofdSaveSettings = new SaveFileDialog
+        {
+          DefaultExt = "ois",
+          FileName = "*.ois",
+          FilterIndex = 1,
+          Filter = "Ogama import settings files|*.ois",
+          Title = "Please specify settings filename",
+          InitialDirectory = Properties.Settings.Default.ImportSettingsPath
+        };
+
       if (ofdSaveSettings.ShowDialog() == DialogResult.OK)
       {
-        ImportRawData.SerializeSettings(ofdSaveSettings.FileName);
+        SerializeSettings(ofdSaveSettings.FileName);
       }
     }
 
@@ -1423,31 +1428,27 @@ namespace Ogama.Modules.ImportExport
     /// Extension ".ois"
     /// </summary>
     /// <param name="filePath">A <see cref="string"/> with the path to the 
-    /// OGAMA target import settings xml file.</param>
-    /// <returns><strong>True</strong> if successful, 
-    /// otherwise <strong>false</strong>.</returns>
-    private static bool SerializeSettings(string filePath)
+    ///   OGAMA target import settings xml file.</param>
+    private static void SerializeSettings(string filePath)
     {
       try
       {
         using (TextWriter writer = new StreamWriter(filePath))
         {
-          MergedSettings settings = new MergedSettings();
-          settings.AsciiSetting = asciiSetting;
-          settings.DetectionSetting = detectionSetting;
+          var settings = new MergedSettings
+            {
+              AsciiSetting = asciiSetting, 
+              DetectionSetting = detectionSetting
+            };
 
-          XmlSerializer serializer = new XmlSerializer(typeof(MergedSettings));
+          var serializer = new XmlSerializer(typeof(MergedSettings));
           serializer.Serialize(writer, settings);
         }
       }
       catch (Exception ex)
       {
         ExceptionMethods.HandleException(ex);
-
-        return false;
       }
-
-      return true;
     }
 
     /// <summary>
@@ -1461,17 +1462,15 @@ namespace Ogama.Modules.ImportExport
     {
       try
       {
-        using (FileStream fs = new FileStream(filePath, FileMode.Open))
+        using (var fs = new FileStream(filePath, FileMode.Open))
         {
-          MergedSettings settings = new MergedSettings();
-
           // Create an instance of the XmlSerializer class;
           // specify the type of object to be deserialized 
-          XmlSerializer serializer = new XmlSerializer(typeof(MergedSettings));
+          var serializer = new XmlSerializer(typeof(MergedSettings));
 
           /* Use the Deserialize method to restore the object's state with
           data from the XML document. */
-          settings = (MergedSettings)serializer.Deserialize(fs);
+          var settings = (MergedSettings)serializer.Deserialize(fs);
 
           asciiSetting = settings.AsciiSetting;
           detectionSetting = settings.DetectionSetting;
