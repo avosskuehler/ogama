@@ -411,7 +411,7 @@ namespace Ogama.Modules.ImportExport
         this.cbbAssignTrialSequenceColumn.Items.AddRange(this.trialColumnHeaders.ToArray());
         this.cbbAssignStartingTimeColumn.SelectedIndex = 0;
         this.cbbAssignTrialIDColumn.SelectedIndex = 2;
-        this.cbbAssignTrialSequenceColumn.SelectedIndex = 3;
+        this.cbbAssignTrialSequenceColumn.SelectedIndex = 2;
         this.RepopulateTrialAssignmentTable();
 
         if (this.trialColumnHeaders.Count > 2)

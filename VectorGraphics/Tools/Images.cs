@@ -117,16 +117,22 @@ namespace VectorGraphics.Tools
     /// with gray background color.</returns>
     public static Bitmap CreateNotFoundImage(Size size, string whatWasNotFound)
     {
-      // create new image
-      Bitmap image = new Bitmap(size.Width, size.Height, PixelFormat.Format32bppArgb);
-      using (Graphics graphics = Graphics.FromImage(image))
+      Bitmap image = null;
+      try
       {
-        graphics.Clear(Color.Gray);
-        SizeF textArea = graphics.MeasureString(whatWasNotFound + " not found", new Font("Verdana", 24));
-        PointF topLeft = new PointF(
-          size.Width / 2 - textArea.Width / 2,
-          size.Height / 2 - textArea.Height / 2);
-        graphics.DrawString(whatWasNotFound + " not found", new Font("Verdana", 24), Brushes.Red, topLeft);
+        // create new image
+        image = new Bitmap(size.Width, size.Height);
+        using (Graphics graphics = Graphics.FromImage(image))
+        {
+          graphics.Clear(Color.Gray);
+          SizeF textArea = graphics.MeasureString(whatWasNotFound + " not found", new Font("Verdana", 24));
+          PointF topLeft = new PointF(x: size.Width / 2 - textArea.Width / 2, y: size.Height / 2 - textArea.Height / 2);
+          graphics.DrawString(whatWasNotFound + " not found", new Font("Verdana", 24), Brushes.Red, topLeft);
+        }
+      }
+      catch (Exception ex)
+      {
+        VGExceptionMethods.HandleExceptionSilent(ex);
       }
 
       return image;

@@ -376,10 +376,6 @@ namespace Ogama.Modules.ImportExport
     private static void GenerateOgamaRawDataList(int numberOfImportLines)
     {
       // Clear existing values
-      detectionSetting.ImageDictionary.Clear();
-      detectionSetting.TrialIDToImageAssignments.Clear();
-      detectionSetting.TrialSequenceToTrialIDAssignments.Clear();
-      detectionSetting.TrialSequenceToStarttimeAssignments.Clear();
       rawDataList.Clear();
       double lastTimeInFileTime = 0;
 
@@ -463,6 +459,11 @@ namespace Ogama.Modules.ImportExport
           return;
         }
       }
+      else
+      {
+        detectionSetting.TrialSequenceToTrialIDAssignments.Clear();
+        detectionSetting.TrialSequenceToStarttimeAssignments.Clear();
+      }
 
       string line = string.Empty;
       int counter = 0;
@@ -520,6 +521,13 @@ namespace Ogama.Modules.ImportExport
               case TrialSequenceImportModes.UseImportColumn:
                 // No trial counting needed
                 break;
+            }
+
+            // Clear old entries except parses from table
+            if (detectionSetting.StimuliImportMode != StimuliImportModes.UseAssignmentTable)
+            {
+              detectionSetting.ImageDictionary.Clear();
+              detectionSetting.TrialIDToImageAssignments.Clear();
             }
 
             // Check for image detection specifications
@@ -1120,6 +1128,14 @@ namespace Ogama.Modules.ImportExport
 
         // Add slide node to slideshow
         Document.ActiveDocument.ExperimentSettings.SlideShow.Nodes.Add(slideNode);
+
+        //if (stimulusImage != null)
+        //{
+        //  stimulusImage.Dispose();
+        //}
+
+        //newSlide.Dispose();
+
         Document.ActiveDocument.Modified = true;
       }
 
@@ -1437,7 +1453,7 @@ namespace Ogama.Modules.ImportExport
         {
           var settings = new MergedSettings
             {
-              AsciiSetting = asciiSetting, 
+              AsciiSetting = asciiSetting,
               DetectionSetting = detectionSetting
             };
 
