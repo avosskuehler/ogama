@@ -1048,7 +1048,6 @@ namespace Ogama.Modules.ImportExport
       {
         int trialSequence = kvp.Key;
         int trialID = kvp.Value;
-
         string file = string.Empty;
         if (detectionSetting.TrialIDToImageAssignments.ContainsKey(trialID))
         {
@@ -1105,8 +1104,13 @@ namespace Ogama.Modules.ImportExport
         }
 
         // Create trial
-        Trial newTrial = new Trial(filename, trialID);
-        newTrial.Name = filename;
+        trialID = int.Parse(Document.ActiveDocument.ExperimentSettings.SlideShow.GetUnusedNodeID());
+
+        var newTrial = new Trial(filename, trialID)
+          {
+            Name = filename
+          };
+
         newTrial.Add(newSlide);
 
         if (trialNames.Contains(filename)
@@ -1116,15 +1120,15 @@ namespace Ogama.Modules.ImportExport
           // Trial already exists
           continue;
         }
-        else
-        {
-          trialNames.Add(filename);
-        }
+
+        trialNames.Add(filename);
 
         // Create slide node
-        SlideshowTreeNode slideNode = new SlideshowTreeNode(newSlide.Name);
-        slideNode.Name = trialID.ToString();
-        slideNode.Slide = newSlide;
+        var slideNode = new SlideshowTreeNode(newSlide.Name)
+        {
+          Name = trialID.ToString(),
+          Slide = newSlide
+        };
 
         // Add slide node to slideshow
         Document.ActiveDocument.ExperimentSettings.SlideShow.Nodes.Add(slideNode);
