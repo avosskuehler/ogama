@@ -338,7 +338,17 @@ namespace Ogama.Modules.Recording
       // with exactly this mehtod.
       // TODO: Find the reason...
 #if !WIN64
-      int count = PS3Camera.CameraCount;
+      try
+      {
+        int count = PS3Camera.CameraCount;
+        Settings.Default.PS3Disabled = false;
+      }
+      catch (Exception ex)
+      {
+        ExceptionMethods.ProcessErrorMessage("Using a PlayStationCamera (if it is connected to the system) will be disabled," +
+          "cause the loading of the CLEyeMulticam.dll failed with the Message: " + ex.Message);
+        Settings.Default.PS3Disabled = true;
+      }
 #endif
 
       this.InitializeComponent();
@@ -495,7 +505,7 @@ namespace Ogama.Modules.Recording
         // create new raw data table for subject
         this.subjectRawDataTable = new OgamaDataSet.RawdataDataTable
           {
-              TableName = this.currentTracker.Subject.SubjectName + "Rawdata" 
+            TableName = this.currentTracker.Subject.SubjectName + "Rawdata"
           };
 
         // Start presentation in a separate thread,
@@ -678,7 +688,7 @@ namespace Ogama.Modules.Recording
 
       // Take primary monitor
       var monitorIndex = 0;
-      if (PresentationScreen.GetPresentationScreen() != Screen.PrimaryScreen) 
+      if (PresentationScreen.GetPresentationScreen() != Screen.PrimaryScreen)
       {
         // otherwise take the secondary sceen.
         monitorIndex = 1;
@@ -763,7 +773,7 @@ namespace Ogama.Modules.Recording
 
       this.InitializeScreenCapture();
       this.CreateTrackerInterfaces();
-      
+
       // Use panel update always at start
       this.forcePanelViewerUpdate = true;
 
@@ -1771,31 +1781,31 @@ namespace Ogama.Modules.Recording
 
       if (tracker == (tracker | HardwareTracker.Mirametrix))
       {
-          // Create Mirametrix tracker
-          var newMirametrix = new MirametrixTracker(
-              ref this.labelCalibrationResultMirametrix,
-              this.tbpMirametrix,
-              this,
-              this.spcMirametrixControls,
-              this.spcMirametrixTrackStatus.Panel1,
-              this.spcMirametrixCalibPlot.Panel1,
-              this.btnMirametrixShowOnPresentationScreen,
-              this.btnMirametrixAcceptCalibration,
-              this.btnMirametrixRecalibrate,
-              this.btnMirametrixConnect,
-              this.btnMirametrixSubjectName,
-              this.btnMirametrixCalibrate,
-              this.btnMirametrixRecord,
-              this.txbMirametrixSubjectName);
+        // Create Mirametrix tracker
+        var newMirametrix = new MirametrixTracker(
+            ref this.labelCalibrationResultMirametrix,
+            this.tbpMirametrix,
+            this,
+            this.spcMirametrixControls,
+            this.spcMirametrixTrackStatus.Panel1,
+            this.spcMirametrixCalibPlot.Panel1,
+            this.btnMirametrixShowOnPresentationScreen,
+            this.btnMirametrixAcceptCalibration,
+            this.btnMirametrixRecalibrate,
+            this.btnMirametrixConnect,
+            this.btnMirametrixSubjectName,
+            this.btnMirametrixCalibrate,
+            this.btnMirametrixRecord,
+            this.txbMirametrixSubjectName);
 
-          this.trackerInterfaces.Add(HardwareTracker.Mirametrix, newMirametrix);
+        this.trackerInterfaces.Add(HardwareTracker.Mirametrix, newMirametrix);
       }
       else
       {
-          if (this.tclEyetracker.TabPages.Contains(this.tbpMirametrix))
-          {
-              this.tclEyetracker.TabPages.Remove(this.tbpMirametrix);
-          }
+        if (this.tclEyetracker.TabPages.Contains(this.tbpMirametrix))
+        {
+          this.tclEyetracker.TabPages.Remove(this.tbpMirametrix);
+        }
       }
 
       if (tracker == (tracker | HardwareTracker.SMI))
@@ -2333,12 +2343,12 @@ namespace Ogama.Modules.Recording
       switch (this.tclEyetracker.SelectedTab.Name)
       {
         case "tbpMirametrix":
-              if (this.trackerInterfaces.ContainsKey(HardwareTracker.Mirametrix))
-              {
-                  this.currentTracker = this.trackerInterfaces[HardwareTracker.Mirametrix];
-              }
+          if (this.trackerInterfaces.ContainsKey(HardwareTracker.Mirametrix))
+          {
+            this.currentTracker = this.trackerInterfaces[HardwareTracker.Mirametrix];
+          }
 
-              break;
+          break;
         case "tbpTobii":
           if (this.trackerInterfaces.ContainsKey(HardwareTracker.Tobii))
           {

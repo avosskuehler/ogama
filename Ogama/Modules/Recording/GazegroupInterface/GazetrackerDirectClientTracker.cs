@@ -181,6 +181,7 @@ namespace Ogama.Modules.Recording.GazegroupInterface
     public static bool IsAvailable(out string errorMessage)
     {
       errorMessage = string.Empty;
+      Camera.DisablePs3Camera = Properties.Settings.Default.PS3Disabled;
 
       try
       {

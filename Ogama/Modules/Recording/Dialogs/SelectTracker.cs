@@ -476,7 +476,7 @@ namespace Ogama.Modules.Recording.Dialogs
         Environment.NewLine + "This is the Gazetracker which uses a webcam as "
                               + "an eye tracker and can be used in both remote and head-mounted setups."
                               + Environment.NewLine;
-
+      
       if (!GazetrackerDirectClientTracker.IsAvailable(out error))
       {
         this.chbGazetrackerDirectClient.Enabled = false;

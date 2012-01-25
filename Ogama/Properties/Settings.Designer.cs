@@ -1719,5 +1719,17 @@ namespace Ogama.Properties {
                 this["OgamaScreenCaptureSettingsPath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PS3Disabled {
+            get {
+                return ((bool)(this["PS3Disabled"]));
+            }
+            set {
+                this["PS3Disabled"] = value;
+            }
+        }
     }
 }
