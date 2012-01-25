@@ -117,14 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="aleaToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="aleaToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <data name="label1.Text" xml:space="preserve">
     <value>Please specify the calibration settings for the Mirametrix S2 tracker. That is the tracker IP and port, the auto-connection mode and the auto-calibration mode.
-We recommand you to use time-out calibration speed only if you have multiple people looking at the same screen !</value>
+We recommend you to use time-out calibration speed only if you have multiple people looking at the same screen !</value>
   </data>
 </root>

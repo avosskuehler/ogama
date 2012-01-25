@@ -1618,7 +1618,6 @@
     <None Include="Resources\SMI_61_25.png" />
     <None Include="Resources\OgamaV3.ico" />
     <None Include="Resources\StartUpSplash.png" />
-    <None Include="Resources\StartUpSplash1.png" />
     <None Include="Resources\ITUBanner.png" />
     <None Include="Resources\Globe32.png" />
     <None Include="Resources\ASL01.gif" />
