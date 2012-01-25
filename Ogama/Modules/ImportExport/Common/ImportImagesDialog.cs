@@ -377,8 +377,8 @@ namespace Ogama.Modules.ImportExport
         this.cbbStimulusFileColumn.Items.AddRange(this.imagefileColumnHeaders.ToArray());
         this.cbbTrialIDColumn.Items.Add("Automatic numbering");
         this.cbbTrialIDColumn.Items.AddRange(this.imagefileColumnHeaders.ToArray());
-        this.cbbStimulusFileColumn.SelectedIndex = 0;
-        this.cbbTrialIDColumn.SelectedIndex = 2;
+        this.cbbStimulusFileColumn.SelectedIndex = 1;
+        this.cbbTrialIDColumn.SelectedIndex = 1;
         this.RepopulateImageAssignmentTable();
 
         if (this.imagefileColumnHeaders.Count > 2)
@@ -632,7 +632,6 @@ namespace Ogama.Modules.ImportExport
           {
             this.dgvAssignments.Rows.Add(new object[] { pair.Key, pair.Value });
           }
-
           break;
         case StimuliImportModes.UseImportColumn:
           this.rdbUseStimulusFileColumn.Checked = true;

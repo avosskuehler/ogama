@@ -376,9 +376,6 @@ namespace Ogama.Modules.ImportExport
     private static void GenerateOgamaRawDataList(int numberOfImportLines)
     {
       // Clear existing values
-      detectionSetting.ImageDictionary.Clear();
-      detectionSetting.TrialIDToImageAssignments.Clear();
-      detectionSetting.TrialSequenceToTrialIDAssignments.Clear();
       rawDataList.Clear();
       double lastTimeInFileTime = 0;
 
@@ -462,6 +459,11 @@ namespace Ogama.Modules.ImportExport
           return;
         }
       }
+      else
+      {
+        detectionSetting.TrialSequenceToTrialIDAssignments.Clear();
+        detectionSetting.TrialSequenceToStarttimeAssignments.Clear();
+      }
 
       string line = string.Empty;
       int counter = 0;
@@ -519,6 +521,13 @@ namespace Ogama.Modules.ImportExport
               case TrialSequenceImportModes.UseImportColumn:
                 // No trial counting needed
                 break;
+            }
+
+            // Clear old entries except parses from table
+            if (detectionSetting.StimuliImportMode != StimuliImportModes.UseAssignmentTable)
+            {
+              detectionSetting.ImageDictionary.Clear();
+              detectionSetting.TrialIDToImageAssignments.Clear();
             }
 
             // Check for image detection specifications
@@ -1039,7 +1048,6 @@ namespace Ogama.Modules.ImportExport
       {
         int trialSequence = kvp.Key;
         int trialID = kvp.Value;
-
         string file = string.Empty;
         if (detectionSetting.TrialIDToImageAssignments.ContainsKey(trialID))
         {
@@ -1096,8 +1104,13 @@ namespace Ogama.Modules.ImportExport
         }
 
         // Create trial
-        Trial newTrial = new Trial(filename, trialID);
-        newTrial.Name = filename;
+        trialID = int.Parse(Document.ActiveDocument.ExperimentSettings.SlideShow.GetUnusedNodeID());
+
+        var newTrial = new Trial(filename, trialID)
+          {
+            Name = filename
+          };
+
         newTrial.Add(newSlide);
 
         if (trialNames.Contains(filename)
@@ -1107,18 +1120,26 @@ namespace Ogama.Modules.ImportExport
           // Trial already exists
           continue;
         }
-        else
-        {
-          trialNames.Add(filename);
-        }
+
+        trialNames.Add(filename);
 
         // Create slide node
-        SlideshowTreeNode slideNode = new SlideshowTreeNode(newSlide.Name);
-        slideNode.Name = trialID.ToString();
-        slideNode.Slide = newSlide;
+        var slideNode = new SlideshowTreeNode(newSlide.Name)
+        {
+          Name = trialID.ToString(),
+          Slide = newSlide
+        };
 
         // Add slide node to slideshow
         Document.ActiveDocument.ExperimentSettings.SlideShow.Nodes.Add(slideNode);
+
+        //if (stimulusImage != null)
+        //{
+        //  stimulusImage.Dispose();
+        //}
+
+        //newSlide.Dispose();
+
         Document.ActiveDocument.Modified = true;
       }
 
@@ -1356,15 +1377,19 @@ namespace Ogama.Modules.ImportExport
       ASCIISettings logFileImportSettings,
       DetectionSettings rawdataSettings)
     {
-      SaveFileDialog ofdSaveSettings = new SaveFileDialog();
-      ofdSaveSettings.DefaultExt = "ois";
-      ofdSaveSettings.FileName = "*.ois";
-      ofdSaveSettings.FilterIndex = 1;
-      ofdSaveSettings.Filter = "Ogama import settings files|*.ois";
-      ofdSaveSettings.Title = "Please specify settings filename";
+      var ofdSaveSettings = new SaveFileDialog
+        {
+          DefaultExt = "ois",
+          FileName = "*.ois",
+          FilterIndex = 1,
+          Filter = "Ogama import settings files|*.ois",
+          Title = "Please specify settings filename",
+          InitialDirectory = Properties.Settings.Default.ImportSettingsPath
+        };
+
       if (ofdSaveSettings.ShowDialog() == DialogResult.OK)
       {
-        ImportRawData.SerializeSettings(ofdSaveSettings.FileName);
+        SerializeSettings(ofdSaveSettings.FileName);
       }
     }
 
@@ -1423,31 +1448,27 @@ namespace Ogama.Modules.ImportExport
     /// Extension ".ois"
     /// </summary>
     /// <param name="filePath">A <see cref="string"/> with the path to the 
-    /// OGAMA target import settings xml file.</param>
-    /// <returns><strong>True</strong> if successful, 
-    /// otherwise <strong>false</strong>.</returns>
-    private static bool SerializeSettings(string filePath)
+    ///   OGAMA target import settings xml file.</param>
+    private static void SerializeSettings(string filePath)
     {
       try
       {
         using (TextWriter writer = new StreamWriter(filePath))
         {
-          MergedSettings settings = new MergedSettings();
-          settings.AsciiSetting = asciiSetting;
-          settings.DetectionSetting = detectionSetting;
+          var settings = new MergedSettings
+            {
+              AsciiSetting = asciiSetting,
+              DetectionSetting = detectionSetting
+            };
 
-          XmlSerializer serializer = new XmlSerializer(typeof(MergedSettings));
+          var serializer = new XmlSerializer(typeof(MergedSettings));
           serializer.Serialize(writer, settings);
         }
       }
       catch (Exception ex)
       {
         ExceptionMethods.HandleException(ex);
-
-        return false;
       }
-
-      return true;
     }
 
     /// <summary>
@@ -1461,17 +1482,15 @@ namespace Ogama.Modules.ImportExport
     {
       try
       {
-        using (FileStream fs = new FileStream(filePath, FileMode.Open))
+        using (var fs = new FileStream(filePath, FileMode.Open))
         {
-          MergedSettings settings = new MergedSettings();
-
           // Create an instance of the XmlSerializer class;
           // specify the type of object to be deserialized 
-          XmlSerializer serializer = new XmlSerializer(typeof(MergedSettings));
+          var serializer = new XmlSerializer(typeof(MergedSettings));
 
           /* Use the Deserialize method to restore the object's state with
           data from the XML document. */
-          settings = (MergedSettings)serializer.Deserialize(fs);
+          var settings = (MergedSettings)serializer.Deserialize(fs);
 
           asciiSetting = settings.AsciiSetting;
           detectionSetting = settings.DetectionSetting;
