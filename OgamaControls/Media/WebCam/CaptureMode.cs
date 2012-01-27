@@ -2,7 +2,7 @@
 // Copyright (c) 2008 All Rights Reserved
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 namespace OgamaControls
 {
   using System;
