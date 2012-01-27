@@ -84,15 +84,16 @@ namespace GTHardware
           DisablePs3Camera = true;
         }
       }
-
-        //else if (KinectCamera.IsConnected())
+      //else if (KinectCamera.IsConnected())
       //    deviceType = DeviceTypeEnum.Kinect;
 
-      else if (DirectShowDevices.Instance.Cameras.Any())
+      if (connectedDevice == DeviceTypeEnum.None && DirectShowDevices.Instance.Cameras.Any())
       {
         // Fallback to DirectShow drivers
         connectedDevice = DeviceTypeEnum.DirectShow;
       }
+
+
 
       return connectedDevice;
     }

@@ -267,7 +267,7 @@ namespace VectorGraphics.Elements
     /// </summary>
     /// <value>A <see cref="PointF"/> with the first point of the polyline.</value>
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false), XmlIgnore]
-    public PointF FirstPt { get; private set; }
+    public PointF FirstPt { get; set; }
 
     /// <summary>
     /// Gets or sets polylines bounding rectangle.
@@ -311,7 +311,7 @@ namespace VectorGraphics.Elements
     /// <value>A <see cref="Boolean"/> that is <strong>true</strong>,
     /// if the polyline is closed, otherwise <strong>false</strong>.</value>
     [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    public bool IsClosed { get; private set; }
+    public bool IsClosed { get; set; }
 
     #endregion //PROPERTIES
 

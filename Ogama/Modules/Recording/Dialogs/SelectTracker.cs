@@ -399,6 +399,11 @@ namespace Ogama.Modules.Recording.Dialogs
         this.chbTobii.Checked = false;
         this.pcbTobii.Enabled = false;
       }
+      else
+      {
+        this.chbTobii.Enabled = true;
+        this.pcbTobii.Enabled = true;
+      }
 
       this.chbTobii.Text = tobiiDefaultText + "Status: " + error;
     }
@@ -418,6 +423,8 @@ namespace Ogama.Modules.Recording.Dialogs
       }
       else
       {
+        this.chbMirametrix.Enabled = true;
+        this.pcbMirametrix.Enabled = true;
         this.chbMirametrix.Text = "Mirametrix S2 installed on this computer ! \n" + error;
       }
     }
@@ -442,6 +449,8 @@ namespace Ogama.Modules.Recording.Dialogs
       }
       else
       {
+        this.chbAsl.Enabled = true;
+        this.pcbAsl.Enabled = true;
         this.chbAsl.Text = AslDefaultText + "(ASL library found)";
       }
     }
@@ -463,6 +472,8 @@ namespace Ogama.Modules.Recording.Dialogs
       }
       else
       {
+        this.chbAlea.Enabled = true;
+        this.pcbAlea.Enabled = true;
         this.chbAlea.Text = aleaDefaultText + "Status: Intelligaze found.";
       }
     }
@@ -482,6 +493,10 @@ namespace Ogama.Modules.Recording.Dialogs
       {
         this.chbGazetrackerDirectClient.Enabled = false;
         this.chbGazetrackerDirectClient.Checked = false;
+      }
+      else
+      {
+        this.chbGazetrackerDirectClient.Enabled = true;
       }
 
       this.chbGazetrackerDirectClient.Text = ituDefaultText + "Status: " + error;
