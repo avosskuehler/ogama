@@ -331,15 +331,11 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\Common\CustomRenderer\CustomRenderer.cs" />
-    <Compile Include="Modules\Common\FormTemplates\FormWithInterface.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Modules\Common\FormTemplates\FormWithInterface.cs" />
     <Compile Include="Modules\Common\FormTemplates\FormWithInterface.Designer.cs">
       <DependentUpon>FormWithInterface.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Common\FormTemplates\FormWithPicture.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Modules\Common\FormTemplates\FormWithPicture.cs" />
     <Compile Include="Modules\Common\FormTemplates\FormWithAccellerators.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -538,9 +534,7 @@
     <Compile Include="Modules\Replay\Video\DSBitmapSourceFilter.cs" />
     <Compile Include="Modules\Replay\Video\DSRecord.cs">
     </Compile>
-    <Compile Include="Modules\Replay\Video\SaveVideoSplash.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Modules\Replay\Video\SaveVideoSplash.cs" />
     <Compile Include="Modules\Replay\Video\SaveVideoSplash.designer.cs">
       <DependentUpon>SaveVideoSplash.cs</DependentUpon>
     </Compile>
@@ -592,19 +586,15 @@
     </Compile>
     <Compile Include="Modules\SlideshowDesign\SlideshowModule.ListView.cs">
       <DependentUpon>SlideshowModule.cs</DependentUpon>
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\SlideshowDesign\SlideshowModule.TreeView.cs">
       <DependentUpon>SlideshowModule.cs</DependentUpon>
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\SlideshowDesign\DesignModule\SlideDesignModule.Help.cs">
       <DependentUpon>SlideDesignModule.cs</DependentUpon>
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\SlideshowDesign\SlideshowModule.Buttons.cs">
       <DependentUpon>SlideshowModule.cs</DependentUpon>
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\Statistics\DescriptiveResult.cs" />
     <Compile Include="Modules\Statistics\Descriptive.cs" />
@@ -669,11 +659,9 @@
     </Compile>
     <Compile Include="Modules\SlideshowDesign\DesignModule\SlideDesignModule.StimuliTabs.cs">
       <DependentUpon>SlideDesignModule.cs</DependentUpon>
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\SlideshowDesign\DesignModule\SlideDesignModule.Common.cs">
       <DependentUpon>SlideDesignModule.cs</DependentUpon>
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\SlideshowDesign\StimuliTypes.cs" />
     <Compile Include="Modules\Common\CustomRenderer\TrialRenderer.cs" />
@@ -706,9 +694,7 @@
     <Compile Include="Modules\Common\Tools\Queries.cs" />
     <Compile Include="Modules\Common\Types\SampleType.cs" />
     <Compile Include="Modules\Common\Types\XMLSerializableDictionary.cs" />
-    <Compile Include="Modules\Saliency\SaliencyModule.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Modules\Saliency\SaliencyModule.cs" />
     <Compile Include="Modules\Saliency\SaliencyModule.designer.cs">
       <DependentUpon>SaliencyModule.cs</DependentUpon>
     </Compile>
@@ -767,17 +753,13 @@
     </Compile>
     <Compile Include="Modules\Recording\TobiiInterface\TobiiTracker.cs" />
     <Compile Include="Modules\Replay\ReplayDrawingModes.cs" />
-    <Compile Include="Modules\Saliency\SaliencyPicture.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="Modules\Saliency\SaliencyPicture.cs" />
     <Compile Include="Modules\Saliency\SaliencyPicture.designer.cs">
       <DependentUpon>SaliencyPicture.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Statistics\Statistic.cs" />
     <Compile Include="Modules\Statistics\Variables\StatisticalParameters.cs" />
-    <Compile Include="Modules\SlideshowDesign\DesignModule\SlidePicture.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="Modules\SlideshowDesign\DesignModule\SlidePicture.cs" />
     <Compile Include="Modules\SlideshowDesign\DesignModule\SlidePicture.Designer.cs">
       <DependentUpon>SlidePicture.cs</DependentUpon>
     </Compile>
@@ -884,9 +866,7 @@
     <Compile Include="Modules\Recording\TobiiInterface\TobiiSettingsDialog.Designer.cs">
       <DependentUpon>TobiiSettingsDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Replay\Video\VideoPropertiesDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Modules\Replay\Video\VideoPropertiesDialog.cs" />
     <Compile Include="Modules\Replay\Video\VideoPropertiesDialog.Designer.cs">
       <DependentUpon>VideoPropertiesDialog.cs</DependentUpon>
     </Compile>
@@ -896,9 +876,7 @@
     <Compile Include="Modules\AOI\Dialogs\NameShapeDlg.Designer.cs">
       <DependentUpon>NameShapeDlg.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\SlideshowDesign\DesignModule\SlideDesignModule.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Modules\SlideshowDesign\DesignModule\SlideDesignModule.cs" />
     <Compile Include="Modules\SlideshowDesign\DesignModule\SlideDesignModule.Designer.cs">
       <DependentUpon>SlideDesignModule.cs</DependentUpon>
     </Compile>
@@ -908,9 +886,7 @@
     <Compile Include="Modules\Recording\Presenter\PresenterModule.Designer.cs">
       <DependentUpon>PresenterModule.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\SlideshowDesign\SlideshowModule.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Modules\SlideshowDesign\SlideshowModule.cs" />
     <Compile Include="Modules\SlideshowDesign\SlideshowModule.Designer.cs">
       <DependentUpon>SlideshowModule.cs</DependentUpon>
     </Compile>
@@ -935,9 +911,7 @@
     <Compile Include="Modules\AttentionMap\AttentionMapPicture.Designer.cs">
       <DependentUpon>AttentionMapPicture.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Replay\ReplayPicture.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="Modules\Replay\ReplayPicture.cs" />
     <Compile Include="Modules\Replay\ReplayPicture.Designer.cs">
       <DependentUpon>ReplayPicture.cs</DependentUpon>
     </Compile>
@@ -961,9 +935,7 @@
     <Compile Include="Modules\ImportExport\Common\ImportParseFileDialog.Designer.cs">
       <DependentUpon>ImportParseFileDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\ImportExport\AOIData\ImportAOIAssignColumnsDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Modules\ImportExport\AOIData\ImportAOIAssignColumnsDialog.cs" />
     <Compile Include="Modules\ImportExport\AOIData\ImportAOIAssignColumnsDialog.Designer.cs">
       <DependentUpon>ImportAOIAssignColumnsDialog.cs</DependentUpon>
     </Compile>
@@ -996,9 +968,7 @@
     <Compile Include="Modules\AttentionMap\AttentionMapModule.Designer.cs">
       <DependentUpon>AttentionMapModule.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Statistics\StatisticsModule.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Modules\Statistics\StatisticsModule.cs" />
     <Compile Include="Modules\Statistics\StatisticsModule.Designer.cs">
       <DependentUpon>StatisticsModule.cs</DependentUpon>
     </Compile>
@@ -1008,15 +978,11 @@
     <Compile Include="Modules\Fixations\FixationsModule.Designer.cs">
       <DependentUpon>FixationsModule.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Replay\ReplayModule.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Modules\Replay\ReplayModule.cs" />
     <Compile Include="Modules\Replay\ReplayModule.Designer.cs">
       <DependentUpon>ReplayModule.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Database\DatabaseModule.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Modules\Database\DatabaseModule.cs" />
     <Compile Include="Modules\Database\DatabaseModule.Designer.cs">
       <DependentUpon>DatabaseModule.cs</DependentUpon>
     </Compile>
