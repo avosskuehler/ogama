@@ -1,5 +1,7 @@
-﻿namespace Ogama.Modules.ImportExport
+﻿namespace Ogama.Modules.ImportExport.Common
 {
+  using Ogama.Modules.Common.Controls;
+
   partial class ImportDataSplash
   {
     /// <summary>
@@ -13,9 +15,9 @@
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      if (disposing && (components != null))
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -36,7 +38,7 @@
       this.lblLoading = new System.Windows.Forms.Label();
       this.progressBar1 = new System.Windows.Forms.ProgressBar();
       this.timer1 = new System.Windows.Forms.Timer(this.components);
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -147,6 +149,6 @@
     internal System.Windows.Forms.Label lblLoading;
     private System.Windows.Forms.ProgressBar progressBar1;
     private System.Windows.Forms.Timer timer1;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
   }
 }

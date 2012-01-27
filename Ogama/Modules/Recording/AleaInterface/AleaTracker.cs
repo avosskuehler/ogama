@@ -21,15 +21,14 @@ namespace Ogama.Modules.Recording.AleaInterface
   using System.Runtime.InteropServices;
   using System.Windows.Forms;
   using System.Xml.Serialization;
-
   using Alea.Api;
-
-  using Ogama.Modules.Recording.TrackerBase;
-
   using Microsoft.Win32;
-
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.CustomEventArgs;
+  using Ogama.Modules.Common.Tools;
+  using Ogama.Modules.Recording.Dialogs;
+  using Ogama.Modules.Recording.TrackerBase;
 
   /// <summary>
   /// This class implements the <see cref="ITracker"/> interface to represent 

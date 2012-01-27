@@ -54,11 +54,6 @@ namespace VectorGraphics.Elements
     private string filename;
 
     /// <summary>
-    /// Saves the path to the file for this image.
-    /// </summary>
-    private string path;
-
-    /// <summary>
     /// Saves the alpha (transparency) value for this image
     /// </summary>
     private float alpha = 1f;
@@ -131,7 +126,7 @@ namespace VectorGraphics.Elements
       null)
     {
       this.filename = newImageFile;
-      this.path = newPath;
+      this.Filepath = newPath;
       this.canvas = newCanvas;
       this.alpha = newAlpha;
 
@@ -157,7 +152,7 @@ namespace VectorGraphics.Elements
     public VGImage(Image newImage, ImageLayout newLayout, Size newCanvas)
       : base(ShapeDrawAction.None, Pens.Red)
     {
-      this.path = string.Empty;
+      this.Filepath = string.Empty;
       this.filename = string.Empty;
       this.layout = newLayout;
       this.canvas = newCanvas;
@@ -173,7 +168,7 @@ namespace VectorGraphics.Elements
     /// </summary>
     protected VGImage()
     {
-      this.path = string.Empty;
+      this.Filepath = string.Empty;
       this.filename = string.Empty;
       this.InitTransparencyMatrix();
     }
@@ -198,7 +193,7 @@ namespace VectorGraphics.Elements
       cloneImage.Sound)
     {
       this.filename = cloneImage.Filename;
-      this.path = cloneImage.Filepath;
+      this.Filepath = cloneImage.Filepath;
       this.alpha = cloneImage.Alpha;
 
       // Removed because when starting recording that leaded
@@ -234,34 +229,28 @@ namespace VectorGraphics.Elements
     /// </summary>
     /// <remarks>This property is used for reloading the image from file.</remarks>
     /// <value>A <see cref="string"/> with the images path.</value>
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    [Browsable(false)]
-    [XmlIgnore()]
-    public string Filepath
-    {
-      get { return this.path; }
-      set { this.path = value; }
-    }
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false), XmlIgnore]
+    public string Filepath { get; set; }
 
     /// <summary>
     /// Gets the image filename with path.
     /// </summary>
-    [XmlIgnore()]
+    [XmlIgnore]
     public string FullFilename
     {
       get
       {
-        if (this.filename == string.Empty || this.filename == null)
+        if (string.IsNullOrEmpty(this.filename))
         {
           throw new ArgumentNullException("Image filename is empty, so it could no be loaded");
         }
 
-        if (this.path == null || this.path == string.Empty)
+        if (string.IsNullOrEmpty(this.Filepath))
         {
           string newPath = Path.GetDirectoryName(this.filename);
           if (newPath != string.Empty)
           {
-            this.path = newPath;
+            this.Filepath = newPath;
             this.filename = Path.GetFileName(this.filename);
           }
           else
@@ -269,7 +258,7 @@ namespace VectorGraphics.Elements
           }
         }
 
-        return Path.Combine(this.path, this.filename);
+        return Path.Combine(this.Filepath, this.filename);
       }
     }
 
@@ -292,7 +281,7 @@ namespace VectorGraphics.Elements
     /// <remarks>When this is null (after deserialization) the image is
     /// reconstructed from file.</remarks>
     /// <value>A <see cref="Image"/> with the image.</value>
-    [XmlIgnoreAttribute()]
+    [XmlIgnoreAttribute]
     [Category("Content")]
     [Description("The image to use as stimulus.")]
     public Image StimulusImage
@@ -349,14 +338,14 @@ namespace VectorGraphics.Elements
     /// <summary>
     /// Gets or sets the current image.
     /// </summary>
-    [XmlIgnore()]
+    [XmlIgnore]
     protected Image Image { get; set; }
 
     /// <summary>
     /// Gets or sets an <see cref="ImageAttributes"/> that 
     /// helps to draw the images transparent.
     /// </summary>
-    [XmlIgnore()]
+    [XmlIgnore]
     protected ImageAttributes ImageAttributes { get; set; }
 
     #endregion //PROPERTIES

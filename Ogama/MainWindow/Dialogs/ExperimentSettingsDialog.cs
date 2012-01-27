@@ -11,16 +11,18 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.MainWindow
+namespace Ogama.MainWindow.Dialogs
 {
   using System;
   using System.ComponentModel;
   using System.Data.SqlClient;
   using System.Windows.Forms;
+
   using Microsoft.SqlServer.Management.Common;
   using Microsoft.SqlServer.Management.Smo;
+
   using Ogama.ExceptionHandling;
-  using Ogama.Modules.Common;
+  using Ogama.Modules.Common.Tools;
   using Ogama.Properties;
 
   /// <summary>

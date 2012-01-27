@@ -11,21 +11,19 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Common
+namespace Ogama.Modules.Common.SlideCollections
 {
   using System;
   using System.Collections.Generic;
   using System.ComponentModel;
-  using System.Runtime.Serialization;
-  using System.Text;
   using System.Windows.Forms;
   using System.Xml;
   using System.Xml.Serialization;
 
   using Ogama.ExceptionHandling;
-  using Ogama.Modules.Common;
-  using VectorGraphics;
+
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
 
   /// <summary>
   /// This class inherits <see cref="TreeNode"/> and implements <see cref="IXmlSerializable"/>.

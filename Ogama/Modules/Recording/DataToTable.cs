@@ -19,6 +19,7 @@ namespace Ogama.Modules.Recording
 
   using Ogama.DataSet;
   using Ogama.Modules.ImportExport;
+  using Ogama.Modules.ImportExport.Common;
 
   /// <summary>
   /// This stores a set of rawdata along with the table where the data

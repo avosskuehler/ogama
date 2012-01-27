@@ -11,20 +11,19 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.MainWindow
+namespace Ogama.MainWindow.Dialogs
 {
   using System;
-  using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Data;
   using System.Drawing;
   using System.Drawing.Drawing2D;
-  using System.Text;
   using System.Windows.Forms;
+
+  using Ogama.Modules.Common.PictureTemplates;
+  using Ogama.Modules.Common.Tools;
 
   using OgamaControls;
   using OgamaControls.Dialogs;
-  using VectorGraphics;
+
   using VectorGraphics.Elements;
 
   /// <summary>
@@ -85,9 +84,9 @@ namespace Ogama.MainWindow
       this.curSettings = global::Ogama.Properties.Settings.Default;
       this.cbbGazeCursorType.Items.AddRange(Enum.GetNames(typeof(VGCursor.DrawingCursors)));
       this.cbbMouseCursorType.Items.AddRange(Enum.GetNames(typeof(VGCursor.DrawingCursors)));
-      this.cbbGazeFixationsDisplayMode.Items.AddRange(Enum.GetNames(typeof(Ogama.Modules.Common.FixationDrawingMode)));
-      this.cbbMouseFixationsDisplayMode.Items.AddRange(Enum.GetNames(typeof(Ogama.Modules.Common.FixationDrawingMode)));
-      this.cbbPresentationMonitor.Items.AddRange(Enum.GetNames(typeof(Ogama.Modules.Common.Monitor)));
+      this.cbbGazeFixationsDisplayMode.Items.AddRange(Enum.GetNames(typeof(FixationDrawingMode)));
+      this.cbbMouseFixationsDisplayMode.Items.AddRange(Enum.GetNames(typeof(FixationDrawingMode)));
+      this.cbbPresentationMonitor.Items.AddRange(Enum.GetNames(typeof(Monitor)));
     }
 
     #endregion //CONSTRUCTION

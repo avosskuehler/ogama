@@ -11,14 +11,11 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Scanpaths
+namespace Ogama.Modules.Scanpath
 {
   using System;
   using System.Collections.Generic;
   using System.Data;
-  using System.Drawing;
-
-  using Ogama.Modules.ImportExport;
 
   /// <summary>
   /// This static class is used to calculate the edit distance

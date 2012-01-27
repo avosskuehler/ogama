@@ -109,7 +109,7 @@ namespace Ogama.MainWindow
             this.imlStimuli = new System.Windows.Forms.ImageList(this.components);
             this.imlTreeView = new System.Windows.Forms.ImageList(this.components);
             this.imlContextPanel = new System.Windows.Forms.ImageList(this.components);
-            this.contextPanel = new Ogama.MainWindow.ContextPanel();
+            this.contextPanel = new ContextPanel.ContextPanel();
             this.bgwLoad = new System.ComponentModel.BackgroundWorker();
             this.fbdExperiment = new System.Windows.Forms.FolderBrowserDialog();
             this.btnRPL = new System.Windows.Forms.ToolStripButton();
@@ -1077,7 +1077,7 @@ namespace Ogama.MainWindow
       private System.Windows.Forms.ToolStripMenuItem mnuEditSaveImage;
       private System.Windows.Forms.ImageList imlContextPanel;
       private System.Windows.Forms.ImageList imlTreeView;
-      private ContextPanel contextPanel;
+      private ContextPanel.ContextPanel contextPanel;
       private System.ComponentModel.BackgroundWorker bgwLoad;
       private System.Windows.Forms.ToolStripStatusLabel lblStatus;
       private System.Windows.Forms.ToolStripProgressBar prbStatus;

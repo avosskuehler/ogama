@@ -11,16 +11,12 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace VectorGraphics.CustomTypeConverter
+namespace VectorGraphics.Tools.CustomTypeConverter
 {
   using System;
-  using System.Collections.Generic;
   using System.ComponentModel;
-  using System.Drawing;
-  using System.Drawing.Drawing2D;
   using System.Globalization;
-  using System.IO;
-  using System.Text;
+
   using VectorGraphics.Elements;
 
   /// <summary>

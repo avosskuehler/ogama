@@ -2,6 +2,8 @@ using OgamaControls;
 
 namespace Ogama.Modules.AttentionMap
 {
+  using Ogama.Modules.Common.Controls;
+
   partial class AttentionMapModule
   {
     /// <summary>
@@ -48,7 +50,7 @@ namespace Ogama.Modules.AttentionMap
       this.btnSeekNextSlide = new System.Windows.Forms.ToolStripButton();
       this.btnSeekPreviousSlide = new System.Windows.Forms.ToolStripButton();
       this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-      this.trialTimeLine = new Ogama.Modules.Common.TrialTimeLine(this.components);
+      this.trialTimeLine = new TrialTimeLine(this.components);
       this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
       this.trbZoom = new OgamaControls.ToolStripTrackBar();
       this.pnlCanvas = new System.Windows.Forms.Panel();
@@ -794,7 +796,7 @@ namespace Ogama.Modules.AttentionMap
     private System.Windows.Forms.ToolStripButton btnSeekNextSlide;
     private System.Windows.Forms.ToolStripButton btnSeekPreviousSlide;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-    private Ogama.Modules.Common.TrialTimeLine trialTimeLine;
+    private TrialTimeLine trialTimeLine;
     private System.Windows.Forms.ToolStripButton btnMouseClicks;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
     private System.Windows.Forms.ToolStripButton btnWeight;

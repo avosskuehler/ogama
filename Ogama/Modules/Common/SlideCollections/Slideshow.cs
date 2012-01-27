@@ -11,20 +11,21 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Common
+namespace Ogama.Modules.Common.SlideCollections
 {
   using System;
   using System.Collections.Generic;
   using System.ComponentModel;
   using System.Drawing;
-  using System.Text;
   using System.Windows.Forms;
   using System.Xml.Serialization;
 
-  using Ogama.Modules.Common;
-  using Ogama.Modules.SlideshowDesign;
-  using VectorGraphics;
+  using Ogama.Modules.Common.Tools;
+  using Ogama.Modules.Common.Types;
+  using Ogama.Modules.SlideshowDesign.Shuffling;
+
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
   using VectorGraphics.Tools;
 
   /// <summary>
@@ -117,7 +118,7 @@ namespace Ogama.Modules.Common
     /// <see cref="Slide"/>s of this slideshow.</value>
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     [Browsable(false)]
-    [XmlIgnore()]
+    [XmlIgnore]
     public NameObjectList<Slide> Slides
     {
       get { return this.GetSlides(); }
@@ -130,7 +131,7 @@ namespace Ogama.Modules.Common
     /// trials of this slideshow.</value>
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     [Browsable(false)]
-    [XmlIgnore()]
+    [XmlIgnore]
     public TrialCollection Trials
     {
       get { return this.GetTrials(); }

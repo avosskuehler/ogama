@@ -11,11 +11,9 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Common
+namespace Ogama.Modules.Common.SlideCollections
 {
   using System;
-  using System.Collections.Generic;
-  using System.Text;
 
   /// <summary>
   /// This structure is used to describe a trial by its sequence number, name and id.

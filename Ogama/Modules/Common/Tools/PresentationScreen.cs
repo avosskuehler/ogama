@@ -11,7 +11,7 @@
 // <author>Martin Werner</author>
 // <email>martin.werner@alea-technologies.de</email>
 
-namespace Ogama.Modules.Common
+namespace Ogama.Modules.Common.Tools
 {
   using System;
   using System.Drawing;

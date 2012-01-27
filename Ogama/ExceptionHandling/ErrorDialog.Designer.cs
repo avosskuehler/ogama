@@ -1,5 +1,7 @@
 ﻿namespace Ogama.ExceptionHandling
 {
+  using Ogama.Modules.Common.Controls;
+
   partial class ErrorDialog
   {
     /// <summary>
@@ -38,7 +40,7 @@
       this.splitContainer1 = new System.Windows.Forms.SplitContainer();
       this.splitContainer2 = new System.Windows.Forms.SplitContainer();
       this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       this.splitContainer1.Panel1.SuspendLayout();
       this.splitContainer1.Panel2.SuspendLayout();
       this.splitContainer1.SuspendLayout();
@@ -216,7 +218,7 @@
     private System.Windows.Forms.TextBox txbErrorMessage;
     private System.Windows.Forms.Button btnErrorLog;
     private System.Windows.Forms.Button btnAbort;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
     private System.Windows.Forms.SplitContainer splitContainer1;
     private System.Windows.Forms.SplitContainer splitContainer2;
     private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;

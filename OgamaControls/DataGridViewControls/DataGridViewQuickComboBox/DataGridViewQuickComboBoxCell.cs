@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using VectorGraphics;
 using System.Windows.Forms.VisualStyles;
-using VectorGraphics.CustomTypeConverter;
 
 namespace OgamaControls
 {

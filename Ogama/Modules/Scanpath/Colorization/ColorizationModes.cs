@@ -11,15 +11,8 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Scanpaths
+namespace Ogama.Modules.Scanpath.Colorization
 {
-  using System;
-  using System.Collections.Generic;
-  using System.Drawing;
-  using System.Text;
-
-  using OgamaControls;
-
   /// <summary>
   /// A colorization mode that is used within the scanpaths interface.
   /// Can be Subject, Category or Gradient.

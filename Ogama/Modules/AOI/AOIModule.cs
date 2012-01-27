@@ -27,15 +27,23 @@ namespace Ogama.Modules.AOI
 
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
+  using Ogama.Modules.AOI.Dialogs;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.FormTemplates;
+  using Ogama.Modules.Common.SlideCollections;
+  using Ogama.Modules.Common.Tools;
+  using Ogama.Modules.Common.Types;
   using Ogama.Modules.ImportExport;
+  using Ogama.Modules.ImportExport.AOIData;
+  using Ogama.Modules.ImportExport.Common;
   using Ogama.Properties;
   using OgamaControls;
   using OgamaControls.Dialogs;
 
-  using VectorGraphics.CustomEventArgs;
-  using VectorGraphics.CustomTypeConverter;
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
+  using VectorGraphics.Tools.CustomEventArgs;
+  using VectorGraphics.Tools.CustomTypeConverter;
 
   /// <summary>
   /// Derived from <see cref="FormWithTrialSelection"/>.
@@ -1064,7 +1072,10 @@ namespace Ogama.Modules.AOI
     private void btnNewRectangle_Click(object sender, EventArgs e)
     {
       // Skip if no data available
-      if (this.cbbTrial.SelectedItem == null) { return; }
+      if (this.cbbTrial.SelectedItem == null)
+      {
+        return;
+      }
       
       this.btnNewRectangle.Checked = true;
       this.btnNewEllipse.Checked = false;
@@ -1084,7 +1095,10 @@ namespace Ogama.Modules.AOI
     private void btnNewEllipse_Click(object sender, EventArgs e)
     {
       // Skip if no data available
-      if (this.cbbTrial.SelectedItem == null) { return; }
+      if (this.cbbTrial.SelectedItem == null)
+      {
+        return;
+      }
 
       this.btnNewRectangle.Checked = false;
       this.btnNewEllipse.Checked = true;
@@ -1104,7 +1118,10 @@ namespace Ogama.Modules.AOI
     private void btnNewPolyline_Click(object sender, EventArgs e)
     {
       // Skip if no data available
-      if (this.cbbTrial.SelectedItem == null) { return; }
+      if (this.cbbTrial.SelectedItem == null)
+      {
+        return;
+      }
 
       this.btnNewRectangle.Checked = false;
       this.btnNewEllipse.Checked = false;
@@ -1124,16 +1141,19 @@ namespace Ogama.Modules.AOI
     private void btnNewAOIGrid_Click(object sender, EventArgs e)
     {
       // Skip if no data available
-      if (this.cbbTrial.SelectedItem == null) { return; }
+      if (this.cbbTrial.SelectedItem == null)
+      {
+        return;
+      }
       
       this.btnNewRectangle.Checked = false;
       this.btnNewEllipse.Checked = false;
       this.btnNewPolyline.Checked = false;
       this.btnNewAOIGrid.Checked = true;
 
-      AddGridDlg gridDialog = new AddGridDlg();
-      Bitmap screenShot = new Bitmap(Document.ActiveDocument.PresentationSize.Width, Document.ActiveDocument.PresentationSize.Height);
-      Image screenshot2 = this.aoiPicture.RenderToImage();
+      var gridDialog = new AddGridDlg();
+      ////Bitmap screenShot = new Bitmap(Document.ActiveDocument.PresentationSize.Width, Document.ActiveDocument.PresentationSize.Height);
+      var screenshot2 = this.aoiPicture.RenderToImage();
       gridDialog.SlideImage = screenshot2;
       if (gridDialog.ShowDialog() == DialogResult.OK)
       {
@@ -1190,7 +1210,10 @@ namespace Ogama.Modules.AOI
     private void btnSeekNextSlide_Click(object sender, EventArgs e)
     {
       // Skip if there is no data
-      if (this.CurrentTrial == null) { return; }
+      if (this.CurrentTrial == null)
+      {
+        return;
+      }
 
       this.trialTimeLine.HighlightNextSlide(true);
       int slideIndex = this.trialTimeLine.HighlightedSlideIndex;
@@ -1209,7 +1232,10 @@ namespace Ogama.Modules.AOI
     private void BtnSeekPreviousSlideClick(object sender, EventArgs e)
     {
       // Skip if there is no data
-      if (this.CurrentTrial == null) { return; }
+      if (this.CurrentTrial == null)
+      {
+        return;
+      }
 
       this.trialTimeLine.HighlightNextSlide(false);
       int slideIndex = this.trialTimeLine.HighlightedSlideIndex;
@@ -1313,7 +1339,10 @@ namespace Ogama.Modules.AOI
     private void aoiPicture_ShapeAdded(object sender, ShapeEventArgs e)
     {
       // Skip if no data available
-      if (this.cbbTrial.SelectedItem == null) { return; }
+      if (this.cbbTrial.SelectedItem == null)
+      {
+        return;
+      }
       
       string shapeName = e.Shape.Name;
       int shapePointCount = e.Shape.GetPointCount();
@@ -1346,7 +1375,10 @@ namespace Ogama.Modules.AOI
     private void aoiPicture_ShapeChanged(object sender, ShapeEventArgs e)
     {
       // Skip if no data available
-      if (this.cbbTrial.SelectedItem == null) { return; }
+      if (this.cbbTrial.SelectedItem == null)
+      {
+        return;
+      }
 
       string shapeName = e.Shape.Name;
       int shapePointCount = e.Shape.GetPointCount();

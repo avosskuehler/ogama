@@ -7,11 +7,12 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing.Text;
 using VectorGraphics;
-using VectorGraphics.CustomEventArgs;
 using VectorGraphics.Elements;
 
 namespace OgamaControls
 {
+  using VectorGraphics.Tools.CustomEventArgs;
+
   /// <summary>
   /// FontSelectControl - A control that lets the user rapidly select a font
   /// </summary>

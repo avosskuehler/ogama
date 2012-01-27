@@ -1,7 +1,11 @@
-﻿using System.Windows.Forms;
-
-namespace Ogama.Modules.SlideshowDesign
+﻿namespace Ogama.Modules.SlideshowDesign.DesignModule
 {
+  using System.Windows.Forms;
+
+  using Ogama.Modules.Common.Controls;
+
+  using VectorGraphics.Tools.CustomEventArgs;
+
   partial class SlideDesignModule
   {
     /// <summary>
@@ -15,9 +19,9 @@ namespace Ogama.Modules.SlideshowDesign
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      if (disposing && (components != null))
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -170,8 +174,8 @@ namespace Ogama.Modules.SlideshowDesign
         this.triggerControl = new OgamaControls.TriggerControl();
         this.pnlCanvas = new System.Windows.Forms.Panel();
         this.pnlPicture = new System.Windows.Forms.Panel();
-        this.designPicture = new Ogama.Modules.SlideshowDesign.SlidePicture(this.components);
-        this.dltForm = new Ogama.Modules.Common.DialogTop();
+        this.designPicture = new SlidePicture(this.components);
+        this.dltForm = new DialogTop();
         this.splitContainer1 = new System.Windows.Forms.SplitContainer();
         this.splitContainer2 = new System.Windows.Forms.SplitContainer();
         ((System.ComponentModel.ISupportInitialize)(this.bsoSubjects)).BeginInit();
@@ -977,7 +981,7 @@ namespace Ogama.Modules.SlideshowDesign
         this.pbcElements.NewTextAlignment = VectorGraphics.Elements.VGAlignment.None;
         this.pbcElements.Size = new System.Drawing.Size(266, 88);
         this.pbcElements.TabIndex = 26;
-        this.pbcElements.ShapePropertiesChanged += new System.EventHandler<VectorGraphics.CustomEventArgs.ShapePropertiesChangedEventArgs>(this.pbcElements_ShapePropertiesChanged);
+        this.pbcElements.ShapePropertiesChanged += new System.EventHandler<ShapePropertiesChangedEventArgs>(this.pbcElements_ShapePropertiesChanged);
         // 
         // tbpAudioProperties
         // 
@@ -1918,12 +1922,12 @@ namespace Ogama.Modules.SlideshowDesign
         this.designPicture.TabIndex = 7;
         this.designPicture.TabStop = false;
         this.designPicture.ZoomFactor = 0F;
-        this.designPicture.ShapeChanged += new VectorGraphics.CustomEventArgs.ShapeEventHandler(this.designPicture_ShapeChanged);
-        this.designPicture.ShapeSelected += new VectorGraphics.CustomEventArgs.ShapeEventHandler(this.picPreview_ShapeSelected);
+        this.designPicture.ShapeChanged += new ShapeEventHandler(this.designPicture_ShapeChanged);
+        this.designPicture.ShapeSelected += new ShapeEventHandler(this.picPreview_ShapeSelected);
         this.designPicture.ShapeDeselected += new System.EventHandler(this.picPreview_ShapeDeselected);
-        this.designPicture.ShapeDoubleClick += new VectorGraphics.CustomEventArgs.ShapeEventHandler(this.picPreview_ShapeDoubleClick);
-        this.designPicture.ShapeDeleted += new VectorGraphics.CustomEventArgs.ShapeEventHandler(this.picPreview_ShapeDeleted);
-        this.designPicture.ShapeAdded += new VectorGraphics.CustomEventArgs.ShapeEventHandler(this.picPreview_ShapeAdded);
+        this.designPicture.ShapeDoubleClick += new ShapeEventHandler(this.picPreview_ShapeDoubleClick);
+        this.designPicture.ShapeDeleted += new ShapeEventHandler(this.picPreview_ShapeDeleted);
+        this.designPicture.ShapeAdded += new ShapeEventHandler(this.picPreview_ShapeAdded);
         // 
         // dltForm
         // 
@@ -2169,7 +2173,7 @@ namespace Ogama.Modules.SlideshowDesign
     private TabPage tbpNewStimuli;
     private Button btnAddInstruction;
     private Button btnAddImage;
-    private Ogama.Modules.Common.DialogTop dltForm;
+    private DialogTop dltForm;
     private Panel panel1;
     private Button btnOK;
     private Button btnCancel;

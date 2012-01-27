@@ -16,19 +16,16 @@ namespace Ogama.Modules.Recording.GazegroupInterface
   using System;
   using System.Drawing;
   using System.Windows.Forms;
-
+  using GTHardware;
   using GTLibrary.Utils;
-
-  using Ogama.ExceptionHandling;
-  using Ogama.Modules.Common;
-  using Ogama.Modules.Recording.TrackerBase;
-
   using GTOgamaClient.API;
   using GTOgamaClient.Controls;
-
+  using Ogama.ExceptionHandling;
+  using Ogama.Modules.Common;
+  using Ogama.Modules.Common.CustomEventArgs;
+  using Ogama.Modules.Recording.Dialogs;
+  using Ogama.Modules.Recording.TrackerBase;
   using OgamaControls;
-
-  using GTHardware;
 
   /// <summary>
   /// This class implements the <see cref="TrackerWithStatusControls"/> class
@@ -303,7 +300,6 @@ namespace Ogama.Modules.Recording.GazegroupInterface
         if (this.gazeTrackerApiClient != null)
         {
           this.gazeTrackerApiClient.CleanUp();
-          //this.gazeTrackerApiClient.ShowInitialImage();
         }
 
         this.adjustButton.Enabled = false;

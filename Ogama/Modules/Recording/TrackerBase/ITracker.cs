@@ -11,9 +11,9 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Recording
+namespace Ogama.Modules.Recording.TrackerBase
 {
-  using Ogama.Modules.Common;
+  using Ogama.Modules.Common.CustomEventArgs;
   using Ogama.Modules.Recording.AleaInterface;
   using Ogama.Modules.Recording.MouseOnlyInterface;
   using Ogama.Modules.Recording.SMIInterface;

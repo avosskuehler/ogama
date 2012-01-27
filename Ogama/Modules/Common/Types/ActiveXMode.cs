@@ -11,10 +11,8 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Common
+namespace Ogama.Modules.Common.Types
 {
-  using System;
-
   /// <summary>
   /// This enumeration indicates the mode in which to display
   /// ActiveX controls of slides in a picture.

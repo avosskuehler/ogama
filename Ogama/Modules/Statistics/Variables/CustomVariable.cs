@@ -11,10 +11,8 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Statistics
+namespace Ogama.Modules.Statistics.Variables
 {
-  using System;
-  using System.Collections.Generic;
   using System.Text;
   using System.Windows.Forms;
 

@@ -11,26 +11,22 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.MainWindow
+namespace Ogama.MainWindow.ContextPanel
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Data;
-    using System.Drawing;
-    using System.IO;
-    using System.Runtime.Serialization;
-    using System.Text;
-    using System.Windows.Forms;
-  
-    using Ogama.ExceptionHandling;
-    using Ogama.Modules.Common;
-    using OgamaControls;
-    using VectorGraphics;
-    using VectorGraphics.Elements;
+  using System;
+  using System.Collections;
+  using System.Data;
+  using System.Drawing;
+  using System.Windows.Forms;
 
-    /// <summary>
+  using Ogama.Modules.Common.CustomRenderer;
+  using Ogama.Modules.Common.SlideCollections;
+
+  using OgamaControls;
+
+  using VectorGraphics.Elements.ElementCollections;
+
+  /// <summary>
     /// Derived from <see cref="UserControl"/>.
     /// A component for displaying context information.
     /// This includes a help text tab, 

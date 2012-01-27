@@ -3,10 +3,11 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Diagnostics;
 using VectorGraphics;
-using VectorGraphics.CustomTypeConverter;
 
 namespace OgamaControls
 {
+  using VectorGraphics.Tools.CustomTypeConverter;
+
   /// <summary>
   /// Defines the editing control for the DataGridViewNumericUpDownCell custom cell type.
   /// </summary>

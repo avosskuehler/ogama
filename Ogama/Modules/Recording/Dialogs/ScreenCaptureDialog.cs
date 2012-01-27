@@ -11,12 +11,14 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Recording
+namespace Ogama.Modules.Recording.Dialogs
 {
   using System;
   using System.Runtime.InteropServices;
   using System.Windows.Forms;
+
   using DirectShowLib;
+
   using OgamaControls;
 
   /// <summary>

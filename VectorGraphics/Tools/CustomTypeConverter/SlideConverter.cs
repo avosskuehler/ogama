@@ -11,25 +11,21 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace VectorGraphics.CustomTypeConverter
+namespace VectorGraphics.Tools.CustomTypeConverter
 {
   using System;
-  using System.Collections.Generic;
   using System.ComponentModel;
-  using System.Drawing;
-  using System.Drawing.Drawing2D;
   using System.Globalization;
-  using System.IO;
-  using System.Text;
 
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
 
   /// <summary>
   /// Derived from <see cref="ExpandableObjectConverter"/>.
-  /// Provides a type converter to convert <see cref="VectorGraphics.Elements.Slide"/> objects
+  /// Provides a type converter to convert <see cref="Slide"/> objects
   /// to strings.
   /// </summary>
-  /// <remarks>It is implemented to have the <see cref="VectorGraphics.Elements.Slide"/>s name at the right side of the 
+  /// <remarks>It is implemented to have the <see cref="Slide"/>s name at the right side of the 
   /// <see cref="System.Windows.Forms.PropertyGrid"/> row.</remarks>
   public class SlideConverter : ExpandableObjectConverter
   {

@@ -1,5 +1,7 @@
-namespace Ogama.Modules.Scanpaths
+namespace Ogama.Modules.Scanpath
 {
+  using Ogama.Modules.Common.Controls;
+
   partial class ScanpathsModule
   {
     /// <summary>
@@ -13,10 +15,10 @@ namespace Ogama.Modules.Scanpaths
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      CustomDispose();
-      if (disposing && (components != null))
+      this.CustomDispose();
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -33,12 +35,12 @@ namespace Ogama.Modules.Scanpaths
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ScanpathsModule));
       this.pnlCanvas = new System.Windows.Forms.Panel();
       this.pnlPicture = new System.Windows.Forms.Panel();
-      this.scanpathsPicture = new Ogama.Modules.Scanpaths.ScanpathsPicture();
+      this.scanpathsPicture = new ScanpathsPicture();
       this.tosTimeLine = new System.Windows.Forms.ToolStrip();
       this.btnStart = new System.Windows.Forms.ToolStripButton();
       this.btnStop = new System.Windows.Forms.ToolStripButton();
       this.btnRewind = new System.Windows.Forms.ToolStripButton();
-      this.trialTimeLine = new Ogama.Modules.Common.TrialTimeLine(this.components);
+      this.trialTimeLine = new TrialTimeLine(this.components);
       this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
       this.trbZoom = new OgamaControls.ToolStripTrackBar();
       this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -170,7 +172,7 @@ namespace Ogama.Modules.Scanpaths
       this.scanpathsPicture.AnimationInterval = 100;
       this.scanpathsPicture.BackColor = System.Drawing.Color.Black;
       this.scanpathsPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-      this.scanpathsPicture.GridBasis = Ogama.Modules.Scanpaths.GridBase.Rectangular;
+      this.scanpathsPicture.GridBasis = GridBase.Rectangular;
       this.scanpathsPicture.GridFactor = 2;
       this.scanpathsPicture.IgnoreSubsequentFixations = false;
       this.scanpathsPicture.InvalidateInterval = 500;
@@ -1075,7 +1077,7 @@ namespace Ogama.Modules.Scanpaths
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
     private System.Windows.Forms.ToolStripButton btnExport;
     private System.Windows.Forms.SaveFileDialog sfdSimiliarity;
-    private Ogama.Modules.Common.TrialTimeLine trialTimeLine;
+    private TrialTimeLine trialTimeLine;
     private OgamaControls.ToolStripNumericUpDown nudTimeSpan;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
     private System.Windows.Forms.ToolStripButton btnTimeLine;

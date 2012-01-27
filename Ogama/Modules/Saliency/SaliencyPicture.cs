@@ -27,6 +27,7 @@ namespace Ogama.Modules.Saliency
   using Ogama.ExceptionHandling;
   using Ogama.Modules.AttentionMap;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.PictureTemplates;
   using Ogama.Modules.Fixations;
   using Ogama.Modules.ImportExport;
   using OgamaControls;

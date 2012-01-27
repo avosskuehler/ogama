@@ -24,7 +24,9 @@ namespace Ogama.Properties
 
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
-  using Ogama.Modules.Scanpaths;
+  using Ogama.Modules.Common.SlideCollections;
+  using Ogama.Modules.Scanpath.Colorization;
+
   using VectorGraphics;
 
   /// <summary>
@@ -213,7 +215,7 @@ namespace Ogama.Properties
     /// <summary>
     /// Gets or sets the OGAMA version that this experiment is currently working with.
     /// </summary>
-    [XmlIgnore()]
+    [XmlIgnore]
     public Version OgamaVersion
     {
       get

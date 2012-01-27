@@ -11,7 +11,7 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Replay
+namespace Ogama.Modules.Replay.Video
 {
   using System;
   using System.Collections.Generic;
@@ -19,9 +19,14 @@ namespace Ogama.Modules.Replay
   using System.IO;
   using System.Runtime.InteropServices;
   using System.Windows.Forms;
+
   using DirectShowLib;
-  using Ogama.Modules.Common;
+
+  using Ogama.Modules.Common.FormTemplates;
+  using Ogama.Modules.Common.SlideCollections;
+
   using OgamaControls;
+
   using VectorGraphics.Elements;
 
   /// <summary>

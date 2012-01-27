@@ -11,7 +11,7 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.SlideshowDesign
+namespace Ogama.Modules.SlideshowDesign.DesignModule.StimuliDialogs
 {
   using System;
   using System.Drawing;
@@ -19,9 +19,13 @@ namespace Ogama.Modules.SlideshowDesign
   using System.Text;
   using System.Text.RegularExpressions;
   using System.Windows.Forms;
-  using Ogama.Modules.Common;
+
+  using Ogama.Modules.Common.Controls;
+  using Ogama.Modules.Common.SlideCollections;
+
   using VectorGraphics.Controls;
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
   using VectorGraphics.StopConditions;
 
   /// <summary>

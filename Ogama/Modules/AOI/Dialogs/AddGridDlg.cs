@@ -11,17 +11,14 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.AOI
+namespace Ogama.Modules.AOI.Dialogs
 {
   using System;
   using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Data;
   using System.Drawing;
-  using System.Text;
   using System.Windows.Forms;
 
-  using Ogama.ExceptionHandling;
+  using Ogama.Modules.Scanpath;
 
   /// <summary>
   /// A pop up <see cref="Form"/>. Asks for the name of a newly defined shape group
@@ -158,22 +155,22 @@ namespace Ogama.Modules.AOI
     /// </summary>
     private void CreateDataGridView()
     {
-      string[] description = Scanpaths.ScanpathsPicture.CurrentIdentifierList;
+      string[] description = ScanpathsPicture.CurrentIdentifierList;
       if (description == null)
       {
-        description = Scanpaths.ScanpathsPicture.IdentifierList;
+        description = ScanpathsPicture.IdentifierList;
       }
 
       int numColumns = (int)this.nudColumns.Value;
       int numRows = (int)this.nudRows.Value;
       if (numRows * numColumns > 26)
       {
-        description = Scanpaths.ScanpathsPicture.IdentifierListLong;
+        description = ScanpathsPicture.IdentifierListLong;
       }
 
       if (numRows * numColumns > 676)
       {
-        description = Scanpaths.ScanpathsPicture.IdentifierListExtraLong;
+        description = ScanpathsPicture.IdentifierListExtraLong;
       }
 
       this.dgvGridPreview.Columns.Clear();

@@ -21,7 +21,8 @@ namespace VectorGraphics.StopConditions
   using System.IO;
   using System.Text;
   using System.Windows.Forms;
-  using VectorGraphics.CustomTypeConverter;
+
+  using VectorGraphics.Tools.CustomTypeConverter;
 
   /// <summary>
   /// Derived from <see cref="ExpandableObjectConverter"/>.

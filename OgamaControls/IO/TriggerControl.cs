@@ -6,10 +6,11 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using VectorGraphics;
-using VectorGraphics.Triggers;
 
 namespace OgamaControls
 {
+  using VectorGraphics.Tools.Trigger;
+
   /// <summary>
   /// Inherits <see cref="UserControl"/>. Is to customize a trigger signal
   /// </summary>

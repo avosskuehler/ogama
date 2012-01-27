@@ -25,11 +25,16 @@ namespace Ogama.Modules.Statistics
   using Ogama.DataSet;
   using Ogama.Modules.AOI;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.Tools;
+  using Ogama.Modules.Common.TrialEvents;
+  using Ogama.Modules.Common.Types;
   using Ogama.Modules.SlideshowDesign;
+  using Ogama.Modules.Statistics.Variables;
 
-  using VectorGraphics.CustomTypeConverter;
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
   using VectorGraphics.StopConditions;
+  using VectorGraphics.Tools.CustomTypeConverter;
 
   /// <summary>
   /// A class for calculation of statistical variables.

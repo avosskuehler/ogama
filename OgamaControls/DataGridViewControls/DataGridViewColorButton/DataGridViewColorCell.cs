@@ -7,10 +7,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using VectorGraphics;
 using System.Windows.Forms.VisualStyles;
-using VectorGraphics.CustomTypeConverter;
 
 namespace OgamaControls
 {
+  using VectorGraphics.Tools.CustomTypeConverter;
+
   /// <summary>
   /// Defines a <strong>ColorButton</strong> cell type for the <see cref="System.Windows.Forms.DataGridView"/> control
   /// </summary>

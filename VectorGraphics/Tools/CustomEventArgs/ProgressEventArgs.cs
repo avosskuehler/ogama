@@ -11,13 +11,9 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace VectorGraphics.CustomEventArgs
+namespace VectorGraphics.Tools.CustomEventArgs
 {
   using System;
-  using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Drawing;
-  using System.Text;
 
   /// <summary>
   /// Delegate. Handles progress event

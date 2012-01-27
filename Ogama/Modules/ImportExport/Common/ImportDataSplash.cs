@@ -11,15 +11,15 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.ImportExport
+namespace Ogama.Modules.ImportExport.Common
 {
   using System;
-  using System.Collections.Generic;
   using System.ComponentModel;
-  using System.Data;
-  using System.Drawing;
-  using System.Text;
   using System.Windows.Forms;
+
+  using Ogama.Modules.ImportExport.AOIData;
+  using Ogama.Modules.ImportExport.FixationData;
+  using Ogama.Modules.ImportExport.RawData;
 
   /// <summary>
   /// Splash <see cref="Form"/> with animated gif and marquee progress bar.

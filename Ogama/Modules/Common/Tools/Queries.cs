@@ -11,7 +11,7 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Common
+namespace Ogama.Modules.Common.Tools
 {
   using System;
   using System.Collections.Generic;
@@ -24,11 +24,13 @@ namespace Ogama.Modules.Common
 
   using Ogama.DataSet;
   using Ogama.ExceptionHandling;
-  using Ogama.Modules.ImportExport;
-  using VectorGraphics;
-  using VectorGraphics.CustomTypeConverter;
+  using Ogama.Modules.Common.TrialEvents;
+  using Ogama.Modules.Common.Types;
+  using Ogama.Modules.ImportExport.Common;
+
   using VectorGraphics.Elements;
   using VectorGraphics.StopConditions;
+  using VectorGraphics.Tools.CustomTypeConverter;
 
   /// <summary>
   /// This static class stores methods with OGAMAs custom database queries,

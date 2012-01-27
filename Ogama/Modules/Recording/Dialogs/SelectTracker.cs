@@ -20,7 +20,7 @@ namespace Ogama.Modules.Recording.Dialogs
   using Ogama.MainWindow;
   using Ogama.MainWindow.Dialogs;
   using Ogama.Modules.Recording.AleaInterface;
-  using Ogama.Modules.Recording.ASLInterface;  
+  using Ogama.Modules.Recording.ASLInterface;
   using Ogama.Modules.Recording.GazegroupInterface;
   using Ogama.Modules.Recording.MirametrixInterface;
   using Ogama.Modules.Recording.TobiiInterface;
@@ -118,7 +118,7 @@ namespace Ogama.Modules.Recording.Dialogs
 
         if (this.chbMirametrix.Checked)
         {
-            returnValue |= HardwareTracker.Mirametrix; 
+          returnValue |= HardwareTracker.Mirametrix;
         }
 
         return returnValue;
@@ -151,8 +151,8 @@ namespace Ogama.Modules.Recording.Dialogs
     /// <summary>
     /// Updates the connected tracker status.
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void eyetrackerUpdateTimer_Tick(object sender, EventArgs e)
     {
       this.UpdateTrackerStatus();
@@ -198,11 +198,11 @@ namespace Ogama.Modules.Recording.Dialogs
     /// <summary>
     /// The event handler for the User clicked the mirametrix logo, so open mirametrix website
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void PcbMirametrixClick(object sender, EventArgs e)
     {
-        System.Diagnostics.Process.Start("http://www.mirametrix.com");
+      System.Diagnostics.Process.Start("http://www.mirametrix.com");
     }
 
     /// <summary>
@@ -260,12 +260,12 @@ namespace Ogama.Modules.Recording.Dialogs
     /// <summary>
     /// The event handler for the User clicked the mirametrix logo, so open mirametrix website
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void PcbHelpMirametrixClick(object sender, EventArgs e)
     {
-        var objActivateMirametrix = new HowToActivateMirametrix();
-        System.Diagnostics.Process.Start("http://www.mirametrix.com");
+      var objActivateMirametrix = new HowToActivateMirametrix();
+      objActivateMirametrix.ShowDialog();
     }
 
     /// <summary>
@@ -408,18 +408,18 @@ namespace Ogama.Modules.Recording.Dialogs
     /// </summary>
     private void UpdateMirametrixStatus()
     {
-        string error;
-        if (!MirametrixTracker.IsAvailable(out error))
-        {
-            this.chbMirametrix.Text = "Mirametrix S2 Eye tracker. Need to have Mirametrix S2 installed on this computer ! \n" + error;
-            this.chbMirametrix.Enabled = false;
-            this.chbMirametrix.Checked = false;
-            this.pcbMirametrix.Enabled = false;
-        }
-        else 
-        {
-            this.chbMirametrix.Text = "Mirametrix S2 installed on this computer ! \n" + error;
-        }
+      string error;
+      if (!MirametrixTracker.IsAvailable(out error))
+      {
+        this.chbMirametrix.Text = "Mirametrix S2 Eye tracker. Need to have Mirametrix S2 installed on this computer ! \n" + error;
+        this.chbMirametrix.Enabled = false;
+        this.chbMirametrix.Checked = false;
+        this.pcbMirametrix.Enabled = false;
+      }
+      else
+      {
+        this.chbMirametrix.Text = "Mirametrix S2 installed on this computer ! \n" + error;
+      }
     }
 
     /// <summary>
@@ -428,20 +428,21 @@ namespace Ogama.Modules.Recording.Dialogs
     private void UpdateASLStatus()
     {
       string error;
+
       // ASL 
-      //  "If you have purchased and installed an ASL " +
-      //  "model 5000 Eye Tracker control unit (materials and softwares)" + Environment.NewLine;
-      string aslDefaultText = "ASL software must be installed on this computer.";
+      // "If you have purchased and installed an ASL " +
+      // "model 5000 Eye Tracker control unit (materials and softwares)" + Environment.NewLine;
+      const string AslDefaultText = "ASL software must be installed on this computer.";
       if (!AslTracker.IsAvailable(out error))
       {
         this.chbAsl.Enabled = false;
         this.chbAsl.Checked = false;
         this.pcbAsl.Enabled = false;
-        this.chbAsl.Text = aslDefaultText + error;
+        this.chbAsl.Text = AslDefaultText + error;
       }
       else
       {
-        this.chbAsl.Text = aslDefaultText + "(ASL library found)";
+        this.chbAsl.Text = AslDefaultText + "(ASL library found)";
       }
     }
 
@@ -476,7 +477,7 @@ namespace Ogama.Modules.Recording.Dialogs
         Environment.NewLine + "This is the Gazetracker which uses a webcam as "
                               + "an eye tracker and can be used in both remote and head-mounted setups."
                               + Environment.NewLine;
-      
+
       if (!GazetrackerDirectClientTracker.IsAvailable(out error))
       {
         this.chbGazetrackerDirectClient.Enabled = false;

@@ -11,15 +11,13 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.ImportExport
+namespace Ogama.Modules.ImportExport.Common
 {
   using System;
-  using System.Collections.Generic;
-  using System.Text;
 
   using Ogama.Modules.Common;
-  using Ogama.Modules.SlideshowDesign;
-  using VectorGraphics;
+  using Ogama.Modules.Common.TrialEvents;
+
   using VectorGraphics.Elements;
 
   /// <summary>

@@ -11,13 +11,13 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.SlideshowDesign
+namespace Ogama.Modules.SlideshowDesign.DesignModule
 {
   using System;
   using System.Text;
   using System.Windows.Forms;
 
-  using Ogama.Modules.Common;
+  using Ogama.Modules.Common.Controls;
 
   /// <summary>
   /// The SlideDesignModule.Help.cs contains the <see cref="Control.Click"/>

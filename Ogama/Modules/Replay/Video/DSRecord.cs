@@ -11,16 +11,18 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Replay
+namespace Ogama.Modules.Replay.Video
 {
   using System;
-  using System.Diagnostics;
   using System.Drawing;
   using System.Runtime.InteropServices;
   using System.Threading;
   using System.Windows.Forms;
+
   using DirectShowLib;
+
   using Ogama.ExceptionHandling;
+
   using OgamaControls;
 
   /// <summary>

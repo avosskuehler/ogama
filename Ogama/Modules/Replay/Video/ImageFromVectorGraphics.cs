@@ -11,7 +11,7 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Replay
+namespace Ogama.Modules.Replay.Video
 {
   using System;
   using System.Drawing;
@@ -19,9 +19,10 @@ namespace Ogama.Modules.Replay
   using System.Runtime.InteropServices;
 
   using DirectShowLib;
-  using Ogama.Modules.Common;
+
   using OgamaControls;
-  using VectorGraphics.CustomEventArgs;
+
+  using VectorGraphics.Tools.CustomEventArgs;
 
   /// <summary>
   /// Class to provide image data for the direct show video.

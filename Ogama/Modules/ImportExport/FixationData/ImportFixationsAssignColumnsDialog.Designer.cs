@@ -1,5 +1,7 @@
-namespace Ogama.Modules.ImportExport
+namespace Ogama.Modules.ImportExport.FixationData
 {
+  using Ogama.Modules.Common.Controls;
+
   partial class ImportFixationsAssignColumnsDialog
   {
     /// <summary>
@@ -13,9 +15,9 @@ namespace Ogama.Modules.ImportExport
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      if (disposing && (components != null))
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -50,7 +52,7 @@ namespace Ogama.Modules.ImportExport
       this.label10 = new System.Windows.Forms.Label();
       this.label9 = new System.Windows.Forms.Label();
       this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       this.splitContainer3 = new System.Windows.Forms.SplitContainer();
       ((System.ComponentModel.ISupportInitialize)(this.dGVAssignments)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.dataSetImport)).BeginInit();
@@ -363,7 +365,7 @@ namespace Ogama.Modules.ImportExport
     private System.Windows.Forms.DataGridViewComboBoxColumn ColumnImportColumns;
     private System.Windows.Forms.Label label14;
     private System.Windows.Forms.SplitContainer splitContainer1;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
     private System.Windows.Forms.SplitContainer splitContainer3;
 
 

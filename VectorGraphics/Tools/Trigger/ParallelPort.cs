@@ -11,7 +11,7 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace VectorGraphics.Triggers
+namespace VectorGraphics.Tools.Trigger
 {
   using System;
   using System.Runtime.InteropServices;

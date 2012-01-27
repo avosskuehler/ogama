@@ -11,15 +11,13 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace VectorGraphics.Elements
+namespace VectorGraphics.Elements.ElementCollections
 {
   using System;
   using System.Collections;
-  using System.Collections.Generic;
   using System.ComponentModel;
-  using System.Drawing;
-  using System.Text;
-  using VectorGraphics.CustomTypeConverter;
+
+  using VectorGraphics.Tools.CustomTypeConverter;
 
   /// <summary>
   /// Derived from <see cref="CollectionBase"/>, implements 

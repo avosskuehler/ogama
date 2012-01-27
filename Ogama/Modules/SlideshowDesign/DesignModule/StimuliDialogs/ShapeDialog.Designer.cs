@@ -1,5 +1,9 @@
-﻿namespace Ogama.Modules.SlideshowDesign
+﻿namespace Ogama.Modules.SlideshowDesign.DesignModule.StimuliDialogs
 {
+  using Ogama.Modules.Common.Controls;
+
+  using VectorGraphics.Tools.CustomEventArgs;
+
   partial class ShapeDialog
   {
     /// <summary>
@@ -13,9 +17,9 @@
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      if (disposing && (components != null))
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -44,7 +48,7 @@
       this.rdbRectangle = new System.Windows.Forms.RadioButton();
       this.btnHelp = new System.Windows.Forms.Button();
       this.panel1 = new System.Windows.Forms.Panel();
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       this.splitContainer1.Panel1.SuspendLayout();
       this.splitContainer1.Panel2.SuspendLayout();
       this.splitContainer1.SuspendLayout();
@@ -141,7 +145,7 @@
       this.pbcStyle.NewName = "";
       this.pbcStyle.Size = new System.Drawing.Size(251, 92);
       this.pbcStyle.TabIndex = 25;
-      this.pbcStyle.ShapePropertiesChanged += new System.EventHandler<VectorGraphics.CustomEventArgs.ShapePropertiesChangedEventArgs>(this.pbcStyle_ShapePropertiesChanged);
+      this.pbcStyle.ShapePropertiesChanged += new System.EventHandler<ShapePropertiesChangedEventArgs>(this.pbcStyle_ShapePropertiesChanged);
       // 
       // groupBox1
       // 
@@ -288,7 +292,7 @@
 
     private System.Windows.Forms.Button btnOK;
     private System.Windows.Forms.Button btnCancel;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
     private System.Windows.Forms.SplitContainer splitContainer1;
     private System.Windows.Forms.Panel panel1;
     private System.Windows.Forms.Button btnHelp;

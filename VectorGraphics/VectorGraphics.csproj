@@ -62,7 +62,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>..\Release86\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
-    <DocumentationFile>..\Release86\VectorGraphics.xml</DocumentationFile>
+    <DocumentationFile>..\Release86\Docs\VectorGraphics.xml</DocumentationFile>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
@@ -89,10 +89,6 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AxShockwaveFlashObjects, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Managed\AxShockwaveFlashObjects.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.VisualStudio.OLE.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <SpecificVersion>False</SpecificVersion>
       <Private>True</Private>
@@ -126,13 +122,13 @@
     <Compile Include="Elements\VGArrow.cs" />
     <Compile Include="Elements\ElementCollections\Slide.cs" />
     <Compile Include="StopConditions\NavigatedStopCondition.cs" />
-    <Compile Include="Tools\AsynchronousEvents.cs" />
-    <Compile Include="Tools\Controls\Flash\FlashMouseLeaveMessageFilter.cs" />
-    <Compile Include="Tools\Controls\Timer\TimerStartException.cs" />
-    <Compile Include="Tools\Controls\Timer\TimerMode.cs" />
-    <Compile Include="Tools\Controls\Timer\TimerCaps.cs" />
-    <Compile Include="Tools\Controls\Timer\MultimediaTimer.cs" />
-    <Compile Include="Tools\Controls\WebsiteThumbnailGenerator.cs" />
+    <Compile Include="Tools\AsyncHelper.cs" />
+    <Compile Include="Controls\Flash\FlashMouseLeaveMessageFilter.cs" />
+    <Compile Include="Controls\Timer\TimerStartException.cs" />
+    <Compile Include="Controls\Timer\TimerMode.cs" />
+    <Compile Include="Controls\Timer\TimerCaps.cs" />
+    <Compile Include="Controls\Timer\MultimediaTimer.cs" />
+    <Compile Include="Controls\WebsiteThumbnailGenerator.cs" />
     <Compile Include="Tools\CustomTypeConverter\SlideConverter.cs" />
     <Compile Include="Elements\VGRegion.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -154,16 +150,16 @@
     <Compile Include="StopConditions\StopConditionCollection.cs" />
     <Compile Include="StopConditions\TimeStopCondition.cs" />
     <Compile Include="Tools\AudioFile.cs" />
-    <Compile Include="Tools\Controls\Flash\AxFlash.cs">
+    <Compile Include="Controls\Flash\AxFlash.cs">
       <SubType>Component</SubType>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Tools\Controls\Flash\AxFlashReadyStateChanged.cs">
+    <Compile Include="Controls\Flash\AxFlashReadyStateChangeEvent.cs">
     </Compile>
-    <Compile Include="Tools\Controls\Flash\AxFlashProgress.cs" />
-    <Compile Include="Tools\Controls\Flash\AxFlashFSCommand.cs" />
-    <Compile Include="Tools\Controls\Flash\AxFlashEventMulticaster.cs" />
-    <Compile Include="Tools\Controls\Flash\AxFlashFlashCall.cs" />
+    <Compile Include="Controls\Flash\AxFlashProgressEvent.cs" />
+    <Compile Include="Controls\Flash\AxFlashFSCommandEvent.cs" />
+    <Compile Include="Controls\Flash\AxFlashEventMulticaster.cs" />
+    <Compile Include="Controls\Flash\AxFlashCallEvent.cs" />
     <Compile Include="Tools\CustomEventArgs\ShapePropertiesChangedEventArgs.cs" />
     <Compile Include="Tools\CustomEventArgs\BrushChangedEventArgs.cs" />
     <Compile Include="Tools\CustomEventArgs\PenChangedEventArgs.cs" />
@@ -175,29 +171,29 @@
     <Compile Include="Tools\CustomTypeConverter\VGElementConverter.cs" />
     <Compile Include="Tools\VGExceptionMethods.cs" />
     <Compile Include="Tools\Interfaces\IViewObject.cs" />
-    <Compile Include="Tools\Controls\RichEdit50.cs">
+    <Compile Include="Controls\RichEdit50.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Tools\CustomCursors.cs" />
-    <Compile Include="Tools\Controls\Flash\AxFlashControl.cs">
+    <Compile Include="Controls\Flash\AxFlashControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Tools\Controls\Flash\FlashMessageFilter.cs" />
-    <Compile Include="Tools\Controls\Flash\FlashCapture.cs">
+    <Compile Include="Controls\Flash\FlashMessageFilter.cs" />
+    <Compile Include="Controls\Flash\FlashCapture.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Tools\Controls\Flash\FlashCapture.Designer.cs">
+    <Compile Include="Controls\Flash\FlashCapture.Designer.cs">
       <DependentUpon>FlashCapture.cs</DependentUpon>
     </Compile>
     <Compile Include="Tools\Interfaces\IClonableNamedObject.cs" />
     <Compile Include="Tools\Images.cs" />
     <Compile Include="Tools\Interfaces\INamedObject.cs" />
-    <Compile Include="Tools\Controls\RichEdit50Opaque.cs">
+    <Compile Include="Controls\RichEdit50Opaque.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Tools\CustomEventArgs\ProgressEventArgs.cs" />
     <Compile Include="Tools\CustomTypeConverter\VGElementCollectionConverter.cs" />
-    <Compile Include="Tools\Controls\RichEdit50Transparent.cs">
+    <Compile Include="Controls\RichEdit50Transparent.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Elements\ElementCollections\VGElementCollectionPropertyDescriptor.cs" />
@@ -267,7 +263,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Cursors\Sharp.Cur" />
-    <EmbeddedResource Include="Tools\Controls\Flash\FlashCapture.resx">
+    <EmbeddedResource Include="Controls\Flash\FlashCapture.resx">
       <DependentUpon>FlashCapture.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>

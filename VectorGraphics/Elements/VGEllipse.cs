@@ -20,8 +20,8 @@ namespace VectorGraphics.Elements
   using System.Text;
   using System.Windows.Forms;
 
-  using VectorGraphics.CustomTypeConverter;
   using VectorGraphics.Tools;
+  using VectorGraphics.Tools.CustomTypeConverter;
 
   /// <summary>
   /// Inherited from <see cref="VGElement"/>. 

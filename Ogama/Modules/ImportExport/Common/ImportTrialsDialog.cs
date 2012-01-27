@@ -11,21 +11,17 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.ImportExport
+namespace Ogama.Modules.ImportExport.Common
 {
   using System;
   using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Data;
-  using System.Drawing;
-  using System.Globalization;
   using System.IO;
-  using System.Text;
   using System.Windows.Forms;
 
   using Ogama.ExceptionHandling;
-  using Ogama.Modules.Common;
-  using Ogama.Modules.SlideshowDesign;
+  using Ogama.Modules.Common.FormTemplates;
+  using Ogama.Modules.ImportExport.FixationData;
+  using Ogama.Modules.ImportExport.RawData;
 
   /// <summary>
   /// This dialog <see cref="Form"/> derives from <see cref="FormWithAccellerators"/>
@@ -465,7 +461,7 @@ namespace Ogama.Modules.ImportExport
             }
 
             if (row.Cells["columnAssignStartTime"].Value == null ||
-              !Int64.TryParse(row.Cells["columnAssignStartTime"].Value.ToString(), out startTime))
+              !long.TryParse(row.Cells["columnAssignStartTime"].Value.ToString(), out startTime))
             {
               return false;
             }
@@ -809,4 +805,3 @@ namespace Ogama.Modules.ImportExport
     #endregion //HELPER
   }
 }
-

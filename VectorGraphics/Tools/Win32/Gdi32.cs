@@ -11,12 +11,10 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace VectorGraphics.Win32
+namespace VectorGraphics.Tools.Win32
 {
   using System;
-  using System.Collections.Generic;
   using System.Runtime.InteropServices;
-  using System.Text;
 
   /// <summary>
   /// Helper class containing Gdi32.dll API functions

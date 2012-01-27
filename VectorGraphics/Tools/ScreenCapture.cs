@@ -18,7 +18,7 @@ namespace VectorGraphics.Tools
   using System.Drawing.Imaging;
   using System.Runtime.InteropServices;
 
-  using VectorGraphics.Win32;
+  using VectorGraphics.Tools.Win32;
 
   /// <summary>
   /// This class provides functions to capture the entire screen, 

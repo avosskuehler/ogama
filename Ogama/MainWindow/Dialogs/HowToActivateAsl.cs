@@ -11,11 +11,12 @@
 // <author></author>
 // <email></email>
 
-namespace Ogama.MainWindow
+namespace Ogama.MainWindow.Dialogs
 {
-    using System;
-    using System.Windows.Forms;
-    using Ogama.Modules.Common; // for GetLang
+  using System;
+  using System.Windows.Forms;
+
+  // for GetLang
 
     /// <summary>
     /// A small popup <see cref="Form"/> for showing a dialog on how to

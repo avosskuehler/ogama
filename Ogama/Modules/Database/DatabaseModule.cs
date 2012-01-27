@@ -29,6 +29,11 @@ namespace Ogama.Modules.Database
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.FormTemplates;
+  using Ogama.Modules.Common.SlideCollections;
+  using Ogama.Modules.Common.Tools;
+  using Ogama.Modules.ImportExport.OgamaData;
+  using Ogama.Modules.ImportExport.RawData;
 
   using VectorGraphics.Elements;
   using VectorGraphics.StopConditions;
@@ -318,7 +323,7 @@ namespace Ogama.Modules.Database
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnImport_Click(object sender, EventArgs e)
     {
-      ImportExport.ImportRawData.Start((MainForm)this.MdiParent);
+      ImportRawData.Start((MainForm)this.MdiParent);
       ((MainForm)this.MdiParent).RefreshContextPanelSubjects();
     }
 
@@ -332,7 +337,7 @@ namespace Ogama.Modules.Database
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnImportOgamaFormat_Click(object sender, EventArgs e)
     {
-      ImportExport.ImportOgamaData.Start();
+      ImportOgamaData.Start();
       ((MainForm)this.MdiParent).RefreshContextPanelSubjects();
     }
 

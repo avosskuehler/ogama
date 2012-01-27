@@ -21,6 +21,8 @@ namespace Ogama.MainWindow
 
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow.Dialogs;
+  using Ogama.Modules.ImportExport.RawData;
+  using Ogama.Modules.Scanpath;
   using Ogama.Properties;
 
   /// <summary>
@@ -738,7 +740,7 @@ namespace Ogama.MainWindow
     /// <summary>
     /// The <see cref="Control.Click"/> event handler
     /// for the <see cref="ToolStripMenuItem"/> <see cref="mnuViewsNewScanpaths"/>.
-    /// Creates a new <see cref="Modules.Scanpaths.ScanpathsModule"/> module.
+    /// Creates a new <see cref="ScanpathsModule"/> module.
     /// </summary>
     /// <param name="sender">Source of the event</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
@@ -851,7 +853,7 @@ namespace Ogama.MainWindow
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void mnuToolsImport_Click(object sender, EventArgs e)
     {
-      Modules.ImportExport.ImportRawData.Start(this);
+      ImportRawData.Start(this);
       this.RefreshContextPanelSubjects();
     }
 

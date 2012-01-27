@@ -36,11 +36,11 @@ You can modify and customize it for your needs as long as your product is not in
     </WorkingPath>
     <BuildLogFile>
     </BuildLogFile>
-    <FrameworkVersion>2.0.50727</FrameworkVersion>
+    <FrameworkVersion>4.0.30319</FrameworkVersion>
     <RootNamespaceContainer>True</RootNamespaceContainer>
     <RootNamespaceTitle>Ogama Namespaces</RootNamespaceTitle>
     <HelpTitle>Ogama - open gaze and mouse analyzer source documentation</HelpTitle>
-    <CopyrightText>Adrian Vo&amp;#223%3bk&amp;#252%3bhler, Freie Universit&amp;#228%3bt Berlin, created 28.08.11  --  Please have a look at the source for deeper understanding.</CopyrightText>
+    <CopyrightText>Dr. Adrian Vo&amp;#223%3bk&amp;#252%3bhler, Freie Universit&amp;#228%3bt Berlin, created 25.01.12  --  Please have a look at the source for deeper understanding.</CopyrightText>
     <FeedbackEMailAddress>adrian%40ogama.net</FeedbackEMailAddress>
     <PresentationStyle>vs2005</PresentationStyle>
     <SyntaxFilters>CSharp</SyntaxFilters>
@@ -100,13 +100,12 @@ You can modify and customize it for your needs as long as your product is not in
       </ComponentConfig>
     </ComponentConfigurations>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\Release\Ogama.exe" />
-      <DocumentationSource sourceFile="..\Release\Ogama.xml" />
-      <DocumentationSource sourceFile="..\Release\OgamaControls.dll" />
-      <DocumentationSource sourceFile="..\Release\OgamaControls.xml" />
-      <DocumentationSource sourceFile="..\Release\VectorGraphics.dll" />
-      <DocumentationSource sourceFile="..\Release\VectorGraphics.xml" />
-    </DocumentationSources>
+      <DocumentationSource sourceFile="..\Release86\Ogama.exe" />
+<DocumentationSource sourceFile="..\Release86\Docs\Ogama.xml" />
+<DocumentationSource sourceFile="..\Release86\OgamaControls.dll" />
+<DocumentationSource sourceFile="..\Release86\Docs\OgamaControls.xml" />
+<DocumentationSource sourceFile="..\Release86\VectorGraphics.dll" />
+<DocumentationSource sourceFile="..\Release86\Docs\VectorGraphics.xml" /></DocumentationSources>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="(global)" isDocumented="False" />
       <NamespaceSummaryItem name="Ogama" isDocumented="True">Ogama - open gaze and mouse analyzer main namespace.</NamespaceSummaryItem>

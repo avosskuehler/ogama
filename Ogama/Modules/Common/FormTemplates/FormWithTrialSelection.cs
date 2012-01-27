@@ -11,13 +11,14 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Common
+namespace Ogama.Modules.Common.FormTemplates
 {
   using System;
   using System.ComponentModel;
   using System.Windows.Forms;
 
   using Ogama.ExceptionHandling;
+  using Ogama.Modules.Common.SlideCollections;
 
   /// <summary>
   /// Inherits <see cref="FormWithPicture"/>.

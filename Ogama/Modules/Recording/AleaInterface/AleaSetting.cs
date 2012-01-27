@@ -19,7 +19,7 @@ namespace Ogama.Modules.Recording.AleaInterface
 
   using Alea.Api;
 
-  using VectorGraphics.CustomTypeConverter;
+  using VectorGraphics.Tools.CustomTypeConverter;
 
   /// <summary>
   /// Class to save settings for the alea eye tracking system.
@@ -255,7 +255,7 @@ namespace Ogama.Modules.Recording.AleaInterface
     /// </summary>
     /// <value>A <see cref="Color"/> for the calibration points,
     /// which is converted into a OLE_COLOR Structure.</value>
-    [XmlIgnoreAttribute()]
+    [XmlIgnoreAttribute]
     public Color CalibPointColor
     {
       get { return this.calibPointColor; }
@@ -278,7 +278,7 @@ namespace Ogama.Modules.Recording.AleaInterface
     /// </summary>
     /// <value>A <see cref="Color"/> for the background,
     /// which is converted into a OLE_COLOR Structure.</value>
-    [XmlIgnoreAttribute()]
+    [XmlIgnoreAttribute]
     public Color CalibBackgroundColor
     {
       get { return this.calibBackgroundColor; }

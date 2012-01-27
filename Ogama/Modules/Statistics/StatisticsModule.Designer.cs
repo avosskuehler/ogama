@@ -1,5 +1,7 @@
 namespace Ogama.Modules.Statistics
 {
+  using Ogama.Modules.Common.Controls;
+
   /// <summary>
   /// 
   /// </summary>
@@ -131,7 +133,7 @@ namespace Ogama.Modules.Statistics
       this.tacStandard = new System.Windows.Forms.TabControl();
       this.tbpSubject = new System.Windows.Forms.TabPage();
       this.splitContainer4 = new System.Windows.Forms.SplitContainer();
-      this.dialogTop3 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop3 = new DialogTop();
       this.groupBox24 = new System.Windows.Forms.GroupBox();
       this.trvSubjects = new OgamaControls.CheckboxTreeView(this.components);
       this.imlTreeViewSubjects = new System.Windows.Forms.ImageList(this.components);
@@ -141,7 +143,7 @@ namespace Ogama.Modules.Statistics
       this.groupBox5 = new System.Windows.Forms.GroupBox();
       this.tbpTrial = new System.Windows.Forms.TabPage();
       this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       this.tpbTrial = new System.Windows.Forms.TabControl();
       this.tpbTrialStandard = new System.Windows.Forms.TabPage();
       this.groupBox17 = new System.Windows.Forms.GroupBox();
@@ -156,7 +158,7 @@ namespace Ogama.Modules.Statistics
       this.tbpGaze = new System.Windows.Forms.TabPage();
       this.splitContainer3 = new System.Windows.Forms.SplitContainer();
       this.label8 = new System.Windows.Forms.Label();
-      this.dialogTop2 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop2 = new DialogTop();
       this.tacGazeParams = new System.Windows.Forms.TabControl();
       this.tbpGazeDefault = new System.Windows.Forms.TabPage();
       this.groupBox7 = new System.Windows.Forms.GroupBox();
@@ -186,7 +188,7 @@ namespace Ogama.Modules.Statistics
       this.tbpMouse = new System.Windows.Forms.TabPage();
       this.splitContainer5 = new System.Windows.Forms.SplitContainer();
       this.label1 = new System.Windows.Forms.Label();
-      this.dialogTop4 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop4 = new DialogTop();
       this.tacMouse = new System.Windows.Forms.TabControl();
       this.tbpMouseDefault = new System.Windows.Forms.TabPage();
       this.groupBox23 = new System.Windows.Forms.GroupBox();
@@ -209,7 +211,7 @@ namespace Ogama.Modules.Statistics
       this.cbbMouseAOIGroup = new System.Windows.Forms.ComboBox();
       this.tbpOptions = new System.Windows.Forms.TabPage();
       this.splitContainer6 = new System.Windows.Forms.SplitContainer();
-      this.dialogTop5 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop5 = new DialogTop();
       this.label3 = new System.Windows.Forms.Label();
       this.chb8CharacterRow = new System.Windows.Forms.CheckBox();
       this.label4 = new System.Windows.Forms.Label();
@@ -3231,24 +3233,24 @@ namespace Ogama.Modules.Statistics
     private System.Windows.Forms.TabPage tpbTrialStandard;
     private OgamaControls.CheckboxTreeView trvTrialsDefault;
     private System.Windows.Forms.TabPage tbpTrialAdditional;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
     private System.Windows.Forms.Button btnStandardDeselectAllTrials;
     private System.Windows.Forms.Button btnStandardSelectAllTrials;
     private System.Windows.Forms.SplitContainer splitContainer1;
     private System.Windows.Forms.SplitContainer splitContainer3;
-    private Ogama.Modules.Common.DialogTop dialogTop2;
+    private DialogTop dialogTop2;
     private System.Windows.Forms.TabControl tacGazeParams;
     private System.Windows.Forms.TabPage tbpGazeDefault;
     private System.Windows.Forms.TabPage tbpGazeAOI;
     private System.Windows.Forms.SplitContainer splitContainer4;
-    private Ogama.Modules.Common.DialogTop dialogTop3;
+    private DialogTop dialogTop3;
     private System.Windows.Forms.SplitContainer splitContainer5;
-    private Ogama.Modules.Common.DialogTop dialogTop4;
+    private DialogTop dialogTop4;
     private System.Windows.Forms.TabControl tacMouse;
     private System.Windows.Forms.TabPage tbpMouseDefault;
     private System.Windows.Forms.TabPage tbpMouseAOI;
     private System.Windows.Forms.SplitContainer splitContainer6;
-    private Ogama.Modules.Common.DialogTop dialogTop5;
+    private DialogTop dialogTop5;
     private System.Windows.Forms.Label label1;
     private System.Windows.Forms.RadioButton rdbGazeFixationDurationMean;
     private System.Windows.Forms.ComboBox cbbGazeAOISingle;

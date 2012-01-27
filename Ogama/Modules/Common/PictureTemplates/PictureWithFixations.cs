@@ -11,7 +11,7 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Common
+namespace Ogama.Modules.Common.PictureTemplates
 {
   using System;
   using System.Collections.Generic;
@@ -21,12 +21,16 @@ namespace Ogama.Modules.Common
   using System.Drawing.Drawing2D;
   using System.Drawing.Imaging;
   using System.Windows.Forms;
+
   using Ogama.ExceptionHandling;
   using Ogama.Modules.AttentionMap;
+  using Ogama.Modules.Common.Types;
+
   using VectorGraphics.Canvas;
-  using VectorGraphics.CustomEventArgs;
-  using VectorGraphics.CustomTypeConverter;
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
+  using VectorGraphics.Tools.CustomEventArgs;
+  using VectorGraphics.Tools.CustomTypeConverter;
 
   /// <summary>
   /// Derived from <see cref="Picture"/>.

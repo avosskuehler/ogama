@@ -1,5 +1,7 @@
-namespace Ogama.Modules.ImportExport
+namespace Ogama.Modules.ImportExport.Common
 {
+  using Ogama.Modules.Common.Controls;
+
   partial class ImportImagesDialog
   {
     /// <summary>
@@ -13,9 +15,9 @@ namespace Ogama.Modules.ImportExport
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      if (disposing && (components != null))
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -68,7 +70,7 @@ namespace Ogama.Modules.ImportExport
       this.ofdAssignmentFile = new System.Windows.Forms.OpenFileDialog();
       this.splitContainer1 = new System.Windows.Forms.SplitContainer();
       this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       this.splitContainer2 = new System.Windows.Forms.SplitContainer();
       ((System.ComponentModel.ISupportInitialize)(this.dataSetImport)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.dgvAssignments)).BeginInit();
@@ -610,7 +612,7 @@ namespace Ogama.Modules.ImportExport
     private System.Windows.Forms.SplitContainer spcTableDropDowns;
     private System.Windows.Forms.SplitContainer splitContainer1;
     private System.Windows.Forms.SplitContainer splitContainer3;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
     private System.Windows.Forms.SplitContainer splitContainer2;
     private System.Windows.Forms.DataGridViewTextBoxColumn columnAssignTrialID;
     private System.Windows.Forms.DataGridViewTextBoxColumn columnAssignStimulusFile;

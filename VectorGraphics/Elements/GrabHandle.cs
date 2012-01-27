@@ -235,7 +235,7 @@ namespace VectorGraphics.Elements
     /// </summary>
     /// <value>A <see cref="Cursor"/> that is show when the mouse
     /// is over the grab handle.</value>
-    [XmlIgnoreAttribute()]
+    [XmlIgnoreAttribute]
     public Cursor Cursor
     {
       get { return this.cursor; }

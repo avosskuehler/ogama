@@ -11,9 +11,8 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.ImportExport
+namespace Ogama.Modules.ImportExport.AOIData
 {
-  using System;
   using System.Windows.Forms;
 
   /// <summary>

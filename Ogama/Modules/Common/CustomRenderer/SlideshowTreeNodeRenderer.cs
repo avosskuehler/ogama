@@ -11,13 +11,14 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Common
+namespace Ogama.Modules.Common.CustomRenderer
 {
   using System;
   using System.Drawing;
   using System.Windows.Forms;
 
   using Ogama.ExceptionHandling;
+  using Ogama.Modules.Common.SlideCollections;
 
   /// <summary>
   /// This class inherits <see cref="CustomRenderer"/> to extend the list view
@@ -88,7 +89,7 @@ namespace Ogama.Modules.Common
         boundsWithoutPadding.Inflate(2, 2);
 
         BufferedGraphics buffered;
-        Rectangle thumbRect = GetThumbRect(ref g, r, out buffered);
+        Rectangle thumbRect = this.GetThumbRect(ref g, r, out buffered);
 
         SlideshowTreeNode node = this.RowObject as SlideshowTreeNode;
 

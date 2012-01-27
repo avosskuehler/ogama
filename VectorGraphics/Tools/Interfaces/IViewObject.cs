@@ -11,12 +11,10 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace VectorGraphics.Interfaces
+namespace VectorGraphics.Tools.Interfaces
 {
   using System;
-  using System.Collections.Generic;
   using System.Runtime.InteropServices;
-  using System.Text;
 
   using Microsoft.VisualStudio.OLE.Interop;
 
@@ -31,8 +29,8 @@ namespace VectorGraphics.Interfaces
   /// seems not to be valid. Please google for more information.</remarks>
   /// <seealso cref="Microsoft.VisualStudio.OLE.Interop.IViewObject"/>
   [ComVisible(true), ComImport()]
-  [GuidAttribute("0000010d-0000-0000-C000-000000000046")]
-  [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
+  [Guid("0000010d-0000-0000-C000-000000000046")]
+  [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
   public interface IViewObject
   {
     /// <summary>

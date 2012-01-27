@@ -22,8 +22,8 @@ namespace VectorGraphics.Elements
   using System.Windows.Forms;
   using System.Xml.Serialization;
 
-  using VectorGraphics.CustomTypeConverter;
   using VectorGraphics.Tools;
+  using VectorGraphics.Tools.CustomTypeConverter;
 
   /// <summary>
   /// Inherited from <see cref="VGElement"/>. Creates new vector graphics sharp.

@@ -11,14 +11,14 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.SlideshowDesign
+namespace Ogama.Modules.SlideshowDesign.DesignModule
 {
   using System;
   using System.IO;
   using System.Windows.Forms;
 
   using Ogama.ExceptionHandling;
-  using VectorGraphics;
+
   using VectorGraphics.Elements;
 
   /// <summary>

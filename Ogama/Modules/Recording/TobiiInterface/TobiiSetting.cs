@@ -17,7 +17,7 @@ namespace Ogama.Modules.Recording.TobiiInterface
   using System.Drawing;
   using System.Xml.Serialization;
 
-  using VectorGraphics.CustomTypeConverter;
+  using VectorGraphics.Tools.CustomTypeConverter;
 
   /// <summary>
   /// Class to save settings for the tobii eye tracking system.
@@ -150,7 +150,7 @@ namespace Ogama.Modules.Recording.TobiiInterface
     /// </summary>
     /// <value>A <see cref="Color"/> for the calibration points,
     /// which is converted into a OLE_COLOR Structure.</value>
-    [XmlIgnoreAttribute()]
+    [XmlIgnoreAttribute]
     public Color TetCalibPointColor
     {
       get { return this.tetPointColor; }
@@ -173,7 +173,7 @@ namespace Ogama.Modules.Recording.TobiiInterface
     /// </summary>
     /// <value>A <see cref="Color"/> for the background,
     /// which is converted into a OLE_COLOR Structure.</value>
-    [XmlIgnoreAttribute()]
+    [XmlIgnoreAttribute]
     public Color TetCalibBackgroundColor
     {
       get { return this.tetBackgroundColor; }

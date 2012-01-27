@@ -11,18 +11,15 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Common
+namespace Ogama.Modules.Common.CustomRenderer
 {
   using System;
-  using System.Collections.Generic;
   using System.Drawing;
-  using System.Drawing.Drawing2D;
-  using System.Text;
   using System.Windows.Forms;
-  using Ogama.Modules.Common;
-  using OgamaControls;
-  using VectorGraphics;
-  using VectorGraphics.Elements;
+
+  using Ogama.Modules.Common.SlideCollections;
+
+  using VectorGraphics.Elements.ElementCollections;
 
   /// <summary>
   /// This class inherits <see cref="CustomRenderer"/> to extend the list view
@@ -91,7 +88,7 @@ namespace Ogama.Modules.Common
       boundsWithoutPadding.Inflate(2, 2);
 
       BufferedGraphics buffered;
-      Rectangle thumbRect = GetThumbRect(ref g, r, out buffered);
+      Rectangle thumbRect = this.GetThumbRect(ref g, r, out buffered);
 
       Trial trial = this.RowObject as Trial;
 

@@ -11,16 +11,12 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace VectorGraphics.CustomTypeConverter
+namespace VectorGraphics.Tools.CustomTypeConverter
 {
   using System;
-  using System.Collections.Generic;
   using System.ComponentModel;
   using System.Drawing;
-  using System.Drawing.Drawing2D;
   using System.Globalization;
-  using System.IO;
-  using System.Text;
 
   /// <summary>
   /// Derived from <see cref="ExpandableObjectConverter"/>.
@@ -87,7 +83,7 @@ namespace VectorGraphics.CustomTypeConverter
       if (value is string)
       {
         string[] v = ((string)value).Split(new char[] { ';' });
-        return new PointF(Single.Parse(v[0]), Single.Parse(v[1]));
+        return new PointF(float.Parse(v[0]), float.Parse(v[1]));
       }
 
       return base.ConvertFrom(context, culture, value);

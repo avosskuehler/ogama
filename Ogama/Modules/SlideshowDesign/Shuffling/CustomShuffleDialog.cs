@@ -11,21 +11,12 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.SlideshowDesign
+namespace Ogama.Modules.SlideshowDesign.Shuffling
 {
   using System;
-  using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Data;
-  using System.Drawing;
-  using System.IO;
-  using System.Text;
   using System.Windows.Forms;
 
-  using Ogama.ExceptionHandling;
-  using Ogama.Modules.Common;
-  using OgamaControls;
-  using VectorGraphics;
+  using Ogama.Modules.Common.SlideCollections;
 
   /// <summary>
   /// This dialog is intended to create a custom shuffling for

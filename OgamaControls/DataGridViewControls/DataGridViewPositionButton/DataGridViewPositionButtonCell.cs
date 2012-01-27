@@ -7,10 +7,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using VectorGraphics;
 using System.Windows.Forms.VisualStyles;
-using VectorGraphics.CustomTypeConverter;
 
 namespace OgamaControls
 {
+  using VectorGraphics.Tools.CustomTypeConverter;
+
   /// <summary>
   /// Defines a <see cref="PositionButton"/> cell type for the <see cref="DataGridView"/> control.
   /// </summary>

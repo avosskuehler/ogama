@@ -11,14 +11,11 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.ImportExport
+namespace Ogama.Modules.ImportExport.FixationData
 {
   using System;
-  using System.Collections;
   using System.Collections.Generic;
-  using System.ComponentModel;
   using System.Data;
-  using System.Data.SqlClient;
   using System.Globalization;
   using System.IO;
   using System.Text;
@@ -26,8 +23,9 @@ namespace Ogama.Modules.ImportExport
   using System.Xml.Serialization;
 
   using Ogama.ExceptionHandling;
-  using Ogama.Modules.Common;
-  using Ogama.Modules.SlideshowDesign;
+  using Ogama.Modules.Common.Tools;
+  using Ogama.Modules.Common.Types;
+  using Ogama.Modules.ImportExport.Common;
 
   /// <summary>
   /// Class for importing fixations through multiple dialogs.

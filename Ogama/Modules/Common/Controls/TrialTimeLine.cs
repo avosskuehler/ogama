@@ -11,13 +11,16 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Common
+namespace Ogama.Modules.Common.Controls
 {
   using System.Collections.Generic;
   using System.ComponentModel;
   using System.Drawing;
   using System.Windows.Forms;
+
   using Ogama.ExceptionHandling;
+  using Ogama.Modules.Common.TrialEvents;
+
   using OgamaControls;
 
   /// <summary>

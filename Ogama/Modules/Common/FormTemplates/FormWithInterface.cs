@@ -11,18 +11,14 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Common
+namespace Ogama.Modules.Common.FormTemplates
 {
   using System;
-  using System.Collections;
   using System.Collections.Generic;
-  using System.ComponentModel;
   using System.Data;
   using System.Drawing;
-  using System.Text;
   using System.Windows.Forms;
 
-  using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
 
   /// <summary>
@@ -438,7 +434,7 @@ namespace Ogama.Modules.Common
     /// </summary>
     protected void RaiseHelp()
     {
-      OnHelpRequested(new HelpEventArgs(new Point(0, 0)));
+      this.OnHelpRequested(new HelpEventArgs(new Point(0, 0)));
     }
 
     /// <summary>

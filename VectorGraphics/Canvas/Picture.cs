@@ -20,10 +20,12 @@ namespace VectorGraphics.Canvas
   using System.Drawing.Drawing2D;
   using System.Drawing.Imaging;
   using System.Windows.Forms;
-  using VectorGraphics.CustomEventArgs;
+
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
   using VectorGraphics.Tools;
-  using VectorGraphics.Win32;
+  using VectorGraphics.Tools.CustomEventArgs;
+  using VectorGraphics.Tools.Win32;
 
   /// <summary>
   /// Derived from <see cref="UserControl"/>. 

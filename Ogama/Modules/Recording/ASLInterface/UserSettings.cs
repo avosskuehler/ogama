@@ -155,6 +155,7 @@ namespace Ogama.Modules.Recording.ASLInterface
         MessageBox.Show(errorMsg, "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         result = new UserSettings();
       }
+
       return result;
     }
 
