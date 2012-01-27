@@ -171,7 +171,7 @@ namespace VectorGraphics.Elements
     /// </summary>
     /// <value>A <see cref="WebBrowser"/> control that contains the ActiveX control.</value>
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false), XmlIgnore]
-    public WebBrowser WebBrowser { get; private set; }
+    public WebBrowser WebBrowser { get; set; }
 
     /// <summary>
     /// Gets or sets the <see cref="Uri"/> for the browser.
