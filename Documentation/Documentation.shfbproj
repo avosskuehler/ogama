@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <!-- The configuration and platform will be used to determine which
+         assemblies to include from solution and project documentation
+         sources -->
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{e7826944-2613-4287-aa56-6da4a0c38e4e}</ProjectGuid>
+    <SHFBSchemaVersion>1.9.3.0</SHFBSchemaVersion>
+    <!-- AssemblyName, Name, and RootNamespace are not used by SHFB but Visual
+         Studio adds them anyway -->
+    <AssemblyName>Documentation</AssemblyName>
+    <RootNamespace>Documentation</RootNamespace>
+    <Name>Documentation</Name>
+    <!-- SHFB properties -->
+    <OutputPath>.\Help\</OutputPath>
+    <HtmlHelpName>OgamaSourceDocumentation</HtmlHelpName>
+    <Language>en-US</Language>
+    <HelpFileFormat>HtmlHelp1</HelpFileFormat>
+    <IndentHtml>False</IndentHtml>
+    <FrameworkVersion>.NET 4.0.30319</FrameworkVersion>
+    <KeepLogFile>True</KeepLogFile>
+    <DisableCodeBlockComponent>False</DisableCodeBlockComponent>
+    <CppCommentsFixup>False</CppCommentsFixup>
+    <CleanIntermediates>True</CleanIntermediates>
+    <SyntaxFilters>CSharp, CPlusPlus</SyntaxFilters>
+    <SdkLinkTarget>Blank</SdkLinkTarget>
+    <RootNamespaceTitle>Ogama</RootNamespaceTitle>
+    <RootNamespaceContainer>True</RootNamespaceContainer>
+    <PresentationStyle>vs2005</PresentationStyle>
+    <Preliminary>False</Preliminary>
+    <NamingMethod>Guid</NamingMethod>
+    <HelpTitle>Ogama source code documentation</HelpTitle>
+    <FeedbackEMailLinkText>adrian%40ogama.net</FeedbackEMailLinkText>
+    <FeedbackEMailAddress>adrian%40ogama.net</FeedbackEMailAddress>
+    <CopyrightText>Dr. Adrian Vo&amp;#223%3bk&amp;#252%3bhler, Freie Universit&amp;#228%3bt Berlin, created 27.01.12  --  Please have a look at the source for deeper understanding.</CopyrightText>
+    <CopyrightHref>http://ogama.codeplex.com</CopyrightHref>
+    <ContentPlacement>AboveNamespaces</ContentPlacement>
+    <ProjectSummary>OGAMA - OpenGazeAndMouseAnalyzer: An open source software designed to record and analyze eye and mouse movements in slideshow study designs.
+
+With Ogama a software is introduced that allows recording and analyzing eye- and mouse-tracking data in parallel. OGAMA is written in C#.NET and released as an open source project. Its main features include database-driven recording, pre-processing and filtering of gaze and mouse data, the creation of attention maps,  areas of interest definition, salicency calculation, scanpath comparsion and replay %28with. avi recording%29. Any eyetracking and/or presentation soft- and hardware recordings in ASCII format can be imported. Data output is provided that can directly be used with different statistical software packages %28like SPSS or SAS%29. Because it is open source you can easily adapt it to suit your needs. Share your experience with us and give it a try.
+
+It is developed at the Freie Universit&amp;#228%3bt Berlin by Adrian Vo&amp;#223%3bk&amp;#252%3bhler since 2006.
+Hopefully it will be useful for your application.
+You can modify and customize it for your needs as long as your product is not intended to make any money, and is not charged for in any way. It is published under the GPL.</ProjectSummary>
+    <VisibleItems>ExplicitInterfaceImplementations, InheritedMembers, InheritedFrameworkMembers, Internals, Privates, Protected, SealedProtected, PrivateFields</VisibleItems>
+    <MissingTags>Summary, AutoDocumentCtors, Namespace, AutoDocumentDispose</MissingTags>
+    <ComponentConfigurations>
+      <ComponentConfig id="Cached Framework Comments Index Data" enabled="True" xmlns="">
+        <component id="Cached Framework Comments Index Data" type="SandcastleBuilder.Components.CachedCopyFromIndexComponent" assembly="{@SHFBFolder}SandcastleBuilder.Components.dll">
+          <index name="comments" value="/doc/members/member" key="@name" cache="100">
+{@CachedFrameworkCommentList}
+{@CommentFileList}
+            </index>
+          <copy name="comments" source="*" target="/document/comments" />
+        </component>
+      </ComponentConfig>
+      <ComponentConfig id="Cached MSDN URL References" enabled="True" xmlns="">
+        <component id="Cached MSDN URL References" type="SandcastleBuilder.Components.CachedResolveReferenceLinksComponent" assembly="{@SHFBFolder}SandcastleBuilder.Components.dll" locale="{@Locale}" linkTarget="{@SdkLinkTarget}">
+          <helpOutput format="HtmlHelp1">
+            <cache filename="{@LocalDataFolder}Cache\MsdnUrl.cache" />
+            <targets base="{@SandcastlePath}Data\Reflection" recurse="true" files="*.xml" type="{@HtmlSdkLinkType}" />
+            <targets files="reflection.xml" type="Local" />
+          </helpOutput>
+          <helpOutput format="MSHelp2">
+            <cache filename="{@LocalDataFolder}Cache\MsdnUrl.cache" />
+            <targets base="{@SandcastlePath}Data\Reflection" recurse="true" files="*.xml" type="{@MSHelp2SdkLinkType}" />
+            <targets files="reflection.xml" type="Index" />
+          </helpOutput>
+          <helpOutput format="MSHelpViewer">
+            <cache filename="{@LocalDataFolder}Cache\MsdnUrl.cache" />
+            <targets base="{@SandcastlePath}Data\Reflection" recurse="true" files="*.xml" type="{@MSHelpViewerSdkLinkType}" />
+            <targets files="reflection.xml" type="Id" />
+          </helpOutput>
+          <helpOutput format="Website">
+            <cache filename="{@LocalDataFolder}Cache\MsdnUrl.cache" />
+            <targets base="{@SandcastlePath}Data\Reflection" recurse="true" files="*.xml" type="{@WebsiteSdkLinkType}" />
+            <targets files="reflection.xml" type="Local" />
+          </helpOutput>
+        </component>
+      </ComponentConfig>
+      <ComponentConfig id="Cached Reflection Index Data" enabled="True" xmlns="">
+        <component id="Cached Reflection Index Data" type="SandcastleBuilder.Components.CachedCopyFromIndexComponent" assembly="{@SHFBFolder}SandcastleBuilder.Components.dll">
+          <index name="reflection" value="/reflection/apis/api" key="@id" cache="10">
+            <cache base="{@SandcastlePath}Data\Reflection" recurse="true" files="*.xml" cacheFile="{@LocalDataFolder}Cache\Reflection.cache" />
+            <data files="reflection.xml" />
+          </index>
+          <copy name="reflection" source="*" target="/document/reference" />
+        </component>
+      </ComponentConfig>
+      <ComponentConfig id="Code Block Component" enabled="True" xmlns="">
+        <component id="Code Block Component" type="SandcastleBuilder.Components.CodeBlockComponent" assembly="{@SHFBFolder}SandcastleBuilder.Components.dll">
+          <!-- Base path for relative filenames in source attributes
+                 (optional) -->
+          <basePath value="{@HtmlEncProjectFolder}" />
+          <!-- Connect to language filter (optional).  If omitted,
+                 language filtering is enabled by default. -->
+          <languageFilter value="true" />
+          <!-- Allow missing source files (Optional).  If omitted,
+                 it will generate errors if referenced source files
+                 are missing. -->
+          <allowMissingSource value="false" />
+          <!-- Remove region markers from imported code blocks.  If omitted,
+                 region markers in imported code blocks are left alone. -->
+          <removeRegionMarkers value="false" />
+          <!-- Code colorizer options (required).
+                 Attributes:
+                    Language syntax configuration file (required)
+                    XSLT style file (required)
+                    "Copy" image file URL (required)
+                    Default language (optional)
+                    Enable line numbering (optional)
+                    Enable outlining (optional)
+                    Keep XML comment "see" tags within the code (optional)
+                    Tab size override (optional, 0 = Use syntax file setting)
+                    Use language name as default title (optional) -->
+          <colorizer syntaxFile="{@SHFBFolder}Colorizer\highlight.xml" styleFile="{@SHFBFolder}Colorizer\highlight.xsl" copyImageUrl="../icons/CopyCode.gif" language="cs" numberLines="false" outlining="false" keepSeeTags="false" tabSize="0" defaultTitle="true" />
+        </component>
+      </ComponentConfig>
+      <ComponentConfig id="Post-transform Component" enabled="True" xmlns="">
+        <component id="Post-transform Component" type="SandcastleBuilder.Components.PostTransformComponent" assembly="{@SHFBFolder}SandcastleBuilder.Components.dll">
+          <!-- Code colorizer files (required).
+                 Attributes:
+                    Stylesheet file (required)
+                    Script file (required)
+                    "Copy" image file (required) -->
+          <colorizer stylesheet="{@SHFBFolder}Colorizer\highlight.css" scriptFile="{@SHFBFolder}Colorizer\highlight.js" copyImage="{@SHFBFolder}Colorizer\CopyCode.gif" />
+          <!-- Base output paths for the files (required).  These should match
+                 the parent folder of the output path of the HTML files (see
+                 each of the SaveComponent instances below). -->
+          <outputPaths>
+{@HelpFormatOutputPaths}
+            </outputPaths>
+          <!-- Logo image file (optional).  Filename is required. The height,
+                 width, altText, placement, and alignment attributes are
+                 optional. -->
+          <logoFile filename="C:\Users\VK\VisualStudioProjects\Ogama@Codeplex\Documentation\HelpBanner.jpg" height="0" width="0" altText="" placement="right" alignment="left" />
+        </component>
+      </ComponentConfig>
+    </ComponentConfigurations>
+    <PlugInConfigurations>
+      <PlugInConfig id="Hierarchical Table of Contents" enabled="True" xmlns="">
+        <configuration>
+          <toc minParts="2" insertBelow="True" />
+        </configuration>
+      </PlugInConfig>
+    </PlugInConfigurations>
+    <DocumentationSources>
+      <DocumentationSource sourceFile="..\Ogama\Ogama.csproj" />
+      <DocumentationSource sourceFile="..\VectorGraphics\VectorGraphics.csproj" />
+      <DocumentationSource sourceFile="..\DirectShow\DmoBase\DmoBase.csproj" />
+      <DocumentationSource sourceFile="..\DirectShow\DmoMixer\DmoMixer.csproj" />
+      <DocumentationSource sourceFile="..\DirectShow\DmoOverlay\DmoOverlay.csproj" />
+    </DocumentationSources>
+  </PropertyGroup>
+  <!-- There are no properties for these groups.  AnyCPU needs to appear in
+       order for Visual Studio to perform the build.  The others are optional
+       common platform types that may appear. -->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|Win32' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|Win32' ">
+  </PropertyGroup>
+  <!-- Import the SHFB build targets -->
+  <Import Project="$(SHFBROOT)\SandcastleHelpFileBuilder.targets" />
+</Project>
