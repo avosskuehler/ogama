@@ -11,7 +11,7 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Recording
+namespace Ogama.Modules.Recording.Presenter
 {
   using System;
   using System.Drawing;
@@ -93,6 +93,19 @@ namespace Ogama.Modules.Recording
     /// with the event data to navigate to.</param>
     public delegate void NavigateInvoker(WebBrowserNavigatingEventArgs navigatingArgs);
 
+    /// <summary>
+    /// The delegate for the thread safe call to a navigate.
+    /// </summary>
+    /// <param name="newUri">The new <see cref="Uri"/> to navigate to.</param>
+    private delegate void NavigateCallback(Uri newUri);
+
+    /// <summary>
+    /// The delegate for the thread safe call to a navigate.
+    /// </summary>
+    /// <param name="newUri">The new <see cref="Uri"/> to navigate to.</param>
+    /// <param name="newFrame">The frame <see cref="String"/> to navigate to.</param>
+    private delegate void NavigateFrameCallback(Uri newUri, string newFrame);
+
     #endregion EVENTS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -119,10 +132,9 @@ namespace Ogama.Modules.Recording
     }
 
     /// <summary>
-    /// Gets the singleton instance of this class.
+    /// Gets a value indicating whether this class has been used,
+    /// to be aware of its disposal.
     /// </summary>
-    /// <value>A <see cref="WebsiteScreenshot"/> with the 
-    /// singleton instance of this class.</value>
     public static bool HasBeenUsed
     {
       get
@@ -209,6 +221,42 @@ namespace Ogama.Modules.Recording
     // Inherited methods                                                         //
     ///////////////////////////////////////////////////////////////////////////////
     #region OVERRIDES
+
+    /// <summary>
+    /// Thread safe navigate to a uri with frame.
+    /// </summary>
+    /// <param name="newUri">A <see cref="Uri"/> to navigate to.</param>
+    protected void ThreadSafeNavigate(Uri newUri)
+    {
+      if (this.webBrowser.InvokeRequired)
+      {
+        var d = new NavigateCallback(this.ThreadSafeNavigate);
+        this.webBrowser.Invoke(d, new object[] { newUri });
+      }
+      else
+      {
+        this.webBrowser.Navigate(newUri);
+      }
+    }
+
+    /// <summary>
+    /// Thread safe navigate to a uri with frame.
+    /// </summary>
+    /// <param name="newUri">A <see cref="Size"/> to navigate to.</param>
+    /// <param name="newFrame">The frame <see cref="String"/> to navigate to.</param>
+    protected void ThreadSafeNavigate(Uri newUri, string newFrame)
+    {
+      if (this.webBrowser.InvokeRequired)
+      {
+        var d = new NavigateFrameCallback(this.ThreadSafeNavigate);
+        this.webBrowser.Invoke(d, new object[] { newUri, newFrame });
+      }
+      else
+      {
+        this.webBrowser.Navigate(newUri, newFrame);
+      }
+    }
+
     #endregion //OVERRIDES
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -268,54 +316,6 @@ namespace Ogama.Modules.Recording
     #region PRIVATEMETHODS
 
     /// <summary>
-    /// The delegate for the thread safe call to a navigate.
-    /// </summary>
-    /// <param name="newUri">The new <see cref="Uri"/> to navigate to.</param>
-    private delegate void NavigateCallback(Uri newUri);
-
-    /// <summary>
-    /// The delegate for the thread safe call to a navigate.
-    /// </summary>
-    /// <param name="newUri">The new <see cref="Uri"/> to navigate to.</param>
-    /// <param name="newFrame">The frame <see cref="String"/> to navigate to.</param>
-    private delegate void NavigateFrameCallback(Uri newUri, string newFrame);
-
-    /// <summary>
-    /// Thread safe navigate to a uri with frame.
-    /// </summary>
-    /// <param name="newUri">A <see cref="Uri"/> to navigate to.</param>
-    protected void ThreadSafeNavigate(Uri newUri)
-    {
-      if (this.webBrowser.InvokeRequired)
-      {
-        var d = new NavigateCallback(this.ThreadSafeNavigate);
-        this.webBrowser.Invoke(d, new object[] { newUri });
-      }
-      else
-      {
-        this.webBrowser.Navigate(newUri);
-      }
-    }
-
-    /// <summary>
-    /// Thread safe navigate to a uri with frame.
-    /// </summary>
-    /// <param name="newUri">A <see cref="Size"/> to navigate to.</param>
-    /// <param name="newFrame">The frame <see cref="String"/> to navigate to.</param>
-    protected void ThreadSafeNavigate(Uri newUri, string newFrame)
-    {
-      if (this.webBrowser.InvokeRequired)
-      {
-        var d = new NavigateFrameCallback(this.ThreadSafeNavigate);
-        this.webBrowser.Invoke(d, new object[] { newUri, newFrame });
-      }
-      else
-      {
-        this.webBrowser.Navigate(newUri, newFrame);
-      }
-    }
-
-    /// <summary>
     /// Static method to parse the current <see cref="HtmlDocument"/> of the
     /// <see cref="WebBrowser"/> for its maximal scrollsize.
     /// Returns the maximum of the given scrollsize and the documents scrollsize.
@@ -366,25 +366,27 @@ namespace Ogama.Modules.Recording
     /// </summary>
     private void CreateBrowserObject()
     {
-      if (this.webBrowser == null)// || !this.webBrowser.IsAccessible)
+      if (this.webBrowser != null)
       {
-        // The webbrowser is not docked, because
-        // the screenshot works if its client size is correctly sized
-        // but the form does not have to.
-        this.webBrowser = new WebBrowser();
-        this.dummyForm = new Form
-          {
-            ClientSize = new Size(1, 1),
-            FormBorderStyle = FormBorderStyle.None
-          };
-
-        this.dummyForm.Controls.Add(this.webBrowser);
-        this.dummyForm.SendToBack();
-        this.dummyForm.Show();
-        this.dummyForm.ShowInTaskbar = false;
-        this.webBrowser.ScrollBarsEnabled = true;
-        this.webBrowser.DocumentCompleted += this.WebBrowser_DocumentCompleted;
+        return;
       }
+
+      // The webbrowser is not docked, because
+      // the screenshot works if its client size is correctly sized
+      // but the form does not have to.
+      this.webBrowser = new WebBrowser();
+      this.dummyForm = new Form
+        {
+          ClientSize = new Size(1, 1),
+          FormBorderStyle = FormBorderStyle.None
+        };
+
+      this.dummyForm.Controls.Add(this.webBrowser);
+      this.dummyForm.SendToBack();
+      this.dummyForm.Show();
+      this.dummyForm.ShowInTaskbar = false;
+      this.webBrowser.ScrollBarsEnabled = true;
+      this.webBrowser.DocumentCompleted += this.WebBrowser_DocumentCompleted;
     }
 
     #endregion //PRIVATEMETHODS

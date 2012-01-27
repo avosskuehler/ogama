@@ -31,11 +31,17 @@ namespace Ogama.Modules.SlideshowDesign
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.FormTemplates;
+  using Ogama.Modules.Common.SlideCollections;
+  using Ogama.Modules.Common.Types;
   using Ogama.Modules.Recording;
+  using Ogama.Modules.SlideshowDesign.DesignModule;
+  using Ogama.Modules.SlideshowDesign.DesignModule.StimuliDialogs;
   using Ogama.Properties;
   using OgamaControls;
   using VectorGraphics;
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
 
   /// <summary>
   /// Derived from <see cref="FormWithPicture"/>.

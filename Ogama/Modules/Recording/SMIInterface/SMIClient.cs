@@ -24,6 +24,8 @@ namespace Ogama.Modules.Recording.SMIInterface
 
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.CustomEventArgs;
+  using Ogama.Modules.Common.Tools;
 
   /// <summary>
   /// This class is the abstraction layer for the communication

@@ -1,5 +1,7 @@
-﻿namespace Ogama.Modules.Recording
+﻿namespace Ogama.Modules.Recording.Dialogs
 {
+  using Ogama.Modules.Common.Controls;
+
   partial class SubjectDetailsDialog
   {
     /// <summary>
@@ -13,9 +15,9 @@
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      if (disposing && (components != null))
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -49,7 +51,7 @@
       this.txbParam3 = new System.Windows.Forms.TextBox();
       this.txbComments = new System.Windows.Forms.TextBox();
       this.txbAge = new System.Windows.Forms.TextBox();
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       this.SuspendLayout();
       // 
       // txbSubjectName
@@ -318,6 +320,6 @@
     private System.Windows.Forms.TextBox txbParam3;
     private System.Windows.Forms.TextBox txbComments;
     private System.Windows.Forms.TextBox txbAge;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
   }
 }

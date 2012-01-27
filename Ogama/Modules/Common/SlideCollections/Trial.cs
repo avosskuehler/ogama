@@ -11,19 +11,16 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Common
+namespace Ogama.Modules.Common.SlideCollections
 {
   using System;
   using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Text;
-  using System.Windows.Forms;
-  using System.Xml.Serialization;
 
-  using Ogama.Modules.Common;
-  using VectorGraphics;
+  using Ogama.Modules.Common.Types;
+
   using VectorGraphics.Elements;
-  using VectorGraphics.Interfaces;
+  using VectorGraphics.Elements.ElementCollections;
+  using VectorGraphics.Tools.Interfaces;
 
   /// <summary>
   /// The Trial class is a <see cref="List{Slide}"/> that implements <see cref="IClonableNamedObject"/>

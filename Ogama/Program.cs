@@ -20,6 +20,7 @@ namespace Ogama
 
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
+  using Ogama.MainWindow.Dialogs;
 
   /// <summary>
   /// Main Program class with entry point for application.

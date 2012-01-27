@@ -11,17 +11,12 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.ImportExport
+namespace Ogama.Modules.ImportExport.Common
 {
   using System;
-  using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Data;
-  using System.Drawing;
-  using System.Text;
   using System.Windows.Forms;
 
-  using Ogama.Modules.Common;
+  using Ogama.Modules.Common.Tools;
 
   /// <summary>
   /// A pop up dialog <see cref="Form"/> for requesting a subject name during import.
@@ -115,7 +110,7 @@ namespace Ogama.Modules.ImportExport
     /// The <see cref="Control.Click"/> event handler for the
     /// <see cref="Button"/> <see cref="btnOK"/>.
     /// Checks for valid SubjectName by calling 
-    /// <see cref="Queries.ValidateSubjectName(ref string, Boolean)"/>
+    /// <see cref="Queries.ValidateSubjectName"/>
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>

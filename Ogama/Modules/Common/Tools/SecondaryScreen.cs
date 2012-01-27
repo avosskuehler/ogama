@@ -11,10 +11,8 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Common
+namespace Ogama.Modules.Common.Tools
 {
-  using System;
-  using System.Drawing;
   using System.Windows.Forms;
 
   /// <summary>

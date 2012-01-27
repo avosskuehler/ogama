@@ -17,10 +17,12 @@ namespace Ogama.Modules.Recording
   using System.Collections.Generic;
   using System.Text;
 
+  using Ogama.Modules.ImportExport.Common;
+
   /// <summary>
   /// Gaze data structure with fields that match the database columns
   /// that correspond to gaze data. Its a subset of 
-  /// <see cref="Modules.ImportExport.RawData"/>
+  /// <see cref="RawData"/>
   /// </summary>
   public struct GazeData
   {

@@ -11,20 +11,18 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Scanpaths
+namespace Ogama.Modules.Scanpath.Colorization
 {
   using System;
   using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Data;
   using System.Drawing;
   using System.Drawing.Drawing2D;
   using System.Drawing.Imaging;
-  using System.Text;
   using System.Windows.Forms;
 
   using Ogama.Modules.AttentionMap;
-  using Ogama.Modules.Common;
+  using Ogama.Modules.Common.PictureTemplates;
+  using Ogama.Modules.Common.Types;
 
   using OgamaControls;
   using OgamaControls.Dialogs;

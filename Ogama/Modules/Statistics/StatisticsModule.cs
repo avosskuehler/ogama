@@ -24,8 +24,12 @@ namespace Ogama.Modules.Statistics
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.FormTemplates;
+  using Ogama.Modules.Common.Tools;
+  using Ogama.Modules.Statistics.Variables;
 
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
 
   /// <summary>
   /// Inherits <see cref="FormWithInterface"/>

@@ -11,7 +11,7 @@
 // <author>Martin Werner</author>
 // <email>martin.werner@alea-technologies.de</email>
 
-namespace Ogama.Modules.Common
+namespace Ogama.Modules.Common.Types
 {
   using System;
   using System.Collections;
@@ -58,7 +58,7 @@ namespace Ogama.Modules.Common
     {
       if (!enumType.IsEnum)
       {
-        throw new ArgumentException(String.Format("Supplied type must be an Enum.  Type was {0}", enumType.ToString()));
+        throw new ArgumentException(string.Format("Supplied type must be an Enum.  Type was {0}", enumType.ToString()));
       }
 
       this.enumType = enumType;
@@ -141,7 +141,7 @@ namespace Ogama.Modules.Common
 
       if (!type.IsEnum)
       {
-        throw new ArgumentException(String.Format("Supplied type must be an Enum.  Type was {0}", type.ToString()));
+        throw new ArgumentException(string.Format("Supplied type must be an Enum.  Type was {0}", type.ToString()));
       }
 
       // Look for our string value associated with fields in this enum

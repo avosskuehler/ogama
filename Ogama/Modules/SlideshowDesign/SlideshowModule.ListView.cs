@@ -18,8 +18,12 @@ namespace Ogama.Modules.SlideshowDesign
   using System.Windows.Forms;
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.CustomRenderer;
+  using Ogama.Modules.Common.SlideCollections;
+
   using OgamaControls;
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
 
   /// <summary>
   /// The SlideshowModule.ListView.cs contains methods referring

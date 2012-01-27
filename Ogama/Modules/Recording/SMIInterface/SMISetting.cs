@@ -17,7 +17,7 @@ namespace Ogama.Modules.Recording.SMIInterface
   using System.Drawing;
   using System.Xml.Serialization;
 
-  using VectorGraphics.CustomTypeConverter;
+  using VectorGraphics.Tools.CustomTypeConverter;
 
   /// <summary>
   /// Class to save settings for the SMI iViewX eye tracking system.
@@ -164,7 +164,7 @@ namespace Ogama.Modules.Recording.SMIInterface
     /// </summary>
     /// <value>A <see cref="Color"/> for the calibration points,
     /// which is converted into a OLE_COLOR Structure.</value>
-    [XmlIgnoreAttribute()]
+    [XmlIgnoreAttribute]
     public Color CalibPointColor
     {
       get { return this.calibPointColor; }
@@ -186,7 +186,7 @@ namespace Ogama.Modules.Recording.SMIInterface
     /// </summary>
     /// <value>A <see cref="Color"/> for the background,
     /// which is converted into a OLE_COLOR Structure.</value>
-    [XmlIgnoreAttribute()]
+    [XmlIgnoreAttribute]
     public Color CalibBackgroundColor
     {
       get { return this.calibBackgroundColor; }
@@ -255,4 +255,3 @@ namespace Ogama.Modules.Recording.SMIInterface
     #endregion //HELPER
   }
 }
-

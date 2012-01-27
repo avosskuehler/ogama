@@ -17,6 +17,7 @@ namespace Ogama.Modules.Fixations
   using System.Collections.Generic;
   using System.Text;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.Types;
 
   /// <summary>
   /// This class encapsulates properties of how to

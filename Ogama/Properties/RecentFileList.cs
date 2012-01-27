@@ -13,12 +13,9 @@
 
 namespace Ogama.Properties
 {
-  using System;
-using System.Collections;
-using System.Collections.Specialized;
-using System.Configuration;
-using System.IO;
-using System.Text;
+  using System.Collections.Specialized;
+  using System.IO;
+  using System.Text;
 
   /// <summary>
   /// Derived from <see cref="StringCollection"/>.
@@ -305,4 +302,3 @@ using System.Text;
     #endregion //HELPER
   }
 }
-

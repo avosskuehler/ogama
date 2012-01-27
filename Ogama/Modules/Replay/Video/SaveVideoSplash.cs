@@ -11,17 +11,12 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Replay
+namespace Ogama.Modules.Replay.Video
 {
   using System;
-  using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Data;
-  using System.Drawing;
-  using System.Reflection;
-  using System.Text;
   using System.Windows.Forms;
-  using Ogama.Modules.Common;
+
+  using Ogama.Modules.Common.FormTemplates;
 
   /// <summary>
   /// Splash <see cref="Form"/> with animated gif and marquee progress bar.

@@ -88,7 +88,7 @@
     <OutputPath>..\Release86\</OutputPath>
     <DefineConstants>TRACE;ASL</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>..\Release86\Ogama.xml</DocumentationFile>
+    <DocumentationFile>..\Release86\Docs\Ogama.xml</DocumentationFile>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
@@ -435,7 +435,7 @@
     <Compile Include="Modules\Recording\Presenter\WebsiteScreenshot.cs" />
     <Compile Include="Modules\Recording\Presenter\DSScreenCapture.cs" />
     <Compile Include="Modules\Recording\Presenter\ScreenCaptureProperties.cs" />
-    <Compile Include="Modules\Recording\TobiiInterface\CalibrationRunner.cs" />
+    <Compile Include="Modules\Recording\TobiiInterface\TobiiCalibrationRunner.cs" />
     <Compile Include="Modules\Recording\TobiiInterface\TobiiCalibrationForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -11,16 +11,12 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.ExceptionHandling
+namespace Ogama.MainWindow.Dialogs
 {
   using System;
-  using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Data;
   using System.Data.SqlClient;
-  using System.Drawing;
-  using System.Text;
   using System.Windows.Forms;
+
   using Microsoft.Data.ConnectionUI;
 
   /// <summary>

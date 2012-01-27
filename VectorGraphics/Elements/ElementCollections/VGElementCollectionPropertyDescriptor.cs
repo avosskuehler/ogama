@@ -11,12 +11,10 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace VectorGraphics.Elements
+namespace VectorGraphics.Elements.ElementCollections
 {
   using System;
-  using System.Collections.Generic;
   using System.ComponentModel;
-  using System.Text;
 
   /// <summary>
   /// Derived from <see cref="PropertyDescriptor"/>.

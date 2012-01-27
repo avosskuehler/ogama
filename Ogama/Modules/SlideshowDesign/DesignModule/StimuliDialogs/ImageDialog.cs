@@ -11,12 +11,9 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.SlideshowDesign
+namespace Ogama.Modules.SlideshowDesign.DesignModule.StimuliDialogs
 {
   using System;
-  using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Data;
   using System.Drawing;
   using System.Drawing.Drawing2D;
   using System.IO;
@@ -24,10 +21,10 @@ namespace Ogama.Modules.SlideshowDesign
   using System.Windows.Forms;
 
   using Ogama.ExceptionHandling;
-  using Ogama.Modules.Common;
+  using Ogama.Modules.Common.Controls;
 
-  using VectorGraphics.CustomEventArgs;
   using VectorGraphics.Elements;
+  using VectorGraphics.Tools.CustomEventArgs;
 
   /// <summary>
   /// This dialog <see cref="Form"/> is used to initially define an 
@@ -337,7 +334,7 @@ namespace Ogama.Modules.SlideshowDesign
             }
             else
             {
-              drawing_rectangle.Height = (int)(this.image.Height * ((float)drawing_rectangle.Width / (float)image.Width));
+              drawing_rectangle.Height = (int)(this.image.Height * ((float)drawing_rectangle.Width / (float)this.image.Width));
               drawing_rectangle.Y = (int)((canvas.Height - drawing_rectangle.Height) / 2);
             }
 

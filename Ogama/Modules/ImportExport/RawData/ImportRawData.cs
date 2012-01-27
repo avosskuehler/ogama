@@ -11,28 +11,27 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.ImportExport
+namespace Ogama.Modules.ImportExport.RawData
 {
   using System;
-  using System.Collections;
   using System.Collections.Generic;
-  using System.ComponentModel;
   using System.Data;
-  using System.Data.SqlClient;
   using System.Drawing;
   using System.Globalization;
   using System.IO;
-  using System.Text;
   using System.Windows.Forms;
   using System.Xml.Serialization;
 
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
-  using Ogama.Modules.Common;
+  using Ogama.Modules.Common.SlideCollections;
+  using Ogama.Modules.Common.Tools;
+  using Ogama.Modules.Common.Types;
   using Ogama.Modules.Fixations;
-  using Ogama.Modules.SlideshowDesign;
+  using Ogama.Modules.ImportExport.Common;
 
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
   using VectorGraphics.StopConditions;
 
   /// <summary>
@@ -664,7 +663,7 @@ namespace Ogama.Modules.ImportExport
             // Check for duplicate time entries
             if (timeInFileTime == lastTimeInFileTime)
             {
-              string message = String.Format(
+              string message = string.Format(
                 "Two consecutive raw data samples had the same sampling time {0}."
                 + Environment.NewLine + "Time in FileTime is {1}" + Environment.NewLine +
                 "PrevTime in FileTime is {2}" + Environment.NewLine +
@@ -1133,12 +1132,12 @@ namespace Ogama.Modules.ImportExport
         // Add slide node to slideshow
         Document.ActiveDocument.ExperimentSettings.SlideShow.Nodes.Add(slideNode);
 
-        //if (stimulusImage != null)
-        //{
-        //  stimulusImage.Dispose();
-        //}
+        ////if (stimulusImage != null)
+        ////{
+        ////  stimulusImage.Dispose();
+        ////}
 
-        //newSlide.Dispose();
+        ////newSlide.Dispose();
 
         Document.ActiveDocument.Modified = true;
       }
@@ -1448,7 +1447,7 @@ namespace Ogama.Modules.ImportExport
     /// Extension ".ois"
     /// </summary>
     /// <param name="filePath">A <see cref="string"/> with the path to the 
-    ///   OGAMA target import settings xml file.</param>
+    /// OGAMA target import settings xml file.</param>
     private static void SerializeSettings(string filePath)
     {
       try

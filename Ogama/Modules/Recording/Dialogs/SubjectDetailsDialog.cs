@@ -11,17 +11,12 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Recording
+namespace Ogama.Modules.Recording.Dialogs
 {
   using System;
-  using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Data;
-  using System.Drawing;
-  using System.Text;
   using System.Windows.Forms;
 
-  using Ogama.Modules.Common;
+  using Ogama.Modules.Common.Tools;
 
   /// <summary>
   /// A pop up dialog <see cref="Form"/> for requesting subject 
@@ -82,7 +77,7 @@ namespace Ogama.Modules.Recording
         {
           if (subjectName.Contains("Subject"))
           {
-            if (Int32.TryParse(subjectName.Replace("Subject", string.Empty), out counter))
+            if (int.TryParse(subjectName.Replace("Subject", string.Empty), out counter))
             {
               counter++;
               subjectName = "Subject" + counter.ToString();

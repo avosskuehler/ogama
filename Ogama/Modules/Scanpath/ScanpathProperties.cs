@@ -11,14 +11,11 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Scanpaths
+namespace Ogama.Modules.Scanpath
 {
   using System;
-  using System.Collections.Generic;
-  using System.Drawing;
-  using System.Text;
 
-  using OgamaControls;
+  using Ogama.Modules.Scanpath.Colorization;
 
   /// <summary>
   /// This structure is designed to save the visualization style of 

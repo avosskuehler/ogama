@@ -11,12 +11,8 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace VectorGraphics.Interfaces
+namespace VectorGraphics.Tools.Interfaces
 {
-  using System;
-  using System.Collections.Generic;
-  using System.Text;
-
   /// <summary>
   /// This interface supports named objects.
   /// </summary>

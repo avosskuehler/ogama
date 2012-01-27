@@ -11,12 +11,8 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace VectorGraphics.Triggers
+namespace VectorGraphics.Tools.Trigger
 {
-  using System;
-  using System.Collections.Generic;
-  using System.Text;
-
   /// <summary>
   /// This is a list of possible trigger signaling states
   /// </summary>

@@ -11,7 +11,7 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Recording
+namespace Ogama.Modules.Recording.Presenter
 {
   using System;
   using System.Collections.Generic;
@@ -22,15 +22,24 @@ namespace Ogama.Modules.Recording
   using System.IO;
   using System.Threading;
   using System.Windows.Forms;
+
   using Ogama.ExceptionHandling;
-  using Ogama.Modules.Common;
-  using Ogama.Modules.Recording.Presenter;
+  using Ogama.Modules.Common.CustomEventArgs;
+  using Ogama.Modules.Common.SlideCollections;
+  using Ogama.Modules.Common.Tools;
+  using Ogama.Modules.Common.TrialEvents;
+  using Ogama.Modules.SlideshowDesign.DesignModule.StimuliDialogs;
+
   using OgamaControls;
+
   using VectorGraphics.Controls;
+  using VectorGraphics.Controls.Flash;
+  using VectorGraphics.Controls.Timer;
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
   using VectorGraphics.StopConditions;
   using VectorGraphics.Tools;
-  using VectorGraphics.Triggers;
+  using VectorGraphics.Tools.Trigger;
 
   /// <summary>
   /// A <see cref="Form"/> that is used for stimuli presentation. 
@@ -973,7 +982,7 @@ namespace Ogama.Modules.Recording
 
           // Make screenshot of newly navigated web page in 
           // separate thread, if it is not already there.
-          string screenshotFilename = Ogama.Modules.SlideshowDesign.BrowserDialog.GetFilenameFromUrl(e.Url);
+          string screenshotFilename = BrowserDialog.GetFilenameFromUrl(e.Url);
           WebsiteScreenshot.Instance.ScreenshotFilename = screenshotFilename;
 
           if (!File.Exists(screenshotFilename) || !this.currentBrowserTreeNode.UrlToID.ContainsKey(screenshotFilename))

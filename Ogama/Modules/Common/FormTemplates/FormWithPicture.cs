@@ -11,25 +11,28 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Common
+namespace Ogama.Modules.Common.FormTemplates
 {
   using System;
-  using System.Collections;
   using System.Collections.Generic;
   using System.ComponentModel;
-  using System.Data;
   using System.Drawing;
   using System.IO;
-  using System.Text;
   using System.Windows.Forms;
 
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
+  using Ogama.Modules.Common.Controls;
+  using Ogama.Modules.Common.SlideCollections;
+  using Ogama.Modules.Common.TrialEvents;
+  using Ogama.Modules.Common.Types;
+
   using OgamaControls;
   using OgamaControls.Media;
-  using VectorGraphics;
+
   using VectorGraphics.Canvas;
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
   using VectorGraphics.Tools;
 
   /// <summary>

@@ -18,9 +18,10 @@ namespace VectorGraphics.Canvas
   using System.Drawing;
   using System.Windows.Forms;
 
-  using VectorGraphics.CustomEventArgs;
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
   using VectorGraphics.Tools;
+  using VectorGraphics.Tools.CustomEventArgs;
 
   /// <summary>
   /// Derived from <see cref="Picture"/>. Allows modifying of shapes through selection

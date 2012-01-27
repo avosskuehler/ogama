@@ -11,22 +11,17 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.SlideshowDesign
+namespace Ogama.Modules.SlideshowDesign.DesignModule.StimuliDialogs
 {
   using System;
-  using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Data;
   using System.Drawing;
-  using System.IO;
   using System.Text;
   using System.Windows.Forms;
 
-  using Ogama.Modules.Common;
-  using OgamaControls.Dialogs;
+  using Ogama.Modules.Common.Controls;
 
-  using VectorGraphics.CustomEventArgs;
   using VectorGraphics.Elements;
+  using VectorGraphics.Tools.CustomEventArgs;
 
   /// <summary>
   /// This dialog <see cref="Form"/> is used to initially define an 

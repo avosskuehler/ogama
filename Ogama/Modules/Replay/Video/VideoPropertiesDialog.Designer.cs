@@ -1,5 +1,7 @@
-﻿namespace Ogama.Modules.Replay
+﻿namespace Ogama.Modules.Replay.Video
 {
+  using Ogama.Modules.Common.Controls;
+
   partial class VideoPropertiesDialog
   {
     /// <summary>
@@ -13,9 +15,9 @@
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      if (disposing && (components != null))
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -77,7 +79,7 @@
       this.label5 = new System.Windows.Forms.Label();
       this.cbbAudioCompressor = new System.Windows.Forms.ComboBox();
       this.pictureBox2 = new System.Windows.Forms.PictureBox();
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       this.picture1 = new VectorGraphics.Canvas.Picture();
       ((System.ComponentModel.ISupportInitialize)(this.bsoSubjects)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.bsoFKSubjectsTrials)).BeginInit();
@@ -805,7 +807,7 @@
 
     private System.Windows.Forms.Button btnOK;
     private System.Windows.Forms.Button btnCancel;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
     private System.Windows.Forms.GroupBox grbUserVideoOptions;
     private System.Windows.Forms.SplitContainer splitContainer1;
     private System.Windows.Forms.Button btnVideoCompressorProperties;

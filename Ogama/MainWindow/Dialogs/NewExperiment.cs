@@ -11,16 +11,12 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.MainWindow
+namespace Ogama.MainWindow.Dialogs
 {
   using System;
-  using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Data;
-  using System.Drawing;
   using System.IO;
-  using System.Text;
   using System.Windows.Forms;
+
   using Ogama.ExceptionHandling;
 
   /// <summary>

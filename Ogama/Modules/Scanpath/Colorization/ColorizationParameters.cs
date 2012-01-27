@@ -11,15 +11,14 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Scanpaths
+namespace Ogama.Modules.Scanpath.Colorization
 {
   using System;
   using System.Collections.Generic;
-  using System.Drawing;
-  using System.Text;
   using System.Xml.Serialization;
 
-  using Ogama.Modules.Common;
+  using Ogama.Modules.Common.Types;
+
   using OgamaControls;
 
   /// <summary>
@@ -59,7 +58,7 @@ namespace Ogama.Modules.Scanpaths
     /// <summary>
     /// Saves the gradient used for colorization
     /// </summary>
-    [XmlIgnoreAttribute()]
+    [XmlIgnore]
     private Gradient colorizationGradient;
 
     #endregion //FIELDS
@@ -145,7 +144,7 @@ namespace Ogama.Modules.Scanpaths
     /// <summary>
     /// Gets or sets the gradient used for colorization
     /// </summary>
-    [XmlIgnoreAttribute()]
+    [XmlIgnore]
     public Gradient ColorizationGradient
     {
       get { return this.colorizationGradient; }

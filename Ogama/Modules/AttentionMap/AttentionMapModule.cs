@@ -27,6 +27,10 @@ namespace Ogama.Modules.AttentionMap
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.FormTemplates;
+  using Ogama.Modules.Common.Tools;
+  using Ogama.Modules.Common.TrialEvents;
+  using Ogama.Modules.Common.Types;
   using Ogama.Properties;
   using OgamaControls;
 
@@ -343,7 +347,10 @@ namespace Ogama.Modules.AttentionMap
     private void btnSeekNextSlide_Click(object sender, EventArgs e)
     {
       // Skip if there is no data
-      if (this.CurrentTrial == null) { return; }
+      if (this.CurrentTrial == null)
+      {
+        return;
+      }
 
       this.trialTimeLine.HighlightNextSlide(true);
       int slideIndex = this.trialTimeLine.HighlightedSlideIndex;
@@ -360,7 +367,10 @@ namespace Ogama.Modules.AttentionMap
     private void btnSeekPreviousSlide_Click(object sender, EventArgs e)
     {
       // Skip if there is no data
-      if (this.CurrentTrial == null) { return; }
+      if (this.CurrentTrial == null)
+      {
+        return;
+      }
 
       this.trialTimeLine.HighlightNextSlide(false);
       int slideIndex = this.trialTimeLine.HighlightedSlideIndex;

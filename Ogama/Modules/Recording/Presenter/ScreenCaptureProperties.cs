@@ -11,10 +11,11 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Recording
+namespace Ogama.Modules.Recording.Presenter
 {
   using System.Drawing;
   using System.Windows.Forms;
+
   using OgamaControls;
 
   /// <summary>

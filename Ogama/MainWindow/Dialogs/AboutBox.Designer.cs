@@ -1,5 +1,7 @@
 namespace Ogama.MainWindow.Dialogs
 {
+  using Ogama.Modules.Common.Controls;
+
   sealed partial class AboutBox
   {
     /// <summary>
@@ -42,7 +44,7 @@ namespace Ogama.MainWindow.Dialogs
       this.pcbWWW = new System.Windows.Forms.PictureBox();
       this.groupBox2 = new System.Windows.Forms.GroupBox();
       this.lblDescription = new System.Windows.Forms.Label();
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       ((System.ComponentModel.ISupportInitialize)(this.pcbFUBerlin)).BeginInit();
       this.grpAssembly.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.pcbWWW)).BeginInit();
@@ -263,6 +265,6 @@ namespace Ogama.MainWindow.Dialogs
     private System.Windows.Forms.GroupBox groupBox2;
     private System.Windows.Forms.Label lblDescription;
     private System.Windows.Forms.PictureBox pcbWWW;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
   }
 }

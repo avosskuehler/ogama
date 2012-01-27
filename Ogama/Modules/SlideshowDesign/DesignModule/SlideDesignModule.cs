@@ -11,27 +11,26 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.SlideshowDesign
+namespace Ogama.Modules.SlideshowDesign.DesignModule
 {
   using System;
   using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Data;
   using System.Drawing;
-  using System.Drawing.Drawing2D;
   using System.IO;
-  using System.Text;
   using System.Windows.Forms;
 
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
-  using Ogama.Modules.Common;
-  using OgamaControls;
-  using OgamaControls.Dialogs;
+  using Ogama.Modules.Common.FormTemplates;
+  using Ogama.Modules.Common.SlideCollections;
+  using Ogama.Modules.SlideshowDesign.DesignModule.StimuliDialogs;
 
-  using VectorGraphics.CustomEventArgs;
+  using OgamaControls;
+
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
   using VectorGraphics.StopConditions;
+  using VectorGraphics.Tools.CustomEventArgs;
 
   /// <summary>
   /// Inherits <see cref="FormWithPicture"/>.

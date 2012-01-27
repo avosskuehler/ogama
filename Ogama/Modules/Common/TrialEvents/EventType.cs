@@ -11,12 +11,8 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Common
+namespace Ogama.Modules.Common.TrialEvents
 {
-  using System;
-  using System.Collections.Generic;
-  using System.Text;
-
   /// <summary>
   /// This enumeration describes the possible event types that occur
   /// during an ogama presentation.

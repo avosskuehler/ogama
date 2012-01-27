@@ -27,9 +27,14 @@ namespace Ogama
   using Ogama.DataSet;
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
+  using Ogama.MainWindow.ContextPanel;
+  using Ogama.MainWindow.Dialogs;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.Tools;
+  using Ogama.Modules.Common.Types;
   using Ogama.Properties;
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
 
   /// <summary>
   /// This class defines an OGAMA document.

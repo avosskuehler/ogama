@@ -11,7 +11,7 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Common
+namespace Ogama.Modules.Common.SlideCollections
 {
   using System;
   using System.Collections.Generic;
@@ -19,7 +19,9 @@ namespace Ogama.Modules.Common
   using System.Xml;
   using System.Xml.Serialization;
 
-  using VectorGraphics.Elements;
+  using Ogama.Modules.Common.Types;
+
+  using VectorGraphics.Elements.ElementCollections;
 
   /// <summary>
   /// The xml serializable browser slide class which inherits <see cref="SlideshowTreeNode"/>

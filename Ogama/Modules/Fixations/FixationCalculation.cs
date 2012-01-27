@@ -22,6 +22,9 @@ namespace Ogama.Modules.Fixations
   using Ogama.DataSet;
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.Tools;
+  using Ogama.Modules.Common.Types;
+
   using VectorGraphics.Elements;
 
   /// <summary>

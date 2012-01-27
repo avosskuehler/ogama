@@ -11,7 +11,7 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace VectorGraphics.CustomTypeConverter
+namespace VectorGraphics.Tools.CustomTypeConverter
 {
   using System;
   using System.Collections.Generic;
@@ -350,14 +350,14 @@ namespace VectorGraphics.CustomTypeConverter
           if (startCap == LineCap.Custom)
           {
             string[] parts5 = parts[5].Trim().Split(new string[] { ":" }, StringSplitOptions.RemoveEmptyEntries);
-            AdjustableArrowCap customStartCap = new AdjustableArrowCap(Single.Parse(parts5[1]), Single.Parse(parts5[2]));
+            AdjustableArrowCap customStartCap = new AdjustableArrowCap(float.Parse(parts5[1]), float.Parse(parts5[2]));
             newValue.CustomStartCap = customStartCap;
           }
 
           if (endCap == LineCap.Custom)
           {
             string[] parts6 = parts[6].Trim().Split(new string[] { ":" }, StringSplitOptions.RemoveEmptyEntries);
-            AdjustableArrowCap customEndCap = new AdjustableArrowCap(Single.Parse(parts6[1]), Single.Parse(parts6[2]));
+            AdjustableArrowCap customEndCap = new AdjustableArrowCap(float.Parse(parts6[1]), float.Parse(parts6[2]));
             newValue.CustomEndCap = customEndCap;
           }
         }
@@ -503,7 +503,7 @@ namespace VectorGraphics.CustomTypeConverter
           style,
           unit,
           byte.Parse(properties[4]),
-          Boolean.Parse(properties[5]));
+          bool.Parse(properties[5]));
 
         return newFont;
       }

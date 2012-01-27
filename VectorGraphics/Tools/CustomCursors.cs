@@ -70,8 +70,8 @@ namespace VectorGraphics.Tools
     /// <summary>
     /// This is a cursor for creating images.
     /// </summary>
-    private static Cursor image = new Cursor(Assembly.GetAssembly(typeof(VGElement)).
-        GetManifestResourceStream("VectorGraphics.Cursors.Image.Cur"));
+    private static Cursor image = new Cursor(
+      Assembly.GetAssembly(typeof(VGElement)).GetManifestResourceStream("VectorGraphics.Cursors.Image.Cur"));
 
     /// <summary>
     /// This is a cursor for creating sounds.

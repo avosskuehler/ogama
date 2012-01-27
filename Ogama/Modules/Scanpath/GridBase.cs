@@ -11,13 +11,8 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Scanpaths
+namespace Ogama.Modules.Scanpath
 {
-  using System;
-  using System.Collections.Generic;
-  using System.Drawing;
-  using System.Text;
-
   /// <summary>
   /// The type of picture parts that should be used
   /// for scanpath algorithm.

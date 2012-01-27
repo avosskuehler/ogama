@@ -11,17 +11,16 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Common
+namespace Ogama.Modules.Common.CustomRenderer
 {
   using System;
-  using System.Collections.Generic;
   using System.Drawing;
   using System.Drawing.Drawing2D;
-  using System.Text;
-  using System.Windows.Forms;
-  using Ogama.Modules.Common;
+
+  using Ogama.Modules.Common.SlideCollections;
+
   using OgamaControls;
-  using VectorGraphics;
+
   using VectorGraphics.Elements;
 
   /// <summary>

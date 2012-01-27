@@ -22,8 +22,8 @@ namespace VectorGraphics.Elements
   using System.Windows.Forms;
   using System.Xml.Serialization;
 
-  using VectorGraphics.CustomTypeConverter;
   using VectorGraphics.Tools;
+  using VectorGraphics.Tools.CustomTypeConverter;
 
   /// <summary>
   /// Inherited from <see cref="VGElement"/>. 
@@ -408,7 +408,7 @@ namespace VectorGraphics.Elements
     /// Gets or sets the font for the weighting values.
     /// </summary>
     /// <value>A <see cref="Font"/> for the weighting values.</value>
-    [XmlIgnoreAttribute()]
+    [XmlIgnoreAttribute]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     [Category("Appearance")]
     [Description("The Font for the weighting values.")]
@@ -487,7 +487,7 @@ namespace VectorGraphics.Elements
     /// Gets or sets the font color for the weighting values.
     /// </summary>
     /// <value>A <see cref="Color"/> for the weighting values.</value>
-    [XmlIgnoreAttribute()]
+    [XmlIgnoreAttribute]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     [Category("Appearance")]
     [Description("The font color for the weighting values.")]

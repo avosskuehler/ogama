@@ -27,13 +27,20 @@ namespace Ogama.Modules.Replay
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.CustomEventArgs;
+  using Ogama.Modules.Common.FormTemplates;
+  using Ogama.Modules.Common.Tools;
+  using Ogama.Modules.Common.TrialEvents;
+  using Ogama.Modules.Common.Types;
+
   using OgamaControls;
 
   using VectorGraphics.Canvas;
-  using VectorGraphics.CustomEventArgs;
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
   using VectorGraphics.StopConditions;
   using VectorGraphics.Tools;
+  using VectorGraphics.Tools.CustomEventArgs;
 
   /// <summary>
   /// Derived from <see cref="Picture"/>. 
@@ -2391,7 +2398,10 @@ namespace Ogama.Modules.Replay
     private int GetSynchronizedSampleCount(long timeInMS)
     {
       // Skip if there is no data
-      if (this.replayTable == null) { return 0; }
+      if (this.replayTable == null)
+      {
+        return 0;
+      }
 
       // Get number of sample data rows.
       int rowsCount = this.replayTable.Rows.Count;

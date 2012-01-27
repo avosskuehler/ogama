@@ -11,11 +11,11 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.ImportExport
+namespace Ogama.Modules.ImportExport.AOIData
 {
   using System;
-  using System.Collections.Generic;
-  using System.Text;
+
+  using Ogama.Modules.ImportExport.Common;
 
   /// <summary>
   /// List of settings that will be used while importing AOI data.

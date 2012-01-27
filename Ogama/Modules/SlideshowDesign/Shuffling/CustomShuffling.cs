@@ -11,11 +11,9 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.SlideshowDesign
+namespace Ogama.Modules.SlideshowDesign.Shuffling
 {
   using System;
-  using System.Collections.Generic;
-  using System.Text;
 
   /// <summary>
   /// This class defines a specialized custom shuffling for the slideshow

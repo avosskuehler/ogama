@@ -20,6 +20,8 @@ namespace Ogama.Modules.Recording.SMIInterface
 
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.CustomEventArgs;
+  using Ogama.Modules.Recording.Dialogs;
   using Ogama.Modules.Recording.TrackerBase;
 
   /// <summary>

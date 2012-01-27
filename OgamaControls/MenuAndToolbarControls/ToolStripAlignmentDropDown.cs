@@ -20,10 +20,11 @@ using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
 using VectorGraphics;
-using VectorGraphics.CustomTypeConverter;
 
 namespace OgamaControls
 {
+  using VectorGraphics.Tools.CustomTypeConverter;
+
   /// <summary>
   /// Class for a toolstrip hostable color drop down control
   /// </summary>

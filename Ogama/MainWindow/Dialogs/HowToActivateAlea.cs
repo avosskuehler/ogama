@@ -11,7 +11,7 @@
 // <author>Martin Werner</author>
 // <email>martin.werner@alea-technologies.de</email>
 
-namespace Ogama.MainWindow
+namespace Ogama.MainWindow.Dialogs
 {
   using System;
   using System.Windows.Forms;

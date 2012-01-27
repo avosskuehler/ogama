@@ -18,6 +18,9 @@ namespace Ogama.MainWindow
   using System.Text;
   using System.Windows.Forms;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.FormTemplates;
+  using Ogama.Modules.Scanpath;
+
   using OgamaControls;
 
   /// <summary>
@@ -399,7 +402,7 @@ namespace Ogama.MainWindow
         bool found = false;
         foreach (Form form in this.MdiChildren)
         {
-          if (form is Modules.Scanpaths.ScanpathsModule)
+          if (form is ScanpathsModule)
           {
             form.Select();
             found = true;
@@ -777,8 +780,8 @@ namespace Ogama.MainWindow
     /// otherwise <strong>false</strong>.</returns>
     private bool CreateScanpathsView()
     {
-      Ogama.Modules.Scanpaths.ScanpathsModule objfrmScanpaths =
-        new Ogama.Modules.Scanpaths.ScanpathsModule();
+      ScanpathsModule objfrmScanpaths =
+        new ScanpathsModule();
 
       if (objfrmScanpaths == null)
       {

@@ -6,10 +6,11 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using VectorGraphics;
-using VectorGraphics.CustomEventArgs;
 
 namespace OgamaControls.Dialogs
 {
+  using VectorGraphics.Tools.CustomEventArgs;
+
   /// <summary>
   /// Dialog for selecting pen style.
   /// i.e. pen style, thickness and color

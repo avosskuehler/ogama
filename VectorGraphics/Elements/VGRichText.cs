@@ -21,8 +21,8 @@ namespace VectorGraphics.Elements
   using System.Windows.Forms;
 
   using VectorGraphics.Controls;
-  using VectorGraphics.CustomTypeConverter;
-  using VectorGraphics.Win32;
+  using VectorGraphics.Tools.CustomTypeConverter;
+  using VectorGraphics.Tools.Win32;
 
   /// <summary>
   /// Inherited from <see cref="VGElement"/>. 

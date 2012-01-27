@@ -13,6 +13,8 @@
 
 namespace VectorGraphics.Canvas
 {
+  using VectorGraphics.Controls.Timer;
+
   partial class Picture
   {
     /// <summary> 
@@ -44,7 +46,7 @@ namespace VectorGraphics.Canvas
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
-      this.tmrForeground = new VectorGraphics.Controls.MultimediaTimer(this.components);
+      this.tmrForeground = new MultimediaTimer(this.components);
       this.tmrBackground = new System.Windows.Forms.Timer(this.components);
       this.SuspendLayout();
       // 
@@ -69,7 +71,7 @@ namespace VectorGraphics.Canvas
 
     #endregion
 
-    private VectorGraphics.Controls.MultimediaTimer tmrForeground;
+    private MultimediaTimer tmrForeground;
     private System.Windows.Forms.Timer tmrBackground;
   }
 }

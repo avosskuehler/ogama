@@ -1,4 +1,4 @@
-// <copyright file="RecordModule.cs" company="FU Berlin">
+﻿// <copyright file="RecordModule.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
 // Copyright (C) 2010 Adrian Voßkühler  
@@ -23,33 +23,37 @@ namespace Ogama.Modules.Recording
   using System.Linq;
   using System.Threading;
   using System.Windows.Forms;
-
   using GTCommons.Events;
-
   using GTHardware.Cameras.PS3Eye;
-
   using Ogama.DataSet;
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.CustomEventArgs;
+  using Ogama.Modules.Common.FormTemplates;
+  using Ogama.Modules.Common.SlideCollections;
+  using Ogama.Modules.Common.Tools;
+  using Ogama.Modules.Common.TrialEvents;
+  using Ogama.Modules.Common.Types;
   using Ogama.Modules.Fixations;
-  using Ogama.Modules.ImportExport;
-  using Ogama.Modules.Recording.ASLInterface;
+  using Ogama.Modules.ImportExport.Common;
   using Ogama.Modules.Recording.AleaInterface;
+  using Ogama.Modules.Recording.ASLInterface;
   using Ogama.Modules.Recording.Dialogs;
   using Ogama.Modules.Recording.GazegroupInterface;
+  using Ogama.Modules.Recording.MirametrixInterface;
   using Ogama.Modules.Recording.MouseOnlyInterface;
+  using Ogama.Modules.Recording.Presenter;
   using Ogama.Modules.Recording.SMIInterface;
   using Ogama.Modules.Recording.TobiiInterface;
-  using Ogama.Modules.Recording.MirametrixInterface;
   using Ogama.Modules.Recording.TrackerBase;
   using Ogama.Properties;
   using OgamaControls;
-
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
   using VectorGraphics.StopConditions;
   using VectorGraphics.Tools;
-  using VectorGraphics.Triggers;
+  using VectorGraphics.Tools.Trigger;
 
   /// <summary>
   /// Derived from <see cref="FormWithPicture"/>.

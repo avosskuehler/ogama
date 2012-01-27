@@ -6,11 +6,12 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using VectorGraphics;
-using VectorGraphics.CustomEventArgs;
 using VectorGraphics.Elements;
 
 namespace OgamaControls
 {
+  using VectorGraphics.Tools.CustomEventArgs;
+
   /// <summary>
   /// This user control is intended to show a selection dialog for cursor.
   /// Its <see cref="CursorStyleChanged"/> event notifys listeners.

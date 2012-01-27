@@ -27,6 +27,7 @@ namespace VectorGraphics.Elements
   using Microsoft.VisualStudio.OLE.Interop;
 
   using VectorGraphics.Controls;
+  using VectorGraphics.Controls.Flash;
   using VectorGraphics.Tools;
 
   /// <summary>
@@ -47,16 +48,6 @@ namespace VectorGraphics.Elements
     // Defining Variables, Enumerations, Events                                  //
     ///////////////////////////////////////////////////////////////////////////////
     #region FIELDS
-
-    /// <summary>
-    /// Saves the filename without path of the flash movie.
-    /// </summary>
-    private string filename;
-
-    /// <summary>
-    /// Saves the path to the file for this flash movie.
-    /// </summary>
-    private string path;
 
     /// <summary>
     /// A <see cref="Matrix"/> with the current graphics transformation.
@@ -134,8 +125,8 @@ namespace VectorGraphics.Elements
       null)
     {
       this.IntializeFields();
-      this.path = newPath;
-      this.filename = newFilename;
+      this.Filepath = newPath;
+      this.Filename = newFilename;
     }
 
     /// <summary>
@@ -158,8 +149,8 @@ namespace VectorGraphics.Elements
       oldFlash.Sound)
     {
       this.IntializeFields();
-      this.filename = oldFlash.Filename;
-      this.path = oldFlash.Filepath;
+      this.Filename = oldFlash.Filename;
+      this.Filepath = oldFlash.Filepath;
     }
 
     /// <summary>
@@ -235,34 +226,23 @@ namespace VectorGraphics.Elements
     /// Gets or sets the filename for the flash movie.
     /// </summary>
     /// <value>A <see cref="string"/> with the filename for the flash movie.</value>
-    [Category("Content")]
-    [Description("The file name without path to the flash movie (.swf) file.")]
-    public string Filename
-    {
-      get { return this.filename; }
-      set { this.filename = value; }
-    }
+    [Category("Content"), Description("The file name without path to the flash movie (.swf) file.")]
+    public string Filename { get; set; }
 
     /// <summary>
     /// Gets or sets the filenames path for this flash movie.
     /// </summary>
     /// <value>A <see cref="string"/> with the flash movies path.</value>
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    [Browsable(false)]
-    [XmlIgnore()]
-    public string Filepath
-    {
-      get { return this.path; }
-      set { this.path = value; }
-    }
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false), XmlIgnore]
+    public string Filepath { get; set; }
 
     /// <summary>
     /// Gets the audio filename with path.
     /// </summary>
-    [XmlIgnore()]
+    [XmlIgnore]
     public string FullFilename
     {
-      get { return Path.Combine(this.path, this.filename); }
+      get { return Path.Combine(this.Filepath, this.Filename); }
     }
 
     /// <summary>
@@ -499,7 +479,7 @@ namespace VectorGraphics.Elements
       sb.Append("VGFlash, Name: ");
       sb.Append(Name);
       sb.Append(" ; '");
-      sb.Append(this.filename);
+      sb.Append(this.Filename);
       return sb.ToString();
     }
 
@@ -513,7 +493,7 @@ namespace VectorGraphics.Elements
     {
       StringBuilder sb = new StringBuilder();
       sb.Append("Flash movie ");
-      string text = this.filename;
+      string text = this.Filename;
       sb.Append(text.Substring(0, text.Length > 12 ? Math.Max(12, text.Length - 1) : text.Length));
       sb.Append(" ...");
       return sb.ToString();
@@ -649,8 +629,8 @@ namespace VectorGraphics.Elements
       Point scaledLocation = Point.Round(mousePts[1]);
 
       // Grab IViewObject interface from the ocx.  
-      Interfaces.IViewObject viewObject =
-        (Interfaces.IViewObject)this.flashControl.GetOcx();
+      Tools.Interfaces.IViewObject viewObject =
+        (Tools.Interfaces.IViewObject)this.flashControl.GetOcx();
 
       // Check for success
       if (viewObject == null)
@@ -694,8 +674,8 @@ namespace VectorGraphics.Elements
     {
       this.flashControl = new AxFlashControl();
       this.currentTransform = new Matrix();
-      this.path = string.Empty;
-      this.filename = string.Empty;
+      this.Filepath = string.Empty;
+      this.Filename = string.Empty;
       this.disposing = false;
     }
 

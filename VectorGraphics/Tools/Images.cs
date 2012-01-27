@@ -22,7 +22,7 @@ namespace VectorGraphics.Tools
   using System.Text;
   using System.Windows.Forms;
 
-  using VectorGraphics.Win32;
+  using VectorGraphics.Tools.Win32;
 
   /// <summary>
   /// A class for creating gray scale images and other image related stuff.

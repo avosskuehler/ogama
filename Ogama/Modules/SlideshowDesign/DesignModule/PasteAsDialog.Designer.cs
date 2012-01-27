@@ -1,5 +1,7 @@
-﻿namespace Ogama.Modules.SlideshowDesign
+﻿namespace Ogama.Modules.SlideshowDesign.DesignModule
 {
+  using Ogama.Modules.Common.Controls;
+
   partial class PasteAsDialog
   {
     /// <summary>
@@ -13,9 +15,9 @@
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      if (disposing && (components != null))
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -31,7 +33,7 @@
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PasteAsDialog));
       this.btnOK = new System.Windows.Forms.Button();
       this.btnCancel = new System.Windows.Forms.Button();
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       this.rdbTarget = new System.Windows.Forms.RadioButton();
       this.rdbStimulus = new System.Windows.Forms.RadioButton();
       this.label1 = new System.Windows.Forms.Label();
@@ -153,7 +155,7 @@
 
     private System.Windows.Forms.Button btnOK;
     private System.Windows.Forms.Button btnCancel;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
     private System.Windows.Forms.RadioButton rdbTarget;
     private System.Windows.Forms.RadioButton rdbStimulus;
     private System.Windows.Forms.Label label1;

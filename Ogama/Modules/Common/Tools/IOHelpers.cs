@@ -11,15 +11,10 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Common
+namespace Ogama.Modules.Common.Tools
 {
   using System;
-  using System.Collections.Generic;
-  using System.Drawing;
-  using System.Drawing.Imaging;
   using System.IO;
-  using System.Text;
-  using System.Windows.Forms;
 
   /// <summary>
   /// Class for import and export functionality.

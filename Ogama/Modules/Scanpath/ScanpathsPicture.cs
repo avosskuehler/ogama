@@ -11,24 +11,20 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Scanpaths
+namespace Ogama.Modules.Scanpath
 {
   using System;
   using System.Collections.Generic;
   using System.ComponentModel;
   using System.Data;
   using System.Drawing;
-  using System.Drawing.Drawing2D;
-  using System.Drawing.Imaging;
-  using System.Text;
-  using System.Windows.Forms;
 
-  using Ogama.Modules.AttentionMap;
-  using Ogama.Modules.Common;
-  using OgamaControls;
+  using Ogama.Modules.Common.PictureTemplates;
+  using Ogama.Modules.Common.Types;
 
-  using VectorGraphics.CustomEventArgs;
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
+  using VectorGraphics.Tools.CustomEventArgs;
 
   /// <summary>
   /// Derived from <see cref="PictureWithFixations"/>. 
@@ -484,7 +480,7 @@ namespace Ogama.Modules.Scanpaths
           this.DrawFixationsForCurrentSubject();
         }
 
-        ApplyAttentionMap(SampleType.Both);
+        this.ApplyAttentionMap(SampleType.Both);
       }
 
       this.DrawForeground(resetPicture);
@@ -678,7 +674,10 @@ namespace Ogama.Modules.Scanpaths
           break;
         case GridBase.AOIs:
           // Skip if no data available
-          if (this.AOITable == null) { return; }
+          if (this.AOITable == null)
+          {
+            return;
+          }
 
           int aoiCount = this.AOITable.Rows.Count;
           for (int i = 0; i < aoiCount; i++)
@@ -714,7 +713,10 @@ namespace Ogama.Modules.Scanpaths
           break;
         case GridBase.AOIs:
           // Skip if no data available
-          if (this.AOITable == null) { return; }
+          if (this.AOITable == null)
+          {
+            return;
+          }
 
           int aoiCount = this.AOITable.Rows.Count;
           if (aoiCount > 26)

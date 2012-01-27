@@ -11,12 +11,11 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Common
+namespace Ogama.Modules.Common.Types
 {
   using System;
   using System.Collections.Generic;
   using System.Runtime.Serialization;
-  using System.Text;
   using System.Xml.Serialization;
 
   /// <summary>

@@ -11,11 +11,10 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Common
+namespace Ogama.Modules.Common.SlideCollections
 {
   using System;
   using System.Collections.Generic;
-  using System.Text;
 
   /// <summary>
   /// This class derives from <see cref="List{Trial}"/> and

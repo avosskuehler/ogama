@@ -1,5 +1,9 @@
 namespace Ogama.Modules.AOI
 {
+  using Ogama.Modules.Common.Controls;
+
+  using VectorGraphics.Tools.CustomEventArgs;
+
   partial class AOIModule
   {
     /// <summary>
@@ -105,7 +109,7 @@ namespace Ogama.Modules.AOI
       this.btnSeekNextSlide = new System.Windows.Forms.ToolStripButton();
       this.btnSeekPreviousSlide = new System.Windows.Forms.ToolStripButton();
       this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-      this.trialTimeLine = new Ogama.Modules.Common.TrialTimeLine(this.components);
+      this.trialTimeLine = new TrialTimeLine(this.components);
       this.toolStrip1 = new System.Windows.Forms.ToolStrip();
       this.cbbTrial = new System.Windows.Forms.ToolStripComboBox();
       this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -1014,9 +1018,9 @@ namespace Ogama.Modules.AOI
       this.aoiPicture.TabIndex = 0;
       this.aoiPicture.TabStop = false;
       this.aoiPicture.ZoomFactor = 0F;
-      this.aoiPicture.ShapeChanged += new VectorGraphics.CustomEventArgs.ShapeEventHandler(this.aoiPicture_ShapeChanged);
-      this.aoiPicture.ShapeDeleted += new VectorGraphics.CustomEventArgs.ShapeEventHandler(this.aoiPicture_ShapeDeleted);
-      this.aoiPicture.ShapeAdded += new VectorGraphics.CustomEventArgs.ShapeEventHandler(this.aoiPicture_ShapeAdded);
+      this.aoiPicture.ShapeChanged += new ShapeEventHandler(this.aoiPicture_ShapeChanged);
+      this.aoiPicture.ShapeDeleted += new ShapeEventHandler(this.aoiPicture_ShapeDeleted);
+      this.aoiPicture.ShapeAdded += new ShapeEventHandler(this.aoiPicture_ShapeAdded);
       // 
       // toolStrip2
       // 
@@ -1489,7 +1493,7 @@ namespace Ogama.Modules.AOI
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
     private System.Windows.Forms.SplitContainer splitContainer1;
     private System.Windows.Forms.ToolStrip toolStrip2;
-    private Ogama.Modules.Common.TrialTimeLine trialTimeLine;
+    private TrialTimeLine trialTimeLine;
     private System.Windows.Forms.ToolStripButton btnSeekNextSlide;
     private System.Windows.Forms.ToolStripButton btnSeekPreviousSlide;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;

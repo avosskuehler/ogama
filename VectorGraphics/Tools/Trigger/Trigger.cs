@@ -11,12 +11,9 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace VectorGraphics.Triggers
+namespace VectorGraphics.Tools.Trigger
 {
   using System;
-  using System.Collections.Generic;
-  using System.Text;
-  using System.Xml.Serialization;
 
   /// <summary>
   /// Class to save settings for triggers.
@@ -246,4 +243,3 @@ namespace VectorGraphics.Triggers
     #endregion //HELPER
   }
 }
-

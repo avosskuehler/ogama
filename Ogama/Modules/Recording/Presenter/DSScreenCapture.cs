@@ -11,16 +11,20 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Recording
+namespace Ogama.Modules.Recording.Presenter
 {
   using System;
   using System.Drawing;
   using System.IO;
   using System.Runtime.InteropServices;
   using System.Windows.Forms;
+
   using DirectShowLib;
   using DirectShowLib.DMO;
+
   using Ogama.ExceptionHandling;
+  using Ogama.Modules.Common.Tools;
+
   using OgamaControls;
 
   /// <summary>
@@ -271,7 +275,7 @@ namespace Ogama.Modules.Recording
     {
       set
       {
-        if (Common.SecondaryScreen.SystemHasSecondaryScreen())
+        if (SecondaryScreen.SystemHasSecondaryScreen())
         {
           this.previewWindow = value;
 
@@ -595,7 +599,7 @@ namespace Ogama.Modules.Recording
         hr = this.graphBuilder.AddFilter(this.smartTeeFilter, "Smart Tee");
         DsError.ThrowExceptionForHR(hr);
 
-        if (Common.SecondaryScreen.SystemHasSecondaryScreen())
+        if (SecondaryScreen.SystemHasSecondaryScreen())
         {
           // Add a DMO Wrapper Filter
           this.dmoFilter = (IBaseFilter)new DMOWrapperFilter();
@@ -630,14 +634,14 @@ namespace Ogama.Modules.Recording
           out this.fileWriterFilter);
         DsError.ThrowExceptionForHR(hr);
         
-        // Disable overwrite
-        // hr = this.fileWriterFilter.SetMode(AMFileSinkFlags.None);
-        // DsError.ThrowExceptionForHR(hr);
+        //// Disable overwrite
+        //// hr = this.fileWriterFilter.SetMode(AMFileSinkFlags.None);
+        //// DsError.ThrowExceptionForHR(hr);
 
         hr = this.captureGraphBuilder.AllocCapFile(this.tempFilename, 10000000);
         DsError.ThrowExceptionForHR(hr);
 
-        if (Common.SecondaryScreen.SystemHasSecondaryScreen())
+        if (SecondaryScreen.SystemHasSecondaryScreen())
         {
           hr = this.captureGraphBuilder.RenderStream(
             null,
