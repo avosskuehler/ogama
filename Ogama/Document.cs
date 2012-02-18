@@ -234,20 +234,20 @@ namespace Ogama
       SqlConnection connectionString = new SqlConnection(Document.ActiveDocument.ExperimentSettings.ServerConnectionString);
       ServerConnection connection = new ServerConnection(connectionString);
       Server sqlServer = new Server(connection);
-      try
+       try
       {
         // If there are open connections set offline and online to kill all 
         // active connections, they are not used anymore.
         int connections = sqlServer.GetActiveDBConnectionCount(Document.ActiveDocument.ExperimentSettings.Name);
         if (connections > 0)
         {
-          string query = "ALTER DATABASE \"" + Document.ActiveDocument.ExperimentSettings.Name +
+           string query = "ALTER DATABASE \"" + Document.ActiveDocument.ExperimentSettings.Name +
             "\" SET OFFLINE WITH ROLLBACK IMMEDIATE;";
           Queries.ExecuteSQLCommand(query);
           query = "ALTER DATABASE \"" + Document.ActiveDocument.ExperimentSettings.Name +
             "\" SET ONLINE;";
           Queries.ExecuteSQLCommand(query);
-          connections = sqlServer.GetActiveDBConnectionCount(Document.ActiveDocument.ExperimentSettings.Name);
+          //connections = sqlServer.GetActiveDBConnectionCount(Document.ActiveDocument.ExperimentSettings.Name);
         }
 
         // Close database connection
