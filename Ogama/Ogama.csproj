@@ -110,7 +110,7 @@
     <DocumentationFile>..\Release64\Docs\Ogama.XML</DocumentationFile>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
@@ -187,13 +187,13 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.XML" />
     <Reference Include="Tobii.Eyetracking.Sdk, Version=3.0.2.0, Culture=neutral, PublicKeyToken=8f83ae3e0f6e46ef, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -201,6 +201,13 @@
     </Reference>
     <Reference Include="WindowsBase">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="WPFToolkit">
+      <HintPath>..\Libs\Managed\WPFToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="WPFVisifire.Charts">
+      <HintPath>..\Libs\Managed\WPFVisifire.Charts.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -361,6 +368,16 @@
     <Compile Include="Modules\Common\Types\SampleValidity.cs" />
     <Compile Include="Modules\Common\Types\StringEnum.cs" />
     <Compile Include="Modules\Common\Types\StringValueAttribute.cs" />
+    <Compile Include="Modules\Diagrams\ChartType.cs" />
+    <Compile Include="Modules\Diagrams\DiagramsControl.xaml.cs">
+      <DependentUpon>DiagramsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Diagrams\DiagramsModule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Diagrams\DiagramsModule.Designer.cs">
+      <DependentUpon>DiagramsModule.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Fixations\Fixation.cs" />
     <Compile Include="Modules\Fixations\FixationCalculation.cs" />
     <Compile Include="Modules\Fixations\ExportOptionsDialog.cs">
@@ -1104,6 +1121,9 @@
       <DependentUpon>HelpDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Diagrams\DiagramsModule.resx">
+      <DependentUpon>DiagramsModule.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Fixations\ExportOptionsDialog.resx">
       <DependentUpon>ExportOptionsDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1428,6 +1448,7 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Help\DIA.rtf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -1629,6 +1650,8 @@
     <None Include="Resources\ASLmire_1024x768.bmp" />
     <None Include="Resources\ASLmire_1280x1024.bmp" />
     <None Include="Resources\ASLmire_defaultSize.bmp" />
+    <None Include="Resources\bar_chart_32.png" />
+    <None Include="Resources\bar_chart_16.ico" />
     <Content Include="Resources\MirametrixLogo.png" />
     <Content Include="Resources\MirametrixLogo_150_33.png" />
     <Content Include="Resources\Mirametrix_S2.png" />
@@ -1867,6 +1890,18 @@
       <Isolated>False</Isolated>
       <Private>True</Private>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Modules\Diagrams\DiagramsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- 

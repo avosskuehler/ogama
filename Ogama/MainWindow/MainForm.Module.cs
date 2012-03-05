@@ -261,6 +261,44 @@ namespace Ogama.MainWindow
 
     /// <summary>
     /// The <see cref="Control.Click"/> event handler
+    /// for the <see cref="ToolStripButton"/> <see cref="btnDIA"/>
+    /// Creates a new diagrams or activates an existing one.
+    /// </summary>
+    /// <param name="sender">Source of the event</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void btnDIA_Click(object sender, EventArgs e)
+    {
+        this.CreateOrActivateDiagramsModule();
+    }
+
+    /// <summary>
+    /// Creates a new Diagrams module. If there is already one open
+    /// it is brought to top.
+    /// </summary>
+    private void CreateOrActivateDiagramsModule()
+    {
+        if (Document.ActiveDocument != null)
+        {
+            bool found = false;
+            foreach (Form form in this.MdiChildren)
+            {
+                if (form is Modules.AOI.AOIModule)
+                {
+                    form.Select();
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                this.CreateDiagramsView();
+            }
+        }
+    }
+
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler
     /// for the <see cref="ToolStripButton"/> <see cref="btnSAL"/>
     /// Creates a new saliency module or activates an existing one.
     /// </summary>
@@ -609,6 +647,38 @@ namespace Ogama.MainWindow
         objfrmAOI.Show();
         return true;
       }
+    }
+
+    /// <summary>
+    /// Creates and displays new diagrams module. 
+    /// Sets help information rtf and binds events.
+    /// </summary>
+    /// <returns><strong>True</strong>, if successful,
+    /// otherwise <strong>false</strong>.</returns>
+    private bool CreateDiagramsView()
+    {
+        Ogama.Modules.Diagrams.DiagramsModule objfrmAOI =
+        new Ogama.Modules.Diagrams.DiagramsModule();
+
+        if (objfrmAOI == null)
+        {
+            MessageBox.Show(
+              "Couldn't create view",
+                Application.ProductName,
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Exclamation);
+            return false;
+        }
+        else
+        {
+            objfrmAOI.MdiParent = this;
+            objfrmAOI.HelpRTF = Application.StartupPath + @"\Help\DIA.rtf";
+            objfrmAOI.FormClosing += new FormClosingEventHandler(this.module_FormClosing);
+            objfrmAOI.Activated += new EventHandler(this.module_Activated);
+            objfrmAOI.HelpRequested += new HelpEventHandler(this.module_HelpButtonClicked);
+            objfrmAOI.Show();
+            return true;
+        }
     }
 
     /// <summary>
