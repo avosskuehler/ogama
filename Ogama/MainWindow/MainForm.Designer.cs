@@ -90,6 +90,7 @@ namespace Ogama.MainWindow
             this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelpSource = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelpHowToTobii = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuHelpHowToMirametrix = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelpHowToAlea = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelpHowToAsl = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelpHowToSMI = new System.Windows.Forms.ToolStripMenuItem();
@@ -109,7 +110,7 @@ namespace Ogama.MainWindow
             this.imlStimuli = new System.Windows.Forms.ImageList(this.components);
             this.imlTreeView = new System.Windows.Forms.ImageList(this.components);
             this.imlContextPanel = new System.Windows.Forms.ImageList(this.components);
-            this.contextPanel = new ContextPanel.ContextPanel();
+            this.contextPanel = new Ogama.MainWindow.ContextPanel.ContextPanel();
             this.bgwLoad = new System.ComponentModel.BackgroundWorker();
             this.fbdExperiment = new System.Windows.Forms.FolderBrowserDialog();
             this.btnRPL = new System.Windows.Forms.ToolStripButton();
@@ -126,7 +127,7 @@ namespace Ogama.MainWindow
             this.btnFIX = new System.Windows.Forms.ToolStripButton();
             this.btnSTA = new System.Windows.Forms.ToolStripButton();
             this.btnAOI = new System.Windows.Forms.ToolStripButton();
-            this.mnuHelpHowToMirametrix = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnDIA = new System.Windows.Forms.ToolStripButton();
             this.mnsMain.SuspendLayout();
             this.stsMain.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -684,6 +685,14 @@ namespace Ogama.MainWindow
             this.mnuHelpHowToTobii.Text = "HowTo: Install Tobii Recording ...";
             this.mnuHelpHowToTobii.Click += new System.EventHandler(this.mnuHelpHowToTobii_Click);
             // 
+            // mnuHelpHowToMirametrix
+            // 
+            this.mnuHelpHowToMirametrix.Image = global::Ogama.Properties.Resources.Mirametrix_S2;
+            this.mnuHelpHowToMirametrix.Name = "mnuHelpHowToMirametrix";
+            this.mnuHelpHowToMirametrix.Size = new System.Drawing.Size(307, 22);
+            this.mnuHelpHowToMirametrix.Text = "HowTo: Install Mirametrix S2 Recording ...";
+            this.mnuHelpHowToMirametrix.Click += new System.EventHandler(this.mnuHelpHowToMirametrix_Click);
+            // 
             // mnuHelpHowToAlea
             // 
             this.mnuHelpHowToAlea.Image = global::Ogama.Properties.Resources.Alea_16_16;
@@ -878,7 +887,8 @@ namespace Ogama.MainWindow
             this.btnDTB,
             this.btnFIX,
             this.btnSTA,
-            this.btnAOI});
+            this.btnAOI,
+            this.btnDIA});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -984,13 +994,15 @@ namespace Ogama.MainWindow
             this.btnAOI.Text = "Shows areas of interest module";
             this.btnAOI.Click += new System.EventHandler(this.btnAOI_Click);
             // 
-            // mnuHelpHowToMirametrix
+            // btnDIA
             // 
-            this.mnuHelpHowToMirametrix.Image = global::Ogama.Properties.Resources.Mirametrix_S2;
-            this.mnuHelpHowToMirametrix.Name = "mnuHelpHowToMirametrix";
-            this.mnuHelpHowToMirametrix.Size = new System.Drawing.Size(307, 22);
-            this.mnuHelpHowToMirametrix.Text = "HowTo: Install Mirametrix S2 Recording ...";
-            this.mnuHelpHowToMirametrix.Click += new System.EventHandler(this.mnuHelpHowToMirametrix_Click);
+            this.btnDIA.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnDIA.Image = global::Ogama.Properties.Resources.bar_chart_32;
+            this.btnDIA.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDIA.Name = "btnDIA";
+            this.btnDIA.Size = new System.Drawing.Size(23, 22);
+            this.btnDIA.Text = "Shows diagrams module";
+            this.btnDIA.Click += new System.EventHandler(this.btnDIA_Click);
             // 
             // MainForm
             // 
@@ -1121,6 +1133,7 @@ namespace Ogama.MainWindow
       private System.Windows.Forms.ToolStripMenuItem mnuHelpHowToITU;
       private System.Windows.Forms.ToolStripMenuItem mnuHelpHowToAsl;
       private System.Windows.Forms.ToolStripMenuItem mnuHelpHowToMirametrix;
+      private System.Windows.Forms.ToolStripButton btnDIA;
     }
 }
 
