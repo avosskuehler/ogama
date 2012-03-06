@@ -144,7 +144,8 @@ namespace Ogama.Modules.SlideshowDesign.DesignModule.StimuliDialogs
           new Size(Document.ActiveDocument.ExperimentSettings.WidthStimulusScreen, Document.ActiveDocument.ExperimentSettings.HeightStimulusScreen),
           VGStyleGroup.AOI_NORMAL,
           this.pbcImageBorder.NewName,
-          string.Empty);
+          string.Empty,
+          false);
 
         image.Sound = this.audioControl.Sound;
         return image;

@@ -1008,8 +1008,12 @@ namespace Ogama.Modules.Recording.Presenter
           // Create VGScrollImageSlide
           var newWebpageSlide = (Slide)this.shownSlideContainer.Slide.Clone();
           newWebpageSlide.Modified = true;
-          newWebpageSlide.Thumb.Dispose();
-          newWebpageSlide.Thumb = null;
+          if (!newWebpageSlide.IsThumbNull)
+          {
+            newWebpageSlide.Thumb.Dispose();
+            newWebpageSlide.Thumb = null;
+          }
+
           newWebpageSlide.Name = newName;
           newWebpageSlide.ActiveXStimuli.Clear();
           newWebpageSlide.VGStimuli.Clear();

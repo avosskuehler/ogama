@@ -820,7 +820,8 @@ namespace Ogama.DataSet
           Document.ActiveDocument.PresentationSize,
           VGStyleGroup.None,
           string.Empty,
-          string.Empty);
+          string.Empty,
+          false);
         newSlide.VGStimuli.Add(image);
 
         // Add trial node to slideshow

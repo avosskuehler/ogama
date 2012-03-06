@@ -357,6 +357,8 @@
     <Compile Include="Modules\Common\SlideCollections\SequencedTrial.cs" />
     <Compile Include="Modules\Common\SlideCollections\TrialCollection.cs" />
     <Compile Include="Modules\Common\SlideCollections\SlideType.cs" />
+    <Compile Include="Modules\Common\Tools\NumericComparer.cs" />
+    <Compile Include="Modules\Common\Tools\StringLogicalComparer.cs" />
     <Compile Include="Modules\Common\Types\ActiveXMode.cs" />
     <Compile Include="Modules\Common\Types\SampleValidity.cs" />
     <Compile Include="Modules\Common\Types\StringEnum.cs" />

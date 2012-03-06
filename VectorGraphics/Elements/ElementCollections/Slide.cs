@@ -183,9 +183,9 @@ namespace VectorGraphics.Elements.ElementCollections
       this.TriggerSignal = slide.TriggerSignal;
 
       // Clone thumb
-      if (slide.Thumb != null)
+      //if (slide.Thumb != null)
       {
-        this.thumb = (Image)slide.Thumb.Clone();
+        //this.thumb = (Image)slide.Thumb.Clone();
       }
 
       // Clone correct responses
@@ -308,6 +308,17 @@ namespace VectorGraphics.Elements.ElementCollections
         }
 
         return false;
+      }
+    }
+
+    [XmlIgnore]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    [Browsable(false)]
+    public bool IsThumbNull
+    {
+      get
+      {
+        return this.thumb == null;
       }
     }
 
