@@ -112,7 +112,8 @@ namespace VectorGraphics.Elements
       Size newCanvas,
       VGStyleGroup newStyleGroup,
       string newName,
-      string newElementGroup)
+      string newElementGroup,
+      bool withoutImageInMemoryCreation)
       : base(
       newShapeDrawAction,
       newPen,
@@ -130,13 +131,17 @@ namespace VectorGraphics.Elements
       this.canvas = newCanvas;
       this.alpha = newAlpha;
 
-      if (!this.CreateInternalImage())
+      if (!withoutImageInMemoryCreation)
       {
-        return;
+        if (!this.CreateInternalImage())
+        {
+          return;
+        }
+
+        var unit = new GraphicsUnit();
+        this.Bounds = this.Image.GetBounds(ref unit);
       }
 
-      GraphicsUnit unit = new GraphicsUnit();
-      this.Bounds = this.Image.GetBounds(ref unit);
       this.layout = newLayout;
       this.InitTransparencyMatrix();
     }

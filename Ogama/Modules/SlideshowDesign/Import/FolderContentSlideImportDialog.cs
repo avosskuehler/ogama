@@ -21,6 +21,7 @@ namespace Ogama.Modules.SlideshowDesign.Import
 
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common.SlideCollections;
+  using Ogama.Modules.Common.Tools;
   using Ogama.Modules.SlideshowDesign.DesignModule.StimuliDialogs;
 
   using OgamaControls;
@@ -240,7 +241,7 @@ namespace Ogama.Modules.SlideshowDesign.Import
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnAddItem_Click(object sender, EventArgs e)
     {
-      if (this.cbbDesignedItem.SelectedItem != null && 
+      if (this.cbbDesignedItem.SelectedItem != null &&
         this.cbbDesignedItem.SelectedItem is VGElement)
       {
         VGElement itemToAdd = (VGElement)this.cbbDesignedItem.SelectedItem;
@@ -302,20 +303,24 @@ namespace Ogama.Modules.SlideshowDesign.Import
     /// the experiment.</returns>
     private List<Slide> GetSlides()
     {
-      List<Slide> newSlides = new List<Slide>();
+      var newSlides = new List<Slide>();
 
-      DirectoryInfo dirInfoStimuli = new DirectoryInfo(this.txbFolder.Text);
+      var dirInfoStimuli = new DirectoryInfo(this.txbFolder.Text);
       if (dirInfoStimuli.Exists)
       {
-        foreach (FileInfo file in dirInfoStimuli.GetFiles())
+        var files = dirInfoStimuli.GetFiles();
+        Array.Sort(files, new NumericComparer());
+        foreach (var file in files)
         {
-          Slide newSlide = new Slide();
-          newSlide.BackgroundColor = this.clbBackground.CurrentColor;
-          newSlide.Modified = true;
-          newSlide.MouseCursorVisible = this.chbShowMouseCursor.Checked;
-          newSlide.MouseInitialPosition = this.psbMouseCursor.CurrentPosition;
-          newSlide.Name = Path.GetFileNameWithoutExtension(file.Name);
-          newSlide.PresentationSize = Document.ActiveDocument.PresentationSize;
+          var newSlide = new Slide
+            {
+              BackgroundColor = this.clbBackground.CurrentColor,
+              Modified = true,
+              MouseCursorVisible = this.chbShowMouseCursor.Checked,
+              MouseInitialPosition = this.psbMouseCursor.CurrentPosition,
+              Name = Path.GetFileNameWithoutExtension(file.Name),
+              PresentationSize = Document.ActiveDocument.PresentationSize
+            };
 
           StopCondition stop = null;
           if (this.rdbTime.Checked)
@@ -384,21 +389,25 @@ namespace Ogama.Modules.SlideshowDesign.Import
             case ".png":
             case ".jpg":
             case ".wmf":
-              File.Copy(file.FullName, destination, true);
+              if (!File.Exists(destination))
+              {
+                File.Copy(file.FullName, destination, true);
+              }
               VGImage image = new VGImage(
-                ShapeDrawAction.None, 
-                Pens.Red, 
-                Brushes.Red, 
+                ShapeDrawAction.None,
+                Pens.Red,
+                Brushes.Red,
                 SystemFonts.MenuFont,
-                Color.Red, 
-                file.Name, 
-                Document.ActiveDocument.ExperimentSettings.SlideResourcesPath, 
+                Color.Red,
+                file.Name,
+                Document.ActiveDocument.ExperimentSettings.SlideResourcesPath,
                 ImageLayout.Stretch,
                 1f,
-                Document.ActiveDocument.PresentationSize, 
-                VGStyleGroup.None, 
+                Document.ActiveDocument.PresentationSize,
+                VGStyleGroup.None,
                 file.Name,
-                string.Empty);
+                string.Empty,
+                true);
 
               newSlide.VGStimuli.Add(image);
               newSlides.Add(newSlide);

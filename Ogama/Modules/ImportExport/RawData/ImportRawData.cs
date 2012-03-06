@@ -1045,7 +1045,6 @@ namespace Ogama.Modules.ImportExport.RawData
 
       foreach (KeyValuePair<int, int> kvp in detectionSetting.TrialSequenceToTrialIDAssignments)
       {
-        int trialSequence = kvp.Key;
         int trialID = kvp.Value;
         string file = string.Empty;
         if (detectionSetting.TrialIDToImageAssignments.ContainsKey(trialID))
@@ -1056,41 +1055,40 @@ namespace Ogama.Modules.ImportExport.RawData
         string filename = Path.GetFileNameWithoutExtension(file);
 
         // Create slide
-        StopConditionCollection stopConditions = new StopConditionCollection();
-        stopConditions.Add(new MouseStopCondition(MouseButtons.Left, true, string.Empty, null, Point.Empty));
+        var stopConditions = new StopConditionCollection
+          {
+            new MouseStopCondition(MouseButtons.Left, true, string.Empty, null, Point.Empty)
+          };
 
         VGImage stimulusImage = null;
 
         if (file != string.Empty)
         {
           stimulusImage = new VGImage(
-             ShapeDrawAction.None,
-             Pens.Black,
-             Brushes.Black,
-             SystemFonts.MenuFont,
-             Color.White,
-             Path.GetFileName(file),
-             Document.ActiveDocument.ExperimentSettings.SlideResourcesPath,
-             ImageLayout.Zoom,
-             1f,
-             Document.ActiveDocument.PresentationSize,
-             VGStyleGroup.None,
-             filename,
-             string.Empty);
-          stimulusImage.Size = Document.ActiveDocument.PresentationSize;
+            ShapeDrawAction.None,
+            Pens.Black,
+            Brushes.Black,
+            SystemFonts.MenuFont,
+            Color.White,
+            Path.GetFileName(file),
+            Document.ActiveDocument.ExperimentSettings.SlideResourcesPath,
+            ImageLayout.Zoom,
+            1f,
+            Document.ActiveDocument.PresentationSize,
+            VGStyleGroup.None,
+            filename,
+            string.Empty,
+            true)
+            {
+              Size = Document.ActiveDocument.PresentationSize
+            };
         }
 
-        Slide newSlide = new Slide(
-          filename,
-          Color.White,
-          null,
-          stopConditions,
-          null,
-          string.Empty,
-          Document.ActiveDocument.PresentationSize);
-
-        newSlide.Modified = true;
-        newSlide.MouseCursorVisible = true;
+        var newSlide = new Slide(
+          filename, Color.White, null, stopConditions, null, string.Empty, Document.ActiveDocument.PresentationSize)
+          {
+            Modified = true, MouseCursorVisible = true
+          };
 
         // Only add stimulus if an image exists
         if (file != string.Empty)
@@ -1125,7 +1123,7 @@ namespace Ogama.Modules.ImportExport.RawData
         // Create slide node
         var slideNode = new SlideshowTreeNode(newSlide.Name)
         {
-          Name = trialID.ToString(),
+          Name = trialID.ToString(CultureInfo.InvariantCulture),
           Slide = newSlide
         };
 

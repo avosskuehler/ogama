@@ -95,7 +95,8 @@ namespace VectorGraphics.Elements
       newCanvas,
       newStyleGroup,
       newName,
-      newElementGroup)
+      newElementGroup,
+      false)
     {
     }
 
@@ -140,7 +141,8 @@ namespace VectorGraphics.Elements
       cloneImage.Canvas,
       cloneImage.StyleGroup,
       cloneImage.Name,
-      cloneImage.ElementGroup)
+      cloneImage.ElementGroup,
+      false)
     {
     }
 
