@@ -1226,7 +1226,7 @@ namespace Ogama.Modules.Recording
             TrialName = this.precedingTrial.Name,
             TrialSequence = this.trialSequenceCounter - 1,
             TrialID = this.precedingTrial.ID,
-            Category = e.Category,
+            Category = this.precedingTrial[0].Category,
             TrialStartTime = this.currentTrialStarttime,
             Duration = (int)(currentTime - this.recordingStarttime - this.currentTrialStarttime)
           };
