@@ -312,6 +312,27 @@ namespace Ogama.Modules.SlideshowDesign.Import
         Array.Sort(files, new NumericComparer());
         foreach (var file in files)
         {
+          // Ignore files with unrecognized extensions
+          switch (file.Extension)
+          {
+            case ".bmp":
+            case ".png":
+            case ".jpg":
+            case ".wmf":
+            case ".mp3":
+            case ".wav":
+            case ".wma":
+              break;
+            default:
+              continue;
+          }
+
+          // Ignore hidden and MAC files
+          if (file.Name.StartsWith("."))
+          {
+            continue;
+          }
+
           var newSlide = new Slide
             {
               BackgroundColor = this.clbBackground.CurrentColor,
