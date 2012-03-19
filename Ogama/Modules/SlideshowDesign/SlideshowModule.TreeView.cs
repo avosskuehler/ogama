@@ -678,7 +678,11 @@ namespace Ogama.Modules.SlideshowDesign
     private void DeleteNode(SlideshowTreeNode treeNode)
     {
       Slide deleteSlide = treeNode.Slide;
-      deleteSlide.Dispose();
+      if (deleteSlide != null)
+      {
+        deleteSlide.Dispose();
+      }
+
       foreach (SlideshowTreeNode subNode in treeNode.Nodes)
       {
         this.DeleteNode(subNode);
