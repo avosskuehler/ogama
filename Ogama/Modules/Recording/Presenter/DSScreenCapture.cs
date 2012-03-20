@@ -22,6 +22,8 @@ namespace Ogama.Modules.Recording.Presenter
   using DirectShowLib;
   using DirectShowLib.DMO;
 
+  using GTHardware.Cameras.DirectShow;
+
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common.Tools;
 

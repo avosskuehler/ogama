@@ -24,7 +24,7 @@ namespace Ogama.Modules.Recording
   using System.Threading;
   using System.Windows.Forms;
   using GTCommons.Events;
-  using GTHardware.Cameras.PS3Eye;
+  //using GTHardware.Cameras.PS3Eye;
   using Ogama.DataSet;
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
@@ -337,24 +337,6 @@ namespace Ogama.Modules.Recording
     /// </summary>
     public RecordModule()
     {
-      // Touching this method at this point avoids an application crash of the 
-      // PS3EyeAxFilter.ax at connection to the gazetracker client
-      // with exactly this mehtod.
-      // TODO: Find the reason...
-#if !WIN64
-      try
-      {
-        int count = PS3Camera.CameraCount;
-        Settings.Default.PS3Disabled = false;
-      }
-      catch (Exception ex)
-      {
-        ExceptionMethods.ProcessErrorMessage("Using a PlayStationCamera (if it is connected to the system) will be disabled," +
-          "cause the loading of the CLEyeMulticam.dll failed with the Message: " + ex.Message);
-        Settings.Default.PS3Disabled = true;
-      }
-#endif
-
       this.InitializeComponent();
 
       this.Picture = this.recordPicture;

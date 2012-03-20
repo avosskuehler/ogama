@@ -19,6 +19,8 @@ namespace Ogama.Modules.Recording.Dialogs
 
   using DirectShowLib;
 
+  using GTHardware.Cameras.DirectShow;
+
   using OgamaControls;
 
   /// <summary>
