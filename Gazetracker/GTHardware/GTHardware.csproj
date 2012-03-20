@@ -150,10 +150,10 @@
     <Compile Include="Cameras\DirectShow\CamSizeFPS.cs" />
     <Compile Include="Cameras\DirectShow\DirectShowCamera.cs" />
     <Compile Include="Cameras\DirectShow\DirectShowDevices.cs" />
+    <Compile Include="Cameras\DirectShow\DirectShowUtils.cs" />
     <Compile Include="Cameras\FileStream\FileStreamCamera.cs" />
     <Compile Include="Cameras\ImageEventArgs.cs" />
     <Compile Include="Cameras\Kinect\Kinect.cs" />
-    <Compile Include="Cameras\PS3\PS3Camera.cs" />
     <Compile Include="Cameras\Thorlabs\IniFile.cs" />
     <Compile Include="Cameras\Thorlabs\ThorlabCamera.cs" />
     <Compile Include="Cameras\Thorlabs\ThorlabDevice.cs" />

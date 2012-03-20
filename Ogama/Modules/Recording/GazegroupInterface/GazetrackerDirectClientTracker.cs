@@ -178,7 +178,6 @@ namespace Ogama.Modules.Recording.GazegroupInterface
     public static bool IsAvailable(out string errorMessage)
     {
       errorMessage = string.Empty;
-      Camera.DisablePs3Camera = Properties.Settings.Default.PS3Disabled;
 
       try
       {
@@ -197,9 +196,6 @@ namespace Ogama.Modules.Recording.GazegroupInterface
             return true;
           case Camera.DeviceTypeEnum.Kinect:
             errorMessage = "Gazetracker found a kinect camera. ";
-            return true;
-          case Camera.DeviceTypeEnum.PS3Eye:
-            errorMessage = "Gazetracker found a PS3 eye camera. ";
             return true;
         }
       }

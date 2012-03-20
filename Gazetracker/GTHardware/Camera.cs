@@ -4,7 +4,6 @@ using System.Linq;
 using GTHardware.Cameras.DirectShow;
 using GTHardware.Cameras.Thorlabs;
 using GTHardware.Cameras.Kinect;
-using GTHardware.Cameras.PS3Eye;
 
 namespace GTHardware
 {
@@ -23,12 +22,9 @@ namespace GTHardware
       None = 0,
       DirectShow = 1,
       Thorlabs = 2,
-      Kinect = 3,
-      PS3Eye = 4,
-      FileStream = 4
+      Kinect = 4,
+      FileStream = 8
     }
-
-    public static bool DisablePs3Camera { get; set; }
 
     #endregion
 
@@ -45,9 +41,9 @@ namespace GTHardware
         case DeviceTypeEnum.Thorlabs:
           camera = new ThorlabCamera(); // needs hwndSource to work, set by this.HwndSource property
           break;
-        case DeviceTypeEnum.PS3Eye:
-          camera = new PS3Camera();
-          break;
+        //case DeviceTypeEnum.PS3Eye:
+        //  camera = new PS3Camera();
+        //  break;
         case DeviceTypeEnum.Kinect:
           camera = new KinectCamera();
           break;
@@ -70,20 +66,20 @@ namespace GTHardware
       {
         connectedDevice = DeviceTypeEnum.Thorlabs;
       }
-      else if (!DisablePs3Camera)
-      {
-        try
-        {
-          if (PS3Camera.CameraCount > 0)
-          {
-            connectedDevice = DeviceTypeEnum.PS3Eye;
-          }
-        }
-        catch (Exception)
-        {
-          DisablePs3Camera = true;
-        }
-      }
+      //else if (!DisablePs3Camera)
+      //{
+      //  try
+      //  {
+      //    if (PS3Camera.CameraCount > 0)
+      //    {
+      //      connectedDevice = DeviceTypeEnum.PS3Eye;
+      //    }
+      //  }
+      //  catch (Exception)
+      //  {
+      //    DisablePs3Camera = true;
+      //  }
+      //}
       //else if (KinectCamera.IsConnected())
       //    deviceType = DeviceTypeEnum.Kinect;
 
@@ -92,8 +88,6 @@ namespace GTHardware
         // Fallback to DirectShow drivers
         connectedDevice = DeviceTypeEnum.DirectShow;
       }
-
-
 
       return connectedDevice;
     }
@@ -182,8 +176,6 @@ namespace GTHardware
         return camera.GetROI();
       }
     }
-
-
 
     #endregion
 

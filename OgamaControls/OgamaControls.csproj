@@ -342,7 +342,6 @@
     <Compile Include="Dialogs\BrushStyleDlg.Designer.cs">
       <DependentUpon>BrushStyleDlg.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\DirectShowUtils.cs" />
     <Compile Include="Helpers\Win32.cs" />
     <Compile Include="Media\Player\AVPlayer.cs">
       <SubType>UserControl</SubType>

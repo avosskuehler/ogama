@@ -240,23 +240,30 @@ namespace GTHardware.Cameras.Thorlabs
 
       try
       {
-        ThorlabDevice tempCam = new ThorlabDevice();
-
-        ThorlabDevice.UC480_CAMERA_LIST camList = new ThorlabDevice.UC480_CAMERA_LIST();
-        int list = tempCam.GetCameraList(ref camList);
-
-        // if camera count is larger than 0 there is a UC camera connected..
-        if (camList.dwCount > 0)
+        int number = 0;
+        ThorlabDevice.GetNumberOfCameras(ref number);
+        if (number > 0)
         {
-          log.Info("IsConnected: Detected " + camList.dwCount.ToString() + " UC480 camera(s) - ThorlabCamera.IsConnected will return 'true' - Thorlabs camera detected");
-          isConnected = true;
-        }
-        else
-        {
-          log.Info("IsConnected: Detected no UC480 camera(s) - ThorlabCamera.IsConnected will return 'false', i.e. No Thorlabs detected");
+          return true;
         }
 
-        tempCam = null; // it's not started or anything, just a reference for the method call above
+        return false;
+
+        //ThorlabDevice.UC480_CAMERA_LIST camList = new ThorlabDevice.UC480_CAMERA_LIST();
+        //int list = tempCam.GetCameraList(ref camList);
+
+        //// if camera count is larger than 0 there is a UC camera connected..
+        //if (camList.dwCount > 0)
+        //{
+        //  log.Info("IsConnected: Detected " + camList.dwCount.ToString() + " UC480 camera(s) - ThorlabCamera.IsConnected will return 'true' - Thorlabs camera detected");
+        //  isConnected = true;
+        //}
+        //else
+        //{
+        //  log.Info("IsConnected: Detected no UC480 camera(s) - ThorlabCamera.IsConnected will return 'false', i.e. No Thorlabs detected");
+        //}
+
+        //tempCam = null; // it's not started or anything, just a reference for the method call above
       }
       catch (Exception ex)
       {

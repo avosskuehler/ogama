@@ -21,6 +21,8 @@ namespace Ogama.Modules.Replay.Video
 
   using DirectShowLib;
 
+  using GTHardware.Cameras.DirectShow;
+
   using Ogama.ExceptionHandling;
 
   using OgamaControls;

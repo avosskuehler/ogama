@@ -23,6 +23,9 @@ namespace Ogama.Modules.Replay
   using System.Threading;
   using System.Windows.Forms;
   using DirectShowLib;
+
+  using GTHardware.Cameras.DirectShow;
+
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
   using Ogama.MainWindow.ContextPanel;
