@@ -182,6 +182,8 @@ namespace VectorGraphics.Elements.ElementCollections
       // Clone trigger
       this.TriggerSignal = slide.TriggerSignal;
 
+      this.IsDesktopSlide = slide.IsDesktopSlide;
+
       // Clone thumb
       //if (slide.Thumb != null)
       {
@@ -443,6 +445,17 @@ namespace VectorGraphics.Elements.ElementCollections
       get { return this.modified; }
       set { this.modified = value; }
     }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether the slide is modified
+    /// a desktop slide, that means invisible to the user showing
+    /// the underlying desktop during recording
+    /// </summary>
+    /// <value>A <see cref="Boolean"/> indicating that this is
+    /// a desktop slide.</value>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    [Browsable(false)]
+    public bool IsDesktopSlide { get; set; }
 
     /// <summary>
     /// Gets or sets the list of vector graphic stimuli for this slide.

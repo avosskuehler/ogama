@@ -282,6 +282,19 @@ namespace Ogama.Modules.SlideshowDesign
     }
 
     /// <summary>
+    /// This method opens the given slide in a new <see cref="SlideDesignModule"/> form
+    /// for modification.
+    /// </summary>
+    /// <param name="treeNode">The <see cref="SlideshowTreeNode"/> that indicates the slide.</param>
+    /// <param name="currentSlide">The <see cref="Slide"/> to be edited.</param>
+    private void OpenDesktopDesignForm(SlideshowTreeNode treeNode, Slide currentSlide)
+    {
+      DesktopDialog newDesktopDesignForm = new DesktopDialog();
+      newDesktopDesignForm.Slide = (Slide)currentSlide.Clone();
+      this.OpenDesktopDesignerForm(newDesktopDesignForm, treeNode.Name);
+    }
+
+    /// <summary>
     /// This method renames all slides with the given name.
     /// </summary>
     /// <param name="oldName">A <see cref="String"/> to be renamed.</param>
@@ -416,6 +429,31 @@ namespace Ogama.Modules.SlideshowDesign
       {
         Slide newSlide = newDesignForm.Slide;
         string newSlidename = newSlide.Name;
+        if (nodeID != string.Empty)
+        {
+          this.OverwriteSlide(newSlide, nodeID);
+        }
+        else
+        {
+          this.AddSlide(newSlide);
+        }
+
+        this.SlideShowModified();
+      }
+    }
+
+    /// <summary>
+    /// Opens a <see cref="DesktopDialog"/> form, waits for succesful
+    /// design and updates slideshow with the designed <see cref="Slide"/>.
+    /// </summary>
+    /// <param name="newDesignForm">A <see cref="DesktopDialog"/> with the desktop design form to display.</param>
+    /// <param name="nodeID">Contains the node ID (which is the Node.Name property) of the node that is 
+    /// modified or "" if this should be a new slide.</param>
+    private void OpenDesktopDesignerForm(DesktopDialog newDesignForm, string nodeID)
+    {
+      if (newDesignForm.ShowDialog() == DialogResult.OK)
+      {
+        Slide newSlide = newDesignForm.Slide;
         if (nodeID != string.Empty)
         {
           this.OverwriteSlide(newSlide, nodeID);

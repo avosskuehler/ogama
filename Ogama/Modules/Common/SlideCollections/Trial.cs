@@ -143,6 +143,26 @@ namespace Ogama.Modules.Common.SlideCollections
 
     /// <summary>
     /// Gets a value indicating whether one of the slides
+    /// is a desktop recording slide.
+    /// </summary>
+    public bool HasDesktopRecordingContent
+    {
+      get
+      {
+        foreach (Slide slide in this)
+        {
+          if (slide.IsDesktopSlide)
+          {
+            return true;
+          }
+        }
+
+        return false;
+      }
+    }
+
+    /// <summary>
+    /// Gets a value indicating whether one of the slides
     /// contains flash content
     /// </summary>
     public bool HasFlashContent

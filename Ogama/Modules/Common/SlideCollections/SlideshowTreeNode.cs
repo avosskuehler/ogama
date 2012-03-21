@@ -242,6 +242,12 @@ namespace Ogama.Modules.Common.SlideCollections
         newSlideshowTreeNode.slide = (Slide)newSlideshowTreeNode.Slide.Clone();
         SlideType currentSlideType = SlideType.None;
 
+        if (newSlideshowTreeNode.Slide.IsDesktopSlide)
+        {
+          newSlideshowTreeNode.ImageKey = "Desktop";
+          return;
+        }
+
         foreach (VGElement element in newSlideshowTreeNode.slide.VGStimuli)
         {
           if (element is VGEllipse || element is VGRectangle || element is VGLine || element is VGCursor || element is VGPolyline || element is VGSharp)
