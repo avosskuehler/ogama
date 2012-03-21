@@ -352,10 +352,17 @@ namespace Ogama.Modules.Recording.Presenter
     /// maximal scroll size values.</param>
     private void GetLargestScrollSizeOfAllFrames(HtmlWindowCollection htmlWindows, ref Size currentScrollsize)
     {
-      foreach (HtmlWindow window in htmlWindows)
+      try
       {
-        GetMaxScrollSizeOfDocument(window.Document, ref currentScrollsize);
-        this.GetLargestScrollSizeOfAllFrames(window.Document.Window.Frames, ref currentScrollsize);
+        foreach (HtmlWindow window in htmlWindows)
+        {
+          GetMaxScrollSizeOfDocument(window.Document, ref currentScrollsize);
+          this.GetLargestScrollSizeOfAllFrames(window.Document.Window.Frames, ref currentScrollsize);
+        }
+      }
+      catch (UnauthorizedAccessException ex)
+      {
+        ExceptionMethods.HandleExceptionSilent(ex);
       }
     }
 

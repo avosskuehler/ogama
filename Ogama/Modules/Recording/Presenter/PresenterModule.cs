@@ -1058,6 +1058,10 @@ namespace Ogama.Modules.Recording.Presenter
           slideNode.Slide = newWebpageSlide;
 
           // Add node to slideshow at browser tree node subgroup
+          //if (Document.ActiveDocument.ExperimentSettings.SlideShow)
+          //{
+
+          //}
           this.currentBrowserTreeNode.Nodes.Add(slideNode);
           documentsSlideshow.IsModified = true;
           Document.ActiveDocument.Modified = true;
@@ -1248,9 +1252,16 @@ namespace Ogama.Modules.Recording.Presenter
       {
         window.Scroll -= new HtmlElementEventHandler(this.WebBrowser_Scroll);
         window.Scroll += new HtmlElementEventHandler(this.WebBrowser_Scroll);
-        window.Document.MouseDown -= new HtmlElementEventHandler(this.WebBrowser_MouseDown);
-        window.Document.MouseDown += new HtmlElementEventHandler(this.WebBrowser_MouseDown);
-        this.AttachEventHandlerForFrames(window.Document.Window.Frames);
+        try
+        {
+          window.Document.MouseDown -= new HtmlElementEventHandler(this.WebBrowser_MouseDown);
+          window.Document.MouseDown += new HtmlElementEventHandler(this.WebBrowser_MouseDown);
+          this.AttachEventHandlerForFrames(window.Document.Window.Frames);
+        }
+        catch (UnauthorizedAccessException ex)
+        {
+          ExceptionMethods.HandleExceptionSilent(ex);
+        }
       }
     }
 
@@ -1682,9 +1693,19 @@ namespace Ogama.Modules.Recording.Presenter
               Application.DoEvents();
             }
 
+
             while (browser.WebBrowser.ReadyState != WebBrowserReadyState.Complete)
             {
               Application.DoEvents();
+              //if (browser.WebBrowser.ReadyState == WebBrowserReadyState.Uninitialized)
+              //{
+              //  return;
+              //}
+
+              if (this.closing)
+              {
+                return;
+              }
             }
 
             // Set input focus to the webbrowser, otherwise the 
