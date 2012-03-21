@@ -187,7 +187,7 @@ namespace GTHardware.Cameras.DirectShow
         camerainfo.Name = dev.Name;
         camerainfo.DirectshowDevice = dev;
 
-        for (int i = 0; i < iCount; i++)
+        for (int i = 0; i < iCount; i++)     
         {
           VideoStreamConfigCaps scc;
 
@@ -213,6 +213,8 @@ namespace GTHardware.Cameras.DirectShow
             //ErrorLogger.ProcessException(ex, false);
           }
         }
+
+        Marshal.FreeCoTaskMem(pscc);
       }
       finally
       {
@@ -228,8 +230,6 @@ namespace GTHardware.Cameras.DirectShow
         {
           Marshal.ReleaseComObject(capGraph);
         }
-
-        Marshal.FreeCoTaskMem(pscc);
       }
 
       return camerainfo;
