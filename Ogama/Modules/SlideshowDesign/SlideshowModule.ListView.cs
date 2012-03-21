@@ -69,7 +69,14 @@ namespace Ogama.Modules.SlideshowDesign
         Slide currentSlide = treeNode.Slide;
         if (currentSlide != null)
         {
-          this.OpenSlideDesignForm(treeNode, currentSlide);
+          if (currentSlide.IsDesktopSlide)
+          {
+            this.OpenDesktopDesignForm(treeNode, currentSlide);
+          }
+          else
+          {
+            this.OpenSlideDesignForm(treeNode, currentSlide);
+          }
         }
         else
         {

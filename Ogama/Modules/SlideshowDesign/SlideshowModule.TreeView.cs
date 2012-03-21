@@ -677,6 +677,7 @@ namespace Ogama.Modules.SlideshowDesign
     /// <param name="treeNode">The <see cref="SlideshowTreeNode"/> to delete.</param>
     private void DeleteNode(SlideshowTreeNode treeNode)
     {
+      if (treeNode == null) { return; }
       Slide deleteSlide = treeNode.Slide;
       if (deleteSlide != null)
       {

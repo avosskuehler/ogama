@@ -20,6 +20,7 @@ namespace Ogama.Modules.Recording.Presenter
   using System.Drawing;
   using System.Globalization;
   using System.IO;
+  using System.Runtime.InteropServices;
   using System.Threading;
   using System.Windows.Forms;
 
@@ -65,6 +66,10 @@ namespace Ogama.Modules.Recording.Presenter
     // Defining Variables, Enumerations, Events                                  //
     ///////////////////////////////////////////////////////////////////////////////
     #region FIELDS
+
+    private static IntPtr keyboardHookID = IntPtr.Zero;
+
+    private static IntPtr mouseHookID = IntPtr.Zero;
 
     /// <summary>
     /// A <see cref="Webcam"/> that controls the user camera
@@ -467,6 +472,19 @@ namespace Ogama.Modules.Recording.Presenter
     /// the presentation via ESC or from record module.</param>
     public void EndPresentation(bool sendBreakTrigger)
     {
+      // Unhook message hooks, if applicable
+      if (keyboardHookID != IntPtr.Zero)
+      {
+        MessageHook.UnhookWindowsHookEx(keyboardHookID);
+        keyboardHookID = IntPtr.Zero;
+      }
+
+      if (mouseHookID != IntPtr.Zero)
+      {
+        MessageHook.UnhookWindowsHookEx(mouseHookID);
+        mouseHookID = IntPtr.Zero;
+      }
+
       this.closing = true;
 
       if (sendBreakTrigger)
@@ -547,6 +565,15 @@ namespace Ogama.Modules.Recording.Presenter
     // Inherited methods                                                         //
     ///////////////////////////////////////////////////////////////////////////////
     #region OVERRIDES
+
+    private IntPtr KeyboardHookCallback(int nCode, IntPtr wParam, IntPtr lParam)
+    {
+      var msg = new Message { WParam = wParam, LParam = lParam, Msg = (int)wParam };
+      int vkCode = Marshal.ReadInt32(lParam);
+      ProcessCmdKey(ref msg, (Keys)vkCode);
+
+      return MessageHook.CallNextHookEx(keyboardHookID, nCode, wParam, lParam);
+    }
 
     /// <summary>
     /// Overriden <see cref="ProcessCmdKey(ref Message,Keys)"/> method. 
@@ -729,6 +756,56 @@ namespace Ogama.Modules.Recording.Presenter
     {
       // _currentKey = (e.KeyData & e.KeyCode);
       // This has moved to ProcessCmdKey
+    }
+
+    private IntPtr MouseHookCallback(int nCode, IntPtr wParam, IntPtr lParam)
+    {
+      if (nCode >= 0)
+      {
+        var skip = false;
+        var isButtonDown = false;
+        var button = MouseButtons.None;
+        switch ((MessageHook.MouseMessages)wParam)
+        {
+          case MessageHook.MouseMessages.WM_LBUTTONDOWN:
+            button = MouseButtons.Left;
+            isButtonDown = true;
+            break;
+          case MessageHook.MouseMessages.WM_LBUTTONUP:
+            button = MouseButtons.Left;
+            isButtonDown = false;
+            break;
+          case MessageHook.MouseMessages.WM_MOUSEMOVE:
+          case MessageHook.MouseMessages.WM_MOUSEWHEEL:
+            skip = true;
+            break;
+          case MessageHook.MouseMessages.WM_RBUTTONDOWN:
+            button = MouseButtons.Right;
+            isButtonDown = true;
+            break;
+          case MessageHook.MouseMessages.WM_RBUTTONUP:
+            button = MouseButtons.Right;
+            isButtonDown = false;
+            break;
+        }
+
+        if (!skip)
+        {
+          var hookStruct =
+            (MessageHook.MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MessageHook.MSLLHOOKSTRUCT));
+          var mea = new MouseEventArgs(button, 1, hookStruct.pt.x, hookStruct.pt.y, 0);
+          if (isButtonDown)
+          {
+            this.frmPresenter_MouseDown(this, mea);
+          }
+          else
+          {
+            this.frmPresenter_MouseUp(this, mea);
+          }
+        }
+      }
+
+      return MessageHook.CallNextHookEx(mouseHookID, nCode, wParam, lParam);
     }
 
     /// <summary>
@@ -1528,7 +1605,7 @@ namespace Ogama.Modules.Recording.Presenter
 
       Trial nextTrial = this.trials[nextTrialCounter];
 
-      if (nextTrial.HasActiveXContent)
+      if (nextTrial.HasActiveXContent || nextTrial[0].IsDesktopSlide)
       {
         string filename = Document.ActiveDocument.SelectionState.SubjectName +
          "-" + nextTrialCounter + ".avi";
@@ -1606,6 +1683,29 @@ namespace Ogama.Modules.Recording.Presenter
           break;
       }
 
+      // Care for desktop recording slides
+      if (this.shownSlideContainer.Slide.IsDesktopSlide)
+      {
+        this.WindowState = FormWindowState.Minimized;
+        keyboardHookID = MessageHook.SetKeyboardHook(this.KeyboardHookCallback);
+        mouseHookID = MessageHook.SetMouseHook(this.MouseHookCallback);
+      }
+      else
+      {
+        this.WindowState = FormWindowState.Maximized;
+        if (keyboardHookID != IntPtr.Zero)
+        {
+          MessageHook.UnhookWindowsHookEx(keyboardHookID);
+          keyboardHookID = IntPtr.Zero;
+        }
+
+        if (mouseHookID != IntPtr.Zero)
+        {
+          MessageHook.UnhookWindowsHookEx(mouseHookID);
+          mouseHookID = IntPtr.Zero;
+        }
+      }
+
       // Reset response fields
       this.currentMousebutton = MouseButtons.None;
       this.currentKey = Keys.None;
@@ -1665,10 +1765,10 @@ namespace Ogama.Modules.Recording.Presenter
         slideContainer.AudioPlayer.Play();
       }
 
+      int countFlash = 0;
+
       if (this.shownSlideContainer.Slide.HasActiveXContent)
       {
-        int countFlash = 0;
-
         foreach (VGElement element in slideContainer.Slide.ActiveXStimuli)
         {
           if (element is VGFlash)
@@ -1724,27 +1824,27 @@ namespace Ogama.Modules.Recording.Presenter
               new HtmlElementEventHandler(this.WebBrowser_MouseDown);
           }
         }
+      }
 
-        // Just do screen capturing on flash content
-        if (countFlash > 0)
+      // Just do screen capturing on flash content or desktop recording
+      if (countFlash > 0 || this.shownSlideContainer.Slide.IsDesktopSlide)
+      {
+        switch (this.shownContainer)
         {
-          switch (this.shownContainer)
-          {
-            case ShownContainer.One:
-              if (this.preparedSlideOne.ScreenCapture != null)
-              {
-                this.preparedSlideOne.ScreenCapture.Start();
-              }
+          case ShownContainer.One:
+            if (this.preparedSlideOne.ScreenCapture != null)
+            {
+              this.preparedSlideOne.ScreenCapture.Start();
+            }
 
-              break;
-            case ShownContainer.Two:
-              if (this.preparedSlideTwo.ScreenCapture != null)
-              {
-                this.preparedSlideTwo.ScreenCapture.Start();
-              }
+            break;
+          case ShownContainer.Two:
+            if (this.preparedSlideTwo.ScreenCapture != null)
+            {
+              this.preparedSlideTwo.ScreenCapture.Start();
+            }
 
-              break;
-          }
+            break;
         }
       }
     }

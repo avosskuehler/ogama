@@ -1350,7 +1350,10 @@ namespace VectorGraphics.Elements
     /// </summary>
     public virtual void Dispose()
     {
-      this.GrabHandles.Clear();
+      if (this.GrabHandles != null)
+      {
+        this.GrabHandles.Clear();
+      }
     }
 
     /// <summary>

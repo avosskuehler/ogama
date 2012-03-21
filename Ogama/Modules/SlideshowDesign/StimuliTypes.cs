@@ -64,6 +64,11 @@ namespace Ogama.Modules.SlideshowDesign
     Browser,
 
     /// <summary>
+    /// The stimulus is the desktop.
+    /// </summary>
+    Desktop,
+
+    /// <summary>
     /// Different types of stimuli
     /// </summary>
     Mixed,

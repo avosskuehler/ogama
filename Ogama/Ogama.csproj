@@ -422,6 +422,7 @@
     <Compile Include="Modules\Recording\MirametrixInterface\MirametrixTrackStatusControl.Designer.cs">
       <DependentUpon>MirametrixTrackStatusControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Recording\Presenter\MessageHook.cs" />
     <Compile Include="Modules\Recording\Presenter\WebsiteScreenshot.cs" />
     <Compile Include="Modules\Recording\Presenter\DSScreenCapture.cs" />
     <Compile Include="Modules\Recording\Presenter\ScreenCaptureProperties.cs" />
@@ -579,6 +580,12 @@
     </Compile>
     <Compile Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\BrowserDialog.Designer.cs">
       <DependentUpon>BrowserDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\DesktopDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\DesktopDialog.Designer.cs">
+      <DependentUpon>DesktopDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\SlideshowDesign\SlideshowModule.ListView.cs">
       <DependentUpon>SlideshowModule.cs</DependentUpon>
@@ -1185,6 +1192,10 @@
       <DependentUpon>BrowserDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\DesktopDialog.resx">
+      <DependentUpon>DesktopDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\SlideshowDesign\Shuffling\CustomShuffleDialog.resx">
       <DependentUpon>CustomShuffleDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1619,6 +1630,10 @@
     <None Include="Resources\ASLmire_1024x768.bmp" />
     <None Include="Resources\ASLmire_1280x1024.bmp" />
     <None Include="Resources\ASLmire_defaultSize.bmp" />
+    <None Include="Resources\Desktop.ico" />
+    <None Include="Resources\Desktop.png" />
+    <None Include="Resources\Desktop32.png" />
+    <None Include="Resources\Desktop48.png" />
     <Content Include="Resources\MirametrixLogo.png" />
     <Content Include="Resources\MirametrixLogo_150_33.png" />
     <Content Include="Resources\Mirametrix_S2.png" />

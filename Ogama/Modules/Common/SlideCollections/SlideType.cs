@@ -56,5 +56,10 @@ namespace Ogama.Modules.Common.SlideCollections
     /// Slides containing only an internet browser.
     /// </summary>
     Browser = 32,
+
+    /// <summary>
+    /// Slides used to capture the desktop
+    /// </summary>
+    Desktop = 64,
   }
 }

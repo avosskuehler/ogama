@@ -2305,7 +2305,7 @@ namespace Ogama.Modules.Recording
     private void InitializeScreenCapture()
     {
       // Only needed if there is a flash movie.
-      if (!Document.ActiveDocument.ExperimentSettings.SlideShow.HasFlashContent())
+      if (!Document.ActiveDocument.ExperimentSettings.SlideShow.HasScreenCaptureContent())
       {
         this.screenCaptureProperties.CaptureMode = CaptureMode.None;
         return;

@@ -21,17 +21,15 @@ namespace Ogama.Modules.SlideshowDesign
 
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
-  using Ogama.Modules.Common;
   using Ogama.Modules.Common.SlideCollections;
   using Ogama.Modules.Recording;
   using Ogama.Modules.Recording.Presenter;
   using Ogama.Modules.SlideshowDesign.DesignModule;
+  using Ogama.Modules.SlideshowDesign.DesignModule.StimuliDialogs;
   using Ogama.Modules.SlideshowDesign.Import;
   using Ogama.Modules.SlideshowDesign.Shuffling;
 
   using OgamaControls;
-  using VectorGraphics;
-  using VectorGraphics.Elements;
   using VectorGraphics.Elements.ElementCollections;
 
   /// <summary>
@@ -150,6 +148,20 @@ namespace Ogama.Modules.SlideshowDesign
       newInstruction.Description = "Instruction stimuli can be used to present a message or a multiple choice question to the subject.";
       newInstruction.SlideName = this.GetUnusedSlideName();
       this.OpenStimulusDesignerForm(newInstruction, string.Empty);
+    }
+
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler for the
+    /// <see cref="Button"/> <see cref="btnDesktop"/>.
+    /// Raises the <see cref="OpenStimulusDesignerForm(SlideDesignModule,string)"/>
+    /// form with adapted properties for desktop stimuli.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void btnDesktop_Click(object sender, EventArgs e)
+    {
+      var newDesktop = new DesktopDialog { SlideName = this.GetUnusedSlideName() };
+      this.OpenDesktopDesignerForm(newDesktop, string.Empty);
     }
 
     /// <summary>

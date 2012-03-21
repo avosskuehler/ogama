@@ -50,12 +50,12 @@ namespace Ogama.MainWindow.ContextPanel
       this.imlSlideTypes = new System.Windows.Forms.ImageList(this.components);
       this.tbpTrialList = new System.Windows.Forms.TabPage();
       this.lsvTrials = new OgamaControls.ObjectListView();
-      this.columnTrials = new OgamaControls.OLVColumn();
+      this.columnTrials = ((OgamaControls.OLVColumn)(new OgamaControls.OLVColumn()));
       this.tabPageSubjectList = new System.Windows.Forms.TabPage();
       this.lsvSubjects = new System.Windows.Forms.ListView();
-      this.columnSubjectName = new System.Windows.Forms.ColumnHeader();
-      this.columnAge = new System.Windows.Forms.ColumnHeader();
-      this.columnComments = new System.Windows.Forms.ColumnHeader();
+      this.columnSubjectName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+      this.columnAge = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+      this.columnComments = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.tabPageHelp = new System.Windows.Forms.TabPage();
       this.tableLayoutPanelHelp = new System.Windows.Forms.TableLayoutPanel();
       this.rtbHelpInterface = new System.Windows.Forms.RichTextBox();
@@ -69,7 +69,7 @@ namespace Ogama.MainWindow.ContextPanel
       this.spcTabsVideo = new System.Windows.Forms.SplitContainer();
       this.grpUsercam = new System.Windows.Forms.GroupBox();
       this.avpUsercam = new OgamaControls.AVPlayer();
-      columnCategorie = new System.Windows.Forms.ColumnHeader();
+      columnCategorie = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.pnlContextTabs.SuspendLayout();
       this.tbpTrialTreeView.SuspendLayout();
       this.tbpTrialList.SuspendLayout();
@@ -80,6 +80,7 @@ namespace Ogama.MainWindow.ContextPanel
       this.panel1.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.pcbInterfaceLogo)).BeginInit();
       this.cmuSlides.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.spcTabsVideo)).BeginInit();
       this.spcTabsVideo.Panel1.SuspendLayout();
       this.spcTabsVideo.Panel2.SuspendLayout();
       this.spcTabsVideo.SuspendLayout();
@@ -153,6 +154,7 @@ namespace Ogama.MainWindow.ContextPanel
       this.imlSlideTypes.Images.SetKeyName(10, "Trial");
       this.imlSlideTypes.Images.SetKeyName(11, "Folder");
       this.imlSlideTypes.Images.SetKeyName(12, "Browser");
+      this.imlSlideTypes.Images.SetKeyName(13, "Desktop");
       // 
       // tbpTrialList
       // 
@@ -222,8 +224,8 @@ namespace Ogama.MainWindow.ContextPanel
       this.toolTip1.SetToolTip(this.lsvSubjects, "Select the subject you wish to \r\nbe analyzed in the modules.");
       this.lsvSubjects.UseCompatibleStateImageBehavior = false;
       this.lsvSubjects.View = System.Windows.Forms.View.Details;
-      this.lsvSubjects.SelectedIndexChanged += new System.EventHandler(this.lsvSubjects_SelectedIndexChanged);
       this.lsvSubjects.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lsvSubjects_ColumnClick);
+      this.lsvSubjects.SelectedIndexChanged += new System.EventHandler(this.lsvSubjects_SelectedIndexChanged);
       // 
       // columnSubjectName
       // 
@@ -366,7 +368,7 @@ namespace Ogama.MainWindow.ContextPanel
       this.avpUsercam.Dock = System.Windows.Forms.DockStyle.Fill;
       this.avpUsercam.Location = new System.Drawing.Point(3, 16);
       this.avpUsercam.Name = "avpUsercam";
-      this.avpUsercam.PlaybackRate = 1;
+      this.avpUsercam.PlaybackRate = 1D;
       this.avpUsercam.Size = new System.Drawing.Size(194, 157);
       this.avpUsercam.TabIndex = 0;
       // 
@@ -389,6 +391,7 @@ namespace Ogama.MainWindow.ContextPanel
       this.cmuSlides.ResumeLayout(false);
       this.spcTabsVideo.Panel1.ResumeLayout(false);
       this.spcTabsVideo.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.spcTabsVideo)).EndInit();
       this.spcTabsVideo.ResumeLayout(false);
       this.grpUsercam.ResumeLayout(false);
       this.ResumeLayout(false);

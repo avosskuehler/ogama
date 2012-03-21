@@ -277,11 +277,11 @@ namespace Ogama.Modules.Common.SlideCollections
     /// </summary>
     /// <returns><strong>True</strong> if the slideshow contains one flash
     /// movie, otherwise <strong>false</strong>.</returns>
-    public bool HasFlashContent()
+    public bool HasScreenCaptureContent()
     {
       foreach (Trial trial in this.GetTrials())
       {
-        if (trial.HasActiveXContent)
+        if (trial.HasActiveXContent || trial.HasDesktopRecordingContent)
         {
           return true;
         }
