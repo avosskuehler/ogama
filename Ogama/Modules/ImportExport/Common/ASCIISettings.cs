@@ -486,6 +486,18 @@ namespace Ogama.Modules.ImportExport.Common
             // Split Tab separated line items
             string[] items = line.Split(this.ColumnSeparatorCharacter);
 
+            // Use only numeric starting lines if applicable
+            if (this.IgnoreNotNumeralLines && !IOHelpers.IsNumeric(line[0]))
+            {
+              continue;
+            }
+
+            // Skip small lines if applicable
+            if (this.IgnoreSmallLines && columncount != items.Length)
+            {
+              continue;
+            }
+
             if (counter == 0)
             {
               columncount = items.Length;
@@ -502,18 +514,6 @@ namespace Ogama.Modules.ImportExport.Common
             if (this.ColumnTitlesAtFirstRow && counter == 0)
             {
               counter++;
-              continue;
-            }
-
-            // Use only numeric starting lines if applicable
-            if (this.IgnoreNotNumeralLines && !IOHelpers.IsNumeric(line[0]))
-            {
-              continue;
-            }
-
-            // Skip small lines if applicable
-            if (this.IgnoreSmallLines && columncount != items.Length)
-            {
               continue;
             }
 
