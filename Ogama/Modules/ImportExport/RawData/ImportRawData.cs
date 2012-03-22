@@ -211,13 +211,8 @@ namespace Ogama.Modules.ImportExport.RawData
                     // Generate the trials
                     GenerateOgamaSubjectAndTrialList();
 
-                    bool succesful = true;
-
                     // Save the import into ogamas database and the mdf file.
-                    if (!SaveImportIntoTablesAndDB())
-                    {
-                      succesful = false;
-                    }
+                    var succesful = SaveImportIntoTablesAndDB();
 
                     // Create slideshow trials
                     GenerateOgamaSlideshowTrials(detectionSetting, mainWindow);
@@ -487,6 +482,13 @@ namespace Ogama.Modules.ImportExport.RawData
           // field for checking for doubled times
           long lastTimeInMs = -100;
 
+          // Clear old entries except parses from table
+          if (detectionSetting.StimuliImportMode != StimuliImportModes.UseAssignmentTable)
+          {
+            detectionSetting.ImageDictionary.Clear();
+            detectionSetting.TrialIDToImageAssignments.Clear();
+          }
+
           // Read every line of ImportFile
           while ((line = importReader.ReadLine()) != null)
           {
@@ -520,13 +522,6 @@ namespace Ogama.Modules.ImportExport.RawData
               case TrialSequenceImportModes.UseImportColumn:
                 // No trial counting needed
                 break;
-            }
-
-            // Clear old entries except parses from table
-            if (detectionSetting.StimuliImportMode != StimuliImportModes.UseAssignmentTable)
-            {
-              detectionSetting.ImageDictionary.Clear();
-              detectionSetting.TrialIDToImageAssignments.Clear();
             }
 
             // Check for image detection specifications
