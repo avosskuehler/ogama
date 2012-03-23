@@ -67,9 +67,12 @@ namespace Ogama.Modules.Recording.Presenter
     ///////////////////////////////////////////////////////////////////////////////
     #region FIELDS
 
-    private static IntPtr keyboardHookID = IntPtr.Zero;
+    private volatile IntPtr keyboardHookID = IntPtr.Zero;
 
-    private static IntPtr mouseHookID = IntPtr.Zero;
+    private volatile IntPtr mouseHookID = IntPtr.Zero;
+
+    private MessageHook.LowLevelProc keyboardCallback;
+    private MessageHook.LowLevelProc mouseCallback;
 
     /// <summary>
     /// A <see cref="Webcam"/> that controls the user camera
@@ -288,6 +291,9 @@ namespace Ogama.Modules.Recording.Presenter
         this.panelTwo.CreateGraphics(),
         new Rectangle(0, 0, width, height));
       this.panelTwo.DrawingSurface = this.preparedSlideTwo.DrawingSurface;
+
+      this.keyboardCallback = new MessageHook.LowLevelProc(KeyboardHookCallback);
+      this.mouseCallback = new MessageHook.LowLevelProc(MouseHookCallback);
     }
 
     #endregion //CONSTRUCTION
@@ -472,18 +478,8 @@ namespace Ogama.Modules.Recording.Presenter
     /// the presentation via ESC or from record module.</param>
     public void EndPresentation(bool sendBreakTrigger)
     {
-      // Unhook message hooks, if applicable
-      if (keyboardHookID != IntPtr.Zero)
-      {
-        MessageHook.UnhookWindowsHookEx(keyboardHookID);
-        keyboardHookID = IntPtr.Zero;
-      }
-
-      if (mouseHookID != IntPtr.Zero)
-      {
-        MessageHook.UnhookWindowsHookEx(mouseHookID);
-        mouseHookID = IntPtr.Zero;
-      }
+      // Disable the low level keyboard and mouse hooks
+      this.UnhookMessageFilter();
 
       this.closing = true;
 
@@ -565,6 +561,7 @@ namespace Ogama.Modules.Recording.Presenter
     // Inherited methods                                                         //
     ///////////////////////////////////////////////////////////////////////////////
     #region OVERRIDES
+
 
     private IntPtr KeyboardHookCallback(int nCode, IntPtr wParam, IntPtr lParam)
     {
@@ -1449,6 +1446,9 @@ namespace Ogama.Modules.Recording.Presenter
           // be saved on disk
           this.StopScreenCapturing(trialChange);
 
+          // Disable the low level keyboard and mouse hooks
+          this.UnhookMessageFilter();
+
           // Switch to new slide/trial
           if (this.trialCounter < this.trials.Count)
           {
@@ -1530,6 +1530,21 @@ namespace Ogama.Modules.Recording.Presenter
       }
     }
 
+    private void UnhookMessageFilter()
+    {
+      if (this.keyboardHookID != IntPtr.Zero)
+      {
+        MessageHook.UnhookWindowsHookEx(this.keyboardHookID);
+        this.keyboardHookID = IntPtr.Zero;
+      }
+
+      if (this.mouseHookID != IntPtr.Zero)
+      {
+        MessageHook.UnhookWindowsHookEx(this.mouseHookID);
+        this.mouseHookID = IntPtr.Zero;
+      }
+    }
+
     /// <summary>
     /// This method invokes the stop of current running
     /// screen capturings if applicable.
@@ -1583,7 +1598,8 @@ namespace Ogama.Modules.Recording.Presenter
 
       if (trialChange)
       {
-        AsyncHelper.FireAndForget(new PrepareScreenCaptureDelegate(this.PrepareScreenCapture), this.trialCounter);
+        //AsyncHelper.FireAndForget(new PrepareScreenCaptureDelegate(this.PrepareScreenCapture), this.trialCounter);
+        this.PrepareScreenCapture(this.trialCounter);
       }
     }
 
@@ -1687,23 +1703,12 @@ namespace Ogama.Modules.Recording.Presenter
       if (this.shownSlideContainer.Slide.IsDesktopSlide)
       {
         this.WindowState = FormWindowState.Minimized;
-        keyboardHookID = MessageHook.SetKeyboardHook(this.KeyboardHookCallback);
-        mouseHookID = MessageHook.SetMouseHook(this.MouseHookCallback);
+        keyboardHookID = MessageHook.SetKeyboardHook(this.keyboardCallback);
+        mouseHookID = MessageHook.SetMouseHook(this.mouseCallback);
       }
       else
       {
         this.WindowState = FormWindowState.Maximized;
-        if (keyboardHookID != IntPtr.Zero)
-        {
-          MessageHook.UnhookWindowsHookEx(keyboardHookID);
-          keyboardHookID = IntPtr.Zero;
-        }
-
-        if (mouseHookID != IntPtr.Zero)
-        {
-          MessageHook.UnhookWindowsHookEx(mouseHookID);
-          mouseHookID = IntPtr.Zero;
-        }
       }
 
       // Reset response fields
