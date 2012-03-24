@@ -204,7 +204,7 @@ namespace Ogama.Modules.Recording.AleaInterface
     }
 
     /// <summary>
-    /// Gets or sets 
+    /// Gets or sets the eye index.
     /// </summary>
     public int Eye
     {

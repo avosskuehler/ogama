@@ -247,7 +247,6 @@ namespace Ogama
           query = "ALTER DATABASE \"" + Document.ActiveDocument.ExperimentSettings.Name +
             "\" SET ONLINE;";
           Queries.ExecuteSQLCommand(query);
-          //connections = sqlServer.GetActiveDBConnectionCount(Document.ActiveDocument.ExperimentSettings.Name);
         }
 
         // Close database connection

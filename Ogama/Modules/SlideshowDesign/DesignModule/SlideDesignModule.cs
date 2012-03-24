@@ -269,8 +269,8 @@ namespace Ogama.Modules.SlideshowDesign.DesignModule
       this.bkgAudioControl.PathToCopyTo = Document.ActiveDocument.ExperimentSettings.SlideResourcesPath;
       this.btnBackgroundColor.CurrentColor = defaultBgColor;
 
-      gveLayoutDockStyle.EditedType = typeof(DockStyle);
-      gveLayoutDockStyle.Value = DockStyle.None;
+      this.gveLayoutDockStyle.EditedType = typeof(DockStyle);
+      this.gveLayoutDockStyle.Value = DockStyle.None;
 
       this.dltForm.Logo = this.Icon.ToBitmap();
 

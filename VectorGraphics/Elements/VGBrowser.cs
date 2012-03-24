@@ -167,7 +167,7 @@ namespace VectorGraphics.Elements
     #region PROPERTIES
 
     /// <summary>
-    /// Gets the underlying <see cref="WebBrowser"/> control.
+    /// Gets or sets the underlying <see cref="WebBrowser"/> control.
     /// </summary>
     /// <value>A <see cref="WebBrowser"/> control that contains the ActiveX control.</value>
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false), XmlIgnore]

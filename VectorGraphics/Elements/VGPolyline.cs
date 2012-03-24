@@ -263,7 +263,7 @@ namespace VectorGraphics.Elements
     }
 
     /// <summary>
-    /// Gets first point in pointlist.
+    /// Gets or sets the first point in pointlist.
     /// </summary>
     /// <value>A <see cref="PointF"/> with the first point of the polyline.</value>
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false), XmlIgnore]
@@ -306,7 +306,7 @@ namespace VectorGraphics.Elements
     }
 
     /// <summary>
-    /// Gets a value indicating whether the polyline is closed.
+    /// Gets or sets a value indicating whether the polyline is closed.
     /// </summary>
     /// <value>A <see cref="Boolean"/> that is <strong>true</strong>,
     /// if the polyline is closed, otherwise <strong>false</strong>.</value>
