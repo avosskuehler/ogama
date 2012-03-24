@@ -99,6 +99,8 @@ namespace VectorGraphics.Elements
     /// <param name="newStyleGroup">Group Enumeration, <see cref="VGStyleGroup"/></param>
     /// <param name="newName">Name of Element</param>
     /// <param name="newElementGroup">Element group description</param>
+    /// <param name="withoutImageInMemoryCreation">Omits internal image creation during
+    /// construction.</param>
     public VGImage(
       ShapeDrawAction newShapeDrawAction,
       Pen newPen,

@@ -67,11 +67,26 @@ namespace Ogama.Modules.Recording.Presenter
     ///////////////////////////////////////////////////////////////////////////////
     #region FIELDS
 
-    private volatile IntPtr keyboardHookID = IntPtr.Zero;
+    /// <summary>
+    /// The ID of the keyboard hook that is inserted in the application chain
+    /// during desktop recording.
+    /// </summary>
+    private IntPtr keyboardHookID = IntPtr.Zero;
 
-    private volatile IntPtr mouseHookID = IntPtr.Zero;
+    /// <summary>
+    /// The ID of the mouse hook that is inserted in the application chain
+    /// during desktop recording.
+    /// </summary>
+    private IntPtr mouseHookID = IntPtr.Zero;
 
+    /// <summary>
+    /// The keyboard callback method that is called during desktop recording.
+    /// </summary>
     private MessageHook.LowLevelProc keyboardCallback;
+
+    /// <summary>
+    /// The mouse callback method that is called during desktop recording.
+    /// </summary>
     private MessageHook.LowLevelProc mouseCallback;
 
     /// <summary>
@@ -292,8 +307,8 @@ namespace Ogama.Modules.Recording.Presenter
         new Rectangle(0, 0, width, height));
       this.panelTwo.DrawingSurface = this.preparedSlideTwo.DrawingSurface;
 
-      this.keyboardCallback = new MessageHook.LowLevelProc(KeyboardHookCallback);
-      this.mouseCallback = new MessageHook.LowLevelProc(MouseHookCallback);
+      this.keyboardCallback = new MessageHook.LowLevelProc(this.KeyboardHookCallback);
+      this.mouseCallback = new MessageHook.LowLevelProc(this.MouseHookCallback);
     }
 
     #endregion //CONSTRUCTION
@@ -562,16 +577,6 @@ namespace Ogama.Modules.Recording.Presenter
     ///////////////////////////////////////////////////////////////////////////////
     #region OVERRIDES
 
-
-    private IntPtr KeyboardHookCallback(int nCode, IntPtr wParam, IntPtr lParam)
-    {
-      var msg = new Message { WParam = wParam, LParam = lParam, Msg = (int)wParam };
-      int vkCode = Marshal.ReadInt32(lParam);
-      ProcessCmdKey(ref msg, (Keys)vkCode);
-
-      return MessageHook.CallNextHookEx(keyboardHookID, nCode, wParam, lParam);
-    }
-
     /// <summary>
     /// Overriden <see cref="ProcessCmdKey(ref Message,Keys)"/> method. 
     /// Captures all pressed keys including
@@ -755,14 +760,36 @@ namespace Ogama.Modules.Recording.Presenter
       // This has moved to ProcessCmdKey
     }
 
-    private IntPtr MouseHookCallback(int nCode, IntPtr wParam, IntPtr lParam)
+    /// <summary>
+    /// An application-defined ocallback function used with the 
+    /// SetWindowsHookEx function. The system call this function every time a 
+    /// new mouse input event is about to be posted into a thread input queue. 
+    /// </summary>
+    /// <param name="ncode">A code the hook procedure uses to determine how 
+    /// to process the message. If nCode is less than zero, the hook procedure 
+    /// must pass the message to the CallNextHookEx function without further processing 
+    /// and should return the value returned by CallNextHookEx</param>
+    /// <param name="wparam">The identifier of the mouse message. This parameter can be one 
+    /// of the following messages: WM_LBUTTONDOWN, WM_LBUTTONUP, WM_MOUSEMOVE, 
+    /// WM_MOUSEWHEEL, WM_MOUSEHWHEEL, WM_RBUTTONDOWN, or WM_RBUTTONUP.</param>
+    /// <param name="lparam">A pointer to an MSLLHOOKSTRUCT structure.</param>
+    /// <returns>If nCode is less than zero, the hook procedure must return the value returned by CallNextHookEx. 
+    /// If nCode is greater than or equal to zero, and the hook procedure did 
+    /// not process the message, it is highly recommended that you call 
+    /// CallNextHookEx and return the value it returns; otherwise, 
+    /// other applications that have installed WH_MOUSE_LL hooks will not 
+    /// receive hook notifications and may behave incorrectly as a result. 
+    /// If the hook procedure processed the message, it may return a nonzero #
+    /// value to prevent the system from passing the message to the rest of the 
+    /// hook chain or the target window procedure.</returns>
+    private IntPtr MouseHookCallback(int ncode, IntPtr wparam, IntPtr lparam)
     {
-      if (nCode >= 0)
+      if (ncode >= 0)
       {
         var skip = false;
         var isButtonDown = false;
         var button = MouseButtons.None;
-        switch ((MessageHook.MouseMessages)wParam)
+        switch ((MessageHook.MouseMessages)wparam)
         {
           case MessageHook.MouseMessages.WM_LBUTTONDOWN:
             button = MouseButtons.Left;
@@ -789,8 +816,8 @@ namespace Ogama.Modules.Recording.Presenter
         if (!skip)
         {
           var hookStruct =
-            (MessageHook.MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MessageHook.MSLLHOOKSTRUCT));
-          var mea = new MouseEventArgs(button, 1, hookStruct.pt.x, hookStruct.pt.y, 0);
+            (MessageHook.MSLLHOOKSTRUCT)Marshal.PtrToStructure(lparam, typeof(MessageHook.MSLLHOOKSTRUCT));
+          var mea = new MouseEventArgs(button, 1, hookStruct.Point.X, hookStruct.Point.Y, 0);
           if (isButtonDown)
           {
             this.frmPresenter_MouseDown(this, mea);
@@ -802,7 +829,7 @@ namespace Ogama.Modules.Recording.Presenter
         }
       }
 
-      return MessageHook.CallNextHookEx(mouseHookID, nCode, wParam, lParam);
+      return MessageHook.CallNextHookEx(this.mouseHookID, ncode, wparam, lparam);
     }
 
     /// <summary>
@@ -1132,10 +1159,6 @@ namespace Ogama.Modules.Recording.Presenter
           slideNode.Slide = newWebpageSlide;
 
           // Add node to slideshow at browser tree node subgroup
-          //if (Document.ActiveDocument.ExperimentSettings.SlideShow)
-          //{
-
-          //}
           this.currentBrowserTreeNode.Nodes.Add(slideNode);
           documentsSlideshow.IsModified = true;
           Document.ActiveDocument.Modified = true;
@@ -1530,6 +1553,10 @@ namespace Ogama.Modules.Recording.Presenter
       }
     }
 
+    /// <summary>
+    /// This method unhooks the low level keyboard and mouse message filters
+    /// if there are any.
+    /// </summary>
     private void UnhookMessageFilter()
     {
       if (this.keyboardHookID != IntPtr.Zero)
@@ -1598,7 +1625,7 @@ namespace Ogama.Modules.Recording.Presenter
 
       if (trialChange)
       {
-        //AsyncHelper.FireAndForget(new PrepareScreenCaptureDelegate(this.PrepareScreenCapture), this.trialCounter);
+        // AsyncHelper.FireAndForget(new PrepareScreenCaptureDelegate(this.PrepareScreenCapture), this.trialCounter);
         this.PrepareScreenCapture(this.trialCounter);
       }
     }
@@ -1703,8 +1730,8 @@ namespace Ogama.Modules.Recording.Presenter
       if (this.shownSlideContainer.Slide.IsDesktopSlide)
       {
         this.WindowState = FormWindowState.Minimized;
-        keyboardHookID = MessageHook.SetKeyboardHook(this.keyboardCallback);
-        mouseHookID = MessageHook.SetMouseHook(this.mouseCallback);
+        this.keyboardHookID = MessageHook.SetKeyboardHook(this.keyboardCallback);
+        this.mouseHookID = MessageHook.SetMouseHook(this.mouseCallback);
       }
       else
       {
@@ -1798,15 +1825,9 @@ namespace Ogama.Modules.Recording.Presenter
               Application.DoEvents();
             }
 
-
             while (browser.WebBrowser.ReadyState != WebBrowserReadyState.Complete)
             {
               Application.DoEvents();
-              //if (browser.WebBrowser.ReadyState == WebBrowserReadyState.Uninitialized)
-              //{
-              //  return;
-              //}
-
               if (this.closing)
               {
                 return;
@@ -2340,6 +2361,36 @@ namespace Ogama.Modules.Recording.Presenter
     // Small helping Methods                                                     //
     ///////////////////////////////////////////////////////////////////////////////
     #region HELPER
+
+    /// <summary>
+    /// This method is an implementation of the hook callback for low level
+    /// keyboard message hooks.
+    /// </summary>
+    /// <param name="ncode">A code the hook procedure uses to determine how 
+    /// to process the message. If nCode is less than zero, the hook procedure 
+    /// must pass the message to the CallNextHookEx function without further processing 
+    /// and should return the value returned by CallNextHookEx</param>
+    /// <param name="wparam">The identifier of the mouse message. This parameter can be one 
+    /// of the following messages: WM_LBUTTONDOWN, WM_LBUTTONUP, WM_MOUSEMOVE, 
+    /// WM_MOUSEWHEEL, WM_MOUSEHWHEEL, WM_RBUTTONDOWN, or WM_RBUTTONUP.</param>
+    /// <param name="lparam">A pointer to an MSLLHOOKSTRUCT structure.</param>
+    /// <returns>If nCode is less than zero, the hook procedure must return the value returned by CallNextHookEx. 
+    /// If nCode is greater than or equal to zero, and the hook procedure did 
+    /// not process the message, it is highly recommended that you call 
+    /// CallNextHookEx and return the value it returns; otherwise, 
+    /// other applications that have installed WH_MOUSE_LL hooks will not 
+    /// receive hook notifications and may behave incorrectly as a result. 
+    /// If the hook procedure processed the message, it may return a nonzero #
+    /// value to prevent the system from passing the message to the rest of the 
+    /// hook chain or the target window procedure.</returns>
+    private IntPtr KeyboardHookCallback(int ncode, IntPtr wparam, IntPtr lparam)
+    {
+      var msg = new Message { WParam = wparam, LParam = lparam, Msg = (int)wparam };
+      int keyCode = Marshal.ReadInt32(lparam);
+      this.ProcessCmdKey(ref msg, (Keys)keyCode);
+
+      return MessageHook.CallNextHookEx(this.keyboardHookID, ncode, wparam, lparam);
+    }
 
     /// <summary>
     /// This method initializes the user canera on first start of the

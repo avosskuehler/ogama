@@ -215,7 +215,7 @@ namespace Ogama.Modules.Scanpath.Colorization
     }
 
     /// <summary>
-    /// Gets or sets, Serializes and deserializes the <see cref="FontColor"/> to XML,
+    /// Gets or sets the serialized font color. Serializes and deserializes the <see cref="FontColor"/> to XML,
     /// because XMLSerializer can not serialize <see cref="Color"/> values.
     /// </summary>
     /// <value>A <see cref="string"/> with the string representation of the font color.</value>

@@ -88,8 +88,8 @@ namespace VectorGraphics.Tools.CustomEventArgs
     }
 
     /// <summary>
-    /// Gets a value indicating whether
-    /// the background worker has finished when the progress event is generated
+    /// Gets a value indicating whether the background worker 
+    /// has finished when the progress event is generated
     /// </summary>
     /// <value>A <see cref="Boolean"/> that is <strong>true</strong>,
     /// when the background worker has finished when the progress event is generated,

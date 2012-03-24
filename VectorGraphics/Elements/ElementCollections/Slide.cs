@@ -184,12 +184,6 @@ namespace VectorGraphics.Elements.ElementCollections
 
       this.IsDesktopSlide = slide.IsDesktopSlide;
 
-      // Clone thumb
-      //if (slide.Thumb != null)
-      {
-        //this.thumb = (Image)slide.Thumb.Clone();
-      }
-
       // Clone correct responses
       this.correctResponses = new StopConditionCollection();
       foreach (StopCondition condition in slide.CorrectResponses)
@@ -313,6 +307,9 @@ namespace VectorGraphics.Elements.ElementCollections
       }
     }
 
+    /// <summary>
+    /// Gets a value indicating whether the current thumb is empty.
+    /// </summary>
     [XmlIgnore]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     [Browsable(false)]

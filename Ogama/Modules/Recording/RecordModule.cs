@@ -24,7 +24,6 @@ namespace Ogama.Modules.Recording
   using System.Threading;
   using System.Windows.Forms;
   using GTCommons.Events;
-  //using GTHardware.Cameras.PS3Eye;
   using Ogama.DataSet;
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;

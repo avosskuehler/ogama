@@ -414,6 +414,7 @@ namespace Ogama.Modules.SlideshowDesign.Import
               {
                 File.Copy(file.FullName, destination, true);
               }
+
               VGImage image = new VGImage(
                 ShapeDrawAction.None,
                 Pens.Red,
