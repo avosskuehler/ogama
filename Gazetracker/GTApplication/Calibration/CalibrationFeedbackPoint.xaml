@@ -1,0 +1,15 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	x:Class="GTApplication.CalibrationUI.CalibrationFeedbackPoint"
+	x:Name="UserControl"
+	Width="Auto" Height="Auto" Opacity="0.495">
+
+	<Grid x:Name="LayoutRoot">
+		<Ellipse Fill="Red" Stroke="#FF000000" x:Name="EllipseBackground" Opacity="0.75"/>
+		<Ellipse Margin="0,0,0,0" Fill="#FFE7FF00" Stroke="#FFF2FF00" Width="10" Height="10" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="EllipseCenterStd"/>
+	</Grid>
+</UserControl>
