@@ -17,12 +17,13 @@ namespace Ogama.Modules.Recording.MirametrixInterface
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Drawing;
+    using System.Globalization;
     using System.IO;
     using System.Runtime.InteropServices;
     using System.Windows.Forms;
     using System.Xml;
     using System.Xml.Serialization;
-   
+       
     using GTCommons.Events;
 
     using Microsoft.Win32;
@@ -30,7 +31,7 @@ namespace Ogama.Modules.Recording.MirametrixInterface
     using Ogama.ExceptionHandling;
     using Ogama.Modules.Common;
     using Ogama.Modules.Recording.TrackerBase;
-
+        
     /// <summary>
     /// This class implements the <see cref="ITracker"/> interface to represent 
     /// an OGAMA known eyetracker.
@@ -326,7 +327,6 @@ namespace Ogama.Modules.Recording.MirametrixInterface
             }
             catch (Exception e) 
             {
-
                 string message = "Exception catched in Calibrate(...) Method : " +
                     Environment.NewLine + e.Message;
                 ExceptionMethods.ProcessErrorMessage(message);
@@ -493,7 +493,7 @@ namespace Ogama.Modules.Recording.MirametrixInterface
                             }
                             else if (root.Name == "REC")
                             {
-                                // TODO : Optimize data send to Ogama by verifying if they are valid
+                                // TODO : Optimize data sent to Ogama by verifying if they are valid
                                 var newGazeData = new GazeData();
 
                                 // Get gazeTimestamp in milliseconds.
@@ -501,22 +501,22 @@ namespace Ogama.Modules.Recording.MirametrixInterface
 
                                 // Calculate values between 0..1
                                 attribute = root.GetAttribute("BPOGX");
-                                newGazeData.GazePosX = float.Parse(attribute);
+                                newGazeData.GazePosX = float.Parse(attribute, CultureInfo.InvariantCulture);
                                 attribute = root.GetAttribute("BPOGY");
-                                newGazeData.GazePosY = float.Parse(attribute);
+                                newGazeData.GazePosY = float.Parse(attribute, CultureInfo.InvariantCulture);
 
                                 // Set pupil diameter
                                 attribute = root.GetAttribute("LPD");
-                                newGazeData.PupilDiaX = float.Parse(attribute);
+                                newGazeData.PupilDiaX = float.Parse(attribute, CultureInfo.InvariantCulture);
                                 attribute = root.GetAttribute("RPD");
-                                newGazeData.PupilDiaY = float.Parse(attribute);
+                                newGazeData.PupilDiaY = float.Parse(attribute, CultureInfo.InvariantCulture);
                                 this.OnGazeDataChanged(new GazeDataChangedEventArgs(newGazeData));
 
                                 // Values needed by the trackstatus windows
                                 attribute = root.GetAttribute("LPS");
-                                float lED = float.Parse(attribute);
+                                float lED = float.Parse(attribute, CultureInfo.InvariantCulture);
                                 attribute = root.GetAttribute("RPS");
-                                float rED = float.Parse(attribute);
+                                float rED = float.Parse(attribute, CultureInfo.InvariantCulture);
                                 float averageRD = (lED + rED) / 2;
                                 if (this.memDlgTrackStatus != null)
                                 {
