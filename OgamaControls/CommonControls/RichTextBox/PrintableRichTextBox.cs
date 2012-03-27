@@ -347,7 +347,7 @@ namespace OgamaControls
     public int Print(int charFrom, int charTo, Point position, Size size, Boolean measure, PrintPageEventArgs e)
     {
       //Calculate the area to render and print
-      VectorGraphics.Win32.User32.RECT rectToPrint;
+      VectorGraphics.Tools.Win32.User32.RECT rectToPrint;
       //rectToPrint.Top = (int)(e.MarginBounds.Top * anInch);
       //rectToPrint.Bottom = (int)(e.MarginBounds.Bottom * anInch);
       //rectToPrint.Left = (int)(e.MarginBounds.Left * anInch);
@@ -362,7 +362,7 @@ namespace OgamaControls
       //Rectangle printRect = new Rectangle(0,0, 500, 200);
       //Calculate the size of the page
 
-      VectorGraphics.Win32.User32.RECT rectPage;
+      VectorGraphics.Tools.Win32.User32.RECT rectPage;
       rectPage.Top = (int)(e.PageBounds.Top * anInch);
       rectPage.Bottom = (int)(e.PageBounds.Bottom * anInch);
       rectPage.Left = (int)(e.PageBounds.Left * anInch);
@@ -372,7 +372,7 @@ namespace OgamaControls
 
       IntPtr hdc = e.Graphics.GetHdc();
 
-      VectorGraphics.Win32.User32.FORMATRANGE fmtRange;
+      VectorGraphics.Tools.Win32.User32.FORMATRANGE fmtRange;
       fmtRange.Chrg.CharacterPositionMax = charTo;				//Indicate character from to character to 
       fmtRange.Chrg.CharacterPositionMin = charFrom;
       fmtRange.Hdc = hdc;                    //Use the same DC for measuring and rendering
@@ -401,7 +401,7 @@ namespace OgamaControls
       //IntPtr lResult = SendMessage(Handle, EM_SETBKGNDCOLOR, wparam2, lparam2);
 
       //Send the rendered data for printing 
-      res = VectorGraphics.Win32.User32.SendMessage(Handle, VectorGraphics.Win32.User32.EMFORMATRANGE, wparam, lparam);
+      res = VectorGraphics.Tools.Win32.User32.SendMessage(Handle, VectorGraphics.Tools.Win32.User32.EMFORMATRANGE, wparam, lparam);
 
       //Free the block of memory allocated
       Marshal.FreeCoTaskMem(lparam);
@@ -428,7 +428,7 @@ namespace OgamaControls
     public int FormatRange(int charFrom, int charTo, Point position, Size size, Boolean measure, Graphics g)
     {
       //Calculate the area to render and print
-      VectorGraphics.Win32.User32.RECT rectToPrint;
+      VectorGraphics.Tools.Win32.User32.RECT rectToPrint;
       //rectToPrint.Top = (int)(e.MarginBounds.Top * anInch);
       //rectToPrint.Bottom = (int)(e.MarginBounds.Bottom * anInch);
       //rectToPrint.Left = (int)(e.MarginBounds.Left * anInch);
@@ -441,7 +441,7 @@ namespace OgamaControls
       rectToPrint.Bottom = rectToPrint.Top + (int)(size.Height * YconvertToTwips);
 
       //Calculate the size of the page
-      VectorGraphics.Win32.User32.RECT rectPage;
+      VectorGraphics.Tools.Win32.User32.RECT rectPage;
       rectPage.Top = rectToPrint.Top;
       rectPage.Bottom = rectToPrint.Bottom;
       rectPage.Left = rectToPrint.Left;
@@ -449,7 +449,7 @@ namespace OgamaControls
 
       IntPtr hdc = g.GetHdc();
 
-      VectorGraphics.Win32.User32.FORMATRANGE fmtRange;
+      VectorGraphics.Tools.Win32.User32.FORMATRANGE fmtRange;
       fmtRange.Chrg.CharacterPositionMax = charTo;				//Indicate character from to character to 
       fmtRange.Chrg.CharacterPositionMin = charFrom;
       fmtRange.Hdc = hdc;                    //Use the same DC for measuring and rendering
@@ -468,7 +468,7 @@ namespace OgamaControls
       Marshal.StructureToPtr(fmtRange, lparam, false);
 
       //Send the rendered data for VectorGraphics.User32. 
-      res = VectorGraphics.Win32.User32.SendMessage(Handle, VectorGraphics.Win32.User32.EMFORMATRANGE, wparam, lparam);
+      res = VectorGraphics.Tools.Win32.User32.SendMessage(Handle, VectorGraphics.Tools.Win32.User32.EMFORMATRANGE, wparam, lparam);
 
       //Free the block of memory allocated
       Marshal.FreeCoTaskMem(lparam);

@@ -1,5 +1,7 @@
-﻿namespace Ogama.Modules.Recording
+﻿namespace Ogama.Modules.Recording.Dialogs
 {
+  using Ogama.Modules.Common.Controls;
+
   partial class SavingSuccessDialog
   {
     /// <summary>
@@ -13,9 +15,9 @@
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      if (disposing && (components != null))
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -30,7 +32,7 @@
     {
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SavingSuccessDialog));
 			this.btnYes = new System.Windows.Forms.Button();
-			this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+			this.dialogTop1 = new DialogTop();
 			this.SuspendLayout();
 			// 
 			// btnYes
@@ -82,6 +84,6 @@
     #endregion
 
     private System.Windows.Forms.Button btnYes;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
   }
 }

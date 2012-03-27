@@ -1,7 +1,7 @@
 // <copyright file="Images.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,7 +9,7 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
 namespace VectorGraphics.Tools
 {
@@ -22,7 +22,7 @@ namespace VectorGraphics.Tools
   using System.Text;
   using System.Windows.Forms;
 
-  using VectorGraphics.Win32;
+  using VectorGraphics.Tools.Win32;
 
   /// <summary>
   /// A class for creating gray scale images and other image related stuff.
@@ -117,16 +117,22 @@ namespace VectorGraphics.Tools
     /// with gray background color.</returns>
     public static Bitmap CreateNotFoundImage(Size size, string whatWasNotFound)
     {
-      // create new image
-      Bitmap image = new Bitmap(size.Width, size.Height, PixelFormat.Format32bppArgb);
-      using (Graphics graphics = Graphics.FromImage(image))
+      Bitmap image = null;
+      try
       {
-        graphics.Clear(Color.Gray);
-        SizeF textArea = graphics.MeasureString(whatWasNotFound + " not found", new Font("Verdana", 24));
-        PointF topLeft = new PointF(
-          size.Width / 2 - textArea.Width / 2,
-          size.Height / 2 - textArea.Height / 2);
-        graphics.DrawString(whatWasNotFound + " not found", new Font("Verdana", 24), Brushes.Red, topLeft);
+        // create new image
+        image = new Bitmap(size.Width, size.Height);
+        using (Graphics graphics = Graphics.FromImage(image))
+        {
+          graphics.Clear(Color.Gray);
+          SizeF textArea = graphics.MeasureString(whatWasNotFound + " not found", new Font("Verdana", 24));
+          PointF topLeft = new PointF(x: size.Width / 2 - textArea.Width / 2, y: size.Height / 2 - textArea.Height / 2);
+          graphics.DrawString(whatWasNotFound + " not found", new Font("Verdana", 24), Brushes.Red, topLeft);
+        }
+      }
+      catch (Exception ex)
+      {
+        VGExceptionMethods.HandleExceptionSilent(ex);
       }
 
       return image;

@@ -1,5 +1,7 @@
-﻿namespace Ogama.MainWindow
+﻿namespace Ogama.MainWindow.Dialogs
 {
+  using Ogama.Modules.Common.Controls;
+
   partial class NewExperiment
   {
     /// <summary>
@@ -13,9 +15,9 @@
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      if (disposing && (components != null))
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -38,7 +40,7 @@
       this.lblDescription = new System.Windows.Forms.Label();
       this.lblFolder = new System.Windows.Forms.Label();
       this.lblName = new System.Windows.Forms.Label();
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       this.SuspendLayout();
       // 
       // btnOK
@@ -173,6 +175,6 @@
     private System.Windows.Forms.Label lblDescription;
     private System.Windows.Forms.Label lblFolder;
     private System.Windows.Forms.Label lblName;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
   }
 }

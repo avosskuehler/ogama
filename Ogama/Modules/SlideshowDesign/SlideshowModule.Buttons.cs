@@ -1,7 +1,7 @@
 // <copyright file="SlideshowModule.Buttons.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,7 +9,7 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
 namespace Ogama.Modules.SlideshowDesign
 {
@@ -21,11 +21,16 @@ namespace Ogama.Modules.SlideshowDesign
 
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
-  using Ogama.Modules.Common;
+  using Ogama.Modules.Common.SlideCollections;
   using Ogama.Modules.Recording;
+  using Ogama.Modules.Recording.Presenter;
+  using Ogama.Modules.SlideshowDesign.DesignModule;
+  using Ogama.Modules.SlideshowDesign.DesignModule.StimuliDialogs;
+  using Ogama.Modules.SlideshowDesign.Import;
+  using Ogama.Modules.SlideshowDesign.Shuffling;
+
   using OgamaControls;
-  using VectorGraphics;
-  using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
 
   /// <summary>
   /// The SlideshowModule.Buttons.cs contains methods referring
@@ -143,6 +148,20 @@ namespace Ogama.Modules.SlideshowDesign
       newInstruction.Description = "Instruction stimuli can be used to present a message or a multiple choice question to the subject.";
       newInstruction.SlideName = this.GetUnusedSlideName();
       this.OpenStimulusDesignerForm(newInstruction, string.Empty);
+    }
+
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler for the
+    /// <see cref="Button"/> <see cref="btnDesktop"/>.
+    /// Raises the <see cref="OpenStimulusDesignerForm(SlideDesignModule,string)"/>
+    /// form with adapted properties for desktop stimuli.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void btnDesktop_Click(object sender, EventArgs e)
+    {
+      var newDesktop = new DesktopDialog { SlideName = this.GetUnusedSlideName() };
+      this.OpenDesktopDesignerForm(newDesktop, string.Empty);
     }
 
     /// <summary>

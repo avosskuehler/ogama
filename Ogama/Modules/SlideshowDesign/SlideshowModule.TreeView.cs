@@ -1,7 +1,7 @@
 // <copyright file="SlideshowModule.TreeView.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,7 +9,7 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
 namespace Ogama.Modules.SlideshowDesign
 {
@@ -20,9 +20,12 @@ namespace Ogama.Modules.SlideshowDesign
   using System.Windows.Forms;
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.SlideCollections;
+
   using OgamaControls;
   using VectorGraphics;
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
 
   /// <summary>
   /// The SlideshowModule.TreeView.cs contains methods referring
@@ -674,8 +677,17 @@ namespace Ogama.Modules.SlideshowDesign
     /// <param name="treeNode">The <see cref="SlideshowTreeNode"/> to delete.</param>
     private void DeleteNode(SlideshowTreeNode treeNode)
     {
+      if (treeNode == null)
+      {
+        return;
+      }
+
       Slide deleteSlide = treeNode.Slide;
-      deleteSlide.Dispose();
+      if (deleteSlide != null)
+      {
+        deleteSlide.Dispose();
+      }
+
       foreach (SlideshowTreeNode subNode in treeNode.Nodes)
       {
         this.DeleteNode(subNode);

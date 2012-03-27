@@ -1,7 +1,7 @@
 // <copyright file="ExperimentSettings.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,7 +9,7 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
 namespace Ogama.Properties
 {
@@ -24,7 +24,9 @@ namespace Ogama.Properties
 
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
-  using Ogama.Modules.Scanpaths;
+  using Ogama.Modules.Common.SlideCollections;
+  using Ogama.Modules.Scanpath.Colorization;
+
   using VectorGraphics;
 
   /// <summary>
@@ -213,7 +215,7 @@ namespace Ogama.Properties
     /// <summary>
     /// Gets or sets the OGAMA version that this experiment is currently working with.
     /// </summary>
-    [XmlIgnore()]
+    [XmlIgnore]
     public Version OgamaVersion
     {
       get

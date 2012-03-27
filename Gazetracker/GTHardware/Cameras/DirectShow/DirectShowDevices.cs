@@ -43,9 +43,6 @@ namespace GTHardware.Cameras.DirectShow
 
     private List<CameraInfo> cameraDevices;
 
-    private IBaseFilter capFilter;
-    private ICaptureGraphBuilder2 capGraph;
-    private IFilterGraph2 m_graphBuilder;
     private const int maxFps = 10000;
     private const int maxHeight = 10000;
     private const int maxWidth = 10000;
@@ -64,7 +61,6 @@ namespace GTHardware.Cameras.DirectShow
     private DirectShowDevices()
     {
       cameraDevices = GetDevices();
-      Clean();
     }
 
     #endregion //CONSTRUCTION
@@ -106,13 +102,6 @@ namespace GTHardware.Cameras.DirectShow
       {
         CameraInfo deviceInfo = Caps(device);
 
-        //if (deviceInfo == null)
-        //{
-        //    deviceInfo = new CameraInfo();
-        //    deviceInfo.Name = device.Name;
-        //    deviceInfo.SupportedSizesAndFPS.Add(new CamSizeFPS(1280, 1024, 25));
-        //}
-
         if (deviceInfo != null)
         {
           deviceInfo.DirectshowDevice = device;
@@ -132,30 +121,31 @@ namespace GTHardware.Cameras.DirectShow
     {
       var camerainfo = new CameraInfo();
 
+      // Get the graphbuilder object
+      var graphBuilder = (IFilterGraph2)new FilterGraph();
+
+      // Get the ICaptureGraphBuilder2
+      var capGraph = (ICaptureGraphBuilder2)new CaptureGraphBuilder2();
+
+      IBaseFilter capFilter = null;
+
       try
       {
-        // Get the graphbuilder object
-        m_graphBuilder = (IFilterGraph2)new FilterGraph();
-
-        // Get the ICaptureGraphBuilder2
-        capGraph = (ICaptureGraphBuilder2)new CaptureGraphBuilder2();
+        int hr = capGraph.SetFiltergraph(graphBuilder);
+        DsError.ThrowExceptionForHR(hr);
 
         // Add the video device
-        int hr = m_graphBuilder.AddSourceFilterForMoniker(dev.Mon, null, "Video input", out capFilter);
-        //DsError.ThrowExceptionForHR(hr);
+        hr = graphBuilder.AddSourceFilterForMoniker(dev.Mon, null, "Video input", out capFilter);
+        //        DsError.ThrowExceptionForHR(hr);
 
         if (hr != 0)
         {
+          Console.WriteLine("Error in m_graphBuilder.AddSourceFilterForMoniker(). Could not add source filter. Message: " + DsError.GetErrorText(hr));
           return null;
         }
 
-
-        hr = capGraph.SetFiltergraph(m_graphBuilder);
-        DsError.ThrowExceptionForHR(hr);
-
-        hr = m_graphBuilder.AddFilter(capFilter, "Ds.NET Video Capture Device");
-        DsError.ThrowExceptionForHR(hr);
-
+        //hr = m_graphBuilder.AddFilter(capFilter, "Ds.NET Video Capture Device");
+        //DsError.ThrowExceptionForHR(hr);
 
         object o = null;
         DsGuid cat = PinCategory.Capture;
@@ -197,7 +187,7 @@ namespace GTHardware.Cameras.DirectShow
         camerainfo.Name = dev.Name;
         camerainfo.DirectshowDevice = dev;
 
-        for (int i = 0; i < iCount; i++)
+        for (int i = 0; i < iCount; i++)     
         {
           VideoStreamConfigCaps scc;
 
@@ -223,36 +213,26 @@ namespace GTHardware.Cameras.DirectShow
             //ErrorLogger.ProcessException(ex, false);
           }
         }
+
+        Marshal.FreeCoTaskMem(pscc);
       }
       finally
       {
+        if (graphBuilder != null)
+        {
+          Marshal.ReleaseComObject(graphBuilder);
+        }
+        if (capFilter != null)
+        {
+          Marshal.ReleaseComObject(capFilter);
+        }
+        if (capGraph != null)
+        {
+          Marshal.ReleaseComObject(capGraph);
+        }
       }
 
       return camerainfo;
-    }
-
-    /// <summary>
-    /// Cleans up the test graph.
-    /// </summary>
-    private void Clean()
-    {
-      if (m_graphBuilder != null)
-      {
-        Marshal.ReleaseComObject(m_graphBuilder);
-        m_graphBuilder = null;
-      }
-      if (capFilter != null)
-      {
-        Marshal.ReleaseComObject(capFilter);
-        capFilter = null;
-      }
-      if (capGraph != null)
-      {
-        Marshal.ReleaseComObject(capGraph);
-        capGraph = null;
-      }
-
-      Marshal.FreeCoTaskMem(pscc);
     }
 
     #endregion //PRIVATEMETHODS

@@ -1,4 +1,4 @@
-﻿namespace Ogama.Modules.Common
+﻿namespace Ogama.Modules.Common.Controls
 {
   partial class HelpDialog
   {
@@ -13,9 +13,9 @@
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      if (disposing && (components != null))
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -32,7 +32,7 @@
       this.txbHelpMessage = new System.Windows.Forms.TextBox();
       this.btnOK = new System.Windows.Forms.Button();
       this.label2 = new System.Windows.Forms.Label();
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       this.splitContainer1 = new System.Windows.Forms.SplitContainer();
       this.splitContainer2 = new System.Windows.Forms.SplitContainer();
       this.splitContainer1.Panel1.SuspendLayout();
@@ -158,7 +158,7 @@
     private System.Windows.Forms.Button btnOK;
     private System.Windows.Forms.Label label2;
     private System.Windows.Forms.TextBox txbHelpMessage;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
     private System.Windows.Forms.SplitContainer splitContainer1;
     private System.Windows.Forms.SplitContainer splitContainer2;
   }

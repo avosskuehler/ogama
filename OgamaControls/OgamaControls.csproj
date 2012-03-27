@@ -93,7 +93,7 @@
     <OutputPath>..\Release86\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <BaseAddress>285212672</BaseAddress>
-    <DocumentationFile>..\Release86\OgamaControls.xml</DocumentationFile>
+    <DocumentationFile>..\Release86\Docs\OgamaControls.xml</DocumentationFile>
     <Optimize>true</Optimize>
     <DebugType>
     </DebugType>
@@ -137,9 +137,7 @@
     <Reference Include="System.Windows.Forms">
       <Name>System.Windows.Forms</Name>
     </Reference>
-    <Reference Include="System.XML">
-      <Name>System.XML</Name>
-    </Reference>
+    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonControls\Buttons\ColorButton\ColorButton.cs">
@@ -344,7 +342,6 @@
     <Compile Include="Dialogs\BrushStyleDlg.Designer.cs">
       <DependentUpon>BrushStyleDlg.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\DirectShowUtils.cs" />
     <Compile Include="Helpers\Win32.cs" />
     <Compile Include="Media\Player\AVPlayer.cs">
       <SubType>UserControl</SubType>

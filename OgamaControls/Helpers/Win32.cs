@@ -105,50 +105,5 @@ namespace OgamaControls
     [DllImport("Kernel32.dll", EntryPoint = "RtlMoveMemory")]
     public static extern void CopyMemory(IntPtr Destination, IntPtr Source, int Length);
   }
-
-  /// <summary>
-  /// This static class exposes methods from the oleaut32.dll to C#.
-  /// </summary>
-  public static class Oleaut32
-  {
-    /// <summary>
-    /// Invokes a new property frame, that is, a property sheet dialog box, whose parent is hwndOwner, where the dialog is positioned at the point (x,y) in the parent window and has the caption lpszCaption.
-    /// </summary>
-    /// <param name="hwndOwner">[in] Parent window of the resulting property sheet dialog box.</param>
-    /// <param name="x">[in] Reserved. Horizontal position for the dialog box relative to hwndOwner.</param>
-    /// <param name="y">[in] Reserved. Vertical position for the dialog box relative to hwndOwner.</param>
-    /// <param name="lpszCaption">[in] Pointer to the string used for the caption of the dialog box.</param>
-    /// <param name="cObjects">[in] Number of object pointers passed in lplpUnk.</param>
-    /// <param name="ppUnk">[in] An array of IUnknown pointers on the objects for 
-    /// which this property sheet is being invoked. The number of elements in the 
-    /// array is specified by cObjects. These pointers are passed to each property 
-    /// page through IPropertyPage::SetObjects.</param>
-    /// <param name="cPages">[in] Number of property pages specified in lpPageCIsID.</param>
-    /// <param name="lpPageClsID">[in] Array of size cPages containing the CLSIDs 
-    /// of each property page to display in the property sheet.</param>
-    /// <param name="lcid">[in] Locale identifier to use for the property sheet. 
-    /// Property pages can retrieve this identifier through IPropertyPageSite::GetLocaleID.</param>
-    /// <param name="dwReserved">[in] Reserved for future use; must be zero.</param>
-    /// <param name="lpvReserved">[in] Reserved for future use; must be NULL.</param>
-    /// <returns>This function supports the standard return values E_INVALIDARG, 
-    /// E_OUTOFMEMORY, and E_UNEXPECTED, as well as the following: 
-    /// S_OK The dialog box was invoked and operated successfully.
-    /// E_POINTER The address in lpszCaption, lplpUnk, or lpPageCIsID is not valid. 
-    /// For example, any one of them may be NULL.</returns>
-    [DllImport(@"oleaut32.dll")]
-    public static extern int OleCreatePropertyFrame(
-      IntPtr hwndOwner,
-      int x,
-      int y,
-      [MarshalAs(UnmanagedType.LPWStr)] string lpszCaption,
-      int cObjects,
-      [MarshalAs(UnmanagedType.Interface, ArraySubType = UnmanagedType.IUnknown)] 
-			ref object ppUnk,
-      int cPages,
-      IntPtr lpPageClsID,
-      int lcid,
-      int dwReserved,
-      IntPtr lpvReserved);
-  }
 }
 

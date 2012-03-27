@@ -1,7 +1,7 @@
 ﻿// <copyright file="AudioFile.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,7 +9,7 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
 namespace VectorGraphics.Tools
 {
@@ -37,32 +37,6 @@ namespace VectorGraphics.Tools
     ///////////////////////////////////////////////////////////////////////////////
     #region FIELDS
 
-    /// <summary>
-    /// Saves the filename without path to the audio file.
-    /// </summary>
-    private string filename;
-
-    /// <summary>
-    /// Saves the path to the audio file.
-    /// </summary>
-    private string path;
-
-    /// <summary>
-    /// Indicates whether this file should be played or not.
-    /// </summary>
-    private bool shouldPlay;
-
-    /// <summary>
-    /// Indicates whether this audio files should be looped during replay.
-    /// </summary>
-    private bool loop;
-
-    /// <summary>
-    /// Indicates that the file should only played when the object it belongs to
-    /// is clicked, otherwise the file will be played immediately.
-    /// </summary>
-    private bool showOnClick;
-
     #endregion //FIELDS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -75,11 +49,11 @@ namespace VectorGraphics.Tools
     /// </summary>
     public AudioFile()
     {
-      this.path = string.Empty;
-      this.filename = string.Empty;
-      this.loop = false;
-      this.shouldPlay = false;
-      this.showOnClick = false;
+      this.Filepath = string.Empty;
+      this.Filename = string.Empty;
+      this.Loop = false;
+      this.ShouldPlay = false;
+      this.ShowOnClick = false;
     }
 
     /// <summary>
@@ -113,37 +87,29 @@ namespace VectorGraphics.Tools
     /// <summary>
     /// Gets or sets the filename without path to the audio file.
     /// </summary>
-    public string Filename
-    {
-      get { return this.filename; }
-      set { this.filename = value; }
-    }
+    public string Filename { get; set; }
 
     /// <summary>
     /// Gets or sets the path to the audio file.
     /// </summary>
-    [XmlIgnore()]
-    public string Filepath
-    {
-      get { return this.path; }
-      set { this.path = value; }
-    }
+    [XmlIgnore]
+    public string Filepath { get; set; }
 
     /// <summary>
     /// Gets the audio filename with path.
     /// </summary>
-    [XmlIgnore()]
+    [XmlIgnore]
     public string FullFilename
     {
       get
       {
-        if (this.path == null)
+        if (this.Filepath == null)
         {
-          string newPath = Path.GetDirectoryName(this.filename);
+          string newPath = Path.GetDirectoryName(this.Filename);
           if (newPath != string.Empty)
           {
-            this.path = newPath;
-            this.filename = Path.GetFileName(this.filename);
+            this.Filepath = newPath;
+            this.Filename = Path.GetFileName(this.Filename);
           }
           else
           {
@@ -151,38 +117,26 @@ namespace VectorGraphics.Tools
           }
         }
 
-        return Path.Combine(this.path, this.filename);
+        return Path.Combine(this.Filepath, this.Filename);
       }
     }
 
     /// <summary>
     /// Gets or sets a value indicating whether this file should be played or not.
     /// </summary>
-    public bool ShouldPlay
-    {
-      get { return this.shouldPlay; }
-      set { this.shouldPlay = value; }
-    }
+    public bool ShouldPlay { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether this audio files should be looped during replay.
     /// </summary>
-    public bool Loop
-    {
-      get { return this.loop; }
-      set { this.loop = value; }
-    }
+    public bool Loop { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether the file should only 
     /// be played when the object it belongs to
     /// is clicked, otherwise the file will be played immediately.
     /// </summary>
-    public bool ShowOnClick
-    {
-      get { return this.showOnClick; }
-      set { this.showOnClick = value; }
-    }
+    public bool ShowOnClick { get; set; }
 
     #endregion //PROPERTIES
 

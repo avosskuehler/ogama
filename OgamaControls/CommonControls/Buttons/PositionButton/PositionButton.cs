@@ -6,10 +6,11 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 using VectorGraphics;
-using VectorGraphics.CustomTypeConverter;
 
 namespace OgamaControls
 {
+  using VectorGraphics.Tools.CustomTypeConverter;
+
   /// <summary>
   /// Position button is a specialized button for a position selection.
   /// OnClick it opens a stimulus screen proportional panel of type <see cref="PositionSelector"/> on which

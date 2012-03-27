@@ -1,5 +1,7 @@
 namespace Ogama.Modules.Statistics
 {
+  using Ogama.Modules.Common.Controls;
+
   /// <summary>
   /// 
   /// </summary>
@@ -33,13 +35,13 @@ namespace Ogama.Modules.Statistics
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StatisticsModule));
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StatisticsModule));
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
       this.dGVExportTable = new System.Windows.Forms.DataGridView();
       this.cmuDGV = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.cmuRecalculate = new System.Windows.Forms.ToolStripMenuItem();
@@ -131,7 +133,7 @@ namespace Ogama.Modules.Statistics
       this.tacStandard = new System.Windows.Forms.TabControl();
       this.tbpSubject = new System.Windows.Forms.TabPage();
       this.splitContainer4 = new System.Windows.Forms.SplitContainer();
-      this.dialogTop3 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop3 = new DialogTop();
       this.groupBox24 = new System.Windows.Forms.GroupBox();
       this.trvSubjects = new OgamaControls.CheckboxTreeView(this.components);
       this.imlTreeViewSubjects = new System.Windows.Forms.ImageList(this.components);
@@ -141,7 +143,7 @@ namespace Ogama.Modules.Statistics
       this.groupBox5 = new System.Windows.Forms.GroupBox();
       this.tbpTrial = new System.Windows.Forms.TabPage();
       this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       this.tpbTrial = new System.Windows.Forms.TabControl();
       this.tpbTrialStandard = new System.Windows.Forms.TabPage();
       this.groupBox17 = new System.Windows.Forms.GroupBox();
@@ -156,7 +158,7 @@ namespace Ogama.Modules.Statistics
       this.tbpGaze = new System.Windows.Forms.TabPage();
       this.splitContainer3 = new System.Windows.Forms.SplitContainer();
       this.label8 = new System.Windows.Forms.Label();
-      this.dialogTop2 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop2 = new DialogTop();
       this.tacGazeParams = new System.Windows.Forms.TabControl();
       this.tbpGazeDefault = new System.Windows.Forms.TabPage();
       this.groupBox7 = new System.Windows.Forms.GroupBox();
@@ -186,7 +188,7 @@ namespace Ogama.Modules.Statistics
       this.tbpMouse = new System.Windows.Forms.TabPage();
       this.splitContainer5 = new System.Windows.Forms.SplitContainer();
       this.label1 = new System.Windows.Forms.Label();
-      this.dialogTop4 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop4 = new DialogTop();
       this.tacMouse = new System.Windows.Forms.TabControl();
       this.tbpMouseDefault = new System.Windows.Forms.TabPage();
       this.groupBox23 = new System.Windows.Forms.GroupBox();
@@ -209,7 +211,7 @@ namespace Ogama.Modules.Statistics
       this.cbbMouseAOIGroup = new System.Windows.Forms.ComboBox();
       this.tbpOptions = new System.Windows.Forms.TabPage();
       this.splitContainer6 = new System.Windows.Forms.SplitContainer();
-      this.dialogTop5 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop5 = new DialogTop();
       this.label3 = new System.Windows.Forms.Label();
       this.chb8CharacterRow = new System.Windows.Forms.CheckBox();
       this.label4 = new System.Windows.Forms.Label();
@@ -276,11 +278,13 @@ namespace Ogama.Modules.Statistics
       this.tscStandard.ContentPanel.SuspendLayout();
       this.tscStandard.TopToolStripPanel.SuspendLayout();
       this.tscStandard.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.spcTacDgv)).BeginInit();
       this.spcTacDgv.Panel1.SuspendLayout();
       this.spcTacDgv.Panel2.SuspendLayout();
       this.spcTacDgv.SuspendLayout();
       this.tacStandard.SuspendLayout();
       this.tbpSubject.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
       this.splitContainer4.Panel1.SuspendLayout();
       this.splitContainer4.Panel2.SuspendLayout();
       this.splitContainer4.SuspendLayout();
@@ -289,6 +293,7 @@ namespace Ogama.Modules.Statistics
       this.groupBox6.SuspendLayout();
       this.groupBox5.SuspendLayout();
       this.tbpTrial.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
       this.splitContainer1.Panel1.SuspendLayout();
       this.splitContainer1.Panel2.SuspendLayout();
       this.splitContainer1.SuspendLayout();
@@ -301,6 +306,7 @@ namespace Ogama.Modules.Statistics
       this.groupBox3.SuspendLayout();
       this.groupBox4.SuspendLayout();
       this.tbpGaze.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
       this.splitContainer3.Panel1.SuspendLayout();
       this.splitContainer3.Panel2.SuspendLayout();
       this.splitContainer3.SuspendLayout();
@@ -317,6 +323,7 @@ namespace Ogama.Modules.Statistics
       this.tbpGazeRegressions.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.nudGazeRegressionLineHeight)).BeginInit();
       this.tbpMouse.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).BeginInit();
       this.splitContainer5.Panel1.SuspendLayout();
       this.splitContainer5.Panel2.SuspendLayout();
       this.splitContainer5.SuspendLayout();
@@ -330,6 +337,7 @@ namespace Ogama.Modules.Statistics
       this.groupBox16.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.nudMouseNumberOf)).BeginInit();
       this.tbpOptions.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer6)).BeginInit();
       this.splitContainer6.Panel1.SuspendLayout();
       this.splitContainer6.Panel2.SuspendLayout();
       this.splitContainer6.SuspendLayout();
@@ -338,6 +346,7 @@ namespace Ogama.Modules.Statistics
       this.tscTransitions.ContentPanel.SuspendLayout();
       this.tscTransitions.TopToolStripPanel.SuspendLayout();
       this.tscTransitions.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
       this.splitContainer2.Panel1.SuspendLayout();
       this.splitContainer2.Panel2.SuspendLayout();
       this.splitContainer2.SuspendLayout();
@@ -345,6 +354,7 @@ namespace Ogama.Modules.Statistics
       this.groupBox19.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
       this.groupBox18.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer7)).BeginInit();
       this.splitContainer7.Panel1.SuspendLayout();
       this.splitContainer7.Panel2.SuspendLayout();
       this.splitContainer7.SuspendLayout();
@@ -356,26 +366,26 @@ namespace Ogama.Modules.Statistics
       // dGVExportTable
       // 
       this.dGVExportTable.AllowUserToOrderColumns = true;
-      dataGridViewCellStyle4.NullValue = null;
-      this.dGVExportTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
-      dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-      dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-      dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-      this.dGVExportTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+      dataGridViewCellStyle1.NullValue = null;
+      this.dGVExportTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+      dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+      dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.dGVExportTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
       this.dGVExportTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.dGVExportTable.ContextMenuStrip = this.cmuDGV;
-      dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.dGVExportTable.DefaultCellStyle = dataGridViewCellStyle6;
+      dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.dGVExportTable.DefaultCellStyle = dataGridViewCellStyle3;
       this.dGVExportTable.Dock = System.Windows.Forms.DockStyle.Fill;
       this.dGVExportTable.Location = new System.Drawing.Point(0, 0);
       this.dGVExportTable.Name = "dGVExportTable";
@@ -492,8 +502,8 @@ namespace Ogama.Modules.Statistics
       this.chbTRIEliminate.TabIndex = 8;
       this.chbTRIEliminate.Text = "Eliminate y/n";
       this.toolTipStatistic.SetToolTip(this.chbTRIEliminate, "During the revision this trial seemed to be not \r\nreliable so it should been elim" +
-              "inated from further analysis.\r\n\r\nvalue = 0, if trial tables column \"EliminateDat" +
-              "a\"\r\nis null, otherwise value=1");
+        "inated from further analysis.\r\n\r\nvalue = 0, if trial tables column \"EliminateDat" +
+        "a\"\r\nis null, otherwise value=1");
       this.chbTRIEliminate.UseVisualStyleBackColor = true;
       this.chbTRIEliminate.CheckedChanged += new System.EventHandler(this.chbTrialDefault_CheckedChanged);
       // 
@@ -505,8 +515,8 @@ namespace Ogama.Modules.Statistics
       this.chbTRIAOISize.TabIndex = 7;
       this.chbTRIAOISize.Text = "AOI size\r\n(% of stimulus size)";
       this.toolTipStatistic.SetToolTip(this.chbTRIAOISize, "Area of all areas of interest,\r\nexcept those marked as \"SearchRect\",\r\nin percent " +
-              "from screen size\r\n\r\nA value of -1 means:\r\nno AOIs defined\r\nA value of -2 means:\r" +
-              "\nno AOIs except \"SearchRect\" defined.");
+        "from screen size\r\n\r\nA value of -1 means:\r\nno AOIs defined\r\nA value of -2 means:\r" +
+        "\nno AOIs except \"SearchRect\" defined.");
       this.chbTRIAOISize.UseVisualStyleBackColor = true;
       this.chbTRIAOISize.CheckedChanged += new System.EventHandler(this.chbTrialDefault_CheckedChanged);
       // 
@@ -518,7 +528,7 @@ namespace Ogama.Modules.Statistics
       this.chbTRITargetsize.TabIndex = 6;
       this.chbTRITargetsize.Text = "Target AOI size \r\n(% of stimulus size)";
       this.toolTipStatistic.SetToolTip(this.chbTRITargetsize, "Area of all areas of interest, with the\r\n\"Target\" category,\r\nin percent from scre" +
-              "en size\r\n\r\nA value of -1 means:\r\nno \"Target\" AOI defined");
+        "en size\r\n\r\nA value of -1 means:\r\nno \"Target\" AOI defined");
       this.chbTRITargetsize.UseVisualStyleBackColor = true;
       this.chbTRITargetsize.CheckedChanged += new System.EventHandler(this.chbTrialDefault_CheckedChanged);
       // 
@@ -530,7 +540,7 @@ namespace Ogama.Modules.Statistics
       this.chbTRIDataLoss.TabIndex = 5;
       this.chbTRIDataLoss.Text = "Blank samples because of blinks (count)";
       this.toolTipStatistic.SetToolTip(this.chbTRIDataLoss, "Count of gaze samples, \r\nthat have a value of (0,0).\r\n\r\nA value of 0  means:\r\nNo " +
-              "gaze data is lost through missing \r\ndetection or blinks.");
+        "gaze data is lost through missing \r\ndetection or blinks.");
       this.chbTRIDataLoss.UseVisualStyleBackColor = true;
       this.chbTRIDataLoss.CheckedChanged += new System.EventHandler(this.chbTrialDefault_CheckedChanged);
       // 
@@ -601,7 +611,7 @@ namespace Ogama.Modules.Statistics
       this.chbGAZFixTimeAtTarget.TabIndex = 7;
       this.chbGAZFixTimeAtTarget.Text = "complete fixation time in target area.";
       this.toolTipStatistic.SetToolTip(this.chbGAZFixTimeAtTarget, "Sum of fixation time\r\nat the area of interest quoted\r\nin AOI interface as \"Target" +
-              "\"\r\n\r\nA value of -1 means: \r\nno \"Target\" AOI defined.");
+        "\"\r\n\r\nA value of -1 means: \r\nno \"Target\" AOI defined.");
       this.chbGAZFixTimeAtTarget.UseVisualStyleBackColor = true;
       this.chbGAZFixTimeAtTarget.CheckedChanged += new System.EventHandler(this.chbGazeDefault_CheckedChanged);
       // 
@@ -624,7 +634,7 @@ namespace Ogama.Modules.Statistics
       this.chbGAZCountFix2FirstClick.TabIndex = 5;
       this.chbGAZCountFix2FirstClick.Text = "fixations until first click (count)";
       this.toolTipStatistic.SetToolTip(this.chbGAZCountFix2FirstClick, "Number of fixations for each trial\r\nuntil first mouse click.\r\n\r\nA value of -1 mea" +
-              "ns:\r\nNo left or right mouse click\r\nin this trial.");
+        "ns:\r\nNo left or right mouse click\r\nin this trial.");
       this.chbGAZCountFix2FirstClick.UseVisualStyleBackColor = true;
       this.chbGAZCountFix2FirstClick.CheckedChanged += new System.EventHandler(this.chbGazeDefault_CheckedChanged);
       // 
@@ -658,7 +668,7 @@ namespace Ogama.Modules.Statistics
       this.chbGAZFixDurationMean.TabIndex = 1;
       this.chbGAZFixDurationMean.Text = "fixation duration mean";
       this.toolTipStatistic.SetToolTip(this.chbGAZFixDurationMean, "Sum of all fixation durations \r\ndivided by fixation count.\r\n\r\nA value of -1 means" +
-              ":\r\nNo fixation at all.");
+        ":\r\nNo fixation at all.");
       this.chbGAZFixDurationMean.UseVisualStyleBackColor = true;
       this.chbGAZFixDurationMean.CheckedChanged += new System.EventHandler(this.chbGazeDefault_CheckedChanged);
       // 
@@ -681,7 +691,7 @@ namespace Ogama.Modules.Statistics
       this.chbMSETime2FirstClick.TabIndex = 4;
       this.chbMSETime2FirstClick.Text = "time until first click.";
       this.toolTipStatistic.SetToolTip(this.chbMSETime2FirstClick, "Time until subjects first mouse click.\r\n\r\nA value of -1 means: \r\nmouse was never " +
-              "clicked");
+        "clicked");
       this.chbMSETime2FirstClick.UseVisualStyleBackColor = true;
       this.chbMSETime2FirstClick.CheckedChanged += new System.EventHandler(this.chbMouseDefault_CheckedChanged);
       // 
@@ -715,7 +725,7 @@ namespace Ogama.Modules.Statistics
       this.chbMSEPathlength.TabIndex = 1;
       this.chbMSEPathlength.Text = "pathlength (px)";
       this.toolTipStatistic.SetToolTip(this.chbMSEPathlength, "Length of the mouse path polyline in pixels.\r\n\r\nA value of -1 means:\r\nno mouse da" +
-              "ta ");
+        "ta ");
       this.chbMSEPathlength.UseVisualStyleBackColor = true;
       this.chbMSEPathlength.CheckedChanged += new System.EventHandler(this.chbMouseDefault_CheckedChanged);
       // 
@@ -746,8 +756,8 @@ namespace Ogama.Modules.Statistics
       this.bgwCalculateStandards.WorkerReportsProgress = true;
       this.bgwCalculateStandards.WorkerSupportsCancellation = true;
       this.bgwCalculateStandards.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwCalculation_DoWork);
-      this.bgwCalculateStandards.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwCalculation_RunWorkerCompleted);
       this.bgwCalculateStandards.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgwCalculation_ProgressChanged);
+      this.bgwCalculateStandards.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwCalculation_RunWorkerCompleted);
       // 
       // sfdExport
       // 
@@ -818,7 +828,7 @@ namespace Ogama.Modules.Statistics
       this.chbGAZSaccadeLength.TabIndex = 4;
       this.chbGAZSaccadeLength.Text = "average saccade length (px)";
       this.toolTipStatistic.SetToolTip(this.chbGAZSaccadeLength, "Mean of all lengths of the straight\r\nline connections between consecutive\r\nfixati" +
-              "ons.\r\n\r\nA value of -1 means:\r\nno gaze data ");
+        "ons.\r\n\r\nA value of -1 means:\r\nno gaze data ");
       this.chbGAZSaccadeLength.UseVisualStyleBackColor = true;
       this.chbGAZSaccadeLength.CheckedChanged += new System.EventHandler(this.chbGazeDefault_CheckedChanged);
       // 
@@ -830,7 +840,7 @@ namespace Ogama.Modules.Statistics
       this.chbGAZSaccadeVelocity.TabIndex = 4;
       this.chbGAZSaccadeVelocity.Text = "saccade velocity (px/s)";
       this.toolTipStatistic.SetToolTip(this.chbGAZSaccadeVelocity, "Average saccade velocity calculated as\r\nmean of all saccades length/timespan valu" +
-              "es.\r\n\r\nA value of -1 means:\r\nno gaze data ");
+        "es.\r\n\r\nA value of -1 means:\r\nno gaze data ");
       this.chbGAZSaccadeVelocity.UseVisualStyleBackColor = true;
       this.chbGAZSaccadeVelocity.CheckedChanged += new System.EventHandler(this.chbGazeDefault_CheckedChanged);
       // 
@@ -853,7 +863,7 @@ namespace Ogama.Modules.Statistics
       this.chbGAZFixationSaccadesRatio.TabIndex = 1;
       this.chbGAZFixationSaccadesRatio.Text = "fixations/saccades ratio";
       this.toolTipStatistic.SetToolTip(this.chbGAZFixationSaccadesRatio, "Sum of fixation times divided\r\nby trial duration.\r\n(OK. This is not every time a " +
-              "real\r\nfixation - saccade ratio, but ...) ");
+        "real\r\nfixation - saccade ratio, but ...) ");
       this.chbGAZFixationSaccadesRatio.UseVisualStyleBackColor = true;
       this.chbGAZFixationSaccadesRatio.CheckedChanged += new System.EventHandler(this.chbGazeDefault_CheckedChanged);
       // 
@@ -865,7 +875,7 @@ namespace Ogama.Modules.Statistics
       this.chbMSEPathlengthPS.TabIndex = 1;
       this.chbMSEPathlengthPS.Text = "pathlength (px/s)";
       this.toolTipStatistic.SetToolTip(this.chbMSEPathlengthPS, "Mouse path velocity.\r\nThat is the length of the mouse \r\npath polyline in pixels p" +
-              "er second.");
+        "er second.");
       this.chbMSEPathlengthPS.UseVisualStyleBackColor = true;
       this.chbMSEPathlengthPS.CheckedChanged += new System.EventHandler(this.chbMouseDefault_CheckedChanged);
       // 
@@ -904,13 +914,7 @@ namespace Ogama.Modules.Statistics
       this.nudTolerance.Size = new System.Drawing.Size(46, 20);
       this.nudTolerance.TabIndex = 10;
       this.nudTolerance.Tag = "";
-      this.toolTipStatistic.SetToolTip(this.nudTolerance, "To make sure the lesser good\r\ncalibrated subjects produce \r\narea of interest hits" +
-              ", widen the \r\nareas of interest by that value.\r\nBe careful with this !");
-      this.nudTolerance.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
+      this.toolTipStatistic.SetToolTip(this.nudTolerance, resources.GetString("nudTolerance.ToolTip"));
       this.nudTolerance.ValueChanged += new System.EventHandler(this.nudTolerance_ValueChanged);
       // 
       // chbTRIResponseCorrectness
@@ -921,7 +925,7 @@ namespace Ogama.Modules.Statistics
       this.chbTRIResponseCorrectness.TabIndex = 3;
       this.chbTRIResponseCorrectness.Text = "Correctness of response";
       this.toolTipStatistic.SetToolTip(this.chbTRIResponseCorrectness, "Did the subject decided correct ?\r\n 1 : correct answered\r\n 0 : wrong answered\r\n-1" +
-              " : no testing conditions specified\r\n");
+        " : no testing conditions specified\r\n");
       this.chbTRIResponseCorrectness.UseVisualStyleBackColor = true;
       this.chbTRIResponseCorrectness.CheckedChanged += new System.EventHandler(this.chbTrialDefault_CheckedChanged);
       // 
@@ -940,7 +944,7 @@ namespace Ogama.Modules.Statistics
       this.groupBox10.TabStop = false;
       this.groupBox10.Text = "Mouse clicks";
       this.toolTipStatistic.SetToolTip(this.groupBox10, "To specify custom trigger strings in the response column for left and \r\nright mou" +
-              "se clicks, please have a look at the options tab.");
+        "se clicks, please have a look at the options tab.");
       // 
       // chbMSECountFix2FirstClick
       // 
@@ -950,7 +954,7 @@ namespace Ogama.Modules.Statistics
       this.chbMSECountFix2FirstClick.TabIndex = 5;
       this.chbMSECountFix2FirstClick.Text = "fixations until first click (count).";
       this.toolTipStatistic.SetToolTip(this.chbMSECountFix2FirstClick, "Number of fixations for each trial\r\nuntil first mouse click.\r\n\r\nA value of -1 mea" +
-              "ns:\r\nNo left or right mouse click\r\nin this trial.");
+        "ns:\r\nNo left or right mouse click\r\nin this trial.");
       this.chbMSECountFix2FirstClick.UseVisualStyleBackColor = true;
       this.chbMSECountFix2FirstClick.CheckedChanged += new System.EventHandler(this.chbMouseDefault_CheckedChanged);
       // 
@@ -1005,7 +1009,7 @@ namespace Ogama.Modules.Statistics
       this.checkBox5.TabIndex = 1;
       this.checkBox5.Text = "Fixations/saccades ratio";
       this.toolTipStatistic.SetToolTip(this.checkBox5, "Sum of fixation times divided\r\nby trial duration.\r\n(OK. This is not every time a " +
-              "real\r\nfixation - saccade ratio, but ...) ");
+        "real\r\nfixation - saccade ratio, but ...) ");
       this.checkBox5.UseVisualStyleBackColor = true;
       // 
       // chbMSEFixations
@@ -1038,7 +1042,7 @@ namespace Ogama.Modules.Statistics
       this.chbMSEFixDurationMean.TabIndex = 1;
       this.chbMSEFixDurationMean.Text = "fixation duration mean";
       this.toolTipStatistic.SetToolTip(this.chbMSEFixDurationMean, "Sum of all fixation durations \r\ndivided by fixation count.\r\n\r\nA value of -1 means" +
-              ":\r\nNo fixation at all.");
+        ":\r\nNo fixation at all.");
       this.chbMSEFixDurationMean.UseVisualStyleBackColor = true;
       this.chbMSEFixDurationMean.CheckedChanged += new System.EventHandler(this.chbMouseDefault_CheckedChanged);
       // 
@@ -1050,7 +1054,7 @@ namespace Ogama.Modules.Statistics
       this.chbMSEFixationSaccadesRatio.TabIndex = 1;
       this.chbMSEFixationSaccadesRatio.Text = "fixations/saccades ratio";
       this.toolTipStatistic.SetToolTip(this.chbMSEFixationSaccadesRatio, "Sum of fixation times divided\r\nby trial duration.\r\n(OK. This is not every time a " +
-              "real\r\nfixation - saccade ratio, but ...) ");
+        "real\r\nfixation - saccade ratio, but ...) ");
       this.chbMSEFixationSaccadesRatio.UseVisualStyleBackColor = true;
       this.chbMSEFixationSaccadesRatio.CheckedChanged += new System.EventHandler(this.chbMouseDefault_CheckedChanged);
       // 
@@ -1073,7 +1077,7 @@ namespace Ogama.Modules.Statistics
       this.chbMSEFixTimeAtTarget.TabIndex = 9;
       this.chbMSEFixTimeAtTarget.Text = "complete fixation time in target area.";
       this.toolTipStatistic.SetToolTip(this.chbMSEFixTimeAtTarget, "Sum of fixation time\r\nat the area of interest quoted\r\nin AOI interface as \"Target" +
-              "\"\r\n\r\nA value of -1 means: \r\nno \"Target\" AOI defined.");
+        "\"\r\n\r\nA value of -1 means: \r\nno \"Target\" AOI defined.");
       this.chbMSEFixTimeAtTarget.UseVisualStyleBackColor = true;
       this.chbMSEFixTimeAtTarget.CheckedChanged += new System.EventHandler(this.chbMouseDefault_CheckedChanged);
       // 
@@ -1091,26 +1095,26 @@ namespace Ogama.Modules.Statistics
       // dgvTransitions
       // 
       this.dgvTransitions.AllowUserToOrderColumns = true;
-      dataGridViewCellStyle7.NullValue = null;
-      this.dgvTransitions.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
-      dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-      dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-      dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-      this.dgvTransitions.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+      dataGridViewCellStyle4.NullValue = null;
+      this.dgvTransitions.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+      dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+      dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.dgvTransitions.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
       this.dgvTransitions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.dgvTransitions.ContextMenuStrip = this.cmuDGV;
-      dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.dgvTransitions.DefaultCellStyle = dataGridViewCellStyle9;
+      dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.dgvTransitions.DefaultCellStyle = dataGridViewCellStyle6;
       this.dgvTransitions.Dock = System.Windows.Forms.DockStyle.Fill;
       this.dgvTransitions.Location = new System.Drawing.Point(0, 0);
       this.dgvTransitions.Name = "dgvTransitions";
@@ -1120,7 +1124,7 @@ namespace Ogama.Modules.Statistics
       this.dgvTransitions.Size = new System.Drawing.Size(775, 146);
       this.dgvTransitions.TabIndex = 1;
       this.toolTipStatistic.SetToolTip(this.dgvTransitions, "Number of fixations for each trial\r\nuntil first mouse click.\r\n\r\nA value of -1 mea" +
-              "ns:\r\nNo left or right mouse click\r\nin this trial.");
+        "ns:\r\nNo left or right mouse click\r\nin this trial.");
       // 
       // chbTRIAOIofResponse
       // 
@@ -1154,8 +1158,8 @@ namespace Ogama.Modules.Statistics
       this.rdbGazeCompleteFixationTime.TabIndex = 25;
       this.rdbGazeCompleteFixationTime.Text = "complete fixation time";
       this.toolTipStatistic.SetToolTip(this.rdbGazeCompleteFixationTime, "Sum of fixation time\r\nat the specified area of interest \r\nor area of interest gro" +
-              "up\r\nin milliseconds.\r\n\r\nA value of -1 means: \r\nthis AOI/AOI group was not define" +
-              "d.");
+        "up\r\nin milliseconds.\r\n\r\nA value of -1 means: \r\nthis AOI/AOI group was not define" +
+        "d.");
       this.rdbGazeCompleteFixationTime.UseVisualStyleBackColor = true;
       // 
       // rdbGazeTimeUntil
@@ -1178,8 +1182,8 @@ namespace Ogama.Modules.Statistics
       this.rdbGazeFixationDurationMean.TabIndex = 26;
       this.rdbGazeFixationDurationMean.Text = "fixation duration mean";
       this.toolTipStatistic.SetToolTip(this.rdbGazeFixationDurationMean, "Sum of all fixation durations \r\ndivided by fixation count at the\r\nspecific area o" +
-              "f interest or\r\narea of interest group.\r\n\r\nA value of -1 means:\r\nNo fixation at a" +
-              "ll.");
+        "f interest or\r\narea of interest group.\r\n\r\nA value of -1 means:\r\nNo fixation at a" +
+        "ll.");
       this.rdbGazeFixationDurationMean.UseVisualStyleBackColor = true;
       // 
       // rdbGazeNumberOfFixations
@@ -1193,7 +1197,7 @@ namespace Ogama.Modules.Statistics
       this.rdbGazeNumberOfFixations.TabStop = true;
       this.rdbGazeNumberOfFixations.Text = "number of fixations";
       this.toolTipStatistic.SetToolTip(this.rdbGazeNumberOfFixations, "Number of fixations\r\nat the specified area of interest \r\nor area of interest grou" +
-              "p.\r\n\r\nA value of -1 means: \r\nthis AOI/AOI group was not defined.");
+        "p.\r\n\r\nA value of -1 means: \r\nthis AOI/AOI group was not defined.");
       this.rdbGazeNumberOfFixations.UseVisualStyleBackColor = true;
       // 
       // cbbGazeAOISingle
@@ -1242,8 +1246,8 @@ namespace Ogama.Modules.Statistics
       this.rdbMouseFixationDurationMean.TabIndex = 30;
       this.rdbMouseFixationDurationMean.Text = "fixation duration mean";
       this.toolTipStatistic.SetToolTip(this.rdbMouseFixationDurationMean, "Sum of all fixation durations \r\ndivided by fixation count at the\r\nspecific area o" +
-              "f interest or\r\narea of interest group.\r\n\r\nA value of -1 means:\r\nNo fixation at a" +
-              "ll.\r\n");
+        "f interest or\r\narea of interest group.\r\n\r\nA value of -1 means:\r\nNo fixation at a" +
+        "ll.\r\n");
       this.rdbMouseFixationDurationMean.UseVisualStyleBackColor = true;
       // 
       // rdbMouseNumberOfFixations
@@ -1257,7 +1261,7 @@ namespace Ogama.Modules.Statistics
       this.rdbMouseNumberOfFixations.TabStop = true;
       this.rdbMouseNumberOfFixations.Text = "number of fixations";
       this.toolTipStatistic.SetToolTip(this.rdbMouseNumberOfFixations, "Number of fixations\r\nat the specified area of interest \r\nor area of interest grou" +
-              "p.\r\n\r\nA value of -1 means: \r\nthis AOI/AOI group was not defined.");
+        "p.\r\n\r\nA value of -1 means: \r\nthis AOI/AOI group was not defined.");
       this.rdbMouseNumberOfFixations.UseVisualStyleBackColor = true;
       // 
       // rdbMouseCompleteFixationTime
@@ -1269,8 +1273,8 @@ namespace Ogama.Modules.Statistics
       this.rdbMouseCompleteFixationTime.TabIndex = 25;
       this.rdbMouseCompleteFixationTime.Text = "complete fixation time";
       this.toolTipStatistic.SetToolTip(this.rdbMouseCompleteFixationTime, "Sum of fixation time\r\nat the specified area of interest \r\nor area of interest gro" +
-              "up\r\nin milliseconds.\r\n\r\nA value of -1 means: \r\nthis AOI/AOI group was not define" +
-              "d.\r\n");
+        "up\r\nin milliseconds.\r\n\r\nA value of -1 means: \r\nthis AOI/AOI group was not define" +
+        "d.\r\n");
       this.rdbMouseCompleteFixationTime.UseVisualStyleBackColor = true;
       // 
       // rdbMouseTimeUntil
@@ -1292,7 +1296,7 @@ namespace Ogama.Modules.Statistics
       this.chbMSESaccadeLength.TabIndex = 4;
       this.chbMSESaccadeLength.Text = "average saccade length (px)";
       this.toolTipStatistic.SetToolTip(this.chbMSESaccadeLength, "Mean of all lengths of the straight\r\nline connections between consecutive\r\nfixati" +
-              "ons.\r\n\r\nA value of -1 means:\r\nno gaze data ");
+        "ons.\r\n\r\nA value of -1 means:\r\nno gaze data ");
       this.chbMSESaccadeLength.UseVisualStyleBackColor = true;
       this.chbMSESaccadeLength.CheckedChanged += new System.EventHandler(this.chbMouseDefault_CheckedChanged);
       // 
@@ -1304,7 +1308,7 @@ namespace Ogama.Modules.Statistics
       this.chbMSESaccadeVelocity.TabIndex = 4;
       this.chbMSESaccadeVelocity.Text = "saccade velocity (px/s)";
       this.toolTipStatistic.SetToolTip(this.chbMSESaccadeVelocity, "Average saccade velocity calculated as\r\nmean of all saccades length/timespan valu" +
-              "es.\r\n\r\nA value of -1 means:\r\nno gaze data ");
+        "es.\r\n\r\nA value of -1 means:\r\nno gaze data ");
       this.chbMSESaccadeVelocity.UseVisualStyleBackColor = true;
       this.chbMSESaccadeVelocity.CheckedChanged += new System.EventHandler(this.chbMouseDefault_CheckedChanged);
       // 
@@ -1316,7 +1320,7 @@ namespace Ogama.Modules.Statistics
       this.chbGAZPathlength.TabIndex = 4;
       this.chbGAZPathlength.Text = "pathlength between fixations (px)";
       this.toolTipStatistic.SetToolTip(this.chbGAZPathlength, "Length of the gaze fixation connections\r\nin pixels.\r\n\r\nA value of -1 means:\r\nno g" +
-              "aze data available.");
+        "aze data available.");
       this.chbGAZPathlength.UseVisualStyleBackColor = true;
       this.chbGAZPathlength.CheckedChanged += new System.EventHandler(this.chbGazeDefault_CheckedChanged);
       // 
@@ -1328,7 +1332,7 @@ namespace Ogama.Modules.Statistics
       this.chbGAZPathlengthPS.TabIndex = 4;
       this.chbGAZPathlengthPS.Text = "pathlength between fixations (/s)";
       this.toolTipStatistic.SetToolTip(this.chbGAZPathlengthPS, "Gaze path velocity. \r\nThat is the length of the gaze fixation connections\r\nin pix" +
-              "els per second.\r\n\r\nA value of -1 means:\r\nno gaze data available.");
+        "els per second.\r\n\r\nA value of -1 means:\r\nno gaze data available.");
       this.chbGAZPathlengthPS.UseVisualStyleBackColor = true;
       this.chbGAZPathlengthPS.CheckedChanged += new System.EventHandler(this.chbGazeDefault_CheckedChanged);
       // 
@@ -1506,7 +1510,7 @@ namespace Ogama.Modules.Statistics
       this.dialogTop3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("dialogTop3.BackgroundImage")));
       this.dialogTop3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
       this.dialogTop3.Description = "Select the subjects that should be included in the calculation and select the sub" +
-          "ject columns that should be exported to the statistics table.";
+    "ject columns that should be exported to the statistics table.";
       this.dialogTop3.Dock = System.Windows.Forms.DockStyle.Fill;
       this.dialogTop3.Location = new System.Drawing.Point(0, 0);
       this.dialogTop3.Logo = global::Ogama.Properties.Resources.user1;
@@ -1560,7 +1564,7 @@ namespace Ogama.Modules.Statistics
       this.clbSUBCustomparameters.FormattingEnabled = true;
       this.clbSUBCustomparameters.Location = new System.Drawing.Point(3, 16);
       this.clbSUBCustomparameters.Name = "clbSUBCustomparameters";
-      this.clbSUBCustomparameters.Size = new System.Drawing.Size(144, 124);
+      this.clbSUBCustomparameters.Size = new System.Drawing.Size(144, 132);
       this.clbSUBCustomparameters.TabIndex = 0;
       this.clbSUBCustomparameters.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.clbSUBCustomparameters_ItemCheck);
       // 
@@ -1629,12 +1633,12 @@ namespace Ogama.Modules.Statistics
       this.dialogTop1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("dialogTop1.BackgroundImage")));
       this.dialogTop1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
       this.dialogTop1.Description = "Select the trial parameter columns that should be exported to the statistics tabl" +
-          "e.";
+    "e.";
       this.dialogTop1.Dock = System.Windows.Forms.DockStyle.Fill;
       this.dialogTop1.Location = new System.Drawing.Point(0, 0);
       this.dialogTop1.Logo = global::Ogama.Properties.Resources.ThumbnailLoadingHS;
       this.dialogTop1.Name = "dialogTop1";
-      this.dialogTop1.Size = new System.Drawing.Size(767, 60);
+      this.dialogTop1.Size = new System.Drawing.Size(150, 60);
       this.dialogTop1.TabIndex = 18;
       // 
       // tpbTrial
@@ -1807,7 +1811,7 @@ namespace Ogama.Modules.Statistics
       this.label8.Size = new System.Drawing.Size(356, 30);
       this.label8.TabIndex = 17;
       this.label8.Text = "HINT: Most of these parameters need a fixations calculation which has to be done " +
-          "before in the fixations interface.";
+    "before in the fixations interface.";
       // 
       // dialogTop2
       // 
@@ -1815,7 +1819,7 @@ namespace Ogama.Modules.Statistics
       this.dialogTop2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("dialogTop2.BackgroundImage")));
       this.dialogTop2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
       this.dialogTop2.Description = "Select the gaze parameter columns that should be exported to the statistics table" +
-          ".";
+    ".";
       this.dialogTop2.Dock = System.Windows.Forms.DockStyle.Fill;
       this.dialogTop2.Location = new System.Drawing.Point(0, 0);
       this.dialogTop2.Logo = global::Ogama.Properties.Resources.FixationsLogo;
@@ -2184,7 +2188,7 @@ namespace Ogama.Modules.Statistics
       this.label1.Size = new System.Drawing.Size(356, 30);
       this.label1.TabIndex = 31;
       this.label1.Text = "HINT: Most of these parameters need a fixations calculation which has to be done " +
-          "before in the fixations interface.";
+    "before in the fixations interface.";
       // 
       // dialogTop4
       // 
@@ -2192,7 +2196,7 @@ namespace Ogama.Modules.Statistics
       this.dialogTop4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("dialogTop4.BackgroundImage")));
       this.dialogTop4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
       this.dialogTop4.Description = "Select the gaze parameter columns that should be exported to the statistics table" +
-          ".";
+    ".";
       this.dialogTop4.Dock = System.Windows.Forms.DockStyle.Fill;
       this.dialogTop4.Location = new System.Drawing.Point(0, 0);
       this.dialogTop4.Logo = global::Ogama.Properties.Resources.Mouse;
@@ -2854,7 +2858,7 @@ namespace Ogama.Modules.Statistics
       this.rdbTransitionsUseTrial.Size = new System.Drawing.Size(192, 56);
       this.rdbTransitionsUseTrial.TabIndex = 1;
       this.rdbTransitionsUseTrial.Text = "Calculate transitions in selected trial\r\n(use all named AOIs)\r\nPlease note: check" +
-          "ing state of \r\nthe trial list is ignored";
+    "ing state of \r\nthe trial list is ignored";
       this.rdbTransitionsUseTrial.UseVisualStyleBackColor = true;
       // 
       // tosTransitions
@@ -2945,8 +2949,8 @@ namespace Ogama.Modules.Statistics
       this.bgwCalculateTransitions.WorkerReportsProgress = true;
       this.bgwCalculateTransitions.WorkerSupportsCancellation = true;
       this.bgwCalculateTransitions.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwCalculateTransitions_DoWork);
-      this.bgwCalculateTransitions.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwCalculateTransitions_RunWorkerCompleted);
       this.bgwCalculateTransitions.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgwCalculateTransitions_ProgressChanged);
+      this.bgwCalculateTransitions.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwCalculateTransitions_RunWorkerCompleted);
       // 
       // StatisticsModule
       // 
@@ -2993,11 +2997,13 @@ namespace Ogama.Modules.Statistics
       this.tscStandard.PerformLayout();
       this.spcTacDgv.Panel1.ResumeLayout(false);
       this.spcTacDgv.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.spcTacDgv)).EndInit();
       this.spcTacDgv.ResumeLayout(false);
       this.tacStandard.ResumeLayout(false);
       this.tbpSubject.ResumeLayout(false);
       this.splitContainer4.Panel1.ResumeLayout(false);
       this.splitContainer4.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
       this.splitContainer4.ResumeLayout(false);
       this.groupBox24.ResumeLayout(false);
       this.groupBox21.ResumeLayout(false);
@@ -3008,6 +3014,7 @@ namespace Ogama.Modules.Statistics
       this.tbpTrial.ResumeLayout(false);
       this.splitContainer1.Panel1.ResumeLayout(false);
       this.splitContainer1.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
       this.splitContainer1.ResumeLayout(false);
       this.tpbTrial.ResumeLayout(false);
       this.tpbTrialStandard.ResumeLayout(false);
@@ -3022,6 +3029,7 @@ namespace Ogama.Modules.Statistics
       this.tbpGaze.ResumeLayout(false);
       this.splitContainer3.Panel1.ResumeLayout(false);
       this.splitContainer3.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
       this.splitContainer3.ResumeLayout(false);
       this.tacGazeParams.ResumeLayout(false);
       this.tbpGazeDefault.ResumeLayout(false);
@@ -3040,6 +3048,7 @@ namespace Ogama.Modules.Statistics
       this.tbpMouse.ResumeLayout(false);
       this.splitContainer5.Panel1.ResumeLayout(false);
       this.splitContainer5.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).EndInit();
       this.splitContainer5.ResumeLayout(false);
       this.tacMouse.ResumeLayout(false);
       this.tbpMouseDefault.ResumeLayout(false);
@@ -3055,6 +3064,7 @@ namespace Ogama.Modules.Statistics
       this.splitContainer6.Panel1.ResumeLayout(false);
       this.splitContainer6.Panel2.ResumeLayout(false);
       this.splitContainer6.Panel2.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer6)).EndInit();
       this.splitContainer6.ResumeLayout(false);
       this.tosStandard.ResumeLayout(false);
       this.tosStandard.PerformLayout();
@@ -3066,6 +3076,7 @@ namespace Ogama.Modules.Statistics
       this.tscTransitions.PerformLayout();
       this.splitContainer2.Panel1.ResumeLayout(false);
       this.splitContainer2.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
       this.splitContainer2.ResumeLayout(false);
       this.tableLayoutPanel1.ResumeLayout(false);
       this.groupBox19.ResumeLayout(false);
@@ -3074,6 +3085,7 @@ namespace Ogama.Modules.Statistics
       this.splitContainer7.Panel1.ResumeLayout(false);
       this.splitContainer7.Panel1.PerformLayout();
       this.splitContainer7.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer7)).EndInit();
       this.splitContainer7.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
       this.groupBox20.ResumeLayout(false);
@@ -3221,24 +3233,24 @@ namespace Ogama.Modules.Statistics
     private System.Windows.Forms.TabPage tpbTrialStandard;
     private OgamaControls.CheckboxTreeView trvTrialsDefault;
     private System.Windows.Forms.TabPage tbpTrialAdditional;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
     private System.Windows.Forms.Button btnStandardDeselectAllTrials;
     private System.Windows.Forms.Button btnStandardSelectAllTrials;
     private System.Windows.Forms.SplitContainer splitContainer1;
     private System.Windows.Forms.SplitContainer splitContainer3;
-    private Ogama.Modules.Common.DialogTop dialogTop2;
+    private DialogTop dialogTop2;
     private System.Windows.Forms.TabControl tacGazeParams;
     private System.Windows.Forms.TabPage tbpGazeDefault;
     private System.Windows.Forms.TabPage tbpGazeAOI;
     private System.Windows.Forms.SplitContainer splitContainer4;
-    private Ogama.Modules.Common.DialogTop dialogTop3;
+    private DialogTop dialogTop3;
     private System.Windows.Forms.SplitContainer splitContainer5;
-    private Ogama.Modules.Common.DialogTop dialogTop4;
+    private DialogTop dialogTop4;
     private System.Windows.Forms.TabControl tacMouse;
     private System.Windows.Forms.TabPage tbpMouseDefault;
     private System.Windows.Forms.TabPage tbpMouseAOI;
     private System.Windows.Forms.SplitContainer splitContainer6;
-    private Ogama.Modules.Common.DialogTop dialogTop5;
+    private DialogTop dialogTop5;
     private System.Windows.Forms.Label label1;
     private System.Windows.Forms.RadioButton rdbGazeFixationDurationMean;
     private System.Windows.Forms.ComboBox cbbGazeAOISingle;

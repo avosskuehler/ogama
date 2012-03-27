@@ -1,7 +1,7 @@
 ﻿// <copyright file="PresenterModule.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,9 +9,9 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
-namespace Ogama.Modules.Recording
+namespace Ogama.Modules.Recording.Presenter
 {
   using System;
   using System.Collections.Generic;
@@ -20,17 +20,27 @@ namespace Ogama.Modules.Recording
   using System.Drawing;
   using System.Globalization;
   using System.IO;
+  using System.Runtime.InteropServices;
   using System.Threading;
   using System.Windows.Forms;
+
   using Ogama.ExceptionHandling;
-  using Ogama.Modules.Common;
-  using Ogama.Modules.Recording.Presenter;
+  using Ogama.Modules.Common.CustomEventArgs;
+  using Ogama.Modules.Common.SlideCollections;
+  using Ogama.Modules.Common.Tools;
+  using Ogama.Modules.Common.TrialEvents;
+  using Ogama.Modules.SlideshowDesign.DesignModule.StimuliDialogs;
+
   using OgamaControls;
+
   using VectorGraphics.Controls;
+  using VectorGraphics.Controls.Flash;
+  using VectorGraphics.Controls.Timer;
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
   using VectorGraphics.StopConditions;
   using VectorGraphics.Tools;
-  using VectorGraphics.Triggers;
+  using VectorGraphics.Tools.Trigger;
 
   /// <summary>
   /// A <see cref="Form"/> that is used for stimuli presentation. 
@@ -56,6 +66,28 @@ namespace Ogama.Modules.Recording
     // Defining Variables, Enumerations, Events                                  //
     ///////////////////////////////////////////////////////////////////////////////
     #region FIELDS
+
+    /// <summary>
+    /// The ID of the keyboard hook that is inserted in the application chain
+    /// during desktop recording.
+    /// </summary>
+    private IntPtr keyboardHookID = IntPtr.Zero;
+
+    /// <summary>
+    /// The ID of the mouse hook that is inserted in the application chain
+    /// during desktop recording.
+    /// </summary>
+    private IntPtr mouseHookID = IntPtr.Zero;
+
+    /// <summary>
+    /// The keyboard callback method that is called during desktop recording.
+    /// </summary>
+    private MessageHook.LowLevelProc keyboardCallback;
+
+    /// <summary>
+    /// The mouse callback method that is called during desktop recording.
+    /// </summary>
+    private MessageHook.LowLevelProc mouseCallback;
 
     /// <summary>
     /// A <see cref="Webcam"/> that controls the user camera
@@ -274,6 +306,9 @@ namespace Ogama.Modules.Recording
         this.panelTwo.CreateGraphics(),
         new Rectangle(0, 0, width, height));
       this.panelTwo.DrawingSurface = this.preparedSlideTwo.DrawingSurface;
+
+      this.keyboardCallback = new MessageHook.LowLevelProc(this.KeyboardHookCallback);
+      this.mouseCallback = new MessageHook.LowLevelProc(this.MouseHookCallback);
     }
 
     #endregion //CONSTRUCTION
@@ -458,6 +493,9 @@ namespace Ogama.Modules.Recording
     /// the presentation via ESC or from record module.</param>
     public void EndPresentation(bool sendBreakTrigger)
     {
+      // Disable the low level keyboard and mouse hooks
+      this.UnhookMessageFilter();
+
       this.closing = true;
 
       if (sendBreakTrigger)
@@ -723,6 +761,78 @@ namespace Ogama.Modules.Recording
     }
 
     /// <summary>
+    /// An application-defined ocallback function used with the 
+    /// SetWindowsHookEx function. The system call this function every time a 
+    /// new mouse input event is about to be posted into a thread input queue. 
+    /// </summary>
+    /// <param name="ncode">A code the hook procedure uses to determine how 
+    /// to process the message. If nCode is less than zero, the hook procedure 
+    /// must pass the message to the CallNextHookEx function without further processing 
+    /// and should return the value returned by CallNextHookEx</param>
+    /// <param name="wparam">The identifier of the mouse message. This parameter can be one 
+    /// of the following messages: WM_LBUTTONDOWN, WM_LBUTTONUP, WM_MOUSEMOVE, 
+    /// WM_MOUSEWHEEL, WM_MOUSEHWHEEL, WM_RBUTTONDOWN, or WM_RBUTTONUP.</param>
+    /// <param name="lparam">A pointer to an MSLLHOOKSTRUCT structure.</param>
+    /// <returns>If nCode is less than zero, the hook procedure must return the value returned by CallNextHookEx. 
+    /// If nCode is greater than or equal to zero, and the hook procedure did 
+    /// not process the message, it is highly recommended that you call 
+    /// CallNextHookEx and return the value it returns; otherwise, 
+    /// other applications that have installed WH_MOUSE_LL hooks will not 
+    /// receive hook notifications and may behave incorrectly as a result. 
+    /// If the hook procedure processed the message, it may return a nonzero #
+    /// value to prevent the system from passing the message to the rest of the 
+    /// hook chain or the target window procedure.</returns>
+    private IntPtr MouseHookCallback(int ncode, IntPtr wparam, IntPtr lparam)
+    {
+      if (ncode >= 0)
+      {
+        var skip = false;
+        var isButtonDown = false;
+        var button = MouseButtons.None;
+        switch ((MessageHook.MouseMessages)wparam)
+        {
+          case MessageHook.MouseMessages.WM_LBUTTONDOWN:
+            button = MouseButtons.Left;
+            isButtonDown = true;
+            break;
+          case MessageHook.MouseMessages.WM_LBUTTONUP:
+            button = MouseButtons.Left;
+            isButtonDown = false;
+            break;
+          case MessageHook.MouseMessages.WM_MOUSEMOVE:
+          case MessageHook.MouseMessages.WM_MOUSEWHEEL:
+            skip = true;
+            break;
+          case MessageHook.MouseMessages.WM_RBUTTONDOWN:
+            button = MouseButtons.Right;
+            isButtonDown = true;
+            break;
+          case MessageHook.MouseMessages.WM_RBUTTONUP:
+            button = MouseButtons.Right;
+            isButtonDown = false;
+            break;
+        }
+
+        if (!skip)
+        {
+          var hookStruct =
+            (MessageHook.MSLLHOOKSTRUCT)Marshal.PtrToStructure(lparam, typeof(MessageHook.MSLLHOOKSTRUCT));
+          var mea = new MouseEventArgs(button, 1, hookStruct.Point.X, hookStruct.Point.Y, 0);
+          if (isButtonDown)
+          {
+            this.frmPresenter_MouseDown(this, mea);
+          }
+          else
+          {
+            this.frmPresenter_MouseUp(this, mea);
+          }
+        }
+      }
+
+      return MessageHook.CallNextHookEx(this.mouseHookID, ncode, wparam, lparam);
+    }
+
+    /// <summary>
     /// The <see cref="Control.MouseDown"/> event handler.
     /// Sets the <see cref="currentMousebutton"/> and raises
     /// the <see cref="TrialEventOccured"/> event.
@@ -973,7 +1083,7 @@ namespace Ogama.Modules.Recording
 
           // Make screenshot of newly navigated web page in 
           // separate thread, if it is not already there.
-          string screenshotFilename = Ogama.Modules.SlideshowDesign.BrowserDialog.GetFilenameFromUrl(e.Url);
+          string screenshotFilename = BrowserDialog.GetFilenameFromUrl(e.Url);
           WebsiteScreenshot.Instance.ScreenshotFilename = screenshotFilename;
 
           if (!File.Exists(screenshotFilename) || !this.currentBrowserTreeNode.UrlToID.ContainsKey(screenshotFilename))
@@ -999,8 +1109,12 @@ namespace Ogama.Modules.Recording
           // Create VGScrollImageSlide
           var newWebpageSlide = (Slide)this.shownSlideContainer.Slide.Clone();
           newWebpageSlide.Modified = true;
-          newWebpageSlide.Thumb.Dispose();
-          newWebpageSlide.Thumb = null;
+          if (!newWebpageSlide.IsThumbNull)
+          {
+            newWebpageSlide.Thumb.Dispose();
+            newWebpageSlide.Thumb = null;
+          }
+
           newWebpageSlide.Name = newName;
           newWebpageSlide.ActiveXStimuli.Clear();
           newWebpageSlide.VGStimuli.Clear();
@@ -1235,9 +1349,16 @@ namespace Ogama.Modules.Recording
       {
         window.Scroll -= new HtmlElementEventHandler(this.WebBrowser_Scroll);
         window.Scroll += new HtmlElementEventHandler(this.WebBrowser_Scroll);
-        window.Document.MouseDown -= new HtmlElementEventHandler(this.WebBrowser_MouseDown);
-        window.Document.MouseDown += new HtmlElementEventHandler(this.WebBrowser_MouseDown);
-        this.AttachEventHandlerForFrames(window.Document.Window.Frames);
+        try
+        {
+          window.Document.MouseDown -= new HtmlElementEventHandler(this.WebBrowser_MouseDown);
+          window.Document.MouseDown += new HtmlElementEventHandler(this.WebBrowser_MouseDown);
+          this.AttachEventHandlerForFrames(window.Document.Window.Frames);
+        }
+        catch (UnauthorizedAccessException ex)
+        {
+          ExceptionMethods.HandleExceptionSilent(ex);
+        }
       }
     }
 
@@ -1348,6 +1469,9 @@ namespace Ogama.Modules.Recording
           // be saved on disk
           this.StopScreenCapturing(trialChange);
 
+          // Disable the low level keyboard and mouse hooks
+          this.UnhookMessageFilter();
+
           // Switch to new slide/trial
           if (this.trialCounter < this.trials.Count)
           {
@@ -1430,6 +1554,25 @@ namespace Ogama.Modules.Recording
     }
 
     /// <summary>
+    /// This method unhooks the low level keyboard and mouse message filters
+    /// if there are any.
+    /// </summary>
+    private void UnhookMessageFilter()
+    {
+      if (this.keyboardHookID != IntPtr.Zero)
+      {
+        MessageHook.UnhookWindowsHookEx(this.keyboardHookID);
+        this.keyboardHookID = IntPtr.Zero;
+      }
+
+      if (this.mouseHookID != IntPtr.Zero)
+      {
+        MessageHook.UnhookWindowsHookEx(this.mouseHookID);
+        this.mouseHookID = IntPtr.Zero;
+      }
+    }
+
+    /// <summary>
     /// This method invokes the stop of current running
     /// screen capturings if applicable.
     /// </summary>
@@ -1482,7 +1625,8 @@ namespace Ogama.Modules.Recording
 
       if (trialChange)
       {
-        AsyncHelper.FireAndForget(new PrepareScreenCaptureDelegate(this.PrepareScreenCapture), this.trialCounter);
+        // AsyncHelper.FireAndForget(new PrepareScreenCaptureDelegate(this.PrepareScreenCapture), this.trialCounter);
+        this.PrepareScreenCapture(this.trialCounter);
       }
     }
 
@@ -1504,7 +1648,7 @@ namespace Ogama.Modules.Recording
 
       Trial nextTrial = this.trials[nextTrialCounter];
 
-      if (nextTrial.HasActiveXContent)
+      if (nextTrial.HasActiveXContent || nextTrial[0].IsDesktopSlide)
       {
         string filename = Document.ActiveDocument.SelectionState.SubjectName +
          "-" + nextTrialCounter + ".avi";
@@ -1582,6 +1726,18 @@ namespace Ogama.Modules.Recording
           break;
       }
 
+      // Care for desktop recording slides
+      if (this.shownSlideContainer.Slide.IsDesktopSlide)
+      {
+        this.WindowState = FormWindowState.Minimized;
+        this.keyboardHookID = MessageHook.SetKeyboardHook(this.keyboardCallback);
+        this.mouseHookID = MessageHook.SetMouseHook(this.mouseCallback);
+      }
+      else
+      {
+        this.WindowState = FormWindowState.Maximized;
+      }
+
       // Reset response fields
       this.currentMousebutton = MouseButtons.None;
       this.currentKey = Keys.None;
@@ -1641,10 +1797,10 @@ namespace Ogama.Modules.Recording
         slideContainer.AudioPlayer.Play();
       }
 
+      int countFlash = 0;
+
       if (this.shownSlideContainer.Slide.HasActiveXContent)
       {
-        int countFlash = 0;
-
         foreach (VGElement element in slideContainer.Slide.ActiveXStimuli)
         {
           if (element is VGFlash)
@@ -1672,6 +1828,10 @@ namespace Ogama.Modules.Recording
             while (browser.WebBrowser.ReadyState != WebBrowserReadyState.Complete)
             {
               Application.DoEvents();
+              if (this.closing)
+              {
+                return;
+              }
             }
 
             // Set input focus to the webbrowser, otherwise the 
@@ -1690,27 +1850,27 @@ namespace Ogama.Modules.Recording
               new HtmlElementEventHandler(this.WebBrowser_MouseDown);
           }
         }
+      }
 
-        // Just do screen capturing on flash content
-        if (countFlash > 0)
+      // Just do screen capturing on flash content or desktop recording
+      if (countFlash > 0 || this.shownSlideContainer.Slide.IsDesktopSlide)
+      {
+        switch (this.shownContainer)
         {
-          switch (this.shownContainer)
-          {
-            case ShownContainer.One:
-              if (this.preparedSlideOne.ScreenCapture != null)
-              {
-                this.preparedSlideOne.ScreenCapture.Start();
-              }
+          case ShownContainer.One:
+            if (this.preparedSlideOne.ScreenCapture != null)
+            {
+              this.preparedSlideOne.ScreenCapture.Start();
+            }
 
-              break;
-            case ShownContainer.Two:
-              if (this.preparedSlideTwo.ScreenCapture != null)
-              {
-                this.preparedSlideTwo.ScreenCapture.Start();
-              }
+            break;
+          case ShownContainer.Two:
+            if (this.preparedSlideTwo.ScreenCapture != null)
+            {
+              this.preparedSlideTwo.ScreenCapture.Start();
+            }
 
-              break;
-          }
+            break;
         }
       }
     }
@@ -2201,6 +2361,36 @@ namespace Ogama.Modules.Recording
     // Small helping Methods                                                     //
     ///////////////////////////////////////////////////////////////////////////////
     #region HELPER
+
+    /// <summary>
+    /// This method is an implementation of the hook callback for low level
+    /// keyboard message hooks.
+    /// </summary>
+    /// <param name="ncode">A code the hook procedure uses to determine how 
+    /// to process the message. If nCode is less than zero, the hook procedure 
+    /// must pass the message to the CallNextHookEx function without further processing 
+    /// and should return the value returned by CallNextHookEx</param>
+    /// <param name="wparam">The identifier of the mouse message. This parameter can be one 
+    /// of the following messages: WM_LBUTTONDOWN, WM_LBUTTONUP, WM_MOUSEMOVE, 
+    /// WM_MOUSEWHEEL, WM_MOUSEHWHEEL, WM_RBUTTONDOWN, or WM_RBUTTONUP.</param>
+    /// <param name="lparam">A pointer to an MSLLHOOKSTRUCT structure.</param>
+    /// <returns>If nCode is less than zero, the hook procedure must return the value returned by CallNextHookEx. 
+    /// If nCode is greater than or equal to zero, and the hook procedure did 
+    /// not process the message, it is highly recommended that you call 
+    /// CallNextHookEx and return the value it returns; otherwise, 
+    /// other applications that have installed WH_MOUSE_LL hooks will not 
+    /// receive hook notifications and may behave incorrectly as a result. 
+    /// If the hook procedure processed the message, it may return a nonzero #
+    /// value to prevent the system from passing the message to the rest of the 
+    /// hook chain or the target window procedure.</returns>
+    private IntPtr KeyboardHookCallback(int ncode, IntPtr wparam, IntPtr lparam)
+    {
+      var msg = new Message { WParam = wparam, LParam = lparam, Msg = (int)wparam };
+      int keyCode = Marshal.ReadInt32(lparam);
+      this.ProcessCmdKey(ref msg, (Keys)keyCode);
+
+      return MessageHook.CallNextHookEx(this.keyboardHookID, ncode, wparam, lparam);
+    }
 
     /// <summary>
     /// This method initializes the user canera on first start of the

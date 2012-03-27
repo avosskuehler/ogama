@@ -1,7 +1,7 @@
 ﻿// <copyright file="OgamaDataSet.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,7 +9,7 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
 namespace Ogama.DataSet
 {
@@ -25,9 +25,14 @@ namespace Ogama.DataSet
   using Ogama.DataSet.OgamaDataSetTableAdapters;
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
+  using Ogama.MainWindow.Dialogs;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.SlideCollections;
+  using Ogama.Modules.Common.Tools;
+  using Ogama.Modules.Common.TrialEvents;
 
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
   using VectorGraphics.StopConditions;
 
   /// <summary>
@@ -815,7 +820,8 @@ namespace Ogama.DataSet
           Document.ActiveDocument.PresentationSize,
           VGStyleGroup.None,
           string.Empty,
-          string.Empty);
+          string.Empty,
+          false);
         newSlide.VGStimuli.Add(image);
 
         // Add trial node to slideshow
@@ -835,19 +841,22 @@ namespace Ogama.DataSet
     /// experiment sorted by appearance in the database.</returns>
     private List<string> GetStimulusFiles()
     {
-      List<string> trialIDs = new List<string>();
+      var trialIDs = new List<string>();
 
       if (Queries.ColumnExists("Trials", "StimulusFile"))
       {
-        const string trialQueryString = "SELECT Trials.* FROM [dbo].[Trials]";
-        SqlDataAdapter trialAdapter = new SqlDataAdapter();
-        trialAdapter.SelectCommand = new SqlCommand(trialQueryString, this.sqlConnection);
-        DataTable trialsTable = new DataTable("Trials");
+        const string TrialQueryString = "SELECT Trials.* FROM [dbo].[Trials]";
+        var trialAdapter = new SqlDataAdapter
+          {
+            SelectCommand = new SqlCommand(TrialQueryString, this.sqlConnection)
+          };
+
+        var trialsTable = new DataTable("Trials");
         trialAdapter.Fill(trialsTable);
 
         foreach (DataRow trialRow in trialsTable.Rows)
         {
-          string stimulusFile = trialRow["StimulusFile"].ToString();
+          var stimulusFile = trialRow["StimulusFile"].ToString();
           if (!trialIDs.Contains(stimulusFile))
           {
             trialIDs.Add(stimulusFile);
@@ -905,10 +914,13 @@ namespace Ogama.DataSet
     /// </summary>
     private void UpgradeAOITable()
     {
-      if (!Queries.ColumnExists("AOIs", "Target")) return;
+      if (!Queries.ColumnExists("AOIs", "Target"))
+      {
+        return;
+      }
 
-      const string queryString = "SELECT AOIs.* FROM [dbo].[AOIs] WHERE [Target] <> ''";
-      var adapter = new SqlDataAdapter {SelectCommand = new SqlCommand(queryString, this.sqlConnection)};
+      const string QueryString = "SELECT AOIs.* FROM [dbo].[AOIs] WHERE [Target] <> ''";
+      var adapter = new SqlDataAdapter { SelectCommand = new SqlCommand(QueryString, this.sqlConnection) };
       var aoiTable = new DataTable("AOIs");
       adapter.Fill(aoiTable);
 
@@ -954,16 +966,19 @@ namespace Ogama.DataSet
     private void RenamePolygonToPolylineInAOITable()
     {
       // Rename Polygon -> Polyline
-      const string queryString = "SELECT AOIs.* FROM [dbo].[AOIs]";
-      SqlDataAdapter adapter = new SqlDataAdapter();
-      adapter.SelectCommand = new SqlCommand(queryString, this.sqlConnection);
-      AOIsDataTable aoiTable = new AOIsDataTable();
+      const string QueryString = "SELECT AOIs.* FROM [dbo].[AOIs]";
+      var adapter = new SqlDataAdapter
+        {
+          SelectCommand = new SqlCommand(QueryString, this.sqlConnection)
+        };
+
+      var aoiTable = new AOIsDataTable();
       adapter.Fill(aoiTable);
 
       // Iterate all aoi from the aoi table
       foreach (DataRow aoiRow in aoiTable.Rows)
       {
-        string shapeType = aoiRow["ShapeType"].ToString();
+        var shapeType = aoiRow["ShapeType"].ToString();
         if (shapeType == "Polygon")
         {
           aoiRow["ShapeType"] = "Polyline";

@@ -1,7 +1,7 @@
 ﻿// <copyright file="TobiiTracker.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,22 +9,23 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
 namespace Ogama.Modules.Recording.TobiiInterface
 {
   using System;
   using System.Collections.Generic;
-  using System.ComponentModel;
   using System.Drawing;
   using System.IO;
   using System.Runtime.InteropServices;
-  using System.Threading;
   using System.Windows.Forms;
   using System.Xml.Serialization;
 
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.CustomEventArgs;
+  using Ogama.Modules.Common.Tools;
+  using Ogama.Modules.Recording.Dialogs;
   using Ogama.Modules.Recording.TrackerBase;
   using Ogama.Properties;
 
@@ -172,31 +173,31 @@ namespace Ogama.Modules.Recording.TobiiInterface
     ///   which should contain the subject name at the tab page of the Tobii device.
     /// </param>
     public TobiiTracker(
-      RecordModule owningRecordModule, 
-      SplitContainer trackerTrackerControlsContainer, 
-      Panel trackerTrackStatusPanel, 
-      Panel trackerCalibrationResultPanel, 
-      Button trackerShowOnSecondaryScreenButton, 
-      Button trackerAcceptButton, 
-      Button trackerRecalibrateButton, 
-      Button trackerConnectButton, 
-      Button trackerSubjectButton, 
-      Button trackerCalibrateButton, 
-      Button trackerRecordButton, 
+      RecordModule owningRecordModule,
+      SplitContainer trackerTrackerControlsContainer,
+      Panel trackerTrackStatusPanel,
+      Panel trackerCalibrationResultPanel,
+      Button trackerShowOnSecondaryScreenButton,
+      Button trackerAcceptButton,
+      Button trackerRecalibrateButton,
+      Button trackerConnectButton,
+      Button trackerSubjectButton,
+      Button trackerCalibrateButton,
+      Button trackerRecordButton,
       TextBox trackerSubjectNameTextBox)
       : base(
-        owningRecordModule, 
-        trackerTrackerControlsContainer, 
-        trackerTrackStatusPanel, 
-        trackerCalibrationResultPanel, 
-        trackerShowOnSecondaryScreenButton, 
-        trackerAcceptButton, 
-        trackerRecalibrateButton, 
-        trackerConnectButton, 
-        trackerSubjectButton, 
-        trackerCalibrateButton, 
-        trackerRecordButton, 
-        trackerSubjectNameTextBox, 
+        owningRecordModule,
+        trackerTrackerControlsContainer,
+        trackerTrackStatusPanel,
+        trackerCalibrationResultPanel,
+        trackerShowOnSecondaryScreenButton,
+        trackerAcceptButton,
+        trackerRecalibrateButton,
+        trackerConnectButton,
+        trackerSubjectButton,
+        trackerCalibrateButton,
+        trackerRecordButton,
+        trackerSubjectNameTextBox,
         Properties.Settings.Default.EyeTrackerSettingsPath + "TobiiSetting.xml")
     {
       // Call the initialize methods of derived classes
@@ -351,9 +352,9 @@ namespace Ogama.Modules.Recording.TobiiInterface
       catch (Exception ex)
       {
         InformationDialog.Show(
-          "Calibration failed", 
-          "Tobii calibration failed with the following message: " + Environment.NewLine + ex.Message, 
-          false, 
+          "Calibration failed",
+          "Tobii calibration failed with the following message: " + Environment.NewLine + ex.Message,
+          false,
           MessageBoxIcon.Error);
 
         this.CleanUp();
@@ -393,9 +394,9 @@ namespace Ogama.Modules.Recording.TobiiInterface
       catch (Exception ex)
       {
         InformationDialog.Show(
-          "CleanUp failed", 
-          "Tobii CleanUp failed with the following message: " + Environment.NewLine + ex.Message, 
-          false, 
+          "CleanUp failed",
+          "Tobii CleanUp failed with the following message: " + Environment.NewLine + ex.Message,
+          false,
           MessageBoxIcon.Error);
       }
 
@@ -459,9 +460,9 @@ namespace Ogama.Modules.Recording.TobiiInterface
       catch (Exception ex)
       {
         InformationDialog.Show(
-          "Record failed", 
-          "Tobii Record failed with the following message: " + Environment.NewLine + ex.Message, 
-          false, 
+          "Record failed",
+          "Tobii Record failed with the following message: " + Environment.NewLine + ex.Message,
+          false,
           MessageBoxIcon.Error);
         this.Stop();
       }
@@ -484,9 +485,9 @@ namespace Ogama.Modules.Recording.TobiiInterface
       catch (Exception ex)
       {
         InformationDialog.Show(
-          "Stop failed", 
-          "Tobii stop tracking failed with the following message: " + Environment.NewLine + ex.Message, 
-          false, 
+          "Stop failed",
+          "Tobii stop tracking failed with the following message: " + Environment.NewLine + ex.Message,
+          false,
           MessageBoxIcon.Error);
       }
     }
@@ -522,7 +523,7 @@ namespace Ogama.Modules.Recording.TobiiInterface
 
         this.dlgTrackStatus.Location =
           new Point(
-            presentationBounds.Left + presentationBounds.Width / 2 - this.dlgTrackStatus.Width / 2, 
+            presentationBounds.Left + presentationBounds.Width / 2 - this.dlgTrackStatus.Width / 2,
             presentationBounds.Top + presentationBounds.Height / 2 - this.dlgTrackStatus.Height / 2);
 
         // Dialog will be disposed when connection failed.
@@ -648,14 +649,11 @@ namespace Ogama.Modules.Recording.TobiiInterface
     }
 
     /// <summary>
-    /// The eyetracker removed.
+    /// The static event handler method that is called whenever an eyetracker 
+    /// has been removed.
     /// </summary>
-    /// <param name="sender">
-    /// The sender.
-    /// </param>
-    /// <param name="e">
-    /// The e.
-    /// </param>
+    /// <param name="sender">Source of the event</param>
+    /// <param name="e">A <see cref="EyetrackerInfoEventArgs"/> with the event data.</param>
     private static void EyetrackerRemoved(object sender, EyetrackerInfoEventArgs e)
     {
       // When an eyetracker disappears from the network we remove it from the listview
@@ -663,24 +661,20 @@ namespace Ogama.Modules.Recording.TobiiInterface
     }
 
     /// <summary>
-    /// The eyetracker updated.
+    /// The static event handler method that is called whenever an eyetracker 
+    /// has been updated.
     /// </summary>
-    /// <param name="sender">
-    /// The sender.
-    /// </param>
-    /// <param name="e">
-    /// The e.
-    /// </param>
+    /// <param name="sender">Source of the event</param>
+    /// <param name="e">A <see cref="EyetrackerInfoEventArgs"/> with the event data.</param>
     private static void EyetrackerUpdated(object sender, EyetrackerInfoEventArgs e)
     {
     }
 
     /// <summary>
-    /// The connect to tracker.
+    /// This methods connects to the tracker.
     /// </summary>
-    /// <param name="info">
-    /// The info.
-    /// </param>
+    /// <param name="info">A <see cref="EyetrackerInfo"/>with information about the
+    /// eyetracker to connect to.</param>
     private void ConnectToTracker(EyetrackerInfo info)
     {
       try
@@ -720,12 +714,8 @@ namespace Ogama.Modules.Recording.TobiiInterface
     /// <summary>
     /// Deserializes the <see cref="TobiiSetting"/> from the given xml file.
     /// </summary>
-    /// <param name="filePath">
-    /// Full file path to the xml settings file.
-    /// </param>
-    /// <returns>
-    /// A <see cref="TobiiSetting"/> object.
-    /// </returns>
+    /// <param name="filePath">Full file path to the xml settings file. </param>
+    /// <returns> A <see cref="TobiiSetting"/> object. </returns>
     private TobiiSetting DeserializeSettings(string filePath)
     {
       var settings = new TobiiSetting();
@@ -753,9 +743,9 @@ namespace Ogama.Modules.Recording.TobiiInterface
       catch (Exception ex)
       {
         InformationDialog.Show(
-          "Error occured", 
-          "Deserialization of TobiiSettings failed with the following message: " + Environment.NewLine + ex.Message, 
-          false, 
+          "Error occured",
+          "Deserialization of TobiiSettings failed with the following message: " + Environment.NewLine + ex.Message,
+          false,
           MessageBoxIcon.Error);
       }
 
@@ -763,7 +753,7 @@ namespace Ogama.Modules.Recording.TobiiInterface
     }
 
     /// <summary>
-    /// The disconnect tracker.
+    /// The disconnect tracker method.
     /// </summary>
     private void DisconnectTracker()
     {
@@ -781,12 +771,11 @@ namespace Ogama.Modules.Recording.TobiiInterface
     }
 
     /// <summary>
-    /// The handle connection error.
+    /// This method handles a connection error by disconnecting.
     /// </summary>
-    /// <param name="sender">
-    /// </param>
-    /// <param name="e">
-    /// </param>
+    /// <param name="sender">Source of the event</param>
+    /// <param name="e">The <see cref="ConnectionErrorEventArgs"/> with the new gaze data
+    /// from the device.</param>
     private void HandleConnectionError(object sender, ConnectionErrorEventArgs e)
     {
       // If the connection goes down we dispose 
@@ -820,9 +809,9 @@ namespace Ogama.Modules.Recording.TobiiInterface
       catch (Exception ex)
       {
         InformationDialog.Show(
-          "Error occured", 
-          "Serialization of TobiiSettings failed with the following message: " + Environment.NewLine + ex.Message, 
-          false, 
+          "Error occured",
+          "Serialization of TobiiSettings failed with the following message: " + Environment.NewLine + ex.Message,
+          false,
           MessageBoxIcon.Error);
       }
     }

@@ -1,5 +1,7 @@
-namespace Ogama.Modules.Recording
+namespace Ogama.Modules.Recording.Dialogs
 {
+  using Ogama.Modules.Common.Controls;
+
   partial class ScreenCaptureDialog
   {
     /// <summary>
@@ -13,9 +15,9 @@ namespace Ogama.Modules.Recording
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      if (disposing && (components != null))
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -30,7 +32,7 @@ namespace Ogama.Modules.Recording
     {
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ScreenCaptureDialog));
       this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       this.splitContainer2 = new System.Windows.Forms.SplitContainer();
       this.btnEncoderProperties = new System.Windows.Forms.Button();
       this.cbbEncoderFilter = new System.Windows.Forms.ComboBox();
@@ -214,7 +216,7 @@ namespace Ogama.Modules.Recording
     #endregion
 
     private System.Windows.Forms.SplitContainer splitContainer1;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
     private System.Windows.Forms.SplitContainer splitContainer2;
     private System.Windows.Forms.Label label9;
     private System.Windows.Forms.Button btnOK;

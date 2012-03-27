@@ -11,12 +11,11 @@ namespace DmoMixer
 {
   using System;
   using System.Diagnostics;
+  using System.Drawing;
   using System.Runtime.InteropServices;
-
   using DirectShowLib;
   using DirectShowLib.DMO;
   using DmoBase;
-  using System.Drawing;
 
   /// <summary>
   /// This COM-Visible class is a DMO (digital media object)
@@ -786,22 +785,21 @@ namespace DmoMixer
     {
       RectangleF streamPosition = videoStream.Position;
 
-      int streamWidth = (int)Math.Abs(streamPosition.Width * this.outputStream.StreamWidth);
-      int streamHeight = (int)Math.Abs(streamPosition.Height * this.outputStream.StreamHeight);
+      var streamWidth = (int)Math.Abs(streamPosition.Width * this.outputStream.StreamWidth);
+      var streamHeight = (int)Math.Abs(streamPosition.Height * this.outputStream.StreamHeight);
 
-      bool resizeStream = (streamWidth != Math.Abs(videoStream.StreamWidth) || streamHeight != Math.Abs(videoStream.StreamHeight));
+      var resizeStream = (streamWidth != Math.Abs(videoStream.StreamWidth) || streamHeight != Math.Abs(videoStream.StreamHeight));
 
       if (videoStream.FlipY)
       {
-        float top = resizeStream ? 1 - streamPosition.Height - streamPosition.Top : 1 - streamPosition.Height - streamPosition.Top;
+        var top = 1 - streamPosition.Height - streamPosition.Top;
         streamPosition.Location = new PointF(streamPosition.Left, top);
       }
 
-      int streamLeft = (int)Math.Abs(streamPosition.Left * this.outputStream.StreamWidth);
-      int streamTop = (int)Math.Abs(streamPosition.Top * this.outputStream.StreamHeight);
+      var streamLeft = (int)Math.Abs(streamPosition.Left * this.outputStream.StreamWidth);
+      var streamTop = (int)Math.Abs(streamPosition.Top * this.outputStream.StreamHeight);
 
-
-      VideoStream resizedStream = videoStream;
+      var resizedStream = videoStream;
 
       if (resizeStream)
       {
@@ -932,7 +930,6 @@ namespace DmoMixer
       // RGB
       for (int y = 0; y < newHeight; y++)
       {
-
         // Y coordinates
         oy = (double)((y * factorY) - 0.5f);
         oy1 = (int)oy;

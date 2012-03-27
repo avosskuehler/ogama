@@ -1,7 +1,7 @@
 ﻿// <copyright file="GazetrackerDirectClientTracker.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,26 +9,23 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
 namespace Ogama.Modules.Recording.GazegroupInterface
 {
   using System;
   using System.Drawing;
   using System.Windows.Forms;
-
+  using GTHardware;
   using GTLibrary.Utils;
-
-  using Ogama.ExceptionHandling;
-  using Ogama.Modules.Common;
-  using Ogama.Modules.Recording.TrackerBase;
-
   using GTOgamaClient.API;
   using GTOgamaClient.Controls;
-
+  using Ogama.ExceptionHandling;
+  using Ogama.Modules.Common;
+  using Ogama.Modules.Common.CustomEventArgs;
+  using Ogama.Modules.Recording.Dialogs;
+  using Ogama.Modules.Recording.TrackerBase;
   using OgamaControls;
-
-  using GTHardware;
 
   /// <summary>
   /// This class implements the <see cref="TrackerWithStatusControls"/> class
@@ -200,9 +197,6 @@ namespace Ogama.Modules.Recording.GazegroupInterface
           case Camera.DeviceTypeEnum.Kinect:
             errorMessage = "Gazetracker found a kinect camera. ";
             return true;
-          case Camera.DeviceTypeEnum.PS3Eye:
-            errorMessage = "Gazetracker found a PS3 eye camera. ";
-            return true;
         }
       }
       catch (Exception)
@@ -302,7 +296,6 @@ namespace Ogama.Modules.Recording.GazegroupInterface
         if (this.gazeTrackerApiClient != null)
         {
           this.gazeTrackerApiClient.CleanUp();
-          //this.gazeTrackerApiClient.ShowInitialImage();
         }
 
         this.adjustButton.Enabled = false;

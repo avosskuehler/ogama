@@ -1,7 +1,7 @@
 // <copyright file="ScanpathsModule.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,32 +9,32 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
-namespace Ogama.Modules.Scanpaths
+namespace Ogama.Modules.Scanpath
 {
   using System;
   using System.Collections.Generic;
-  using System.ComponentModel;
   using System.Data;
-  using System.Data.SqlClient;
   using System.Drawing;
-  using System.Drawing.Drawing2D;
-  using System.Drawing.Imaging;
   using System.IO;
-  using System.Text;
   using System.Windows.Forms;
 
-  using Ogama.DataSet;
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
-  using Ogama.Modules.Common;
+  using Ogama.Modules.Common.Controls;
+  using Ogama.Modules.Common.FormTemplates;
+  using Ogama.Modules.Common.PictureTemplates;
+  using Ogama.Modules.Common.SlideCollections;
+  using Ogama.Modules.Common.Types;
+  using Ogama.Modules.Scanpath.Colorization;
   using Ogama.Properties;
+
   using OgamaControls;
   using OgamaControls.Dialogs;
-  using VectorGraphics;
-  using VectorGraphics.CustomEventArgs;
+
   using VectorGraphics.Elements;
+  using VectorGraphics.Tools.CustomEventArgs;
 
   /// <summary>
   /// Derived from <see cref="FormWithTrialSelection"/>.
@@ -229,7 +229,7 @@ namespace Ogama.Modules.Scanpaths
       finally
       {
         // Reset Cursor
-        Cursor = Cursors.Default;
+        this.Cursor = Cursors.Default;
       }
 
       return true;
@@ -1379,19 +1379,22 @@ namespace Ogama.Modules.Scanpaths
       }
 
       // Skip if no data available
-      if (this.scanpathsPicture.GazeFixations == null) { return; }
+      if (this.scanpathsPicture.GazeFixations == null)
+      {
+        return;
+      }
 
       if (this.aggregateDistancesByCategory)
       {
-        List<string> categories = new List<string>();
+        var categories = new List<string>();
 
         // Create loci similarity matrix
         int rows = this.selectedSubjects.Count;
-        Array lociSimilarities = Array.CreateInstance(typeof(DistanceEntry), rows, rows);
-        Array globalSimilarities = Array.CreateInstance(typeof(DistanceEntry), rows, rows);
+        Array lociSimilarities = new DistanceEntry[rows, rows];
+        Array globalSimilarities = new DistanceEntry[rows, rows];
 
         DataTable fixations = this.scanpathsPicture.GazeFixations;
-        DataView fixationsView = new DataView(
+        var fixationsView = new DataView(
            fixations,
           string.Empty,
           "CountInTrial",
@@ -1417,19 +1420,19 @@ namespace Ogama.Modules.Scanpaths
         foreach (KeyValuePair<string, ScanpathProperties> subjectRowKVP in this.selectedSubjects)
         {
           int columnCounter = 0;
-          DataView fixationsOfS = new DataView(
-            fixations,
-            "(SubjectName='" + subjectRowKVP.Value.SubjectName + "')",
-           "CountInTrial",
-           DataViewRowState.CurrentRows);
+          ////DataView fixationsOfS = new DataView(
+          ////  fixations,
+          ////  "(SubjectName='" + subjectRowKVP.Value.SubjectName + "')",
+          //// "CountInTrial",
+          //// DataViewRowState.CurrentRows);
 
           foreach (KeyValuePair<string, ScanpathProperties> subjectColumnKVP in this.selectedSubjects)
           {
-            DataView fixationsOfT = new DataView(
-              fixations,
-              "(SubjectName='" + subjectColumnKVP.Value.SubjectName + "')",
-             "CountInTrial",
-             DataViewRowState.CurrentRows);
+            ////DataView fixationsOfT = new DataView(
+            ////  fixations,
+            ////  "(SubjectName='" + subjectColumnKVP.Value.SubjectName + "')",
+            //// "CountInTrial",
+            //// DataViewRowState.CurrentRows);
 
             ////float malsburgSimilarity = EditDistance.MalsburgDistance(sFixations, tFixations, 0.5f);
             List<string> rowStringList = GetStringListForExtendedString(subjectRowKVP.Value.ScanpathString);
@@ -1462,8 +1465,8 @@ namespace Ogama.Modules.Scanpaths
         }
 
         int mergedRows = categories.Count;
-        Array mergedLociSimilarities = Array.CreateInstance(typeof(CategoryEntry), mergedRows, mergedRows);
-        Array mergedGlobalSimilarities = Array.CreateInstance(typeof(CategoryEntry), mergedRows, mergedRows);
+        Array mergedLociSimilarities = new CategoryEntry[mergedRows, mergedRows];
+        Array mergedGlobalSimilarities = new CategoryEntry[mergedRows, mergedRows];
 
         // Merge categories
         for (int i = 0; i <= lociSimilarities.GetUpperBound(0); i++)
@@ -1503,8 +1506,8 @@ namespace Ogama.Modules.Scanpaths
         // Ouput category distances
         for (int i = 0; i <= mergedLociSimilarities.GetUpperBound(0); i++)
         {
-          List<object> lociSimilarity = new List<object>();
-          List<object> sequenceSimilarity = new List<object>();
+          var lociSimilarity = new List<object>();
+          var sequenceSimilarity = new List<object>();
           for (int j = 0; j <= mergedLociSimilarities.GetUpperBound(1); j++)
           {
             CategoryEntry currentCategoryValue = (CategoryEntry)mergedLociSimilarities.GetValue(i, j);
@@ -1514,13 +1517,11 @@ namespace Ogama.Modules.Scanpaths
             sequenceSimilarity.Add(currentGlobalCategoryValue.DistanceValue / currentGlobalCategoryValue.Divisor);
           }
 
-          List<object> lociColumns = new List<object>();
-          lociColumns.Add(categories[i]);
+          var lociColumns = new List<object> { categories[i] };
           lociColumns.AddRange(lociSimilarity.ToArray());
           this.dgvLociSimilarity.Rows.Add(lociColumns.ToArray());
 
-          List<object> sequenceColumns = new List<object>();
-          sequenceColumns.Add(categories[i]);
+          var sequenceColumns = new List<object> { categories[i] };
           sequenceColumns.AddRange(sequenceSimilarity.ToArray());
           this.dgvSequenceSimilarity.Rows.Add(sequenceColumns.ToArray());
         }
@@ -1541,29 +1542,29 @@ namespace Ogama.Modules.Scanpaths
         this.dgvSequenceSimilarity.Columns.Add("columnSequenceSubjectGroup", "Subject Group");
 
         DataTable fixations = this.scanpathsPicture.GazeFixations;
-        DataView fixationsView = new DataView(
-           fixations,
-          string.Empty,
-          "CountInTrial",
-          DataViewRowState.CurrentRows);
+        ////DataView fixationsView = new DataView(
+        ////   fixations,
+        ////  string.Empty,
+        ////  "CountInTrial",
+        ////  DataViewRowState.CurrentRows);
 
         foreach (KeyValuePair<string, ScanpathProperties> subjectRowKVP in this.selectedSubjects)
         {
-          List<object> lociSimilarity = new List<object>();
-          List<object> sequenceSimilarity = new List<object>();
-          DataView fixationsOfS = new DataView(
-            fixations,
-            "(SubjectName='" + subjectRowKVP.Value.SubjectName + "')",
-           "CountInTrial",
-           DataViewRowState.CurrentRows);
+          var lociSimilarity = new List<object>();
+          var sequenceSimilarity = new List<object>();
+          ////DataView fixationsOfS = new DataView(
+          ////  fixations,
+          ////  "(SubjectName='" + subjectRowKVP.Value.SubjectName + "')",
+          //// "CountInTrial",
+          //// DataViewRowState.CurrentRows);
 
           foreach (KeyValuePair<string, ScanpathProperties> subjectColumnKVP in this.selectedSubjects)
           {
-            DataView fixationsOfT = new DataView(
-              fixations,
-              "(SubjectName='" + subjectColumnKVP.Value.SubjectName + "')",
-             "CountInTrial",
-             DataViewRowState.CurrentRows);
+            ////DataView fixationsOfT = new DataView(
+            ////  fixations,
+            ////  "(SubjectName='" + subjectColumnKVP.Value.SubjectName + "')",
+            //// "CountInTrial",
+            //// DataViewRowState.CurrentRows);
 
             ////float malsburgSimilarity = EditDistance.MalsburgDistance(sFixations, tFixations, 0.5f);
             List<string> rowStringList = GetStringListForExtendedString(subjectRowKVP.Value.ScanpathString);
@@ -1579,14 +1580,14 @@ namespace Ogama.Modules.Scanpaths
             sequenceSimilarity.Add(globalSimilarity.ToString("N0") + " %");
           }
 
-          List<object> lociColumns = new List<object>();
+          var lociColumns = new List<object>();
           lociColumns.Add(subjectRowKVP.Value.SubjectName);
           lociColumns.AddRange(lociSimilarity.ToArray());
           lociColumns.Add(subjectRowKVP.Value.ScanpathString);
           lociColumns.Add(subjectRowKVP.Value.SubjectCategory);
           this.dgvLociSimilarity.Rows.Add(lociColumns.ToArray());
 
-          List<object> sequenceColumns = new List<object>();
+          var sequenceColumns = new List<object>();
           sequenceColumns.Add(subjectRowKVP.Value.SubjectName);
           sequenceColumns.AddRange(sequenceSimilarity.ToArray());
           sequenceColumns.Add(subjectRowKVP.Value.ScanpathString);
@@ -1607,7 +1608,7 @@ namespace Ogama.Modules.Scanpaths
     /// <returns>A <see cref="List{String}"/> to be used in the extended distance calculation.</returns>
     private static List<string> GetStringListForExtendedString(string extendedString)
     {
-      List<string> rowString = new List<string>();
+      var rowString = new List<string>();
 
       int identifierCount = ScanpathsPicture.CurrentIdentifierList.Length;
       int modulo = 1;

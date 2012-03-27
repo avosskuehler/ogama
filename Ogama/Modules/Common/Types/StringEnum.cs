@@ -1,7 +1,7 @@
 // <copyright file="StringEnum.cs" company="alea technologies">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -11,7 +11,7 @@
 // <author>Martin Werner</author>
 // <email>martin.werner@alea-technologies.de</email>
 
-namespace Ogama.Modules.Common
+namespace Ogama.Modules.Common.Types
 {
   using System;
   using System.Collections;
@@ -58,7 +58,7 @@ namespace Ogama.Modules.Common
     {
       if (!enumType.IsEnum)
       {
-        throw new ArgumentException(String.Format("Supplied type must be an Enum.  Type was {0}", enumType.ToString()));
+        throw new ArgumentException(string.Format("Supplied type must be an Enum.  Type was {0}", enumType.ToString()));
       }
 
       this.enumType = enumType;
@@ -141,7 +141,7 @@ namespace Ogama.Modules.Common
 
       if (!type.IsEnum)
       {
-        throw new ArgumentException(String.Format("Supplied type must be an Enum.  Type was {0}", type.ToString()));
+        throw new ArgumentException(string.Format("Supplied type must be an Enum.  Type was {0}", type.ToString()));
       }
 
       // Look for our string value associated with fields in this enum

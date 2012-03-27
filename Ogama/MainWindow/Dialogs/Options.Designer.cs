@@ -1,7 +1,9 @@
-using OgamaControls;
-
-namespace Ogama.MainWindow
+namespace Ogama.MainWindow.Dialogs
 {
+  using Ogama.Modules.Common.Controls;
+
+  using OgamaControls;
+
   partial class Options
   {
     /// <summary>
@@ -15,9 +17,9 @@ namespace Ogama.MainWindow
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      if (disposing && (components != null))
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -171,7 +173,7 @@ namespace Ogama.MainWindow
       this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
       this.panel2 = new System.Windows.Forms.Panel();
       this.label9 = new System.Windows.Forms.Label();
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       this.button1 = new System.Windows.Forms.Button();
       this.btnGazeCursorMode = new System.Windows.Forms.ToolStripButton();
       this.btnGazePathMode = new System.Windows.Forms.ToolStripButton();
@@ -2330,7 +2332,7 @@ namespace Ogama.MainWindow
     private System.Windows.Forms.Button btnMouseFixationsFontStyle;
     private System.Windows.Forms.Label label8;
     private ColorButton clbBackground;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
     private System.Windows.Forms.Label label6;
     private System.Windows.Forms.ComboBox cbbPresentationMonitor;
   }

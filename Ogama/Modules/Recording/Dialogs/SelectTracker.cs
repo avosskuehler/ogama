@@ -1,7 +1,7 @@
 // <copyright file="SelectTracker.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,7 +9,7 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
 namespace Ogama.Modules.Recording.Dialogs
 {
@@ -20,7 +20,7 @@ namespace Ogama.Modules.Recording.Dialogs
   using Ogama.MainWindow;
   using Ogama.MainWindow.Dialogs;
   using Ogama.Modules.Recording.AleaInterface;
-  using Ogama.Modules.Recording.ASLInterface;  
+  using Ogama.Modules.Recording.ASLInterface;
   using Ogama.Modules.Recording.GazegroupInterface;
   using Ogama.Modules.Recording.MirametrixInterface;
   using Ogama.Modules.Recording.TobiiInterface;
@@ -118,7 +118,7 @@ namespace Ogama.Modules.Recording.Dialogs
 
         if (this.chbMirametrix.Checked)
         {
-            returnValue |= HardwareTracker.Mirametrix; 
+          returnValue |= HardwareTracker.Mirametrix;
         }
 
         return returnValue;
@@ -151,8 +151,8 @@ namespace Ogama.Modules.Recording.Dialogs
     /// <summary>
     /// Updates the connected tracker status.
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void eyetrackerUpdateTimer_Tick(object sender, EventArgs e)
     {
       this.UpdateTrackerStatus();
@@ -198,11 +198,11 @@ namespace Ogama.Modules.Recording.Dialogs
     /// <summary>
     /// The event handler for the User clicked the mirametrix logo, so open mirametrix website
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void PcbMirametrixClick(object sender, EventArgs e)
     {
-        System.Diagnostics.Process.Start("http://www.mirametrix.com");
+      System.Diagnostics.Process.Start("http://www.mirametrix.com");
     }
 
     /// <summary>
@@ -260,12 +260,12 @@ namespace Ogama.Modules.Recording.Dialogs
     /// <summary>
     /// The event handler for the User clicked the mirametrix logo, so open mirametrix website
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void PcbHelpMirametrixClick(object sender, EventArgs e)
     {
-        var objActivateMirametrix = new HowToActivateMirametrix();
-        System.Diagnostics.Process.Start("http://www.mirametrix.com");
+      var objActivateMirametrix = new HowToActivateMirametrix();
+      objActivateMirametrix.ShowDialog();
     }
 
     /// <summary>
@@ -399,6 +399,11 @@ namespace Ogama.Modules.Recording.Dialogs
         this.chbTobii.Checked = false;
         this.pcbTobii.Enabled = false;
       }
+      else
+      {
+        this.chbTobii.Enabled = true;
+        this.pcbTobii.Enabled = true;
+      }
 
       this.chbTobii.Text = tobiiDefaultText + "Status: " + error;
     }
@@ -408,18 +413,20 @@ namespace Ogama.Modules.Recording.Dialogs
     /// </summary>
     private void UpdateMirametrixStatus()
     {
-        string error;
-        if (!MirametrixTracker.IsAvailable(out error))
-        {
-            this.chbMirametrix.Text = "Mirametrix S2 Eye tracker. Need to have Mirametrix S2 installed on this computer ! \n" + error;
-            this.chbMirametrix.Enabled = false;
-            this.chbMirametrix.Checked = false;
-            this.pcbMirametrix.Enabled = false;
-        }
-        else 
-        {
-            this.chbMirametrix.Text = "Mirametrix S2 installed on this computer ! \n" + error;
-        }
+      string error;
+      if (!MirametrixTracker.IsAvailable(out error))
+      {
+        this.chbMirametrix.Text = "Mirametrix S2 Eye tracker. Need to have Mirametrix S2 installed on this computer ! \n" + error;
+        this.chbMirametrix.Enabled = false;
+        this.chbMirametrix.Checked = false;
+        this.pcbMirametrix.Enabled = false;
+      }
+      else
+      {
+        this.chbMirametrix.Enabled = true;
+        this.pcbMirametrix.Enabled = true;
+        this.chbMirametrix.Text = "Mirametrix S2 installed on this computer ! \n" + error;
+      }
     }
 
     /// <summary>
@@ -428,20 +435,23 @@ namespace Ogama.Modules.Recording.Dialogs
     private void UpdateASLStatus()
     {
       string error;
+
       // ASL 
-      //  "If you have purchased and installed an ASL " +
-      //  "model 5000 Eye Tracker control unit (materials and softwares)" + Environment.NewLine;
-      string aslDefaultText = "ASL software must be installed on this computer.";
+      // "If you have purchased and installed an ASL " +
+      // "model 5000 Eye Tracker control unit (materials and softwares)" + Environment.NewLine;
+      const string AslDefaultText = "ASL software must be installed on this computer.";
       if (!AslTracker.IsAvailable(out error))
       {
         this.chbAsl.Enabled = false;
         this.chbAsl.Checked = false;
         this.pcbAsl.Enabled = false;
-        this.chbAsl.Text = aslDefaultText + error;
+        this.chbAsl.Text = AslDefaultText + error;
       }
       else
       {
-        this.chbAsl.Text = aslDefaultText + "(ASL library found)";
+        this.chbAsl.Enabled = true;
+        this.pcbAsl.Enabled = true;
+        this.chbAsl.Text = AslDefaultText + "(ASL library found)";
       }
     }
 
@@ -462,6 +472,8 @@ namespace Ogama.Modules.Recording.Dialogs
       }
       else
       {
+        this.chbAlea.Enabled = true;
+        this.pcbAlea.Enabled = true;
         this.chbAlea.Text = aleaDefaultText + "Status: Intelligaze found.";
       }
     }
@@ -481,6 +493,10 @@ namespace Ogama.Modules.Recording.Dialogs
       {
         this.chbGazetrackerDirectClient.Enabled = false;
         this.chbGazetrackerDirectClient.Checked = false;
+      }
+      else
+      {
+        this.chbGazetrackerDirectClient.Enabled = true;
       }
 
       this.chbGazetrackerDirectClient.Text = ituDefaultText + "Status: " + error;

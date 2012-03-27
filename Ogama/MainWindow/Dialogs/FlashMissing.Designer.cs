@@ -1,5 +1,7 @@
-﻿namespace Ogama.MainWindow
+﻿namespace Ogama.MainWindow.Dialogs
 {
+  using Ogama.Modules.Common.Controls;
+
   partial class FlashMissing
   {
     /// <summary>
@@ -13,9 +15,9 @@
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      if (disposing && (components != null))
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -35,7 +37,7 @@
       this.llbGetFlash = new System.Windows.Forms.LinkLabel();
       this.pcbGetFlash = new System.Windows.Forms.PictureBox();
       this.label4 = new System.Windows.Forms.Label();
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       ((System.ComponentModel.ISupportInitialize)(this.pcbGetFlash)).BeginInit();
       this.SuspendLayout();
       // 
@@ -146,6 +148,6 @@
     private System.Windows.Forms.LinkLabel llbGetFlash;
     private System.Windows.Forms.PictureBox pcbGetFlash;
     private System.Windows.Forms.Label label4;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
   }
 }

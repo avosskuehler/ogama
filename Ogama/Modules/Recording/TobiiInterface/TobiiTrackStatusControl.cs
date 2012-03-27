@@ -1,11 +1,15 @@
-// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TobiiTrackStatusControl.cs" company="">
-//   
+// <copyright file="TobiiTrackStatusControl.cs" company="FU Berlin">
+// ******************************************************
+// OGAMA - open gaze and mouse analyzer 
+// Copyright (C) 2012 Adrian Voßkühler  
+// ------------------------------------------------------------------------
+// This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+// This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+// You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+// **************************************************************
 // </copyright>
-// <summary>
-//   The tobii track status control.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
+// <author>Adrian Voßkühler</author>
+// <email>adrian@ogama.net</email>
 
 namespace Ogama.Modules.Recording.TobiiInterface
 {
@@ -23,54 +27,54 @@ namespace Ogama.Modules.Recording.TobiiInterface
     #region Constants and Fields
 
     /// <summary>
-    /// The _brush.
+    /// The brush.
     /// </summary>
-    private readonly SolidBrush _brush;
+    private readonly SolidBrush brush;
 
     /// <summary>
-    /// The _data history.
+    /// The data history.
     /// </summary>
-    private readonly Queue<GazeDataItem> _dataHistory;
+    private readonly Queue<GazeDataItem> dataHistory;
 
     /// <summary>
-    /// The _eye brush.
+    /// The eye brush.
     /// </summary>
-    private readonly SolidBrush _eyeBrush;
+    private readonly SolidBrush eyeBrush;
 
     /// <summary>
     /// The bar height.
     /// </summary>
-    private static int BarHeight = 25;
+    private const int BarHeight = 25;
 
     /// <summary>
     /// The eye radius.
     /// </summary>
-    private static int EyeRadius = 8;
+    private const int EyeRadius = 8;
 
     /// <summary>
     /// The history size.
     /// </summary>
-    private static int HistorySize = 30;
+    private const int HistorySize = 30;
 
     /// <summary>
-    /// The _left eye.
+    /// The left eye <see cref="Point3D"/>
     /// </summary>
-    private Point3D _leftEye;
+    private Point3D leftEye;
 
     /// <summary>
-    /// The _left validity.
+    /// The left eyes validity.
     /// </summary>
-    private int _leftValidity;
+    private int leftValidity;
 
     /// <summary>
-    /// The _right eye.
+    /// The right eye <see cref="Point3D"/>
     /// </summary>
-    private Point3D _rightEye;
+    private Point3D rightEye;
 
     /// <summary>
-    /// The _right validity.
+    /// The right eyes validity.
     /// </summary>
-    private int _rightValidity;
+    private int rightValidity;
 
     #endregion
 
@@ -87,13 +91,13 @@ namespace Ogama.Modules.Recording.TobiiInterface
       this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
       this.SetStyle(ControlStyles.DoubleBuffer, true);
 
-      this._dataHistory = new Queue<GazeDataItem>(HistorySize);
+      this.dataHistory = new Queue<GazeDataItem>(HistorySize);
 
-      this._brush = new SolidBrush(Color.Red);
-      this._eyeBrush = new SolidBrush(Color.White);
+      this.brush = new SolidBrush(Color.Red);
+      this.eyeBrush = new SolidBrush(Color.White);
 
-      this._leftValidity = 4;
-      this._rightValidity = 4;
+      this.leftValidity = 4;
+      this.rightValidity = 4;
     }
 
     #endregion
@@ -107,24 +111,24 @@ namespace Ogama.Modules.Recording.TobiiInterface
     {
       get
       {
-        if (this._leftValidity == 4 && this._rightValidity == 4)
+        if (this.leftValidity == 4 && this.rightValidity == 4)
         {
-          this._brush.Color = Color.Red;
+          this.brush.Color = Color.Red;
         }
-        else if (this._leftValidity == 0 && this._rightValidity == 0)
+        else if (this.leftValidity == 0 && this.rightValidity == 0)
         {
-          this._brush.Color = Color.Lime;
+          this.brush.Color = Color.Lime;
         }
-        else if (this._leftValidity == 2 && this._rightValidity == 2)
+        else if (this.leftValidity == 2 && this.rightValidity == 2)
         {
-          this._brush.Color = Color.Orange;
+          this.brush.Color = Color.Orange;
         }
         else
         {
-          this._brush.Color = Color.Yellow;
+          this.brush.Color = Color.Yellow;
         }
 
-        return this._brush;
+        return this.brush;
       }
     }
 
@@ -137,11 +141,11 @@ namespace Ogama.Modules.Recording.TobiiInterface
     /// </summary>
     public void Clear()
     {
-      this._dataHistory.Clear();
-      this._leftValidity = 0;
-      this._rightValidity = 0;
-      this._leftEye = new Point3D();
-      this._rightEye = new Point3D();
+      this.dataHistory.Clear();
+      this.leftValidity = 0;
+      this.rightValidity = 0;
+      this.leftEye = new Point3D();
+      this.rightEye = new Point3D();
 
       this.Invalidate();
     }
@@ -155,19 +159,19 @@ namespace Ogama.Modules.Recording.TobiiInterface
     public void OnGazeData(GazeDataItem gd)
     {
       // Add data to history
-      this._dataHistory.Enqueue(gd);
+      this.dataHistory.Enqueue(gd);
 
       // Remove history item if necessary
-      while (this._dataHistory.Count > HistorySize)
+      while (this.dataHistory.Count > HistorySize)
       {
-        this._dataHistory.Dequeue();
+        this.dataHistory.Dequeue();
       }
 
-      this._leftValidity = gd.LeftValidity;
-      this._rightValidity = gd.RightValidity;
+      this.leftValidity = gd.LeftValidity;
+      this.rightValidity = gd.RightValidity;
 
-      this._leftEye = gd.LeftEyePosition3DRelative;
-      this._rightEye = gd.RightEyePosition3DRelative;
+      this.leftEye = gd.LeftEyePosition3DRelative;
+      this.rightEye = gd.RightEyePosition3DRelative;
 
       this.Invalidate();
     }
@@ -187,38 +191,37 @@ namespace Ogama.Modules.Recording.TobiiInterface
       base.OnPaint(e);
 
       // Compute status bar color
-      this._brush.Color = this.ComputeStatusColor();
+      this.brush.Color = this.ComputeStatusColor();
 
       // Draw bottom bar
-      e.Graphics.FillRectangle(this._brush, new Rectangle(0, this.Height - BarHeight, this.Width, BarHeight));
+      e.Graphics.FillRectangle(this.brush, new Rectangle(0, this.Height - BarHeight, this.Width, BarHeight));
 
       // Draw eyes
-      if (this._leftValidity <= 2)
+      if (this.leftValidity <= 2)
       {
         var r = new RectangleF(
-          (float)((1.0 - this._leftEye.X) * this.Width - EyeRadius), 
-          (float)(this._leftEye.Y * this.Height - EyeRadius), 
-          2 * EyeRadius, 
+          (float)((1.0 - this.leftEye.X) * this.Width - EyeRadius),
+          (float)(this.leftEye.Y * this.Height - EyeRadius),
+          2 * EyeRadius,
           2 * EyeRadius);
-        e.Graphics.FillEllipse(this._eyeBrush, r);
+        e.Graphics.FillEllipse(this.eyeBrush, r);
       }
 
-      if (this._rightValidity <= 2)
+      if (this.rightValidity <= 2)
       {
         var r = new RectangleF(
-          (float)((1 - this._rightEye.X) * this.Width - EyeRadius), 
-          (float)(this._rightEye.Y * this.Height - EyeRadius), 
-          2 * EyeRadius, 
+          (float)((1 - this.rightEye.X) * this.Width - EyeRadius),
+          (float)(this.rightEye.Y * this.Height - EyeRadius),
+          2 * EyeRadius,
           2 * EyeRadius);
-        e.Graphics.FillEllipse(this._eyeBrush, r);
+        e.Graphics.FillEllipse(this.eyeBrush, r);
       }
     }
 
     /// <summary>
-    /// The compute status color.
+    /// This method computes the status color.
     /// </summary>
-    /// <returns>
-    /// </returns>
+    /// <returns>The <see cref="Color"/> indicating the tracking quality.</returns>
     private Color ComputeStatusColor()
     {
       if (!this.Enabled)
@@ -229,7 +232,7 @@ namespace Ogama.Modules.Recording.TobiiInterface
       int quality = 0;
       int count = 0;
 
-      foreach (GazeDataItem item in this._dataHistory)
+      foreach (GazeDataItem item in this.dataHistory)
       {
         if (item.LeftValidity == 4 && item.RightValidity == 4)
         {

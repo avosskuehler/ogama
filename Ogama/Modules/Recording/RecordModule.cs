@@ -1,7 +1,7 @@
-// <copyright file="RecordModule.cs" company="FU Berlin">
+﻿// <copyright file="RecordModule.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,7 +9,7 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
 namespace Ogama.Modules.Recording
 {
@@ -23,33 +23,36 @@ namespace Ogama.Modules.Recording
   using System.Linq;
   using System.Threading;
   using System.Windows.Forms;
-
   using GTCommons.Events;
-
-  using GTHardware.Cameras.PS3Eye;
-
   using Ogama.DataSet;
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.CustomEventArgs;
+  using Ogama.Modules.Common.FormTemplates;
+  using Ogama.Modules.Common.SlideCollections;
+  using Ogama.Modules.Common.Tools;
+  using Ogama.Modules.Common.TrialEvents;
+  using Ogama.Modules.Common.Types;
   using Ogama.Modules.Fixations;
-  using Ogama.Modules.ImportExport;
-  using Ogama.Modules.Recording.ASLInterface;
+  using Ogama.Modules.ImportExport.Common;
   using Ogama.Modules.Recording.AleaInterface;
+  using Ogama.Modules.Recording.ASLInterface;
   using Ogama.Modules.Recording.Dialogs;
   using Ogama.Modules.Recording.GazegroupInterface;
+  using Ogama.Modules.Recording.MirametrixInterface;
   using Ogama.Modules.Recording.MouseOnlyInterface;
+  using Ogama.Modules.Recording.Presenter;
   using Ogama.Modules.Recording.SMIInterface;
   using Ogama.Modules.Recording.TobiiInterface;
-  using Ogama.Modules.Recording.MirametrixInterface;
   using Ogama.Modules.Recording.TrackerBase;
   using Ogama.Properties;
   using OgamaControls;
-
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
   using VectorGraphics.StopConditions;
   using VectorGraphics.Tools;
-  using VectorGraphics.Triggers;
+  using VectorGraphics.Tools.Trigger;
 
   /// <summary>
   /// Derived from <see cref="FormWithPicture"/>.
@@ -333,14 +336,6 @@ namespace Ogama.Modules.Recording
     /// </summary>
     public RecordModule()
     {
-      // Touching this method at this point avoids an application crash of the 
-      // PS3EyeAxFilter.ax at connection to the gazetracker client
-      // with exactly this mehtod.
-      // TODO: Find the reason...
-#if !WIN64
-      int count = PS3Camera.CameraCount;
-#endif
-
       this.InitializeComponent();
 
       this.Picture = this.recordPicture;
@@ -495,7 +490,7 @@ namespace Ogama.Modules.Recording
         // create new raw data table for subject
         this.subjectRawDataTable = new OgamaDataSet.RawdataDataTable
           {
-              TableName = this.currentTracker.Subject.SubjectName + "Rawdata" 
+            TableName = this.currentTracker.Subject.SubjectName + "Rawdata"
           };
 
         // Start presentation in a separate thread,
@@ -678,7 +673,7 @@ namespace Ogama.Modules.Recording
 
       // Take primary monitor
       var monitorIndex = 0;
-      if (PresentationScreen.GetPresentationScreen() != Screen.PrimaryScreen) 
+      if (PresentationScreen.GetPresentationScreen() != Screen.PrimaryScreen)
       {
         // otherwise take the secondary sceen.
         monitorIndex = 1;
@@ -763,7 +758,7 @@ namespace Ogama.Modules.Recording
 
       this.InitializeScreenCapture();
       this.CreateTrackerInterfaces();
-      
+
       // Use panel update always at start
       this.forcePanelViewerUpdate = true;
 
@@ -1212,7 +1207,7 @@ namespace Ogama.Modules.Recording
             TrialName = this.precedingTrial.Name,
             TrialSequence = this.trialSequenceCounter - 1,
             TrialID = this.precedingTrial.ID,
-            Category = e.Category,
+            Category = this.precedingTrial[0].Category,
             TrialStartTime = this.currentTrialStarttime,
             Duration = (int)(currentTime - this.recordingStarttime - this.currentTrialStarttime)
           };
@@ -1771,31 +1766,31 @@ namespace Ogama.Modules.Recording
 
       if (tracker == (tracker | HardwareTracker.Mirametrix))
       {
-          // Create Mirametrix tracker
-          var newMirametrix = new MirametrixTracker(
-              ref this.labelCalibrationResultMirametrix,
-              this.tbpMirametrix,
-              this,
-              this.spcMirametrixControls,
-              this.spcMirametrixTrackStatus.Panel1,
-              this.spcMirametrixCalibPlot.Panel1,
-              this.btnMirametrixShowOnPresentationScreen,
-              this.btnMirametrixAcceptCalibration,
-              this.btnMirametrixRecalibrate,
-              this.btnMirametrixConnect,
-              this.btnMirametrixSubjectName,
-              this.btnMirametrixCalibrate,
-              this.btnMirametrixRecord,
-              this.txbMirametrixSubjectName);
+        // Create Mirametrix tracker
+        var newMirametrix = new MirametrixTracker(
+            ref this.labelCalibrationResultMirametrix,
+            this.tbpMirametrix,
+            this,
+            this.spcMirametrixControls,
+            this.spcMirametrixTrackStatus.Panel1,
+            this.spcMirametrixCalibPlot.Panel1,
+            this.btnMirametrixShowOnPresentationScreen,
+            this.btnMirametrixAcceptCalibration,
+            this.btnMirametrixRecalibrate,
+            this.btnMirametrixConnect,
+            this.btnMirametrixSubjectName,
+            this.btnMirametrixCalibrate,
+            this.btnMirametrixRecord,
+            this.txbMirametrixSubjectName);
 
-          this.trackerInterfaces.Add(HardwareTracker.Mirametrix, newMirametrix);
+        this.trackerInterfaces.Add(HardwareTracker.Mirametrix, newMirametrix);
       }
       else
       {
-          if (this.tclEyetracker.TabPages.Contains(this.tbpMirametrix))
-          {
-              this.tclEyetracker.TabPages.Remove(this.tbpMirametrix);
-          }
+        if (this.tclEyetracker.TabPages.Contains(this.tbpMirametrix))
+        {
+          this.tclEyetracker.TabPages.Remove(this.tbpMirametrix);
+        }
       }
 
       if (tracker == (tracker | HardwareTracker.SMI))
@@ -2309,7 +2304,7 @@ namespace Ogama.Modules.Recording
     private void InitializeScreenCapture()
     {
       // Only needed if there is a flash movie.
-      if (!Document.ActiveDocument.ExperimentSettings.SlideShow.HasFlashContent())
+      if (!Document.ActiveDocument.ExperimentSettings.SlideShow.HasScreenCaptureContent())
       {
         this.screenCaptureProperties.CaptureMode = CaptureMode.None;
         return;
@@ -2333,12 +2328,12 @@ namespace Ogama.Modules.Recording
       switch (this.tclEyetracker.SelectedTab.Name)
       {
         case "tbpMirametrix":
-              if (this.trackerInterfaces.ContainsKey(HardwareTracker.Mirametrix))
-              {
-                  this.currentTracker = this.trackerInterfaces[HardwareTracker.Mirametrix];
-              }
+          if (this.trackerInterfaces.ContainsKey(HardwareTracker.Mirametrix))
+          {
+            this.currentTracker = this.trackerInterfaces[HardwareTracker.Mirametrix];
+          }
 
-              break;
+          break;
         case "tbpTobii":
           if (this.trackerInterfaces.ContainsKey(HardwareTracker.Tobii))
           {

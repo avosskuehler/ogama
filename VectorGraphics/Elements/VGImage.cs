@@ -1,7 +1,7 @@
 // <copyright file="VGImage.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,7 +9,7 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
 namespace VectorGraphics.Elements
 {
@@ -52,11 +52,6 @@ namespace VectorGraphics.Elements
     /// Saves the filename without path of the image.
     /// </summary>
     private string filename;
-
-    /// <summary>
-    /// Saves the path to the file for this image.
-    /// </summary>
-    private string path;
 
     /// <summary>
     /// Saves the alpha (transparency) value for this image
@@ -104,6 +99,8 @@ namespace VectorGraphics.Elements
     /// <param name="newStyleGroup">Group Enumeration, <see cref="VGStyleGroup"/></param>
     /// <param name="newName">Name of Element</param>
     /// <param name="newElementGroup">Element group description</param>
+    /// <param name="withoutImageInMemoryCreation">Omits internal image creation during
+    /// construction.</param>
     public VGImage(
       ShapeDrawAction newShapeDrawAction,
       Pen newPen,
@@ -117,7 +114,8 @@ namespace VectorGraphics.Elements
       Size newCanvas,
       VGStyleGroup newStyleGroup,
       string newName,
-      string newElementGroup)
+      string newElementGroup,
+      bool withoutImageInMemoryCreation)
       : base(
       newShapeDrawAction,
       newPen,
@@ -131,17 +129,21 @@ namespace VectorGraphics.Elements
       null)
     {
       this.filename = newImageFile;
-      this.path = newPath;
+      this.Filepath = newPath;
       this.canvas = newCanvas;
       this.alpha = newAlpha;
 
-      if (!this.CreateInternalImage())
+      if (!withoutImageInMemoryCreation)
       {
-        return;
+        if (!this.CreateInternalImage())
+        {
+          return;
+        }
+
+        var unit = new GraphicsUnit();
+        this.Bounds = this.Image.GetBounds(ref unit);
       }
 
-      GraphicsUnit unit = new GraphicsUnit();
-      this.Bounds = this.Image.GetBounds(ref unit);
       this.layout = newLayout;
       this.InitTransparencyMatrix();
     }
@@ -157,7 +159,7 @@ namespace VectorGraphics.Elements
     public VGImage(Image newImage, ImageLayout newLayout, Size newCanvas)
       : base(ShapeDrawAction.None, Pens.Red)
     {
-      this.path = string.Empty;
+      this.Filepath = string.Empty;
       this.filename = string.Empty;
       this.layout = newLayout;
       this.canvas = newCanvas;
@@ -173,7 +175,7 @@ namespace VectorGraphics.Elements
     /// </summary>
     protected VGImage()
     {
-      this.path = string.Empty;
+      this.Filepath = string.Empty;
       this.filename = string.Empty;
       this.InitTransparencyMatrix();
     }
@@ -198,7 +200,7 @@ namespace VectorGraphics.Elements
       cloneImage.Sound)
     {
       this.filename = cloneImage.Filename;
-      this.path = cloneImage.Filepath;
+      this.Filepath = cloneImage.Filepath;
       this.alpha = cloneImage.Alpha;
 
       // Removed because when starting recording that leaded
@@ -234,34 +236,28 @@ namespace VectorGraphics.Elements
     /// </summary>
     /// <remarks>This property is used for reloading the image from file.</remarks>
     /// <value>A <see cref="string"/> with the images path.</value>
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    [Browsable(false)]
-    [XmlIgnore()]
-    public string Filepath
-    {
-      get { return this.path; }
-      set { this.path = value; }
-    }
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false), XmlIgnore]
+    public string Filepath { get; set; }
 
     /// <summary>
     /// Gets the image filename with path.
     /// </summary>
-    [XmlIgnore()]
+    [XmlIgnore]
     public string FullFilename
     {
       get
       {
-        if (this.filename == string.Empty || this.filename == null)
+        if (string.IsNullOrEmpty(this.filename))
         {
           throw new ArgumentNullException("Image filename is empty, so it could no be loaded");
         }
 
-        if (this.path == null || this.path == string.Empty)
+        if (string.IsNullOrEmpty(this.Filepath))
         {
           string newPath = Path.GetDirectoryName(this.filename);
           if (newPath != string.Empty)
           {
-            this.path = newPath;
+            this.Filepath = newPath;
             this.filename = Path.GetFileName(this.filename);
           }
           else
@@ -269,7 +265,7 @@ namespace VectorGraphics.Elements
           }
         }
 
-        return Path.Combine(this.path, this.filename);
+        return Path.Combine(this.Filepath, this.filename);
       }
     }
 
@@ -292,7 +288,7 @@ namespace VectorGraphics.Elements
     /// <remarks>When this is null (after deserialization) the image is
     /// reconstructed from file.</remarks>
     /// <value>A <see cref="Image"/> with the image.</value>
-    [XmlIgnoreAttribute()]
+    [XmlIgnoreAttribute]
     [Category("Content")]
     [Description("The image to use as stimulus.")]
     public Image StimulusImage
@@ -349,14 +345,14 @@ namespace VectorGraphics.Elements
     /// <summary>
     /// Gets or sets the current image.
     /// </summary>
-    [XmlIgnore()]
+    [XmlIgnore]
     protected Image Image { get; set; }
 
     /// <summary>
     /// Gets or sets an <see cref="ImageAttributes"/> that 
     /// helps to draw the images transparent.
     /// </summary>
-    [XmlIgnore()]
+    [XmlIgnore]
     protected ImageAttributes ImageAttributes { get; set; }
 
     #endregion //PROPERTIES

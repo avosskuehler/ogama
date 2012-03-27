@@ -1,7 +1,7 @@
 // <copyright file="FolderContentSlideImportDialog.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,25 +9,25 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
-namespace Ogama.Modules.SlideshowDesign
+namespace Ogama.Modules.SlideshowDesign.Import
 {
   using System;
   using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Data;
   using System.Drawing;
   using System.IO;
-  using System.Text;
   using System.Windows.Forms;
 
   using Ogama.ExceptionHandling;
-  using Ogama.Modules.Common;
+  using Ogama.Modules.Common.SlideCollections;
+  using Ogama.Modules.Common.Tools;
+  using Ogama.Modules.SlideshowDesign.DesignModule.StimuliDialogs;
+
   using OgamaControls;
-  using OgamaControls.Media;
-  using VectorGraphics;
+
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
   using VectorGraphics.StopConditions;
   using VectorGraphics.Tools;
 
@@ -241,7 +241,7 @@ namespace Ogama.Modules.SlideshowDesign
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnAddItem_Click(object sender, EventArgs e)
     {
-      if (this.cbbDesignedItem.SelectedItem != null && 
+      if (this.cbbDesignedItem.SelectedItem != null &&
         this.cbbDesignedItem.SelectedItem is VGElement)
       {
         VGElement itemToAdd = (VGElement)this.cbbDesignedItem.SelectedItem;
@@ -303,20 +303,45 @@ namespace Ogama.Modules.SlideshowDesign
     /// the experiment.</returns>
     private List<Slide> GetSlides()
     {
-      List<Slide> newSlides = new List<Slide>();
+      var newSlides = new List<Slide>();
 
-      DirectoryInfo dirInfoStimuli = new DirectoryInfo(this.txbFolder.Text);
+      var dirInfoStimuli = new DirectoryInfo(this.txbFolder.Text);
       if (dirInfoStimuli.Exists)
       {
-        foreach (FileInfo file in dirInfoStimuli.GetFiles())
+        var files = dirInfoStimuli.GetFiles();
+        Array.Sort(files, new NumericComparer());
+        foreach (var file in files)
         {
-          Slide newSlide = new Slide();
-          newSlide.BackgroundColor = this.clbBackground.CurrentColor;
-          newSlide.Modified = true;
-          newSlide.MouseCursorVisible = this.chbShowMouseCursor.Checked;
-          newSlide.MouseInitialPosition = this.psbMouseCursor.CurrentPosition;
-          newSlide.Name = Path.GetFileNameWithoutExtension(file.Name);
-          newSlide.PresentationSize = Document.ActiveDocument.PresentationSize;
+          // Ignore files with unrecognized extensions
+          switch (file.Extension)
+          {
+            case ".bmp":
+            case ".png":
+            case ".jpg":
+            case ".wmf":
+            case ".mp3":
+            case ".wav":
+            case ".wma":
+              break;
+            default:
+              continue;
+          }
+
+          // Ignore hidden and MAC files
+          if (file.Name.StartsWith("."))
+          {
+            continue;
+          }
+
+          var newSlide = new Slide
+            {
+              BackgroundColor = this.clbBackground.CurrentColor,
+              Modified = true,
+              MouseCursorVisible = this.chbShowMouseCursor.Checked,
+              MouseInitialPosition = this.psbMouseCursor.CurrentPosition,
+              Name = Path.GetFileNameWithoutExtension(file.Name),
+              PresentationSize = Document.ActiveDocument.PresentationSize
+            };
 
           StopCondition stop = null;
           if (this.rdbTime.Checked)
@@ -385,21 +410,26 @@ namespace Ogama.Modules.SlideshowDesign
             case ".png":
             case ".jpg":
             case ".wmf":
-              File.Copy(file.FullName, destination, true);
+              if (!File.Exists(destination))
+              {
+                File.Copy(file.FullName, destination, true);
+              }
+
               VGImage image = new VGImage(
-                ShapeDrawAction.None, 
-                Pens.Red, 
-                Brushes.Red, 
+                ShapeDrawAction.None,
+                Pens.Red,
+                Brushes.Red,
                 SystemFonts.MenuFont,
-                Color.Red, 
-                file.Name, 
-                Document.ActiveDocument.ExperimentSettings.SlideResourcesPath, 
+                Color.Red,
+                file.Name,
+                Document.ActiveDocument.ExperimentSettings.SlideResourcesPath,
                 ImageLayout.Stretch,
                 1f,
-                Document.ActiveDocument.PresentationSize, 
-                VGStyleGroup.None, 
+                Document.ActiveDocument.PresentationSize,
+                VGStyleGroup.None,
                 file.Name,
-                string.Empty);
+                string.Empty,
+                true);
 
               newSlide.VGStimuli.Add(image);
               newSlides.Add(newSlide);

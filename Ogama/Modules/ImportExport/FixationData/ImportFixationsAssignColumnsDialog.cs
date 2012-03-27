@@ -1,7 +1,7 @@
 // <copyright file="ImportFixationsAssignColumnsDialog.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,15 +9,16 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
-namespace Ogama.Modules.ImportExport
+namespace Ogama.Modules.ImportExport.FixationData
 {
   using System;
   using System.Windows.Forms;
 
   using Ogama.ExceptionHandling;
-  using Ogama.Modules.Common;
+  using Ogama.Modules.Common.FormTemplates;
+  using Ogama.Modules.ImportExport.Common;
 
   /// <summary>
   /// This dialog <see cref="Form"/> derives from <see cref="FormWithAccellerators"/>
@@ -340,4 +341,3 @@ namespace Ogama.Modules.ImportExport
     #endregion //HELPER
   }
 }
-

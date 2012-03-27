@@ -1,7 +1,7 @@
 // <copyright file="VGText.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,7 +9,7 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
 namespace VectorGraphics.Elements
 {
@@ -22,8 +22,8 @@ namespace VectorGraphics.Elements
   using System.Windows.Forms;
   using System.Xml.Serialization;
 
-  using VectorGraphics.CustomTypeConverter;
   using VectorGraphics.Tools;
+  using VectorGraphics.Tools.CustomTypeConverter;
 
   /// <summary>
   /// Inherited from <see cref="VGElement"/>. 
@@ -63,16 +63,6 @@ namespace VectorGraphics.Elements
     /// Saves the <see cref="HorizontalAlignment"/> of the text.
     /// </summary>
     private HorizontalAlignment textAlignment;
-
-    /// <summary>
-    /// This factor multiplies the default line spacing value of the current textfont.
-    /// </summary>
-    private float lineSpacing;
-
-    /// <summary>
-    /// This value is the padding for the text bounds.
-    /// </summary>
-    private float padding;
 
     #endregion //FIELDS
 
@@ -133,8 +123,8 @@ namespace VectorGraphics.Elements
       this.textAlignment = newAlignment;
       this.text = newText;
       this.textFont = newFont;
-      this.lineSpacing = newLineSpacing != 0 ? newLineSpacing : 1.0f;
-      this.padding = newPadding;
+      this.LineSpacing = newLineSpacing != 0 ? newLineSpacing : 1.0f;
+      this.Padding = newPadding;
     }
 
     /// <summary>
@@ -168,8 +158,8 @@ namespace VectorGraphics.Elements
       this.text = cloneText.StringToDraw;
       this.textAlignment = cloneText.Alignment;
       this.textFont = cloneText.TextFont == null ? this.Font : (Font)cloneText.TextFont.Clone();
-      this.lineSpacing = cloneText.LineSpacing != 0 ? cloneText.LineSpacing : 1.0f;
-      this.padding = cloneText.Padding;
+      this.LineSpacing = cloneText.LineSpacing != 0 ? cloneText.LineSpacing : 1.0f;
+      this.Padding = cloneText.Padding;
     }
 
     #endregion //CONSTRUCTION
@@ -209,7 +199,7 @@ namespace VectorGraphics.Elements
     /// Gets or sets font of text element
     /// </summary>
     /// <value>A <see cref="Font"/> for drawing the name of this shape.</value>
-    [XmlIgnoreAttribute()]
+    [XmlIgnoreAttribute]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     [Category("Appearance")]
     [Description("The font to use for the text to draw.")]
@@ -219,12 +209,7 @@ namespace VectorGraphics.Elements
       {
         // Ogama V0.X versions used the inherited font property
         // instead of the new textFont, so update it here.
-        if (this.textFont == null)
-        {
-          this.textFont = this.Font;
-        }
-
-        return this.textFont;
+        return this.textFont ?? (this.textFont = this.Font);
       }
 
       set
@@ -289,7 +274,7 @@ namespace VectorGraphics.Elements
     /// Gets or sets used color for the graphic elements font.
     /// </summary>
     /// <value>A <see cref="Color"/> for the font of this shape.</value>
-    [XmlIgnoreAttribute()]
+    [XmlIgnoreAttribute]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     [Category("Appearance")]
     [Description("The font color to use for the text.")]
@@ -343,29 +328,15 @@ namespace VectorGraphics.Elements
     /// Gets or sets the factor for the line spacing of the text.
     /// </summary>
     /// <value>A <see cref="Single"/> with the factor for the line spacing for the text.</value>
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-    [Category("Appearance")]
-    [Description("The line spacing of the text.")]
-    [DefaultValue(1.0f)]
-    public float LineSpacing
-    {
-      get { return this.lineSpacing; }
-      set { this.lineSpacing = value; }
-    }
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible), Category("Appearance"), Description("The line spacing of the text."), DefaultValue(1.0f)]
+    public float LineSpacing { get; set; }
 
     /// <summary>
     /// Gets or sets the text padding of the text.
     /// </summary>
     /// <value>A <see cref="Single"/> with the text padding of the text.</value>
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-    [Category("Appearance")]
-    [Description("The padding for the text from its bounds.")]
-    [DefaultValue(6.0f)]
-    public float Padding
-    {
-      get { return this.padding; }
-      set { this.padding = value; }
-    }
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible), Category("Appearance"), Description("The padding for the text from its bounds."), DefaultValue(6.0f)]
+    public float Padding { get; set; }
 
     #endregion //PROPERTIES
 
@@ -388,9 +359,9 @@ namespace VectorGraphics.Elements
         throw new ArgumentNullException("Graphics object should not be null.");
       }
 
-      if (this.lineSpacing == 0)
+      if (this.LineSpacing == 0)
       {
-        this.lineSpacing = 1;
+        this.LineSpacing = 1;
       }
 
       graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
@@ -418,9 +389,9 @@ namespace VectorGraphics.Elements
       }
 
       RectangleF halfInlineRect = this.Bounds;
-      if (this.padding * 2 < halfInlineRect.Width && this.padding < halfInlineRect.Height)
+      if (this.Padding * 2 < halfInlineRect.Width && this.Padding < halfInlineRect.Height)
       {
-        halfInlineRect.Inflate(-this.padding, -this.padding);
+        halfInlineRect.Inflate(-this.Padding, -this.Padding);
       }
 
       RectangleF innerBounds = this.Bounds;
@@ -440,13 +411,13 @@ namespace VectorGraphics.Elements
       }
 
       RectangleF textBounds = innerBounds;
-      if (this.padding * 2 < textBounds.Width && this.padding < textBounds.Height)
+      if (this.Padding * 2 < textBounds.Width && this.Padding < textBounds.Height)
       {
-        textBounds.Inflate(-this.padding, -this.padding);
+        textBounds.Inflate(-this.Padding, -this.Padding);
       }
 
       SizeF fit = new SizeF(textBounds.Width, this.TextFont.Height);
-      int spacing = (int)(this.lineSpacing * this.TextFont.Height);
+      int spacing = (int)(this.LineSpacing * this.TextFont.Height);
       int line = 0;
       RectangleF lineBounds = textBounds;
       lineBounds.Height = spacing;
@@ -473,7 +444,7 @@ namespace VectorGraphics.Elements
       newBounds.Height = spacing * line;
       if ((ShapeDrawAction & ShapeDrawAction.Edge) == ShapeDrawAction.Edge)
       {
-        newBounds.Height += this.Pen.Width + 2 * this.padding;
+        newBounds.Height += this.Pen.Width + 2 * this.Padding;
       }
 
       this.Bounds = newBounds;
@@ -494,7 +465,7 @@ namespace VectorGraphics.Elements
       this.text = string.Empty;
       this.textFont = SystemFonts.MenuFont;
       this.textFontColor = Color.Blue;
-      this.lineSpacing = 1;
+      this.LineSpacing = 1;
     }
 
     /// <summary>

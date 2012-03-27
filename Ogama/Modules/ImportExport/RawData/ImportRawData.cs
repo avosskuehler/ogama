@@ -1,7 +1,7 @@
 ﻿// <copyright file="ImportRawData.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,30 +9,29 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
-namespace Ogama.Modules.ImportExport
+namespace Ogama.Modules.ImportExport.RawData
 {
   using System;
-  using System.Collections;
   using System.Collections.Generic;
-  using System.ComponentModel;
   using System.Data;
-  using System.Data.SqlClient;
   using System.Drawing;
   using System.Globalization;
   using System.IO;
-  using System.Text;
   using System.Windows.Forms;
   using System.Xml.Serialization;
 
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
-  using Ogama.Modules.Common;
+  using Ogama.Modules.Common.SlideCollections;
+  using Ogama.Modules.Common.Tools;
+  using Ogama.Modules.Common.Types;
   using Ogama.Modules.Fixations;
-  using Ogama.Modules.SlideshowDesign;
+  using Ogama.Modules.ImportExport.Common;
 
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
   using VectorGraphics.StopConditions;
 
   /// <summary>
@@ -212,13 +211,8 @@ namespace Ogama.Modules.ImportExport
                     // Generate the trials
                     GenerateOgamaSubjectAndTrialList();
 
-                    bool succesful = true;
-
                     // Save the import into ogamas database and the mdf file.
-                    if (!SaveImportIntoTablesAndDB())
-                    {
-                      succesful = false;
-                    }
+                    var succesful = SaveImportIntoTablesAndDB();
 
                     // Create slideshow trials
                     GenerateOgamaSlideshowTrials(detectionSetting, mainWindow);
@@ -376,9 +370,6 @@ namespace Ogama.Modules.ImportExport
     private static void GenerateOgamaRawDataList(int numberOfImportLines)
     {
       // Clear existing values
-      detectionSetting.ImageDictionary.Clear();
-      detectionSetting.TrialIDToImageAssignments.Clear();
-      detectionSetting.TrialSequenceToTrialIDAssignments.Clear();
       rawDataList.Clear();
       double lastTimeInFileTime = 0;
 
@@ -462,6 +453,11 @@ namespace Ogama.Modules.ImportExport
           return;
         }
       }
+      else
+      {
+        detectionSetting.TrialSequenceToTrialIDAssignments.Clear();
+        detectionSetting.TrialSequenceToStarttimeAssignments.Clear();
+      }
 
       string line = string.Empty;
       int counter = 0;
@@ -485,6 +481,13 @@ namespace Ogama.Modules.ImportExport
         {
           // field for checking for doubled times
           long lastTimeInMs = -100;
+
+          // Clear old entries except parses from table
+          if (detectionSetting.StimuliImportMode != StimuliImportModes.UseAssignmentTable)
+          {
+            detectionSetting.ImageDictionary.Clear();
+            detectionSetting.TrialIDToImageAssignments.Clear();
+          }
 
           // Read every line of ImportFile
           while ((line = importReader.ReadLine()) != null)
@@ -655,7 +658,7 @@ namespace Ogama.Modules.ImportExport
             // Check for duplicate time entries
             if (timeInFileTime == lastTimeInFileTime)
             {
-              string message = String.Format(
+              string message = string.Format(
                 "Two consecutive raw data samples had the same sampling time {0}."
                 + Environment.NewLine + "Time in FileTime is {1}" + Environment.NewLine +
                 "PrevTime in FileTime is {2}" + Environment.NewLine +
@@ -1037,9 +1040,7 @@ namespace Ogama.Modules.ImportExport
 
       foreach (KeyValuePair<int, int> kvp in detectionSetting.TrialSequenceToTrialIDAssignments)
       {
-        int trialSequence = kvp.Key;
         int trialID = kvp.Value;
-
         string file = string.Empty;
         if (detectionSetting.TrialIDToImageAssignments.ContainsKey(trialID))
         {
@@ -1049,41 +1050,40 @@ namespace Ogama.Modules.ImportExport
         string filename = Path.GetFileNameWithoutExtension(file);
 
         // Create slide
-        StopConditionCollection stopConditions = new StopConditionCollection();
-        stopConditions.Add(new MouseStopCondition(MouseButtons.Left, true, string.Empty, null, Point.Empty));
+        var stopConditions = new StopConditionCollection
+          {
+            new MouseStopCondition(MouseButtons.Left, true, string.Empty, null, Point.Empty)
+          };
 
         VGImage stimulusImage = null;
 
         if (file != string.Empty)
         {
           stimulusImage = new VGImage(
-             ShapeDrawAction.None,
-             Pens.Black,
-             Brushes.Black,
-             SystemFonts.MenuFont,
-             Color.White,
-             Path.GetFileName(file),
-             Document.ActiveDocument.ExperimentSettings.SlideResourcesPath,
-             ImageLayout.Zoom,
-             1f,
-             Document.ActiveDocument.PresentationSize,
-             VGStyleGroup.None,
-             filename,
-             string.Empty);
-          stimulusImage.Size = Document.ActiveDocument.PresentationSize;
+            ShapeDrawAction.None,
+            Pens.Black,
+            Brushes.Black,
+            SystemFonts.MenuFont,
+            Color.White,
+            Path.GetFileName(file),
+            Document.ActiveDocument.ExperimentSettings.SlideResourcesPath,
+            ImageLayout.Zoom,
+            1f,
+            Document.ActiveDocument.PresentationSize,
+            VGStyleGroup.None,
+            filename,
+            string.Empty,
+            true)
+            {
+              Size = Document.ActiveDocument.PresentationSize
+            };
         }
 
-        Slide newSlide = new Slide(
-          filename,
-          Color.White,
-          null,
-          stopConditions,
-          null,
-          string.Empty,
-          Document.ActiveDocument.PresentationSize);
-
-        newSlide.Modified = true;
-        newSlide.MouseCursorVisible = true;
+        var newSlide = new Slide(
+          filename, Color.White, null, stopConditions, null, string.Empty, Document.ActiveDocument.PresentationSize)
+          {
+            Modified = true, MouseCursorVisible = true
+          };
 
         // Only add stimulus if an image exists
         if (file != string.Empty)
@@ -1096,8 +1096,13 @@ namespace Ogama.Modules.ImportExport
         }
 
         // Create trial
-        Trial newTrial = new Trial(filename, trialID);
-        newTrial.Name = filename;
+        trialID = int.Parse(Document.ActiveDocument.ExperimentSettings.SlideShow.GetUnusedNodeID());
+
+        var newTrial = new Trial(filename, trialID)
+          {
+            Name = filename
+          };
+
         newTrial.Add(newSlide);
 
         if (trialNames.Contains(filename)
@@ -1107,18 +1112,26 @@ namespace Ogama.Modules.ImportExport
           // Trial already exists
           continue;
         }
-        else
-        {
-          trialNames.Add(filename);
-        }
+
+        trialNames.Add(filename);
 
         // Create slide node
-        SlideshowTreeNode slideNode = new SlideshowTreeNode(newSlide.Name);
-        slideNode.Name = trialID.ToString();
-        slideNode.Slide = newSlide;
+        var slideNode = new SlideshowTreeNode(newSlide.Name)
+        {
+          Name = trialID.ToString(CultureInfo.InvariantCulture),
+          Slide = newSlide
+        };
 
         // Add slide node to slideshow
         Document.ActiveDocument.ExperimentSettings.SlideShow.Nodes.Add(slideNode);
+
+        ////if (stimulusImage != null)
+        ////{
+        ////  stimulusImage.Dispose();
+        ////}
+
+        ////newSlide.Dispose();
+
         Document.ActiveDocument.Modified = true;
       }
 
@@ -1356,15 +1369,19 @@ namespace Ogama.Modules.ImportExport
       ASCIISettings logFileImportSettings,
       DetectionSettings rawdataSettings)
     {
-      SaveFileDialog ofdSaveSettings = new SaveFileDialog();
-      ofdSaveSettings.DefaultExt = "ois";
-      ofdSaveSettings.FileName = "*.ois";
-      ofdSaveSettings.FilterIndex = 1;
-      ofdSaveSettings.Filter = "Ogama import settings files|*.ois";
-      ofdSaveSettings.Title = "Please specify settings filename";
+      var ofdSaveSettings = new SaveFileDialog
+        {
+          DefaultExt = "ois",
+          FileName = "*.ois",
+          FilterIndex = 1,
+          Filter = "Ogama import settings files|*.ois",
+          Title = "Please specify settings filename",
+          InitialDirectory = Properties.Settings.Default.ImportSettingsPath
+        };
+
       if (ofdSaveSettings.ShowDialog() == DialogResult.OK)
       {
-        ImportRawData.SerializeSettings(ofdSaveSettings.FileName);
+        SerializeSettings(ofdSaveSettings.FileName);
       }
     }
 
@@ -1424,30 +1441,26 @@ namespace Ogama.Modules.ImportExport
     /// </summary>
     /// <param name="filePath">A <see cref="string"/> with the path to the 
     /// OGAMA target import settings xml file.</param>
-    /// <returns><strong>True</strong> if successful, 
-    /// otherwise <strong>false</strong>.</returns>
-    private static bool SerializeSettings(string filePath)
+    private static void SerializeSettings(string filePath)
     {
       try
       {
         using (TextWriter writer = new StreamWriter(filePath))
         {
-          MergedSettings settings = new MergedSettings();
-          settings.AsciiSetting = asciiSetting;
-          settings.DetectionSetting = detectionSetting;
+          var settings = new MergedSettings
+            {
+              AsciiSetting = asciiSetting,
+              DetectionSetting = detectionSetting
+            };
 
-          XmlSerializer serializer = new XmlSerializer(typeof(MergedSettings));
+          var serializer = new XmlSerializer(typeof(MergedSettings));
           serializer.Serialize(writer, settings);
         }
       }
       catch (Exception ex)
       {
         ExceptionMethods.HandleException(ex);
-
-        return false;
       }
-
-      return true;
     }
 
     /// <summary>
@@ -1461,17 +1474,15 @@ namespace Ogama.Modules.ImportExport
     {
       try
       {
-        using (FileStream fs = new FileStream(filePath, FileMode.Open))
+        using (var fs = new FileStream(filePath, FileMode.Open))
         {
-          MergedSettings settings = new MergedSettings();
-
           // Create an instance of the XmlSerializer class;
           // specify the type of object to be deserialized 
-          XmlSerializer serializer = new XmlSerializer(typeof(MergedSettings));
+          var serializer = new XmlSerializer(typeof(MergedSettings));
 
           /* Use the Deserialize method to restore the object's state with
           data from the XML document. */
-          settings = (MergedSettings)serializer.Deserialize(fs);
+          var settings = (MergedSettings)serializer.Deserialize(fs);
 
           asciiSetting = settings.AsciiSetting;
           detectionSetting = settings.DetectionSetting;

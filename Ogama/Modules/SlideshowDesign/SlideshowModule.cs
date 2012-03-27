@@ -1,7 +1,7 @@
 ﻿// <copyright file="SlideshowModule.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,7 +9,7 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
 namespace Ogama.Modules.SlideshowDesign
 {
@@ -31,11 +31,17 @@ namespace Ogama.Modules.SlideshowDesign
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.FormTemplates;
+  using Ogama.Modules.Common.SlideCollections;
+  using Ogama.Modules.Common.Types;
   using Ogama.Modules.Recording;
+  using Ogama.Modules.SlideshowDesign.DesignModule;
+  using Ogama.Modules.SlideshowDesign.DesignModule.StimuliDialogs;
   using Ogama.Properties;
   using OgamaControls;
   using VectorGraphics;
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
 
   /// <summary>
   /// Derived from <see cref="FormWithPicture"/>.
@@ -276,6 +282,19 @@ namespace Ogama.Modules.SlideshowDesign
     }
 
     /// <summary>
+    /// This method opens the given slide in a new <see cref="SlideDesignModule"/> form
+    /// for modification.
+    /// </summary>
+    /// <param name="treeNode">The <see cref="SlideshowTreeNode"/> that indicates the slide.</param>
+    /// <param name="currentSlide">The <see cref="Slide"/> to be edited.</param>
+    private void OpenDesktopDesignForm(SlideshowTreeNode treeNode, Slide currentSlide)
+    {
+      DesktopDialog newDesktopDesignForm = new DesktopDialog();
+      newDesktopDesignForm.Slide = (Slide)currentSlide.Clone();
+      this.OpenDesktopDesignerForm(newDesktopDesignForm, treeNode.Name);
+    }
+
+    /// <summary>
     /// This method renames all slides with the given name.
     /// </summary>
     /// <param name="oldName">A <see cref="String"/> to be renamed.</param>
@@ -410,6 +429,31 @@ namespace Ogama.Modules.SlideshowDesign
       {
         Slide newSlide = newDesignForm.Slide;
         string newSlidename = newSlide.Name;
+        if (nodeID != string.Empty)
+        {
+          this.OverwriteSlide(newSlide, nodeID);
+        }
+        else
+        {
+          this.AddSlide(newSlide);
+        }
+
+        this.SlideShowModified();
+      }
+    }
+
+    /// <summary>
+    /// Opens a <see cref="DesktopDialog"/> form, waits for succesful
+    /// design and updates slideshow with the designed <see cref="Slide"/>.
+    /// </summary>
+    /// <param name="newDesignForm">A <see cref="DesktopDialog"/> with the desktop design form to display.</param>
+    /// <param name="nodeID">Contains the node ID (which is the Node.Name property) of the node that is 
+    /// modified or "" if this should be a new slide.</param>
+    private void OpenDesktopDesignerForm(DesktopDialog newDesignForm, string nodeID)
+    {
+      if (newDesignForm.ShowDialog() == DialogResult.OK)
+      {
+        Slide newSlide = newDesignForm.Slide;
         if (nodeID != string.Empty)
         {
           this.OverwriteSlide(newSlide, nodeID);
