@@ -14,10 +14,9 @@
 namespace Ogama.Modules.Recording.MirametrixInterface
 {
   using System;
-  using System.ComponentModel;
   using System.Diagnostics;
   using System.Drawing;
-    using System.Globalization;
+  using System.Globalization;
   using System.IO;
   using System.Runtime.InteropServices;
   using System.Windows.Forms;
@@ -29,12 +28,11 @@ namespace Ogama.Modules.Recording.MirametrixInterface
   using Microsoft.Win32;
 
   using Ogama.ExceptionHandling;
-  using Ogama.Modules.Common;
   using Ogama.Modules.Common.CustomEventArgs;
   using Ogama.Modules.Common.Tools;
   using Ogama.Modules.Recording.Dialogs;
   using Ogama.Modules.Recording.TrackerBase;
-        
+
   /// <summary>
   /// This class implements the <see cref="ITracker"/> interface to represent 
   /// an OGAMA known eyetracker.
@@ -504,22 +502,22 @@ namespace Ogama.Modules.Recording.MirametrixInterface
 
                 // Calculate values between 0..1
                 attribute = root.GetAttribute("BPOGX");
-                                newGazeData.GazePosX = float.Parse(attribute, CultureInfo.InvariantCulture);
+                newGazeData.GazePosX = float.Parse(attribute, CultureInfo.InvariantCulture);
                 attribute = root.GetAttribute("BPOGY");
-                                newGazeData.GazePosY = float.Parse(attribute, CultureInfo.InvariantCulture);
+                newGazeData.GazePosY = float.Parse(attribute, CultureInfo.InvariantCulture);
 
                 // Set pupil diameter
                 attribute = root.GetAttribute("LPD");
-                                newGazeData.PupilDiaX = float.Parse(attribute, CultureInfo.InvariantCulture);
+                newGazeData.PupilDiaX = float.Parse(attribute, CultureInfo.InvariantCulture);
                 attribute = root.GetAttribute("RPD");
-                                newGazeData.PupilDiaY = float.Parse(attribute, CultureInfo.InvariantCulture);
+                newGazeData.PupilDiaY = float.Parse(attribute, CultureInfo.InvariantCulture);
                 this.OnGazeDataChanged(new GazeDataChangedEventArgs(newGazeData));
 
                 // Values needed by the trackstatus windows
                 attribute = root.GetAttribute("LPS");
-                                float lED = float.Parse(attribute, CultureInfo.InvariantCulture);
+                float lED = float.Parse(attribute, CultureInfo.InvariantCulture);
                 attribute = root.GetAttribute("RPS");
-                                float rED = float.Parse(attribute, CultureInfo.InvariantCulture);
+                float rED = float.Parse(attribute, CultureInfo.InvariantCulture);
                 float averageRD = (lED + rED) / 2;
                 if (this.memDlgTrackStatus != null)
                 {
