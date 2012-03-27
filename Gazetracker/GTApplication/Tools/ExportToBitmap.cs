@@ -16,7 +16,7 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 // <modifiedby>Martin Tall</modifiedby>
 
 using System;

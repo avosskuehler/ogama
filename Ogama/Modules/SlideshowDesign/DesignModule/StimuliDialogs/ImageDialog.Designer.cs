@@ -1,6 +1,9 @@
-﻿using VectorGraphics;
-namespace Ogama.Modules.SlideshowDesign
+﻿namespace Ogama.Modules.SlideshowDesign.DesignModule.StimuliDialogs
 {
+  using Ogama.Modules.Common.Controls;
+
+  using VectorGraphics.Tools.CustomEventArgs;
+
   partial class ImageDialog
   {
     /// <summary>
@@ -14,9 +17,9 @@ namespace Ogama.Modules.SlideshowDesign
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      if (disposing && (components != null))
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -48,7 +51,7 @@ namespace Ogama.Modules.SlideshowDesign
       this.btnHelp = new System.Windows.Forms.Button();
       this.panel1 = new System.Windows.Forms.Panel();
       this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       this.panelPreview = new OgamaControls.DoubleBufferPanel();
       this.splitContainer1.Panel1.SuspendLayout();
       this.splitContainer1.Panel2.SuspendLayout();
@@ -213,7 +216,7 @@ namespace Ogama.Modules.SlideshowDesign
       this.pbcImageBorder.NewTextAlignment = VectorGraphics.Elements.VGAlignment.None;
       this.pbcImageBorder.Size = new System.Drawing.Size(252, 110);
       this.pbcImageBorder.TabIndex = 25;
-      this.pbcImageBorder.ShapePropertiesChanged += new System.EventHandler<VectorGraphics.CustomEventArgs.ShapePropertiesChangedEventArgs>(this.pbcImageBorder_ShapePropertiesChanged);
+      this.pbcImageBorder.ShapePropertiesChanged += new System.EventHandler<ShapePropertiesChangedEventArgs>(this.pbcImageBorder_ShapePropertiesChanged);
       // 
       // grpPreview
       // 
@@ -309,7 +312,7 @@ namespace Ogama.Modules.SlideshowDesign
 
     private System.Windows.Forms.Button btnOK;
     private System.Windows.Forms.Button btnCancel;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
     private System.Windows.Forms.SplitContainer splitContainer1;
     private System.Windows.Forms.Panel panel1;
     private System.Windows.Forms.Button btnHelp;

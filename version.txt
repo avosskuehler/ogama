@@ -1,2 +1,2 @@
-4.0.4257.16120
-This is a beta release, but contains many bugfixes and features ...
+4.1.4410.1001
+This is a release, containing bugfixes and more hardware support

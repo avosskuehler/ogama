@@ -1,7 +1,7 @@
 // <copyright file="Document.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,7 +9,7 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
 namespace Ogama
 {
@@ -27,9 +27,14 @@ namespace Ogama
   using Ogama.DataSet;
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
+  using Ogama.MainWindow.ContextPanel;
+  using Ogama.MainWindow.Dialogs;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.Tools;
+  using Ogama.Modules.Common.Types;
   using Ogama.Properties;
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
 
   /// <summary>
   /// This class defines an OGAMA document.
@@ -229,20 +234,19 @@ namespace Ogama
       SqlConnection connectionString = new SqlConnection(Document.ActiveDocument.ExperimentSettings.ServerConnectionString);
       ServerConnection connection = new ServerConnection(connectionString);
       Server sqlServer = new Server(connection);
-      try
+       try
       {
         // If there are open connections set offline and online to kill all 
         // active connections, they are not used anymore.
         int connections = sqlServer.GetActiveDBConnectionCount(Document.ActiveDocument.ExperimentSettings.Name);
         if (connections > 0)
         {
-          string query = "ALTER DATABASE \"" + Document.ActiveDocument.ExperimentSettings.Name +
+           string query = "ALTER DATABASE \"" + Document.ActiveDocument.ExperimentSettings.Name +
             "\" SET OFFLINE WITH ROLLBACK IMMEDIATE;";
           Queries.ExecuteSQLCommand(query);
           query = "ALTER DATABASE \"" + Document.ActiveDocument.ExperimentSettings.Name +
             "\" SET ONLINE;";
           Queries.ExecuteSQLCommand(query);
-          connections = sqlServer.GetActiveDBConnectionCount(Document.ActiveDocument.ExperimentSettings.Name);
         }
 
         // Close database connection

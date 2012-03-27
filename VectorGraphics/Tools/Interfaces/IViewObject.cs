@@ -1,7 +1,7 @@
 ﻿// <copyright file="IViewObject.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,14 +9,12 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
-namespace VectorGraphics.Interfaces
+namespace VectorGraphics.Tools.Interfaces
 {
   using System;
-  using System.Collections.Generic;
   using System.Runtime.InteropServices;
-  using System.Text;
 
   using Microsoft.VisualStudio.OLE.Interop;
 
@@ -31,8 +29,8 @@ namespace VectorGraphics.Interfaces
   /// seems not to be valid. Please google for more information.</remarks>
   /// <seealso cref="Microsoft.VisualStudio.OLE.Interop.IViewObject"/>
   [ComVisible(true), ComImport()]
-  [GuidAttribute("0000010d-0000-0000-C000-000000000046")]
-  [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
+  [Guid("0000010d-0000-0000-C000-000000000046")]
+  [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
   public interface IViewObject
   {
     /// <summary>

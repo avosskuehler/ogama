@@ -1,7 +1,7 @@
 ﻿// <copyright file="AOIPicture.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,7 +9,7 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
 namespace Ogama.Modules.AOI
 {
@@ -21,11 +21,15 @@ namespace Ogama.Modules.AOI
   using System.Drawing.Drawing2D;
   using System.Windows.Forms;
   using Ogama.ExceptionHandling;
+  using Ogama.Modules.AOI.Dialogs;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.Types;
+
   using VectorGraphics.Canvas;
-  using VectorGraphics.CustomEventArgs;
-  using VectorGraphics.CustomTypeConverter;
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
+  using VectorGraphics.Tools.CustomEventArgs;
+  using VectorGraphics.Tools.CustomTypeConverter;
 
   /// <summary>
   /// Derived from <see cref="PictureModifiable"/>. 
@@ -662,18 +666,21 @@ namespace Ogama.Modules.AOI
     public void DrawAOIStatistics(VisualizationModes mode, SampleType sampleType)
     {
       // Skip if no data available
-      if (this.aoiStatistics == null) { return; }
+      if (this.aoiStatistics == null)
+      {
+        return;
+      }
 
       // Get all statistical elements
-      VGElementCollection statisticalElements =
+      var statisticalElements =
         this.Elements.FindAllGroupMembers(VGStyleGroup.AOI_STATISTICS_ARROW);
       statisticalElements.AddRange(this.Elements.FindAllGroupMembers(VGStyleGroup.AOI_STATISTICS_BUBBLE));
 
       this.Elements.RemoveAll(statisticalElements);
 
-      List<int> distances = new List<int>();
+      var distances = new List<int>();
 
-      VGElementCollection aoisWithoutSearchRects = new VGElementCollection();
+      var aoisWithoutSearchRects = new VGElementCollection();
       foreach (VGElement aoi in this.aoiCollection)
       {
         if (aoi.StyleGroup != VGStyleGroup.AOI_SEARCHRECT)
@@ -694,8 +701,8 @@ namespace Ogama.Modules.AOI
         {
           if (aoiStatistic.SumOfTimeOfAllFixations > 0)
           {
-            RectangleF bounds = this.GetCircleBounds(aoi.Center, aoiStatistic.SumOfTimeOfAllFixations, mode);
-            VGEllipse ellipse = new VGEllipse(
+            var bounds = this.GetCircleBounds(aoi.Center, aoiStatistic.SumOfTimeOfAllFixations, mode);
+            var ellipse = new VGEllipse(
                 this.bubbleDrawAction,
                 this.bubblePen,
                 this.bubbleBrush,
@@ -716,8 +723,8 @@ namespace Ogama.Modules.AOI
         {
           if (aoiStatistic.FixationCount > 0)
           {
-            RectangleF bounds = this.GetCircleBounds(aoi.Center, aoiStatistic.FixationCount, mode);
-            VGEllipse ellipse = new VGEllipse(
+            var bounds = this.GetCircleBounds(aoi.Center, aoiStatistic.FixationCount, mode);
+            var ellipse = new VGEllipse(
                 this.bubbleDrawAction,
                 this.bubblePen,
                 this.bubbleBrush,
@@ -738,8 +745,8 @@ namespace Ogama.Modules.AOI
         {
           if (aoiStatistic.FixationDurationMean > 0)
           {
-            RectangleF bounds = this.GetCircleBounds(aoi.Center, aoiStatistic.FixationDurationMean, mode);
-            VGEllipse ellipse = new VGEllipse(
+            var bounds = this.GetCircleBounds(aoi.Center, aoiStatistic.FixationDurationMean, mode);
+            var ellipse = new VGEllipse(
                 this.bubbleDrawAction,
                 this.bubblePen,
                 this.bubbleBrush,
@@ -757,11 +764,7 @@ namespace Ogama.Modules.AOI
       }
 
       // Check for absolute or relative transition values
-      bool absolute = false;
-      if ((mode & VisualizationModes.AbsoluteTransitions) == VisualizationModes.AbsoluteTransitions)
-      {
-        absolute = true;
-      }
+      bool absolute = (mode & VisualizationModes.AbsoluteTransitions) == VisualizationModes.AbsoluteTransitions;
 
       if ((mode & VisualizationModes.RelativeTransitions) == VisualizationModes.RelativeTransitions
         || (mode & VisualizationModes.AbsoluteTransitions) == VisualizationModes.AbsoluteTransitions)
@@ -779,7 +782,7 @@ namespace Ogama.Modules.AOI
             break;
         }
 
-        Array transitions = Statistics.Statistic.CreateTransitionMatrixForSingleAOIs(
+        var transitions = Statistics.Statistic.CreateTransitionMatrixForSingleAOIs(
           trialsFixations,
           aoisWithoutSearchRects);
 

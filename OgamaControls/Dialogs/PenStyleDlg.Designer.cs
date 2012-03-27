@@ -1,5 +1,7 @@
 namespace OgamaControls.Dialogs
 {
+  using VectorGraphics.Tools.CustomEventArgs;
+
   partial class PenStyleDlg
   {
     /// <summary>
@@ -50,7 +52,7 @@ namespace OgamaControls.Dialogs
       this.penSelectControl.Padding = new System.Windows.Forms.Padding(5);
       this.penSelectControl.Size = new System.Drawing.Size(350, 241);
       this.penSelectControl.TabIndex = 0;
-      this.penSelectControl.PenChanged += new System.EventHandler<VectorGraphics.CustomEventArgs.PenChangedEventArgs>(this.penSelectControl_PenChanged);
+      this.penSelectControl.PenChanged += new System.EventHandler<PenChangedEventArgs>(this.penSelectControl_PenChanged);
       // 
       // btnOK
       // 

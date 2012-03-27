@@ -7,11 +7,12 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using VectorGraphics;
-using VectorGraphics.CustomEventArgs;
 using VectorGraphics.Elements;
 
 namespace OgamaControls
 {
+  using VectorGraphics.Tools.CustomEventArgs;
+
   /// <summary>
   /// PenSelectControl - A control that lets the user rapidly select a pen
   /// </summary>

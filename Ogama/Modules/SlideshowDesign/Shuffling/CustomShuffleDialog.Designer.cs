@@ -1,5 +1,7 @@
-namespace Ogama.Modules.SlideshowDesign
+namespace Ogama.Modules.SlideshowDesign.Shuffling
 {
+  using Ogama.Modules.Common.Controls;
+
   partial class CustomShuffleDialog
 	{
 		/// <summary>
@@ -13,9 +15,9 @@ namespace Ogama.Modules.SlideshowDesign
 		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
 		protected override void Dispose(bool disposing)
 		{
-			if (disposing && (components != null))
+			if (disposing && (this.components != null))
 			{
-				components.Dispose();
+				this.components.Dispose();
 			}
 			base.Dispose(disposing);
 		}
@@ -43,7 +45,7 @@ namespace Ogama.Modules.SlideshowDesign
       this.txbParentNodeName = new System.Windows.Forms.TextBox();
       this.chbShuffleInsideGroups = new System.Windows.Forms.CheckBox();
       this.trvSlideshow = new System.Windows.Forms.TreeView();
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       ((System.ComponentModel.ISupportInitialize)(this.nudCountSectionItemsInGroup)).BeginInit();
       this.grpProperties.SuspendLayout();
       this.SuspendLayout();
@@ -249,7 +251,7 @@ namespace Ogama.Modules.SlideshowDesign
 
 		#endregion
 
-		private Ogama.Modules.Common.DialogTop dialogTop1;
+		private DialogTop dialogTop1;
 		private System.Windows.Forms.Button btnOK;
     private System.Windows.Forms.Button btnCancel;
     private System.Windows.Forms.Label label1;

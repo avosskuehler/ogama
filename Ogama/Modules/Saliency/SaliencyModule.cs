@@ -1,7 +1,7 @@
 // <copyright file="SaliencyModule.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,7 +9,7 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
 namespace Ogama.Modules.Saliency
 {
@@ -31,15 +31,18 @@ namespace Ogama.Modules.Saliency
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.FormTemplates;
+  using Ogama.Modules.Common.PictureTemplates;
+  using Ogama.Modules.Common.Types;
   using Ogama.Modules.Fixations;
   using Ogama.Modules.ImportExport;
   using Ogama.Properties;
   using OgamaControls;
   using OgamaControls.Dialogs;
 
-  using VectorGraphics.CustomEventArgs;
   using VectorGraphics.Elements;
   using VectorGraphics.Tools;
+  using VectorGraphics.Tools.CustomEventArgs;
 
   /// <summary>
   /// Derived from <see cref="FormWithTrialSelection"/>.
@@ -593,7 +596,10 @@ namespace Ogama.Modules.Saliency
       this.ResetForm();
 
       // Return if we have no data
-      if (!Document.ActiveDocument.SelectionState.IsSet) { return; }
+      if (!Document.ActiveDocument.SelectionState.IsSet)
+      {
+        return;
+      }
 
       // Update status bar of main form.
       ((MainForm)this.MdiParent).StatusLabel.Text = "Calculating salient locations ...";
@@ -1083,52 +1089,54 @@ namespace Ogama.Modules.Saliency
           while ((line = importReader.ReadLine()) != null)
           {
             // only use lines containing "CovertShift"
-            if (line.Contains("CovertShift"))
+            if (!line.Contains("CovertShift"))
             {
-              // Split separated line items
-              string[] items = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-              string timeString = items[0].Replace("ms", string.Empty);
-              float startTime = 0f;
+              continue;
+            }
 
-              // Specify the dot as decimal separator.
-              NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
-              nfi.NumberDecimalSeparator = ".";
+            // Split separated line items
+            var items = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            var timeString = items[0].Replace("ms", string.Empty);
+            var startTime = 0f;
 
-              Single.TryParse(timeString, NumberStyles.Float, nfi, out startTime);
-              int startTimeMS = (int)startTime;
+            // Specify the dot as decimal separator.
+            NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
+            nfi.NumberDecimalSeparator = ".";
 
-              foreach (string item in items)
+            float.TryParse(timeString, NumberStyles.Float, nfi, out startTime);
+            var startTimeMS = (int)startTime;
+
+            foreach (string item in items)
+            {
+              if (item.Contains("(") && item.Contains(")"))
               {
-                if (item.Contains("(") && item.Contains(")"))
+                string strCoordinatePair = item.Replace("(", string.Empty);
+                strCoordinatePair = strCoordinatePair.Replace(")", string.Empty);
+                string[] coordinates = strCoordinatePair.Split(',');
+
+                OgamaDataSet.GazeFixationsRow fixationRow = fixations.NewGazeFixationsRow();
+
+                // Dummy entries
+                fixationRow.SubjectName = string.Empty;
+                fixationRow.TrialID = 0;
+                fixationRow.TrialSequence = 0;
+
+                // Interesting entries.
+                fixationRow.StartTime = startTimeMS;
+                fixationRow.PosX = Convert.ToInt32(coordinates[0]);
+                fixationRow.PosY = Convert.ToInt32(coordinates[1]);
+                fixationRow.CountInTrial = fixCounter;
+                fixations.AddGazeFixationsRow(fixationRow);
+
+                // Update length of foregoing fixation
+                if (fixCounter >= 1)
                 {
-                  string strCoordinatePair = item.Replace("(", string.Empty);
-                  strCoordinatePair = strCoordinatePair.Replace(")", string.Empty);
-                  string[] coordinates = strCoordinatePair.Split(',');
-
-                  OgamaDataSet.GazeFixationsRow fixationRow = fixations.NewGazeFixationsRow();
-
-                  // Dummy entries
-                  fixationRow.SubjectName = string.Empty;
-                  fixationRow.TrialID = 0;
-                  fixationRow.TrialSequence = 0;
-
-                  // Interesting entries.
-                  fixationRow.StartTime = startTimeMS;
-                  fixationRow.PosX = Convert.ToInt32(coordinates[0]);
-                  fixationRow.PosY = Convert.ToInt32(coordinates[1]);
-                  fixationRow.CountInTrial = fixCounter;
-                  fixations.AddGazeFixationsRow(fixationRow);
-
-                  // Update length of foregoing fixation
-                  if (fixCounter >= 1)
-                  {
-                    fixations[fixCounter - 1].Length = (int)(startTimeMS - fixations[fixCounter - 1].StartTime);
-                    duration = (int)(fixations[fixCounter - 1].StartTime + fixations[fixCounter - 1].Length);
-                  }
-
-                  fixCounter++;
-                  break;
+                  fixations[fixCounter - 1].Length = (int)(startTimeMS - fixations[fixCounter - 1].StartTime);
+                  duration = (int)(fixations[fixCounter - 1].StartTime + fixations[fixCounter - 1].Length);
                 }
+
+                fixCounter++;
+                break;
               }
             }
           }

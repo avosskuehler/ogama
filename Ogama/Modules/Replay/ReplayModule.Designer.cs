@@ -1,5 +1,10 @@
 namespace Ogama.Modules.Replay
 {
+  using Ogama.Modules.Common.Controls;
+  using Ogama.Modules.Common.CustomEventArgs;
+
+  using VectorGraphics.Tools.CustomEventArgs;
+
   partial class ReplayModule
   {
     /// <summary>
@@ -48,7 +53,7 @@ namespace Ogama.Modules.Replay
       this.btnSeekToPreviousMarker = new System.Windows.Forms.ToolStripButton();
       this.btnAddMarker = new System.Windows.Forms.ToolStripButton();
       this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
-      this.trialTimeLine = new Ogama.Modules.Common.TrialTimeLine(this.components);
+      this.trialTimeLine = new TrialTimeLine(this.components);
       this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
       this.trbZoom = new OgamaControls.ToolStripTrackBar();
       this.pnlCanvas = new System.Windows.Forms.Panel();
@@ -394,9 +399,9 @@ namespace Ogama.Modules.Replay
       this.replayPicture.TabIndex = 0;
       this.replayPicture.TabStop = false;
       this.replayPicture.ZoomFactor = 0F;
-      this.replayPicture.TrialEventIDFound += new Ogama.Modules.Common.TrialEventIDFoundEventHandler(this.replayPicture_TrialEventIDFound);
-      this.replayPicture.TrialSequenceChanged += new Ogama.Modules.Common.TrialSequenceChangedEventHandler(this.replayPicture_TrialSequenceChanged);
-      this.replayPicture.Progress += new VectorGraphics.CustomEventArgs.ProgressEventHandler(this.replayPicture_Progress);
+      this.replayPicture.TrialEventIDFound += new TrialEventIDFoundEventHandler(this.replayPicture_TrialEventIDFound);
+      this.replayPicture.TrialSequenceChanged += new TrialSequenceChangedEventHandler(this.replayPicture_TrialSequenceChanged);
+      this.replayPicture.Progress += new ProgressEventHandler(this.replayPicture_Progress);
       // 
       // toolStrip2
       // 
@@ -1204,7 +1209,7 @@ namespace Ogama.Modules.Replay
     private System.Windows.Forms.Panel pnlCanvas;
     private System.Windows.Forms.ToolTip toolTip1;
     private System.Windows.Forms.Panel pnlPicture;
-    private Ogama.Modules.Common.TrialTimeLine trialTimeLine;
+    private TrialTimeLine trialTimeLine;
     private System.Windows.Forms.ToolStripButton btnEnableAudio;
     private System.Windows.Forms.ToolStripButton btnShowUsercam;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;

@@ -1,7 +1,7 @@
 ﻿// <copyright file="TobiiTrackStatus.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,7 +9,7 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
 namespace Ogama.Modules.Recording.TobiiInterface
 {
@@ -34,20 +34,15 @@ namespace Ogama.Modules.Recording.TobiiInterface
     ///////////////////////////////////////////////////////////////////////////////
     #region FIELDS
 
-    ///// <summary>
-    ///// The TetStatusObject to show on the presentation screen.
-    ///// </summary>
-    //private TobiiTrackStatusControl tetTrackStatusSubject;
+    /////// <summary>
+    /////// Saves the current active <see cref="TobiiSetting"/> to use.
+    /////// </summary>
+    ////private TobiiSetting tobiiSettings;
 
-    ///// <summary>
-    ///// Saves the current active <see cref="TobiiSetting"/> to use.
-    ///// </summary>
-    //private TobiiSetting tobiiSettings;
-
-    ///// <summary>
-    ///// Saves whether this dialog is connected to the tracker.
-    ///// </summary>
-    //private bool isConnected;
+    /////// <summary>
+    /////// Saves whether this dialog is connected to the tracker.
+    /////// </summary>
+    ////private bool isConnected;
 
     #endregion //FIELDS
 
@@ -64,8 +59,9 @@ namespace Ogama.Modules.Recording.TobiiInterface
     public TobiiTrackStatus(TobiiSetting setting)
     {
       this.InitializeComponent();
-      //this.tobiiSettings = setting;
-      //this.Connect();
+
+      // this.tobiiSettings = setting;
+      // this.Connect();
     }
 
     #endregion //CONSTRUCTION
@@ -104,10 +100,10 @@ namespace Ogama.Modules.Recording.TobiiInterface
     /// <param name="e">A <see cref="FormClosingEventArgs"/> with the event data.</param>
     private void TobiiTrackStatusFormClosing(object sender, FormClosingEventArgs e)
     {
-      //if (this.isConnected)
-      //{
-      //  this.Disconnect();
-      //}
+      ////if (this.isConnected)
+      ////{
+      ////  this.Disconnect();
+      ////}
     }
 
     #endregion //WINDOWSEVENTHANDLER
@@ -145,46 +141,29 @@ namespace Ogama.Modules.Recording.TobiiInterface
     {
       try
       {
-        //this.tetTrackStatusSubject = (ITetTrackStatus)this.axTobiiTrackStatus.GetOcx();
+        ////this.tetTrackStatusSubject = (ITetTrackStatus)this.axTobiiTrackStatus.GetOcx();
 
-        //// Connect to the TET server if necessary
-        //if (!this.tetTrackStatusSubject.IsConnected)
-        //{
-        //  this.tetTrackStatusSubject.Connect(
-        //    this.tobiiSettings.connectedTrackerName,
-        //    this.tobiiSettings.TetServerPort);
-        //}
+        ////// Connect to the TET server if necessary
+        ////if (!this.tetTrackStatusSubject.IsConnected)
+        ////{
+        ////  this.tetTrackStatusSubject.Connect(
+        ////    this.tobiiSettings.connectedTrackerName,
+        ////    this.tobiiSettings.TetServerPort);
+        ////}
 
-        //// Start the track status meter
-        //if (!this.tetTrackStatusSubject.IsTracking)
-        //{
-        //  this.tetTrackStatusSubject.Start();
-        //}
+        ////// Start the track status meter
+        ////if (!this.tetTrackStatusSubject.IsTracking)
+        ////{
+        ////  this.tetTrackStatusSubject.Start();
+        ////}
 
-        //this.isConnected = true;
+        ////this.isConnected = true;
       }
       catch (Exception)
       {
         // Don´t show an error message here
         this.Close();
       }
-    }
-
-    /// <summary>
-    /// This method disconnects the track status object from the
-    /// tracking system.
-    /// </summary>
-    private void Disconnect()
-    {
-      //if (this.tetTrackStatusSubject.IsConnected)
-      //{
-      //  if (this.tetTrackStatusSubject.IsTracking)
-      //  {
-      //    this.tetTrackStatusSubject.Stop();
-      //  }
-
-      //  this.tetTrackStatusSubject.Disconnect();
-      //}
     }
 
     #endregion //METHODS

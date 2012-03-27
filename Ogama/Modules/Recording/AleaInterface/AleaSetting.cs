@@ -1,7 +1,7 @@
 ﻿// <copyright file="AleaSetting.cs" company="alea technologies">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -19,7 +19,7 @@ namespace Ogama.Modules.Recording.AleaInterface
 
   using Alea.Api;
 
-  using VectorGraphics.CustomTypeConverter;
+  using VectorGraphics.Tools.CustomTypeConverter;
 
   /// <summary>
   /// Class to save settings for the alea eye tracking system.
@@ -204,7 +204,7 @@ namespace Ogama.Modules.Recording.AleaInterface
     }
 
     /// <summary>
-    /// Gets or sets 
+    /// Gets or sets the eye index.
     /// </summary>
     public int Eye
     {
@@ -255,7 +255,7 @@ namespace Ogama.Modules.Recording.AleaInterface
     /// </summary>
     /// <value>A <see cref="Color"/> for the calibration points,
     /// which is converted into a OLE_COLOR Structure.</value>
-    [XmlIgnoreAttribute()]
+    [XmlIgnoreAttribute]
     public Color CalibPointColor
     {
       get { return this.calibPointColor; }
@@ -278,7 +278,7 @@ namespace Ogama.Modules.Recording.AleaInterface
     /// </summary>
     /// <value>A <see cref="Color"/> for the background,
     /// which is converted into a OLE_COLOR Structure.</value>
-    [XmlIgnoreAttribute()]
+    [XmlIgnoreAttribute]
     public Color CalibBackgroundColor
     {
       get { return this.calibBackgroundColor; }

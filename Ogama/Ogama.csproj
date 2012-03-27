@@ -88,7 +88,7 @@
     <OutputPath>..\Release86\</OutputPath>
     <DefineConstants>TRACE;ASL</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>..\Release86\Ogama.xml</DocumentationFile>
+    <DocumentationFile>..\Release86\Docs\Ogama.xml</DocumentationFile>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
@@ -146,25 +146,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\Microsoft.SqlServer.ConnectionInfo.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.SqlServer.Dmf, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Managed\Microsoft.SqlServer.Dmf.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.SqlServer.Management.Sdk.Sfc, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\Microsoft.SqlServer.Management.Sdk.Sfc.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.SqlServer.ServiceBrokerEnum, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Managed\Microsoft.SqlServer.ServiceBrokerEnum.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.SqlServer.Smo, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\Microsoft.SqlServer.Smo.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.SqlServer.SqlClrProvider, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Managed\Microsoft.SqlServer.SqlClrProvider.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.SqlEnum, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -357,6 +345,8 @@
     <Compile Include="Modules\Common\SlideCollections\SequencedTrial.cs" />
     <Compile Include="Modules\Common\SlideCollections\TrialCollection.cs" />
     <Compile Include="Modules\Common\SlideCollections\SlideType.cs" />
+    <Compile Include="Modules\Common\Tools\NumericComparer.cs" />
+    <Compile Include="Modules\Common\Tools\StringLogicalComparer.cs" />
     <Compile Include="Modules\Common\Types\ActiveXMode.cs" />
     <Compile Include="Modules\Common\Types\SampleValidity.cs" />
     <Compile Include="Modules\Common\Types\StringEnum.cs" />
@@ -432,10 +422,11 @@
     <Compile Include="Modules\Recording\MirametrixInterface\MirametrixTrackStatusControl.Designer.cs">
       <DependentUpon>MirametrixTrackStatusControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Recording\Presenter\MessageHook.cs" />
     <Compile Include="Modules\Recording\Presenter\WebsiteScreenshot.cs" />
     <Compile Include="Modules\Recording\Presenter\DSScreenCapture.cs" />
     <Compile Include="Modules\Recording\Presenter\ScreenCaptureProperties.cs" />
-    <Compile Include="Modules\Recording\TobiiInterface\CalibrationRunner.cs" />
+    <Compile Include="Modules\Recording\TobiiInterface\TobiiCalibrationRunner.cs" />
     <Compile Include="Modules\Recording\TobiiInterface\TobiiCalibrationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -589,6 +580,12 @@
     </Compile>
     <Compile Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\BrowserDialog.Designer.cs">
       <DependentUpon>BrowserDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\DesktopDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\DesktopDialog.Designer.cs">
+      <DependentUpon>DesktopDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\SlideshowDesign\SlideshowModule.ListView.cs">
       <DependentUpon>SlideshowModule.cs</DependentUpon>
@@ -1195,6 +1192,10 @@
       <DependentUpon>BrowserDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\DesktopDialog.resx">
+      <DependentUpon>DesktopDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\SlideshowDesign\Shuffling\CustomShuffleDialog.resx">
       <DependentUpon>CustomShuffleDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1629,6 +1630,10 @@
     <None Include="Resources\ASLmire_1024x768.bmp" />
     <None Include="Resources\ASLmire_1280x1024.bmp" />
     <None Include="Resources\ASLmire_defaultSize.bmp" />
+    <None Include="Resources\Desktop.ico" />
+    <None Include="Resources\Desktop.png" />
+    <None Include="Resources\Desktop32.png" />
+    <None Include="Resources\Desktop48.png" />
     <Content Include="Resources\MirametrixLogo.png" />
     <Content Include="Resources\MirametrixLogo_150_33.png" />
     <Content Include="Resources\Mirametrix_S2.png" />

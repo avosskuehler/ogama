@@ -1,7 +1,7 @@
 // <copyright file="ReplayModule.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,11 +9,13 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
 namespace Ogama.Modules.Replay
 {
   using System;
+  using System.Collections;
+  using System.Collections.Generic;
   using System.Data;
   using System.Drawing;
   using System.IO;
@@ -21,18 +23,29 @@ namespace Ogama.Modules.Replay
   using System.Threading;
   using System.Windows.Forms;
   using DirectShowLib;
+
+  using GTHardware.Cameras.DirectShow;
+
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
+  using Ogama.MainWindow.ContextPanel;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.Controls;
+  using Ogama.Modules.Common.CustomEventArgs;
+  using Ogama.Modules.Common.FormTemplates;
+  using Ogama.Modules.Common.Tools;
+  using Ogama.Modules.Common.TrialEvents;
+  using Ogama.Modules.Common.Types;
+  using Ogama.Modules.Replay.Video;
   using Ogama.Properties;
   using OgamaControls;
   using OgamaControls.Dialogs;
   using OgamaControls.Media;
-  using VectorGraphics.CustomEventArgs;
+
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
   using VectorGraphics.Tools;
-  using System.Collections;
-  using System.Collections.Generic;
+  using VectorGraphics.Tools.CustomEventArgs;
 
   /// <summary>
   /// Derived from <see cref="FormWithSubjectAndTrialSelection"/>.
@@ -1811,7 +1824,7 @@ namespace Ogama.Modules.Replay
         }
 
         // Load trial stimulus into picture
-        this.LoadAudioStimuli(FilterTrialEvents(this.TrialEvents, e.TrialSequence));
+        this.LoadAudioStimuli(this.FilterTrialEvents(this.TrialEvents, e.TrialSequence));
 
         // Start sound
         if (this.btnEnableAudio.Checked)
@@ -2540,7 +2553,7 @@ namespace Ogama.Modules.Replay
         this.usercamVideoPlayer.StopMovie();
       }
 
-      StopTrialVideoAndTrialAudio();
+      this.StopTrialVideoAndTrialAudio();
 
       // Enable the ComboBoxes
       this.cbbSubject.Enabled = true;
@@ -2590,8 +2603,13 @@ namespace Ogama.Modules.Replay
     private void ResetControls()
     {
       this.StopPlaying();
-      //Skip if there is no data
-      if (this.CurrentTrial == null) { return; }
+
+      // Skip if there is no data
+      if (this.CurrentTrial == null)
+      {
+        return;
+      }
+
       // Load first slide of multiple slides on trial
       if (this.CurrentTrial.Count > 1)
       {

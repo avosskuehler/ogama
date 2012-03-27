@@ -6,11 +6,12 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using VectorGraphics;
-using VectorGraphics.CustomEventArgs;
 using VectorGraphics.Elements;
 
 namespace OgamaControls.Dialogs
 {
+  using VectorGraphics.Tools.CustomEventArgs;
+
   /// <summary>
   /// Dialog for selecting pen and font style together.
   /// </summary>

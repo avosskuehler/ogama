@@ -7,11 +7,12 @@ using System.Text;
 using System.Windows.Forms;
 using System.Configuration;
 using VectorGraphics;
-using VectorGraphics.CustomEventArgs;
 using VectorGraphics.Elements;
 
 namespace OgamaControls
 {
+  using VectorGraphics.Tools.CustomEventArgs;
+
   /// <summary>
   /// Area to show font styles
   /// </summary>

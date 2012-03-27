@@ -1,7 +1,7 @@
 ﻿// <copyright file="MainForm.Menu.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,7 +9,7 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
 namespace Ogama.MainWindow
 {
@@ -21,6 +21,8 @@ namespace Ogama.MainWindow
 
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow.Dialogs;
+  using Ogama.Modules.ImportExport.RawData;
+  using Ogama.Modules.Scanpath;
   using Ogama.Properties;
 
   /// <summary>
@@ -738,7 +740,7 @@ namespace Ogama.MainWindow
     /// <summary>
     /// The <see cref="Control.Click"/> event handler
     /// for the <see cref="ToolStripMenuItem"/> <see cref="mnuViewsNewScanpaths"/>.
-    /// Creates a new <see cref="Modules.Scanpaths.ScanpathsModule"/> module.
+    /// Creates a new <see cref="ScanpathsModule"/> module.
     /// </summary>
     /// <param name="sender">Source of the event</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
@@ -851,7 +853,7 @@ namespace Ogama.MainWindow
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void mnuToolsImport_Click(object sender, EventArgs e)
     {
-      Modules.ImportExport.ImportRawData.Start(this);
+      ImportRawData.Start(this);
       this.RefreshContextPanelSubjects();
     }
 

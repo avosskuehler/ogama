@@ -1,5 +1,7 @@
-namespace Ogama.MainWindow
+namespace Ogama.MainWindow.Dialogs
 {
+  using Ogama.Modules.Common.Controls;
+
   partial class UpgradeDocumentSplash
   {
     /// <summary>
@@ -13,9 +15,9 @@ namespace Ogama.MainWindow
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      if (disposing && (components != null))
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -35,7 +37,7 @@ namespace Ogama.MainWindow
       this.label1 = new System.Windows.Forms.Label();
       this.pictureBox1 = new System.Windows.Forms.PictureBox();
       this.label2 = new System.Windows.Forms.Label();
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
       this.SuspendLayout();
       // 
@@ -131,7 +133,7 @@ namespace Ogama.MainWindow
     private System.Windows.Forms.Timer timer1;
     private System.Windows.Forms.ProgressBar progressBar1;
     internal System.Windows.Forms.Label label1;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
     private System.Windows.Forms.PictureBox pictureBox1;
     internal System.Windows.Forms.Label label2;
 

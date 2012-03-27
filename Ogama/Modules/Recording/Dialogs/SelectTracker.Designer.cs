@@ -1,5 +1,7 @@
 ﻿namespace Ogama.Modules.Recording.Dialogs
 {
+  using Ogama.Modules.Common.Controls;
+
   partial class SelectTracker
   {
     /// <summary>
@@ -30,7 +32,7 @@
     {
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SelectTracker));
         this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-        this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+        this.dialogTop1 = new DialogTop();
         this.splitContainer2 = new System.Windows.Forms.SplitContainer();
         this.tabControl1 = new System.Windows.Forms.TabControl();
         this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -545,7 +547,7 @@
     #endregion
 
     private System.Windows.Forms.SplitContainer splitContainer1;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
     private System.Windows.Forms.CheckBox chbMouseOnly;
     private System.Windows.Forms.CheckBox chbAlea;
     private System.Windows.Forms.CheckBox chbTobii;

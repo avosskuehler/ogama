@@ -1,7 +1,7 @@
 ﻿// <copyright file="ExceptionMethods.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,12 +9,13 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
 namespace Ogama.ExceptionHandling
 {
   using System;
   using System.Collections.Generic;
+  using System.Diagnostics;
   using System.IO;
   using System.Text;
   using System.Windows.Forms;
@@ -118,20 +119,40 @@ namespace Ogama.ExceptionHandling
     {
       // Add error to error log
       string exceptionLogFile = Path.Combine(Properties.Settings.Default.LogfilePath, "exception.log");
-      string message = GetLogEntryForException(e);
+
+      var message = new StringBuilder(e.Message);
+      Exception innerException = e;
+      message.AppendLine("------------------------------------");
+
+      var trace = new StackTrace(e, true);
+      message.AppendLine("Method name:" + trace.GetFrame(0).GetMethod().Name);
+      message.AppendLine("Line: " + trace.GetFrame(0).GetFileLineNumber());
+      message.AppendLine("Column: " + trace.GetFrame(0).GetFileColumnNumber());
+
+      // Loop inner exceptions.
+      while (innerException.InnerException != null)
+      {
+        innerException = innerException.InnerException;
+        message.AppendLine(GetLogEntryForException(innerException));
+      }
+
+      message.AppendLine(GetLogEntryForException(innerException));
 
       using (StreamWriter w = File.AppendText(exceptionLogFile))
       {
-        Log(message, w);
+        Log(message.ToString(), w);
 
         // Close the writer and underlying file.
         w.Close();
       }
 
-      ExceptionDialog newExceptionDlg = new ExceptionDialog();
-      newExceptionDlg.ExceptionMessage = e.Message;
-      newExceptionDlg.ExceptionDetails = message;
-      DialogResult result = newExceptionDlg.ShowDialog();
+      var newExceptionDlg = new ExceptionDialog
+        {
+          ExceptionMessage = e.Message,
+          ExceptionDetails = message.ToString()
+        };
+
+      var result = newExceptionDlg.ShowDialog();
       switch (result)
       {
         case DialogResult.Abort:
@@ -156,7 +177,7 @@ namespace Ogama.ExceptionHandling
       // the 'Global Policy' handler have a try at handling it.
       try
       {
-        ExceptionMethods.HandleException(ex);
+        HandleException(ex);
       }
       catch
       {

@@ -1,5 +1,7 @@
-﻿namespace Ogama.Modules.Scanpaths
+﻿namespace Ogama.Modules.Scanpath.Colorization
 {
+  using Ogama.Modules.Common.Controls;
+
   partial class ColorDefinitionDialog
   {
     /// <summary>
@@ -13,9 +15,9 @@
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      if (disposing && (components != null))
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -53,7 +55,7 @@
       this.spcPreview = new System.Windows.Forms.SplitContainer();
       this.btnOK = new System.Windows.Forms.Button();
       this.btnCancel = new System.Windows.Forms.Button();
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       this.splitContainer2.Panel1.SuspendLayout();
       this.splitContainer2.Panel2.SuspendLayout();
       this.splitContainer2.SuspendLayout();
@@ -436,7 +438,7 @@
     private System.Windows.Forms.Label label3;
     private System.Windows.Forms.ComboBox cbbPredefinedGradient;
     private System.Windows.Forms.GroupBox grpPreview;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
     private System.Windows.Forms.SplitContainer spcPreview;
     private System.Windows.Forms.Button btnNumbersStyle;
     private System.Windows.Forms.Button btnConnectionsStyle;

@@ -1,7 +1,7 @@
 ﻿// <copyright file="MainForm.Module.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,7 +9,7 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
 namespace Ogama.MainWindow
 {
@@ -18,6 +18,9 @@ namespace Ogama.MainWindow
   using System.Text;
   using System.Windows.Forms;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.FormTemplates;
+  using Ogama.Modules.Scanpath;
+
   using OgamaControls;
 
   /// <summary>
@@ -399,7 +402,7 @@ namespace Ogama.MainWindow
         bool found = false;
         foreach (Form form in this.MdiChildren)
         {
-          if (form is Modules.Scanpaths.ScanpathsModule)
+          if (form is ScanpathsModule)
           {
             form.Select();
             found = true;
@@ -777,8 +780,8 @@ namespace Ogama.MainWindow
     /// otherwise <strong>false</strong>.</returns>
     private bool CreateScanpathsView()
     {
-      Ogama.Modules.Scanpaths.ScanpathsModule objfrmScanpaths =
-        new Ogama.Modules.Scanpaths.ScanpathsModule();
+      ScanpathsModule objfrmScanpaths =
+        new ScanpathsModule();
 
       if (objfrmScanpaths == null)
       {

@@ -1,7 +1,7 @@
 ﻿// <copyright file="TobiiSetting.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,7 +9,7 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
 namespace Ogama.Modules.Recording.TobiiInterface
 {
@@ -17,7 +17,7 @@ namespace Ogama.Modules.Recording.TobiiInterface
   using System.Drawing;
   using System.Xml.Serialization;
 
-  using VectorGraphics.CustomTypeConverter;
+  using VectorGraphics.Tools.CustomTypeConverter;
 
   /// <summary>
   /// Class to save settings for the tobii eye tracking system.
@@ -150,7 +150,7 @@ namespace Ogama.Modules.Recording.TobiiInterface
     /// </summary>
     /// <value>A <see cref="Color"/> for the calibration points,
     /// which is converted into a OLE_COLOR Structure.</value>
-    [XmlIgnoreAttribute()]
+    [XmlIgnoreAttribute]
     public Color TetCalibPointColor
     {
       get { return this.tetPointColor; }
@@ -173,7 +173,7 @@ namespace Ogama.Modules.Recording.TobiiInterface
     /// </summary>
     /// <value>A <see cref="Color"/> for the background,
     /// which is converted into a OLE_COLOR Structure.</value>
-    [XmlIgnoreAttribute()]
+    [XmlIgnoreAttribute]
     public Color TetCalibBackgroundColor
     {
       get { return this.tetBackgroundColor; }

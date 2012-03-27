@@ -1,5 +1,7 @@
-namespace Ogama.Modules.AOI
+namespace Ogama.Modules.AOI.Dialogs
 {
+  using Ogama.Modules.Common.Controls;
+
   partial class AddGridDlg
   {
     /// <summary>
@@ -13,9 +15,9 @@ namespace Ogama.Modules.AOI
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      if (disposing && (components != null))
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -39,7 +41,7 @@ namespace Ogama.Modules.AOI
       this.label2 = new System.Windows.Forms.Label();
       this.nudColumns = new System.Windows.Forms.NumericUpDown();
       this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       this.splitContainer2 = new System.Windows.Forms.SplitContainer();
       this.splitContainer3 = new System.Windows.Forms.SplitContainer();
       this.dgvGridPreview = new OgamaControls.DataGridViewWithBackground();
@@ -287,7 +289,7 @@ namespace Ogama.Modules.AOI
     private System.Windows.Forms.Button btnOK;
     private System.Windows.Forms.Button btnCancel;
     private System.Windows.Forms.ToolTip toolTip1;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
     private System.Windows.Forms.NumericUpDown nudRows;
     private System.Windows.Forms.Label label1;
     private System.Windows.Forms.Label label2;

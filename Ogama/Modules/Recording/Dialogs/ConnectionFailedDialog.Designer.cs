@@ -1,5 +1,7 @@
-﻿namespace Ogama.Modules.Recording
+﻿namespace Ogama.Modules.Recording.Dialogs
 {
+  using Ogama.Modules.Common.Controls;
+
   partial class ConnectionFailedDialog
   {
     /// <summary>
@@ -13,9 +15,9 @@
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      if (disposing && (components != null))
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -32,7 +34,7 @@
       this.txbErrorMessage = new System.Windows.Forms.TextBox();
       this.btnOK = new System.Windows.Forms.Button();
       this.label2 = new System.Windows.Forms.Label();
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       this.SuspendLayout();
       // 
       // txbErrorMessage
@@ -104,6 +106,6 @@
     private System.Windows.Forms.Button btnOK;
     private System.Windows.Forms.Label label2;
     private System.Windows.Forms.TextBox txbErrorMessage;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
   }
 }

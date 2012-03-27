@@ -1,5 +1,7 @@
 ﻿namespace Ogama.ExceptionHandling
 {
+  using Ogama.Modules.Common.Controls;
+
   partial class ShowLogDialog
   {
     /// <summary>
@@ -35,7 +37,7 @@
       this.label2 = new System.Windows.Forms.Label();
       this.txbLog = new System.Windows.Forms.TextBox();
       this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       this.splitContainer1.Panel1.SuspendLayout();
       this.splitContainer1.Panel2.SuspendLayout();
       this.splitContainer1.SuspendLayout();
@@ -171,6 +173,6 @@
     private System.Windows.Forms.TextBox txbLog;
     private System.Windows.Forms.Label label2;
     private System.Windows.Forms.SplitContainer splitContainer2;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
   }
 }

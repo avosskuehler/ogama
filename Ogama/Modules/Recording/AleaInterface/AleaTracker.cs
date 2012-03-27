@@ -1,7 +1,7 @@
 ﻿// <copyright file="AleaTracker.cs" company="alea technologies">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -21,15 +21,14 @@ namespace Ogama.Modules.Recording.AleaInterface
   using System.Runtime.InteropServices;
   using System.Windows.Forms;
   using System.Xml.Serialization;
-
   using Alea.Api;
-
-  using Ogama.Modules.Recording.TrackerBase;
-
   using Microsoft.Win32;
-
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.CustomEventArgs;
+  using Ogama.Modules.Common.Tools;
+  using Ogama.Modules.Recording.Dialogs;
+  using Ogama.Modules.Recording.TrackerBase;
 
   /// <summary>
   /// This class implements the <see cref="ITracker"/> interface to represent 

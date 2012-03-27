@@ -1,7 +1,7 @@
 // <copyright file="StatisticsModule.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,7 +9,7 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
 namespace Ogama.Modules.Statistics
 {
@@ -24,8 +24,12 @@ namespace Ogama.Modules.Statistics
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.FormTemplates;
+  using Ogama.Modules.Common.Tools;
+  using Ogama.Modules.Statistics.Variables;
 
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
 
   /// <summary>
   /// Inherits <see cref="FormWithInterface"/>
@@ -275,7 +279,7 @@ namespace Ogama.Modules.Statistics
       this.btnHelp.Click += this.btnHelp_Click;
 
       this.chbSubjectDefault_CheckedChanged(this.chbSUBID, EventArgs.Empty);
-      this.tolerance = 10;
+      this.tolerance = 0;
 
       this.cbbMouseClickButton.Items.AddRange(Enum.GetNames(typeof(MouseButtons)));
 
@@ -401,12 +405,12 @@ namespace Ogama.Modules.Statistics
       }
 
       var var = new GazeVariable(
-        GazeParams.Custom, 
-        newGazeVariable.ColumnName, 
-        "Gaze: " + newGazeVariable.ToString(), 
-        Type.GetType("System.Int32"), 
-        "N0", 
-        null, 
+        GazeParams.Custom,
+        newGazeVariable.ColumnName,
+        "Gaze: " + newGazeVariable.ToString(),
+        Type.GetType("System.Int32"),
+        "N0",
+        null,
         newGazeVariable.ReturnValues());
 
       this.InsertOrRemoveColumn(true, var);
@@ -446,12 +450,12 @@ namespace Ogama.Modules.Statistics
       newGazeVariable.ParamType = ParamTypes.Regressions;
 
       var var = new GazeVariable(
-        GazeParams.Custom, 
-        newGazeVariable.ColumnName, 
-        "Gaze: " + newGazeVariable.ToString(), 
-        Type.GetType("System.Int32"), 
-        "N0", 
-        null, 
+        GazeParams.Custom,
+        newGazeVariable.ColumnName,
+        "Gaze: " + newGazeVariable.ToString(),
+        Type.GetType("System.Int32"),
+        "N0",
+        null,
         newGazeVariable.ReturnValues());
 
       this.InsertOrRemoveColumn(true, var);
@@ -514,12 +518,12 @@ namespace Ogama.Modules.Statistics
       }
 
       var var = new MouseVariable(
-        MouseParams.Custom, 
-        newMouseVariable.ColumnName, 
-        "Mouse: " + newMouseVariable.ToString(), 
-        Type.GetType("System.Int32"), 
-        "N0", 
-        null, 
+        MouseParams.Custom,
+        newMouseVariable.ColumnName,
+        "Mouse: " + newMouseVariable.ToString(),
+        Type.GetType("System.Int32"),
+        "N0",
+        null,
         newMouseVariable.ReturnValues());
 
       this.InsertOrRemoveColumn(true, var);
@@ -532,142 +536,142 @@ namespace Ogama.Modules.Statistics
     private void CreateGazeVariables()
     {
       var varGazeFixations = new GazeVariable(
-        GazeParams.Fixations, 
-        "GFIXCOUN", 
-        "Gaze: Fixations (count)", 
-        Type.GetType("System.Int32"), 
-        "N0", 
-        this.chbGAZFixations, 
+        GazeParams.Fixations,
+        "GFIXCOUN",
+        "Gaze: Fixations (count)",
+        Type.GetType("System.Int32"),
+        "N0",
+        this.chbGAZFixations,
         this.toolTipStatistic.GetToolTip(this.chbGAZFixations));
       this.defaultVariables.Add("chbGAZFixations", varGazeFixations);
 
       var varGazeFixationsPS = new GazeVariable(
-        GazeParams.FixationsPS, 
-        "GFIXCOpS", 
-        "Gaze: Fixations (count/s)", 
-        Type.GetType("System.Single"), 
-        "N2", 
-        this.chbGAZFixationsPS, 
+        GazeParams.FixationsPS,
+        "GFIXCOpS",
+        "Gaze: Fixations (count/s)",
+        Type.GetType("System.Single"),
+        "N2",
+        this.chbGAZFixationsPS,
         this.toolTipStatistic.GetToolTip(this.chbGAZFixationsPS));
       this.defaultVariables.Add("chbGAZFixationsPS", varGazeFixationsPS);
 
       var varGazeFixationDurationMean = new GazeVariable(
-        GazeParams.FixationDurationMean, 
-        "GFIXDURA", 
-        "Gaze: Fixation Duration Mean (ms)", 
-        Type.GetType("System.Single"), 
-        "N2", 
-        this.chbGAZFixDurationMean, 
+        GazeParams.FixationDurationMean,
+        "GFIXDURA",
+        "Gaze: Fixation Duration Mean (ms)",
+        Type.GetType("System.Single"),
+        "N2",
+        this.chbGAZFixDurationMean,
         this.toolTipStatistic.GetToolTip(this.chbGAZFixDurationMean));
       this.defaultVariables.Add("chbGAZFixDurationMean", varGazeFixationDurationMean);
 
       var varGazeFixationDurationMedian = new GazeVariable(
-        GazeParams.FixationDurationMedian, 
-        "GFIXDUME", 
-        "Gaze: Fixation Duration Median (ms)", 
-        Type.GetType("System.Single"), 
-        "N2", 
-        this.chbGAZFixDurationMedian, 
+        GazeParams.FixationDurationMedian,
+        "GFIXDUME",
+        "Gaze: Fixation Duration Median (ms)",
+        Type.GetType("System.Single"),
+        "N2",
+        this.chbGAZFixDurationMedian,
         this.toolTipStatistic.GetToolTip(this.chbGAZFixDurationMedian));
       this.defaultVariables.Add("chbGAZFixDurationMedian", varGazeFixationDurationMedian);
 
       var varGazeFixationSaccadeRatio = new GazeVariable(
-        GazeParams.FixationSaccadeRatio, 
-        "GFIXDUpS", 
-        "Gaze: Fixation/Saccade ratio", 
-        Type.GetType("System.Single"), 
-        "N2", 
-        this.chbGAZFixationSaccadesRatio, 
+        GazeParams.FixationSaccadeRatio,
+        "GFIXDUpS",
+        "Gaze: Fixation/Saccade ratio",
+        Type.GetType("System.Single"),
+        "N2",
+        this.chbGAZFixationSaccadesRatio,
         this.toolTipStatistic.GetToolTip(this.chbGAZFixationSaccadesRatio));
       this.defaultVariables.Add("chbGAZFixationSaccadesRatio", varGazeFixationSaccadeRatio);
 
       var varGazeAverageSaccadeLength = new GazeVariable(
-        GazeParams.AverageSaccadeLength, 
-        "GFIXSALE", 
-        "Gaze: Average Saccade Length (px)", 
-        Type.GetType("System.Single"), 
-        "N2", 
-        this.chbGAZSaccadeLength, 
+        GazeParams.AverageSaccadeLength,
+        "GFIXSALE",
+        "Gaze: Average Saccade Length (px)",
+        Type.GetType("System.Single"),
+        "N2",
+        this.chbGAZSaccadeLength,
         this.toolTipStatistic.GetToolTip(this.chbGAZSaccadeLength));
       this.defaultVariables.Add("chbGAZSaccadeLength", varGazeAverageSaccadeLength);
 
       var varGazeAverageSaccadeVelocity = new GazeVariable(
-        GazeParams.AverageSaccadeVelocity, 
-        "GFIXSAVE", 
-        "Gaze: Average Saccade Velocity (px/s)", 
-        Type.GetType("System.Single"), 
-        "N2", 
-        this.chbGAZSaccadeVelocity, 
+        GazeParams.AverageSaccadeVelocity,
+        "GFIXSAVE",
+        "Gaze: Average Saccade Velocity (px/s)",
+        Type.GetType("System.Single"),
+        "N2",
+        this.chbGAZSaccadeVelocity,
         this.toolTipStatistic.GetToolTip(this.chbGAZSaccadeVelocity));
       this.defaultVariables.Add("chbGAZSaccadeVelocity", varGazeAverageSaccadeVelocity);
 
       var varGazeTimeToFirstFixInSearchRect = new GazeVariable(
-        GazeParams.TimeToFirstFixInSearchRect, 
-        "GFIXRECT", 
-        "Gaze: Time To First Fixation in AOI 'SearchRect' (ms)", 
-        Type.GetType("System.Int32"), 
-        "N0", 
-        this.chbGAZTime2FirstFixInSearchRect, 
+        GazeParams.TimeToFirstFixInSearchRect,
+        "GFIXRECT",
+        "Gaze: Time To First Fixation in AOI 'SearchRect' (ms)",
+        Type.GetType("System.Int32"),
+        "N0",
+        this.chbGAZTime2FirstFixInSearchRect,
         this.toolTipStatistic.GetToolTip(this.chbGAZTime2FirstFixInSearchRect));
       this.defaultVariables.Add("chbGAZTime2FirstFixInSearchRect", varGazeTimeToFirstFixInSearchRect);
 
       var varGazeTimeToFirstFixAtTarget = new GazeVariable(
-        GazeParams.TimeToFirstFixAtTarget, 
-        "GFIXTARG", 
-        "Gaze: Time To First Fixation in AOI 'Target' (ms)", 
-        Type.GetType("System.Int32"), 
-        "N0", 
-        this.chbGAZTime2FirstFixAtTarget, 
+        GazeParams.TimeToFirstFixAtTarget,
+        "GFIXTARG",
+        "Gaze: Time To First Fixation in AOI 'Target' (ms)",
+        Type.GetType("System.Int32"),
+        "N0",
+        this.chbGAZTime2FirstFixAtTarget,
         this.toolTipStatistic.GetToolTip(this.chbGAZTime2FirstFixAtTarget));
       this.defaultVariables.Add("chbGAZTime2FirstFixAtTarget", varGazeTimeToFirstFixAtTarget);
 
       var varGazeTimeToSecondFixAtTarget = new GazeVariable(
-        GazeParams.TimeToSecondFixAtTarget, 
-        "GFIX2TAR", 
-        "Gaze: Time To Second Fixation in AOI 'Target' (ms)", 
-        Type.GetType("System.Int32"), 
-        "N0", 
-        this.chbGAZTime2SecondFixAtTarget, 
+        GazeParams.TimeToSecondFixAtTarget,
+        "GFIX2TAR",
+        "Gaze: Time To Second Fixation in AOI 'Target' (ms)",
+        Type.GetType("System.Int32"),
+        "N0",
+        this.chbGAZTime2SecondFixAtTarget,
         this.toolTipStatistic.GetToolTip(this.chbGAZTime2SecondFixAtTarget));
       this.defaultVariables.Add("chbGAZTime2SecondFixAtTarget", varGazeTimeToSecondFixAtTarget);
 
       var varGazeTimeAtTarget = new GazeVariable(
-        GazeParams.TimeAtTarget, 
-        "GFIXTAFT", 
-        "Gaze: AOI 'Target' Fixation Time (ms)", 
-        Type.GetType("System.Int32"), 
-        "N0", 
-        this.chbGAZFixTimeAtTarget, 
+        GazeParams.TimeAtTarget,
+        "GFIXTAFT",
+        "Gaze: AOI 'Target' Fixation Time (ms)",
+        Type.GetType("System.Int32"),
+        "N0",
+        this.chbGAZFixTimeAtTarget,
         this.toolTipStatistic.GetToolTip(this.chbGAZFixTimeAtTarget));
       this.defaultVariables.Add("chbGAZFixTimeAtTarget", varGazeTimeAtTarget);
 
       var varGazePathlength = new GazeVariable(
-        GazeParams.Pathlength, 
-        "GFIXPATH", 
-        "Gaze: Fixation Connections Length (px)", 
-        Type.GetType("System.Int32"), 
-        "N0", 
-        this.chbGAZSaccadeLength, 
+        GazeParams.Pathlength,
+        "GFIXPATH",
+        "Gaze: Fixation Connections Length (px)",
+        Type.GetType("System.Int32"),
+        "N0",
+        this.chbGAZSaccadeLength,
         this.toolTipStatistic.GetToolTip(this.chbGAZSaccadeLength));
       this.defaultVariables.Add("chbGAZPathlength", varGazePathlength);
 
       var varGazePathlengthPS = new GazeVariable(
-        GazeParams.PathlengthPS, 
-        "GFIXPApS", 
-        "Gaze: Path velocity (px/s)", 
-        Type.GetType("System.Single"), 
-        "N2", 
-        this.chbGAZSaccadeVelocity, 
+        GazeParams.PathlengthPS,
+        "GFIXPApS",
+        "Gaze: Path velocity (px/s)",
+        Type.GetType("System.Single"),
+        "N2",
+        this.chbGAZSaccadeVelocity,
         this.toolTipStatistic.GetToolTip(this.chbGAZSaccadeVelocity));
       this.defaultVariables.Add("chbGAZPathlengthPS", varGazePathlengthPS);
 
       var varGazeFixationsUntilFirstMouseClick = new GazeVariable(
-        GazeParams.FixationsUntilFirstMouseClick, 
-        "GFIXCO1C", 
-        "Gaze: Fixations Until First Click (count)", 
-        Type.GetType("System.Single"), 
-        "N2", 
-        this.chbGAZCountFix2FirstClick, 
+        GazeParams.FixationsUntilFirstMouseClick,
+        "GFIXCO1C",
+        "Gaze: Fixations Until First Click (count)",
+        Type.GetType("System.Single"),
+        "N2",
+        this.chbGAZCountFix2FirstClick,
         this.toolTipStatistic.GetToolTip(this.chbGAZCountFix2FirstClick));
       this.defaultVariables.Add("chbGAZCountFix2FirstClick", varGazeFixationsUntilFirstMouseClick);
     }
@@ -678,202 +682,202 @@ namespace Ogama.Modules.Statistics
     private void CreateMouseVariables()
     {
       var varMouseFixations = new MouseVariable(
-        MouseParams.Fixations, 
-        "MFIXCOUN", 
-        "Mouse: Fixations (count)", 
-        Type.GetType("System.Int32"), 
-        "N0", 
-        this.chbMSEFixations, 
+        MouseParams.Fixations,
+        "MFIXCOUN",
+        "Mouse: Fixations (count)",
+        Type.GetType("System.Int32"),
+        "N0",
+        this.chbMSEFixations,
         this.toolTipStatistic.GetToolTip(this.chbMSEFixations));
       this.defaultVariables.Add("chbMSEFixations", varMouseFixations);
 
       var varMouseFixationsPS = new MouseVariable(
-        MouseParams.FixationsPS, 
-        "MFIXCOpS", 
-        "Mouse: Fixations (count/s)", 
-        Type.GetType("System.Single"), 
-        "N2", 
-        this.chbMSEFixationsPS, 
+        MouseParams.FixationsPS,
+        "MFIXCOpS",
+        "Mouse: Fixations (count/s)",
+        Type.GetType("System.Single"),
+        "N2",
+        this.chbMSEFixationsPS,
         this.toolTipStatistic.GetToolTip(this.chbMSEFixationsPS));
       this.defaultVariables.Add("chbMSEFixationsPS", varMouseFixationsPS);
 
       var varMouseFixationsUntilFirstMouseClick = new MouseVariable(
-        MouseParams.FixationsUntilFirstMouseClick, 
-        "MFIXCO1C", 
-        "Mouse: Fixations Until First Click (count)", 
-        Type.GetType("System.Int32"), 
-        "N0", 
-        this.chbMSECountFix2FirstClick, 
+        MouseParams.FixationsUntilFirstMouseClick,
+        "MFIXCO1C",
+        "Mouse: Fixations Until First Click (count)",
+        Type.GetType("System.Int32"),
+        "N0",
+        this.chbMSECountFix2FirstClick,
         this.toolTipStatistic.GetToolTip(this.chbMSECountFix2FirstClick));
       this.defaultVariables.Add("chbMSECountFix2FirstClick", varMouseFixationsUntilFirstMouseClick);
 
       var varMouseFixationDurationMean = new MouseVariable(
-        MouseParams.FixationDurationMean, 
-        "MFIXDURA", 
-        "Mouse: Fixation Duration Mean (ms)", 
-        Type.GetType("System.Single"), 
-        "N2", 
-        this.chbMSEFixDurationMean, 
+        MouseParams.FixationDurationMean,
+        "MFIXDURA",
+        "Mouse: Fixation Duration Mean (ms)",
+        Type.GetType("System.Single"),
+        "N2",
+        this.chbMSEFixDurationMean,
         this.toolTipStatistic.GetToolTip(this.chbMSEFixDurationMean));
       this.defaultVariables.Add("chbMSEFixDurationMean", varMouseFixationDurationMean);
 
       var varMouseFixationDurationMedian = new MouseVariable(
-        MouseParams.FixationDurationMedian, 
-        "MFIXDUME", 
-        "Mouse: Fixation Duration Median (ms)", 
-        Type.GetType("System.Single"), 
-        "N2", 
-        this.chbMSEFixDurationMedian, 
+        MouseParams.FixationDurationMedian,
+        "MFIXDUME",
+        "Mouse: Fixation Duration Median (ms)",
+        Type.GetType("System.Single"),
+        "N2",
+        this.chbMSEFixDurationMedian,
         this.toolTipStatistic.GetToolTip(this.chbMSEFixDurationMedian));
       this.defaultVariables.Add("chbMSEFixDurationMedian", varMouseFixationDurationMedian);
 
       var varMouseFixationSaccadeRatio = new MouseVariable(
-        MouseParams.FixationSaccadeRatio, 
-        "MFIXDUpS", 
-        "Mouse: Fixation/Saccade ratio", 
-        Type.GetType("System.Single"), 
-        "N2", 
-        this.chbMSEFixationSaccadesRatio, 
+        MouseParams.FixationSaccadeRatio,
+        "MFIXDUpS",
+        "Mouse: Fixation/Saccade ratio",
+        Type.GetType("System.Single"),
+        "N2",
+        this.chbMSEFixationSaccadesRatio,
         this.toolTipStatistic.GetToolTip(this.chbMSEFixationSaccadesRatio));
       this.defaultVariables.Add("chbMSEFixationSaccadesRatio", varMouseFixationSaccadeRatio);
 
       var varMouseAverageSaccadeLength = new MouseVariable(
-        MouseParams.AverageSaccadeLength, 
-        "MFIXSALE", 
-        "Mouse: Average Saccade Length (px)", 
-        Type.GetType("System.Single"), 
-        "N2", 
-        this.chbMSESaccadeLength, 
+        MouseParams.AverageSaccadeLength,
+        "MFIXSALE",
+        "Mouse: Average Saccade Length (px)",
+        Type.GetType("System.Single"),
+        "N2",
+        this.chbMSESaccadeLength,
         this.toolTipStatistic.GetToolTip(this.chbMSESaccadeLength));
       this.defaultVariables.Add("chbMSESaccadeLength", varMouseAverageSaccadeLength);
 
       var varMouseAverageSaccadeVelocity = new MouseVariable(
-        MouseParams.AverageSaccadeVelocity, 
-        "MFIXSAVE", 
-        "Mouse: Average Saccade Velocity (px/s)", 
-        Type.GetType("System.Single"), 
-        "N2", 
-        this.chbMSESaccadeVelocity, 
+        MouseParams.AverageSaccadeVelocity,
+        "MFIXSAVE",
+        "Mouse: Average Saccade Velocity (px/s)",
+        Type.GetType("System.Single"),
+        "N2",
+        this.chbMSESaccadeVelocity,
         this.toolTipStatistic.GetToolTip(this.chbMSESaccadeVelocity));
       this.defaultVariables.Add("chbMSESaccadeVelocity", varMouseAverageSaccadeVelocity);
 
       var varMouseTimeToFirstFixInSearchRect = new MouseVariable(
-        MouseParams.TimeToFirstFixInSearchRect, 
-        "MFIXRECT", 
-        "Mouse: Time To First Fixation in AOI 'SearchRect' (ms)", 
-        Type.GetType("System.Int32"), 
-        "N0", 
-        this.chbMSETime2FirstFixInSearchRect, 
+        MouseParams.TimeToFirstFixInSearchRect,
+        "MFIXRECT",
+        "Mouse: Time To First Fixation in AOI 'SearchRect' (ms)",
+        Type.GetType("System.Int32"),
+        "N0",
+        this.chbMSETime2FirstFixInSearchRect,
         this.toolTipStatistic.GetToolTip(this.chbMSETime2FirstFixInSearchRect));
       this.defaultVariables.Add("chbMSETime2FirstFixInSearchRect", varMouseTimeToFirstFixInSearchRect);
 
       var varMouseTimeToFirstFixAtTarget = new MouseVariable(
-        MouseParams.TimeToFirstFixAtTarget, 
-        "MFIXTARG", 
-        "Mouse: Time To First Fixation in AOI 'Target' (ms)", 
-        Type.GetType("System.Int32"), 
-        "N0", 
-        this.chbMSETime2FirstFixAtTarget, 
+        MouseParams.TimeToFirstFixAtTarget,
+        "MFIXTARG",
+        "Mouse: Time To First Fixation in AOI 'Target' (ms)",
+        Type.GetType("System.Int32"),
+        "N0",
+        this.chbMSETime2FirstFixAtTarget,
         this.toolTipStatistic.GetToolTip(this.chbMSETime2FirstFixAtTarget));
       this.defaultVariables.Add("chbMSETime2FirstFixAtTarget", varMouseTimeToFirstFixAtTarget);
 
       var varMouseTimeToSecondFixAtTarget = new MouseVariable(
-        MouseParams.TimeToSecondFixAtTarget, 
-        "MFIX2TAR", 
-        "Mouse: Time To Second Fixation in AOI 'Target' (ms)", 
-        Type.GetType("System.Int32"), 
-        "N0", 
-        this.chbMSETime2SecondFixAtTarget, 
+        MouseParams.TimeToSecondFixAtTarget,
+        "MFIX2TAR",
+        "Mouse: Time To Second Fixation in AOI 'Target' (ms)",
+        Type.GetType("System.Int32"),
+        "N0",
+        this.chbMSETime2SecondFixAtTarget,
         this.toolTipStatistic.GetToolTip(this.chbMSETime2SecondFixAtTarget));
       this.defaultVariables.Add("chbMSETime2SecondFixAtTarget", varMouseTimeToSecondFixAtTarget);
 
       var varMouseTimeAtTarget = new MouseVariable(
-        MouseParams.TimeAtTarget, 
-        "MFIXTAFT", 
-        "Mouse: AOI 'Target' Fixation Time (ms)", 
-        Type.GetType("System.Int32"), 
-        "N0", 
-        this.chbMSEFixTimeAtTarget, 
+        MouseParams.TimeAtTarget,
+        "MFIXTAFT",
+        "Mouse: AOI 'Target' Fixation Time (ms)",
+        Type.GetType("System.Int32"),
+        "N0",
+        this.chbMSEFixTimeAtTarget,
         this.toolTipStatistic.GetToolTip(this.chbMSEFixTimeAtTarget));
       this.defaultVariables.Add("chbMSEFixTimeAtTarget", varMouseTimeAtTarget);
 
       var varMousePathlength = new MouseVariable(
-        MouseParams.Pathlength, 
-        "MSE_PATH", 
-        "Mouse: Pathlength (px)", 
-        Type.GetType("System.Int32"), 
-        "N0", 
-        this.chbMSEPathlength, 
+        MouseParams.Pathlength,
+        "MSE_PATH",
+        "Mouse: Pathlength (px)",
+        Type.GetType("System.Int32"),
+        "N0",
+        this.chbMSEPathlength,
         this.toolTipStatistic.GetToolTip(this.chbMSEPathlength));
       this.defaultVariables.Add("chbMSEPathlength", varMousePathlength);
 
       var varMousePathlengthPS = new MouseVariable(
-        MouseParams.PathlengthPS, 
-        "MSE_PApS", 
-        "Mouse: Path velocity (px/s)", 
-        Type.GetType("System.Single"), 
-        "N2", 
-        this.chbMSEPathlengthPS, 
+        MouseParams.PathlengthPS,
+        "MSE_PApS",
+        "Mouse: Path velocity (px/s)",
+        Type.GetType("System.Single"),
+        "N2",
+        this.chbMSEPathlengthPS,
         this.toolTipStatistic.GetToolTip(this.chbMSEPathlengthPS));
       this.defaultVariables.Add("chbMSEPathlengthPS", varMousePathlengthPS);
 
       var varMouseLeftClicksPS = new MouseVariable(
-        MouseParams.LeftClicksPS, 
-        "MCLILCpS", 
-        "Mouse: Left Clicks (count/s)", 
-        Type.GetType("System.Single"), 
-        "N2", 
-        this.chbMSELeftClicksPS, 
+        MouseParams.LeftClicksPS,
+        "MCLILCpS",
+        "Mouse: Left Clicks (count/s)",
+        Type.GetType("System.Single"),
+        "N2",
+        this.chbMSELeftClicksPS,
         this.toolTipStatistic.GetToolTip(this.chbMSELeftClicksPS));
       this.defaultVariables.Add("chbMSELeftClicksPS", varMouseLeftClicksPS);
 
       var varMouseRightClicksPS = new MouseVariable(
-        MouseParams.RightClicksPS, 
-        "MCLIRCpS", 
-        "Mouse: Right Clicks (count/s)", 
-        Type.GetType("System.Single"), 
-        "N2", 
-        this.chbMSERightClicksPS, 
+        MouseParams.RightClicksPS,
+        "MCLIRCpS",
+        "Mouse: Right Clicks (count/s)",
+        Type.GetType("System.Single"),
+        "N2",
+        this.chbMSERightClicksPS,
         this.toolTipStatistic.GetToolTip(this.chbMSERightClicksPS));
       this.defaultVariables.Add("chbMSERightClicksPS", varMouseRightClicksPS);
 
       var varMouseLeftClicks = new MouseVariable(
-        MouseParams.LeftClicks, 
-        "MCLILCOU", 
-        "Mouse: Left Clicks (count)", 
-        Type.GetType("System.Int32"), 
-        "N0", 
-        this.chbMSELeftClicks, 
+        MouseParams.LeftClicks,
+        "MCLILCOU",
+        "Mouse: Left Clicks (count)",
+        Type.GetType("System.Int32"),
+        "N0",
+        this.chbMSELeftClicks,
         this.toolTipStatistic.GetToolTip(this.chbMSELeftClicks));
       this.defaultVariables.Add("chbMSELeftClicks", varMouseLeftClicks);
 
       var varMouseRightClicks = new MouseVariable(
-        MouseParams.RightClicks, 
-        "MCLIRCOU", 
-        "Mouse: Right Clicks (count)", 
-        Type.GetType("System.Int32"), 
-        "N0", 
-        this.chbMSERightClicks, 
+        MouseParams.RightClicks,
+        "MCLIRCOU",
+        "Mouse: Right Clicks (count)",
+        Type.GetType("System.Int32"),
+        "N0",
+        this.chbMSERightClicks,
         this.toolTipStatistic.GetToolTip(this.chbMSERightClicks));
       this.defaultVariables.Add("chbMSERightClicks", varMouseRightClicks);
 
       var varMouseTimeToFirstClick = new MouseVariable(
-        MouseParams.TimeToFirstClick, 
-        "MTIM1CLI", 
-        "Mouse: Time Until First Click (ms)", 
-        Type.GetType("System.Int32"), 
-        "N0", 
-        this.chbMSETime2FirstClick, 
+        MouseParams.TimeToFirstClick,
+        "MTIM1CLI",
+        "Mouse: Time Until First Click (ms)",
+        Type.GetType("System.Int32"),
+        "N0",
+        this.chbMSETime2FirstClick,
         this.toolTipStatistic.GetToolTip(this.chbMSETime2FirstClick));
       this.defaultVariables.Add("chbMSETime2FirstClick", varMouseTimeToFirstClick);
 
       var varMouseAverageDistanceToGaze = new MouseVariable(
-        MouseParams.AverageDistanceToGaze, 
-        "GMF_AVDI", 
-        "Gaze: Average Gaze Mouse Path Distance (px)", 
-        Type.GetType("System.Single"), 
-        "N2", 
-        this.chbMSEAverageDistance, 
+        MouseParams.AverageDistanceToGaze,
+        "GMF_AVDI",
+        "Gaze: Average Gaze Mouse Path Distance (px)",
+        Type.GetType("System.Single"),
+        "N2",
+        this.chbMSEAverageDistance,
         this.toolTipStatistic.GetToolTip(this.chbMSEAverageDistance));
       this.defaultVariables.Add("chbMSEAverageDistance", varMouseAverageDistanceToGaze);
     }
@@ -884,62 +888,62 @@ namespace Ogama.Modules.Statistics
     private void CreateSubjectVariables()
     {
       var varSubjectName = new SubjectVariable(
-        SubjectParams.SubjectName, 
-        "SUB_NAME", 
-        "Subject: Name", 
-        Type.GetType("System.String"), 
-        string.Empty, 
-        this.chbSUBID, 
+        SubjectParams.SubjectName,
+        "SUB_NAME",
+        "Subject: Name",
+        Type.GetType("System.String"),
+        string.Empty,
+        this.chbSUBID,
         this.toolTipStatistic.GetToolTip(this.chbSUBID));
       this.defaultVariables.Add("chbSUBID", varSubjectName);
 
       var varSubjectCategory = new SubjectVariable(
-        SubjectParams.Category, 
-        "SUB_CATE", 
-        "Subject: Category", 
-        Type.GetType("System.String"), 
-        string.Empty, 
-        this.chbSUBCategory, 
+        SubjectParams.Category,
+        "SUB_CATE",
+        "Subject: Category",
+        Type.GetType("System.String"),
+        string.Empty,
+        this.chbSUBCategory,
         this.toolTipStatistic.GetToolTip(this.chbSUBCategory));
       this.defaultVariables.Add("chbSUBCategory", varSubjectCategory);
 
       var varSubjectAge = new SubjectVariable(
-        SubjectParams.Age, 
-        "SUB_AGE", 
-        "Subject: Age", 
-        Type.GetType("System.Int32"), 
-        "N0", 
-        this.chbSUBAge, 
+        SubjectParams.Age,
+        "SUB_AGE",
+        "Subject: Age",
+        Type.GetType("System.Int32"),
+        "N0",
+        this.chbSUBAge,
         this.toolTipStatistic.GetToolTip(this.chbSUBAge));
       this.defaultVariables.Add("chbSUBAge", varSubjectAge);
 
       var varSubjectHandedness = new SubjectVariable(
-        SubjectParams.Handedness, 
-        "SUB_HAND", 
-        "Subject: Handedness", 
-        Type.GetType("System.String"), 
-        string.Empty, 
-        this.chbSUBHandedness, 
+        SubjectParams.Handedness,
+        "SUB_HAND",
+        "Subject: Handedness",
+        Type.GetType("System.String"),
+        string.Empty,
+        this.chbSUBHandedness,
         this.toolTipStatistic.GetToolTip(this.chbSUBHandedness));
       this.defaultVariables.Add("chbSUBHandedness", varSubjectHandedness);
 
       var varSubjectSex = new SubjectVariable(
-        SubjectParams.Sex, 
-        "SUB_SEX", 
-        "Subject: Sex", 
-        Type.GetType("System.String"), 
-        string.Empty, 
-        this.chbSUBSex, 
+        SubjectParams.Sex,
+        "SUB_SEX",
+        "Subject: Sex",
+        Type.GetType("System.String"),
+        string.Empty,
+        this.chbSUBSex,
         this.toolTipStatistic.GetToolTip(this.chbSUBSex));
       this.defaultVariables.Add("chbSUBSex", varSubjectSex);
 
       var varSubjectComments = new SubjectVariable(
-        SubjectParams.Comments, 
-        "SUB_COMM", 
-        "Subject: Comments", 
-        Type.GetType("System.String"), 
-        string.Empty, 
-        this.chbSUBComments, 
+        SubjectParams.Comments,
+        "SUB_COMM",
+        "Subject: Comments",
+        Type.GetType("System.String"),
+        string.Empty,
+        this.chbSUBComments,
         this.toolTipStatistic.GetToolTip(this.chbSUBComments));
       this.defaultVariables.Add("chbSUBComments", varSubjectComments);
 
@@ -952,12 +956,12 @@ namespace Ogama.Modules.Statistics
         string description = paramRow["Description"].ToString();
 
         var varSubjectCustom = new SubjectVariable(
-          SubjectParams.Custom, 
-          "SUB_C" + customVarCounter.ToString(), 
-          "Subject: " + param, 
-          Type.GetType("System.String"), 
-          string.Empty, 
-          null, 
+          SubjectParams.Custom,
+          "SUB_C" + customVarCounter.ToString(),
+          "Subject: " + param,
+          Type.GetType("System.String"),
+          string.Empty,
+          null,
           description);
         this.defaultVariables.Add("SUB_C" + customVarCounter.ToString(), varSubjectCustom);
         customVarCounter++;
@@ -972,162 +976,162 @@ namespace Ogama.Modules.Statistics
     private void CreateTrialVariables()
     {
       var varTrialID = new TrialVariable(
-        TrialParams.TrialID, 
-        "TRI_ID", 
-        "Trial: ID", 
-        Type.GetType("System.Int32"), 
-        "N0", 
-        this.chbTRITrialID, 
+        TrialParams.TrialID,
+        "TRI_ID",
+        "Trial: ID",
+        Type.GetType("System.Int32"),
+        "N0",
+        this.chbTRITrialID,
         this.toolTipStatistic.GetToolTip(this.chbTRITrialID));
       this.defaultVariables.Add("chbTRITrialID", varTrialID);
 
       var varTrialName = new TrialVariable(
-        TrialParams.Name, 
-        "TRI_NAME", 
-        "Trial: Name", 
-        Type.GetType("System.String"), 
-        string.Empty, 
-        this.chbTRIName, 
+        TrialParams.Name,
+        "TRI_NAME",
+        "Trial: Name",
+        Type.GetType("System.String"),
+        string.Empty,
+        this.chbTRIName,
         this.toolTipStatistic.GetToolTip(this.chbTRIName));
       this.defaultVariables.Add("chbTRIName", varTrialName);
 
       var varTrialSequence = new TrialVariable(
-        TrialParams.Sequence, 
-        "TRI_SEQU", 
-        "Trial: Sequence", 
-        Type.GetType("System.Int32"), 
-        "N0", 
-        this.chbTRISequence, 
+        TrialParams.Sequence,
+        "TRI_SEQU",
+        "Trial: Sequence",
+        Type.GetType("System.Int32"),
+        "N0",
+        this.chbTRISequence,
         this.toolTipStatistic.GetToolTip(this.chbTRISequence));
       this.defaultVariables.Add("chbTRISequence", varTrialSequence);
 
       var varTrialDuration = new TrialVariable(
-        TrialParams.Duration, 
-        "TRI_DURA", 
-        "Trial: Duration (ms)", 
-        Type.GetType("System.Int32"), 
-        "N0", 
-        this.chbTRIDuration, 
+        TrialParams.Duration,
+        "TRI_DURA",
+        "Trial: Duration (ms)",
+        Type.GetType("System.Int32"),
+        "N0",
+        this.chbTRIDuration,
         this.toolTipStatistic.GetToolTip(this.chbTRIDuration));
       this.defaultVariables.Add("chbTRIDuration", varTrialDuration);
 
       var varTrialStarttime = new TrialVariable(
-        TrialParams.Starttime, 
-        "TRI_TIME", 
-        "Trial: Starting Time (ms)", 
-        Type.GetType("System.Int32"), 
-        "N0", 
-        this.chbTRIStarttime, 
+        TrialParams.Starttime,
+        "TRI_TIME",
+        "Trial: Starting Time (ms)",
+        Type.GetType("System.Int32"),
+        "N0",
+        this.chbTRIStarttime,
         this.toolTipStatistic.GetToolTip(this.chbTRIStarttime));
       this.defaultVariables.Add("chbTRIStarttime", varTrialStarttime);
 
       var varTrialCategory = new TrialVariable(
-        TrialParams.Category, 
-        "TRI_CATE", 
-        "Trial: Category", 
-        Type.GetType("System.String"), 
-        string.Empty, 
-        this.chbTRICategory, 
+        TrialParams.Category,
+        "TRI_CATE",
+        "Trial: Category",
+        Type.GetType("System.String"),
+        string.Empty,
+        this.chbTRICategory,
         this.toolTipStatistic.GetToolTip(this.chbTRICategory));
       this.defaultVariables.Add("chbTRICategory", varTrialCategory);
 
       var varTrialTargetsize = new TrialVariable(
-        TrialParams.Targetsize, 
-        "TRI_TASI", 
-        "Trial: Target AOI Size (% of screen size)", 
-        Type.GetType("System.Single"), 
-        "N1", 
-        this.chbTRITargetsize, 
+        TrialParams.Targetsize,
+        "TRI_TASI",
+        "Trial: Target AOI Size (% of screen size)",
+        Type.GetType("System.Single"),
+        "N1",
+        this.chbTRITargetsize,
         this.toolTipStatistic.GetToolTip(this.chbTRITargetsize));
       this.defaultVariables.Add("chbTRITargetsize", varTrialTargetsize);
 
       var varTrialAOISize = new TrialVariable(
-        TrialParams.AOISize, 
-        "TRI_AOIS", 
-        "Trial: AOI Size (% of screen size)", 
-        Type.GetType("System.Single"), 
-        "N1", 
-        this.chbTRIAOISize, 
+        TrialParams.AOISize,
+        "TRI_AOIS",
+        "Trial: AOI Size (% of screen size)",
+        Type.GetType("System.Single"),
+        "N1",
+        this.chbTRIAOISize,
         this.toolTipStatistic.GetToolTip(this.chbTRIAOISize));
       this.defaultVariables.Add("chbTRIAOISize", varTrialAOISize);
 
       var varTrialResponsesAOI = new TrialVariable(
-        TrialParams.ResponseAOI, 
-        "TRI_RAOI", 
-        "Trial: Responses AOI", 
-        Type.GetType("System.String"), 
-        string.Empty, 
-        this.chbTRIAOIofResponse, 
+        TrialParams.ResponseAOI,
+        "TRI_RAOI",
+        "Trial: Responses AOI",
+        Type.GetType("System.String"),
+        string.Empty,
+        this.chbTRIAOIofResponse,
         this.toolTipStatistic.GetToolTip(this.chbTRIAOIofResponse));
       this.defaultVariables.Add("chbTRIAOIofResponse", varTrialResponsesAOI);
 
       var varTrialResponse = new TrialVariable(
-        TrialParams.Response, 
-        "TRI_RESP", 
-        "Trial: Response", 
-        Type.GetType("System.String"), 
-        string.Empty, 
-        this.chbTRIResponse, 
+        TrialParams.Response,
+        "TRI_RESP",
+        "Trial: Response",
+        Type.GetType("System.String"),
+        string.Empty,
+        this.chbTRIResponse,
         this.toolTipStatistic.GetToolTip(this.chbTRIResponse));
       this.defaultVariables.Add("chbTRIResponse", varTrialResponse);
 
       var varTrialResponseCorrectness = new TrialVariable(
-        TrialParams.ResponseCorrectness, 
-        "TRI_SOLU", 
-        "Trial: Response Correctness", 
-        Type.GetType("System.String"), 
-        string.Empty, 
-        this.chbTRIResponseCorrectness, 
+        TrialParams.ResponseCorrectness,
+        "TRI_SOLU",
+        "Trial: Response Correctness",
+        Type.GetType("System.String"),
+        string.Empty,
+        this.chbTRIResponseCorrectness,
         this.toolTipStatistic.GetToolTip(this.chbTRIResponseCorrectness));
       this.defaultVariables.Add("chbTRIResponseCorrectness", varTrialResponseCorrectness);
 
       var varTrialDataLoss = new TrialVariable(
-        TrialParams.Dataloss, 
-        "TRI_LOSS", 
-        "Trial: Data Loss (count)", 
-        Type.GetType("System.Int32"), 
-        "N0", 
-        this.chbTRIDataLoss, 
+        TrialParams.Dataloss,
+        "TRI_LOSS",
+        "Trial: Data Loss (count)",
+        Type.GetType("System.Int32"),
+        "N0",
+        this.chbTRIDataLoss,
         this.toolTipStatistic.GetToolTip(this.chbTRIDataLoss));
       this.defaultVariables.Add("chbTRIDataLoss", varTrialDataLoss);
 
       var varTrialDataLossPC = new TrialVariable(
-        TrialParams.DatalossPC, 
-        "TRI_LOpc", 
-        "Trial: Data Loss (%)", 
-        Type.GetType("System.Single"), 
-        "N1", 
-        this.chbTRIDataLossPC, 
+        TrialParams.DatalossPC,
+        "TRI_LOpc",
+        "Trial: Data Loss (%)",
+        Type.GetType("System.Single"),
+        "N1",
+        this.chbTRIDataLossPC,
         this.toolTipStatistic.GetToolTip(this.chbTRIDataLossPC));
       this.defaultVariables.Add("chbTRIDataLossPC", varTrialDataLossPC);
 
       var varTrialSamplesOutofMonitorPC = new TrialVariable(
-        TrialParams.OutOfMonitorPC, 
-        "TRI_LMpc", 
-        "Trial: Samples Out of Monitor (%)", 
-        Type.GetType("System.Single"), 
-        "N1", 
-        this.chbTRISamplesOutOfMonitorPC, 
+        TrialParams.OutOfMonitorPC,
+        "TRI_LMpc",
+        "Trial: Samples Out of Monitor (%)",
+        Type.GetType("System.Single"),
+        "N1",
+        this.chbTRISamplesOutOfMonitorPC,
         this.toolTipStatistic.GetToolTip(this.chbTRISamplesOutOfMonitorPC));
       this.defaultVariables.Add("chbTRISamplesOutOfMonitorPC", varTrialSamplesOutofMonitorPC);
 
       var varTrialSamplesOutofMonitor = new TrialVariable(
-        TrialParams.OutOfMonitor, 
-        "TRI_LOMO", 
-        "Trial: Samples Out of Monitor (count)", 
-        Type.GetType("System.Single"), 
-        "N0", 
-        this.chbTRISamplesOutOfMonitor, 
+        TrialParams.OutOfMonitor,
+        "TRI_LOMO",
+        "Trial: Samples Out of Monitor (count)",
+        Type.GetType("System.Single"),
+        "N0",
+        this.chbTRISamplesOutOfMonitor,
         this.toolTipStatistic.GetToolTip(this.chbTRISamplesOutOfMonitor));
       this.defaultVariables.Add("chbTRISamplesOutOfMonitor", varTrialSamplesOutofMonitor);
 
       var varTrialEliminate = new TrialVariable(
-        TrialParams.Elimination, 
-        "TRI_ELIM", 
-        "Trial: To Eliminate", 
-        Type.GetType("System.String"), 
-        string.Empty, 
-        this.chbTRIEliminate, 
+        TrialParams.Elimination,
+        "TRI_ELIM",
+        "Trial: To Eliminate",
+        Type.GetType("System.String"),
+        string.Empty,
+        this.chbTRIEliminate,
         this.toolTipStatistic.GetToolTip(this.chbTRIEliminate));
       this.defaultVariables.Add("chbTRIEliminate", varTrialEliminate);
     }
@@ -1439,122 +1443,124 @@ namespace Ogama.Modules.Statistics
       {
         int counterRows = 0;
         var newStatistic = new Statistic(
-          this.subjectParams, 
-          this.trialParams, 
-          this.gazeParams, 
-          this.gazeCustomParams, 
-          this.mouseParams, 
-          this.mouseCustomParams, 
+          this.subjectParams,
+          this.trialParams,
+          this.gazeParams,
+          this.gazeCustomParams,
+          this.mouseParams,
+          this.mouseCustomParams,
           this.tolerance);
 
         DataTable subjectsTable = Document.ActiveDocument.DocDataSet.SubjectsAdapter.GetData();
-        var subjectView = new DataView(subjectsTable);
-        subjectView.Sort = "SubjectName ASC";
-
-        List<string> checkedSubjects = GetCheckedSubjects(this.trvSubjects);
-
-        // Iterate selected subjects
-        foreach (DataRowView subjectRow in subjectView)
+        using (var subjectView = new DataView(subjectsTable))
         {
-          string subjectName = subjectRow["SubjectName"].ToString();
-          var experimentList = new List<string>();
+          subjectView.Sort = "SubjectName ASC";
 
-          counterRows = 0;
-          if (checkedSubjects.Contains(subjectName))
+          List<string> checkedSubjects = GetCheckedSubjects(this.trvSubjects);
+
+          // Iterate selected subjects
+          foreach (DataRowView subjectRow in subjectView)
           {
-            // If trialID is not checked but other trial depending variables
-            // Check it now
-            if (this.trialParams != (this.trialParams | TrialParams.TrialID))
+            string subjectName = subjectRow["SubjectName"].ToString();
+            var experimentList = new List<string>();
+
+            counterRows = 0;
+            if (checkedSubjects.Contains(subjectName))
             {
-              if (this.trialParams != TrialParams.None || this.mouseParams != MouseParams.None
-                  || this.gazeParams != GazeParams.None)
+              // If trialID is not checked but other trial depending variables
+              // Check it now
+              if (this.trialParams != (this.trialParams | TrialParams.TrialID))
               {
-                string message = "There are variables selected for calculation, " + Environment.NewLine
-                                 + "that need the trial identifying column TRIALID." + Environment.NewLine
-                                 + "Please select this column in the Trials section.";
-                ExceptionMethods.ProcessMessage("Please add TrialID", message);
-                break;
+                if (this.trialParams != TrialParams.None || this.mouseParams != MouseParams.None
+                    || this.gazeParams != GazeParams.None)
+                {
+                  string message = "There are variables selected for calculation, " + Environment.NewLine
+                                   + "that need the trial identifying column TRIALID." + Environment.NewLine
+                                   + "Please select this column in the Trials section.";
+                  ExceptionMethods.ProcessMessage("Please add TrialID", message);
+                  break;
+                }
               }
-            }
 
-            // If only exporting subject columns, ignore trials
-            if (this.trialParams == TrialParams.None)
-            {
-              DataGridViewRow newRow = this.GetStandardsDataGridViewRow();
-              newStatistic.FillSubjectColumns(newRow, subjectRow);
-              continue;
-            }
-
-            List<int> trialIDs = GetSelectedTrials(this.trvTrialsDefault);
-
-            DataTable trialsTable = Document.ActiveDocument.DocDataSet.TrialsAdapter.GetDataBySubject(subjectName);
-            var trialsView = new DataView(trialsTable);
-            trialsView.Sort = "TrialSequence ASC";
-
-            // Iterate 
-            foreach (DataRowView trialRow in trialsView)
-            {
-              var trialID = (int)trialRow["TrialID"];
-              float duration = Convert.ToSingle(trialRow["Duration"]);
-
-              // Skip trials that are not selected.
-              if (!trialIDs.Contains(trialID))
+              // If only exporting subject columns, ignore trials
+              if (this.trialParams == TrialParams.None)
               {
+                DataGridViewRow newRow = this.GetStandardsDataGridViewRow();
+                newStatistic.FillSubjectColumns(newRow, subjectRow);
                 continue;
               }
 
-              // Get a datagridview via asynchronous call.
-              DataGridViewRow newRow = this.GetStandardsDataGridViewRow();
+              List<int> trialIDs = GetSelectedTrials(this.trvTrialsDefault);
 
-              VGElementCollection targetAOIs = this.GetGroupAOIs(trialID, "Target");
-              VGElementCollection searchRectAOIs = this.GetGroupAOIs(trialID, "SearchRect");
+              DataTable trialsTable = Document.ActiveDocument.DocDataSet.TrialsAdapter.GetDataBySubject(subjectName);
+              var trialsView = new DataView(trialsTable);
+              trialsView.Sort = "TrialSequence ASC";
 
-              if (this.subjectParams != SubjectParams.None)
+              // Iterate 
+              foreach (DataRowView trialRow in trialsView)
               {
-                newStatistic.FillSubjectColumns(newRow, subjectRow);
-              }
+                var trialID = (int)trialRow["TrialID"];
+                float duration = Convert.ToSingle(trialRow["Duration"]);
 
-              if (this.trialParams != TrialParams.None)
-              {
-                newStatistic.FillTrialColumns(newRow, trialRow, subjectName);
-              }
+                // Skip trials that are not selected.
+                if (!trialIDs.Contains(trialID))
+                {
+                  continue;
+                }
 
-              if (this.trialParams != TrialParams.None || this.mouseParams != MouseParams.None)
-              {
-                newStatistic.FillPolylineRelatedColumns(newRow, trialRow, subjectName);
-              }
+                // Get a datagridview via asynchronous call.
+                var newRow = this.GetStandardsDataGridViewRow();
 
-              if (this.mouseParams != MouseParams.None)
-              {
-                newStatistic.FillMouseColumns(newRow, trialRow, subjectName, targetAOIs, searchRectAOIs);
-              }
+                var targetAOIs = this.GetGroupAOIs(trialID, "Target");
+                var searchRectAOIs = this.GetGroupAOIs(trialID, "SearchRect");
 
-              if (this.gazeParams != GazeParams.None)
-              {
-                newStatistic.FillGazeColumns(newRow, trialRow, subjectName, targetAOIs, searchRectAOIs);
-              }
+                if (this.subjectParams != SubjectParams.None)
+                {
+                  newStatistic.FillSubjectColumns(newRow, subjectRow);
+                }
 
-              if (worker.CancellationPending)
-              {
-                e.Cancel = true;
-                break;
-              }
-              else
-              {
-                // Report progress as a percentage of the total task.
-                int percentComplete = Convert.ToInt32(Convert.ToSingle(counterRows) / trialsTable.Rows.Count * 100);
-                worker.ReportProgress(percentComplete, "Calculating Subject:" + subjectName);
-              }
+                if (this.trialParams != TrialParams.None)
+                {
+                  newStatistic.FillTrialColumns(newRow, trialRow, subjectName);
+                }
 
-              // increase counter
-              counterRows++;
+                if (this.trialParams != TrialParams.None || this.mouseParams != MouseParams.None)
+                {
+                  newStatistic.FillPolylineRelatedColumns(newRow, trialRow, subjectName);
+                }
+
+                if (this.mouseParams != MouseParams.None)
+                {
+                  newStatistic.FillMouseColumns(newRow, trialRow, subjectName, targetAOIs, searchRectAOIs);
+                }
+
+                if (this.gazeParams != GazeParams.None)
+                {
+                  newStatistic.FillGazeColumns(newRow, trialRow, subjectName, targetAOIs, searchRectAOIs);
+                }
+
+                if (worker.CancellationPending)
+                {
+                  e.Cancel = true;
+                  break;
+                }
+                else
+                {
+                  // Report progress as a percentage of the total task.
+                  int percentComplete = Convert.ToInt32(Convert.ToSingle(counterRows) / trialsTable.Rows.Count * 100);
+                  worker.ReportProgress(percentComplete, "Calculating Subject:" + subjectName);
+                }
+
+                // increase counter
+                counterRows++;
+              }
             }
-          }
 
-          if (worker.CancellationPending)
-          {
-            e.Cancel = true;
-            break;
+            if (worker.CancellationPending)
+            {
+              e.Cancel = true;
+              break;
+            }
           }
         }
 
