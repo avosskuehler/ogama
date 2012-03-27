@@ -40,31 +40,37 @@ namespace Ogama.Modules.Diagrams
 
         private void comboChartTypes_Loaded(object sender, RoutedEventArgs e)
         {
-            ChartType AverageFixationBySubjectAndTrial =
-                new Chart_AverageFixationBySubjectAndTrial(theChart);
-            ChartType AverageFixationOverTime =
-                new Chart_AverageFixationOverTime(theChart);
-            ChartType PupilDiameterOverTime = new Chart_PupilDiameterOverTime(theChart);
-            ChartType XOverYGazePosition = new Chart_XOverYGazePosition(theChart);
-            ChartType SubjectCountOverAgeBySex = new Chart_SubjectCountOverAgeBySex(theChart);
-            ChartType subjectCountOver_____ByOccupation =
-                new Chart_subjectCountOver_____ByOccupation(theChart);
-            ChartType SaccadeDistanceOverSaccadeNumber =
-                new Chart_SaccadeDistanceOverSaccadeNumber(theChart);
-            ChartType AverageFixationDurationOverSex =
-                new Chart_AverageFixationDurationOverSex(theChart);
-            ChartType AverageFixationDurationOverAgeBySex =
-                new Chart_AverageFixationDurationOverAgeBySex(theChart);
+            ChartType custom = new ChartType(theChart);
+            custom.Name = "test custom chart";
+            custom.YVariable = "";
+            custom.XVariable="";
+            custom.GroupBy = "";
+            defaultChartTypes.Add(custom);
+            //ChartType AverageFixationBySubjectAndTrial =
+            //    new Chart_AverageFixationBySubjectAndTrial(theChart);
+            //ChartType AverageFixationOverTime =
+            //    new Chart_AverageFixationOverTime(theChart);
+            //ChartType PupilDiameterOverTime = new Chart_PupilDiameterOverTime(theChart);
+            //ChartType XOverYGazePosition = new Chart_XOverYGazePosition(theChart);
+            //ChartType SubjectCountOverAgeBySex = new Chart_SubjectCountOverAgeBySex(theChart);
+            //ChartType subjectCountOver_____ByOccupation =
+            //    new Chart_subjectCountOver_____ByOccupation(theChart);
+            //ChartType SaccadeDistanceOverSaccadeNumber =
+            //    new Chart_SaccadeDistanceOverSaccadeNumber(theChart);
+            //ChartType AverageFixationDurationOverSex =
+            //    new Chart_AverageFixationDurationOverSex(theChart);
+            //ChartType AverageFixationDurationOverAgeBySex =
+            //    new Chart_AverageFixationDurationOverAgeBySex(theChart);
 
-            defaultChartTypes.Add(AverageFixationBySubjectAndTrial);
-            defaultChartTypes.Add(AverageFixationOverTime);
-            defaultChartTypes.Add(PupilDiameterOverTime);
-            defaultChartTypes.Add(XOverYGazePosition);
-            defaultChartTypes.Add(SubjectCountOverAgeBySex);
-            defaultChartTypes.Add(subjectCountOver_____ByOccupation);
-            defaultChartTypes.Add(SaccadeDistanceOverSaccadeNumber);
-            defaultChartTypes.Add(AverageFixationDurationOverSex);
-            defaultChartTypes.Add(AverageFixationDurationOverAgeBySex);
+            //defaultChartTypes.Add(AverageFixationBySubjectAndTrial);
+            //defaultChartTypes.Add(AverageFixationOverTime);
+            //defaultChartTypes.Add(PupilDiameterOverTime);
+            //defaultChartTypes.Add(XOverYGazePosition);
+            //defaultChartTypes.Add(SubjectCountOverAgeBySex);
+            //defaultChartTypes.Add(subjectCountOver_____ByOccupation);
+            //defaultChartTypes.Add(SaccadeDistanceOverSaccadeNumber);
+            //defaultChartTypes.Add(AverageFixationDurationOverSex);
+            //defaultChartTypes.Add(AverageFixationDurationOverAgeBySex);
 
             foreach (var chart in defaultChartTypes)
             {
