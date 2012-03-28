@@ -22,13 +22,13 @@
         "Entry"
         {
         "MsmKey" = "8:_0686889B83BDC072A708533D80BF1863"
-        "OwnerKey" = "8:_C3151F364458A82C72CBD7886BB4AC22"
+        "OwnerKey" = "8:_EA38EC2C3BD34EA99A524E30CCA2405E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_0686889B83BDC072A708533D80BF1863"
-        "OwnerKey" = "8:_EA38EC2C3BD34EA99A524E30CCA2405E"
+        "OwnerKey" = "8:_C3151F364458A82C72CBD7886BB4AC22"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -327,12 +327,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_48C0B6A31E348FD8D23178B8902A6A91"
-        "OwnerKey" = "8:_18AFFCEE8FD1A0EA57712C76E8112F90"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_4E6103C59E47766459292F01B99A9C9B"
         "OwnerKey" = "8:_1640485731EFA0E4B24B7B0857D886FF"
         "MsmSig" = "8:_UNDEFINED"
@@ -442,13 +436,13 @@
         "Entry"
         {
         "MsmKey" = "8:_53659393CDF26142C3CE351AB89D75EC"
-        "OwnerKey" = "8:_EA38EC2C3BD34EA99A524E30CCA2405E"
+        "OwnerKey" = "8:_C3151F364458A82C72CBD7886BB4AC22"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_53659393CDF26142C3CE351AB89D75EC"
-        "OwnerKey" = "8:_C3151F364458A82C72CBD7886BB4AC22"
+        "OwnerKey" = "8:_EA38EC2C3BD34EA99A524E30CCA2405E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -490,13 +484,7 @@
         "Entry"
         {
         "MsmKey" = "8:_603DF930A3407167CE0FE1C79D9403CB"
-        "OwnerKey" = "8:_C3151F364458A82C72CBD7886BB4AC22"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_603DF930A3407167CE0FE1C79D9403CB"
-        "OwnerKey" = "8:_EA38EC2C3BD34EA99A524E30CCA2405E"
+        "OwnerKey" = "8:_0686889B83BDC072A708533D80BF1863"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -508,13 +496,19 @@
         "Entry"
         {
         "MsmKey" = "8:_603DF930A3407167CE0FE1C79D9403CB"
+        "OwnerKey" = "8:_C3151F364458A82C72CBD7886BB4AC22"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_603DF930A3407167CE0FE1C79D9403CB"
         "OwnerKey" = "8:_53659393CDF26142C3CE351AB89D75EC"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_603DF930A3407167CE0FE1C79D9403CB"
-        "OwnerKey" = "8:_0686889B83BDC072A708533D80BF1863"
+        "OwnerKey" = "8:_EA38EC2C3BD34EA99A524E30CCA2405E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -586,12 +580,6 @@
         "Entry"
         {
         "MsmKey" = "8:_6F555175424E18D7C9EAFD03219C5014"
-        "OwnerKey" = "8:_834D4C1970DE804A78EACEA856878EDF"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_6F555175424E18D7C9EAFD03219C5014"
         "OwnerKey" = "8:_EA38EC2C3BD34EA99A524E30CCA2405E"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -605,6 +593,12 @@
         {
         "MsmKey" = "8:_6F555175424E18D7C9EAFD03219C5014"
         "OwnerKey" = "8:_B3571F4CD68F603D6896CCB35ECA2771"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6F555175424E18D7C9EAFD03219C5014"
+        "OwnerKey" = "8:_834D4C1970DE804A78EACEA856878EDF"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -628,13 +622,13 @@
         "Entry"
         {
         "MsmKey" = "8:_834D4C1970DE804A78EACEA856878EDF"
-        "OwnerKey" = "8:_EA38EC2C3BD34EA99A524E30CCA2405E"
+        "OwnerKey" = "8:_0686889B83BDC072A708533D80BF1863"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_834D4C1970DE804A78EACEA856878EDF"
-        "OwnerKey" = "8:_0686889B83BDC072A708533D80BF1863"
+        "OwnerKey" = "8:_EA38EC2C3BD34EA99A524E30CCA2405E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -807,12 +801,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_A989AB9C3D8E4DB787DF022D78E3DDBB"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_AA1D320498064D879F8881A03FC848F7"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -832,13 +820,13 @@
         "Entry"
         {
         "MsmKey" = "8:_B3571F4CD68F603D6896CCB35ECA2771"
-        "OwnerKey" = "8:_EA38EC2C3BD34EA99A524E30CCA2405E"
+        "OwnerKey" = "8:_0686889B83BDC072A708533D80BF1863"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_B3571F4CD68F603D6896CCB35ECA2771"
-        "OwnerKey" = "8:_0686889B83BDC072A708533D80BF1863"
+        "OwnerKey" = "8:_EA38EC2C3BD34EA99A524E30CCA2405E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -993,14 +981,14 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_DA11228523BB448EB597FCC8A59FDA4F"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_DAE7D9FCF2C37610CE5102A92D905F73"
+        "OwnerKey" = "8:_2A2D520675403D5447AF64404BBB8D90"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_DAE7D9FCF2C37610CE5102A92D905F73"
-        "OwnerKey" = "8:_2A2D520675403D5447AF64404BBB8D90"
+        "OwnerKey" = "8:_0686889B83BDC072A708533D80BF1863"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1013,12 +1001,6 @@
         {
         "MsmKey" = "8:_DAE7D9FCF2C37610CE5102A92D905F73"
         "OwnerKey" = "8:_22B6338C247C87CA61D3B4801F9B504A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_DAE7D9FCF2C37610CE5102A92D905F73"
-        "OwnerKey" = "8:_0686889B83BDC072A708533D80BF1863"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1127,6 +1109,30 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_335FC866C554DE189EDDE306F542AFBB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_6F555175424E18D7C9EAFD03219C5014"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_603DF930A3407167CE0FE1C79D9403CB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_53659393CDF26142C3CE351AB89D75EC"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_0686889B83BDC072A708533D80BF1863"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1312,24 +1318,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_0686889B83BDC072A708533D80BF1863"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_53659393CDF26142C3CE351AB89D75EC"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_603DF930A3407167CE0FE1C79D9403CB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_2A2D520675403D5447AF64404BBB8D90"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1349,12 +1337,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_834D4C1970DE804A78EACEA856878EDF"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_6F555175424E18D7C9EAFD03219C5014"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1424,7 +1406,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:..\\Release86\\Setup\\Ogama\\OgamaSetupV4.1-x86.msi"
+        "OutputFilename" = "8:..\\Release86\\Setup\\Ogama\\OgamaSetupV4.2-x86.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -1836,7 +1818,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:GTOgamaClient, Version=4.1.4461.39726, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:GTOgamaClient, Version=4.1.4470.27254, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_1640485731EFA0E4B24B7B0857D886FF"
@@ -2237,7 +2219,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:DmoBase, Version=4.1.4461.39719, Culture=neutral, PublicKeyToken=163be806126850ac, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:DmoBase, Version=4.2.4470.27247, Culture=neutral, PublicKeyToken=163be806126850ac, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_335FC866C554DE189EDDE306F542AFBB"
@@ -2364,26 +2346,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_48C0B6A31E348FD8D23178B8902A6A91"
-            {
-            "SourcePath" = "8:ASLSerialOutLib2.dll"
-            "TargetName" = "8:ASLSerialOutLib2.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_8FB299A70F114EA6AF4E625DC566059B"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:4"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4E6103C59E47766459292F01B99A9C9B"
@@ -2942,7 +2904,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:OgamaControls, Version=4.1.4461.39720, Culture=neutral, PublicKeyToken=43078ad6ea7e2b10, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:OgamaControls, Version=4.2.4470.27250, Culture=neutral, PublicKeyToken=43078ad6ea7e2b10, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_8A2346C91DAC17984F61FB07092BA533"
@@ -3306,26 +3268,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A989AB9C3D8E4DB787DF022D78E3DDBB"
-            {
-            "SourcePath" = "8:..\\Gazetracker\\Libs\\Native\\x86\\uc480.ini"
-            "TargetName" = "8:uc480.ini"
-            "Tag" = "8:"
-            "Folder" = "8:_8FB299A70F114EA6AF4E625DC566059B"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AA1D320498064D879F8881A03FC848F7"
             {
             "SourcePath" = "8:..\\Ogama\\Resources\\OgamaV3.ico"
@@ -3401,7 +3343,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:VectorGraphics, Version=4.1.4461.39718, Culture=neutral, PublicKeyToken=c29763027ae5aa3e, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:VectorGraphics, Version=4.2.4470.27245, Culture=neutral, PublicKeyToken=c29763027ae5aa3e, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_B386CFDDE83C9A4F5F8AD51504B37184"
@@ -3743,26 +3685,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DA11228523BB448EB597FCC8A59FDA4F"
-            {
-            "SourcePath" = "8:..\\Gazetracker\\Libs\\Native\\x86\\uc480.dll"
-            "TargetName" = "8:uc480.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_8FB299A70F114EA6AF4E625DC566059B"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_DAE7D9FCF2C37610CE5102A92D905F73"
             {
             "AssemblyRegister" = "3:1"
@@ -4019,20 +3941,20 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:OGAMA 4.1"
-        "ProductCode" = "8:{632C29AA-C8BB-4074-9194-6DF459204AD6}"
-        "PackageCode" = "8:{C98AB529-C732-4171-94CB-2730D2749EEB}"
+        "ProductName" = "8:OGAMA 4.2"
+        "ProductCode" = "8:{A4CFEAF1-A087-4403-ADAE-3D6EF8F0598F}"
+        "PackageCode" = "8:{367B5CF4-596C-4D3F-8F71-E66BAEB7B77B}"
         "UpgradeCode" = "8:{4F9B223A-EE75-489A-8EDD-C8740626D263}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:4.1"
+        "ProductVersion" = "8:4.2"
         "Manufacturer" = "8:Freie Universität Berlin"
         "ARPHELPTELEPHONE" = "8:adrian@ogama.net"
         "ARPHELPLINK" = "8:http://ogama.codeplex.com"
-        "Title" = "8:OgamaSetupV4.1-x86"
+        "Title" = "8:OgamaSetupV4.2-x86"
         "Subject" = "8:Ogama - open gaze and mouse analyzer is an open source gaze and mouse tracking recording and analysis software."
         "ARPCONTACT" = "8:Dr. Adrian Voßkühler"
         "Keywords" = "8:ogama, eyetracking, mousetracking"
@@ -4586,7 +4508,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_088CB109699643A095DDB471A3DA72C7"
             {
-            "SourcePath" = "8:..\\DirectShow\\DmoMixer\\obj\\x86\\Debug\\DmoMixer.dll"
+            "SourcePath" = "8:..\\DirectShow\\DmoMixer\\obj\\x86\\Release\\DmoMixer.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_8FB299A70F114EA6AF4E625DC566059B"
@@ -4614,7 +4536,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_276FF946B1794620A2BE0DAAA8BC2A2F"
             {
-            "SourcePath" = "8:..\\DirectShow\\DmoOverlay\\obj\\x86\\Debug\\DmoOverlay.dll"
+            "SourcePath" = "8:..\\DirectShow\\DmoOverlay\\obj\\x86\\Release\\DmoOverlay.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_8FB299A70F114EA6AF4E625DC566059B"
@@ -4670,7 +4592,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_EA38EC2C3BD34EA99A524E30CCA2405E"
             {
-            "SourcePath" = "8:..\\Ogama\\obj\\x86\\Debug\\Ogama.exe"
+            "SourcePath" = "8:..\\Ogama\\obj\\x86\\Release\\Ogama.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_8FB299A70F114EA6AF4E625DC566059B"

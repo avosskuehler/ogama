@@ -2,7 +2,7 @@
 using System.Linq;
 
 using GTHardware.Cameras.DirectShow;
-using GTHardware.Cameras.Thorlabs;
+//using GTHardware.Cameras.Thorlabs;
 using GTHardware.Cameras.Kinect;
 
 namespace GTHardware
@@ -38,9 +38,9 @@ namespace GTHardware
       // Create camera subclass object, inherits from CameraBase
       switch (deviceType)
       {
-        case DeviceTypeEnum.Thorlabs:
-          camera = new ThorlabCamera(); // needs hwndSource to work, set by this.HwndSource property
-          break;
+        //case DeviceTypeEnum.Thorlabs:
+        //  camera = new ThorlabCamera(); // needs hwndSource to work, set by this.HwndSource property
+        //  break;
         //case DeviceTypeEnum.PS3Eye:
         //  camera = new PS3Camera();
         //  break;
@@ -62,10 +62,10 @@ namespace GTHardware
       // Check which cameras are connected, 
       // Set the deviceType which is used to initialize the camera object
 
-      if (ThorlabCamera.IsConnected())
-      {
-        connectedDevice = DeviceTypeEnum.Thorlabs;
-      }
+      //if (ThorlabCamera.IsConnected())
+      //{
+      //  connectedDevice = DeviceTypeEnum.Thorlabs;
+      //}
       //else if (!DisablePs3Camera)
       //{
       //  try

@@ -154,10 +154,6 @@
     <Compile Include="Cameras\FileStream\FileStreamCamera.cs" />
     <Compile Include="Cameras\ImageEventArgs.cs" />
     <Compile Include="Cameras\Kinect\Kinect.cs" />
-    <Compile Include="Cameras\Thorlabs\IniFile.cs" />
-    <Compile Include="Cameras\Thorlabs\ThorlabCamera.cs" />
-    <Compile Include="Cameras\Thorlabs\ThorlabDevice.cs" />
-    <Compile Include="Cameras\Thorlabs\ThorlabSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
