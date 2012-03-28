@@ -41,7 +41,7 @@ You can modify and customize it for your needs as long as your product is not in
     <RootNamespaceContainer>True</RootNamespaceContainer>
     <RootNamespaceTitle>Ogama Namespaces</RootNamespaceTitle>
     <HelpTitle>Ogama - open gaze and mouse analyzer source documentation</HelpTitle>
-    <CopyrightText>Dr. Adrian Vo&amp;#223%3bk&amp;#252%3bhler, Freie Universit&amp;#228%3bt Berlin, created 27.01.12  --  Please have a look at the source for deeper understanding.</CopyrightText>
+    <CopyrightText>Dr. Adrian Vo&amp;#223%3bk&amp;#252%3bhler, Freie Universit&amp;#228%3bt Berlin, created 28.03.12  --  Please have a look at the source for deeper understanding.</CopyrightText>
     <FeedbackEMailAddress>adrian%40ogama.net</FeedbackEMailAddress>
     <PresentationStyle>vs2005</PresentationStyle>
     <SyntaxFilters>CSharp</SyntaxFilters>
@@ -56,38 +56,58 @@ You can modify and customize it for your needs as long as your product is not in
           <copy name="comments" source="*" target="/document/comments" />
         </component>
       </ComponentConfig>
-<ComponentConfig id="Code Block Component" enabled="True"><component id="Code Block Component" type="SandcastleBuilder.Components.CodeBlockComponent" assembly="{@SHFBFolder}SandcastleBuilder.Components.dll"><basePath value="{@HtmlEncProjectFolder}" /><languageFilter value="true" /><allowMissingSource value="false" /><removeRegionMarkers value="false" /><colorizer syntaxFile="{@SHFBFolder}Colorizer\highlight.xml" styleFile="{@SHFBFolder}Colorizer\highlight.xsl" copyImageUrl="../icons/CopyCode.gif" language="cs" tabSize="0" numberLines="false" outlining="false" keepSeeTags="false" defaultTitle="true" /></component></ComponentConfig>
-<ComponentConfig id="Post-transform Component" enabled="True"><component id="Post-transform Component" type="SandcastleBuilder.Components.PostTransformComponent" assembly="{@SHFBFolder}SandcastleBuilder.Components.dll"><!-- Code colorizer files (required).
+      <ComponentConfig id="Code Block Component" enabled="True">
+        <component id="Code Block Component" type="SandcastleBuilder.Components.CodeBlockComponent" assembly="{@SHFBFolder}SandcastleBuilder.Components.dll">
+          <basePath value="{@HtmlEncProjectFolder}" />
+          <languageFilter value="true" />
+          <allowMissingSource value="false" />
+          <removeRegionMarkers value="false" />
+          <colorizer syntaxFile="{@SHFBFolder}Colorizer\highlight.xml" styleFile="{@SHFBFolder}Colorizer\highlight.xsl" copyImageUrl="../icons/CopyCode.gif" language="cs" tabSize="0" numberLines="false" outlining="false" keepSeeTags="false" defaultTitle="true" />
+        </component>
+      </ComponentConfig>
+      <ComponentConfig id="Post-transform Component" enabled="True">
+        <component id="Post-transform Component" type="SandcastleBuilder.Components.PostTransformComponent" assembly="{@SHFBFolder}SandcastleBuilder.Components.dll">
+          <!-- Code colorizer files (required).
                  Attributes:
                     Stylesheet file (required)
                     Script file (required)
-                    "Copy" image file (required) --><colorizer stylesheet="{@SHFBFolder}Colorizer\highlight.css" scriptFile="{@SHFBFolder}Colorizer\highlight.js" copyImage="{@SHFBFolder}Colorizer\CopyCode.gif" /><!-- Base output path for the files (required).  This should match
+                    "Copy" image file (required) -->
+          <colorizer stylesheet="{@SHFBFolder}Colorizer\highlight.css" scriptFile="{@SHFBFolder}Colorizer\highlight.js" copyImage="{@SHFBFolder}Colorizer\CopyCode.gif" />
+          <!-- Base output path for the files (required).  This should match
                  the parent folder of the output path of the HTML files (see
-                 SaveComponent). --><outputPaths>{@HelpFormatOutputPaths}</outputPaths><!-- Logo image file (optional).  Filename is required. The height,
+                 SaveComponent). -->
+          <outputPaths>{@HelpFormatOutputPaths}</outputPaths>
+          <!-- Logo image file (optional).  Filename is required. The height,
                  width, altText, placement, and alignment attributes are
-                 optional. --><logoFile filename="C:\Users\Adrian\Documents\Ogama@Codeplex\Help\HelpBanner.jpg" height="0" width="0" altText="" placement="right" alignment="left" /></component></ComponentConfig>
-<ComponentConfig id="Cached MSDN URL References" enabled="True"><component id="Cached MSDN URL References" type="SandcastleBuilder.Components.CachedResolveReferenceLinksComponent" assembly="{@SHFBFolder}SandcastleBuilder.Components.dll" locale="{@Locale}" linkTarget="{@SdkLinkTarget}">
-<helpOutput format="HtmlHelp1">
-  <cache filename="{@LocalDataFolder}Cache\MsdnUrl.cache" />
-  <targets base="{@SandcastlePath}Data\Reflection" recurse="true" files="*.xml" type="{@HtmlSdkLinkType}" />
-  <targets files="reflection.xml" type="Local" />
-</helpOutput>
-<helpOutput format="MSHelp2">
-  <cache filename="{@LocalDataFolder}Cache\MsdnUrl.cache" />
-  <targets base="{@SandcastlePath}Data\Reflection" recurse="true" files="*.xml" type="{@MSHelp2SdkLinkType}" />
-  <targets files="reflection.xml" type="Index" />
-</helpOutput>
-<helpOutput format="MSHelpViewer">
-  <cache filename="{@LocalDataFolder}Cache\MsdnUrl.cache" />
-  <targets base="{@SandcastlePath}Data\Reflection" recurse="true" files="*.xml" type="{@MSHelpViewerSdkLinkType}" />
-  <targets files="reflection.xml" type="Id" />
-</helpOutput>
-<helpOutput format="Website">
-  <cache filename="{@LocalDataFolder}Cache\MsdnUrl.cache" />
-  <targets base="{@SandcastlePath}Data\Reflection" recurse="true" files="*.xml" type="{@WebsiteSdkLinkType}" />
-  <targets files="reflection.xml" type="Local" />
-</helpOutput>
-</component></ComponentConfig></ComponentConfigurations>
+                 optional. -->
+          <logoFile filename="C:\Users\Adrian\Documents\Ogama@Codeplex\Help\HelpBanner.jpg" height="0" width="0" altText="" placement="right" alignment="left" />
+        </component>
+      </ComponentConfig>
+      <ComponentConfig id="Cached MSDN URL References" enabled="True">
+        <component id="Cached MSDN URL References" type="SandcastleBuilder.Components.CachedResolveReferenceLinksComponent" assembly="{@SHFBFolder}SandcastleBuilder.Components.dll" locale="{@Locale}" linkTarget="{@SdkLinkTarget}">
+          <helpOutput format="HtmlHelp1">
+            <cache filename="{@LocalDataFolder}Cache\MsdnUrl.cache" />
+            <targets base="{@SandcastlePath}Data\Reflection" recurse="true" files="*.xml" type="{@HtmlSdkLinkType}" />
+            <targets files="reflection.xml" type="Local" />
+          </helpOutput>
+          <helpOutput format="MSHelp2">
+            <cache filename="{@LocalDataFolder}Cache\MsdnUrl.cache" />
+            <targets base="{@SandcastlePath}Data\Reflection" recurse="true" files="*.xml" type="{@MSHelp2SdkLinkType}" />
+            <targets files="reflection.xml" type="Index" />
+          </helpOutput>
+          <helpOutput format="MSHelpViewer">
+            <cache filename="{@LocalDataFolder}Cache\MsdnUrl.cache" />
+            <targets base="{@SandcastlePath}Data\Reflection" recurse="true" files="*.xml" type="{@MSHelpViewerSdkLinkType}" />
+            <targets files="reflection.xml" type="Id" />
+          </helpOutput>
+          <helpOutput format="Website">
+            <cache filename="{@LocalDataFolder}Cache\MsdnUrl.cache" />
+            <targets base="{@SandcastlePath}Data\Reflection" recurse="true" files="*.xml" type="{@WebsiteSdkLinkType}" />
+            <targets files="reflection.xml" type="Local" />
+          </helpOutput>
+        </component>
+      </ComponentConfig>
+    </ComponentConfigurations>
     <DocumentationSources>
       <DocumentationSource sourceFile="..\Release86\Ogama.exe" />
       <DocumentationSource sourceFile="..\Release86\Docs\Ogama.xml" />
@@ -98,22 +118,22 @@ You can modify and customize it for your needs as long as your product is not in
     </DocumentationSources>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="(global)" isDocumented="False" />
-<NamespaceSummaryItem name="Ogama" isDocumented="True">Ogama - open gaze and mouse analyzer main namespace.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.DataSet" isDocumented="True">The Dataset namespace is used for the creation, modification and access of the underlying SQL Database file.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.DataSet.OgamaDataSetTableAdapters" isDocumented="False" />
-<NamespaceSummaryItem name="Ogama.ExceptionHandling" isDocumented="True">The ExceptionHandling namespace is used to encapsulate OGAMAs exception handling.
+      <NamespaceSummaryItem name="Ogama" isDocumented="True">Ogama - open gaze and mouse analyzer main namespace.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Ogama.DataSet" isDocumented="True">The Dataset namespace is used for the creation, modification and access of the underlying SQL Database file.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Ogama.DataSet.OgamaDataSetTableAdapters" isDocumented="False" />
+      <NamespaceSummaryItem name="Ogama.ExceptionHandling" isDocumented="True">The ExceptionHandling namespace is used to encapsulate OGAMAs exception handling.
 It is created according to the Microsoft Enterprise Library "Exception Handling Application Block" to handle different layers of exceptions via Policys.
 Also it provides some OGAMA styled message boxes.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.MainWindow" isDocumented="True">This namespace encapsulates the source code used in the main window.
+      <NamespaceSummaryItem name="Ogama.MainWindow" isDocumented="True">This namespace encapsulates the source code used in the main window.
 This main window is the parent container which contains menu, toolbar, status bar and a context panel and the source code for module creation and handling.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.AOI" isDocumented="True">The AOI namespace encapsulates the source code used in the areas of interest module.
+      <NamespaceSummaryItem name="Ogama.Modules.AOI" isDocumented="True">The AOI namespace encapsulates the source code used in the areas of interest module.
 This module is intended to define and display areas of interest (AOI) on the given slide. The defined AOI then can be edited and copied in a data grid view. There is also the possibility to import/export a list of AOI from a text file. OGAMA knows ellipsoid, rectangular and polygonal shapes for AOI.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.AttentionMap" isDocumented="True">The AttentionMap namespace encapsulates the source code used in the attention map module.
+      <NamespaceSummaryItem name="Ogama.Modules.AttentionMap" isDocumented="True">The AttentionMap namespace encapsulates the source code used in the attention map module.
 This module is intended to calculate gaussian distributions of the fixational data and overlay it on the original stimulus image, so that you can see a landscape of visited and unvisited locations on the stimulus. You can choose the subjects to include in the calculation and whether the calculation should be based only on a special or all fixations.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.Common" isDocumented="True">This namespace encapsulates the source code used in more than one module.
+      <NamespaceSummaryItem name="Ogama.Modules.Common" isDocumented="True">This namespace encapsulates the source code used in more than one module.
 For example the base classes for the different modules along with customized Slide collections.
 It contains also the helper classes and the database queries that are not auto generated by the data set designer.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.Database" isDocumented="True">The Database namespace encapsulates the source code used in the database module.
+      <NamespaceSummaryItem name="Ogama.Modules.Database" isDocumented="True">The Database namespace encapsulates the source code used in the database module.
 This module is intended to display all the tables from the database which are
 
 Subjects
@@ -126,7 +146,7 @@ AOIs
 Rawdata Tables
 
 The user can view, edit and revise each entry.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.Fixations" isDocumented="True">The Fixations namespace encapsulates the source code used in the fixations module.
+      <NamespaceSummaryItem name="Ogama.Modules.Fixations" isDocumented="True">The Fixations namespace encapsulates the source code used in the fixations module.
 This module is intended to calculate and display the gaze and mouse fixations made by the subjects. 
 There are several display modes and a data grid view which shows the calculated fixations.
 The calculation uses the fixation detection algorithms available from
@@ -135,89 +155,85 @@ The calculation uses the fixation detection algorithms available from
             McLean, VA 22101
             (703) 385-7133
  that are ported to C# in the class Fixation in the Common namespace.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.Recording" isDocumented="True">The Recording namespace encapsulates the source code used in the recording module.
+      <NamespaceSummaryItem name="Ogama.Modules.Recording" isDocumented="True">The Recording namespace encapsulates the source code used in the recording module.
 It is intended to receive the sampling data from the ITracker interfaces and stores them after succesful presentation of the slideshow via the Presentation module into OGAMAs database.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.Replay" isDocumented="True">The Replay namespace encapsulates the source code used in the replay module.
+      <NamespaceSummaryItem name="Ogama.Modules.Replay" isDocumented="True">The Replay namespace encapsulates the source code used in the replay module.
 This module is intended to replay the data that is logged during the experiment. A lot of settings can be made,  concerning the visualization of the data.
 Also a video export is implemented.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.Saliency" isDocumented="True">The Saliency namespace encapsulates the source code used in the saliency module.
+      <NamespaceSummaryItem name="Ogama.Modules.Saliency" isDocumented="True">The Saliency namespace encapsulates the source code used in the saliency module.
 This module is intended to calculate and visualize the salient locations on the stimulus images which are calculated by modelling the bottom-up processes of the human visual system. It uses the ezvision programm compiled for windows from the great iLab Neuromorphic Vision C++ Toolkit toolkit. (see http://ilab.usc.edu/toolkit)</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.SlideshowDesign" isDocumented="True">The SlideshowDesign namespace encapsulates the source code used in the slideshow design module.
+      <NamespaceSummaryItem name="Ogama.Modules.SlideshowDesign" isDocumented="True">The SlideshowDesign namespace encapsulates the source code used in the slideshow design module.
 This module is intended to supply tools for creating different slide shows that are suitable for OGAMA.
 Different types of slides are available: Instructional, pictures, graphical elements, flash stimuli and blank slides.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.Statistics" isDocumented="True">The Statistics namespace encapsulates the source code used in the statistics module.
+      <NamespaceSummaryItem name="Ogama.Modules.Statistics" isDocumented="True">The Statistics namespace encapsulates the source code used in the statistics module.
 This module is intended to calculate a lot of parameters useful for further analysis.
 The parameters can be selected in the form and are generated by filling a datagrid view. This data grid can be exported to a SPSS readable format.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Properties" isDocumented="True">The properties handling of the application.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="OgamaControls" isDocumented="True">This project compiles into a dynamic library OgamaControls.dll and consists of a lot of custom controls. 
+      <NamespaceSummaryItem name="Ogama.Properties" isDocumented="True">The properties handling of the application.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="OgamaControls" isDocumented="True">This project compiles into a dynamic library OgamaControls.dll and consists of a lot of custom controls. 
 For example these are controls for shape selection, font and pen style selection or gradient creation.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="OgamaControls.Dialogs" isDocumented="True">Ready to use dialogs for shape, pen, color and font selection.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="OgamaControls.Media" isDocumented="True">Ready to use controls for media support like DirectShow Webcam, and direct show editing services Audioplayer etc.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="VectorGraphics" isDocumented="True">This is the namespace for the dynamic library VectorGraphics.dll.
+      <NamespaceSummaryItem name="OgamaControls.Dialogs" isDocumented="True">Ready to use dialogs for shape, pen, color and font selection.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="OgamaControls.Media" isDocumented="True">Ready to use controls for media support like DirectShow Webcam, and direct show editing services Audioplayer etc.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="VectorGraphics" isDocumented="True">This is the namespace for the dynamic library VectorGraphics.dll.
 It is a set of classes used for drawing and handling vector graphic elements like lines, rectangles, ellipses and polylines along with cursors, images and textual objects.
 They all base on the VGElement class and are XMLSerializable.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="VectorGraphics.Canvas" isDocumented="True">This namespace provides classes that can contain and arrange vector graphic elements.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="VectorGraphics.Controls" isDocumented="True">This namespace contains all the custom controls used in this DLL, for example a transparent RichTextBox.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="VectorGraphics.Elements" isDocumented="True">This is the main namespace of this library. It consists of all elements that can be created and arranged on the canvas, like polygons, images, rectangles, flash objects, sound, cursors.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="VectorGraphics.StopConditions" isDocumented="True">This namespace contains the classes that define stop conditions resp. responses to slides, which in place are specialized input events from the mouse and keyboard.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="VectorGraphics.Tools" isDocumented="True">This namespace encapsulates all the helper classes used by the library.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.Recording.Presenter" isDocumented="True">This namespace contains the necessary code that displays the slideshow on the presentation screen and logs the events.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.MainWindow.ContextPanel" isDocumented="True">This namespace encapsulates code for the context panel at the right of the main window.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.MainWindow.Dialogs" isDocumented="True">This namespace contains all the main window dialogs, like experiment settings etc.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.AOI.Dialogs" isDocumented="True">This namespace contains the dialogs for the AOI module.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.Common.Controls" isDocumented="True">This namespace contains base classes for all modules.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.Common.CustomEventArgs" isDocumented="True">This namespace contains customized event argument classes.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.Common.CustomRenderer" isDocumented="True">This namespace contains custom renderer.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.Common.FormTemplates" isDocumented="True">This namespace contains the form template classes for the main modules.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.Common.PictureTemplates" isDocumented="True">This namespace contains picture templates that derived from the vector graphics dll and can be used in the module forms.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.Common.SlideCollections" isDocumented="True">This namespace contains specialized slide collections, like a slideshow and a trial.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.Common.Tools" isDocumented="True">This namespace contains common tools for ogama.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.Common.TrialEvents" isDocumented="True">This namespace contains trial events that occur during recording.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.Common.Types" isDocumented="True">This namespace contains ogama specialized types.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.ImportExport.AOIData" isDocumented="True">This namespace encapsulates the source code used in the import export section of the AOI module.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.ImportExport.Common" isDocumented="True">This namespace encapsulates the source code used in all import export methods.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.ImportExport.FixationData" isDocumented="True">This namespace encapsulates the source code used in the import export section of the Fixations module.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.ImportExport.OgamaData" isDocumented="True">This namespace encapsulates the source code used in the import export section of the Database module.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.ImportExport.RawData" isDocumented="True">This namespace encapsulates the source code used in the import export section of the Database module.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.Recording.AleaInterface" isDocumented="True">This namespace encapsulates source code used in the recording module to capture eye movements captured from an alea tracking device. (www.alea-technologies.com)
+      <NamespaceSummaryItem name="VectorGraphics.Canvas" isDocumented="True">This namespace provides classes that can contain and arrange vector graphic elements.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="VectorGraphics.Controls" isDocumented="True">This namespace contains all the custom controls used in this DLL, for example a transparent RichTextBox.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="VectorGraphics.Elements" isDocumented="True">This is the main namespace of this library. It consists of all elements that can be created and arranged on the canvas, like polygons, images, rectangles, flash objects, sound, cursors.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="VectorGraphics.StopConditions" isDocumented="True">This namespace contains the classes that define stop conditions resp. responses to slides, which in place are specialized input events from the mouse and keyboard.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="VectorGraphics.Tools" isDocumented="True">This namespace encapsulates all the helper classes used by the library.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Ogama.Modules.Recording.Presenter" isDocumented="True">This namespace contains the necessary code that displays the slideshow on the presentation screen and logs the events.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Ogama.MainWindow.ContextPanel" isDocumented="True">This namespace encapsulates code for the context panel at the right of the main window.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Ogama.MainWindow.Dialogs" isDocumented="True">This namespace contains all the main window dialogs, like experiment settings etc.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Ogama.Modules.AOI.Dialogs" isDocumented="True">This namespace contains the dialogs for the AOI module.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Ogama.Modules.Common.Controls" isDocumented="True">This namespace contains base classes for all modules.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Ogama.Modules.Common.CustomEventArgs" isDocumented="True">This namespace contains customized event argument classes.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Ogama.Modules.Common.CustomRenderer" isDocumented="True">This namespace contains custom renderer.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Ogama.Modules.Common.FormTemplates" isDocumented="True">This namespace contains the form template classes for the main modules.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Ogama.Modules.Common.PictureTemplates" isDocumented="True">This namespace contains picture templates that derived from the vector graphics dll and can be used in the module forms.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Ogama.Modules.Common.SlideCollections" isDocumented="True">This namespace contains specialized slide collections, like a slideshow and a trial.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Ogama.Modules.Common.Tools" isDocumented="True">This namespace contains common tools for ogama.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Ogama.Modules.Common.TrialEvents" isDocumented="True">This namespace contains trial events that occur during recording.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Ogama.Modules.Common.Types" isDocumented="True">This namespace contains ogama specialized types.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Ogama.Modules.ImportExport.AOIData" isDocumented="True">This namespace encapsulates the source code used in the import export section of the AOI module.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Ogama.Modules.ImportExport.Common" isDocumented="True">This namespace encapsulates the source code used in all import export methods.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Ogama.Modules.ImportExport.FixationData" isDocumented="True">This namespace encapsulates the source code used in the import export section of the Fixations module.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Ogama.Modules.ImportExport.OgamaData" isDocumented="True">This namespace encapsulates the source code used in the import export section of the Database module.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Ogama.Modules.ImportExport.RawData" isDocumented="True">This namespace encapsulates the source code used in the import export section of the Database module.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Ogama.Modules.Recording.AleaInterface" isDocumented="True">This namespace encapsulates source code used in the recording module to capture eye movements captured from an alea tracking device. (www.alea-technologies.com)
 That is the alea recording module.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.Recording.ASLInterface" isDocumented="True">This namespace encapsulates source code used in the recording module to capture eye movements captured from a ASL tracking device. (www.asleyetracking.com)
+      <NamespaceSummaryItem name="Ogama.Modules.Recording.ASLInterface" isDocumented="True">This namespace encapsulates source code used in the recording module to capture eye movements captured from a ASL tracking device. (www.asleyetracking.com)
 That is the asl recording module.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.Recording.Dialogs" isDocumented="True">This namespace encapsulates source code for the dialogs used in the recording module.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.Recording.GazegroupInterface" isDocumented="True">This namespace encapsulates source code used in the recording module to capture eye movements captured with the gazetracker tracking device. (www.asleyetracking.com)
+      <NamespaceSummaryItem name="Ogama.Modules.Recording.Dialogs" isDocumented="True">This namespace encapsulates source code for the dialogs used in the recording module.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Ogama.Modules.Recording.GazegroupInterface" isDocumented="True">This namespace encapsulates source code used in the recording module to capture eye movements captured with the gazetracker tracking device. (www.asleyetracking.com)
 That is the ITU gazetracker recording module.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.Recording.MirametrixInterface" isDocumented="True">This namespace encapsulates source code used in the recording module to capture eye movements capture from a Mirametrix tracking device. (www.mirametrix.com)
+      <NamespaceSummaryItem name="Ogama.Modules.Recording.MirametrixInterface" isDocumented="True">This namespace encapsulates source code used in the recording module to capture eye movements capture from a Mirametrix tracking device. (www.mirametrix.com)
 That is the Mirametrix recording module.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.Recording.MouseOnlyInterface" isDocumented="True">This namespace encapsulates source code used in the recording module to capture mouse movements. 
+      <NamespaceSummaryItem name="Ogama.Modules.Recording.MouseOnlyInterface" isDocumented="True">This namespace encapsulates source code used in the recording module to capture mouse movements. 
 That is the mouse movement recording module.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.Recording.SMIInterface" isDocumented="True">This namespace encapsulates source code used in the recording module to capture gaze movements captured by an SMI iViewX device. (www.smivision.com)
+      <NamespaceSummaryItem name="Ogama.Modules.Recording.SMIInterface" isDocumented="True">This namespace encapsulates source code used in the recording module to capture gaze movements captured by an SMI iViewX device. (www.smivision.com)
 That is the SMI recording module.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.Recording.TobiiInterface" isDocumented="True">This namespace encapsulates source code used in the recording module to capture eye movements capture from a tobii tracking device. (www.tobii.com)
+      <NamespaceSummaryItem name="Ogama.Modules.Recording.TobiiInterface" isDocumented="True">This namespace encapsulates source code used in the recording module to capture eye movements capture from a tobii tracking device. (www.tobii.com)
 That is the tobii recording module.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.Recording.TrackerBase" isDocumented="True">This namespace encapsulates source code used in the recording module from all tracking devices.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.Replay.Video" isDocumented="True">This namespace contains the code to export gaze videos.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.Scanpath" isDocumented="True">The Scanpaths namespace encapsulates the source code used in the scanpaths module.
+      <NamespaceSummaryItem name="Ogama.Modules.Recording.TrackerBase" isDocumented="True">This namespace encapsulates source code used in the recording module from all tracking devices.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Ogama.Modules.Replay.Video" isDocumented="True">This namespace contains the code to export gaze videos.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Ogama.Modules.Scanpath" isDocumented="True">The Scanpaths namespace encapsulates the source code used in the scanpaths module.
 This module is intended to replay or show fixations of multiple subjects in parallel including levensthein loci and sequence similarity values.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.Scanpath.Colorization" isDocumented="True">This namespace contains code for the colorization of scanpaths.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.SlideshowDesign.DesignModule" isDocumented="True">This namespace contains code for the design module.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.SlideshowDesign.DesignModule.StimuliDialogs" isDocumented="True">This namespace contains code for the stimuli design dialogs of the design module.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.SlideshowDesign.Import" isDocumented="True">This namespace contains code for the stimuli import sections of the stimuli design module.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.SlideshowDesign.Shuffling" isDocumented="True">This namespace contains code for custom shuffling of the slideshows.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Ogama.Modules.Statistics.Variables" isDocumented="True">This namespace contains code for the statistics variables.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="VectorGraphics.Controls.Flash" isDocumented="True">This namespace contains a customized flash control.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="VectorGraphics.Controls.Timer" isDocumented="True">This namespace contains a customized timer.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="VectorGraphics.Elements.ElementCollections" isDocumented="True">This namespace contains collections of slide elements, that is e.g. a slide.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="VectorGraphics.Tools.CustomEventArgs" isDocumented="True">This namespace encapsulates customized event arguments used by the vector graphics library.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="VectorGraphics.Tools.CustomTypeConverter" isDocumented="True">This namespace provides a lot of custom type converter that are used to xml serialize (convert to string an back) all the objects in this library.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="VectorGraphics.Tools.Interfaces" isDocumented="True">The namespace encapsulating interfaces used by the library, e.g. a specialized IDrawObject.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="VectorGraphics.Tools.Trigger" isDocumented="True">This namespace consists of classes that define trigger signals that can be send to ouput devices.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="VectorGraphics.Tools.Win32" isDocumented="True">This namespace encapsulates win32 and gdi32 P/Invoke calls.</NamespaceSummaryItem></NamespaceSummaries>
+      <NamespaceSummaryItem name="Ogama.Modules.Scanpath.Colorization" isDocumented="True">This namespace contains code for the colorization of scanpaths.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Ogama.Modules.SlideshowDesign.DesignModule" isDocumented="True">This namespace contains code for the design module.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Ogama.Modules.SlideshowDesign.DesignModule.StimuliDialogs" isDocumented="True">This namespace contains code for the stimuli design dialogs of the design module.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Ogama.Modules.SlideshowDesign.Import" isDocumented="True">This namespace contains code for the stimuli import sections of the stimuli design module.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Ogama.Modules.SlideshowDesign.Shuffling" isDocumented="True">This namespace contains code for custom shuffling of the slideshows.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Ogama.Modules.Statistics.Variables" isDocumented="True">This namespace contains code for the statistics variables.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="VectorGraphics.Controls.Flash" isDocumented="True">This namespace contains a customized flash control.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="VectorGraphics.Controls.Timer" isDocumented="True">This namespace contains a customized timer.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="VectorGraphics.Elements.ElementCollections" isDocumented="True">This namespace contains collections of slide elements, that is e.g. a slide.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="VectorGraphics.Tools.CustomEventArgs" isDocumented="True">This namespace encapsulates customized event arguments used by the vector graphics library.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="VectorGraphics.Tools.CustomTypeConverter" isDocumented="True">This namespace provides a lot of custom type converter that are used to xml serialize (convert to string an back) all the objects in this library.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="VectorGraphics.Tools.Interfaces" isDocumented="True">The namespace encapsulating interfaces used by the library, e.g. a specialized IDrawObject.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="VectorGraphics.Tools.Trigger" isDocumented="True">This namespace consists of classes that define trigger signals that can be send to ouput devices.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="VectorGraphics.Tools.Win32" isDocumented="True">This namespace encapsulates win32 and gdi32 P/Invoke calls.</NamespaceSummaryItem>
+    </NamespaceSummaries>
     <PlugInConfigurations>
-      <PlugInConfig id="Hierarchical Table of Contents" enabled="True">
-        <configuration>
-          <toc minParts="1" insertBelow="False" />
-        </configuration>
-      </PlugInConfig>
     </PlugInConfigurations>
     <BinaryTOC>True</BinaryTOC>
     <ApiFilter>
@@ -228,6 +244,11 @@ This module is intended to replay or show fixations of multiple subjects in para
     <HtmlSdkLinkType>Msdn</HtmlSdkLinkType>
     <WebsiteSdkLinkType>Msdn</WebsiteSdkLinkType>
     <IncludeFavorites>False</IncludeFavorites>
+    <SdkLinkTarget>Blank</SdkLinkTarget>
+    <Preliminary>False</Preliminary>
+    <NamingMethod>Guid</NamingMethod>
+    <Language>en-US</Language>
+    <ContentPlacement>AboveNamespaces</ContentPlacement>
   </PropertyGroup>
   <!-- There are no properties for these two groups but they need to appear in
        order for Visual Studio to perform the build. -->
