@@ -24,6 +24,23 @@ namespace Ogama.Modules.Diagrams
             this.Chart = chart;
         }
 
+        public ChartType(Chart chart, string xVariable, string yVariable, 
+            string groupBy, string agregateFunction)
+        {
+            this.Chart = chart;
+
+            string[] x = xVariable.Split('.');
+            string[] y = yVariable.Split('.');
+            string[] group = groupBy.Split('.');
+            this.XVariable_Table = x[0];
+            this.XVariable = x[1];
+            this.YVariable_Table = y[0];
+            this.YVariable = y[1];
+            this.GroupBy_Table = group[0];
+            this.GroupBy = group[1];
+            this.AgregateFunction = agregateFunction;
+        }
+
         public Chart Chart = new Chart();
         public string Name;
         public string YVariable;
@@ -32,7 +49,7 @@ namespace Ogama.Modules.Diagrams
         public string XVariable_Table;
         public string GroupBy;//variable defines the difference between individual series
         public string GroupBy_Table;
-        public AgregateFunction AgregateFunction;
+        public string AgregateFunction;
         public Visifire.Charts.RenderAs Type;
         Ogama.DataSet.OgamaDataSet db = Document.ActiveDocument.DocDataSet;
         
@@ -67,13 +84,13 @@ namespace Ogama.Modules.Diagrams
         public virtual void Draw()
         {
             //to be deleted - just for debug
-            AgregateFunction = AgregateFunction.Avg;//AgregateFunction.Count;
-            YVariable = "Length";//"ID";
-            YVariable_Table = "GazeFixations";
-            XVariable = "Category";
-            XVariable_Table = "Trials";
-            GroupBy = "Category";
-            GroupBy_Table = "Subjects";
+            //AgregateFunction = "Avg";//AgregateFunction.Count;
+            //YVariable = "Length";//"ID";
+            //YVariable_Table = "GazeFixations";
+            //XVariable = "Category";
+            //XVariable_Table = "Trials";
+            //GroupBy = "Category";
+            //GroupBy_Table = "Subjects";
             //------------------------------
 
             ClearContentsAndAddTitle();

@@ -40,11 +40,14 @@ namespace Ogama.Modules.Diagrams
 
         private void comboChartTypes_Loaded(object sender, RoutedEventArgs e)
         {
-            ChartType custom = new ChartType(theChart);
+            FillComboAgregate();
+            FillComboGroupBy();
+            FillComboY();
+            FillComboX();
+
+            ChartType custom = new ChartType(theChart, "Trials.Category", "GazeFixations.Length", 
+                "Subjects.Category", "Avg");
             custom.Name = "test custom chart";
-            custom.YVariable = "";
-            custom.XVariable="";
-            custom.GroupBy = "";
             defaultChartTypes.Add(custom);
             //ChartType AverageFixationBySubjectAndTrial =
             //    new Chart_AverageFixationBySubjectAndTrial(theChart);
@@ -77,6 +80,51 @@ namespace Ogama.Modules.Diagrams
                 comboChartTypes.Items.Add(chart.Name);
             }
             comboChartTypes.SelectedIndex = 0;
+        }
+
+        private void FillComboY()
+        {
+            foreach (string table in new[]{"Subjects","Trials","MouseFixations","GazeFixations"})
+            {
+                foreach (var column in Document.ActiveDocument.DocDataSet.Tables[table].Columns)
+                {
+                    comboY.Items.Add(table + "." + column);
+                }
+            }
+        }
+
+        private void FillComboX()
+        {
+            foreach (string table in new[] { "Subjects", "Trials", "MouseFixations", "GazeFixations" })
+            {
+                foreach (var column in Document.ActiveDocument.DocDataSet.Tables[table].Columns)
+                {
+                    comboX.Items.Add(table + "." + column);
+                }
+            }
+        }
+
+        private void FillComboGroupBy()
+        {
+            comboGroupBy.Items.Add("Subjects.SubjectName");
+            comboGroupBy.Items.Add("Subjects.Category");
+            comboGroupBy.Items.Add("Subjects.Age");
+            comboGroupBy.Items.Add("Subjects.Sex");
+            comboGroupBy.Items.Add("Subjects.Handedness");
+            comboGroupBy.Items.Add("Subjects.Comments");//Inventive minds will find this useful
+            comboGroupBy.Items.Add("Trials.TrialName");
+            comboGroupBy.Items.Add("Trials.Category");
+            comboGroupBy.Items.Add("Trials.EliminateData");
+        }
+
+        private void FillComboAgregate()
+        {
+            string[] agregateFunctions = Enum.GetNames(typeof(AgregateFunction));
+            foreach (string f in agregateFunctions)
+            {
+                comboAgregateFunction.Items.Add(f);
+            }
+            comboAgregateFunction.SelectedIndex = 0;
         }
     }
 }
