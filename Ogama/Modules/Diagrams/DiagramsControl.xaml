@@ -4,33 +4,53 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vc="clr-namespace:Visifire.Charts;assembly=WPFVisifire.Charts"
+             xmlns:properties="clr-namespace:Ogama.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="400" d:DesignWidth="550">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="28*" />
-            <RowDefinition Height="372*" />
-        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="338*" />
-            <ColumnDefinition Width="212*" />
+            <ColumnDefinition Width="400*" />
+            <ColumnDefinition Width="250*" />
         </Grid.ColumnDefinitions>
-        <Label Content="Data samples" Height="28" HorizontalAlignment="Center" Name="chartTitle" VerticalAlignment="Top" Margin="129,0" />
-        <vc:Chart Grid.Row="1" Name="theChart">
+        <vc:Chart Name="theChart">
             <vc:Chart.Titles>
                 <vc:Title Text="No chart yet" Name="theTitle"></vc:Title>
             </vc:Chart.Titles>
         </vc:Chart>
-        <Label Content="Chart Content" Grid.Column="1" Height="28" HorizontalAlignment="Center" Name="label1" VerticalAlignment="Top" Margin="64,0" />
-        <TabControl Grid.Column="1" Name="tabControl1" Grid.Row="1">
+        <TabControl Grid.Column="1" Name="tabControl1" Grid.Row="0">
             <TabItem Header="Standard charts" Name="tabItem1">
                 <Grid>
                     <ComboBox Height="23" HorizontalAlignment="Left" Margin="6,40,0,0" Name="comboChartTypes" VerticalAlignment="Top" Width="190" SelectionChanged="comboBox1_SelectionChanged" ItemsSource="{Binding}" Loaded="comboChartTypes_Loaded" />
                     <Label Content="Chart type" Height="28" HorizontalAlignment="Left" Margin="6,6,0,0" Name="label2" VerticalAlignment="Top" />
                 </Grid>
             </TabItem>
-            <TabItem Header="Cutsom Charts" Name="tabItem2">
-                <Grid />
+            <TabItem Header="Custom Charts" Name="tabItem2" IsEnabled="True" IsSelected="True">
+                <StackPanel>
+                    <StackPanel.Resources>
+                        <Style x:Key="Spacing" TargetType="{x:Type Control}">
+                            <Setter Property="Margin" Value="5"/>
+                        </Style>
+                    </StackPanel.Resources>
+                    <UniformGrid Columns="3" Margin="0,5,0,0">
+                        <UniformGrid.Resources>
+                            <Style TargetType="{x:Type RadioButton}">
+                                <Setter Property="Margin" Value="5" />
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </UniformGrid.Resources>
+                        <RadioButton Name="radioBarChart">Bar</RadioButton>
+                        <RadioButton Name="radioButton1">Pie</RadioButton>
+                        <RadioButton Name="radioButton2">Line</RadioButton>
+                    </UniformGrid>
+                    <Label Content="Display" Height="28" Name="label5" Style="{StaticResource Spacing}" />
+                    <ComboBox Height="23" Name="comboAgregateFunction" Width="120" Style="{StaticResource Spacing}" />
+                    <ComboBox Height="23" Name="comboY" Width="120" Style="{StaticResource Spacing}" />
+                    <Label Content="over" Height="28" Name="label3" Style="{StaticResource Spacing}" />
+                    <ComboBox Height="23" Name="comboX" Width="120" Style="{StaticResource Spacing}" />
+                    <Label Content="grouped by" Height="28" Name="label4" Style="{StaticResource Spacing}" />
+                    <ComboBox Height="23" Name="comboGroupBy" Width="120" Style="{StaticResource Spacing}" />
+                    <Button Content="Draw it!" Margin="10" Height="41" HorizontalAlignment="Center" Name="button1" VerticalAlignment="Top" Width="105" FontSize="16" />
+                </StackPanel>
             </TabItem>
         </TabControl>
     </Grid>
