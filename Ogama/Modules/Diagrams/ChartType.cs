@@ -41,6 +41,42 @@ namespace Ogama.Modules.Diagrams
             this.AgregateFunction = agregateFunction;
         }
 
+        public static Dictionary<string, DataType> columnTypes = new Dictionary<string, DataType>()
+        {
+            {"Subjects.ID",DataType.Ordinal},
+            {"Subjects.SubjectName",DataType.Nominal},
+            {"Subjects.Category",DataType.Nominal},
+            {"Subjects.Age",DataType.Ordinal},
+            {"Subjects.Sex",DataType.Nominal},
+            {"Subjects.Handedness",DataType.Nominal},
+            {"Subjects.Comments",DataType.Nominal},
+            {"Trials.ID",DataType.Ordinal},
+            {"Trials.SubjectName",DataType.Nominal},
+            {"Trials.TrialSequence",DataType.Ordinal},
+            {"Trials.TrialID",DataType.Ordinal},
+            {"Trials.TrialName",DataType.Nominal},
+            {"Trials.Category",DataType.Nominal},
+            {"Trials.TrialStartTime",DataType.Ordinal},
+            {"Trials.EliminateData",DataType.Nominal},
+            {"GazeFixations.ID",DataType.Ordinal},
+            {"GazeFixations.SubjectName",DataType.Nominal},
+            {"GazeFixations.TrialID",DataType.Ordinal},
+            {"GazeFixations.TrialSequence",DataType.Ordinal},
+            {"GazeFixations.CountInTrial",DataType.Ordinal},
+            {"GazeFixations.StartTime",DataType.Ordinal},
+            {"GazeFixations.Length",DataType.Ordinal},
+            {"GazeFixations.PosX",DataType.Ordinal},
+            {"GazeFixations.PosY",DataType.Ordinal},
+            {"MouseFixations.ID",DataType.Ordinal},
+            {"MouseFixations.SubjectName",DataType.Nominal},
+            {"MouseFixations.TrialID",DataType.Ordinal},
+            {"MouseFixations.TrialSequence",DataType.Ordinal},
+            {"MouseFixations.CountInTrial",DataType.Ordinal},
+            {"MouseFixations.StartTime",DataType.Ordinal},
+            {"MouseFixations.Length",DataType.Ordinal},
+            {"MouseFixations.PosX",DataType.Ordinal},
+            {"MouseFixations.PosY",DataType.Ordinal},
+        };
         public Chart Chart = new Chart();
         public string Name;
         public string YVariable;
@@ -83,16 +119,6 @@ namespace Ogama.Modules.Diagrams
         }
         public virtual void Draw()
         {
-            //to be deleted - just for debug
-            //AgregateFunction = "Avg";//AgregateFunction.Count;
-            //YVariable = "Length";//"ID";
-            //YVariable_Table = "GazeFixations";
-            //XVariable = "Category";
-            //XVariable_Table = "Trials";
-            //GroupBy = "Category";
-            //GroupBy_Table = "Subjects";
-            //------------------------------
-
             ClearContentsAndAddTitle();
             Axis axisX = new Axis();
             axisX.Title = XVariable;
@@ -106,8 +132,22 @@ namespace Ogama.Modules.Diagrams
                               select c[GroupBy]).Distinct();
             foreach (var series in categories)
             {
-                string select = string.Format("SELECT {0}.{1}, ROUND({4}(CAST({2}.{3} AS Float)),2)",
-                        XVariable_Table, XVariable, YVariable_Table, YVariable, AgregateFunction);
+                string select = "";
+                if (AgregateFunction=="Avg")
+                {
+                    select = string.Format("SELECT {0}.{1}, ROUND({4}(CAST({2}.{3} AS Float)),2)",
+                         XVariable_Table, XVariable, YVariable_Table, YVariable, AgregateFunction);
+                }
+                else if (AgregateFunction=="Count")
+                {
+                    select = string.Format("SELECT {0}.{1}, {4}(DISTINCT {2}.{3})",
+                         XVariable_Table, XVariable, YVariable_Table, YVariable, AgregateFunction);
+                }
+                else
+                {
+                    select = string.Format("SELECT {0}.{1}, {4}({2}.{3})",
+                         XVariable_Table, XVariable, YVariable_Table, YVariable, AgregateFunction);
+                }
                 string from = "FROM Trials,Subjects";
                 string join = "WHERE Trials.SubjectName = Subjects.SubjectName";
                 string group = string.Format("GROUP BY {0}.{1}", XVariable_Table, XVariable);//what if time?
@@ -142,10 +182,11 @@ namespace Ogama.Modules.Diagrams
 
                 DataSeries dataseries = new DataSeries();
                 dataseries.Name = series.ToString();
+                //dataseries.RenderAs = RenderAs.StackedColumn;
                 while (result.Read())
                 {
                     DataPoint point = new DataPoint();
-                    point.AxisXLabel = result[XVariable].ToString();//point.XValue = result[XVariable];
+                    point.AxisXLabel = result[XVariable].ToString() != "" ? result[XVariable].ToString() : "<no name>";
                     point.YValue = Convert.ToDouble(result[1]);
                     dataseries.DataPoints.Add(point);
                 }
@@ -295,6 +336,12 @@ namespace Ogama.Modules.Diagrams
         Count,
         Min,
         Max
+    }
+    
+    public enum DataType
+    {
+        Ordinal,
+        Nominal
     }
 
     public class Chart_AverageFixationOverTime : ChartType
