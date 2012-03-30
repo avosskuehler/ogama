@@ -45,10 +45,6 @@ namespace Ogama.Modules.Diagrams
             FillComboY();
             FillComboX();
 
-            ChartType custom = new ChartType(theChart, "Trials.Category", "GazeFixations.Length", 
-                "Subjects.Category", "Avg");
-            custom.Name = "test custom chart";
-            defaultChartTypes.Add(custom);
             //ChartType AverageFixationBySubjectAndTrial =
             //    new Chart_AverageFixationBySubjectAndTrial(theChart);
             //ChartType AverageFixationOverTime =
@@ -91,6 +87,7 @@ namespace Ogama.Modules.Diagrams
                     comboY.Items.Add(table + "." + column);
                 }
             }
+            comboY.SelectedIndex = 0;
         }
 
         private void FillComboX()
@@ -102,6 +99,7 @@ namespace Ogama.Modules.Diagrams
                     comboX.Items.Add(table + "." + column);
                 }
             }
+            comboX.SelectedIndex = 0;
         }
 
         private void FillComboGroupBy()
@@ -115,6 +113,8 @@ namespace Ogama.Modules.Diagrams
             comboGroupBy.Items.Add("Trials.TrialName");
             comboGroupBy.Items.Add("Trials.Category");
             comboGroupBy.Items.Add("Trials.EliminateData");
+            
+            comboGroupBy.SelectedIndex = 0;
         }
 
         private void FillComboAgregate()
@@ -125,6 +125,26 @@ namespace Ogama.Modules.Diagrams
                 comboAgregateFunction.Items.Add(f);
             }
             comboAgregateFunction.SelectedIndex = 0;
+        }
+
+        private void buttonDrawIt_Click(object sender, RoutedEventArgs e)
+        {
+            //ChartType custom = new ChartType(theChart, "Trials.Category", "GazeFixations.Length",
+            //    "Subjects.Category", "Avg");
+            //custom.Name = "test custom chart";
+            //defaultChartTypes.Add(custom);
+            
+            //TODO: some checkings
+            if (false)
+            {
+                
+            }
+            else
+            {
+                ChartType customChart = new ChartType(theChart, comboX.Text, comboY.Text,
+                    comboGroupBy.Text, comboAgregateFunction.Text);
+                customChart.Draw();
+            }
         }
     }
 }
