@@ -30,14 +30,20 @@ namespace Ogama.Modules.Diagrams
             this.Chart = chart;
 
             string[] x = xVariable.Split('.');
-            string[] y = yVariable.Split('.');
-            string[] group = groupBy.Split('.');
             this.XVariable_Table = x[0];
             this.XVariable = x[1];
+            
+            string[] y = yVariable.Split('.');
             this.YVariable_Table = y[0];
             this.YVariable = y[1];
-            this.GroupBy_Table = group[0];
-            this.GroupBy = group[1];
+
+            if (groupBy != "")
+            {
+                string[] group = groupBy.Split('.');
+                this.GroupBy_Table = group[0];
+                this.GroupBy = group[1];
+            }
+
             this.AgregateFunction = agregateFunction;
         }
 
@@ -91,7 +97,6 @@ namespace Ogama.Modules.Diagrams
         
         public void ClearContentsAndAddTitle()
         {
-            //Chart.View3D = true;
             Chart.AxesX.Clear();
             Chart.AxesY.Clear();
             Chart.Series.Clear();
@@ -117,7 +122,181 @@ namespace Ogama.Modules.Diagrams
             }
             return tables;
         }
+        
         public virtual void Draw()
+        {
+            PreDrawPrepare();
+            if (GroupBy == null)//no group by
+            {
+                string query = BuildQuery("");
+                SqlDataReader result = ExecuteQuery(query);
+                BuildChart("", result);
+            }
+            else
+            {
+                var seriesNames = GetSeriesNames();
+                foreach (var seriesName in seriesNames)
+                {
+                    string query = BuildQuery(seriesName);
+                    SqlDataReader result = ExecuteQuery(query);
+                    BuildChart(seriesName, result);
+                }
+            }
+        }
+
+        public void Draw(string rangesString)
+        {
+            string[] ranges = rangesString.Split(',');
+            PreDrawPrepare();
+            if (GroupBy == null)
+            {
+                string query = BuildQuery("");
+                SqlDataReader result = ExecuteQuery(query);
+                //<-------------------------------------------
+                
+                //BuildChart("", result);
+            }
+            else
+            {
+                var seriesNames = GetSeriesNames();
+                foreach (var seriesName in seriesNames)
+                {
+                    string query = BuildQuery(seriesName);
+                    SqlDataReader result = ExecuteQuery(query);
+                    //<-------------------------------------------
+                    DataSeries dataseries = new DataSeries();
+                    dataseries.Name = seriesName.ToString();
+                    List<Tuple<string,object>> newResult = new List<Tuple<string,object>>();
+                    while (result.Read())
+                    {
+                        foreach (string range in ranges)
+                        {
+                            string[] limits = range.Split('-');
+                            long min = Convert.ToInt64(limits[0]);
+                            long max = Convert.ToInt64(limits[1]);
+                            if ((long)result[0] <= max && (long)result[0] >= min)
+                            {
+                                newResult.Add(Tuple.Create(range,result[1]));
+                            }
+                            IEnumerable<Tuple<string, object>> finalResult = newResult;
+                            if (AgregateFunction == "Max")
+                            {
+                                finalResult = newResult.GroupBy(v => v.Item1,
+                                    (k, g) => new Tuple<string, object>(k, g.Max(v => v.Item2)));//some logi to use other agregates
+                            }
+                            else if (AgregateFunction=="Min")
+                            {
+                                finalResult = newResult.GroupBy(v => v.Item1,
+                                    (k, g) => new Tuple<string, object>(k, g.Min(v => v.Item2)));
+                            }
+                            else if (AgregateFunction=="Sum")
+                            {
+                                finalResult = newResult;
+                            }
+                            foreach (var pair in finalResult)
+                            {
+                                DataPoint point = new DataPoint();
+                                point.AxisXLabel = pair.Item1;
+                                point.YValue = Convert.ToDouble(pair.Item2);
+                                dataseries.DataPoints.Add(point);
+                            }
+                        }
+                    }
+                    //BuildChart(seriesName, result);
+                }
+            }
+        }
+
+        private SqlDataReader ExecuteQuery(string query)
+        {
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = query;
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = db.DatabaseConnection;
+
+            SqlDataReader result = cmd.ExecuteReader();
+            return result;
+        }
+
+        private void BuildChart(object series, SqlDataReader result)
+        {
+            DataSeries dataseries = new DataSeries();
+            dataseries.Name = series.ToString();
+            //dataseries.RenderAs = RenderAs.StackedColumn;
+            while (result.Read())
+            {
+                DataPoint point = new DataPoint();
+                point.AxisXLabel = result[XVariable].ToString() != "" ? result[XVariable].ToString() : "<no name>";
+                point.YValue = Convert.ToDouble(result[1]);
+                dataseries.DataPoints.Add(point);
+            }
+            Chart.Series.Add(dataseries);
+
+            result.Close();
+            //db.DatabaseConnection.Close();
+        }
+
+        private string BuildQuery(object seriesName)
+        {
+            string select = "";
+            if (AgregateFunction == "Avg")
+            {
+                select = string.Format("SELECT {0}.{1}, ROUND({4}(CAST({2}.{3} AS Float)),2)",
+                     XVariable_Table, XVariable, YVariable_Table, YVariable, AgregateFunction);
+            }
+            else if (AgregateFunction == "Count")
+            {
+                select = string.Format("SELECT {0}.{1}, {4}(DISTINCT {2}.{3})",
+                     XVariable_Table, XVariable, YVariable_Table, YVariable, AgregateFunction);
+            }
+            else
+            {
+                select = string.Format("SELECT {0}.{1}, {4}({2}.{3})",
+                     XVariable_Table, XVariable, YVariable_Table, YVariable, AgregateFunction);
+            }
+            string from = "FROM Trials,Subjects";
+            string join = "WHERE Trials.SubjectName = Subjects.SubjectName";
+            string group = string.Format("GROUP BY {0}.{1}", XVariable_Table, XVariable);//what if time?
+            string seriesSelector = "";
+            if (seriesName != "")
+            {
+                seriesSelector = string.Format("AND {0}.{1} = \'{2}\'", GroupBy_Table, GroupBy, seriesName);
+            }
+
+            if (XVariable_Table == db.GazeFixations.TableName ||
+                YVariable_Table == db.GazeFixations.TableName ||
+                GroupBy_Table == db.GazeFixations.TableName)
+            {
+                from += ",GazeFixations";
+                join += " AND GazeFixations.TrialID = Trials.TrialID"
+                + " AND GazeFixations.TrialSequence = Trials.TrialSequence"
+                + " AND GazeFixations.SubjectName = Trials.SubjectName";
+            }
+            else if (XVariable_Table == db.MouseFixations.TableName ||
+                YVariable_Table == db.MouseFixations.TableName ||
+                GroupBy_Table == db.MouseFixations.TableName)
+            {
+                from += ",MouseFixations";
+                join += " AND MouseFixations.TrialID = Trials.TrialID"
+                + " AND MouseFixations.TrialSequence = Trials.TrialSequence"
+                + " AND MouseFixations.SubjectName = Trials.SubjectName";
+            }
+            string query = select + " " + from + " " + join + " " + seriesSelector + " " + group;
+            return query;
+        }
+
+        private IEnumerable<object> GetSeriesNames()
+        {
+            var seriesNames = (from c in db.Tables[GroupBy_Table].AsEnumerable()
+                              where !c.IsNull(GroupBy)//omit null records
+                              select c[GroupBy]).Distinct();
+            return seriesNames;
+        }
+
+        /// <summary>
+        /// Clears chart contents, adds the new title and axis labels
+        /// </summary>
+        private void PreDrawPrepare()
         {
             ClearContentsAndAddTitle();
             Axis axisX = new Axis();
@@ -126,75 +305,6 @@ namespace Ogama.Modules.Diagrams
             Axis axisY = new Axis();
             axisY.Title = YVariable;
             Chart.AxesY.Add(axisY);
-            
-            var categories = (from c in db.Tables[GroupBy_Table].AsEnumerable()
-                              where !c.IsNull(GroupBy)//omit null records
-                              select c[GroupBy]).Distinct();
-            foreach (var series in categories)
-            {
-                string select = "";
-                if (AgregateFunction=="Avg")
-                {
-                    select = string.Format("SELECT {0}.{1}, ROUND({4}(CAST({2}.{3} AS Float)),2)",
-                         XVariable_Table, XVariable, YVariable_Table, YVariable, AgregateFunction);
-                }
-                else if (AgregateFunction=="Count")
-                {
-                    select = string.Format("SELECT {0}.{1}, {4}(DISTINCT {2}.{3})",
-                         XVariable_Table, XVariable, YVariable_Table, YVariable, AgregateFunction);
-                }
-                else
-                {
-                    select = string.Format("SELECT {0}.{1}, {4}({2}.{3})",
-                         XVariable_Table, XVariable, YVariable_Table, YVariable, AgregateFunction);
-                }
-                string from = "FROM Trials,Subjects";
-                string join = "WHERE Trials.SubjectName = Subjects.SubjectName";
-                string group = string.Format("GROUP BY {0}.{1}", XVariable_Table, XVariable);//what if time?
-                string seriesSelector = string.Format("AND {0}.{1} = \'{2}\'", GroupBy_Table, GroupBy, series);
-
-                if (XVariable_Table == db.GazeFixations.TableName ||
-                    YVariable_Table == db.GazeFixations.TableName ||
-                    GroupBy_Table == db.GazeFixations.TableName)
-                {
-                    from += ",GazeFixations";
-                    join += " AND GazeFixations.TrialID = Trials.TrialID"
-                    + " AND GazeFixations.TrialSequence = Trials.TrialSequence"
-                    + " AND GazeFixations.SubjectName = Trials.SubjectName";
-                }
-                else if (XVariable_Table == db.MouseFixations.TableName ||
-                    YVariable_Table == db.MouseFixations.TableName ||
-                    GroupBy_Table == db.MouseFixations.TableName)
-                {
-                    from += ",MouseFixations";
-                    join += " AND MouseFixations.TrialID = Trials.TrialID"
-                    + " AND MouseFixations.TrialSequence = Trials.TrialSequence"
-                    + " AND MouseFixations.SubjectName = Trials.SubjectName";
-                }
-
-                
-                SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = select + " " + from + " " + join + " " + seriesSelector + " " + group;
-                cmd.CommandType = CommandType.Text;
-                cmd.Connection = db.DatabaseConnection;
-
-                SqlDataReader result = cmd.ExecuteReader();//(System.Data.CommandBehavior.CloseConnection);
-
-                DataSeries dataseries = new DataSeries();
-                dataseries.Name = series.ToString();
-                //dataseries.RenderAs = RenderAs.StackedColumn;
-                while (result.Read())
-                {
-                    DataPoint point = new DataPoint();
-                    point.AxisXLabel = result[XVariable].ToString() != "" ? result[XVariable].ToString() : "<no name>";
-                    point.YValue = Convert.ToDouble(result[1]);
-                    dataseries.DataPoints.Add(point);
-                }
-                Chart.Series.Add(dataseries);
-
-                result.Close();
-                //db.DatabaseConnection.Close();
-            }
         }
     }
 
