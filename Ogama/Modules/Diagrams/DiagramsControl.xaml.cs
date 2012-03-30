@@ -30,6 +30,15 @@ namespace Ogama.Modules.Diagrams
         public DiagramsControl()
         {
             InitializeComponent();
+            checkBoxGroupBy.IsChecked = true;
+            theChart.MouseDoubleClick += new MouseButtonEventHandler(theChart_MouseDoubleClick);
+        }
+
+        void theChart_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            //throw new NotImplementedException();
+            ChartProperties properties = new ChartProperties(theChart);
+            properties.ShowDialog();
         }
 
         private void comboBox1_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -133,18 +142,38 @@ namespace Ogama.Modules.Diagrams
             //    "Subjects.Category", "Avg");
             //custom.Name = "test custom chart";
             //defaultChartTypes.Add(custom);
-            
+
             //TODO: some checkings
-            if (false)
+            string groupBy = "";
+            if (comboGroupBy.IsEnabled == true)
             {
-                
+                groupBy = comboGroupBy.Text;
+            }
+            ChartType customChart = new ChartType(theChart, comboX.Text, comboY.Text,
+                    groupBy, comboAgregateFunction.Text);
+            customChart.Draw();
+        }
+
+        private void comboX_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ChartType.columnTypes[(string)e.AddedItems[0]] == DataType.Ordinal)
+            {
+                textBoxRanges.IsEnabled = true;
             }
             else
             {
-                ChartType customChart = new ChartType(theChart, comboX.Text, comboY.Text,
-                    comboGroupBy.Text, comboAgregateFunction.Text);
-                customChart.Draw();
+                textBoxRanges.IsEnabled = false;
             }
+        }
+
+        private void checkBoxGroupBy_Checked(object sender, RoutedEventArgs e)
+        {
+            comboGroupBy.IsEnabled = true;
+        }
+
+        private void checkBoxGroupBy_Unchecked(object sender, RoutedEventArgs e)
+        {
+            comboGroupBy.IsEnabled = false;
         }
     }
 }

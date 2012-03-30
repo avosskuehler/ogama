@@ -41,13 +41,14 @@
                         <RadioButton Name="radioButton1">Pie</RadioButton>
                         <RadioButton Name="radioButton2">Line</RadioButton>
                     </UniformGrid>
-                    <Label Content="Display" Height="28" Name="label5" Style="{StaticResource Spacing}" />
-                    <ComboBox Height="23" Name="comboAgregateFunction" Width="120" Style="{StaticResource Spacing}" />
-                    <ComboBox Height="23" Name="comboY" Width="120" Style="{StaticResource Spacing}" />
-                    <Label Content="over" Height="28" Name="label3" Style="{StaticResource Spacing}" />
-                    <ComboBox Height="23" Name="comboX" Width="120" Style="{StaticResource Spacing}" />
-                    <Label Content="grouped by" Height="28" Name="label4" Style="{StaticResource Spacing}" />
-                    <ComboBox Height="23" Name="comboGroupBy" Width="120" Style="{StaticResource Spacing}" />
+                    <Label Content="Display" Name="label5" Style="{StaticResource Spacing}" />
+                    <ComboBox Name="comboAgregateFunction" Width="180" Style="{StaticResource Spacing}" />
+                    <ComboBox Name="comboY" Width="180" Style="{StaticResource Spacing}" />
+                    <Label Content="over" Name="label3" Style="{StaticResource Spacing}" />
+                    <ComboBox Name="comboX" Width="180" Style="{StaticResource Spacing}" SelectionChanged="comboX_SelectionChanged" />
+                    <TextBox Name="textBoxRanges" IsEnabled="False" Width ="180" Style="{StaticResource Spacing}">Define ranges here...</TextBox>
+                    <CheckBox Content="Group in series by" Name="checkBoxGroupBy" Style="{StaticResource Spacing}" Checked="checkBoxGroupBy_Checked" Unchecked="checkBoxGroupBy_Unchecked" IsChecked="False" />
+                    <ComboBox Name="comboGroupBy" Width="180" Style="{StaticResource Spacing}" />
                     <Button Content="Draw it!" Margin="10" Height="41" HorizontalAlignment="Center" Name="buttonDrawIt" VerticalAlignment="Top" Width="105" FontSize="16" Click="buttonDrawIt_Click" />
                 </StackPanel>
             </TabItem>
