@@ -1,2 +1,2 @@
-4.1.4410.1001
-This is a release, containing bugfixes and more hardware support
+4.2.4470.34830
+This is a release, containing bugfixes and new desktop recording
