@@ -1206,48 +1206,50 @@ namespace Ogama.Modules.Database
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnSpecial_Click(object sender, EventArgs e)
     {
-      Slideshow slideshow = Document.ActiveDocument.ExperimentSettings.SlideShow;
-      Dictionary<string, int> name2idAssignment = new Dictionary<string, int>();
-      foreach (Trial trial in slideshow.Trials)
-      {
-        name2idAssignment.Add(trial.Name, trial.ID);
-      }
+      //string query = "SELECT Trials.Category, ROUND(Avg(CAST(GazeFixations.Length AS Float)),2) FROM Trials,Subjects,GazeFixations WHERE Trials.SubjectName = Subjects.SubjectName AND GazeFixations.TrialID = Trials.TrialID AND GazeFixations.TrialSequence = Trials.TrialSequence AND GazeFixations.SubjectName = Trials.SubjectName AND Subjects.Category = 'Developer' GROUP BY Trials.Category";
+      //Queries.ExecuteSQLCommand(query);
+      //Slideshow slideshow = Document.ActiveDocument.ExperimentSettings.SlideShow;
+      //Dictionary<string, int> name2idAssignment = new Dictionary<string, int>();
+      //foreach (Trial trial in slideshow.Trials)
+      //{
+      //  name2idAssignment.Add(trial.Name, trial.ID);
+      //}
 
-      bool doNotUpdate = false;
-      DataTable trials = Document.ActiveDocument.DocDataSet.Trials;
-      List<string> missingTrials = new List<string>();
+      //bool doNotUpdate = false;
+      //DataTable trials = Document.ActiveDocument.DocDataSet.Trials;
+      //List<string> missingTrials = new List<string>();
 
-      foreach (DataRow trialsRow in trials.Rows)
-      {
-        string trialName = Path.GetFileNameWithoutExtension(trialsRow["TrialName"].ToString());
-        if (name2idAssignment.ContainsKey(trialName))
-        {
-          trialsRow["TrialID"] = name2idAssignment[trialName];
-        }
-        else
-        {
-          if (!missingTrials.Contains(trialName))
-          {
-            missingTrials.Add(trialName);
-          }
+      //foreach (DataRow trialsRow in trials.Rows)
+      //{
+      //  string trialName = Path.GetFileNameWithoutExtension(trialsRow["TrialName"].ToString());
+      //  if (name2idAssignment.ContainsKey(trialName))
+      //  {
+      //    trialsRow["TrialID"] = name2idAssignment[trialName];
+      //  }
+      //  else
+      //  {
+      //    if (!missingTrials.Contains(trialName))
+      //    {
+      //      missingTrials.Add(trialName);
+      //    }
 
-          doNotUpdate = true;
-        }
-      }
+      //    doNotUpdate = true;
+      //  }
+      //}
 
-      // Update trials
-      if (!doNotUpdate)
-      {
-        int affectedRows = Document.ActiveDocument.DocDataSet.TrialsAdapter.Update((OgamaDataSet.TrialsDataTable)trials);
-      }
-      else
-      {
-        Console.WriteLine("MissingTrialNames: ");
-        foreach (string item in missingTrials)
-        {
-          Console.WriteLine(item);
-        }
-      }
+      //// Update trials
+      //if (!doNotUpdate)
+      //{
+      //  int affectedRows = Document.ActiveDocument.DocDataSet.TrialsAdapter.Update((OgamaDataSet.TrialsDataTable)trials);
+      //}
+      //else
+      //{
+      //  Console.WriteLine("MissingTrialNames: ");
+      //  foreach (string item in missingTrials)
+      //  {
+      //    Console.WriteLine(item);
+      //  }
+      //}
 
       ////DataTable trials = Document.ActiveDocument.DocDataSet.Trials;
       ////DataView trialView = new DataView(trials);

@@ -209,10 +209,10 @@ namespace Ogama.Modules.Database
       this.dgvSubjects.Size = new System.Drawing.Size(650, 291);
       this.dgvSubjects.TabIndex = 0;
       this.toolTip1.SetToolTip(this.dgvSubjects, "Select a row to filter the data in the preceding tables.\r\nRight click for a conte" +
-              "xt menu.");
-      this.dgvSubjects.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dgvSubjects_UserDeletingRow);
-      this.dgvSubjects.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSubjects_RowEnter);
+        "xt menu.");
       this.dgvSubjects.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvSubjects_DataError);
+      this.dgvSubjects.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSubjects_RowEnter);
+      this.dgvSubjects.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dgvSubjects_UserDeletingRow);
       // 
       // colSubjectsID
       // 
@@ -306,9 +306,9 @@ namespace Ogama.Modules.Database
       this.dgvRawData.Size = new System.Drawing.Size(650, 291);
       this.dgvRawData.TabIndex = 2;
       this.toolTip1.SetToolTip(this.dgvRawData, "This table displays only the data of the selected trial or subject depending on f" +
-              "ilter mode.\r\nRight click for a context menu.");
-      this.dgvRawData.Validated += new System.EventHandler(this.dgvRawData_Validated);
+        "ilter mode.\r\nRight click for a context menu.");
       this.dgvRawData.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView_DataError);
+      this.dgvRawData.Validated += new System.EventHandler(this.dgvRawData_Validated);
       // 
       // dgvTrials
       // 
@@ -333,9 +333,9 @@ namespace Ogama.Modules.Database
       this.dgvTrials.Size = new System.Drawing.Size(650, 291);
       this.dgvTrials.TabIndex = 3;
       this.toolTip1.SetToolTip(this.dgvTrials, "Select trial row to filter the data of the preceding tables.\r\nRight click for a c" +
-              "ontext menu.");
-      this.dgvTrials.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTrials_RowEnter);
+        "ontext menu.");
       this.dgvTrials.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView_DataError);
+      this.dgvTrials.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTrials_RowEnter);
       // 
       // colTrialsID
       // 
@@ -1105,7 +1105,7 @@ namespace Ogama.Modules.Database
       this.btnImport.Size = new System.Drawing.Size(113, 22);
       this.btnImport.Text = "Import Assistant";
       this.btnImport.ToolTipText = "Start import assistant to import eye- and/or mousetracker\r\ndata from ASCII files." +
-          "";
+    "";
       this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
       // 
       // btnImportOgamaFormat
@@ -1199,8 +1199,8 @@ namespace Ogama.Modules.Database
       this.bgwExport.WorkerReportsProgress = true;
       this.bgwExport.WorkerSupportsCancellation = true;
       this.bgwExport.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwExport_DoWork);
-      this.bgwExport.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwExport_RunWorkerCompleted);
       this.bgwExport.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgwExport_ProgressChanged);
+      this.bgwExport.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwExport_RunWorkerCompleted);
       // 
       // DatabaseModule
       // 
@@ -1215,8 +1215,8 @@ namespace Ogama.Modules.Database
       this.Name = "DatabaseModule";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
       this.Text = "Database Module";
-      this.Load += new System.EventHandler(this.DatabaseModule_Load);
       this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DatabaseModule_FormClosing);
+      this.Load += new System.EventHandler(this.DatabaseModule_Load);
       ((System.ComponentModel.ISupportInitialize)(this.bsoSubjects)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.bsoFKSubjectsTrials)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.ogamaDataSet)).EndInit();

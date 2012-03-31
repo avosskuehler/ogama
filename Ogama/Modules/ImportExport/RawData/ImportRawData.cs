@@ -567,7 +567,27 @@ namespace Ogama.Modules.ImportExport.RawData
                   if (trialNames.Contains(stimulusName))
                   {
                     Trial trialFound = trials.Find(delegate(Trial t) { return t.Name == stimulusName; });
-                    trialID = trialFound.ID;
+                    if (trialFound == null)
+                    {
+                      // This trial picture was seen before in import process
+                      foreach (KeyValuePair<int, string> kvp in detectionSetting.TrialIDToImageAssignments)
+                      {
+                        if (Path.GetFileNameWithoutExtension(kvp.Value) == stimulusName)
+                        {
+                          trialID = kvp.Key;
+                          break;
+                        }
+                      }
+                    }
+                    else
+                    {
+                      // This trial is in the slideshow already
+                      trialID = trialFound.ID;
+                    }
+                  }
+                  else
+                  {
+                    trialNames.Add(stimulusName);
                   }
 
                   if (!detectionSetting.TrialIDToImageAssignments.ContainsKey(trialID))
@@ -1082,7 +1102,8 @@ namespace Ogama.Modules.ImportExport.RawData
         var newSlide = new Slide(
           filename, Color.White, null, stopConditions, null, string.Empty, Document.ActiveDocument.PresentationSize)
           {
-            Modified = true, MouseCursorVisible = true
+            Modified = true,
+            MouseCursorVisible = true
           };
 
         // Only add stimulus if an image exists
