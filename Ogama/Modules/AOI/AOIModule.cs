@@ -543,7 +543,8 @@ namespace Ogama.Modules.AOI
             exportFile.Write("\t");
             exportFile.Write(aoiRow.IsShapePtsNull() ? string.Empty : aoiRow.ShapePts);
             exportFile.Write("\t");
-            exportFile.Write(aoiRow.IsShapeGroupNull() ? string.Empty : aoiRow.ShapeGroup);
+            //    exportFile.Write(aoiRow.IsShapeGroupNull() ? string.Empty : aoiRow.ShapeGroup);
+            exportFile.Write(aoiRow.ShapeGroup);
             exportFile.Write("\t");
             exportFile.Write(aoiRow.IsShapeTypeNull() ? 0 : Statistics.Statistic.GetAOISize(aoiRow) / screenArea * 100);
             exportFile.Write("\t");
@@ -1076,7 +1077,7 @@ namespace Ogama.Modules.AOI
       {
         return;
       }
-      
+
       this.btnNewRectangle.Checked = true;
       this.btnNewEllipse.Checked = false;
       this.btnNewPolyline.Checked = false;
@@ -1145,7 +1146,7 @@ namespace Ogama.Modules.AOI
       {
         return;
       }
-      
+
       this.btnNewRectangle.Checked = false;
       this.btnNewEllipse.Checked = false;
       this.btnNewPolyline.Checked = false;
@@ -1343,7 +1344,7 @@ namespace Ogama.Modules.AOI
       {
         return;
       }
-      
+
       string shapeName = e.Shape.Name;
       int shapePointCount = e.Shape.GetPointCount();
       string shapeType = e.Shape.GetType().ToString().Replace("VectorGraphics.Elements.VG", string.Empty);

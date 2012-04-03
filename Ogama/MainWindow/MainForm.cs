@@ -14,28 +14,17 @@
 namespace Ogama.MainWindow
 {
   using System;
-  using System.Collections;
   using System.Collections.Generic;
   using System.ComponentModel;
-  using System.Data;
-  using System.Data.SqlClient;
-  using System.Drawing;
-  using System.Globalization;
   using System.IO;
-  using System.Text;
-  using System.Threading;
   using System.Windows.Forms;
-  using System.Xml.Serialization;
 
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow.Dialogs;
-  using Ogama.Modules.Common;
   using Ogama.Modules.Common.FormTemplates;
   using Ogama.Modules.ImportExport.RawData;
   using Ogama.Modules.Recording.TobiiInterface;
-  using Ogama.Modules.SlideshowDesign;
   using Ogama.Properties;
-  using OgamaControls;
 
   /// <summary>
   /// The main frame <see cref="Form"/>. Is the MDI Parent. 
