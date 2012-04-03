@@ -282,7 +282,7 @@ namespace Ogama.MainWindow
             bool found = false;
             foreach (Form form in this.MdiChildren)
             {
-                if (form is Modules.AOI.AOIModule)
+                if (form is Modules.Diagrams.DiagramsModule)
                 {
                     form.Select();
                     found = true;
