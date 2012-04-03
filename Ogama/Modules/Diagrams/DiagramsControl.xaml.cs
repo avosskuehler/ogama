@@ -32,11 +32,47 @@ namespace Ogama.Modules.Diagrams
             InitializeComponent();
             checkBoxGroupBy.IsChecked = true;
             theChart.MouseDoubleClick += new MouseButtonEventHandler(theChart_MouseDoubleClick);
+
+            FillComboAgregate();
+            FillComboGroupBy();
+            FillComboY();
+            FillComboX(); 
+            
+            ChartType AverageFixationBySubjectAndTrial =
+                new Chart_AverageFixationBySubjectAndTrial(theChart);
+            ChartType AverageFixationOverTime =
+                new Chart_AverageFixationOverTime(theChart);
+            ChartType PupilDiameterOverTime = new Chart_PupilDiameterOverTime(theChart);
+            ChartType XOverYGazePosition = new Chart_XOverYGazePosition(theChart);
+            ChartType SubjectCountOverAgeBySex = new Chart_SubjectCountOverAgeBySex(theChart);
+            ChartType subjectCountOver_____ByOccupation =
+                new Chart_subjectCountOver_____ByOccupation(theChart);
+            ChartType SaccadeDistanceOverSaccadeNumber =
+                new Chart_SaccadeDistanceOverSaccadeNumber(theChart);
+            ChartType AverageFixationDurationOverSex =
+                new Chart_AverageFixationDurationOverSex(theChart);
+            ChartType AverageFixationDurationOverAgeBySex =
+                new Chart_AverageFixationDurationOverAgeBySex(theChart);
+
+            defaultChartTypes.Add(AverageFixationBySubjectAndTrial);
+            defaultChartTypes.Add(AverageFixationOverTime);
+            defaultChartTypes.Add(PupilDiameterOverTime);
+            defaultChartTypes.Add(XOverYGazePosition);
+            defaultChartTypes.Add(SubjectCountOverAgeBySex);
+            defaultChartTypes.Add(subjectCountOver_____ByOccupation);
+            defaultChartTypes.Add(SaccadeDistanceOverSaccadeNumber);
+            defaultChartTypes.Add(AverageFixationDurationOverSex);
+            defaultChartTypes.Add(AverageFixationDurationOverAgeBySex);
+
+            foreach (var chart in defaultChartTypes)
+            {
+                comboChartTypes.Items.Add(chart.Name);
+            }
+            comboChartTypes.SelectedIndex = 0;
         }
 
         void theChart_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            //throw new NotImplementedException();
             ChartProperties properties = new ChartProperties(theChart);
             properties.ShowDialog();
         }
@@ -49,10 +85,10 @@ namespace Ogama.Modules.Diagrams
 
         private void comboChartTypes_Loaded(object sender, RoutedEventArgs e)
         {
-            FillComboAgregate();
-            FillComboGroupBy();
-            FillComboY();
-            FillComboX();
+            //FillComboAgregate();
+            //FillComboGroupBy();
+            //FillComboY();
+            //FillComboX();
 
             //ChartType AverageFixationBySubjectAndTrial =
             //    new Chart_AverageFixationBySubjectAndTrial(theChart);
@@ -80,11 +116,11 @@ namespace Ogama.Modules.Diagrams
             //defaultChartTypes.Add(AverageFixationDurationOverSex);
             //defaultChartTypes.Add(AverageFixationDurationOverAgeBySex);
 
-            foreach (var chart in defaultChartTypes)
-            {
-                comboChartTypes.Items.Add(chart.Name);
-            }
-            comboChartTypes.SelectedIndex = 0;
+            //foreach (var chart in defaultChartTypes)
+            //{
+            //    comboChartTypes.Items.Add(chart.Name);
+            //}
+            //comboChartTypes.SelectedIndex = 0;
         }
 
         private void FillComboY()
@@ -151,7 +187,27 @@ namespace Ogama.Modules.Diagrams
             }
             ChartType customChart = new ChartType(theChart, comboX.Text, comboY.Text,
                     groupBy, comboAgregateFunction.Text);
+            //customChart.Type = RenderAs.Column;
+            customChart.Type = RenderAs.Pie;
+            customChart.Type = GetChartTypeSelected();
             customChart.Draw();
+        }
+
+        private RenderAs GetChartTypeSelected()
+        {
+            if (radioColumn.IsChecked == true)
+            {
+                return RenderAs.Column;
+            }
+            else if (radioStacked.IsChecked == true)
+            {
+                return RenderAs.StackedColumn;
+            }
+            else if (radioPie.IsChecked == true)
+            {
+                return RenderAs.Pie;
+            }
+            return RenderAs.Column;//ideally should never reach here
         }
 
         private void comboX_SelectionChanged(object sender, SelectionChangedEventArgs e)
