@@ -95,23 +95,9 @@ namespace Ogama.Modules.Diagrams
         public Visifire.Charts.RenderAs Type;
         Ogama.DataSet.OgamaDataSet db = Document.ActiveDocument.DocDataSet;
         
-        public void ClearContentsAndAddTitle()
-        {
-            Chart.AxesX.Clear();
-            Chart.AxesY.Clear();
-            Chart.Series.Clear();
-            Chart.Titles.Clear();
-            Title title = new Title();
-            title.Text = Name;
-            Chart.Titles.Add(title);
-        }
         private List<string> FindTableOfColumn(string column)
         {
             List<string> tables = new List<string>();//List<DataTable> tables = new List<DataTable>();
-            //if (db.Rawdata.Columns.Contains(column))
-            //{
-            //    tables.Add(db.Rawdata);
-            //}
             if (db.GazeFixations.Columns.Contains(column))
             {
                 tables.Add(db.GazeFixations.TableName);
@@ -121,6 +107,33 @@ namespace Ogama.Modules.Diagrams
                 tables.Add(db.MouseFixations.TableName);
             }
             return tables;
+        }
+
+        /// <summary>
+        /// Clears chart contents, adds the new title and axis labels
+        /// </summary>
+        private void PreDrawPrepare()
+        {
+            ClearContents();
+
+            Title title = new Title();
+            title.Text = Name;
+            Chart.Titles.Add(title);
+
+            Axis axisX = new Axis();
+            axisX.Title = XVariable;
+            Chart.AxesX.Add(axisX);
+            Axis axisY = new Axis();
+            axisY.Title = YVariable;
+            Chart.AxesY.Add(axisY);
+        }
+
+        public void ClearContents()
+        {
+            Chart.AxesX.Clear();
+            Chart.AxesY.Clear();
+            Chart.Series.Clear();
+            Chart.Titles.Clear();
         }
         
         public virtual void Draw()
@@ -222,7 +235,7 @@ namespace Ogama.Modules.Diagrams
         {
             DataSeries dataseries = new DataSeries();
             dataseries.Name = series.ToString();
-            //dataseries.RenderAs = RenderAs.StackedColumn;
+            dataseries.RenderAs = this.Type;
             while (result.Read())
             {
                 DataPoint point = new DataPoint();
@@ -292,20 +305,6 @@ namespace Ogama.Modules.Diagrams
                               select c[GroupBy]).Distinct();
             return seriesNames;
         }
-
-        /// <summary>
-        /// Clears chart contents, adds the new title and axis labels
-        /// </summary>
-        private void PreDrawPrepare()
-        {
-            ClearContentsAndAddTitle();
-            Axis axisX = new Axis();
-            axisX.Title = XVariable;
-            Chart.AxesX.Add(axisX);
-            Axis axisY = new Axis();
-            axisY.Title = YVariable;
-            Chart.AxesY.Add(axisY);
-        }
     }
 
     public class Chart_AverageFixationBySubjectAndTrial : ChartType
@@ -313,12 +312,9 @@ namespace Ogama.Modules.Diagrams
         public Chart_AverageFixationBySubjectAndTrial(Chart chart)
             : base(chart)
         {
+            this.Name = "Average fixation time grouped by subject and trial category";
         }
 
-        public string Name
-        {
-            get { return "Average fixation time grouped by subject and trial category"; }
-        } 
         /// <summary>
         /// the original draw
         /// </summary>
@@ -369,7 +365,7 @@ namespace Ogama.Modules.Diagrams
         /// </summary>
         public override void Draw()
         {
-            ClearContentsAndAddTitle();//base.Draw();
+            ClearContents();//base.Draw();
             Axis axisX = new Axis();
             axisX.Title = "Trial category";
             axisX.Prefix = "Category:";
@@ -435,7 +431,6 @@ namespace Ogama.Modules.Diagrams
                 }
                 Chart.Series.Add(series);
             }
-            
         }
     }
 
@@ -459,13 +454,41 @@ namespace Ogama.Modules.Diagrams
         public Chart_AverageFixationOverTime(Chart chart)
             : base(chart)
         {
-        }
-        public string Name
-        {
-            get { return "Average fixation duration over trial time"; }
+            this.Name = "Average fixation duration over trial time";
         }
         public override void Draw()
         {
+            ClearContents();
+            Axis axisX = new Axis();
+            axisX.Title = "Time";
+            axisX.Prefix = "Category:";
+            Chart.AxesX.Add(axisX);
+            Axis axisY = new Axis();
+            axisY.Title = "Average fixation duration";
+            axisY.Suffix = "ms";
+            Chart.AxesY.Add(axisY);
+            var db = Document.ActiveDocument.DocDataSet;//alias
+            //var subjectCategories = (from subjects in db.Subjects select subjects.Category).Distinct();
+            var result = from gazeFixations in db.GazeFixations
+                         group new { gazeFixations, gazeFixations.StartTime }
+                            by gazeFixations.StartTime into res
+                         select new
+                         {
+                             Time = res.Key,
+                             AvgFixationLength = res.Average(p => (int)p.gazeFixations.Length)
+                         };
+
+            DataSeries series = new DataSeries();
+            //series.RenderAs = RenderAs.Column;
+            series.Name = "";
+            foreach (var p in result)
+            {
+                DataPoint point = new DataPoint();
+                point.AxisXLabel = p.Time.ToString();
+                point.YValue = p.AvgFixationLength;
+                series.DataPoints.Add(point);
+            }
+            Chart.Series.Add(series);
         }
     }
 
@@ -474,10 +497,7 @@ namespace Ogama.Modules.Diagrams
         public Chart_PupilDiameterOverTime(Chart chart)
             : base(chart)
         {
-        }
-        public string Name
-        {
-            get { return "Pupil diameter over time"; }
+            this.Name = "Pupil diameter over time";
         }
         public override void Draw()
         {
@@ -489,10 +509,7 @@ namespace Ogama.Modules.Diagrams
         public Chart_XOverYGazePosition(Chart chart)
             : base(chart)
         {
-        }
-        public string Name
-        {
-            get { return "X over Y gaze position raw data"; }
+            this.Name = "X over Y gaze position raw data";
         }
         public override void Draw()
         {
@@ -504,10 +521,7 @@ namespace Ogama.Modules.Diagrams
         public Chart_SubjectCountOverAgeBySex(Chart chart)
             : base(chart)
         {
-        }
-        public string Name
-        {
-            get { return "Subject count over time by sex"; }
+            this.Name = "Subject count over time by sex";
         }
         public override void Draw()
         {
@@ -519,10 +533,7 @@ namespace Ogama.Modules.Diagrams
         public Chart_subjectCountOver_____ByOccupation(Chart chart)
             : base(chart)
         {
-        }
-        public string Name
-        {
-            get { return "Subject count over ___ by occupation"; }
+            this.Name = "Subject count over ___ by occupation";
         }
         public override void Draw()
         {
@@ -534,10 +545,7 @@ namespace Ogama.Modules.Diagrams
         public Chart_SaccadeDistanceOverSaccadeNumber(Chart chart)
             : base(chart)
         {
-        }
-        public string Name
-        {
-            get { return "Saccade distance over saccade number"; }
+            this.Name = "Saccade distance over saccade number";
         }
         public override void Draw()
         {
@@ -549,10 +557,7 @@ namespace Ogama.Modules.Diagrams
         public Chart_AverageFixationDurationOverSex(Chart chart)
             : base(chart)
         {
-        }
-        public string Name
-        {
-            get { return "Average fixation duration over sex"; }
+            this.Name = "Average fixation duration over sex";
         }
         public override void Draw()
         {
@@ -564,10 +569,7 @@ namespace Ogama.Modules.Diagrams
         public Chart_AverageFixationDurationOverAgeBySex(Chart chart)
             : base(chart)
         {
-        }
-        public string Name
-        {
-            get { return "Average fixation duration over age by sex"; }
+            this.Name = "Average fixation duration over age by sex";
         }
         public override void Draw()
         {

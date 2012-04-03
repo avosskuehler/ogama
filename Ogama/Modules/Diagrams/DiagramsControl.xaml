@@ -11,7 +11,7 @@
             <ColumnDefinition Width="400*" />
             <ColumnDefinition Width="250*" />
         </Grid.ColumnDefinitions>
-        <vc:Chart Name="theChart">
+        <vc:Chart Name="theChart" ToolBarEnabled="True" AnimationEnabled="True" LightingEnabled="True">
             <vc:Chart.Titles>
                 <vc:Title Text="No chart yet" Name="theTitle"></vc:Title>
             </vc:Chart.Titles>
@@ -37,9 +37,10 @@
                                 <Setter Property="HorizontalAlignment" Value="Center" />
                             </Style>
                         </UniformGrid.Resources>
-                        <RadioButton Name="radioBarChart">Bar</RadioButton>
-                        <RadioButton Name="radioButton1">Pie</RadioButton>
-                        <RadioButton Name="radioButton2">Line</RadioButton>
+                        <RadioButton Name="radioColumn">Column</RadioButton>
+                        <RadioButton Name="radioStacked">Stacked</RadioButton>
+                        <RadioButton Name="radioPie">Pie</RadioButton>
+                        <!--<RadioButton Name="radioLine">Line</RadioButton>-->
                     </UniformGrid>
                     <Label Content="Display" Name="label5" Style="{StaticResource Spacing}" />
                     <ComboBox Name="comboAgregateFunction" Width="180" Style="{StaticResource Spacing}" />
