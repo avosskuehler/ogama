@@ -99,6 +99,11 @@ namespace Ogama.Modules.Recording
           returnValue |= HardwareTracker.ASL; // = 64
         }
 
+        if (this.chbEyeTech.Checked)
+        {
+          returnValue |= HardwareTracker.EyeTech;
+        }
+
         return returnValue;
       }
     }

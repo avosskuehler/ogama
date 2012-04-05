@@ -34,6 +34,7 @@ namespace Ogama.Modules.Recording
   using Ogama.Modules.Recording.MouseOnly;
   using Ogama.Modules.Recording.SMI;
   using Ogama.Modules.Recording.Tobii;
+  using Ogama.Modules.Recording.EyeTech;
   using Ogama.Properties;
   using OgamaControls;
 
@@ -1665,6 +1666,7 @@ namespace Ogama.Modules.Recording
       this.tclEyetracker.TabPages.Add(this.tbpAsl);
       this.tclEyetracker.TabPages.Add(this.tbpMouseOnly);
       this.tclEyetracker.TabPages.Add(this.tbpITU);
+      this.tclEyetracker.TabPages.Add(this.tbpEyeTech);
 
       // Read activated tracker value from the application settings
       string activatedTracker = Properties.Settings.Default.ActivatedHardwareTracker;
@@ -1763,6 +1765,27 @@ namespace Ogama.Modules.Recording
         this.tclEyetracker.TabPages.Remove(this.tbpTobii);
       }
 #endif
+
+      if (tracker == (tracker | HardwareTracker.EyeTech))
+      {
+        // Create EyeTech tracker
+        EyeTechTracker newEyeTech = new EyeTechTracker(
+          this,
+          this.btnEyeTechConnect,
+          this.btnEyeTechSubjectName,
+          this.btnEyeTechCalibrate,
+          this.btnEyeTechRecord,
+          this.txbEyeTechSubjectName);
+
+        this.trackerInterfaces.Add(HardwareTracker.EyeTech, newEyeTech);
+      }
+      else
+      {
+        if (this.tclEyetracker.TabPages.Contains(this.tbpEyeTech))
+        {
+          this.tclEyetracker.TabPages.Remove(this.tbpEyeTech);
+        }
+      }
 
       if (tracker == (tracker | HardwareTracker.SMI))
       {
@@ -2307,6 +2330,14 @@ namespace Ogama.Modules.Recording
 
           break;
 #endif
+        case "tbpEyeTech":
+          if (this.trackerInterfaces.ContainsKey(HardwareTracker.EyeTech))
+          {
+            this.currentTracker = this.trackerInterfaces[HardwareTracker.EyeTech];
+          }
+
+          break;
+
         case "tbpAlea":
           if (this.trackerInterfaces.ContainsKey(HardwareTracker.Alea))
           {

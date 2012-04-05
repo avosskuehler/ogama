@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{84DE2C81-CE99-4ED3-B4F3-3C47CDD85E3D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -71,7 +71,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>..\Debug\</OutputPath>
-    <DefineConstants>DEBUG;ASL</DefineConstants>
+    <DefineConstants>DEBUG;EYETECH</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DocumentationFile>..\Debug\Ogama.XML</DocumentationFile>
     <DebugType>full</DebugType>
@@ -81,7 +81,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>..\Release\</OutputPath>
-    <DefineConstants>TRACE;TOBII; ASL</DefineConstants>
+    <DefineConstants>TRACE; ASL; EYETECH</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DocumentationFile>..\Release\Ogama.xml</DocumentationFile>
     <Optimize>true</Optimize>
@@ -418,6 +418,21 @@
       <DependentUpon>AslTrackStatus.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Recording\ASL\UserSettings.cs" />
+    <Compile Include="Modules\Recording\EyeTech\EyeTechSetting.cs" />
+    <Compile Include="Modules\Recording\EyeTech\EyeTechSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\EyeTech\EyeTechSettingsDialog.designer.cs">
+      <DependentUpon>EyeTechSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\EyeTech\EyeTechTracker.cs" />
+    <Compile Include="Modules\Recording\EyeTech\QLCalibration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\EyeTech\QLCalibration.designer.cs">
+      <DependentUpon>QLCalibration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\EyeTech\QuickLinkAPI.cs" />
     <Compile Include="Modules\Recording\ITU\ITUDefaultGazeTracker.cs" />
     <Compile Include="Modules\Recording\ITU\ITUGazeTrackerBase.cs" />
     <Compile Include="Modules\Recording\Presenter\WebsiteScreenshot.cs" />
@@ -1021,6 +1036,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateAsl.resx">
       <DependentUpon>HowToActivateAsl.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateITU.resx">
       <DependentUpon>HowToActivateITU.cs</DependentUpon>
@@ -1080,15 +1096,19 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\Alea\AleaTrackStatus.resx">
       <DependentUpon>AleaTrackStatus.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\ASL\AslCalibration.resx">
       <DependentUpon>AslCalibration.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\ASL\AslSettingsDialog.resx">
       <DependentUpon>AslSettingsDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\ASL\AslTrackStatus.resx">
       <DependentUpon>AslTrackStatus.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\Dialogs\SelectTracker.resx">
       <DependentUpon>SelectTracker.cs</DependentUpon>
@@ -1106,14 +1126,25 @@
       <DependentUpon>SavingSplash.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\EyeTech\EyeTechSettingsDialog.resx">
+      <DependentUpon>EyeTechSettingsDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\EyeTech\QLCalibration.resx">
+      <DependentUpon>QLCalibration.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\RecordingPicture.resx">
       <DependentUpon>RecordingPicture.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\SMI\SMICalibrationForm.resx">
       <DependentUpon>SMICalibrationForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\SMI\SMISettingsDlg.resx">
       <DependentUpon>SMISettingsDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Replay\Video\SaveVideoSplash.resx">
       <DependentUpon>SaveVideoSplash.cs</DependentUpon>
@@ -1577,6 +1608,7 @@
     <None Include="Resources\ASLmire_1024x768.bmp" />
     <None Include="Resources\ASLmire_1280x1024.bmp" />
     <None Include="Resources\ASLmire_defaultSize.bmp" />
+    <None Include="Resources\NewEyeTechLogo_S.png" />
     <Content Include="SaliencyCalculation\cygblas.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
