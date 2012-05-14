@@ -737,9 +737,17 @@ namespace Ogama.Modules.Recording.GazegroupInterface
     /// <returns>True if a gazetracker instance is running, otherwise false.</returns>
     private bool IsGazeTrackerApplicationRunning()
     {
+      // Check for Ogamas GT adaption
       Process[] gazetrackerProcesses =
         Process.GetProcessesByName("GTApplication");
-      return gazetrackerProcesses.Length != 0;
+      if (gazetrackerProcesses.Length == 0)
+      {
+        // Check for original 2.0b gazetracker
+        gazetrackerProcesses = Process.GetProcessesByName("GazeTrackerUI");
+        return gazetrackerProcesses.Length != 0;
+      }
+
+      return true;
     }
 
     #endregion //HELPER
