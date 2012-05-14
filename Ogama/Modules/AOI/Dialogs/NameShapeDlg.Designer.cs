@@ -1,5 +1,7 @@
-namespace Ogama.Modules.AOI
+namespace Ogama.Modules.AOI.Dialogs
 {
+  using Ogama.Modules.Common.Controls;
+
   partial class NameShapeDlg
   {
     /// <summary>
@@ -13,9 +15,9 @@ namespace Ogama.Modules.AOI
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      if (disposing && (components != null))
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -34,7 +36,7 @@ namespace Ogama.Modules.AOI
       this.btnOK = new System.Windows.Forms.Button();
       this.btnCancel = new System.Windows.Forms.Button();
       this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       this.SuspendLayout();
       // 
       // txbShapeName
@@ -109,6 +111,6 @@ namespace Ogama.Modules.AOI
     private System.Windows.Forms.Button btnCancel;
     private System.Windows.Forms.TextBox txbShapeName;
     private System.Windows.Forms.ToolTip toolTip1;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
   }
 }

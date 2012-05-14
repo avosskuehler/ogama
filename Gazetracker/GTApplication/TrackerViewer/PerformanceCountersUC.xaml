@@ -1,0 +1,28 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	x:Class="GTApplication.TrackerViewer.PerformanceCountersUC"
+	x:Name="UserControl" d:DesignHeight="26.187" Width="155">
+
+	<Grid x:Name="LayoutRoot">
+		<WrapPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="0">
+			
+            <Label HorizontalAlignment="Left" Margin="-2,0,0,0" VerticalAlignment="Center" Width="50" Content="Camera" FontSize="10.667" Background="{x:Null}" Foreground="#FF909090"/>
+			<Label x:Name="LabelFPSCamera" Content="999" Foreground="#FFBFBFBF" HorizontalAlignment="Left" FontSize="10.667" Margin="-6,0,0,0" Width="27" VerticalAlignment="Center"/>
+
+            <Label HorizontalAlignment="Left" Margin="-2,0,0,0" VerticalAlignment="Center" Width="50" Content="Tracking" FontSize="10.667" Background="{x:Null}" Foreground="#FF909090"/>
+            <Label x:Name="LabelFPSTracking" Content="999" Foreground="#FFBFBFBF" HorizontalAlignment="Left" FontSize="10.667" Margin="-6,0,0,0" Width="27" VerticalAlignment="Center"/>
+            <!--
+            <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="CPU" FontSize="10.667" Margin="-6,0,0,0" Foreground="#FF909090"/>
+			<Label x:Name="LabelCPU" Content="99%" VerticalAlignment="Center" Foreground="#FFC3C3C3" HorizontalAlignment="Left" FontSize="10.667" Margin="-6,0,0,0"/>
+			
+			
+			<Label HorizontalAlignment="Left" Margin="-6,0,0,0" VerticalAlignment="Center" Content="Mem" FontSize="10.667" Foreground="#FF909090"/>
+			<Label x:Name="LabelMem" Content="999Mb" VerticalAlignment="Center" Foreground="#FFC7C7C7" HorizontalAlignment="Left" FontSize="10.667" Margin="-6,0,0,0"/>
+            -->
+		</WrapPanel>
+	</Grid>
+</UserControl>

@@ -1,7 +1,7 @@
 // <copyright file="ColorizationStyle.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,20 +9,16 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
-namespace Ogama.Modules.Scanpaths
+namespace Ogama.Modules.Scanpath.Colorization
 {
   using System;
-  using System.Collections.Generic;
   using System.ComponentModel;
   using System.Drawing;
-  using System.Text;
   using System.Xml.Serialization;
 
-  using OgamaControls;
-  using VectorGraphics;
-  using VectorGraphics.CustomTypeConverter;
+  using VectorGraphics.Tools.CustomTypeConverter;
 
   /// <summary>
   /// A class to save the drawing style of a subject.
@@ -118,7 +114,7 @@ namespace Ogama.Modules.Scanpaths
     /// <summary>
     /// Gets or sets the pen for fixation circles or dots.
     /// </summary>
-    [XmlIgnoreAttribute()]
+    [XmlIgnore]
     public Pen FixationPen
     {
       get { return this.fixationPen; }
@@ -138,7 +134,7 @@ namespace Ogama.Modules.Scanpaths
     /// <summary>
     /// Gets or sets the pen for fixation connections.
     /// </summary>
-    [XmlIgnoreAttribute()]
+    [XmlIgnore]
     public Pen ConnectionPen
     {
       get { return this.connectionPen; }
@@ -158,7 +154,7 @@ namespace Ogama.Modules.Scanpaths
     /// <summary>
     /// Gets or sets the font to use for element names.
     /// </summary>
-    [XmlIgnoreAttribute()]
+    [XmlIgnore]
     public Font Font
     {
       get { return this.font; }
@@ -211,7 +207,7 @@ namespace Ogama.Modules.Scanpaths
     /// <summary>
     /// Gets or sets the color to use during writing.
     /// </summary>
-    [XmlIgnoreAttribute()]
+    [XmlIgnore]
     public Color FontColor
     {
       get { return this.fontColor; }
@@ -219,7 +215,7 @@ namespace Ogama.Modules.Scanpaths
     }
 
     /// <summary>
-    /// Gets or sets, Serializes and deserializes the <see cref="FontColor"/> to XML,
+    /// Gets or sets the serialized font color. Serializes and deserializes the <see cref="FontColor"/> to XML,
     /// because XMLSerializer can not serialize <see cref="Color"/> values.
     /// </summary>
     /// <value>A <see cref="string"/> with the string representation of the font color.</value>

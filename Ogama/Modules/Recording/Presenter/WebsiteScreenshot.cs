@@ -1,7 +1,7 @@
 ﻿// <copyright file="WebsiteScreenshot.cs" company="alea technologies">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,14 +9,19 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
-namespace Ogama.Modules.Recording
+namespace Ogama.Modules.Recording.Presenter
 {
   using System;
   using System.Drawing;
   using System.Drawing.Imaging;
+  using System.Runtime.InteropServices;
   using System.Windows.Forms;
+
+  using Ogama.ExceptionHandling;
+
+  using OgamaControls;
 
   /// <summary>
   /// This class creates screenshots of websites.
@@ -88,6 +93,19 @@ namespace Ogama.Modules.Recording
     /// with the event data to navigate to.</param>
     public delegate void NavigateInvoker(WebBrowserNavigatingEventArgs navigatingArgs);
 
+    /// <summary>
+    /// The delegate for the thread safe call to a navigate.
+    /// </summary>
+    /// <param name="newUri">The new <see cref="Uri"/> to navigate to.</param>
+    private delegate void NavigateCallback(Uri newUri);
+
+    /// <summary>
+    /// The delegate for the thread safe call to a navigate.
+    /// </summary>
+    /// <param name="newUri">The new <see cref="Uri"/> to navigate to.</param>
+    /// <param name="newFrame">The frame <see cref="String"/> to navigate to.</param>
+    private delegate void NavigateFrameCallback(Uri newUri, string newFrame);
+
     #endregion EVENTS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -114,10 +132,9 @@ namespace Ogama.Modules.Recording
     }
 
     /// <summary>
-    /// Gets the singleton instance of this class.
+    /// Gets a value indicating whether this class has been used,
+    /// to be aware of its disposal.
     /// </summary>
-    /// <value>A <see cref="WebsiteScreenshot"/> with the 
-    /// singleton instance of this class.</value>
     public static bool HasBeenUsed
     {
       get
@@ -147,8 +164,30 @@ namespace Ogama.Modules.Recording
     {
       if (this.webBrowser != null)
       {
-        this.webBrowser.Dispose();
+        try
+        {
+          ThreadSafe.Dispose(this.webBrowser);
+        }
+        catch (InvalidComObjectException ex)
+        {
+          ExceptionMethods.HandleExceptionSilent(ex);
+        }
+
         this.webBrowser = null;
+      }
+
+      if (this.dummyForm != null)
+      {
+        try
+        {
+          ThreadSafe.Close(this.dummyForm);
+        }
+        catch (Exception ex)
+        {
+          ExceptionMethods.HandleExceptionSilent(ex);
+        }
+
+        this.dummyForm = null;
       }
     }
 
@@ -167,12 +206,12 @@ namespace Ogama.Modules.Recording
       if (navigatingArgs.TargetFrameName == string.Empty)
       {
         // There is no frame navigated
-        this.webBrowser.Navigate(navigatingArgs.Url);
+        this.ThreadSafeNavigate(navigatingArgs.Url);
       }
       else
       {
         // The url is called in a specific target frame.
-        this.webBrowser.Navigate(navigatingArgs.Url, navigatingArgs.TargetFrameName);
+        this.ThreadSafeNavigate(navigatingArgs.Url, navigatingArgs.TargetFrameName);
       }
     }
 
@@ -182,6 +221,42 @@ namespace Ogama.Modules.Recording
     // Inherited methods                                                         //
     ///////////////////////////////////////////////////////////////////////////////
     #region OVERRIDES
+
+    /// <summary>
+    /// Thread safe navigate to a uri with frame.
+    /// </summary>
+    /// <param name="newUri">A <see cref="Uri"/> to navigate to.</param>
+    protected void ThreadSafeNavigate(Uri newUri)
+    {
+      if (this.webBrowser.InvokeRequired)
+      {
+        var d = new NavigateCallback(this.ThreadSafeNavigate);
+        this.webBrowser.Invoke(d, new object[] { newUri });
+      }
+      else
+      {
+        this.webBrowser.Navigate(newUri);
+      }
+    }
+
+    /// <summary>
+    /// Thread safe navigate to a uri with frame.
+    /// </summary>
+    /// <param name="newUri">A <see cref="Size"/> to navigate to.</param>
+    /// <param name="newFrame">The frame <see cref="String"/> to navigate to.</param>
+    protected void ThreadSafeNavigate(Uri newUri, string newFrame)
+    {
+      if (this.webBrowser.InvokeRequired)
+      {
+        var d = new NavigateFrameCallback(this.ThreadSafeNavigate);
+        this.webBrowser.Invoke(d, new object[] { newUri, newFrame });
+      }
+      else
+      {
+        this.webBrowser.Navigate(newUri, newFrame);
+      }
+    }
+
     #endregion //OVERRIDES
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -254,13 +329,13 @@ namespace Ogama.Modules.Recording
     {
       if (document.GetElementsByTagName("HTML").Count > 0 && document.Body != null)
       {
-        int htmlWidth = document.GetElementsByTagName("HTML")[0].ScrollRectangle.Width;
-        int htmlHeight = document.GetElementsByTagName("HTML")[0].ScrollRectangle.Height;
-        int scrollWidth = document.Body.ScrollRectangle.Width;
-        int scrollHeight = document.Body.ScrollRectangle.Height;
+        var htmlWidth = document.GetElementsByTagName("HTML")[0].ScrollRectangle.Width;
+        var htmlHeight = document.GetElementsByTagName("HTML")[0].ScrollRectangle.Height;
+        var scrollWidth = document.Body.ScrollRectangle.Width;
+        var scrollHeight = document.Body.ScrollRectangle.Height;
 
-        int maxWidth = (int)Math.Max(htmlWidth, scrollWidth);
-        int maxHeight = (int)Math.Max(htmlHeight, scrollHeight);
+        var maxWidth = (int)Math.Max(htmlWidth, scrollWidth);
+        var maxHeight = (int)Math.Max(htmlHeight, scrollHeight);
 
         currentScrollsize.Width = Math.Max(currentScrollsize.Width, maxWidth);
         currentScrollsize.Height = Math.Max(currentScrollsize.Height, maxHeight);
@@ -277,10 +352,17 @@ namespace Ogama.Modules.Recording
     /// maximal scroll size values.</param>
     private void GetLargestScrollSizeOfAllFrames(HtmlWindowCollection htmlWindows, ref Size currentScrollsize)
     {
-      foreach (HtmlWindow window in htmlWindows)
+      try
       {
-        GetMaxScrollSizeOfDocument(window.Document, ref currentScrollsize);
-        this.GetLargestScrollSizeOfAllFrames(window.Document.Window.Frames, ref currentScrollsize);
+        foreach (HtmlWindow window in htmlWindows)
+        {
+          GetMaxScrollSizeOfDocument(window.Document, ref currentScrollsize);
+          this.GetLargestScrollSizeOfAllFrames(window.Document.Window.Frames, ref currentScrollsize);
+        }
+      }
+      catch (UnauthorizedAccessException ex)
+      {
+        ExceptionMethods.HandleExceptionSilent(ex);
       }
     }
 
@@ -291,23 +373,27 @@ namespace Ogama.Modules.Recording
     /// </summary>
     private void CreateBrowserObject()
     {
-      if (this.webBrowser == null || !this.webBrowser.IsAccessible)
+      if (this.webBrowser != null)
       {
-        // The webbrowser is not docked, because
-        // the screenshot works if its client size is correctly sized
-        // but the form does not have to.
-        this.webBrowser = new WebBrowser();
-        this.dummyForm = new Form();
-        this.dummyForm.ClientSize = new Size(1, 1);
-        this.dummyForm.FormBorderStyle = FormBorderStyle.None;
-        this.dummyForm.Controls.Add(this.webBrowser);
-        this.dummyForm.SendToBack();
-        this.dummyForm.Show();
-        this.dummyForm.ShowInTaskbar = false;
-        this.webBrowser.ScrollBarsEnabled = true;
-        this.webBrowser.DocumentCompleted +=
-          new WebBrowserDocumentCompletedEventHandler(this.WebBrowser_DocumentCompleted);
+        return;
       }
+
+      // The webbrowser is not docked, because
+      // the screenshot works if its client size is correctly sized
+      // but the form does not have to.
+      this.webBrowser = new WebBrowser();
+      this.dummyForm = new Form
+        {
+          ClientSize = new Size(1, 1),
+          FormBorderStyle = FormBorderStyle.None
+        };
+
+      this.dummyForm.Controls.Add(this.webBrowser);
+      this.dummyForm.SendToBack();
+      this.dummyForm.Show();
+      this.dummyForm.ShowInTaskbar = false;
+      this.webBrowser.ScrollBarsEnabled = true;
+      this.webBrowser.DocumentCompleted += this.WebBrowser_DocumentCompleted;
     }
 
     #endregion //PRIVATEMETHODS

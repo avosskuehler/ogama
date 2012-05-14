@@ -117,16 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="textBoxDescription.Text" xml:space="preserve">
-    <value>It is currently developed by Adrian Voßkühler at the science education department of the Freie Universität Berlin.
-
-It is written in C#.NET and published under GPL. It uses .NET Framework 2 and SQL Databases and is open source.
-</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>- Dixon Cleveland from LC Technologies allowed us to use their fixation detection algorithm.
-- Jana Kopplin from Braingame Publishing GmbH allowed us to use their image from the physikus game in the logo</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="dialogTop1.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -393,7 +383,7 @@ It is written in C#.NET and published under GPL. It uses .NET Framework 2 and SQ
   <data name="dialogTop1.Logo" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAZZSURBVFhH7ZZ5UJRlHMe/7wKLi4JEdkCWzmgWmVJq2nQZ
+        YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAZZSURBVFhH7ZZ5UJRlHMe/7wKLi4JEdkCWzmgWmVJq2nQZ
         eeWVOZlXasfUZNbkWDl2WDFlmqlph2Me5RXmjRggCoLklQoYgqKipoYpKkLAigu737fv+7oy01Rmjf7R
         jM/MZx7Yffb53b/nB1z2RQdgBol6fqy/9dkVXZYAsyHAFuIB0Vv0F0+KHuI+0fz8mcuujOnU5bfaQh18
         A9dyGtpwDrpwHmI5Fy04EyGcqO9HiE6i8WVUwhYeLQbDxU/Qkwswncuw2ZeIvTXJ2OVNQiITMIbfIVpK

@@ -1,7 +1,7 @@
 // <copyright file="ImportTrialsDialog.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,23 +9,19 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
-namespace Ogama.Modules.ImportExport
+namespace Ogama.Modules.ImportExport.Common
 {
   using System;
   using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Data;
-  using System.Drawing;
-  using System.Globalization;
   using System.IO;
-  using System.Text;
   using System.Windows.Forms;
 
   using Ogama.ExceptionHandling;
-  using Ogama.Modules.Common;
-  using Ogama.Modules.SlideshowDesign;
+  using Ogama.Modules.Common.FormTemplates;
+  using Ogama.Modules.ImportExport.FixationData;
+  using Ogama.Modules.ImportExport.RawData;
 
   /// <summary>
   /// This dialog <see cref="Form"/> derives from <see cref="FormWithAccellerators"/>
@@ -411,7 +407,7 @@ namespace Ogama.Modules.ImportExport
         this.cbbAssignTrialSequenceColumn.Items.AddRange(this.trialColumnHeaders.ToArray());
         this.cbbAssignStartingTimeColumn.SelectedIndex = 0;
         this.cbbAssignTrialIDColumn.SelectedIndex = 2;
-        this.cbbAssignTrialSequenceColumn.SelectedIndex = 3;
+        this.cbbAssignTrialSequenceColumn.SelectedIndex = 2;
         this.RepopulateTrialAssignmentTable();
 
         if (this.trialColumnHeaders.Count > 2)
@@ -465,7 +461,7 @@ namespace Ogama.Modules.ImportExport
             }
 
             if (row.Cells["columnAssignStartTime"].Value == null ||
-              !Int64.TryParse(row.Cells["columnAssignStartTime"].Value.ToString(), out startTime))
+              !long.TryParse(row.Cells["columnAssignStartTime"].Value.ToString(), out startTime))
             {
               return false;
             }
@@ -809,4 +805,3 @@ namespace Ogama.Modules.ImportExport
     #endregion //HELPER
   }
 }
-

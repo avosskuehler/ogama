@@ -1,5 +1,7 @@
-namespace Ogama.Modules.Replay
+namespace Ogama.Modules.Replay.Video
 {
+  using Ogama.Modules.Common.Controls;
+
   partial class SaveVideoSplash
   {
     /// <summary>
@@ -13,9 +15,9 @@ namespace Ogama.Modules.Replay
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      if (disposing && (components != null))
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -34,7 +36,7 @@ namespace Ogama.Modules.Replay
       this.pictureBox2 = new System.Windows.Forms.PictureBox();
       this.pictureBox3 = new System.Windows.Forms.PictureBox();
       this.label1 = new System.Windows.Forms.Label();
-      this.dialogTop = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop = new DialogTop();
       this.splitContainer1 = new System.Windows.Forms.SplitContainer();
       this.spcPreviewSplash = new System.Windows.Forms.SplitContainer();
       this.previewPanel = new System.Windows.Forms.Panel();
@@ -205,7 +207,7 @@ namespace Ogama.Modules.Replay
     private System.Windows.Forms.PictureBox pictureBox3;
     private System.Windows.Forms.ProgressBar progressBar;
     internal System.Windows.Forms.Label label1;
-    private Ogama.Modules.Common.DialogTop dialogTop;
+    private DialogTop dialogTop;
     private System.Windows.Forms.SplitContainer splitContainer1;
     private System.Windows.Forms.SplitContainer spcPreviewSplash;
     private System.Windows.Forms.Panel previewPanel;

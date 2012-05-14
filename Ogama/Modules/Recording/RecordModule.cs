@@ -1,7 +1,7 @@
 ﻿// <copyright file="RecordModule.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,7 +9,7 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
 namespace Ogama.Modules.Recording
 {
@@ -20,28 +20,40 @@ namespace Ogama.Modules.Recording
   using System.Diagnostics;
   using System.Drawing;
   using System.IO;
+  using System.Linq;
   using System.Threading;
   using System.Windows.Forms;
-
+  using GTCommons.Events;
   using Ogama.DataSet;
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.CustomEventArgs;
+  using Ogama.Modules.Common.FormTemplates;
+  using Ogama.Modules.Common.SlideCollections;
+  using Ogama.Modules.Common.Tools;
+  using Ogama.Modules.Common.TrialEvents;
+  using Ogama.Modules.Common.Types;
   using Ogama.Modules.Fixations;
-  using Ogama.Modules.ImportExport;
-  using Ogama.Modules.Recording.Alea;
-  using Ogama.Modules.Recording.ASL;
-  using Ogama.Modules.Recording.MouseOnly;
-  using Ogama.Modules.Recording.SMI;
-  using Ogama.Modules.Recording.Tobii;
+  using Ogama.Modules.ImportExport.Common;
+  using Ogama.Modules.Recording.AleaInterface;
+  using Ogama.Modules.Recording.ASLInterface;
+  using Ogama.Modules.Recording.Dialogs;
+  using Ogama.Modules.Recording.GazegroupInterface;
+  using Ogama.Modules.Recording.MirametrixInterface;
   using Ogama.Modules.Recording.EyeTech;
+  using Ogama.Modules.Recording.Presenter;
+  using Ogama.Modules.Recording.SMIInterface;
+  using Ogama.Modules.Recording.TobiiInterface;
+  using Ogama.Modules.Recording.TrackerBase;
   using Ogama.Properties;
   using OgamaControls;
 
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
   using VectorGraphics.StopConditions;
   using VectorGraphics.Tools;
-  using VectorGraphics.Triggers;
+  using VectorGraphics.Tools.Trigger;
 
   /// <summary>
   /// Derived from <see cref="FormWithPicture"/>.
@@ -59,35 +71,10 @@ namespace Ogama.Modules.Recording
     #region CONSTANTS
 
     /// <summary>
-    /// This value sets the maximal distance for two points
-    /// that are considered to be near in pixel.
-    /// </summary>
-    private const int MAXDISTANCENEAR = 30;
-
-    /// <summary>
-    /// Number of tables that are used to bulk copy the data into the
-    /// database from the dataset.
-    /// </summary>
-    private const int NUMWRITINGTHREADS = 5;
-
-    /// <summary>
-    /// When the received samples exceed the following limit after trial 
-    /// has changed, then the data is written to the database,
-    /// freeing memory.
-    /// </summary>
-    private const int MINSAMPLESFORWRITINGTODATABASE = 1000;
-
-    /// <summary>
-    /// A value that indicates how much samples are ignored during
-    /// refreshing the mouse and gaze cursors.
-    /// </summary>
-    private static int reducingCount = 3;
-
-    /// <summary>
     /// This is a slide that shows a short recording instruction
     /// when starting the module.
     /// </summary>
-    private static Slide defaultSlide = new Slide(
+    private static readonly Slide DefaultSlide = new Slide(
       "Background",
       Color.Black,
       Images.CreateRecordInstructionImage(Document.ActiveDocument.ExperimentSettings.WidthStimulusScreen, Document.ActiveDocument.ExperimentSettings.HeightStimulusScreen),
@@ -95,6 +82,25 @@ namespace Ogama.Modules.Recording
       null,
       string.Empty,
       Document.ActiveDocument.PresentationSize);
+
+    /// <summary>
+    /// This value sets the maximal distance for two points
+    /// that are considered to be near in pixel.
+    /// </summary>
+    private const int Maxdistancenear = 30;
+
+    /// <summary>
+    /// Number of tables that are used to bulk copy the data into the
+    /// database from the dataset.
+    /// </summary>
+    private const int Numwritingthreads = 5;
+
+    /// <summary>
+    /// When the received samples exceed the following limit after trial 
+    /// has changed, then the data is written to the database,
+    /// freeing memory.
+    /// </summary>
+    private const int Minsamplesforwritingtodatabase = 1000;
 
     #endregion //CONSTANTS
 
@@ -332,6 +338,7 @@ namespace Ogama.Modules.Recording
     public RecordModule()
     {
       this.InitializeComponent();
+
       this.Picture = this.recordPicture;
       this.ZoomTrackBar = this.trbZoom;
 
@@ -482,8 +489,10 @@ namespace Ogama.Modules.Recording
         this.Cursor = Cursors.WaitCursor;
 
         // create new raw data table for subject
-        this.subjectRawDataTable = new OgamaDataSet.RawdataDataTable();
-        this.subjectRawDataTable.TableName = this.currentTracker.Subject.SubjectName + "Rawdata";
+        this.subjectRawDataTable = new OgamaDataSet.RawdataDataTable
+          {
+            TableName = this.currentTracker.Subject.SubjectName + "Rawdata"
+          };
 
         // Start presentation in a separate thread,
         if (this.StartPresentation())
@@ -514,7 +523,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">A <see cref="GazeDataChangedEventArgs"/> with the event data.</param>
-    public void ITracker_GazeDataChanged(object sender, GazeDataChangedEventArgs e)
+    public void TrackerGazeDataChanged(object sender, GazeDataChangedEventArgs e)
     {
       // Save current timestamp
       lock (this.timeLock)
@@ -528,14 +537,12 @@ namespace Ogama.Modules.Recording
       }
 
       // Create a new RawData object
-      RawData newRawData = new RawData();
-
-      // Write name
-      newRawData.SubjectName = this.currentTracker.Subject.SubjectName;
-
-      // Write the sampling values from the ITracker interface
-      newRawData.GazePosX = e.Gazedata.GazePosX;
-      newRawData.GazePosY = e.Gazedata.GazePosY;
+      var newRawData = new RawData
+        {
+          SubjectName = this.currentTracker.Subject.SubjectName,
+          GazePosX = e.Gazedata.GazePosX,
+          GazePosY = e.Gazedata.GazePosY
+        };
 
       // The GazePos data is in values from 0 to 1
       // so scale it to SCREEN COORDINATES
@@ -553,12 +560,12 @@ namespace Ogama.Modules.Recording
       newRawData.PupilDiaX = e.Gazedata.PupilDiaX;
       newRawData.PupilDiaY = e.Gazedata.PupilDiaY;
 
-      long gazeTime = e.Gazedata.Time - this.recordingStarttime;
+      var gazeTime = e.Gazedata.Time - this.recordingStarttime;
       newRawData.Time = gazeTime;
       newRawData.TrialSequence = this.trialSequenceCounter;
 
       // Retrieve mouse position, this is already in SCREEN COORDINATES
-      PointF? newMousePos = this.GetMousePosition();
+      var newMousePos = this.GetMousePosition();
       if (this.currentSlide.MouseCursorVisible && newMousePos != null)
       {
         newRawData.MousePosX = newMousePos.Value.X + this.xScrollOffset;
@@ -569,7 +576,7 @@ namespace Ogama.Modules.Recording
       // if (_counter % REDUCING_COUNT == 0)
       if (newRawData.GazePosX != null && newRawData.GazePosY != null)
       {
-        PointF newCursorPos = new PointF(
+        var newCursorPos = new PointF(
           newRawData.GazePosX.Value,
           newRawData.GazePosY.Value);
 
@@ -624,18 +631,16 @@ namespace Ogama.Modules.Recording
     /// This methods is used to initialize elements that are not
     /// initialized in the designer.
     /// </summary>
-    protected override void InitializeCustomElements()
+    protected override sealed void InitializeCustomElements()
     {
       base.InitializeCustomElements();
 
-      this.btnHelp.Click += new EventHandler(this.btnHelp_Click);
-      this.pnlCanvas.Resize += new EventHandler(this.pnlCanvas_Resize);
+      this.btnHelp.Click += this.btnHelp_Click;
+      this.pnlCanvas.Resize += this.pnlCanvas_Resize;
 
       // Sets the counter value for updating mouse and gaze cursor.
       // Should give a frame rate of about 20 Hz
       // So if GazeSamping rate is 60 Hz to get 20 Hz it should be set to 3.
-      reducingCount = Document.ActiveDocument.ExperimentSettings.GazeSamplingRate / 30;
-
       this.xResolution = Document.ActiveDocument.ExperimentSettings.WidthStimulusScreen;
       this.yResolution = Document.ActiveDocument.ExperimentSettings.HeightStimulusScreen;
       this.xPosition = PresentationScreen.GetPresentationBounds().X;
@@ -643,7 +648,7 @@ namespace Ogama.Modules.Recording
 
       this.systemHasSecondaryScreen = SecondaryScreen.SystemHasSecondaryScreen();
 
-      this.delegateNewSlideAvailable = new UpdateLiveView(this.NewSlideAvailable);
+      this.delegateNewSlideAvailable = this.NewSlideAvailable;
 
       this.trialDataList = new List<TrialsData>();
       this.trialEventList = new List<TrialEvent>();
@@ -658,15 +663,17 @@ namespace Ogama.Modules.Recording
       this.recordTimerWatch = new Stopwatch();
       ////this.watch.Start();
 
-      this.generalTrigger = new Trigger();
-      this.generalTrigger.OutputDevice = TriggerOutputDevices.LPT;
-      this.generalTrigger.Signaling = TriggerSignaling.None;
-      this.generalTrigger.SignalingTime = 10;
-      this.generalTrigger.Value = 255;
-      this.generalTrigger.PortAddress = 0x0378;
+      this.generalTrigger = new Trigger
+        {
+          OutputDevice = TriggerOutputDevices.LPT,
+          Signaling = TriggerSignaling.None,
+          SignalingTime = 10,
+          Value = 255,
+          PortAddress = 0x0378
+        };
 
       // Take primary monitor
-      int monitorIndex = 0;
+      var monitorIndex = 0;
       if (PresentationScreen.GetPresentationScreen() != Screen.PrimaryScreen)
       {
         // otherwise take the secondary sceen.
@@ -676,7 +683,7 @@ namespace Ogama.Modules.Recording
       this.screenCaptureProperties = new ScreenCaptureProperties(
         "OgamaScreenCapture Filter",
         string.Empty,
-        "ffdshow",
+        "ffdshow video encoder",
         string.Empty,
         10,
         Document.ActiveDocument.PresentationSize,
@@ -685,8 +692,8 @@ namespace Ogama.Modules.Recording
         monitorIndex,
         this.recordPicture);
 
-      this.rawDataLists = new List<RawData>[NUMWRITINGTHREADS];
-      for (int i = 0; i < NUMWRITINGTHREADS; i++)
+      this.rawDataLists = new List<RawData>[Numwritingthreads];
+      for (var i = 0; i < Numwritingthreads; i++)
       {
         this.rawDataLists[i] = new List<RawData>();
       }
@@ -717,10 +724,10 @@ namespace Ogama.Modules.Recording
     /// Overridden <see cref="FormWithPicture.InitAccelerators()"/>.
     /// Sets Enter Key for start of recording.
     /// </summary>
-    protected override void InitAccelerators()
+    protected override sealed void InitAccelerators()
     {
       base.InitAccelerators();
-      this.SetAccelerator(Keys.Enter, new AcceleratorAction(this.OnPressEnter));
+      this.SetAccelerator(Keys.Enter, this.OnPressEnter);
     }
 
     #endregion //OVERRIDES
@@ -741,7 +748,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void RecordModule_Load(object sender, EventArgs e)
+    private void RecordModuleLoad(object sender, EventArgs e)
     {
       this.smoothing = false;
 
@@ -752,7 +759,7 @@ namespace Ogama.Modules.Recording
 
       this.InitializeScreenCapture();
       this.CreateTrackerInterfaces();
-      
+
       // Use panel update always at start
       this.forcePanelViewerUpdate = true;
 
@@ -777,7 +784,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">A <see cref="FormClosingEventArgs"/> with the event data.</param>
-    private void RecordModule_FormClosing(object sender, FormClosingEventArgs e)
+    private void RecordModuleFormClosing(object sender, FormClosingEventArgs e)
     {
       if (this.presentationThread != null && this.presentationThread.IsAlive)
       {
@@ -801,7 +808,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
-    private void btnPrimary_Click(object sender, EventArgs e)
+    private void BtnPrimaryClick(object sender, EventArgs e)
     {
       this.btnSecondary.Checked = !this.btnPrimary.Checked;
       this.SubmitPresentationScreenToSettings();
@@ -814,7 +821,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
-    private void btnSecondary_Click(object sender, EventArgs e)
+    private void BtnSecondaryClick(object sender, EventArgs e)
     {
       this.btnPrimary.Checked = !this.btnSecondary.Checked;
       this.SubmitPresentationScreenToSettings();
@@ -828,9 +835,9 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
-    private void btnWebcamSettings_Click(object sender, EventArgs e)
+    private void BtnWebcamSettingsClick(object sender, EventArgs e)
     {
-      this.webcamPreview.ShowConfigureDialog(this.btnUsercam.Checked ? true : false);
+      this.webcamPreview.ShowConfigureDialog(this.btnUsercam.Checked);
     }
 
     /// <summary>
@@ -840,13 +847,15 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
-    private void btnTriggerSettings_Click(object sender, EventArgs e)
+    private void BtnTriggerSettingsClick(object sender, EventArgs e)
     {
-      TriggerDialog dlg = new TriggerDialog();
-      dlg.TriggerSignal = this.generalTrigger;
-      if (dlg.ShowDialog() == DialogResult.OK)
+      using (var dlg = new TriggerDialog())
       {
-        this.generalTrigger = dlg.TriggerSignal;
+        dlg.TriggerSignal = this.generalTrigger;
+        if (dlg.ShowDialog() == DialogResult.OK)
+        {
+          this.generalTrigger = dlg.TriggerSignal;
+        }
       }
     }
 
@@ -857,7 +866,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
-    private void tclEyetracker_SelectedIndexChanged(object sender, EventArgs e)
+    private void TclEyetrackerSelectedIndexChanged(object sender, EventArgs e)
     {
       this.SwitchCurrentTracker();
     }
@@ -870,7 +879,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
-    private void btnTrackerSettings_Click(object sender, EventArgs e)
+    private void BtnTrackerSettingsClick(object sender, EventArgs e)
     {
       if (this.currentTracker != null)
       {
@@ -878,9 +887,9 @@ namespace Ogama.Modules.Recording
       }
       else
       {
-        string message = "Please choose a tracker system before changing settings, "
-        + "by selecting a tracker tab at the left side of the module";
-        ExceptionMethods.ProcessMessage("No tracker selected", message);
+        const string Message = "Please choose a tracker system before changing settings, "
+                               + "by selecting a tracker tab at the left side of the module";
+        ExceptionMethods.ProcessMessage("No tracker selected", Message);
       }
     }
 
@@ -892,7 +901,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
-    private void btnScreenCaptureSettings_Click(object sender, EventArgs e)
+    private void BtnScreenCaptureSettingsClick(object sender, EventArgs e)
     {
       this.ShowScreenCaptureDialog();
     }
@@ -906,15 +915,18 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
-    private void btnSelectTracker_Click(object sender, EventArgs e)
+    private void BtnSelectTrackerClick(object sender, EventArgs e)
     {
-      HardwareTracker tracker = this.ShowTrackerSelectionDialog();
-      if (tracker != HardwareTracker.None)
+      var tracker = this.ShowTrackerSelectionDialog();
+      switch (tracker)
       {
-        Properties.Settings.Default.ActivatedHardwareTracker = tracker.ToString();
-        Properties.Settings.Default.Save();
-        this.CreateTrackerInterfaces();
+        case HardwareTracker.None:
+          return;
       }
+
+      Settings.Default.ActivatedHardwareTracker = tracker.ToString();
+      Settings.Default.Save();
+      this.CreateTrackerInterfaces();
     }
 
     /// <summary>
@@ -926,15 +938,18 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
-    private void btnNoDeviceTabSelectTracker_Click(object sender, EventArgs e)
+    private void BtnNoDeviceTabSelectTrackerClick(object sender, EventArgs e)
     {
-      HardwareTracker tracker = this.ShowTrackerSelectionDialog();
-      if (tracker != HardwareTracker.None)
+      var tracker = this.ShowTrackerSelectionDialog();
+      switch (tracker)
       {
-        Properties.Settings.Default.ActivatedHardwareTracker = tracker.ToString();
-        Properties.Settings.Default.Save();
-        this.CreateTrackerInterfaces();
+        case HardwareTracker.None:
+          return;
       }
+
+      Settings.Default.ActivatedHardwareTracker = tracker.ToString();
+      Settings.Default.Save();
+      this.CreateTrackerInterfaces();
     }
 
     /// <summary>
@@ -944,7 +959,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
-    private void btnUsercam_Click(object sender, EventArgs e)
+    private void BtnUsercamClick(object sender, EventArgs e)
     {
       if (this.btnUsercam.Checked)
       {
@@ -952,7 +967,7 @@ namespace Ogama.Modules.Recording
         if (!this.webcamPreview.TestCapture())
         {
           this.btnUsercam.Checked = false;
-          string message = "It seems that your system has no webcam plugged in, " +
+          var message = "It seems that your system has no webcam plugged in, " +
             "so user camera recording is not available at the moment. " +
             Environment.NewLine +
             "Try again after plugging in a camera or change the capture device.";
@@ -983,7 +998,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
-    private void btnSmoothing_Click(object sender, EventArgs e)
+    private void BtnSmoothingClick(object sender, EventArgs e)
     {
       this.smoothing = this.btnSmoothing.Checked;
     }
@@ -1003,23 +1018,23 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">A <see cref="TrialEventOccuredEventArgs"/> with the event data.</param>
-    private void objPresenter_TrialEventOccured(object sender, TrialEventOccuredEventArgs e)
+    private void ObjPresenterTrialEventOccured(object sender, TrialEventOccuredEventArgs e)
     {
       // Save scroll offsets for raw data transformation
       if (e.TrialEvent.Type == EventType.Scroll)
       {
-        string[] scrollOffsets = e.TrialEvent.Param.Split(';');
+        var scrollOffsets = e.TrialEvent.Param.Split(';');
         lock (this)
         {
           this.xScrollOffset = Convert.ToInt32(scrollOffsets[0]);
           this.yScrollOffset = Convert.ToInt32(scrollOffsets[1]);
         }
 
-        Point newScrollPosition = new Point(this.xScrollOffset, this.yScrollOffset);
+        var newScrollPosition = new Point(this.xScrollOffset, this.yScrollOffset);
         this.ThreadSafeSetAutoScrollPosition(newScrollPosition);
       }
 
-      long time = e.EventTime - this.recordingStarttime - this.currentTrialStarttime;
+      var time = e.EventTime - this.recordingStarttime - this.currentTrialStarttime;
 
       // Store trial event event
       e.TrialEvent.EventID = this.trialEventList.Count;
@@ -1027,13 +1042,15 @@ namespace Ogama.Modules.Recording
       e.TrialEvent.TrialSequence = this.trialSequenceCounter;
       e.TrialEvent.SubjectName = this.currentTracker.Subject.SubjectName;
 
-      if (this.trialSequenceCounter >= 0)
+      if (this.trialSequenceCounter < 0)
       {
-        this.trialEventList.Add(e.TrialEvent);
-        if (e.TrialEvent.Type != EventType.Marker)
-        {
-          this.WriteTrialEventToRawData(e.TrialEvent);
-        }
+        return;
+      }
+
+      this.trialEventList.Add(e.TrialEvent);
+      if (e.TrialEvent.Type != EventType.Marker)
+      {
+        this.WriteTrialEventToRawData(e.TrialEvent);
       }
     }
 
@@ -1044,7 +1061,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">A <see cref="CounterChangedEventArgs"/> with the event data.</param>
-    private void objPresenter_CounterChanged(object sender, CounterChangedEventArgs e)
+    private void ObjPresenterCounterChanged(object sender, CounterChangedEventArgs e)
     {
       this.counterChangedTime = this.GetCurrentTime();
 
@@ -1077,24 +1094,10 @@ namespace Ogama.Modules.Recording
         }
 
         // Set current trial
-        if (e.TrialID != -5)
-        {
-          this.currentTrial = this.trials[this.trials.GetIndexOfTrialByID(e.TrialID)];
-        }
-        else
-        {
-          this.currentTrial = null;
-        }
+        this.currentTrial = e.TrialID != -5 ? this.trials[this.trials.GetIndexOfTrialByID(e.TrialID)] : null;
 
         // Set current slide
-        if (this.currentTrial != null)
-        {
-          this.currentSlide = this.currentTrial[this.slideCounter];
-        }
-        else
-        {
-          this.currentSlide = null;
-        }
+        this.currentSlide = this.currentTrial != null ? this.currentTrial[this.slideCounter] : null;
       }
     }
 
@@ -1104,19 +1107,21 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">A <see cref="TrialEventOccuredEventArgs"/> with the event data.</param>
-    private void objPresenter_SlideChanged(object sender, SlideChangedEventArgs e)
+    private void ObjPresenterSlideChanged(object sender, SlideChangedEventArgs e)
     {
-      long time = this.counterChangedTime - this.recordingStarttime - this.currentTrialStarttime;
+      var time = this.counterChangedTime - this.recordingStarttime - this.currentTrialStarttime;
 
       // Store slide changed event
-      MediaEvent slideChangedEvent = new MediaEvent();
-      slideChangedEvent.EventID = this.trialEventList.Count;
-      slideChangedEvent.Param = e.SlideCounter + "#" + e.NextSlide.Name;
-      slideChangedEvent.Task = MediaEventTask.Show;
-      slideChangedEvent.Time = time;
-      slideChangedEvent.Type = EventType.Slide;
-      slideChangedEvent.SubjectName = this.currentTracker.Subject.SubjectName;
-      slideChangedEvent.TrialSequence = this.trialSequenceCounter;
+      var slideChangedEvent = new MediaEvent
+        {
+          EventID = this.trialEventList.Count,
+          Param = e.SlideCounter + "#" + e.NextSlide.Name,
+          Task = MediaEventTask.Show,
+          Time = time,
+          Type = EventType.Slide,
+          SubjectName = this.currentTracker.Subject.SubjectName,
+          TrialSequence = this.trialSequenceCounter
+        };
 
       if (this.trialSequenceCounter >= 0)
       {
@@ -1125,8 +1130,7 @@ namespace Ogama.Modules.Recording
       }
 
       // Store subjects response event
-      InputEvent inputEvent = new InputEvent();
-      inputEvent.EventID = this.trialEventList.Count;
+      var inputEvent = new InputEvent { EventID = this.trialEventList.Count };
       if (e.Response != null)
       {
         inputEvent.Param = e.Response.ToString();
@@ -1154,7 +1158,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">A <see cref="TrialChangedEventArgs"/> with the event data.</param>
-    private void objPresenter_TrialChanged(object sender, TrialChangedEventArgs e)
+    private void ObjPresenterTrialChanged(object sender, TrialChangedEventArgs e)
     {
       // Set time critical values
       long currentTime = this.counterChangedTime;
@@ -1168,7 +1172,7 @@ namespace Ogama.Modules.Recording
 
         // When rawData list exceeds sample limit or this was the last trial
         // write the samples into the database
-        if (this.rawDataLists[this.listCounter].Count > MINSAMPLESFORWRITINGTODATABASE
+        if (this.rawDataLists[this.listCounter].Count > Minsamplesforwritingtodatabase
           || e.NextTrial == null)
         {
           // Stop recording if this was the last trial or cancelled
@@ -1186,11 +1190,11 @@ namespace Ogama.Modules.Recording
           {
             // Save copy to dataset table in new thread
             AsyncHelper.FireAndForget(
-              new WaitCallback(this.StoreRecordsInDataSetTable),
+              new WaitCallback(StoreRecordsInDataSetTable),
               new DataToTable(this.rawDataLists[this.listCounter], this.subjectRawDataTable));
 
             this.listCounter++;
-            if (this.listCounter == NUMWRITINGTHREADS)
+            if (this.listCounter == Numwritingthreads)
             {
               this.listCounter = 0;
             }
@@ -1198,14 +1202,16 @@ namespace Ogama.Modules.Recording
         }
 
         // Write new trial information
-        TrialsData trialData = new TrialsData();
-        trialData.SubjectName = this.currentTracker.Subject.SubjectName;
-        trialData.TrialName = this.precedingTrial.Name;
-        trialData.TrialSequence = this.trialSequenceCounter - 1;
-        trialData.TrialID = this.precedingTrial.ID;
-        trialData.Category = e.Category;
-        trialData.TrialStartTime = this.currentTrialStarttime;
-        trialData.Duration = (int)(currentTime - this.recordingStarttime - this.currentTrialStarttime);
+        var trialData = new TrialsData
+          {
+            SubjectName = this.currentTracker.Subject.SubjectName,
+            TrialName = this.precedingTrial.Name,
+            TrialSequence = this.trialSequenceCounter - 1,
+            TrialID = this.precedingTrial.ID,
+            Category = this.precedingTrial[0].Category,
+            TrialStartTime = this.currentTrialStarttime,
+            Duration = (int)(currentTime - this.recordingStarttime - this.currentTrialStarttime)
+          };
 
         if (this.trialSequenceCounter > 0)
         {
@@ -1215,14 +1221,17 @@ namespace Ogama.Modules.Recording
         // Store usercam start event if applicable
         if (this.chbRecordAudio.Checked || this.chbRecordVideo.Checked)
         {
-          MediaEvent usercamVideoEvent = new MediaEvent();
-          usercamVideoEvent.EventID = this.trialEventList.Count;
-          usercamVideoEvent.Param = this.currentTrialVideoStartTime.ToString();
-          usercamVideoEvent.Task = MediaEventTask.Start;
-          usercamVideoEvent.Time = 0;
-          usercamVideoEvent.Type = EventType.Usercam;
-          usercamVideoEvent.SubjectName = this.currentTracker.Subject.SubjectName;
-          usercamVideoEvent.TrialSequence = this.trialSequenceCounter - 1;
+          var usercamVideoEvent = new MediaEvent
+            {
+              EventID = this.trialEventList.Count,
+              Param = this.currentTrialVideoStartTime.ToString(),
+              Task = MediaEventTask.Start,
+              Time = 0,
+              Type = EventType.Usercam,
+              SubjectName = this.currentTracker.Subject.SubjectName,
+              TrialSequence = this.trialSequenceCounter - 1
+            };
+
           if (this.trialSequenceCounter > 0)
           {
             this.trialEventList.Add(usercamVideoEvent);
@@ -1230,18 +1239,20 @@ namespace Ogama.Modules.Recording
         }
 
         // Store subjects response event
-        InputEvent inputEvent = new InputEvent();
-        inputEvent.EventID = this.trialEventList.Count;
+        var inputEvent = new InputEvent
+          {
+            EventID = this.trialEventList.Count,
+            SubjectName = this.currentTracker.Subject.SubjectName,
+            Task = InputEventTask.SlideChange,
+            Time = trialData.Duration,
+            TrialSequence = this.trialSequenceCounter - 1,
+            Type = EventType.Response
+          };
+
         if (e.Response != null)
         {
           inputEvent.Param = e.Response.ToString();
         }
-
-        inputEvent.SubjectName = this.currentTracker.Subject.SubjectName;
-        inputEvent.Task = InputEventTask.SlideChange;
-        inputEvent.Time = trialData.Duration;
-        inputEvent.TrialSequence = this.trialSequenceCounter - 1;
-        inputEvent.Type = EventType.Response;
 
         if (this.trialSequenceCounter >= 0)
         {
@@ -1258,7 +1269,7 @@ namespace Ogama.Modules.Recording
       }
 
       // Update recorder modules viewer
-      Thread updateLiveViewerThread = new Thread(new ThreadStart(this.NewSlideAvailable));
+      var updateLiveViewerThread = new Thread(this.NewSlideAvailable);
       updateLiveViewerThread.SetApartmentState(ApartmentState.STA);
       updateLiveViewerThread.Start();
     }
@@ -1269,9 +1280,9 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="stateInfo">An <see cref="Object"/> with the thread param which is 
     /// a <see cref="List{RawData}"/></param>
-    private void StoreRecordsInDataSetTable(object stateInfo)
+    private static void StoreRecordsInDataSetTable(object stateInfo)
     {
-      DataToTable data = (DataToTable)stateInfo;
+      var data = (DataToTable)stateInfo;
 
       if (!Queries.SaveDataToTable(data.RawDataList, data.RawDataTable))
       {
@@ -1288,31 +1299,23 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
-    private void objPresenter_PresentationDone(object sender, EventArgs e)
+    private void ObjPresenterPresentationDone(object sender, EventArgs e)
     {
       try
       {
         // Wait for writing of raw data finishes
-        bool writingFinished = false;
+        var writingFinished = false;
         while (!writingFinished)
         {
-          bool dataFound = false;
-          foreach (List<RawData> rawData in this.rawDataLists)
+          var dataFound = false;
+          if (this.rawDataLists.Any(rawData => rawData.Count > 0))
           {
-            if (rawData.Count > 0)
-            {
-              Application.DoEvents();
-              Thread.Sleep(500);
-              dataFound = true;
-              break;
-            }
+            Application.DoEvents();
+            Thread.Sleep(500);
+            dataFound = true;
           }
 
-          if (dataFound)
-          {
-            writingFinished = false;
-          }
-          else
+          if (!dataFound)
           {
             writingFinished = true;
           }
@@ -1323,9 +1326,9 @@ namespace Ogama.Modules.Recording
 
         // Show the question for saving the new sampling data on the 
         // controllers screen
-        AskSaveDataDialog saveDlg = new AskSaveDataDialog();
-        Rectangle controllerBounds = PresentationScreen.GetControllerWorkingArea();
-        Point centerControllerScreen = new Point(
+        var saveDlg = new AskSaveDataDialog();
+        var controllerBounds = PresentationScreen.GetControllerWorkingArea();
+        var centerControllerScreen = new Point(
         controllerBounds.Width / 2,
         controllerBounds.Height / 2);
         Cursor.Position = centerControllerScreen;
@@ -1393,7 +1396,7 @@ namespace Ogama.Modules.Recording
     /// rows (response entries or gaze data entries)</remarks>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">A <see cref="NewRawDataAvailableEventArgs"/> with the event data.</param>
-    private void RecordModule_NewRawDataAvailable(object sender, NewRawDataAvailableEventArgs e)
+    private void RecordModuleNewRawDataAvailable(object sender, NewRawDataAvailableEventArgs e)
     {
       // Write row into table
       try
@@ -1428,7 +1431,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">A <see cref="CaptureModeEventArgs"/> with the event data.</param>
-    private void webcamPreview_WebcamAvailable(object sender, CaptureModeEventArgs e)
+    private void WebcamPreviewWebcamAvailable(object sender, CaptureModeEventArgs e)
     {
       // Show user cam by default
       this.spcPanelUserCam.Panel2Collapsed = false;
@@ -1443,7 +1446,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Sender of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void tmrWaitForPresentationEnd_Tick(object sender, EventArgs e)
+    private void TmrWaitForPresentationEndTick(object sender, EventArgs e)
     {
       if (!this.recordingBusy)
       {
@@ -1471,7 +1474,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Sender of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void tmrRecordClock_Tick(object sender, EventArgs e)
+    private void TmrRecordClockTick(object sender, EventArgs e)
     {
       this.ThreadSafeUpdateLabel(this.recordTimerWatch.Elapsed.ToString());
     }
@@ -1491,17 +1494,17 @@ namespace Ogama.Modules.Recording
     /// wires the events.
     /// </summary>
     /// <param name="data">A <see cref="object"/> with the list of slides.</param>
-    private void PresentationThread_DoWork(object data)
+    private void PresentationThreadDoWork(object data)
     {
       // Create presentation form
       this.presenterForm = new PresenterModule();
 
       // Cast thread data.
-      List<object> threadParams = (List<object>)data;
-      TrialCollection trials = threadParams[0] as TrialCollection;
-      Trigger trigger = threadParams[1] as Trigger;
-      bool enableTrigger = (bool)threadParams[2];
-      ScreenCaptureProperties screenCaptureProperties = (ScreenCaptureProperties)threadParams[3];
+      var threadParams = (List<object>)data;
+      var trialCollection = threadParams[0] as TrialCollection;
+      var trigger = threadParams[1] as Trigger;
+      var enableTrigger = (bool)threadParams[2];
+      var captureProperties = (ScreenCaptureProperties)threadParams[3];
 
       CaptureDeviceProperties userCameraProperties = null;
 
@@ -1519,10 +1522,10 @@ namespace Ogama.Modules.Recording
       this.presenterForm.GeneralTrigger = trigger;
 
       // Set slide list of presenter
-      this.presenterForm.TrialList = trials;
+      this.presenterForm.TrialList = trialCollection;
 
       // Set screen capture device properties
-      this.presenterForm.ScreenCaptureProperties = screenCaptureProperties;
+      this.presenterForm.ScreenCaptureProperties = captureProperties;
 
       // Set user camera properties
       this.presenterForm.UserCameraProperties = userCameraProperties;
@@ -1531,14 +1534,14 @@ namespace Ogama.Modules.Recording
       this.presenterForm.GetTimeMethod = getTimeMethod;
 
       // Wire presenter events
-      this.presenterForm.CounterChanged += new CounterChangedEventHandler(this.objPresenter_CounterChanged);
-      this.presenterForm.SlideChanged += new SlideChangedEventHandler(this.objPresenter_SlideChanged);
-      this.presenterForm.TrialChanged += new TrialChangedEventHandler(this.objPresenter_TrialChanged);
-      this.presenterForm.TrialEventOccured += new TrialEventOccuredEventHandler(this.objPresenter_TrialEventOccured);
-      this.presenterForm.PresentationDone += new EventHandler(this.objPresenter_PresentationDone);
+      this.presenterForm.CounterChanged += this.ObjPresenterCounterChanged;
+      this.presenterForm.SlideChanged += this.ObjPresenterSlideChanged;
+      this.presenterForm.TrialChanged += this.ObjPresenterTrialChanged;
+      this.presenterForm.TrialEventOccured += this.ObjPresenterTrialEventOccured;
+      this.presenterForm.PresentationDone += this.ObjPresenterPresentationDone;
 
       // Wire this forms event
-      this.NewRawDataAvailable += new NewRawDataAvailableEventHandler(this.RecordModule_NewRawDataAvailable);
+      this.NewRawDataAvailable += this.RecordModuleNewRawDataAvailable;
 
       // Captures input to presentation form.
       this.presenterForm.Capture = true;
@@ -1547,17 +1550,17 @@ namespace Ogama.Modules.Recording
       this.presenterForm.ShowDialog();
 
       // Presentation is done, so unplug event handlers.
-      this.presenterForm.CounterChanged -= new CounterChangedEventHandler(this.objPresenter_CounterChanged);
-      this.presenterForm.SlideChanged -= new SlideChangedEventHandler(this.objPresenter_SlideChanged);
-      this.presenterForm.TrialChanged -= new TrialChangedEventHandler(this.objPresenter_TrialChanged);
-      this.presenterForm.TrialEventOccured -= new TrialEventOccuredEventHandler(this.objPresenter_TrialEventOccured);
-      this.presenterForm.PresentationDone -= new EventHandler(this.objPresenter_PresentationDone);
+      this.presenterForm.CounterChanged -= this.ObjPresenterCounterChanged;
+      this.presenterForm.SlideChanged -= this.ObjPresenterSlideChanged;
+      this.presenterForm.TrialChanged -= this.ObjPresenterTrialChanged;
+      this.presenterForm.TrialEventOccured -= this.ObjPresenterTrialEventOccured;
+      this.presenterForm.PresentationDone -= this.ObjPresenterPresentationDone;
 
       // Delete presentation form
       this.presenterForm.Dispose();
       this.presenterForm = null;
 
-      this.NewRawDataAvailable -= new NewRawDataAvailableEventHandler(this.RecordModule_NewRawDataAvailable);
+      this.NewRawDataAvailable -= this.RecordModuleNewRawDataAvailable;
     }
 
     /// <summary>
@@ -1568,17 +1571,17 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event</param>
     /// <param name="e">A <see cref="DoWorkEventArgs"/> with the event data.</param>
-    private void bgwSaveSplash_DoWork(object sender, DoWorkEventArgs e)
+    private void BgwSaveSplashDoWork(object sender, DoWorkEventArgs e)
     {
       // Create splash object
-      SavingSplash newSplash = new SavingSplash();
+      var newSplash = new SavingSplash();
 
       // Get the BackgroundWorker that raised this event.
-      BackgroundWorker worker = sender as BackgroundWorker;
+      var worker = sender as BackgroundWorker;
       newSplash.Worker = worker;
 
       // Get the description to be shown in the headline.
-      string description = e.Argument as string;
+      var description = e.Argument as string;
       newSplash.Description = description;
 
       // Show dialog
@@ -1628,10 +1631,12 @@ namespace Ogama.Modules.Recording
     /// </summary>
     private void ShowScreenCaptureDialog()
     {
-      ScreenCaptureDialog dialog = new ScreenCaptureDialog();
+      var dialog = new ScreenCaptureDialog
+        {
+          VideoCompressor = this.screenCaptureProperties.VideoCompressor
+        };
 
       // Initialize dialog with defaults
-      dialog.VideoCompressor = this.screenCaptureProperties.VideoCompressor;
       if (Document.ActiveDocument.ExperimentSettings.ScreenCaptureFramerate < 5)
       {
         Document.ActiveDocument.ExperimentSettings.ScreenCaptureFramerate = 10;
@@ -1660,24 +1665,25 @@ namespace Ogama.Modules.Recording
 
       // Reset tab control
       this.tclEyetracker.TabPages.Clear();
+      this.tclEyetracker.TabPages.Add(this.tbpMirametrix);
       this.tclEyetracker.TabPages.Add(this.tbpTobii);
       this.tclEyetracker.TabPages.Add(this.tbpAlea);
       this.tclEyetracker.TabPages.Add(this.tbpSMI);
       this.tclEyetracker.TabPages.Add(this.tbpAsl);
       this.tclEyetracker.TabPages.Add(this.tbpMouseOnly);
-      this.tclEyetracker.TabPages.Add(this.tbpITU);
-      this.tclEyetracker.TabPages.Add(this.tbpEyeTech);
+      this.tclEyetracker.TabPages.Add(this.tbpGazetrackerIPClient);
+      this.tclEyetracker.TabPages.Add(this.tbpGazetrackerDirectClient);
 
       // Read activated tracker value from the application settings
-      string activatedTracker = Properties.Settings.Default.ActivatedHardwareTracker;
-      HardwareTracker tracker = (HardwareTracker)Enum.Parse(typeof(HardwareTracker), activatedTracker);
+      var activatedTracker = Settings.Default.ActivatedHardwareTracker;
+      var tracker = (HardwareTracker)Enum.Parse(typeof(HardwareTracker), activatedTracker);
 
       // Show dialog if no tracking device is selected.
       if (tracker == HardwareTracker.None)
       {
         tracker = this.ShowTrackerSelectionDialog();
-        Properties.Settings.Default.ActivatedHardwareTracker = tracker.ToString();
-        Properties.Settings.Default.Save();
+        Settings.Default.ActivatedHardwareTracker = tracker.ToString();
+        Settings.Default.Save();
       }
 
       this.tclEyetracker.SuspendLayout();
@@ -1685,7 +1691,7 @@ namespace Ogama.Modules.Recording
       if (tracker == (tracker | HardwareTracker.MouseOnly))
       {
         // Create mouse only tracker
-        MouseOnlyTracker newMouseOnly = new MouseOnlyTracker(
+        var newMouseOnly = new MouseOnlyTracker(
           this,
           null,
           this.btnMouseOnlySubject,
@@ -1706,7 +1712,7 @@ namespace Ogama.Modules.Recording
       if (tracker == (tracker | HardwareTracker.Alea))
       {
         // Create alea tracker
-        AleaTracker newAlea = new AleaTracker(
+        var newAlea = new AleaTracker(
           ref this.labelCalibrationResult,
           this.tbpAlea,
           this,
@@ -1732,11 +1738,10 @@ namespace Ogama.Modules.Recording
         }
       }
 
-#if TOBII
       if (tracker == (tracker | HardwareTracker.Tobii))
       {
-        // Create mouse only tracker
-        TobiiTracker newTobii = new TobiiTracker(
+        // Create tobii tracker
+        var newTobii = new TobiiTracker(
           this,
           this.spcTobiiControls,
           this.spcTobiiTrackStatus.Panel1,
@@ -1759,12 +1764,35 @@ namespace Ogama.Modules.Recording
           this.tclEyetracker.TabPages.Remove(this.tbpTobii);
         }
       }
-#else
-      if (this.tclEyetracker.TabPages.Contains(this.tbpTobii))
+
+      if (tracker == (tracker | HardwareTracker.Mirametrix))
       {
-        this.tclEyetracker.TabPages.Remove(this.tbpTobii);
+        // Create Mirametrix tracker
+        var newMirametrix = new MirametrixTracker(
+            ref this.labelCalibrationResultMirametrix,
+            this.tbpMirametrix,
+            this,
+            this.spcMirametrixControls,
+            this.spcMirametrixTrackStatus.Panel1,
+            this.spcMirametrixCalibPlot.Panel1,
+            this.btnMirametrixShowOnPresentationScreen,
+            this.btnMirametrixAcceptCalibration,
+            this.btnMirametrixRecalibrate,
+            this.btnMirametrixConnect,
+            this.btnMirametrixSubjectName,
+            this.btnMirametrixCalibrate,
+            this.btnMirametrixRecord,
+            this.txbMirametrixSubjectName);
+
+        this.trackerInterfaces.Add(HardwareTracker.Mirametrix, newMirametrix);
       }
-#endif
+      else
+      {
+        if (this.tclEyetracker.TabPages.Contains(this.tbpMirametrix))
+        {
+          this.tclEyetracker.TabPages.Remove(this.tbpMirametrix);
+        }
+      }
 
       if (tracker == (tracker | HardwareTracker.EyeTech))
       {
@@ -1790,7 +1818,7 @@ namespace Ogama.Modules.Recording
       if (tracker == (tracker | HardwareTracker.SMI))
       {
         // Create mouse only tracker
-        SMITracker newSMI = new SMITracker(
+        var newSMI = new SMITracker(
           this,
           this.btnSMIConnect,
           this.btnSMISubjectName,
@@ -1808,11 +1836,10 @@ namespace Ogama.Modules.Recording
         }
       }
 
-#if ASL
       if (tracker == (tracker | HardwareTracker.ASL))
       {
         // Create ASL tracker
-        AslTracker newAsl = new AslTracker(
+        var newAsl = new AslTracker(
               this,
               this.btnAslConnect,
               this.btnAslSubjectName,
@@ -1828,32 +1855,20 @@ namespace Ogama.Modules.Recording
           this.tclEyetracker.TabPages.Remove(this.tbpAsl);
         }
       }
-#else
-      if (this.tclEyetracker.TabPages.Contains(this.tbpAsl))
-      {
-          this.tclEyetracker.TabPages.Remove(this.tbpAsl);
-      }
-#endif
 
-      if (tracker == (tracker | HardwareTracker.ITU))
+      if (tracker == (tracker | HardwareTracker.GazetrackerIPClient))
       {
         // Create ITU GazeTracker
-        ITUGazeTracker.ITUGazeTrackerBase newITU = new ITUGazeTracker.ITUDefaultGazeTracker(
+        var newGazetrackerIPClient = new GazetrackerIPClientTracker(
           this,
-          this.spcITUControls,
-          this.spcITUTrackStatus.Panel1,
-          this.spcITUCalibPlot.Panel1,
-          this.btnITUShowOnPresentationScreen,
-          this.btnITUAcceptCalibration,
-          this.btnITURecalibrate,
-          this.btnITUConnect,
-          this.btnITUAdjust,
-          this.btnITUSubjectName,
-          this.btnITUCalibrate,
-          this.btnITURecord,
-          this.txbITUSubjectName);
+          this.txbGazetrackerIPStatus,
+          this.btnGazetrackerIPLaunch,
+          this.btnGazetrackerIPConnect,
+          this.btnGazetrackerIPSubject,
+          this.btnGazetrackerIPRecord,
+          this.txbGazetrackerIPSubject);
 
-        this.trackerInterfaces.Add(HardwareTracker.ITU, newITU);
+        this.trackerInterfaces.Add(HardwareTracker.GazetrackerIPClient, newGazetrackerIPClient);
 
         // Disable Usercam button by default,
         // because gazetracker often uses the first connected camera device
@@ -1863,9 +1878,39 @@ namespace Ogama.Modules.Recording
       }
       else
       {
-        if (this.tclEyetracker.TabPages.Contains(this.tbpITU))
+        if (this.tclEyetracker.TabPages.Contains(this.tbpGazetrackerIPClient))
         {
-          this.tclEyetracker.TabPages.Remove(this.tbpITU);
+          this.tclEyetracker.TabPages.Remove(this.tbpGazetrackerIPClient);
+        }
+      }
+
+      if (tracker == (tracker | HardwareTracker.GazetrackerDirectClient))
+      {
+        // Create ITU GazeTracker
+        var newGazetrackerDirectClient = new GazetrackerDirectClientTracker(
+          this,
+          this.eyeVideoControlGazetracker,
+          this.btnGazetrackerDirectClientShowOnPresentationScreen,
+          this.btnGazetrackerDirectClientConnect,
+          this.btnGazetrackerDirectClientAdjust,
+          this.btnGazetrackerDirectClientSubject,
+          this.btnGazetrackerDirectClientCalibrate,
+          this.btnGazetrackerDirectClientRecord,
+          this.txbGazetrackerDirectClientSubject);
+
+        this.trackerInterfaces.Add(HardwareTracker.GazetrackerDirectClient, newGazetrackerDirectClient);
+
+        // Disable Usercam button by default,
+        // because gazetracker often uses the first connected camera device
+        // which would otherwise used by the usercam
+        this.btnUsercam.Checked = false;
+        this.spcPanelUserCam.Panel2Collapsed = true;
+      }
+      else
+      {
+        if (this.tclEyetracker.TabPages.Contains(this.tbpGazetrackerDirectClient))
+        {
+          this.tclEyetracker.TabPages.Remove(this.tbpGazetrackerDirectClient);
         }
       }
 
@@ -1901,13 +1946,8 @@ namespace Ogama.Modules.Recording
     /// with the enabled tracking devices.</returns>
     private HardwareTracker ShowTrackerSelectionDialog()
     {
-      SelectTracker dialog = new SelectTracker();
-      if (dialog.ShowDialog() == DialogResult.OK)
-      {
-        return dialog.SelectedTracker;
-      }
-
-      return HardwareTracker.None;
+      var dialog = new SelectTracker();
+      return dialog.ShowDialog() == DialogResult.OK ? dialog.SelectedTracker : HardwareTracker.None;
     }
 
     /// <summary>
@@ -1977,11 +2017,14 @@ namespace Ogama.Modules.Recording
 
         this.webcamPreview.Properties.CaptureMode = mode;
 
-        List<object> threadParameters = new List<object>();
-        threadParameters.Add(this.trials);
-        threadParameters.Add(this.generalTrigger);
-        threadParameters.Add(this.btnTrigger.Checked);
-        threadParameters.Add(this.screenCaptureProperties);
+        var threadParameters = new List<object>
+          {
+            this.trials, 
+            this.generalTrigger, 
+            this.btnTrigger.Checked, 
+            this.screenCaptureProperties
+          };
+
         if (this.btnUsercam.Checked)
         {
           threadParameters.Add(this.webcamPreview.Properties);
@@ -1991,31 +2034,31 @@ namespace Ogama.Modules.Recording
         this.currentTrialVideoStartTime = 0;
         this.currentTracker.Record();
 
-        Stopwatch watch = new Stopwatch();
-        watch.Start();
+        var stopwatch = new Stopwatch();
+        stopwatch.Start();
 
         // Wait for first sample to be received
         while (this.GetCurrentTime() < 0)
         {
           Application.DoEvents();
-          if (watch.ElapsedMilliseconds > 5000)
+          if (stopwatch.ElapsedMilliseconds > 5000)
           {
-            string message = "Could not start recording, because we received no gaze samples from the tracking device during 5 seconds." +
+            var message = "Could not start recording, because we received no gaze samples from the tracking device during 5 seconds." +
               Environment.NewLine + "Please be sure your tracker is up and running and collecting gaze data, resp. is correct calibrated.";
             InformationDialog.Show("No incoming tracker data", message, false, MessageBoxIcon.Warning);
-            watch.Stop();
+            stopwatch.Stop();
 
             return false;
           }
         }
 
-        watch.Stop();
+        stopwatch.Stop();
 
         // Set recording flag
         this.recordingBusy = true;
 
         // Initialize presentation thread
-        this.presentationThread = new Thread(new ParameterizedThreadStart(this.PresentationThread_DoWork));
+        this.presentationThread = new Thread(this.PresentationThreadDoWork);
         this.presentationThread.SetApartmentState(ApartmentState.STA);
         this.presentationThread.Start(threadParameters);
 
@@ -2045,7 +2088,7 @@ namespace Ogama.Modules.Recording
     {
       if (this.currentTrial == null)
       {
-        this.currentSlide = defaultSlide;
+        this.currentSlide = DefaultSlide;
       }
 
       if (this.systemHasSecondaryScreen || this.forcePanelViewerUpdate)
@@ -2057,7 +2100,7 @@ namespace Ogama.Modules.Recording
         {
           if (this.currentSlide.VGStimuli[0] is VGScrollImage)
           {
-            VGScrollImage webpageScreenshot = (VGScrollImage)this.currentSlide.VGStimuli[0];
+            var webpageScreenshot = (VGScrollImage)this.currentSlide.VGStimuli[0];
             while (!File.Exists(webpageScreenshot.FullFilename))
             {
               Application.DoEvents();
@@ -2065,7 +2108,6 @@ namespace Ogama.Modules.Recording
 
             // When the file exists it must be ensured, that it is released
             // by its creator...
-            FileStream fs = null;
             int attempts = 0;
 
             // Loop allow multiple attempts
@@ -2073,7 +2115,7 @@ namespace Ogama.Modules.Recording
             {
               try
               {
-                fs = File.OpenRead(webpageScreenshot.FullFilename);
+                FileStream fs = File.OpenRead(webpageScreenshot.FullFilename);
 
                 // If we get here, the File.Open succeeded, so break out of the loop
                 fs.Dispose();
@@ -2090,11 +2132,9 @@ namespace Ogama.Modules.Recording
                   MessageBox.Show("Wait Time did not was enough");
                   break;
                 }
-                else
-                {
-                  // Sleep before making another attempt
-                  Thread.Sleep(200);
-                }
+
+                // Sleep before making another attempt
+                Thread.Sleep(200);
               }
             }
 
@@ -2174,7 +2214,7 @@ namespace Ogama.Modules.Recording
         Application.DoEvents();
 
         // Calculate fixations
-        FixationCalculation calculationObject = new FixationCalculation();
+        var calculationObject = new FixationCalculation();
         calculationObject.CalcFixations(SampleType.Gaze, subject, trialsTable, null, null);
         calculationObject.CalcFixations(SampleType.Mouse, subject, trialsTable, null, null);
 
@@ -2182,8 +2222,8 @@ namespace Ogama.Modules.Recording
 
         // Show the success information on the 
         // controllers screen
-        SavingSuccessDialog successDlg = new SavingSuccessDialog();
-        Rectangle controllerBounds = PresentationScreen.GetControllerWorkingArea();
+        var successDlg = new SavingSuccessDialog();
+        var controllerBounds = PresentationScreen.GetControllerWorkingArea();
         successDlg.Location =
           new Point(
           controllerBounds.Width / 2 - successDlg.Width / 2,
@@ -2260,15 +2300,14 @@ namespace Ogama.Modules.Recording
       this.lastTimeStamp = -1;
 
       this.currentTrial = null;
-      this.currentSlide = defaultSlide;
+      this.currentSlide = DefaultSlide;
 
       this.recordTimerWatch.Reset();
       this.tmrRecordClock.Stop();
       this.tmrRecordClock.Dispose();
 
-      this.tmrRecordClock = new System.Windows.Forms.Timer();
-      this.tmrRecordClock.Interval = 1000;
-      this.tmrRecordClock.Tick += new EventHandler(this.tmrRecordClock_Tick);
+      this.tmrRecordClock = new System.Windows.Forms.Timer { Interval = 1000 };
+      this.tmrRecordClock.Tick += this.TmrRecordClockTick;
 
       // Stop updating viewer
       this.Picture.StopAnimation();
@@ -2287,15 +2326,13 @@ namespace Ogama.Modules.Recording
     private void InitializeScreenCapture()
     {
       // Only needed if there is a flash movie.
-      if (!Document.ActiveDocument.ExperimentSettings.SlideShow.HasFlashContent())
+      if (!Document.ActiveDocument.ExperimentSettings.SlideShow.HasScreenCaptureContent())
       {
         this.screenCaptureProperties.CaptureMode = CaptureMode.None;
         return;
       }
-      else
-      {
-        this.screenCaptureProperties.CaptureMode = CaptureMode.Video;
-      }
+
+      this.screenCaptureProperties.CaptureMode = CaptureMode.Video;
     }
 
     /// <summary>
@@ -2312,7 +2349,13 @@ namespace Ogama.Modules.Recording
 
       switch (this.tclEyetracker.SelectedTab.Name)
       {
-#if TOBII
+        case "tbpMirametrix":
+          if (this.trackerInterfaces.ContainsKey(HardwareTracker.Mirametrix))
+          {
+            this.currentTracker = this.trackerInterfaces[HardwareTracker.Mirametrix];
+          }
+
+          break;
         case "tbpTobii":
           if (this.trackerInterfaces.ContainsKey(HardwareTracker.Tobii))
           {
@@ -2320,8 +2363,6 @@ namespace Ogama.Modules.Recording
           }
 
           break;
-#endif
-#if ASL
         case "tbpAsl":
           if (this.trackerInterfaces.ContainsKey(HardwareTracker.ASL))
           {
@@ -2329,7 +2370,6 @@ namespace Ogama.Modules.Recording
           }
 
           break;
-#endif
         case "tbpEyeTech":
           if (this.trackerInterfaces.ContainsKey(HardwareTracker.EyeTech))
           {
@@ -2359,10 +2399,17 @@ namespace Ogama.Modules.Recording
           }
 
           break;
-        case "tbpITU":
-          if (this.trackerInterfaces.ContainsKey(HardwareTracker.ITU))
+        case "tbpGazetrackerDirectClient":
+          if (this.trackerInterfaces.ContainsKey(HardwareTracker.GazetrackerDirectClient))
           {
-            this.currentTracker = this.trackerInterfaces[HardwareTracker.ITU];
+            this.currentTracker = this.trackerInterfaces[HardwareTracker.GazetrackerDirectClient];
+          }
+
+          break;
+        case "tbpGazetrackerIPClient":
+          if (this.trackerInterfaces.ContainsKey(HardwareTracker.GazetrackerIPClient))
+          {
+            this.currentTracker = this.trackerInterfaces[HardwareTracker.GazetrackerIPClient];
           }
 
           break;
@@ -2395,31 +2442,23 @@ namespace Ogama.Modules.Recording
     /// </summary>
     private void SubmitPresentationScreenToSettings()
     {
-      if (this.btnPrimary.Checked)
-      {
-        Settings.Default.PresentationScreenMonitor = "Primary";
-      }
-      else
-      {
-        Settings.Default.PresentationScreenMonitor = "Secondary";
-      }
-
+      Settings.Default.PresentationScreenMonitor = this.btnPrimary.Checked ? "Primary" : "Secondary";
       Settings.Default.Save();
       this.InitializeScreenCapture();
     }
 
     /// <summary>
     /// This method is a quick check whether two points are near.
-    /// It uses the <see cref="MAXDISTANCENEAR"/> constant to check.
+    /// It uses the <see cref="Maxdistancenear"/> constant to check.
     /// </summary>
     /// <param name="firstPt">First point</param>
     /// <param name="secondPt">Second Point</param>
     /// <returns><strong>True</strong> if points are near, otherwise <strong>false</strong>.</returns>
     private bool PointsArNear(PointF firstPt, PointF secondPt)
     {
-      if (Math.Abs(firstPt.X - secondPt.X) < MAXDISTANCENEAR)
+      if (Math.Abs(firstPt.X - secondPt.X) < Maxdistancenear)
       {
-        if (Math.Abs(firstPt.Y - secondPt.Y) < MAXDISTANCENEAR)
+        if (Math.Abs(firstPt.Y - secondPt.Y) < Maxdistancenear)
         {
           return true;
         }
@@ -2438,13 +2477,14 @@ namespace Ogama.Modules.Recording
     private void WriteTrialEventToRawData(TrialEvent inputEvent)
     {
       // Create a new RawData object
-      RawData newRawData = new RawData();
-
       // Fill its members with current values.
-      newRawData.SubjectName = this.currentTracker.Subject.SubjectName;
-      newRawData.TrialSequence = this.trialSequenceCounter;
-      newRawData.Time = inputEvent.Time + this.currentTrialStarttime;
-      newRawData.EventID = inputEvent.EventID;
+      var newRawData = new RawData
+        {
+          SubjectName = this.currentTracker.Subject.SubjectName,
+          TrialSequence = this.trialSequenceCounter,
+          Time = inputEvent.Time + this.currentTrialStarttime,
+          EventID = inputEvent.EventID
+        };
 
       // Raise the NewRawDataAvailable event with the new data
       // to submit its contents to the database.
@@ -2459,10 +2499,10 @@ namespace Ogama.Modules.Recording
     /// or <strong>null</strong> if the mouse is out of presentation screen.</returns>
     private PointF? GetMousePosition()
     {
-      PointF newMousePos = new PointF();
+      var newMousePos = new PointF();
 
       // Get Mouse State.
-      Point mousePos = Control.MousePosition;
+      var mousePos = MousePosition;
       newMousePos.X = (float)(mousePos.X - this.xPosition);
       newMousePos.Y = (float)(mousePos.Y - this.yPosition);
 

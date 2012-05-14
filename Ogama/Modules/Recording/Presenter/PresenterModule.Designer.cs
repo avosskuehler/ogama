@@ -1,4 +1,4 @@
-﻿namespace Ogama.Modules.Recording
+﻿namespace Ogama.Modules.Recording.Presenter
 {
   partial class PresenterModule
   {
@@ -13,9 +13,9 @@
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      if (disposing && (components != null))
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -32,23 +32,23 @@
       this.panelTwo = new OgamaControls.BufferedGraphicsRenderPanel();
       this.SuspendLayout();
       // 
-      // panel1
+      // panelOne
       // 
       this.panelOne.BackColor = System.Drawing.Color.Gold;
       this.panelOne.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelOne.Location = new System.Drawing.Point(0, 0);
-      this.panelOne.Name = "panel1";
+      this.panelOne.Name = "panelOne";
       this.panelOne.Size = new System.Drawing.Size(640, 480);
       this.panelOne.TabIndex = 0;
       this.panelOne.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmPresenter_MouseDown);
       this.panelOne.MouseUp += new System.Windows.Forms.MouseEventHandler(this.frmPresenter_MouseUp);
       // 
-      // panel2
+      // panelTwo
       // 
       this.panelTwo.BackColor = System.Drawing.Color.Green;
       this.panelTwo.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelTwo.Location = new System.Drawing.Point(0, 0);
-      this.panelTwo.Name = "panel2";
+      this.panelTwo.Name = "panelTwo";
       this.panelTwo.Size = new System.Drawing.Size(640, 480);
       this.panelTwo.TabIndex = 0;
       this.panelTwo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmPresenter_MouseDown);
@@ -66,11 +66,11 @@
       this.Name = "PresenterModule";
       this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
       this.Text = "frmPresenter";
-      this.Load += new System.EventHandler(this.PresenterModule_Load);
-      this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.frmPresenter_MouseUp);
-      this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmPresenter_MouseDown);
       this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmPresenter_FormClosing);
+      this.Load += new System.EventHandler(this.PresenterModule_Load);
       this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmPresenter_KeyDown);
+      this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmPresenter_MouseDown);
+      this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.frmPresenter_MouseUp);
       this.ResumeLayout(false);
 
     }

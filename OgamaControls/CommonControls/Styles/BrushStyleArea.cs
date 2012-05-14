@@ -9,11 +9,12 @@ using System.Drawing.Drawing2D;
 using System.Configuration;
 using System.Runtime.Serialization;
 using VectorGraphics;
-using VectorGraphics.CustomEventArgs;
 using VectorGraphics.Elements;
 
 namespace OgamaControls
 {
+  using VectorGraphics.Tools.CustomEventArgs;
+
   /// <summary>
   /// Area to show pen style.
   /// </summary>

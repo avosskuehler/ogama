@@ -1,5 +1,7 @@
-﻿namespace Ogama.MainWindow
+﻿namespace Ogama.MainWindow.Dialogs
 {
+  using Ogama.Modules.Common.Controls;
+
   partial class CheckForUpdates
   {
     /// <summary>
@@ -13,9 +15,9 @@
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      if (disposing && (components != null))
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -45,7 +47,7 @@
       this.lblAdditionalHint = new System.Windows.Forms.Label();
       this.tmrConnect = new System.Windows.Forms.Timer(this.components);
       this.grbResults = new System.Windows.Forms.GroupBox();
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       ((System.ComponentModel.ISupportInitialize)(this.pcbOgama)).BeginInit();
       this.grbResults.SuspendLayout();
       this.SuspendLayout();
@@ -253,7 +255,7 @@
     private System.Windows.Forms.Button btnOK;
     private System.Windows.Forms.Label lblResult;
     private System.Windows.Forms.LinkLabel llbDownloadUri;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
     private System.Windows.Forms.ProgressBar pgbDownload;
     private System.Windows.Forms.Label lblDownloadStatus;
     private System.Windows.Forms.Label lblYourVersion;

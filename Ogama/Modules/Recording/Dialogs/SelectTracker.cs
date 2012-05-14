@@ -1,7 +1,7 @@
-﻿// <copyright file="SelectTracker.cs" company="FU Berlin">
+// <copyright file="SelectTracker.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,19 +9,22 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
-namespace Ogama.Modules.Recording
+namespace Ogama.Modules.Recording.Dialogs
 {
   using System;
-  using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Data;
-  using System.Drawing;
-  using System.Text;
   using System.Windows.Forms;
+
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
+  using Ogama.MainWindow.Dialogs;
+  using Ogama.Modules.Recording.AleaInterface;
+  using Ogama.Modules.Recording.ASLInterface;
+  using Ogama.Modules.Recording.GazegroupInterface;
+  using Ogama.Modules.Recording.MirametrixInterface;
+  using Ogama.Modules.Recording.TobiiInterface;
+  using Ogama.Modules.Recording.TrackerBase;
 
   /// <summary>
   /// A small popup <see cref="Form"/> for showing a dialog 
@@ -39,6 +42,13 @@ namespace Ogama.Modules.Recording
     // Defining Variables, Enumerations, Events                                  //
     ///////////////////////////////////////////////////////////////////////////////
     #region FIELDS
+
+    /// <summary>
+    /// Provides an <see cref="Timer"/> which updates the tracker status
+    /// of the connected devices every second.
+    /// </summary>
+    private Timer eyetrackerUpdateTimer;
+
     #endregion //FIELDS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -52,6 +62,8 @@ namespace Ogama.Modules.Recording
     public SelectTracker()
     {
       this.InitializeComponent();
+      this.eyetrackerUpdateTimer = new Timer() { Interval = 1000, Enabled = true };
+      this.eyetrackerUpdateTimer.Tick += this.eyetrackerUpdateTimer_Tick;
     }
 
     #endregion //CONSTRUCTION
@@ -89,9 +101,14 @@ namespace Ogama.Modules.Recording
           returnValue |= HardwareTracker.SMI;
         }
 
-        if (this.chbITU.Checked)
+        if (this.chbGazetrackerIPClient.Checked)
         {
-          returnValue |= HardwareTracker.ITU;
+          returnValue |= HardwareTracker.GazetrackerIPClient;
+        }
+
+        if (this.chbGazetrackerDirectClient.Checked)
+        {
+          returnValue |= HardwareTracker.GazetrackerDirectClient;
         }
 
         if (this.chbAsl.Checked)
@@ -99,9 +116,9 @@ namespace Ogama.Modules.Recording
           returnValue |= HardwareTracker.ASL; // = 64
         }
 
-        if (this.chbEyeTech.Checked)
+        if (this.chbMirametrix.Checked)
         {
-          returnValue |= HardwareTracker.EyeTech;
+          returnValue |= HardwareTracker.Mirametrix;
         }
 
         return returnValue;
@@ -126,92 +143,19 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void SelectTracker_Load(object sender, EventArgs e)
+    private void SelectTrackerLoad(object sender, EventArgs e)
     {
-      string error;
+      this.UpdateTrackerStatus();
+    }
 
-      string ituDefaultText = "The ITU GazeTracker application which uses a webcam as " +
-        "an eye tracker and can be used in both remote and head-mounted setup."
-        + Environment.NewLine;
-
-      if (!Ogama.Modules.Recording.ITUGazeTracker.ITUGazeTrackerBase.IsAvailable(out error))
-      {
-        this.chbITU.Enabled = false;
-        this.chbITU.Checked = false;
-        this.chbITU.Text = ituDefaultText +
-          "Status: " + error;
-      }
-      else
-      {
-        this.chbITU.Text = ituDefaultText +
-          "Status: GazeTracker found a camera device.";
-      }
-
-      string aleaDefaultText = "The alea technologies IG-30 Pro Eyetracking-System. " +
-          "Needs to have Intelligaze Software 1.2 to be installed." + Environment.NewLine;
-      if (!Ogama.Modules.Recording.Alea.AleaTracker.IsAvailable(out error))
-      {
-        this.chbAlea.Enabled = false;
-        this.chbAlea.Checked = false;
-        this.pcbAlea.Enabled = false;
-        this.chbAlea.Text = aleaDefaultText +
-          "Status: " + error;
-      }
-      else
-      {
-        this.chbAlea.Text = aleaDefaultText +
-          "Status: Intelligaze found.";
-      }
-
-      string tobiiDefaultText = "The Tobii technologies T60,T120,X120 gaze tracker series." +
-          "Needs to have a purchased Tobii SDK to be installed on the computer." + Environment.NewLine;
-#if TOBII
-      if (!Ogama.Modules.Recording.Tobii.TobiiTracker.IsAvailable(out error))
-      {
-        this.chbTobii.Enabled = false;
-        this.chbTobii.Checked = false;
-        this.pcbTobii.Enabled = false;
-        this.chbTobii.Text = tobiiDefaultText +
-          "Status: " + error;
-      }
-      else
-      {
-        this.chbTobii.Text = tobiiDefaultText +
-          "Status: Tobii SDK found.";
-      }
-#else
-      this.chbTobii.Enabled = false;
-      this.chbTobii.Checked = false;
-      this.pcbTobii.Enabled = false;
-      this.chbTobii.Text = tobiiDefaultText +
-        "Status: This version of OGAMA has no Tobii support (TOBII compiler flag not set)."
-        + Environment.NewLine;
-#endif
-
-      // ASL 
-      //  "If you have purchased and installed an ASL " +
-      //  "model 5000 Eye Tracker control unit (materials and softwares)" + Environment.NewLine;
-      string aslDefaultText = "ASL software must be installed on this computer.";
-#if ASL
-        if (!Ogama.Modules.Recording.ASL.AslTracker.IsAvailable(out error))
-        {
-            this.chbAsl.Enabled = false;
-            this.chbAsl.Checked = false;
-            this.pcbAsl.Enabled = false;
-            this.chbAsl.Text = aslDefaultText + error;
-        }
-        else
-        {
-            this.chbAsl.Text = aslDefaultText + "(ASL library found)";
-        }
-#else
-      this.chbAsl.Enabled = false;
-      this.chbAsl.Checked = false;
-      this.pcbAsl.Enabled = false;
-      this.chbAsl.Text = aslDefaultText +
-      "Status : This version of OGAMA has no ASL support (ASL compiler flag not set)."
-          + Environment.NewLine;
-#endif
+    /// <summary>
+    /// Updates the connected tracker status.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void eyetrackerUpdateTimer_Tick(object sender, EventArgs e)
+    {
+      this.UpdateTrackerStatus();
     }
 
     /// <summary>
@@ -222,7 +166,7 @@ namespace Ogama.Modules.Recording
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">The <see cref="FormClosingEventArgs"/>
     /// with the event data.</param>
-    private void SelectTracker_FormClosing(object sender, FormClosingEventArgs e)
+    private void SelectTrackerFormClosing(object sender, FormClosingEventArgs e)
     {
       if (this.SelectedTracker == HardwareTracker.None && this.DialogResult == DialogResult.OK)
       {
@@ -231,6 +175,10 @@ namespace Ogama.Modules.Recording
           Environment.NewLine + "If no gaze tracking hardware is available " +
           "you can use the mouse only tracker.";
         ExceptionMethods.ProcessMessage("Please select a device ...", message);
+      }
+      else
+      {
+        this.eyetrackerUpdateTimer.Stop();
       }
     }
 
@@ -242,9 +190,19 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void pcbTobii_Click(object sender, EventArgs e)
+    private void PcbTobiiClick(object sender, EventArgs e)
     {
       System.Diagnostics.Process.Start("http://www.tobii.com");
+    }
+
+    /// <summary>
+    /// The event handler for the User clicked the mirametrix logo, so open mirametrix website
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void PcbMirametrixClick(object sender, EventArgs e)
+    {
+      System.Diagnostics.Process.Start("http://www.mirametrix.com");
     }
 
     /// <summary>
@@ -255,7 +213,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void pcbAlea_Click(object sender, EventArgs e)
+    private void PcbAleaClick(object sender, EventArgs e)
     {
       System.Diagnostics.Process.Start("http://www.alea-technologies.com");
     }
@@ -268,7 +226,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void pcbSMI_Click(object sender, EventArgs e)
+    private void PcbSMIClick(object sender, EventArgs e)
     {
       System.Diagnostics.Process.Start("http://www.smivision.com");
     }
@@ -281,7 +239,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void pcbITU_Click(object sender, EventArgs e)
+    private void PcbITUClick(object sender, EventArgs e)
     {
       System.Diagnostics.Process.Start("http://www.gazegroup.org/downloads/23-gazetracker");
     }
@@ -293,10 +251,21 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void pcbHelpTobii_Click(object sender, EventArgs e)
+    private void PcbHelpTobiiClick(object sender, EventArgs e)
     {
-      HowToActivateTobii objActivateTobii = new HowToActivateTobii();
+      var objActivateTobii = new HowToActivateTobii();
       objActivateTobii.ShowDialog();
+    }
+
+    /// <summary>
+    /// The event handler for the User clicked the mirametrix logo, so open mirametrix website
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void PcbHelpMirametrixClick(object sender, EventArgs e)
+    {
+      var objActivateMirametrix = new HowToActivateMirametrix();
+      objActivateMirametrix.ShowDialog();
     }
 
     /// <summary>
@@ -307,7 +276,7 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void pcbAsl_Click(object sender, EventArgs e)
+    private void PcbAslClick(object sender, EventArgs e)
     {
       System.Diagnostics.Process.Start("http://asleyetracking.com/site/");
     }
@@ -319,9 +288,9 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void pcbHelpAlea_Click(object sender, EventArgs e)
+    private void PcbHelpAleaClick(object sender, EventArgs e)
     {
-      HowToActivateAlea objActivateAlea = new HowToActivateAlea();
+      var objActivateAlea = new HowToActivateAlea();
       objActivateAlea.ShowDialog();
     }
 
@@ -332,9 +301,9 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void pcbHelpSMI_Click(object sender, EventArgs e)
+    private void PcbHelpSMIClick(object sender, EventArgs e)
     {
-      HowToActivateSMI objActivateSMI = new HowToActivateSMI();
+      var objActivateSMI = new HowToActivateSMI();
       objActivateSMI.ShowDialog();
     }
 
@@ -345,24 +314,36 @@ namespace Ogama.Modules.Recording
     /// </summary>
     /// <param name="sender">Source of the event</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void pcbHelpAsl_Click(object sender, EventArgs e)
+    private void PcbHelpAslClick(object sender, EventArgs e)
     {
-      HowToActivateAsl objActivateAsl = new HowToActivateAsl();
+      var objActivateAsl = new HowToActivateAsl();
       objActivateAsl.ShowDialog();
     }
 
     /// <summary>
     /// The <see cref="Control.Click"/> event handler
-    /// for the <see cref="PictureBox"/> <see cref="pcbHelpITU"/>
-    /// Displays instructions to enable gaze tracking with the ITU
-    /// GazeTracker and a webcam.
+    /// for the <see cref="PictureBox"/> <see cref="pcbHelpGazetrackerIPClient"/>
+    /// Displays instructions to enable gaze tracking with the GazeTracker and a webcam.
     /// </summary>
     /// <param name="sender">Source of the event</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void pcbHelpITU_Click(object sender, EventArgs e)
+    private void PcbHelpGazetrackerClientClick(object sender, EventArgs e)
     {
-      HowToActivateITU objActivateITU = new HowToActivateITU();
+      var objActivateITU = new HowToActivateGazetracker();
       objActivateITU.ShowDialog();
+    }
+
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler
+    /// for the <see cref="PictureBox"/> <see cref="pcbHelpGazetrackerDirectClient"/>
+    /// Displays instructions to enable gaze tracking with the GazeTracker and a webcam.
+    /// </summary>
+    /// <param name="sender">Source of the event</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void PcbHelpGazetrackerDirectClientClick(object sender, EventArgs e)
+    {
+      var objHowToActivateGazetracker = new HowToActivateGazetracker();
+      objHowToActivateGazetracker.ShowDialog();
     }
 
     #endregion //WINDOWSEVENTHANDLER
@@ -391,6 +372,136 @@ namespace Ogama.Modules.Recording
     // Methods for doing main class job                                          //
     ///////////////////////////////////////////////////////////////////////////////
     #region METHODS
+
+    /// <summary>
+    /// Updates the status of all connected devices.
+    /// </summary>
+    private void UpdateTrackerStatus()
+    {
+      this.UpdateGazetrackerDirectClientStatus();
+      this.UpdateAleaTrackStatus();
+      this.UpdateTobiiStatus();
+      this.UpdateASLStatus();
+      this.UpdateMirametrixStatus();
+    }
+
+    /// <summary>
+    /// Updates the status of the Tobii tracking devices
+    /// </summary>
+    private void UpdateTobiiStatus()
+    {
+      string error;
+      string tobiiDefaultText = "The Tobii technologies T60,T120,X120 gaze tracker series."
+                                + Environment.NewLine;
+      if (!TobiiTracker.IsAvailable(out error))
+      {
+        this.chbTobii.Enabled = false;
+        this.chbTobii.Checked = false;
+        this.pcbTobii.Enabled = false;
+      }
+      else
+      {
+        this.chbTobii.Enabled = true;
+        this.pcbTobii.Enabled = true;
+      }
+
+      this.chbTobii.Text = tobiiDefaultText + "Status: " + error;
+    }
+
+    /// <summary>
+    /// Updates the status of the Mirametrix tracking devices
+    /// </summary>
+    private void UpdateMirametrixStatus()
+    {
+      string error;
+      if (!MirametrixTracker.IsAvailable(out error))
+      {
+        this.chbMirametrix.Text = "Mirametrix S2 Eye tracker. Need to have Mirametrix S2 installed on this computer ! \n" + error;
+        this.chbMirametrix.Enabled = false;
+        this.chbMirametrix.Checked = false;
+        this.pcbMirametrix.Enabled = false;
+      }
+      else
+      {
+        this.chbMirametrix.Enabled = true;
+        this.pcbMirametrix.Enabled = true;
+        this.chbMirametrix.Text = "Mirametrix S2 installed on this computer ! \n" + error;
+      }
+    }
+
+    /// <summary>
+    /// Updates the status of the ASL tracking devices
+    /// </summary>
+    private void UpdateASLStatus()
+    {
+      string error;
+
+      // ASL 
+      // "If you have purchased and installed an ASL " +
+      // "model 5000 Eye Tracker control unit (materials and softwares)" + Environment.NewLine;
+      const string AslDefaultText = "ASL software must be installed on this computer.";
+      if (!AslTracker.IsAvailable(out error))
+      {
+        this.chbAsl.Enabled = false;
+        this.chbAsl.Checked = false;
+        this.pcbAsl.Enabled = false;
+        this.chbAsl.Text = AslDefaultText + error;
+      }
+      else
+      {
+        this.chbAsl.Enabled = true;
+        this.pcbAsl.Enabled = true;
+        this.chbAsl.Text = AslDefaultText + "(ASL library found)";
+      }
+    }
+
+    /// <summary>
+    /// Updates the status of the Alea tracking devices
+    /// </summary>
+    private void UpdateAleaTrackStatus()
+    {
+      string error;
+      string aleaDefaultText = "The alea technologies IG-30 Pro Eyetracking-System. "
+                               + "Needs to have Intelligaze Software 1.2 to be installed." + Environment.NewLine;
+      if (!AleaTracker.IsAvailable(out error))
+      {
+        this.chbAlea.Enabled = false;
+        this.chbAlea.Checked = false;
+        this.pcbAlea.Enabled = false;
+        this.chbAlea.Text = aleaDefaultText + "Status: " + error;
+      }
+      else
+      {
+        this.chbAlea.Enabled = true;
+        this.pcbAlea.Enabled = true;
+        this.chbAlea.Text = aleaDefaultText + "Status: Intelligaze found.";
+      }
+    }
+
+    /// <summary>
+    /// Updates the status of the gazetracker direct client devices.
+    /// </summary>
+    private void UpdateGazetrackerDirectClientStatus()
+    {
+      string error;
+      string ituDefaultText = "Gazetracker DIRECT connection." +
+        Environment.NewLine + "This is the Gazetracker which uses a webcam as "
+                              + "an eye tracker and can be used in both remote and head-mounted setups."
+                              + Environment.NewLine;
+
+      if (!GazetrackerDirectClientTracker.IsAvailable(out error))
+      {
+        this.chbGazetrackerDirectClient.Enabled = false;
+        this.chbGazetrackerDirectClient.Checked = false;
+      }
+      else
+      {
+        this.chbGazetrackerDirectClient.Enabled = true;
+      }
+
+      this.chbGazetrackerDirectClient.Text = ituDefaultText + "Status: " + error;
+    }
+
     #endregion //METHODS
 
     ///////////////////////////////////////////////////////////////////////////////

@@ -1,7 +1,7 @@
 // <copyright file="DatabaseModule.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,7 +9,7 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
 namespace Ogama.Modules.Database
 {
@@ -29,6 +29,11 @@ namespace Ogama.Modules.Database
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.FormTemplates;
+  using Ogama.Modules.Common.SlideCollections;
+  using Ogama.Modules.Common.Tools;
+  using Ogama.Modules.ImportExport.OgamaData;
+  using Ogama.Modules.ImportExport.RawData;
 
   using VectorGraphics.Elements;
   using VectorGraphics.StopConditions;
@@ -318,7 +323,7 @@ namespace Ogama.Modules.Database
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnImport_Click(object sender, EventArgs e)
     {
-      ImportExport.ImportRawData.Start((MainForm)this.MdiParent);
+      ImportRawData.Start((MainForm)this.MdiParent);
       ((MainForm)this.MdiParent).RefreshContextPanelSubjects();
     }
 
@@ -332,7 +337,7 @@ namespace Ogama.Modules.Database
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnImportOgamaFormat_Click(object sender, EventArgs e)
     {
-      ImportExport.ImportOgamaData.Start();
+      ImportOgamaData.Start();
       ((MainForm)this.MdiParent).RefreshContextPanelSubjects();
     }
 
@@ -1201,48 +1206,50 @@ namespace Ogama.Modules.Database
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnSpecial_Click(object sender, EventArgs e)
     {
-      Slideshow slideshow = Document.ActiveDocument.ExperimentSettings.SlideShow;
-      Dictionary<string, int> name2idAssignment = new Dictionary<string, int>();
-      foreach (Trial trial in slideshow.Trials)
-      {
-        name2idAssignment.Add(trial.Name, trial.ID);
-      }
+      //string query = "SELECT Trials.Category, ROUND(Avg(CAST(GazeFixations.Length AS Float)),2) FROM Trials,Subjects,GazeFixations WHERE Trials.SubjectName = Subjects.SubjectName AND GazeFixations.TrialID = Trials.TrialID AND GazeFixations.TrialSequence = Trials.TrialSequence AND GazeFixations.SubjectName = Trials.SubjectName AND Subjects.Category = 'Developer' GROUP BY Trials.Category";
+      //Queries.ExecuteSQLCommand(query);
+      //Slideshow slideshow = Document.ActiveDocument.ExperimentSettings.SlideShow;
+      //Dictionary<string, int> name2idAssignment = new Dictionary<string, int>();
+      //foreach (Trial trial in slideshow.Trials)
+      //{
+      //  name2idAssignment.Add(trial.Name, trial.ID);
+      //}
 
-      bool doNotUpdate = false;
-      DataTable trials = Document.ActiveDocument.DocDataSet.Trials;
-      List<string> missingTrials = new List<string>();
+      //bool doNotUpdate = false;
+      //DataTable trials = Document.ActiveDocument.DocDataSet.Trials;
+      //List<string> missingTrials = new List<string>();
 
-      foreach (DataRow trialsRow in trials.Rows)
-      {
-        string trialName = Path.GetFileNameWithoutExtension(trialsRow["TrialName"].ToString());
-        if (name2idAssignment.ContainsKey(trialName))
-        {
-          trialsRow["TrialID"] = name2idAssignment[trialName];
-        }
-        else
-        {
-          if (!missingTrials.Contains(trialName))
-          {
-            missingTrials.Add(trialName);
-          }
+      //foreach (DataRow trialsRow in trials.Rows)
+      //{
+      //  string trialName = Path.GetFileNameWithoutExtension(trialsRow["TrialName"].ToString());
+      //  if (name2idAssignment.ContainsKey(trialName))
+      //  {
+      //    trialsRow["TrialID"] = name2idAssignment[trialName];
+      //  }
+      //  else
+      //  {
+      //    if (!missingTrials.Contains(trialName))
+      //    {
+      //      missingTrials.Add(trialName);
+      //    }
 
-          doNotUpdate = true;
-        }
-      }
+      //    doNotUpdate = true;
+      //  }
+      //}
 
-      // Update trials
-      if (!doNotUpdate)
-      {
-        int affectedRows = Document.ActiveDocument.DocDataSet.TrialsAdapter.Update((OgamaDataSet.TrialsDataTable)trials);
-      }
-      else
-      {
-        Console.WriteLine("MissingTrialNames: ");
-        foreach (string item in missingTrials)
-        {
-          Console.WriteLine(item);
-        }
-      }
+      //// Update trials
+      //if (!doNotUpdate)
+      //{
+      //  int affectedRows = Document.ActiveDocument.DocDataSet.TrialsAdapter.Update((OgamaDataSet.TrialsDataTable)trials);
+      //}
+      //else
+      //{
+      //  Console.WriteLine("MissingTrialNames: ");
+      //  foreach (string item in missingTrials)
+      //  {
+      //    Console.WriteLine(item);
+      //  }
+      //}
 
       ////DataTable trials = Document.ActiveDocument.DocDataSet.Trials;
       ////DataView trialView = new DataView(trials);

@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.ComponentModel;
-using System.Windows.Forms;
-using DirectShowLib;
-using System.Drawing;
-using System.Runtime.InteropServices;
-using GTHardware.Cameras.DirectShow;
-
-namespace OgamaControls
+﻿namespace OgamaControls
 {
+  using System;
+  using System.ComponentModel;
+  using System.Drawing;
+  using System.Runtime.InteropServices;
+  using System.Windows.Forms;
+
+  using DirectShowLib;
+
+  using GTHardware.Cameras.DirectShow;
+
   /// <summary>
   /// Capture class encapsulating simple video device capturing to file.
   /// Is used for the usercamera feature of Ogama
@@ -63,7 +63,7 @@ namespace OgamaControls
     /// <summary>
     /// DShow Filter: file writer
     /// </summary>
-    private IFileSinkFilter2 fileWriterFilter;
+    private IFileSinkFilter fileWriterFilter;
 
     /// <summary>
     /// The <see cref="IReferenceClock"/> of the current graph

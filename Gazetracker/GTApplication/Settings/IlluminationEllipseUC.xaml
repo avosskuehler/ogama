@@ -1,0 +1,25 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	x:Class="GTApplication.SettingsUI.IlluminationEllipseUC"
+	x:Name="UserControl"
+	d:DesignWidth="25" d:DesignHeight="25">
+
+	<Grid x:Name="LayoutRoot">
+		<Ellipse x:Name="EllipseIllumination" Margin="8">
+			<Ellipse.Effect>
+				<DropShadowEffect Color="#FFFF8100" BlurRadius="40" Direction="0" ShadowDepth="0"/>
+			</Ellipse.Effect>
+			<Ellipse.Fill>
+				<RadialGradientBrush>
+					<GradientStop Color="#FFFF6A6A"/>
+					<GradientStop Color="Red" Offset="0.465"/>
+					<GradientStop Color="#FF7C0000" Offset="1"/>
+				</RadialGradientBrush>
+			</Ellipse.Fill>
+		</Ellipse>
+	</Grid>
+</UserControl>

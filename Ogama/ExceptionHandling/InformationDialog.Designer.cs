@@ -1,5 +1,7 @@
 ﻿namespace Ogama.ExceptionHandling
 {
+  using Ogama.Modules.Common.Controls;
+
   partial class InformationDialog
   {
     /// <summary>
@@ -31,7 +33,7 @@
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InformationDialog));
       this.txbMessage = new System.Windows.Forms.TextBox();
       this.btnOK = new System.Windows.Forms.Button();
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       this.splitContainer1 = new System.Windows.Forms.SplitContainer();
       this.splitContainer2 = new System.Windows.Forms.SplitContainer();
       this.spcYesNoCancelOK = new System.Windows.Forms.SplitContainer();
@@ -216,7 +218,7 @@
 
     private System.Windows.Forms.Button btnOK;
     private System.Windows.Forms.TextBox txbMessage;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
     private System.Windows.Forms.SplitContainer splitContainer1;
     private System.Windows.Forms.SplitContainer splitContainer2;
     private System.Windows.Forms.SplitContainer spcYesNoCancelOK;

@@ -6,10 +6,11 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using VectorGraphics;
-using VectorGraphics.CustomEventArgs;
 
 namespace OgamaControls.Dialogs
 {
+  using VectorGraphics.Tools.CustomEventArgs;
+
   /// <summary>
   /// Dialog for selecting a cursor shape style.
   /// </summary>

@@ -1,7 +1,7 @@
 ﻿// <copyright file="Trial.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,21 +9,18 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
-namespace Ogama.Modules.Common
+namespace Ogama.Modules.Common.SlideCollections
 {
   using System;
   using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Text;
-  using System.Windows.Forms;
-  using System.Xml.Serialization;
 
-  using Ogama.Modules.Common;
-  using VectorGraphics;
+  using Ogama.Modules.Common.Types;
+
   using VectorGraphics.Elements;
-  using VectorGraphics.Interfaces;
+  using VectorGraphics.Elements.ElementCollections;
+  using VectorGraphics.Tools.Interfaces;
 
   /// <summary>
   /// The Trial class is a <see cref="List{Slide}"/> that implements <see cref="IClonableNamedObject"/>
@@ -135,6 +132,26 @@ namespace Ogama.Modules.Common
         foreach (Slide slide in this)
         {
           if (slide.HasActiveXContent)
+          {
+            return true;
+          }
+        }
+
+        return false;
+      }
+    }
+
+    /// <summary>
+    /// Gets a value indicating whether one of the slides
+    /// is a desktop recording slide.
+    /// </summary>
+    public bool HasDesktopRecordingContent
+    {
+      get
+      {
+        foreach (Slide slide in this)
+        {
+          if (slide.IsDesktopSlide)
           {
             return true;
           }

@@ -1,5 +1,8 @@
 namespace Ogama.Modules.Fixations
 {
+  using Ogama.Modules.Common.Controls;
+  using Ogama.Modules.Common.PictureTemplates;
+
   partial class FixationsModule
   {
     /// <summary>
@@ -35,12 +38,12 @@ namespace Ogama.Modules.Fixations
       this.spcPictureSlider = new System.Windows.Forms.SplitContainer();
       this.pnlCanvas = new System.Windows.Forms.Panel();
       this.pnlPicture = new System.Windows.Forms.Panel();
-      this.fixationsPicture = new Ogama.Modules.Common.PictureWithFixations();
+      this.fixationsPicture = new PictureWithFixations();
       this.toolStrip1 = new System.Windows.Forms.ToolStrip();
       this.btnSeekNextSlide = new System.Windows.Forms.ToolStripButton();
       this.btnSeekPreviousSlide = new System.Windows.Forms.ToolStripButton();
       this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-      this.trialTimeLine = new Ogama.Modules.Common.TrialTimeLine(this.components);
+      this.trialTimeLine = new TrialTimeLine(this.components);
       this.trbZoom = new OgamaControls.ToolStripTrackBar();
       this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
       this.spcGazeMouseTables = new System.Windows.Forms.SplitContainer();
@@ -1182,7 +1185,7 @@ namespace Ogama.Modules.Fixations
     private System.Windows.Forms.SplitContainer spcPictureTools;
     private System.Windows.Forms.DataGridView dgvGazeFixations;
     private System.Windows.Forms.ToolTip toolTip1;
-    private Ogama.Modules.Common.PictureWithFixations fixationsPicture;
+    private PictureWithFixations fixationsPicture;
     private System.Windows.Forms.ToolStripContainer toolStripContainer1;
     private System.Windows.Forms.ToolStrip tosTrialSelection;
     private System.Windows.Forms.ToolStripComboBox cbbSubject;
@@ -1235,7 +1238,7 @@ namespace Ogama.Modules.Fixations
     private System.Windows.Forms.ToolStripButton btnShowHideAOI;
     private System.Windows.Forms.Panel pnlPicture;
     private System.Windows.Forms.ToolStrip toolStrip1;
-    private Ogama.Modules.Common.TrialTimeLine trialTimeLine;
+    private TrialTimeLine trialTimeLine;
     private System.Windows.Forms.ToolStripButton btnSeekNextSlide;
     private System.Windows.Forms.ToolStripButton btnSeekPreviousSlide;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;

@@ -1,7 +1,7 @@
-using System;
-
-namespace Ogama.MainWindow
+namespace Ogama.MainWindow.Dialogs
 {
+  using Ogama.Modules.Common.Controls;
+
   partial class ExperimentSettingsDialog
   {
     /// <summary>
@@ -15,9 +15,9 @@ namespace Ogama.MainWindow
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      if (disposing && (components != null))
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -72,7 +72,7 @@ namespace Ogama.MainWindow
       this.groupBox8 = new System.Windows.Forms.GroupBox();
       this.btnTestSQLConnection = new System.Windows.Forms.Button();
       this.label12 = new System.Windows.Forms.Label();
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       this.groupBox1.SuspendLayout();
       this.groupBox2.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.nudMinGazeSamples)).BeginInit();
@@ -705,7 +705,7 @@ namespace Ogama.MainWindow
     private System.Windows.Forms.NumericUpDown nudGazeDiameterDiv;
     private System.Windows.Forms.GroupBox groupBox7;
     private System.Windows.Forms.NumericUpDown nudMouseDiameterDiv;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
     private System.Windows.Forms.CheckBox chbMergeConsecutiveFixations;
     private System.Windows.Forms.CheckBox chbEliminateFirstFixationOfGivenLength;
     private System.Windows.Forms.Label label4;

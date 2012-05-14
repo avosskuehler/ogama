@@ -1,4 +1,4 @@
-﻿namespace Ogama.MainWindow
+﻿namespace Ogama.MainWindow.Dialogs
 {
   partial class HowToActivateTobii
   {
@@ -13,9 +13,9 @@
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      if (disposing && (components != null))
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -56,7 +56,7 @@
       this.label1.Size = new System.Drawing.Size(366, 37);
       this.label1.TabIndex = 1;
       this.label1.Text = "To enable the recording with Tobii Technology tracking systems please perform the" +
-          " following steps:";
+    " following steps:";
       // 
       // btnOK
       // 

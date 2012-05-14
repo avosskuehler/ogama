@@ -9,9 +9,9 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
-namespace Ogama.Modules.SlideshowDesign
+namespace Ogama.Modules.SlideshowDesign.DesignModule
 {
   using System;
   using System.Collections.Generic;
@@ -20,7 +20,7 @@ namespace Ogama.Modules.SlideshowDesign
   using System.Windows.Forms;
 
   using Ogama.ExceptionHandling;
-  using Ogama.Modules.Common;
+  using Ogama.Modules.Common.SlideCollections;
 
   using VectorGraphics.Elements;
   using VectorGraphics.StopConditions;

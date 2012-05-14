@@ -1,5 +1,7 @@
-namespace Ogama.Modules.Recording
+namespace Ogama.Modules.Recording.Dialogs
 {
+  using Ogama.Modules.Common.Controls;
+
   partial class SavingSplash
   {
     /// <summary>
@@ -13,9 +15,9 @@ namespace Ogama.Modules.Recording
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      if (disposing && (components != null))
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -36,7 +38,7 @@ namespace Ogama.Modules.Recording
       this.pictureBox2 = new System.Windows.Forms.PictureBox();
       this.pictureBox3 = new System.Windows.Forms.PictureBox();
       this.label1 = new System.Windows.Forms.Label();
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -150,7 +152,7 @@ namespace Ogama.Modules.Recording
     private System.Windows.Forms.PictureBox pictureBox3;
     private System.Windows.Forms.ProgressBar progressBar1;
     internal System.Windows.Forms.Label label1;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
 
   }
 }

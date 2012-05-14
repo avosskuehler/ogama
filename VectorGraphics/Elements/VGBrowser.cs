@@ -1,7 +1,7 @@
 // <copyright file="VGBrowser.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,7 +9,7 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
 namespace VectorGraphics.Elements
 {
@@ -22,6 +22,7 @@ namespace VectorGraphics.Elements
   using System.Xml.Serialization;
   
   using VectorGraphics.Controls;
+  using VectorGraphics.Controls.Flash;
 
   /// <summary>
   /// Inherited from <see cref="VGElement"/>. 
@@ -43,26 +44,9 @@ namespace VectorGraphics.Elements
     #region FIELDS
 
     /// <summary>
-    /// Saves the <see cref="Uri"/> that is the starting location
-    /// for this browser object.
-    /// </summary>
-    private string browserURL;
-
-    /// <summary>
-    /// Indicates the number of links the user is allowed to follow,
-    /// including backward links.
-    /// </summary>
-    private int browseDepth;
-
-    /// <summary>
     /// A <see cref="Matrix"/> with the current graphics transformation.
     /// </summary>
     private Matrix currentTransform;
-
-    /// <summary>
-    /// The <see cref="WebBrowser"/> control that is displayed via this class.
-    /// </summary>
-    private WebBrowser webBrowser;
 
     /// <summary>
     /// A <see cref="FlashMessageFilter"/> that is inserted in the 
@@ -119,8 +103,8 @@ namespace VectorGraphics.Elements
       null)
     {
       this.InitializeFields();
-      this.browserURL = newBrowserURL;
-      this.browseDepth = newBrowseDepth;
+      this.BrowserURL = newBrowserURL;
+      this.BrowseDepth = newBrowseDepth;
     }
 
     /// <summary>
@@ -143,8 +127,8 @@ namespace VectorGraphics.Elements
       oldBrowser.Sound)
     {
       this.InitializeFields();
-      this.browserURL = oldBrowser.BrowserURL;
-      this.browseDepth = oldBrowser.browseDepth;
+      this.BrowserURL = oldBrowser.BrowserURL;
+      this.BrowseDepth = oldBrowser.BrowseDepth;
     }
 
     /// <summary>
@@ -164,13 +148,6 @@ namespace VectorGraphics.Elements
     #region ENUMS
 
     /// <summary>
-    /// The delegate for the thread-safe call to GetControlHandle
-    /// </summary>
-    /// <param name="control">The <see cref="Control"/> to receive the handle for.</param>
-    /// <returns>An <see cref="IntPtr"/> with the controls handle.</returns>
-    private delegate IntPtr HandleInvoker(Control control);
-
-    /// <summary>
     /// The delegate for the thread-safe call to Control.Controls.Add(Control)
     /// </summary>
     /// <param name="control">The <see cref="Control"/> to be added to the controls container.</param>
@@ -182,15 +159,6 @@ namespace VectorGraphics.Elements
     /// <param name="control">The <see cref="Control"/> to be removed from the controls container.</param>
     private delegate void RemoveDelegate(Control control);
 
-    /// <summary>
-    /// The delegate for the thread-safe call to Control.SetBounds(...)
-    /// </summary>
-    /// <param name="x">The new Left property value of the control. </param>
-    /// <param name="y">The new Top property value of the control.</param>
-    /// <param name="width">The new Width property value of the control.</param>
-    /// <param name="height">The new Height property value of the control.</param>
-    private delegate void SetBoundsDelegate(int x, int y, int width, int height);
-
     #endregion ENUMS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -199,28 +167,18 @@ namespace VectorGraphics.Elements
     #region PROPERTIES
 
     /// <summary>
-    /// Gets the underlying <see cref="WebBrowser"/> control.
+    /// Gets or sets the underlying <see cref="WebBrowser"/> control.
     /// </summary>
     /// <value>A <see cref="WebBrowser"/> control that contains the ActiveX control.</value>
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    [Browsable(false)]
-    [XmlIgnore()]
-    public WebBrowser WebBrowser
-    {
-      get { return this.webBrowser; }
-    }
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false), XmlIgnore]
+    public WebBrowser WebBrowser { get; set; }
 
     /// <summary>
     /// Gets or sets the <see cref="Uri"/> for the browser.
     /// </summary>
     /// <value>A <see cref="String"/> with the starting location for the browser.</value>
-    [Category("Content")]
-    [Description("The Uri for the browsing start location.")]
-    public string BrowserURL
-    {
-      get { return this.browserURL; }
-      set { this.browserURL = value; }
-    }
+    [Category("Content"), Description("The Uri for the browsing start location.")]
+    public string BrowserURL { get; set; }
 
     /// <summary>
     /// Gets or sets the number of links the user is allowed to follow,
@@ -228,13 +186,8 @@ namespace VectorGraphics.Elements
     /// </summary>
     /// <value>A <see cref="Int32"/> with the number of links the user is allowed to follow,
     /// including backward links.</value>
-    [Category("Content")]
-    [Description("The number of links the user is allowed to follow, including backward links.")]
-    public int BrowseDepth
-    {
-      get { return this.browseDepth; }
-      set { this.browseDepth = value; }
-    }
+    [Category("Content"), Description("The number of links the user is allowed to follow, including backward links.")]
+    public int BrowseDepth { get; set; }
 
     /// <summary>
     /// Gets or sets the bounding rectangle of this
@@ -273,40 +226,40 @@ namespace VectorGraphics.Elements
     {
       if (recreateBrowser)
       {
-        if (this.webBrowser != null)
+        if (this.WebBrowser != null)
         {
-          if (this.webBrowser.InvokeRequired)
+          if (this.WebBrowser.InvokeRequired)
           {
-            this.webBrowser.Invoke(new MethodInvoker(this.webBrowser.Dispose));
+            this.WebBrowser.Invoke(new MethodInvoker(this.WebBrowser.Dispose));
           }
           else
           {
-            this.webBrowser.Dispose();
+            this.WebBrowser.Dispose();
           }
         }
 
-        this.webBrowser = new WebBrowser();
+        this.WebBrowser = new WebBrowser();
       }
 
-      this.webBrowser.Dock = DockStyle.Fill;
+      this.WebBrowser.Dock = DockStyle.Fill;
 
       if (control.InvokeRequired)
       {
-        control.Invoke(new AddDelegate(control.Controls.Add), this.webBrowser);
+        control.Invoke(new AddDelegate(control.Controls.Add), this.WebBrowser);
       }
       else
       {
-        control.Controls.Add(this.webBrowser);
+        control.Controls.Add(this.WebBrowser);
       }
 
       // Put it in the foreground
-      control.Controls.SetChildIndex(this.webBrowser, 0);
+      control.Controls.SetChildIndex(this.WebBrowser, 0);
 
-      this.webBrowser.Url = new Uri(this.browserURL);
-      this.webBrowser.ScriptErrorsSuppressed = true;
-      if (this.browseDepth == 0)
+      this.WebBrowser.Url = new Uri(this.BrowserURL);
+      this.WebBrowser.ScriptErrorsSuppressed = true;
+      if (this.BrowseDepth == 0)
       {
-        this.webBrowser.AllowNavigation = false;
+        this.WebBrowser.AllowNavigation = false;
       }
     }
 
@@ -325,7 +278,7 @@ namespace VectorGraphics.Elements
       // for recording
       if (sendFlashMessagesToParent)
       {
-        this.messageFilter = new FlashMessageFilter(this.webBrowser, this.webBrowser.Parent);
+        this.messageFilter = new FlashMessageFilter(this.WebBrowser, this.WebBrowser.Parent);
         Application.AddMessageFilter(this.messageFilter);
       }
       else if (this.messageFilter != null)
@@ -371,7 +324,7 @@ namespace VectorGraphics.Elements
     public override void Reset()
     {
       base.Reset();
-      this.webBrowser.Url = new Uri("about:blank");
+      this.WebBrowser.Url = new Uri("about:blank");
     }
 
     /// <summary>
@@ -385,7 +338,7 @@ namespace VectorGraphics.Elements
       sb.Append("VGBrowser, Name: ");
       sb.Append(Name);
       sb.Append(" ; '");
-      sb.Append(this.browserURL.ToString());
+      sb.Append(this.BrowserURL.ToString());
       return sb.ToString();
     }
 
@@ -399,7 +352,7 @@ namespace VectorGraphics.Elements
     {
       StringBuilder sb = new StringBuilder();
       sb.Append("Web browser: ");
-      string text = this.browserURL.ToString();
+      string text = this.BrowserURL.ToString();
       sb.Append(text.Substring(0, text.Length > 12 ? Math.Max(12, text.Length - 1) : text.Length));
       sb.Append(" ...");
       return sb.ToString();
@@ -412,15 +365,15 @@ namespace VectorGraphics.Elements
     {
       base.Dispose();
 
-      if (this.webBrowser.Parent != null)
+      if (this.WebBrowser.Parent != null)
       {
-        if (this.webBrowser.Parent.InvokeRequired)
+        if (this.WebBrowser.Parent.InvokeRequired)
         {
-          this.webBrowser.Parent.Invoke(new RemoveDelegate(this.webBrowser.Parent.Controls.Remove), this.webBrowser);
+          this.WebBrowser.Parent.Invoke(new RemoveDelegate(this.WebBrowser.Parent.Controls.Remove), this.WebBrowser);
         }
         else
         {
-          this.webBrowser.Parent.Controls.Remove(this.webBrowser);
+          this.WebBrowser.Parent.Controls.Remove(this.WebBrowser);
         }
       }
 
@@ -485,11 +438,11 @@ namespace VectorGraphics.Elements
     /// </summary>
     private void InitializeFields()
     {
-      this.webBrowser = new WebBrowser();
+      this.WebBrowser = new WebBrowser();
       this.currentTransform = new Matrix();
-      this.browserURL = "about:blank";
-      this.browseDepth = 0;
-      this.webBrowser.Url = new Uri(this.browserURL);
+      this.BrowserURL = "about:blank";
+      this.BrowseDepth = 0;
+      this.WebBrowser.Url = new Uri(this.BrowserURL);
     }
 
     #endregion //METHODS

@@ -1,7 +1,7 @@
 ﻿// <copyright file="DSRecord.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,18 +9,22 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
-namespace Ogama.Modules.Replay
+namespace Ogama.Modules.Replay.Video
 {
   using System;
-  using System.Diagnostics;
   using System.Drawing;
   using System.Runtime.InteropServices;
   using System.Threading;
   using System.Windows.Forms;
+
   using DirectShowLib;
+
+  using GTHardware.Cameras.DirectShow;
+
   using Ogama.ExceptionHandling;
+
   using OgamaControls;
 
   /// <summary>
@@ -332,7 +336,7 @@ namespace Ogama.Modules.Replay
           // Create the file writer part of the graph. 
           // SetOutputFileName does this for us, and returns the mux and sink
           IBaseFilter mux;
-          IFileSinkFilter2 sink;
+          IFileSinkFilter sink;
           hr = captureGraph.SetOutputFileName(
             MediaSubType.Avi,
             this.videoExportProperties.OutputVideoProperties.Filename,
@@ -521,7 +525,7 @@ namespace Ogama.Modules.Replay
             hr >= 0;
             hr = mediaEvent.GetEvent(out ec, out p1, out p2, 100))
         {
-          Debug.WriteLine(ec);
+          // Debug.WriteLine(ec);
           switch (ec)
           {
             // If the clip is finished playing

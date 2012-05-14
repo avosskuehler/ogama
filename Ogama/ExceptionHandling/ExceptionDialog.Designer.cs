@@ -1,5 +1,7 @@
 ﻿namespace Ogama.ExceptionHandling
 {
+  using Ogama.Modules.Common.Controls;
+
   partial class ExceptionDialog
   {
     /// <summary>
@@ -30,7 +32,7 @@
     {
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExceptionDialog));
       this.pnlDescription = new System.Windows.Forms.Panel();
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
       this.spcMessageDetails = new System.Windows.Forms.SplitContainer();
       this.lblExceptionMessage = new System.Windows.Forms.Label();
@@ -234,6 +236,6 @@
     private System.Windows.Forms.Button btnOK;
     private System.Windows.Forms.Label lblExceptionMessage;
     private System.Windows.Forms.CheckBox chbShowDetails;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
   }
 }

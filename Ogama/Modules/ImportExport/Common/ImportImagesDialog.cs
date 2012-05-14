@@ -1,7 +1,7 @@
 // <copyright file="ImportImagesDialog.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,23 +9,21 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
-namespace Ogama.Modules.ImportExport
+namespace Ogama.Modules.ImportExport.Common
 {
   using System;
   using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Data;
-  using System.Drawing;
-  using System.Globalization;
   using System.IO;
-  using System.Text;
   using System.Windows.Forms;
 
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common;
-  using Ogama.Modules.SlideshowDesign;
+  using Ogama.Modules.Common.FormTemplates;
+  using Ogama.Modules.Common.Tools;
+  using Ogama.Modules.ImportExport.FixationData;
+  using Ogama.Modules.ImportExport.RawData;
 
   /// <summary>
   /// This dialog <see cref="Form"/> derives from <see cref="FormWithAccellerators"/>
@@ -39,12 +37,15 @@ namespace Ogama.Modules.ImportExport
     ///////////////////////////////////////////////////////////////////////////////
     // Defining Constants                                                        //
     ///////////////////////////////////////////////////////////////////////////////
+
     #region CONSTANTS
+
     #endregion //CONSTANTS
 
     ///////////////////////////////////////////////////////////////////////////////
     // Defining Variables, Enumerations, Events                                  //
     ///////////////////////////////////////////////////////////////////////////////
+
     #region FIELDS
 
     /// <summary>
@@ -83,6 +84,7 @@ namespace Ogama.Modules.ImportExport
     ///////////////////////////////////////////////////////////////////////////////
     // Construction and Initializing methods                                     //
     ///////////////////////////////////////////////////////////////////////////////
+
     #region CONSTRUCTION
 
     /// <summary>
@@ -105,17 +107,21 @@ namespace Ogama.Modules.ImportExport
     ///////////////////////////////////////////////////////////////////////////////
     // Defining Properties                                                       //
     ///////////////////////////////////////////////////////////////////////////////
+
     #region PROPERTIES
+
     #endregion //PROPERTIES
 
     ///////////////////////////////////////////////////////////////////////////////
     // Eventhandler                                                              //
     ///////////////////////////////////////////////////////////////////////////////
+
     #region EVENTS
 
     ///////////////////////////////////////////////////////////////////////////////
     // Eventhandler for UI, Menu, Buttons, Toolbars etc.                         //
     ///////////////////////////////////////////////////////////////////////////////
+
     #region WINDOWSEVENTHANDLER
 
     /// <summary>
@@ -282,8 +288,8 @@ namespace Ogama.Modules.ImportExport
         }
         catch (Exception ex)
         {
-          string message = "This is not a valid trial sequence number, it has to be a unique number." +
-            Environment.NewLine + "Error: " + ex.Message;
+          string message = "This is not a valid trial sequence number, it has to be a unique number."
+                           + Environment.NewLine + "Error: " + ex.Message;
           this.dgvAssignments[e.ColumnIndex, e.RowIndex].ErrorText = message;
         }
       }
@@ -312,7 +318,9 @@ namespace Ogama.Modules.ImportExport
     ///////////////////////////////////////////////////////////////////////////////
     // Eventhandler for Custom Defined Events                                    //
     ///////////////////////////////////////////////////////////////////////////////
+
     #region CUSTOMEVENTHANDLER
+
     #endregion //CUSTOMEVENTHANDLER
 
     #endregion //EVENTS
@@ -320,18 +328,23 @@ namespace Ogama.Modules.ImportExport
     ///////////////////////////////////////////////////////////////////////////////
     // Methods and Eventhandling for Background tasks                            //
     ///////////////////////////////////////////////////////////////////////////////
+
     #region BACKGROUNDWORKER
+
     #endregion //BACKGROUNDWORKER
 
     ///////////////////////////////////////////////////////////////////////////////
     // Inherited methods                                                         //
     ///////////////////////////////////////////////////////////////////////////////
+
     #region OVERRIDES
+
     #endregion //OVERRIDES
 
     ///////////////////////////////////////////////////////////////////////////////
     // Methods for doing main class job                                          //
     ///////////////////////////////////////////////////////////////////////////////
+
     #region METHODS
 
     /// <summary>
@@ -349,18 +362,15 @@ namespace Ogama.Modules.ImportExport
       this.imagefileColumnHeaders.Clear();
       this.imagesImportRows.Clear();
       this.imagesImportRows = this.asciiSetting.ParseFile(
-        imagesImportFile,
-        this.numberOfImportLines,
-        ref this.imagefileColumnHeaders);
+        imagesImportFile, this.numberOfImportLines, ref this.imagefileColumnHeaders);
 
       this.cbbStimulusFileColumn.Items.Clear();
       this.cbbTrialIDColumn.Items.Clear();
 
       if (this.imagefileColumnHeaders.Count == 0)
       {
-        string message = "There are no columns in import file, so we stop importing. "
-        + Environment.NewLine +
-        "This import uses the same settings as the raw file import (quotation characters etc.)";
+        string message = "There are no columns in import file, so we stop importing. " + Environment.NewLine
+                         + "This import uses the same settings as the raw file import (quotation characters etc.)";
         ExceptionMethods.ProcessErrorMessage(message);
         return;
       }
@@ -377,15 +387,15 @@ namespace Ogama.Modules.ImportExport
         this.cbbStimulusFileColumn.Items.AddRange(this.imagefileColumnHeaders.ToArray());
         this.cbbTrialIDColumn.Items.Add("Automatic numbering");
         this.cbbTrialIDColumn.Items.AddRange(this.imagefileColumnHeaders.ToArray());
-        this.cbbStimulusFileColumn.SelectedIndex = 0;
-        this.cbbTrialIDColumn.SelectedIndex = 2;
+        this.cbbStimulusFileColumn.SelectedIndex = 1;
+        this.cbbTrialIDColumn.SelectedIndex = 1;
         this.RepopulateImageAssignmentTable();
 
         if (this.imagefileColumnHeaders.Count > 2)
         {
           this.spcTableDropDowns.Panel2Collapsed = false;
-          string message = "There are more than two columns in import file, " +
-            "please specify the starting time column and the trial ID column.";
+          string message = "There are more than two columns in import file, "
+                           + "please specify the starting time column and the trial ID column.";
           ExceptionMethods.ProcessMessage("Please choose columns", message);
         }
       }
@@ -428,8 +438,8 @@ namespace Ogama.Modules.ImportExport
               return false;
             }
 
-            if (row.Cells["columnAssignTrialID"].Value == null ||
-              !int.TryParse(row.Cells["columnAssignTrialID"].Value.ToString(), out trialID))
+            if (row.Cells["columnAssignTrialID"].Value == null
+                || !int.TryParse(row.Cells["columnAssignTrialID"].Value.ToString(), out trialID))
             {
               return false;
             }
@@ -472,30 +482,20 @@ namespace Ogama.Modules.ImportExport
           case ImportTypes.Rawdata:
             foreach (TrialsData trial in ImportRawData.GetTrialList(this.numberOfImportLines))
             {
-              this.dgvTrialsPreview.Rows.Add(new object[] 
-                {
-                  trial.SubjectName,
-                  trial.TrialSequence, 
-                  trial.TrialID, 
-                  trial.Category,
-                  trial.TrialName,
-                  trial.TrialStartTime,
-                  trial.Duration
-                });
+              this.dgvTrialsPreview.Rows.Add(
+                new object[]
+                  {
+                    trial.SubjectName, trial.TrialSequence, trial.TrialID, trial.Category, trial.TrialName,
+                    trial.TrialStartTime, trial.Duration
+                  });
             }
 
             break;
           case ImportTypes.Fixations:
             foreach (TrialsData trial in ImportFixations.GetTrialList(this.numberOfImportLines))
             {
-              this.dgvTrialsPreview.Rows.Add(new object[] 
-                {
-                  trial.SubjectName,
-                  trial.TrialSequence,
-                  trial.TrialID,
-                  string.Empty,
-                  trial.TrialName
-                });
+              this.dgvTrialsPreview.Rows.Add(
+                new object[] { trial.SubjectName, trial.TrialSequence, trial.TrialID, string.Empty, trial.TrialName });
             }
 
             break;
@@ -513,8 +513,7 @@ namespace Ogama.Modules.ImportExport
     {
       // If combo boxes didn´t have a selection
       // Cancel the repopulation
-      if (this.cbbStimulusFileColumn.SelectedItem == null ||
-        this.cbbTrialIDColumn.SelectedItem == null)
+      if (this.cbbStimulusFileColumn.SelectedItem == null || this.cbbTrialIDColumn.SelectedItem == null)
       {
         return;
       }
@@ -545,22 +544,14 @@ namespace Ogama.Modules.ImportExport
         for (int i = 0; i < this.imagesImportRows.Count; i++)
         {
           string[] item = this.imagesImportRows[i];
-          this.dgvAssignments.Rows.Add(new string[] 
-            { 
-              i.ToString(), 
-              item[columnIndexStimulusFile] 
-            });
+          this.dgvAssignments.Rows.Add(new string[] { i.ToString(), item[columnIndexStimulusFile] });
         }
       }
       else
       {
         foreach (string[] items in this.imagesImportRows)
         {
-          this.dgvAssignments.Rows.Add(new string[] 
-            { 
-              items[columnIndexTrialID], 
-              items[columnIndexStimulusFile] 
-            });
+          this.dgvAssignments.Rows.Add(new string[] { items[columnIndexTrialID], items[columnIndexStimulusFile] });
         }
       }
 
@@ -610,9 +601,7 @@ namespace Ogama.Modules.ImportExport
             this.imagefileColumnHeaders.Clear();
             this.imagesImportRows.Clear();
             this.imagesImportRows = this.asciiSetting.ParseFile(
-              this.detectionSetting.StimuliImportFile,
-              this.numberOfImportLines,
-              ref this.imagefileColumnHeaders);
+              this.detectionSetting.StimuliImportFile, this.numberOfImportLines, ref this.imagefileColumnHeaders);
 
             this.cbbStimulusFileColumn.Items.Clear();
             this.cbbTrialIDColumn.Items.Clear();
@@ -662,6 +651,7 @@ namespace Ogama.Modules.ImportExport
     ///////////////////////////////////////////////////////////////////////////////
     // Small helping Methods                                                     //
     ///////////////////////////////////////////////////////////////////////////////
+
     #region HELPER
 
     /// <summary>
@@ -738,13 +728,11 @@ namespace Ogama.Modules.ImportExport
 
       if (fileErrorCounter > 0)
       {
-        string message = "It seems that at least " + fileErrorCounter.ToString() +
-          " stimulus filenames are not valid, " + Environment.NewLine +
-          " because they contain white-space " +
-          " or other unallowed characters." + Environment.NewLine +
-          "Would you like to revise the names ?";
-        if (InformationDialog.Show("Invalid filename", message, true, MessageBoxIcon.Information)
-          == DialogResult.Yes)
+        string message = "It seems that at least " + fileErrorCounter.ToString() + " stimulus filenames are not valid, "
+                         + Environment.NewLine + " because they contain white-space "
+                         + " or other unallowed characters." + Environment.NewLine
+                         + "Would you like to revise the names ?";
+        if (InformationDialog.Show("Invalid filename", message, true, MessageBoxIcon.Information) == DialogResult.Yes)
         {
           return false;
         }
@@ -756,4 +744,3 @@ namespace Ogama.Modules.ImportExport
     #endregion //HELPER
   }
 }
-

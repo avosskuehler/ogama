@@ -11,6 +11,7 @@ namespace DmoMixer
 {
   using System;
   using System.Drawing;
+
   using DirectShowLib.DMO;
 
   /// <summary>

@@ -1,4 +1,4 @@
-﻿namespace Ogama.Modules.SlideshowDesign
+﻿namespace Ogama.Modules.SlideshowDesign.DesignModule
 {
   partial class SlidePicture
   {
@@ -13,9 +13,9 @@
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      if (disposing && (components != null))
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -28,7 +28,7 @@
     /// </summary>
     private void InitializeComponent()
     {
-      components = new System.ComponentModel.Container();
+      this.components = new System.ComponentModel.Container();
     }
 
     #endregion

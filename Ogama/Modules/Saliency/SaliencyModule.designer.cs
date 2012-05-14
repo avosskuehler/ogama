@@ -2,6 +2,8 @@ using OgamaControls;
 
 namespace Ogama.Modules.Saliency
 {
+  using Ogama.Modules.Common.Controls;
+
   partial class SaliencyModule
   {
     /// <summary>
@@ -91,7 +93,7 @@ namespace Ogama.Modules.Saliency
       this.btnSeekNextSlide = new System.Windows.Forms.ToolStripButton();
       this.btnSeekPreviousSlide = new System.Windows.Forms.ToolStripButton();
       this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-      this.trialTimeLine = new Ogama.Modules.Common.TrialTimeLine(this.components);
+      this.trialTimeLine = new TrialTimeLine(this.components);
       this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
       this.trbZoom = new OgamaControls.ToolStripTrackBar();
       this.tacChannels = new System.Windows.Forms.TabControl();
@@ -1556,7 +1558,7 @@ namespace Ogama.Modules.Saliency
     private System.Windows.Forms.ToolStripButton btnSeekNextSlide;
     private System.Windows.Forms.ToolStripButton btnSeekPreviousSlide;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-    private Ogama.Modules.Common.TrialTimeLine trialTimeLine;
+    private TrialTimeLine trialTimeLine;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
     private ToolStripTrackBar trbZoom;
     private System.Windows.Forms.ToolStripContainer toolStripContainer2;

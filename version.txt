@@ -1,2 +1,2 @@
-3.4.3899.20191
-This update is recommended. Bug fixes mainly in the recorder ...
+4.2.4470.34830
+This is a release, containing bugfixes and new desktop recording

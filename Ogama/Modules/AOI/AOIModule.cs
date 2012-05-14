@@ -1,7 +1,7 @@
 // <copyright file="AOIModule.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,7 +9,7 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
 namespace Ogama.Modules.AOI
 {
@@ -27,15 +27,23 @@ namespace Ogama.Modules.AOI
 
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
+  using Ogama.Modules.AOI.Dialogs;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.FormTemplates;
+  using Ogama.Modules.Common.SlideCollections;
+  using Ogama.Modules.Common.Tools;
+  using Ogama.Modules.Common.Types;
   using Ogama.Modules.ImportExport;
+  using Ogama.Modules.ImportExport.AOIData;
+  using Ogama.Modules.ImportExport.Common;
   using Ogama.Properties;
   using OgamaControls;
   using OgamaControls.Dialogs;
 
-  using VectorGraphics.CustomEventArgs;
-  using VectorGraphics.CustomTypeConverter;
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
+  using VectorGraphics.Tools.CustomEventArgs;
+  using VectorGraphics.Tools.CustomTypeConverter;
 
   /// <summary>
   /// Derived from <see cref="FormWithTrialSelection"/>.
@@ -1063,6 +1071,12 @@ namespace Ogama.Modules.AOI
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnNewRectangle_Click(object sender, EventArgs e)
     {
+      // Skip if no data available
+      if (this.cbbTrial.SelectedItem == null)
+      {
+        return;
+      }
+      
       this.btnNewRectangle.Checked = true;
       this.btnNewEllipse.Checked = false;
       this.btnNewPolyline.Checked = false;
@@ -1080,6 +1094,12 @@ namespace Ogama.Modules.AOI
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnNewEllipse_Click(object sender, EventArgs e)
     {
+      // Skip if no data available
+      if (this.cbbTrial.SelectedItem == null)
+      {
+        return;
+      }
+
       this.btnNewRectangle.Checked = false;
       this.btnNewEllipse.Checked = true;
       this.btnNewPolyline.Checked = false;
@@ -1097,6 +1117,12 @@ namespace Ogama.Modules.AOI
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnNewPolyline_Click(object sender, EventArgs e)
     {
+      // Skip if no data available
+      if (this.cbbTrial.SelectedItem == null)
+      {
+        return;
+      }
+
       this.btnNewRectangle.Checked = false;
       this.btnNewEllipse.Checked = false;
       this.btnNewPolyline.Checked = true;
@@ -1114,13 +1140,20 @@ namespace Ogama.Modules.AOI
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnNewAOIGrid_Click(object sender, EventArgs e)
     {
+      // Skip if no data available
+      if (this.cbbTrial.SelectedItem == null)
+      {
+        return;
+      }
+      
       this.btnNewRectangle.Checked = false;
       this.btnNewEllipse.Checked = false;
       this.btnNewPolyline.Checked = false;
       this.btnNewAOIGrid.Checked = true;
-      AddGridDlg gridDialog = new AddGridDlg();
-      Bitmap screenShot = new Bitmap(Document.ActiveDocument.PresentationSize.Width, Document.ActiveDocument.PresentationSize.Height);
-      Image screenshot2 = this.aoiPicture.RenderToImage();
+
+      var gridDialog = new AddGridDlg();
+      ////Bitmap screenShot = new Bitmap(Document.ActiveDocument.PresentationSize.Width, Document.ActiveDocument.PresentationSize.Height);
+      var screenshot2 = this.aoiPicture.RenderToImage();
       gridDialog.SlideImage = screenshot2;
       if (gridDialog.ShowDialog() == DialogResult.OK)
       {
@@ -1176,6 +1209,12 @@ namespace Ogama.Modules.AOI
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnSeekNextSlide_Click(object sender, EventArgs e)
     {
+      // Skip if there is no data
+      if (this.CurrentTrial == null)
+      {
+        return;
+      }
+
       this.trialTimeLine.HighlightNextSlide(true);
       int slideIndex = this.trialTimeLine.HighlightedSlideIndex;
       this.LoadSlide(this.CurrentTrial[slideIndex], ActiveXMode.BehindPicture);
@@ -1190,8 +1229,14 @@ namespace Ogama.Modules.AOI
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void btnSeekPreviousSlide_Click(object sender, EventArgs e)
+    private void BtnSeekPreviousSlideClick(object sender, EventArgs e)
     {
+      // Skip if there is no data
+      if (this.CurrentTrial == null)
+      {
+        return;
+      }
+
       this.trialTimeLine.HighlightNextSlide(false);
       int slideIndex = this.trialTimeLine.HighlightedSlideIndex;
       this.LoadSlide(this.CurrentTrial[slideIndex], ActiveXMode.BehindPicture);
@@ -1293,6 +1338,12 @@ namespace Ogama.Modules.AOI
     /// <param name="e">A <see cref="ShapeEventArgs"/> with the event data.</param>
     private void aoiPicture_ShapeAdded(object sender, ShapeEventArgs e)
     {
+      // Skip if no data available
+      if (this.cbbTrial.SelectedItem == null)
+      {
+        return;
+      }
+      
       string shapeName = e.Shape.Name;
       int shapePointCount = e.Shape.GetPointCount();
       string shapeType = e.Shape.GetType().ToString().Replace("VectorGraphics.Elements.VG", string.Empty);
@@ -1323,6 +1374,12 @@ namespace Ogama.Modules.AOI
     /// <param name="e">A <see cref="ShapeEventArgs"/> with the event data.</param>
     private void aoiPicture_ShapeChanged(object sender, ShapeEventArgs e)
     {
+      // Skip if no data available
+      if (this.cbbTrial.SelectedItem == null)
+      {
+        return;
+      }
+
       string shapeName = e.Shape.Name;
       int shapePointCount = e.Shape.GetPointCount();
       string shapeType = e.Shape.GetType().ToString().Replace("VectorGraphics.Elements.VG", string.Empty);

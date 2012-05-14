@@ -1,7 +1,7 @@
 ﻿// <copyright file="SlidePicture.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,24 +9,19 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
-namespace Ogama.Modules.SlideshowDesign
+namespace Ogama.Modules.SlideshowDesign.DesignModule
 {
   using System;
-  using System.Collections.Generic;
   using System.ComponentModel;
-  using System.Diagnostics;
   using System.Drawing;
   using System.Drawing.Drawing2D;
-  using System.Text;
   using System.Windows.Forms;
 
-  using Ogama.Modules.Common;
-  using VectorGraphics;
   using VectorGraphics.Canvas;
-  using VectorGraphics.CustomEventArgs;
   using VectorGraphics.Elements;
+  using VectorGraphics.Tools.CustomEventArgs;
 
   /// <summary>
   /// A <see cref="Picture"/> derived from specialized
@@ -109,7 +104,7 @@ namespace Ogama.Modules.SlideshowDesign
 
           break;
         case VGShapeType.Ellipse:
-          NewEllipseStart(
+          this.NewEllipseStart(
             ShapeDrawAction.NameAndEdge,
             this.TargetPen,
             new SolidBrush(this.TargetPen.Color),
@@ -120,7 +115,7 @@ namespace Ogama.Modules.SlideshowDesign
 
           break;
         case VGShapeType.Polyline:
-          NewPolylineStart(
+          this.NewPolylineStart(
             ShapeDrawAction.NameAndEdge,
             this.TargetPen,
             new SolidBrush(this.TargetPen.Color),
@@ -159,7 +154,7 @@ namespace Ogama.Modules.SlideshowDesign
       if (t != null)
       {
         VGElement elementToAdd = t;
-        ResetSelectedElement();
+        this.ResetSelectedElement();
 
         PasteAsDialog dialog = new PasteAsDialog();
         dialog.ElementToPaste = elementToAdd;

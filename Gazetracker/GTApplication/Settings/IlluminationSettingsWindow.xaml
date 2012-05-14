@@ -1,0 +1,156 @@
+﻿<Window
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Dotway_WPF_Controls="clr-namespace:Dotway.WPF.Controls;assembly=Dotway.WPF.Controls"
+    xmlns:Custom="http://schemas.AvalonControls/AvalonControlsLibrary/Controls"
+    xmlns:GazeGUI="clr-namespace:GazeGUI;assembly=GazeGUI"
+    mc:Ignorable="d"
+    xmlns:GazeGUIVelocity="clr-namespace:GazeGUIVelocity;assembly=GazeGUIVelocity" 
+    xmlns:GazeTracker="clr-namespace:GazeTracker" 
+    xmlns:Custom1="http://schemas.microsoft.com/wpf/2008/toolkit" 
+    xmlns:System_Windows_Controls_Primitives="clr-namespace:System.Windows.Controls.Primitives;assembly=System.Windows.Controls.Layout.Toolkit" 
+    xmlns:GazeTrackerUI_TrackerViewer_GPU="clr-namespace:GazeTrackerUI.TrackerViewer.GPU" 
+    x:Class="GazeTrackerUI.Settings.IlluminationSettingsWindow"
+    x:Name="illuminationSettingsWindow" Title="IlluminationSettingsWindow" 
+    Height="413.667" Width="497" 
+	AllowsTransparency="True" WindowStyle="None" ResizeMode="CanResizeWithGrip" Background="{x:Null}"
+    Loaded="OnLoad" Foreground="{x:Null}">
+
+  <Grid x:Name="LayoutRoot">
+
+    <Image Margin="2" Source="/GazeTracker;Component/Graphics/f8e14b4df4c3413852893f1754a09ce037db2c70_m.jpg" Stretch="Fill" Opacity="0.75"/>
+    <Rectangle Stroke="#FF454545" Margin="0" RadiusX="8" RadiusY="8">
+    	<Rectangle.Fill>
+    		<LinearGradientBrush EndPoint="0.52,0.432" StartPoint="0.522,0.017">
+    			<GradientStop Color="#330C0C0C"/>
+    			<GradientStop Color="#58393939" Offset="0.99"/>
+    		</LinearGradientBrush>
+    	</Rectangle.Fill>
+    </Rectangle>
+
+    <Rectangle Stroke="#FF454545" Margin="0" RadiusX="8" RadiusY="8" MouseLeftButtonDown="DragWindow">
+      <Rectangle.Fill>
+        <LinearGradientBrush EndPoint="0.515,0.517" StartPoint="0.519,0.96">
+          <GradientStop Color="#64000000"/>
+          <GradientStop Color="#A5222222" Offset="0.99"/>
+        </LinearGradientBrush>
+      </Rectangle.Fill>
+    </Rectangle>
+
+  	<Grid x:Name="GridTop" Margin="8,-2.5,-8.5,0" VerticalAlignment="Top" Height="30.5">
+  		<Label HorizontalAlignment="Left" Margin="0,4.5,0,0" Width="116" Content="Illumination" Foreground="#FFC7C7C7"/>
+  		<Label HorizontalAlignment="Left" Margin="73.503,4.497,0,0.043" Content="Status" Foreground="#FFC7C7C7" d:LayoutOverrides="Height"/>
+  		<Label x:Name="labelConnectionStatus" HorizontalAlignment="Left" Margin="111.33,4.497,0,0.043" Content="Not connected" Foreground="#FFB70000" d:LayoutOverrides="Height"/>
+
+
+  		<Label Content=" x" MouseDown="HideWindow" Background="{x:Null}" FontFamily="Verdana" FontSize="18" Foreground="#FFC3C3C3" HorizontalAlignment="Right" x:Name="LabelCloseX" Width="37.653" Margin="0,0,0,1.166" />
+    
+
+  	</Grid>
+    
+
+    <Grid x:Name="GridLeftPanel" Visibility="Visible" Margin="4,0,4,4">
+     
+    <TabControl Style="{StaticResource GTTabControl}" IsSynchronizedWithCurrentItem="True" x:Name="TabControlLEDs" Background="{x:Null}" BorderBrush="Black" Foreground="{x:Null}" Margin="6,31,6,55" IsSelected="True">
+
+    <TabItem Style="{StaticResource GTTabItem}" x:Name="TabItemGroups" Header="Groups" Margin="0" Height="22" Width="120" IsSelected="True">
+	  
+    		<Grid Height="Auto" x:Name="GridGroups" Width="Auto" VerticalAlignment="Stretch" Margin="4" Panel.ZIndex="1">
+    			<Grid x:Name="GridCreateGroup" Margin="6,6,6,0" VerticalAlignment="Top" Height="41">
+    				<Label HorizontalAlignment="Left" Margin="-3,-6,0,20" Content="Group name" Background="#00C9C9C9" Foreground="#FFC9C9C9" d:LayoutOverrides="Height"/>
+    				<TextBox x:Name="textBoxGroupID" Margin="2,18,0,1" TextWrapping="Wrap" Background="#652E2E2E" Foreground="#FFC7C7C7" BorderBrush="#FF373737" FontSize="10.667" HorizontalAlignment="Left" Width="206" Height="22"/>
+    				<Label Margin="217,-6,151,20" Content="Function" Foreground="#FFC9C9C9"/>
+    				<ComboBox x:Name="comboBoxFunction" Background="#7F202020" Foreground="White" BorderBrush="{x:Null}" Margin="222,17.5,123,1.5" FontSize="10.667"/>
+    				<GazeGUIVelocity:Button Action="CreateGroup" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="89" Height="30" Label="Create" ActivationMethod="Mouse" Margin="0,0,0,-1"/>
+    			</Grid>
+    			<Grid x:Name="GridGroupList" Margin="6,55,6,49.96">
+    				<Rectangle x:Name="RectangleGroups" Fill="#3F000000" Stroke="#FF2C2C2C" RadiusX="4" RadiusY="4" Margin="0"/>
+    				<WrapPanel x:Name="WrapPanelGroups" ItemHeight="70" ItemWidth="85" Margin="8,12,12,12"/>
+				
+    			</Grid>
+				
+				<Label HorizontalAlignment="Left" Margin="4,0,0,24" VerticalAlignment="Bottom" Content="Brightness" Foreground="#FFC9C9C9"/>
+				<Slider x:Name="SliderBrightness" Background="#FF3D3D3D" Margin="9,0,0,8" Style="{StaticResource SimpleSlider}" BorderBrush="{x:Null}" Foreground="#FF5F5F5F" AutoToolTipPlacement="TopLeft" LargeChange="0" Maximum="100" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="215" TickFrequency="5" SmallChange="1"/>
+
+    		</Grid>
+    	</TabItem>
+
+    	<TabItem Style="{StaticResource GTTabItem}" x:Name="TabItemIllumination" Header="LED Assignment" Margin="0" Height="22" Width="120" BorderBrush="{x:Null}">
+	  
+    		<Grid Height="Auto" x:Name="GridLEDs" Width="Auto" VerticalAlignment="Stretch" Margin="4,4,4,6" Panel.ZIndex="1">
+			<!--
+    			<Custom1:DataGrid x:Name="datagridLEDs" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}" Background="#320C0C0C" BorderBrush="#FF3D3D3D" Margin="0,2,0,31.96" AlternatingRowBackground="#FF4D4D4D" RowBackground="#FF2E2E2E" Foreground="#FFC9C9C9" AutoGenerateColumns="False">
+    				<Custom1:DataGrid.Columns>
+    					<Custom1:DataGridTextColumn x:Name="dataGridTextColumnChannel" Header=" Channel" Binding="{Binding Channel}" SortMemberPath="Channel"  Width="75" Foreground="#FFC7C7C7" IsReadOnly="True"/>
+    					<Custom1:DataGridTextColumn x:Name="dataGridTextColumnGroup" Header="Group" Binding="{Binding Group.ID}" SortMemberPath="ID" Width="175" Foreground="#FFC7C7C7"  IsReadOnly="True"/>
+    					<Custom1:DataGridTextColumn x:Name="dataGridTextColumnBrightness" Header="Brightness" Width="75" Binding="{Binding Brightness}" SortMemberPath="Brightness" Foreground="#FFC9C9C9"/>
+    					<Custom1:DataGridCheckBoxColumn x:Name="dataGridCheckBoxOn" Header="On" Binding="{Binding On}" SortMemberPath="On" Width="100"/>
+    				</Custom1:DataGrid.Columns>
+    			</Custom1:DataGrid>
+                -->
+    			<Grid Margin="0,0,8,0" VerticalAlignment="Bottom"/>
+    			<ComboBox x:Name="comboBoxGroups" Background="#7F202020" Foreground="White" BorderBrush="{x:Null}" Margin="0,0,0,4" FontSize="10.667" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="119.666" Height="20"/>
+    			<Label Margin="0,0,111.666,2" VerticalAlignment="Bottom" Content="Assign selected to" Foreground="#FFC9C9C9" HorizontalAlignment="Right" Width="115.334"/>
+
+    		</Grid>
+    	</TabItem>
+    	<TabItem Style="{StaticResource GTTabItem}" x:Name="TabItemPhidgetSetup" Header="Phidget info" Margin="0" Height="22" Width="120">
+	  
+    		<Grid Height="Auto" x:Name="GridPhidgetConfig" Width="Auto" VerticalAlignment="Stretch" Margin="4,4,4,6" Panel.ZIndex="1" Background="#3F000000">
+    			<StackPanel HorizontalAlignment="Left" Margin="10,8,0,8" Width="55">
+    				<Label Margin="0" Content="Name" Foreground="#FFC7C7C7" HorizontalAlignment="Right" Height="23" FontSize="10.667"/>
+    				<Label Margin="0" Content="Type" Foreground="#FFC7C7C7" HorizontalAlignment="Right" Height="26" FontSize="10.667"/>
+    				<Label Margin="0" Content="ID" Foreground="#FFC7C7C7" HorizontalAlignment="Right" Height="23" FontSize="10.667"/>
+    				<Label Margin="0" Content="S/N" Foreground="#FFC7C7C7" HorizontalAlignment="Right" Height="23" FontSize="10.667"/>
+    				<Label Margin="0" Content="Version" Foreground="#FFC7C7C7" HorizontalAlignment="Right" Height="23" FontSize="10.667"/>
+    				<Label HorizontalAlignment="Right" Margin="0" Height="24" Content="Server ID" FontSize="10.667" Foreground="#FFC7C7C7"/>
+    				<Label Margin="0" Content="Host" Foreground="#FFC7C7C7" HorizontalAlignment="Right" Height="23" FontSize="10.667"/>
+    				<Label Margin="0" Content="Port" Foreground="#FFC7C7C7" HorizontalAlignment="Right" Height="23" FontSize="10.667"/>
+    			</StackPanel>
+    			<StackPanel Margin="71,8,19,8">
+    				<Label x:Name="LabelName" Margin="8,0,0,0" Content="-- Name --" Foreground="#FF21C700" HorizontalAlignment="Left" Height="23" FontSize="10.667"/>
+    				<Label x:Name="LabelType" Margin="8,0,0,0" Content="-- Type --" Foreground="#FF21C700" HorizontalAlignment="Left" Height="26" FontSize="10.667"/>
+    				<Label x:Name="LabelID" Margin="8,0,0,0" Content="-- ID --" Foreground="#FF21C700" HorizontalAlignment="Left" Height="23" FontSize="10.667"/>
+    				<Label x:Name="LabelSN" Margin="8,0,0,0" Content="-- S/N --" Foreground="#FF21C700" HorizontalAlignment="Left" Height="23" FontSize="10.667"/>
+    				<Label x:Name="LabelVersion" Margin="8,0,0,0" Content="-- Version --" Foreground="#FF21C700" HorizontalAlignment="Left" Height="23" FontSize="10.667"/>
+    				<Label x:Name="LabelServerID" HorizontalAlignment="Left" Margin="8,0,0,0" Height="24" Content="-- Server ID --" FontSize="10.667" Foreground="#FF21C700"/>
+    				<Label x:Name="LabelHost" Margin="8,0,0,0" Content="-- Host --" Foreground="#FF21C700" HorizontalAlignment="Left" Height="23" FontSize="10.667"/>
+    				<Label x:Name="LabelPort" Margin="8,0,0,0" Content="-- Port --" Foreground="#FF21C700" HorizontalAlignment="Left" Height="23" FontSize="10.667"/>
+    			</StackPanel>
+    			<GazeGUIVelocity:Button x:Name="BtnConnect" Action="ConnectPhidget" HorizontalAlignment="Right" Margin="0,0,8,8" VerticalAlignment="Bottom" Width="112" Height="35" Label="Connect" ActivationMethod="Mouse" d:LayoutOverrides="VerticalAlignment"/>
+    		</Grid>
+    	</TabItem>
+				
+	</TabControl>
+
+      <Grid x:Name="GridGlobalPower" Margin="6,0,6,6" VerticalAlignment="Bottom" Height="44">
+
+      	<Rectangle Fill="#6E101010" Stroke="Black" Margin="0"/>
+      	<Grid x:Name="GridGlobalVoltage" HorizontalAlignment="Left" Width="77.666" Margin="5,0,0,2">
+      		<Label FontSize="10.667" Foreground="#FFC3C3C3" Width="Auto" Margin="-4,-2,0,19.813" HorizontalAlignment="Left" Content="Global voltage" d:LayoutOverrides="Height"/>
+      		<ComboBox x:Name="comboBoxGlobalVolt" SelectedValue="{Binding TrackingMethod}" Background="#7F202020" Foreground="White" BorderBrush="{x:Null}" Margin="0,18.5,0,3.5" FontSize="10.667"/>
+      	</Grid>
+      	<Grid x:Name="GridGlobalAmp" Margin="0,-2,330.334,2" HorizontalAlignment="Right" Width="59">
+      		<Label RenderTransformOrigin="0.5,0.5" Foreground="#FFC3C3C3" Width="Auto" Content="Global amp" FontSize="10.667" d:LayoutOverrides="Width, Height" Background="#00C3C3C3" Margin="-5.335,-0.001,-25.465,19.812"/>
+      		<ComboBox x:Name="comboBoxGlobalAmp" SelectedValue="{Binding IRPlacement}" Height="20" Background="#7F202020" VerticalAlignment="Bottom" Foreground="White" BorderBrush="{x:Null}" Margin="0,0,0,3.5" FontSize="10.667"/>
+      	</Grid>
+      	<Grid x:Name="GridGlobalOnOff" Margin="0,-2,259.334,2" HorizontalAlignment="Right" Width="59">
+      		<Label RenderTransformOrigin="0.5,0.5" Foreground="#FFC3C3C3" Width="Auto" Content="Turn all" FontSize="10.667" d:LayoutOverrides="Width, Height" Background="#00C3C3C3" Margin="-5.335,-0.001,-25.465,19.812"/>
+      		<ComboBox x:Name="comboBoxTurnAll" SelectedValue="{Binding IRPlacement}" Height="20" Background="#7F202020" VerticalAlignment="Bottom" Foreground="White" BorderBrush="{x:Null}" Margin="0,0,0,3.5" FontSize="10.667"/>
+      	</Grid>
+        
+      	<GazeGUIVelocity:Button x:Name="BtnSave" HorizontalAlignment="Right" Margin="0,0,6,6" VerticalAlignment="Bottom" Width="83" Height="30" Label="Save" ActivationMethod="Mouse"/>
+      	<GazeGUIVelocity:Button x:Name="BtnLoad" HorizontalAlignment="Right" Margin="0,0,94,5" VerticalAlignment="Bottom" Width="83" Height="30" Label="Load" ActivationMethod="Mouse"/>
+      </Grid>
+
+    </Grid>
+
+
+  </Grid>
+
+
+
+
+</Window>

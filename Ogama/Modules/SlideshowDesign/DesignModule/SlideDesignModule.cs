@@ -1,7 +1,7 @@
 ﻿// <copyright file="SlideDesignModule.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,29 +9,28 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
-namespace Ogama.Modules.SlideshowDesign
+namespace Ogama.Modules.SlideshowDesign.DesignModule
 {
   using System;
   using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Data;
   using System.Drawing;
-  using System.Drawing.Drawing2D;
   using System.IO;
-  using System.Text;
   using System.Windows.Forms;
 
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
-  using Ogama.Modules.Common;
-  using OgamaControls;
-  using OgamaControls.Dialogs;
+  using Ogama.Modules.Common.FormTemplates;
+  using Ogama.Modules.Common.SlideCollections;
+  using Ogama.Modules.SlideshowDesign.DesignModule.StimuliDialogs;
 
-  using VectorGraphics.CustomEventArgs;
+  using OgamaControls;
+
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
   using VectorGraphics.StopConditions;
+  using VectorGraphics.Tools.CustomEventArgs;
 
   /// <summary>
   /// Inherits <see cref="FormWithPicture"/>.
@@ -270,6 +269,9 @@ namespace Ogama.Modules.SlideshowDesign
       this.bkgAudioControl.PathToCopyTo = Document.ActiveDocument.ExperimentSettings.SlideResourcesPath;
       this.btnBackgroundColor.CurrentColor = defaultBgColor;
 
+      this.gveLayoutDockStyle.EditedType = typeof(DockStyle);
+      this.gveLayoutDockStyle.Value = DockStyle.None;
+
       this.dltForm.Logo = this.Icon.ToBitmap();
 
       this.rtbInstructions.BackColor = this.btnBackgroundColor.CurrentColor;
@@ -418,12 +420,7 @@ namespace Ogama.Modules.SlideshowDesign
     {
       if (this.designPicture.SelectedElement != null && !this.isInitializingSelectedShape)
       {
-        if (this.designPicture.SelectedElement is VGImage)
-        {
-          VGImage selectedImage = this.designPicture.SelectedElement as VGImage;
-          selectedImage.Layout = ImageLayout.None;
-          this.cbbImageLayout.SelectedItem = ImageLayout.None.ToString();
-        }
+        this.ResetImageLayout();
 
         PointF newLocation = this.designPicture.SelectedElement.Location;
         newLocation.X = (float)this.nudLayoutLeft.Value;
@@ -445,6 +442,7 @@ namespace Ogama.Modules.SlideshowDesign
     {
       if (this.designPicture.SelectedElement != null && !this.isInitializingSelectedShape)
       {
+        this.ResetImageLayout();
         PointF newLocation = this.designPicture.SelectedElement.Location;
         newLocation.Y = (float)this.nudLayoutTop.Value;
         this.designPicture.SelectedElement.Location = newLocation;
@@ -465,6 +463,7 @@ namespace Ogama.Modules.SlideshowDesign
     {
       if (this.designPicture.SelectedElement != null && !this.isInitializingSelectedShape)
       {
+        this.ResetImageLayout();
         SizeF newSize = this.designPicture.SelectedElement.Size;
         newSize.Width = (float)this.nudLayoutWidth.Value;
         this.designPicture.SelectedElement.Size = newSize;
@@ -481,13 +480,89 @@ namespace Ogama.Modules.SlideshowDesign
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/>.</param>
-    private void nudLayoutHeight_ValueChanged(object sender, EventArgs e)
+    private void NudLayoutHeightValueChanged(object sender, EventArgs e)
     {
       if (this.designPicture.SelectedElement != null && !this.isInitializingSelectedShape)
       {
+        this.ResetImageLayout();
         SizeF newSize = this.designPicture.SelectedElement.Size;
         newSize.Height = (float)this.nudLayoutHeight.Value;
         this.designPicture.SelectedElement.Size = newSize;
+        this.designPicture.RedrawAll();
+        this.designPicture.Invalidate();
+      }
+    }
+
+    /// <summary>
+    /// This method centers the current selected element of the modules picture
+    /// if there is any.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/>.</param>
+    private void BtnLayoutCenterScreenClick(object sender, EventArgs e)
+    {
+      if (this.designPicture.SelectedElement != null && !this.isInitializingSelectedShape)
+      {
+        this.ResetImageLayout();
+        this.designPicture.SelectedElement.Center = new PointF(
+         this.designPicture.PresentationSize.Width / 2,
+         this.designPicture.PresentationSize.Height / 2);
+        this.UpdateShapePositionAndSizeNumerics(this.designPicture.SelectedElement);
+        this.designPicture.RedrawAll();
+        this.designPicture.Invalidate();
+      }
+    }
+
+    /// <summary>
+    /// This method updates the position of the selected element in the desing picture
+    /// (if there is any) according to the selected docking style.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/>.</param>
+    private void GveLayoutDockStyleValueChanged(object sender, EventArgs e)
+    {
+      if (this.designPicture.SelectedElement != null && !this.isInitializingSelectedShape)
+      {
+        if (this.designPicture.SelectedElement is VGImage)
+        {
+          var selectedImage = this.designPicture.SelectedElement as VGImage;
+          selectedImage.Layout = ImageLayout.None;
+          this.cbbImageLayout.SelectedItem = ImageLayout.None.ToString();
+        }
+
+        switch ((DockStyle)this.gveLayoutDockStyle.Value)
+        {
+          case DockStyle.None:
+            break;
+          case DockStyle.Top:
+            this.designPicture.SelectedElement.Location =
+              new PointF(this.designPicture.SelectedElement.Location.X, 0);
+            break;
+          case DockStyle.Bottom:
+            this.designPicture.SelectedElement.Location = new PointF(
+              this.designPicture.SelectedElement.Location.X,
+              this.designPicture.PresentationSize.Height - this.designPicture.SelectedElement.Height);
+            break;
+          case DockStyle.Left:
+            this.designPicture.SelectedElement.Location =
+              new PointF(0, this.designPicture.SelectedElement.Location.Y);
+            break;
+          case DockStyle.Right:
+            this.designPicture.SelectedElement.Location = new PointF(
+              this.designPicture.PresentationSize.Width - this.designPicture.SelectedElement.Width,
+              this.designPicture.SelectedElement.Location.Y);
+            break;
+          case DockStyle.Fill:
+            this.designPicture.SelectedElement.Size = this.designPicture.PresentationSize;
+            this.designPicture.SelectedElement.Center = new PointF(
+              this.designPicture.PresentationSize.Width / 2,
+              this.designPicture.PresentationSize.Height / 2);
+            break;
+          default:
+            throw new ArgumentOutOfRangeException();
+        }
+
+        this.UpdateShapePositionAndSizeNumerics(this.designPicture.SelectedElement);
         this.designPicture.RedrawAll();
         this.designPicture.Invalidate();
       }
@@ -706,12 +781,13 @@ namespace Ogama.Modules.SlideshowDesign
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">A <see cref="ShapeEventArgs"/> with the new shape.</param>
-    private void picPreview_ShapeDeselected(object sender, EventArgs e)
+    private void PicPreviewShapeDeselected(object sender, EventArgs e)
     {
       this.rtbInstructions.RichTextBox.Text = string.Empty;
       this.txbInstructions.Text = string.Empty;
       this.tacProperties.Visible = false;
       this.txbImageFilename.Text = string.Empty;
+      this.gveLayoutDockStyle.Text = "None";
     }
 
     /// <summary>
@@ -721,16 +797,15 @@ namespace Ogama.Modules.SlideshowDesign
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">A <see cref="ShapeEventArgs"/> with the selected shape.</param>
-    private void picPreview_ShapeDoubleClick(object sender, ShapeEventArgs e)
+    private void PicPreviewShapeDoubleClick(object sender, ShapeEventArgs e)
     {
       if (e.Shape is VGText)
       {
-        VGText text = (VGText)e.Shape;
-        TextDialog dlg = new TextDialog();
-        dlg.NewText = text;
+        var text = (VGText)e.Shape;
+        var dlg = new TextDialog { NewText = text };
         if (dlg.ShowDialog() == DialogResult.OK)
         {
-          VGText modifiedText = (VGText)dlg.NewText;
+          var modifiedText = dlg.NewText;
           ((VGText)this.designPicture.SelectedElement).StringToDraw = modifiedText.StringToDraw;
           ((VGText)this.designPicture.SelectedElement).Alignment = modifiedText.Alignment;
           ((VGText)this.designPicture.SelectedElement).TextFont = modifiedText.TextFont;
@@ -839,10 +914,12 @@ namespace Ogama.Modules.SlideshowDesign
     {
       try
       {
+        this.isInitializingSelectedShape = true;
         this.nudLayoutLeft.Value = (decimal)shape.Location.X;
         this.nudLayoutTop.Value = (decimal)shape.Location.Y;
         this.nudLayoutWidth.Value = (decimal)shape.Width;
         this.nudLayoutHeight.Value = (decimal)shape.Height;
+        this.isInitializingSelectedShape = false;
       }
       catch (ArgumentOutOfRangeException ex)
       {
@@ -1179,6 +1256,21 @@ namespace Ogama.Modules.SlideshowDesign
     // Small helping Methods                                                     //
     ///////////////////////////////////////////////////////////////////////////////
     #region HELPER
+
+    /// <summary>
+    /// This methods resets the image layout of an selected <see cref="VGImage"/>
+    /// to ImageLayout.None.
+    /// </summary>
+    private void ResetImageLayout()
+    {
+      if (this.designPicture.SelectedElement is VGImage)
+      {
+        var selectedImage = this.designPicture.SelectedElement as VGImage;
+        selectedImage.Layout = ImageLayout.None;
+        this.cbbImageLayout.SelectedItem = ImageLayout.None.ToString();
+        this.gveLayoutDockStyle.Text = "None";
+      }
+    }
 
     /// <summary>
     /// Removes all <see cref="StopCondition"/>s with a target condition
