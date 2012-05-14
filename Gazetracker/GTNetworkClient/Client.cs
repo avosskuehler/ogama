@@ -344,7 +344,7 @@ namespace GTNetworkClient
       {
         this.IsRunning = false;
 
-        if (this.tcpClient != null && this.tcpClient.Connected)
+        if (this.tcpClient != null) // && this.tcpClient.Connected)
         {
           this.tcpClient.Close();
         }
