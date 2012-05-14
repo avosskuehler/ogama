@@ -41,6 +41,8 @@
         this.pcbMirametrix = new System.Windows.Forms.PictureBox();
         this.pcbHelpAsl = new System.Windows.Forms.PictureBox();
         this.chbAsl = new System.Windows.Forms.CheckBox();
+      this.pcbEyeTech = new System.Windows.Forms.PictureBox();
+      this.chbEyeTech = new System.Windows.Forms.CheckBox();
         this.pcbAsl = new System.Windows.Forms.PictureBox();
         this.pcbHelpSMI = new System.Windows.Forms.PictureBox();
         this.pcbHelpAlea = new System.Windows.Forms.PictureBox();
@@ -75,6 +77,7 @@
         ((System.ComponentModel.ISupportInitialize)(this.pcbHelpMirametrix)).BeginInit();
         ((System.ComponentModel.ISupportInitialize)(this.pcbMirametrix)).BeginInit();
         ((System.ComponentModel.ISupportInitialize)(this.pcbHelpAsl)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.pcbEyeTech)).BeginInit();
         ((System.ComponentModel.ISupportInitialize)(this.pcbAsl)).BeginInit();
         ((System.ComponentModel.ISupportInitialize)(this.pcbHelpSMI)).BeginInit();
         ((System.ComponentModel.ISupportInitialize)(this.pcbHelpAlea)).BeginInit();
@@ -161,6 +164,8 @@
         // 
         this.tabPage1.Controls.Add(this.pcbHelpMirametrix);
         this.tabPage1.Controls.Add(this.chbMirametrix);
+      this.tabPage1.Controls.Add(this.pcbEyeTech);
+      this.tabPage1.Controls.Add(this.chbEyeTech);
         this.tabPage1.Controls.Add(this.pcbMirametrix);
         this.tabPage1.Controls.Add(this.pcbHelpAsl);
         this.tabPage1.Controls.Add(this.chbAsl);
@@ -526,6 +531,7 @@
         ((System.ComponentModel.ISupportInitialize)(this.pcbHelpMirametrix)).EndInit();
         ((System.ComponentModel.ISupportInitialize)(this.pcbMirametrix)).EndInit();
         ((System.ComponentModel.ISupportInitialize)(this.pcbHelpAsl)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.pcbEyeTech)).EndInit();
         ((System.ComponentModel.ISupportInitialize)(this.pcbAsl)).EndInit();
         ((System.ComponentModel.ISupportInitialize)(this.pcbHelpSMI)).EndInit();
         ((System.ComponentModel.ISupportInitialize)(this.pcbHelpAlea)).EndInit();
@@ -572,6 +578,8 @@
     private System.Windows.Forms.PictureBox pcbAsl;
     private System.Windows.Forms.PictureBox pcbHelpGazetrackerDirectClient;
     private System.Windows.Forms.CheckBox chbGazetrackerDirectClient;
+    private System.Windows.Forms.CheckBox chbEyeTech;
+    private System.Windows.Forms.PictureBox pcbEyeTech;
     private System.Windows.Forms.PictureBox pictureBox2;
     private System.Windows.Forms.PictureBox pictureBox1;
     private System.Windows.Forms.PictureBox pcbHelpMirametrix;

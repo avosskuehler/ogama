@@ -1,7 +1,7 @@
 ﻿// <copyright file="RecordModule.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,7 +9,7 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
 namespace Ogama.Modules.Recording
 {
@@ -23,32 +23,46 @@ namespace Ogama.Modules.Recording
   using System.Linq;
   using System.Threading;
   using System.Windows.Forms;
-
   using GTCommons.Events;
-
-  using GTHardware.Cameras.PS3Eye;
-
   using Ogama.DataSet;
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.CustomEventArgs;
+  using Ogama.Modules.Common.FormTemplates;
+  using Ogama.Modules.Common.SlideCollections;
+  using Ogama.Modules.Common.Tools;
+  using Ogama.Modules.Common.TrialEvents;
+  using Ogama.Modules.Common.Types;
   using Ogama.Modules.Fixations;
+<<<<<<< local
   using Ogama.Modules.ImportExport;
   using Ogama.Modules.Recording.Alea;
   using Ogama.Modules.Recording.ASL;
-  using Ogama.Modules.Recording.Dialogs;
-  using Ogama.Modules.Recording.Gazegroup;
   using Ogama.Modules.Recording.MouseOnly;
   using Ogama.Modules.Recording.SMI;
   using Ogama.Modules.Recording.Tobii;
+  using Ogama.Modules.Recording.EyeTech;
+=======
+  using Ogama.Modules.ImportExport.Common;
+  using Ogama.Modules.Recording.AleaInterface;
+  using Ogama.Modules.Recording.ASLInterface;
+  using Ogama.Modules.Recording.Dialogs;
+  using Ogama.Modules.Recording.GazegroupInterface;
+  using Ogama.Modules.Recording.MirametrixInterface;
+  using Ogama.Modules.Recording.MouseOnlyInterface;
+  using Ogama.Modules.Recording.Presenter;
+  using Ogama.Modules.Recording.SMIInterface;
+  using Ogama.Modules.Recording.TobiiInterface;
   using Ogama.Modules.Recording.TrackerBase;
+>>>>>>> other
   using Ogama.Properties;
   using OgamaControls;
-
   using VectorGraphics.Elements;
+  using VectorGraphics.Elements.ElementCollections;
   using VectorGraphics.StopConditions;
   using VectorGraphics.Tools;
-  using VectorGraphics.Triggers;
+  using VectorGraphics.Tools.Trigger;
 
   /// <summary>
   /// Derived from <see cref="FormWithPicture"/>.
@@ -332,12 +346,6 @@ namespace Ogama.Modules.Recording
     /// </summary>
     public RecordModule()
     {
-      // Touching this method at this point avoids an application crash of the 
-      // PS3EyeAxFilter.ax at connection to the gazetracker client
-      // with exactly this mehtod.
-      // TODO: Find the reason...
-      int count = PS3Camera.CLEyeGetCameraCount();
-
       this.InitializeComponent();
 
       this.Picture = this.recordPicture;
@@ -492,7 +500,7 @@ namespace Ogama.Modules.Recording
         // create new raw data table for subject
         this.subjectRawDataTable = new OgamaDataSet.RawdataDataTable
           {
-              TableName = this.currentTracker.Subject.SubjectName + "Rawdata" 
+            TableName = this.currentTracker.Subject.SubjectName + "Rawdata"
           };
 
         // Start presentation in a separate thread,
@@ -675,7 +683,7 @@ namespace Ogama.Modules.Recording
 
       // Take primary monitor
       var monitorIndex = 0;
-      if (PresentationScreen.GetPresentationScreen() != Screen.PrimaryScreen) 
+      if (PresentationScreen.GetPresentationScreen() != Screen.PrimaryScreen)
       {
         // otherwise take the secondary sceen.
         monitorIndex = 1;
@@ -760,7 +768,7 @@ namespace Ogama.Modules.Recording
 
       this.InitializeScreenCapture();
       this.CreateTrackerInterfaces();
-      
+
       // Use panel update always at start
       this.forcePanelViewerUpdate = true;
 
@@ -1209,7 +1217,7 @@ namespace Ogama.Modules.Recording
             TrialName = this.precedingTrial.Name,
             TrialSequence = this.trialSequenceCounter - 1,
             TrialID = this.precedingTrial.ID,
-            Category = e.Category,
+            Category = this.precedingTrial[0].Category,
             TrialStartTime = this.currentTrialStarttime,
             Duration = (int)(currentTime - this.recordingStarttime - this.currentTrialStarttime)
           };
@@ -1666,13 +1674,19 @@ namespace Ogama.Modules.Recording
 
       // Reset tab control
       this.tclEyetracker.TabPages.Clear();
+      this.tclEyetracker.TabPages.Add(this.tbpMirametrix);
       this.tclEyetracker.TabPages.Add(this.tbpTobii);
       this.tclEyetracker.TabPages.Add(this.tbpAlea);
       this.tclEyetracker.TabPages.Add(this.tbpSMI);
       this.tclEyetracker.TabPages.Add(this.tbpAsl);
       this.tclEyetracker.TabPages.Add(this.tbpMouseOnly);
+<<<<<<< local
+      this.tclEyetracker.TabPages.Add(this.tbpITU);
+      this.tclEyetracker.TabPages.Add(this.tbpEyeTech);
+=======
       this.tclEyetracker.TabPages.Add(this.tbpGazetrackerIPClient);
       this.tclEyetracker.TabPages.Add(this.tbpGazetrackerDirectClient);
+>>>>>>> other
 
       // Read activated tracker value from the application settings
       var activatedTracker = Settings.Default.ActivatedHardwareTracker;
@@ -1738,11 +1752,10 @@ namespace Ogama.Modules.Recording
         }
       }
 
-#if TOBII
       if (tracker == (tracker | HardwareTracker.Tobii))
       {
-        // Create mouse only tracker
-        TobiiTracker newTobii = new TobiiTracker(
+        // Create tobii tracker
+        var newTobii = new TobiiTracker(
           this,
           this.spcTobiiControls,
           this.spcTobiiTrackStatus.Panel1,
@@ -1765,12 +1778,56 @@ namespace Ogama.Modules.Recording
           this.tclEyetracker.TabPages.Remove(this.tbpTobii);
         }
       }
-#else
-      if (this.tclEyetracker.TabPages.Contains(this.tbpTobii))
+
+      if (tracker == (tracker | HardwareTracker.Mirametrix))
       {
-        this.tclEyetracker.TabPages.Remove(this.tbpTobii);
+        // Create Mirametrix tracker
+        var newMirametrix = new MirametrixTracker(
+            ref this.labelCalibrationResultMirametrix,
+            this.tbpMirametrix,
+            this,
+            this.spcMirametrixControls,
+            this.spcMirametrixTrackStatus.Panel1,
+            this.spcMirametrixCalibPlot.Panel1,
+            this.btnMirametrixShowOnPresentationScreen,
+            this.btnMirametrixAcceptCalibration,
+            this.btnMirametrixRecalibrate,
+            this.btnMirametrixConnect,
+            this.btnMirametrixSubjectName,
+            this.btnMirametrixCalibrate,
+            this.btnMirametrixRecord,
+            this.txbMirametrixSubjectName);
+
+        this.trackerInterfaces.Add(HardwareTracker.Mirametrix, newMirametrix);
       }
-#endif
+      else
+      {
+        if (this.tclEyetracker.TabPages.Contains(this.tbpMirametrix))
+        {
+          this.tclEyetracker.TabPages.Remove(this.tbpMirametrix);
+        }
+      }
+
+      if (tracker == (tracker | HardwareTracker.EyeTech))
+      {
+        // Create EyeTech tracker
+        EyeTechTracker newEyeTech = new EyeTechTracker(
+          this,
+          this.btnEyeTechConnect,
+          this.btnEyeTechSubjectName,
+          this.btnEyeTechCalibrate,
+          this.btnEyeTechRecord,
+          this.txbEyeTechSubjectName);
+
+        this.trackerInterfaces.Add(HardwareTracker.EyeTech, newEyeTech);
+      }
+      else
+      {
+        if (this.tclEyetracker.TabPages.Contains(this.tbpEyeTech))
+        {
+          this.tclEyetracker.TabPages.Remove(this.tbpEyeTech);
+        }
+      }
 
       if (tracker == (tracker | HardwareTracker.SMI))
       {
@@ -1793,7 +1850,6 @@ namespace Ogama.Modules.Recording
         }
       }
 
-#if ASL
       if (tracker == (tracker | HardwareTracker.ASL))
       {
         // Create ASL tracker
@@ -1813,12 +1869,6 @@ namespace Ogama.Modules.Recording
           this.tclEyetracker.TabPages.Remove(this.tbpAsl);
         }
       }
-#else
-      if (this.tclEyetracker.TabPages.Contains(this.tbpAsl))
-      {
-          this.tclEyetracker.TabPages.Remove(this.tbpAsl);
-      }
-#endif
 
       if (tracker == (tracker | HardwareTracker.GazetrackerIPClient))
       {
@@ -2290,7 +2340,7 @@ namespace Ogama.Modules.Recording
     private void InitializeScreenCapture()
     {
       // Only needed if there is a flash movie.
-      if (!Document.ActiveDocument.ExperimentSettings.SlideShow.HasFlashContent())
+      if (!Document.ActiveDocument.ExperimentSettings.SlideShow.HasScreenCaptureContent())
       {
         this.screenCaptureProperties.CaptureMode = CaptureMode.None;
         return;
@@ -2313,7 +2363,13 @@ namespace Ogama.Modules.Recording
 
       switch (this.tclEyetracker.SelectedTab.Name)
       {
-#if TOBII
+        case "tbpMirametrix":
+          if (this.trackerInterfaces.ContainsKey(HardwareTracker.Mirametrix))
+          {
+            this.currentTracker = this.trackerInterfaces[HardwareTracker.Mirametrix];
+          }
+
+          break;
         case "tbpTobii":
           if (this.trackerInterfaces.ContainsKey(HardwareTracker.Tobii))
           {
@@ -2321,8 +2377,6 @@ namespace Ogama.Modules.Recording
           }
 
           break;
-#endif
-#if ASL
         case "tbpAsl":
           if (this.trackerInterfaces.ContainsKey(HardwareTracker.ASL))
           {
@@ -2330,7 +2384,18 @@ namespace Ogama.Modules.Recording
           }
 
           break;
+<<<<<<< local
 #endif
+        case "tbpEyeTech":
+          if (this.trackerInterfaces.ContainsKey(HardwareTracker.EyeTech))
+          {
+            this.currentTracker = this.trackerInterfaces[HardwareTracker.EyeTech];
+          }
+
+          break;
+
+=======
+>>>>>>> other
         case "tbpAlea":
           if (this.trackerInterfaces.ContainsKey(HardwareTracker.Alea))
           {

@@ -390,7 +390,18 @@
         this.tabPage12 = new System.Windows.Forms.TabPage();
         this.label79 = new System.Windows.Forms.Label();
         this.button65 = new System.Windows.Forms.Button();
-        this.tBWarning = new System.Windows.Forms.TextBox();
+      this.tbpEyeTech = new System.Windows.Forms.TabPage();
+      this.groupBox15 = new System.Windows.Forms.GroupBox();
+      this.textBox15 = new System.Windows.Forms.TextBox();
+      this.txbEyeTechSubjectName = new System.Windows.Forms.TextBox();
+      this.btnEyeTechRecord = new System.Windows.Forms.Button();
+      this.btnEyeTechCalibrate = new System.Windows.Forms.Button();
+      this.label80 = new System.Windows.Forms.Label();
+      this.label81 = new System.Windows.Forms.Label();
+      this.label82 = new System.Windows.Forms.Label();
+      this.label83 = new System.Windows.Forms.Label();
+      this.btnEyeTechSubjectName = new System.Windows.Forms.Button();
+      this.btnEyeTechConnect = new System.Windows.Forms.Button();
         ((System.ComponentModel.ISupportInitialize)(this.bsoSubjects)).BeginInit();
         ((System.ComponentModel.ISupportInitialize)(this.bsoFKSubjectsTrials)).BeginInit();
         ((System.ComponentModel.ISupportInitialize)(this.ogamaDataSet)).BeginInit();
@@ -606,6 +617,8 @@
         this.groupBox14.SuspendLayout();
         this.tabPage11.SuspendLayout();
         this.tabPage12.SuspendLayout();
+      this.tbpEyeTech.SuspendLayout();
+      this.groupBox15.SuspendLayout();
         this.SuspendLayout();
         // 
         // toolStripContainer1
@@ -699,6 +712,7 @@
         this.tclEyetracker.Controls.Add(this.tbpAsl);
         this.tclEyetracker.Controls.Add(this.tbpMouseOnly);
         this.tclEyetracker.Controls.Add(this.tbpNoDevice);
+      this.tclEyetracker.Controls.Add(this.tbpEyeTech);
         this.tclEyetracker.Dock = System.Windows.Forms.DockStyle.Fill;
         this.tclEyetracker.ImageList = this.imlEyetracker;
         this.tclEyetracker.Location = new System.Drawing.Point(0, 0);
@@ -2353,7 +2367,7 @@
         this.toolStrip2.Dock = System.Windows.Forms.DockStyle.None;
         this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
         this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.trbZoom});
+        this.trbZoom});
         this.toolStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
         this.toolStrip2.Location = new System.Drawing.Point(0, 0);
         this.toolStrip2.Name = "toolStrip2";
@@ -2412,21 +2426,21 @@
         this.toolStrip1.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::Ogama.Properties.Settings.Default, "RECToolbarLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
         this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
         this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnPrimary,
-            this.btnSecondary,
-            this.btnScreenCaptureSettings,
-            this.toolStripSeparator2,
-            this.btnSelectTracker,
-            this.btnTrackerSettings,
-            this.toolStripSeparator4,
-            this.btnUsercam,
-            this.btnWebcamSettings,
-            this.toolStripSeparator1,
-            this.btnTrigger,
-            this.btnTriggerSettings,
-            this.toolStripSeparator3,
-            this.btnSmoothing,
-            this.btnHelp});
+        this.btnPrimary,
+        this.btnSecondary,
+        this.btnScreenCaptureSettings,
+        this.toolStripSeparator2,
+        this.btnSelectTracker,
+        this.btnTrackerSettings,
+        this.toolStripSeparator4,
+        this.btnUsercam,
+        this.btnWebcamSettings,
+        this.toolStripSeparator1,
+        this.btnTrigger,
+        this.btnTriggerSettings,
+        this.toolStripSeparator3,
+        this.btnSmoothing,
+        this.btnHelp});
         this.toolStrip1.Location = global::Ogama.Properties.Settings.Default.RECToolbarLocation;
         this.toolStrip1.Name = "toolStrip1";
         this.toolStrip1.Size = new System.Drawing.Size(663, 25);
@@ -5133,15 +5147,151 @@
         this.button65.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
         this.button65.UseVisualStyleBackColor = true;
         // 
-        // tBWarning
-        // 
-        this.tBWarning.Location = new System.Drawing.Point(7, 6);
-        this.tBWarning.Multiline = true;
-        this.tBWarning.Name = "tBWarning";
-        this.tBWarning.Size = new System.Drawing.Size(180, 42);
-        this.tBWarning.TabIndex = 0;
-        this.tBWarning.Text = "Please click \"Show on presentation module\" to visualize.";
-        // 
+      // tbpEyeTech
+      // 
+      this.tbpEyeTech.Controls.Add(this.groupBox15);
+      this.tbpEyeTech.Controls.Add(this.txbEyeTechSubjectName);
+      this.tbpEyeTech.Controls.Add(this.btnEyeTechRecord);
+      this.tbpEyeTech.Controls.Add(this.btnEyeTechCalibrate);
+      this.tbpEyeTech.Controls.Add(this.label80);
+      this.tbpEyeTech.Controls.Add(this.label81);
+      this.tbpEyeTech.Controls.Add(this.label82);
+      this.tbpEyeTech.Controls.Add(this.label83);
+      this.tbpEyeTech.Controls.Add(this.btnEyeTechSubjectName);
+      this.tbpEyeTech.Controls.Add(this.btnEyeTechConnect);
+      this.tbpEyeTech.ImageKey = "SMI";
+      this.tbpEyeTech.Location = new System.Drawing.Point(4, 23);
+      this.tbpEyeTech.Name = "tbpEyeTech";
+      this.tbpEyeTech.Padding = new System.Windows.Forms.Padding(3);
+      this.tbpEyeTech.Size = new System.Drawing.Size(212, 385);
+      this.tbpEyeTech.TabIndex = 8;
+      this.tbpEyeTech.Text = "EyeTech";
+      this.tbpEyeTech.UseVisualStyleBackColor = true;
+      // 
+      // groupBox15
+      // 
+      this.groupBox15.Controls.Add(this.textBox15);
+      this.groupBox15.Location = new System.Drawing.Point(8, 8);
+      this.groupBox15.Name = "groupBox15";
+      this.groupBox15.Size = new System.Drawing.Size(196, 183);
+      this.groupBox15.TabIndex = 30;
+      this.groupBox15.TabStop = false;
+      this.groupBox15.Text = "Track status";
+      // 
+      // textBox15
+      // 
+      this.textBox15.Location = new System.Drawing.Point(6, 19);
+      this.textBox15.Multiline = true;
+      this.textBox15.Name = "textBox15";
+      this.textBox15.Size = new System.Drawing.Size(184, 137);
+      this.textBox15.TabIndex = 0;
+      this.textBox15.Text = resources.GetString("textBox15.Text");
+      // 
+      // txbEyeTechSubjectName
+      // 
+      this.txbEyeTechSubjectName.Location = new System.Drawing.Point(110, 234);
+      this.txbEyeTechSubjectName.Name = "txbEyeTechSubjectName";
+      this.txbEyeTechSubjectName.ReadOnly = true;
+      this.txbEyeTechSubjectName.Size = new System.Drawing.Size(91, 20);
+      this.txbEyeTechSubjectName.TabIndex = 21;
+      this.txbEyeTechSubjectName.Text = "Subject1";
+      // 
+      // btnEyeTechRecord
+      // 
+      this.btnEyeTechRecord.Enabled = false;
+      this.btnEyeTechRecord.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnEyeTechRecord.ImageKey = "Record";
+      this.btnEyeTechRecord.ImageList = this.imlButtons;
+      this.btnEyeTechRecord.Location = new System.Drawing.Point(32, 290);
+      this.btnEyeTechRecord.Name = "btnEyeTechRecord";
+      this.btnEyeTechRecord.Size = new System.Drawing.Size(72, 23);
+      this.btnEyeTechRecord.TabIndex = 28;
+      this.btnEyeTechRecord.Text = "&Record";
+      this.btnEyeTechRecord.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      // 
+      // btnEyeTechCalibrate
+      // 
+      this.btnEyeTechCalibrate.Enabled = false;
+      this.btnEyeTechCalibrate.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnEyeTechCalibrate.ImageKey = "Calibrate";
+      this.btnEyeTechCalibrate.ImageList = this.imlButtons;
+      this.btnEyeTechCalibrate.Location = new System.Drawing.Point(32, 261);
+      this.btnEyeTechCalibrate.Name = "btnEyeTechCalibrate";
+      this.btnEyeTechCalibrate.Size = new System.Drawing.Size(72, 23);
+      this.btnEyeTechCalibrate.TabIndex = 29;
+      this.btnEyeTechCalibrate.Text = "&Calibrate";
+      this.btnEyeTechCalibrate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      // 
+      // label80
+      // 
+      this.label80.AutoSize = true;
+      this.label80.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label80.Location = new System.Drawing.Point(8, 261);
+      this.label80.Name = "label80";
+      this.label80.Size = new System.Drawing.Size(25, 24);
+      this.label80.TabIndex = 27;
+      this.label80.Text = "3.";
+      // 
+      // label81
+      // 
+      this.label81.AutoSize = true;
+      this.label81.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label81.Location = new System.Drawing.Point(8, 290);
+      this.label81.Name = "label81";
+      this.label81.Size = new System.Drawing.Size(25, 24);
+      this.label81.TabIndex = 26;
+      this.label81.Text = "4.";
+      // 
+      // label82
+      // 
+      this.label82.AutoSize = true;
+      this.label82.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label82.Location = new System.Drawing.Point(8, 232);
+      this.label82.Name = "label82";
+      this.label82.Size = new System.Drawing.Size(25, 24);
+      this.label82.TabIndex = 24;
+      this.label82.Text = "2.";
+      // 
+      // label83
+      // 
+      this.label83.AutoSize = true;
+      this.label83.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label83.Location = new System.Drawing.Point(8, 203);
+      this.label83.Margin = new System.Windows.Forms.Padding(0);
+      this.label83.Name = "label83";
+      this.label83.Size = new System.Drawing.Size(25, 24);
+      this.label83.TabIndex = 25;
+      this.label83.Text = "1.";
+      // 
+      // btnEyeTechSubjectName
+      // 
+      this.btnEyeTechSubjectName.Enabled = false;
+      this.btnEyeTechSubjectName.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnEyeTechSubjectName.ImageKey = "Subject";
+      this.btnEyeTechSubjectName.ImageList = this.imlButtons;
+      this.btnEyeTechSubjectName.Location = new System.Drawing.Point(32, 233);
+      this.btnEyeTechSubjectName.Name = "btnEyeTechSubjectName";
+      this.btnEyeTechSubjectName.Size = new System.Drawing.Size(72, 23);
+      this.btnEyeTechSubjectName.TabIndex = 22;
+      this.btnEyeTechSubjectName.Text = "Subject";
+      this.btnEyeTechSubjectName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.btnEyeTechSubjectName.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.btnEyeTechSubjectName.UseVisualStyleBackColor = true;
+      // 
+      // btnEyeTechConnect
+      // 
+      this.btnEyeTechConnect.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnEyeTechConnect.ImageKey = "Connect";
+      this.btnEyeTechConnect.ImageList = this.imlButtons;
+      this.btnEyeTechConnect.Location = new System.Drawing.Point(32, 203);
+      this.btnEyeTechConnect.Name = "btnEyeTechConnect";
+      this.btnEyeTechConnect.Size = new System.Drawing.Size(73, 23);
+      this.btnEyeTechConnect.TabIndex = 23;
+      this.btnEyeTechConnect.Text = "Connect";
+      this.btnEyeTechConnect.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.btnEyeTechConnect.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.btnEyeTechConnect.UseVisualStyleBackColor = true;
+      // 
         // RecordModule
         // 
         this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5407,6 +5557,10 @@
         this.tabPage11.ResumeLayout(false);
         this.tabPage11.PerformLayout();
         this.tabPage12.ResumeLayout(false);
+      this.tbpEyeTech.ResumeLayout(false);
+      this.tbpEyeTech.PerformLayout();
+      this.groupBox15.ResumeLayout(false);
+      this.groupBox15.PerformLayout();
         this.ResumeLayout(false);
 
     }
@@ -5642,6 +5796,16 @@
     private System.Windows.Forms.Label label74;
     private System.Windows.Forms.Button button61;
     private System.Windows.Forms.Button button62;
+    private System.Windows.Forms.TabPage tbpAsl;
+    private System.Windows.Forms.TextBox txbAslSubjectName;
+    private System.Windows.Forms.Button btnAslRecord;
+    private System.Windows.Forms.Button btnAslCalibrate;
+    private System.Windows.Forms.Label label75;
+    private System.Windows.Forms.Label recordLabel;
+    private System.Windows.Forms.Label label76;
+    private System.Windows.Forms.Label connectLabel;
+    private System.Windows.Forms.Button btnAslSubjectName;
+    private System.Windows.Forms.Button btnAslConnect;
     private System.Windows.Forms.TabPage tabPage11;
     private System.Windows.Forms.Label label77;
     private System.Windows.Forms.Label label78;

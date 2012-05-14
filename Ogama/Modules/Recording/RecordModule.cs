@@ -41,13 +41,14 @@ namespace Ogama.Modules.Recording
   using Ogama.Modules.Recording.Dialogs;
   using Ogama.Modules.Recording.GazegroupInterface;
   using Ogama.Modules.Recording.MirametrixInterface;
-  using Ogama.Modules.Recording.MouseOnlyInterface;
+  using Ogama.Modules.Recording.EyeTech;
   using Ogama.Modules.Recording.Presenter;
   using Ogama.Modules.Recording.SMIInterface;
   using Ogama.Modules.Recording.TobiiInterface;
   using Ogama.Modules.Recording.TrackerBase;
   using Ogama.Properties;
   using OgamaControls;
+
   using VectorGraphics.Elements;
   using VectorGraphics.Elements.ElementCollections;
   using VectorGraphics.StopConditions;
@@ -1793,6 +1794,27 @@ namespace Ogama.Modules.Recording
         }
       }
 
+      if (tracker == (tracker | HardwareTracker.EyeTech))
+      {
+        // Create EyeTech tracker
+        EyeTechTracker newEyeTech = new EyeTechTracker(
+          this,
+          this.btnEyeTechConnect,
+          this.btnEyeTechSubjectName,
+          this.btnEyeTechCalibrate,
+          this.btnEyeTechRecord,
+          this.txbEyeTechSubjectName);
+
+        this.trackerInterfaces.Add(HardwareTracker.EyeTech, newEyeTech);
+      }
+      else
+      {
+        if (this.tclEyetracker.TabPages.Contains(this.tbpEyeTech))
+        {
+          this.tclEyetracker.TabPages.Remove(this.tbpEyeTech);
+        }
+      }
+
       if (tracker == (tracker | HardwareTracker.SMI))
       {
         // Create mouse only tracker
@@ -2348,6 +2370,14 @@ namespace Ogama.Modules.Recording
           }
 
           break;
+        case "tbpEyeTech":
+          if (this.trackerInterfaces.ContainsKey(HardwareTracker.EyeTech))
+          {
+            this.currentTracker = this.trackerInterfaces[HardwareTracker.EyeTech];
+          }
+
+          break;
+
         case "tbpAlea":
           if (this.trackerInterfaces.ContainsKey(HardwareTracker.Alea))
           {

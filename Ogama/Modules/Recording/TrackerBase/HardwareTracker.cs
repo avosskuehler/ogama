@@ -57,6 +57,9 @@ namespace Ogama.Modules.Recording.TrackerBase
     /// </summary>
     GazetrackerIPClient = 32,
 
+    ///
+    EyeTech = 32,
+
     /// <summary>
     /// Applied Science Laboratories (ASL) professional gaze tracker
     /// </summary>
