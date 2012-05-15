@@ -1,6 +1,4 @@
-﻿#if EYETECH
-
-namespace Ogama.Modules.Recording.EyeTech
+﻿namespace Ogama.Modules.Recording.EyeTechInterface
 {
   partial class EyeTechSettingsDialog
   {
@@ -15,9 +13,9 @@ namespace Ogama.Modules.Recording.EyeTech
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      if (disposing && (components != null))
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -234,9 +232,9 @@ namespace Ogama.Modules.Recording.EyeTech
       this.label1.Name = "label1";
       this.label1.Size = new System.Drawing.Size(235, 72);
       this.label1.TabIndex = 24;
-      this.label1.Text = "Please specify the calibration settings for the Tobii.\r\nThat is the number of cal" +
-          "ibration points, their size, the speed of display, their color and the backgroun" +
-          "d color.";
+      this.label1.Text = "Please specify the calibration settings for the Tobii.\r\nThat is the number of cal"
+                         + "ibration points, their size, the speed of display, their color and the backgroun"
+                         + "d color.";
       // 
       // groupBox4
       // 
@@ -402,33 +400,59 @@ namespace Ogama.Modules.Recording.EyeTech
     #endregion
 
     private System.Windows.Forms.RadioButton rdbTobii2PtsCalib;
+
     private System.Windows.Forms.RadioButton rdbTobii5PtsCalib;
+
     private System.Windows.Forms.RadioButton rdbTobii9PtsCalib;
+
     private System.Windows.Forms.RadioButton rdbTobiiSizeLarge;
+
     private System.Windows.Forms.RadioButton rdbTobiiSizeMedium;
+
     private System.Windows.Forms.RadioButton rdbTobiiSizeSmall;
+
     private System.Windows.Forms.RadioButton rdbTobiiSpeedFast;
+
     private System.Windows.Forms.RadioButton rdbTobiiSpeedMediumFast;
+
     private System.Windows.Forms.RadioButton rdbTobiiSpeedMedium;
+
     private System.Windows.Forms.RadioButton rdbTobiiSpeedMediumSlow;
+
     private System.Windows.Forms.RadioButton rdbTobiiSpeedSlow;
+
     private System.Windows.Forms.GroupBox groupBox1;
+
     private System.Windows.Forms.GroupBox groupBox2;
+
     private System.Windows.Forms.GroupBox groupBox3;
+
     private System.Windows.Forms.PictureBox pictureBox1;
+
     private System.Windows.Forms.Label label1;
+
     private System.Windows.Forms.GroupBox groupBox4;
+
     private System.Windows.Forms.Label label3;
+
     private System.Windows.Forms.Label label2;
+
     private OgamaControls.ColorButton clbTobiiBackColor;
+
     private OgamaControls.ColorButton clbTobiiPointColor;
+
     private System.Windows.Forms.Button btnOK;
+
     private System.Windows.Forms.Button btnCancel;
+
     private System.Windows.Forms.TextBox txbServerAddress;
+
     private System.Windows.Forms.TextBox txbServerPort;
+
     private System.Windows.Forms.Label label4;
+
     private System.Windows.Forms.Label label5;
+
     private System.Windows.Forms.CheckBox chbRandomizePointOrder;
   }
 }
-#endif

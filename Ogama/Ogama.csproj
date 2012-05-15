@@ -391,6 +391,14 @@
       <DependentUpon>AslTrackStatus.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Recording\ASLInterface\UserSettings.cs" />
+    <Compile Include="Modules\Recording\EyeTechInterface\EyeTechSetting.cs" />
+    <Compile Include="Modules\Recording\EyeTechInterface\EyeTechSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\EyeTechInterface\EyeTechSettingsDialog.designer.cs">
+      <DependentUpon>EyeTechSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\EyeTechInterface\EyeTechTracker.cs" />
     <Compile Include="Modules\Recording\GazegroupInterface\GazetrackerIPClientSetting.cs" />
     <Compile Include="Modules\Recording\GazegroupInterface\GazetrackerIPClientSettingsDialog.cs">
       <SubType>Form</SubType>
@@ -426,6 +434,13 @@
     <Compile Include="Modules\Recording\Presenter\WebsiteScreenshot.cs" />
     <Compile Include="Modules\Recording\Presenter\DSScreenCapture.cs" />
     <Compile Include="Modules\Recording\Presenter\ScreenCaptureProperties.cs" />
+    <Compile Include="Modules\Recording\EyeTechInterface\QLCalibration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\EyeTechInterface\QLCalibration.designer.cs">
+      <DependentUpon>QLCalibration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\EyeTechInterface\QuickLinkAPI.cs" />
     <Compile Include="Modules\Recording\TobiiInterface\TobiiCalibrationRunner.cs" />
     <Compile Include="Modules\Recording\TobiiInterface\TobiiCalibrationForm.cs">
       <SubType>Form</SubType>
@@ -1137,6 +1152,9 @@
       <DependentUpon>SavingSplash.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\EyeTechInterface\EyeTechSettingsDialog.resx">
+      <DependentUpon>EyeTechSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\GazegroupInterface\GazetrackerIPClientSettingsDialog.resx">
       <DependentUpon>GazetrackerIPClientSettingsDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1149,6 +1167,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\MirametrixInterface\MirametrixTrackStatusControl.resx">
       <DependentUpon>MirametrixTrackStatusControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\EyeTechInterface\QLCalibration.resx">
+      <DependentUpon>QLCalibration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\RecordingPicture.resx">
       <DependentUpon>RecordingPicture.cs</DependentUpon>
@@ -1634,6 +1655,7 @@
     <None Include="Resources\Desktop.png" />
     <None Include="Resources\Desktop32.png" />
     <None Include="Resources\Desktop48.png" />
+    <Content Include="Resources\EyeTechLogo_S.png" />
     <Content Include="Resources\MirametrixLogo.png" />
     <Content Include="Resources\MirametrixLogo_150_33.png" />
     <Content Include="Resources\Mirametrix_S2.png" />

@@ -1,4 +1,4 @@
-﻿namespace QuickLinkAPI
+﻿namespace Ogama.Modules.Recording.EyeTechInterface
 {
   partial class QLCalibration
   {

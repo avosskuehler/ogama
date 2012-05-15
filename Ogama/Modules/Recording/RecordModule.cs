@@ -39,9 +39,9 @@ namespace Ogama.Modules.Recording
   using Ogama.Modules.Recording.AleaInterface;
   using Ogama.Modules.Recording.ASLInterface;
   using Ogama.Modules.Recording.Dialogs;
+  using Ogama.Modules.Recording.EyeTechInterface;
   using Ogama.Modules.Recording.GazegroupInterface;
   using Ogama.Modules.Recording.MirametrixInterface;
-//  using Ogama.Modules.Recording.EyeTech;
   using Ogama.Modules.Recording.MouseOnlyInterface;
   using Ogama.Modules.Recording.Presenter;
   using Ogama.Modules.Recording.SMIInterface;
@@ -1798,15 +1798,15 @@ namespace Ogama.Modules.Recording
       if (tracker == (tracker | HardwareTracker.EyeTech))
       {
         // Create EyeTech tracker
-        //EyeTechTracker newEyeTech = new EyeTechTracker(
-        //  this,
-        //  this.btnEyeTechConnect,
-        //  this.btnEyeTechSubjectName,
-        //  this.btnEyeTechCalibrate,
-        //  this.btnEyeTechRecord,
-        //  this.txbEyeTechSubjectName);
+        var newEyeTech = new EyeTechTracker(
+          this,
+          this.btnEyeTechConnect,
+          this.btnEyeTechSubjectName,
+          this.btnEyeTechCalibrate,
+          this.btnEyeTechRecord,
+          this.txbEyeTechSubjectName);
 
-        //this.trackerInterfaces.Add(HardwareTracker.EyeTech, newEyeTech);
+        this.trackerInterfaces.Add(HardwareTracker.EyeTech, newEyeTech);
       }
       else
       {

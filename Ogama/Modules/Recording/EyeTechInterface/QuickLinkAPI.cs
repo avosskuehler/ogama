@@ -10,10 +10,9 @@
  */
 using Microsoft.Win32;
 
-namespace QuickLinkAPI
+namespace Ogama.Modules.Recording.EyeTechInterface
 {
-
-  public partial class NativeConstants
+  public class NativeConstants
   {
     public const string QUICK_LINK_API_H = "";
     public const string QUICK_LINK_API = "__declspec(dllimport)";
@@ -253,7 +252,7 @@ namespace QuickLinkAPI
     public ToolBarImageDisplay Toolbar_ImageDisplayType;
   }
 
-  public partial class NativeMethods
+  public class NativeMethods
   {
     // QuickLinkAPI.dll location
     string libraryLocation = "";
@@ -560,6 +559,5 @@ namespace QuickLinkAPI
     [System.Runtime.InteropServices.DllImportAttribute("QuickLinkAPI.dll", EntryPoint = "SetCustomGPIO", CallingConvention = System.Runtime.InteropServices.CallingConvention.StdCall)]
     [return: System.Runtime.InteropServices.MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType.I1)]
     public static extern bool SetCustomGPIO(CameraCustomGPIOOutputValue GPIO_1, CameraCustomGPIOOutputValue GPIO_2, CameraCustomGPIOOutputValue GPIO_3);
-
   }
 }

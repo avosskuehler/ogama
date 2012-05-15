@@ -11,7 +11,6 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-#if EYETECH
 /** Module Notice:
  * This module implements an additional Ogama Recording module, specifically 
  * made for the EyeTech TM3, but should work on other EyeTech hardware as 
@@ -30,19 +29,10 @@
  * Knowing this, some of the function/struct comments are "incorrect".
  */
 
-namespace Ogama.Modules.Recording.EyeTech
+namespace Ogama.Modules.Recording.EyeTechInterface
 {
   using System;
-  using System.Collections.Generic;
-  using System.Drawing;
-  using System.Text;
   using System.Xml.Serialization;
-
-  using VectorGraphics;
-  using VectorGraphics.CustomTypeConverter;
-
-  using QuickLinkAPI;
-
 
   /// <summary>
   /// Class to save settings for the eyetech eye tracking system.
@@ -127,27 +117,32 @@ namespace Ogama.Modules.Recording.EyeTech
     ///////////////////////////////////////////////////////////////////////////////
     #region PROPERTIES
 
-    public CalibrationOptions CalibrationOptions {
+    public CalibrationOptions CalibrationOptions
+    {
       get { return this.calibrationOptions; }
       set { this.calibrationOptions = value; }
     }
 
-    public ProcessingOptions ProcessingOptions {
+    public ProcessingOptions ProcessingOptions
+    {
       get { return this.processingOptions; }
       set { this.processingOptions = value; }
     }
 
-    public CameraOptions CameraOptions {
+    public CameraOptions CameraOptions
+    {
       get { return this.cameraOptions; }
       set { this.cameraOptions = value; }
     }
 
-    public ClickingOptions ClickingOptions {
+    public ClickingOptions ClickingOptions
+    {
       get { return this.clickingOptions; }
       set { this.clickingOptions = value; }
     }
 
-    public ToolbarOptions ToolbarOptions {
+    public ToolbarOptions ToolbarOptions
+    {
       get { return this.toolbarOptions; }
       set { this.toolbarOptions = value; }
     }
@@ -206,7 +201,6 @@ namespace Ogama.Modules.Recording.EyeTech
         NativeMethods.GetCameraOptions(ref this.cameraOptions);
         NativeMethods.GetClickingOptions(ref this.clickingOptions);
         NativeMethods.GetToolbarOptions(ref this.toolbarOptions);
-
         return true;
       }
 
@@ -225,5 +219,3 @@ namespace Ogama.Modules.Recording.EyeTech
     #endregion //HELPER
   }
 }
-
-#endif
