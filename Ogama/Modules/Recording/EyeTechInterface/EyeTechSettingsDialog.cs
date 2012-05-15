@@ -1,4 +1,4 @@
-﻿// <copyright file="TobiiSettingsDialog.cs" company="FU Berlin">
+﻿// <copyright file="EyeTechSettingsDialog.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
 // Copyright (C) 2010 Adrian Voßkühler  
@@ -11,28 +11,15 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian.vosskuehler@fu-berlin.de</email>
 
-namespace Ogama.Modules.Recording.EyeTech
+namespace Ogama.Modules.Recording.EyeTechInterface
 {
-  using System;
-  using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Data;
-  using System.Drawing;
-  using System.Text;
   using System.Windows.Forms;
-
-  using Ogama.Properties;
-
-#if EYETECH
-  using QuickLinkAPI;
-#endif
 
   /// <summary>
   /// Popup form to specify settings for the eyetech system.
   /// </summary>
   public partial class EyeTechSettingsDialog : Form
   {
-#if EYETECH
    ///////////////////////////////////////////////////////////////////////////////
     // Defining Constants                                                        //
     ///////////////////////////////////////////////////////////////////////////////
@@ -45,7 +32,7 @@ namespace Ogama.Modules.Recording.EyeTech
     #region FIELDS
 
     /// <summary>
-    /// Saves the current <see cref="TobiiSetting"/>.
+    /// Saves the current <see cref="EyeTechSetting"/>.
     /// </summary>
     private EyeTechSetting eyetechSettings;
 
@@ -57,7 +44,7 @@ namespace Ogama.Modules.Recording.EyeTech
     #region CONSTRUCTION
 
     /// <summary>
-    /// Initializes a new instance of the TobiiSettingsDialog class.
+    /// Initializes a new instance of the EyeTechSettingsDialog class.
     /// </summary>
     public EyeTechSettingsDialog()
     {
@@ -72,9 +59,9 @@ namespace Ogama.Modules.Recording.EyeTech
     #region PROPERTIES
 
     /// <summary>
-    /// Gets or sets the <see cref="TobiiSetting"/> class.
+    /// Gets or sets the <see cref="EyeTechSetting"/> class.
     /// </summary>
-    /// <value>A <see cref="TobiiSetting"/> with the current settings.</value>
+    /// <value>A <see cref="EyeTechSetting"/> with the current settings.</value>
     public EyeTechSetting EyeTechSettings
     {
       get
@@ -132,7 +119,6 @@ namespace Ogama.Modules.Recording.EyeTech
     ///////////////////////////////////////////////////////////////////////////////
     #region HELPER
     #endregion //HELPER
-#endif
   }
 }
 

@@ -17,10 +17,10 @@ namespace Ogama.Modules.Recording.Dialogs
   using System.Windows.Forms;
 
   using Ogama.ExceptionHandling;
-  using Ogama.MainWindow;
   using Ogama.MainWindow.Dialogs;
   using Ogama.Modules.Recording.AleaInterface;
   using Ogama.Modules.Recording.ASLInterface;
+  using Ogama.Modules.Recording.EyeTechInterface;
   using Ogama.Modules.Recording.GazegroupInterface;
   using Ogama.Modules.Recording.MirametrixInterface;
   using Ogama.Modules.Recording.TobiiInterface;
@@ -47,7 +47,7 @@ namespace Ogama.Modules.Recording.Dialogs
     /// Provides an <see cref="Timer"/> which updates the tracker status
     /// of the connected devices every second.
     /// </summary>
-    private Timer eyetrackerUpdateTimer;
+    private readonly Timer eyetrackerUpdateTimer;
 
     #endregion //FIELDS
 
@@ -62,8 +62,8 @@ namespace Ogama.Modules.Recording.Dialogs
     public SelectTracker()
     {
       this.InitializeComponent();
-      this.eyetrackerUpdateTimer = new Timer() { Interval = 1000, Enabled = true };
-      this.eyetrackerUpdateTimer.Tick += this.eyetrackerUpdateTimer_Tick;
+      this.eyetrackerUpdateTimer = new Timer { Interval = 1000, Enabled = true };
+      this.eyetrackerUpdateTimer.Tick += this.EyetrackerUpdateTimerTick;
     }
 
     #endregion //CONSTRUCTION
@@ -153,7 +153,7 @@ namespace Ogama.Modules.Recording.Dialogs
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void eyetrackerUpdateTimer_Tick(object sender, EventArgs e)
+    private void EyetrackerUpdateTimerTick(object sender, EventArgs e)
     {
       this.UpdateTrackerStatus();
     }
@@ -383,6 +383,7 @@ namespace Ogama.Modules.Recording.Dialogs
       this.UpdateTobiiStatus();
       this.UpdateASLStatus();
       this.UpdateMirametrixStatus();
+      this.UpdateEyeTechStatus();
     }
 
     /// <summary>
@@ -426,6 +427,27 @@ namespace Ogama.Modules.Recording.Dialogs
         this.chbMirametrix.Enabled = true;
         this.pcbMirametrix.Enabled = true;
         this.chbMirametrix.Text = "Mirametrix S2 installed on this computer ! \n" + error;
+      }
+    }
+
+    /// <summary>
+    /// Updates the status of the Eyetech tracking devices
+    /// </summary>
+    private void UpdateEyeTechStatus()
+    {
+      string error;
+      if (!EyeTechTracker.IsAvailable(out error))
+      {
+        this.chbEyeTech.Text = "The EyeTech TM3 eyetracker. Needs to have quickglance application installed on your computer. \n" + error;
+        this.chbEyeTech.Enabled = false;
+        this.chbEyeTech.Checked = false;
+        this.pcbEyeTech.Enabled = false;
+      }
+      else
+      {
+        this.chbEyeTech.Enabled = true;
+        this.pcbEyeTech.Enabled = true;
+        this.chbEyeTech.Text = "The EyeTech TM3 eyetracker. \n" + error;
       }
     }
 
