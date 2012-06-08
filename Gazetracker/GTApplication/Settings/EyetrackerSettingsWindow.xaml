@@ -1,0 +1,63 @@
+﻿<Window
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+
+    xmlns:Dotway_WPF_Controls="clr-namespace:Dotway.WPF.Controls;assembly=Dotway.WPF.Controls"
+    xmlns:Custom="http://schemas.AvalonControls/AvalonControlsLibrary/Controls"
+	x:Class="GazeTrackerUI.SettingsUI.EyetrackerSettingsWindow"
+    x:Name="eyetrackerSettingsWindow" Title="Eyetracker settings" 
+    Height="182" Width="281" 
+	AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize" Background="{x:Null}">
+
+  <Grid x:Name="LayoutRoot" Margin="0" HorizontalAlignment="Left">
+      <Grid>
+            			
+            		<Rectangle Stroke="#FF494949" RadiusX="4" RadiusY="4"  MouseLeftButtonDown="DragWindow">
+            			<Rectangle.Fill>
+            				<LinearGradientBrush EndPoint="0.508,0.056" StartPoint="0.506,0.969">
+            					<GradientStop Color="#E40C0C0C" Offset="0"/>
+            					<GradientStop Color="#E4262626" Offset="1"/>
+            				</LinearGradientBrush>
+            			</Rectangle.Fill>
+            		</Rectangle>
+          
+            		<Grid x:Name="GridSliders" Margin="6,25,8,62">
+            			<Grid HorizontalAlignment="Left" Margin="74,-1,8,6" Width="193">
+            				<Slider x:Name="SliderSizeMin" 
+            					Value="{Binding Min}" 
+            					Style="{StaticResource SimpleSlider}" 
+            					AutoToolTipPlacement="TopLeft" Background="#FF4B4B4B" BorderBrush="{x:Null}" Margin="0,4,0,0" VerticalAlignment="Top" Height="27" Maximum="500" Minimum="10" TickPlacement="BottomRight" TickFrequency="25" />
+            				<Slider x:Name="SliderSizeMax" 
+            					Value="{Binding Max}" 
+            					Style="{StaticResource SimpleSlider}" 
+            					AutoToolTipPlacement="TopLeft" BorderBrush="{x:Null}" Background="#FF4B4B4B" Margin="0,36.5,0,26.5" Maximum="500" Minimum="10" TickFrequency="25" TickPlacement="BottomRight" Height="27" />
+            				<Slider x:Name="SliderScaleFactor" 
+            					Minimum="1.1" 
+            					Value="{Binding ScaleFactor}" 
+            					Style="{StaticResource SimpleSlider}" 
+            					AutoToolTipPlacement="TopLeft" BorderBrush="{x:Null}" Background="#FF4B4B4B" Margin="0,0,0,-7" VerticalAlignment="Bottom" Height="27" TickPlacement="BottomRight" />
+            			</Grid>
+            			<StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Width="68" Orientation="Vertical" Height="95">
+            				<Label VerticalAlignment="Center" Height="27" Foreground="White" Content="Size min" FontFamily="Segoe UI Light" HorizontalAlignment="Right"/>
+            				<Label VerticalAlignment="Center" Height="27" Foreground="White" Content="Size max" FontFamily="Segoe UI Light" Margin="0,6,0,0" HorizontalAlignment="Right"/>
+            				<Label Content="Scale factor" Height="27" Foreground="White" FontFamily="Segoe UI Light" Margin="0,4,0,0" HorizontalAlignment="Right"/>
+            			</StackPanel>
+            		</Grid>
+          
+            		<Path Fill="#FF2F2F2F" Stretch="Fill" Stroke="#FF474747" Margin="8,0,8,58.672" Data="M8,82 L321,81" VerticalAlignment="Bottom" Height="2"/>
+          
+            		<Grid x:Name="GridHaarCascade" Margin="6,0,0,10" VerticalAlignment="Bottom" Height="52" HorizontalAlignment="Left" Width="254">
+            			<Label Margin="0,4,0,19" Content="Haarcascade file" Foreground="#FFE8E8E8" HorizontalAlignment="Left" Width="107"/>
+            			<TextBox x:Name="TextBoxHaarCascadeFile" Text="{Binding HaarCascadePath}" Margin="5,0,63,0" VerticalAlignment="Bottom" Height="21" Background="#FF3F3F3F" BorderBrush="{x:Null}" Foreground="#FFD4D4D4" TextWrapping="Wrap" FontSize="10.667"/>
+            			<Button Background="#FF4F4F4F" Click="LoadClassifier" HorizontalAlignment="Right" Margin="0,0,0,1" VerticalAlignment="Bottom" Width="57" Height="20" Content="Browse" BorderBrush="{x:Null}" FontSize="10.667" Foreground="White"/>
+            		</Grid>
+          
+            		<Label x:Name="LabelCloseX" Content="x" MouseDown="HideWindow" Background="{x:Null}" FontFamily="Verdana" FontSize="18" Foreground="#FF989898" HorizontalAlignment="Right" Height="29.334" Margin="0,-3.332,5,0" VerticalAlignment="Top" />
+            		<Label Margin="0,0.04,0,0" VerticalAlignment="Top" Content="Eyetracker" Foreground="#FFA7A7A7" HorizontalAlignment="Center"/>
+            	</Grid>
+	</Grid>
+
+</Window>

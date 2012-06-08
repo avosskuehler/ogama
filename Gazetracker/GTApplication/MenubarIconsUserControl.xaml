@@ -1,0 +1,53 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:GTApplication="clr-namespace:GTApplication"
+	mc:Ignorable="d"
+	x:Class="GTApplication.MenubarIconsUserControl"
+	x:Name="UserControl" d:DesignHeight="21">
+
+	<Grid x:Name="LayoutRoot">
+		<StackPanel x:Name="StackPanelIcons" Orientation="Horizontal" Margin="0">
+			
+			<Image x:Name="IconSettings" MouseDown="Settings" ToolTip="Show main tracker configuration panel" Margin="0" Width="22" Source="Graphics/IconSettings.png" Stretch="Fill" HorizontalAlignment="Left" VerticalAlignment="Center" OpacityMask="#9C000000">
+                 <Image.Effect>
+					<DropShadowEffect ShadowDepth="3" Color="#FF1D1D1D"/>
+				</Image.Effect>
+			</Image>
+			
+			<Image x:Name="IconAutotune" MouseDown="Autotune" Margin="7,0,0,0" Source="Graphics\wizard.png" Stretch="Fill" HorizontalAlignment="Right" Width="22" OpacityMask="#D9000000" ToolTip="Auto tune eye tracking setup" VerticalAlignment="Center">               
+                <Image.Effect>
+					<DropShadowEffect ShadowDepth="3"/>
+				</Image.Effect>
+			</Image>
+            <!-- 
+			<Image x:Name="IconIllumination" MouseDown="IlluminationSettings" Margin="7,-2,0,1" Width="22" Height="22" Source="Graphics/icon_lightbulb3.png" Stretch="Fill" ToolTip="Illumination control (Requires PhidgetLED64 controller)">
+				<Image.Effect>
+					<DropShadowEffect ShadowDepth="2"/>
+				</Image.Effect>
+			</Image>
+            -->
+			<Image x:Name="IconUDPClient" MouseDown="NetworkClient" Margin="7,0,0,0" VerticalAlignment="Bottom" Width="24" Source="Graphics\icon_network.gif" Stretch="Fill" ToolTip="Network client">
+                <Image.Effect>
+					<DropShadowEffect ShadowDepth="3"/>
+				</Image.Effect>
+			</Image>
+            
+			<Image x:Name="IconTrackStats" MouseDown="TrackStats" Margin="6,0,0,0" Width="22" Source="Graphics/iconTrackStats.png" Stretch="Fill" OpacityMask="#BB000000" ToolTip="Monitor tracker statistics and quality" Height="19" VerticalAlignment="Center">
+                <Image.Effect>
+                    <DropShadowEffect ShadowDepth="3"/>
+                </Image.Effect>
+            </Image>
+            
+			<Image x:Name="IconDetachVideo" MouseDown="DetachVideo" Width="21" Source="graphics\fullscreen2.png" Stretch="Fill" Margin="7,0,0,0" ToolTip="Detach video into seperate window" Height="18">
+                <Image.Effect>
+					<DropShadowEffect ShadowDepth="3"/>
+				</Image.Effect>
+			</Image>
+            
+
+        </StackPanel>
+	</Grid>
+</UserControl>

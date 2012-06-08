@@ -1,0 +1,91 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	xmlns:GazeGUIVelocity="clr-namespace:GazeGUIVelocity;assembly=GazeGUIVelocity" xmlns:GazeGUI="clr-namespace:GazeGUI;assembly=GazeGUI"
+	x:Class="GTApplication.CalibrationUI.CalibrationMenuUC"
+	x:Name="UserControl"
+	d:DesignWidth="315" Height="130" Width="320">
+
+	<Grid x:Name="LayoutRoot">
+
+		<Grid x:Name="GridMenu" Panel.ZIndex="1" Margin="0">
+			<Rectangle RadiusY="4" x:Name="RectBG" Width="Auto" RadiusX="4" Margin="0" >
+				<Rectangle.Effect>
+					<DropShadowEffect Color="#FF2B2B2B" Direction="322" BlurRadius="13" ShadowDepth="4"/>
+				</Rectangle.Effect>
+				<Rectangle.Stroke>
+					<LinearGradientBrush EndPoint="0.415,0.03" StartPoint="0.585,0.97">
+						<GradientStop Color="#FF575757" Offset="0"/>
+						<GradientStop Color="#FF9F9F9F" Offset="1"/>
+					</LinearGradientBrush>
+				</Rectangle.Stroke>
+				<Rectangle.Fill>
+					<LinearGradientBrush EndPoint="0.483,0.001" StartPoint="0.498,0.986">
+						<GradientStop Color="#FF202020" Offset="0.004"/>
+						<GradientStop Color="#B14F4F4F" Offset="1"/>
+					</LinearGradientBrush>
+				</Rectangle.Fill>
+			</Rectangle>
+			
+			<GazeGUIVelocity:Rating Margin="14,14,0,0" x:Name="ratingCalibrationQuality" VerticalAlignment="Top" Height="37" HorizontalAlignment="Left" d:LayoutOverrides="VerticalAlignment"/>
+			<StackPanel HorizontalAlignment="Right" Margin="0,11,8,46" Width="116.07">
+				<Grid HorizontalAlignment="Right" Margin="0" Width="120">
+					<CheckBox x:Name="CheckBoxVisualFeedback" Content="Direct visual feedback" Style="{DynamicResource iPhoneCheckBox}" Margin="0,3.62,0,4.34" Height="18" HorizontalAlignment="Right" Width="60" IsChecked="True" />
+					<Label Margin="0" VerticalAlignment="Center" Content="Crosshair" Foreground="#FF969696" HorizontalAlignment="Left"/>
+				</Grid>
+				<Grid HorizontalAlignment="Right" Width="120" Margin="0,6,0,0">
+					<CheckBox x:Name="CheckBoxSmooth" Content="Direct visual feedback" Style="{DynamicResource iPhoneCheckBox}" Margin="60,3.62,0,4.34" Height="18" Width="60"/>
+					<Label Margin="6,0,0,0" VerticalAlignment="Center" Content="Smooth" Foreground="#FF969696" HorizontalAlignment="Left"/>
+				</Grid>
+			</StackPanel>
+			<Grid Margin="8,0,8,11" VerticalAlignment="Bottom">
+				<GazeGUI:ButtonGlass x:Name="BtnRecalibrate" ButtonAction="RedoCalibration" HorizontalAlignment="Left" Width="95" ButtonIcon="..\Graphics\GTxeyes.png" ButtonLabel="Recalibrate" Height="32"/>
+				<GazeGUI:ButtonGlass x:Name="BtnShare" ButtonAction="ShareData" ButtonIcon="..\Graphics\users.png" ButtonLabel="Share" HorizontalAlignment="Center" Width="95" Height="32"/>
+				<GazeGUI:ButtonGlass x:Name="BtnContinue" ButtonAction="AcceptCalibration" Width="95" ButtonIcon="..\Graphics\GTsystem_run.png" ButtonLabel="Continue" HorizontalAlignment="Right" Height="32"/>
+			</Grid>
+			<Grid x:Name="GridAccuracy" Margin="19.648,51,150.351,47" Width="150">
+				<Label x:Name="LabelAccuracy" Content="Accuracy" HorizontalAlignment="Left" Foreground="#FF604EFF"/>
+			
+			
+				<Label x:Name="LabelAccuracyValues" Content="left 0.5 right: 0.5" Foreground="#FFABABAB" HorizontalAlignment="Left" Margin="52,0,0,0"/>
+			
+			
+			</Grid>
+			
+			
+			<Grid x:Name="GridAccuracyParams" Margin="0,12.5,0,17.5" Width="220" HorizontalAlignment="Center" Visibility="Collapsed">
+				<Rectangle Margin="0" RadiusY="4" RadiusX="4">
+					<Rectangle.Fill>
+						<LinearGradientBrush EndPoint="0.498,0" StartPoint="0.502,1">
+							<GradientStop Color="#FF181818" Offset="0"/>
+							<GradientStop Color="#FF2E2E2E" Offset="1"/>
+						</LinearGradientBrush>
+					</Rectangle.Fill>
+					<Rectangle.Effect>
+						<DropShadowEffect BlurRadius="20" Direction="335" ShadowDepth="7"/>
+					</Rectangle.Effect>
+					<Rectangle.Stroke>
+						<LinearGradientBrush EndPoint="0.447,-0.113" StartPoint="0.553,0.983">
+							<GradientStop Color="#FF5B5B5B"/>
+							<GradientStop Color="#FFB3B3B3" Offset="1"/>
+						</LinearGradientBrush>
+					</Rectangle.Stroke>
+				</Rectangle>
+				
+				<Grid Margin="10,24,15,32">
+					<Label Margin="0,0,67.143,0" Content="Distance from screen" Foreground="#FFABABAB"/>
+				
+					<TextBox x:Name="TextBoxDistanceFromScreen" BorderBrush="#FF767676" HorizontalAlignment="Right" Margin="0,2,31.144,0" VerticalAlignment="Top" Width="40" Height="18" Background="#E52C2C2C" FontSize="10.667" Foreground="#FFC3C3C3" Text="600"/>
+					<Label Content="mm" Foreground="#FFABABAB" HorizontalAlignment="Right"/>
+				</Grid>
+				<Label Content="x" MouseDown="CloseAccuracyParamGrid" Background="{x:Null}" FontFamily="Verdana" FontSize="18" Foreground="#FF989898" HorizontalAlignment="Right" x:Name="X" Width="Auto" Height="Auto" Margin="0,-4.344,3,0" ToolTip="Close" VerticalAlignment="Top" Panel.ZIndex="1" />
+				<GazeGUI:ButtonGlass x:Name="BtnAccuracyParamsSet" ButtonAction="AccuracyParamSet" HorizontalAlignment="Center" Width="120" ButtonIcon="/GTApplication;Component/Graphics/iconTrackStats.png" ButtonLabel="Recalculate" VerticalAlignment="Bottom" Height="30" Margin="0,0,0,10"/>
+			</Grid>
+		</Grid>
+	
+	
+	</Grid>
+</UserControl>
