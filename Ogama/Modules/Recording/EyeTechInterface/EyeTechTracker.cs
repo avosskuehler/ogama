@@ -379,13 +379,7 @@ namespace Ogama.Modules.Recording.EyeTechInterface
     /// </summary>
     public override void ChangeSettings()
     {
-      var dlg = new EyeTechSettingsDialog { EyeTechSettings = this.eyetechSettings };
-      if (dlg.ShowDialog() == DialogResult.OK)
-      {
-        this.eyetechSettings = dlg.EyeTechSettings;
-        this.UpdateSettings();
-        this.SerializeSettings(this.eyetechSettings, this.SettingsFile);
-      }
+      // Do nothing for now
     }
 
     /// <summary>
