@@ -178,19 +178,11 @@ namespace Ogama.Modules.Recording.EyeTechInterface
     /// otherwise <strong>false</strong></returns>.
     public static bool IsAvailable(out string errorMessage)
     {
-      // Search if the Quick Glance Application exists
+      // No options available in the API for checking this
+      // FIXME Add method for Quick Glance detection
       errorMessage = string.Empty;
+      return true;
 
-      using (var key = Registry.LocalMachine.OpenSubKey(@"Software\EyeTech Digital Systems\Quick Glance"))
-      {
-        if (key != null)
-        {
-          return true;
-        }
-      }
-
-      errorMessage = "EyeTech Quick Glance application is not installed.";
-      return false;
     }
 
     #endregion //PUBLICMETHODS
