@@ -121,6 +121,11 @@ namespace Ogama.Modules.Recording.Dialogs
           returnValue |= HardwareTracker.Mirametrix;
         }
 
+        if (this.chbEyeTech.Checked)
+        {
+            returnValue |= HardwareTracker.EyeTech;
+        }
+
         return returnValue;
       }
     }
