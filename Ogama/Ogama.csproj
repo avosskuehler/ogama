@@ -428,12 +428,6 @@
     <Compile Include="Modules\Recording\Presenter\WebsiteScreenshot.cs" />
     <Compile Include="Modules\Recording\Presenter\DSScreenCapture.cs" />
     <Compile Include="Modules\Recording\Presenter\ScreenCaptureProperties.cs" />
-    <Compile Include="Modules\Recording\EyeTechInterface\QLCalibration.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Modules\Recording\EyeTechInterface\QLCalibration.designer.cs">
-      <DependentUpon>QLCalibration.cs</DependentUpon>
-    </Compile>
     <Compile Include="Modules\Recording\EyeTechInterface\QuickLinkAPI.cs" />
     <Compile Include="Modules\Recording\TobiiInterface\TobiiCalibrationRunner.cs" />
     <Compile Include="Modules\Recording\TobiiInterface\TobiiCalibrationForm.cs">
@@ -1158,9 +1152,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\MirametrixInterface\MirametrixTrackStatusControl.resx">
       <DependentUpon>MirametrixTrackStatusControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Recording\EyeTechInterface\QLCalibration.resx">
-      <DependentUpon>QLCalibration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\RecordingPicture.resx">
       <DependentUpon>RecordingPicture.cs</DependentUpon>
