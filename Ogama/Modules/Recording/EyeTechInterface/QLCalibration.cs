@@ -5,11 +5,11 @@
   using System.ComponentModel;
   using System.Data;
   using System.Drawing;
-  using System.Text;
-  using System.Windows.Forms;
   using System.Runtime.InteropServices;
+  using System.Text;
   using System.Threading;
-  
+  using System.Windows.Forms;
+
   /// <summary>
   /// This form is used to to start a calibration for the EyeTech Tracker. 
   /// As soon as it is shown, the calibration will start based upon the
@@ -17,13 +17,14 @@
   /// </summary>
   public partial class QLCalibration : Form
   {
+    private const int SW_HIDE = 0;
+    private const int SW_SHOW = 1;
+
     // Used for hiding the taskbar to achieve real fullscreen.
     [DllImport("user32.dll")]
     private static extern int FindWindow(string lpszClassName, string lpszWindowName);
     [DllImport("user32.dll")]
     private static extern int ShowWindow(int hWnd, int nCmdShow);
-    private const int SW_HIDE = 0;
-    private const int SW_SHOW = 1;
 
     public QLCalibration()
     {
@@ -41,7 +42,7 @@
 
       // Hide cursor and taskbar.
       Cursor.Hide();
-      int hWnd = FindWindow("Shell_TrayWnd", "");
+      int hWnd = FindWindow("Shell_TrayWnd", string.Empty);
       ShowWindow(hWnd, SW_HIDE);
 
       // Set window options to fullscreen
@@ -53,7 +54,7 @@
       Calibrate();
 
       calibrationResult = NativeMethods.GetScoreEx(ref scoreLeft, ref scoreRight);
-      //label2.Text = "Left: " + scoreLeft + " Right: " + scoreRight;
+      ////label2.Text = "Left: " + scoreLeft + " Right: " + scoreRight;
 
       // Restore mouse and show results
       Cursor.Show();
@@ -72,7 +73,7 @@
       // Exit calibration form and restore taskbar.
       this.Close();
 
-      int hwnd = FindWindow("Shell_TrayWnd", "");
+      int hwnd = FindWindow("Shell_TrayWnd", string.Empty);
       ShowWindow(hwnd, SW_SHOW);
     }
 

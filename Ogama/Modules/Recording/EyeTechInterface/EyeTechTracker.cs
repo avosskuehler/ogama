@@ -33,7 +33,7 @@ namespace Ogama.Modules.Recording.EyeTechInterface
   /// to represent an OGAMA known eyetracker.
   /// It encapsulates an EyeTech http://www.eyetechds.com/ eyetracker 
   /// and is written with the SDK v5.2 from EyeTech Digital Systems.
-  /// It is tested with the EyeTech TM3, but suppossed to work with an TM2
+  /// It is tested with the EyeTech TM3, but supposed to work with an TM2
   /// as well.
   /// </summary>
   public class EyeTechTracker : Tracker
@@ -90,7 +90,7 @@ namespace Ogama.Modules.Recording.EyeTechInterface
     /// Initializes COM objects and other.
     /// </summary>
     /// <param name="owningRecordModule">The <see cref="RecordModule"/>
-    /// form wich host the recorder.</param>
+    /// form which host the recorder.</param>
     /// <param name="trackerConnectButton">The <see cref="Button"/>
     /// named "Connect" at the tab page of the EyeTech device.</param>
     /// <param name="trackerSubjectButton">The <see cref="Button"/>
@@ -162,7 +162,6 @@ namespace Ogama.Modules.Recording.EyeTechInterface
       set { this.isRecording = value; }
     }
 
-
     #endregion //PROPERTIES
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -182,7 +181,6 @@ namespace Ogama.Modules.Recording.EyeTechInterface
       // FIXME Add method for Quick Glance detection
       errorMessage = string.Empty;
       return true;
-
     }
 
     #endregion //PUBLICMETHODS
@@ -195,7 +193,7 @@ namespace Ogama.Modules.Recording.EyeTechInterface
     /// <summary>
     /// Connects the track status object to the eyetech system.
     /// </summary>
-    /// <returns><strong>True</strong> if connection succeded, otherwise
+    /// <returns><strong>True</strong> if connection succeeded, otherwise
     /// <strong>false</strong>.</returns>
     public override bool Connect()
     {
@@ -596,7 +594,7 @@ namespace Ogama.Modules.Recording.EyeTechInterface
     /// <summary>
     /// Function used to locate and start QuickGlance, as it is required to run for the API to work.
     /// </summary>
-    /// <returns>True if QuickGlance was sucessfully started.</returns>
+    /// <returns>True if QuickGlance was successfully started.</returns>
     private bool StartQuickGlance()
     {
       var key = Registry.LocalMachine.OpenSubKey(@"Software\EyeTech Digital Systems\Quick Glance", false);
@@ -635,11 +633,11 @@ namespace Ogama.Modules.Recording.EyeTechInterface
     {
       // Get the default sample time per calibration point.
       int calibrationTime = this.eyetechSettings.CalibrationOptions.Calibration_TargetTime;
-      int calibrationPoints = 0;
+      ////int calibrationPoints = 0;
 
       // Value's to indicate calibration precision. <=10 Good. >10 requires a retry.
-      double scoreLeft = -1.0;
-      double scoreRight = -1.0;
+      ////double scoreLeft = -1.0;
+      ////double scoreRight = -1.0;
 
       // new QLCalibration(calibrationTime, calibrationPoints, ref scoreLeft, ref scoreRight);
       var calScreen = new QLCalibration();
