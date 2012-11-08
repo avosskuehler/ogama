@@ -1674,6 +1674,7 @@ namespace Ogama.Modules.Recording
       this.tclEyetracker.TabPages.Add(this.tbpMouseOnly);
       this.tclEyetracker.TabPages.Add(this.tbpGazetrackerIPClient);
       this.tclEyetracker.TabPages.Add(this.tbpGazetrackerDirectClient);
+      this.tclEyetracker.TabPages.Add(this.tbpEyeTech);
 
       // Read activated tracker value from the application settings
       var activatedTracker = Settings.Default.ActivatedHardwareTracker;
