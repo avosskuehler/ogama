@@ -256,49 +256,6 @@ namespace Ogama.Modules.Recording.EyeTechInterface
       // worth fixing up for the v1 API
       NativeMethods.InternalCalibration1();
 
-      ////NativeMethods.InitializeCalibrationEx((uint)1);
-
-      //// Thread Calibrator = new Thread(new QuickLinkAPI.QLCalibration());
-      //// Thread Calibrator = new Thread(StartCalibrating);
-      //// Application.Run(new Form1());
-      //// calibrationResult = Calibrator.Start();
-      //// Calibrator.Start();
-
-      //// Calibrator.Join();
-
-      //// InformationDialog.Show(
-      ////   "Calibration",
-      ////   "Wait for calibration and click OK to continue.",
-      ////   false, MessageBoxIcon.Information);
-
-      //// bool result = false;
-      //// string temp = "";
-
-      //// switch (calibrationResult)
-      //// {
-      ////   case CalibrationErrorEx.CALIBRATIONEX_OK:
-      ////     if (scoreLeft < 10 && scoreRight < 10)
-      ////     {
-      ////       result = true;
-      ////       this.RecordButton.Enabled = true;
-      ////     }
-
-      ////     // EXPAND if settings do not allow left or right to be used.
-      ////     temp = "CALIBRATIONEX_OK";
-      ////     break;
-      ////   case CalibrationErrorEx.CALIBRATIONEX_NOT_INITIALIZED:
-      ////     temp = "CALIBRATIONEX_NOT_INITIALIZED";
-      ////     break;
-      ////   case CalibrationErrorEx.CALIBRATIONEX_NOT_ALL_TARGETS_CALIBRATED:
-      ////     temp = "CALIBRATIONEX_NOT_ALL_TARGETS_CALIBRATED";
-      ////     break;
-      ////   case CalibrationErrorEx.CALIBRATIONEX_INTERNAL_TIMEOUT:
-      ////     temp = "CALIBRATIONEX_INTERNAL_TIMEOUT";
-      ////     break;
-      ////   default:
-      ////     break;
-      //// }
-
       // EYETECH TODO return result;
       // IMPORTANT : external calibration has no way of returning success
       // so it's up to the subject to check calibration statuss
@@ -624,24 +581,6 @@ namespace Ogama.Modules.Recording.EyeTechInterface
       }
 
       return false;
-    }
-
-    /// <summary>
-    /// Currently not used. Starts the calibration routine.
-    /// </summary>
-    private void StartCalibrating()
-    {
-      // Get the default sample time per calibration point.
-      int calibrationTime = this.eyetechSettings.CalibrationOptions.Calibration_TargetTime;
-      ////int calibrationPoints = 0;
-
-      // Value's to indicate calibration precision. <=10 Good. >10 requires a retry.
-      ////double scoreLeft = -1.0;
-      ////double scoreRight = -1.0;
-
-      // new QLCalibration(calibrationTime, calibrationPoints, ref scoreLeft, ref scoreRight);
-      var calScreen = new QLCalibration();
-      calScreen.ShowDialog();
     }
 
     #endregion //HELPER
