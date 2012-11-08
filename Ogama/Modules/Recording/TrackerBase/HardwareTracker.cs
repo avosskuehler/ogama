@@ -57,9 +57,6 @@ namespace Ogama.Modules.Recording.TrackerBase
     /// </summary>
     GazetrackerIPClient = 32,
 
-    ///
-    EyeTech = 32,
-
     /// <summary>
     /// Applied Science Laboratories (ASL) professional gaze tracker
     /// </summary>
@@ -69,5 +66,11 @@ namespace Ogama.Modules.Recording.TrackerBase
     /// Mirametrix S2 Tracker available
     /// </summary>
     Mirametrix = 128,
+
+    /// <summary>
+    /// The EyeTech gazetracker using quicklink
+    /// </summary>
+    EyeTech = 256,
+
   }
 }
