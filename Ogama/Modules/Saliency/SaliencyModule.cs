@@ -596,7 +596,7 @@ namespace Ogama.Modules.Saliency
       this.ResetForm();
 
       // Return if we have no data
-      if (!Document.ActiveDocument.SelectionState.IsSet)
+      if (Document.ActiveDocument.SelectionState.TrialID < 0)
       {
         return;
       }
