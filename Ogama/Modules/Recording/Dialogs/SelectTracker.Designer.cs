@@ -225,6 +225,7 @@
       // chbEyeTech
       // 
       this.chbEyeTech.Image = global::Ogama.Properties.Resources.Eyetech_tracker;
+      this.chbEyeTech.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
       this.chbEyeTech.Location = new System.Drawing.Point(166, 407);
       this.chbEyeTech.Name = "chbEyeTech";
       this.chbEyeTech.Size = new System.Drawing.Size(370, 40);
