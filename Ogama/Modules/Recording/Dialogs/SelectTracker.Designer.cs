@@ -224,12 +224,13 @@
       // 
       // chbEyeTech
       // 
+      this.chbEyeTech.Image = global::Ogama.Properties.Resources.Eyetech_tracker;
       this.chbEyeTech.Location = new System.Drawing.Point(166, 407);
       this.chbEyeTech.Name = "chbEyeTech";
       this.chbEyeTech.Size = new System.Drawing.Size(370, 40);
       this.chbEyeTech.TabIndex = 24;
-      this.chbEyeTech.Text = "The EyeTech TM3 eyetracker. Needs to have quickglance application installed on yo" +
-    "ur computer.";
+      this.chbEyeTech.Text = "The EyeTech eyetracker. Quick Glance software needs to be installed and running t" +
+          "o function properly.";
       this.chbEyeTech.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       // 
       // pcbMirametrix
@@ -264,7 +265,7 @@
       this.chbAsl.Size = new System.Drawing.Size(370, 72);
       this.chbAsl.TabIndex = 18;
       this.chbAsl.Text = "If you have purchased and installed an ASL model 5000 Eye Tracker control unit (m" +
-    "aterials and softwares)";
+          "aterials and softwares)";
       this.chbAsl.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.chbAsl.UseVisualStyleBackColor = true;
       // 
@@ -336,7 +337,7 @@
       this.chbAlea.Size = new System.Drawing.Size(370, 82);
       this.chbAlea.TabIndex = 1;
       this.chbAlea.Text = "The alea technologies IG-30 Pro Eyetracking-System. Needs to have Intelligaze Sof" +
-    "tware 1.2 to be installed.\r\n";
+          "tware 1.2 to be installed.\r\n";
       this.chbAlea.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.chbAlea.UseVisualStyleBackColor = true;
       // 
@@ -382,7 +383,7 @@
       this.chbSMI.Size = new System.Drawing.Size(285, 43);
       this.chbSMI.TabIndex = 1;
       this.chbSMI.Text = "The SMI iViewX interface. Needs to have a iViewX software running on the same or " +
-    "a connected computer.\r\n";
+          "a connected computer.\r\n";
       this.chbSMI.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.chbSMI.UseVisualStyleBackColor = true;
       // 
@@ -480,7 +481,7 @@
       this.chbMouseOnly.Size = new System.Drawing.Size(341, 57);
       this.chbMouseOnly.TabIndex = 1;
       this.chbMouseOnly.Text = "This recorder captures just mouse movements and events. This can be used when gaz" +
-    "e tracking is not needed.\r\n\r\n";
+          "e tracking is not needed.\r\n\r\n";
       this.chbMouseOnly.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.chbMouseOnly.UseVisualStyleBackColor = true;
       // 
