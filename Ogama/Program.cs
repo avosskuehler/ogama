@@ -41,8 +41,7 @@ namespace Ogama
       Application.SetCompatibleTextRenderingDefault(false);
 
       
-        runOgama(args);
-      
+       runOgama(args);
         
         //runRtaDemo();
 
