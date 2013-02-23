@@ -539,6 +539,44 @@
     <Compile Include="Modules\Replay\Video\ImageHandler.cs" />
     <Compile Include="Modules\Replay\Video\VideoExportProperties.cs" />
     <Compile Include="Modules\Replay\Video\VideoStreamProperties.cs" />
+    <Compile Include="Modules\Rta\DaoFactory.cs" />
+    <Compile Include="Modules\Rta\DMOHelper.cs" />
+    <Compile Include="Modules\Rta\RtaBaseDao.cs" />
+    <Compile Include="Modules\Rta\RtaController.cs" />
+    <Compile Include="Modules\Rta\RtaExtension4ReplayModule.cs" />
+    <Compile Include="Modules\Rta\RtaReplay\Action.cs" />
+    <Compile Include="Modules\Rta\RtaReplay\ActionController.cs" />
+    <Compile Include="Modules\Rta\RtaReplay\DrawController.cs" />
+    <Compile Include="Modules\Rta\RtaReplay\FormRtaView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Rta\RtaReplay\FormRtaView.Designer.cs">
+      <DependentUpon>FormRtaView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Rta\RtaReplay\FormRtaViewController.cs" />
+    <Compile Include="Modules\Rta\RtaReplay\IDrawable.cs" />
+    <Compile Include="Modules\Rta\RtaReplay\IDrawControllerListener.cs" />
+    <Compile Include="Modules\Rta\RtaReplay\IFigure.cs" />
+    <Compile Include="Modules\Rta\RtaReplay\IFormRtaViewControllerListener.cs" />
+    <Compile Include="Modules\Rta\RtaReplay\IRtaCategoryVisitor.cs" />
+    <Compile Include="Modules\Rta\RtaReplay\IRtaCategoryVisitorImpl.cs" />
+    <Compile Include="Modules\Rta\RtaReplay\Marker.cs" />
+    <Compile Include="Modules\Rta\RtaReplay\MessageQueue.cs" />
+    <Compile Include="Modules\Rta\RtaReplay\Program.cs" />
+    <Compile Include="Modules\Rta\RtaReplay\RtaCategory.cs" />
+    <Compile Include="Modules\Rta\RtaReplay\RtaCategoryModel.cs" />
+    <Compile Include="Modules\Rta\RtaReplay\RtaCategoryTreeitemConverter.cs" />
+    <Compile Include="Modules\Rta\RtaReplay\RtaPanel.cs" />
+    <Compile Include="Modules\Rta\RtaReplay\Segment.cs" />
+    <Compile Include="Modules\Rta\RtaReplay\Tools.cs" />
+    <Compile Include="Modules\Rta\RtaSettings.cs" />
+    <Compile Include="Modules\Rta\RtaSettingsDao.cs" />
+    <Compile Include="Modules\Rta\RtaSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Rta\RtaSettingsForm.Designer.cs">
+      <DependentUpon>RtaSettingsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Scanpath\Colorization\ColorizationModes.cs" />
     <Compile Include="Modules\Scanpath\Colorization\ColorizationParameters.cs" />
     <Compile Include="Modules\Scanpath\Colorization\ColorizationStyle.cs" />
@@ -1172,6 +1210,12 @@
       <DependentUpon>SaveVideoSplash.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Rta\RtaReplay\FormRtaView.resx">
+      <DependentUpon>FormRtaView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Rta\RtaSettingsForm.resx">
+      <DependentUpon>RtaSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Scanpath\Colorization\ColorDefinitionDialog.resx">
       <DependentUpon>ColorDefinitionDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1634,6 +1678,7 @@
     <None Include="Resources\Desktop.png" />
     <None Include="Resources\Desktop32.png" />
     <None Include="Resources\Desktop48.png" />
+    <Content Include="Modules\Rta\rta.info.txt" />
     <Content Include="Resources\MirametrixLogo.png" />
     <Content Include="Resources\MirametrixLogo_150_33.png" />
     <Content Include="Resources\Mirametrix_S2.png" />
@@ -1863,6 +1908,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <COMReference Include="AxWMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
     <COMReference Include="stdole">
       <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>2</VersionMajor>
@@ -1872,7 +1925,17 @@
       <Isolated>False</Isolated>
       <Private>True</Private>
     </COMReference>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- 
 	<Import Project="$(ProgramFiles)\MSBuild\Microsoft\StyleCop\v4.3\Microsoft.StyleCop.targets" />
