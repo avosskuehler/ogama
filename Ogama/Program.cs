@@ -40,29 +40,45 @@ namespace Ogama
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
 
-      // Support for command line arguments.
-      string fileName = string.Empty;
-      if (args.Length == 1)
-      {
-        if (File.Exists(args[0]))
+      
+        runOgama(args);
+      
+        
+        //runRtaDemo();
+
+    }
+
+    private static void runRtaDemo()
+    {
+        Application.Run(new Ogama.Modules.Rta.RtaReplay.FormRtaView());
+
+    }
+
+    private static void runOgama(string[] args)
+    {
+        // Support for command line arguments.
+        string fileName = string.Empty;
+        if (args.Length == 1)
         {
-          fileName = args[0];
+            if (File.Exists(args[0]))
+            {
+                fileName = args[0];
+            }
         }
-      }
 
-      try
-      {
-        // Show splash screen with copyright
-        InitialSplash objfrmSplash = new InitialSplash();
-        objfrmSplash.ShowDialog();
+        try
+        {
+            // Show splash screen with copyright
+            InitialSplash objfrmSplash = new InitialSplash();
+            objfrmSplash.ShowDialog();
 
-        // Start Application
-        Application.Run(new Ogama.MainWindow.MainForm(fileName));
-      }
-      catch (Exception ex)
-      {
-        ExceptionMethods.ProcessUnhandledException(ex);
-      }
+            // Start Application
+            Application.Run(new Ogama.MainWindow.MainForm(fileName));
+        }
+        catch (Exception ex)
+        {
+            ExceptionMethods.ProcessUnhandledException(ex);
+        }
     }
   }
 }
