@@ -66,5 +66,11 @@ namespace Ogama.Modules.Recording.TrackerBase
     /// Mirametrix S2 Tracker available
     /// </summary>
     Mirametrix = 128,
+
+    /// <summary>
+    /// The EyeTech gazetracker using quicklink
+    /// </summary>
+    EyeTech = 256,
+
   }
 }

@@ -39,6 +39,7 @@ namespace Ogama.Modules.Recording
   using Ogama.Modules.Recording.AleaInterface;
   using Ogama.Modules.Recording.ASLInterface;
   using Ogama.Modules.Recording.Dialogs;
+  using Ogama.Modules.Recording.EyeTechInterface;
   using Ogama.Modules.Recording.GazegroupInterface;
   using Ogama.Modules.Recording.MirametrixInterface;
   using Ogama.Modules.Recording.MouseOnlyInterface;
@@ -48,6 +49,7 @@ namespace Ogama.Modules.Recording
   using Ogama.Modules.Recording.TrackerBase;
   using Ogama.Properties;
   using OgamaControls;
+
   using VectorGraphics.Elements;
   using VectorGraphics.Elements.ElementCollections;
   using VectorGraphics.StopConditions;
@@ -1672,6 +1674,7 @@ namespace Ogama.Modules.Recording
       this.tclEyetracker.TabPages.Add(this.tbpMouseOnly);
       this.tclEyetracker.TabPages.Add(this.tbpGazetrackerIPClient);
       this.tclEyetracker.TabPages.Add(this.tbpGazetrackerDirectClient);
+      this.tclEyetracker.TabPages.Add(this.tbpEyeTech);
 
       // Read activated tracker value from the application settings
       var activatedTracker = Settings.Default.ActivatedHardwareTracker;
@@ -1790,6 +1793,27 @@ namespace Ogama.Modules.Recording
         if (this.tclEyetracker.TabPages.Contains(this.tbpMirametrix))
         {
           this.tclEyetracker.TabPages.Remove(this.tbpMirametrix);
+        }
+      }
+
+      if (tracker == (tracker | HardwareTracker.EyeTech))
+      {
+        // Create EyeTech tracker
+        var newEyeTech = new EyeTechTracker(
+          this,
+          this.btnEyeTechConnect,
+          this.btnEyeTechSubjectName,
+          this.btnEyeTechCalibrate,
+          this.btnEyeTechRecord,
+          this.txbEyeTechSubjectName);
+
+        this.trackerInterfaces.Add(HardwareTracker.EyeTech, newEyeTech);
+      }
+      else
+      {
+        if (this.tclEyetracker.TabPages.Contains(this.tbpEyeTech))
+        {
+          this.tclEyetracker.TabPages.Remove(this.tbpEyeTech);
         }
       }
 
@@ -2348,6 +2372,14 @@ namespace Ogama.Modules.Recording
           }
 
           break;
+        case "tbpEyeTech":
+          if (this.trackerInterfaces.ContainsKey(HardwareTracker.EyeTech))
+          {
+            this.currentTracker = this.trackerInterfaces[HardwareTracker.EyeTech];
+          }
+
+          break;
+
         case "tbpAlea":
           if (this.trackerInterfaces.ContainsKey(HardwareTracker.Alea))
           {
