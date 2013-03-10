@@ -1,7 +1,7 @@
 ﻿// <copyright file="Slide.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,9 +9,9 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
-namespace VectorGraphics.Elements
+namespace VectorGraphics.Elements.ElementCollections
 {
   using System;
   using System.ComponentModel;
@@ -19,12 +19,14 @@ namespace VectorGraphics.Elements
   using System.Drawing.Drawing2D;
   using System.IO;
   using System.Xml.Serialization;
+
   using VectorGraphics.Controls;
-  using VectorGraphics.CustomTypeConverter;
-  using VectorGraphics.Interfaces;
+  using VectorGraphics.Controls.Flash;
   using VectorGraphics.StopConditions;
   using VectorGraphics.Tools;
-  using VectorGraphics.Triggers;
+  using VectorGraphics.Tools.CustomTypeConverter;
+  using VectorGraphics.Tools.Interfaces;
+  using VectorGraphics.Tools.Trigger;
 
   /// <summary>
   /// Class to specify a slide with stimuli that can be 
@@ -83,21 +85,6 @@ namespace VectorGraphics.Elements
     private StopConditionCollection stopConditions;
 
     /// <summary>
-    /// Saves the slides background color.
-    /// </summary>
-    private Color bgColor;
-
-    /// <summary>
-    /// Saves the slides background image.
-    /// </summary>
-    private Image bgImage;
-
-    /// <summary>
-    /// Saves an <see cref="AudioFile"/> for the background sound.
-    /// </summary>
-    private AudioFile bgSound;
-
-    /// <summary>
     /// Saves the slides name.
     /// </summary>
     private string name;
@@ -126,30 +113,9 @@ namespace VectorGraphics.Elements
     private VGElementCollection targets;
 
     /// <summary>
-    /// Flag, indicating the visibility of the mouse cursor.
-    /// </summary>
-    private bool mouseCursorVisible;
-
-    /// <summary>
-    /// The initial position for the mouse during presentation.
-    /// </summary>
-    private Point mouseInitialPosition;
-
-    /// <summary>
-    /// Mouse location updated is forced or don´t changed.
-    /// </summary>
-    private bool forceMousePositionChange;
-
-    /// <summary>
     /// Flag, indicating a modification of this slide.
     /// </summary>
     private bool modified;
-
-    /// <summary>
-    /// Saves a device trigger signal element, that can be used
-    /// to send a trigger to other devices during presentation.
-    /// </summary>
-    private Trigger trigger;
 
     #endregion //FIELDS
 
@@ -170,7 +136,7 @@ namespace VectorGraphics.Elements
       this.links = new StopConditionCollection();
       this.stopConditions = new StopConditionCollection();
       this.category = string.Empty;
-      this.trigger = new Trigger(TriggerSignaling.None, TriggerOutputDevices.LPT, 40, 255, 0x0378);
+      this.TriggerSignal = new Trigger(TriggerSignaling.None, TriggerOutputDevices.LPT, 40, 255, 0x0378);
     }
 
     /// <summary>
@@ -202,25 +168,21 @@ namespace VectorGraphics.Elements
       }
 
       // Clone background properties
-      this.bgColor = slide.BackgroundColor;
+      this.BackgroundColor = slide.BackgroundColor;
       if (slide.BackgroundImage != null)
       {
-        this.bgImage = (Image)slide.BackgroundImage.Clone();
+        this.BackgroundImage = (Image)slide.BackgroundImage.Clone();
       }
 
       if (slide.BackgroundSound != null)
       {
-        this.bgSound = (AudioFile)slide.BackgroundSound.Clone();
+        this.BackgroundSound = (AudioFile)slide.BackgroundSound.Clone();
       }
 
       // Clone trigger
-      this.trigger = slide.TriggerSignal;
+      this.TriggerSignal = slide.TriggerSignal;
 
-      // Clone thumb
-      if (slide.Thumb != null)
-      {
-        this.thumb = (Image)slide.Thumb.Clone();
-      }
+      this.IsDesktopSlide = slide.IsDesktopSlide;
 
       // Clone correct responses
       this.correctResponses = new StopConditionCollection();
@@ -248,9 +210,9 @@ namespace VectorGraphics.Elements
       }
 
       // Clone mouse properties
-      this.mouseInitialPosition = slide.MouseInitialPosition;
-      this.mouseCursorVisible = slide.MouseCursorVisible;
-      this.forceMousePositionChange = slide.ForceMousePositionChange;
+      this.MouseInitialPosition = slide.MouseInitialPosition;
+      this.MouseCursorVisible = slide.MouseCursorVisible;
+      this.ForceMousePositionChange = slide.ForceMousePositionChange;
 
       this.presentationSize = slide.presentationSize;
       this.modified = slide.Modified;
@@ -284,8 +246,8 @@ namespace VectorGraphics.Elements
       this.targets = new VGElementCollection();
       this.links = new StopConditionCollection();
       this.stopConditions = newStopConditions;
-      this.bgColor = newBackgroundColor;
-      this.bgImage = newBackgroundImage;
+      this.BackgroundColor = newBackgroundColor;
+      this.BackgroundImage = newBackgroundImage;
       this.name = newName;
       this.correctResponses = newResponses;
       this.category = newCategory;
@@ -316,7 +278,7 @@ namespace VectorGraphics.Elements
     /// <summary>
     /// Gets or sets the size of slide thumbs.
     /// </summary>
-    [XmlIgnoreAttribute()]
+    [XmlIgnore]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     [Browsable(false)]
     public static Size SlideDesignThumbSize
@@ -329,7 +291,7 @@ namespace VectorGraphics.Elements
     /// Gets a value indicating whether one of the slides
     /// contains flash content
     /// </summary>
-    [XmlIgnoreAttribute()]
+    [XmlIgnore]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     [Browsable(false)]
     public bool HasActiveXContent
@@ -346,13 +308,27 @@ namespace VectorGraphics.Elements
     }
 
     /// <summary>
+    /// Gets a value indicating whether the current thumb is empty.
+    /// </summary>
+    [XmlIgnore]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    [Browsable(false)]
+    public bool IsThumbNull
+    {
+      get
+      {
+        return this.thumb == null;
+      }
+    }
+
+    /// <summary>
     /// Gets or sets a thumb for this slide.
     /// </summary>
     /// <value>A <see cref="Image"/> with the slides thumb.</value>
     /// <remarks>Because images can not be xml serialized directly,
     /// this property is duplicated by <see cref="SerializedThumb"/>,
     /// which uses <see cref="TypeDescriptor"/> to serialize to bytes.</remarks>
-    [XmlIgnoreAttribute()]
+    [XmlIgnore]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     [Browsable(false)]
     public Image Thumb
@@ -468,6 +444,17 @@ namespace VectorGraphics.Elements
     }
 
     /// <summary>
+    /// Gets or sets a value indicating whether the slide is modified
+    /// a desktop slide, that means invisible to the user showing
+    /// the underlying desktop during recording
+    /// </summary>
+    /// <value>A <see cref="Boolean"/> indicating that this is
+    /// a desktop slide.</value>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    [Browsable(false)]
+    public bool IsDesktopSlide { get; set; }
+
+    /// <summary>
     /// Gets or sets the list of vector graphic stimuli for this slide.
     /// </summary>
     /// <value>A <see cref="VGElementCollection"/> with the vector graphic
@@ -509,12 +496,7 @@ namespace VectorGraphics.Elements
     {
       get
       {
-        if (this.activeXElements == null)
-        {
-          this.activeXElements = new VGElementCollection();
-        }
-
-        return this.activeXElements;
+        return this.activeXElements ?? (this.activeXElements = new VGElementCollection());
       }
 
       set
@@ -563,12 +545,7 @@ namespace VectorGraphics.Elements
     {
       get
       {
-        if (this.stopConditions == null)
-        {
-          this.stopConditions = new StopConditionCollection();
-        }
-
-        return this.stopConditions;
+        return this.stopConditions ?? (this.stopConditions = new StopConditionCollection());
       }
 
       set
@@ -581,14 +558,8 @@ namespace VectorGraphics.Elements
     /// Gets or sets the background color of the current slide.
     /// </summary>
     /// <value>A <see cref="Color"/> with the slides background color.</value>
-    [XmlIgnoreAttribute()]
-    [Category("Background")]
-    [Description("The background color of this slide.")]
-    public Color BackgroundColor
-    {
-      get { return this.bgColor; }
-      set { this.bgColor = value; }
-    }
+    [XmlIgnore, Category("Background"), Description("The background color of this slide.")]
+    public Color BackgroundColor { get; set; }
 
     /// <summary>
     /// Gets or sets the SerializedBackgroundColor.
@@ -600,8 +571,8 @@ namespace VectorGraphics.Elements
     [Browsable(false)]
     public string SerializedBackgroundColor
     {
-      get { return ObjectStringConverter.ColorToHtmlAlpha(this.bgColor); }
-      set { this.bgColor = ObjectStringConverter.HtmlAlphaToColor(value); }
+      get { return ObjectStringConverter.ColorToHtmlAlpha(this.BackgroundColor); }
+      set { this.BackgroundColor = ObjectStringConverter.HtmlAlphaToColor(value); }
     }
 
     /// <summary>
@@ -611,14 +582,8 @@ namespace VectorGraphics.Elements
     /// <remarks>Because this property can not be xml serialized,
     /// there is the <see cref="SerializedBackgroundImage"/>
     /// property from which this property can be persisted.</remarks>
-    [XmlIgnoreAttribute()]
-    [Category("Background")]
-    [Description("A background image for this slide.")]
-    public Image BackgroundImage
-    {
-      get { return this.bgImage; }
-      set { this.bgImage = value; }
-    }
+    [XmlIgnore, Category("Background"), Description("A background image for this slide.")]
+    public Image BackgroundImage { get; set; }
 
     /// <summary>
     /// Gets or sets the SerializedBackgroundImage.
@@ -633,26 +598,24 @@ namespace VectorGraphics.Elements
     {
       get
       {
-        if (this.bgImage != null)
+        if (this.BackgroundImage != null)
         {
-          TypeConverter bitmapConverter = TypeDescriptor.GetConverter(this.bgImage.GetType());
-          return (byte[])bitmapConverter.ConvertTo(this.bgImage, typeof(byte[]));
+          var bitmapConverter = TypeDescriptor.GetConverter(this.BackgroundImage.GetType());
+          return (byte[])bitmapConverter.ConvertTo(this.BackgroundImage, typeof(byte[]));
         }
-        else
-        {
-          return null;
-        }
+
+        return null;
       }
 
       set
       {
         if (value != null)
         {
-          this.bgImage = new Bitmap(new MemoryStream(value));
+          this.BackgroundImage = new Bitmap(new MemoryStream(value));
         }
         else
         {
-          this.bgImage = null;
+          this.BackgroundImage = null;
         }
       }
     }
@@ -660,25 +623,15 @@ namespace VectorGraphics.Elements
     /// <summary>
     /// Gets or sets an <see cref="AudioFile"/> for the background sound.
     /// </summary>
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    [Browsable(false)]
-    public AudioFile BackgroundSound
-    {
-      get { return this.bgSound; }
-      set { this.bgSound = value; }
-    }
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false)]
+    public AudioFile BackgroundSound { get; set; }
 
     /// <summary>
     /// Gets or sets the device trigger signal element, that can be used
     /// to send a trigger to other devices during presentation.
     /// </summary>
-    [Category("Options")]
-    [Description("An optional trigger that can be sent to connected devices during presentation.")]
-    public Trigger TriggerSignal
-    {
-      get { return this.trigger; }
-      set { this.trigger = value; }
-    }
+    [Category("Options"), Description("An optional trigger that can be sent to connected devices during presentation.")]
+    public Trigger TriggerSignal { get; set; }
 
     /// <summary>
     /// Gets or sets the mouse or key that is the correct 
@@ -691,12 +644,7 @@ namespace VectorGraphics.Elements
     {
       get
       {
-        if (this.correctResponses == null)
-        {
-          this.correctResponses = new StopConditionCollection();
-        }
-
-        return this.correctResponses;
+        return this.correctResponses ?? (this.correctResponses = new StopConditionCollection());
       }
 
       set
@@ -717,12 +665,7 @@ namespace VectorGraphics.Elements
     {
       get
       {
-        if (this.links == null)
-        {
-          this.links = new StopConditionCollection();
-        }
-
-        return this.links;
+        return this.links ?? (this.links = new StopConditionCollection());
       }
 
       set
@@ -743,12 +686,7 @@ namespace VectorGraphics.Elements
     {
       get
       {
-        if (this.targets == null)
-        {
-          this.targets = new VGElementCollection();
-        }
-
-        return this.targets;
+        return this.targets ?? (this.targets = new VGElementCollection());
       }
 
       set
@@ -764,25 +702,15 @@ namespace VectorGraphics.Elements
     /// <value>A <see cref="Boolean"/> value. 
     /// <strong>True</strong> if mouse cursor should be visible during 
     /// presentation of this slide.</value>
-    [Category("Mouse")]
-    [Description("Defines the visibility of the mouse cursor during presentation.")]
-    public bool MouseCursorVisible
-    {
-      get { return this.mouseCursorVisible; }
-      set { this.mouseCursorVisible = value; }
-    }
+    [Category("Mouse"), Description("Defines the visibility of the mouse cursor during presentation.")]
+    public bool MouseCursorVisible { get; set; }
 
     /// <summary>
     /// Gets or sets the mouse cursors initial position.
     /// </summary>
     /// <value>A <see cref="Point"/> with the initial position of the mouse cursor.</value>
-    [Category("Mouse")]
-    [Description("The initial position of the mouse cursor, if it is visible.")]
-    public Point MouseInitialPosition
-    {
-      get { return this.mouseInitialPosition; }
-      set { this.mouseInitialPosition = value; }
-    }
+    [Category("Mouse"), Description("The initial position of the mouse cursor, if it is visible.")]
+    public Point MouseInitialPosition { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether to let the mouse cursor
@@ -790,13 +718,8 @@ namespace VectorGraphics.Elements
     /// </summary>
     /// <value>A <see cref="Boolean"/> indicating whether to let the mouse cursor
     /// at its current location during slide change</value>
-    [Category("Mouse")]
-    [Description("False if the position of the mouse cursor should not change on slide change.")]
-    public bool ForceMousePositionChange
-    {
-      get { return this.forceMousePositionChange; }
-      set { this.forceMousePositionChange = value; }
-    }
+    [Category("Mouse"), Description("False if the position of the mouse cursor should not change on slide change.")]
+    public bool ForceMousePositionChange { get; set; }
 
     #endregion //PROPERTIES
 
@@ -836,7 +759,7 @@ namespace VectorGraphics.Elements
         this.thumb = null;
       }
 
-      if (this.bgImage != null)
+      if (this.BackgroundImage != null)
       {
         // this.bgImage.Dispose();
       }

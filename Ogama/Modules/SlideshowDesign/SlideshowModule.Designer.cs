@@ -54,7 +54,7 @@
       this.imlSlideTypes = new System.Windows.Forms.ImageList(this.components);
       this.spcSlidesProperties = new System.Windows.Forms.SplitContainer();
       this.lsvDetails = new OgamaControls.ObjectListView();
-      this.colPosition = new OgamaControls.OLVColumn();
+      this.colPosition = ((OgamaControls.OLVColumn)(new OgamaControls.OLVColumn()));
       this.spcPropertiesPreview = new System.Windows.Forms.SplitContainer();
       this.grbSlideProperties = new System.Windows.Forms.GroupBox();
       this.prgSlides = new System.Windows.Forms.PropertyGrid();
@@ -70,6 +70,7 @@
       this.btnMixed = new System.Windows.Forms.ToolStripButton();
       this.btnInternet = new System.Windows.Forms.ToolStripButton();
       this.btnFlash = new System.Windows.Forms.ToolStripButton();
+      this.btnDesktop = new System.Windows.Forms.ToolStripButton();
       this.btnBlank = new System.Windows.Forms.ToolStripButton();
       this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
       this.btnSaveSlideshow = new System.Windows.Forms.ToolStripButton();
@@ -105,18 +106,22 @@
       this.toolStripContainer1.ContentPanel.SuspendLayout();
       this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
       this.toolStripContainer1.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.spcTreeDetail)).BeginInit();
       this.spcTreeDetail.Panel1.SuspendLayout();
       this.spcTreeDetail.Panel2.SuspendLayout();
       this.spcTreeDetail.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.spcToolbarTreeView)).BeginInit();
       this.spcToolbarTreeView.Panel1.SuspendLayout();
       this.spcToolbarTreeView.Panel2.SuspendLayout();
       this.spcToolbarTreeView.SuspendLayout();
       this.toolStrip1.SuspendLayout();
       this.cmuItemView.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.spcSlidesProperties)).BeginInit();
       this.spcSlidesProperties.Panel1.SuspendLayout();
       this.spcSlidesProperties.Panel2.SuspendLayout();
       this.spcSlidesProperties.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.lsvDetails)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.spcPropertiesPreview)).BeginInit();
       this.spcPropertiesPreview.Panel1.SuspendLayout();
       this.spcPropertiesPreview.Panel2.SuspendLayout();
       this.spcPropertiesPreview.SuspendLayout();
@@ -274,15 +279,15 @@
       this.trvSlideshow.SelectionMode = OgamaControls.TreeViewSelectionMode.MultiSelectSameLevel;
       this.trvSlideshow.Size = new System.Drawing.Size(287, 522);
       this.trvSlideshow.TabIndex = 0;
-      this.trvSlideshow.DrawNode += new System.Windows.Forms.DrawTreeNodeEventHandler(this.trvSlideshow_DrawNode);
       this.trvSlideshow.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.trvSlideshow_AfterLabelEdit);
-      this.trvSlideshow.DoubleClick += new System.EventHandler(this.trvSlideshow_DoubleClick);
-      this.trvSlideshow.DragDrop += new System.Windows.Forms.DragEventHandler(this.trvSlideshow_DragDrop);
-      this.trvSlideshow.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.trvSlideshow_AfterSelect);
-      this.trvSlideshow.DragEnter += new System.Windows.Forms.DragEventHandler(this.trvSlideshow_DragEnter);
-      this.trvSlideshow.KeyDown += new System.Windows.Forms.KeyEventHandler(this.trvSlideshow_KeyDown);
+      this.trvSlideshow.DrawNode += new System.Windows.Forms.DrawTreeNodeEventHandler(this.trvSlideshow_DrawNode);
       this.trvSlideshow.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.trvSlideshow_ItemDrag);
+      this.trvSlideshow.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.trvSlideshow_AfterSelect);
+      this.trvSlideshow.DragDrop += new System.Windows.Forms.DragEventHandler(this.trvSlideshow_DragDrop);
+      this.trvSlideshow.DragEnter += new System.Windows.Forms.DragEventHandler(this.trvSlideshow_DragEnter);
       this.trvSlideshow.DragOver += new System.Windows.Forms.DragEventHandler(this.trvSlideshow_DragOver);
+      this.trvSlideshow.DoubleClick += new System.EventHandler(this.trvSlideshow_DoubleClick);
+      this.trvSlideshow.KeyDown += new System.Windows.Forms.KeyEventHandler(this.trvSlideshow_KeyDown);
       // 
       // cmuItemView
       // 
@@ -319,7 +324,7 @@
       this.cmuDescription.Name = "cmuDescription";
       this.cmuDescription.Size = new System.Drawing.Size(524, 22);
       this.cmuDescription.Text = "Choose the following number of items from the shuffled section during presentatio" +
-          "n:";
+    "n:";
       // 
       // cmuCountCombo
       // 
@@ -376,6 +381,7 @@
       this.imlSlideTypes.Images.SetKeyName(10, "Rtf");
       this.imlSlideTypes.Images.SetKeyName(11, "Trial");
       this.imlSlideTypes.Images.SetKeyName(12, "Browser");
+      this.imlSlideTypes.Images.SetKeyName(13, "Desktop");
       // 
       // spcSlidesProperties
       // 
@@ -419,9 +425,9 @@
       this.lsvDetails.TabIndex = 0;
       this.lsvDetails.UseCompatibleStateImageBehavior = false;
       this.lsvDetails.View = System.Windows.Forms.View.Tile;
-      this.lsvDetails.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lsvDetails_KeyDown);
       this.lsvDetails.SelectedIndexChanged += new System.EventHandler(this.lsvDetails_SelectedIndexChanged);
       this.lsvDetails.DoubleClick += new System.EventHandler(this.lsvDetails_DoubleClick);
+      this.lsvDetails.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lsvDetails_KeyDown);
       // 
       // colPosition
       // 
@@ -528,6 +534,7 @@
             this.btnMixed,
             this.btnInternet,
             this.btnFlash,
+            this.btnDesktop,
             this.btnBlank,
             this.toolStripSeparator1,
             this.btnSaveSlideshow,
@@ -540,7 +547,7 @@
             this.btnHelp});
       this.tosStimuli.Location = global::Ogama.Properties.Settings.Default.SCRToolbarLocation;
       this.tosStimuli.Name = "tosStimuli";
-      this.tosStimuli.Size = new System.Drawing.Size(352, 25);
+      this.tosStimuli.Size = new System.Drawing.Size(375, 25);
       this.tosStimuli.TabIndex = 0;
       // 
       // btnInstruction
@@ -613,6 +620,16 @@
       this.btnFlash.Text = "Add flash movie slide ...";
       this.btnFlash.Click += new System.EventHandler(this.btnFlash_Click);
       // 
+      // btnDesktop
+      // 
+      this.btnDesktop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.btnDesktop.Image = global::Ogama.Properties.Resources.Desktop1;
+      this.btnDesktop.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.btnDesktop.Name = "btnDesktop";
+      this.btnDesktop.Size = new System.Drawing.Size(23, 22);
+      this.btnDesktop.Text = "Add desktop recording ...";
+      this.btnDesktop.Click += new System.EventHandler(this.btnDesktop_Click);
+      // 
       // btnBlank
       // 
       this.btnBlank.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -636,7 +653,7 @@
       this.btnSaveSlideshow.Name = "btnSaveSlideshow";
       this.btnSaveSlideshow.Size = new System.Drawing.Size(23, 22);
       this.btnSaveSlideshow.Text = "Save slideshow to experiment settings, update context panel and create stimulus f" +
-          "iles for each slide ...";
+    "iles for each slide ...";
       this.btnSaveSlideshow.Click += new System.EventHandler(this.btnSaveSlideshow_Click);
       // 
       // btnImport
@@ -753,8 +770,8 @@
       this.Logo = global::Ogama.Properties.Resources.Design;
       this.Name = "SlideshowModule";
       this.Text = "Slideshow design module";
-      this.Load += new System.EventHandler(this.frmStimuli_Load);
       this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmStimuli_FormClosing);
+      this.Load += new System.EventHandler(this.frmStimuli_Load);
       ((System.ComponentModel.ISupportInitialize)(this.bsoSubjects)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.bsoFKSubjectsTrials)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.ogamaDataSet)).EndInit();
@@ -778,20 +795,24 @@
       this.toolStripContainer1.PerformLayout();
       this.spcTreeDetail.Panel1.ResumeLayout(false);
       this.spcTreeDetail.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.spcTreeDetail)).EndInit();
       this.spcTreeDetail.ResumeLayout(false);
       this.spcToolbarTreeView.Panel1.ResumeLayout(false);
       this.spcToolbarTreeView.Panel1.PerformLayout();
       this.spcToolbarTreeView.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.spcToolbarTreeView)).EndInit();
       this.spcToolbarTreeView.ResumeLayout(false);
       this.toolStrip1.ResumeLayout(false);
       this.toolStrip1.PerformLayout();
       this.cmuItemView.ResumeLayout(false);
       this.spcSlidesProperties.Panel1.ResumeLayout(false);
       this.spcSlidesProperties.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.spcSlidesProperties)).EndInit();
       this.spcSlidesProperties.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.lsvDetails)).EndInit();
       this.spcPropertiesPreview.Panel1.ResumeLayout(false);
       this.spcPropertiesPreview.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.spcPropertiesPreview)).EndInit();
       this.spcPropertiesPreview.ResumeLayout(false);
       this.grbSlideProperties.ResumeLayout(false);
       this.grbPreview.ResumeLayout(false);
@@ -860,5 +881,6 @@
     private VectorGraphics.Canvas.Picture slidePreviewPicture;
     private System.Windows.Forms.ToolStripButton btnAddFolder;
     private System.Windows.Forms.ToolStripButton btnInternet;
+    private System.Windows.Forms.ToolStripButton btnDesktop;
   }
 }

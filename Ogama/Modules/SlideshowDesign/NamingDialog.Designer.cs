@@ -1,5 +1,7 @@
 namespace Ogama.Modules.SlideshowDesign
 {
+  using Ogama.Modules.Common.Controls;
+
   partial class NamingDialog
   {
     /// <summary>
@@ -34,7 +36,7 @@ namespace Ogama.Modules.SlideshowDesign
       this.btnOK = new System.Windows.Forms.Button();
       this.btnCancel = new System.Windows.Forms.Button();
       this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       this.SuspendLayout();
       // 
       // txbName
@@ -109,6 +111,6 @@ namespace Ogama.Modules.SlideshowDesign
     private System.Windows.Forms.Button btnCancel;
     private System.Windows.Forms.TextBox txbName;
     private System.Windows.Forms.ToolTip toolTip1;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
   }
 }

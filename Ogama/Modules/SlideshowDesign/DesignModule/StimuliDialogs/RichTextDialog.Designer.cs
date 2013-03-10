@@ -1,5 +1,9 @@
-﻿namespace Ogama.Modules.SlideshowDesign
+﻿namespace Ogama.Modules.SlideshowDesign.DesignModule.StimuliDialogs
 {
+  using Ogama.Modules.Common.Controls;
+
+  using VectorGraphics.Tools.CustomEventArgs;
+
   partial class RichTextDialog
   {
     /// <summary>
@@ -13,9 +17,9 @@
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      if (disposing && (components != null))
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -41,7 +45,7 @@
       this.pbcBorder = new OgamaControls.PenAndBrushControl();
       this.btnHelp = new System.Windows.Forms.Button();
       this.panel1 = new System.Windows.Forms.Panel();
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       this.splitContainer1.Panel1.SuspendLayout();
       this.splitContainer1.Panel2.SuspendLayout();
       this.splitContainer1.SuspendLayout();
@@ -198,7 +202,7 @@
       this.pbcBorder.NewTextAlignment = VectorGraphics.Elements.VGAlignment.None;
       this.pbcBorder.Size = new System.Drawing.Size(249, 106);
       this.pbcBorder.TabIndex = 0;
-      this.pbcBorder.ShapePropertiesChanged += new System.EventHandler<VectorGraphics.CustomEventArgs.ShapePropertiesChangedEventArgs>(this.pbcBorder_ShapePropertiesChanged);
+      this.pbcBorder.ShapePropertiesChanged += new System.EventHandler<ShapePropertiesChangedEventArgs>(this.pbcBorder_ShapePropertiesChanged);
       // 
       // btnHelp
       // 
@@ -265,7 +269,7 @@
 
     private System.Windows.Forms.Button btnOK;
     private System.Windows.Forms.Button btnCancel;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
     private System.Windows.Forms.SplitContainer splitContainer1;
     private System.Windows.Forms.Panel panel1;
     private System.Windows.Forms.Button btnHelp;

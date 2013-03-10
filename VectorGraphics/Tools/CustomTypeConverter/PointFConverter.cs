@@ -1,7 +1,7 @@
 ﻿// <copyright file="PointFConverter.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,18 +9,14 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
-namespace VectorGraphics.CustomTypeConverter
+namespace VectorGraphics.Tools.CustomTypeConverter
 {
   using System;
-  using System.Collections.Generic;
   using System.ComponentModel;
   using System.Drawing;
-  using System.Drawing.Drawing2D;
   using System.Globalization;
-  using System.IO;
-  using System.Text;
 
   /// <summary>
   /// Derived from <see cref="ExpandableObjectConverter"/>.
@@ -87,7 +83,7 @@ namespace VectorGraphics.CustomTypeConverter
       if (value is string)
       {
         string[] v = ((string)value).Split(new char[] { ';' });
-        return new PointF(Single.Parse(v[0]), Single.Parse(v[1]));
+        return new PointF(float.Parse(v[0]), float.Parse(v[1]));
       }
 
       return base.ConvertFrom(context, culture, value);

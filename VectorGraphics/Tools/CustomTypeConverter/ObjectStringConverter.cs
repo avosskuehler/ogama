@@ -1,7 +1,7 @@
 ﻿// <copyright file="ObjectStringConverter.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,9 +9,9 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
-namespace VectorGraphics.CustomTypeConverter
+namespace VectorGraphics.Tools.CustomTypeConverter
 {
   using System;
   using System.Collections.Generic;
@@ -350,14 +350,14 @@ namespace VectorGraphics.CustomTypeConverter
           if (startCap == LineCap.Custom)
           {
             string[] parts5 = parts[5].Trim().Split(new string[] { ":" }, StringSplitOptions.RemoveEmptyEntries);
-            AdjustableArrowCap customStartCap = new AdjustableArrowCap(Single.Parse(parts5[1]), Single.Parse(parts5[2]));
+            AdjustableArrowCap customStartCap = new AdjustableArrowCap(float.Parse(parts5[1]), float.Parse(parts5[2]));
             newValue.CustomStartCap = customStartCap;
           }
 
           if (endCap == LineCap.Custom)
           {
             string[] parts6 = parts[6].Trim().Split(new string[] { ":" }, StringSplitOptions.RemoveEmptyEntries);
-            AdjustableArrowCap customEndCap = new AdjustableArrowCap(Single.Parse(parts6[1]), Single.Parse(parts6[2]));
+            AdjustableArrowCap customEndCap = new AdjustableArrowCap(float.Parse(parts6[1]), float.Parse(parts6[2]));
             newValue.CustomEndCap = customEndCap;
           }
         }
@@ -503,7 +503,7 @@ namespace VectorGraphics.CustomTypeConverter
           style,
           unit,
           byte.Parse(properties[4]),
-          Boolean.Parse(properties[5]));
+          bool.Parse(properties[5]));
 
         return newFont;
       }

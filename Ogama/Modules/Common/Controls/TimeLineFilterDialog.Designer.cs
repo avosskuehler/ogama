@@ -1,4 +1,4 @@
-namespace Ogama.Modules.Common
+namespace Ogama.Modules.Common.Controls
 {
   partial class TimeLineFilterDialog
   {
@@ -13,9 +13,9 @@ namespace Ogama.Modules.Common
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      if (disposing && (components != null))
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -29,7 +29,7 @@ namespace Ogama.Modules.Common
     private void InitializeComponent()
     {
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TimeLineFilterDialog));
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       this.splitContainer1 = new System.Windows.Forms.SplitContainer();
       this.btnOK = new System.Windows.Forms.Button();
       this.chbSound = new System.Windows.Forms.CheckBox();

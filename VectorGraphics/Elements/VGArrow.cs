@@ -1,7 +1,7 @@
 ﻿// <copyright file="VGArrow.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,7 +9,7 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
 namespace VectorGraphics.Elements
 {
@@ -22,8 +22,8 @@ namespace VectorGraphics.Elements
   using System.Windows.Forms;
   using System.Xml.Serialization;
 
-  using VectorGraphics.CustomTypeConverter;
   using VectorGraphics.Tools;
+  using VectorGraphics.Tools.CustomTypeConverter;
 
   /// <summary>
   /// Inherited from <see cref="VGElement"/>. 
@@ -408,7 +408,7 @@ namespace VectorGraphics.Elements
     /// Gets or sets the font for the weighting values.
     /// </summary>
     /// <value>A <see cref="Font"/> for the weighting values.</value>
-    [XmlIgnoreAttribute()]
+    [XmlIgnoreAttribute]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     [Category("Appearance")]
     [Description("The Font for the weighting values.")]
@@ -487,7 +487,7 @@ namespace VectorGraphics.Elements
     /// Gets or sets the font color for the weighting values.
     /// </summary>
     /// <value>A <see cref="Color"/> for the weighting values.</value>
-    [XmlIgnoreAttribute()]
+    [XmlIgnoreAttribute]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     [Category("Appearance")]
     [Description("The font color for the weighting values.")]

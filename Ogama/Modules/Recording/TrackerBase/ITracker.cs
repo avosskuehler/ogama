@@ -1,7 +1,7 @@
 ﻿// <copyright file="ITracker.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,22 +9,25 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
-namespace Ogama.Modules.Recording
+namespace Ogama.Modules.Recording.TrackerBase
 {
-  using Ogama.Modules.Common;
+  using Ogama.Modules.Common.CustomEventArgs;
+  using Ogama.Modules.Recording.AleaInterface;
+  using Ogama.Modules.Recording.MouseOnlyInterface;
+  using Ogama.Modules.Recording.SMIInterface;
 
   /// <summary>
   /// This interface introduces a possibility to add new tracking hardware
   /// to the <see cref="RecordModule"/> <see cref="System.Windows.Forms.Form"/>.
   /// </summary>
   /// <remarks>For an example how to implement this interface have a look
-  /// at the four existing implementations <see cref="MouseOnly.MouseOnlyTracker"/>
+  /// at the four existing implementations <see cref="MouseOnlyTracker"/>
   /// for the tracking of mouse data and Tobii.TobiiTracker for
-  /// tracking with a Tobii (www.tobii.com) system, <see cref="Alea.AleaTracker"/> for
+  /// tracking with a Tobii (www.tobii.com) system, <see cref="AleaTracker"/> for
   /// tracking with a Alea Technologies (www.alea-technologies.com) system
-  /// and  <see cref="SMI.SMITracker"/> for
+  /// and  <see cref="SMITracker"/> for
   /// tracking with a SMI iViewX (www.smivision.com) system.
   /// Please also refer to the <see cref="RecordModule"/> source to add the
   /// new tracker to the user interface. Each tracker should have its own

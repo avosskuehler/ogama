@@ -1,7 +1,7 @@
 // <copyright file="MainForm.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,7 +9,7 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
 namespace Ogama.MainWindow
 {
@@ -28,7 +28,11 @@ namespace Ogama.MainWindow
   using System.Xml.Serialization;
 
   using Ogama.ExceptionHandling;
+  using Ogama.MainWindow.Dialogs;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.FormTemplates;
+  using Ogama.Modules.ImportExport.RawData;
+  using Ogama.Modules.Recording.TobiiInterface;
   using Ogama.Modules.SlideshowDesign;
   using Ogama.Properties;
   using OgamaControls;
@@ -88,6 +92,18 @@ namespace Ogama.MainWindow
 
       this.InitializeComponent();
       this.InitAccelerators();
+
+      try
+      {
+        TobiiTracker.StaticInitialize();
+      }
+      catch (Exception ex)
+      {
+        ExceptionMethods.ProcessErrorMessage(
+          "The tobii SDK could not be initialized, the tobii record interface will not be"
+          + "available. Please install apple bonjour, if this is a module load error."
+          + ex.Message);
+      }
     }
 
     #endregion //CONSTRUCTION
@@ -167,7 +183,7 @@ namespace Ogama.MainWindow
     /// Gets the <see cref="ContextPanel"/>.
     /// </summary>
     /// <value>The <see cref="ContextPanel"/> user control.</value>
-    public ContextPanel ContextPanel
+    public ContextPanel.ContextPanel ContextPanel
     {
       get { return this.contextPanel; }
     }
@@ -733,7 +749,7 @@ namespace Ogama.MainWindow
           case Tasks.Import:
             if (this.CreateDatabaseView())
             {
-              Modules.ImportExport.ImportRawData.Start(this);
+              ImportRawData.Start(this);
             }
 
             break;
@@ -824,4 +840,3 @@ namespace Ogama.MainWindow
     #endregion //HELPER
   }
 }
-

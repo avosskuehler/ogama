@@ -1,6 +1,8 @@
-namespace Ogama.Modules.SlideshowDesign
+namespace Ogama.Modules.SlideshowDesign.Import
 {
-	partial class FolderContentSlideImportDialog
+  using Ogama.Modules.Common.Controls;
+
+  partial class FolderContentSlideImportDialog
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -13,9 +15,9 @@ namespace Ogama.Modules.SlideshowDesign
 		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
 		protected override void Dispose(bool disposing)
 		{
-			if (disposing && (components != null))
+			if (disposing && (this.components != null))
 			{
-				components.Dispose();
+				this.components.Dispose();
 			}
 			base.Dispose(disposing);
 		}
@@ -30,7 +32,7 @@ namespace Ogama.Modules.SlideshowDesign
 		{
       this.components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FolderContentSlideImportDialog));
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       this.btnOK = new System.Windows.Forms.Button();
       this.btnCancel = new System.Windows.Forms.Button();
       this.cbbKeys = new System.Windows.Forms.ComboBox();
@@ -647,7 +649,7 @@ namespace Ogama.Modules.SlideshowDesign
 
 		#endregion
 
-		private Ogama.Modules.Common.DialogTop dialogTop1;
+		private DialogTop dialogTop1;
 		private System.Windows.Forms.Button btnOK;
     private System.Windows.Forms.Button btnCancel;
 		private OgamaControls.ColorButton clbBackground;

@@ -1,5 +1,7 @@
 ﻿namespace Ogama.Modules.Fixations
 {
+  using Ogama.Modules.Common.Controls;
+
   partial class ExportOptionsDialog
   {
     /// <summary>
@@ -32,7 +34,7 @@
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExportOptionsDialog));
       this.btnOK = new System.Windows.Forms.Button();
       this.btnCancel = new System.Windows.Forms.Button();
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       this.rdbFixations = new System.Windows.Forms.RadioButton();
       this.rdbSaccades = new System.Windows.Forms.RadioButton();
       this.chbGaze = new System.Windows.Forms.CheckBox();
@@ -423,7 +425,7 @@
 
     private System.Windows.Forms.Button btnOK;
     private System.Windows.Forms.Button btnCancel;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
     private System.Windows.Forms.RadioButton rdbFixations;
     private System.Windows.Forms.RadioButton rdbSaccades;
     private System.Windows.Forms.CheckBox chbGaze;

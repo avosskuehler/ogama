@@ -1,7 +1,7 @@
-﻿// <copyright file="HardwareTracker.cs" company="FU Berlin">
+// <copyright file="HardwareTracker.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,9 +9,9 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
-namespace Ogama.Modules.Recording
+namespace Ogama.Modules.Recording.TrackerBase
 {
   using System;
 
@@ -48,13 +48,23 @@ namespace Ogama.Modules.Recording
     SMI = 8,
 
     /// <summary>
-    /// The ITU GazeTracker.
+    /// The Gazegroup GazeTracker using the ogama client.
     /// </summary>
-    ITU = 16,
+    GazetrackerDirectClient = 16,
+
+    /// <summary>
+    /// The Gazegroup GazeTracker using an IP connection.
+    /// </summary>
+    GazetrackerIPClient = 32,
 
     /// <summary>
     /// Applied Science Laboratories (ASL) professional gaze tracker
     /// </summary>
     ASL = 64,
+
+    /// <summary>
+    /// Mirametrix S2 Tracker available
+    /// </summary>
+    Mirametrix = 128,
   }
 }

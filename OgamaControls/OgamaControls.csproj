@@ -1,4 +1,5 @@
-﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
     <ProductVersion>9.0.30729</ProductVersion>
@@ -25,8 +26,11 @@
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
-    <OldToolsVersion>2.0</OldToolsVersion>
+    <OldToolsVersion>3.5</OldToolsVersion>
     <SignAssembly>true</SignAssembly>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>..\Debug\</OutputPath>
@@ -76,20 +80,20 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\Debug\</OutputPath>
+    <OutputPath>..\Debug86\</OutputPath>
     <DefineConstants>DEBUG</DefineConstants>
     <BaseAddress>285212672</BaseAddress>
-    <DocumentationFile>..\Debug\OgamaControls.xml</DocumentationFile>
+    <DocumentationFile>..\Debug86\Docs\OgamaControls.xml</DocumentationFile>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <OutputPath>..\Release\</OutputPath>
+    <OutputPath>..\Release86\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <BaseAddress>285212672</BaseAddress>
-    <DocumentationFile>..\Release\OgamaControls.xml</DocumentationFile>
+    <DocumentationFile>..\Release86\Docs\OgamaControls.xml</DocumentationFile>
     <Optimize>true</Optimize>
     <DebugType>
     </DebugType>
@@ -98,7 +102,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug\</OutputPath>
+    <OutputPath>..\Debug64\</OutputPath>
     <DefineConstants>DEBUG</DefineConstants>
     <BaseAddress>285212672</BaseAddress>
     <FileAlignment>4096</FileAlignment>
@@ -115,18 +119,17 @@
     <FileAlignment>4096</FileAlignment>
     <PlatformTarget>x64</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>2</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GTHardware, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bf600965c04ba845, processorArchitecture=x86">
+    <Reference Include="DirectShowLib-2005, Version=2.1.0.0, Culture=neutral, PublicKeyToken=67e7b740cdfc2d3f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Managed\GTHardware.dll</HintPath>
+      <HintPath>..\Libs\Managed\DirectShowLib-2005.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
-    <Reference Include="System.Data">
-      <Name>System.Data</Name>
-    </Reference>
+    <Reference Include="System.Data" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing">
       <Name>System.Drawing</Name>
@@ -134,9 +137,7 @@
     <Reference Include="System.Windows.Forms">
       <Name>System.Windows.Forms</Name>
     </Reference>
-    <Reference Include="System.XML">
-      <Name>System.XML</Name>
-    </Reference>
+    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonControls\Buttons\ColorButton\ColorButton.cs">
@@ -249,7 +250,6 @@
     <Compile Include="DataGridViewControls\DataGridViewWithBackground\DataGridViewWithBackground.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Helpers\StringEventArgs.cs" />
     <Compile Include="IO\TriggerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -342,7 +342,6 @@
     <Compile Include="Dialogs\BrushStyleDlg.Designer.cs">
       <DependentUpon>BrushStyleDlg.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\DirectShowUtils.cs" />
     <Compile Include="Helpers\Win32.cs" />
     <Compile Include="Media\Player\AVPlayer.cs">
       <SubType>UserControl</SubType>
@@ -365,7 +364,6 @@
     </Compile>
     <Compile Include="Media\WebCam\DXCapture.cs" />
     <Compile Include="Media\WebCam\ReferenceClock.cs" />
-    <Compile Include="Media\WebCam\ThreadSafe.cs" />
     <Compile Include="Media\WebCam\Webcam.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -470,6 +468,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ThreadSafe.cs" />
     <EmbeddedResource Include="CommonControls\Buttons\ColorButton\ColorButton.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ColorButton.cs</DependentUpon>
@@ -552,9 +551,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DirectShow\DirectShowLib\DirectShowLib-2005.csproj">
-      <Project>{CE009BFA-5EF6-4153-B2A1-2FA79698A9AE}</Project>
-      <Name>DirectShowLib-2005</Name>
+    <ProjectReference Include="..\Gazetracker\GTHardware\GTHardware.csproj">
+      <Project>{4EF59290-9005-460E-8919-5003414BDC92}</Project>
+      <Name>GTHardware</Name>
     </ProjectReference>
     <ProjectReference Include="..\VectorGraphics\VectorGraphics.csproj">
       <Project>{8230AED9-33A2-42FD-BDF7-4F7E4EFA73DB}</Project>

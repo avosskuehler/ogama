@@ -1,5 +1,7 @@
 namespace OgamaControls.Dialogs
 {
+  using VectorGraphics.Tools.CustomEventArgs;
+
   partial class FontStyleDlg
   {
     /// <summary>
@@ -45,7 +47,7 @@ namespace OgamaControls.Dialogs
       this.fontSelectControl1.Padding = new System.Windows.Forms.Padding(5);
       this.fontSelectControl1.Size = new System.Drawing.Size(299, 269);
       this.fontSelectControl1.TabIndex = 0;
-      this.fontSelectControl1.FontStyleChanged += new System.EventHandler<VectorGraphics.CustomEventArgs.FontChangedEventArgs>(this.fontSelectControl1_FontStyleChanged);
+      this.fontSelectControl1.FontStyleChanged += new System.EventHandler<FontChangedEventArgs>(this.fontSelectControl1_FontStyleChanged);
       // 
       // btnCancel
       // 

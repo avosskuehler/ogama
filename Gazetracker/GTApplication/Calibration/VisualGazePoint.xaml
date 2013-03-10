@@ -1,0 +1,19 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	x:Class="GTApplication.CalibrationUI.VisualGazePoint"
+	x:Name="UserControl"
+	Width="50" Height="50">
+
+	<Grid x:Name="LayoutRoot">
+		<Ellipse Fill="#26686868" Stroke="#FF000000" x:Name="EllipseBackground"/>
+		<Ellipse Margin="12,12,12,12" Fill="#3F6A6A6A" Stroke="#FF000000" x:Name="EllipseCenter"/>
+		<Path HorizontalAlignment="Left" Margin="6,0,0,24" VerticalAlignment="Bottom" Width="15" Height="1" Fill="#5A3B3B3B" Stretch="Fill" Stroke="#FF000000" Data="M5,25 C10.875,25 16.75,25 22.625,25"/>
+		<Path HorizontalAlignment="Right" Margin="0,0,5.875,24" VerticalAlignment="Bottom" Width="15" Height="1" Fill="#5A3B3B3B" Stretch="Fill" Stroke="#FF000000" Data="M5,25 C10.875,25 16.75,25 22.625,25"/>
+		<Path Margin="24.625,6.125,24.375,0" VerticalAlignment="Top" Height="15" Fill="#5A3B3B3B" Stretch="Fill" Stroke="#FF000000" Data="M24.375,6.25 C24.375,10.785504 24.25,15.276018 24.25,19.75 24.166667,19.75 24.083333,19.75 24,19.75"/>
+		<Path Margin="24.625,0,24.375,6.25" Fill="#5A3B3B3B" Stretch="Fill" Stroke="#FF000000" Data="M24.375,6.25 C24.375,10.785504 24.25,15.276018 24.25,19.75 24.166667,19.75 24.083333,19.75 24,19.75" Height="15" VerticalAlignment="Bottom"/>
+	</Grid>
+</UserControl>

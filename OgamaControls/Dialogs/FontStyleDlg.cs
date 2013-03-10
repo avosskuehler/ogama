@@ -6,11 +6,12 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using VectorGraphics;
-using VectorGraphics.CustomEventArgs;
 using VectorGraphics.Elements;
 
 namespace OgamaControls.Dialogs
 {
+  using VectorGraphics.Tools.CustomEventArgs;
+
   /// <summary>
   /// Dialog for selecting font style.
   /// i.e. font face, size and style

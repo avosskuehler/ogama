@@ -1,4 +1,4 @@
-﻿namespace DmoOverlay
+﻿namespace DmoMixer
 {
   partial class RegisterDll
   {

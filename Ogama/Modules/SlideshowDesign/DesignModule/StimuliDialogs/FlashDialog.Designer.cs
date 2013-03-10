@@ -1,5 +1,7 @@
-﻿namespace Ogama.Modules.SlideshowDesign
+﻿namespace Ogama.Modules.SlideshowDesign.DesignModule.StimuliDialogs
 {
+  using Ogama.Modules.Common.Controls;
+
   partial class FlashDialog
   {
     /// <summary>
@@ -13,9 +15,9 @@
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      if (disposing && (components != null))
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -44,8 +46,9 @@
       this.axShockwaveFlash = new AxShockwaveFlashObjects.AxShockwaveFlash();
       this.btnHelp = new System.Windows.Forms.Button();
       this.panel1 = new System.Windows.Forms.Panel();
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
       this.splitContainer1.Panel1.SuspendLayout();
       this.splitContainer1.Panel2.SuspendLayout();
       this.splitContainer1.SuspendLayout();
@@ -111,15 +114,17 @@
       this.audioControl.ShouldPlay = false;
       this.audioControl.Size = new System.Drawing.Size(249, 72);
       this.audioControl.TabIndex = 29;
+      this.audioControl.Visible = false;
       // 
       // pbcBorder
       // 
-      this.pbcBorder.DrawAction = VectorGraphics.Elements.ShapeDrawAction.Edge;
+      this.pbcBorder.DrawAction = VectorGraphics.Elements.ShapeDrawAction.None;
       this.pbcBorder.Location = new System.Drawing.Point(226, 181);
       this.pbcBorder.Name = "pbcBorder";
       this.pbcBorder.NewFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.pbcBorder.NewFontColor = System.Drawing.SystemColors.GrayText;
       this.pbcBorder.NewName = "";
+      this.pbcBorder.NewTextAlignment = VectorGraphics.Elements.VGAlignment.None;
       this.pbcBorder.Size = new System.Drawing.Size(246, 85);
       this.pbcBorder.TabIndex = 28;
       // 
@@ -251,6 +256,7 @@
       this.Text = "Add new flash movie ...";
       this.splitContainer1.Panel1.ResumeLayout(false);
       this.splitContainer1.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
       this.splitContainer1.ResumeLayout(false);
       this.grpImageProperties.ResumeLayout(false);
       this.grpImageProperties.PerformLayout();
@@ -266,7 +272,7 @@
 
     private System.Windows.Forms.Button btnOK;
     private System.Windows.Forms.Button btnCancel;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
     private System.Windows.Forms.SplitContainer splitContainer1;
     private System.Windows.Forms.Panel panel1;
     private System.Windows.Forms.Button btnHelp;

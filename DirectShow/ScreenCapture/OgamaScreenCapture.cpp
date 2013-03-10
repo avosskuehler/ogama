@@ -447,6 +447,8 @@ HRESULT COgamaScreenCapturePin::CopyMonitorToBitmap(BYTE *pData, BITMAPINFO *pHe
 
 	// select new bitmap into memory DC
     hOldBitmap = (HBITMAP) SelectObject(m_MemoryDC, m_ScreenBitmap);
+	
+	// dwRop |= CAPTUREBLT;
 
     // bitblt screen DC to memory DC
     BitBlt(m_MemoryDC, 0, 0, m_ScreenWidth, m_ScreenHeight, m_ScreenDC, 0, 0, SRCCOPY);

@@ -1,5 +1,7 @@
-﻿namespace Ogama.Modules.Recording
+﻿namespace Ogama.Modules.Recording.Dialogs
 {
+  using Ogama.Modules.Common.Controls;
+
   partial class TriggerDialog
   {
     /// <summary>
@@ -13,9 +15,9 @@
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      if (disposing && (components != null))
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -34,7 +36,7 @@
       this.label1 = new System.Windows.Forms.Label();
       this.btnCancel = new System.Windows.Forms.Button();
       this.triggerControl = new OgamaControls.TriggerControl();
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       this.label2 = new System.Windows.Forms.Label();
       this.SuspendLayout();
       // 
@@ -138,7 +140,7 @@
     #endregion
 
     private System.Windows.Forms.Button btnOK;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
     private OgamaControls.TriggerControl triggerControl;
     private System.Windows.Forms.CheckBox chbOverrideSlideTrigger;
     private System.Windows.Forms.Label label1;

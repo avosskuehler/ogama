@@ -1,7 +1,9 @@
 using VectorGraphics;
-using VectorGraphics.CustomEventArgs;
+
 namespace OgamaControls.Dialogs
 {
+  using VectorGraphics.Tools.CustomEventArgs;
+
   partial class PenAndFontStyleDlg
   {
     /// <summary>
@@ -59,7 +61,7 @@ namespace OgamaControls.Dialogs
       this.penSelectControl.Padding = new System.Windows.Forms.Padding(3);
       this.penSelectControl.Size = new System.Drawing.Size(294, 254);
       this.penSelectControl.TabIndex = 1;
-      this.penSelectControl.PenChanged += new System.EventHandler<VectorGraphics.CustomEventArgs.PenChangedEventArgs>(this.penSelectControl_PenChanged);
+      this.penSelectControl.PenChanged += new System.EventHandler<PenChangedEventArgs>(this.penSelectControl_PenChanged);
       // 
       // fontSelectControl
       // 
@@ -69,7 +71,7 @@ namespace OgamaControls.Dialogs
       this.fontSelectControl.Padding = new System.Windows.Forms.Padding(3);
       this.fontSelectControl.Size = new System.Drawing.Size(294, 254);
       this.fontSelectControl.TabIndex = 0;
-      this.fontSelectControl.FontStyleChanged += new System.EventHandler<VectorGraphics.CustomEventArgs.FontChangedEventArgs>(this.fontSelectControl_FontStyleChanged);
+      this.fontSelectControl.FontStyleChanged += new System.EventHandler<FontChangedEventArgs>(this.fontSelectControl_FontStyleChanged);
       // 
       // btnCancel
       // 

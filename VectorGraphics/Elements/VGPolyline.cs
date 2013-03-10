@@ -1,7 +1,7 @@
 // <copyright file="VGPolyline.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,7 +9,7 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
 namespace VectorGraphics.Elements
 {
@@ -21,8 +21,9 @@ namespace VectorGraphics.Elements
   using System.Text;
   using System.Windows.Forms;
   using System.Xml.Serialization;
-  using VectorGraphics.CustomTypeConverter;
+
   using VectorGraphics.Tools;
+  using VectorGraphics.Tools.CustomTypeConverter;
 
   /// <summary>
   /// Inherited from <see cref="VGElement"/>. 
@@ -46,22 +47,6 @@ namespace VectorGraphics.Elements
     ///////////////////////////////////////////////////////////////////////////////
     #region FIELDS
 
-    /// <summary>
-    /// Graphics path that encapsulates the points
-    /// </summary>
-    private GraphicsPath path;
-
-    /// <summary>
-    /// Flag. True, if polyline is closed.
-    /// </summary>
-    private bool isClosed;
-
-    /// <summary>
-    /// Saves first point location, because a graphics path has at minimum
-    /// two points.
-    /// </summary>
-    private PointF firstPoint;
-
     #endregion //FIELDS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -77,7 +62,7 @@ namespace VectorGraphics.Elements
     public VGPolyline(ShapeDrawAction newShapeDrawAction, Pen newPen)
       : base(newShapeDrawAction, newPen)
     {
-      this.path = new GraphicsPath();
+      this.Path = new GraphicsPath();
     }
 
     /// <summary>
@@ -96,7 +81,7 @@ namespace VectorGraphics.Elements
       string newElementGroup)
       : base(newShapeDrawAction, newPen, newStyleGroup, newName, newElementGroup)
     {
-      this.path = new GraphicsPath();
+      this.Path = new GraphicsPath();
     }
 
     /// <summary>
@@ -119,7 +104,7 @@ namespace VectorGraphics.Elements
       string newElementGroup)
       : base(newShapeDrawAction, newPen, newFont, newFontColor, newStyleGroup, newName, newElementGroup)
     {
-      this.path = new GraphicsPath();
+      this.Path = new GraphicsPath();
     }
 
     /// <summary>
@@ -154,7 +139,7 @@ namespace VectorGraphics.Elements
       newElementGroup,
       null)
     {
-      this.path = new GraphicsPath();
+      this.Path = new GraphicsPath();
     }
 
     /// <summary>
@@ -166,14 +151,14 @@ namespace VectorGraphics.Elements
     public VGPolyline(ShapeDrawAction newShapeDrawAction, Pen newPen, PointF[] pts)
       : base(newShapeDrawAction, newPen)
     {
-      this.path = new GraphicsPath();
+      this.Path = new GraphicsPath();
       if (pts.Length >= 2)
       {
-        this.path.AddLines(pts);
+        this.Path.AddLines(pts);
       }
       else if (pts.Length == 1)
       {
-        this.firstPoint = pts[0];
+        this.FirstPt = pts[0];
       }
     }
 
@@ -195,14 +180,14 @@ namespace VectorGraphics.Elements
       string newElementGroup)
       : base(newShapeDrawAction, newPen, newStyleGroup, newName, newElementGroup)
     {
-      this.path = new GraphicsPath();
+      this.Path = new GraphicsPath();
       if (pts.Length >= 2)
       {
-        this.path.AddLines(pts);
+        this.Path.AddLines(pts);
       }
       else if (pts.Length == 1)
       {
-        this.firstPoint = pts[0];
+        this.FirstPt = pts[0];
       }
     }
 
@@ -233,8 +218,8 @@ namespace VectorGraphics.Elements
       newPolyline.ElementGroup,
       newPolyline.Sound)
     {
-      this.path = new GraphicsPath();
-      this.path = newPolyline.GetPathCopy();
+      this.Path = new GraphicsPath();
+      this.Path = newPolyline.GetPathCopy();
     }
 
     #endregion //CONSTRUCTION
@@ -249,14 +234,8 @@ namespace VectorGraphics.Elements
     /// of the polyline.
     /// </summary>
     /// <value>A <see cref="GraphicsPath"/> with the polyline points.</value>
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    [Browsable(false)]
-    [XmlIgnoreAttribute()]
-    public GraphicsPath Path
-    {
-      get { return this.path; }
-      set { this.path = value; }
-    }
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false), XmlIgnore]
+    public GraphicsPath Path { get; set; }
 
     /// <summary>
     /// Gets or sets the SerializableGraphicsPath.
@@ -267,8 +246,8 @@ namespace VectorGraphics.Elements
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public string SerializableGraphicsPath
     {
-      get { return ObjectStringConverter.GraphicsPathToString(this.path); }
-      set { this.path = ObjectStringConverter.StringToGraphicsPath(value); }
+      get { return ObjectStringConverter.GraphicsPathToString(this.Path); }
+      set { this.Path = ObjectStringConverter.StringToGraphicsPath(value); }
     }
 
     /// <summary>
@@ -277,23 +256,18 @@ namespace VectorGraphics.Elements
     /// <value>A <see cref="PointF"/> with the last point of the polyline.</value>
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     [Browsable(false)]
-    [XmlIgnoreAttribute()]
+    [XmlIgnoreAttribute]
     public PointF LastPt
     {
-      get { return this.path.GetLastPoint(); }
+      get { return this.Path.GetLastPoint(); }
     }
 
     /// <summary>
-    /// Gets first point in pointlist.
+    /// Gets or sets the first point in pointlist.
     /// </summary>
     /// <value>A <see cref="PointF"/> with the first point of the polyline.</value>
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    [Browsable(false)]
-    [XmlIgnoreAttribute()]
-    public PointF FirstPt
-    {
-      get { return this.firstPoint; }
-    }
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false), XmlIgnore]
+    public PointF FirstPt { get; set; }
 
     /// <summary>
     /// Gets or sets polylines bounding rectangle.
@@ -306,14 +280,7 @@ namespace VectorGraphics.Elements
     {
       get
       {
-        if (this.path != null)
-        {
-          return this.path.GetBounds();
-        }
-        else
-        {
-          return RectangleF.Empty;
-        }
+        return this.Path != null ? this.Path.GetBounds() : RectangleF.Empty;
       }
 
       set
@@ -332,23 +299,19 @@ namespace VectorGraphics.Elements
     {
       get
       {
-        RectangleF bounds = this.Bounds;
-        PointF center = new PointF(bounds.X + bounds.Width / 2, bounds.Y + bounds.Height / 2);
+        var bounds = this.Bounds;
+        var center = new PointF(bounds.X + bounds.Width / 2, bounds.Y + bounds.Height / 2);
         return center;
       }
     }
 
     /// <summary>
-    /// Gets a value indicating whether the polyline is closed.
+    /// Gets or sets a value indicating whether the polyline is closed.
     /// </summary>
     /// <value>A <see cref="Boolean"/> that is <strong>true</strong>,
     /// if the polyline is closed, otherwise <strong>false</strong>.</value>
-    [Browsable(false)]
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    public bool IsClosed
-    {
-      get { return this.isClosed; }
-    }
+    [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    public bool IsClosed { get; set; }
 
     #endregion //PROPERTIES
 
@@ -376,9 +339,9 @@ namespace VectorGraphics.Elements
     /// </summary>
     public void Clear()
     {
-      this.path.Reset();
-      this.firstPoint = PointF.Empty;
-      this.isClosed = false;
+      this.Path.Reset();
+      this.FirstPt = PointF.Empty;
+      this.IsClosed = false;
     }
 
     /// <summary>
@@ -387,22 +350,22 @@ namespace VectorGraphics.Elements
     /// <param name="pt">Point to add</param>
     public void AddPt(PointF pt)
     {
-      if (this.path.PointCount >= 1)
+      if (this.Path.PointCount >= 1)
       {
-        if (!this.SamePosition(pt, this.path.GetLastPoint()))
+        if (!this.SamePosition(pt, this.Path.GetLastPoint()))
         {
-          this.path.AddLine(this.LastPt, pt);
+          this.Path.AddLine(this.LastPt, pt);
         }
       }
-      else if (this.path.PointCount == 0)
+      else if (this.Path.PointCount == 0)
       {
-        if (!this.firstPoint.IsEmpty)
+        if (!this.FirstPt.IsEmpty)
         {
-          this.path.AddLine(this.firstPoint, pt);
+          this.Path.AddLine(this.FirstPt, pt);
         }
         else
         {
-          this.firstPoint = pt;
+          this.FirstPt = pt;
         }
       }
     }
@@ -415,7 +378,7 @@ namespace VectorGraphics.Elements
     {
       if (pts.Count > 1)
       {
-        this.path.AddLines(pts.ToArray());
+        this.Path.AddLines(pts.ToArray());
       }
       else if (pts.Count == 1)
       {
@@ -428,12 +391,12 @@ namespace VectorGraphics.Elements
     /// </summary>
     public void RemoveLastPt()
     {
-      if (this.path.PointCount >= 2)
+      if (this.Path.PointCount >= 2)
       {
-        PointF[] newPts = new PointF[this.path.PointCount - 1];
-        Array.Copy(this.path.PathPoints, 0, newPts, 0, this.path.PointCount - 1);
-        this.path.Reset();
-        this.path.AddLines(newPts);
+        PointF[] newPts = new PointF[this.Path.PointCount - 1];
+        Array.Copy(this.Path.PathPoints, 0, newPts, 0, this.Path.PointCount - 1);
+        this.Path.Reset();
+        this.Path.AddLines(newPts);
       }
     }
 
@@ -444,12 +407,12 @@ namespace VectorGraphics.Elements
     /// points to be removed.</param>
     public void RemoveLastPts(int number)
     {
-      if (this.path.PointCount > number + 1)
+      if (this.Path.PointCount > number + 1)
       {
-        PointF[] newPts = new PointF[this.path.PointCount - number];
-        Array.Copy(this.path.PathPoints, 0, newPts, 0, this.path.PointCount - number);
-        this.path.Reset();
-        this.path.AddLines(newPts);
+        PointF[] newPts = new PointF[this.Path.PointCount - number];
+        Array.Copy(this.Path.PathPoints, 0, newPts, 0, this.Path.PointCount - number);
+        this.Path.Reset();
+        this.Path.AddLines(newPts);
       }
     }
 
@@ -458,18 +421,18 @@ namespace VectorGraphics.Elements
     /// </summary>
     public void RemoveFirstPt()
     {
-      if (this.path.PointCount >= 2)
+      if (this.Path.PointCount >= 2)
       {
-        PointF[] newPts = new PointF[this.path.PointCount - 1];
-        Array.Copy(this.path.PathPoints, 1, newPts, 0, this.path.PointCount - 1);
-        this.path.Reset();
-        this.path.AddLines(newPts);
+        PointF[] newPts = new PointF[this.Path.PointCount - 1];
+        Array.Copy(this.Path.PathPoints, 1, newPts, 0, this.Path.PointCount - 1);
+        this.Path.Reset();
+        this.Path.AddLines(newPts);
       }
       else
       {
-        this.firstPoint = PointF.Empty;
-        this.isClosed = false;
-        this.path.Reset();
+        this.FirstPt = PointF.Empty;
+        this.IsClosed = false;
+        this.Path.Reset();
       }
     }
 
@@ -480,18 +443,18 @@ namespace VectorGraphics.Elements
     /// points to be removed.</param>
     public void RemoveFirstPts(int number)
     {
-      if (this.path.PointCount >= number)
+      if (this.Path.PointCount >= number)
       {
-        PointF[] newPts = new PointF[this.path.PointCount - number];
-        Array.Copy(this.path.PathPoints, number, newPts, 0, this.path.PointCount - number);
-        this.path.Reset();
-        this.path.AddLines(newPts);
+        PointF[] newPts = new PointF[this.Path.PointCount - number];
+        Array.Copy(this.Path.PathPoints, number, newPts, 0, this.Path.PointCount - number);
+        this.Path.Reset();
+        this.Path.AddLines(newPts);
       }
       else
       {
-        this.firstPoint = PointF.Empty;
-        this.isClosed = false;
-        this.path.Reset();
+        this.FirstPt = PointF.Empty;
+        this.IsClosed = false;
+        this.Path.Reset();
       }
     }
 
@@ -501,12 +464,12 @@ namespace VectorGraphics.Elements
     /// </summary>
     public void ClosePolyline()
     {
-      if (this.path.PathPoints[0] != this.path.PathPoints[this.path.PointCount - 1])
+      if (this.Path.PathPoints[0] != this.Path.PathPoints[this.Path.PointCount - 1])
       {
-        this.AddPt(this.path.PathPoints[0]);
+        this.AddPt(this.Path.PathPoints[0]);
       }
 
-      this.isClosed = true;
+      this.IsClosed = true;
     }
 
     /// <summary>
@@ -516,11 +479,11 @@ namespace VectorGraphics.Elements
     public float GetLength()
     {
       float length = 0f;
-      if (this.path.PointCount >= 2)
+      if (this.Path.PointCount >= 2)
       {
-        for (int i = 0; i < this.path.PointCount - 1; i++)
+        for (int i = 0; i < this.Path.PointCount - 1; i++)
         {
-          length += Distance(this.path.PathPoints[i], this.path.PathPoints[i + 1]);
+          length += Distance(this.Path.PathPoints[i], this.Path.PathPoints[i + 1]);
         }
       }
 
@@ -534,7 +497,7 @@ namespace VectorGraphics.Elements
     /// <remarks>Automatic calculation is disabled due to performance reasons.</remarks>
     public void RecalculateBounds()
     {
-      UpdateBoundsWithoutRaisingNewPosition(this.path.GetBounds());
+      UpdateBoundsWithoutRaisingNewPosition(this.Path.GetBounds());
     }
 
     #endregion //PUBLICMETHODS
@@ -551,7 +514,7 @@ namespace VectorGraphics.Elements
     /// <returns>Number of points in graphics path list.</returns>
     public override int GetPointCount()
     {
-      return this.path.PointCount;
+      return this.Path.PointCount;
     }
 
     /// <summary>
@@ -567,14 +530,14 @@ namespace VectorGraphics.Elements
         throw new ArgumentNullException("Graphics object should not be null.");
       }
 
-      if (this.path.PointCount > 1)
+      if (this.Path.PointCount > 1)
       {
-        GraphicsPath outlinePath = (GraphicsPath)this.path.Clone();
+        GraphicsPath outlinePath = (GraphicsPath)this.Path.Clone();
 
         // Draw path
         if ((ShapeDrawAction & ShapeDrawAction.Fill) == ShapeDrawAction.Fill)
         {
-          graphics.FillPath(Brush, this.path);
+          graphics.FillPath(Brush, this.Path);
         }
 
         if ((ShapeDrawAction & ShapeDrawAction.Edge) == ShapeDrawAction.Edge)
@@ -596,7 +559,7 @@ namespace VectorGraphics.Elements
     /// otherwise <strong>false</strong>.</returns>
     public override bool Contains(PointF pt)
     {
-      GraphicsPath bigPath = (GraphicsPath)this.path.Clone();
+      GraphicsPath bigPath = (GraphicsPath)this.Path.Clone();
       bigPath.FillMode = FillMode.Winding;
 
       if (this.IsInEditMode)
@@ -606,7 +569,7 @@ namespace VectorGraphics.Elements
         bigPath.Widen(handlePen);
       }
 
-      bigPath.AddPath(this.path, true);
+      bigPath.AddPath(this.Path, true);
 
       return bigPath.IsVisible(pt);
     }
@@ -621,13 +584,13 @@ namespace VectorGraphics.Elements
     /// <returns><strong>True</strong> if point is in region, otherwise <strong>false</strong></returns>
     public override bool Contains(PointF pt, int tolerance)
     {
-      GraphicsPath bigPath = (GraphicsPath)this.path.Clone();
+      GraphicsPath bigPath = (GraphicsPath)this.Path.Clone();
       bigPath.FillMode = FillMode.Winding;
 
       Pen tolerancePen = new Pen(Color.White, tolerance * 2);
       bigPath.Widen(tolerancePen);
 
-      bigPath.AddPath(this.path, true);
+      bigPath.AddPath(this.Path, true);
 
       return bigPath.IsVisible(pt);
     }
@@ -673,8 +636,8 @@ namespace VectorGraphics.Elements
           }
         }
 
-        this.path.Reset();
-        this.path.AddLines(currentPoints.ToArray());
+        this.Path.Reset();
+        this.Path.AddLines(currentPoints.ToArray());
 
         PointF newHandleLocation = new PointF(
           handle.Location.X - handleMovement.X,
@@ -699,9 +662,9 @@ namespace VectorGraphics.Elements
     public override List<PointF> GetPoints()
     {
       List<PointF> pointList = new List<PointF>();
-      if (this.path != null && this.path.PointCount > 0)
+      if (this.Path != null && this.Path.PointCount > 0)
       {
-        foreach (PointF pt in this.path.PathPoints)
+        foreach (PointF pt in this.Path.PathPoints)
         {
           pointList.Add(pt);
         }
@@ -718,9 +681,9 @@ namespace VectorGraphics.Elements
     public override void Reset()
     {
       base.Reset();
-      this.firstPoint = PointF.Empty;
-      this.isClosed = false;
-      this.path.Reset();
+      this.FirstPt = PointF.Empty;
+      this.IsClosed = false;
+      this.Path.Reset();
     }
 
     /// <summary>
@@ -781,9 +744,9 @@ namespace VectorGraphics.Elements
     /// <param name="translationMatrix">Translation Matrix</param>
     protected override void NewPosition(Matrix translationMatrix)
     {
-      if (this.path != null)
+      if (this.Path != null)
       {
-        this.path.Transform(translationMatrix);
+        this.Path.Transform(translationMatrix);
       }
     }
 
@@ -848,12 +811,12 @@ namespace VectorGraphics.Elements
     /// <returns>Exact copy of the polylines graphic path.</returns>
     private GraphicsPath GetPathCopy()
     {
-      if (this.path == null)
+      if (this.Path == null)
       {
-        this.path = new GraphicsPath();
+        this.Path = new GraphicsPath();
       }
 
-      return (GraphicsPath)this.path.Clone();
+      return (GraphicsPath)this.Path.Clone();
     }
 
     #endregion //METHODS

@@ -1,6 +1,7 @@
-﻿using System.Windows.Forms;
-namespace Ogama.Modules.Common
+﻿namespace Ogama.Modules.Common.FormTemplates
 {
+  using System.Windows.Forms;
+
   partial class FormWithInterface
   {
     /// <summary>
@@ -14,10 +15,10 @@ namespace Ogama.Modules.Common
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      CustomDispose();
-      if (disposing && (components != null))
+      this.CustomDispose();
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }

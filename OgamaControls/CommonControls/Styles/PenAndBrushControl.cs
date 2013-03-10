@@ -7,11 +7,12 @@ using System.Text;
 using System.Windows.Forms;
 using OgamaControls.Dialogs;
 using VectorGraphics;
-using VectorGraphics.CustomEventArgs;
 using VectorGraphics.Elements;
 
 namespace OgamaControls
 {
+  using VectorGraphics.Tools.CustomEventArgs;
+
   /// <summary>
   /// This <see cref="UserControl"/> can be used to define a <see cref="Pen"/>
   /// and <see cref="Brush"/> that are visualized in two preview 

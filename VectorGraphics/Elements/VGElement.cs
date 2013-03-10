@@ -1,7 +1,7 @@
 // <copyright file="VGElement.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,7 +9,7 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
 namespace VectorGraphics.Elements
 {
@@ -23,8 +23,8 @@ namespace VectorGraphics.Elements
   using System.Windows.Forms;
   using System.Xml.Serialization;
 
-  using VectorGraphics.CustomTypeConverter;
   using VectorGraphics.Tools;
+  using VectorGraphics.Tools.CustomTypeConverter;
 
   /// <summary>
   /// The abstract parent class for all vector graphic elements.
@@ -57,26 +57,6 @@ namespace VectorGraphics.Elements
     ///////////////////////////////////////////////////////////////////////////////
     #region CONSTANTS
 
-    /// <summary>
-    /// Defines a default aqua colored solid Pen
-    /// </summary>
-    private static Pen defaultPen;
-
-    /// <summary>
-    /// Defines a default aqua colored solid newBrush;
-    /// </summary>
-    private static Brush defaultBrush;
-
-    /// <summary>
-    /// Defines a default newFont;
-    /// </summary>
-    private static Font defaultFont;
-
-    /// <summary>
-    /// Defines a default aqua color for text
-    /// </summary>
-    private static Color defaultFontColor;
-
     #endregion //CONSTANTS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -88,21 +68,6 @@ namespace VectorGraphics.Elements
     /// Pen to draw edges.
     /// </summary>
     private Pen pen;
-
-    /// <summary>
-    /// Brush to draw text or fills.
-    /// </summary>
-    private Brush brush;
-
-    /// <summary>
-    /// Font that should be used for drawing text
-    /// </summary>
-    private Font font;
-
-    /// <summary>
-    /// Color that should be used for drawing text
-    /// </summary>
-    private Color fontColor;
 
     /// <summary>
     /// DrawAction: Edge, Fill or Both.
@@ -132,21 +97,6 @@ namespace VectorGraphics.Elements
     private string elementGroup;
 
     /// <summary>
-    /// Flag. True if shape has new properties.
-    /// </summary>
-    private bool isModified;
-
-    /// <summary>
-    /// Flag, if this object ist hidden by other objects
-    /// </summary>
-    private bool isVisible;
-
-    /// <summary>
-    /// Modifier Keys of parent picture.
-    /// </summary>
-    private Keys modifierKeys;
-
-    /// <summary>
     /// Coordinate of top left corner of the element.
     /// </summary>
     private PointF location;
@@ -155,32 +105,6 @@ namespace VectorGraphics.Elements
     /// Bounding width and height of the element.
     /// </summary>
     private SizeF size;
-
-    /// <summary>
-    /// List if grab handles for that graphic element
-    /// </summary>
-    private List<GrabHandle> grabHandles;
-
-    /// <summary>
-    /// Saves an <see cref="AudioFile"/> for the sound to play when this <see cref="VGElement"/>
-    /// is displayed.
-    /// </summary>
-    private AudioFile sound;
-
-    /// <summary>
-    /// Saves the alignment of the text.
-    /// </summary>
-    private VGAlignment textAlignment;
-
-    /// <summary>
-    /// Saves a (trial) time at which this element is first displayed.
-    /// </summary>
-    private long onsetTime;
-
-    /// <summary>
-    /// Saves a (trial) time at which this element has been updated for the last time.
-    /// </summary>
-    private long endTime;
 
     #endregion //FIELDS
 
@@ -194,10 +118,10 @@ namespace VectorGraphics.Elements
     /// </summary>
     static VGElement()
     {
-      VGElement.defaultPen = Pens.Aqua;
-      VGElement.defaultBrush = Brushes.Aqua;
-      VGElement.defaultFont = SystemFonts.DefaultFont;
-      VGElement.defaultFontColor = SystemColors.WindowText;
+      VGElement.DefaultPen = Pens.Aqua;
+      VGElement.DefaultBrush = Brushes.Aqua;
+      VGElement.DefaultFont = SystemFonts.DefaultFont;
+      VGElement.DefaultFontColor = SystemColors.WindowText;
     }
 
     /// <summary>
@@ -229,7 +153,7 @@ namespace VectorGraphics.Elements
     {
       this.InitStandards();
       this.pen = newPen == null ? null : (Pen)newPen.Clone();
-      this.brush = newBrush == null ? null : (Brush)newBrush.Clone();
+      this.Brush = newBrush == null ? null : (Brush)newBrush.Clone();
       this.Bounds = newBounds;
       this.styleGroup = newStyleGroup;
       this.name = newName;
@@ -264,17 +188,17 @@ namespace VectorGraphics.Elements
     {
       this.InitStandards();
       this.pen = newPen == null ? null : (Pen)newPen.Clone();
-      this.brush = newBrush == null ? null : (Brush)newBrush.Clone();
+      this.Brush = newBrush == null ? null : (Brush)newBrush.Clone();
       this.Bounds = newBounds;
       this.styleGroup = newStyleGroup;
       this.name = newName;
       this.elementGroup = newElementGroup;
-      this.font = newFont == null ? null : (Font)newFont.Clone();
-      this.fontColor = newFontColor;
+      this.Font = newFont == null ? null : (Font)newFont.Clone();
+      this.FontColor = newFontColor;
       this.shapeDrawAction = newShapeDrawAction;
       if (newSound != null)
       {
-        this.sound = (AudioFile)newSound.Clone();
+        this.Sound = (AudioFile)newSound.Clone();
       }
     }
 
@@ -301,7 +225,7 @@ namespace VectorGraphics.Elements
       this.InitStandards();
       this.shapeDrawAction = newShapeDrawAction;
       this.pen = newPen == null ? null : (Pen)newPen.Clone();
-      this.brush = newBrush == null ? null : (Brush)newBrush.Clone();
+      this.Brush = newBrush == null ? null : (Brush)newBrush.Clone();
     }
 
     /// <summary>
@@ -327,7 +251,7 @@ namespace VectorGraphics.Elements
       this.elementGroup = newElementGroup;
       this.shapeDrawAction = newShapeDrawAction;
       this.pen = newPen == null ? null : (Pen)newPen.Clone();
-      this.brush = newBrush == null ? null : (Brush)newBrush.Clone();
+      this.Brush = newBrush == null ? null : (Brush)newBrush.Clone();
     }
 
     /// <summary>
@@ -376,8 +300,8 @@ namespace VectorGraphics.Elements
       this.styleGroup = newStyleGroup;
       this.name = newName;
       this.elementGroup = newElementGroup;
-      this.font = newFont == null ? null : (Font)newFont.Clone();
-      this.fontColor = newFontColor;
+      this.Font = newFont == null ? null : (Font)newFont.Clone();
+      this.FontColor = newFontColor;
       this.shapeDrawAction = newShapeDrawAction;
       this.pen = newPen == null ? null : (Pen)newPen.Clone();
     }
@@ -391,7 +315,7 @@ namespace VectorGraphics.Elements
     {
       this.InitStandards();
       this.shapeDrawAction = newShapeDrawAction;
-      this.brush = newBrush == null ? null : (Brush)newBrush.Clone();
+      this.Brush = newBrush == null ? null : (Brush)newBrush.Clone();
     }
 
     /// <summary>
@@ -414,7 +338,7 @@ namespace VectorGraphics.Elements
       this.name = newName;
       this.elementGroup = newElementGroup;
       this.shapeDrawAction = newShapeDrawAction;
-      this.brush = newBrush == null ? null : (Brush)newBrush.Clone();
+      this.Brush = newBrush == null ? null : (Brush)newBrush.Clone();
     }
 
     /// <summary>
@@ -484,8 +408,8 @@ namespace VectorGraphics.Elements
       this.elementGroup = newElementGroup;
       this.shapeDrawAction = newShapeDrawAction;
       this.pen = newPen == null ? null : (Pen)newPen.Clone();
-      this.font = newFont == null ? null : (Font)newFont.Clone();
-      this.fontColor = newFontColor;
+      this.Font = newFont == null ? null : (Font)newFont.Clone();
+      this.FontColor = newFontColor;
 
       this.Bounds = newBounds;
     }
@@ -500,7 +424,7 @@ namespace VectorGraphics.Elements
     {
       this.InitStandards();
       this.shapeDrawAction = newShapeDrawAction;
-      this.brush = newBrush == null ? null : (Brush)newBrush.Clone();
+      this.Brush = newBrush == null ? null : (Brush)newBrush.Clone();
       this.Bounds = newBounds;
     }
 
@@ -526,7 +450,7 @@ namespace VectorGraphics.Elements
       this.name = newName;
       this.elementGroup = newElementGroup;
       this.shapeDrawAction = newShapeDrawAction;
-      this.brush = newBrush == null ? null : (Brush)newBrush.Clone();
+      this.Brush = newBrush == null ? null : (Brush)newBrush.Clone();
       this.Bounds = newBounds;
     }
 
@@ -556,9 +480,9 @@ namespace VectorGraphics.Elements
       this.name = newName;
       this.elementGroup = newElementGroup;
       this.shapeDrawAction = newShapeDrawAction;
-      this.brush = newBrush == null ? null : (Brush)newBrush.Clone();
-      this.font = newFont == null ? null : (Font)newFont.Clone();
-      this.fontColor = newFontColor;
+      this.Brush = newBrush == null ? null : (Brush)newBrush.Clone();
+      this.Font = newFont == null ? null : (Font)newFont.Clone();
+      this.FontColor = newFontColor;
       this.Bounds = newBounds;
     }
 
@@ -572,46 +496,26 @@ namespace VectorGraphics.Elements
     /// <summary>
     /// Gets a default aqua colored solid pen.
     /// </summary>
-    [XmlIgnoreAttribute()]
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    [Browsable(false)]
-    public static Pen DefaultPen
-    {
-      get { return defaultPen; }
-    }
+    [XmlIgnore, DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false)]
+    public static Pen DefaultPen { get; private set; }
 
     /// <summary>
     /// Gets a default aqua colored solid brush;
     /// </summary>
-    [XmlIgnoreAttribute()]
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    [Browsable(false)]
-    public static Brush DefaultBrush
-    {
-      get { return defaultBrush; }
-    }
+    [XmlIgnore, DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false)]
+    public static Brush DefaultBrush { get; private set; }
 
     /// <summary>
     /// Gets a default font;
     /// </summary>
-    [XmlIgnoreAttribute()]
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    [Browsable(false)]
-    public static Font DefaultFont
-    {
-      get { return defaultFont; }
-    }
+    [XmlIgnore, DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false)]
+    public static Font DefaultFont { get; private set; }
 
     /// <summary>
     /// Gets a default aqua color for text
     /// </summary>
-    [XmlIgnoreAttribute()]
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    [Browsable(false)]
-    public static Color DefaultFontColor
-    {
-      get { return defaultFontColor; }
-    }
+    [XmlIgnore, DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false)]
+    public static Color DefaultFontColor { get; private set; }
 
     /// <summary>
     /// Gets or sets name of graphic element
@@ -660,7 +564,7 @@ namespace VectorGraphics.Elements
     /// Gets or sets used newPen for graphic element
     /// </summary>
     /// <value>A <see cref="Pen"/> for drawing the bounds of this shape.</value>
-    [XmlIgnoreAttribute()]
+    [XmlIgnoreAttribute]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     [Category("Appearance")]
     [Description("The newPen to use for the bounding line.")]
@@ -688,16 +592,8 @@ namespace VectorGraphics.Elements
     /// Gets or sets used newBrush for graphic element
     /// </summary>
     /// <value>A <see cref="Brush"/> for drawing the interior of this shape.</value>
-    [XmlIgnoreAttribute()]
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    [Category("Appearance")]
-    [Description("The newBrush to use for the interior of this shape if it is in fill mode.")]
-    [TypeConverter(typeof(BrushConverter))]
-    public Brush Brush
-    {
-      get { return this.brush; }
-      set { this.brush = value; }
-    }
+    [XmlIgnore, DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Category("Appearance"), Description("The newBrush to use for the interior of this shape if it is in fill mode."), TypeConverter(typeof(BrushConverter))]
+    public Brush Brush { get; set; }
 
     /// <summary>
     /// Gets or sets the SerializedBrush.
@@ -708,23 +604,16 @@ namespace VectorGraphics.Elements
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public string SerializedBrush
     {
-      get { return ObjectStringConverter.BrushToString(this.brush); }
-      set { this.brush = ObjectStringConverter.StringToBrush(value); }
+      get { return ObjectStringConverter.BrushToString(this.Brush); }
+      set { this.Brush = ObjectStringConverter.StringToBrush(value); }
     }
 
     /// <summary>
     /// Gets or sets newFont of text element
     /// </summary>
     /// <value>A <see cref="Font"/> for drawing the name of this shape.</value>
-    [XmlIgnoreAttribute()]
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-    [Category("Appearance")]
-    [Description("The newFont to use for the text to draw the name of this shape.")]
-    public Font Font
-    {
-      get { return this.font; }
-      set { this.font = value; }
-    }
+    [XmlIgnore, DesignerSerializationVisibility(DesignerSerializationVisibility.Visible), Category("Appearance"), Description("The newFont to use for the text to draw the name of this shape.")]
+    public Font Font { get; set; }
 
     /// <summary>
     /// Gets or sets the SerializedFont.
@@ -737,10 +626,10 @@ namespace VectorGraphics.Elements
     {
       get
       {
-        if (this.font != null)
+        if (this.Font != null)
         {
           TypeConverter fontConverter = TypeDescriptor.GetConverter(typeof(Font));
-          return fontConverter.ConvertToInvariantString(this.font);
+          return fontConverter.ConvertToInvariantString(this.Font);
         }
         else
         {
@@ -757,23 +646,23 @@ namespace VectorGraphics.Elements
             if (value.Contains("#"))
             {
               // Ogama Version 0.X format
-              this.font = ObjectStringConverter.StringToFontOld(value);
+              this.Font = ObjectStringConverter.StringToFontOld(value);
             }
             else
             {
               TypeConverter fontConverter = TypeDescriptor.GetConverter(typeof(Font));
-              this.font = (Font)fontConverter.ConvertFromInvariantString(value);
+              this.Font = (Font)fontConverter.ConvertFromInvariantString(value);
             }
           }
           catch (ArgumentException)
           {
             // Paranoia check for very old versions.
-            this.font = new Font(SystemFonts.MenuFont.FontFamily, 28f, GraphicsUnit.Point);
+            this.Font = new Font(SystemFonts.MenuFont.FontFamily, 28f, GraphicsUnit.Point);
           }
         }
         else
         {
-          this.font = null;
+          this.Font = null;
         }
       }
     }
@@ -782,15 +671,8 @@ namespace VectorGraphics.Elements
     /// Gets or sets used color for the graphic elements newFont.
     /// </summary>
     /// <value>A <see cref="Color"/> for the newFont of this shape.</value>
-    [XmlIgnoreAttribute()]
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-    [Category("Appearance")]
-    [Description("The newFont color to use for the text to draw the name of this shape.")]
-    public Color FontColor
-    {
-      get { return this.fontColor; }
-      set { this.fontColor = value; }
-    }
+    [XmlIgnore, DesignerSerializationVisibility(DesignerSerializationVisibility.Visible), Category("Appearance"), Description("The newFont color to use for the text to draw the name of this shape.")]
+    public Color FontColor { get; set; }
 
     /// <summary>
     /// Gets or sets the SerializedFontColor.
@@ -802,8 +684,8 @@ namespace VectorGraphics.Elements
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public string SerializedFontColor
     {
-      get { return ObjectStringConverter.ColorToHtmlAlpha(this.fontColor); }
-      set { this.fontColor = ObjectStringConverter.HtmlAlphaToColor(value); }
+      get { return ObjectStringConverter.ColorToHtmlAlpha(this.FontColor); }
+      set { this.FontColor = ObjectStringConverter.HtmlAlphaToColor(value); }
     }
 
     /// <summary>
@@ -828,7 +710,7 @@ namespace VectorGraphics.Elements
     /// <strong>false</strong>.</value>
     [Browsable(false)]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    [XmlIgnoreAttribute()]
+    [XmlIgnoreAttribute]
     public bool IsInEditMode
     {
       get
@@ -855,7 +737,7 @@ namespace VectorGraphics.Elements
     /// <summary>
     /// Gets the bounding rectangle including the newPen width.
     /// </summary>
-    [XmlIgnoreAttribute()]
+    [XmlIgnoreAttribute]
     [Browsable(false)]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public virtual RectangleF BigBounds
@@ -885,7 +767,7 @@ namespace VectorGraphics.Elements
     /// of this shape.</value>
     [Browsable(false)]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    [XmlIgnoreAttribute()]
+    [XmlIgnoreAttribute]
     public virtual RectangleF Bounds
     {
       get
@@ -915,7 +797,7 @@ namespace VectorGraphics.Elements
     /// <value>A <see cref="PointF"/> with the center of this shape.</value>
     [Browsable(false)]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    [XmlIgnoreAttribute()]
+    [XmlIgnoreAttribute]
     public virtual PointF Center
     {
       get
@@ -973,7 +855,7 @@ namespace VectorGraphics.Elements
     /// <value>A <see cref="Single"/> with the height of this shape.</value>
     [Browsable(false)]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    [XmlIgnoreAttribute()]
+    [XmlIgnoreAttribute]
     public float Height
     {
       get { return this.size.Height; }
@@ -985,7 +867,7 @@ namespace VectorGraphics.Elements
     /// <value>A <see cref="Single"/> with the width of this shape.</value>
     [Browsable(false)]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    [XmlIgnoreAttribute()]
+    [XmlIgnoreAttribute]
     public float Width
     {
       get { return this.size.Width; }
@@ -1026,14 +908,8 @@ namespace VectorGraphics.Elements
     /// <value>A <see cref="bool"/> which is <strong>true</strong>,
     /// if shape should be be drawn during OnPaint, otherwise
     /// <strong>false</strong>.</value>
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-    [Category("Appearance")]
-    [Description("Flag. True, if shape should be visible.")]
-    public bool Visible
-    {
-      get { return this.isVisible; }
-      set { this.isVisible = value; }
-    }
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible), Category("Appearance"), Description("Flag. True, if shape should be visible.")]
+    public bool Visible { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether the object is modified.
@@ -1042,14 +918,8 @@ namespace VectorGraphics.Elements
     /// <value>A <see cref="Boolean"/> which is <strong>true</strong>,
     /// if shapes properties were modified since last serialization, otherwise
     /// <strong>false</strong>.</value>
-    [Browsable(false)]
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    [XmlIgnoreAttribute()]
-    public bool Modified
-    {
-      get { return this.isModified; }
-      set { this.isModified = value; }
-    }
+    [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), XmlIgnore]
+    public bool Modified { get; set; }
 
     /// <summary>
     /// Gets or sets the list of grab handles for the current graphic element.
@@ -1057,28 +927,16 @@ namespace VectorGraphics.Elements
     /// </summary>
     /// <value>A <see cref="List{GrabHandle}"/> with the
     /// adornments of this shape.</value>
-    [Browsable(false)]
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    [XmlIgnoreAttribute()]
-    public List<GrabHandle> GrabHandles
-    {
-      get { return this.grabHandles; }
-      set { this.grabHandles = value; }
-    }
+    [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), XmlIgnore]
+    public List<GrabHandle> GrabHandles { get; set; }
 
     /// <summary>
     /// Gets or sets the modifier keys from the parent picture.
     /// </summary>
     /// <value>A <see cref="Keys"/> with the modifier keys of the
     /// owning picture.</value>
-    [XmlIgnoreAttribute()]
-    [Browsable(false)]
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    public Keys ModifierKeys
-    {
-      get { return this.modifierKeys; }
-      set { this.modifierKeys = value; }
-    }
+    [XmlIgnore, Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    public Keys ModifierKeys { get; set; }
 
     /// <summary>
     /// Gets or sets the modifier keys from the parent picture.
@@ -1089,54 +947,34 @@ namespace VectorGraphics.Elements
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public string SerializableModifierKeys
     {
-      get { return this.modifierKeys.ToString(); }
-      set { this.modifierKeys = (Keys)Enum.Parse(typeof(Keys), value); }
+      get { return this.ModifierKeys.ToString(); }
+      set { this.ModifierKeys = (Keys)Enum.Parse(typeof(Keys), value); }
     }
 
     /// <summary>
     /// Gets or sets an <see cref="AudioFile"/> for the sound
     /// to be played when this <see cref="VGElement"/> is displayed.
     /// </summary>
-    [Browsable(false)]
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    public AudioFile Sound
-    {
-      get { return this.sound; }
-      set { this.sound = value; }
-    }
+    [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    public AudioFile Sound { get; set; }
 
     /// <summary>
     /// Gets or sets the <see cref="VGAlignment"/> for the name position.
     /// </summary>
-    [Browsable(false)]
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    public VGAlignment TextAlignment
-    {
-      get { return this.textAlignment; }
-      set { this.textAlignment = value; }
-    }
+    [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    public VGAlignment TextAlignment { get; set; }
 
     /// <summary>
     /// Gets or sets a (trial) time at which this element is first displayed.
     /// </summary>
-    [Browsable(false)]
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    public long OnsetTime
-    {
-      get { return this.onsetTime; }
-      set { this.onsetTime = value; }
-    }
+    [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    public long OnsetTime { get; set; }
 
     /// <summary>
     /// Gets or sets a (trial) time at which this element has been updated for the last time.
     /// </summary>
-    [Browsable(false)]
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    public long EndTime
-    {
-      get { return this.endTime; }
-      set { this.endTime = value; }
-    }
+    [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    public long EndTime { get; set; }
 
     #endregion //PROPERTIES
 
@@ -1229,21 +1067,21 @@ namespace VectorGraphics.Elements
           poly.RecalculateBounds();
         }
 
-        SizeF sizeText = graphics.MeasureString(this.name, this.font);
+        SizeF sizeText = graphics.MeasureString(this.name, this.Font);
         PointF textTopLeft = new PointF();
         StringFormat sf = new StringFormat();
-        switch (this.textAlignment)
+        switch (this.TextAlignment)
         {
           case VGAlignment.Bottom:
             textTopLeft.X = this.Center.X - sizeText.Width / 2;
             textTopLeft.Y = this.Bounds.Bottom;
-            graphics.DrawString(this.name, this.font, new SolidBrush(this.fontColor), textTopLeft, sf);
+            graphics.DrawString(this.name, this.Font, new SolidBrush(this.FontColor), textTopLeft, sf);
             break;
           case VGAlignment.None:
           case VGAlignment.Center:
             textTopLeft.X = this.Center.X - sizeText.Width / 2;
             textTopLeft.Y = this.Center.Y - sizeText.Height / 2;
-            graphics.DrawString(this.name, this.font, new SolidBrush(this.fontColor), textTopLeft, sf);
+            graphics.DrawString(this.name, this.Font, new SolidBrush(this.FontColor), textTopLeft, sf);
             break;
           case VGAlignment.Left:
             textTopLeft.X = this.Location.X;
@@ -1254,8 +1092,8 @@ namespace VectorGraphics.Elements
             graphics.RotateTransform(180);
             graphics.DrawString(
               this.name,
-              this.font,
-              new SolidBrush(this.fontColor),
+              this.Font,
+              new SolidBrush(this.FontColor),
               -textTopLeft.X,
               -textTopLeft.Y,
               sf);
@@ -1265,12 +1103,12 @@ namespace VectorGraphics.Elements
             textTopLeft.X = this.Bounds.Right;
             textTopLeft.Y = this.Center.Y - sizeText.Width / 2;
             sf.FormatFlags = StringFormatFlags.DirectionVertical;
-            graphics.DrawString(this.name, this.font, new SolidBrush(this.fontColor), textTopLeft, sf);
+            graphics.DrawString(this.name, this.Font, new SolidBrush(this.FontColor), textTopLeft, sf);
             break;
           case VGAlignment.Top:
             textTopLeft.X = this.Center.X - sizeText.Width / 2;
             textTopLeft.Y = this.Location.Y - sizeText.Height;
-            graphics.DrawString(this.name, this.font, new SolidBrush(this.fontColor), textTopLeft, sf);
+            graphics.DrawString(this.name, this.Font, new SolidBrush(this.FontColor), textTopLeft, sf);
             break;
         }
       }
@@ -1361,7 +1199,7 @@ namespace VectorGraphics.Elements
       }
 
       this.AddGrabHandles();
-      this.isModified = true;
+      this.Modified = true;
     }
 
     /// <summary>
@@ -1432,18 +1270,18 @@ namespace VectorGraphics.Elements
     /// </summary>
     public virtual void Reset()
     {
-      this.textAlignment = VGAlignment.Center;
-      this.brush = defaultBrush;
-      this.font = defaultFont;
-      this.fontColor = defaultFontColor;
-      this.isVisible = true;
-      this.grabHandles.Clear();
+      this.TextAlignment = VGAlignment.Center;
+      this.Brush = DefaultBrush;
+      this.Font = DefaultFont;
+      this.FontColor = DefaultFontColor;
+      this.Visible = true;
+      this.GrabHandles.Clear();
       this.styleGroup = VGStyleGroup.None;
       this.isInEditMode = false;
-      this.isModified = false;
+      this.Modified = false;
       this.location = new PointF(0, 0);
-      this.modifierKeys = Keys.None;
-      this.pen = defaultPen;
+      this.ModifierKeys = Keys.None;
+      this.pen = DefaultPen;
       this.shapeDrawAction = ShapeDrawAction.Edge;
       this.size = new SizeF(100, 100);
       this.name = string.Empty;
@@ -1512,7 +1350,10 @@ namespace VectorGraphics.Elements
     /// </summary>
     public virtual void Dispose()
     {
-      this.grabHandles.Clear();
+      if (this.GrabHandles != null)
+      {
+        this.GrabHandles.Clear();
+      }
     }
 
     /// <summary>
@@ -1576,9 +1417,9 @@ namespace VectorGraphics.Elements
     /// </summary>
     protected void RemoveGrabHandles()
     {
-      if (this.grabHandles != null)
+      if (this.GrabHandles != null)
       {
-        this.grabHandles.Clear();
+        this.GrabHandles.Clear();
       }
     }
 
@@ -1789,18 +1630,18 @@ namespace VectorGraphics.Elements
     /// </summary>
     private void InitStandards()
     {
-      this.textAlignment = VGAlignment.Center;
-      this.isVisible = true;
-      this.brush = (Brush)VGElement.defaultBrush.Clone();
-      this.pen = (Pen)VGElement.defaultPen.Clone();
-      this.font = (Font)VGElement.defaultFont.Clone();
-      this.fontColor = VGElement.defaultFontColor;
+      this.TextAlignment = VGAlignment.Center;
+      this.Visible = true;
+      this.Brush = (Brush)VGElement.DefaultBrush.Clone();
+      this.pen = (Pen)VGElement.DefaultPen.Clone();
+      this.Font = (Font)VGElement.DefaultFont.Clone();
+      this.FontColor = VGElement.DefaultFontColor;
       this.styleGroup = VGStyleGroup.None;
       this.name = string.Empty;
-      this.grabHandles = new List<GrabHandle>();
+      this.GrabHandles = new List<GrabHandle>();
       this.location = PointF.Empty;
       this.size = SizeF.Empty;
-      this.sound = new AudioFile();
+      this.Sound = new AudioFile();
     }
 
     #endregion //METHODS

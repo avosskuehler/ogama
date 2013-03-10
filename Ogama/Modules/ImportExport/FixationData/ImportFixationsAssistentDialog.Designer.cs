@@ -1,5 +1,7 @@
-﻿namespace Ogama.Modules.ImportExport
+﻿namespace Ogama.Modules.ImportExport.FixationData
 {
+  using Ogama.Modules.Common.Controls;
+
   partial class ImportFixationsAssistentDialog
   {
     /// <summary>
@@ -13,9 +15,9 @@
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-      if (disposing && (components != null))
+      if (disposing && (this.components != null))
       {
-        components.Dispose();
+        this.components.Dispose();
       }
       base.Dispose(disposing);
     }
@@ -33,7 +35,7 @@
       this.btnOK = new System.Windows.Forms.Button();
       this.btnCancel = new System.Windows.Forms.Button();
       this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-      this.dialogTop1 = new Ogama.Modules.Common.DialogTop();
+      this.dialogTop1 = new DialogTop();
       this.splitContainer2 = new System.Windows.Forms.SplitContainer();
       this.splitContainer1.Panel1.SuspendLayout();
       this.splitContainer1.Panel2.SuspendLayout();
@@ -163,7 +165,7 @@
     private System.Windows.Forms.Button btnOK;
     private System.Windows.Forms.Button btnCancel;
     private System.Windows.Forms.SplitContainer splitContainer1;
-    private Ogama.Modules.Common.DialogTop dialogTop1;
+    private DialogTop dialogTop1;
     private System.Windows.Forms.SplitContainer splitContainer2;
   }
 }

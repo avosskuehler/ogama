@@ -1,7 +1,7 @@
 // <copyright file="AttentionMapModule.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2010 Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -9,7 +9,7 @@
 // **************************************************************
 // </copyright>
 // <author>Adrian Voßkühler</author>
-// <email>adrian.vosskuehler@fu-berlin.de</email>
+// <email>adrian@ogama.net</email>
 
 namespace Ogama.Modules.AttentionMap
 {
@@ -27,6 +27,10 @@ namespace Ogama.Modules.AttentionMap
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
   using Ogama.Modules.Common;
+  using Ogama.Modules.Common.FormTemplates;
+  using Ogama.Modules.Common.Tools;
+  using Ogama.Modules.Common.TrialEvents;
+  using Ogama.Modules.Common.Types;
   using Ogama.Properties;
   using OgamaControls;
 
@@ -342,6 +346,12 @@ namespace Ogama.Modules.AttentionMap
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnSeekNextSlide_Click(object sender, EventArgs e)
     {
+      // Skip if there is no data
+      if (this.CurrentTrial == null)
+      {
+        return;
+      }
+
       this.trialTimeLine.HighlightNextSlide(true);
       int slideIndex = this.trialTimeLine.HighlightedSlideIndex;
       this.LoadSlide(this.CurrentTrial[slideIndex], ActiveXMode.BehindPicture);
@@ -356,6 +366,12 @@ namespace Ogama.Modules.AttentionMap
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnSeekPreviousSlide_Click(object sender, EventArgs e)
     {
+      // Skip if there is no data
+      if (this.CurrentTrial == null)
+      {
+        return;
+      }
+
       this.trialTimeLine.HighlightNextSlide(false);
       int slideIndex = this.trialTimeLine.HighlightedSlideIndex;
       this.LoadSlide(this.CurrentTrial[slideIndex], ActiveXMode.BehindPicture);
@@ -717,6 +733,7 @@ namespace Ogama.Modules.AttentionMap
         // Check if any subject is selected
         if (this.trvSubjects.Nodes.Count == 0)
         {
+          this.btnStartCalculation.Enabled = true;
           return;
         }
 
