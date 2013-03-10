@@ -46,6 +46,7 @@
       this.label10 = new System.Windows.Forms.Label();
       this.txbName = new System.Windows.Forms.TextBox();
       this.label5 = new System.Windows.Forms.Label();
+      this.pcbHelpNaming = new System.Windows.Forms.PictureBox();
       this.tbpTiming = new System.Windows.Forms.TabPage();
       this.pcbHelpTiming = new System.Windows.Forms.PictureBox();
       this.btnRemoveCondition = new System.Windows.Forms.Button();
@@ -60,6 +61,7 @@
       this.tbpBowseDepth = new System.Windows.Forms.TabPage();
       this.pcbHelpBrowseDepth = new System.Windows.Forms.PictureBox();
       this.label2 = new System.Windows.Forms.Label();
+      this.label4 = new System.Windows.Forms.Label();
       this.label1 = new System.Windows.Forms.Label();
       this.nudBrowseDepth = new System.Windows.Forms.NumericUpDown();
       this.grpPreview = new System.Windows.Forms.GroupBox();
@@ -67,21 +69,23 @@
       this.btnHelp = new System.Windows.Forms.Button();
       this.panel1 = new System.Windows.Forms.Panel();
       this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-      this.dialogTop1 = new DialogTop();
-      this.label4 = new System.Windows.Forms.Label();
-      this.pcbHelpNaming = new System.Windows.Forms.PictureBox();
+      this.dialogTop1 = new Ogama.Modules.Common.Controls.DialogTop();
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
       this.splitContainer1.Panel1.SuspendLayout();
       this.splitContainer1.Panel2.SuspendLayout();
       this.splitContainer1.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
       this.splitContainer2.Panel1.SuspendLayout();
       this.splitContainer2.Panel2.SuspendLayout();
       this.splitContainer2.SuspendLayout();
       this.grpImageProperties.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
       this.splitContainer3.Panel1.SuspendLayout();
       this.splitContainer3.Panel2.SuspendLayout();
       this.splitContainer3.SuspendLayout();
       this.tabControl1.SuspendLayout();
       this.tbpName.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.pcbHelpNaming)).BeginInit();
       this.tbpTiming.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.pcbHelpTiming)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.nudTime)).BeginInit();
@@ -90,7 +94,6 @@
       ((System.ComponentModel.ISupportInitialize)(this.nudBrowseDepth)).BeginInit();
       this.grpPreview.SuspendLayout();
       this.panel1.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.pcbHelpNaming)).BeginInit();
       this.SuspendLayout();
       // 
       // btnOK
@@ -285,6 +288,18 @@
       this.label5.TabIndex = 0;
       this.label5.Text = "Slidename";
       // 
+      // pcbHelpNaming
+      // 
+      this.pcbHelpNaming.Cursor = System.Windows.Forms.Cursors.Help;
+      this.pcbHelpNaming.Image = global::Ogama.Properties.Resources.HelpBmp;
+      this.pcbHelpNaming.Location = new System.Drawing.Point(250, 5);
+      this.pcbHelpNaming.Name = "pcbHelpNaming";
+      this.pcbHelpNaming.Size = new System.Drawing.Size(16, 16);
+      this.pcbHelpNaming.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+      this.pcbHelpNaming.TabIndex = 14;
+      this.pcbHelpNaming.TabStop = false;
+      this.pcbHelpNaming.Click += new System.EventHandler(this.pcbHelpNaming_Click);
+      // 
       // tbpTiming
       // 
       this.tbpTiming.Controls.Add(this.pcbHelpTiming);
@@ -470,6 +485,14 @@
       this.label2.TabIndex = 9;
       this.label2.Text = "Browse depth";
       // 
+      // label4
+      // 
+      this.label4.Location = new System.Drawing.Point(6, 64);
+      this.label4.Name = "label4";
+      this.label4.Size = new System.Drawing.Size(260, 105);
+      this.label4.TabIndex = 9;
+      this.label4.Text = resources.GetString("label4.Text");
+      // 
       // label1
       // 
       this.label1.AutoSize = true;
@@ -483,7 +506,7 @@
       // 
       this.nudBrowseDepth.Location = new System.Drawing.Point(87, 28);
       this.nudBrowseDepth.Maximum = new decimal(new int[] {
-            20,
+            5000,
             0,
             0,
             0});
@@ -550,26 +573,6 @@
       this.dialogTop1.Size = new System.Drawing.Size(667, 60);
       this.dialogTop1.TabIndex = 22;
       // 
-      // label4
-      // 
-      this.label4.Location = new System.Drawing.Point(6, 64);
-      this.label4.Name = "label4";
-      this.label4.Size = new System.Drawing.Size(260, 105);
-      this.label4.TabIndex = 9;
-      this.label4.Text = resources.GetString("label4.Text");
-      // 
-      // pcbHelpNaming
-      // 
-      this.pcbHelpNaming.Cursor = System.Windows.Forms.Cursors.Help;
-      this.pcbHelpNaming.Image = global::Ogama.Properties.Resources.HelpBmp;
-      this.pcbHelpNaming.Location = new System.Drawing.Point(250, 5);
-      this.pcbHelpNaming.Name = "pcbHelpNaming";
-      this.pcbHelpNaming.Size = new System.Drawing.Size(16, 16);
-      this.pcbHelpNaming.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-      this.pcbHelpNaming.TabIndex = 14;
-      this.pcbHelpNaming.TabStop = false;
-      this.pcbHelpNaming.Click += new System.EventHandler(this.pcbHelpNaming_Click);
-      // 
       // BrowserDialog
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -589,18 +592,22 @@
       this.Text = "Add new browser slide ...";
       this.splitContainer1.Panel1.ResumeLayout(false);
       this.splitContainer1.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
       this.splitContainer1.ResumeLayout(false);
       this.splitContainer2.Panel1.ResumeLayout(false);
       this.splitContainer2.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
       this.splitContainer2.ResumeLayout(false);
       this.grpImageProperties.ResumeLayout(false);
       this.grpImageProperties.PerformLayout();
       this.splitContainer3.Panel1.ResumeLayout(false);
       this.splitContainer3.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
       this.splitContainer3.ResumeLayout(false);
       this.tabControl1.ResumeLayout(false);
       this.tbpName.ResumeLayout(false);
       this.tbpName.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.pcbHelpNaming)).EndInit();
       this.tbpTiming.ResumeLayout(false);
       this.tbpTiming.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.pcbHelpTiming)).EndInit();
@@ -611,7 +618,6 @@
       ((System.ComponentModel.ISupportInitialize)(this.nudBrowseDepth)).EndInit();
       this.grpPreview.ResumeLayout(false);
       this.panel1.ResumeLayout(false);
-      ((System.ComponentModel.ISupportInitialize)(this.pcbHelpNaming)).EndInit();
       this.ResumeLayout(false);
 
     }
