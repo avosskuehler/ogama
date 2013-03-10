@@ -30,7 +30,7 @@ namespace Ogama.Modules.Recording
     /// <summary>
     /// A <see cref="List{RawData}"/> with the new data.
     /// </summary>
-    public List<RawData> RawDataList;
+    public RawData[] RawDataList;
 
     /// <summary>
     /// A <see cref="OgamaDataSet.RawdataDataTable"/> of the current subject
@@ -46,7 +46,7 @@ namespace Ogama.Modules.Recording
     /// where to write the data to.</param>
     public DataToTable(List<RawData> newRawData, OgamaDataSet.RawdataDataTable newRawDataTable)
     {
-      this.RawDataList = newRawData;
+      this.RawDataList = newRawData.ToArray();
       this.RawDataTable = newRawDataTable;
     }
   }

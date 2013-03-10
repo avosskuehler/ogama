@@ -87,20 +87,20 @@ namespace GTOgamaClient.Controls
     /// </summary>
     private bool isRendering;
 
-    /// <summary>
-    ///   The mem load.
-    /// </summary>
-    private double memLoad;
+    ///// <summary>
+    /////   The mem load.
+    ///// </summary>
+    //private double memLoad;
 
     /// <summary>
     ///   The pc cpu.
     /// </summary>
     private PerformanceCounter cpuPerformance;
 
-    /// <summary>
-    ///   The pc mem.
-    /// </summary>
-    private PerformanceCounter memoryPerformance;
+    ///// <summary>
+    /////   The pc mem.
+    ///// </summary>
+    //private PerformanceCounter memoryPerformance;
 
     /// <summary>
     ///   The process.

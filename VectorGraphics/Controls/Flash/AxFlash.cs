@@ -1,4 +1,4 @@
-// <copyright file="AxFlash.cs" company="FU Berlin">
+﻿// <copyright file="AxFlash.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
 // Copyright (C) 2012 Adrian Voßkühler  
