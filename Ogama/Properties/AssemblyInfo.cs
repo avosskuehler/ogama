@@ -23,7 +23,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Freie Universität Berlin")]
 [assembly: AssemblyProduct("OGAMA")]
-[assembly: AssemblyCopyright("© Dr. Adrian Voßkühler 2012")]
+[assembly: AssemblyCopyright("© Dr. Adrian Voßkühler 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -41,5 +41,5 @@ using System.Runtime.InteropServices;
 //      Minor Version 
 //      Build Number
 //      Revision
-[assembly: AssemblyVersion("4.2.*")]
-[assembly: AssemblyFileVersion("4.2")]
+[assembly: AssemblyVersion("4.3.*")]
+[assembly: AssemblyFileVersion("4.3")]

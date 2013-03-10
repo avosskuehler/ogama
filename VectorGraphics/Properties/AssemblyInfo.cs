@@ -23,7 +23,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Freie Universität Berlin")]
 [assembly: AssemblyProduct("OGAMA")]
-[assembly: AssemblyCopyright("Copyright © Dr. Adrian Voßkühler 2012")]
+[assembly: AssemblyCopyright("Copyright © Dr. Adrian Voßkühler 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -44,5 +44,5 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("4.2.*")]
-[assembly: AssemblyFileVersion("4.2")]
+[assembly: AssemblyVersion("4.3.*")]
+[assembly: AssemblyFileVersion("4.3")]

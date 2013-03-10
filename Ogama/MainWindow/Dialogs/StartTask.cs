@@ -85,14 +85,79 @@ namespace Ogama.MainWindow.Dialogs
 
     /// <summary>
     /// The <see cref="Control.Click"/> event handler for
-    /// the <see cref="Button"/> <see cref="btnAnalyze"/>
-    /// Sets task to <see cref="Tasks.Analyze"/> and closes this dialog.
+    /// the <see cref="Button"/> <see cref="btnReplay"/>
+    /// Sets task to <see cref="Tasks.Replay"/> and closes this dialog.
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void btnAnalyze_Click(object sender, EventArgs e)
+    private void btnReplay_Click(object sender, EventArgs e)
     {
-      this.task = Tasks.Analyze;
+      this.task = Tasks.Replay;
+      this.CloseDialog();
+    }
+
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler for
+    /// the <see cref="Button"/> <see cref="btnAttentionMap"/>
+    /// Sets task to <see cref="Tasks.AttentionMaps"/> and closes this dialog.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void btnAttentionMap_Click(object sender, EventArgs e)
+    {
+      this.task = Tasks.AttentionMaps;
+      this.CloseDialog();
+    }
+
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler for
+    /// the <see cref="Button"/> <see cref="btnScanpaths"/>
+    /// Sets task to <see cref="Tasks.Scanpaths"/> and closes this dialog.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void btnScanpaths_Click(object sender, EventArgs e)
+    {
+      this.task = Tasks.Scanpaths;
+      this.CloseDialog();
+    }
+
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler for
+    /// the <see cref="Button"/> <see cref="btnFixations"/>
+    /// Sets task to <see cref="Tasks.Fixations"/> and closes this dialog.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void btnFixations_Click(object sender, EventArgs e)
+    {
+      this.task = Tasks.Fixations;
+      this.CloseDialog();
+    }
+
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler for
+    /// the <see cref="Button"/> <see cref="btnAOI"/>
+    /// Sets task to <see cref="Tasks.AOIs"/> and closes this dialog.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void btnAOI_Click(object sender, EventArgs e)
+    {
+      this.task = Tasks.AOIs;
+      this.CloseDialog();
+    }
+
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler for
+    /// the <see cref="Button"/> <see cref="btnStatistics"/>
+    /// Sets task to <see cref="Tasks.Statistics"/> and closes this dialog.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void btnStatistics_Click(object sender, EventArgs e)
+    {
+      this.task = Tasks.Statistics;
       this.CloseDialog();
     }
 

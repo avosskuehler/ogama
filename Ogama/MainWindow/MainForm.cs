@@ -14,28 +14,17 @@
 namespace Ogama.MainWindow
 {
   using System;
-  using System.Collections;
   using System.Collections.Generic;
   using System.ComponentModel;
-  using System.Data;
-  using System.Data.SqlClient;
-  using System.Drawing;
-  using System.Globalization;
   using System.IO;
-  using System.Text;
-  using System.Threading;
   using System.Windows.Forms;
-  using System.Xml.Serialization;
 
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow.Dialogs;
-  using Ogama.Modules.Common;
   using Ogama.Modules.Common.FormTemplates;
   using Ogama.Modules.ImportExport.RawData;
   using Ogama.Modules.Recording.TobiiInterface;
-  using Ogama.Modules.SlideshowDesign;
   using Ogama.Properties;
-  using OgamaControls;
 
   /// <summary>
   /// The main frame <see cref="Form"/>. Is the MDI Parent. 
@@ -498,9 +487,9 @@ namespace Ogama.MainWindow
 
     /// <summary>
     /// This method shows an dialog to ask for saving settings,
-    /// and returns true if succesfull and false, if saving has been cancelled.
+    /// and returns true if succesful and false, if saving has been cancelled.
     /// </summary>
-    /// <returns><strong>True</strong> if succesfull and <strong>false</strong>,
+    /// <returns><strong>True</strong> if succesful and <strong>false</strong>,
     /// if saving has been cancelled.</returns>
     private bool SaveAndDisposeDocument()
     {
@@ -538,7 +527,7 @@ namespace Ogama.MainWindow
     /// Checks for existing document and starts open file dialog if there is none
     /// Otherwise throw error and return false.
     /// </summary>
-    /// <returns><strong>True</strong>, if openening was successful,
+    /// <returns><strong>True</strong>, if opening was successful,
     /// otherwise <strong>false</strong>.</returns>
     private bool OpenExperiment()
     {
@@ -553,19 +542,15 @@ namespace Ogama.MainWindow
 
           return true;
         }
-        else
-        {
-          this.ChangeMenuItems(false);
-          return false;
-        }
-      }
-      else
-      {
-        string message = "Couldn't open experiment, because there is one already open." +
-          Environment.NewLine + "Please close it using File -> Close Experiment.";
-        ExceptionMethods.ProcessErrorMessage(message);
+
+        this.ChangeMenuItems(false);
         return false;
       }
+
+      string message = "Couldn't open experiment, because there is one already open." +
+                       Environment.NewLine + "Please close it using File -> Close Experiment.";
+      ExceptionMethods.ProcessErrorMessage(message);
+      return false;
     }
 
     /// <summary>
@@ -732,19 +717,34 @@ namespace Ogama.MainWindow
 
     /// <summary>
     /// Shows a dialog with a question which task should be started.
-    /// Referring to the answer the corresponding module is startet.
+    /// Referring to the answer the corresponding module is started.
     /// </summary>
     /// <returns><strong>True</strong> if selection was done, otherwise
     /// user clicked cancel and return <strong>false</strong>.</returns>
     private bool ShowTaskChooseDialog()
     {
-      StartTask objWhatToDo = new StartTask();
+      var objWhatToDo = new StartTask();
       if (objWhatToDo.ShowDialog() == DialogResult.OK)
       {
         switch (objWhatToDo.Task)
         {
-          case Tasks.Analyze:
+          case Tasks.Replay:
             this.CreateReplayView();
+            break;
+          case Tasks.Scanpaths:
+            this.CreateScanpathsView();
+            break;
+          case Tasks.Statistics:
+            this.CreateStatisticsView();
+            break;
+          case Tasks.AOIs:
+            this.CreateAOIView();
+            break;
+          case Tasks.AttentionMaps:
+            this.CreateAttentionMapView();
+            break;
+          case Tasks.Fixations:
+            this.CreateFixationsView();
             break;
           case Tasks.Import:
             if (this.CreateDatabaseView())

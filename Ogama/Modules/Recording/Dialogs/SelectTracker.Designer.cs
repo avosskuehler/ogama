@@ -32,7 +32,6 @@
     {
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SelectTracker));
       this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-      this.dialogTop1 = new Ogama.Modules.Common.Controls.DialogTop();
       this.splitContainer2 = new System.Windows.Forms.SplitContainer();
       this.tabControl1 = new System.Windows.Forms.TabControl();
       this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -64,6 +63,7 @@
       this.chbGazetrackerIPClient = new System.Windows.Forms.CheckBox();
       this.btnCancel = new System.Windows.Forms.Button();
       this.btnOK = new System.Windows.Forms.Button();
+      this.dialogTop1 = new Ogama.Modules.Common.Controls.DialogTop();
       ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
       this.splitContainer1.Panel1.SuspendLayout();
       this.splitContainer1.Panel2.SuspendLayout();
@@ -109,23 +109,10 @@
       // splitContainer1.Panel2
       // 
       this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-      this.splitContainer1.Size = new System.Drawing.Size(601, 593);
+      this.splitContainer1.Size = new System.Drawing.Size(601, 631);
       this.splitContainer1.SplitterDistance = 60;
       this.splitContainer1.SplitterWidth = 1;
       this.splitContainer1.TabIndex = 6;
-      // 
-      // dialogTop1
-      // 
-      this.dialogTop1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
-      this.dialogTop1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("dialogTop1.BackgroundImage")));
-      this.dialogTop1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-      this.dialogTop1.Description = "Check the tracking devices that should be available in the recording module.";
-      this.dialogTop1.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.dialogTop1.Location = new System.Drawing.Point(0, 0);
-      this.dialogTop1.Logo = global::Ogama.Properties.Resources.Record;
-      this.dialogTop1.Name = "dialogTop1";
-      this.dialogTop1.Size = new System.Drawing.Size(601, 60);
-      this.dialogTop1.TabIndex = 0;
       // 
       // splitContainer2
       // 
@@ -145,8 +132,8 @@
       this.splitContainer2.Panel2.Controls.Add(this.btnCancel);
       this.splitContainer2.Panel2.Controls.Add(this.btnOK);
       this.splitContainer2.Panel2MinSize = 35;
-      this.splitContainer2.Size = new System.Drawing.Size(601, 532);
-      this.splitContainer2.SplitterDistance = 493;
+      this.splitContainer2.Size = new System.Drawing.Size(601, 570);
+      this.splitContainer2.SplitterDistance = 531;
       this.splitContainer2.TabIndex = 15;
       // 
       // tabControl1
@@ -157,7 +144,7 @@
       this.tabControl1.Location = new System.Drawing.Point(0, 0);
       this.tabControl1.Name = "tabControl1";
       this.tabControl1.SelectedIndex = 0;
-      this.tabControl1.Size = new System.Drawing.Size(601, 493);
+      this.tabControl1.Size = new System.Drawing.Size(601, 531);
       this.tabControl1.TabIndex = 14;
       // 
       // tabPage1
@@ -182,7 +169,7 @@
       this.tabPage1.Location = new System.Drawing.Point(4, 22);
       this.tabPage1.Name = "tabPage1";
       this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPage1.Size = new System.Drawing.Size(593, 467);
+      this.tabPage1.Size = new System.Drawing.Size(593, 505);
       this.tabPage1.TabIndex = 0;
       this.tabPage1.Text = "Commercial Tracker";
       this.tabPage1.UseVisualStyleBackColor = true;
@@ -206,7 +193,7 @@
       this.chbMirametrix.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
       this.chbMirametrix.Location = new System.Drawing.Point(166, 324);
       this.chbMirametrix.Name = "chbMirametrix";
-      this.chbMirametrix.Size = new System.Drawing.Size(330, 86);
+      this.chbMirametrix.Size = new System.Drawing.Size(370, 86);
       this.chbMirametrix.TabIndex = 20;
       this.chbMirametrix.Text = "Mirametrix S2 Eye Tracker";
       this.chbMirametrix.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -215,7 +202,7 @@
       // pcbEyeTech
       // 
       this.pcbEyeTech.Image = global::Ogama.Properties.Resources.EyeTechLogo_S;
-      this.pcbEyeTech.Location = new System.Drawing.Point(8, 397);
+      this.pcbEyeTech.Location = new System.Drawing.Point(8, 432);
       this.pcbEyeTech.Name = "pcbEyeTech";
       this.pcbEyeTech.Size = new System.Drawing.Size(129, 50);
       this.pcbEyeTech.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -226,12 +213,12 @@
       // 
       this.chbEyeTech.Image = global::Ogama.Properties.Resources.Eyetech_tracker;
       this.chbEyeTech.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.chbEyeTech.Location = new System.Drawing.Point(166, 407);
+      this.chbEyeTech.Location = new System.Drawing.Point(166, 414);
       this.chbEyeTech.Name = "chbEyeTech";
-      this.chbEyeTech.Size = new System.Drawing.Size(370, 40);
+      this.chbEyeTech.Size = new System.Drawing.Size(370, 81);
       this.chbEyeTech.TabIndex = 24;
       this.chbEyeTech.Text = "The EyeTech eyetracker. Quick Glance software needs to be installed and running t" +
-          "o function properly.";
+    "o function properly.";
       this.chbEyeTech.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       // 
       // pcbMirametrix
@@ -266,7 +253,7 @@
       this.chbAsl.Size = new System.Drawing.Size(370, 72);
       this.chbAsl.TabIndex = 18;
       this.chbAsl.Text = "If you have purchased and installed an ASL model 5000 Eye Tracker control unit (m" +
-          "aterials and softwares)";
+    "aterials and softwares)";
       this.chbAsl.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.chbAsl.UseVisualStyleBackColor = true;
       // 
@@ -338,7 +325,7 @@
       this.chbAlea.Size = new System.Drawing.Size(370, 82);
       this.chbAlea.TabIndex = 1;
       this.chbAlea.Text = "The alea technologies IG-30 Pro Eyetracking-System. Needs to have Intelligaze Sof" +
-          "tware 1.2 to be installed.\r\n";
+    "tware 1.2 to be installed.\r\n";
       this.chbAlea.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.chbAlea.UseVisualStyleBackColor = true;
       // 
@@ -384,7 +371,7 @@
       this.chbSMI.Size = new System.Drawing.Size(285, 43);
       this.chbSMI.TabIndex = 1;
       this.chbSMI.Text = "The SMI iViewX interface. Needs to have a iViewX software running on the same or " +
-          "a connected computer.\r\n";
+    "a connected computer.\r\n";
       this.chbSMI.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.chbSMI.UseVisualStyleBackColor = true;
       // 
@@ -482,7 +469,7 @@
       this.chbMouseOnly.Size = new System.Drawing.Size(341, 57);
       this.chbMouseOnly.TabIndex = 1;
       this.chbMouseOnly.Text = "This recorder captures just mouse movements and events. This can be used when gaz" +
-          "e tracking is not needed.\r\n\r\n";
+    "e tracking is not needed.\r\n\r\n";
       this.chbMouseOnly.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.chbMouseOnly.UseVisualStyleBackColor = true;
       // 
@@ -520,13 +507,26 @@
       this.btnOK.Text = "OK";
       this.btnOK.UseVisualStyleBackColor = true;
       // 
+      // dialogTop1
+      // 
+      this.dialogTop1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
+      this.dialogTop1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("dialogTop1.BackgroundImage")));
+      this.dialogTop1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+      this.dialogTop1.Description = "Check the tracking devices that should be available in the recording module.";
+      this.dialogTop1.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.dialogTop1.Location = new System.Drawing.Point(0, 0);
+      this.dialogTop1.Logo = global::Ogama.Properties.Resources.Record;
+      this.dialogTop1.Name = "dialogTop1";
+      this.dialogTop1.Size = new System.Drawing.Size(601, 60);
+      this.dialogTop1.TabIndex = 0;
+      // 
       // SelectTracker
       // 
       this.AcceptButton = this.btnOK;
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.CancelButton = this.btnCancel;
-      this.ClientSize = new System.Drawing.Size(601, 593);
+      this.ClientSize = new System.Drawing.Size(601, 631);
       this.Controls.Add(this.splitContainer1);
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

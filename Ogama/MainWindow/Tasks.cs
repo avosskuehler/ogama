@@ -17,6 +17,12 @@ namespace Ogama.MainWindow
   using System.Collections.Generic;
   using System.Text;
 
+  using Ogama.Modules.AOI;
+  using Ogama.Modules.AttentionMap;
+  using Ogama.Modules.Fixations;
+  using Ogama.Modules.Scanpath;
+  using Ogama.Modules.Statistics;
+
   /// <summary>
   /// A task that can be performed in OGAMA.
   /// Used to create the referring module after loading the experiment.
@@ -26,7 +32,32 @@ namespace Ogama.MainWindow
     /// <summary>
     /// Shows the <see cref="Ogama.Modules.Replay.ReplayModule"/> module.
     /// </summary>
-    Analyze,
+    Replay,
+
+    /// <summary>
+    /// Shows the <see cref="AttentionMapModule"/> module.
+    /// </summary>
+    AttentionMaps,    
+    
+    /// <summary>
+    /// Shows the <see cref="ScanpathsModule"/> module.
+    /// </summary>
+    Scanpaths,
+
+    /// <summary>
+    /// Shows the <see cref="FixationsModule"/> module.
+    /// </summary>
+    Fixations,
+
+    /// <summary>
+    /// Shows the <see cref="AOIModule"/> module.
+    /// </summary>
+    AOIs,
+
+    /// <summary>
+    /// Shows the <see cref="StatisticsModule"/> module.
+    /// </summary>
+    Statistics,
 
     /// <summary>
     /// Shows the <see cref="Ogama.Modules.Database.DatabaseModule"/> and starts the import process.
