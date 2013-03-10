@@ -391,6 +391,8 @@
       <DependentUpon>AslTrackStatus.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Recording\ASLInterface\UserSettings.cs" />
+    <Compile Include="Modules\Recording\EyeTechInterface\EyeTechSetting.cs" />
+    <Compile Include="Modules\Recording\EyeTechInterface\EyeTechTracker.cs" />
     <Compile Include="Modules\Recording\GazegroupInterface\GazetrackerIPClientSetting.cs" />
     <Compile Include="Modules\Recording\GazegroupInterface\GazetrackerIPClientSettingsDialog.cs">
       <SubType>Form</SubType>
@@ -426,6 +428,7 @@
     <Compile Include="Modules\Recording\Presenter\WebsiteScreenshot.cs" />
     <Compile Include="Modules\Recording\Presenter\DSScreenCapture.cs" />
     <Compile Include="Modules\Recording\Presenter\ScreenCaptureProperties.cs" />
+    <Compile Include="Modules\Recording\EyeTechInterface\QuickLinkAPI.cs" />
     <Compile Include="Modules\Recording\TobiiInterface\TobiiCalibrationRunner.cs" />
     <Compile Include="Modules\Recording\TobiiInterface\TobiiCalibrationForm.cs">
       <SubType>Form</SubType>
@@ -1634,6 +1637,8 @@
     <None Include="Resources\Desktop.png" />
     <None Include="Resources\Desktop32.png" />
     <None Include="Resources\Desktop48.png" />
+    <Content Include="Resources\EyeTechLogo_S.png" />
+    <None Include="Resources\Eyetech_tracker.png" />
     <Content Include="Resources\MirametrixLogo.png" />
     <Content Include="Resources\MirametrixLogo_150_33.png" />
     <Content Include="Resources\Mirametrix_S2.png" />
