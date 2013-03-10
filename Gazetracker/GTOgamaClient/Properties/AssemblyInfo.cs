@@ -12,7 +12,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Freie Universität Berlin")]
 [assembly: AssemblyProduct("OgamaClient")]
-[assembly: AssemblyCopyright("Copyright ©  Dr. Adrian Voßkühler 2012")]
+[assembly: AssemblyCopyright("Copyright ©  Dr. Adrian Voßkühler 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -51,6 +51,6 @@ using System.Windows;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("4.1.*")]
-[assembly: AssemblyFileVersion("4.1.0.0")]
+[assembly: AssemblyVersion("4.3.*")]
+[assembly: AssemblyFileVersion("4.3.0.0")]
 [assembly: GuidAttribute("6DCBD6C9-E2D8-4ed8-A8D8-6D72CD25CD89")]

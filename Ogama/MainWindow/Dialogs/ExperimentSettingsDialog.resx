@@ -112,19 +112,38 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>375, 17</value>
   </metadata>
+  <data name="nudMinGazeSamples.ToolTip" xml:space="preserve">
+    <value>This is the amount of samples that should be at minimum in 
+the range of the distance above, to be sure that there was a fixation.
+This value heavily depends on the sampling rate.
+If you have 60 Hz, than 5 samples should be enough, for 500 Hz there
+should be at least 40 samples.</value>
+  </data>
+  <data name="chbMergeConsecutiveFixations.ToolTip" xml:space="preserve">
+    <value>Sometimes two consecutive fixations have their center less
+than the above maximum distance away from each other. 
+Often this indicates that we had one wrong delimited fixation, 
+so with this option checked, two fixation with this condition were
+treated as one fixation.</value>
+  </data>
   <data name="label3.Text" xml:space="preserve">
     <value>Fixation detection ring size. This value sets the size of the buffer that is used to detect fixations.
 Please note: To this amount the fixation detection is delayed compared to the raw path data during replay.</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="nudFixationRingSize.ToolTip" xml:space="preserve">
+    <value>With this amount of samples the fixation is calculated during replay.
+It is a ring buffer, that must be not to small (&lt;20) to enable correct
+fixation detection and not to big (&gt;100) for small display latencies.</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="dialogTop1.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         /9j/4AAQSkZJRgABAgEBLAEsAAD/7gAOQWRvYmUAZAAAAAAB/+EFkEV4aWYAAE1NACoAAAAIAAcBEgAD

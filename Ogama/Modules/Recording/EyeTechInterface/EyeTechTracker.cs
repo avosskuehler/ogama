@@ -179,6 +179,15 @@ namespace Ogama.Modules.Recording.EyeTechInterface
     {
       // No options available in the API for checking this
       // FIXME Add method for Quick Glance detection
+      var key = Registry.LocalMachine.OpenSubKey(@"Software\EyeTech Digital Systems\Quick Glance", false);
+      if (key == null)
+      {
+        errorMessage =
+          "Quick Glance application not found in registry. EyeTech tracker will not work. Please install the "
+          + "Quick glance application.";
+        return false;
+      }
+
       errorMessage = string.Empty;
       return true;
     }

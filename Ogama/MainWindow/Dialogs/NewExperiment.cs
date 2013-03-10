@@ -14,6 +14,7 @@
 namespace Ogama.MainWindow.Dialogs
 {
   using System;
+  using System.Collections.Generic;
   using System.IO;
   using System.Windows.Forms;
 
@@ -48,10 +49,25 @@ namespace Ogama.MainWindow.Dialogs
     public NewExperiment()
     {
       this.InitializeComponent();
-      this.txbExperimentName.Text = "Experiment1";
-      this.txbParentFolder.Text = Path.Combine(
+
+      var path = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.Personal),
         "OgamaExperiments");
+
+      // Check for existing default experiment
+      var experiments = Directory.GetDirectories(path);
+      var experimentList = new List<string>();
+      experimentList.AddRange(experiments);
+      var counter = 1;
+      var defaultName = "Experiment" + counter;
+      while (experimentList.Contains(Path.Combine(path, defaultName)))
+      {
+        counter++;
+        defaultName = "Experiment" + counter;
+      }
+
+      this.txbExperimentName.Text = defaultName;
+      this.txbParentFolder.Text = path;
     }
 
     #endregion //CONSTRUCTION
