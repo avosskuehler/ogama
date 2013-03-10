@@ -70,6 +70,7 @@ namespace Ogama.MainWindow.Dialogs
         this.nudMouseDiameterDiv.Value = (decimal)settings.MouseDiameterDiv;
         this.nudFixationRingSize.Value = (decimal)settings.FixationRingSize;
         this.chbEliminateFirstFixationOfGivenLength.Checked = settings.EliminateFirstFixation;
+        this.chbEliminateFirstFixationSimple.Checked = settings.EliminateFirstFixationSimple;
         this.chbMergeConsecutiveFixations.Checked = settings.MergeConsecutiveFixations;
         this.nudFixationLimit.Value = (decimal)settings.LimitForFirstFixation;
       }
@@ -278,6 +279,7 @@ namespace Ogama.MainWindow.Dialogs
       settings.MouseSamplingRate = Convert.ToInt32(this.txbSamplingRateMouse.Text);
       settings.LimitForFirstFixation = (int)this.nudFixationLimit.Value;
       settings.EliminateFirstFixation = this.chbEliminateFirstFixationOfGivenLength.Checked;
+      settings.EliminateFirstFixationSimple = this.chbEliminateFirstFixationSimple.Checked;
       settings.MergeConsecutiveFixations = this.chbMergeConsecutiveFixations.Checked;
       settings.FixationRingSize = (int)this.nudFixationRingSize.Value;
       settings.SqlInstanceName = this.txbSQLInstanceName.Text;
@@ -328,8 +330,38 @@ namespace Ogama.MainWindow.Dialogs
       return true;
     }
 
-    #endregion //METHODS
+    /// <summary>
+    /// This method checks the state of chbEliminateFirstFixationSimple_CheckedChanged checkbox
+    /// and controls another checkbox chbEliminateFirstFixationOfGivenLength
+    /// so there is ony one checkbox could be checked.
+    /// </summary>
+    /// <param name="sender">Indicates the sender of an event.</param>
+    /// <param name="e">Event arguments.</param>
+    private void chbEliminateFirstFixationSimple_CheckedChanged(object sender, EventArgs e)
+    {
+        if (this.chbEliminateFirstFixationSimple.Checked)
+        {
+            this.chbEliminateFirstFixationOfGivenLength.Checked = false;
+        }
+    }
+    
+    /// <summary>
+    /// This method checks the state of chbEliminateFirstFixationOfGivenLength_CheckedChanged checkbox
+    /// and controls another checkbox chbEliminateFirstFixationSimple
+    /// so there is ony one checkbox could be checked.
+    /// </summary>
+    /// <param name="sender">Indicates the sender of an event.</param>
+    /// <param name="e">Event arguments.</param>
+    private void chbEliminateFirstFixationOfGivenLength_CheckedChanged(object sender, EventArgs e)
+    {
+        if (this.chbEliminateFirstFixationOfGivenLength.Checked)
+        {
+            this.chbEliminateFirstFixationSimple.Checked = false;
+        }
+    }
 
+    #endregion //METHODS
+      
     ///////////////////////////////////////////////////////////////////////////////
     // Small helping Methods                                                     //
     ///////////////////////////////////////////////////////////////////////////////
