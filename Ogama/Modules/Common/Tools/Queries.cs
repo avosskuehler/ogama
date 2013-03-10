@@ -19,6 +19,7 @@ namespace Ogama.Modules.Common.Tools
   using System.Data;
   using System.Data.SqlClient;
   using System.Drawing;
+  using System.Linq;
   using System.Text;
   using System.Windows.Forms;
 
@@ -1740,18 +1741,22 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     /// Document.ActiveDocument.DocDataSet.TrialEvents);</code></remarks>
     /// <param name="trialEventList">A <see cref="List{TrialEvent}"/> with the 
     /// new trial event information.</param>
-    /// <returns><strong>True</strong>, if succesful otherwise, <strong>false</strong>.</returns>
+    /// <returns><strong>True</strong>, if successful otherwise, <strong>false</strong>.</returns>
     public static bool WriteTrialEventsToDataSet(List<TrialEvent> trialEventList)
     {
+      if (trialEventList == null)
+      {
+        return true;
+      }
+
       // Notify start loading data into the dataset.
       Document.ActiveDocument.DocDataSet.TrialEvents.BeginLoadData();
       try
       {
-        foreach (TrialEvent trialEvent in trialEventList)
+        foreach (TrialEvent trialEvent in trialEventList.Where(trialEvent => trialEvent != null))
         {
           // Insert Data in Trials Table
-          OgamaDataSet.TrialEventsRow workTrialEventRow;
-          workTrialEventRow = Document.ActiveDocument.DocDataSet.TrialEvents.NewTrialEventsRow();
+          var workTrialEventRow = Document.ActiveDocument.DocDataSet.TrialEvents.NewTrialEventsRow();
           workTrialEventRow.EventID = trialEvent.EventID;
           workTrialEventRow.EventParam = trialEvent.Param;
           workTrialEventRow.SubjectName = trialEvent.SubjectName;
@@ -1797,18 +1802,17 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     /// <param name="subjectName">A <see cref="string"/> with the subject name.</param>
     /// <param name="lstRawData">A <see cref="List{RawData}"/> with the 
     /// new raw data.</param>
-    /// <returns><strong>True</strong>, if succesful otherwise, <strong>false</strong>.</returns>
+    /// <returns><strong>True</strong>, if successful otherwise, <strong>false</strong>.</returns>
     public static bool WriteRawDataListToDataSet(string subjectName, List<RawData> lstRawData)
     {
       // Create Subjects rawdata table
-      OgamaDataSet.RawdataDataTable subjectRawDataTable =
-        new OgamaDataSet.RawdataDataTable();
+      var subjectRawDataTable = new OgamaDataSet.RawdataDataTable();
 
       // Give it correct name
       subjectRawDataTable.TableName = subjectName + "Rawdata";
       try
       {
-        SaveDataToTable(lstRawData, subjectRawDataTable);
+        SaveDataToTable(lstRawData.ToArray(), subjectRawDataTable);
 
         // Add the raw data table to the DataTableCollection.
         Document.ActiveDocument.DocDataSet.Tables.Add(subjectRawDataTable);
@@ -1831,10 +1835,10 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     /// This method saves the given collection of <see cref="RawData"/> into the
     /// given <see cref="OgamaDataSet.RawdataDataTable"/>
     /// </summary>
-    /// <param name="lstRawData">A <see cref="List{RawData}"/> with the new samples.</param>
+    /// <param name="lstRawData">A <see cref="RawData"/> with the new samples.</param>
     /// <param name="subjectRawDataTable">The <see cref="OgamaDataSet.RawdataDataTable"/> to be filled.</param>
-    /// <returns><strong>True</strong> if successfull otherwise <strong>false</strong>.</returns>
-    public static bool SaveDataToTable(List<RawData> lstRawData, OgamaDataSet.RawdataDataTable subjectRawDataTable)
+    /// <returns><strong>True</strong> if successful otherwise <strong>false</strong>.</returns>
+    public static bool SaveDataToTable(RawData[] lstRawData, OgamaDataSet.RawdataDataTable subjectRawDataTable)
     {
       try
       {
@@ -2543,7 +2547,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     /// <returns>A <see cref="SortedList{Int32, TrialEvent}"/>
     /// with the events occured in this experiment.</returns>
     private static SortedList<int, TrialEvent> ExtractEvents(
-      string subjectName, 
+      string subjectName,
       DataTable table,
       out int usercamID)
     {

@@ -330,7 +330,7 @@ namespace Ogama.Modules.Recording.EyeTechInterface
     }
 
     /// <summary>
-    /// Raises <see cref="EyeTechSettingsDialog"/> to change the settings
+    /// Change the settings
     /// for this interface.
     /// </summary>
     public override void ChangeSettings()

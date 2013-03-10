@@ -1194,6 +1194,9 @@ namespace Ogama.Modules.Recording
               new WaitCallback(StoreRecordsInDataSetTable),
               new DataToTable(this.rawDataLists[this.listCounter], this.subjectRawDataTable));
 
+            // Clear list, cause its content was copied during creation of DataToTable
+            this.rawDataLists[this.listCounter].Clear();
+
             this.listCounter++;
             if (this.listCounter == Numwritingthreads)
             {
@@ -1289,8 +1292,6 @@ namespace Ogama.Modules.Recording
       {
         throw new DataException("The new raw data could not be written into the dataset.");
       }
-
-      data.RawDataList.Clear();
     }
 
     /// <summary>
