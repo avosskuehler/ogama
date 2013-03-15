@@ -8,7 +8,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{e7826944-2613-4287-aa56-6da4a0c38e4e}</ProjectGuid>
-    <SHFBSchemaVersion>1.9.3.0</SHFBSchemaVersion>
+    <SHFBSchemaVersion>1.9.5.0</SHFBSchemaVersion>
     <!-- AssemblyName, Name, and RootNamespace are not used by SHFB but Visual
          Studio adds them anyway -->
     <AssemblyName>Documentation</AssemblyName>
@@ -25,7 +25,7 @@ It is developed at the Freie Universit&amp;#228%3bt Berlin by Adrian Vo&amp;#223
 Hopefully it will be useful for your application.
 You can modify and customize it for your needs as long as your product is not intended to make any money, and is not charged for in any way. It is published under the GPL.
 </ProjectSummary>
-    <MissingTags>Parameter, Returns, AutoDocumentCtors, Namespace, TypeParameter</MissingTags>
+    <MissingTags>AutoDocumentCtors, Namespace</MissingTags>
     <VisibleItems>Attributes, ExplicitInterfaceImplementations, InheritedMembers, Internals, Privates, Protected, SealedProtected, PrivateFields</VisibleItems>
     <HtmlHelp1xCompilerPath>
     </HtmlHelp1xCompilerPath>
@@ -37,75 +37,46 @@ You can modify and customize it for your needs as long as your product is not in
     </WorkingPath>
     <BuildLogFile>
     </BuildLogFile>
-    <FrameworkVersion>.NET 4.0.30319</FrameworkVersion>
+    <FrameworkVersion>.NET Framework 4.0</FrameworkVersion>
     <RootNamespaceContainer>True</RootNamespaceContainer>
     <RootNamespaceTitle>Ogama Namespaces</RootNamespaceTitle>
-    <HelpTitle>Ogama - open gaze and mouse analyzer source documentation</HelpTitle>
-    <CopyrightText>Dr. Adrian Vo&amp;#223%3bk&amp;#252%3bhler, Freie Universit&amp;#228%3bt Berlin, created 28.03.12  --  Please have a look at the source for deeper understanding.</CopyrightText>
+    <HelpTitle>-</HelpTitle>
+    <CopyrightText>Dr. Adrian Vo&amp;#223%3bk&amp;#252%3bhler, Freie Universit&amp;#228%3bt Berlin, www.ogama.net, created 14.03.13  -  Please have a look at the sources for deeper understanding.</CopyrightText>
     <FeedbackEMailAddress>adrian%40ogama.net</FeedbackEMailAddress>
-    <PresentationStyle>vs2005</PresentationStyle>
+    <PresentationStyle>VS2010</PresentationStyle>
     <SyntaxFilters>CSharp</SyntaxFilters>
     <HelpFileVersion>4.1.0.0</HelpFileVersion>
     <ComponentConfigurations>
-      <ComponentConfig id="Cached Framework Comments Index Data" enabled="True">
-        <component id="Cached Framework Comments Index Data" type="SandcastleBuilder.Components.CachedCopyFromIndexComponent" assembly="{@SHFBFolder}SandcastleBuilder.Components.dll">
-          <index name="comments" value="/doc/members/member" key="@name" cache="100">
-{@CachedFrameworkCommentList}
-{@CommentFileList}
-            </index>
-          <copy name="comments" source="*" target="/document/comments" />
-        </component>
-      </ComponentConfig>
       <ComponentConfig id="Code Block Component" enabled="True">
         <component id="Code Block Component" type="SandcastleBuilder.Components.CodeBlockComponent" assembly="{@SHFBFolder}SandcastleBuilder.Components.dll">
-          <basePath value="{@HtmlEncProjectFolder}" />
-          <languageFilter value="true" />
-          <allowMissingSource value="false" />
-          <removeRegionMarkers value="false" />
-          <colorizer syntaxFile="{@SHFBFolder}Colorizer\highlight.xml" styleFile="{@SHFBFolder}Colorizer\highlight.xsl" copyImageUrl="../icons/CopyCode.gif" language="cs" tabSize="0" numberLines="false" outlining="false" keepSeeTags="false" defaultTitle="true" />
-        </component>
-      </ComponentConfig>
-      <ComponentConfig id="Post-transform Component" enabled="True">
-        <component id="Post-transform Component" type="SandcastleBuilder.Components.PostTransformComponent" assembly="{@SHFBFolder}SandcastleBuilder.Components.dll">
-          <!-- Code colorizer files (required).
-                 Attributes:
-                    Stylesheet file (required)
-                    Script file (required)
-                    "Copy" image file (required) -->
-          <colorizer stylesheet="{@SHFBFolder}Colorizer\highlight.css" scriptFile="{@SHFBFolder}Colorizer\highlight.js" copyImage="{@SHFBFolder}Colorizer\CopyCode.gif" />
-          <!-- Base output path for the files (required).  This should match
-                 the parent folder of the output path of the HTML files (see
-                 SaveComponent). -->
-          <outputPaths>{@HelpFormatOutputPaths}</outputPaths>
-          <!-- Logo image file (optional).  Filename is required. The height,
-                 width, altText, placement, and alignment attributes are
-                 optional. -->
-          <logoFile filename="C:\Users\Adrian\Documents\Ogama@Codeplex\Help\HelpBanner.jpg" height="0" width="0" altText="" placement="right" alignment="left" />
-        </component>
-      </ComponentConfig>
-      <ComponentConfig id="Cached MSDN URL References" enabled="True">
-        <component id="Cached MSDN URL References" type="SandcastleBuilder.Components.CachedResolveReferenceLinksComponent" assembly="{@SHFBFolder}SandcastleBuilder.Components.dll" locale="{@Locale}" linkTarget="{@SdkLinkTarget}">
-          <helpOutput format="HtmlHelp1">
-            <cache filename="{@LocalDataFolder}Cache\MsdnUrl.cache" />
-            <targets base="{@SandcastlePath}Data\Reflection" recurse="true" files="*.xml" type="{@HtmlSdkLinkType}" />
-            <targets files="reflection.xml" type="Local" />
-          </helpOutput>
-          <helpOutput format="MSHelp2">
-            <cache filename="{@LocalDataFolder}Cache\MsdnUrl.cache" />
-            <targets base="{@SandcastlePath}Data\Reflection" recurse="true" files="*.xml" type="{@MSHelp2SdkLinkType}" />
-            <targets files="reflection.xml" type="Index" />
-          </helpOutput>
-          <helpOutput format="MSHelpViewer">
-            <cache filename="{@LocalDataFolder}Cache\MsdnUrl.cache" />
-            <targets base="{@SandcastlePath}Data\Reflection" recurse="true" files="*.xml" type="{@MSHelpViewerSdkLinkType}" />
-            <targets files="reflection.xml" type="Id" />
-          </helpOutput>
-          <helpOutput format="Website">
-            <cache filename="{@LocalDataFolder}Cache\MsdnUrl.cache" />
-            <targets base="{@SandcastlePath}Data\Reflection" recurse="true" files="*.xml" type="{@WebsiteSdkLinkType}" />
-            <targets files="reflection.xml" type="Local" />
-          </helpOutput>
-        </component>
+<!-- Base path for relative filenames in source attributes (optional) -->
+<basePath value="{@HtmlEncProjectFolder}" />
+<!-- Base output paths for the files (required).  These should match the parent folder of the output path
+					 of the HTML files (see each of the SaveComponent instances in the configuration files). -->
+<outputPaths>
+				{@HelpFormatOutputPaths}
+			</outputPaths>
+<!-- Allow missing source files (Optional).  If omitted, it will generate errors if referenced source files
+				 are missing. -->
+<allowMissingSource value="false" />
+<!-- Remove region markers from imported code blocks.  If omitted, region markers in imported code blocks
+					 are left alone. -->
+<removeRegionMarkers value="false" />
+<!-- Code colorizer options (required).
+					 Attributes:
+							Language syntax configuration file (required)
+							XSLT stylesheet file (required)
+							CSS stylesheet file (required)
+							Script file (required)
+							Disabled (optional, leading whitespace normalization only)
+							Default language (optional)
+							Enable line numbering (optional)
+							Enable outlining (optional)
+							Keep XML comment "see" tags within the code (optional)
+							Tab size override (optional, 0 = Use syntax file setting)
+							Use language name as default title (optional) -->
+<colorizer syntaxFile="{@SHFBFolder}Colorizer\highlight.xml" styleFile="{@SHFBFolder}Colorizer\highlight.xsl" stylesheet="{@SHFBFolder}Colorizer\highlight.css" scriptFile="{@SHFBFolder}Colorizer\highlight.js" disabled="{@DisableCodeBlockComponent}" language="cs" numberLines="false" outlining="false" keepSeeTags="false" tabSize="0" defaultTitle="true" />
+</component>
       </ComponentConfig>
     </ComponentConfigurations>
     <DocumentationSources>
@@ -240,7 +211,8 @@ This module is intended to replay or show fixations of multiple subjects in para
     </ApiFilter>
     <HelpFileFormat>HtmlHelp1</HelpFileFormat>
     <IncludeStopWordList>True</IncludeStopWordList>
-    <FooterText>Visit OGAMAs homepage at www.ogama.net or http://ogama.codeplex.com!</FooterText>
+    <FooterText>
+    </FooterText>
     <HtmlSdkLinkType>Msdn</HtmlSdkLinkType>
     <WebsiteSdkLinkType>Msdn</WebsiteSdkLinkType>
     <IncludeFavorites>False</IncludeFavorites>
@@ -249,6 +221,15 @@ This module is intended to replay or show fixations of multiple subjects in para
     <NamingMethod>Guid</NamingMethod>
     <Language>en-US</Language>
     <ContentPlacement>AboveNamespaces</ContentPlacement>
+    <HelpAttributes />
+    <TransformComponentArguments>
+      <Argument Key="logoFile" Value="HelpBanner.jpg" xmlns="" />
+      <Argument Key="logoHeight" Value="" xmlns="" />
+      <Argument Key="logoWidth" Value="" xmlns="" />
+      <Argument Key="logoAltText" Value="" xmlns="" />
+      <Argument Key="logoPlacement" Value="right" xmlns="" />
+      <Argument Key="logoAlignment" Value="left" xmlns="" />
+    </TransformComponentArguments>
   </PropertyGroup>
   <!-- There are no properties for these two groups but they need to appear in
        order for Visual Studio to perform the build. -->
@@ -347,6 +328,15 @@ This module is intended to replay or show fixations of multiple subjects in para
     <Reference Include="VectorGraphics.XmlSerializers">
       <HintPath>..\..\..\Release\VectorGraphics.XmlSerializers.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Icons" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Icons\HelpBanner.jpg">
+      <ImageId>HelpBanner</ImageId>
+      <AlternateText>Help Banner</AlternateText>
+    </Content>
   </ItemGroup>
   <!-- Import the SHFB build targets -->
   <Import Project="$(SHFBROOT)\SandcastleHelpFileBuilder.targets" />
