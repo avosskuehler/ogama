@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DirectShow", "DirectShow", "{5284AD20-AD56-4D92-A2B5-6008ED8F1A41}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gazetracker", "Gazetracker", "{C28970BB-859F-44F8-B41A-FC8CD8E187FF}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ogama", "Ogama\Ogama.csproj", "{84DE2C81-CE99-4ED3-B4F3-3C47CDD85E3D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OgamaControls", "OgamaControls\OgamaControls.csproj", "{63EF9D30-447A-4F79-9EC8-E4956DC0ABF8}"
@@ -24,8 +26,6 @@ EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup-x64", "Setup-x64\Setup-x64.vdproj", "{B4F56D79-B7AE-4B37-9D39-73C64ADD22AF}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GenericSampleSourceFilter", "DirectShow\GenericSampleSourceFilter\GenericSampleSourceFilter.vcxproj", "{6DF2C2D9-9751-4245-ACB2-5D3F41345932}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gazetracker", "Gazetracker", "{C28970BB-859F-44F8-B41A-FC8CD8E187FF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GTCommons", "Gazetracker\GTCommons\GTCommons.csproj", "{02E8476C-305D-4FAD-83BC-3A70CCA37260}"
 EndProject

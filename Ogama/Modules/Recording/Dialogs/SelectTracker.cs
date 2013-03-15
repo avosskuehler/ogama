@@ -123,7 +123,7 @@ namespace Ogama.Modules.Recording.Dialogs
 
         if (this.chbEyeTech.Checked)
         {
-            returnValue |= HardwareTracker.EyeTech;
+          returnValue |= HardwareTracker.EyeTech;
         }
 
         return returnValue;
