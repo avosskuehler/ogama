@@ -31,7 +31,7 @@ namespace Ogama.Modules.Recording.Presenter
 
   /// <summary>
   /// This class is used to create a DirectShow graph which 
-  /// has the OgamaScreenCapture device as a source, which is split
+  /// has the OgamaCapture device as a source, which is split
   /// with a Smart Tee into a capture stream which is rendered to a file
   /// and a preview stream which is shown on the recorder
   /// module preview added with a gaze and mouse overlay dmo filter.
@@ -217,7 +217,7 @@ namespace Ogama.Modules.Recording.Presenter
     /// has the properties to modify the screen capture filter.
     /// </summary>
     [ComImport, System.Security.SuppressUnmanagedCodeSecurity,
-    Guid("E86F68BE-BEC5-4D7B-9CB9-6954ACE63C87"),
+    Guid("E86F68BE-BEC5-4d7b-9CB9-6954ACE63C87"),
     InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
     public interface IOgamaScreenCapture
     {
@@ -583,13 +583,13 @@ namespace Ogama.Modules.Recording.Presenter
 #endif
         // Get the ogama screen capture device and add it to the filter graph
         this.screenCaptureFilter = DirectShowUtils.CreateFilter(
-          FilterCategory.VideoInputDevice,
-          "OgamaScreenCapture Filter");
-        hr = this.graphBuilder.AddFilter(this.screenCaptureFilter, "Ogama Screen Capture Filter");
+          FilterCategory.VideoInputDevice, "OgamaCapture");
+
+        hr = this.graphBuilder.AddFilter(this.screenCaptureFilter, "OgamaCapture");
         DsError.ThrowExceptionForHR(hr);
 
         // Query the interface for the screen capture Filter
-        IOgamaScreenCapture ogamaFilter = this.screenCaptureFilter as IOgamaScreenCapture;
+        var ogamaFilter = this.screenCaptureFilter as IOgamaScreenCapture;
 
         hr = ogamaFilter.set_Monitor(this.monitorIndex);
         DsError.ThrowExceptionForHR(hr);
@@ -635,7 +635,7 @@ namespace Ogama.Modules.Recording.Presenter
           out this.muxFilter,
           out this.fileWriterFilter);
         DsError.ThrowExceptionForHR(hr);
-        
+
         //// Disable overwrite
         //// hr = this.fileWriterFilter.SetMode(AMFileSinkFlags.None);
         //// DsError.ThrowExceptionForHR(hr);

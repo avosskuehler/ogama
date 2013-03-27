@@ -682,7 +682,7 @@ namespace Ogama.Modules.Recording
       }
 
       this.screenCaptureProperties = new ScreenCaptureProperties(
-        "OgamaScreenCapture Filter",
+        "OgamaCapture",
         string.Empty,
         "ffdshow video encoder",
         string.Empty,
