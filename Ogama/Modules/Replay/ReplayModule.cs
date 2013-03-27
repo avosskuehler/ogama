@@ -1294,7 +1294,8 @@ namespace Ogama.Modules.Replay
 
         if (this.isUsingTrialVideo)
         {
-          AsyncHelper.FireAndForget(new MethodInvoker(this.videoFramePusher.Start));
+          this.videoFramePusher.Start();
+          // AsyncHelper.FireAndForget(new MethodInvoker(this.videoFramePusher.Start));
         }
 
         // Start sound
@@ -1369,7 +1370,8 @@ namespace Ogama.Modules.Replay
 
       if (this.isUsingTrialVideo)
       {
-        AsyncHelper.FireAndForget(new MethodInvoker(this.videoFramePusher.Start));
+        this.videoFramePusher.Start();
+        //         AsyncHelper.FireAndForget(new MethodInvoker(this.videoFramePusher.Start));
       }
 
       // Start sound
@@ -1820,7 +1822,8 @@ namespace Ogama.Modules.Replay
         if (this.isUsingTrialVideo)
         {
           this.Picture.ResetBackground();
-          AsyncHelper.FireAndForget(new MethodInvoker(this.videoFramePusher.Start));
+          this.videoFramePusher.Start();
+          //           AsyncHelper.FireAndForget(new MethodInvoker(this.videoFramePusher.Start));
         }
 
         // Load trial stimulus into picture
