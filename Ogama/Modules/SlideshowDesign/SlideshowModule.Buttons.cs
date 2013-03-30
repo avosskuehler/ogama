@@ -498,8 +498,8 @@ namespace Ogama.Modules.SlideshowDesign
     private void btnCustomShuffling_Click(object sender, EventArgs e)
     {
       CustomShuffleDialog shuffleDlg = new CustomShuffleDialog();
-      shuffleDlg.Shuffling = this.slideshow.Shuffling;
       shuffleDlg.Slideshow = this.slideshow;
+      shuffleDlg.Shuffling = this.slideshow.Shuffling;
       if (shuffleDlg.ShowDialog() == DialogResult.OK)
       {
         this.slideshow.Shuffling = shuffleDlg.Shuffling;

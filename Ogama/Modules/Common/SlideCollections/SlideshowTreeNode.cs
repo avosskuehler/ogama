@@ -27,7 +27,7 @@ namespace Ogama.Modules.Common.SlideCollections
 
   /// <summary>
   /// This class inherits <see cref="TreeNode"/> and implements <see cref="IXmlSerializable"/>.
-  /// It extends the default <see cref="TreeNode"/> behaviour with shuffling options
+  /// It extends the default <see cref="TreeNode"/> behavior with shuffling options
   /// and mainly the possibility to have a <see cref="Slide"/> contained in the node.
   /// </summary>
   /// <remarks>This is the solution to provide a <see cref="TreeView"/>
@@ -76,12 +76,11 @@ namespace Ogama.Modules.Common.SlideCollections
     /// Initializes a new instance of the SlideshowTreeNode class.
     /// </summary>
     public SlideshowTreeNode()
-      : base()
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the SlideshowTreeNode class by cloneing
+    /// Initializes a new instance of the SlideshowTreeNode class by cloning
     /// the given <see cref="SlideshowTreeNode"/>
     /// </summary>
     /// <param name="newSlideshowTreeNode">The <see cref="SlideshowTreeNode"/> to clone.</param>
@@ -362,6 +361,56 @@ namespace Ogama.Modules.Common.SlideCollections
     #region METHODS
 
     /// <summary>
+    /// This method is a custom serialization with an <see cref="XmlSerializer"/>
+    /// to write the contents of the <see cref="SlideshowTreeNode"/> that 
+    /// are exposed in this override into an XML file.
+    /// It serializes recursively.
+    /// </summary>
+    /// <param name="writer">The <see cref="XmlWriter"/> to use.</param>
+    /// <param name="node">The <see cref="SlideshowTreeNode"/> to serialize.</param>
+    public virtual void SerializeNode(XmlWriter writer, SlideshowTreeNode node)
+    {
+      var slideSerializer = new XmlSerializer(typeof(Slide));
+
+      writer.WriteStartElement("SlideshowTreeNode");
+
+      writer.WriteStartElement("Name");
+      writer.WriteValue(node.Name);
+      writer.WriteEndElement();
+      writer.WriteStartElement("Randomize");
+      writer.WriteValue(node.Randomize);
+      writer.WriteEndElement();
+      writer.WriteStartElement("NumberOfItemsToUse");
+      writer.WriteValue(node.NumberOfItemsToUse);
+      writer.WriteEndElement();
+      if (node.Slide != null)
+      {
+        slideSerializer.Serialize(writer, node.Slide);
+      }
+
+      writer.WriteStartElement("Tag");
+      if (node.Tag != null)
+      {
+        writer.WriteValue(node.Tag);
+      }
+
+      writer.WriteEndElement();
+      writer.WriteStartElement("Text");
+      writer.WriteValue(node.Text);
+      writer.WriteEndElement();
+
+      if (node.Nodes.Count > 0)
+      {
+        foreach (SlideshowTreeNode subNode in node.Nodes)
+        {
+          subNode.SerializeNode(writer, subNode);
+        }
+      }
+
+      writer.WriteEndElement();
+    }
+
+    /// <summary>
     /// This method is a custom deserialization with an <see cref="XmlSerializer"/>
     /// to read the contents of the <see cref="SlideshowTreeNode"/> that 
     /// are exposed in this override.
@@ -369,9 +418,9 @@ namespace Ogama.Modules.Common.SlideCollections
     /// </summary>
     /// <param name="reader">The <see cref="XmlReader"/> to use.</param>
     /// <param name="node">The <see cref="SlideshowTreeNode"/> to deserialize.</param>
-    protected virtual void DeserializeNode(XmlReader reader, SlideshowTreeNode node)
+    public virtual void DeserializeNode(XmlReader reader, SlideshowTreeNode node)
     {
-      XmlSerializer slideSerializer = new XmlSerializer(typeof(Slide));
+      var slideSerializer = new XmlSerializer(typeof(Slide));
 
       // Check for older versions of Ogama 1.X 
       if (reader.Name == "Slides")
@@ -421,14 +470,14 @@ namespace Ogama.Modules.Common.SlideCollections
         {
           if (reader.Name == "SlideshowTreeNode")
           {
-            SlideshowTreeNode newNode = new SlideshowTreeNode();
+            var newNode = new SlideshowTreeNode();
             newNode.DeserializeNode(reader, newNode);
             this.SetTreeNodeImageKey(newNode);
             node.Nodes.Add(newNode);
           }
           else if (reader.Name == "BrowserTreeNode")
           {
-            BrowserTreeNode newNode = new BrowserTreeNode();
+            var newNode = new BrowserTreeNode();
             newNode.DeserializeNode(reader, newNode);
             this.SetTreeNodeImageKey(newNode);
             node.Nodes.Add(newNode);
@@ -494,64 +543,14 @@ namespace Ogama.Modules.Common.SlideCollections
           }
         }
 
-        Slideshow slideshow = this as Slideshow;
+        var slideshow = this as Slideshow;
 
         // Add node
-        SlideshowTreeNode slideNode = new SlideshowTreeNode(actualSlide.Name);
+        var slideNode = new SlideshowTreeNode(actualSlide.Name);
         slideNode.Name = slideshow.GetUnusedNodeID();
         slideNode.Slide = actualSlide;
         slideshow.Nodes.Add(slideNode);
       }
-    }
-
-    /// <summary>
-    /// This method is a custom serialization with an <see cref="XmlSerializer"/>
-    /// to write the contents of the <see cref="SlideshowTreeNode"/> that 
-    /// are exposed in this override into an XML file.
-    /// It serializes recursively.
-    /// </summary>
-    /// <param name="writer">The <see cref="XmlWriter"/> to use.</param>
-    /// <param name="node">The <see cref="SlideshowTreeNode"/> to serialize.</param>
-    protected virtual void SerializeNode(XmlWriter writer, SlideshowTreeNode node)
-    {
-      XmlSerializer slideSerializer = new XmlSerializer(typeof(Slide));
-
-      writer.WriteStartElement("SlideshowTreeNode");
-
-      writer.WriteStartElement("Name");
-      writer.WriteValue(node.Name);
-      writer.WriteEndElement();
-      writer.WriteStartElement("Randomize");
-      writer.WriteValue(node.Randomize);
-      writer.WriteEndElement();
-      writer.WriteStartElement("NumberOfItemsToUse");
-      writer.WriteValue(node.NumberOfItemsToUse);
-      writer.WriteEndElement();
-      if (node.Slide != null)
-      {
-        slideSerializer.Serialize(writer, node.Slide);
-      }
-
-      writer.WriteStartElement("Tag");
-      if (node.Tag != null)
-      {
-        writer.WriteValue(node.Tag);
-      }
-
-      writer.WriteEndElement();
-      writer.WriteStartElement("Text");
-      writer.WriteValue(node.Text);
-      writer.WriteEndElement();
-
-      if (node.Nodes.Count > 0)
-      {
-        foreach (SlideshowTreeNode subNode in node.Nodes)
-        {
-          subNode.SerializeNode(writer, subNode);
-        }
-      }
-
-      writer.WriteEndElement();
     }
 
     /// <summary>

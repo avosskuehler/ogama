@@ -18,6 +18,7 @@ namespace Ogama.Modules.Common.SlideCollections
   using System.ComponentModel;
   using System.Drawing;
   using System.Windows.Forms;
+  using System.Xml;
   using System.Xml.Serialization;
 
   using Ogama.Modules.Common.Tools;
@@ -37,7 +38,7 @@ namespace Ogama.Modules.Common.SlideCollections
   [XmlInclude(typeof(BrowserTreeNode))]
   public class Slideshow : SlideshowTreeNode
   {
-    ///////////////////////////////////////////////////////////////////////////////
+    ///////////////////// //////////////////////////////////////////////////////////
     // Defining Constants                                                        //
     ///////////////////////////////////////////////////////////////////////////////
     #region CONSTANTS
@@ -418,6 +419,84 @@ namespace Ogama.Modules.Common.SlideCollections
     public override object Clone()
     {
       return new Slideshow(this);
+    }
+
+    /// <summary>
+    /// This method is a custom serialization with an <see cref="XmlSerializer"/>
+    /// to write the contents of the <see cref="Slideshow"/> that 
+    /// are exposed in this override into an XML file.
+    /// It serializes recursively.
+    /// </summary>
+    /// <param name="writer">The <see cref="XmlWriter"/> to use.</param>
+    /// <param name="node">The <see cref="SlideshowTreeNode"/> to serialize.</param>
+    public override void SerializeNode(XmlWriter writer, SlideshowTreeNode node)
+    {
+      writer.WriteStartElement("IsModified");
+      writer.WriteValue(this.IsModified);
+      writer.WriteEndElement();
+
+      var shuffleSerializer = new XmlSerializer(typeof(CustomShuffling));
+
+      if (this.Shuffling != null)
+      {
+        shuffleSerializer.Serialize(writer, this.Shuffling);
+      }
+
+      if (node.Nodes.Count > 0)
+      {
+        foreach (SlideshowTreeNode subNode in node.Nodes)
+        {
+          subNode.SerializeNode(writer, subNode);
+        }
+      }
+    }
+
+    /// <summary>
+    /// This method is a custom deserialization with an <see cref="XmlSerializer"/>
+    /// to read the contents of the <see cref="Slideshow"/> that 
+    /// are exposed in this override. It deserializes recursively.
+    /// </summary>
+    /// <param name="reader">The <see cref="XmlReader"/> to use.</param>
+    /// <param name="node">The <see cref="SlideshowTreeNode"/> to deserialize.</param>
+    public override void DeserializeNode(XmlReader reader, SlideshowTreeNode node)
+    {
+      var shuffleSerializer = new XmlSerializer(typeof(CustomShuffling));
+
+      // Check for Versions < Ogama 4.3
+      if (reader.Name == "SlideshowTreeNode")
+      {
+        base.DeserializeNode(reader, node);
+        return;
+      }
+
+      reader.ReadStartElement("IsModified");
+      this.IsModified = reader.ReadContentAsBoolean();
+      reader.ReadEndElement();
+
+      if (reader.Name == "CustomShuffling")
+      {
+        this.shuffling = (CustomShuffling)shuffleSerializer.Deserialize(reader);
+      }
+
+
+      while ((reader.Name == "SlideshowTreeNode" && reader.NodeType == XmlNodeType.Element) ||
+        (reader.Name == "BrowserTreeNode" && reader.NodeType == XmlNodeType.Element))
+      {
+        if (reader.Name == "SlideshowTreeNode")
+        {
+          var newNode = new SlideshowTreeNode();
+          newNode.DeserializeNode(reader, newNode);
+          this.SetTreeNodeImageKey(newNode);
+          node.Nodes.Add(newNode);
+        }
+        else if (reader.Name == "BrowserTreeNode")
+        {
+          var newNode = new BrowserTreeNode();
+          newNode.DeserializeNode(reader, newNode);
+          this.SetTreeNodeImageKey(newNode);
+          node.Nodes.Add(newNode);
+        }
+      }
     }
 
     #endregion //OVERRIDES

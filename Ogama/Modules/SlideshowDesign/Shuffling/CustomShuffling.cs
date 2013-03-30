@@ -38,37 +38,6 @@ namespace Ogama.Modules.SlideshowDesign.Shuffling
     ///////////////////////////////////////////////////////////////////////////////
     #region FIELDS
 
-    /// <summary>
-    /// Indicates the use of this shuffling.
-    /// </summary>
-    private bool useThisCustomShuffling;
-
-    /// <summary>
-    /// Indicates the parent node ID for the groups of slides that should be rearranged.
-    /// </summary>
-    private int shuffleSectionsParentNodeID;
-
-    /// <summary>
-    /// Indicates whether to shuffle the items in a section,
-    /// before combining them to groups.
-    /// </summary>
-    private bool shuffleSectionItems;
-
-    /// <summary>
-    /// The number of items of a section in each group.
-    /// </summary>
-    private int numItemsOfSectionInGroup;
-
-    /// <summary>
-    /// Indicates whether to shuffle the newly created groups before presentation.
-    /// </summary>
-    private bool shuffleGroups;
-
-    /// <summary>
-    /// Indicates whether to shuffle the items in a group.
-    /// </summary>
-    private bool shuffleGroupItems;
-
     #endregion //FIELDS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -81,11 +50,11 @@ namespace Ogama.Modules.SlideshowDesign.Shuffling
     /// </summary>
     public CustomShuffling()
     {
-      this.shuffleSectionsParentNodeID = 1;
-      this.shuffleSectionItems = true;
-      this.numItemsOfSectionInGroup = 1;
-      this.shuffleGroups = true;
-      this.useThisCustomShuffling = false;
+      this.ShuffleSectionsParentNodeID = 1;
+      this.ShuffleSectionItems = true;
+      this.NumItemsOfSectionInGroup = 1;
+      this.ShuffleGroups = true;
+      this.UseThisCustomShuffling = false;
     }
 
     /// <summary>
@@ -104,11 +73,11 @@ namespace Ogama.Modules.SlideshowDesign.Shuffling
       bool newShuffleGroups,
       bool newShuffleGroupItems)
     {
-      this.shuffleSectionsParentNodeID = newShuffleSectionsParentNodeID;
-      this.shuffleSectionItems = newShuffleSectionItems;
-      this.numItemsOfSectionInGroup = newNumItemsOfSectionInGroup;
-      this.shuffleGroups = newShuffleGroups;
-      this.shuffleGroupItems = newShuffleGroupItems;
+      this.ShuffleSectionsParentNodeID = newShuffleSectionsParentNodeID;
+      this.ShuffleSectionItems = newShuffleSectionItems;
+      this.NumItemsOfSectionInGroup = newNumItemsOfSectionInGroup;
+      this.ShuffleGroups = newShuffleGroups;
+      this.ShuffleGroupItems = newShuffleGroupItems;
     }
 
     #endregion //CONSTRUCTION
@@ -127,52 +96,33 @@ namespace Ogama.Modules.SlideshowDesign.Shuffling
     /// <summary>
     /// Gets or sets a value indicating whether this shuffling should be used.
     /// </summary>
-    public bool UseThisCustomShuffling
-    {
-      get { return this.useThisCustomShuffling; }
-      set { this.useThisCustomShuffling = value; }
-    }
+    public bool UseThisCustomShuffling { get; set; }
 
     /// <summary>
-    /// Gets the parent node ID for the groups of slides that should be rearranged.
+    /// Gets or sets the parent node ID for the groups of slides that should be rearranged.
     /// </summary>
-    public int ShuffleSectionsParentNodeID
-    {
-      get { return this.shuffleSectionsParentNodeID; }
-    }
+    public int ShuffleSectionsParentNodeID { get; set; }
 
     /// <summary>
-    /// Gets a value indicating whether to shuffle the items in a section,
+    /// Gets or sets a value indicating whether to shuffle the items in a section,
     /// before combining them to groups.
     /// </summary>
-    public bool ShuffleSectionItems
-    {
-      get { return this.shuffleSectionItems; }
-    }
+    public bool ShuffleSectionItems { get; set; }
 
     /// <summary>
-    /// Gets the number of items of a section in each group.
+    /// Gets or sets the number of items of a section in each group.
     /// </summary>
-    public int NumItemsOfSectionInGroup
-    {
-      get { return this.numItemsOfSectionInGroup; }
-    }
+    public int NumItemsOfSectionInGroup { get; set; }
 
     /// <summary>
-    /// Gets a value indicating whether to shuffle the newly created groups before presentation.
+    /// Gets or sets a value indicating whether to shuffle the newly created groups before presentation.
     /// </summary>
-    public bool ShuffleGroups
-    {
-      get { return this.shuffleGroups; }
-    }
+    public bool ShuffleGroups { get; set; }
 
     /// <summary>
-    /// Gets a value indicating whether to shuffle the items in a group.
+    /// Gets or sets a value indicating whether to shuffle the items in a group.
     /// </summary>
-    public bool ShuffleGroupItems
-    {
-      get { return this.shuffleGroupItems; }
-    }
+    public bool ShuffleGroupItems { get; set; }
 
     #endregion //PROPERTIES
 
