@@ -14,7 +14,9 @@
 namespace Ogama.Modules.Recording.SMIInterface
 {
   using System;
+  using System.Linq;
   using System.Net;
+  using System.Net.Sockets;
   using System.Windows.Forms;
 
   /// <summary>
@@ -132,14 +134,15 @@ namespace Ogama.Modules.Recording.SMIInterface
     {
       // Getting Ip address of local machine...
       // First get the host name of local machine.
-      string strHostName = Dns.GetHostName();
+      var strHostName = Dns.GetHostName();
 
       // Then using host name, get the IP address list..
-      IPAddress[] addr = Dns.GetHostAddresses(strHostName);
+      var addr = Dns.GetHostAddresses(strHostName);
 
       if (addr.Length > 0)
       {
-        this.txbOGAMAAddress.Text = addr[0].ToString();
+        var add = addr.First(ip => ip.AddressFamily == AddressFamily.InterNetwork);
+        this.txbOGAMAAddress.Text = add.ToString();
       }
       else
       {
