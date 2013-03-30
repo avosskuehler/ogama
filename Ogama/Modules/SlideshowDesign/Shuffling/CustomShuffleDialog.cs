@@ -14,6 +14,7 @@
 namespace Ogama.Modules.SlideshowDesign.Shuffling
 {
   using System;
+  using System.Globalization;
   using System.Windows.Forms;
 
   using Ogama.Modules.Common.SlideCollections;
@@ -185,6 +186,15 @@ namespace Ogama.Modules.SlideshowDesign.Shuffling
       this.chbShuffleSections.Checked = shuffling.ShuffleSectionItems;
       this.nudCountSectionItemsInGroup.Value = shuffling.NumItemsOfSectionInGroup;
       this.rdbEnableShuffling.Checked = shuffling.UseThisCustomShuffling;
+      foreach (TreeNode node in this.trvSlideshow.Nodes)
+      {
+        if (node.Name == shuffling.ShuffleSectionsParentNodeID.ToString(CultureInfo.InvariantCulture))
+        {
+          this.selectedNodeID = shuffling.ShuffleSectionsParentNodeID;
+          this.txbParentNodeName.Text = node.Text;
+          break;
+        }
+      }
     }
 
     /// <summary>

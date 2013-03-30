@@ -151,11 +151,11 @@ namespace Ogama.Modules.Common.SlideCollections
     /// </summary>
     /// <param name="reader">The <see cref="XmlReader"/> to use.</param>
     /// <param name="node">The <see cref="SlideshowTreeNode"/> to deserialize.</param>
-    protected override void DeserializeNode(XmlReader reader, SlideshowTreeNode node)
+    public override void DeserializeNode(XmlReader reader, SlideshowTreeNode node)
     {
-      XmlSerializer slideSerializer = new XmlSerializer(typeof(Slide));
-      XmlSerializer dictionarySerializer = new XmlSerializer(typeof(XMLSerializableDictionary<string, int>));
-      BrowserTreeNode browserTreeNode = node as BrowserTreeNode;
+      var slideSerializer = new XmlSerializer(typeof(Slide));
+      var dictionarySerializer = new XmlSerializer(typeof(XMLSerializableDictionary<string, int>));
+      var browserTreeNode = node as BrowserTreeNode;
 
       reader.ReadStartElement("BrowserTreeNode");
       reader.ReadStartElement("Name");
@@ -218,11 +218,11 @@ namespace Ogama.Modules.Common.SlideCollections
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to use.</param>
     /// <param name="node">The <see cref="SlideshowTreeNode"/> to serialize.</param>
-    protected override void SerializeNode(XmlWriter writer, SlideshowTreeNode node)
+    public override void SerializeNode(XmlWriter writer, SlideshowTreeNode node)
     {
-      XmlSerializer slideSerializer = new XmlSerializer(typeof(Slide));
-      XmlSerializer dictionarySerializer = new XmlSerializer(typeof(XMLSerializableDictionary<string, int>));
-      BrowserTreeNode browserTreeNode = node as BrowserTreeNode;
+      var slideSerializer = new XmlSerializer(typeof(Slide));
+      var dictionarySerializer = new XmlSerializer(typeof(XMLSerializableDictionary<string, int>));
+      var browserTreeNode = node as BrowserTreeNode;
 
       writer.WriteStartElement("BrowserTreeNode");
 
