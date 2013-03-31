@@ -618,7 +618,10 @@ namespace Ogama.Modules.Recording
         }
       }
 
-      this.OnNewRawDataAvailable(new NewRawDataAvailableEventArgs(newRawData));
+      if (!this.currentSlide.IsDisabled)
+      {
+        this.OnNewRawDataAvailable(new NewRawDataAvailableEventArgs(newRawData));
+      }
     }
 
     #endregion //PUBLICMETHODS
@@ -1110,6 +1113,11 @@ namespace Ogama.Modules.Recording
     /// <param name="e">A <see cref="TrialEventOccuredEventArgs"/> with the event data.</param>
     private void ObjPresenterSlideChanged(object sender, SlideChangedEventArgs e)
     {
+      if (e.NextSlide.IsDisabled)
+      {
+        return;
+      }
+
       var time = this.counterChangedTime - this.recordingStarttime - this.currentTrialStarttime;
 
       // Store slide changed event
@@ -1165,6 +1173,21 @@ namespace Ogama.Modules.Recording
       long currentTime = this.counterChangedTime;
       this.xScrollOffset = 0;
       this.yScrollOffset = 0;
+
+      // If the last trial was a disabled trial (PreFixationSlide)
+      // Only update start times
+      if (e.FinishedTrial[e.FinishedTrial.Count - 1].IsDisabled)
+      {
+        // Update new trial
+        this.currentTrialStarttime = currentTime - this.recordingStarttime;
+
+        if (this.chbRecordAudio.Checked || this.chbRecordVideo.Checked)
+        {
+          this.currentTrialVideoStartTime = e.WebcamTime;
+        }
+
+        return;
+      }
 
       if (e.FinishedTrial.Name != "DummyTrial")
       {

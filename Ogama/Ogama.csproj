@@ -1637,6 +1637,7 @@
     <None Include="Resources\Desktop.png" />
     <None Include="Resources\Desktop32.png" />
     <None Include="Resources\Desktop48.png" />
+    <None Include="Resources\Disabled16.png" />
     <Content Include="Resources\EyeTechLogo_S.png" />
     <None Include="Resources\Eyetech_tracker.png" />
     <Content Include="Resources\MirametrixLogo.png" />

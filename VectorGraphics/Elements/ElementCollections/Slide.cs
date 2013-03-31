@@ -45,11 +45,6 @@ namespace VectorGraphics.Elements.ElementCollections
     ///////////////////////////////////////////////////////////////////////////////
     #region CONSTANTS
 
-    /// <summary>
-    /// Size of slide thumbs.
-    /// </summary>
-    private static Size slideDesignThumbSize = new Size(150, 100);
-
     #endregion //CONSTANTS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -67,12 +62,6 @@ namespace VectorGraphics.Elements.ElementCollections
     /// ActiveX controls (like <see cref="VGFlash"/>).
     /// </summary>
     private VGElementCollection activeXElements;
-
-    /// <summary>
-    /// This member saves the original presentation size of
-    /// this Slide (used to calculate transformations)
-    /// </summary>
-    private Size presentationSize;
 
     /// <summary>
     /// Saves a thumb for this slide.
@@ -112,17 +101,20 @@ namespace VectorGraphics.Elements.ElementCollections
     /// </summary>
     private VGElementCollection targets;
 
-    /// <summary>
-    /// Flag, indicating a modification of this slide.
-    /// </summary>
-    private bool modified;
-
     #endregion //FIELDS
 
     ///////////////////////////////////////////////////////////////////////////////
     // Construction and Initializing methods                                     //
     ///////////////////////////////////////////////////////////////////////////////
     #region CONSTRUCTION
+
+    /// <summary>
+    /// Initializes static members of the <see cref="Slide"/> class.
+    /// </summary>
+    static Slide()
+    {
+      SlideDesignThumbSize = new Size(150, 100);
+    }
 
     /// <summary>
     /// Initializes a new instance of the Slide class.
@@ -137,6 +129,7 @@ namespace VectorGraphics.Elements.ElementCollections
       this.stopConditions = new StopConditionCollection();
       this.category = string.Empty;
       this.TriggerSignal = new Trigger(TriggerSignaling.None, TriggerOutputDevices.LPT, 40, 255, 0x0378);
+      this.IdOfPreSlideFixationTrial = -1;
     }
 
     /// <summary>
@@ -183,6 +176,8 @@ namespace VectorGraphics.Elements.ElementCollections
       this.TriggerSignal = slide.TriggerSignal;
 
       this.IsDesktopSlide = slide.IsDesktopSlide;
+      this.IdOfPreSlideFixationTrial = slide.IdOfPreSlideFixationTrial;
+      this.IsDisabled = slide.IsDisabled;
 
       // Clone correct responses
       this.correctResponses = new StopConditionCollection();
@@ -214,8 +209,8 @@ namespace VectorGraphics.Elements.ElementCollections
       this.MouseCursorVisible = slide.MouseCursorVisible;
       this.ForceMousePositionChange = slide.ForceMousePositionChange;
 
-      this.presentationSize = slide.presentationSize;
-      this.modified = slide.Modified;
+      this.PresentationSize = slide.PresentationSize;
+      this.Modified = slide.Modified;
     }
 
     /// <summary>
@@ -251,7 +246,8 @@ namespace VectorGraphics.Elements.ElementCollections
       this.name = newName;
       this.correctResponses = newResponses;
       this.category = newCategory;
-      this.presentationSize = newPresentationSize;
+      this.PresentationSize = newPresentationSize;
+      this.IdOfPreSlideFixationTrial = -1;
     }
 
     #endregion //CONSTRUCTION
@@ -262,7 +258,7 @@ namespace VectorGraphics.Elements.ElementCollections
     #region ENUMS
 
     /// <summary>
-    /// Delegate to call a slide.Draw() asynchrous from another thread
+    /// Delegate to call a slide.Draw() asynchronous from another thread
     /// </summary>
     /// <param name="slide">The <see cref="Slide"/> to be drawn.</param>
     /// <param name="g">The <see cref="Graphics"/> to draw the slide to.</param>
@@ -276,16 +272,30 @@ namespace VectorGraphics.Elements.ElementCollections
     #region PROPERTIES
 
     /// <summary>
-    /// Gets or sets the size of slide thumbs.
+    /// Gets or sets a value indicating whether the slide should
+    /// be disabled during slideshow presentation
     /// </summary>
-    [XmlIgnore]
+    /// <value>A <see cref="Boolean"/> indicating that this slide
+    /// should not be presented.</value>
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     [Browsable(false)]
-    public static Size SlideDesignThumbSize
-    {
-      get { return slideDesignThumbSize; }
-      set { slideDesignThumbSize = value; }
-    }
+    public bool IsDisabled { get; set; }
+
+    /// <summary>
+    /// Gets or sets a unique identifier for the trial that should be
+    /// displayed before this slide is shown, but not 
+    /// used in analysis.
+    /// </summary>
+    /// <value>An <see cref="int"/> with a unique trial id or -1 if not used.</value>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    [Browsable(false)]
+    public int IdOfPreSlideFixationTrial { get; set; }
+
+    /// <summary>
+    /// Gets or sets the size of slide thumbs.
+    /// </summary>
+    [XmlIgnore, DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false)]
+    public static Size SlideDesignThumbSize { get; set; }
 
     /// <summary>
     /// Gets a value indicating whether one of the slides
@@ -364,25 +374,16 @@ namespace VectorGraphics.Elements.ElementCollections
       {
         if (this.thumb != null)
         {
-          TypeConverter bitmapConverter = TypeDescriptor.GetConverter(this.thumb.GetType());
+          var bitmapConverter = TypeDescriptor.GetConverter(this.thumb.GetType());
           return (byte[])bitmapConverter.ConvertTo(this.thumb, typeof(byte[]));
         }
-        else
-        {
-          return null;
-        }
+
+        return null;
       }
 
       set
       {
-        if (value != null)
-        {
-          this.thumb = new Bitmap(new MemoryStream(value));
-        }
-        else
-        {
-          this.thumb = null;
-        }
+        this.thumb = value != null ? new Bitmap(new MemoryStream(value)) : null;
       }
     }
 
@@ -390,13 +391,8 @@ namespace VectorGraphics.Elements.ElementCollections
     /// Gets or sets the original presentation size of
     /// this Slide (used to calculate transformations)
     /// </summary>
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    [Browsable(false)]
-    public Size PresentationSize
-    {
-      get { return this.presentationSize; }
-      set { this.presentationSize = value; }
-    }
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false)]
+    public Size PresentationSize { get; set; }
 
     /// <summary>
     /// Gets the original size of the stimulus content
@@ -435,13 +431,8 @@ namespace VectorGraphics.Elements.ElementCollections
     /// </summary>
     /// <value>A <see cref="Boolean"/> indication the modification
     /// state of this slide.</value>
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    [Browsable(false)]
-    public bool Modified
-    {
-      get { return this.modified; }
-      set { this.modified = value; }
-    }
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false)]
+    public bool Modified { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether the slide is modified
@@ -469,12 +460,7 @@ namespace VectorGraphics.Elements.ElementCollections
     {
       get
       {
-        if (this.stimuli == null)
-        {
-          this.stimuli = new VGElementCollection();
-        }
-
-        return this.stimuli;
+        return this.stimuli ?? (this.stimuli = new VGElementCollection());
       }
 
       set
@@ -609,14 +595,7 @@ namespace VectorGraphics.Elements.ElementCollections
 
       set
       {
-        if (value != null)
-        {
-          this.BackgroundImage = new Bitmap(new MemoryStream(value));
-        }
-        else
-        {
-          this.BackgroundImage = null;
-        }
+        this.BackgroundImage = value != null ? new Bitmap(new MemoryStream(value)) : null;
       }
     }
 
@@ -795,7 +774,7 @@ namespace VectorGraphics.Elements.ElementCollections
       }
 
       graphics.SmoothingMode = SmoothingMode.AntiAlias;
-      if (this.presentationSize == Size.Empty)
+      if (this.PresentationSize == Size.Empty)
       {
         throw new ArgumentOutOfRangeException("The presentation size of the slide is empty.");
       }
@@ -811,8 +790,8 @@ namespace VectorGraphics.Elements.ElementCollections
           this.BackgroundImage,
           0,
           0,
-          this.presentationSize.Width,
-          this.presentationSize.Height);
+          this.PresentationSize.Width,
+          this.PresentationSize.Height);
       }
 
       foreach (VGElement element in this.stimuli)
@@ -937,12 +916,12 @@ namespace VectorGraphics.Elements.ElementCollections
     /// </summary>
     private void RecreateThumb()
     {
-      Bitmap newThumb = new Bitmap(slideDesignThumbSize.Width, slideDesignThumbSize.Height);
+      Bitmap newThumb = new Bitmap(SlideDesignThumbSize.Width, SlideDesignThumbSize.Height);
 
       using (Graphics g = Graphics.FromImage(newThumb))
       {
-        float factorX = (float)newThumb.Width / this.presentationSize.Width;
-        float factorY = (float)newThumb.Height / this.presentationSize.Height;
+        float factorX = (float)newThumb.Width / this.PresentationSize.Width;
+        float factorY = (float)newThumb.Height / this.PresentationSize.Height;
         if (factorX != 0 && factorY != 0)
         {
           g.ScaleTransform(factorX, factorY);
@@ -964,7 +943,7 @@ namespace VectorGraphics.Elements.ElementCollections
           else if (element is VGBrowser)
           {
             VGBrowser browser = element as VGBrowser;
-            Image browserThumb = CreateBrowserThumb(browser.BrowserURL, this.presentationSize);
+            Image browserThumb = CreateBrowserThumb(browser.BrowserURL, this.PresentationSize);
             g.DrawImage(browserThumb, Point.Empty);
           }
         }

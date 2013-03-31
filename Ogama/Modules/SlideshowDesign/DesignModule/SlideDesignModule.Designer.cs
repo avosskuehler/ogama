@@ -181,6 +181,11 @@
       this.dltForm = new Ogama.Modules.Common.Controls.DialogTop();
       this.splitContainer1 = new System.Windows.Forms.SplitContainer();
       this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+      this.chbIsDisabled = new System.Windows.Forms.CheckBox();
+      this.tabPage4 = new System.Windows.Forms.TabPage();
+      this.label27 = new System.Windows.Forms.Label();
+      this.cbbPreSlideFixationTrial = new System.Windows.Forms.ComboBox();
+      this.label28 = new System.Windows.Forms.Label();
       ((System.ComponentModel.ISupportInitialize)(this.bsoSubjects)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.bsoFKSubjectsTrials)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.ogamaDataSet)).BeginInit();
@@ -260,6 +265,7 @@
       this.splitContainer2.Panel1.SuspendLayout();
       this.splitContainer2.Panel2.SuspendLayout();
       this.splitContainer2.SuspendLayout();
+      this.tabPage4.SuspendLayout();
       this.SuspendLayout();
       // 
       // ofdBackgroundImage
@@ -1062,6 +1068,7 @@
       this.tctStandards.Controls.Add(this.tbpBackground);
       this.tctStandards.Controls.Add(this.tbpMouse);
       this.tctStandards.Controls.Add(this.tbpTrigger);
+      this.tctStandards.Controls.Add(this.tabPage4);
       this.tctStandards.Dock = System.Windows.Forms.DockStyle.Fill;
       this.tctStandards.ImageList = this.imlCommands;
       this.tctStandards.Location = new System.Drawing.Point(0, 0);
@@ -1072,6 +1079,7 @@
       // 
       // tbpName
       // 
+      this.tbpName.Controls.Add(this.chbIsDisabled);
       this.tbpName.Controls.Add(this.label11);
       this.tbpName.Controls.Add(this.pcbHelpNaming);
       this.tbpName.Controls.Add(this.cbbCategory);
@@ -1084,7 +1092,7 @@
       this.tbpName.Padding = new System.Windows.Forms.Padding(3);
       this.tbpName.Size = new System.Drawing.Size(272, 215);
       this.tbpName.TabIndex = 6;
-      this.tbpName.Text = "Naming";
+      this.tbpName.Text = "Default";
       this.tbpName.UseVisualStyleBackColor = true;
       // 
       // label11
@@ -2035,6 +2043,60 @@
       this.splitContainer2.SplitterDistance = 485;
       this.splitContainer2.TabIndex = 0;
       // 
+      // chbIsDisabled
+      // 
+      this.chbIsDisabled.AutoSize = true;
+      this.chbIsDisabled.Location = new System.Drawing.Point(115, 117);
+      this.chbIsDisabled.Name = "chbIsDisabled";
+      this.chbIsDisabled.Size = new System.Drawing.Size(93, 17);
+      this.chbIsDisabled.TabIndex = 27;
+      this.chbIsDisabled.Text = "Disabled Slide";
+      this.toolTip.SetToolTip(this.chbIsDisabled, "Check this, if you don´t want to show this slide in the slideshow.\r\nIf you will u" +
+        "se this slide as a pre trial slide, check this to\r\neliminate this slide from ana" +
+        "lysis.");
+      this.chbIsDisabled.UseVisualStyleBackColor = true;
+      // 
+      // tabPage4
+      // 
+      this.tabPage4.Controls.Add(this.label28);
+      this.tabPage4.Controls.Add(this.cbbPreSlideFixationTrial);
+      this.tabPage4.Controls.Add(this.label27);
+      this.tabPage4.Location = new System.Drawing.Point(4, 23);
+      this.tabPage4.Name = "tabPage4";
+      this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+      this.tabPage4.Size = new System.Drawing.Size(272, 215);
+      this.tabPage4.TabIndex = 9;
+      this.tabPage4.Text = "Pre Slide Fixation Trial";
+      this.tabPage4.UseVisualStyleBackColor = true;
+      // 
+      // label27
+      // 
+      this.label27.AutoSize = true;
+      this.label27.Location = new System.Drawing.Point(6, 12);
+      this.label27.Name = "label27";
+      this.label27.Size = new System.Drawing.Size(263, 26);
+      this.label27.TabIndex = 29;
+      this.label27.Text = "Specify the trial to be shown before this slide is shown,\r\nthis can be a fixation" +
+    " sharp or anything else.";
+      // 
+      // cbbPreSlideFixationTrial
+      // 
+      this.cbbPreSlideFixationTrial.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.cbbPreSlideFixationTrial.FormattingEnabled = true;
+      this.cbbPreSlideFixationTrial.Location = new System.Drawing.Point(80, 59);
+      this.cbbPreSlideFixationTrial.Name = "cbbPreSlideFixationTrial";
+      this.cbbPreSlideFixationTrial.Size = new System.Drawing.Size(93, 21);
+      this.cbbPreSlideFixationTrial.TabIndex = 35;
+      // 
+      // label28
+      // 
+      this.label28.AutoSize = true;
+      this.label28.Location = new System.Drawing.Point(11, 62);
+      this.label28.Name = "label28";
+      this.label28.Size = new System.Drawing.Size(60, 13);
+      this.label28.TabIndex = 36;
+      this.label28.Text = "Select Trial";
+      // 
       // SlideDesignModule
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2149,6 +2211,8 @@
       this.splitContainer2.Panel2.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
       this.splitContainer2.ResumeLayout(false);
+      this.tabPage4.ResumeLayout(false);
+      this.tabPage4.PerformLayout();
       this.ResumeLayout(false);
 
     }
@@ -2299,5 +2363,10 @@
     private Label label25;
     private NumericUpDown nudLayoutWidth;
     private OgamaControls.GenericValueEditor gveLayoutDockStyle;
+    private CheckBox chbIsDisabled;
+    private TabPage tabPage4;
+    private Label label28;
+    private ComboBox cbbPreSlideFixationTrial;
+    private Label label27;
   }
 }

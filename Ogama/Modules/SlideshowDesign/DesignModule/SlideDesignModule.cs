@@ -262,6 +262,11 @@ namespace Ogama.Modules.SlideshowDesign.DesignModule
       this.cbbLinksTrial.DisplayMember = "Name";
       this.cbbLinksTrial.ValueMember = "ID";
 
+      // Pre Fixation tab
+      this.cbbPreSlideFixationTrial.Items.AddRange(trials.ToArray());
+      this.cbbPreSlideFixationTrial.DisplayMember = "Name";
+      this.cbbPreSlideFixationTrial.ValueMember = "ID";
+
       // Images Tab
       this.cbbImageLayout.Items.AddRange(Enum.GetNames(typeof(ImageLayout)));
 
@@ -1082,13 +1087,28 @@ namespace Ogama.Modules.SlideshowDesign.DesignModule
     /// <summary>
     /// Update the dialog forms fields with the content from the given <see cref="Slide"/>.
     /// </summary>
-    /// <param name="slide">The <see cref="Slide"/> whichs content  should
+    /// <param name="slide">The <see cref="Slide"/> which content should
     /// be shown in the dialog.</param>
     private void PopulateDialogWithSlide(Slide slide)
     {
       // Common properties
       this.txbName.Text = slide.Name;
       this.cbbCategory.Text = slide.Category;
+      this.chbIsDisabled.Checked = slide.IsDisabled;
+
+      if (slide.IdOfPreSlideFixationTrial != -1)
+      {
+        var item = Document.ActiveDocument.ExperimentSettings.SlideShow.GetTrialByID(slide.IdOfPreSlideFixationTrial);
+        foreach (var item1 in this.cbbPreSlideFixationTrial.Items)
+        {
+          var trial = item1 as Trial;
+          if (trial.ID == item.ID)
+          {
+            this.cbbPreSlideFixationTrial.SelectedItem = item1;
+            break;
+          }
+        }
+      }
 
       // Tab Timing
       foreach (StopCondition condition in slide.StopConditions)
@@ -1163,11 +1183,18 @@ namespace Ogama.Modules.SlideshowDesign.DesignModule
     /// <returns>The new <see cref="Slide"/> to be added to the slideshow.</returns>
     private Slide GetSlide()
     {
-      Slide slide = new Slide();
+      var slide = new Slide();
 
       // Store category and name.
       slide.Category = this.cbbCategory.Text;
       slide.Name = this.txbName.Text;
+      slide.IsDisabled = this.chbIsDisabled.Checked;
+      slide.IdOfPreSlideFixationTrial = -1;
+      if (this.cbbPreSlideFixationTrial.SelectedItem != null)
+      {
+        var selectedTrial = (Trial)this.cbbPreSlideFixationTrial.SelectedItem;
+        slide.IdOfPreSlideFixationTrial = selectedTrial.ID;
+      }
 
       // Add standard stop condition if none is specified.
       if (this.lsbStopConditions.Items.Count == 0)

@@ -188,6 +188,19 @@ namespace Ogama.Modules.SlideshowDesign
         diceBounds.Offset(e.Node.Bounds.Width + 10 + (int)textSize.Width, 0);
         Slideshow.DrawDice(e.Graphics, diceBounds.Location);
       }
+
+      // If the disabled flag is set, draw a disabled icon 
+      // to the right of the label text.
+      var node = e.Node as SlideshowTreeNode;
+      if (node.Slide != null)
+      {
+        if (node.Slide.IsDisabled)
+        {
+          Rectangle disabledBounds = e.Node.Bounds;
+          disabledBounds.Offset(e.Node.Bounds.Width + 10 + (int)textSize.Width, 0);
+          Slideshow.DrawDisabled(e.Graphics, disabledBounds.Location);
+        }
+      }
     }
 
     /// <summary>
@@ -357,6 +370,9 @@ namespace Ogama.Modules.SlideshowDesign
     /// <param name="e">An <see cref="CancelEventArgs"/> that contains the event data. </param>
     private void cmuItemView_Opening(object sender, CancelEventArgs e)
     {
+      this.cmuDisable.Text = "Disable Slide";
+      this.cmuDisable.Checked = false;
+ 
       int itemCount = this.trvSlideshow.SelectedNodes.Count;
       if (itemCount > 1)
       {
@@ -397,6 +413,12 @@ namespace Ogama.Modules.SlideshowDesign
         else
         {
           SlideshowTreeNode node = this.trvSlideshow.SelectedNodes[0] as SlideshowTreeNode;
+          if (node.Slide != null && node.Slide.IsDisabled)
+          {
+            this.cmuDisable.Text = "Enable Slide";
+            this.cmuDisable.Checked = true;
+          }
+
           this.cmuShuffle.Enabled = true;
           this.cmuShuffle.Checked = node.Randomize;
           if (this.cmuShuffle.Checked)
@@ -430,6 +452,30 @@ namespace Ogama.Modules.SlideshowDesign
           }
         }
       }
+    }
+
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler for the
+    /// <see cref="ToolStripMenuItem"/> <see cref="cmuDisable"/>.
+    /// Occurs when the context menues disable button is clicked
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/>.</param>
+    private void cmuDisable_Click(object sender, EventArgs e)
+    {
+      var selectedNodes = this.trvSlideshow.SelectedNodes;
+
+      foreach (var selectedNode1 in selectedNodes)
+      {
+        var node = selectedNode1 as SlideshowTreeNode;
+        if (node.Slide != null)
+        {
+          node.Slide.IsDisabled = !node.Slide.IsDisabled;
+        }
+      }
+
+      this.trvSlideshow.Invalidate();
+      this.lsvDetails.Invalidate();
     }
 
     /// <summary>
