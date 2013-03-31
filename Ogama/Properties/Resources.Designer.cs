@@ -491,6 +491,13 @@ namespace Ogama.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Disabled16 {
+            get {
+                object obj = ResourceManager.GetObject("Disabled16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap DisplayInColorHS {
             get {
                 object obj = ResourceManager.GetObject("DisplayInColorHS", resourceCulture);

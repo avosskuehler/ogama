@@ -43,6 +43,7 @@
       this.btnCustomShuffling = new System.Windows.Forms.ToolStripButton();
       this.trvSlideshow = new OgamaControls.MultiselectTreeView();
       this.cmuItemView = new System.Windows.Forms.ContextMenuStrip(this.components);
+      this.cmuDisable = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
       this.cmuShuffle = new System.Windows.Forms.ToolStripMenuItem();
       this.cmuDescription = new System.Windows.Forms.ToolStripMenuItem();
@@ -292,6 +293,7 @@
       // cmuItemView
       // 
       this.cmuItemView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmuDisable,
             this.toolStripSeparator4,
             this.cmuShuffle,
             this.cmuDescription,
@@ -301,8 +303,17 @@
             this.cmuCombineToTrial,
             this.cmuDelete});
       this.cmuItemView.Name = "contextMenuStrip1";
-      this.cmuItemView.Size = new System.Drawing.Size(525, 153);
+      this.cmuItemView.Size = new System.Drawing.Size(525, 197);
       this.cmuItemView.Opening += new System.ComponentModel.CancelEventHandler(this.cmuItemView_Opening);
+      // 
+      // cmuDisable
+      // 
+      this.cmuDisable.CheckOnClick = true;
+      this.cmuDisable.Image = global::Ogama.Properties.Resources.Disabled16;
+      this.cmuDisable.Name = "cmuDisable";
+      this.cmuDisable.Size = new System.Drawing.Size(524, 22);
+      this.cmuDisable.Text = "Disable Slide";
+      this.cmuDisable.Click += new System.EventHandler(this.cmuDisable_Click);
       // 
       // toolStripSeparator4
       // 
@@ -882,5 +893,6 @@
     private System.Windows.Forms.ToolStripButton btnAddFolder;
     private System.Windows.Forms.ToolStripButton btnInternet;
     private System.Windows.Forms.ToolStripButton btnDesktop;
+    private System.Windows.Forms.ToolStripMenuItem cmuDisable;
   }
 }

@@ -24,7 +24,7 @@ namespace Ogama.Modules.Common.SlideCollections
 
   /// <summary>
   /// The Trial class is a <see cref="List{Slide}"/> that implements <see cref="IClonableNamedObject"/>
-  /// and <see cref="IObjectWithID"/> so it is cloneable, named and owns a unique identifier.
+  /// and <see cref="IObjectWithID"/> so it is clonable, named and owns a unique identifier.
   /// <strong>Trials</strong> are the basis of Ogamas analysis. They can consist of
   /// a number of <see cref="Slide"/> but by default contain only one <see cref="Slide"/>
   /// to make analysis as fine grained as possible.
@@ -43,16 +43,6 @@ namespace Ogama.Modules.Common.SlideCollections
     ///////////////////////////////////////////////////////////////////////////////
     #region FIELDS
 
-    /// <summary>
-    /// Saves the trial name.
-    /// </summary>
-    private string name;
-
-    /// <summary>
-    /// Saves the trials unique identifier.
-    /// </summary>
-    private int id;
-
     #endregion //FIELDS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -65,18 +55,18 @@ namespace Ogama.Modules.Common.SlideCollections
     /// </summary>
     public Trial()
     {
-      this.name = "Trial";
-      this.id = 0;
+      this.Name = "Trial";
+      this.ID = 0;
     }
 
     /// <summary>
-    /// Initializes a new instance of the Trial class by cloneing the given <see cref="Trial"/>
+    /// Initializes a new instance of the Trial class by cloning the given <see cref="Trial"/>
     /// </summary>
     /// <param name="newTrial">A <see cref="Trial"/> with the trial to clone.</param>
     public Trial(Trial newTrial)
     {
-      this.name = newTrial.Name;
-      this.id = newTrial.ID;
+      this.Name = newTrial.Name;
+      this.ID = newTrial.ID;
       foreach (Slide slide in newTrial)
       {
         this.Add((Slide)slide.Clone());
@@ -90,8 +80,8 @@ namespace Ogama.Modules.Common.SlideCollections
     /// <param name="newId">An <see cref="int"/> with the trials unique identifier.</param>
     public Trial(string newName, int newId)
     {
-      this.name = newName;
-      this.id = newId;
+      this.Name = newName;
+      this.ID = newId;
     }
 
     #endregion //CONSTRUCTION
@@ -105,21 +95,13 @@ namespace Ogama.Modules.Common.SlideCollections
     /// Gets or sets the trials name.
     /// </summary>
     /// <value>A <see cref="string"/> with the name for this trial.</value>
-    public string Name
-    {
-      get { return this.name; }
-      set { this.name = value; }
-    }
+    public string Name { get; set; }
 
     /// <summary>
     /// Gets or sets the trials unique identifier.
     /// </summary>
     /// <value>An <see cref="int"/> with a unique id.</value>
-    public int ID
-    {
-      get { return this.id; }
-      set { this.id = value; }
-    }
+    public int ID { get; set; }
 
     /// <summary>
     /// Gets a value indicating whether one of the slides
@@ -219,7 +201,7 @@ namespace Ogama.Modules.Common.SlideCollections
     /// <returns>A <see cref="string"/> with the name of the trial.</returns>
     public override string ToString()
     {
-      return this.name;
+      return this.Name;
     }
 
     #endregion //OVERRIDES

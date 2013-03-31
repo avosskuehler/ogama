@@ -37,7 +37,7 @@ namespace Ogama.Modules.Recording.TobiiInterface
   /// This class implements the <see cref="TrackerWithStatusControls"/> class
   ///   to represent an OGAMA known eyetracker.
   ///   It encapsulates a TOBII http://www.tobii.com eyetracker 
-  ///   and is written with the SDK 2.0.1 from Tobii Systems.
+  ///   and is written with the SDK 3 from Tobii Systems.
   ///   It is tested with the Tobii T60/T120 series.
   /// </summary>
   public class TobiiTracker : TrackerWithStatusControls

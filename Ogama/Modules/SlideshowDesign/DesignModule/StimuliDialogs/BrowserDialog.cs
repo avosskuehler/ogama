@@ -148,11 +148,52 @@ namespace Ogama.Modules.SlideshowDesign.DesignModule.StimuliDialogs
     /// <returns>A <see cref="String"/> with a valid and unique filename.</returns>
     public static string GetFilenameFromUrl(Uri url)
     {
-      string filename = Regex.Replace(url.ToString(), @"(\\|\/|\:|\*|\?|\""|\<|\>|\|)?", string.Empty);
-      filename = filename.Substring(0, Math.Min(filename.Length, 100));
+      // string filename = Regex.Replace(url.ToString(), @"(\\|\/|\:|\*|\?|\""|\<|\>|\|)?", string.Empty);
+      var filename = FilenameFromTitle(url.ToString());
       filename += ".png";
       filename = Path.Combine(Document.ActiveDocument.ExperimentSettings.SlideResourcesPath, filename);
       return filename;
+    }
+
+    /// <summary>
+    /// Reformats the url into a filename with max length of 100.
+    /// </summary>
+    /// <param name="url">The url to be converted</param>
+    /// <returns>A <see cref="String"/> with the converted url</returns>
+    public static string FilenameFromTitle(string url)
+    {
+      // first trim the raw string
+      var safe = url.Trim();
+
+      safe = safe.Replace("http://", string.Empty);
+
+      // replace spaces with hyphens
+      safe = safe.Replace(" ", "-").ToLower();
+
+      // replace any 'double spaces' with singles
+      if (safe.IndexOf("--", StringComparison.Ordinal) > -1)
+      {
+        while (safe.IndexOf("--", StringComparison.Ordinal) > -1)
+        {
+          safe = safe.Replace("--", "-");
+        }
+      }
+
+      // trim out illegal characters
+      safe = Regex.Replace(safe, "[^a-z0-9\\-]", string.Empty);
+
+      // trim the length
+      if (safe.Length > 100)
+      {
+        safe = safe.Substring(0, 100);
+      }
+
+      // clean the beginning and end of the filename
+      char[] replace = { '-', '.' };
+      safe = safe.TrimStart(replace);
+      safe = safe.TrimEnd(replace);
+
+      return safe;
     }
 
     #endregion //PUBLICMETHODS

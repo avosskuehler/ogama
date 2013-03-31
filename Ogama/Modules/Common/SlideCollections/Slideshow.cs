@@ -179,6 +179,18 @@ namespace Ogama.Modules.Common.SlideCollections
     }
 
     /// <summary>
+    /// This method draws a disabled bitmap at the given position
+    /// on the given graphics object.
+    /// </summary>
+    /// <param name="g">The <see cref="Graphics"/> to draw to.</param>
+    /// <param name="position">The <see cref="Point"/> location of the top left corner.</param>
+    public static void DrawDisabled(Graphics g, Point position)
+    {
+      Image disabledBitmap = Properties.Resources.Disabled16;
+      g.DrawImage(disabledBitmap, position.X, position.Y, disabledBitmap.Width, disabledBitmap.Height);
+    }
+
+    /// <summary>
     /// This method draws a trial bitmap at the given position
     /// on the given graphics object.
     /// </summary>
@@ -381,7 +393,7 @@ namespace Ogama.Modules.Common.SlideCollections
     public TrialCollection GetRandomizedTrials()
     {
       List<object> nodeCollection = this.ParseNodeForRandomizedTrials(this);
-      TrialCollection trials = new TrialCollection();
+      var trials = new TrialCollection();
       this.GetTrialsFromObjectCollection(nodeCollection, ref trials);
       return trials;
     }
@@ -804,15 +816,15 @@ namespace Ogama.Modules.Common.SlideCollections
     private List<object> ParseNodeForCustomShuffledTrials(TreeNode node)
     {
       // Get sections
-      List<object> sections = new List<object>();
+      var sections = new List<object>();
       foreach (TreeNode subNode in node.Nodes)
       {
-        List<object> nodeCollection = this.ParseNodeForRandomizedTrials(subNode);
-        TrialCollection trials = new TrialCollection();
+        var nodeCollection = this.ParseNodeForRandomizedTrials(subNode);
+        var trials = new TrialCollection();
         this.GetTrialsFromObjectCollection(nodeCollection, ref trials);
 
         // Convert to List<object>
-        List<object> trialsObjectCollection = new List<object>();
+        var trialsObjectCollection = new List<object>();
         trialsObjectCollection.AddRange(trials.ToArray());
 
         // Shuffle sections if applicable
@@ -825,15 +837,15 @@ namespace Ogama.Modules.Common.SlideCollections
       }
 
       // Create groups
-      List<object> groups = new List<object>();
+      var groups = new List<object>();
       int index = 0;
-      bool finish = false;
+      var finish = false;
       do
       {
-        List<object> group = new List<object>();
+        var group = new List<object>();
         for (int i = 0; i < sections.Count; i++)
         {
-          List<object> coll = (List<object>)sections[i];
+          var coll = (List<object>)sections[i];
           if (coll.Count == index)
           {
             finish = true;
@@ -878,9 +890,9 @@ namespace Ogama.Modules.Common.SlideCollections
     /// shuffle groups.</returns>
     private List<object> ParseNodeForRandomizedTrials(TreeNode node)
     {
-      List<object> items = new List<object>();
+      var items = new List<object>();
 
-      SlideshowTreeNode parentNode = node as SlideshowTreeNode;
+      var parentNode = node as SlideshowTreeNode;
       if (this.shuffling.UseThisCustomShuffling)
       {
         if (Convert.ToInt32(parentNode.Name) == this.shuffling.ShuffleSectionsParentNodeID)
@@ -891,36 +903,71 @@ namespace Ogama.Modules.Common.SlideCollections
 
       if (parentNode.Tag != null && parentNode.Tag.ToString() == "Trial")
       {
-        Trial trial = new Trial(parentNode.Text, GetIdOfNode(parentNode));
+        var trial = new Trial(parentNode.Text, GetIdOfNode(parentNode));
         foreach (SlideshowTreeNode subNode in parentNode.Nodes)
         {
-          Slide slide = subNode.Slide;
-          if (slide != null)
+          var slide = subNode.Slide;
+          if (slide != null && !slide.IsDisabled)
           {
+            // if we have a preslide fixation trial add the slides before
+            var preSlideTrialID = slide.IdOfPreSlideFixationTrial;
+            if (preSlideTrialID != -1)
+            {
+              var preSlideNode = this.GetNodeByID(preSlideTrialID);
+              trial.AddRange(this.GetPreSlideTrialSlides(preSlideNode));
+            }
+
             trial.Add(slide);
           }
         }
 
-        items.Add(trial);
+        if (trial.Count > 0)
+        {
+          items.Add(trial);
+        }
       }
       else
       {
         foreach (TreeNode subNode in node.Nodes)
         {
-          SlideshowTreeNode subCollectionNode = subNode as SlideshowTreeNode;
+          var subCollectionNode = subNode as SlideshowTreeNode;
           if (subCollectionNode is BrowserTreeNode)
           {
-            Trial trial = new Trial(subNode.Text, GetIdOfNode(subNode));
-            Slide browserSlide = this.CreateBrowserSlide(subCollectionNode as BrowserTreeNode);
-            trial.Add(browserSlide);
-            items.Add(trial);
+            var trial = new Trial(subNode.Text, GetIdOfNode(subNode));
+            var browserSlide = this.CreateBrowserSlide(subCollectionNode as BrowserTreeNode);
+            if (!browserSlide.IsDisabled)
+            {
+              // if we have a preslide fixation trial add this trial before
+              var preSlideTrialID = browserSlide.IdOfPreSlideFixationTrial;
+              if (preSlideTrialID != -1)
+              {
+                var preSlideNode = this.GetNodeByID(preSlideTrialID);
+                var preTrial = new Trial(preSlideNode.Text, preSlideTrialID);
+                preTrial.AddRange(this.GetPreSlideTrialSlides(preSlideNode));
+                items.Add(preTrial);
+              }
+
+              trial.Add(browserSlide);
+              items.Add(trial);
+            }
           }
           else
           {
-            Slide slide = subCollectionNode.Slide;
-            if (slide != null)
+            var slide = subCollectionNode.Slide;
+            if (slide != null && !slide.IsDisabled)
             {
-              Trial trial = new Trial(subNode.Text, GetIdOfNode(subNode));
+              var trial = new Trial(subNode.Text, GetIdOfNode(subNode));
+
+              // if we have a preslide fixation trial add this trial before
+              var preSlideTrialID = slide.IdOfPreSlideFixationTrial;
+              if (preSlideTrialID != -1)
+              {
+                var preSlideNode = this.GetNodeByID(preSlideTrialID);
+                var preTrial = new Trial(preSlideNode.Text, preSlideTrialID);
+                preTrial.AddRange(this.GetPreSlideTrialSlides(preSlideNode));
+                items.Add(preTrial);
+              }
+
               trial.Add(slide);
               items.Add(trial);
             }
@@ -943,6 +990,34 @@ namespace Ogama.Modules.Common.SlideCollections
       }
 
       return items;
+    }
+
+    /// <summary>
+    /// This method returns a list of slides from the trial node that is selected
+    /// to be shown before the slide.
+    /// </summary>
+    /// <param name="preSlideNode">The pre slide node.</param>
+    /// <returns>The slide list.</returns>
+    private List<Slide> GetPreSlideTrialSlides(SlideshowTreeNode preSlideNode)
+    {
+      var slides = new List<Slide>();
+      if (preSlideNode.Tag != null && preSlideNode.Tag.ToString() == "Trial")
+      {
+        foreach (SlideshowTreeNode subNode in preSlideNode.Nodes)
+        {
+          var slide = subNode.Slide;
+          if (slide != null)
+          {
+            slides.Add(slide);
+          }
+        }
+      }
+      else
+      {
+        slides.Add(preSlideNode.Slide);
+      }
+
+      return slides;
     }
 
     /// <summary>
@@ -1027,5 +1102,6 @@ namespace Ogama.Modules.Common.SlideCollections
     }
 
     #endregion //HELPER
+
   }
 }
