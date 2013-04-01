@@ -206,11 +206,9 @@ namespace Ogama.Modules.Replay.Video
         return;
       }
 
-      // Create a new thread to process events
-      Thread t;
-      t = new Thread(new ThreadStart(this.EventWait));
-      t.Name = "Media Event Thread";
-      t.Start();
+      //// Create a new thread to process events
+      //var t = new Thread(this.EventWait) { Name = "Media Event Thread" };
+      //t.Start();
 
       int hr = this.mediaControl.Run();
       DsError.ThrowExceptionForHR(hr);
@@ -223,11 +221,20 @@ namespace Ogama.Modules.Replay.Video
     {
       int hr;
 
-      hr = ((IMediaEventSink)this.filterGraph).Notify(EventCode.UserAbort, IntPtr.Zero, IntPtr.Zero);
-      DsError.ThrowExceptionForHR(hr);
+      // Don´t stop it, cause this hangs with the buffer callback that is never called again
+      //hr = this.mediaControl.Stop();
+      //DsError.ThrowExceptionForHR(hr);
 
-      hr = this.mediaControl.Stop();
-      DsError.ThrowExceptionForHR(hr);
+      // Send an event saying we are complete
+      if (this.Completed != null)
+      {
+        var ca = new DESCompletedArgs(0);
+        this.Completed(this, ca);
+      }
+
+      // Just tell the event loop to be finished
+      //hr = ((IMediaEventSink)this.filterGraph).Notify(EventCode.UserAbort, IntPtr.Zero, IntPtr.Zero);
+      //DsError.ThrowExceptionForHR(hr);
     }
 
     #endregion //PUBLICMETHODS
@@ -383,7 +390,7 @@ namespace Ogama.Modules.Replay.Video
         }
         finally
         {
-          Marshal.ReleaseComObject(bitmapSource);
+          //Marshal.ReleaseComObject(bitmapSource);
         }
 
         // Grab some other interfaces
@@ -421,7 +428,7 @@ namespace Ogama.Modules.Replay.Video
       if (hr >= 0) // If there is video
       {
         // Set the window style
-        hr = videoWindow.put_WindowStyle((WindowStyle.Child | WindowStyle.ClipChildren | WindowStyle.ClipSiblings));
+        hr = videoWindow.put_WindowStyle(WindowStyle.Child | WindowStyle.ClipChildren | WindowStyle.ClipSiblings);
         DsError.ThrowExceptionForHR(hr);
 
         // Make the window visible
@@ -463,7 +470,8 @@ namespace Ogama.Modules.Replay.Video
         if (this.mediaControl != null)
         {
           // Stop the graph
-          hr = this.mediaControl.Stop();
+          // Don´t stop it, cause this hangs with the buffer callback that is never called again
+          //hr = this.mediaControl.StopWhenReady();
           this.mediaControl = null;
         }
 
@@ -511,16 +519,17 @@ namespace Ogama.Modules.Replay.Video
       // Returned when GetEvent is called but there are no events
       const int E_ABORT = unchecked((int)0x80004004);
 
-      int hr;
-      IntPtr p1, p2;
-      EventCode ec;
       EventCode exitCode = 0;
 
-      IMediaEvent mediaEvent = (IMediaEvent)this.filterGraph;
+      var mediaEvent = (IMediaEvent)this.filterGraph;
 
       do
       {
         // Read the event
+        int hr;
+        IntPtr p1;
+        IntPtr p2;
+        EventCode ec;
         for (hr = mediaEvent.GetEvent(out ec, out p1, out p2, 100);
             hr >= 0;
             hr = mediaEvent.GetEvent(out ec, out p1, out p2, 100))
@@ -558,7 +567,7 @@ namespace Ogama.Modules.Replay.Video
       // Send an event saying we are complete
       if (this.Completed != null)
       {
-        DESCompletedArgs ca = new DESCompletedArgs(exitCode);
+        var ca = new DESCompletedArgs(exitCode);
         this.Completed(this, ca);
       }
 

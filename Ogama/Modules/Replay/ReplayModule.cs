@@ -1884,7 +1884,7 @@ namespace Ogama.Modules.Replay
       {
         if (this.directShowInterface != null)
         {
-          this.directShowInterface.Completed -= new EventHandler(this.directShowInterface_Completed);
+          this.directShowInterface.Completed -= this.directShowInterface_Completed;
           this.directShowInterface.Dispose();
           this.directShowInterface = null;
         }
@@ -1907,7 +1907,7 @@ namespace Ogama.Modules.Replay
     {
       if (this.directShowInterfaceWithWebcam != null)
       {
-        this.directShowInterfaceWithWebcam.Completed -= new EventHandler(this.directShowInterfaceWithWebcam_Completed);
+        this.directShowInterfaceWithWebcam.Completed -= this.directShowInterfaceWithWebcam_Completed;
         this.directShowInterfaceWithWebcam.Dispose();
         this.directShowInterfaceWithWebcam = null;
       }
@@ -2144,7 +2144,8 @@ namespace Ogama.Modules.Replay
         this.videoExportProperties.GazeVideoProperties.StreamEndTime,
         this.videoFramePusher,
         this.replayPicture.RenderFrame);
-      imageHandler.Progress += new EventHandler<ProgressEventArgs>(this.imageHandler_Progress);
+      imageHandler.Progress += this.imageHandler_Progress;
+      imageHandler.Finished += this.imageHandler_Finished;
 
       // Setup usercam video filename.
       this.directShowInterfaceWithWebcam = new DSRecordWithDMO(
@@ -2152,7 +2153,7 @@ namespace Ogama.Modules.Replay
         this.videoExportProperties,
         this.newSplash.PreviewWindow);
 
-      this.directShowInterfaceWithWebcam.Completed += new EventHandler(this.directShowInterfaceWithWebcam_Completed);
+      this.directShowInterfaceWithWebcam.Completed += this.directShowInterfaceWithWebcam_Completed;
 
       this.replayPicture.ResetPicture();
 
@@ -2176,22 +2177,22 @@ namespace Ogama.Modules.Replay
       this.newSplash.Header = "Rendering gaze and mouse video";
       this.newSplash.IsPreviewVisible = true;
 
-      ImageFromVectorGraphics imageHandler =
+      var imageHandler =
         new ImageFromVectorGraphics(
         this.videoExportProperties.OutputVideoProperties,
         this.videoExportProperties.GazeVideoProperties.StreamStartTime,
         this.videoExportProperties.GazeVideoProperties.StreamEndTime,
         this.videoFramePusher,
         this.replayPicture.RenderFrame);
-      imageHandler.Progress += new EventHandler<ProgressEventArgs>(this.imageHandler_Progress);
-
+      imageHandler.Progress += this.imageHandler_Progress;
+      imageHandler.Finished += this.imageHandler_Finished;
       // Setup usercam video filename.
       this.directShowInterface = new DSRecord(
         imageHandler,
         this.videoExportProperties,
         this.newSplash.PreviewWindow);
 
-      this.directShowInterface.Completed += new EventHandler(this.directShowInterface_Completed);
+      this.directShowInterface.Completed += this.directShowInterface_Completed;
 
       this.replayPicture.ResetPicture();
 
@@ -2205,6 +2206,17 @@ namespace Ogama.Modules.Replay
 
         this.directShowInterface.Start();
       }
+    }
+
+    /// <summary>
+    /// This event handler ensures the correct close and disposal of
+    /// the video export once the image handler has no data anymore.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void imageHandler_Finished(object sender, EventArgs e)
+    {
+      this.OnEscape();
     }
 
     /// <summary>
