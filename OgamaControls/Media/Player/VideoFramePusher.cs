@@ -501,8 +501,8 @@ namespace OgamaControls
         {
           int hr = 0;
 
-          hr = this.mediaSeeking.SetPositions(timeToStart * 10000, AMSeekingSeekingFlags.AbsolutePositioning,
-            null, AMSeekingSeekingFlags.NoPositioning);
+          hr = this.mediaSeeking.SetPositions(
+            timeToStart * 10000, AMSeekingSeekingFlags.AbsolutePositioning, null, AMSeekingSeekingFlags.NoPositioning);
           DsError.ThrowExceptionForHR(hr);
 
           hr = this.mediaControl.StopWhenReady();

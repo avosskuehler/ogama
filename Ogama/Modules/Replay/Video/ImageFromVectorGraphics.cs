@@ -153,6 +153,8 @@ namespace Ogama.Modules.Replay.Video
     /// </summary>
     public event EventHandler<ProgressEventArgs> Progress;
 
+    public event EventHandler<EventArgs> Finished;
+
     #endregion ENUMS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -234,13 +236,7 @@ namespace Ogama.Modules.Replay.Video
 
           Rectangle r = new Rectangle(0, 0, bmp.Width, bmp.Height);
 
-          // Release the previous image
-          if (this.bitmapVGData != null)
-          {
-            this.bitmapVG.UnlockBits(this.bitmapVGData);
-            this.bitmapVG.Dispose();
-          }
-
+ 
           // Store the pointers
           this.bitmapVG = bmp;
           this.bitmapVGData = this.bitmapVG.LockBits(r, ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
@@ -252,21 +248,39 @@ namespace Ogama.Modules.Replay.Video
             Kernel32.CopyMemory(pointer, this.bitmapVGData.Scan0, size);
           }
 
+          // Release the previous image
+          if (this.bitmapVGData != null)
+          {
+            this.bitmapVG.UnlockBits(this.bitmapVGData);
+            this.bitmapVG.Dispose();
+          }
+
           if (this.Progress != null)
           {
             int percentComplete = (int)((float)currentTime / (this.sectionEndTime - this.sectionStartTime) * 100);
             this.Progress(this, new ProgressEventArgs(false, percentComplete, currentTime));
           }
 
-          if (sampleTime > this.sectionEndTime - this.frameTimeSpan)
+          if (sampleTime > this.sectionEndTime - 500)
           {
             // Console.WriteLine("Finish=true");
-            hr = 1; // End of stream
+            if (this.Finished != null)
+            {
+              this.Finished(this, EventArgs.Empty);
+            }
+
+            hr = 0; // End of stream
           }
         }
         else
         {
-          hr = 1; // End of stream
+          // Console.WriteLine("Finish=true");
+          if (this.Finished != null)
+          {
+            this.Finished(this, EventArgs.Empty);
+          }
+
+          hr = 0; // End of stream
         }
       }
 

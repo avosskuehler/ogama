@@ -228,8 +228,8 @@ namespace Ogama.Modules.Replay.Video
       hr = ((IMediaEventSink)this.filterGraph).Notify(EventCode.UserAbort, IntPtr.Zero, IntPtr.Zero);
       DsError.ThrowExceptionForHR(hr);
 
-      hr = this.mediaControl.Stop();
-      DsError.ThrowExceptionForHR(hr);
+      //hr = this.mediaControl.Stop();
+      //DsError.ThrowExceptionForHR(hr);
     }
 
     #endregion //PUBLICMETHODS
@@ -578,8 +578,8 @@ namespace Ogama.Modules.Replay.Video
         // Stop the graph
         if (this.mediaControl != null)
         {
-          // Stop the graph
-          hr = this.mediaControl.Stop();
+          //// Stop the graph
+          //hr = this.mediaControl.Stop();
         }
 
         // Free the preview window (ignore errors)
