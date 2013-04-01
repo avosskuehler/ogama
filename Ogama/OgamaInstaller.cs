@@ -157,32 +157,32 @@ namespace Ogama
     {
       base.Install(stateSaver);
 
-      // Get path to our OGAMA common application data folder
-      string commonAppData = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
-      commonAppData = Path.Combine(commonAppData, this.AssemblyCompany);
-      commonAppData = Path.Combine(commonAppData, this.AssemblyProduct);
+      //// Get path to our OGAMA common application data folder
+      //string commonAppData = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+      //commonAppData = Path.Combine(commonAppData, this.AssemblyCompany);
+      //commonAppData = Path.Combine(commonAppData, this.AssemblyProduct);
 
-      // Set read and write rights for everybody on this directory
-      // to enable writing of the ogamasc.xml file needed by the
-      // screen capture filter
-      try
-      {
-        SecurityIdentifier sid = new SecurityIdentifier(WellKnownSidType.WorldSid, null);
+      //// Set read and write rights for everybody on this directory
+      //// to enable writing of the ogamasc.xml file needed by the
+      //// screen capture filter
+      //try
+      //{
+      //  SecurityIdentifier sid = new SecurityIdentifier(WellKnownSidType.WorldSid, null);
 
-        DirectorySecurity security = Directory.GetAccessControl(commonAppData, AccessControlSections.All);
-        security.AddAccessRule(new FileSystemAccessRule(
-          sid,
-          FileSystemRights.FullControl,
-          InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit,
-          PropagationFlags.None,
-          AccessControlType.Allow));
+      //  DirectorySecurity security = Directory.GetAccessControl(commonAppData, AccessControlSections.All);
+      //  security.AddAccessRule(new FileSystemAccessRule(
+      //    sid,
+      //    FileSystemRights.FullControl,
+      //    InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit,
+      //    PropagationFlags.None,
+      //    AccessControlType.Allow));
 
-        Directory.SetAccessControl(commonAppData, security);
-      }
-      catch (Exception ex)
-      {
-        MessageBox.Show("Error: " + ex.Message);
-      }
+      //  Directory.SetAccessControl(commonAppData, security);
+      //}
+      //catch (Exception ex)
+      //{
+      //  MessageBox.Show("Error: " + ex.Message);
+      //}
     }
 
     /// <summary>
