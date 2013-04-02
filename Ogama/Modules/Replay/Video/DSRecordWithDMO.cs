@@ -209,12 +209,10 @@ namespace Ogama.Modules.Replay.Video
       }
 
       // Create a new thread to process events
-      Thread t;
-      t = new Thread(new ThreadStart(this.EventWait));
-      t.Name = "Media Event Thread";
+      Thread t = new Thread(this.EventWait) { Name = "Media Event Thread" };
       t.Start();
 
-      int hr = this.mediaControl.Run();
+      var hr = this.mediaControl.Run();
       DsError.ThrowExceptionForHR(hr);
     }
 
@@ -675,7 +673,7 @@ namespace Ogama.Modules.Replay.Video
       // Send an event saying we are complete
       if (this.Completed != null)
       {
-        DESCompletedArgs ca = new DESCompletedArgs(exitCode);
+        var ca = new DESCompletedArgs(exitCode);
         this.Completed(this, ca);
       }
 

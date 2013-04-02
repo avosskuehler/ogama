@@ -206,11 +206,11 @@ namespace Ogama.Modules.Replay.Video
         return;
       }
 
-      //// Create a new thread to process events
-      //var t = new Thread(this.EventWait) { Name = "Media Event Thread" };
-      //t.Start();
+      // Create a new thread to process events
+      var t = new Thread(this.EventWait) { Name = "Media Event Thread" };
+      t.Start();
 
-      int hr = this.mediaControl.Run();
+      var hr = this.mediaControl.Run();
       DsError.ThrowExceptionForHR(hr);
     }
 
@@ -222,19 +222,19 @@ namespace Ogama.Modules.Replay.Video
       int hr;
 
       // Don´t stop it, cause this hangs with the buffer callback that is never called again
-      //hr = this.mediaControl.Stop();
-      //DsError.ThrowExceptionForHR(hr);
+      // hr = this.mediaControl.Stop();
+      // DsError.ThrowExceptionForHR(hr);
 
-      // Send an event saying we are complete
-      if (this.Completed != null)
-      {
-        var ca = new DESCompletedArgs(0);
-        this.Completed(this, ca);
-      }
+      //// Send an event saying we are complete
+      //if (this.Completed != null)
+      //{
+      //  var ca = new DESCompletedArgs(0);
+      //  this.Completed(this, ca);
+      //}
 
       // Just tell the event loop to be finished
-      //hr = ((IMediaEventSink)this.filterGraph).Notify(EventCode.UserAbort, IntPtr.Zero, IntPtr.Zero);
-      //DsError.ThrowExceptionForHR(hr);
+      hr = ((IMediaEventSink)this.filterGraph).Notify(EventCode.UserAbort, IntPtr.Zero, IntPtr.Zero);
+      DsError.ThrowExceptionForHR(hr);
     }
 
     #endregion //PUBLICMETHODS

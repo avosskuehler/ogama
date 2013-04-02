@@ -205,7 +205,7 @@ namespace Ogama
         appData = Path.Combine(appData, this.AssemblyVersion);
 
         // Remove the whole content.
-        DirectoryInfo dir = new DirectoryInfo(appData);
+        var dir = new DirectoryInfo(appData);
         this.DeleteContent(dir);
       }
       catch (Exception ex)

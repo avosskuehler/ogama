@@ -83,6 +83,17 @@ namespace DmoMixer
     public override void Commit(IDictionary savedState)
     {
       base.Commit(savedState);
+    }
+
+    /// <summary>
+    /// Performs the installation of the DMO.
+    /// </summary>
+    /// <param name="stateSaver">An <see cref="IDictionary"/> used to save 
+    /// information needed to perform a commit, rollback, or uninstall operation.</param>
+    [SecurityPermission(SecurityAction.Demand)]
+    public override void Install(IDictionary stateSaver)
+    {
+      base.Install(stateSaver);
 
       ////RegistrationServices regSvc = new RegistrationServices();
       ////regSvc.RegisterAssembly(
@@ -97,17 +108,6 @@ namespace DmoMixer
 
       // Execute regasm
       System.Diagnostics.Process.Start(regasmPath, "/codebase /s \"" + componentPath + "\"");
-    }
-
-    /// <summary>
-    /// Performs the installation of the DMO.
-    /// </summary>
-    /// <param name="stateSaver">An <see cref="IDictionary"/> used to save 
-    /// information needed to perform a commit, rollback, or uninstall operation.</param>
-    [SecurityPermission(SecurityAction.Demand)]
-    public override void Install(IDictionary stateSaver)
-    {
-      base.Install(stateSaver);
     }
 
     /// <summary>

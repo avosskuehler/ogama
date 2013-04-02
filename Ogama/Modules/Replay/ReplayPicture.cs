@@ -389,14 +389,15 @@ namespace Ogama.Modules.Replay
     #region ENUMS
 
     /// <summary>
-    /// This delegate enables calling the <see cref="RenderFrame(ref int,long,Size)"/>
+    /// This delegate enables calling the <see cref="RenderFrame(ref int,long,Size, ref bool)"/>
     /// function from another thread
     /// </summary>
     /// <param name="startSample">Ref. An <see cref="int"/> with the sample number of the start sample.</param>
     /// <param name="endTime">End time in milliseconds</param>
     /// <param name="videoSize">size of video</param>
-    /// <returns>A <see cref="Bitmap"/> with the rendere frame.</returns>
-    public delegate Bitmap RenderFrameHandler(ref int startSample, long endTime, Size videoSize);
+    /// <param name="reachedEnd">Ref. The picture runs out of data.</param>
+    /// <returns>A <see cref="Bitmap"/> with the rendered frame.</returns>
+    public delegate Bitmap RenderFrameHandler(ref int startSample, long endTime, Size videoSize, ref bool reachedEnd);
 
     /// <summary>
     /// Event. Raised when event id was found.
@@ -1033,11 +1034,18 @@ namespace Ogama.Modules.Replay
     /// <param name="startSample">Ref. An <see cref="int"/> with the sample number of the start sample.</param>
     /// <param name="endTime">End time in milliseconds</param>
     /// <param name="videoSize">size of video</param>
+    /// <param name="reachedEnd">Ref. The picture runs out of data.</param>
     /// <returns>A <see cref="Bitmap"/> with the rendered frame.</returns>
-    public Bitmap RenderFrame(ref int startSample, long endTime, Size videoSize)
+    public Bitmap RenderFrame(ref int startSample, long endTime, Size videoSize, ref bool reachedEnd)
     {
       // Calculate samples in range.
       int endTimeInSamples = this.GetSynchronizedSampleCount(endTime);
+
+      if (endTimeInSamples >= this.replayTable.Rows.Count)
+      {
+        reachedEnd = true;
+      }
+
       this.RenderTimeRange(startSample, endTimeInSamples);
       startSample = endTimeInSamples + 1;
       Image currentFrame = this.RenderToImage();
