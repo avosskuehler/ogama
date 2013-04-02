@@ -153,6 +153,10 @@ namespace Ogama.Modules.Replay.Video
     /// </summary>
     public event EventHandler<ProgressEventArgs> Progress;
 
+    /// <summary>
+    /// This event occurs, whenever there is no more data available 
+    /// from the picture
+    /// </summary>
     public event EventHandler<EventArgs> Finished;
 
     #endregion ENUMS
@@ -225,18 +229,21 @@ namespace Ogama.Modules.Replay.Video
             this.videoFramePusher.ShowSampleAtMS(sampleTime);
           }
 
+          var reachedEnd = false;
+
           // Get image from the Canvas
           Bitmap bmp = this.imageRenderer(
            ref this.newStartTimeInSamples,
            sampleTime,
-           this.videoSize);
+           this.videoSize,
+           ref reachedEnd);
 
           // By default do a vertical flip for the image
           bmp.RotateFlip(RotateFlipType.RotateNoneFlipY);
 
           Rectangle r = new Rectangle(0, 0, bmp.Width, bmp.Height);
 
- 
+
           // Store the pointers
           this.bitmapVG = bmp;
           this.bitmapVGData = this.bitmapVG.LockBits(r, ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
@@ -261,26 +268,38 @@ namespace Ogama.Modules.Replay.Video
             this.Progress(this, new ProgressEventArgs(false, percentComplete, currentTime));
           }
 
-          if (sampleTime > this.sectionEndTime - 500)
+          if (reachedEnd)
           {
-            // Console.WriteLine("Finish=true");
             if (this.Finished != null)
             {
               this.Finished(this, EventArgs.Empty);
             }
 
-            hr = 0; // End of stream
+            sizeRead = size;
+
+            return 1; // End of stream
+          }
+
+          if (sampleTime > this.sectionEndTime - 2 * this.frameTimeSpan)
+          {
+            //// Console.WriteLine("Finish=true");
+            if (this.Finished != null)
+            {
+              this.Finished(this, EventArgs.Empty);
+            }
+
+            hr = 1; // End of stream
           }
         }
         else
         {
-          // Console.WriteLine("Finish=true");
+          //// Console.WriteLine("Finish=true");
           if (this.Finished != null)
           {
             this.Finished(this, EventArgs.Empty);
           }
 
-          hr = 0; // End of stream
+          hr = 1; // End of stream
         }
       }
 

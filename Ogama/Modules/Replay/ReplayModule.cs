@@ -2513,7 +2513,7 @@ namespace Ogama.Modules.Replay
     /// <returns>Always <strong>true</strong>.</returns>
     private bool LoadUsercam(string subjectName, int usercamID)
     {
-      if (usercamID == -1 || !this.btnShowUsercam.Checked)
+      if (usercamID == -1 )//|| !this.btnShowUsercam.Checked)
       {
         // No usercam available
         this.usercamVideoPlayer.CloseMovie();
