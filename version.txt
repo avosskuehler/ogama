@@ -1,2 +1,2 @@
-4.2.4470.34830
-This is a release, containing bugfixes and new desktop recording
+4.3.4840.39362
+This is a maintenance release, containing bugfixes and usability improvements.
