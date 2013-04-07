@@ -5,12 +5,15 @@ using System.Reflection;
 using System.Threading;
 using Emgu.CV;
 using Emgu.CV.Structure;
-using xn;
 
 namespace GTHardware.Cameras.Kinect
 {
   using GTCommons;
 
+  /// <summary>
+  /// Disabled cause it uses old OpenNI without x64 support
+  /// Please udate to OpenNI2 !
+  /// </summary>
   public class KinectCamera : CameraBase
   {
 
@@ -20,8 +23,8 @@ namespace GTHardware.Cameras.Kinect
 
     private static readonly string configFile = @"kinect.xml";
 
-    private Context context;
-    private IRGenerator ir;
+    //private Context context;
+    //private IRGenerator ir;
     private Thread readerThread;
     private bool shouldRun;
     private Image<Gray, UInt16> grayImage;
@@ -69,14 +72,14 @@ namespace GTHardware.Cameras.Kinect
         // string dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase);
         var dir = GTPath.GetLocalApplicationDataPath();
         DirectoryInfo dirInfo = new DirectoryInfo(new Uri(dir).LocalPath);
-        Context ctx = new Context(dirInfo.FullName + "\\" + configFile);
-        ProductionNode irNode = ctx.FindExistingNode(NodeType.IR) as IRGenerator;
+        //Context ctx = new Context(dirInfo.FullName + "\\" + configFile);
+        //ProductionNode irNode = ctx.FindExistingNode(NodeType.IR) as IRGenerator;
 
-        if (irNode != null)
-          isConnected = true;
+        //if (irNode != null)
+        //  isConnected = true;
 
-        irNode.Dispose();
-        ctx.Dispose();
+        //irNode.Dispose();
+        //ctx.Dispose();
 
       }
       catch (Exception)
@@ -153,13 +156,13 @@ namespace GTHardware.Cameras.Kinect
       // string dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase);
       var dir = GTPath.GetLocalApplicationDataPath();
       DirectoryInfo dirInfo = new DirectoryInfo(new Uri(dir).LocalPath);
-      this.context = new Context(dirInfo.FullName + Path.DirectorySeparatorChar + configFile);
+      //this.context = new Context(dirInfo.FullName + Path.DirectorySeparatorChar + configFile);
 
-      this.ir = context.FindExistingNode(NodeType.IR) as IRGenerator;
+      //this.ir = context.FindExistingNode(NodeType.IR) as IRGenerator;
 
-      if (this.ir != null)
-        return true;
-      else
+      //if (this.ir != null)
+      //  return true;
+      //else
         return false;
     }
 
@@ -199,8 +202,8 @@ namespace GTHardware.Cameras.Kinect
     public override void Cleanup()
     {
       this.Stop();
-      this.ir.StopGenerating();
-      this.ir.Dispose();
+      //this.ir.StopGenerating();
+      //this.ir.Dispose();
     }
 
     public override Rectangle SetROI(Rectangle newRoi)
@@ -242,53 +245,53 @@ namespace GTHardware.Cameras.Kinect
 
     private unsafe void ReaderThread()
     {
-      IRMetaData irMD = new IRMetaData();
+      //IRMetaData irMD = new IRMetaData();
 
-      while (this.shouldRun)
-      {
-        try
-        {
-          this.context.WaitOneUpdateAll(this.ir);
-        }
-        catch (Exception)
-        {
-        }
+      //while (this.shouldRun)
+      //{
+      //  try
+      //  {
+      //    this.context.WaitOneUpdateAll(this.ir);
+      //  }
+      //  catch (Exception)
+      //  {
+      //  }
 
-        this.ir.GetMetaData(irMD);
-        MapData<ushort> irMap = this.ir.GetIRMap();
+      //  this.ir.GetMetaData(irMD);
+      //  MapData<ushort> irMap = this.ir.GetIRMap();
 
-        if (isRoiSet == false)
-        {
-          defaultWidth = irMap.XRes;
-          defaultHeight = irMap.YRes;
-        }
+      //  if (isRoiSet == false)
+      //  {
+      //    defaultWidth = irMap.XRes;
+      //    defaultHeight = irMap.YRes;
+      //  }
 
-        int w = irMap.XRes;
-        int h = irMap.YRes;
+      //  int w = irMap.XRes;
+      //  int h = irMap.YRes;
 
-        lock (this)
-        {
-          int stride = w * 2;
+      //  lock (this)
+      //  {
+      //    int stride = w * 2;
 
-          if (stride % 2 != 0)
-            stride += (2 - (stride % 2));
+      //    if (stride % 2 != 0)
+      //      stride += (2 - (stride % 2));
 
 
-          if (roi.Size.Width != 0)
-          {
-            Emgu.CV.Image<Gray, UInt16> tmp = new Emgu.CV.Image<Gray, UInt16>(irMap.XRes, irMap.YRes, stride, ir.GetIRMapPtr());
-            tmp.ROI = new Rectangle(roi.X, roi.Y, roi.Width, roi.Height);
-            grayImage = tmp.Copy();
-          }
-          else
-          {
-            grayImage = new Emgu.CV.Image<Gray, UInt16>(w, h, stride, ir.GetIRMapPtr());
-          }
-        }
+      //    if (roi.Size.Width != 0)
+      //    {
+      //      Emgu.CV.Image<Gray, UInt16> tmp = new Emgu.CV.Image<Gray, UInt16>(irMap.XRes, irMap.YRes, stride, ir.GetIRMapPtr());
+      //      tmp.ROI = new Rectangle(roi.X, roi.Y, roi.Width, roi.Height);
+      //      grayImage = tmp.Copy();
+      //    }
+      //    else
+      //    {
+      //      grayImage = new Emgu.CV.Image<Gray, UInt16>(w, h, stride, ir.GetIRMapPtr());
+      //    }
+      //  }
 
-        if (FrameCaptureComplete != null)
-          FrameCaptureComplete();
-      }
+      //  if (FrameCaptureComplete != null)
+      //    FrameCaptureComplete();
+      //}
     }
 
     #endregion

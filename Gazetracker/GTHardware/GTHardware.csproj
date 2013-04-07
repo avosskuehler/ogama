@@ -121,10 +121,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="OpenNI.net, Version=1.5.2.23, Culture=neutral, PublicKeyToken=6b43d0c6cf74ee7f, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Managed\OpenNI.net.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationCore">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
