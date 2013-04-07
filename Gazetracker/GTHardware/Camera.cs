@@ -23,7 +23,8 @@ namespace GTHardware
       DirectShow = 1,
       Thorlabs = 2,
       Kinect = 4,
-      FileStream = 8
+      FileStream = 8,
+      PS3Eye = 16
     }
 
     #endregion

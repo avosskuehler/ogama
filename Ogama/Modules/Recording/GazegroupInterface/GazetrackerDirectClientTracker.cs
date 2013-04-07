@@ -191,9 +191,12 @@ namespace Ogama.Modules.Recording.GazegroupInterface
           case Camera.DeviceTypeEnum.DirectShow:
             errorMessage = "Gazetracker found a camera. ";
             return true;
-          //case Camera.DeviceTypeEnum.Thorlabs:
-          //  errorMessage = "Gazetracker found a thorlabs camera. ";
-          //  return true;
+          case Camera.DeviceTypeEnum.Thorlabs:
+            errorMessage = "Gazetracker found a thorlabs camera. ";
+            return true;
+          case Camera.DeviceTypeEnum.PS3Eye:
+            errorMessage = "Gazetracker found a PS3Eye camera. ";
+            return true;
           case Camera.DeviceTypeEnum.Kinect:
             errorMessage = "Gazetracker found a kinect camera. ";
             return true;
