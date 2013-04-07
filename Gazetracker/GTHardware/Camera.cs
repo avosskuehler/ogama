@@ -45,9 +45,9 @@ namespace GTHardware
         //case DeviceTypeEnum.PS3Eye:
         //  camera = new PS3Camera();
         //  break;
-        case DeviceTypeEnum.Kinect:
-          camera = new KinectCamera();
-          break;
+        //case DeviceTypeEnum.Kinect:
+        //  camera = new KinectCamera();
+        //  break;
         case DeviceTypeEnum.DirectShow:
           camera = new DirectShowCamera();
           break;
