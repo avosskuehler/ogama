@@ -1,0 +1,2 @@
+4.2.4470.34830
+This is a release, containing bugfixes and new desktop recording

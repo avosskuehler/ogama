@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Ogama.Modules.Common.FormWithAccellerators" Collapsed="true">
+    <Position X="3" Y="1" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAQAAAAAAAAAGBAAAAIAIAAAAAAAABAAIAA=</HashCode>
+      <FileName>Modules\Common\FormTemplates\FormWithAccellerators.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.MainWindow.MainForm" Collapsed="true">
+    <Position X="5.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>S2wns//cISSBFipvfmHp0e+T3lyi8kx0lUjd3TSIDb8=</HashCode>
+      <FileName>MainWindow\MainForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.FormWithInterface" Collapsed="true">
+    <Position X="3" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>YIAAIQEAACACQAAGAADkgAAyIAhAIgARBUAGACAAAEA=</HashCode>
+      <FileName>Modules\Common\FormTemplates\FormWithInterface.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.FormWithPicture" Collapsed="true">
+    <Position X="3" Y="3" Width="2" />
+    <TypeIdentifier>
+      <HashCode>QBAAoAMIAaAAAAgCADCAAAACACAAIggDAEAIAREAQIA=</HashCode>
+      <FileName>Modules\Common\FormTemplates\FormWithPicture.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Database.DatabaseModule" Collapsed="true">
+    <Position X="1.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QlGIxY0jXXFPE+dDAfGCKZ5GEQGSMNaZiTwQIcICLpI=</HashCode>
+      <FileName>Modules\Database\DatabaseModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Statistics.StatisticsModule" Collapsed="true">
+    <Position X="5.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>///PqR/j5O6Ws7m4CJ7VQ8suKv6SqZV5+uNNqf/Hnz8=</HashCode>
+      <FileName>Modules\Statistics\StatisticsModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.FormWithSubjectAndTrialSelection" Collapsed="true">
+    <Position X="4.25" Y="4" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAMAAAAAAgAAAAJAQAAEAEAAAAIQAAAAABAAiAA=</HashCode>
+      <FileName>Modules\Common\FormTemplates\FormWithSubjectAndTrialSelection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Common.FormWithTrialSelection" Collapsed="true">
+    <Position X="1.25" Y="4" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAABAQAAEAEAAAAIQAAAAABAACAA=</HashCode>
+      <FileName>Modules\Common\FormTemplates\FormWithTrialSelection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Recording.RecordModule" Collapsed="true">
+    <Position X="5.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>95KjUf1jmqiPVLXJgFGXJJFSsEnIZ1M8M3QC529M4N8=</HashCode>
+      <FileName>Modules\Recording\RecordModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.SlideshowDesign.SlideshowModule" Collapsed="true">
+    <Position X="1.25" Y="3" Width="1.5" />
+    <InheritanceLine Type="Ogama.Modules.Common.FormWithPicture" ManuallyRouted="true">
+      <Path>
+        <Point X="3" Y="3.346" />
+        <Point X="2.75" Y="3.346" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>JERFQL1BmbFsGA6ECkOEokgGsIUsSxSTRIQ5a5DUFsw=</HashCode>
+      <FileName>Modules\SlideshowDesign\SlideshowModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Fixations.FixationsModule" Collapsed="true">
+    <Position X="4.25" Y="6" Width="1.5" />
+    <InheritanceLine Type="Ogama.Modules.Common.FormWithSubjectAndTrialSelection" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.614" Y="4.691" />
+        <Point X="5.614" Y="4.845" />
+        <Point X="5.904" Y="4.845" />
+        <Point X="5.904" Y="6.375" />
+        <Point X="5.75" Y="6.375" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>wiADQ/1BwLA0EbcC5eHZvFYmqARGP0CYiJJAMA5IQZY=</HashCode>
+      <FileName>Modules\Fixations\FixationsModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Replay.ReplayModule" Collapsed="true">
+    <Position X="4.25" Y="5" Width="1.5" />
+    <InheritanceLine Type="Ogama.Modules.Common.FormWithSubjectAndTrialSelection" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.614" Y="4.691" />
+        <Point X="5.614" Y="4.845" />
+        <Point X="5.904" Y="4.845" />
+        <Point X="5.904" Y="5.438" />
+        <Point X="5.75" Y="5.438" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>8j8Oc/2JjGFFu2daIyzioN7yUNcVbNucBEsr4Rc5dsM=</HashCode>
+      <FileName>Modules\Replay\ReplayModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.AOI.AOIModule" Collapsed="true">
+    <Position X="2.25" Y="8" Width="1.5" />
+    <InheritanceLine Type="Ogama.Modules.Common.FormWithTrialSelection" FixedToPoint="true">
+      <Path>
+        <Point X="2.5" Y="4.691" />
+        <Point X="2.5" Y="4.898" />
+        <Point X="2.148" Y="4.898" />
+        <Point X="2.148" Y="8.312" />
+        <Point X="2.25" Y="8.312" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>aoNj1/8BnGaM0L8HLfngiIv37IC7nwE1AHxF4y1tFwg=</HashCode>
+      <FileName>Modules\AOI\AOIModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.AttentionMap.AttentionMapModule" Collapsed="true">
+    <Position X="2.25" Y="5" Width="1.5" />
+    <InheritanceLine Type="Ogama.Modules.Common.FormWithTrialSelection" FixedToPoint="true">
+      <Path>
+        <Point X="2.5" Y="4.691" />
+        <Point X="2.5" Y="4.898" />
+        <Point X="2.148" Y="4.898" />
+        <Point X="2.148" Y="5.375" />
+        <Point X="2.25" Y="5.375" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>wIAAA/0B8LAcEAcAgaCEIMkPAChAuQIYgQgAPQgQCjU=</HashCode>
+      <FileName>Modules\AttentionMap\AttentionMapModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Saliency.SaliencyModule" Collapsed="true">
+    <Position X="2.25" Y="6" Width="1.5" />
+    <InheritanceLine Type="Ogama.Modules.Common.FormWithTrialSelection" FixedToPoint="true">
+      <Path>
+        <Point X="2.5" Y="4.691" />
+        <Point X="2.5" Y="4.898" />
+        <Point X="2.148" Y="4.898" />
+        <Point X="2.148" Y="6.375" />
+        <Point X="2.25" Y="6.375" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>YhyT0e9D4PoHVlcEIcTxCFYyBVsAKaCYrbJkfJQIKEE=</HashCode>
+      <FileName>Modules\Saliency\SaliencyModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogama.Modules.Scanpaths.ScanpathsModule" Collapsed="true">
+    <Position X="2.25" Y="7" Width="1.5" />
+    <InheritanceLine Type="Ogama.Modules.Common.FormWithTrialSelection" FixedToPoint="true">
+      <Path>
+        <Point X="2.5" Y="4.691" />
+        <Point X="2.5" Y="4.898" />
+        <Point X="2.148" Y="4.898" />
+        <Point X="2.148" Y="7.375" />
+        <Point X="2.25" Y="7.375" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>Y+gBQ/0BiPktEpU4QQDTqFu2GoQEHggcjP5A9AQgEIA=</HashCode>
+      <FileName>Modules\Scanpath\ScanpathsModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
