@@ -41,6 +41,8 @@ namespace Ogama.Modules.ImportExport.Common
         this.cbbColumnSeparator = new System.Windows.Forms.ComboBox();
         this.label4 = new System.Windows.Forms.Label();
         this.groupBox1 = new System.Windows.Forms.GroupBox();
+        this.chbIgnoreDoubleTime = new System.Windows.Forms.CheckBox();
+        this.chbPreviousLineColumnTitle = new System.Windows.Forms.CheckBox();
         this.txbUseQuote = new System.Windows.Forms.TextBox();
         this.chbUseLines = new System.Windows.Forms.CheckBox();
         this.chbIgnoreSmallLines = new System.Windows.Forms.CheckBox();
@@ -66,7 +68,6 @@ namespace Ogama.Modules.ImportExport.Common
         this.splitContainer2 = new System.Windows.Forms.SplitContainer();
         this.dialogTop1 = new Ogama.Modules.Common.Controls.DialogTop();
         this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-        this.checkBox1 = new System.Windows.Forms.CheckBox();
         ((System.ComponentModel.ISupportInitialize)(this.dGVPreviewImport)).BeginInit();
         ((System.ComponentModel.ISupportInitialize)(this.dataSetImport)).BeginInit();
         this.groupBox1.SuspendLayout();
@@ -96,9 +97,9 @@ namespace Ogama.Modules.ImportExport.Common
         this.chbIgnoreLinesQuoted.CheckState = System.Windows.Forms.CheckState.Checked;
         this.chbIgnoreLinesQuoted.Location = new System.Drawing.Point(16, 21);
         this.chbIgnoreLinesQuoted.Name = "chbIgnoreLinesQuoted";
-        this.chbIgnoreLinesQuoted.Size = new System.Drawing.Size(147, 17);
+        this.chbIgnoreLinesQuoted.Size = new System.Drawing.Size(148, 17);
         this.chbIgnoreLinesQuoted.TabIndex = 0;
-        this.chbIgnoreLinesQuoted.Text = "ignore Lines quoted with: ";
+        this.chbIgnoreLinesQuoted.Text = "Ignore Lines quoted with: ";
         this.toolTip1.SetToolTip(this.chbIgnoreLinesQuoted, "Check this box if there are quotings or comment lines in your file.");
         this.chbIgnoreLinesQuoted.UseVisualStyleBackColor = true;
         this.chbIgnoreLinesQuoted.CheckedChanged += new System.EventHandler(this.chbIgnoreLinesQuoted_CheckedChanged);
@@ -118,7 +119,7 @@ namespace Ogama.Modules.ImportExport.Common
         this.chbFirstLineColumnTitle.AutoSize = true;
         this.chbFirstLineColumnTitle.Checked = true;
         this.chbFirstLineColumnTitle.CheckState = System.Windows.Forms.CheckState.Checked;
-        this.chbFirstLineColumnTitle.Location = new System.Drawing.Point(16, 134);
+        this.chbFirstLineColumnTitle.Location = new System.Drawing.Point(16, 136);
         this.chbFirstLineColumnTitle.Name = "chbFirstLineColumnTitle";
         this.chbFirstLineColumnTitle.Size = new System.Drawing.Size(275, 17);
         this.chbFirstLineColumnTitle.TabIndex = 2;
@@ -133,7 +134,7 @@ namespace Ogama.Modules.ImportExport.Common
         this.dGVPreviewImport.Dock = System.Windows.Forms.DockStyle.Fill;
         this.dGVPreviewImport.Location = new System.Drawing.Point(3, 16);
         this.dGVPreviewImport.Name = "dGVPreviewImport";
-        this.dGVPreviewImport.Size = new System.Drawing.Size(640, 143);
+        this.dGVPreviewImport.Size = new System.Drawing.Size(640, 161);
         this.dGVPreviewImport.TabIndex = 14;
         this.toolTip1.SetToolTip(this.dGVPreviewImport, "This is the preview of your import file as read\r\nby the parser using the settings" +
                 " above.\r\nIt will be updated immediately when you change\r\nimport settings.");
@@ -179,7 +180,8 @@ namespace Ogama.Modules.ImportExport.Common
         // 
         // groupBox1
         // 
-        this.groupBox1.Controls.Add(this.checkBox1);
+        this.groupBox1.Controls.Add(this.chbIgnoreDoubleTime);
+        this.groupBox1.Controls.Add(this.chbPreviousLineColumnTitle);
         this.groupBox1.Controls.Add(this.txbUseQuote);
         this.groupBox1.Controls.Add(this.chbUseLines);
         this.groupBox1.Controls.Add(this.chbIgnoreSmallLines);
@@ -191,10 +193,32 @@ namespace Ogama.Modules.ImportExport.Common
         this.groupBox1.Controls.Add(this.chbIgnoreLinesQuoted);
         this.groupBox1.Location = new System.Drawing.Point(9, 29);
         this.groupBox1.Name = "groupBox1";
-        this.groupBox1.Size = new System.Drawing.Size(305, 176);
+        this.groupBox1.Size = new System.Drawing.Size(313, 206);
         this.groupBox1.TabIndex = 24;
         this.groupBox1.TabStop = false;
         this.groupBox1.Text = "Importsettings";
+        // 
+        // chbIgnoreDoubleTime
+        // 
+        this.chbIgnoreDoubleTime.AutoSize = true;
+        this.chbIgnoreDoubleTime.Location = new System.Drawing.Point(16, 182);
+        this.chbIgnoreDoubleTime.Name = "chbIgnoreDoubleTime";
+        this.chbIgnoreDoubleTime.Size = new System.Drawing.Size(146, 17);
+        this.chbIgnoreDoubleTime.TabIndex = 41;
+        this.chbIgnoreDoubleTime.Text = "Ignore double timestamps";
+        this.chbIgnoreDoubleTime.UseVisualStyleBackColor = true;
+        this.chbIgnoreDoubleTime.CheckedChanged += new System.EventHandler(this.chbIgnoreDoubleTime_CheckedChanged);
+        // 
+        // chbPreviousLineColumnTitle
+        // 
+        this.chbPreviousLineColumnTitle.AutoSize = true;
+        this.chbPreviousLineColumnTitle.Location = new System.Drawing.Point(16, 159);
+        this.chbPreviousLineColumnTitle.Name = "chbPreviousLineColumnTitle";
+        this.chbPreviousLineColumnTitle.Size = new System.Drawing.Size(297, 17);
+        this.chbPreviousLineColumnTitle.TabIndex = 40;
+        this.chbPreviousLineColumnTitle.Text = "Column names are above first row that will not be ignored.";
+        this.chbPreviousLineColumnTitle.UseVisualStyleBackColor = true;
+        this.chbPreviousLineColumnTitle.CheckedChanged += new System.EventHandler(this.chbPreviousLineColumnTitle_CheckedChanged);
         // 
         // txbUseQuote
         // 
@@ -208,11 +232,11 @@ namespace Ogama.Modules.ImportExport.Common
         // chbUseLines
         // 
         this.chbUseLines.AutoSize = true;
-        this.chbUseLines.Location = new System.Drawing.Point(16, 111);
+        this.chbUseLines.Location = new System.Drawing.Point(16, 113);
         this.chbUseLines.Name = "chbUseLines";
-        this.chbUseLines.Size = new System.Drawing.Size(157, 17);
+        this.chbUseLines.Size = new System.Drawing.Size(159, 17);
         this.chbUseLines.TabIndex = 37;
-        this.chbUseLines.Text = "use only Lines quoted with: ";
+        this.chbUseLines.Text = "Use only Lines quoted with: ";
         this.chbUseLines.UseVisualStyleBackColor = true;
         this.chbUseLines.CheckedChanged += new System.EventHandler(this.chbUseLines_CheckedChanged);
         // 
@@ -221,7 +245,7 @@ namespace Ogama.Modules.ImportExport.Common
         this.chbIgnoreSmallLines.AutoSize = true;
         this.chbIgnoreSmallLines.Checked = true;
         this.chbIgnoreSmallLines.CheckState = System.Windows.Forms.CheckState.Checked;
-        this.chbIgnoreSmallLines.Location = new System.Drawing.Point(16, 88);
+        this.chbIgnoreSmallLines.Location = new System.Drawing.Point(16, 90);
         this.chbIgnoreSmallLines.Name = "chbIgnoreSmallLines";
         this.chbIgnoreSmallLines.Size = new System.Drawing.Size(281, 17);
         this.chbIgnoreSmallLines.TabIndex = 2;
@@ -243,11 +267,11 @@ namespace Ogama.Modules.ImportExport.Common
         this.chbIgnoreLinesContaining.AutoSize = true;
         this.chbIgnoreLinesContaining.Checked = true;
         this.chbIgnoreLinesContaining.CheckState = System.Windows.Forms.CheckState.Checked;
-        this.chbIgnoreLinesContaining.Location = new System.Drawing.Point(16, 43);
+        this.chbIgnoreLinesContaining.Location = new System.Drawing.Point(16, 44);
         this.chbIgnoreLinesContaining.Name = "chbIgnoreLinesContaining";
-        this.chbIgnoreLinesContaining.Size = new System.Drawing.Size(141, 17);
+        this.chbIgnoreLinesContaining.Size = new System.Drawing.Size(142, 17);
         this.chbIgnoreLinesContaining.TabIndex = 0;
-        this.chbIgnoreLinesContaining.Text = "ignore Lines containing: ";
+        this.chbIgnoreLinesContaining.Text = "Ignore Lines containing: ";
         this.chbIgnoreLinesContaining.UseVisualStyleBackColor = true;
         this.chbIgnoreLinesContaining.CheckedChanged += new System.EventHandler(this.chbIgnoreLinesContaining_CheckedChanged);
         // 
@@ -256,11 +280,11 @@ namespace Ogama.Modules.ImportExport.Common
         this.chbIgnoreNotNumberLines.AutoSize = true;
         this.chbIgnoreNotNumberLines.Checked = true;
         this.chbIgnoreNotNumberLines.CheckState = System.Windows.Forms.CheckState.Checked;
-        this.chbIgnoreNotNumberLines.Location = new System.Drawing.Point(16, 65);
+        this.chbIgnoreNotNumberLines.Location = new System.Drawing.Point(16, 67);
         this.chbIgnoreNotNumberLines.Name = "chbIgnoreNotNumberLines";
-        this.chbIgnoreNotNumberLines.Size = new System.Drawing.Size(223, 17);
+        this.chbIgnoreNotNumberLines.Size = new System.Drawing.Size(224, 17);
         this.chbIgnoreNotNumberLines.TabIndex = 0;
-        this.chbIgnoreNotNumberLines.Text = "ignore Lines that don´t start with a number";
+        this.chbIgnoreNotNumberLines.Text = "Ignore Lines that don´t start with a number";
         this.chbIgnoreNotNumberLines.UseVisualStyleBackColor = true;
         this.chbIgnoreNotNumberLines.CheckedChanged += new System.EventHandler(this.chbIgnoreNotNumberLines_CheckedChanged);
         // 
@@ -307,7 +331,7 @@ namespace Ogama.Modules.ImportExport.Common
         // 
         this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
         this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Abort;
-        this.btnCancel.Location = new System.Drawing.Point(568, -1);
+        this.btnCancel.Location = new System.Drawing.Point(568, -12);
         this.btnCancel.Name = "btnCancel";
         this.btnCancel.Size = new System.Drawing.Size(75, 23);
         this.btnCancel.TabIndex = 27;
@@ -319,7 +343,7 @@ namespace Ogama.Modules.ImportExport.Common
         this.btnNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
         this.btnNext.Cursor = System.Windows.Forms.Cursors.Arrow;
         this.btnNext.DialogResult = System.Windows.Forms.DialogResult.OK;
-        this.btnNext.Location = new System.Drawing.Point(487, -1);
+        this.btnNext.Location = new System.Drawing.Point(487, -12);
         this.btnNext.Name = "btnNext";
         this.btnNext.Size = new System.Drawing.Size(75, 23);
         this.btnNext.TabIndex = 26;
@@ -352,7 +376,7 @@ namespace Ogama.Modules.ImportExport.Common
         this.btnBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
         this.btnBack.Cursor = System.Windows.Forms.Cursors.Arrow;
         this.btnBack.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-        this.btnBack.Location = new System.Drawing.Point(406, -1);
+        this.btnBack.Location = new System.Drawing.Point(406, -12);
         this.btnBack.Name = "btnBack";
         this.btnBack.Size = new System.Drawing.Size(75, 23);
         this.btnBack.TabIndex = 28;
@@ -369,7 +393,7 @@ namespace Ogama.Modules.ImportExport.Common
         this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
         this.panel1.Location = new System.Drawing.Point(0, 0);
         this.panel1.Name = "panel1";
-        this.panel1.Size = new System.Drawing.Size(646, 209);
+        this.panel1.Size = new System.Drawing.Size(646, 239);
         this.panel1.TabIndex = 0;
         // 
         // groupBox3
@@ -433,7 +457,7 @@ namespace Ogama.Modules.ImportExport.Common
         this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
         this.groupBox2.Location = new System.Drawing.Point(0, 0);
         this.groupBox2.Name = "groupBox2";
-        this.groupBox2.Size = new System.Drawing.Size(646, 162);
+        this.groupBox2.Size = new System.Drawing.Size(646, 180);
         this.groupBox2.TabIndex = 16;
         this.groupBox2.TabStop = false;
         this.groupBox2.Text = "Preview of raw data file to read:";
@@ -454,8 +478,8 @@ namespace Ogama.Modules.ImportExport.Common
         // splitContainer1.Panel2
         // 
         this.splitContainer1.Panel2.Controls.Add(this.splitContainer3);
-        this.splitContainer1.Size = new System.Drawing.Size(646, 462);
-        this.splitContainer1.SplitterDistance = 270;
+        this.splitContainer1.Size = new System.Drawing.Size(646, 510);
+        this.splitContainer1.SplitterDistance = 300;
         this.splitContainer1.TabIndex = 37;
         // 
         // splitContainer2
@@ -474,7 +498,7 @@ namespace Ogama.Modules.ImportExport.Common
         // splitContainer2.Panel2
         // 
         this.splitContainer2.Panel2.Controls.Add(this.panel1);
-        this.splitContainer2.Size = new System.Drawing.Size(646, 270);
+        this.splitContainer2.Size = new System.Drawing.Size(646, 300);
         this.splitContainer2.SplitterDistance = 60;
         this.splitContainer2.SplitterWidth = 1;
         this.splitContainer2.TabIndex = 0;
@@ -509,21 +533,10 @@ namespace Ogama.Modules.ImportExport.Common
         // splitContainer3.Panel2
         // 
         this.splitContainer3.Panel2.Controls.Add(this.panel2);
-        this.splitContainer3.Size = new System.Drawing.Size(646, 188);
-        this.splitContainer3.SplitterDistance = 162;
+        this.splitContainer3.Size = new System.Drawing.Size(646, 206);
+        this.splitContainer3.SplitterDistance = 180;
         this.splitContainer3.SplitterWidth = 1;
         this.splitContainer3.TabIndex = 0;
-        // 
-        // checkBox1
-        // 
-        this.checkBox1.AutoSize = true;
-        this.checkBox1.Location = new System.Drawing.Point(16, 158);
-        this.checkBox1.Name = "checkBox1";
-        this.checkBox1.Size = new System.Drawing.Size(80, 17);
-        this.checkBox1.TabIndex = 39;
-        this.checkBox1.Text = "checkBox1";
-        this.checkBox1.UseVisualStyleBackColor = true;
-        this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
         // 
         // ImportParseFileDialog
         // 
@@ -531,7 +544,7 @@ namespace Ogama.Modules.ImportExport.Common
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
         this.AutoSize = true;
         this.CancelButton = this.btnCancel;
-        this.ClientSize = new System.Drawing.Size(646, 462);
+        this.ClientSize = new System.Drawing.Size(646, 510);
         this.Controls.Add(this.splitContainer1);
         this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
         this.MaximizeBox = false;
@@ -605,6 +618,7 @@ namespace Ogama.Modules.ImportExport.Common
     private System.Windows.Forms.GroupBox groupBox3;
     private System.Windows.Forms.Label label2;
     private System.Windows.Forms.ComboBox cbbDecimalSeparator;
-    private System.Windows.Forms.CheckBox checkBox1;
+    private System.Windows.Forms.CheckBox chbPreviousLineColumnTitle;
+    private System.Windows.Forms.CheckBox chbIgnoreDoubleTime;
   }
 }
