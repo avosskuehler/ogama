@@ -21,6 +21,7 @@ namespace Ogama
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
   using Ogama.MainWindow.Dialogs;
+    using Ogama.Modules.ImportExport.AOIData;
 
   /// <summary>
   /// Main Program class with entry point for application.
@@ -43,15 +44,28 @@ namespace Ogama
       
        runOgama(args);
         
-        //runRtaDemo();
+       //runRtaDemo();
+
+       //runFormDemo();
 
     }
+
+     private static void runFormDemo()
+     {
+         Ogama.Modules.ImportExport.Common.ASCIISettings settings = 
+             new Ogama.Modules.ImportExport.Common.ASCIISettings();
+         //Application.Run(new Ogama.Modules.ImportExport.Common.ImportParseFileDialog(settings));
+
+         Application.Run(new ImportAOIAssignColumnsDialog());
+     }
 
     private static void runRtaDemo()
     {
         Application.Run(new Ogama.Modules.Rta.RtaReplay.FormRtaView());
 
     }
+
+   
 
     private static void runOgama(string[] args)
     {

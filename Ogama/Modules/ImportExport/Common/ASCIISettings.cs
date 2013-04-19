@@ -82,6 +82,12 @@ namespace Ogama.Modules.ImportExport.Common
     private bool ignoreSmallLines;
 
     /// <summary>
+    /// Flag. True, if import should ignore line,
+    /// with 2nd consecutive timestamp.    
+    /// </summary>
+    private bool ignoreDoubles;
+
+    /// <summary>
     /// Flag. True, if import should ignore lines,
     /// that don´t start with a numeral
     /// </summary>
@@ -132,6 +138,8 @@ namespace Ogama.Modules.ImportExport.Common
     /// </summary>
     private bool columnTitlesAtFirstRow;
 
+
+
     /// <summary>
     /// Saves the time value of the very first raw data value.
     /// </summary>
@@ -174,10 +182,12 @@ namespace Ogama.Modules.ImportExport.Common
       this.ignoreQuotationString = "#";
       this.ignoreTriggerStringLines = true;
       this.ignoreTriggerString = "Keyboard";
+      this.ignoreDoubles = false;
       this.columnTitlesAtFirstRow = true;
+      this.columnTitlesAtPreviousRow = false;
       this.columnAssignments = new XMLSerializableDictionary<string, string>();
       this.useQuotes = false;
-      this.useQuotationString = "EFIX";
+      this.useQuotationString = "EFIX";      
       this.startTime = 0;
     }
 
@@ -387,6 +397,34 @@ namespace Ogama.Modules.ImportExport.Common
     }
 
     /// <summary>
+    /// Gets or sets a value indicating whether 
+    /// column titles are in the first data row that is read.
+    /// </summary>
+    /// <value>A <see cref="Boolean"/> that is <strong>true</strong>,
+    /// if column titles are above the first data row,
+    /// otherwise <strong>false</strong>.</value>
+    public bool ColumnTitlesAtPreviousRow 
+    {
+      get { return this.columnTitlesAtPreviousRow; }
+      set { this.columnTitlesAtPreviousRow = value; }
+    }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether 
+    /// double timestamps should be used during import.
+    /// </summary>
+    /// <value>A <see cref="Boolean"/> that is <strong>true</strong>,
+    /// if import should only use lines, with a double timestamp
+    /// otherwise <strong>false</strong>.</value>
+    public bool IgnoreDoubles
+    {
+        get { return this.ignoreDoubles; }
+        set { this.ignoreDoubles = value; }
+    }
+
+   
+
+    /// <summary>
     /// Gets or sets the time value of the very first raw data value.
     /// </summary>
     /// <value>An <see cref="Int64"/> with the starting time of the experiment.</value>
@@ -451,12 +489,14 @@ namespace Ogama.Modules.ImportExport.Common
       {
         using (StreamReader importReader = new StreamReader(importFile))
         {
+            string lastLine = "";
           // Read ImportFile
           while ((line = importReader.ReadLine()) != null)
           {
             // ignore empty lines
             if (line.Trim() == string.Empty)
             {
+                lastLine = line;
               continue;
             }
 
@@ -465,7 +505,8 @@ namespace Ogama.Modules.ImportExport.Common
               line.Trim().Substring(0, this.IgnoreQuotationString.Length) ==
               this.IgnoreQuotationString)
             {
-              continue;
+                lastLine = line; 
+                continue;
             }
 
             // Ignore lines that do not have the "use only" quotation
@@ -473,30 +514,30 @@ namespace Ogama.Modules.ImportExport.Common
             if (this.UseQuotes &&
               !line.Contains(this.UseQuotationString))
             {
-              continue;
+                lastLine = line; 
+                continue;
             }
 
             // ignore lines with ignore trigger
             if (this.IgnoreTriggerStringLines &&
               line.Contains(this.IgnoreTriggerString))
             {
-              continue;
+                lastLine = line; 
+                continue;
             }
 
             // Split Tab separated line items
             string[] items = line.Split(this.ColumnSeparatorCharacter);
+           
 
             // Use only numeric starting lines if applicable
             if (this.IgnoreNotNumeralLines && !IOHelpers.IsNumeric(line[0]))
             {
-              continue;
+                lastLine = line; 
+                continue;
             }
 
-            // Skip small lines if applicable
-            if (this.IgnoreSmallLines && columncount != items.Length)
-            {
-              continue;
-            }
+            
 
             if (counter == 0)
             {
@@ -507,7 +548,18 @@ namespace Ogama.Modules.ImportExport.Common
               {
                 string headerText = this.ColumnTitlesAtFirstRow ? items[i].Replace(' ', '-') : "Column" + i.ToString();
                 columnHeaders.Add(headerText);
+
               }
+
+              handleColumnTitlesAtPreviousRow(columnHeaders, lastLine);
+              
+            }
+
+            // Skip small lines if applicable
+            if (this.IgnoreSmallLines && columncount != items.Length)
+            {
+                lastLine = line;
+                continue;
             }
 
             // Skip first line if filled with column titles
@@ -528,7 +580,10 @@ namespace Ogama.Modules.ImportExport.Common
             {
               break;
             }
-          }
+
+            lastLine = line;
+
+          }//end while
         }
       }
       catch (Exception ex)
@@ -537,6 +592,24 @@ namespace Ogama.Modules.ImportExport.Common
       }
 
       return fileRows;
+    }
+
+    protected void handleColumnTitlesAtPreviousRow(List<string> columnHeaders, string lastLine)
+    {
+        if (this.ColumnTitlesAtPreviousRow)
+        {
+            string[] lastItems = lastLine.Split(this.ColumnSeparatorCharacter);
+            if (lastItems.Length > 0)
+            {
+                columnHeaders.Clear();
+                for (int i = 0; i < lastItems.Length; i++)
+                {
+                    string headerText = lastItems[i];
+                    headerText = headerText.Replace(' ', '-');
+                    columnHeaders.Add(headerText);
+                }
+            }
+        }
     }
 
     #endregion //PUBLICMETHODS
@@ -669,5 +742,10 @@ namespace Ogama.Modules.ImportExport.Common
     ///////////////////////////////////////////////////////////////////////////////
     #region HELPER
     #endregion //HELPER
+
+
+
+
+    public bool columnTitlesAtPreviousRow { get; set; }
   }
 }
