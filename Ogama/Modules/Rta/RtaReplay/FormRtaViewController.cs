@@ -9,9 +9,11 @@ namespace Ogama.Modules.Rta.RtaReplay
     public class FormRtaViewController
     {
 
+        public string xmlFilename = "c:/testRta.xml";
+
         private RtaCategoryModel rtaCategoryModel = new RtaCategoryModel();
         private RtaCategoryTreeitemConverter converter = new RtaCategoryTreeitemConverter();
-        public string xmlFilename = "c:/testRta.xml";
+        private String currentPlayerPosition;
         private IFormRtaViewControllerListener listener;
 
         public RtaCategoryModel getModel()
@@ -66,7 +68,7 @@ namespace Ogama.Modules.Rta.RtaReplay
             RtaCategory rtaCategory = (RtaCategory)treeNode.Tag;
             if (rtaCategory != null)
             {
-                this.rtaCategoryModel.Remove(rtaCategory);
+                this.rtaCategoryModel.RemoveCategory(rtaCategory);
             }
             treeNode.Remove();
         }
@@ -75,6 +77,11 @@ namespace Ogama.Modules.Rta.RtaReplay
         public void save()
         {
             this.rtaCategoryModel.WriteToXmlFile(this.xmlFilename);
+        }
+
+        public void setCurrentPlayerPosition(string p)
+        {
+            this.currentPlayerPosition = p;
         }
     }
 }

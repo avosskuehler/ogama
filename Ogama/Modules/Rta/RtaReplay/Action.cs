@@ -15,6 +15,7 @@ namespace Ogama.Modules.Rta.RtaReplay
         public bool resize;
         public bool delete;
         public bool create;
+        
         public IFigure figure;
 
         

@@ -11,6 +11,13 @@ namespace Ogama.Modules.Rta.RtaReplay
     {
         [System.Xml.Serialization.XmlElement("RtaCategory")]
         public List<RtaCategory> categories { get; set; }
+        
+        [System.Xml.Serialization.XmlElement("RtaEvent")]
+        public List<RtaEvent> events { get; set; }
+
+        RtaCategoryModelListener listener { get; set;}
+
+
 
         public RtaCategoryModel()
         {
@@ -23,26 +30,47 @@ namespace Ogama.Modules.Rta.RtaReplay
             {
                 this.categories = new List<RtaCategory>();
             }
+            if (this.events == null)
+            {
+                this.events = new List<RtaEvent>();
+            }
+        }
+
+        public void Add(RtaEvent rtaEvent)
+        {
+            events.Add(rtaEvent);
+            this.fireOnEventAdded(rtaEvent);
+        }
+        public void Change(RtaEvent rtaEvent)
+        {
+            this.fireOnEventChanged(rtaEvent);
+        }
+
+        public void RemoveEvent(RtaEvent rtaEvent)
+        {
+            events.Remove(rtaEvent);
+            this.fireOnEventRemoved(rtaEvent);
         }
 
         public void Add(RtaCategory newCategory, RtaCategory parent)
         {
             parent.getChildren().Add(newCategory);
-            
+            this.fireOnCategoryAdded(newCategory);
         }
 
         public void Add(RtaCategory category)
         {
             this.categories.Add(category);
             category.parent = null;
+            this.fireOnCategoryAdded(category);
         }
 
-        public int CountChildren()
+        public void Change(RtaCategory rtaCategory)
         {
-            return this.categories.Count;
+            this.fireOnCategoryChanged(rtaCategory);
         }
 
-        public void Remove(RtaCategory category)
+        public void RemoveCategory(RtaCategory category)
         {
             if (category == null)
             {
@@ -57,9 +85,16 @@ namespace Ogama.Modules.Rta.RtaReplay
             {
                 this.categories.Remove(category);
             }
-            
+
         }
 
+
+        public int CountChildren()
+        {
+            return this.categories.Count;
+        }
+
+        
         public string WriteToXml()
         {
             System.Xml.Serialization.XmlSerializer serializer = getSerializer();
@@ -84,6 +119,11 @@ namespace Ogama.Modules.Rta.RtaReplay
             fileStream.Close();
         }
 
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filename"></param>
         public void ReadFromXmlFile(string filename)
         {
             System.Xml.Serialization.XmlSerializer serializer = getSerializer();
@@ -92,23 +132,24 @@ namespace Ogama.Modules.Rta.RtaReplay
             try
             {
                 fileStream = new System.IO.FileStream(filename,
-                 System.IO.FileMode.Open);
+                System.IO.FileMode.Open);
             }
             catch (System.IO.FileNotFoundException e)
             {
+                Console.WriteLine(e);
                 return;
             }
             
-            RtaCategoryModel result = null;
 
             try
             {
-                result = (RtaCategoryModel)serializer.Deserialize(fileStream);
+                RtaCategoryModel result = (RtaCategoryModel)serializer.Deserialize(fileStream);
                 this.categories = result.categories;
+                this.events = result.events;
             }
             catch (System.InvalidOperationException ex)
             {
-                
+                Console.WriteLine(ex);
             }
             finally
             {
@@ -138,7 +179,7 @@ namespace Ogama.Modules.Rta.RtaReplay
 
             List<RtaCategory> categories = new List<RtaCategory>();
 
-            for (int i = 0; i < this.categories.Count(); i++)
+            for (int i = 0; i < this.categories.Count; i++)
             {
                 categories.Add(this.categories.ElementAt(i));
             }
@@ -148,13 +189,73 @@ namespace Ogama.Modules.Rta.RtaReplay
             for (int i = 0; i < categories.Count; i++)
             {
                 RtaCategory currentItem = categories.ElementAt(i);
-
+                
                 visitor.onVisit(currentItem);
+
 
                 List<RtaCategory> subList = currentItem.getChildren();
 
                 categories.InsertRange(i + 1, subList);
             }
+
+
+
+            for (int i = 0; i < this.events.Count; i++)
+            {
+                RtaEvent rtaEvent = this.events.ElementAt(i);
+                visitor.onVisit(rtaEvent);
+            }
+            
         }
+
+        protected void fireOnCategoryAdded(RtaCategory rtaCategory)
+        {
+            if (this.listener != null)
+            {
+                this.listener.onCategoryAdded(rtaCategory);
+            }
+        }
+
+        protected void fireOnCategoryChanged(RtaCategory rtaCategory)
+        {
+            if (this.listener != null)
+            {
+                this.listener.onCategoryChanged(rtaCategory);
+            }
+        }
+
+        protected void fireOnCategoryRemoved(RtaCategory rtaCategory)
+        {
+            if (this.listener != null)
+            {
+                this.listener.onCategoryRemoved(rtaCategory);
+            }
+        }
+
+        protected void fireOnEventAdded(RtaEvent rtaEvent)
+        {
+            if (this.listener != null)
+            {
+                this.listener.onEventAdded(rtaEvent);
+            }
+        }
+
+        protected void fireOnEventChanged(RtaEvent rtaEvent)
+        {
+            if (this.listener != null)
+            {
+                this.listener.onEventChanged(rtaEvent);
+            }
+        }
+
+        protected void fireOnEventRemoved(RtaEvent rtaEvent)
+        {
+            if (this.listener != null)
+            {
+                this.listener.onEventRemoved(rtaEvent);
+            }
+        }
+
+        
     }
 }

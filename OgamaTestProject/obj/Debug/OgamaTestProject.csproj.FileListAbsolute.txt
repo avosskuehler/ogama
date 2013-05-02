@@ -95,3 +95,6 @@ C:\data\projects\ogama\ogama_rta_branch-clone\OgamaTestProject\bin\Debug\GTAppli
 C:\data\projects\ogama\ogama_rta_branch-clone\OgamaTestProject\obj\Debug\ResolveAssemblyReference.cache
 C:\data\projects\ogama\ogama_rta_branch-clone\OgamaTestProject\obj\Debug\OgamaTestProject.dll
 C:\data\projects\ogama\ogama_rta_branch-clone\OgamaTestProject\obj\Debug\OgamaTestProject.pdb
+C:\data\projects\ogama\ogama_rta_branch-clone\OgamaTestProject\obj\Debug\OgamaTestProject.Properties.Resources.resources
+C:\data\projects\ogama\ogama_rta_branch-clone\OgamaTestProject\obj\Debug\GenerateResource.read.1.tlog
+C:\data\projects\ogama\ogama_rta_branch-clone\OgamaTestProject\obj\Debug\GenerateResource.write.1.tlog
