@@ -40,6 +40,14 @@ namespace Ogama.Modules.Rta.RtaReplay
 
             return ((dMax / dH) * dValue);
         }
+
+        public double getPlayerPositionByTimestamp(double xPosition, double maxXposition)
+        {
+            
+
+            return 0;
+
+        }
     }
 
 }
