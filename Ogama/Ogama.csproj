@@ -563,10 +563,13 @@
     <Compile Include="Modules\Rta\RtaReplay\IRtaCategoryVisitorImpl.cs" />
     <Compile Include="Modules\Rta\RtaReplay\Marker.cs" />
     <Compile Include="Modules\Rta\RtaReplay\MessageQueue.cs" />
+    <Compile Include="Modules\Rta\RtaReplay\ModelController.cs" />
     <Compile Include="Modules\Rta\RtaReplay\Program.cs" />
     <Compile Include="Modules\Rta\RtaReplay\RtaCategory.cs" />
     <Compile Include="Modules\Rta\RtaReplay\RtaCategoryModel.cs" />
+    <Compile Include="Modules\Rta\RtaReplay\RtaCategoryModelListener.cs" />
     <Compile Include="Modules\Rta\RtaReplay\RtaCategoryTreeitemConverter.cs" />
+    <Compile Include="Modules\Rta\RtaReplay\RtaEvent.cs" />
     <Compile Include="Modules\Rta\RtaReplay\RtaPanel.cs" />
     <Compile Include="Modules\Rta\RtaReplay\Segment.cs" />
     <Compile Include="Modules\Rta\RtaReplay\Tools.cs" />

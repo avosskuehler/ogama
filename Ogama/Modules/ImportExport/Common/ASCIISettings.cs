@@ -489,15 +489,42 @@ namespace Ogama.Modules.ImportExport.Common
       {
         using (StreamReader importReader = new StreamReader(importFile))
         {
-            string lastLine = "";
-          // Read ImportFile
-          while ((line = importReader.ReadLine()) != null)
-          {
+            processContent(numberOfImportLines, columnHeaders, fileRows, ref counter, ref columncount, importReader);
+        }
+      }
+      catch (Exception ex)
+      {
+        ExceptionMethods.HandleException(ex);
+      }
+
+      return fileRows;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="numberOfImportLines"></param>
+    /// <param name="columnHeaders"></param>
+    /// <param name="fileRows"></param>
+    /// <param name="counter"></param>
+    /// <param name="columncount"></param>
+    /// <param name="importReader"></param>
+    public void processContent(int numberOfImportLines, 
+        List<string> columnHeaders, 
+        List<string[]> fileRows, 
+        ref int counter, 
+        ref int columncount, 
+        StreamReader importReader)
+    {
+        string line = String.Empty;
+        // Read ImportFile
+        while ((line = importReader.ReadLine()) != null)
+        {
             // ignore empty lines
             if (line.Trim() == string.Empty)
             {
                 lastLine = line;
-              continue;
+                continue;
             }
 
             // Ignore Quotes if applicable
@@ -537,19 +564,23 @@ namespace Ogama.Modules.ImportExport.Common
                 continue;
             }
 
-            
+            // Skip small lines if applicable
+            if (this.IgnoreSmallLines && columncount != items.Length)
+            {
+                continue;
+            }
 
             if (counter == 0)
             {
-              columncount = items.Length;
+                columncount = items.Length;
 
-              // Fill column header list
-              for (int i = 0; i < items.Length; i++)
-              {
-                string headerText = this.ColumnTitlesAtFirstRow ? items[i].Replace(' ', '-') : "Column" + i.ToString();
-                columnHeaders.Add(headerText);
+                // Fill column header list
+                for (int i = 0; i < items.Length; i++)
+                {
+                    string headerText = this.ColumnTitlesAtFirstRow ? items[i].Replace(' ', '-') : "Column" + i.ToString();
+                    columnHeaders.Add(headerText);
 
-              }
+                }
 
               handleColumnTitlesAtPreviousRow(columnHeaders, lastLine);
               
@@ -565,8 +596,8 @@ namespace Ogama.Modules.ImportExport.Common
             // Skip first line if filled with column titles
             if (this.ColumnTitlesAtFirstRow && counter == 0)
             {
-              counter++;
-              continue;
+                counter++;
+                continue;
             }
 
             // Add row to import list
@@ -578,7 +609,7 @@ namespace Ogama.Modules.ImportExport.Common
             // Cancel import, if only a part for preview should be imported.
             if (counter > numberOfImportLines && numberOfImportLines >= 0)
             {
-              break;
+                break;
             }
 
             lastLine = line;

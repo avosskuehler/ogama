@@ -9,6 +9,6 @@ namespace Ogama.Modules.Rta.RtaReplay
     {
         void onVisit(RtaCategory rtaCategory);
 
-       
+        void onVisit(RtaEvent rtaEvent);
     }
 }
