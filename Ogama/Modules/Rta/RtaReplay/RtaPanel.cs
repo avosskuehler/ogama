@@ -24,8 +24,45 @@ namespace Ogama.Modules.Rta.RtaReplay
         private Marker marker2 = null;
         private Marker progressMarker = null;
         private Label labelName;
-
+        private RtaCategoryModel model;
+        private RtaCategory rtaCategory;
         private List<RtaPanel> siblings = new List<RtaPanel>();
+        private String currentPlayerPositionString = "";
+
+        public void addRtaEvent(RtaEvent rtaEvent)
+        {
+            this.controller.addRtaEvent(rtaEvent);
+        }
+
+        public bool belongsToRtaEvent(RtaEvent rtaEvent)
+        {
+            string myCategoryName = rtaCategory.name;
+            string itsCategoryName = rtaEvent.fkRtaCategory.name;
+            
+            log("compare " + myCategoryName + "," + itsCategoryName);
+
+            if (myCategoryName.Equals(itsCategoryName))
+            {
+                return true;
+            }
+            if (this.rtaCategory.Equals(rtaEvent.fkRtaCategory))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public void setRtaCategoryModel(RtaCategoryModel model)
+        {
+            this.model = model;
+            this.controller.setRtaCategoryModel(model);
+        }
+
+        public void setRtaCategory(RtaCategory rtaCategory)
+        {
+            this.rtaCategory = rtaCategory;
+            this.controller.setRtaCategory(this.rtaCategory);
+        }
 
         public void AddSibling(RtaPanel rtaPanel)
         {
@@ -233,7 +270,7 @@ namespace Ogama.Modules.Rta.RtaReplay
 
         private void log(string s)
         {
-            Console.WriteLine("Form2.log:" + s);
+            Console.WriteLine("RtaPanel.log:" + s);
         }
 
         public void adjustProgressTrackerPosition(double xPositionInPercent)
@@ -261,5 +298,21 @@ namespace Ogama.Modules.Rta.RtaReplay
             
         }
 
+        
+        public void setCurrentPlayerPositionString(String currentPlayerPositionString)
+        {
+            this.currentPlayerPositionString = currentPlayerPositionString;
+        }
+
+        public String getCurrentPlayerPosition()
+        {
+            return this.currentPlayerPositionString;
+        }
+
+
+        public string getTimeValueByXposition(double xPosition)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

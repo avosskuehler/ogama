@@ -23,15 +23,30 @@ namespace Ogama.Modules.Rta.RtaReplay
         private Segment newSegment = null;
         private IComparer<IFigure> figureComparator = null;
         IDrawControllerListener listener;
-
+        private System.Object DRAW_LOCK = new System.Object();
         private List<IFigure> figures = new List<IFigure>();
-
-        private ActionController actionController = new ActionController();
-
         public int graphicsWidthMaxValue = 0;
         public double progressInPercent = 0;
-
         private Tools tools = new Tools();
+
+        private RtaCategoryModel model;
+        private RtaCategory rtaCategory;
+        private ActionController actionController = new ActionController();
+
+        public void setRtaCategory(RtaCategory rtaCategory)
+        {
+            this.rtaCategory = rtaCategory;
+        }
+
+        public void setActionController(ActionController actionController)
+        {
+            this.actionController = actionController;
+        }
+
+        public void setRtaCategoryModel(RtaCategoryModel model)
+        {
+            this.model = model;
+        }
 
         public bool isValidProgressMarkerPosition(int x)
         {
@@ -59,7 +74,67 @@ namespace Ogama.Modules.Rta.RtaReplay
             this.actionController.revert();
         }
 
+        public void addSegment(Segment segment)
+        {
+            if (segment == null)
+            {
+                return;
+            }
+
+            RtaEvent rtaEvent = new RtaEvent();
+            rtaEvent.fkRtaCategory = this.rtaCategory;
+            rtaEvent.Xstart = segment.getDimension().X;
+            rtaEvent.Xend = segment.getDimension().Right;
+            rtaEvent.startTimestamp = this.listener.getCurrentPlayerPosition();
+            rtaEvent.endTimestamp = rtaEvent.startTimestamp;
+
+            segment.rtaEvent = rtaEvent;
+
+            this.model.Add(rtaEvent); 
+        }
+
+        public void onSegmentChanged(Segment changedSegment)
+        {
+            RtaEvent rtaEvent = changedSegment.rtaEvent;
+
+            rtaEvent.Xstart = changedSegment.positionX;
+            rtaEvent.Xend = changedSegment.positionX + changedSegment.width;
+
+        }
+
+        public void addRtaEvent(RtaEvent rtaEvent)
+        {
+            if (rtaEvent == null)
+            {
+                return;
+            }
+            Segment segment = new Segment();
+            segment.positionX = (int)rtaEvent.Xstart;
+            segment.width = (int)rtaEvent.Xend;
+            segment.rtaEvent = rtaEvent;
+            
+            addToFigures(segment);
+            
+        }
+
+       
+
+
+
         public void add(IFigure figure)
+        {
+            addToFigures(figure);
+
+            if (figure is Segment)
+            {
+                Segment segment = (Segment)figure;
+
+                this.addSegment(segment);
+            }
+
+        }
+
+        private void addToFigures(IFigure figure)
         {
             this.figures.Add(figure);
             figures.Sort(this.getFigureComparator());
@@ -68,10 +143,13 @@ namespace Ogama.Modules.Rta.RtaReplay
         public void remove(IFigure figure)
         {
             this.figures.Remove(figure);
+            if (figure is Segment)
+            {
+                Segment segment = (Segment)figure;
+                this.model.RemoveEvent(segment.rtaEvent);
+            }
         }
 
-
-        private System.Object DRAW_LOCK = new System.Object();
 
         public void drawFigures(Graphics g)
         {
@@ -85,13 +163,11 @@ namespace Ogama.Modules.Rta.RtaReplay
                     {
                         figure.draw(g);
                     });
-
                 }
-            
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine(e.Message);
             }
            
         }
@@ -101,7 +177,7 @@ namespace Ogama.Modules.Rta.RtaReplay
         {
             if (this.figureComparator == null)
             {
-                this.figureComparator = new FigureComarator();
+                this.figureComparator = new FigureComparator();
             }
             return this.figureComparator;
         }
@@ -136,19 +212,35 @@ namespace Ogama.Modules.Rta.RtaReplay
             selectedFigure.move(x, y, this.figureTouchPointX, this.mouseDownPositionX);
 
             moveMarker();
-
+            Boolean segmentHasChanged = false;
+            Boolean segmentHasMoved = false;
+            
             if (selectedFigure.wasResized())
             {
                 this.actionController.onResize();
+                segmentHasChanged = true;
             }
             else
             {
                 this.actionController.onMove();
+                segmentHasMoved = true;
+            }
+            
+            if (segmentHasChanged || segmentHasMoved)
+            {
+                if (selectedFigure is Segment)
+                {
+                    Segment changedSegment = (Segment)selectedFigure;
+                    this.onSegmentChanged(changedSegment);
+                }
             }
 
             drawFigures(g);
 
         }
+
+
+      
 
         private void moveMarker()
         {
@@ -353,11 +445,9 @@ namespace Ogama.Modules.Rta.RtaReplay
         public void register(IDrawControllerListener li)
         {
             this.listener = li;
-        }
+        }   
 
-   
-
-        class FigureComarator : IComparer<IFigure>
+        class FigureComparator : IComparer<IFigure>
         {
             public int Compare(IFigure x, IFigure y)
             {

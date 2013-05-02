@@ -108,9 +108,7 @@ namespace Ogama.Modules.Rta.RtaReplay
         }
 
 
-        private Double RequestedMoviePosition;
-
-
+       
         private void run()
         {
             
@@ -130,23 +128,23 @@ namespace Ogama.Modules.Rta.RtaReplay
                     continue;
                 }
 
-                /*if (this.RequestedMoviePosition != null)
-                {
-                    this.axWindowsMediaPlayer1.Ctlcontrols.currentPosition = RequestedMoviePosition;
-                }
-                else*/
-                { 
-                    if (positionInPercent < 0)
-                    {
-                        positionInPercent = 0;
-                    }
+                String currentPlayerPositionString = this.axWindowsMediaPlayer1.Ctlcontrols.currentPositionString;
 
-                    for (int i = 0; i < rtaPanelList.Count; i++)
-                    {
-                        RtaPanel panel = rtaPanelList.ElementAt(i);
-                        panel.adjustProgressTrackerPosition(positionInPercent);
-                    }
+                
+                if (positionInPercent < 0)
+                {
+                    positionInPercent = 0;
                 }
+
+                for (int i = 0; i < rtaPanelList.Count; i++)
+                {
+                    RtaPanel panel = rtaPanelList.ElementAt(i);
+                    panel.adjustProgressTrackerPosition(positionInPercent);
+                    panel.setCurrentPlayerPositionString(currentPlayerPositionString);
+                }
+
+                double segmentXposition = 532;
+
 
                 
             }
@@ -159,14 +157,16 @@ namespace Ogama.Modules.Rta.RtaReplay
             this.clear();
             RtaCategoryModel model = this.controller.getModel();
             model.visit(this);
-            registerRtaPanels();
+            registerRtaPanelsToEachOther();
         }
 
-        protected void registerRtaPanels()
+        protected void registerRtaPanelsToEachOther()
         {
             for (int i = 0; i < rtaPanelList.Count; i++)
             {
                 RtaPanel panelA = rtaPanelList.ElementAt(i);
+                panelA.setRtaCategoryModel(this.controller.getModel());
+                
                 for (int j = 0; j < rtaPanelList.Count; j++)
                 {
                     if (i == j)
@@ -175,10 +175,9 @@ namespace Ogama.Modules.Rta.RtaReplay
                     }
 
                     RtaPanel panelB = rtaPanelList.ElementAt(j);
+                    panelB.setRtaCategoryModel(this.controller.getModel());
                     panelA.AddSibling(panelB);
                 }
-
-
             }
         }
 
@@ -209,7 +208,8 @@ namespace Ogama.Modules.Rta.RtaReplay
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
         {
-
+            Console.WriteLine("splitContainer1_Panel2_Paint paint:");
+            
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
@@ -262,10 +262,22 @@ namespace Ogama.Modules.Rta.RtaReplay
             }
             int index = rtaPanelList.Count;
             RtaPanel rtaPanel = new RtaPanel(rtaCategory.name);
+            rtaPanel.setRtaCategory(rtaCategory);
             rtaPanel.setLocation(20, index * 60 + 10);
             rtaPanel.AddToParent(this.splitContainer1.Panel2);
             rtaPanelList.Add(rtaPanel);
             
+        }
+
+        public void onVisit(RtaEvent rtaEvent)
+        {
+            rtaPanelList.ForEach(delegate (RtaPanel rtaPanel)
+            {
+                if(rtaPanel.belongsToRtaEvent(rtaEvent))
+                {
+                    rtaPanel.addRtaEvent(rtaEvent);
+                }
+            });
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)

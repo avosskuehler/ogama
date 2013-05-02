@@ -116,9 +116,18 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modules\ImportExport\Common\ASCIISettingsTest.cs" />
     <Compile Include="Modules\Rta\RtaControllerTest.cs" />
+    <Compile Include="Modules\Rta\RtaReplay\RtaCategoryModelTest.cs" />
+    <Compile Include="Modules\Rta\RtaReplay\RtaCategoryTest.cs" />
+    <Compile Include="Modules\Rta\RtaReplay\RtaCategoryTreeitemConverterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Modules\Rta\RtaReplay\RtaExtension4ReplayModuleTest.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Gazetracker\GTCommons\GTCommons.csproj">
@@ -153,6 +162,19 @@
       <Project>{8230AED9-33A2-42FD-BDF7-4F7E4EFA73DB}</Project>
       <Name>VectorGraphics</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Rec 04\Rec 04-All-Data.tsv" />
+    <None Include="resources\Rec 04\Rec 04-AOI-Data.tsv" />
+    <None Include="resources\Rec 04\Rec 04-Combined-Data.tsv" />
+    <None Include="resources\Rec 04\Rec 04-Event-Data.tsv" />
+    <None Include="resources\Rec 04\Rec 04-Fixation-Data.tsv" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

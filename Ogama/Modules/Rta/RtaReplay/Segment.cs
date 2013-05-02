@@ -24,6 +24,7 @@ namespace Ogama.Modules.Rta.RtaReplay
 
         private Brush DEFAULT_BACKGROUND_BRUSH = Brushes.LightGray;
         public Brush backgroundBrush = Brushes.LightGray;
+        public RtaEvent rtaEvent{get;set;}
 
         public int getZlevel()
         {
@@ -133,21 +134,6 @@ namespace Ogama.Modules.Rta.RtaReplay
             int newWidth = Math.Abs(translationX);
             int add2 = Math.Abs(this.positionX - currentPositionX);
             int add = translationXdiffAbs;
-
-            
-
-
-            log(
-                "\nmove::"+
-                " increase:" + increase+
-                " LEFT:"+resizeLeft+
-                " RIGHT:"+resizeRight+
-                " add: " + add +
-                " add2:"+add2
-            );
-
-            
-
             
             if (resizeLeft)
             {
@@ -189,11 +175,9 @@ namespace Ogama.Modules.Rta.RtaReplay
             {
                 this.positionX = (currentPositionX - figureTouchPointX);   
             }
-            
-            
 
-            
-            
+            this.rtaEvent.Xstart = this.positionX;
+            this.rtaEvent.Xend = this.getDimension().Right;
             
         }
 

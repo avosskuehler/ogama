@@ -442,7 +442,6 @@ namespace Ogama.Modules.ImportExport.Common
         columnHeaders.Clear();
       }
 
-      string line = string.Empty;
       int counter = 0;
       int columncount = 0;
 
@@ -451,13 +450,41 @@ namespace Ogama.Modules.ImportExport.Common
       {
         using (StreamReader importReader = new StreamReader(importFile))
         {
-          // Read ImportFile
-          while ((line = importReader.ReadLine()) != null)
-          {
+            processContent(numberOfImportLines, columnHeaders, fileRows, ref counter, ref columncount, importReader);
+        }
+      }
+      catch (Exception ex)
+      {
+        ExceptionMethods.HandleException(ex);
+      }
+
+      return fileRows;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="numberOfImportLines"></param>
+    /// <param name="columnHeaders"></param>
+    /// <param name="fileRows"></param>
+    /// <param name="counter"></param>
+    /// <param name="columncount"></param>
+    /// <param name="importReader"></param>
+    public void processContent(int numberOfImportLines, 
+        List<string> columnHeaders, 
+        List<string[]> fileRows, 
+        ref int counter, 
+        ref int columncount, 
+        StreamReader importReader)
+    {
+        string line = String.Empty;
+        // Read ImportFile
+        while ((line = importReader.ReadLine()) != null)
+        {
             // ignore empty lines
             if (line.Trim() == string.Empty)
             {
-              continue;
+                continue;
             }
 
             // Ignore Quotes if applicable
@@ -465,7 +492,7 @@ namespace Ogama.Modules.ImportExport.Common
               line.Trim().Substring(0, this.IgnoreQuotationString.Length) ==
               this.IgnoreQuotationString)
             {
-              continue;
+                continue;
             }
 
             // Ignore lines that do not have the "use only" quotation
@@ -473,14 +500,14 @@ namespace Ogama.Modules.ImportExport.Common
             if (this.UseQuotes &&
               !line.Contains(this.UseQuotationString))
             {
-              continue;
+                continue;
             }
 
             // ignore lines with ignore trigger
             if (this.IgnoreTriggerStringLines &&
               line.Contains(this.IgnoreTriggerString))
             {
-              continue;
+                continue;
             }
 
             // Split Tab separated line items
@@ -489,32 +516,32 @@ namespace Ogama.Modules.ImportExport.Common
             // Use only numeric starting lines if applicable
             if (this.IgnoreNotNumeralLines && !IOHelpers.IsNumeric(line[0]))
             {
-              continue;
+                continue;
             }
 
             // Skip small lines if applicable
             if (this.IgnoreSmallLines && columncount != items.Length)
             {
-              continue;
+                continue;
             }
 
             if (counter == 0)
             {
-              columncount = items.Length;
+                columncount = items.Length;
 
-              // Fill column header list
-              for (int i = 0; i < items.Length; i++)
-              {
-                string headerText = this.ColumnTitlesAtFirstRow ? items[i].Replace(' ', '-') : "Column" + i.ToString();
-                columnHeaders.Add(headerText);
-              }
+                // Fill column header list
+                for (int i = 0; i < items.Length; i++)
+                {
+                    string headerText = this.ColumnTitlesAtFirstRow ? items[i].Replace(' ', '-') : "Column" + i.ToString();
+                    columnHeaders.Add(headerText);
+                }
             }
 
             // Skip first line if filled with column titles
             if (this.ColumnTitlesAtFirstRow && counter == 0)
             {
-              counter++;
-              continue;
+                counter++;
+                continue;
             }
 
             // Add row to import list
@@ -526,17 +553,9 @@ namespace Ogama.Modules.ImportExport.Common
             // Cancel import, if only a part for preview should be imported.
             if (counter > numberOfImportLines && numberOfImportLines >= 0)
             {
-              break;
+                break;
             }
-          }
-        }
-      }
-      catch (Exception ex)
-      {
-        ExceptionMethods.HandleException(ex);
-      }
-
-      return fileRows;
+        }//end while
     }
 
     #endregion //PUBLICMETHODS

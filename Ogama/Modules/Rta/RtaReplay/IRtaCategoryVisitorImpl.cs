@@ -11,5 +11,10 @@ namespace Ogama.Modules.Rta.RtaReplay
         {
 
         }
+
+        public void onVisit(RtaEvent rtaEvent)
+        {
+
+        }
     }
 }
