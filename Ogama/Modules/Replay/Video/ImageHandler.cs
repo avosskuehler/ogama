@@ -161,7 +161,7 @@ namespace Ogama.Modules.Replay.Video
               {
                 sample.SetActualDataLength(read);
 
-                // increment the frame number for next time
+                // progress the frame number for next time
                 this.frameNumber++;
               }
             }

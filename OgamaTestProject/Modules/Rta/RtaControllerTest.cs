@@ -12,6 +12,31 @@ namespace OgamaTestProject.Modules.Rta
     public class RtaControllerTest
     {
         [TestMethod]
+        public void TestgetAvailbleVideoFilterNames()
+        {
+            RtaController cut = new RtaController();
+
+            List<string> list = cut.getAvailbleVideoFilterNames();
+
+            Assert.IsNotNull(list);
+            for (int i = 0; i < list.Count; i++)
+            {
+                string filtername = list[i];
+                Log("available filtername:" + filtername);
+                Console.WriteLine("filtername:" + filtername);
+            }
+
+        }
+
+        protected void Log(string s)
+        {
+            System.IO.StreamWriter sw = System.IO.File.AppendText(
+                "c:/testog.txt");
+            sw.WriteLine(s);
+            sw.Close();
+        }
+
+        [TestMethod]
         public void TestSetup()
         {
             RtaController cut = new RtaController();
@@ -21,7 +46,7 @@ namespace OgamaTestProject.Modules.Rta
             cut.start();
             System.Threading.Thread.Sleep(1000 * 5);
             cut.stop();
-            
+
 
         }
 

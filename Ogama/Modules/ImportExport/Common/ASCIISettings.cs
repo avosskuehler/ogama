@@ -517,6 +517,7 @@ namespace Ogama.Modules.ImportExport.Common
         StreamReader importReader)
     {
         string line = String.Empty;
+        string lastLine = String.Empty;
         // Read ImportFile
         while ((line = importReader.ReadLine()) != null)
         {
@@ -615,14 +616,6 @@ namespace Ogama.Modules.ImportExport.Common
             lastLine = line;
 
           }//end while
-        }
-      }
-      catch (Exception ex)
-      {
-        ExceptionMethods.HandleException(ex);
-      }
-
-      return fileRows;
     }
 
     protected void handleColumnTitlesAtPreviousRow(List<string> columnHeaders, string lastLine)

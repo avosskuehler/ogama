@@ -43,14 +43,24 @@ namespace Ogama
 
       
        runOgama(args);
-        
-       //runRtaDemo();
 
+
+       //testVideoFilter();
+       //runRtaDemo();
        //runFormDemo();
 
     }
 
-     private static void runFormDemo()
+    private static void testVideoFilter()
+    {
+        List<string> list = new Ogama.Modules.Rta.RtaController().getAvailbleVideoFilterNames();
+        for (int i = 0; i < list.Count; i++)
+        {
+            Console.WriteLine("filterName:" + list[i]);
+        }
+    }
+
+    private static void runFormDemo()
      {
          Ogama.Modules.ImportExport.Common.ASCIISettings settings = 
              new Ogama.Modules.ImportExport.Common.ASCIISettings();

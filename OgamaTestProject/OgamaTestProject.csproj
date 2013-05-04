@@ -117,6 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Modules\ImportExport\Common\ASCIISettingsTest.cs" />
+    <Compile Include="Modules\Rta\ProgressDialogTest.cs" />
     <Compile Include="Modules\Rta\RtaControllerTest.cs" />
     <Compile Include="Modules\Rta\RtaReplay\RtaCategoryModelTest.cs" />
     <Compile Include="Modules\Rta\RtaReplay\RtaCategoryTest.cs" />
