@@ -539,8 +539,16 @@
     <Compile Include="Modules\Replay\Video\ImageHandler.cs" />
     <Compile Include="Modules\Replay\Video\VideoExportProperties.cs" />
     <Compile Include="Modules\Replay\Video\VideoStreamProperties.cs" />
+    <Compile Include="Modules\Rta\CountDownLatch.cs" />
     <Compile Include="Modules\Rta\DaoFactory.cs" />
     <Compile Include="Modules\Rta\DMOHelper.cs" />
+    <Compile Include="Modules\Rta\IRtaControllerListener.cs" />
+    <Compile Include="Modules\Rta\ProgressDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Rta\ProgressDialog.Designer.cs">
+      <DependentUpon>ProgressDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Rta\RtaBaseDao.cs" />
     <Compile Include="Modules\Rta\RtaController.cs" />
     <Compile Include="Modules\Rta\RtaExtension4ReplayModule.cs" />
@@ -1213,6 +1221,9 @@
     <EmbeddedResource Include="Modules\Replay\Video\SaveVideoSplash.resx">
       <DependentUpon>SaveVideoSplash.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Rta\ProgressDialog.resx">
+      <DependentUpon>ProgressDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Rta\RtaReplay\FormRtaView.resx">
       <DependentUpon>FormRtaView.cs</DependentUpon>

@@ -23,7 +23,7 @@ namespace Ogama.Modules.Rta
     public class RtaController
     {
         //components
-        
+
         private IBaseFilter muxFilter = null;
         private IFileSinkFilter fileWriterFilter = null;
         private IMediaControl mediaControl = null;
@@ -56,13 +56,86 @@ namespace Ogama.Modules.Rta
         /// </summary>
         public RtaController()
         {
-         
+
+        }
+
+        protected void Log(string s)
+        {
+            StreamWriter sw = System.IO.File.AppendText("c:/log.txt");
+            sw.WriteLine(s);
+            sw.Close();
+        }
+
+        private static List<string> availableVideoFilterNames = null;
+
+        private IRtaControllerListener listener;
+
+        public void register(IRtaControllerListener li)
+        {
+            this.listener = li;
+        }
+
+        public static bool hasNotLoadedVideoFilterNames()
+        {
+            if (availableVideoFilterNames == null)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// return a list of video filter names, which can be used by recording
+        /// </summary>
+        /// <returns></returns>
+        public List<string> getAvailbleVideoFilterNames()
+        {
+            if (availableVideoFilterNames == null)
+            {
+                List<string> result = new List<string>();
+
+                DsDevice[] deviceList = DsDevice.GetDevicesOfCat(FilterCategory.VideoCompressorCategory);
+                for (int i = 0; i < deviceList.Length; i++)
+                {
+                 
+                    string filterName = deviceList[i].Name;
+                    Log("filterName:" + filterName + " (" + (i + 1) + " / " + deviceList.Length + ")");
+                    RtaSettings rtaTestSettings = new RtaSettings();
+                    rtaTestSettings.VideoCompressorName = filterName;
+                    rtaTestSettings.MonitorIndex = 0;
+                    try
+                    {
+                        rtaTestSettings.TempFilename = System.IO.Path.GetTempFileName();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        Log("Error: " + e.ToString());
+                    }
+
+                    Boolean setupOk = setup(rtaTestSettings);
+                    Log("setupOk:" + setupOk);
+
+                    if (setupOk)
+                    {
+                        result.Add(filterName);
+                    }
+
+                    if (this.listener != null)
+                    {
+                        this.listener.onVideoFilterNameDetectionProgress(i, deviceList.Length, filterName);
+                    }
+                }
+                availableVideoFilterNames = result;
+            }
+
+            return availableVideoFilterNames;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="rtaSettings"></param>
+        /// <param name="rtaTestSettings"></param>
         /// <returns></returns>
         public bool setup(RtaSettings rtaSettings)
         {
@@ -143,9 +216,13 @@ namespace Ogama.Modules.Rta
                   rtaSettings.TempFilename,
                   out muxFilter,
                   out fileWriterFilter);
-                DsError.ThrowExceptionForHR(hr);
+                if (hr != 0)
+                {
+                    return false;
+                }
+                //DsError.ThrowExceptionForHR(hr);
 
-                hr = captureGraphBuilder.AllocCapFile(rtaSettings.TempFilename, 
+                hr = captureGraphBuilder.AllocCapFile(rtaSettings.TempFilename,
                     10000000);
                 DsError.ThrowExceptionForHR(hr);
 
@@ -204,12 +281,17 @@ namespace Ogama.Modules.Rta
                      screenCaptureFilter,
                      videoCompressorFilter,
                      muxFilter);
-                    DsError.ThrowExceptionForHR(hr);
-                }
-            
 
-                
-               
+                    //DsError.ThrowExceptionForHR(hr);
+                    if (hr != 0)
+                    {
+                        return false;
+                    }
+                }
+
+
+
+
 
                 // Render audio (audio -> mux)
                 if (AudioDeviceFilter != null)
@@ -238,7 +320,7 @@ namespace Ogama.Modules.Rta
                 ExceptionMethods.HandleException(e);
                 return false;
             }
-                 
+
         }
 
 
@@ -262,7 +344,7 @@ namespace Ogama.Modules.Rta
             DsError.ThrowExceptionForHR(hr);
         }
 
-        
+
 
         private void SetDMOParams(IBaseFilter dmoWrapperFilter)
         {
@@ -299,10 +381,10 @@ namespace Ogama.Modules.Rta
 
         public System.Windows.Forms.MouseEventHandler GetMouseListener()
         {
-           System.Windows.Forms.MouseEventHandler MouseListener = 
-           new System.Windows.Forms.MouseEventHandler(this.onMouseEvent);
+            System.Windows.Forms.MouseEventHandler MouseListener =
+            new System.Windows.Forms.MouseEventHandler(this.onMouseEvent);
 
-           return MouseListener;
+            return MouseListener;
         }
 
         private void onMouseEvent(object sender, MouseEventArgs e)
@@ -380,7 +462,7 @@ namespace Ogama.Modules.Rta
                 return;
             }
             int hr = this.mediaControl.Stop();
-            
+
             hr = this.captureGraphBuilder.CopyCaptureFile(rtaSettings.TempFilename,
                 rtaSettings.Filename, false, null);
 
@@ -398,7 +480,7 @@ namespace Ogama.Modules.Rta
         public string createRtaFilename(string trialName)
         {
             string filename = "";
-            
+
             return filename;
         }
         /*
@@ -575,23 +657,23 @@ namespace Ogama.Modules.Rta
 
         }
         */
-       /* private void addAudioSource()
-        {
-            DirectShowLib.IGraphBuilder graphBuilder = dsScreenCapture.getGraphBuilder();
-            string AudioInputDevice = "Creative Sound Blaster-PCI";
+        /* private void addAudioSource()
+         {
+             DirectShowLib.IGraphBuilder graphBuilder = dsScreenCapture.getGraphBuilder();
+             string AudioInputDevice = "Creative Sound Blaster-PCI";
 
-            int hr = 0;
+             int hr = 0;
 
-            DirectShowLib.IBaseFilter AudioDeviceFilter = GTHardware.Cameras.DirectShow.DirectShowUtils.CreateFilter(
-                DirectShowLib.FilterCategory.AudioInputDevice,
-                AudioInputDevice);
+             DirectShowLib.IBaseFilter AudioDeviceFilter = GTHardware.Cameras.DirectShow.DirectShowUtils.CreateFilter(
+                 DirectShowLib.FilterCategory.AudioInputDevice,
+                 AudioInputDevice);
 
-            if (AudioDeviceFilter != null)
-            {
+             if (AudioDeviceFilter != null)
+             {
 
-                hr = graphBuilder.AddFilter(AudioDeviceFilter, "Audio Source");
-                DirectShowLib.DsError.ThrowExceptionForHR(hr);
-            }
-        }*/
+                 hr = graphBuilder.AddFilter(AudioDeviceFilter, "Audio Source");
+                 DirectShowLib.DsError.ThrowExceptionForHR(hr);
+             }
+         }*/
     }
 }

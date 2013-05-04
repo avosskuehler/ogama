@@ -5,6 +5,7 @@
     using System;
     using System.Runtime.InteropServices;
     using Ogama.Modules.Rta;
+    using System.Collections.Generic;
 
     partial class RtaSettingsForm
     {
@@ -21,6 +22,10 @@
         private System.Windows.Forms.NumericUpDown numericBoxFramerate;
 
         private RtaSettings RtaSettings = null;
+
+        private RtaController rtaController = new RtaController();
+
+        private static List<string> availableVideoFilterNames = null;
 
 
         /// <summary>
@@ -272,6 +277,7 @@
 
 
 
+
         /// <summary>
         /// 
         /// 
@@ -288,22 +294,35 @@
 
             string preselectedCompressor = rtaSettings.VideoCompressorName;
 
-            for (int i = 0; i < deviceList.Length; i++)
+             List<string> filterNames = null;
+             if (RtaController.hasNotLoadedVideoFilterNames())
+             {
+                 ProgressDialog dialog = new ProgressDialog();
+                 dialog.start();
+                 filterNames = dialog.getFilterNames();
+             }
+             else
+             {
+                 filterNames = rtaController.getAvailbleVideoFilterNames();
+             }
+
+            for (int i = 0; i < filterNames.Count; i++)
             {
-                string filterName = deviceList[i].Name;
+                
+                string filterName = filterNames[i];
+
                 this.cbbVideoCompressor.Items.Add(filterName);
 
-                if (filterName.Contains("ffdshow"))
+                if (filterName != null && preselectedCompressor != null)
                 {
-                    this.cbbVideoCompressor.SelectedIndex = i;
-                }
-
-                if (filterName.Contains(filterName))
-                {
-                    this.cbbVideoCompressor.SelectedIndex = i;
+                    if (filterName.Contains(preselectedCompressor))
+                    {
+                        this.cbbVideoCompressor.SelectedIndex = i;
+                    }
                 }
             }
 
+        
 
         }
 
