@@ -14,6 +14,7 @@ using Ogama.Modules.Common.Tools;
 
 using OgamaControls;
 using System.Drawing;
+using Ogama.Modules.Rta.Model;
 
 namespace Ogama.Modules.Rta
 {
@@ -645,7 +646,7 @@ namespace Ogama.Modules.Rta
 
 
         /*
-        protected void init()
+        protected void initFileBasedDatabase()
         {
             dsScreenCapture = new DSScreenCapture("ffdshow video encoder", 10, 0);
             //@see DXCapture.cs

@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ogama.Modules.Rta;
 using Ogama.Modules.Rta.RtaReplay;
+using Ogama.Modules.Rta.Model;
 
 namespace OgamaTestProject.Modules.Rta
 {

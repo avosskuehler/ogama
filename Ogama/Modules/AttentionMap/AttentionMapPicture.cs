@@ -244,7 +244,7 @@ namespace Ogama.Modules.AttentionMap
       int eyeMonX = this.PresentationSize.Width;
       int eyeMonY = this.PresentationSize.Height;
 
-      // init DistributionArray
+      // initFileBasedDatabase DistributionArray
       float[,] distributionArray = new float[eyeMonX, eyeMonY];
 
       // Calculate gaussian kernel for each entry in Fixationtable and add it to Distributionarray

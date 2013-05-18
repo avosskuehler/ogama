@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Ogama.Modules.Rta.Model;
 
 namespace Ogama.Modules.Rta.RtaReplay
 {
@@ -128,7 +129,7 @@ namespace Ogama.Modules.Rta.RtaReplay
                     continue;
                 }
 
-                String currentPlayerPositionString = this.axWindowsMediaPlayer1.Ctlcontrols.currentPositionString;
+                double currentPlayerPosition = this.axWindowsMediaPlayer1.Ctlcontrols.currentPosition;
 
                 
                 if (positionInPercent < 0)
@@ -140,7 +141,7 @@ namespace Ogama.Modules.Rta.RtaReplay
                 {
                     RtaPanel panel = rtaPanelList.ElementAt(i);
                     panel.adjustProgressTrackerPosition(positionInPercent);
-                    panel.setCurrentPlayerPositionString(currentPlayerPositionString);
+                    panel.setCurrentPlayerPositionString(currentPlayerPosition);
                 }
 
                 double segmentXposition = 532;

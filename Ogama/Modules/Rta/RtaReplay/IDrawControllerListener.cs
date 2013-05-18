@@ -11,7 +11,7 @@ namespace Ogama.Modules.Rta.RtaReplay
         void onProgressTrackerPositionChanged(double xPositionInPercent);
         void onRightMarkerPositionChanged(double xPositionInPercent);
 
-        String getCurrentPlayerPosition();
+        double getCurrentPlayerPosition();
         String getTimeValueByXposition(double xPosition);
     }
 }

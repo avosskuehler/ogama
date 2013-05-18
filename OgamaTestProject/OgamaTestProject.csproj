@@ -116,7 +116,14 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modules\Dao\BaseDaoHibernateTest.cs" />
+    <Compile Include="Modules\Dao\RtaSettingsDaoTest.cs" />
     <Compile Include="Modules\ImportExport\Common\ASCIISettingsTest.cs" />
+    <Compile Include="Modules\Rta\Dao\BaseGenericCrudTest.cs" />
+    <Compile Include="Modules\Rta\Dao\RtaCategoryDaoTest.cs" />
+    <Compile Include="Modules\Rta\Dao\RtaEventDaoTest.cs" />
+    <Compile Include="Modules\Rta\Dao\RtaSettingsDaoTest.cs" />
+    <Compile Include="Modules\Rta\LoggerFacadeTest.cs" />
     <Compile Include="Modules\Rta\ProgressDialogTest.cs" />
     <Compile Include="Modules\Rta\RtaControllerTest.cs" />
     <Compile Include="Modules\Rta\RtaReplay\RtaCategoryModelTest.cs" />

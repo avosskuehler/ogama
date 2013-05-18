@@ -41,12 +41,10 @@ namespace Ogama
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
 
-      
-       runOgama(args);
-
+      runOgama(args);
+      //runRtaDemo();
 
        //testVideoFilter();
-       //runRtaDemo();
        //runFormDemo();
 
     }
