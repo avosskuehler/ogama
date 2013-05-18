@@ -1,4 +1,5 @@
-﻿namespace Ogama.Modules.Rta
+﻿using Ogama.Modules.Rta.Model;
+namespace Ogama.Modules.Rta
 {
     using DirectShowLib;
     using GTHardware.Cameras.DirectShow;

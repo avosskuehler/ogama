@@ -130,6 +130,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\EtApi.dll</HintPath>
     </Reference>
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+    </Reference>
     <Reference Include="Interop.ASLSERIALOUTLIB2Lib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\Interop.ASLSERIALOUTLIB2Lib.dll</HintPath>
@@ -158,6 +161,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\Microsoft.SqlServer.SqlEnum.dll</HintPath>
     </Reference>
+    <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.3.3.3.4000\lib\Net35\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL" />
     <Reference Include="PresentationCore">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -177,6 +184,14 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.SQLite, Version=1.0.85.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\System.Data.SQLite.1.0.85.0\lib\net40\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.85.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\System.Data.SQLite.1.0.85.0\lib\net40\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
@@ -351,6 +366,9 @@
     <Compile Include="Modules\Common\Types\SampleValidity.cs" />
     <Compile Include="Modules\Common\Types\StringEnum.cs" />
     <Compile Include="Modules\Common\Types\StringValueAttribute.cs" />
+    <Compile Include="Modules\Dao\BaseDaoHibernate.cs" />
+    <Compile Include="Modules\Dao\FindRequest.cs" />
+    <Compile Include="Modules\Dao\BaseModel.cs" />
     <Compile Include="Modules\Fixations\Fixation.cs" />
     <Compile Include="Modules\Fixations\FixationCalculation.cs" />
     <Compile Include="Modules\Fixations\ExportOptionsDialog.cs">
@@ -540,16 +558,17 @@
     <Compile Include="Modules\Replay\Video\VideoExportProperties.cs" />
     <Compile Include="Modules\Replay\Video\VideoStreamProperties.cs" />
     <Compile Include="Modules\Rta\CountDownLatch.cs" />
-    <Compile Include="Modules\Rta\DaoFactory.cs" />
+    <Compile Include="Modules\Rta\Dao\RtaCategoryDao.cs" />
+    <Compile Include="Modules\Rta\Dao\RtaEventDao.cs" />
     <Compile Include="Modules\Rta\DMOHelper.cs" />
     <Compile Include="Modules\Rta\IRtaControllerListener.cs" />
+    <Compile Include="Modules\Rta\Logger.cs" />
     <Compile Include="Modules\Rta\ProgressDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\Rta\ProgressDialog.Designer.cs">
       <DependentUpon>ProgressDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Rta\RtaBaseDao.cs" />
     <Compile Include="Modules\Rta\RtaController.cs" />
     <Compile Include="Modules\Rta\RtaExtension4ReplayModule.cs" />
     <Compile Include="Modules\Rta\RtaFeature.cs" />
@@ -573,16 +592,16 @@
     <Compile Include="Modules\Rta\RtaReplay\MessageQueue.cs" />
     <Compile Include="Modules\Rta\RtaReplay\ModelController.cs" />
     <Compile Include="Modules\Rta\RtaReplay\Program.cs" />
-    <Compile Include="Modules\Rta\RtaReplay\RtaCategory.cs" />
+    <Compile Include="Modules\Rta\Model\RtaCategory.cs" />
     <Compile Include="Modules\Rta\RtaReplay\RtaCategoryModel.cs" />
     <Compile Include="Modules\Rta\RtaReplay\RtaCategoryModelListener.cs" />
     <Compile Include="Modules\Rta\RtaReplay\RtaCategoryTreeitemConverter.cs" />
-    <Compile Include="Modules\Rta\RtaReplay\RtaEvent.cs" />
+    <Compile Include="Modules\Rta\Model\RtaEvent.cs" />
     <Compile Include="Modules\Rta\RtaReplay\RtaPanel.cs" />
     <Compile Include="Modules\Rta\RtaReplay\Segment.cs" />
     <Compile Include="Modules\Rta\RtaReplay\Tools.cs" />
-    <Compile Include="Modules\Rta\RtaSettings.cs" />
-    <Compile Include="Modules\Rta\RtaSettingsDao.cs" />
+    <Compile Include="Modules\Rta\Model\RtaSettings.cs" />
+    <Compile Include="Modules\Rta\Dao\RtaSettingsDao.cs" />
     <Compile Include="Modules\Rta\RtaSettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1488,6 +1507,10 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -1543,7 +1566,24 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <Content Include="readme.txt" />
+    <EmbeddedResource Include="Resources\hbm\RtaCategory.hbm.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\hbm\RtaEvent.hbm.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <Content Include="x64\SQLite.Interop.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\SQLite.Interop.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="DataSet\OgamaDatabaseTemplate.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1698,6 +1738,10 @@
     <Content Include="Resources\MirametrixLogo_150_33.png" />
     <Content Include="Resources\Mirametrix_S2.png" />
     <Content Include="Resources\Mirametrix_S2_16_8.png" />
+    <EmbeddedResource Include="Resources\hbm\RtaSettings.hbm.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="SaliencyCalculation\cygblas.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

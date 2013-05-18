@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
-
+using Ogama.Modules.Rta.Model;
 namespace Ogama.Modules.Rta.RtaReplay
 {
     public class RtaPanel : IDrawControllerListener
@@ -27,7 +27,7 @@ namespace Ogama.Modules.Rta.RtaReplay
         private RtaCategoryModel model;
         private RtaCategory rtaCategory;
         private List<RtaPanel> siblings = new List<RtaPanel>();
-        private String currentPlayerPositionString = "";
+        private double currentPlayerPositionString = 0;
 
         public void addRtaEvent(RtaEvent rtaEvent)
         {
@@ -299,12 +299,12 @@ namespace Ogama.Modules.Rta.RtaReplay
         }
 
         
-        public void setCurrentPlayerPositionString(String currentPlayerPositionString)
+        public void setCurrentPlayerPositionString(double currentPlayerPositionString)
         {
             this.currentPlayerPositionString = currentPlayerPositionString;
         }
 
-        public String getCurrentPlayerPosition()
+        public double getCurrentPlayerPosition()
         {
             return this.currentPlayerPositionString;
         }

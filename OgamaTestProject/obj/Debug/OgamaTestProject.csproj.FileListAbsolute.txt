@@ -98,3 +98,17 @@ C:\data\projects\ogama\ogama_rta_branch-clone\OgamaTestProject\obj\Debug\OgamaTe
 C:\data\projects\ogama\ogama_rta_branch-clone\OgamaTestProject\obj\Debug\OgamaTestProject.Properties.Resources.resources
 C:\data\projects\ogama\ogama_rta_branch-clone\OgamaTestProject\obj\Debug\GenerateResource.read.1.tlog
 C:\data\projects\ogama\ogama_rta_branch-clone\OgamaTestProject\obj\Debug\GenerateResource.write.1.tlog
+C:\data\projects\ogama\ogama_rta_branch-clone\OgamaTestProject\bin\Debug\NLog.dll
+C:\data\projects\ogama\ogama_rta_branch-clone\OgamaTestProject\bin\Debug\NLog.pdb
+C:\data\projects\ogama\ogama_rta_branch-clone\OgamaTestProject\bin\Debug\NLog.xml
+C:\data\projects\ogama\ogama_rta_branch-clone\OgamaTestProject\bin\Debug\NHibernate.dll
+C:\data\projects\ogama\ogama_rta_branch-clone\OgamaTestProject\bin\Debug\Iesi.Collections.dll
+C:\data\projects\ogama\ogama_rta_branch-clone\OgamaTestProject\bin\Debug\NHibernate.pdb
+C:\data\projects\ogama\ogama_rta_branch-clone\OgamaTestProject\bin\Debug\NHibernate.xml
+C:\data\projects\ogama\ogama_rta_branch-clone\OgamaTestProject\bin\Debug\Iesi.Collections.pdb
+C:\data\projects\ogama\ogama_rta_branch-clone\OgamaTestProject\bin\Debug\Iesi.Collections.xml
+C:\data\projects\ogama\ogama_rta_branch-clone\OgamaTestProject\bin\Debug\x64\SQLite.Interop.dll
+C:\data\projects\ogama\ogama_rta_branch-clone\OgamaTestProject\bin\Debug\x86\SQLite.Interop.dll
+C:\data\projects\ogama\ogama_rta_branch-clone\OgamaTestProject\bin\Debug\Resources\hbm\RtaSettings.hbm.xml
+C:\data\projects\ogama\ogama_rta_branch-clone\OgamaTestProject\bin\Debug\Resources\hbm\RtaCategory.hbm.xml
+C:\data\projects\ogama\ogama_rta_branch-clone\OgamaTestProject\bin\Debug\Resources\hbm\RtaEvent.hbm.xml

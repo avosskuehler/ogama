@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Ogama.Modules.Rta.Model;
 
 namespace Ogama.Modules.Rta
 {
@@ -144,12 +145,14 @@ namespace Ogama.Modules.Rta
             return filename;
         }
 
+        private LoggerFacade log = new LoggerFacade();
         /// <summary>
         /// 
         /// </summary>
         public void showRtaVideoDialog()
         {
-           
+
+            log.info("showRtaVideoDialog()");
 
         }
     }

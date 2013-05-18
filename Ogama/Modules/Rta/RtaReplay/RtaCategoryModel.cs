@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml;
-
+using Ogama.Modules.Rta.Model;
 namespace Ogama.Modules.Rta.RtaReplay
 {
     [System.Xml.Serialization.XmlRoot("RtaCategoryModel")]

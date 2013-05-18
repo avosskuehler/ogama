@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using Ogama.Modules.Rta.Model;
 
 namespace Ogama.Modules.Rta.RtaReplay
 {

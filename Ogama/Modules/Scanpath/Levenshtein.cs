@@ -142,7 +142,7 @@ namespace Ogama.Modules.Scanpath
         /* calc. rowwise */
         for (j = 1; j < l2; j++)
         {
-          /* init pointers and col#0 */
+          /* initFileBasedDatabase pointers and col#0 */
           p1 = r + ((j & 1) == 0 ? 1 : 0);
           p2 = r + (j & 1);
           n = *p1 + 1;
