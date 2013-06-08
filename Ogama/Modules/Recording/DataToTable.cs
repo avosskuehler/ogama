@@ -13,16 +13,13 @@
 
 namespace Ogama.Modules.Recording
 {
-  using System;
   using System.Collections.Generic;
-  using System.Text;
 
   using Ogama.DataSet;
-  using Ogama.Modules.ImportExport;
   using Ogama.Modules.ImportExport.Common;
 
   /// <summary>
-  /// This stores a set of rawdata along with the table where the data
+  /// This stores a set of raw data along with the table where the data
   /// should be written to.
   /// </summary>
   public struct DataToTable

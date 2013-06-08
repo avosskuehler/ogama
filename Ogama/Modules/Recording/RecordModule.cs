@@ -529,6 +529,15 @@ namespace Ogama.Modules.Recording
       // Save current timestamp
       lock (this.timeLock)
       {
+        //if (this.lastTimeStamp == e.Gazedata.Time&&t)
+        //{
+        //  var message = string.Format(
+        //    "TrackerGazeDataChanged: Data sample with time {0} "
+        //    + "has same timestamp as foregoing sample ", 
+        //    e.Gazedata.Time);
+        //  throw new ArgumentException(message);
+        //}
+
         this.lastTimeStamp = e.Gazedata.Time;
       }
 
@@ -1305,7 +1314,7 @@ namespace Ogama.Modules.Recording
     /// This static method performs the writing of the copied raw data list into the
     /// table.
     /// </summary>
-    /// <param name="stateInfo">An <see cref="Object"/> with the thread param which is 
+    /// <param name="stateInfo">An <see cref="Object"/> with the thread parameter which is 
     /// a <see cref="List{RawData}"/></param>
     private static void StoreRecordsInDataSetTable(object stateInfo)
     {
