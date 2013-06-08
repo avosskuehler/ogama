@@ -453,7 +453,7 @@ namespace Ogama.Modules.Recording.TobiiInterface
         if (!this.isTracking)
         {
           // Start subscribing to gaze data stream
-          connectedTracker.StartTracking();
+          //connectedTracker.StartTracking();
           this.isTracking = true;
         }
       }
@@ -480,7 +480,8 @@ namespace Ogama.Modules.Recording.TobiiInterface
           return;
         }
 
-        connectedTracker.StopTracking();
+        this.isTracking = false;
+        //connectedTracker.StopTracking();
       }
       catch (Exception ex)
       {
@@ -830,6 +831,8 @@ namespace Ogama.Modules.Recording.TobiiInterface
       // this.tetCalibProc.BackgroundColor = (uint)ColorTranslator.ToOle(this.tobiiSettings.TetCalibBackgroundColor);
     }
 
+    private long lasttime = -1;
+
     /// <summary>
     /// OnGazeData event handler for connected tracker.
     ///   This event fires whenever there are new gaze data 
@@ -861,7 +864,18 @@ namespace Ogama.Modules.Recording.TobiiInterface
         Console.WriteLine("Warning. Sync state is " + this.syncManager.SyncState.StateFlag);
       }
 
-      var newGazeData = new GazeData { Time = gd.TimeStamp };
+      //if (this.lasttime == gd.TimeStamp)
+      //{
+      //  var message = string.Format(
+      //    "TobiiTracker, ConnectedTrackerGazeDataReceived: Data sample with time {0} "
+      //    + "has same timestamp as foregoing sample ",
+      //    gd.TimeStamp);
+      //  throw new ArgumentException(message);
+      //}
+
+      this.lasttime = gd.TimeStamp;
+
+      var newGazeData = new GazeData { Time = gd.TimeStamp/1000 };
 
       // Convert Tobii gazestamp in milliseconds.
 
