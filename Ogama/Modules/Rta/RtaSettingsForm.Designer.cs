@@ -1,4 +1,4 @@
-﻿using Ogama.Modules.Rta.Model;
+﻿
 namespace Ogama.Modules.Rta
 {
     using DirectShowLib;
@@ -7,6 +7,7 @@ namespace Ogama.Modules.Rta
     using System.Runtime.InteropServices;
     using Ogama.Modules.Rta;
     using System.Collections.Generic;
+    using OgamaDao.Model.Rta;
 
     partial class RtaSettingsForm
     {

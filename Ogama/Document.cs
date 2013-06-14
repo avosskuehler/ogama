@@ -385,7 +385,7 @@ namespace Ogama
 
     /// <summary>
     /// Creates OgamaDataSet and fills it with data from SQL Databasefile 
-    /// given bei <see cref="Properties.ExperimentSettings.DatabaseConnectionString"/>.
+    /// given by <see cref="Properties.ExperimentSettings.DatabaseConnectionString"/>.
     /// </summary>
     /// <param name="splash">The loading document splash screens background worker,
     /// needed for interrupting splash when SQL connection fails.</param>
