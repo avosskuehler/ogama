@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
-using Ogama.Modules.Rta.Model;
+using OgamaDao.Model.Rta;
 namespace Ogama.Modules.Rta.RtaReplay
 {
     public class RtaPanel : IDrawControllerListener

@@ -165,6 +165,9 @@
       <HintPath>..\packages\NHibernate.3.3.3.4000\lib\Net35\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL" />
+    <Reference Include="OgamaDao">
+      <HintPath>..\OgamaDao\bin\Debug\OgamaDao.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -360,15 +363,13 @@
     <Compile Include="Modules\Common\SlideCollections\SequencedTrial.cs" />
     <Compile Include="Modules\Common\SlideCollections\TrialCollection.cs" />
     <Compile Include="Modules\Common\SlideCollections\SlideType.cs" />
+    <Compile Include="Modules\Database\DaoFactory.cs" />
     <Compile Include="Modules\Common\Tools\NumericComparer.cs" />
     <Compile Include="Modules\Common\Tools\StringLogicalComparer.cs" />
     <Compile Include="Modules\Common\Types\ActiveXMode.cs" />
     <Compile Include="Modules\Common\Types\SampleValidity.cs" />
     <Compile Include="Modules\Common\Types\StringEnum.cs" />
     <Compile Include="Modules\Common\Types\StringValueAttribute.cs" />
-    <Compile Include="Modules\Dao\BaseDaoHibernate.cs" />
-    <Compile Include="Modules\Dao\FindRequest.cs" />
-    <Compile Include="Modules\Dao\BaseModel.cs" />
     <Compile Include="Modules\Fixations\Fixation.cs" />
     <Compile Include="Modules\Fixations\FixationCalculation.cs" />
     <Compile Include="Modules\Fixations\ExportOptionsDialog.cs">
@@ -558,8 +559,6 @@
     <Compile Include="Modules\Replay\Video\VideoExportProperties.cs" />
     <Compile Include="Modules\Replay\Video\VideoStreamProperties.cs" />
     <Compile Include="Modules\Rta\CountDownLatch.cs" />
-    <Compile Include="Modules\Rta\Dao\RtaCategoryDao.cs" />
-    <Compile Include="Modules\Rta\Dao\RtaEventDao.cs" />
     <Compile Include="Modules\Rta\DMOHelper.cs" />
     <Compile Include="Modules\Rta\IRtaControllerListener.cs" />
     <Compile Include="Modules\Rta\Logger.cs" />
@@ -592,16 +591,12 @@
     <Compile Include="Modules\Rta\RtaReplay\MessageQueue.cs" />
     <Compile Include="Modules\Rta\RtaReplay\ModelController.cs" />
     <Compile Include="Modules\Rta\RtaReplay\Program.cs" />
-    <Compile Include="Modules\Rta\Model\RtaCategory.cs" />
     <Compile Include="Modules\Rta\RtaReplay\RtaCategoryModel.cs" />
     <Compile Include="Modules\Rta\RtaReplay\RtaCategoryModelListener.cs" />
     <Compile Include="Modules\Rta\RtaReplay\RtaCategoryTreeitemConverter.cs" />
-    <Compile Include="Modules\Rta\Model\RtaEvent.cs" />
     <Compile Include="Modules\Rta\RtaReplay\RtaPanel.cs" />
     <Compile Include="Modules\Rta\RtaReplay\Segment.cs" />
     <Compile Include="Modules\Rta\RtaReplay\Tools.cs" />
-    <Compile Include="Modules\Rta\Model\RtaSettings.cs" />
-    <Compile Include="Modules\Rta\Dao\RtaSettingsDao.cs" />
     <Compile Include="Modules\Rta\RtaSettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>

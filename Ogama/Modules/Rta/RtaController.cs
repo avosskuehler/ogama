@@ -14,7 +14,7 @@ using Ogama.Modules.Common.Tools;
 
 using OgamaControls;
 using System.Drawing;
-using Ogama.Modules.Rta.Model;
+using OgamaDao.Model.Rta;
 
 namespace Ogama.Modules.Rta
 {
@@ -62,9 +62,9 @@ namespace Ogama.Modules.Rta
 
         protected void Log(string s)
         {
-            StreamWriter sw = System.IO.File.AppendText("c:/log.txt");
+            /*StreamWriter sw = System.IO.File.AppendText("c:/log.txt");
             sw.WriteLine(s);
-            sw.Close();
+            sw.Close();*/
         }
 
         private static List<string> availableVideoFilterNames = null;
@@ -484,197 +484,6 @@ namespace Ogama.Modules.Rta
 
             return filename;
         }
-        /*
-        protected bool init2()
-        {
-          
-            try
-            {
-                GC.Collect();
-                // Get the graphbuilder object
-                IGraphBuilder graphBuilder = new FilterGraph() as IFilterGraph2;
-
-                // Get a ICaptureGraphBuilder2 to help build the graph
-                captureGraphBuilder = new CaptureGraphBuilder2() as ICaptureGraphBuilder2;
-
-                // Link the CaptureGraphBuilder to the filter graph
-                int hr = captureGraphBuilder.SetFiltergraph(graphBuilder);
-                DsError.ThrowExceptionForHR(hr);
-
-                // Get the ogama screen capture device and add it to the filter graph
-                IBaseFilter screenCaptureFilter = DirectShowUtils.CreateFilter(
-                    FilterCategory.VideoInputDevice,
-                    "OgamaScreenCapture Filter");
-                 hr = graphBuilder.AddFilter(screenCaptureFilter, 
-                     "Ogama Screen Capture Filter");
-                DsError.ThrowExceptionForHR(hr);
-
-                // Query the interface for the screen capture Filter
-                Ogama.Modules.Recording.Presenter.DSScreenCapture.IOgamaScreenCapture 
-                    ogamaFilter = screenCaptureFilter 
-                    as Ogama.Modules.Recording.Presenter.DSScreenCapture.IOgamaScreenCapture;
-
-
-                hr = ogamaFilter.set_Monitor(monitorIndex);
-                DsError.ThrowExceptionForHR(hr);
-
-                hr = ogamaFilter.set_Framerate(frameRate);
-                DsError.ThrowExceptionForHR(hr);
-
-                IBaseFilter smartTeeFilter = new SmartTee() as IBaseFilter;
-                hr = graphBuilder.AddFilter(smartTeeFilter, "Smart Tee");
-                DsError.ThrowExceptionForHR(hr);
-
-                // Get the video compressor and add it to the filter graph
-                // Create the filter for the selected video compressor
-                IBaseFilter videoCompressorFilter = DirectShowUtils.CreateFilter(
-                    FilterCategory.VideoCompressorCategory,
-                    this.videoCompressorName);
-                hr = graphBuilder.AddFilter(videoCompressorFilter, "Video Compressor");
-                DsError.ThrowExceptionForHR(hr);
-
-
-                // Add the Audio input device to the graph
-                IBaseFilter AudioDeviceFilter = DirectShowUtils.CreateFilter(
-                    FilterCategory.AudioInputDevice,
-                    AudioInputDeviceName);
-                if (AudioDeviceFilter != null)
-                {
-                    hr = graphBuilder.AddFilter(AudioDeviceFilter, "Audio Source");
-                    DsError.ThrowExceptionForHR(hr);
-                }
-                // Get the audio compressor and add it to the filter graph
-                // Create the filter for the selected audio compressor
-                IBaseFilter AudioCompressorFilter = DirectShowUtils.CreateFilter(
-                  FilterCategory.AudioCompressorCategory,
-                  this.AudioCompressorName);
-                if (AudioCompressorFilter != null)
-                {
-                    hr = graphBuilder.AddFilter(AudioCompressorFilter, "Audio Compressor");
-                    DsError.ThrowExceptionForHR(hr);
-                }
-
-                // Render the file writer portion of graph (mux -> file)
-                hr = captureGraphBuilder.SetOutputFileName(
-                  MediaSubType.Avi,
-                  tempFilename,
-                  out muxFilter,
-                  out fileWriterFilter);
-                DsError.ThrowExceptionForHR(hr);
-
-                hr = captureGraphBuilder.AllocCapFile(tempFilename, 10000000);
-                DsError.ThrowExceptionForHR(hr);
-
-
-                //TEST
-                // Try interleaved first, because if the device supports it,
-                // it's the only way to get audio as well as video
-                
-                hr = captureGraphBuilder.RenderStream(
-                  PinCategory.Capture,
-                  MediaType.Interleaved,
-                  screenCaptureFilter,
-                  videoCompressorFilter,
-                  muxFilter);
-
-                // If interleaved fails try video
-                if (hr < 0)
-                {
-                   
-                    hr = captureGraphBuilder.RenderStream(
-                      PinCategory.Capture,
-                      MediaType.Video,
-                      screenCaptureFilter,
-                      videoCompressorFilter,
-                      muxFilter);
-
-                    if (hr == -2147220969)
-                    {
-                        throw new ArgumentException("Video device is already in use");
-                    }
-
-                    //DsError.ThrowExceptionForHR(hr);
-                }
-
-                //the old way
-               hr = captureGraphBuilder.RenderStream(
-                    null,
-                    null,
-                    screenCaptureFilter,
-                    videoCompressorFilter,
-                    muxFilter);
-                DsError.ThrowExceptionForHR(hr);
-               
-                // Render audio (audio -> mux)
-                if (AudioDeviceFilter != null)
-                {
-                    
-                    hr = captureGraphBuilder.RenderStream(
-                      PinCategory.Capture,
-                      MediaType.Audio,
-                      AudioDeviceFilter,
-                      AudioCompressorFilter,
-                      muxFilter);
-
-                    DsError.ThrowExceptionForHR(hr);
-                }
-
-
-                hr = graphBuilder.SetDefaultSyncSource();
-                DsError.ThrowExceptionForHR(hr);
-
-                mediaControl = (IMediaControl)graphBuilder;
-            }
-            catch (Exception e)
-            {
-                ExceptionMethods.HandleException(e);
-                return false;
-            }
-            return true;
-        }
-
-        */
-
-
-
-
-
-
-
-
-
-
-
-        /*
-        protected void initFileBasedDatabase()
-        {
-            dsScreenCapture = new DSScreenCapture("ffdshow video encoder", 10, 0);
-            //@see DXCapture.cs
-
-            
-
-           // addAudioSource();
-
-
-        }
-        */
-        /* private void addAudioSource()
-         {
-             DirectShowLib.IGraphBuilder graphBuilder = dsScreenCapture.getGraphBuilder();
-             string AudioInputDevice = "Creative Sound Blaster-PCI";
-
-             int hr = 0;
-
-             DirectShowLib.IBaseFilter AudioDeviceFilter = GTHardware.Cameras.DirectShow.DirectShowUtils.CreateFilter(
-                 DirectShowLib.FilterCategory.AudioInputDevice,
-                 AudioInputDevice);
-
-             if (AudioDeviceFilter != null)
-             {
-
-                 hr = graphBuilder.AddFilter(AudioDeviceFilter, "Audio Source");
-                 DirectShowLib.DsError.ThrowExceptionForHR(hr);
-             }
-         }*/
+      
     }
 }

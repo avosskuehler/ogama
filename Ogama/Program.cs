@@ -41,8 +41,8 @@ namespace Ogama
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
 
-      runOgama(args);
-      //runRtaDemo();
+      //runOgama(args);
+      runRtaDemo();
 
        //testVideoFilter();
        //runFormDemo();

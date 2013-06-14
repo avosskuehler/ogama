@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Ogama.Modules.Rta.Model;
+using OgamaDao.Model.Rta;
 
 namespace Ogama.Modules.Rta.RtaReplay
 {
