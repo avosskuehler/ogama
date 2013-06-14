@@ -71,7 +71,7 @@ namespace OgamaTestProject
         /// <summary>
         ///Ein Test für "RtaCategoryTreeitemConverter-Konstruktor"
         ///</summary>
-        [TestMethod()]
+        //[TestMethod()]
         public void TestConvert()
         {
             RtaCategoryTreeitemConverter classUnderTest = new RtaCategoryTreeitemConverter();

@@ -11,7 +11,7 @@ namespace OgamaTestProject.Modules.Rta
     [TestClass]
     public class ProgressDialogTest
     {
-        [TestMethod]
+       // [TestMethod]
         public void TestRunProgressDialog()
         {
             Ogama.Modules.Rta.ProgressDialog cut = new Ogama.Modules.Rta.ProgressDialog();
