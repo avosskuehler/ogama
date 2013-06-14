@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ogama.Modules.Rta;
-using Ogama.Modules.Rta.RtaReplay;
-using Ogama.Modules.Rta.Model;
+using OgamaDao.Model.Rta;
 
 namespace OgamaTestProject.Modules.Rta
 {
@@ -41,7 +40,7 @@ namespace OgamaTestProject.Modules.Rta
         public void TestSetup()
         {
             RtaController cut = new RtaController();
-            RtaSettings rtaSettings = getRtaSettings();
+            OgamaDao.Model.Rta.RtaSettings rtaSettings = getRtaSettings();
             cut.setup(rtaSettings);
 
             cut.start();
