@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+
+                           assembly="OgamaDao"
+
+                           namespace="OgamaDao.Model.Rta">
+
+  <class name="RtaCategory" table="RtaCategory" lazy="false">
+
+    <id name="ID">
+      <generator class="guid"/>
+    </id>
+
+    <property name="name">
+      <column name="name" />
+    </property>
+
+    <property name="description">
+      <column name="description" />
+    </property>
+
+
+    <many-to-one
+        name="parent"                                
+        column="parent"                              
+        class="RtaCategory"                               
+        cascade="none"
+        fetch="select"                                
+        update="true"
+        insert="true"
+        access="property"
+        unique="true"                         
+        optimistic-lock="false"                
+        not-found="exception"                
+  />
+
+
+    <property name="show">
+      <column name="show" />
+    </property>
+
+
+  </class>
+
+</hibernate-mapping>
