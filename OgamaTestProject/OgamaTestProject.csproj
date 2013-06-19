@@ -116,18 +116,13 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Modules\Dao\BaseDaoHibernateTest.cs" />
-    <Compile Include="Modules\Dao\RtaSettingsDaoTest.cs" />
+    <Compile Include="DataSet\OgamaDataSetTest.cs" />
+    <Compile Include="DataSet\QueriesTest.cs" />
+    <Compile Include="Modules\Database\DatabaseFactoryWrapperTest.cs" />
     <Compile Include="Modules\ImportExport\Common\ASCIISettingsTest.cs" />
-    <Compile Include="Modules\Rta\Dao\BaseGenericCrudTest.cs" />
-    <Compile Include="Modules\Rta\Dao\RtaCategoryDaoTest.cs" />
-    <Compile Include="Modules\Rta\Dao\RtaEventDaoTest.cs" />
-    <Compile Include="Modules\Rta\Dao\RtaSettingsDaoTest.cs" />
     <Compile Include="Modules\Rta\LoggerFacadeTest.cs" />
     <Compile Include="Modules\Rta\ProgressDialogTest.cs" />
     <Compile Include="Modules\Rta\RtaControllerTest.cs" />
-    <Compile Include="Modules\Rta\RtaReplay\RtaCategoryModelTest.cs" />
-    <Compile Include="Modules\Rta\RtaReplay\RtaCategoryTest.cs" />
     <Compile Include="Modules\Rta\RtaReplay\RtaCategoryTreeitemConverterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Modules\Rta\RtaReplay\RtaExtension4ReplayModuleTest.cs" />
@@ -136,6 +131,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="TestdataProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Gazetracker\GTCommons\GTCommons.csproj">
@@ -162,6 +158,10 @@
       <Project>{63EF9D30-447A-4F79-9EC8-E4956DC0ABF8}</Project>
       <Name>OgamaControls</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OgamaDao\OgamaDao.csproj">
+      <Project>{34C00FBB-1E30-48ED-988D-1468E5E5FEC6}</Project>
+      <Name>OgamaDao</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ogama\Ogama.csproj">
       <Project>{84DE2C81-CE99-4ED3-B4F3-3C47CDD85E3D}</Project>
       <Name>Ogama</Name>
@@ -183,6 +183,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
