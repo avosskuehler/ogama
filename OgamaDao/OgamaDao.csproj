@@ -59,6 +59,7 @@
     <Compile Include="Dao\DatabaseSchemaSqlite3.cs" />
     <Compile Include="Dao\OgamaDataset\MouseFixationDao.cs" />
     <Compile Include="Dao\Rta\RtaModelDao.cs" />
+    <Compile Include="Dao\SessionFactory.cs" />
     <Compile Include="Model\BaseModel.cs" />
     <Compile Include="Dao\FindRequest.cs" />
     <Compile Include="Dao\Rta\RtaCategoryDao.cs" />

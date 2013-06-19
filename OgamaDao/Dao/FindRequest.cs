@@ -11,6 +11,11 @@ namespace OgamaDao.Dao
         public T entity { get; set; }
         public int page { get; set; }
         public int pageSize { get; set; }
+        public List<string> ignoreProperties = new List<string>();
+        public void ignore(string propertyName)
+        {
+            this.ignoreProperties.Add(propertyName);
+        }
 
     }
 }

@@ -26,10 +26,13 @@ namespace OgamaDao.Dao
         /// <summary>
         /// session factory
         /// </summary>
-        protected ISessionFactory sessionFactory = null;
+        protected ISessionFactory sessionFactory;
+        public void SetSessionFactory(ISessionFactory sf)
+        {
+            this.sessionFactory = sf;
+        }
 
-
-        
+        /*
         /// <summary>
         /// 
         /// initialize hibernate session factory
@@ -39,6 +42,7 @@ namespace OgamaDao.Dao
             Configuration config = GetSQLiteConfig();
             config.SetProperty("connection.connection_string", "Data Source=" + databaseFile + ";Version=3");
             init(config);
+
         }
         /// <summary>
         /// 
@@ -51,7 +55,7 @@ namespace OgamaDao.Dao
             
             addEntitiyMappings(config);
 
-            this.sessionFactory = config.BuildSessionFactory();
+            sessionFactory = config.BuildSessionFactory();
 
             
             var schema = new SchemaExport(config);
@@ -65,12 +69,12 @@ namespace OgamaDao.Dao
         {
             addEntitiyMappings(config);
 
-            this.sessionFactory = config.BuildSessionFactory();
+            sessionFactory = config.BuildSessionFactory();
 
             var schema = new SchemaExport(config);
             schema.Create(true, true);
 
-            IStatelessSession s = this.sessionFactory.OpenStatelessSession();
+            IStatelessSession s = sessionFactory.OpenStatelessSession();
 
             new DatabaseSchemaSqlite3().createDatabase(s);
 
@@ -78,7 +82,7 @@ namespace OgamaDao.Dao
         }
         
 
-        private static void addEntitiyMappings(Configuration config)
+        private void addEntitiyMappings(Configuration config)
         {
             config.AddAssembly(typeof(RtaCategory).Assembly);
             //config.AddAssembly(typeof(RtaSettings).Assembly);
@@ -112,6 +116,7 @@ namespace OgamaDao.Dao
             config.SetProperty("query.substitutions", "true=1;false=0");
             config.SetProperty("current_session_context_class", "thread_static");
         }
+*/
 
         /// <summary>
         /// get or open a hibernate session
@@ -129,7 +134,7 @@ namespace OgamaDao.Dao
                 NHibernate.Context.ThreadStaticSessionContext.Bind(sessionFactory.OpenSession());
             } 
             
-            return this.sessionFactory.GetCurrentSession();
+            return sessionFactory.GetCurrentSession();
         }
 
         /// <summary>
@@ -137,7 +142,7 @@ namespace OgamaDao.Dao
         /// </summary>
         protected void DisposeCurrentSession()
         {
-            ISession currentSession = NHibernate.Context.ThreadStaticSessionContext.Unbind(this.sessionFactory);
+            ISession currentSession = NHibernate.Context.ThreadStaticSessionContext.Unbind(sessionFactory);
             currentSession.Flush();
             currentSession.Close();
             currentSession.Dispose();
@@ -169,6 +174,28 @@ namespace OgamaDao.Dao
             }
         }
 
+        public void save(List<T> list)
+        {
+            ISession session = this.GetCurrentSession();
+            try
+            {
+                foreach (T entity in list)
+                {
+                    object id = session.Save(entity);
+                    entity.ToString();
+                    entity.ID = (Guid)id;
+                }
+            }
+            catch (Exception e)
+            {
+                log.Error(e);
+                throw e;
+            }
+            finally
+            {
+                this.DisposeCurrentSession();
+            }
+        }
         /// <summary>
         /// write the given entity into the database
         /// </summary>
@@ -179,7 +206,6 @@ namespace OgamaDao.Dao
             try
             {
                 object id = session.Save(entity);
-                entity.ToString();
                 entity.ID = (Guid)id;
             }
             catch (Exception e)
@@ -252,11 +278,20 @@ namespace OgamaDao.Dao
                 transaction.Begin();
 
                 ISession session = GetCurrentSession();
+                
                 T entity = request.entity;
-                Type t = typeof(RtaSettings);
-                IList<T> results = session.CreateCriteria(entity.GetType())
-                    .Add(Example.Create(entity))
-                    .List<T>();
+                
+                Example example = Example.Create(entity);
+                foreach (string p in request.ignoreProperties)
+                {
+                    example = example.ExcludeProperty(p);
+                }
+                example = example.ExcludeZeroes();
+                example = example.ExcludeNulls();
+
+                ICriteria criteria = session.CreateCriteria(entity.GetType()).Add(example);
+                
+                IList<T> results = criteria.List<T>();
                 
                 return results;
 
@@ -298,5 +333,7 @@ namespace OgamaDao.Dao
             }
         }
 
+        
+        
     }
 }
