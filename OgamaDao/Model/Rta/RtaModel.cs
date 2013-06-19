@@ -89,5 +89,45 @@ namespace OgamaDao.Model.Rta
             this.rtaCategories = this.rtaCateogryDao.findAll();
             this.rtaEvents = this.rtaEventDao.findAll();
         }
+
+        public void visit(IRtaModelVisitor visitor)
+        {
+
+            List<RtaCategory> categories = new List<RtaCategory>();
+
+            for (int i = 0; i < this.getRtaCategories().Count; i++)
+            {
+                categories.Add(this.getRtaCategories().ElementAt(i));
+            }
+
+            Stack<RtaCategory> parentNodes = new Stack<RtaCategory>();
+
+            for (int i = 0; i < categories.Count; i++)
+            {
+                RtaCategory currentItem = categories.ElementAt(i);
+
+                visitor.onVisit(currentItem);
+
+
+                List<RtaCategory> subList = currentItem.getChildren();
+
+                categories.InsertRange(i + 1, subList);
+            }
+
+
+
+            for (int i = 0; i < this.getRtaEvents().Count; i++)
+            {
+                RtaEvent rtaEvent = this.getRtaEvents().ElementAt(i);
+                visitor.onVisit(rtaEvent);
+            }
+
+        }
+
+        public void Save()
+        {
+            this.SaveRtaCategories();
+            this.SaveRtaEvents();
+        }
     }
 }
