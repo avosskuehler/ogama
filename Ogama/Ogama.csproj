@@ -363,13 +363,13 @@
     <Compile Include="Modules\Common\SlideCollections\SequencedTrial.cs" />
     <Compile Include="Modules\Common\SlideCollections\TrialCollection.cs" />
     <Compile Include="Modules\Common\SlideCollections\SlideType.cs" />
-    <Compile Include="Modules\Database\DaoFactory.cs" />
     <Compile Include="Modules\Common\Tools\NumericComparer.cs" />
     <Compile Include="Modules\Common\Tools\StringLogicalComparer.cs" />
     <Compile Include="Modules\Common\Types\ActiveXMode.cs" />
     <Compile Include="Modules\Common\Types\SampleValidity.cs" />
     <Compile Include="Modules\Common\Types\StringEnum.cs" />
     <Compile Include="Modules\Common\Types\StringValueAttribute.cs" />
+    <Compile Include="Modules\Database\DaoFactoryWrapper.cs" />
     <Compile Include="Modules\Fixations\Fixation.cs" />
     <Compile Include="Modules\Fixations\FixationCalculation.cs" />
     <Compile Include="Modules\Fixations\ExportOptionsDialog.cs">
@@ -589,7 +589,6 @@
     <Compile Include="Modules\Rta\RtaReplay\IRtaCategoryVisitorImpl.cs" />
     <Compile Include="Modules\Rta\RtaReplay\Marker.cs" />
     <Compile Include="Modules\Rta\RtaReplay\MessageQueue.cs" />
-    <Compile Include="Modules\Rta\RtaReplay\ModelController.cs" />
     <Compile Include="Modules\Rta\RtaReplay\Program.cs" />
     <Compile Include="Modules\Rta\RtaReplay\RtaCategoryModel.cs" />
     <Compile Include="Modules\Rta\RtaReplay\RtaCategoryModelListener.cs" />

@@ -93,7 +93,7 @@ namespace Ogama.Modules.Recording.MirametrixInterface
     private int[] memConnectionsIds;
 
     /// <summary>
-    /// Xml document which contains all parameterizations
+    /// Xml Document which contains all parameterizations
     /// </summary>
     private XmlDocument memXmlDocument;
 
@@ -769,7 +769,7 @@ namespace Ogama.Modules.Recording.MirametrixInterface
       // specify the type of object to be deserialized 
       XmlSerializer serializer = new XmlSerializer(typeof(MirametrixSetting));
 
-      // If the XML document has been altered with unknown 
+      // If the XML Document has been altered with unknown 
       // nodes or attributes, handle them with the 
       // UnknownNode and UnknownAttribute events.
       serializer.UnknownNode += new XmlNodeEventHandler(this.SerializerUnknownNode);
@@ -777,11 +777,11 @@ namespace Ogama.Modules.Recording.MirametrixInterface
 
       try
       {
-        // A FileStream is needed to read the XML document.
+        // A FileStream is needed to read the XML Document.
         FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
 
         // Use the Deserialize method to restore the object's state with
-        // data from the XML document.
+        // data from the XML Document.
         settings = (MirametrixSetting)serializer.Deserialize(fs);
         fs.Close();
       }

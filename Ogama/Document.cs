@@ -37,12 +37,12 @@ namespace Ogama
   using VectorGraphics.Elements.ElementCollections;
 
   /// <summary>
-  /// This class defines an OGAMA document.
-  /// Is a singleton class type with the current document as static member.
+  /// This class defines an OGAMA Document.
+  /// Is a singleton class type with the current Document as static member.
   /// It also has a modified flag and an experiment settings class member along with
   /// the current selected trial and subject state.
   /// </summary>
-  /// <remarks>To retrieve the current active document and its experiment settings
+  /// <remarks>To retrieve the current active Document and its experiment settings
   /// call <code>Document.ActiveDocument</code> resp.
   /// <code>Document.ActiveDocument.ExperimentSettings</code>.</remarks>
   public class Document
@@ -80,7 +80,7 @@ namespace Ogama
     #region FIELDS
 
     /// <summary>
-    /// Current active document
+    /// Current active Document
     /// </summary>
     private static Document activeDocument;
 
@@ -96,12 +96,12 @@ namespace Ogama
     private SelectionsState selectionState;
 
     /// <summary>
-    /// Dataset assigned with this document.
+    /// Dataset assigned with this Document.
     /// </summary>
     private OgamaDataSet dataSet;
 
     /// <summary>
-    /// Flag. True, if document parameters were modified.
+    /// Flag. True, if Document parameters were modified.
     /// </summary>
     private bool isModified;
 
@@ -131,9 +131,9 @@ namespace Ogama
     #region PROPERTIES
 
     /// <summary>
-    /// Gets or sets current active document.
+    /// Gets or sets current active Document.
     /// </summary>
-    /// <value>A <see cref="Document"/> with the current document.</value>
+    /// <value>A <see cref="Document"/> with the current Document.</value>
     public static Document ActiveDocument
     {
       get { return activeDocument; }
@@ -141,10 +141,10 @@ namespace Ogama
     }
 
     /// <summary>
-    /// Gets or sets a value indicating whether the document is modified.
-    /// True, if there are changes in the document settings.
+    /// Gets or sets a value indicating whether the Document is modified.
+    /// True, if there are changes in the Document settings.
     /// </summary>
-    /// <value>A <see cref="bool"/> which is <strong>true</strong>, when the document
+    /// <value>A <see cref="bool"/> which is <strong>true</strong>, when the Document
     /// has unsaved changes.</value>
     public bool Modified
     {
@@ -155,7 +155,7 @@ namespace Ogama
     /// <summary>
     /// Gets or sets experiment settings.
     /// </summary>
-    /// <value>A <see cref="ExperimentSettings"/> for the current document.</value>
+    /// <value>A <see cref="ExperimentSettings"/> for the current Document.</value>
     public ExperimentSettings ExperimentSettings
     {
       get { return this.experimentSettings; }
@@ -202,7 +202,7 @@ namespace Ogama
     /// <summary>
     /// Gets or sets the current active Subject, TrialID and TrialImagefile
     /// </summary>
-    /// <value>A <see cref="SelectionsState"/> for the current document.</value>
+    /// <value>A <see cref="SelectionsState"/> for the current Document.</value>
     public SelectionsState SelectionState
     {
       get { return this.selectionState; }
@@ -212,7 +212,7 @@ namespace Ogama
     /// <summary>
     /// Gets or sets assigned dataset.
     /// </summary>
-    /// <value>The <see cref="OgamaDataSet"/> for the current document.</value>
+    /// <value>The <see cref="OgamaDataSet"/> for the current Document.</value>
     public OgamaDataSet DocDataSet
     {
       get { return this.dataSet; }
@@ -311,12 +311,12 @@ namespace Ogama
     #region METHODS
 
     /// <summary>
-    /// Tries to load document of given file and updates recent files list.
+    /// Tries to load Document of given file and updates recent files list.
     /// </summary>
     /// <param name="filePath">A <see cref="string"/> with the full path to .oga xml file.</param>
     /// <param name="addToRecentFiles">Flag. <strong>True</strong>, if file should be
     /// added to recent files list.</param>
-    /// <param name="splash">The loading document splash screens background worker,
+    /// <param name="splash">The loading Document splash screens background worker,
     /// needed for interrupting splash when SQL connection fails.</param>
     /// <returns><strong>True</strong>,if successful, otherwise
     /// <strong>false</strong>.</returns>
@@ -361,10 +361,10 @@ namespace Ogama
     }
 
     /// <summary>
-    /// Tries to save document and updates recent files list.
+    /// Tries to save Document and updates recent files list.
     /// </summary>
     /// <param name="filePath">A <see cref="string"/> with the full path to .oga xml file.</param>
-    /// <param name="splash">The loading document splash screens background worker,
+    /// <param name="splash">The loading Document splash screens background worker,
     /// needed for interrupting splash when SQL connection fails.</param>
     /// <returns><strong>True</strong>,if successful, otherwise
     /// <strong>false</strong>.</returns>
@@ -387,7 +387,7 @@ namespace Ogama
     /// Creates OgamaDataSet and fills it with data from SQL Databasefile 
     /// given by <see cref="Properties.ExperimentSettings.DatabaseConnectionString"/>.
     /// </summary>
-    /// <param name="splash">The loading document splash screens background worker,
+    /// <param name="splash">The loading Document splash screens background worker,
     /// needed for interrupting splash when SQL connection fails.</param>
     /// <returns><strong>True</strong>,if successful, otherwise
     /// <strong>false</strong>.</returns>
@@ -588,7 +588,7 @@ namespace Ogama
     /// </summary>
     /// <param name="filePath">A <see cref="string"/> with the path 
     /// and filename to the settings file.</param>
-    /// <param name="splash">The loading document splash screens background worker,
+    /// <param name="splash">The loading Document splash screens background worker,
     /// needed for interrupting splash when SQL connection fails.</param>
     /// <returns><strong>True</strong>,if successful, otherwise
     /// <strong>false</strong>.</returns>
@@ -605,7 +605,7 @@ namespace Ogama
           string filename = Path.GetFileNameWithoutExtension(filePath);
           string directory = Path.GetDirectoryName(filePath);
 
-          // Setup document path and name
+          // Setup Document path and name
           this.experimentSettings.DocumentPath = directory;
 
           // Set path properties of slideshow elements

@@ -917,7 +917,7 @@ namespace Ogama.Modules.ImportExport.FixationData
           XmlSerializer serializer = new XmlSerializer(typeof(MergedSettings));
 
           /* Use the Deserialize method to restore the object's state with
-          data from the XML document. */
+          data from the XML Document. */
           settings = (MergedSettings)serializer.Deserialize(fs);
 
           asciiSetting = settings.AsciiSetting;
