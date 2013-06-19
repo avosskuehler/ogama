@@ -10,16 +10,15 @@ namespace Ogama.Modules.Rta.RtaReplay
     {
 
 
-        public void LoadModelIntoTreeNodeCollection(RtaCategoryModel model, System.Windows.Forms.TreeNodeCollection nodes)
+        public void LoadModelIntoTreeNodeCollection(RtaModel model, System.Windows.Forms.TreeNodeCollection nodes)
         {
             List<RtaCategory> categories = new List<RtaCategory>();
 
-            for (int i = 0; i < model.categories.Count(); i++)
+            for (int i = 0; i < model.getRtaCategories().Count(); i++)
             {
-                categories.Add(model.categories.ElementAt(i));
+                categories.Add(model.getRtaCategories().ElementAt(i));
             }
 
-            
             
             Stack<TreeNode> parentNodes = new Stack<TreeNode>();
 

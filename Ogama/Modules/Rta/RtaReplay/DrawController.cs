@@ -30,7 +30,7 @@ namespace Ogama.Modules.Rta.RtaReplay
         public double progressInPercent = 0;
         private Tools tools = new Tools();
 
-        private RtaCategoryModel model;
+        private RtaModel model;
         private RtaCategory rtaCategory;
         private ActionController actionController = new ActionController();
 
@@ -44,7 +44,7 @@ namespace Ogama.Modules.Rta.RtaReplay
             this.actionController = actionController;
         }
 
-        public void setRtaCategoryModel(RtaCategoryModel model)
+        public void setRtaModel(RtaModel model)
         {
             this.model = model;
         }

@@ -174,7 +174,7 @@ namespace Ogama.Modules.Rta.RtaReplay
         }
 
 
-        public void visit(IRtaCategoryVisitor visitor)
+        public void visit(IRtaModelVisitor visitor)
         {
 
             List<RtaCategory> categories = new List<RtaCategory>();

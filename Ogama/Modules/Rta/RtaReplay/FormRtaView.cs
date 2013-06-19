@@ -10,7 +10,7 @@ using OgamaDao.Model.Rta;
 
 namespace Ogama.Modules.Rta.RtaReplay
 {
-    public partial class FormRtaView : Form, IRtaCategoryVisitor
+    public partial class FormRtaView : Form, IRtaModelVisitor
     {
 
         private FormRtaViewController controller = new FormRtaViewController();
@@ -156,7 +156,7 @@ namespace Ogama.Modules.Rta.RtaReplay
         protected void loadModel()
         {
             this.clear();
-            RtaCategoryModel model = this.controller.getModel();
+            RtaModel model = this.controller.getModel();
             model.visit(this);
             registerRtaPanelsToEachOther();
         }
@@ -166,18 +166,17 @@ namespace Ogama.Modules.Rta.RtaReplay
             for (int i = 0; i < rtaPanelList.Count; i++)
             {
                 RtaPanel panelA = rtaPanelList.ElementAt(i);
-                panelA.setRtaCategoryModel(this.controller.getModel());
-                
                 for (int j = 0; j < rtaPanelList.Count; j++)
                 {
                     if (i == j)
                     {
                         continue;
                     }
-
                     RtaPanel panelB = rtaPanelList.ElementAt(j);
-                    panelB.setRtaCategoryModel(this.controller.getModel());
                     panelA.AddSibling(panelB);
+
+                    panelA.setRtaModel(this.controller.getModel());
+                    panelB.setRtaModel(this.controller.getModel());
                 }
             }
         }
