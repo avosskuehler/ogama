@@ -7,14 +7,14 @@ FormRtaView
 	(1..1)
 	FormRtaViewController
 	(1..1)
-	RtaCategoryModel
+	RtaModel
 		(1..n)
 		DrawController
 		(1..1)
 		RtaPanel
 		
 
-		RtaCategoryModel
+		RtaModel
 	(1..n)			(1..n)
 	RtaEvent (n..1)	RtaCategory
 	(1..1)

@@ -738,14 +738,14 @@ namespace Ogama.Modules.ImportExport.Common
           // specify the type of object to be deserialized 
           XmlSerializer serializer = new XmlSerializer(typeof(ASCIISettings));
 
-          //////* If the XML document has been altered with unknown 
+          //////* If the XML Document has been altered with unknown 
           //////nodes or attributes, handle them with the 
           //////UnknownNode and UnknownAttribute events.*/
           ////serializer.UnknownNode += new XmlNodeEventHandler(serializer_UnknownNode);
           ////serializer.UnknownAttribute += new XmlAttributeEventHandler(serializer_UnknownAttribute);
 
           /* Use the Deserialize method to restore the object's state with
-          data from the XML document. */
+          data from the XML Document. */
           settings = (ASCIISettings)serializer.Deserialize(fs);
         }
 

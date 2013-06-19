@@ -4,10 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using OgamaDao.Model.Rta;
+using OgamaDao.Dao;
 namespace Ogama.Modules.Rta.RtaReplay
 {
     public class FormRtaViewController
     {
+
+        private RtaModel RtaModel;
+
 
         public string xmlFilename = "c:/testRta.xml";
 
@@ -16,10 +20,25 @@ namespace Ogama.Modules.Rta.RtaReplay
         private String currentPlayerPosition;
         private IFormRtaViewControllerListener listener;
 
+
+        public FormRtaViewController()
+        {
+            this.init();
+        }
+
+        protected void init()
+        {
+            this.RtaModel = new RtaModel();
+            DaoFactory df = Ogama.Modules.Database.DaoFactoryWrapper.GetDaoFactory();
+            this.RtaModel.SetRtaCategoryDao(df.GetRtaCategoyDao());
+            this.RtaModel.SetRtaEventDao(df.getRtaEventDao());
+        }
+
         public RtaCategoryModel getModel()
         {
             return this.rtaCategoryModel;
         }
+
 
         public void loadCategoryList(System.Windows.Forms.TreeNodeCollection controls)
         {
