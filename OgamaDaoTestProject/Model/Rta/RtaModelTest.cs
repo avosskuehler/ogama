@@ -143,21 +143,21 @@ namespace OgamaDaoTestProject.Model.Rta
         }
 
         [TestMethod]
-        public void TestSaveToDatabase()
+        public void TestSave()
         {
+            cut = new RtaModel();
+
             Assert.AreEqual(0, cut.getRtaCategories().Count());
             Assert.AreEqual(0, cut.getRtaEvents().Count());
 
-            cut = new RtaModel();
+            
             cut.SetRtaCategoryDao(daoFactory.GetRtaCategoyDao());
             cut.SetRtaEventDao(daoFactory.getRtaEventDao());
 
             cut.Add(new RtaCategory());
             cut.Add(new RtaEvent());
 
-            cut.SaveRtaCategories();
-            cut.SaveRtaEvents();
-
+            cut.Save();
 
             cut = new RtaModel();
             cut.SetRtaCategoryDao(daoFactory.GetRtaCategoyDao());
@@ -166,6 +166,27 @@ namespace OgamaDaoTestProject.Model.Rta
 
             Assert.AreEqual(1, cut.getRtaCategories().Count());
             Assert.AreEqual(1, cut.getRtaEvents().Count());
+        }
+
+        [TestMethod]
+        public void TestChangeModelAndRevert()
+        {
+            //fetch the model
+            cut = new RtaModel();
+            cut.SetRtaCategoryDao(daoFactory.GetRtaCategoyDao());
+            cut.SetRtaEventDao(daoFactory.getRtaEventDao());
+            int numberOfCategories = cut.getRtaCategories().Count;
+            Assert.AreEqual(0, numberOfCategories);
+            //add some stuff
+            cut.Add(new RtaCategory());
+            cut.Add(new RtaEvent());
+
+            //now don't save the model
+            cut.Load();
+
+            //then: the model shall remain unchanged
+            Assert.AreEqual(0, numberOfCategories);
+
         }
     }
 }
