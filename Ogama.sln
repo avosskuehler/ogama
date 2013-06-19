@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DirectShow", "DirectShow", "{5284AD20-AD56-4D92-A2B5-6008ED8F1A41}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ogama", "Ogama\Ogama.csproj", "{84DE2C81-CE99-4ED3-B4F3-3C47CDD85E3D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{34C00FBB-1E30-48ED-988D-1468E5E5FEC6} = {34C00FBB-1E30-48ED-988D-1468E5E5FEC6}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OgamaControls", "OgamaControls\OgamaControls.csproj", "{63EF9D30-447A-4F79-9EC8-E4956DC0ABF8}"
 EndProject
@@ -44,6 +47,9 @@ EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "SourceDocumentation", "SourceDocumentation\SourceDocumentation.shfbproj", "{E7826944-2613-4287-AA56-6DA4A0C38E4E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OgamaTestProject", "OgamaTestProject\OgamaTestProject.csproj", "{46DE29F1-E403-4015-9A6F-5F39FEC50A33}"
+	ProjectSection(ProjectDependencies) = postProject
+		{34C00FBB-1E30-48ED-988D-1468E5E5FEC6} = {34C00FBB-1E30-48ED-988D-1468E5E5FEC6}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{748A5351-3569-480C-B1C5-32AB22BE5DFA}"
 	ProjectSection(SolutionItems) = preProject
@@ -51,6 +57,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Ogama1.vsmdi = Ogama1.vsmdi
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OgamaDao", "OgamaDao\OgamaDao.csproj", "{34C00FBB-1E30-48ED-988D-1468E5E5FEC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OgamaDaoTestProject", "OgamaDaoTestProject\OgamaDaoTestProject.csproj", "{36F3A411-81E9-454D-845D-296DC518C15A}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -363,6 +373,30 @@ Global
 		{46DE29F1-E403-4015-9A6F-5F39FEC50A33}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{46DE29F1-E403-4015-9A6F-5F39FEC50A33}.Release|x64.ActiveCfg = Release|Any CPU
 		{46DE29F1-E403-4015-9A6F-5F39FEC50A33}.Release|x86.ActiveCfg = Release|Any CPU
+		{34C00FBB-1E30-48ED-988D-1468E5E5FEC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34C00FBB-1E30-48ED-988D-1468E5E5FEC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34C00FBB-1E30-48ED-988D-1468E5E5FEC6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{34C00FBB-1E30-48ED-988D-1468E5E5FEC6}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{34C00FBB-1E30-48ED-988D-1468E5E5FEC6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{34C00FBB-1E30-48ED-988D-1468E5E5FEC6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{34C00FBB-1E30-48ED-988D-1468E5E5FEC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34C00FBB-1E30-48ED-988D-1468E5E5FEC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34C00FBB-1E30-48ED-988D-1468E5E5FEC6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{34C00FBB-1E30-48ED-988D-1468E5E5FEC6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{34C00FBB-1E30-48ED-988D-1468E5E5FEC6}.Release|x64.ActiveCfg = Release|Any CPU
+		{34C00FBB-1E30-48ED-988D-1468E5E5FEC6}.Release|x86.ActiveCfg = Release|Any CPU
+		{36F3A411-81E9-454D-845D-296DC518C15A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36F3A411-81E9-454D-845D-296DC518C15A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36F3A411-81E9-454D-845D-296DC518C15A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{36F3A411-81E9-454D-845D-296DC518C15A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{36F3A411-81E9-454D-845D-296DC518C15A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{36F3A411-81E9-454D-845D-296DC518C15A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{36F3A411-81E9-454D-845D-296DC518C15A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36F3A411-81E9-454D-845D-296DC518C15A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36F3A411-81E9-454D-845D-296DC518C15A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{36F3A411-81E9-454D-845D-296DC518C15A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{36F3A411-81E9-454D-845D-296DC518C15A}.Release|x64.ActiveCfg = Release|Any CPU
+		{36F3A411-81E9-454D-845D-296DC518C15A}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
