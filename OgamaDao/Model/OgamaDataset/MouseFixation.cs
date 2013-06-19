@@ -7,7 +7,6 @@ namespace OgamaDao.Model.OgamaDataset
 {
     public class MouseFixation : BaseModel
     {
-        public virtual Guid ID {get; set;}
 
         public virtual string SubjectName {get; set;}
         public virtual int TrialID {get; set;}

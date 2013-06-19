@@ -6,6 +6,9 @@ using OgamaDao.Dao.Rta;
 
 namespace OgamaDao.Model.Rta
 {
+    /// <summary>
+    /// Facade class for the whole RTA model
+    /// </summary>
     public class RtaModel
     {
         private List<RtaCategory> rtaCategories = new List<RtaCategory>();
@@ -74,6 +77,17 @@ namespace OgamaDao.Model.Rta
         public void SaveRtaCategories()
         {
             this.rtaCateogryDao.save(this.rtaCategories);
+        }
+
+        public void SaveRtaEvents()
+        {
+            this.rtaEventDao.save(this.rtaEvents);            
+        }
+
+        public void Load()
+        {
+            this.rtaCategories = this.rtaCateogryDao.findAll();
+            this.rtaEvents = this.rtaEventDao.findAll();
         }
     }
 }

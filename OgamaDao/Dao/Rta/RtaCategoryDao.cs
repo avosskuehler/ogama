@@ -9,13 +9,25 @@ namespace OgamaDao.Dao.Rta
     public class RtaCategoryDao : OgamaDao.Dao.BaseDaoHibernate<RtaCategory>
     {
 
-        public void save(List<RtaCategory> list)
+        public List<RtaCategory> findAll()
         {
+            List<RtaCategory> list = new List<RtaCategory>();
+            RtaCategory pattern = new RtaCategory();
+            FindRequest<RtaCategory> request = new FindRequest<RtaCategory>();
+            request.entity = new RtaCategory();
+            request.ignore("ID");
 
-            foreach( RtaCategory item in list)
+            IList<RtaCategory> findings = find(request);
+
+            foreach (RtaCategory item in findings)
             {
-                base.save(item);
+                list.Add(item);
             }
+
+            return list;
         }
+
+      
+        
     }
 }

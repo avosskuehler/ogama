@@ -9,11 +9,22 @@ namespace OgamaDao.Dao
     public class DaoFactory
     {
         private string databaseFilename;
+        private SessionFactoryHolder sessionFactoryHolder;
+
+        //DAOs
         private RtaCategoryDao rtaCategoryDao;
+        private RtaEventDao rtaEventDao;
+
 
         public void init(string databaseFilename)
         {
+            if (sessionFactoryHolder != null)
+            {
+                return;
+            }
             this.databaseFilename = databaseFilename;
+            sessionFactoryHolder = new SessionFactoryHolder();
+            sessionFactoryHolder.initFileBasedDatabase(this.databaseFilename);
         }
 
 
@@ -23,9 +34,19 @@ namespace OgamaDao.Dao
             if (rtaCategoryDao == null)
             {
                 rtaCategoryDao = new RtaCategoryDao();
-                rtaCategoryDao.initFileBasedDatabase(this.databaseFilename);
+                rtaCategoryDao.SetSessionFactory(sessionFactoryHolder.getHibernateSessionFactory());
             }
             return rtaCategoryDao;
+        }
+
+        public RtaEventDao getRtaEventDao()
+        {
+            if (this.rtaEventDao == null)
+            {
+                rtaEventDao = new RtaEventDao();
+                rtaEventDao.SetSessionFactory(sessionFactoryHolder.getHibernateSessionFactory());
+            }
+            return rtaEventDao;
         }
     }
 }
