@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OgamaDao.Dao.Rta;
 using OgamaDao.Model.Rta;
+using OgamaDao.Dao;
 
 namespace OgamaDaoTestProject.Dao.Rta
 {
@@ -22,17 +23,18 @@ namespace OgamaDaoTestProject.Dao.Rta
         [TestMethod]
         public void TestUpdateEventWithCategory()
         {
-            RtaCategoryDao categoryDao = new RtaCategoryDao();
-            categoryDao.initFileBasedDatabase(databaseFile);
-            RtaEventDao rtaEventDao = new RtaEventDao();
-            rtaEventDao.initFileBasedDatabase(databaseFile);
-
+            
+            
             RtaCategory category1 = new RtaCategory();
+            RtaCategoryDao categoryDao = new RtaCategoryDao();
+            categoryDao.SetSessionFactory(base.sfh.getHibernateSessionFactory());
             categoryDao.save(category1);
 
             RtaEvent event1 = new RtaEvent();
             
             event1.fkRtaCategory = category1;
+            RtaEventDao rtaEventDao = new RtaEventDao();
+            rtaEventDao.SetSessionFactory(base.sfh.getHibernateSessionFactory());
             rtaEventDao.save(event1);
 
             RtaEvent event2 = rtaEventDao.findById(event1);

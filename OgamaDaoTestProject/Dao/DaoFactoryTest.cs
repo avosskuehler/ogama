@@ -32,6 +32,11 @@ namespace OgamaDaoTestProject.Dao
             Assert.IsNotNull(dao);
             RtaCategoryDao dao2 = cut.GetRtaCategoyDao();
             Assert.AreEqual(dao,dao2);
+
+            RtaEventDao dao3 = cut.getRtaEventDao();
+            Assert.IsNotNull(dao3);
+
+           
         }
     }
 }

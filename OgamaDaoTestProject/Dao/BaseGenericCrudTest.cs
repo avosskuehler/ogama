@@ -13,12 +13,17 @@ namespace OgamaDaoTestProject.Dao
         public static string databaseFile = "c:/temp/sqlite3testdb.sqlite";
 
         protected OgamaDao.Dao.BaseDaoHibernate<T> cut;
-        
+        protected SessionFactoryHolder sfh;
+        protected DaoFactory daoFactory;
+
         protected T entity;
 
         public void Setup()
         {
-            cut.initFileBasedDatabase(databaseFile);
+            sfh = new SessionFactoryHolder();
+            sfh.initFileBasedDatabase(databaseFile);
+            
+            cut.SetSessionFactory(sfh.getHibernateSessionFactory());
         }
 
         [TestMethod]

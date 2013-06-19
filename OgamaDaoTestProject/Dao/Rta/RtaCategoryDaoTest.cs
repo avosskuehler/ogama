@@ -38,9 +38,6 @@ namespace OgamaDaoTestProject.Dao.Rta
             RtaCategory item2 = new RtaCategory();
             item1.Add(item2);
 
-            RtaCategoryDao cut = new RtaCategoryDao();
-            cut.initFileBasedDatabase(databaseFile);
-
             long c0 = cut.count(item1);
             cut.save(list);
             long c1 = cut.count(item1);
