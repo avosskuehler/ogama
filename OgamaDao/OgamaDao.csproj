@@ -66,6 +66,7 @@
     <Compile Include="Dao\Rta\RtaEventDao.cs" />
     <Compile Include="Dao\Rta\RtaSettingsDao.cs" />
     <Compile Include="Model\OgamaDataset\MouseFixation.cs" />
+    <Compile Include="Model\Rta\IRtaModelVisitor.cs" />
     <Compile Include="Model\Rta\RtaCategory.cs" />
     <Compile Include="Model\Rta\RtaEvent.cs" />
     <Compile Include="Model\Rta\RtaModel.cs" />
