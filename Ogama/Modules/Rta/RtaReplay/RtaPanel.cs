@@ -24,7 +24,7 @@ namespace Ogama.Modules.Rta.RtaReplay
         private Marker marker2 = null;
         private Marker progressMarker = null;
         private Label labelName;
-        private RtaCategoryModel model;
+        private RtaModel model;
         private RtaCategory rtaCategory;
         private List<RtaPanel> siblings = new List<RtaPanel>();
         private double currentPlayerPositionString = 0;
@@ -52,10 +52,10 @@ namespace Ogama.Modules.Rta.RtaReplay
             return false;
         }
 
-        public void setRtaCategoryModel(RtaCategoryModel model)
+        public void setRtaModel(RtaModel model)
         {
             this.model = model;
-            this.controller.setRtaCategoryModel(model);
+            this.controller.setRtaModel(model);
         }
 
         public void setRtaCategory(RtaCategory rtaCategory)

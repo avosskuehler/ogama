@@ -585,8 +585,6 @@
     <Compile Include="Modules\Rta\RtaReplay\IDrawControllerListener.cs" />
     <Compile Include="Modules\Rta\RtaReplay\IFigure.cs" />
     <Compile Include="Modules\Rta\RtaReplay\IFormRtaViewControllerListener.cs" />
-    <Compile Include="Modules\Rta\RtaReplay\IRtaCategoryVisitor.cs" />
-    <Compile Include="Modules\Rta\RtaReplay\IRtaCategoryVisitorImpl.cs" />
     <Compile Include="Modules\Rta\RtaReplay\Marker.cs" />
     <Compile Include="Modules\Rta\RtaReplay\MessageQueue.cs" />
     <Compile Include="Modules\Rta\RtaReplay\Program.cs" />

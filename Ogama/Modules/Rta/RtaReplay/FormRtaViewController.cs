@@ -9,13 +9,8 @@ namespace Ogama.Modules.Rta.RtaReplay
 {
     public class FormRtaViewController
     {
-
-        private RtaModel RtaModel;
-
-
-        public string xmlFilename = "c:/testRta.xml";
-
-        private RtaCategoryModel rtaCategoryModel = new RtaCategoryModel();
+        
+        private RtaModel rtaModel;
         private RtaCategoryTreeitemConverter converter = new RtaCategoryTreeitemConverter();
         private String currentPlayerPosition;
         private IFormRtaViewControllerListener listener;
@@ -28,22 +23,22 @@ namespace Ogama.Modules.Rta.RtaReplay
 
         protected void init()
         {
-            this.RtaModel = new RtaModel();
+            this.rtaModel = new RtaModel();
             DaoFactory df = Ogama.Modules.Database.DaoFactoryWrapper.GetDaoFactory();
-            this.RtaModel.SetRtaCategoryDao(df.GetRtaCategoyDao());
-            this.RtaModel.SetRtaEventDao(df.getRtaEventDao());
+            this.rtaModel.SetRtaCategoryDao(df.GetRtaCategoyDao());
+            this.rtaModel.SetRtaEventDao(df.getRtaEventDao());
+            this.rtaModel.Load();
         }
 
-        public RtaCategoryModel getModel()
+        public RtaModel getModel()
         {
-            return this.rtaCategoryModel;
+            return this.rtaModel;
         }
 
 
         public void loadCategoryList(System.Windows.Forms.TreeNodeCollection controls)
         {
-            rtaCategoryModel.ReadFromXmlFile(xmlFilename);
-            converter.LoadModelIntoTreeNodeCollection(rtaCategoryModel, controls);
+            converter.LoadModelIntoTreeNodeCollection(rtaModel, controls);
         }
 
 
@@ -68,13 +63,13 @@ namespace Ogama.Modules.Rta.RtaReplay
             if (parent == null)
             {
                 nodes.Add(newNode);
-                this.rtaCategoryModel.Add(rtaCategory);
+                this.rtaModel.Add(rtaCategory);
             }
             else
             {
                 parent.Nodes.Add(newNode);
                 RtaCategory parentRtaCategory = (RtaCategory)parent.Tag;
-                this.rtaCategoryModel.Add(rtaCategory, parentRtaCategory);
+                this.rtaModel.Add(rtaCategory, parentRtaCategory);
             }
         }
 
@@ -87,7 +82,7 @@ namespace Ogama.Modules.Rta.RtaReplay
             RtaCategory rtaCategory = (RtaCategory)treeNode.Tag;
             if (rtaCategory != null)
             {
-                this.rtaCategoryModel.RemoveCategory(rtaCategory);
+                this.rtaModel.Remove(rtaCategory);
             }
             treeNode.Remove();
         }
@@ -95,7 +90,13 @@ namespace Ogama.Modules.Rta.RtaReplay
 
         public void save()
         {
-            this.rtaCategoryModel.WriteToXmlFile(this.xmlFilename);
+            this.rtaModel.SaveRtaCategories();
+            this.rtaModel.SaveRtaEvents();
+        }
+
+        public void cancel()
+        {
+            this.rtaModel.Load();
         }
 
         public void setCurrentPlayerPosition(string p)
