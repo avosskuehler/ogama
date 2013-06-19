@@ -11,5 +11,10 @@ namespace OgamaTestProject
         {
             return "C:/temp";
         }
+
+        public static string GetTestDatabaseFilename()
+        {
+            return System.IO.Path.Combine(GetTestFolder(), "test.db");
+        }
     }
 }
