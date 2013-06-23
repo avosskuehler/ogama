@@ -591,6 +591,7 @@
     <Compile Include="Modules\Rta\RtaReplay\RtaCategoryModelListener.cs" />
     <Compile Include="Modules\Rta\RtaReplay\RtaCategoryTreeitemConverter.cs" />
     <Compile Include="Modules\Rta\RtaReplay\RtaPanel.cs" />
+    <Compile Include="Modules\Rta\RtaReplay\RtaPanelController.cs" />
     <Compile Include="Modules\Rta\RtaReplay\Segment.cs" />
     <Compile Include="Modules\Rta\RtaReplay\Tools.cs" />
     <Compile Include="Modules\Rta\RtaSettingsForm.cs">

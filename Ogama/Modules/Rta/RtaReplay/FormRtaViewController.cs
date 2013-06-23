@@ -9,7 +9,8 @@ namespace Ogama.Modules.Rta.RtaReplay
 {
     public class FormRtaViewController
     {
-        
+        private NLog.Logger log = new NLog.LogFactory().GetCurrentClassLogger();
+
         private RtaModel rtaModel;
         private RtaCategoryTreeitemConverter converter = new RtaCategoryTreeitemConverter();
         private String currentPlayerPosition;
@@ -35,6 +36,10 @@ namespace Ogama.Modules.Rta.RtaReplay
             return this.rtaModel;
         }
 
+        public void onSpaceKey()
+        {
+            
+        }
 
         public void loadCategoryList(System.Windows.Forms.TreeNodeCollection controls)
         {

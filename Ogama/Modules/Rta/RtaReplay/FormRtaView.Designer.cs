@@ -261,6 +261,8 @@
             this.Controls.Add(this.Rta);
             this.Name = "FormRtaView";
             this.Text = "FormRtaView";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormRtaView_KeyDown);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FormRtaView_KeyPress);
             this.Rta.ResumeLayout(false);
             this.tabPageRtaView.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
