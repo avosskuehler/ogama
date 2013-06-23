@@ -188,5 +188,38 @@ namespace OgamaDaoTestProject.Model.Rta
             Assert.AreEqual(0, numberOfCategories);
 
         }
+
+        [TestMethod]
+        public void TestVisit()
+        {
+            ModelVisitor visitor = new ModelVisitor();
+            RtaCategory c1 = new RtaCategory();
+            c1.name = "c1";
+            RtaCategory c2 = new RtaCategory();
+            c2.name = "c2";
+            c1.Add(c2);
+            cut.getRtaCategories().Add(c1);
+            RtaCategory c3 = new RtaCategory();
+            c3.name = "c3";
+            cut.getRtaCategories().Add(c3);
+
+            cut.visit(visitor);
+
+            Assert.AreEqual(3, visitor.rtaCategories.Count);
+        }
+    }
+
+    class ModelVisitor : IRtaModelVisitor
+    {
+        public List<RtaCategory> rtaCategories = new List<RtaCategory>();
+        public void onVisit(RtaCategory rtaCategory)
+        {
+            rtaCategories.Add(rtaCategory);
+        }
+
+        public void onVisit(RtaEvent rtaEvent)
+        {
+
+        }
     }
 }

@@ -41,7 +41,7 @@ namespace OgamaDaoTestProject.Dao.Rta
             long c0 = cut.count(item1);
             cut.save(list);
             long c1 = cut.count(item1);
-            Assert.AreEqual(c0 + 2, c1);
+            Assert.AreEqual(list.Count, c1);
 
             foreach (RtaCategory item in list)
             {
@@ -49,7 +49,43 @@ namespace OgamaDaoTestProject.Dao.Rta
             }
 
         }
-       
+
+        [TestMethod]
+        public void TestSaveList()
+        {
+            long nItems0 = cut.count(new RtaCategory());
+            int N = 3;
+            List<RtaCategory> list = new List<RtaCategory>();
+            for (int i = 0; i < N; i++)
+            {
+                RtaCategory item = new RtaCategory();
+                item.name = "item:" + i;
+                list.Add(item);
+            }
+
+            cut.save(list);
+
+            long nItems1 = cut.count(new RtaCategory());
+            Assert.AreNotEqual(nItems0 + N, nItems1);
+            
+        }
+
+        [TestMethod]
+        public void TestDeleteWithDependencies()
+        {
+            RtaCategory c0 = new RtaCategory();
+            cut.save(c0);
+
+            RtaCategory c1 = new RtaCategory();
+            cut.save(c1);
+
+            c0.Add(c1);
+            cut.save(c0);
+
+            Assert.IsNotNull(c1.parent);
+
+            cut.delete(c0);
+        }
     }
 
     

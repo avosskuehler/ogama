@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Collections;
 using OgamaDao.Model.Rta;
 using OgamaDao.Dao;
+using System.Collections.Generic;
 
 namespace OgamaTestProject
 {
@@ -16,25 +17,41 @@ namespace OgamaTestProject
     public class RtaCategoryTreeitemConverterTest
     {
 
+        RtaCategoryTreeitemConverter cut = new RtaCategoryTreeitemConverter();
+
+
+        [TestMethod]
+        public void TestLoadFlatModelIntoTreeNodeCollection()
+        {
+            int N = 2;
+            int M = 1;
+            RtaModel model = getModel(N, M);
+            TreeView treeView = new TreeView();
+
+            TreeNodeCollection nodes = treeView.Nodes;
+
+            cut.LoadFlatModelIntoTreeNodeCollection(model, nodes);
+
+            Assert.AreEqual(N, nodes.Count);
+            IEnumerator e = nodes.GetEnumerator();
+            while (e.MoveNext())
+            {
+                object item = e.Current;
+                Assert.IsNotNull(item);
+                Assert.IsTrue(item is TreeNode);
+                TreeNode treeNode = (TreeNode)item;
+                Assert.AreEqual(M, treeNode.Nodes.Count);
+            }
+            
+        }
+        
         [TestMethod]
         public void TestConvert()
         {
-            RtaCategoryTreeitemConverter cut = new RtaCategoryTreeitemConverter();
-            
-            RtaModel model = new RtaModel();
-
-            int N = 3;
-            int M = 2;
-            for (int i = 0; i < N; i++)
-            {
-                RtaCategory cat = createTestCategory(i);
-                for (int k = 0; k < M; k++)
-                {
-                    RtaCategory cat1 = createTestCategory(i*k+1);
-                    cat.Add(cat1);
-                }
-                model.getRtaCategories().Add(cat);
-            }
+    
+            int N = 1;
+            int M = 1;
+            RtaModel model = getModel(N, M);
 
             TreeView treeView = new TreeView();
             
@@ -42,10 +59,10 @@ namespace OgamaTestProject
 
             cut.LoadModelIntoTreeNodeCollection(model, nodes);
 
-            Assert.IsTrue(nodes.Count == N);
+            Assert.AreEqual(N, nodes.Count);
 
             IEnumerator e = nodes.GetEnumerator();
-
+            
             while(e.MoveNext())
             {
                 object item = e.Current;
@@ -57,6 +74,24 @@ namespace OgamaTestProject
             }
             
 
+        }
+
+        private static RtaModel getModel(int N, int M)
+        {
+            RtaModel model = new RtaModel();
+
+            for (int i = 0; i < N; i++)
+            {
+                RtaCategory cat = createTestCategory(i);
+                model.getRtaCategories().Add(cat);
+                for (int k = 0; k < M; k++)
+                {
+                    RtaCategory cat1 = createTestCategory(i * k + 1);
+                    cat1.parent = cat;
+                    model.getRtaCategories().Add(cat1);
+                }
+            }
+            return model;
         }
 
         private static RtaCategory createTestCategory(int i)
