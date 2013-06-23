@@ -21,8 +21,11 @@ namespace Ogama.Modules.Rta.RtaReplay
         protected System.Threading.Thread thread;
         protected Boolean runThread = false;
         protected Tools tools = new Tools();
-
-        
+        private string movieFilename;
+        public void SetMovieFilename(string s)
+        {
+            this.movieFilename = s;
+        }
 
         private RtaCategory getCurrentRtaCategory()
         {
@@ -81,8 +84,10 @@ namespace Ogama.Modules.Rta.RtaReplay
             
         }
 
-        public FormRtaView()
+        public FormRtaView(string movieFilename)
         {
+            SetMovieFilename(movieFilename);
+
             InitializeComponent();
 
             controller.loadCategoryList(this.treeView1.Nodes);
@@ -96,8 +101,7 @@ namespace Ogama.Modules.Rta.RtaReplay
 
         protected void loadMovie()
         {
-            //axWindowsMediaPlayer1
-            this.axWindowsMediaPlayer1.URL = "c:/data/projects/demos/demo2.mp4";
+            this.axWindowsMediaPlayer1.URL = this.movieFilename;
             this.axWindowsMediaPlayer1.Ctlcontrols.play();
 
 
@@ -166,6 +170,7 @@ namespace Ogama.Modules.Rta.RtaReplay
             for (int i = 0; i < rtaPanelList.Count; i++)
             {
                 RtaPanel panelA = rtaPanelList.ElementAt(i);
+                panelA.setRtaModel(this.controller.getModel());
                 for (int j = 0; j < rtaPanelList.Count; j++)
                 {
                     if (i == j)
@@ -174,8 +179,6 @@ namespace Ogama.Modules.Rta.RtaReplay
                     }
                     RtaPanel panelB = rtaPanelList.ElementAt(j);
                     panelA.AddSibling(panelB);
-
-                    panelA.setRtaModel(this.controller.getModel());
                     panelB.setRtaModel(this.controller.getModel());
                 }
             }

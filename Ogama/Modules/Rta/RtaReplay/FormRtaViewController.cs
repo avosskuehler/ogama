@@ -38,7 +38,7 @@ namespace Ogama.Modules.Rta.RtaReplay
 
         public void loadCategoryList(System.Windows.Forms.TreeNodeCollection controls)
         {
-            converter.LoadModelIntoTreeNodeCollection(rtaModel, controls);
+            converter.LoadFlatModelIntoTreeNodeCollection(rtaModel, controls);
         }
 
 

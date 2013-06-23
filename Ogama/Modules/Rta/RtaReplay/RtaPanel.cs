@@ -224,10 +224,11 @@ namespace Ogama.Modules.Rta.RtaReplay
             {
                 System.Windows.Forms.MouseEventArgs mouseEvent = (System.Windows.Forms.MouseEventArgs)e;
                 Graphics g = getGraphics();
-
-                this.controller.onMouseMove(mouseEvent.X, mouseEvent.Y, g, getGraphicsWidth());
+                if (mouseEvent.Button == MouseButtons.Left)
+                {
+                    this.controller.onMouseMove(mouseEvent.X, mouseEvent.Y, g, getGraphicsWidth());
+                }
             }
-
         }
 
         private void onMouseDown(object sender, EventArgs e)

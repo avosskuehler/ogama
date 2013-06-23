@@ -10,7 +10,7 @@ namespace Ogama.Modules.Rta.RtaReplay
     {
         public int positionX;
         public int height = 50;
-        public int width = 5;
+        public int width = 2;
         public Brush brush = Brushes.Black;
         public bool leftMarker = false;
         public int maxXvalue = 0;

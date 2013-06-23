@@ -17,7 +17,7 @@ namespace Ogama.Modules.Rta.RtaReplay
         private int segmentActiveCornerWidth = 5;
         private int minWidth = 20;
         private int lastTranslationX = 0;
-        private int lastMouseDownPositionX = 0;
+        private int lastMouseDownPositionX = -1;
         private bool resizeLeft = false;
         private bool resizeRight = false;
         
@@ -57,11 +57,11 @@ namespace Ogama.Modules.Rta.RtaReplay
             }
         }
 
-        public void onMouseUp(int x)
-        {
-            this.resizeRight = false;
-        }
-
+        
+        /// <summary>
+        /// none
+        /// </summary>
+        /// <returns></returns>
         public bool isDeleted()
         {
             if (this.positionY < deltaMinY)
@@ -80,7 +80,184 @@ namespace Ogama.Modules.Rta.RtaReplay
             return false;
         }
 
+        public void onMouseUp(int x)
+        {
+            this.resizeRight = false;
+            this.resizeLeft = false;
+        }
+
+
+        private int mouseDownX = -1;
+        private int figureTouchPointWidthDiff = 0;
+        private int initialWidth = 0;
+        
+        public void onMouseDown(int x)
+        {
+            mouseDownX = x;
+            initialWidth = this.width;
+            
+            if (x >= this.positionX + this.width - segmentActiveCornerWidth)
+            {
+                resizeRight = true;
+            }
+            else if (x <= this.positionX + segmentActiveCornerWidth)
+            {
+                resizeLeft = true;
+            }
+        }
+
+    
         public void move(int currentPositionX, int currentPositionY, int figureTouchPointX, int mouseDownPositionX)
+        {
+            int newX = currentPositionX - mouseDownX;
+            
+            if (resizeRight)
+            {
+                this.width = initialWidth + newX;
+            }
+            else if (resizeLeft)
+            {
+                int transitionX = newX + figureTouchPointX;
+                this.positionX = currentPositionX + figureTouchPointX;
+                this.width = initialWidth - transitionX;
+            }
+            else
+            {
+                this.positionX = currentPositionX - figureTouchPointX;
+            }
+
+        }
+
+
+
+
+
+
+        int newWidthDiff = 0;
+
+        public void move4(int currentPositionX, int currentPositionY, int figureTouchPointX, int mouseDownPositionX)
+        {
+            int newX = currentPositionX - figureTouchPointX;
+            int translationX = currentPositionX - mouseDownPositionX;
+            if (this.positionX + figureTouchPointX == mouseDownPositionX)
+            {
+                figureTouchPointWidthDiff = this.positionX + width - (mouseDownPositionX);
+            }
+            if (lastMouseDownPositionX != mouseDownPositionX)
+            {
+                initialWidth = this.width;
+            }
+            lastMouseDownPositionX = mouseDownPositionX;
+
+            log("move(" + currentPositionX + "," + currentPositionY + "," + figureTouchPointX + "," + mouseDownPositionX + ")," + figureTouchPointWidthDiff);
+
+            if (currentPositionX >= this.positionX + this.width - figureTouchPointWidthDiff)
+            {
+                //resize right
+                int newWidth = initialWidth + translationX - figureTouchPointWidthDiff;
+                this.width = newWidth;
+                //log("width:" + width);
+            }
+
+
+
+
+
+            if (isResizeLeft(figureTouchPointX))
+            {
+               /* if (translationX < 0)
+                {
+                    translationX += figureTouchPointX;
+                }
+                else
+                {
+                    translationX -= figureTouchPointX;
+                }
+                this.positionX += translationX;
+                this.width -= translationX;*/
+            }
+            else if (isResizeRight(figureTouchPointX) || isResizeRight(figureTouchPointX + newWidthDiff))
+            {
+               /* if (lastMouseDownPositionX != mouseDownPositionX)
+                {
+                    initialWidth = this.width;
+                }
+                lastMouseDownPositionX = mouseDownPositionX;
+                int newWidth = initialWidth + translationX;
+                newWidthDiff = newWidth - width;
+                this.width = newWidth;
+                */
+            }
+            else
+            {
+                
+                //this.positionX = newX;
+            }
+            
+        }
+
+      /*  int lastCurrentPositionX = 0;
+        public void move3(int currentPositionX, int currentPositionY, int figureTouchPointX, int mouseDownPositionX)
+        {
+         
+            int translationX = currentPositionX - mouseDownPositionX;
+            if (translationX == 0)
+            {
+                translationX = mouseDownPositionX;
+            }
+
+            if (isResizeLeft(figureTouchPointX))
+            {
+                resizeLeft = true;
+                if (translationX < 0)
+                {
+                    translationX += mouseDownPositionX;
+                }
+                this.positionX += translationX;
+                this.width -= translationX;
+            }
+            else if (isResizeRight(figureTouchPointX))
+            {
+                resizeRight = true;
+                if (translationX > 0)
+                {
+                    translationX -= (width - figureTouchPointX);
+                }
+                this.width += translationX;
+            }
+            else
+            {
+                this.positionX += translationX;
+            }
+
+            lastCurrentPositionX = currentPositionX;
+
+        }
+        */
+
+        private bool isResizeRight(int figureTouchPointX)
+        {
+            int a = figureTouchPointX;
+            int b = width - segmentActiveCornerWidth;
+
+            //log("isRisizeRight ("+a+">="+b+")");
+            return a >= b;
+
+        }
+
+        private bool isResizeLeft(int figureTouchPointX)
+        {
+            return figureTouchPointX < segmentActiveCornerWidth;
+        }
+
+        /// <summary>
+        /// moving or resizing the segment
+        /// </summary>
+        /// <param name="currentPositionX">the current mouse x-position</param>
+        /// <param name="currentPositionY">the x-position, at which the mouse has hidden the segment</param>
+        /// <param name="figureTouchPointX">the x-position, at which the mouse has hidden the segment</param>
+        /// <param name="mouseDownPositionX">the initial x-position the mouse has been, when a mouse button was pressed</param>
+        public void move_old(int currentPositionX, int currentPositionY, int figureTouchPointX, int mouseDownPositionX)
         {
             this.positionY = currentPositionY;
            
