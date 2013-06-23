@@ -19,7 +19,7 @@ namespace OgamaDao.Dao
     /// base generic dao
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class BaseDaoHibernate<T> where T : BaseModel
+    public abstract class BaseDaoHibernate<T> where T : BaseModel
     {
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
 
@@ -174,28 +174,46 @@ namespace OgamaDao.Dao
             }
         }
 
+        protected abstract T getEntity();
+
+        public abstract void deleteNotInList(List<T> list);
+
         public void save(List<T> list)
         {
+            
+            this.deleteNotInList(list);
+
             ISession session = this.GetCurrentSession();
+            ITransaction ta = session.BeginTransaction();
             try
             {
-                foreach (T entity in list)
+                for (int i = 0; i < list.Count; i++)
                 {
-                    object id = session.Save(entity);
-                    entity.ToString();
-                    entity.ID = (Guid)id;
+                    T entity = list.ElementAt(i);
+                    if (entity.ID.Equals(Guid.Empty))
+                    {
+                        Guid newID = (Guid)session.Save(entity);
+                        entity.ID = newID;
+                    }
+                    else
+                    {
+                        entity = session.Merge(entity);
+                    }
                 }
+                ta.Commit();
+                this.DisposeCurrentSession();
             }
             catch (Exception e)
             {
+                ta.Rollback();
                 log.Error(e);
-                throw e;
             }
             finally
             {
-                this.DisposeCurrentSession();
+                
             }
         }
+
         /// <summary>
         /// write the given entity into the database
         /// </summary>
@@ -205,8 +223,16 @@ namespace OgamaDao.Dao
             ISession session = this.GetCurrentSession();
             try
             {
-                object id = session.Save(entity);
-                entity.ID = (Guid)id;
+                if (entity.ID.Equals(Guid.Empty))
+                {
+                    Guid newID = (Guid)session.Save(entity);
+                    entity.ID = newID;
+                }
+                else
+                {
+                    T entityUpdated = session.Merge(entity);
+
+                }
             }
             catch (Exception e)
             {
@@ -228,11 +254,10 @@ namespace OgamaDao.Dao
                 transaction.Begin();
 
                 ISession session = GetCurrentSession();
+                string entityName = entity.GetType().Name;
+                T result = (T)session.Get(entityName, entity.ID); 
                 
-                Type t = typeof(RtaSettings);
-                T result = session.CreateCriteria(entity.GetType())
-                    .Add(Example.Create(entity))
-                    .UniqueResult<T>();
+                transaction.Commit();
 
                 return result;
 
@@ -245,7 +270,7 @@ namespace OgamaDao.Dao
             }
             finally
             {
-                transaction.Commit();
+                
             }
             
         }
@@ -288,11 +313,16 @@ namespace OgamaDao.Dao
                 }
                 example = example.ExcludeZeroes();
                 example = example.ExcludeNulls();
+                
 
                 ICriteria criteria = session.CreateCriteria(entity.GetType()).Add(example);
-                
+                criteria = criteria.SetFirstResult(request.page * request.pageSize);
+                criteria = criteria.SetFetchSize(request.pageSize);
+
                 IList<T> results = criteria.List<T>();
-                
+
+                transaction.Commit();
+
                 return results;
 
             }
@@ -304,7 +334,7 @@ namespace OgamaDao.Dao
             }
             finally
             {
-                transaction.Commit();
+                
             }
             
         }
@@ -320,6 +350,7 @@ namespace OgamaDao.Dao
 
                 session.Delete(entity);
 
+                transaction.Commit();
             }
             catch (Exception e)
             {
@@ -329,7 +360,7 @@ namespace OgamaDao.Dao
             }
             finally
             {
-                transaction.Commit();
+                
             }
         }
 

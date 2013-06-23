@@ -30,8 +30,8 @@
         update="true"
         insert="true"
         access="property"
-        unique="true"                         
-        optimistic-lock="false"                
+        unique="false"                         
+        optimistic-lock="true"                
         not-found="exception"                
   />
 

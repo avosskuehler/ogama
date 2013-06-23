@@ -10,5 +10,6 @@ namespace OgamaDao.Model.Rta
         void onVisit(RtaCategory rtaCategory);
 
         void onVisit(RtaEvent rtaEvent);
+
     }
 }
