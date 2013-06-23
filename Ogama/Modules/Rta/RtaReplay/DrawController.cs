@@ -19,7 +19,7 @@ namespace Ogama.Modules.Rta.RtaReplay
         private static IFigure NO_FIGURE = new Marker();
         private IFigure selectedFigure = NO_FIGURE;
         public Graphics g;
-        public Color BackgroundColor = Color.DarkGray;
+        public Color BackgroundColor = Color.White;
         public Marker marker1;
         public Marker marker2;
         public Marker progressMarker;

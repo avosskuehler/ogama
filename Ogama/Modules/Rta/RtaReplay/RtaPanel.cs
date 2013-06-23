@@ -28,6 +28,12 @@ namespace Ogama.Modules.Rta.RtaReplay
         private RtaCategory rtaCategory;
         private List<RtaPanel> siblings = new List<RtaPanel>();
         private double currentPlayerPositionString = 0;
+        private RtaPanelController rtaPanelController;
+
+        public void setRtaPanelController(RtaPanelController rtaPanelController)
+        {
+            this.rtaPanelController = rtaPanelController;
+        }
 
         public void addRtaEvent(RtaEvent rtaEvent)
         {
@@ -209,6 +215,7 @@ namespace Ogama.Modules.Rta.RtaReplay
             panel.MouseMove += new MouseEventHandler(onMouseMove);
             panel.MouseDown += new MouseEventHandler(onMouseDown);
             panel.MouseUp += new MouseEventHandler(onMouseUp);
+
             return panel;
         }
 
@@ -228,6 +235,7 @@ namespace Ogama.Modules.Rta.RtaReplay
                 {
                     this.controller.onMouseMove(mouseEvent.X, mouseEvent.Y, g, getGraphicsWidth());
                 }
+                this.rtaPanelController.setActiveRtaPanel(this);
             }
         }
 
@@ -256,7 +264,7 @@ namespace Ogama.Modules.Rta.RtaReplay
 
         private Graphics getGraphics()
         {
-            if (this.g == null)
+            //if (this.g == null)
             {
                 g = this.drawingPanel.CreateGraphics();
             }
@@ -314,6 +322,20 @@ namespace Ogama.Modules.Rta.RtaReplay
         public string getTimeValueByXposition(double xPosition)
         {
             throw new NotImplementedException();
+        }
+
+        public void onSpaceKey()
+        {
+            
+        }
+
+        public void onResize(Size size)
+        {
+            int delta = 50;
+            this.basePanel.Width = size.Width - delta;
+            this.drawingPanel.Width = size.Width - delta - 10;
+            
+            this.controller.drawFigures(getGraphics());
         }
     }
 }

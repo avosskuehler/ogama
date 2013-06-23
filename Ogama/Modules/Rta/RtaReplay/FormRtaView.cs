@@ -21,6 +21,7 @@ namespace Ogama.Modules.Rta.RtaReplay
         protected System.Threading.Thread thread;
         protected Boolean runThread = false;
         protected Tools tools = new Tools();
+        private RtaPanelController rtaPanelController = new RtaPanelController();
         private string movieFilename;
         public void SetMovieFilename(string s)
         {
@@ -97,7 +98,31 @@ namespace Ogama.Modules.Rta.RtaReplay
             loadModel();
 
             loadMovie();
+
+            this.Rta.KeyPress += new KeyPressEventHandler(keyPressHandler);
+
+            this.SizeChanged += new EventHandler(FormRtaView_SizeChanged);
         }
+
+        void FormRtaView_SizeChanged(object sender, EventArgs e)
+        {
+            Console.WriteLine("FormRtaView_S.izeChanged:"+this.Size);
+            
+            foreach (RtaPanel rtaPanel in rtaPanelList)
+            {
+                rtaPanel.onResize(this.Size);
+            }
+        }
+
+        private void keyPressHandler(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == ' ')
+            {
+                this.rtaPanelController.onSpaceKey();
+            }
+        }
+
+      
 
         protected void loadMovie()
         {
@@ -163,7 +188,10 @@ namespace Ogama.Modules.Rta.RtaReplay
             RtaModel model = this.controller.getModel();
             model.visit(this);
             registerRtaPanelsToEachOther();
+
         }
+
+        
 
         protected void registerRtaPanelsToEachOther()
         {
@@ -171,6 +199,7 @@ namespace Ogama.Modules.Rta.RtaReplay
             {
                 RtaPanel panelA = rtaPanelList.ElementAt(i);
                 panelA.setRtaModel(this.controller.getModel());
+                panelA.setRtaPanelController(this.rtaPanelController);
                 for (int j = 0; j < rtaPanelList.Count; j++)
                 {
                     if (i == j)
@@ -180,6 +209,7 @@ namespace Ogama.Modules.Rta.RtaReplay
                     RtaPanel panelB = rtaPanelList.ElementAt(j);
                     panelA.AddSibling(panelB);
                     panelB.setRtaModel(this.controller.getModel());
+                    panelB.setRtaPanelController(this.rtaPanelController);
                 }
             }
         }
@@ -268,8 +298,8 @@ namespace Ogama.Modules.Rta.RtaReplay
             rtaPanel.setRtaCategory(rtaCategory);
             rtaPanel.setLocation(20, index * 60 + 10);
             rtaPanel.AddToParent(this.splitContainer1.Panel2);
+            rtaPanel.onResize(this.Size);
             rtaPanelList.Add(rtaPanel);
-            
         }
 
         public void onVisit(RtaEvent rtaEvent)
@@ -301,6 +331,16 @@ namespace Ogama.Modules.Rta.RtaReplay
             {
                 this.loadModel();
             }
+        }
+
+        private void FormRtaView_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Console.WriteLine("FormRtaView_KeyPress, e:"+e);
+        }
+
+        private void FormRtaView_KeyDown(object sender, KeyEventArgs e)
+        {
+            Console.WriteLine("FormRtaView_KeyDown, e:" + e);
         }
     }
 }
