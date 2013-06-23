@@ -19,6 +19,12 @@ namespace OgamaDao.Dao
 
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
 
+        private bool createSchema = false;
+        public void SetCreateSchema(bool createSchema)
+        {
+            this.createSchema = createSchema;
+        }
+
         /// <summary>
         /// session factory
         /// </summary>
@@ -43,14 +49,19 @@ namespace OgamaDao.Dao
 
             sessionFactory = config.BuildSessionFactory();
 
-            var schema = new SchemaExport(config);
-            schema.Create(true, true);
-
-            IStatelessSession s = sessionFactory.OpenStatelessSession();
-
-            new DatabaseSchemaSqlite3().createDatabase(s);
-
-            s.Close();
+            if (this.createSchema)
+            {
+                var schema = new SchemaExport(config);
+                schema.Drop(true, true);
+                schema.Create(true, true);
+            }
+            else
+            {
+                IStatelessSession s = sessionFactory.OpenStatelessSession();
+                new DatabaseSchemaSqlite3().createDatabase(s);
+                s.Close();
+            }
+            
         }
 
         private static void addEntitiyMappings(Configuration config)

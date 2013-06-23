@@ -8,7 +8,6 @@ namespace OgamaDao.Dao
 {
     public class DaoFactory
     {
-        private string databaseFilename;
         private SessionFactoryHolder sessionFactoryHolder;
 
         //DAOs
@@ -22,9 +21,8 @@ namespace OgamaDao.Dao
             {
                 return;
             }
-            this.databaseFilename = databaseFilename;
             sessionFactoryHolder = new SessionFactoryHolder();
-            sessionFactoryHolder.initFileBasedDatabase(this.databaseFilename);
+            sessionFactoryHolder.initFileBasedDatabase(databaseFilename);
         }
 
 

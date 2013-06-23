@@ -8,6 +8,11 @@ namespace OgamaDao.Dao.Rta
 {
     public class RtaEventDao : OgamaDao.Dao.BaseDaoHibernate<RtaEvent>
     {
+        protected override RtaEvent getEntity()
+        {
+            return new RtaEvent();
+        }
+
         public List<RtaEvent> findAll()
         {
             List<RtaEvent> list = new List<RtaEvent>();
@@ -18,6 +23,11 @@ namespace OgamaDao.Dao.Rta
             }
 
             return list;
+        }
+
+        public override void deleteNotInList(List<RtaEvent> list)
+        {
+
         }
     }
 
