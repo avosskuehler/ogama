@@ -51,5 +51,32 @@ namespace Ogama.Modules.Rta.RtaReplay
         }
 
 
+
+        public void LoadFlatModelIntoTreeNodeCollection(RtaModel model, System.Windows.Forms.TreeNodeCollection nodes)
+        {
+            Dictionary<RtaCategory, TreeNode> nodeMap = new Dictionary<RtaCategory, TreeNode>();
+            foreach (RtaCategory cat in model.getRtaCategories())
+            {
+                
+                TreeNode node = new TreeNode(cat.name);
+                node.Tag = cat;
+
+                RtaCategory parent = cat.parent;
+
+                if (parent == null)
+                {
+                    nodes.Add(node);
+                    nodeMap.Add(cat, node);
+                }
+                else
+                {
+                    TreeNode parentNode = new TreeNode();
+                    if (nodeMap.TryGetValue(parent, out parentNode))
+                    {
+                        parentNode.Nodes.Add(node);
+                    }
+                }
+            }
+        }
     }
 }

@@ -587,7 +587,6 @@
     <Compile Include="Modules\Rta\RtaReplay\IFormRtaViewControllerListener.cs" />
     <Compile Include="Modules\Rta\RtaReplay\Marker.cs" />
     <Compile Include="Modules\Rta\RtaReplay\MessageQueue.cs" />
-    <Compile Include="Modules\Rta\RtaReplay\Program.cs" />
     <Compile Include="Modules\Rta\RtaReplay\RtaCategoryModel.cs" />
     <Compile Include="Modules\Rta\RtaReplay\RtaCategoryModelListener.cs" />
     <Compile Include="Modules\Rta\RtaReplay\RtaCategoryTreeitemConverter.cs" />

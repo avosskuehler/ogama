@@ -9,6 +9,8 @@ namespace Ogama.Modules.Rta.RtaReplay
 {
     public class DrawController
     {
+        NLog.Logger log = new NLog.LogFactory().GetCurrentClassLogger();
+
         public bool mouseDown;
         private int mouseDownPositionX = 0;
         private int mouseUpPositionX = 0;
@@ -98,8 +100,15 @@ namespace Ogama.Modules.Rta.RtaReplay
         {
             RtaEvent rtaEvent = changedSegment.rtaEvent;
 
-            rtaEvent.Xstart = changedSegment.positionX;
-            rtaEvent.Xend = changedSegment.positionX + changedSegment.width;
+            double xStart1 = rtaEvent.Xstart;
+            double xEnd1 = rtaEvent.Xend;
+            double widthOld = xEnd1 - xStart1;
+            double xStartNew = changedSegment.positionX;
+            double xEndNew = xStartNew + changedSegment.width;
+            double widthNew = xEndNew - xStartNew;
+
+            rtaEvent.Xstart = xStartNew;
+            rtaEvent.Xend = xEndNew;
 
         }
 
@@ -147,7 +156,7 @@ namespace Ogama.Modules.Rta.RtaReplay
             if (figure is Segment)
             {
                 Segment segment = (Segment)figure;
-                this.model.RemoveEvent(segment.rtaEvent);
+                this.model.Remove(segment.rtaEvent);
             }
         }
 
@@ -399,6 +408,10 @@ namespace Ogama.Modules.Rta.RtaReplay
             {
                 return;
             }
+            if (selectedFigure is Segment)
+            {
+                ((Segment)selectedFigure).onMouseDown(x);
+            }
             createNewAction(x- figureTouchPointX);
         }
 
@@ -464,9 +477,6 @@ namespace Ogama.Modules.Rta.RtaReplay
             }
         }
 
-        private void log(string s)
-        {
-            Console.WriteLine("DrawController.log:" + s);
-        }
+       
     }
 }

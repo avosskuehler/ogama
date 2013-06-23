@@ -21,7 +21,7 @@ namespace Ogama
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
   using Ogama.MainWindow.Dialogs;
-    using Ogama.Modules.ImportExport.AOIData;
+  using Ogama.Modules.ImportExport.AOIData;
 
   /// <summary>
   /// Main Program class with entry point for application.
@@ -49,6 +49,21 @@ namespace Ogama
 
     }
 
+    private static void runRtaDemo()
+    {
+
+        Document testDoc = new Document();
+        testDoc.ExperimentSettings = new Ogama.Properties.ExperimentSettings();
+        testDoc.ExperimentSettings.DocumentPath = "c:/temp";
+        testDoc.ExperimentSettings.Name = "rtaDemo2";
+        Document.ActiveDocument = testDoc;
+
+        string movieFilename = "c:/temp/demo2.mp4";
+        Ogama.Modules.Rta.RtaReplay.FormRtaView form = new Ogama.Modules.Rta.RtaReplay.FormRtaView(movieFilename);
+        Application.Run(form);
+
+    }
+
     private static void testVideoFilter()
     {
         List<string> list = new Ogama.Modules.Rta.RtaController().getAvailbleVideoFilterNames();
@@ -67,11 +82,7 @@ namespace Ogama
          Application.Run(new ImportAOIAssignColumnsDialog());
      }
 
-    private static void runRtaDemo()
-    {
-        Application.Run(new Ogama.Modules.Rta.RtaReplay.FormRtaView());
-
-    }
+   
 
    
 
