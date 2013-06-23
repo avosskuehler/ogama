@@ -10,7 +10,7 @@ namespace OgamaDaoTestProject.Dao
     [TestClass]
     public class BaseGenericCrudTest<T> where T : OgamaDao.Model.BaseModel
     {
-        public static string databaseFile = "c:/temp/sqlite3testdb.sqlite";
+        public static string databaseFile = TestdataProvider.getTestDatabaseFilename();
 
         protected OgamaDao.Dao.BaseDaoHibernate<T> cut;
         protected SessionFactoryHolder sfh;
@@ -42,6 +42,19 @@ namespace OgamaDaoTestProject.Dao
         }
 
         [TestMethod]
+        public void TestUpdate()
+        {
+            long c1 = cut.count(entity);
+
+            cut.save(entity);
+            T entityToUpdate = cut.findById(entity);
+            cut.save(entityToUpdate);
+
+            long c2 = cut.count(entity);
+            Assert.AreEqual(c1+1, c2);
+        }
+
+        [TestMethod]
         public void TestFind()
         {
             cut.save(entity);
@@ -57,9 +70,8 @@ namespace OgamaDaoTestProject.Dao
             cut.save(entity);
             cut.delete(entity);
 
-            IList<T> list = cut.find(entity);
-            Assert.IsNotNull(list);
-            Assert.AreEqual(list.Count, 0);
+            T entity2 = cut.findById(entity);
+            Assert.IsNull(entity2);
         }
     }
 }

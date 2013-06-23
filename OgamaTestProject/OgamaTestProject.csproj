@@ -125,6 +125,7 @@
     <Compile Include="Modules\Rta\RtaControllerTest.cs" />
     <Compile Include="Modules\Rta\RtaReplay\FormRtaViewControllerTest.cs" />
     <Compile Include="Modules\Rta\RtaReplay\RtaCategoryTreeitemConverterTest.cs" />
+    <Compile Include="Modules\Rta\RtaReplay\SegmentTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Modules\Rta\RtaReplay\RtaExtension4ReplayModuleTest.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
