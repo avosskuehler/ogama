@@ -13,19 +13,24 @@ namespace Ogama.Modules.Rta.RtaReplay
     public partial class FormRtaView : Form, IRtaModelVisitor
     {
 
-        private FormRtaViewController controller = new FormRtaViewController();
-
+        private FormRtaViewController controller;
         private TreeNode currentTreeNode = null;
         private List<RtaPanel> rtaPanelList = new List<RtaPanel>();
-
         protected System.Threading.Thread thread;
         protected Boolean runThread = false;
         protected Tools tools = new Tools();
         private RtaPanelController rtaPanelController = new RtaPanelController();
         private string movieFilename;
+        private RtaSettings rtaSettings;
+
         public void SetMovieFilename(string s)
         {
             this.movieFilename = s;
+        }
+
+        public void SetRtaSettings(RtaSettings rtaSettings)
+        {
+            this.rtaSettings = rtaSettings;
         }
 
         private RtaCategory getCurrentRtaCategory()
@@ -85,9 +90,13 @@ namespace Ogama.Modules.Rta.RtaReplay
             
         }
 
-        public FormRtaView(string movieFilename)
+        public FormRtaView(string movieFilename, RtaSettings rtaSettings)
         {
             SetMovieFilename(movieFilename);
+
+            SetRtaSettings(rtaSettings);
+
+            this.controller = new FormRtaViewController(rtaSettings);
 
             InitializeComponent();
 
@@ -300,6 +309,8 @@ namespace Ogama.Modules.Rta.RtaReplay
             rtaPanel.AddToParent(this.splitContainer1.Panel2);
             rtaPanel.onResize(this.Size);
             rtaPanelList.Add(rtaPanel);
+
+            
         }
 
         public void onVisit(RtaEvent rtaEvent)

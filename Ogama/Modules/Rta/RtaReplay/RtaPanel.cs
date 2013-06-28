@@ -279,7 +279,7 @@ namespace Ogama.Modules.Rta.RtaReplay
 
         private void log(string s)
         {
-            Console.WriteLine("RtaPanel.log:" + s);
+            //Console.WriteLine("RtaPanel.log:" + s);
         }
 
         public void adjustProgressTrackerPosition(double xPositionInPercent)

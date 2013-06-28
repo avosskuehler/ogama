@@ -99,17 +99,8 @@ namespace Ogama.Modules.Rta.RtaReplay
         public void onSegmentChanged(Segment changedSegment)
         {
             RtaEvent rtaEvent = changedSegment.rtaEvent;
-
-            double xStart1 = rtaEvent.Xstart;
-            double xEnd1 = rtaEvent.Xend;
-            double widthOld = xEnd1 - xStart1;
-            double xStartNew = changedSegment.positionX;
-            double xEndNew = xStartNew + changedSegment.width;
-            double widthNew = xEndNew - xStartNew;
-
-            rtaEvent.Xstart = xStartNew;
-            rtaEvent.Xend = xEndNew;
-
+            rtaEvent.Xstart = changedSegment.positionX;
+            rtaEvent.Xend = changedSegment.positionX + changedSegment.width;
         }
 
         public void addRtaEvent(RtaEvent rtaEvent)
@@ -442,12 +433,20 @@ namespace Ogama.Modules.Rta.RtaReplay
             }
             this.selectedFigure.onMouseUp(x);
 
-            
-            if (this.selectedFigure.isDeleted())
+            if (selectedFigure is Segment)
             {
-                this.remove(this.selectedFigure);
-                this.actionController.onDelete();
+                Segment segment = (Segment)selectedFigure;
+                if (segment.isDeleted())
+                {
+                    this.remove(this.selectedFigure);
+                    this.actionController.onDelete();
+                }
+                else
+                {
+                    this.model.Save();
+                }
             }
+
             this.actionController.updateActionEndPositionX(x- figureTouchPointX);
             this.actionController.onActionPerformed();
 

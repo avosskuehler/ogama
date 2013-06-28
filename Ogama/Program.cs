@@ -22,6 +22,7 @@ namespace Ogama
   using Ogama.MainWindow;
   using Ogama.MainWindow.Dialogs;
   using Ogama.Modules.ImportExport.AOIData;
+    using OgamaDao.Model.Rta;
 
   /// <summary>
   /// Main Program class with entry point for application.
@@ -52,16 +53,44 @@ namespace Ogama
     private static void runRtaDemo()
     {
 
+        setTestDocument();
+
+        string movieFilename = "c:/temp/demo2.mp4";
+        RtaSettings rtaSettings = getRtaSettings();
+
+        Ogama.Modules.Rta.RtaReplay.FormRtaView form = new Ogama.Modules.Rta.RtaReplay.FormRtaView(movieFilename, rtaSettings);
+        
+        Application.Run(form);
+
+    }
+
+    private static void setTestDocument()
+    {
         Document testDoc = new Document();
         testDoc.ExperimentSettings = new Ogama.Properties.ExperimentSettings();
         testDoc.ExperimentSettings.DocumentPath = "c:/temp";
         testDoc.ExperimentSettings.Name = "rtaDemo2";
         Document.ActiveDocument = testDoc;
+    }
 
-        string movieFilename = "c:/temp/demo2.mp4";
-        Ogama.Modules.Rta.RtaReplay.FormRtaView form = new Ogama.Modules.Rta.RtaReplay.FormRtaView(movieFilename);
-        Application.Run(form);
-
+    private static RtaSettings getRtaSettings()
+    {
+        RtaSettings rtaSettings = new RtaSettings();
+        rtaSettings.ID = new Guid("fe6bdeb7-fea8-4ae5-a2bb-f2ed28210e68");
+        OgamaDao.Dao.DaoFactory df = Ogama.Modules.Database.DaoFactoryWrapper.GetDaoFactory();
+        IList<RtaSettings> rtaSettingsList = df.getRtaSettingsDao().find(rtaSettings);
+        RtaSettings[] array = new RtaSettings[rtaSettingsList.Count];
+        rtaSettingsList.CopyTo(array, 0);
+        
+        if (array.Length == 0)
+        {
+            df.getRtaSettingsDao().save(rtaSettings); 
+        }
+        else
+        {
+            rtaSettings = array[0];
+        }
+        return rtaSettings;
     }
 
     private static void testVideoFilter()
