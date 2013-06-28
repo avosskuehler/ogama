@@ -27,7 +27,7 @@ namespace OgamaDao.Model.Rta
             
         }
 
-      
+        
         /// <summary>
         /// 
         /// </summary>

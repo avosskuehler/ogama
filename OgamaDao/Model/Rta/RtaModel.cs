@@ -12,10 +12,15 @@ namespace OgamaDao.Model.Rta
     public class RtaModel
     {
         private List<RtaCategory> rtaCategories = new List<RtaCategory>();
-        private List<RtaEvent> rtaEvents = new List<RtaEvent>();
 
         private RtaCategoryDao rtaCateogryDao;
         private RtaEventDao rtaEventDao;
+
+        public void Init(OgamaDao.Dao.DaoFactory daoFactory)
+        {
+            this.SetRtaCategoryDao(daoFactory.GetRtaCategoyDao());
+            this.SetRtaEventDao(daoFactory.getRtaEventDao());
+        }
 
         public void SetRtaCategoryDao(RtaCategoryDao dao)
         {
@@ -33,7 +38,11 @@ namespace OgamaDao.Model.Rta
             {
                 return;
             }
-            this.rtaEvents.Add(rtaEvent);
+            if (rtaEvent.fkRtaCategory == null)
+            {
+                throw new System.InvalidOperationException("given RtaEvent has no RtaCategory!");
+            }
+            rtaEvent.fkRtaCategory.Add(rtaEvent);
         }
 
         public void Add(RtaCategory newRtaCategory)
@@ -54,9 +63,9 @@ namespace OgamaDao.Model.Rta
             this.rtaCategories.Add(newRtaCategory);
         }
 
-        public List<RtaEvent> getRtaEvents()
+        public List<RtaEvent> getRtaEvents(RtaCategory rtaCategory)
         {
-            return this.rtaEvents;
+            return rtaEventDao.findByRtaCategory(rtaCategory);
         }
 
         public List<RtaCategory> getRtaCategories()
@@ -69,25 +78,53 @@ namespace OgamaDao.Model.Rta
             this.rtaCategories.Remove(c);
         }
 
-        public void Remove(RtaEvent e)
+        public void Remove(RtaEvent rtaEvent)
         {
-            this.rtaEvents.Remove(e);
+            if (rtaEvent == null)
+            {
+                return;
+            }
+            if (rtaEvent.fkRtaCategory == null)
+            {
+                throw new System.InvalidOperationException("given RtaEvent has no RtaCategory!");
+            }
+            rtaEvent.fkRtaCategory.GetRtaEvents().Remove(rtaEvent);
+            rtaEventDao.delete(rtaEvent);
         }
 
         public void SaveRtaCategories()
         {
             this.rtaCateogryDao.save(this.rtaCategories);
+            SaveRtaEvents();
         }
 
-        public void SaveRtaEvents()
+        protected void SaveRtaEvents()
         {
-            this.rtaEventDao.save(this.rtaEvents);            
+            foreach (RtaCategory rtaCategory in rtaCategories)
+            {
+                rtaEventDao.save(rtaCategory.GetRtaEvents());
+            }
         }
 
-        public void Load()
+        public void Load(RtaSettings rtaSettings)
         {
-            this.rtaCategories = this.rtaCateogryDao.findAll();
-            this.rtaEvents = this.rtaEventDao.findAll();
+            LoadCategories(rtaSettings);
+            LoadEvents();
+        }
+
+        public void LoadCategories(RtaSettings rtaSettings)
+        {
+            this.rtaCategories = this.rtaCateogryDao.findByRtaSettings(rtaSettings);
+        }
+
+        protected void LoadEvents()
+        {
+            foreach (RtaCategory rtaCategory in getRtaCategories())
+            {
+                List<RtaEvent> rtaEvents = rtaEventDao.findByRtaCategory(rtaCategory);
+                rtaCategory.SetRtaEvents(rtaEvents);
+            }
+            
         }
 
         public void visit(IRtaModelVisitor visitor)
@@ -105,29 +142,19 @@ namespace OgamaDao.Model.Rta
             for (int i = 0; i < categories.Count; i++)
             {
                 RtaCategory currentItem = categories.ElementAt(i);
+                List<RtaEvent> rtaEvents = getRtaEvents(currentItem);
+                currentItem.SetRtaEvents(rtaEvents);
 
                 visitor.onVisit(currentItem);
 
-
                 List<RtaCategory> subList = currentItem.getChildren();
-
                 categories.InsertRange(i + 1, subList);
             }
-
-
-
-            for (int i = 0; i < this.getRtaEvents().Count; i++)
-            {
-                RtaEvent rtaEvent = this.getRtaEvents().ElementAt(i);
-                visitor.onVisit(rtaEvent);
-            }
-
         }
 
         public void Save()
         {
             this.SaveRtaCategories();
-            this.SaveRtaEvents();
         }
     }
 }

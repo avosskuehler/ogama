@@ -13,7 +13,7 @@ namespace OgamaDao.Dao
         //DAOs
         private RtaCategoryDao rtaCategoryDao;
         private RtaEventDao rtaEventDao;
-
+        private RtaSettingsDao rtaSettingsDao;
 
         public void init(string databaseFilename)
         {
@@ -45,6 +45,16 @@ namespace OgamaDao.Dao
                 rtaEventDao.SetSessionFactory(sessionFactoryHolder.getHibernateSessionFactory());
             }
             return rtaEventDao;
+        }
+
+        public RtaSettingsDao getRtaSettingsDao()
+        {
+            if (rtaSettingsDao == null)
+            {
+                rtaSettingsDao = new RtaSettingsDao();
+                rtaSettingsDao.SetSessionFactory(sessionFactoryHolder.getHibernateSessionFactory());
+            }
+            return rtaSettingsDao;
         }
     }
 }

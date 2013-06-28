@@ -18,6 +18,11 @@ namespace OgamaDao.Dao.Rta
         public override void deleteNotInList(List<RtaSettings> list)
         {
         }
+
+        protected override void deleteChildren(RtaSettings entity, NHibernate.ISession session)
+        {
+
+        }
     }
 }
 
