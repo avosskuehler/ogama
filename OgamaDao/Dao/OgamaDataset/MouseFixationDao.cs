@@ -20,5 +20,10 @@ namespace OgamaDao.Dao.OgamaDataset
         {
 
         }
+
+        protected override void deleteChildren(OgamaDao.Model.OgamaDataset.MouseFixation entity, NHibernate.ISession session)
+        {
+
+        }
     }
 }

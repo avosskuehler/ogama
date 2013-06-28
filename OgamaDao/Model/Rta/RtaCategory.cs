@@ -12,12 +12,30 @@ namespace OgamaDao.Model.Rta
         public virtual string description { get; set; }
         public virtual RtaCategory parent { get; set; }
         public virtual Boolean show { get; set; }
-
-        public List<RtaCategory> children = new List<RtaCategory>();
+        public virtual RtaSettings fkRtaSettings { get; set; }
         
+        public List<RtaCategory> children = new List<RtaCategory>();
+        private List<RtaEvent> events = new List<RtaEvent>();
+
         public RtaCategory()
         {
 
+        }
+
+
+        public void Add(RtaEvent rtaEvent)
+        {
+            this.events.Add(rtaEvent);
+        }
+
+        public void SetRtaEvents(List<RtaEvent> events)
+        {
+            this.events = events;
+        }
+
+        public List<RtaEvent> GetRtaEvents()
+        {
+            return this.events;
         }
 
         public void SetActive(bool active)

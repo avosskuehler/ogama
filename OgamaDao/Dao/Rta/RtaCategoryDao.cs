@@ -3,16 +3,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OgamaDao.Model.Rta;
+using NHibernate;
 
 namespace OgamaDao.Dao.Rta
 {
     public class RtaCategoryDao : OgamaDao.Dao.BaseDaoHibernate<RtaCategory>
     {
-        private NLog.Logger log = new NLog.LogFactory().GetCurrentClassLogger();
-
         protected override RtaCategory getEntity()
         {
             return new RtaCategory();
+        }
+
+        class RtaCategoryFindByRtaSettings : HibernateCallback
+        {
+            private RtaSettings key;
+            public RtaCategoryFindByRtaSettings(RtaSettings key)
+            {
+                this.key = key;
+            }
+
+            public Object doInHibernate(NHibernate.ISession session)
+            {
+                IQuery query = session.CreateQuery("from RtaCategory where fkRtaSettings.ID = :ID1");
+                query.SetGuid("ID1", key.ID);
+                return query.List<RtaCategory>();
+            }
+        }
+
+        public List<RtaCategory> findByRtaSettings(RtaSettings rtaSettings)
+        {
+            List<RtaCategory> list = new List<RtaCategory>();
+
+            Object result = base.doInSession(new RtaCategoryFindByRtaSettings(rtaSettings));
+            if (result is List<RtaCategory>)
+            {
+                list = (List<RtaCategory>)result;
+            }
+            return list;
         }
 
         public List<RtaCategory> findAll()
@@ -23,8 +50,6 @@ namespace OgamaDao.Dao.Rta
             request.entity = new RtaCategory();
             request.ignore("ID");
             request.ignore("show");
-            request.page = 0;
-            request.pageSize = int.MaxValue;
 
             IList<RtaCategory> findings = find(request);
 
@@ -69,6 +94,14 @@ namespace OgamaDao.Dao.Rta
                     log.Error(e);
                 }
             }
+        }
+
+        protected override void deleteChildren(RtaCategory entity, ISession session)
+        {
+            IQuery query = session.CreateQuery("delete from RtaEvent where fkRtaCategory.ID = :ID1");
+            query = query.SetGuid("ID1", entity.ID);
+            int deleted = query.ExecuteUpdate();
+            log.Info("delete dependencies: " + deleted);
         }
         
     }

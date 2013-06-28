@@ -35,6 +35,19 @@
         not-found="exception"                
   />
 
+    <many-to-one
+      name="fkRtaSettings"
+      column="fkRtaSettings"
+      class="RtaSettings"
+      cascade="none"
+      fetch="select"
+      update="true"
+      insert="true"
+      access="property"
+      unique="false"
+      optimistic-lock="true"
+      not-found="exception"
+  />
 
     <property name="show">
       <column name="show" />

@@ -16,6 +16,7 @@ namespace OgamaDao.Dao
         {
             this.ignoreProperties.Add(propertyName);
         }
+        public List<Tuple<string, string>> restrictions = new List<Tuple<string, string>>();
 
     }
 }

@@ -57,6 +57,7 @@
     <Compile Include="Dao\BaseDaoHibernate.cs" />
     <Compile Include="Dao\DaoFactory.cs" />
     <Compile Include="Dao\DatabaseSchemaSqlite3.cs" />
+    <Compile Include="Dao\HibernateCallback.cs" />
     <Compile Include="Dao\OgamaDataset\MouseFixationDao.cs" />
     <Compile Include="Dao\SessionFactory.cs" />
     <Compile Include="Model\BaseModel.cs" />

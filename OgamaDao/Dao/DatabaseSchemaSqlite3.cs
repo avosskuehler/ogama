@@ -26,10 +26,9 @@ namespace OgamaDao.Dao
         public void createInitialDatabase(IStatelessSession session)
         {
             string[] queries = new string[] { 
-                "CREATE TABLE RtaCategory (ID UNIQUEIDENTIFIER not null, name TEXT, description TEXT, parent UNIQUEIDENTIFIER, show BOOL, primary key (ID), constraint FKB129CDD3655B7E foreign key (parent) references RtaCategory);"
-                //"CREATE TABLE RtaCategory (ID UNIQUEIDENTIFIER not null, name TEXT, description TEXT, parent UNIQUEIDENTIFIER unique, show BOOL, primary key (ID), constraint FKB129CDD3655B7E foreign key (parent) references RtaCategory)"
-                ,"CREATE TABLE RtaEvent (ID UNIQUEIDENTIFIER not null, fkRtaCategory UNIQUEIDENTIFIER unique, Xstart DOUBLE, Xend DOUBLE, startTimestamp DOUBLE, endTimestamp DOUBLE, primary key (ID), constraint FKF3AFA8173F19C63B foreign key (fkRtaCategory) references RtaCategory);"
-                ,"CREATE TABLE RtaSettings (ID UNIQUEIDENTIFIER not null, MonitorIndex INT, Framerate INT, TempFilename TEXT, Filename TEXT, VideoCompressorName TEXT, AudioInputDeviceName TEXT, AudioCompressorName TEXT, primary key (ID));"
+                "CREATE TABLE RtaCategory (ID UNIQUEIDENTIFIER not null, name TEXT, description TEXT, parent UNIQUEIDENTIFIER, fkRtaSettings UNIQUEIDENTIFIER, show BOOL, primary key (ID), constraint FKB129CDD3655B7E foreign key (parent) references RtaCategory, constraint FKB129CDD8D6D98B foreign key (fkRtaSettings) references RtaSettings);",
+                "CREATE TABLE RtaEvent (ID UNIQUEIDENTIFIER not null, fkRtaCategory UNIQUEIDENTIFIER, Xstart DOUBLE, Xend DOUBLE, startTimestamp DOUBLE, endTimestamp DOUBLE, primary key (ID), constraint FKF3AFA8173F19C63B foreign key (fkRtaCategory) references RtaCategory);",
+                "CREATE TABLE RtaSettings (ID UNIQUEIDENTIFIER not null, MonitorIndex INT, Framerate INT, TempFilename TEXT, Filename TEXT, VideoCompressorName TEXT, AudioInputDeviceName TEXT, AudioCompressorName TEXT, primary key (ID));"
             };
             foreach (String s in queries)
             {
