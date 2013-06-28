@@ -15,20 +15,20 @@ namespace Ogama.Modules.Rta.RtaReplay
         private RtaCategoryTreeitemConverter converter = new RtaCategoryTreeitemConverter();
         private String currentPlayerPosition;
         private IFormRtaViewControllerListener listener;
+        private RtaSettings rtaSettings;
 
-
-        public FormRtaViewController()
+        public FormRtaViewController(RtaSettings rtaSettings)
         {
-            this.init();
+            this.rtaSettings = rtaSettings;
+            this.init(rtaSettings);
         }
 
-        protected void init()
+        protected void init(RtaSettings rtaSettings)
         {
             this.rtaModel = new RtaModel();
             DaoFactory df = Ogama.Modules.Database.DaoFactoryWrapper.GetDaoFactory();
-            this.rtaModel.SetRtaCategoryDao(df.GetRtaCategoyDao());
-            this.rtaModel.SetRtaEventDao(df.getRtaEventDao());
-            this.rtaModel.Load();
+            this.rtaModel.Init(df);
+            this.rtaModel.Load(rtaSettings);
         }
 
         public RtaModel getModel()
@@ -60,6 +60,7 @@ namespace Ogama.Modules.Rta.RtaReplay
             RtaCategory rtaCategory = new RtaCategory();
             rtaCategory.name = "unknown";
             rtaCategory.description = "";
+            rtaCategory.fkRtaSettings = this.rtaSettings;
 
             TreeNode newNode = new TreeNode();
             newNode.Text = rtaCategory.name;
@@ -95,13 +96,12 @@ namespace Ogama.Modules.Rta.RtaReplay
 
         public void save()
         {
-            this.rtaModel.SaveRtaCategories();
-            this.rtaModel.SaveRtaEvents();
+            this.rtaModel.Save();
         }
 
         public void cancel()
         {
-            this.rtaModel.Load();
+            this.rtaModel.Load(this.rtaSettings);
         }
 
         public void setCurrentPlayerPosition(string p)

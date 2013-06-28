@@ -86,6 +86,7 @@ namespace Ogama.Modules.Rta.RtaReplay
         {
             this.resizeRight = false;
             this.resizeLeft = false;
+            this.select(false);
         }
 
 
@@ -103,6 +104,7 @@ namespace Ogama.Modules.Rta.RtaReplay
             {
                 resizeLeft = true;
             }
+            this.select(true);
         }
 
     
@@ -152,8 +154,9 @@ namespace Ogama.Modules.Rta.RtaReplay
             }
             else
             {
-                this.backgroundBrush = DEFAULT_BACKGROUND_BRUSH;
+                //this.backgroundBrush = DEFAULT_BACKGROUND_BRUSH;
             }
+            
             g.FillRectangle(backgroundBrush, positionX, positionY, width, height);
             Brush cornerBrush = Brushes.Yellow;
             g.FillRectangle(cornerBrush, positionX, positionY, segmentActiveCornerWidth, height);
@@ -176,7 +179,7 @@ namespace Ogama.Modules.Rta.RtaReplay
 
         private void log(string s)
         {
-            Console.WriteLine("Segment.log:" + s);
+            //Console.WriteLine("Segment.log:" + s);
         }
     }
 }
