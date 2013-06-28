@@ -82,18 +82,18 @@ namespace OgamaTestProject.Modules.Rta.RtaReplay
             cut.rtaEvent = new OgamaDao.Model.Rta.RtaEvent();
 
             int initialWidth = 50;
-            int mouseDownPositionX = 2;
-            int currentPositionX = -1;
+            int mouseDownPositionX = 12;
+            int currentPositionX = 5;
             int figureTouchPointX = 2;
 
-            cut.positionX = 0;
+            cut.positionX = 10;
             cut.width = initialWidth;
             cut.onMouseDown(mouseDownPositionX);
 
             cut.move(currentPositionX, 0, figureTouchPointX, mouseDownPositionX);
 
-            Assert.AreEqual(-1, cut.positionX);
-            Assert.AreEqual(51, cut.width);
+            Assert.AreEqual(7, cut.positionX);
+            Assert.AreEqual(55, cut.width);
         }
 
         [TestMethod]
