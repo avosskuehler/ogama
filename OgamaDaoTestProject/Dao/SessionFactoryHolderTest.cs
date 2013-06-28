@@ -14,7 +14,7 @@ namespace OgamaDaoTestProject.Dao
         public void TestCreateSchema()
         {
             SessionFactoryHolder cut = new SessionFactoryHolder();
-            cut.SetCreateSchema(false);
+            cut.SetCreateSchema(true);
             cut.initFileBasedDatabase(TestdataProvider.getTestDatabaseFilename());
 
         }

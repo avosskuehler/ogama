@@ -17,12 +17,13 @@ namespace OgamaDaoTestProject.Model.Rta
         private RtaCategory rtaCategory1 = new RtaCategory();
         private RtaEvent rtaEvent1 = new RtaEvent();
         private DaoFactory daoFactory = new DaoFactory();
-
+        private TestdataProvider testdataProvider = new TestdataProvider();
+        
         [TestInitialize]
         public void setUp()
         {
             cut = new RtaModel();
-            daoFactory.init("c:/temp/test.db");
+            daoFactory.init(TestdataProvider.getTestDatabaseFilename());
         }
 
         [TestMethod]
@@ -48,30 +49,53 @@ namespace OgamaDaoTestProject.Model.Rta
         }
 
         [TestMethod]
+        public void TestAddWrongRtaEvent()
+        {
+
+            RtaEvent newRtaEvent = new RtaEvent();
+
+            try
+            {
+                cut.Add(newRtaEvent);
+                Assert.Fail();
+            }
+            catch (System.InvalidOperationException e)
+            {
+                Assert.IsNotNull(e);
+            }
+            
+        }
+
+        [TestMethod]
         public void TestAddRtaEvent()
         {
-            
-            int s0 = cut.getRtaEvents().Count;
-            cut.Add(rtaEvent1);
-            int s1 = cut.getRtaEvents().Count;
-            Assert.AreEqual(s0 + 1, s1);
+            RtaSettings rtaSettings = testdataProvider.createTestModel(daoFactory);
+            RtaCategory rtaCategory = new RtaCategory();
+            RtaEvent rtaEvent = new RtaEvent();
+            rtaEvent.fkRtaCategory = rtaCategory;
+           
+            cut.Add(rtaEvent);
 
         }
 
         [TestMethod]
         public void TestRemoveRtaEvent()
         {
-            cut.Add(rtaEvent1);
-            Assert.AreEqual(1, cut.getRtaEvents().Count);
-            cut.Remove(rtaEvent1);
-            Assert.AreEqual(0, cut.getRtaEvents().Count);
+            RtaCategory rtaCategory = new RtaCategory();
+            RtaEvent rtaEvent = new RtaEvent();
+            rtaEvent.fkRtaCategory = rtaCategory;
+            cut.SetRtaCategoryDao(daoFactory.GetRtaCategoyDao());
+            cut.SetRtaEventDao(daoFactory.getRtaEventDao());
+            cut.Add(rtaEvent);
+            
+            cut.Remove(rtaEvent);
+
+            Assert.AreEqual(0,rtaCategory.GetRtaEvents().Count);
         }
 
         [TestMethod]
         public void TestSaveRtaCategories()
         {
-            
-            
             RtaCategoryDao rtaCategoryDao = daoFactory.GetRtaCategoyDao();
             cut.SetRtaCategoryDao(rtaCategoryDao);
            
@@ -80,27 +104,9 @@ namespace OgamaDaoTestProject.Model.Rta
             long c1 = rtaCategoryDao.count(rtaCategory1);
 
             Assert.AreEqual(c0, c1);
-
         }
 
-        [TestMethod]
-        public void TestSaveRtaEvents()
-        {
-            RtaEventDao rtaEventDao = daoFactory.getRtaEventDao();
-            cut.SetRtaEventDao(rtaEventDao);
-            long c0 = cut.getRtaEvents().Count();
-            Guid id0 = rtaEvent1.ID;
-            
-            cut.Add(rtaEvent1);
-           
-            cut.SaveRtaEvents();
-
-            Guid id1 = rtaEvent1.ID;
-            Assert.AreNotEqual(id0, id1);
-
-            long c1 = rtaEventDao.count(rtaEvent1);
-            Assert.AreEqual(c0 + 1, c1);
-        }
+      
 
         [TestMethod]
         public void TestGetRtaCategories()
@@ -119,53 +125,45 @@ namespace OgamaDaoTestProject.Model.Rta
         [TestMethod]
         public void TestLoad()
         {
-            RtaCategoryDao rtaCategoryDao = daoFactory.GetRtaCategoyDao();
-            rtaCategoryDao.save(rtaCategory1);
-            Assert.AreEqual(1, rtaCategoryDao.count(new RtaCategory()));
+            RtaSettings rtaSettings = testdataProvider.createTestModel(daoFactory);
 
-            RtaEventDao rtaEventDao = daoFactory.getRtaEventDao();
-            rtaEventDao.save(rtaEvent1);
-            Assert.AreEqual(1, rtaCategoryDao.count(new RtaCategory()));
+            cut.SetRtaEventDao(daoFactory.getRtaEventDao());
+            cut.SetRtaCategoryDao(daoFactory.GetRtaCategoyDao());
 
-            cut.SetRtaEventDao(rtaEventDao);
-            cut.SetRtaCategoryDao(rtaCategoryDao);
+            Assert.AreEqual(0,cut.getRtaCategories().Count);
 
-            long numberOfrtaCategories0 = cut.getRtaCategories().Count();
-            Assert.AreEqual(0, numberOfrtaCategories0);
+            cut.Load(rtaSettings);
+
+            RtaCategory rtaCategory = cut.getRtaCategories().ElementAt(0);
+            Assert.IsNotNull(rtaCategory);
+            RtaEvent rtaEvent = rtaCategory.GetRtaEvents().ElementAt(0);
+            Assert.IsNotNull(rtaEvent);
             
-            cut.Load();
-            
-            long numberOfRtaCategories1 = cut.getRtaCategories().Count();
-            Assert.AreEqual(1, numberOfRtaCategories1);
-
-            long numberOfRtaEvents1 = cut.getRtaEvents().Count();
-            Assert.AreEqual(1, numberOfRtaEvents1);
         }
 
         [TestMethod]
         public void TestSave()
         {
             cut = new RtaModel();
+            cut.Init(daoFactory);
 
-            Assert.AreEqual(0, cut.getRtaCategories().Count());
-            Assert.AreEqual(0, cut.getRtaEvents().Count());
+            Assert.AreEqual(0, cut.getRtaCategories().Count);
 
+            RtaSettings rtaSettings = testdataProvider.createTestModel(daoFactory);
             
-            cut.SetRtaCategoryDao(daoFactory.GetRtaCategoyDao());
-            cut.SetRtaEventDao(daoFactory.getRtaEventDao());
+            Assert.AreEqual(0, cut.getRtaCategories().Count);
 
-            cut.Add(new RtaCategory());
-            cut.Add(new RtaEvent());
+            cut.Load(rtaSettings);
 
+            Assert.AreEqual(1, cut.getRtaCategories().Count);
+            
             cut.Save();
+            Assert.AreEqual(1, cut.getRtaCategories().Count);
+            
+            cut.Load(rtaSettings);
+            Assert.AreEqual(1, cut.getRtaCategories().Count);
+            
 
-            cut = new RtaModel();
-            cut.SetRtaCategoryDao(daoFactory.GetRtaCategoyDao());
-            cut.SetRtaEventDao(daoFactory.getRtaEventDao());
-            cut.Load();
-
-            Assert.AreEqual(1, cut.getRtaCategories().Count());
-            Assert.AreEqual(1, cut.getRtaEvents().Count());
         }
 
         [TestMethod]
@@ -173,20 +171,18 @@ namespace OgamaDaoTestProject.Model.Rta
         {
             //fetch the model
             cut = new RtaModel();
-            cut.SetRtaCategoryDao(daoFactory.GetRtaCategoyDao());
-            cut.SetRtaEventDao(daoFactory.getRtaEventDao());
-            int numberOfCategories = cut.getRtaCategories().Count;
-            Assert.AreEqual(0, numberOfCategories);
-            //add some stuff
-            cut.Add(new RtaCategory());
-            cut.Add(new RtaEvent());
+            cut.Init(daoFactory);
+            RtaSettings rtaSettings = testdataProvider.createTestModel(daoFactory);
 
-            //now don't save the model
-            cut.Load();
+            cut.Load(rtaSettings);
+            Assert.AreEqual(1, cut.getRtaCategories().Count);
 
-            //then: the model shall remain unchanged
-            Assert.AreEqual(0, numberOfCategories);
+            RtaCategory newRtaCategory = new RtaCategory();
+            cut.Add(newRtaCategory);
+            Assert.AreEqual(2, cut.getRtaCategories().Count);
 
+            cut.Load(rtaSettings);
+            Assert.AreEqual(1, cut.getRtaCategories().Count);
         }
 
         [TestMethod]

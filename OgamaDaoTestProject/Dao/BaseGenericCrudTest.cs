@@ -64,6 +64,7 @@ namespace OgamaDaoTestProject.Dao
 
         }
 
+
         [TestMethod]
         public void TestDelete()
         {

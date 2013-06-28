@@ -86,6 +86,40 @@ namespace OgamaDaoTestProject.Dao.Rta
 
             cut.delete(c0);
         }
+
+        [TestMethod]
+        public void TestFindAll()
+        {
+            cut.save(new RtaCategory());
+
+            List<RtaCategory> list = ((RtaCategoryDao)cut).findAll();
+
+            Assert.IsNotNull(list);
+            Assert.IsTrue(list.Count > 0);
+        }
+
+        [TestMethod]
+        public void TestFindByRtaSettings()
+        {
+            RtaCategoryDao cut = new RtaCategoryDao();
+            cut.SetSessionFactory(sfh.getHibernateSessionFactory());
+            RtaSettingsDao rtaSettingsDao = new RtaSettingsDao();
+            rtaSettingsDao.SetSessionFactory(sfh.getHibernateSessionFactory());
+
+            RtaSettings key = new RtaSettings();
+            rtaSettingsDao.save(key);
+
+            RtaCategory cat1 = new RtaCategory();
+            cat1.fkRtaSettings = key;
+            cut.save(cat1);
+
+            List<RtaCategory> list = cut.findByRtaSettings(key);
+            Assert.IsNotNull(list);
+            Assert.IsTrue(list.Count > 0);
+            list.ForEach(delegate (RtaCategory rtaCategory){
+                Assert.AreEqual(key.ID, rtaCategory.fkRtaSettings.ID);
+            });
+        }
     }
 
     
