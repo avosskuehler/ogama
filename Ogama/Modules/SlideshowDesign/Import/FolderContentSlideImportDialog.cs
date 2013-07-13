@@ -312,8 +312,9 @@ namespace Ogama.Modules.SlideshowDesign.Import
         Array.Sort(files, new NumericComparer());
         foreach (var file in files)
         {
+          var extension = file.Extension.ToLower();
           // Ignore files with unrecognized extensions
-          switch (file.Extension)
+          switch (extension)
           {
             case ".bmp":
             case ".png":
@@ -378,7 +379,7 @@ namespace Ogama.Modules.SlideshowDesign.Import
           }
           else if (this.rdbDuration.Checked)
           {
-            if (file.Extension == ".mp3" || file.Extension == ".wav" || file.Extension == ".wma")
+            if (extension == ".mp3" || extension == ".wav" || extension == ".wma")
             {
               int duration = this.GetAudioFileLength(file.FullName);
               if (duration != 0)
@@ -404,7 +405,7 @@ namespace Ogama.Modules.SlideshowDesign.Import
           }
 
           string destination = Path.Combine(Document.ActiveDocument.ExperimentSettings.SlideResourcesPath, file.Name);
-          switch (file.Extension)
+          switch (extension)
           {
             case ".bmp":
             case ".png":
