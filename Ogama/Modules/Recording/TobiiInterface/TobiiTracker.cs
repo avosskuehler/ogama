@@ -831,8 +831,6 @@ namespace Ogama.Modules.Recording.TobiiInterface
       // this.tetCalibProc.BackgroundColor = (uint)ColorTranslator.ToOle(this.tobiiSettings.TetCalibBackgroundColor);
     }
 
-    private long lasttime = -1;
-
     /// <summary>
     /// OnGazeData event handler for connected tracker.
     ///   This event fires whenever there are new gaze data 
@@ -873,12 +871,11 @@ namespace Ogama.Modules.Recording.TobiiInterface
       //  throw new ArgumentException(message);
       //}
 
-      this.lasttime = gd.TimeStamp;
-
-      var newGazeData = new GazeData { Time = gd.TimeStamp/1000 };
+      //this.lasttime = gd.TimeStamp;
 
       // Convert Tobii gazestamp in milliseconds.
-
+      var newGazeData = new GazeData { Time = gd.TimeStamp / 1000 };
+      
       // The validity code takes one of five values for each eye ranging from 0 to 4, with the
       // following interpretation:
       // 0 - The eye tracker is certain that the data for this eye is right. There is no risk of

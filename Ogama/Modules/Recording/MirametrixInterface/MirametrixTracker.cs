@@ -51,13 +51,13 @@ namespace Ogama.Modules.Recording.MirametrixInterface
     /// </summary>
     private readonly Label memCalibrationResult;
 
-    /// <summary>
-    /// This is the customized tab page for the Mirametrix tracker.
-    /// </summary>
-    private TabPage memTabPage;
+    ///// <summary>
+    ///// This is the customized tab page for the Mirametrix tracker.
+    ///// </summary>
+    //private TabPage memTabPage;
 
     /// <summary>
-    /// Saves Mirametrix settings
+    /// Saves mirametrix settings
     /// </summary>
     private MirametrixSetting memSettings;
 
@@ -83,33 +83,31 @@ namespace Ogama.Modules.Recording.MirametrixInterface
     /// </summary>
     private bool memIsRecording;
 
-    /// <summary>
-    /// Specify the time when recording started
-    /// </summary>
-    private Stopwatch memTimeOfRecordingStart;
+    ///// <summary>
+    ///// Specify the time when recording started
+    ///// </summary>
+    //private Stopwatch memTimeOfRecordingStart;
 
     /// <summary>
     /// Specify the time when recording started
     /// </summary>
     private int[] memConnectionsIds;
 
-    /// <summary>
-    /// Xml document which contains all parameterizations
-    /// </summary>
-    private XmlDocument memXmlDocument;
+    ///// <summary>
+    ///// Xml document which contains all parameterizations
+    ///// </summary>
+    //private XmlDocument memXmlDocument;
 
     /// <summary>
-    ///   The TetTrackStatus is a help tool to provide a real time display 
-    ///   of the tracking ability of the subject being eye tracked and 
-    ///   to make it easy to verify that the subject is advantageous 
-    ///   positioned. Preferably use it before the gaze tracking starts to 
-    ///   verify that the eyes of the subject are found. Note that 
-    ///   the subjects gaze point is not represented in any way, 
-    ///   only the position of the eyes in the eye tracker sensor are shown.
+    /// Saves the timer tick frequency for high resolution timing. This returns the output of
+    /// QueryPerformanceFrequency in the Win32 API.
+    /// This is used to to convert the timing ticks to milliseconds.
     /// </summary>
-    /// <remarks>
-    ///   That is from the TobiiSDK documentation.
-    /// </remarks>
+    private ulong tickFrequency;
+
+    /// <summary>
+    /// The track status control for the mirametrix device.
+    /// </summary>
     private MirametrixTrackStatusControl memMirametrixTrackStatus;
 
     #endregion
@@ -181,7 +179,7 @@ namespace Ogama.Modules.Recording.MirametrixInterface
       Properties.Settings.Default.EyeTrackerSettingsPath + "Mirametrix.xml")
     {
       this.memCalibrationResult = mirametrixResultLabel;
-      this.memTabPage = mirametrixTabpage;
+      //this.memTabPage = mirametrixTabpage;
 
       // Call the initialize methods of derived classes
       this.Initialize();
@@ -345,7 +343,7 @@ namespace Ogama.Modules.Recording.MirametrixInterface
     {
       this.Stop();
       this.memNetworkManager.Disconnect();
-      this.memTimeOfRecordingStart.Reset();
+      //this.memTimeOfRecordingStart.Reset();
       base.CleanUp();
     }
 
@@ -361,8 +359,9 @@ namespace Ogama.Modules.Recording.MirametrixInterface
           if (!this.memIsRecording)
           {
             this.memIsRecording = true;
-            this.memTimeOfRecordingStart.Reset();
-            this.memTimeOfRecordingStart.Start();
+            //this.memTimeOfRecordingStart.Reset();
+            //this.memTimeOfRecordingStart.Start();
+            this.memNetworkManager.SendMessage("<SET ID=\"ENABLE_SEND_TIME_TICK\" STATE=\"1\"/> \r\n");
             this.memNetworkManager.SendMessage("<SET ID=\"ENABLE_SEND_POG_BEST\" STATE=\"1\"/> \r\n");
             this.memNetworkManager.SendMessage("<SET ID=\"ENABLE_SEND_PUPIL_LEFT\" STATE=\"1\"/> \r\n");
             this.memNetworkManager.SendMessage("<SET ID=\"ENABLE_SEND_PUPIL_RIGHT\" STATE=\"1\"/> \r\n");
@@ -386,7 +385,7 @@ namespace Ogama.Modules.Recording.MirametrixInterface
     {
       this.memIsRecording = false;
       this.memIsCalibrating = false;
-      this.memTimeOfRecordingStart.Stop();
+      //this.memTimeOfRecordingStart.Stop();
       this.memNetworkManager.SendMessage("<SET ID=\"ENABLE_SEND_DATA\" STATE=\"0\" /> \r\n");
     }
 
@@ -503,6 +502,15 @@ namespace Ogama.Modules.Recording.MirametrixInterface
                     }
                   }
                 }
+                else if (attribute == "TIME_TICK_FREQUENCY")
+                {
+                  // REPLY: <ACK ID="TIME_TICK_FREQUENCY" FREQ="2405480000" />
+                  ulong readedTickFrequency;
+                  if (ulong.TryParse(root.GetAttribute("FREQ"), out readedTickFrequency))
+                  {
+                    this.tickFrequency = readedTickFrequency;
+                  }
+                }
               }
               else if (root.Name == "CAL")
               {
@@ -520,8 +528,15 @@ namespace Ogama.Modules.Recording.MirametrixInterface
                 // TODO : Optimize data send to Ogama by verifying if they are valid
                 var newGazeData = new GazeData();
 
-                // Get gazeTimestamp in milliseconds.
-                newGazeData.Time = this.memTimeOfRecordingStart.ElapsedMilliseconds;
+                //// Get gazeTimestamp in milliseconds.
+                ////newGazeData.Time = this.memTimeOfRecordingStart.ElapsedMilliseconds;
+
+                // Get time stamp in ticks
+                attribute = root.GetAttribute("TIME_TICK");
+                var timeInTicks = double.Parse(attribute, CultureInfo.InvariantCulture);
+
+                // Convert to milliseconds
+                newGazeData.Time = (long)(timeInTicks / (this.tickFrequency / 1000.0));
 
                 // Calculate values between 0..1
                 attribute = root.GetAttribute("BPOGX");
@@ -674,12 +689,18 @@ namespace Ogama.Modules.Recording.MirametrixInterface
       this.memNetworkManager.MessageReceived += this.ProcessReceivedMessage;
       this.memIsCalibrating = false;
       this.memIsRecording = false;
-      this.memXmlDocument = new XmlDocument();
-      this.memTimeOfRecordingStart = new Stopwatch();
+      //this.memXmlDocument = new XmlDocument();
+      //this.memTimeOfRecordingStart = new Stopwatch();
 
       // Check the screen size, in ProcessReceivedMessage we receive the answer
       // and set the correct size
       this.memNetworkManager.SendMessage("<GET ID=\"SCREEN_SIZE\" />\r\n");
+
+      // Get the timer tick frequency default value
+      QueryPerformanceFrequency(out this.tickFrequency);
+
+      // Get the timer tick frequency for high resolution timing from the mirametrix API
+      this.memNetworkManager.SendMessage("<GET ID=\"TIME_TICK_FREQUENCY\" />\r\n");
 
       base.Initialize();
     }
@@ -699,6 +720,9 @@ namespace Ogama.Modules.Recording.MirametrixInterface
         this.memDlgTrackStatus.Close();
       }
     }
+
+    [DllImport("Kernel32.dll", SetLastError = true)]
+    private static extern bool QueryPerformanceFrequency(out ulong frequency);
 
     /// <summary>
     /// Searches a specified process
