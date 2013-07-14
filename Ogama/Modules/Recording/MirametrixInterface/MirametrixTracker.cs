@@ -18,6 +18,7 @@ namespace Ogama.Modules.Recording.MirametrixInterface
   using System.Drawing;
   using System.Globalization;
   using System.IO;
+  using System.Linq;
   using System.Runtime.InteropServices;
   using System.Windows.Forms;
   using System.Xml;
@@ -35,7 +36,7 @@ namespace Ogama.Modules.Recording.MirametrixInterface
 
   /// <summary>
   /// This class implements the <see cref="ITracker"/> interface to represent 
-  /// an OGAMA known eyetracker.
+  /// an OGAMA known eye tracker.
   /// </summary>        
   public class MirametrixTracker : TrackerWithStatusControls
   {
@@ -48,7 +49,7 @@ namespace Ogama.Modules.Recording.MirametrixInterface
     /// This is the label on the calibration result panel
     /// to show the quality status of the calibration.
     /// </summary>
-    private Label memCalibrationResult;
+    private readonly Label memCalibrationResult;
 
     /// <summary>
     /// This is the customized tab page for the Mirametrix tracker.
@@ -480,6 +481,28 @@ namespace Ogama.Modules.Recording.MirametrixInterface
                     Properties.Settings.Default.PresentationScreenMonitor = "Secondary";
                   }
                 }
+                else if (attribute == "SCREEN_SIZE")
+                {
+                  int screenWith;
+                  if (int.TryParse(root.GetAttribute("WIDTH"), out screenWith))
+                  {
+                    int screenHeight;
+                    if (int.TryParse(root.GetAttribute("HEIGHT"), out screenHeight))
+                    {
+                      if (screenHeight != Document.ActiveDocument.PresentationSize.Height
+                        || screenWith != Document.ActiveDocument.PresentationSize.Width)
+                      {
+                        // Send correct size to tracker
+                        string screenSizeString =
+                          string.Format(
+                            "<SET ID=\"SCREEN_SIZE\" WIDTH=\"{0}\" HEIGHT=\"{1}\"/>\r\n",
+                            Document.ActiveDocument.PresentationSize.Width,
+                            Document.ActiveDocument.PresentationSize.Height);
+                        this.memNetworkManager.SendMessage(screenSizeString);
+                      }
+                    }
+                  }
+                }
               }
               else if (root.Name == "CAL")
               {
@@ -648,11 +671,16 @@ namespace Ogama.Modules.Recording.MirametrixInterface
 
       // We just need one connection for now. Maybe for subsequent development, we will be able to connect to many trackers
       this.memNetworkManager = new ClientNetworkManager(this.memSettings.ServerAddress, this.memSettings.ServerPort, out this.memConnectionsIds);
-      this.memNetworkManager.MessageReceived += new NewMessageEventHandler(this.ProcessReceivedMessage);
+      this.memNetworkManager.MessageReceived += this.ProcessReceivedMessage;
       this.memIsCalibrating = false;
       this.memIsRecording = false;
       this.memXmlDocument = new XmlDocument();
       this.memTimeOfRecordingStart = new Stopwatch();
+
+      // Check the screen size, in ProcessReceivedMessage we receive the answer
+      // and set the correct size
+      this.memNetworkManager.SendMessage("<GET ID=\"SCREEN_SIZE\" />\r\n");
+
       base.Initialize();
     }
 
@@ -673,34 +701,24 @@ namespace Ogama.Modules.Recording.MirametrixInterface
     }
 
     /// <summary>
-    /// Searchs a specified process
+    /// Searches a specified process
     /// </summary>
-    /// <param name="name">Name of process, without .exe or .dll</param>
+    /// <param name="name">Name of process, without extension .exe or .dll</param>
     /// <returns>True if process is running, false otherwise</returns>
     private static bool IsProcessOpen(string name)
     {
-      foreach (Process clsProcess in Process.GetProcesses())
-      {
-        if (clsProcess.ProcessName == name)
-        {
-          return true;
-        }
-      }
-
-      return false;
+      return Process.GetProcesses().Any(clsProcess => clsProcess.ProcessName == name);
     }
 
     /// <summary>
-    /// Searchs a specified application in windows registries
+    /// Searches a specified application in windows registries
     /// </summary>
     /// <param name="appName">Name of application</param>
     /// <returns>True if application installed, false otherwise</returns>
     private static bool IsApplicationInstalled(string appName)
     {
-      string keyName;
-
       // search in: CurrentUser
-      keyName = @"SOFTWARE";
+      var keyName = @"SOFTWARE";
       if (ExistsInSubKey(Registry.CurrentUser, keyName, "STARTMENU_REGISTRYNAME", appName) == true)
       {
         return true;
