@@ -273,6 +273,16 @@ namespace Ogama.Modules.Recording.MirametrixInterface
       {
         connectionSucceeded = this.memNetworkManager.Connect();
 
+        // Check the screen size, in ProcessReceivedMessage we receive the answer
+        // and set the correct size
+        this.memNetworkManager.SendMessage("<GET ID=\"SCREEN_SIZE\" />\r\n");
+
+        // Get the timer tick frequency default value
+        QueryPerformanceFrequency(out this.tickFrequency);
+
+        // Get the timer tick frequency for high resolution timing from the mirametrix API
+        this.memNetworkManager.SendMessage("<GET ID=\"TIME_TICK_FREQUENCY\" />\r\n");
+
         // Get the displayed screen for configure Ogama having the same
         this.memNetworkManager.SendMessage("<GET ID=\"SCREEN_SELECTED\" />\r\n");
         if (this.memSettings.CalibrationType.Equals(1))
@@ -691,16 +701,6 @@ namespace Ogama.Modules.Recording.MirametrixInterface
       this.memIsRecording = false;
       //this.memXmlDocument = new XmlDocument();
       //this.memTimeOfRecordingStart = new Stopwatch();
-
-      // Check the screen size, in ProcessReceivedMessage we receive the answer
-      // and set the correct size
-      this.memNetworkManager.SendMessage("<GET ID=\"SCREEN_SIZE\" />\r\n");
-
-      // Get the timer tick frequency default value
-      QueryPerformanceFrequency(out this.tickFrequency);
-
-      // Get the timer tick frequency for high resolution timing from the mirametrix API
-      this.memNetworkManager.SendMessage("<GET ID=\"TIME_TICK_FREQUENCY\" />\r\n");
 
       base.Initialize();
     }
