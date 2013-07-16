@@ -54,6 +54,11 @@ namespace Ogama.MainWindow.Dialogs
         Environment.GetFolderPath(Environment.SpecialFolder.Personal),
         "OgamaExperiments");
 
+      if (!Directory.Exists(path))
+      {
+        Directory.CreateDirectory(path);
+      }
+
       // Check for existing default experiment
       var experiments = Directory.GetDirectories(path);
       var experimentList = new List<string>();
