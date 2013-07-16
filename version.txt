@@ -1,0 +1,2 @@
+4.3.4840.39362
+This is a maintenance release, containing bugfixes and usability improvements.

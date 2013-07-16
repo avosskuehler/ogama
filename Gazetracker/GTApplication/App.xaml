@@ -1,0 +1,19 @@
+﻿<Application x:Class="GTApplication.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    StartupUri="GazeTrackerUIMainWindow.xaml">
+  <Application.Resources>
+
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/GTApplication;component/Style/Simple Styles.xaml"/>
+        <ResourceDictionary x:Name="IphoneStyle" Source="/GTApplication;component/Style/style_iphone.xaml" />
+        <ResourceDictionary x:Name="IphoneStyleSmall" Source="/GTApplication;component/Style/style_iphonesmall.xaml"/>
+        <ResourceDictionary x:Name="DataGridStyle" Source="/GTApplication;component/Style/style_datagrid.xaml" />
+        <ResourceDictionary x:Name="TabControlStyle" Source="/GTApplication;component/Style/style_datagrid.xaml" />
+        <ResourceDictionary x:Name="EditSlider" Source="/GTApplication;component/Style/style_editslider.xaml"/>
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+
+  </Application.Resources>
+</Application>
