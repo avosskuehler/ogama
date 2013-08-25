@@ -126,6 +126,12 @@ namespace Ogama.Modules.Replay
         this.btnMouseModeClicks = new System.Windows.Forms.ToolStripButton();
         this.sfdVideo = new System.Windows.Forms.SaveFileDialog();
         this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+        this.toolStripRta = new System.Windows.Forms.ToolStrip();
+        this.toolStripLabelRta = new System.Windows.Forms.ToolStripLabel();
+        this.toolStripButtonRtaSettings = new System.Windows.Forms.ToolStripButton();
+        this.toolStripButtonRtaRecord = new System.Windows.Forms.ToolStripButton();
+        this.toolStripComboBoxRtaVideos = new System.Windows.Forms.ToolStripComboBox();
+        this.toolStripButtonRtaVideoPlay = new System.Windows.Forms.ToolStripButton();
         ((System.ComponentModel.ISupportInitialize)(this.bsoSubjects)).BeginInit();
         ((System.ComponentModel.ISupportInitialize)(this.bsoFKSubjectsTrials)).BeginInit();
         ((System.ComponentModel.ISupportInitialize)(this.ogamaDataSet)).BeginInit();
@@ -155,6 +161,7 @@ namespace Ogama.Modules.Replay
         this.tosTrial.SuspendLayout();
         this.tosGaze.SuspendLayout();
         this.tosMouse.SuspendLayout();
+        this.toolStripRta.SuspendLayout();
         this.SuspendLayout();
         // 
         // toolStripContainer1
@@ -187,6 +194,7 @@ namespace Ogama.Modules.Replay
         this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.tosTrial);
         this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.tosGaze);
         this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.tosMouse);
+        this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStripRta);
         // 
         // toolStrip5
         // 
@@ -394,7 +402,7 @@ namespace Ogama.Modules.Replay
         // 
         this.trialTimeLine.Duration = 0;
         this.trialTimeLine.Name = "trialTimeLine";
-        this.trialTimeLine.Size = new System.Drawing.Size(279, 23);
+        this.trialTimeLine.Size = new System.Drawing.Size(200, 23);
         this.trialTimeLine.CaretValueChanged += new OgamaControls.TimeLine.PositionValueChangedEventHandler(this.TimeSlider_CaretValueChanged);
         this.trialTimeLine.CaretMovingStarted += new System.EventHandler(this.TimeSlider_CaretMovingStarted);
         this.trialTimeLine.MarkerPositionChanged += new OgamaControls.TimeLine.MarkerPositionChangedEventHandler(this.TimeSlider_MarkerPositionChanged);
@@ -1135,6 +1143,64 @@ namespace Ogama.Modules.Replay
         this.sfdVideo.SupportMultiDottedExtensions = true;
         this.sfdVideo.Title = "Select file to save video to ...";
         // 
+        // toolStripRta
+        // 
+        this.toolStripRta.Dock = System.Windows.Forms.DockStyle.None;
+        this.toolStripRta.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabelRta,
+            this.toolStripButtonRtaSettings,
+            this.toolStripButtonRtaRecord,
+            this.toolStripComboBoxRtaVideos,
+            this.toolStripButtonRtaVideoPlay});
+        this.toolStripRta.Location = new System.Drawing.Point(414, 25);
+        this.toolStripRta.Name = "toolStripRta";
+        this.toolStripRta.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+        this.toolStripRta.Size = new System.Drawing.Size(262, 25);
+        this.toolStripRta.TabIndex = 6;
+        // 
+        // toolStripLabelRta
+        // 
+        this.toolStripLabelRta.Name = "toolStripLabelRta";
+        this.toolStripLabelRta.Size = new System.Drawing.Size(27, 22);
+        this.toolStripLabelRta.Text = "RTA";
+        // 
+        // toolStripButtonRtaSettings
+        // 
+        this.toolStripButtonRtaSettings.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+        this.toolStripButtonRtaSettings.Image = global::Ogama.Properties.Resources.video;
+        this.toolStripButtonRtaSettings.ImageTransparentColor = System.Drawing.Color.Magenta;
+        this.toolStripButtonRtaSettings.Name = "toolStripButtonRtaSettings";
+        this.toolStripButtonRtaSettings.Size = new System.Drawing.Size(23, 22);
+        this.toolStripButtonRtaSettings.Text = "RtaSettings";
+        this.toolStripButtonRtaSettings.ToolTipText = "control rta session settings";
+        this.toolStripButtonRtaSettings.Click += new System.EventHandler(this.toolStripButtonRtaSettings_Click);
+        // 
+        // toolStripButtonRtaRecord
+        // 
+        this.toolStripButtonRtaRecord.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+        this.toolStripButtonRtaRecord.Image = global::Ogama.Properties.Resources.Record;
+        this.toolStripButtonRtaRecord.ImageTransparentColor = System.Drawing.Color.Magenta;
+        this.toolStripButtonRtaRecord.Name = "toolStripButtonRtaRecord";
+        this.toolStripButtonRtaRecord.Size = new System.Drawing.Size(23, 22);
+        this.toolStripButtonRtaRecord.Text = "toolStripButton2";
+        this.toolStripButtonRtaRecord.ToolTipText = "record rta session";
+        // 
+        // toolStripComboBoxRtaVideos
+        // 
+        this.toolStripComboBoxRtaVideos.Name = "toolStripComboBoxRtaVideos";
+        this.toolStripComboBoxRtaVideos.Size = new System.Drawing.Size(121, 25);
+        this.toolStripComboBoxRtaVideos.ToolTipText = "recorded rta sessions";
+        // 
+        // toolStripButtonRtaVideoPlay
+        // 
+        this.toolStripButtonRtaVideoPlay.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+        this.toolStripButtonRtaVideoPlay.Image = global::Ogama.Properties.Resources.ReplayLogo;
+        this.toolStripButtonRtaVideoPlay.ImageTransparentColor = System.Drawing.Color.Magenta;
+        this.toolStripButtonRtaVideoPlay.Name = "toolStripButtonRtaVideoPlay";
+        this.toolStripButtonRtaVideoPlay.Size = new System.Drawing.Size(23, 22);
+        this.toolStripButtonRtaVideoPlay.Text = "toolStripButton7";
+        this.toolStripButtonRtaVideoPlay.ToolTipText = "replay rta video";
+        // 
         // ReplayModule
         // 
         this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1190,6 +1256,8 @@ namespace Ogama.Modules.Replay
         this.tosGaze.PerformLayout();
         this.tosMouse.ResumeLayout(false);
         this.tosMouse.PerformLayout();
+        this.toolStripRta.ResumeLayout(false);
+        this.toolStripRta.PerformLayout();
         this.ResumeLayout(false);
 
     }
@@ -1285,6 +1353,12 @@ namespace Ogama.Modules.Replay
     private System.Windows.Forms.ToolStripLabel toolStripLabel5;
     private System.Windows.Forms.ToolStripButton btnRTASettings;
     private System.Windows.Forms.ToolStripButton toolStripButtonPlayRta;
+    private System.Windows.Forms.ToolStrip toolStripRta;
+    private System.Windows.Forms.ToolStripLabel toolStripLabelRta;
+    private System.Windows.Forms.ToolStripButton toolStripButtonRtaSettings;
+    private System.Windows.Forms.ToolStripButton toolStripButtonRtaRecord;
+    private System.Windows.Forms.ToolStripComboBox toolStripComboBoxRtaVideos;
+    private System.Windows.Forms.ToolStripButton toolStripButtonRtaVideoPlay;
 
   }
 }

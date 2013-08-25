@@ -23,6 +23,7 @@ namespace Ogama
   using Ogama.MainWindow.Dialogs;
   using Ogama.Modules.ImportExport.AOIData;
     using OgamaDao.Model.Rta;
+    using Ogama.Modules.Rta;
 
   /// <summary>
   /// Main Program class with entry point for application.
@@ -42,8 +43,9 @@ namespace Ogama
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
 
-      //runOgama(args);
-      runRtaDemo();
+      runOgama(args);
+
+      //runRtaDemo();
 
        //testVideoFilter();
        //runFormDemo();
@@ -54,12 +56,11 @@ namespace Ogama
     {
 
         setTestDocument();
-
-        string movieFilename = "c:/temp/demo2.mp4";
         RtaSettings rtaSettings = getRtaSettings();
 
-        Ogama.Modules.Rta.RtaReplay.FormRtaView form = new Ogama.Modules.Rta.RtaReplay.FormRtaView(movieFilename, rtaSettings);
-        
+        RtaModule rtaModule = new RtaModule(rtaSettings);
+        Ogama.Modules.Rta.RtaReplay.FormRtaView form = rtaModule.GetFormToRun();
+
         Application.Run(form);
 
     }
@@ -76,6 +77,8 @@ namespace Ogama
     private static RtaSettings getRtaSettings()
     {
         RtaSettings rtaSettings = new RtaSettings();
+        string movieFilename = "c:/temp/demo2.mp4";
+        rtaSettings.Filename = movieFilename;
         rtaSettings.ID = new Guid("fe6bdeb7-fea8-4ae5-a2bb-f2ed28210e68");
         OgamaDao.Dao.DaoFactory df = Ogama.Modules.Database.DaoFactoryWrapper.GetDaoFactory();
         IList<RtaSettings> rtaSettingsList = df.getRtaSettingsDao().find(rtaSettings);

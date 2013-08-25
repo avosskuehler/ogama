@@ -2775,6 +2775,12 @@ namespace Ogama.Modules.Replay
         this.rtaExtension.showRtaVideoDialog();
     }
 
+    private void toolStripButtonRtaSettings_Click(object sender, EventArgs e)
+    {
+        string selectedTrial = cbbTrial.Text;
+        rtaExtension.configureRtaSettings(selectedTrial);
+    }
+
     
   }
 }

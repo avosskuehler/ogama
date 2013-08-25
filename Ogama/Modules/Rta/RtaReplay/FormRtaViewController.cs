@@ -17,18 +17,35 @@ namespace Ogama.Modules.Rta.RtaReplay
         private IFormRtaViewControllerListener listener;
         private RtaSettings rtaSettings;
 
+        public FormRtaViewController()
+        {
+
+        }
+
+      
+
         public FormRtaViewController(RtaSettings rtaSettings)
         {
             this.rtaSettings = rtaSettings;
             this.init(rtaSettings);
         }
 
-        protected void init(RtaSettings rtaSettings)
+        public void init(RtaSettings rtaSettings)
         {
             this.rtaModel = new RtaModel();
             DaoFactory df = Ogama.Modules.Database.DaoFactoryWrapper.GetDaoFactory();
             this.rtaModel.Init(df);
             this.rtaModel.Load(rtaSettings);
+        }
+
+        public void SetRtaSettings(RtaSettings rtaSettings)
+        {
+            this.rtaSettings = rtaSettings;
+        }
+
+        public void SetRtaModel(RtaModel rtaModel)
+        {
+            this.rtaModel = rtaModel;
         }
 
         public RtaModel getModel()

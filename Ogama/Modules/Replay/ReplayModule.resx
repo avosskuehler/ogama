@@ -118,28 +118,28 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <metadata name="bsoSubjects.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>158, 54</value>
+    <value>564, 54</value>
   </metadata>
   <metadata name="bsoFKSubjectsTrials.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>269, 54</value>
+    <value>675, 54</value>
   </metadata>
   <metadata name="ogamaDataSet.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1096, 17</value>
+    <value>299, 54</value>
   </metadata>
   <metadata name="bsoFKTrialsEvents.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 54</value>
+    <value>423, 54</value>
   </metadata>
   <metadata name="bsoTrialsAOIs.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>726, 54</value>
+    <value>324, 91</value>
   </metadata>
   <metadata name="bsoTrialsGazeFixations.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>846, 54</value>
+    <value>444, 91</value>
   </metadata>
   <metadata name="bsoTrialsMouseFixations.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>419, 54</value>
+    <value>17, 91</value>
   </metadata>
   <metadata name="bsoShapeGroups.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>591, 54</value>
+    <value>189, 91</value>
   </metadata>
   <metadata name="bsoFKSubjectsSubjectParameters.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>237, 17</value>
@@ -154,10 +154,10 @@
     <value>141, 17</value>
   </metadata>
   <metadata name="bsoGazeFixations.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>814, 17</value>
+    <value>17, 54</value>
   </metadata>
   <metadata name="bsoMouseFixations.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>951, 17</value>
+    <value>154, 54</value>
   </metadata>
   <metadata name="bsoAOIs.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>616, 17</value>
@@ -166,9 +166,40 @@
     <value>709, 17</value>
   </metadata>
   <metadata name="toolStrip5.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>496, 91</value>
+    <value>507, 128</value>
+  </metadata>
+  <metadata name="toolStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>790, 91</value>
+  </metadata>
+  <metadata name="toolStrip4.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>298, 128</value>
+  </metadata>
+  <metadata name="tosTrial.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>702, 91</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnShowVisiblePartOfScreen.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAZdJREFUOE/Fkl0o
+        A1AYhudOUnJBippmyYXYYibS/Cyi/CxulhqlSSkif8OQq4lGSmEiU0b52biQKWWaQmFrGcoIKWVupGib
+        l3M0VgzZha++c87N87zf6Rw/ewQbDF+KCHxphht2OAFv/fAI2O+fcWV/xsm1C/tnrvfQHwW3Fius5VxY
+        yjgwGy0Unlqx/U5AkgmMq1U8rddjtzgSm1YXJpaPfxa4x7ZIOG9wnxBbIiZWD5wYnTd/L/C8MxmbJBN4
+        UWeCdseJIc2Od8GR7QZ13Sra24d39M5kbJJM4BmjAwOThq8Fp5d2Cmpt09Bf6JAnqYJqYQ+CQintEe0R
+        1BsO9KnWPgv++hfen/H/BHit0kY1DNd6LJ1rMGEdhHJbjla9FJVzBRCN8ZCuZIKvCAVPnIU8cQ0EBRUI
+        5DYTFAyylNSOY/igF8OmHiiMTWhYKUPFbO4rnIiMfhaF+YoQuifJohCbko+AeA9BUbUKMTldiM7uBFvY
+        CVZmB5jpcoSntSMstQ0hya0I5skQlNBCkwnsH9f0MQE9/bFeADzBm6xBLAUSAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <metadata name="tosGaze.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 128</value>
+  </metadata>
+  <metadata name="tosMouse.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>108, 128</value>
+  </metadata>
+  <metadata name="toolStripRta.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>397, 128</value>
+  </metadata>
   <data name="btnStart.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -227,39 +258,11 @@
         AAAASUVORK5CYII=
 </value>
   </data>
-  <metadata name="toolStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 91</value>
-  </metadata>
-  <metadata name="toolStrip4.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>397, 91</value>
-  </metadata>
-  <metadata name="tosTrial.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1104, 54</value>
-  </metadata>
-  <data name="btnShowVisiblePartOfScreen.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAZdJREFUOE/Fkl0o
-        A1AYhudOUnJBippmyYXYYibS/Cyi/CxulhqlSSkif8OQq4lGSmEiU0b52biQKWWaQmFrGcoIKWVupGib
-        l3M0VgzZha++c87N87zf6Rw/ewQbDF+KCHxphht2OAFv/fAI2O+fcWV/xsm1C/tnrvfQHwW3Fius5VxY
-        yjgwGy0Unlqx/U5AkgmMq1U8rddjtzgSm1YXJpaPfxa4x7ZIOG9wnxBbIiZWD5wYnTd/L/C8MxmbJBN4
-        UWeCdseJIc2Od8GR7QZ13Sra24d39M5kbJJM4BmjAwOThq8Fp5d2Cmpt09Bf6JAnqYJqYQ+CQintEe0R
-        1BsO9KnWPgv++hfen/H/BHit0kY1DNd6LJ1rMGEdhHJbjla9FJVzBRCN8ZCuZIKvCAVPnIU8cQ0EBRUI
-        5DYTFAyylNSOY/igF8OmHiiMTWhYKUPFbO4rnIiMfhaF+YoQuifJohCbko+AeA9BUbUKMTldiM7uBFvY
-        CVZmB5jpcoSntSMstQ0hya0I5skQlNBCkwnsH9f0MQE9/bFeADzBm6xBLAUSAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <metadata name="tosGaze.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>116, 91</value>
-  </metadata>
-  <metadata name="tosMouse.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>207, 91</value>
-  </metadata>
   <metadata name="sfdVideo.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1010, 54</value>
+    <value>608, 91</value>
   </metadata>
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>305, 91</value>
+    <value>206, 128</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>128</value>

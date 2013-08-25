@@ -68,6 +68,10 @@ namespace Ogama.Modules.Rta
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.labelVideoName = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.labelVideoDescription = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -153,7 +157,7 @@ namespace Ogama.Modules.Rta
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOK.Location = new System.Drawing.Point(229, 197);
+            this.btnOK.Location = new System.Drawing.Point(234, 287);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 26;
@@ -164,7 +168,7 @@ namespace Ogama.Modules.Rta
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(313, 197);
+            this.btnCancel.Location = new System.Drawing.Point(318, 287);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 27;
@@ -230,11 +234,47 @@ namespace Ogama.Modules.Rta
             this.label4.TabIndex = 36;
             this.label4.Text = "Framerate";
             // 
+            // labelVideoName
+            // 
+            this.labelVideoName.AutoSize = true;
+            this.labelVideoName.Location = new System.Drawing.Point(57, 189);
+            this.labelVideoName.Name = "labelVideoName";
+            this.labelVideoName.Size = new System.Drawing.Size(76, 13);
+            this.labelVideoName.TabIndex = 37;
+            this.labelVideoName.Text = "Video filename";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(152, 191);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(207, 20);
+            this.textBox1.TabIndex = 38;
+            // 
+            // labelVideoDescription
+            // 
+            this.labelVideoDescription.AutoSize = true;
+            this.labelVideoDescription.Location = new System.Drawing.Point(59, 230);
+            this.labelVideoDescription.Name = "labelVideoDescription";
+            this.labelVideoDescription.Size = new System.Drawing.Size(88, 13);
+            this.labelVideoDescription.TabIndex = 39;
+            this.labelVideoDescription.Text = "Video description";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(151, 234);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(209, 20);
+            this.textBox2.TabIndex = 40;
+            // 
             // RtaSettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(398, 232);
+            this.ClientSize = new System.Drawing.Size(403, 322);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.labelVideoDescription);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.labelVideoName);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.numericBoxFramerate);
@@ -502,6 +542,10 @@ namespace Ogama.Modules.Rta
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelVideoName;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label labelVideoDescription;
+        private System.Windows.Forms.TextBox textBox2;
 
 
     }

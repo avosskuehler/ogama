@@ -15,6 +15,7 @@ namespace OgamaDao.Model.Rta
 
         private RtaCategoryDao rtaCateogryDao;
         private RtaEventDao rtaEventDao;
+        private RtaSettings rtaSettings;
 
         public void Init(OgamaDao.Dao.DaoFactory daoFactory)
         {
@@ -108,6 +109,7 @@ namespace OgamaDao.Model.Rta
 
         public void Load(RtaSettings rtaSettings)
         {
+            this.rtaSettings = rtaSettings;
             LoadCategories(rtaSettings);
             LoadEvents();
         }
@@ -155,6 +157,11 @@ namespace OgamaDao.Model.Rta
         public void Save()
         {
             this.SaveRtaCategories();
+        }
+
+        public RtaSettings getCurrentRtaSettings()
+        {
+            return this.rtaSettings;
         }
     }
 }

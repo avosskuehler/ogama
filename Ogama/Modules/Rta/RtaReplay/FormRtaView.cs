@@ -20,13 +20,7 @@ namespace Ogama.Modules.Rta.RtaReplay
         protected Boolean runThread = false;
         protected Tools tools = new Tools();
         private RtaPanelController rtaPanelController = new RtaPanelController();
-        private string movieFilename;
         private RtaSettings rtaSettings;
-
-        public void SetMovieFilename(string s)
-        {
-            this.movieFilename = s;
-        }
 
         public void SetRtaSettings(RtaSettings rtaSettings)
         {
@@ -90,9 +84,8 @@ namespace Ogama.Modules.Rta.RtaReplay
             
         }
 
-        public FormRtaView(string movieFilename, RtaSettings rtaSettings)
+        public FormRtaView( RtaSettings rtaSettings)
         {
-            SetMovieFilename(movieFilename);
 
             SetRtaSettings(rtaSettings);
 
@@ -115,8 +108,6 @@ namespace Ogama.Modules.Rta.RtaReplay
 
         void FormRtaView_SizeChanged(object sender, EventArgs e)
         {
-            Console.WriteLine("FormRtaView_S.izeChanged:"+this.Size);
-            
             foreach (RtaPanel rtaPanel in rtaPanelList)
             {
                 rtaPanel.onResize(this.Size);
@@ -135,10 +126,8 @@ namespace Ogama.Modules.Rta.RtaReplay
 
         protected void loadMovie()
         {
-            this.axWindowsMediaPlayer1.URL = this.movieFilename;
+            this.axWindowsMediaPlayer1.URL = this.rtaSettings.Filename;
             this.axWindowsMediaPlayer1.Ctlcontrols.play();
-
-
 
             thread = new System.Threading.Thread(this.run);
             this.runThread = true;

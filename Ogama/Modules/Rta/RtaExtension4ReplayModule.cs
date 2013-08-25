@@ -151,7 +151,8 @@ namespace Ogama.Modules.Rta
         /// </summary>
         public void showRtaVideoDialog()
         {
-
+            
+            //RtaModule rtaModule = new RtaModule();
             log.info("showRtaVideoDialog()");
 
         }

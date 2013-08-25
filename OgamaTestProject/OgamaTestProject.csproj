@@ -123,6 +123,7 @@
     <Compile Include="Modules\Rta\LoggerFacadeTest.cs" />
     <Compile Include="Modules\Rta\ProgressDialogTest.cs" />
     <Compile Include="Modules\Rta\RtaControllerTest.cs" />
+    <Compile Include="Modules\Rta\RtaModuleTest.cs" />
     <Compile Include="Modules\Rta\RtaReplay\FormRtaViewControllerTest.cs" />
     <Compile Include="Modules\Rta\RtaReplay\RtaCategoryTreeitemConverterTest.cs" />
     <Compile Include="Modules\Rta\RtaReplay\SegmentTest.cs" />
