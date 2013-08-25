@@ -203,8 +203,21 @@ namespace OgamaDaoTestProject.Model.Rta
 
             Assert.AreEqual(3, visitor.rtaCategories.Count);
         }
+
+        [TestMethod]
+        public void TestLoadModel()
+        {
+            RtaSettings rtaSettings = new RtaSettings();
+            rtaSettings.ID = new Guid();
+            cut.Init(daoFactory);
+            cut.Load(rtaSettings);
+            RtaSettings rtaSettingsFromModel = cut.getCurrentRtaSettings();
+            Assert.AreEqual(rtaSettings.ID, rtaSettingsFromModel.ID);
+        }
     }
 
+
+ 
     class ModelVisitor : IRtaModelVisitor
     {
         public List<RtaCategory> rtaCategories = new List<RtaCategory>();

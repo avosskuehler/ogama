@@ -571,6 +571,7 @@
     <Compile Include="Modules\Rta\RtaController.cs" />
     <Compile Include="Modules\Rta\RtaExtension4ReplayModule.cs" />
     <Compile Include="Modules\Rta\RtaFeature.cs" />
+    <Compile Include="Modules\Rta\RtaModule.cs" />
     <Compile Include="Modules\Rta\RtaReplay\Action.cs" />
     <Compile Include="Modules\Rta\RtaReplay\ActionController.cs" />
     <Compile Include="Modules\Rta\RtaReplay\DrawController.cs" />
