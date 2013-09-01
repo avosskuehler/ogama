@@ -191,6 +191,28 @@ namespace Ogama.Modules.ImportExport.Common
 
     /// <summary>
     /// The <see cref="CheckBox.CheckedChanged"/> event handler for
+    /// the <see cref="CheckBox"/> <see cref="chbPreviousLineColumnTitle"/>.
+    /// User switched "column title is above first line" state, so update preview.
+    /// </summary>
+    /// <remarks>If this is called during <see cref="Form.Load"/> event
+    /// the <see cref="ASCIISettings.ColumnHeaders"/> are not reset,
+    /// otherwise they have to be resetted.</remarks>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void chbPreviousLineColumnTitle_CheckedChanged(object sender, EventArgs e)
+    {
+        this.asciiSetting.ColumnTitlesAtPreviousRow = this.chbPreviousLineColumnTitle.Checked;
+        if (!this.isInitializing)
+        {
+            this.asciiSetting.ColumnHeaders.Clear();
+        }
+
+        this.UpdatePreview(true);
+
+    }
+
+    /// <summary>
+    /// The <see cref="CheckBox.CheckedChanged"/> event handler for
     /// the <see cref="CheckBox"/> <see cref="chbIgnoreLinesQuoted"/>.
     /// User switched "ignore lines with less columns than in first line" state, so update preview.
     /// </summary>
@@ -593,5 +615,20 @@ namespace Ogama.Modules.ImportExport.Common
     }
 
     #endregion //HELPER
+    
+    /// <summary>
+    /// The <see cref="CheckBox.CheckedChanged"/> event handler for
+    /// the <see cref="CheckBox"/> <see cref="chbUseLines"/>.
+    /// User switched "ignore double timestamps" state, so update preview.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void chbIgnoreDoubleTime_CheckedChanged(object sender, EventArgs e)
+    {
+        this.asciiSetting.IgnoreDoubles = this.chbIgnoreDoubleTime.Checked;
+        this.UpdatePreview(true);
+    }
+    
   }
 }
+

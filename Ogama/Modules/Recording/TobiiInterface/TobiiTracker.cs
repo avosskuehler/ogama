@@ -725,7 +725,7 @@ namespace Ogama.Modules.Recording.TobiiInterface
       // specify the type of object to be deserialized 
       var serializer = new XmlSerializer(typeof(TobiiSetting));
 
-      // If the XML document has been altered with unknown 
+      // If the XML Document has been altered with unknown 
       // nodes or attributes, handle them with the 
       // UnknownNode and UnknownAttribute events.
       serializer.UnknownNode += this.SerializerUnknownNode;
@@ -733,11 +733,11 @@ namespace Ogama.Modules.Recording.TobiiInterface
 
       try
       {
-        // A FileStream is needed to read the XML document.
+        // A FileStream is needed to read the XML Document.
         var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
 
         // Use the Deserialize method to restore the object's state with
-        // data from the XML document.
+        // data from the XML Document.
         settings = (TobiiSetting)serializer.Deserialize(fs);
         fs.Close();
       }

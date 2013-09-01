@@ -47,6 +47,8 @@ namespace Ogama.Modules.Replay
   using VectorGraphics.Tools;
   using VectorGraphics.Tools.CustomEventArgs;
 
+  using Ogama.Modules.Rta;
+
   /// <summary>
   /// Derived from <see cref="FormWithSubjectAndTrialSelection"/>.
   /// This <see cref="Form"/> hosts the replay module.
@@ -133,6 +135,10 @@ namespace Ogama.Modules.Replay
     /// length of the selected avi export movie.
     /// </summary>
     private DESCombine desCombine;
+
+
+    
+    private RtaExtension4ReplayModule rtaExtension = new RtaExtension4ReplayModule();
 
     #endregion //FIELDS
 
@@ -297,6 +303,7 @@ namespace Ogama.Modules.Replay
       this.pnlCanvas.Resize += new EventHandler(this.pnlCanvas_Resize);
       this.videoFramePusher = new VideoFramePusher();
       this.videoFramePusher.VideoFrameAvailable += new BitmapEventHandler(this.videoFramePusher_VideoFrameAvailable);
+      this.MouseMove += this.rtaExtension.GetMouseListener();
     }
 
     /// <summary>
@@ -1126,6 +1133,52 @@ namespace Ogama.Modules.Replay
 
       this.RedrawPicture();
     }
+
+
+    
+
+    private void btnRTAMouseModeClicks_Click(object sender, EventArgs e)
+    {        
+        this.btnRTA.Checked = !this.btnRTA.Checked;
+        
+        
+        this.rtaExtension.startRtaSession(this.btnRTA, getSelectedTrialName());
+    }
+
+    private void btnRTASettingsMouseModeClicks_Click(object sender, EventArgs e)
+    {
+        configureRtaModule();
+    }
+
+    private void configureRtaModule()
+    {
+        string sequencedName = getSelectedTrialName();
+
+        rtaExtension.configureRtaSettings(sequencedName);
+    }
+
+    private string getSelectedTrialName()
+    {
+        System.Object value = cbbTrial.SelectedItem;
+        string sequencedName = null;
+        if (value is Ogama.Modules.Common.SlideCollections.SequencedTrial)
+        {
+            Ogama.Modules.Common.SlideCollections.SequencedTrial trial =
+                (Ogama.Modules.Common.SlideCollections.SequencedTrial)value;
+
+            sequencedName = trial.SequencedName;
+            sequencedName = sequencedName.Replace("#", "");
+            sequencedName = sequencedName.Replace("(", "");
+            sequencedName = sequencedName.Replace(")", "");
+            sequencedName = sequencedName.Replace(":", "");
+            sequencedName = sequencedName.Replace(" ", "");
+
+
+        }
+        return sequencedName;
+    }
+
+    
 
     /// <summary>
     /// The <see cref="Control.Click"/> event handler for the
@@ -2731,5 +2784,18 @@ namespace Ogama.Modules.Replay
     }
 
     #endregion //HELPER
+
+    private void toolStripButtonPlayRta_Click(object sender, EventArgs e)
+    {
+        this.rtaExtension.showRtaVideoDialog();
+    }
+
+    private void toolStripButtonRtaSettings_Click(object sender, EventArgs e)
+    {
+        string selectedTrial = cbbTrial.Text;
+        rtaExtension.configureRtaSettings(selectedTrial);
+    }
+
+    
   }
 }

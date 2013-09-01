@@ -21,6 +21,9 @@ namespace Ogama
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
   using Ogama.MainWindow.Dialogs;
+  using Ogama.Modules.ImportExport.AOIData;
+    using OgamaDao.Model.Rta;
+    using Ogama.Modules.Rta;
 
   /// <summary>
   /// Main Program class with entry point for application.
@@ -40,29 +43,106 @@ namespace Ogama
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
 
-      // Support for command line arguments.
-      string fileName = string.Empty;
-      if (args.Length == 1)
-      {
-        if (File.Exists(args[0]))
+      runOgama(args);
+
+      //runRtaDemo();
+
+       //testVideoFilter();
+       //runFormDemo();
+
+    }
+
+    private static void runRtaDemo()
+    {
+
+        setTestDocument();
+        RtaSettings rtaSettings = getRtaSettings();
+
+        RtaModule rtaModule = new RtaModule(rtaSettings);
+        Ogama.Modules.Rta.RtaReplay.FormRtaView form = rtaModule.GetFormToRun();
+
+        Application.Run(form);
+
+    }
+
+    private static void setTestDocument()
+    {
+        Document testDoc = new Document();
+        testDoc.ExperimentSettings = new Ogama.Properties.ExperimentSettings();
+        testDoc.ExperimentSettings.DocumentPath = "c:/temp";
+        testDoc.ExperimentSettings.Name = "rtaDemo2";
+        Document.ActiveDocument = testDoc;
+    }
+
+    private static RtaSettings getRtaSettings()
+    {
+        RtaSettings rtaSettings = new RtaSettings();
+        string movieFilename = "c:/temp/demo2.mp4";
+        rtaSettings.Filename = movieFilename;
+        rtaSettings.ID = new Guid("fe6bdeb7-fea8-4ae5-a2bb-f2ed28210e68");
+        OgamaDao.Dao.DaoFactory df = Ogama.Modules.Database.DaoFactoryWrapper.GetDaoFactory();
+        IList<RtaSettings> rtaSettingsList = df.getRtaSettingsDao().find(rtaSettings);
+        RtaSettings[] array = new RtaSettings[rtaSettingsList.Count];
+        rtaSettingsList.CopyTo(array, 0);
+        
+        if (array.Length == 0)
         {
-          fileName = args[0];
+            df.getRtaSettingsDao().save(rtaSettings); 
         }
-      }
+        else
+        {
+            rtaSettings = array[0];
+        }
+        return rtaSettings;
+    }
 
-      try
-      {
-        // Show splash screen with copyright
-        InitialSplash objfrmSplash = new InitialSplash();
-        objfrmSplash.ShowDialog();
+    private static void testVideoFilter()
+    {
+        List<string> list = new Ogama.Modules.Rta.RtaController().getAvailbleVideoFilterNames();
+        for (int i = 0; i < list.Count; i++)
+        {
+            Console.WriteLine("filterName:" + list[i]);
+        }
+    }
 
-        // Start Application
-        Application.Run(new Ogama.MainWindow.MainForm(fileName));
-      }
-      catch (Exception ex)
-      {
-        ExceptionMethods.ProcessUnhandledException(ex);
-      }
+    private static void runFormDemo()
+     {
+         Ogama.Modules.ImportExport.Common.ASCIISettings settings = 
+             new Ogama.Modules.ImportExport.Common.ASCIISettings();
+         //Application.Run(new Ogama.Modules.ImportExport.Common.ImportParseFileDialog(settings));
+
+         Application.Run(new ImportAOIAssignColumnsDialog());
+     }
+
+   
+
+   
+
+    private static void runOgama(string[] args)
+    {
+        // Support for command line arguments.
+        string fileName = string.Empty;
+        if (args.Length == 1)
+        {
+            if (File.Exists(args[0]))
+            {
+                fileName = args[0];
+            }
+        }
+
+        try
+        {
+            // Show splash screen with copyright
+            InitialSplash objfrmSplash = new InitialSplash();
+            objfrmSplash.ShowDialog();
+
+            // Start Application
+            Application.Run(new Ogama.MainWindow.MainForm(fileName));
+        }
+        catch (Exception ex)
+        {
+            ExceptionMethods.ProcessUnhandledException(ex);
+        }
     }
   }
 }

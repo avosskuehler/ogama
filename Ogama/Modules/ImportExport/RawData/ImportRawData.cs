@@ -649,7 +649,7 @@ namespace Ogama.Modules.ImportExport.RawData
             if (asciiSetting.IgnoreSmallLines && columncount != items.Length)
             {
               continue;
-            }
+            }           
 
             // Create Ogama columns placeholder
             RawData newRawData = new RawData();
@@ -676,20 +676,27 @@ namespace Ogama.Modules.ImportExport.RawData
             }
 
             // Check for duplicate time entries
-            if (timeInFileTime == lastTimeInFileTime)
+            if ((timeInFileTime == lastTimeInFileTime) && (ASCIISettings.IgnoreDoubles == false))
             {
-              string message = string.Format(
-                "Two consecutive raw data samples had the same sampling time {0}."
-                + Environment.NewLine + "Time in FileTime is {1}" + Environment.NewLine +
-                "PrevTime in FileTime is {2}" + Environment.NewLine +
-                "This indicates an logfile error or wrong timescale."
-                + Environment.NewLine + "Please try to change the timescale to milliseconds.",
-                timeInMs,
-                timeInFileTime,
-                lastTimeInFileTime);
-              ExceptionMethods.ProcessErrorMessage(message);
-              return;
+                string message = string.Format(
+                  "Two consecutive raw data samples had the same sampling time {0}."
+                  + Environment.NewLine + "Time in FileTime is {1}" + Environment.NewLine +
+                  "PrevTime in FileTime is {2}" + Environment.NewLine +
+                  "This indicates an logfile error or wrong timescale."
+                  + Environment.NewLine + "Please try to change the timescale to milliseconds.",
+                  timeInMs,
+                  timeInFileTime,
+                  lastTimeInFileTime);
+                ExceptionMethods.ProcessErrorMessage(message);
+                return;
             }
+           
+
+            if ((timeInFileTime == lastTimeInFileTime) && (ASCIISettings.IgnoreDoubles == true))
+                {
+                    continue;
+                }
+            
 
             // Set time check value
             lastTimeInMs = timeInMs;
@@ -1502,7 +1509,7 @@ namespace Ogama.Modules.ImportExport.RawData
           var serializer = new XmlSerializer(typeof(MergedSettings));
 
           /* Use the Deserialize method to restore the object's state with
-          data from the XML document. */
+          data from the XML Document. */
           var settings = (MergedSettings)serializer.Deserialize(fs);
 
           asciiSetting = settings.AsciiSetting;
