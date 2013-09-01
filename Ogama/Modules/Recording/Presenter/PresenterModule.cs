@@ -1050,8 +1050,6 @@ namespace Ogama.Modules.Recording.Presenter
       e.Cancel = true;
     }
 
-    private Object WebBrowser_Navigating_Lock = new Object();
-
     /// <summary>
     /// The <see cref="WebBrowser.Navigating"/> event handler which reactivates the
     /// scroll event subscribtion and updates the slideshow with the new trial along
@@ -1088,15 +1086,12 @@ namespace Ogama.Modules.Recording.Presenter
           string screenshotFilename = BrowserDialog.GetFilenameFromUrl(e.Url);
           WebsiteScreenshot.Instance.ScreenshotFilename = screenshotFilename;
 
-          lock (WebBrowser_Navigating_Lock)
+          if (!File.Exists(screenshotFilename) || !this.currentBrowserTreeNode.UrlToID.ContainsKey(screenshotFilename))
           {
-              if (!File.Exists(screenshotFilename) || !this.currentBrowserTreeNode.UrlToID.ContainsKey(screenshotFilename))
-              {
-                  var newTrialId = Convert.ToInt32(documentsSlideshow.GetUnusedNodeID());
-                  this.currentBrowserTreeNode.UrlToID.Add(screenshotFilename, newTrialId);
-              }
+            var newTrialId = Convert.ToInt32(documentsSlideshow.GetUnusedNodeID());
+            this.currentBrowserTreeNode.UrlToID.Add(screenshotFilename, newTrialId);
           }
-          
+
           // Now update slideshow with new trial
           if (this.getTimeMethod != null)
           {
