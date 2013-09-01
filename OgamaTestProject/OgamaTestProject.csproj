@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{46DE29F1-E403-4015-9A6F-5F39FEC50A33}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OgamaTestProject</RootNamespace>
+    <AssemblyName>OgamaTestProject</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ASL_Utilities">
+      <HintPath>..\Libs\Managed\ASL_Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="AxInterop.WMPLib">
+      <HintPath>..\Ogama\obj\x86\Debug\AxInterop.WMPLib.dll</HintPath>
+    </Reference>
+    <Reference Include="AxShockwaveFlashObjects">
+      <HintPath>..\Libs\Managed\AxShockwaveFlashObjects.dll</HintPath>
+    </Reference>
+    <Reference Include="DirectShowLib-2005">
+      <HintPath>..\Libs\Managed\DirectShowLib-2005.dll</HintPath>
+    </Reference>
+    <Reference Include="EtApi">
+      <HintPath>..\Libs\Managed\EtApi.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.ASLSERIALOUTLIB2Lib">
+      <HintPath>..\Libs\Managed\Interop.ASLSERIALOUTLIB2Lib.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Interop.WMPLib">
+      <HintPath>..\Ogama\obj\x86\Debug\Interop.WMPLib.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Data.ConnectionUI">
+      <HintPath>..\Libs\Managed\Microsoft.Data.ConnectionUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.ConnectionUI.Dialog">
+      <HintPath>..\Libs\Managed\Microsoft.Data.ConnectionUI.Dialog.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.ConnectionInfo, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\Microsoft.SqlServer.ConnectionInfo.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Management.Sdk.Sfc, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\Microsoft.SqlServer.Management.Sdk.Sfc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Smo, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\Microsoft.SqlServer.Smo.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.SqlEnum, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\Microsoft.SqlServer.SqlEnum.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="ShockwaveFlashObjects">
+      <HintPath>..\Libs\Managed\ShockwaveFlashObjects.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.XML" />
+    <Reference Include="Tobii.Eyetracking.Sdk">
+      <HintPath>..\Libs\Managed\Tobii.Eyetracking.Sdk.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataSet\OgamaDataSetTest.cs" />
+    <Compile Include="DataSet\QueriesTest.cs" />
+    <Compile Include="Modules\Database\DatabaseFactoryWrapperTest.cs" />
+    <Compile Include="Modules\ImportExport\Common\ASCIISettingsTest.cs" />
+    <Compile Include="Modules\Rta\LoggerFacadeTest.cs" />
+    <Compile Include="Modules\Rta\ProgressDialogTest.cs" />
+    <Compile Include="Modules\Rta\RtaControllerTest.cs" />
+    <Compile Include="Modules\Rta\RtaModuleTest.cs" />
+    <Compile Include="Modules\Rta\RtaReplay\FormRtaViewControllerTest.cs" />
+    <Compile Include="Modules\Rta\RtaReplay\RtaCategoryTreeitemConverterTest.cs" />
+    <Compile Include="Modules\Rta\RtaReplay\SegmentTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Modules\Rta\RtaReplay\RtaExtension4ReplayModuleTest.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TestdataProvider.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Gazetracker\GTCommons\GTCommons.csproj">
+      <Project>{02E8476C-305D-4FAD-83BC-3A70CCA37260}</Project>
+      <Name>GTCommons</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gazetracker\GTHardware\GTHardware.csproj">
+      <Project>{4EF59290-9005-460E-8919-5003414BDC92}</Project>
+      <Name>GTHardware</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gazetracker\GTLibrary\GTLibrary.csproj">
+      <Project>{BF8D4E7F-F8E1-4204-B438-55B35233F590}</Project>
+      <Name>GTLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gazetracker\GTNetworkClient\GTNetworkClient.csproj">
+      <Project>{BD8916FF-DE52-4932-A71B-5E748AF559F0}</Project>
+      <Name>GTNetworkClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gazetracker\GTOgamaClient\GTOgamaClient.csproj">
+      <Project>{2F1306D9-F01D-4431-8122-9DBC888480CD}</Project>
+      <Name>GTOgamaClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OgamaControls\OgamaControls.csproj">
+      <Project>{63EF9D30-447A-4F79-9EC8-E4956DC0ABF8}</Project>
+      <Name>OgamaControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OgamaDao\OgamaDao.csproj">
+      <Project>{34C00FBB-1E30-48ED-988D-1468E5E5FEC6}</Project>
+      <Name>OgamaDao</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ogama\Ogama.csproj">
+      <Project>{84DE2C81-CE99-4ED3-B4F3-3C47CDD85E3D}</Project>
+      <Name>Ogama</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VectorGraphics\VectorGraphics.csproj">
+      <Project>{8230AED9-33A2-42FD-BDF7-4F7E4EFA73DB}</Project>
+      <Name>VectorGraphics</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Rec 04\Rec 04-All-Data.tsv" />
+    <None Include="resources\Rec 04\Rec 04-AOI-Data.tsv" />
+    <None Include="resources\Rec 04\Rec 04-Combined-Data.tsv" />
+    <None Include="resources\Rec 04\Rec 04-Event-Data.tsv" />
+    <None Include="resources\Rec 04\Rec 04-Fixation-Data.tsv" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

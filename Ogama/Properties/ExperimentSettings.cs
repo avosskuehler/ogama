@@ -412,7 +412,7 @@ namespace Ogama.Properties
     }
 
     /// <summary>
-    /// Gets or sets file path for this document (XML) file
+    /// Gets or sets file path for this Document (XML) file
     /// </summary>
     /// <value>A <see cref="string"/> with the path to the experiment file.</value>
     [XmlIgnore]
@@ -423,7 +423,7 @@ namespace Ogama.Properties
     }
 
     /// <summary>
-    /// Gets full file name with path for the document.
+    /// Gets full file name with path for the Document.
     /// </summary>
     /// <value>A <see cref="string"/> with the experiment file.</value>
     public string DocumentFilename
@@ -608,21 +608,21 @@ namespace Ogama.Properties
       {
         ExperimentSettings settings;
 
-        // A FileStream is needed to read the XML document.
+        // A FileStream is needed to read the XML Document.
         using (FileStream fs = new FileStream(filePath, FileMode.Open))
         {
           // Create an instance of the XmlSerializer class;
           // specify the type of object to be deserialized 
           XmlSerializer serializer = new XmlSerializer(typeof(ExperimentSettings));
 
-          ////* If the XML document has been altered with unknown 
+          ////* If the XML Document has been altered with unknown 
           ////nodes or attributes, handle them with the 
           ////UnknownNode and UnknownAttribute events.*/
           ////serializer.UnknownNode += new XmlNodeEventHandler(serializer_UnknownNode);
           ////serializer.UnknownAttribute += new XmlAttributeEventHandler(serializer_UnknownAttribute);
 
           /* Use the Deserialize method to restore the object's state with
-          data from the XML document. */
+          data from the XML Document. */
           settings = (ExperimentSettings)serializer.Deserialize(fs);
         }
 
@@ -803,9 +803,9 @@ namespace Ogama.Properties
     }
 
     /// <summary>
-    /// Builds the document filename with path.
+    /// Builds the Document filename with path.
     /// </summary>
-    /// <returns>A <see cref="string"/> with the document file name with path.</returns>
+    /// <returns>A <see cref="string"/> with the Document file name with path.</returns>
     private string CreateDocumentFilename()
     {
       string returnString = Path.Combine(this.documentPath, this.experimentName + ".oga");

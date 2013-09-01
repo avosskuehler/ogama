@@ -907,7 +907,7 @@ namespace Ogama.Modules.Recording.Presenter
     }
 
     /// <summary>
-    /// The Scroll event handler of the web document in which the scroll
+    /// The Scroll event handler of the web Document in which the scroll
     /// position is sent to the recorder as a trial event.
     /// </summary>
     /// <param name="sender">Source of the event.</param>
@@ -1029,7 +1029,7 @@ namespace Ogama.Modules.Recording.Presenter
       // Get WebBrowser object
       WebBrowser browser = sender as WebBrowser;
 
-      // Reattach scroll and mouse down events for each document even in frames
+      // Reattach scroll and mouse down events for each Document even in frames
       // otherwise we will not receive mouse down event on subframes.
       browser.Document.Window.Scroll -= new HtmlElementEventHandler(this.WebBrowser_Scroll);
       browser.Document.Window.Scroll += new HtmlElementEventHandler(this.WebBrowser_Scroll);
@@ -1050,10 +1050,12 @@ namespace Ogama.Modules.Recording.Presenter
       e.Cancel = true;
     }
 
+    private Object WebBrowser_Navigating_Lock = new Object();
+
     /// <summary>
     /// The <see cref="WebBrowser.Navigating"/> event handler which reactivates the
     /// scroll event subscribtion and updates the slideshow with the new trial along
-    /// making a new screenshot of the new document if this site has never been visited before.
+    /// making a new screenshot of the new Document if this site has never been visited before.
     /// </summary>
     /// <param name="sender">Source of the event</param>
     /// <param name="e">A <see cref="WebBrowserNavigatingEventArgs"/> with the event data</param>
@@ -1086,12 +1088,15 @@ namespace Ogama.Modules.Recording.Presenter
           string screenshotFilename = BrowserDialog.GetFilenameFromUrl(e.Url);
           WebsiteScreenshot.Instance.ScreenshotFilename = screenshotFilename;
 
-          if (!File.Exists(screenshotFilename) || !this.currentBrowserTreeNode.UrlToID.ContainsKey(screenshotFilename))
+          lock (WebBrowser_Navigating_Lock)
           {
-            var newTrialId = Convert.ToInt32(documentsSlideshow.GetUnusedNodeID());
-            this.currentBrowserTreeNode.UrlToID.Add(screenshotFilename, newTrialId);
+              if (!File.Exists(screenshotFilename) || !this.currentBrowserTreeNode.UrlToID.ContainsKey(screenshotFilename))
+              {
+                  var newTrialId = Convert.ToInt32(documentsSlideshow.GetUnusedNodeID());
+                  this.currentBrowserTreeNode.UrlToID.Add(screenshotFilename, newTrialId);
+              }
           }
-
+          
           // Now update slideshow with new trial
           if (this.getTimeMethod != null)
           {
@@ -1179,7 +1184,7 @@ namespace Ogama.Modules.Recording.Presenter
           this.shownSlideContainer.Slide = newWebpageSlide;
 
           // Update screenshot parallel world triggering
-          // a screenshot on document completed event using
+          // a screenshot on Document completed event using
           // the filename stated above
           // This forces multiple screenshot on webpages with frames
           // but because using only the first url for the filename
@@ -1338,7 +1343,7 @@ namespace Ogama.Modules.Recording.Presenter
 
     /// <summary>
     /// This method iterates recursively through the <see cref="HtmlWindowCollection"/>
-    /// of a webbrowser document to attach the mouse down event for all
+    /// of a webbrowser Document to attach the mouse down event for all
     /// frames, if there are multiple.
     /// </summary>
     /// <param name="htmlWindows">The first <see cref="HtmlWindowCollection"/>

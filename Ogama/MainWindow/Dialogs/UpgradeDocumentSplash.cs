@@ -19,7 +19,7 @@ namespace Ogama.MainWindow.Dialogs
 
   /// <summary>
   /// Splash <see cref="Form"/> with animated gif and marquee progress bar.
-  /// Is invoked from <see cref="MainForm"/>, when document is beeing upgraded.
+  /// Is invoked from <see cref="MainForm"/>, when Document is beeing upgraded.
   /// Informs the user, that database upgrading is going on.
   /// </summary>
   public partial class UpgradeDocumentSplash : Form
@@ -36,7 +36,7 @@ namespace Ogama.MainWindow.Dialogs
     #region FIELDS
 
     /// <summary>
-    /// Backgroundworker, that detects upgrading of document
+    /// Backgroundworker, that detects upgrading of Document
     /// </summary>
     private BackgroundWorker worker;
 

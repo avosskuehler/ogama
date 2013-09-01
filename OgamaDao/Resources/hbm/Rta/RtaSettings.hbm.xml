@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+
+                           assembly="OgamaDao"
+
+                           namespace="OgamaDao.Model.Rta">
+
+  <class name="RtaSettings" table="RtaSettings" lazy="false">
+
+    <id name="ID">
+      <generator class="guid"/>
+    </id>
+
+    <property name="MonitorIndex">
+      <column name="MonitorIndex" />
+    </property>
+
+    <property name="Framerate">
+      <column name="Framerate" />
+    </property>
+
+
+    <property name="TempFilename">
+      <column name="TempFilename" />
+    </property>
+
+
+    <property name="Filename">
+      <column name="Filename" />
+    </property>
+
+
+    <property name="VideoCompressorName">
+      <column name="VideoCompressorName" />
+    </property>
+
+
+    <property name="AudioInputDeviceName">
+      <column name="AudioInputDeviceName" />
+    </property>
+
+
+    <property name="AudioCompressorName">
+      <column name="AudioCompressorName" />
+    </property>
+
+
+  </class>
+
+</hibernate-mapping>
