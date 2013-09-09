@@ -1,0 +1,757 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GazeTrackingLibrary.Autotune" Collapsed="true">
+    <Position X="19.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAEAAGAEECAAABAAAAAQAABAAgAAAA=</HashCode>
+      <FileName>Autotune.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GazeTrackingLibrary.TrackData" Collapsed="true">
+    <Position X="7" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>OcEgEEmBAABEiAlAQAgJSEIYEhojABACAQAgAAXAAAA=</HashCode>
+      <FileName>TrackData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GazeTrackingLibrary.TrackDB" Collapsed="true">
+    <Position X="4.75" Y="3.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>ABACAAJIAAAQAAQAABAgMCCAABBAABBAQAQAAEAACAA=</HashCode>
+      <FileName>TrackDB.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="db" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Tracker" Collapsed="true">
+    <Position X="10" Y="1.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+      <Compartment Name="Events" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="exponentialSmoother" Type="GazeTrackingLibrary.EyeMovementDetection.ExponentialSmoother">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.57" Y="0.45" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="visualization" Type="GazeTrackingLibrary.Visualization" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.938" Y="2.062" />
+        <Point X="10.938" Y="7.531" />
+        <Point X="8.5" Y="7.531" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="trackData" Type="GazeTrackingLibrary.TrackData" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.188" Y="2.062" />
+        <Point X="10.188" Y="3.531" />
+        <Point X="8.5" Y="3.531" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Commands" Type="GTCommons.GTCommands" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.375" Y="2.062" />
+        <Point X="10.375" Y="4.531" />
+        <Point X="8.5" Y="4.531" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Server" Type="GazeTrackingLibrary.Network.UDPServer" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.75" Y="2.062" />
+        <Point X="10.75" Y="6.531" />
+        <Point X="8.5" Y="6.531" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="LogData" Type="GazeTrackingLibrary.Logging.Logger" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.562" Y="2.062" />
+        <Point X="10.562" Y="5.531" />
+        <Point X="8.5" Y="5.531" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="GazeDataRaw" Type="GazeTrackingLibrary.Utils.GTGazeData">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.048" Y="0.11" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>gQACQoJJASYArAQAAkgiAiQUFIlQAETAQAGMAkFACAI=</HashCode>
+      <FileName>Tracker.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="exponentialSmoother" />
+      <Field Name="visualization" />
+      <Field Name="eyeMovement" />
+      <Field Name="recalibration" />
+      <Field Name="trackData" />
+      <Property Name="Commands" />
+      <Property Name="ImageProcessing" />
+      <Property Name="Server" />
+      <Property Name="LogData" />
+      <Property Name="Calibration" />
+      <Property Name="GazeDataRaw" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Visualization" Collapsed="true">
+    <Position X="7" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAABAEBQAEAAQAQAQEAAAAAAAAEEABAJEAAACBAUAQg=</HashCode>
+      <FileName>Visualization.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Calibration.CalibMethod" Collapsed="true">
+    <Position X="18.75" Y="1.5" Width="1.5" />
+    <AssociationLine Name="calibTargets" Type="GazeTrackingLibrary.Calibration.CalibrationTarget" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="19.938" Y="2.062" />
+        <Point X="19.938" Y="2.25" />
+        <Point X="21.75" Y="2.25" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.236" Y="0.098" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>KAAggIAgAgIQAlAAEAPAAAQWCAIEAAECCAAAAQAAIAA=</HashCode>
+      <FileName>Calibration\CalibMethod.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CalibrationDataLeft" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="calibTargets" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Calibration.Calibration" Collapsed="true">
+    <Position X="15.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAIAkAgEEQPABAAAAICAIACCACAAAAAABhA=</HashCode>
+      <FileName>Calibration\Calibration.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="calibExport" />
+      <Property Name="CalibMethod" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Calibration.CalibrationData" Collapsed="true">
+    <Position X="21.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIMAAAAAAAAAAAEAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Calibration\CalibrationData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Calibration.CalibrationExport" Collapsed="true">
+    <Position X="15.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEIAEABAggEAcAICIAAAAiAACAJgAAQAAAAAgAgA=</HashCode>
+      <FileName>Calibration\CalibrationExport.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Calibration.CalibrationTarget" Collapsed="true">
+    <Position X="21.75" Y="2" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAgQEIAAAAAAGBAAAhAAIAGUAAACAAABCAYAABDAIBA=</HashCode>
+      <FileName>Calibration\CalibrationTarget.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Calibration.CalibPupil" Collapsed="true">
+    <Position X="17.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Calibration\Interpolation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Calibration.CalibPolynomial" Collapsed="true">
+    <Position X="19.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABIAAAAAAAkAAAAAAAgAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Calibration\Interpolation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Calibration.Recalibration" Collapsed="true">
+    <Position X="12.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAEAAACAIAQIFEQAACIAAAAAIACAAAEAAICBAAAAA=</HashCode>
+      <FileName>Calibration\Recalibration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Hardware.CameraControl" Collapsed="true">
+    <Position X="7" Y="8.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+      <Compartment Name="Events" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAIEQAhCAAhhAAAAICAEAQIBBAEAAAQBEICEQAICE=</HashCode>
+      <FileName>Camera\CameraControl.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="uc480" />
+      <Property Name="Capture" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Hardware.CameraInfo" Collapsed="true">
+    <Position X="7" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAQAAAAAAAAIAAAAAAAACAA=</HashCode>
+      <FileName>Camera\CameraInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Hardware.CamSizeFPS" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAQAAAAAAEAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Camera\CamSizeFPS.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GazeTrackingLibrary.Hardware.Capture" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7" Y="9.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>lEggkACCBCAAAwBEAAgE2HAWoAAGgQQAAJEIAIhJUAA=</HashCode>
+      <FileName>Camera\Capture.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GazeTrackingLibrary.Hardware.Devices" Collapsed="true">
+    <Position X="7" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>HCAUAAICAAAAAAAAAACAEAAEgEBAABAAQAAAEIAAQAA=</HashCode>
+      <FileName>Camera\Devices.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Cameras" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Detection.BlobAnalysis.Blob" Collapsed="true">
+    <Position X="12.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAQAAAgEAAAAAAIQAAgCAgAJAAACAAAQAAAgE=</HashCode>
+      <FileName>Detection\BlobAnalysis\Blob.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Detection.BlobAnalysis.BlobCounter" Collapsed="true">
+    <Position X="14.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACACAAAAAAQAAAAAAQAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Detection\BlobAnalysis\BlobCounter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Detection.BlobAnalysis.BlobCounterBase" Collapsed="true">
+    <Position X="14.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQCQAABMEGAgJABAYAAAUgACAAAIIBAAAAAREgAAkBA=</HashCode>
+      <FileName>Detection\BlobAnalysis\BlobCounterBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Detection.BlobAnalysis.BlobDetector" Collapsed="true">
+    <Position X="14.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAIAAAACAAAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Detection\BlobAnalysis\BlobDetector.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="blobCounter" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Detection.BlobAnalysis.Blobs" Collapsed="true">
+    <Position X="14.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABBAECACKAAAAECUAAiAAQBAAQAAQAAAAAAAAAAAEA=</HashCode>
+      <FileName>Detection\BlobAnalysis\Blobs.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="blobArray" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Detection.DetectionManager" Collapsed="true">
+    <Position X="14.75" Y="5" Width="1.5" />
+    <AssociationLine Name="eyestracker" Type="GazeTrackingLibrary.Detection.Eyes.EyesTracker" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="16.125" Y="5" />
+        <Point X="16.125" Y="4.75" />
+        <Point X="17.25" Y="4.75" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Eyetracker" Type="GazeTrackingLibrary.Detection.Eye.Eyetracker" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="16.125" Y="5.562" />
+        <Point X="16.125" Y="5.843" />
+        <Point X="17.25" Y="5.843" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="GlintDetectionLeft" Type="GazeTrackingLibrary.Detection.Glint.GlintDetection" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="15.875" Y="5.562" />
+        <Point X="15.875" Y="6.687" />
+        <Point X="17.25" Y="6.687" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="PupilDetectionLeft" Type="GazeTrackingLibrary.Detection.Pupil.PupilDetection" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="15.25" Y="5.562" />
+        <Point X="15.25" Y="6.687" />
+        <Point X="13.75" Y="6.687" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>wAAGAIAAggAEkEAEDAAIAABQAAAAAAEQAAAREADCAIA=</HashCode>
+      <FileName>Detection\DetectionManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="eyestracker" />
+      <Property Name="Eyetracker" />
+      <Property Name="GlintDetectionLeft" />
+      <Property Name="PupilDetectionLeft" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Detection.Eye.Eyetracker" Collapsed="true">
+    <Position X="17.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABIAAQACAAAAAAAAAAIAAAAAEIAABACAAAAAAAAQA=</HashCode>
+      <FileName>Detection\Eye\Eyetracker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Detection.Eyes.EyesTracker" Collapsed="true">
+    <Position X="17.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAYAAIAAgAAAQAEAAAAAAAIAEAACQAAAAAAAAA=</HashCode>
+      <FileName>Detection\Eyes\Eyestracker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Detection.Glint.GlintConfiguration" Collapsed="true">
+    <Position X="17.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEBAAABgQAAAIAAIAAIAAABAABAAA=</HashCode>
+      <FileName>Detection\Glint\GlintBlob.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Blobs" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Detection.Glint.GlintData" Collapsed="true">
+    <Position X="17.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Detection\Glint\GlintData.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Glints" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Detection.Glint.GlintDetection" Collapsed="true">
+    <Position X="17.25" Y="6.5" Width="1.5" />
+    <AssociationLine Name="blobDetector" Type="GazeTrackingLibrary.Detection.BlobAnalysis.BlobDetector" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="17.25" Y="6.875" />
+        <Point X="15.875" Y="6.875" />
+        <Point X="15.875" Y="7.5" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>gMAABAAAQEAAERAEIEQQBgAAAAAABAhAAAAgCAAAJAE=</HashCode>
+      <FileName>Detection\Glint\GlintDetection.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="blobDetector" />
+      <Field Name="glintData" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Detection.Pupil.PupilData" Collapsed="true">
+    <Position X="12.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAEAABAAAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Detection\Pupil\PupilData.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Blob" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Detection.Pupil.PupilDetection" Collapsed="true">
+    <Position X="12.25" Y="6.5" Width="1.5" />
+    <AssociationLine Name="blobDetector" Type="GazeTrackingLibrary.Detection.BlobAnalysis.BlobDetector" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="13.75" Y="6.875" />
+        <Point X="15.239" Y="6.875" />
+        <Point X="15.239" Y="7.5" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AABAAAIAAAAAAQAgAAAQCAAAQAgAAAAAAAACAAAIQAA=</HashCode>
+      <FileName>Detection\Pupil\PupilDetection.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="blobDetector" />
+      <Field Name="pupilData" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GazeTrackingLibrary.EyeMovement.Classifier" Collapsed="true">
+    <Position X="4.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAggABAAgAQABgAAIAAAAAIAACAAQQAAAAAHCBABAQ=</HashCode>
+      <FileName>EyeMovement\Classifier.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GazeTrackingLibrary.EyeMovementDetection.IdentitySmoother" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>EyeMovement\IGazeSmoother.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GazeTrackingLibrary.EyeMovementDetection.AverageWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="1" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAIAAQAAAAAAA=</HashCode>
+      <FileName>EyeMovement\IGazeSmoother.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GazeTrackingLibrary.EyeMovementDetection.ExponentialSmoother" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAQAAAAAAAAAAAAAAAABAAAQABAAEIAAQBAAAAAA=</HashCode>
+      <FileName>EyeMovement\IGazeSmoother.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GazeTrackingLibrary.Logging.ErrorLogger" Collapsed="true">
+    <Position X="22.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIIAQAAADAAAAAIAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Log\ErrorLogger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Logging.Logger" Collapsed="true">
+    <Position X="7" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAEACAEBQAIAAEACCAAAAAAAAIAAIAACgAAAAI=</HashCode>
+      <FileName>Log\Logger.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Server" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Log.Performance" Collapsed="true">
+    <Position X="22.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACABAQAAAAEAAAAAACBAAAAAIAgAAAAAAAA=</HashCode>
+      <FileName>Log\Performance.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Network.UDPServer" Collapsed="true">
+    <Position X="7" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACACBAABCAAwQgAAGEAAAAACAAAAgAAIAEAAACDEAA=</HashCode>
+      <FileName>Network\UDPServer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Settings.AutotuneSettings" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="24.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAQFAAFEQEQAMBAIAAAAAQEgBAAIkBQhDIBEJAQAAA=</HashCode>
+      <FileName>Settings\AutotuneSettings.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GazeTrackingLibrary.Settings.CalibrationSettings" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="24.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>MFaABbEAGCIDAEiAoILgAAaiiFEgAgwQgAQFEpAUQQA=</HashCode>
+      <FileName>Settings\CalibrationSettings.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GazeTrackingLibrary.Settings.CameraSettings" Collapsed="true">
+    <Position X="24.75" Y="4.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>XOAQtUQAEVXOgmIMsBIoATQ0iACEgCJQAFAMmRggANI=</HashCode>
+      <FileName>Settings\CameraSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Settings.EyestrackerSettings" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="24.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAIAgAIAAKABQAgRAEACVABAAEEBAABAA=</HashCode>
+      <FileName>Settings\EyestrackerSettings.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GazeTrackingLibrary.Settings.EyetrackerSettings" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="28" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAgAIAAKABQAgRAEACVABAAEEBAABAA=</HashCode>
+      <FileName>Settings\EyetrackerSettings.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GazeTrackingLibrary.Settings.FileSettings" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="31.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAJAAAAAQAAAAAAAIAAACAQAgAAAAAAAAAAIGBACCAA=</HashCode>
+      <FileName>Settings\FileSettings.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GazeTrackingLibrary.Settings.GTSettings" Collapsed="true">
+    <Position X="28" Y="2.75" Width="1.5" />
+    <AssociationLine Name="Processing" Type="GazeTrackingLibrary.Settings.ProcessingSettings" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="29.188" Y="3.312" />
+        <Point X="29.188" Y="4.89" />
+        <Point X="31.25" Y="4.89" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Eyestracker" Type="GazeTrackingLibrary.Settings.EyestrackerSettings" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="28.5" Y="3.312" />
+        <Point X="28.5" Y="6.031" />
+        <Point X="26.25" Y="6.031" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Eyetracker" Type="GazeTrackingLibrary.Settings.EyetrackerSettings" FixedToPoint="true">
+      <Path>
+        <Point X="28.75" Y="3.312" />
+        <Point X="28.75" Y="6.5" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Camera" Type="GazeTrackingLibrary.Settings.CameraSettings" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="28.312" Y="3.312" />
+        <Point X="28.312" Y="5.101" />
+        <Point X="26.25" Y="5.101" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Calibration" Type="GazeTrackingLibrary.Settings.CalibrationSettings" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="28.125" Y="3.312" />
+        <Point X="28.125" Y="4.031" />
+        <Point X="26.25" Y="4.031" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Network" Type="GazeTrackingLibrary.Settings.NetworkSettings" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="29.375" Y="3.312" />
+        <Point X="29.375" Y="3.89" />
+        <Point X="31.25" Y="3.89" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Visualization" Type="GazeTrackingLibrary.Settings.VisualizationSettings" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="29" Y="3.312" />
+        <Point X="29" Y="6.031" />
+        <Point X="31.25" Y="6.031" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Autotune" Type="GazeTrackingLibrary.Settings.AutotuneSettings" FixedFromPoint="true">
+      <Path>
+        <Point X="28" Y="2.938" />
+        <Point X="26.25" Y="2.938" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAACAYACAQkCGAABBECAAAQCgAACFAAAEAAAGBQCCEE=</HashCode>
+      <FileName>Settings\GTSettings.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Processing" />
+      <Property Name="Eyestracker" />
+      <Property Name="Eyetracker" />
+      <Property Name="Camera" />
+      <Property Name="Calibration" />
+      <Property Name="Network" />
+      <Property Name="Visualization" />
+      <Property Name="Autotune" />
+      <Property Name="FileSettings" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Settings.NetworkSettings" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="31.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAwAgAQAAAAAIAAIAAIAiQAgAAAABgAABCgEDAAAAA=</HashCode>
+      <FileName>Settings\NetworkSettings.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GazeTrackingLibrary.Settings.ProcessingSettings" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="31.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IITEAZoExABSSgIIZQggaISgpAAAJIAUAQCClBAAAAE=</HashCode>
+      <FileName>Settings\ProcessingSettings.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GazeTrackingLibrary.Settings.VisualizationSettings" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="31.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAMYIECAEABQgAABNIAAARQggAFcIAAAXJAAEBCTCCA=</HashCode>
+      <FileName>Settings\VisualizationSettings.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GazeTrackingLibrary.Utils.GTGazeData" Collapsed="true">
+    <Position X="12.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IQggAAAJAAAABIEAAAAAwAAAACCIAAAAAAAAAAAUAAA=</HashCode>
+      <FileName>Utils\GTGazeData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Utils.GTPoint" Collapsed="true">
+    <Position X="19.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAYAUAAAAAAACAAIAAAAAAAAAAYAA=</HashCode>
+      <FileName>Utils\GTPoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Utils.Operations" Collapsed="true">
+    <Position X="19.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAhAAAAAIMAAAAAAAFkgAAABEgAAABAAAEAQ=</HashCode>
+      <FileName>Utils\Operations.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Utils.ScreenParameters" Collapsed="true">
+    <Position X="33.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>KAIgcCAAAAAAAAAAACIgAAAAAAAAAAAAKAAAAAAIAAA=</HashCode>
+      <FileName>Utils\ScreenParameters.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GazeTrackingLibrary.Utils.SystemInfo" Collapsed="true">
+    <Position X="33.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAkAEAgIAAYAAIJQACAAwEAAAAAAAAA=</HashCode>
+      <FileName>Utils\SystemInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GTCommons.GTCommands" Collapsed="true">
+    <Position X="7" Y="4.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="UC480Cam.UC480Control" Collapsed="true">
+    <Position X="4.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Interface Name="GazeTrackingLibrary.Detection.BlobAnalysis.IBlobsFilter" Collapsed="true">
+    <Position X="4.75" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Detection\BlobAnalysis\IBlobsFilter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GazeTrackingLibrary.EyeMovementDetection.IGazeSmoother" Collapsed="true">
+    <Position X="6.5" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>EyeMovement\IGazeSmoother.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="GazeTrackingLibrary.Detection.BlobAnalysis.ObjectsOrder" Collapsed="true">
+    <Position X="15.25" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAgAAAAAAAAAAAgAAAAAAAAAAAAQEAAAA=</HashCode>
+      <FileName>Detection\BlobAnalysis\BlobCounterBase.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GazeTrackingLibrary.Utils.TrackingMethodEnum" Collapsed="true">
+    <Position X="6.5" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAgAAAAQAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utils\PresentationScreen.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GazeTrackingLibrary.Utils.TrackingModeEnum" Collapsed="true">
+    <Position X="8.25" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utils\PresentationScreen.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GazeTrackingLibrary.Utils.Monitor" Collapsed="true">
+    <Position X="13.5" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Utils\PresentationScreen.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GazeTrackingLibrary.Utils.VideoModeEnum" Collapsed="true">
+    <Position X="10" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAAAIAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Utils\PresentationScreen.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GazeTrackingLibrary.Utils.VideoRenderEnum" Collapsed="true">
+    <Position X="11.75" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utils\PresentationScreen.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GazeTrackingLibrary.Utils.IRPlacementEnum" Collapsed="true">
+    <Position X="10" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAgAAAAAAAAAABAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Utils\PresentationScreen.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GazeTrackingLibrary.Utils.EyeEnum" Collapsed="true">
+    <Position X="8.25" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAiAAAAAAAA=</HashCode>
+      <FileName>Utils\PresentationScreen.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GazeTrackingLibrary.Utils.AutotuneCheckLevel" Collapsed="true">
+    <Position X="4.75" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAEACA=</HashCode>
+      <FileName>Utils\PresentationScreen.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GazeTrackingLibrary.Utils.LogLevel" Collapsed="true">
+    <Position X="11.75" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAgAAAAAAAAA=</HashCode>
+      <FileName>Utils\PresentationScreen.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GazeTrackingLibrary.Utils.TrackDBFilter" Collapsed="true">
+    <Position X="4.75" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAYABAAAAARAAIAAAIAAAIAAAAIIAAQAAAAgE=</HashCode>
+      <FileName>Utils\PresentationScreen.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GazeTrackingLibrary.Utils.RecalibrationTypeEnum" Collapsed="true">
+    <Position X="17" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAEAgQA=</HashCode>
+      <FileName>Utils\PresentationScreen.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GazeTrackingLibrary.Utils.CalibrationTypeEnum" Collapsed="true">
+    <Position X="6.5" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAABAAAAAAAAAAAAAAAAAAAAABAAAABA=</HashCode>
+      <FileName>Utils\PresentationScreen.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
