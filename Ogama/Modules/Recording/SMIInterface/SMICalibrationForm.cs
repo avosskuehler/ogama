@@ -16,6 +16,7 @@ namespace Ogama.Modules.Recording.SMIInterface
   using System.Collections.Generic;
   using System.Drawing;
   using System.Windows.Forms;
+  using System;
 
   /// <summary>
   /// This <see cref="Form"/> is used to show calibration points in
@@ -70,7 +71,7 @@ namespace Ogama.Modules.Recording.SMIInterface
     public SMICalibrationForm()
     {
       this.InitializeComponent();
-      this.currentPointLocation = Point.Empty;
+      this.currentPointLocation = new Point(100, 100);
       this.calibrationPoints = new List<Point>();
       this.usedPointSize = 20;
     }
@@ -150,6 +151,7 @@ namespace Ogama.Modules.Recording.SMIInterface
       {
         this.currentPointLocation = this.calibrationPoints[calibrationPointIndex - 1];
         this.Invalidate();
+        Console.WriteLine("ShowCalibrationPoint, currentPointLocation:" + currentPointLocation);
       }
     }
 

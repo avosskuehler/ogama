@@ -205,6 +205,7 @@ namespace Ogama.Modules.Recording.SMIInterface
       {
         this.udpClient.Connect(this.smiSettings.SMIServerAddress, this.smiSettings.SMIServerPort);
         this.Configure();
+        
       }
       catch (Exception ex)
       {
@@ -219,7 +220,7 @@ namespace Ogama.Modules.Recording.SMIInterface
     {
       try
       {
-        this.udpClient.Close();
+        this.udpClient.Close();        
       }
       catch (Exception ex)
       {
@@ -271,6 +272,7 @@ namespace Ogama.Modules.Recording.SMIInterface
     /// </summary>
     public void StopTracking()
     {
+
       this.SendString("ET_EST");
 
       if (this.listenThread.IsAlive)
@@ -280,6 +282,7 @@ namespace Ogama.Modules.Recording.SMIInterface
 
       this.stopListenThread = true;
       this.isTracking = false;
+      
     }
 
     /// <summary>
@@ -300,18 +303,19 @@ namespace Ogama.Modules.Recording.SMIInterface
       {
         this.Connect();
       }
-
+      
       // Get presentation size
       Size presentationSize = PresentationScreen.GetPresentationResolution();
 
       // Set calibration area size
       this.SendString("ET_CSZ " + presentationSize.Width.ToString() + " " + presentationSize.Height.ToString());
 
+
       // Set calibration points
       int fivePercentX = (int)(0.05f * presentationSize.Width);
       int fivePercentY = (int)(0.05f * presentationSize.Height);
       int xHalf = presentationSize.Width / 2;
-      int yHalf = presentationSize.Width / 2;
+      int yHalf = presentationSize.Height / 2;//was Width
       Point topLeft = new Point(fivePercentX, fivePercentY);
       Point topMiddle = new Point(xHalf, fivePercentY);
       Point topRight = new Point(presentationSize.Width - fivePercentX, fivePercentY);
@@ -342,9 +346,14 @@ namespace Ogama.Modules.Recording.SMIInterface
       this.newCalibrationForm.CalibPointColor = this.smiSettings.CalibPointColor;
       this.newCalibrationForm.CalibPointSize = this.smiSettings.CalibPointSize;
       this.newCalibrationForm.BackColor = this.smiSettings.CalibBackgroundColor;
-      PresentationScreen.PutFormOnPresentationScreen(this.newCalibrationForm, true);
-      this.newCalibrationForm.Show();
+      this.newCalibrationForm.Width = presentationSize.Width;
+      this.newCalibrationForm.Height = presentationSize.Height;
       this.newCalibrationForm.CalibrationPoints = calibrationPoints;
+
+      
+      PresentationScreen.PutFormOnPresentationScreen(this.newCalibrationForm, true);
+      
+      this.newCalibrationForm.Show();
 
       // Starts calibration.
       this.SendString("ET_CAL 9");
@@ -454,14 +463,21 @@ namespace Ogama.Modules.Recording.SMIInterface
         {
           break;
         }
-
-        // Blocks until a message returns on this socket from a remote host.
-        byte[] receiveBytes = this.udpClient.Receive(ref remoteIpEndPoint);
-        string returnData = Encoding.ASCII.GetString(receiveBytes);
-        if (returnData.Length > 0)
+        try
         {
-          this.NewBytesReceived(returnData);
+          // Blocks until a message returns on this socket from a remote host.
+          byte[] receiveBytes = this.udpClient.Receive(ref remoteIpEndPoint);
+          string returnData = Encoding.ASCII.GetString(receiveBytes);
+          if (returnData.Length > 0)
+          {
+            this.NewBytesReceived(returnData);
+          }
         }
+        catch (Exception ex)
+        {
+          ExceptionMethods.HandleExceptionSilent(ex);
+        }
+
       }
     }
 
@@ -552,7 +568,14 @@ namespace Ogama.Modules.Recording.SMIInterface
       char[] seperator = { ' ' };
       string[] tmp = dataStr.Split(seperator);
       string availableEye = tmp[1];
-      this.lastTime = Convert.ToInt64(tmp[2]);
+      try
+      {
+          this.lastTime = Convert.ToInt64(tmp[2]);
+      }
+      catch (System.Exception)
+      {
+
+      }
       switch (availableEye)
       {
         case "b":
@@ -589,7 +612,8 @@ namespace Ogama.Modules.Recording.SMIInterface
           data.GazePosY = Convert.ToSingle(tmp[6]) / this.presentationScreenSize.Height;
           break;
       }
-
+     
+      
       data.Time = this.lastTime;
       return data;
     }

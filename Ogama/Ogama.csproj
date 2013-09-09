@@ -352,6 +352,12 @@
     <Compile Include="Modules\Common\Types\SampleValidity.cs" />
     <Compile Include="Modules\Common\Types\StringEnum.cs" />
     <Compile Include="Modules\Common\Types\StringValueAttribute.cs" />
+    <Compile Include="Modules\Database\ModifyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Database\ModifyForm.Designer.cs">
+      <DependentUpon>ModifyForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Fixations\Fixation.cs" />
     <Compile Include="Modules\Fixations\FixationCalculation.cs" />
     <Compile Include="Modules\Fixations\ExportOptionsDialog.cs">
@@ -1104,6 +1110,9 @@
     <EmbeddedResource Include="Modules\Common\Controls\HelpDialog.resx">
       <DependentUpon>HelpDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Database\ModifyForm.resx">
+      <DependentUpon>ModifyForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Fixations\ExportOptionsDialog.resx">
       <DependentUpon>ExportOptionsDialog.cs</DependentUpon>
