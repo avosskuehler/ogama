@@ -142,13 +142,8 @@ namespace Ogama.Modules.ImportExport.OgamaData
           // Generate the import tables
           GenerateSubjectTrialRawdataList();
 
-          bool succesful = true;
-
           // Save the import into ogamas database and the mdf file.
-          if (!SaveImportIntoTablesAndDB())
-          {
-            succesful = false;
-          }
+          var succesful = SaveImportIntoTablesAndDB();
 
           // Import has finished.
           asciiSettings.WaitingSplash.CancelAsync();

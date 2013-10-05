@@ -116,6 +116,12 @@
     <Compile Include="Canvas\PictureModifiable.Designer.cs">
       <DependentUpon>PictureModifiable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TransparentControls\TransparentUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TransparentControls\TransparentUserControl.Designer.cs">
+      <DependentUpon>TransparentUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Elements\VGScrollImage.cs" />
     <Compile Include="Elements\VGBrowser.cs" />
     <Compile Include="Elements\VGAlignment.cs" />
@@ -271,6 +277,9 @@
   <ItemGroup>
     <None Include="Resources\RecordingBackground.png" />
     <None Include="Properties\VectorGraphicsKey.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\TransparentControls\TransparentUserControl.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!--
