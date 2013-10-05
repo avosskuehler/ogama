@@ -1,18 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 
-namespace OgamaControls
+namespace VectorGraphics.Controls
 {
   /// <summary>
   /// A <see cref="UserControl"/> which has a real transparent background.
   /// It works for all windows forms components, but not for ActiveX containers in the background.
   /// </summary>
-  [ToolboxBitmap(typeof(resfinder), "OgamaControls.CommonControls.TransparentControls.TransparentUserControl.bmp")]
   public partial class TransparentUserControl : UserControl
 	{
     /// <summary>
@@ -26,6 +19,11 @@ namespace OgamaControls
       this.DoubleBuffered = true;
 			InitializeComponent();
 		}
+
+    protected override void OnPaintBackground(PaintEventArgs pevent)
+    {
+      //do not allow the background to be painted  
+    } 
 
     /// <summary>
     /// Overridden. Adds the WS_TRANSPARENT style.

@@ -1,4 +1,4 @@
-namespace OgamaControls
+namespace VectorGraphics.Controls
 {
 	partial class TransparentUserControl
 	{

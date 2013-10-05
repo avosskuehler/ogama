@@ -297,12 +297,6 @@
     <Compile Include="CommonControls\Styles\PenSelectControl.Designer.cs">
       <DependentUpon>PenSelectControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="CommonControls\TransparentControls\TransparentUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="CommonControls\TransparentControls\TransparentUserControl.Designer.cs">
-      <DependentUpon>TransparentUserControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="DataGridViewControls\DataGridViewImageButton\DataGridViewImageButtonCell.cs" />
     <Compile Include="DataGridViewControls\DataGridViewImageButton\DataGridViewImageButtonColumn.cs">
     </Compile>
@@ -647,7 +641,6 @@
     <EmbeddedResource Include="Dialogs\PenStyleDlg.bmp" />
     <EmbeddedResource Include="CommonControls\Buttons\PositionButton\PositionButton.bmp" />
     <EmbeddedResource Include="CommonControls\Buttons\PositionButton\PositionDropdown.bmp" />
-    <EmbeddedResource Include="CommonControls\TransparentControls\TransparentUserControl.bmp" />
     <EmbeddedResource Include="Media\WebCam\WebcamPropertiesDlg.resx">
       <DependentUpon>WebcamPropertiesDlg.cs</DependentUpon>
       <SubType>Designer</SubType>

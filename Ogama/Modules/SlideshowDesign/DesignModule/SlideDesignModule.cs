@@ -281,10 +281,10 @@ namespace Ogama.Modules.SlideshowDesign.DesignModule
 
       this.rtbInstructions.BackColor = this.btnBackgroundColor.CurrentColor;
 
-      this.nudLayoutLeft.Maximum = Document.ActiveDocument.PresentationSize.Width * 2;
-      this.nudLayoutTop.Maximum = Document.ActiveDocument.PresentationSize.Height * 2;
-      this.nudLayoutWidth.Maximum = Document.ActiveDocument.PresentationSize.Width * 2;
-      this.nudLayoutHeight.Maximum = Document.ActiveDocument.PresentationSize.Height * 2;
+      this.nudLayoutLeft.Maximum = Document.ActiveDocument.PresentationSize.Width * 5;
+      this.nudLayoutTop.Maximum = Document.ActiveDocument.PresentationSize.Height * 5;
+      this.nudLayoutWidth.Maximum = Document.ActiveDocument.PresentationSize.Width * 5;
+      this.nudLayoutHeight.Maximum = Document.ActiveDocument.PresentationSize.Height * 5;
 
       foreach (Slide slide in Document.ActiveDocument.ExperimentSettings.SlideShow.Slides)
       {
