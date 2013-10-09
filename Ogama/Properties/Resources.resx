@@ -319,7 +319,10 @@
   <data name="MirametrixLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MirametrixLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="UserVideo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="GazepointLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GazepointLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data> 
+ <data name="UserVideo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\UserVideo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Line" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -709,6 +712,9 @@
   <data name="Mirametrix_S2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Mirametrix_S2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Gazepoint_GP3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Gazepoint_GP3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="DiceLeftPart" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DiceLeftPart.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -771,6 +777,9 @@
   </data>
   <data name="MirametrixLogo_150_33" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MirametrixLogo_150_33.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GazepointLogo_150_33" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GazepointLogo_150_33.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="OrgChartHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\OrgChartHS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

@@ -1,4 +1,4 @@
-// <copyright file="SelectTracker.cs" company="FU Berlin">
+﻿// <copyright file="SelectTracker.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
 // Copyright (C) 2013 Dr. Adrian Voßkühler  
@@ -23,6 +23,7 @@ namespace Ogama.Modules.Recording.Dialogs
   using Ogama.Modules.Recording.EyeTechInterface;
   using Ogama.Modules.Recording.GazegroupInterface;
   using Ogama.Modules.Recording.MirametrixInterface;
+  using Ogama.Modules.Recording.GazepointInterface;
   using Ogama.Modules.Recording.TobiiInterface;
   using Ogama.Modules.Recording.TrackerBase;
 
@@ -121,6 +122,11 @@ namespace Ogama.Modules.Recording.Dialogs
           returnValue |= HardwareTracker.Mirametrix;
         }
 
+        if (this.chbGazepoint.Checked)
+        {
+          returnValue |= HardwareTracker.Gazepoint;
+        }
+
         if (this.chbEyeTech.Checked)
         {
           returnValue |= HardwareTracker.EyeTech;
@@ -211,6 +217,17 @@ namespace Ogama.Modules.Recording.Dialogs
     }
 
     /// <summary>
+    /// The event handler for the User clicked the gazepoint logo, so open mirametrix website
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void PcbGazepointClick(object sender, EventArgs e)
+    {
+      System.Diagnostics.Process.Start("http://www.gazept.com");
+    }
+
+
+    /// <summary>
     /// The <see cref="Control.Click"/> event handler for
     /// the <see cref="PictureBox"/> <see cref="pcbAlea"/>.
     /// User clicked the alea logo,
@@ -272,6 +289,18 @@ namespace Ogama.Modules.Recording.Dialogs
       var objActivateMirametrix = new HowToActivateMirametrix();
       objActivateMirametrix.ShowDialog();
     }
+
+    /// <summary>
+    /// The event handler for the User clicked the gazepoint help
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void PcbHelpGazepointClick(object sender, EventArgs e)
+    {
+      var objActivateGazepoint = new HowToActivateGazepoint();
+      objActivateGazepoint.ShowDialog();
+    }
+
 
     /// <summary>
     /// The <see cref="Control.Click"/> event handler for
@@ -388,6 +417,7 @@ namespace Ogama.Modules.Recording.Dialogs
       this.UpdateTobiiStatus();
       this.UpdateASLStatus();
       this.UpdateMirametrixStatus();
+      this.UpdateGazepointStatus();
       this.UpdateEyeTechStatus();
     }
 
@@ -434,6 +464,28 @@ namespace Ogama.Modules.Recording.Dialogs
         this.chbMirametrix.Text = "Mirametrix S2 installed on this computer ! \n" + error;
       }
     }
+    /// <summary>
+    /// Updates the status of the Gazepoint tracking devices
+    /// </summary>
+   
+    private void UpdateGazepointStatus()
+    {
+        string error;
+        if (!GazepointTracker.IsAvailable(out error))
+        {
+            this.chbGazepoint.Text = "Gazepoint GP3 eye tracker. Need to have Gazepoint S2 installed on this computer ! \n" + error;
+            this.chbGazepoint.Enabled = false;
+            this.chbGazepoint.Checked = false;
+            this.pcbGazepoint.Enabled = false;
+        }
+        else
+        {
+            this.chbGazepoint.Enabled = true;
+            this.pcbGazepoint.Enabled = true;
+            this.chbGazepoint.Text = "Gazepoint GP3 installed on this computer ! \n" + error;
+        }
+    }
+
 
     /// <summary>
     /// Updates the status of the Eyetech tracking devices
@@ -530,6 +582,11 @@ namespace Ogama.Modules.Recording.Dialogs
     }
 
     #endregion //METHODS
+
+    private void chbGazepoint_CheckedChanged(object sender, EventArgs e)
+    {
+
+    }
 
     ///////////////////////////////////////////////////////////////////////////////
     // Small helping Methods                                                     //

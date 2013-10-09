@@ -245,6 +245,12 @@
     <Compile Include="MainWindow\Dialogs\HowToActivateMirametrix.Designer.cs">
       <DependentUpon>HowToActivateMirametrix.cs</DependentUpon>
     </Compile>
+    <Compile Include="MainWindow\Dialogs\HowToActivateGazepoint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\HowToActivateGazepoint.Designer.cs">
+      <DependentUpon>HowToActivateGazepoint.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow\Dialogs\HowToActivateSMI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -424,6 +430,27 @@
     </Compile>
     <Compile Include="Modules\Recording\MirametrixInterface\MirametrixTrackStatusControl.Designer.cs">
       <DependentUpon>MirametrixTrackStatusControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\GazepointInterface\ClientNetworkManager.cs" />
+    <Compile Include="Modules\Recording\GazepointInterface\GazepointSetting.cs" />
+    <Compile Include="Modules\Recording\GazepointInterface\GazepointSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\GazepointInterface\GazepointSettingsDialog.Designer.cs">
+      <DependentUpon>GazepointSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\GazepointInterface\GazepointTracker.cs" />
+    <Compile Include="Modules\Recording\GazepointInterface\GazepointTrackStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\GazepointInterface\GazepointTrackStatus.Designer.cs">
+      <DependentUpon>GazepointTrackStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\GazepointInterface\GazepointTrackStatusControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\GazepointInterface\GazepointTrackStatusControl.Designer.cs">
+      <DependentUpon>GazepointTrackStatusControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Recording\Presenter\MessageHook.cs" />
     <Compile Include="Modules\Recording\Presenter\WebsiteScreenshot.cs" />
@@ -1061,6 +1088,9 @@
     <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateMirametrix.resx">
       <DependentUpon>HowToActivateMirametrix.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateGazepoint.resx">
+      <DependentUpon>HowToActivateGazepoint.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateSMI.resx">
       <DependentUpon>HowToActivateSMI.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1153,6 +1183,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\MirametrixInterface\MirametrixTrackStatusControl.resx">
       <DependentUpon>MirametrixTrackStatusControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\GazepointInterface\GazepointSettingsDialog.resx">
+      <DependentUpon>GazepointSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\GazepointInterface\GazepointTrackStatus.resx">
+      <DependentUpon>GazepointTrackStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\GazepointInterface\GazepointTrackStatusControl.resx">
+      <DependentUpon>GazepointTrackStatusControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\RecordingPicture.resx">
       <DependentUpon>RecordingPicture.cs</DependentUpon>
@@ -1645,6 +1684,10 @@
     <Content Include="Resources\MirametrixLogo_150_33.png" />
     <Content Include="Resources\Mirametrix_S2.png" />
     <Content Include="Resources\Mirametrix_S2_16_8.png" />
+    <Content Include="Resources\GazepointLogo.png" />
+    <Content Include="Resources\GazepointLogo_150_33.png" />
+    <Content Include="Resources\Gazepoint_GP3.png" />
+    <Content Include="Resources\Gazepoint_GP3_16_8.png" />
     <Content Include="SaliencyCalculation\cygblas.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
