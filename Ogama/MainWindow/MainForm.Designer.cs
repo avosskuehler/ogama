@@ -127,6 +127,8 @@ namespace Ogama.MainWindow
             this.btnSTA = new System.Windows.Forms.ToolStripButton();
             this.btnAOI = new System.Windows.Forms.ToolStripButton();
             this.mnuHelpHowToMirametrix = new System.Windows.Forms.ToolStripMenuItem();
+     	    this.mnuHelpHowToGazepoint = new System.Windows.Forms.ToolStripMenuItem();
+       
             this.mnsMain.SuspendLayout();
             this.stsMain.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -651,6 +653,7 @@ namespace Ogama.MainWindow
             this.mnuHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuHelpSource,
             this.mnuHelpHowToTobii,
+            this.mnuHelpHowToGazepoint,
             this.mnuHelpHowToMirametrix,
             this.mnuHelpHowToAlea,
             this.mnuHelpHowToAsl,
@@ -991,7 +994,17 @@ namespace Ogama.MainWindow
             this.mnuHelpHowToMirametrix.Size = new System.Drawing.Size(307, 22);
             this.mnuHelpHowToMirametrix.Text = "HowTo: Install Mirametrix S2 Recording ...";
             this.mnuHelpHowToMirametrix.Click += new System.EventHandler(this.mnuHelpHowToMirametrix_Click);
+            //
+// 
+            // mnuHelpHowToGazepoint
             // 
+            this.mnuHelpHowToGazepoint.Image = global::Ogama.Properties.Resources.Gazepoint_GP3;
+            this.mnuHelpHowToGazepoint.Name = "mnuHelpHowToGazepoint";
+            this.mnuHelpHowToGazepoint.Size = new System.Drawing.Size(307, 22);
+            this.mnuHelpHowToGazepoint.Text = "HowTo: Install Gazepoint GP3 Recording ...";
+            this.mnuHelpHowToGazepoint.Click += new System.EventHandler(this.mnuHelpHowToGazepoint_Click);
+            // 
+             
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1121,6 +1134,7 @@ namespace Ogama.MainWindow
       private System.Windows.Forms.ToolStripMenuItem mnuHelpHowToITU;
       private System.Windows.Forms.ToolStripMenuItem mnuHelpHowToAsl;
       private System.Windows.Forms.ToolStripMenuItem mnuHelpHowToMirametrix;
+      private System.Windows.Forms.ToolStripMenuItem mnuHelpHowToGazepoint;
     }
 }
 

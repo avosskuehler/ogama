@@ -1,4 +1,4 @@
-// <copyright file="HardwareTracker.cs" company="FU Berlin">
+﻿// <copyright file="HardwareTracker.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
 // Copyright (C) 2013 Dr. Adrian Voßkühler  
@@ -72,5 +72,9 @@ namespace Ogama.Modules.Recording.TrackerBase
     /// </summary>
     EyeTech = 256,
 
+    /// <summary>
+    /// The Gazepoint GP3 using open-gaze API
+    /// </summary>
+    Gazepoint = 512,
   }
 }

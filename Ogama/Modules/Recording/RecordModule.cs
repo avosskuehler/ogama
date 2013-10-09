@@ -42,6 +42,7 @@ namespace Ogama.Modules.Recording
   using Ogama.Modules.Recording.EyeTechInterface;
   using Ogama.Modules.Recording.GazegroupInterface;
   using Ogama.Modules.Recording.MirametrixInterface;
+  using Ogama.Modules.Recording.GazepointInterface;
   using Ogama.Modules.Recording.MouseOnlyInterface;
   using Ogama.Modules.Recording.Presenter;
   using Ogama.Modules.Recording.SMIInterface;
@@ -1700,6 +1701,7 @@ namespace Ogama.Modules.Recording
       // Reset tab control
       this.tclEyetracker.TabPages.Clear();
       this.tclEyetracker.TabPages.Add(this.tbpMirametrix);
+      this.tclEyetracker.TabPages.Add(this.tbpGazepoint);
       this.tclEyetracker.TabPages.Add(this.tbpTobii);
       this.tclEyetracker.TabPages.Add(this.tbpAlea);
       this.tclEyetracker.TabPages.Add(this.tbpSMI);
@@ -1827,6 +1829,34 @@ namespace Ogama.Modules.Recording
         {
           this.tclEyetracker.TabPages.Remove(this.tbpMirametrix);
         }
+      }
+      if (tracker == (tracker | HardwareTracker.Gazepoint))
+      {
+          // Create Gazepoint tracker
+          var newGazepoint = new GazepointTracker(
+              ref this.labelCalibrationResultGazepoint,
+              this.tbpGazepoint,
+              this,
+              this.spcGazepointControls,
+              this.spcGazepointTrackStatus.Panel1,
+              this.spcGazepointCalibPlot.Panel1,
+              this.btnGazepointShowOnPresentationScreen,
+              this.btnGazepointAcceptCalibration,
+              this.btnGazepointRecalibrate,
+              this.btnGazepointConnect,
+              this.btnGazepointSubjectName,
+              this.btnGazepointCalibrate,
+              this.btnGazepointRecord,
+              this.txbGazepointSubjectName);
+
+          this.trackerInterfaces.Add(HardwareTracker.Gazepoint, newGazepoint);
+      }
+      else
+      {
+          if (this.tclEyetracker.TabPages.Contains(this.tbpGazepoint))
+          {
+              this.tclEyetracker.TabPages.Remove(this.tbpGazepoint);
+          }
       }
 
       if (tracker == (tracker | HardwareTracker.EyeTech))
@@ -2388,6 +2418,13 @@ namespace Ogama.Modules.Recording
           if (this.trackerInterfaces.ContainsKey(HardwareTracker.Mirametrix))
           {
             this.currentTracker = this.trackerInterfaces[HardwareTracker.Mirametrix];
+          }
+
+          break;
+        case "tbpGazepoint":
+          if (this.trackerInterfaces.ContainsKey(HardwareTracker.Gazepoint))
+          {
+              this.currentTracker = this.trackerInterfaces[HardwareTracker.Gazepoint];
           }
 
           break;

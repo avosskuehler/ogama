@@ -918,7 +918,29 @@ namespace Ogama.Properties {
             }
         }
         
-        internal static System.Drawing.Icon MixedMedia {
+       internal static System.Drawing.Bitmap Gazepoint_GP3 {
+            get {
+                object obj = ResourceManager.GetObject("Gazepoint_GP3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap GazepointLogo {
+            get {
+                object obj = ResourceManager.GetObject("GazepointLogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap GazepointLogo_150_33 {
+            get {
+                object obj = ResourceManager.GetObject("GazepointLogo_150_33", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+  
+       internal static System.Drawing.Icon MixedMedia {
             get {
                 object obj = ResourceManager.GetObject("MixedMedia", resourceCulture);
                 return ((System.Drawing.Icon)(obj));

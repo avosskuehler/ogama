@@ -1027,6 +1027,18 @@ namespace Ogama.MainWindow
 
     /// <summary>
     /// The <see cref="Control.Click"/> event handler
+    /// for the <see cref="ToolStripMenuItem"/> <see cref="mnuHelpHowToGazepoint"/>
+    /// Displays instructions to activate mirametrix recording.
+    /// </summary>
+    /// <param name="sender">Source of the event</param>
+    /// <param name="e">An empty</param>
+    private void mnuHelpHowToGazepoint_Click(object sender, EventArgs e)
+    {
+        HowToActivateGazepoint objActivateGazepoint = new HowToActivateGazepoint();
+        objActivateGazepoint.ShowDialog();
+    }
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler
     /// for the <see cref="ToolStripMenuItem"/> <see cref="mnuHelpHowToAsl"/>
     /// Displays instructions to activate ASL recording.
     /// </summary>
