@@ -1,7 +1,7 @@
 ﻿// <copyright file="PresenterModule.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2013 Dr. Adrian Voßkühler  
+// Copyright (C) 2012 Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -41,7 +41,6 @@ namespace Ogama.Modules.Recording.Presenter
   using VectorGraphics.StopConditions;
   using VectorGraphics.Tools;
   using VectorGraphics.Tools.Trigger;
-  using System.Runtime.CompilerServices;
 
   /// <summary>
   /// A <see cref="Form"/> that is used for stimuli presentation. 
@@ -257,12 +256,6 @@ namespace Ogama.Modules.Recording.Presenter
     /// web browsing to prevent sending double scroll trial events with same data.
     /// </summary>
     private Point lastScrollEventPosition;
-
-    /// <summary>
-    /// Lock for parallel file access used in WebBrowser_Navigating.
-    /// 
-    /// </summary>
-    private Object WebBrowser_Navigating_Lock = new Object();
 
     #endregion //FIELDS
 
@@ -914,7 +907,7 @@ namespace Ogama.Modules.Recording.Presenter
     }
 
     /// <summary>
-    /// The Scroll event handler of the web document in which the scroll
+    /// The Scroll event handler of the web Document in which the scroll
     /// position is sent to the recorder as a trial event.
     /// </summary>
     /// <param name="sender">Source of the event.</param>
@@ -1036,7 +1029,7 @@ namespace Ogama.Modules.Recording.Presenter
       // Get WebBrowser object
       WebBrowser browser = sender as WebBrowser;
 
-      // Reattach scroll and mouse down events for each document even in frames
+      // Reattach scroll and mouse down events for each Document even in frames
       // otherwise we will not receive mouse down event on subframes.
       browser.Document.Window.Scroll -= new HtmlElementEventHandler(this.WebBrowser_Scroll);
       browser.Document.Window.Scroll += new HtmlElementEventHandler(this.WebBrowser_Scroll);
@@ -1057,15 +1050,15 @@ namespace Ogama.Modules.Recording.Presenter
       e.Cancel = true;
     }
 
+    private Object WebBrowser_Navigating_Lock = new Object();
+
     /// <summary>
     /// The <see cref="WebBrowser.Navigating"/> event handler which reactivates the
     /// scroll event subscribtion and updates the slideshow with the new trial along
-    /// making a new screenshot of the new document if this site has never been visited before.
+    /// making a new screenshot of the new Document if this site has never been visited before.
     /// </summary>
     /// <param name="sender">Source of the event</param>
     /// <param name="e">A <see cref="WebBrowserNavigatingEventArgs"/> with the event data</param>
-    
-    [MethodImpl(MethodImplOptions.Synchronized)]
     private void WebBrowser_Navigating(object sender, WebBrowserNavigatingEventArgs e)
     {
       try
@@ -1191,7 +1184,7 @@ namespace Ogama.Modules.Recording.Presenter
           this.shownSlideContainer.Slide = newWebpageSlide;
 
           // Update screenshot parallel world triggering
-          // a screenshot on document completed event using
+          // a screenshot on Document completed event using
           // the filename stated above
           // This forces multiple screenshot on webpages with frames
           // but because using only the first url for the filename
@@ -1203,7 +1196,7 @@ namespace Ogama.Modules.Recording.Presenter
       }
       catch (Exception ex)
       {
-        ExceptionMethods.HandleExceptionSilent(ex);
+        ExceptionMethods.HandleException(ex);
       }
     }
 
@@ -1350,7 +1343,7 @@ namespace Ogama.Modules.Recording.Presenter
 
     /// <summary>
     /// This method iterates recursively through the <see cref="HtmlWindowCollection"/>
-    /// of a webbrowser document to attach the mouse down event for all
+    /// of a webbrowser Document to attach the mouse down event for all
     /// frames, if there are multiple.
     /// </summary>
     /// <param name="htmlWindows">The first <see cref="HtmlWindowCollection"/>
