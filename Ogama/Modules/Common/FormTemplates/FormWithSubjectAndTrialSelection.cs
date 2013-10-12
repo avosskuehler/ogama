@@ -188,7 +188,7 @@ namespace Ogama.Modules.Common.FormTemplates
     }
 
     /// <summary>
-    /// Initializes data bindings. Mainly wires the assigned Document dataset to the binding
+    /// Initializes data bindings. Mainly wires the assigned document dataset to the binding
     /// sources.
     /// </summary>
     protected override void InitializeDataBindings()

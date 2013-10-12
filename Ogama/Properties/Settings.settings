@@ -263,7 +263,7 @@
       <Value Profile="(Default)">3, 0</Value>
     </Setting>
     <Setting Name="RPLTrialToolbarLocation" Type="System.Drawing.Point" Scope="User">
-      <Value Profile="(Default)">90, 0</Value>
+      <Value Profile="(Default)">0, 0</Value>
     </Setting>
     <Setting Name="RPLGazeToolbarLocation" Type="System.Drawing.Point" Scope="User">
       <Value Profile="(Default)">0, 27</Value>
