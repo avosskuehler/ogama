@@ -1189,10 +1189,10 @@ namespace Ogama.Modules.Database
           return;
         }
 
-        ModifyForm form = new ModifyForm();
+        /*ModifyForm form = new ModifyForm();
         form.databaseModule = this;
         form.ShowDialog();
-
+        */
       }
       catch (Exception error)
       {
