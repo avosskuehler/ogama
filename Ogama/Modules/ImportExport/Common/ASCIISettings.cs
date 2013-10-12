@@ -82,12 +82,6 @@ namespace Ogama.Modules.ImportExport.Common
     private bool ignoreSmallLines;
 
     /// <summary>
-    /// Flag. True, if import should ignore line,
-    /// with 2nd consecutive timestamp.    
-    /// </summary>
-    private bool ignoreDoubles;
-
-    /// <summary>
     /// Flag. True, if import should ignore lines,
     /// that don´t start with a numeral
     /// </summary>
@@ -138,8 +132,6 @@ namespace Ogama.Modules.ImportExport.Common
     /// </summary>
     private bool columnTitlesAtFirstRow;
 
-
-
     /// <summary>
     /// Saves the time value of the very first raw data value.
     /// </summary>
@@ -182,12 +174,10 @@ namespace Ogama.Modules.ImportExport.Common
       this.ignoreQuotationString = "#";
       this.ignoreTriggerStringLines = true;
       this.ignoreTriggerString = "Keyboard";
-      this.ignoreDoubles = false;
       this.columnTitlesAtFirstRow = true;
-      this.columnTitlesAtPreviousRow = false;
       this.columnAssignments = new XMLSerializableDictionary<string, string>();
       this.useQuotes = false;
-      this.useQuotationString = "EFIX";      
+      this.useQuotationString = "EFIX";
       this.startTime = 0;
     }
 
@@ -397,34 +387,6 @@ namespace Ogama.Modules.ImportExport.Common
     }
 
     /// <summary>
-    /// Gets or sets a value indicating whether 
-    /// column titles are in the first data row that is read.
-    /// </summary>
-    /// <value>A <see cref="Boolean"/> that is <strong>true</strong>,
-    /// if column titles are above the first data row,
-    /// otherwise <strong>false</strong>.</value>
-    public bool ColumnTitlesAtPreviousRow 
-    {
-      get { return this.columnTitlesAtPreviousRow; }
-      set { this.columnTitlesAtPreviousRow = value; }
-    }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether 
-    /// double timestamps should be used during import.
-    /// </summary>
-    /// <value>A <see cref="Boolean"/> that is <strong>true</strong>,
-    /// if import should only use lines, with a double timestamp
-    /// otherwise <strong>false</strong>.</value>
-    public bool IgnoreDoubles
-    {
-        get { return this.ignoreDoubles; }
-        set { this.ignoreDoubles = value; }
-    }
-
-   
-
-    /// <summary>
     /// Gets or sets the time value of the very first raw data value.
     /// </summary>
     /// <value>An <see cref="Int64"/> with the starting time of the experiment.</value>
@@ -489,43 +451,13 @@ namespace Ogama.Modules.ImportExport.Common
       {
         using (StreamReader importReader = new StreamReader(importFile))
         {
-            processContent(numberOfImportLines, columnHeaders, fileRows, ref counter, ref columncount, importReader);
-        }
-      }
-      catch (Exception ex)
-      {
-        ExceptionMethods.HandleException(ex);
-      }
-
-      return fileRows;
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="numberOfImportLines"></param>
-    /// <param name="columnHeaders"></param>
-    /// <param name="fileRows"></param>
-    /// <param name="counter"></param>
-    /// <param name="columncount"></param>
-    /// <param name="importReader"></param>
-    public void processContent(int numberOfImportLines, 
-        List<string> columnHeaders, 
-        List<string[]> fileRows, 
-        ref int counter, 
-        ref int columncount, 
-        StreamReader importReader)
-    {
-        string line = String.Empty;
-        string lastLine = String.Empty;
-        // Read ImportFile
-        while ((line = importReader.ReadLine()) != null)
-        {
+          // Read ImportFile
+          while ((line = importReader.ReadLine()) != null)
+          {
             // ignore empty lines
             if (line.Trim() == string.Empty)
             {
-                lastLine = line;
-                continue;
+              continue;
             }
 
             // Ignore Quotes if applicable
@@ -533,8 +465,7 @@ namespace Ogama.Modules.ImportExport.Common
               line.Trim().Substring(0, this.IgnoreQuotationString.Length) ==
               this.IgnoreQuotationString)
             {
-                lastLine = line; 
-                continue;
+              continue;
             }
 
             // Ignore lines that do not have the "use only" quotation
@@ -542,63 +473,48 @@ namespace Ogama.Modules.ImportExport.Common
             if (this.UseQuotes &&
               !line.Contains(this.UseQuotationString))
             {
-                lastLine = line; 
-                continue;
+              continue;
             }
 
             // ignore lines with ignore trigger
             if (this.IgnoreTriggerStringLines &&
               line.Contains(this.IgnoreTriggerString))
             {
-                lastLine = line; 
-                continue;
+              continue;
             }
 
             // Split Tab separated line items
             string[] items = line.Split(this.ColumnSeparatorCharacter);
-           
 
             // Use only numeric starting lines if applicable
             if (this.IgnoreNotNumeralLines && !IOHelpers.IsNumeric(line[0]))
             {
-                lastLine = line; 
-                continue;
+              continue;
             }
 
             // Skip small lines if applicable
             if (this.IgnoreSmallLines && columncount != items.Length)
             {
-                continue;
+              continue;
             }
 
             if (counter == 0)
             {
-                columncount = items.Length;
+              columncount = items.Length;
 
-                // Fill column header list
-                for (int i = 0; i < items.Length; i++)
-                {
-                    string headerText = this.ColumnTitlesAtFirstRow ? items[i].Replace(' ', '-') : "Column" + i.ToString();
-                    columnHeaders.Add(headerText);
-
-                }
-
-              handleColumnTitlesAtPreviousRow(columnHeaders, lastLine);
-              
-            }
-
-            // Skip small lines if applicable
-            if (this.IgnoreSmallLines && columncount != items.Length)
-            {
-                lastLine = line;
-                continue;
+              // Fill column header list
+              for (int i = 0; i < items.Length; i++)
+              {
+                string headerText = this.ColumnTitlesAtFirstRow ? items[i].Replace(' ', '-') : "Column" + i.ToString();
+                columnHeaders.Add(headerText);
+              }
             }
 
             // Skip first line if filled with column titles
             if (this.ColumnTitlesAtFirstRow && counter == 0)
             {
-                counter++;
-                continue;
+              counter++;
+              continue;
             }
 
             // Add row to import list
@@ -610,30 +526,17 @@ namespace Ogama.Modules.ImportExport.Common
             // Cancel import, if only a part for preview should be imported.
             if (counter > numberOfImportLines && numberOfImportLines >= 0)
             {
-                break;
+              break;
             }
-
-            lastLine = line;
-
-          }//end while
-    }
-
-    protected void handleColumnTitlesAtPreviousRow(List<string> columnHeaders, string lastLine)
-    {
-        if (this.ColumnTitlesAtPreviousRow)
-        {
-            string[] lastItems = lastLine.Split(this.ColumnSeparatorCharacter);
-            if (lastItems.Length > 0)
-            {
-                columnHeaders.Clear();
-                for (int i = 0; i < lastItems.Length; i++)
-                {
-                    string headerText = lastItems[i];
-                    headerText = headerText.Replace(' ', '-');
-                    columnHeaders.Add(headerText);
-                }
-            }
+          }
         }
+      }
+      catch (Exception ex)
+      {
+        ExceptionMethods.HandleException(ex);
+      }
+
+      return fileRows;
     }
 
     #endregion //PUBLICMETHODS
@@ -738,14 +641,14 @@ namespace Ogama.Modules.ImportExport.Common
           // specify the type of object to be deserialized 
           XmlSerializer serializer = new XmlSerializer(typeof(ASCIISettings));
 
-          //////* If the XML Document has been altered with unknown 
+          //////* If the XML document has been altered with unknown 
           //////nodes or attributes, handle them with the 
           //////UnknownNode and UnknownAttribute events.*/
           ////serializer.UnknownNode += new XmlNodeEventHandler(serializer_UnknownNode);
           ////serializer.UnknownAttribute += new XmlAttributeEventHandler(serializer_UnknownAttribute);
 
           /* Use the Deserialize method to restore the object's state with
-          data from the XML Document. */
+          data from the XML document. */
           settings = (ASCIISettings)serializer.Deserialize(fs);
         }
 
@@ -766,10 +669,5 @@ namespace Ogama.Modules.ImportExport.Common
     ///////////////////////////////////////////////////////////////////////////////
     #region HELPER
     #endregion //HELPER
-
-
-
-
-    public bool columnTitlesAtPreviousRow { get; set; }
   }
 }

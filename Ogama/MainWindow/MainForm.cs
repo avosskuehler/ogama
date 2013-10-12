@@ -524,7 +524,7 @@ namespace Ogama.MainWindow
     }
 
     /// <summary>
-    /// Checks for existing Document and starts open file dialog if there is none
+    /// Checks for existing document and starts open file dialog if there is none
     /// Otherwise throw error and return false.
     /// </summary>
     /// <returns><strong>True</strong>, if opening was successful,
@@ -554,7 +554,7 @@ namespace Ogama.MainWindow
     }
 
     /// <summary>
-    /// Opens Document and initializes context panel.
+    /// Opens document and initializes context panel.
     /// When loading finished shows <see cref="StartTask"/> dialog.
     /// </summary>
     /// <param name="filename">A <see cref="string"/> with 
@@ -826,7 +826,7 @@ namespace Ogama.MainWindow
 
     /// <summary>
     /// Disables or enables menu items that are not used when no
-    /// Document is open.
+    /// document is open.
     /// </summary>
     /// <param name="isEnabled"><strong>True</strong>, if items should be enabled,
     /// otherwise <strong>false</strong>.</param>

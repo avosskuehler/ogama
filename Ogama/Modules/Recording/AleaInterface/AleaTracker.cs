@@ -994,7 +994,7 @@ namespace Ogama.Modules.Recording.AleaInterface
       // specify the type of object to be deserialized 
       XmlSerializer serializer = new XmlSerializer(typeof(AleaSetting));
 
-      // If the XML Document has been altered with unknown 
+      // If the XML document has been altered with unknown 
       // nodes or attributes, handle them with the 
       // UnknownNode and UnknownAttribute events.
       serializer.UnknownNode += new XmlNodeEventHandler(this.SerializerUnknownNode);
@@ -1002,11 +1002,11 @@ namespace Ogama.Modules.Recording.AleaInterface
 
       try
       {
-        // A FileStream is needed to read the XML Document.
+        // A FileStream is needed to read the XML document.
         FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
 
         // Use the Deserialize method to restore the object's state with
-        // data from the XML Document.
+        // data from the XML document.
         settings = (AleaSetting)serializer.Deserialize(fs);
         fs.Close();
       }

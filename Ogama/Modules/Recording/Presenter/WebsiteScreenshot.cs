@@ -58,7 +58,7 @@ namespace Ogama.Modules.Recording.Presenter
 
     /// <summary>
     /// The url that is targeted for navigating.
-    /// When this is receiving the message Document completed,
+    /// When this is receiving the message document completed,
     /// all sub frames are loaded.
     /// </summary>
     private Uri targetUrl;
@@ -321,7 +321,7 @@ namespace Ogama.Modules.Recording.Presenter
     /// Returns the maximum of the given scrollsize and the documents scrollsize.
     /// So be sure to reset currentSrollsize first.
     /// </summary>
-    /// <param name="Document">The <see cref="HtmlDocument"/> to check its maximal
+    /// <param name="document">The <see cref="HtmlDocument"/> to check its maximal
     /// size.</param>
     /// <param name="currentScrollsize">Ref. A <see cref="Size"/> to be updated with
     /// maximal scroll size values.</param>
@@ -344,7 +344,7 @@ namespace Ogama.Modules.Recording.Presenter
 
     /// <summary>
     /// This method iterates recursively through the <see cref="HtmlWindowCollection"/>
-    /// of a webbrowser Document get the maximal scroll size of the containing frames.
+    /// of a webbrowser document get the maximal scroll size of the containing frames.
     /// </summary>
     /// <param name="htmlWindows">The first <see cref="HtmlWindowCollection"/>
     /// to start parsing. You get it from browser.Document.Window.Frames</param>

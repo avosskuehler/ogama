@@ -20,7 +20,7 @@ namespace Ogama.Modules.Common.Types
   /// subject, trial name and trial section time
   /// </summary>
   /// <remarks>When a new interface form is opened, this class, which member is stored in
-  /// the Document class is asked for the current selections to show always
+  /// the document class is asked for the current selections to show always
   /// the recent stimulus image and subject data.</remarks>
   public class SelectionsState
   {
@@ -84,7 +84,7 @@ namespace Ogama.Modules.Common.Types
     #region PROPERTIES
 
     /// <summary>
-    /// Gets last selected SubjectName for the currently active Document
+    /// Gets last selected SubjectName for the currently active document
     /// </summary>
     /// <value>A <see cref="string"/> with currently selected subject.</value>
     public string SubjectName
@@ -93,7 +93,7 @@ namespace Ogama.Modules.Common.Types
     }
 
     /// <summary>
-    /// Gets last selected trial ID for the currently active Document
+    /// Gets last selected trial ID for the currently active document
     /// </summary>
     /// <value>A <see cref="int"/> with currently selected trials ID.</value>
     public int TrialID
@@ -102,7 +102,7 @@ namespace Ogama.Modules.Common.Types
     }
 
     /// <summary>
-    /// Gets last selected trial sequence for the currently active Document
+    /// Gets last selected trial sequence for the currently active document
     /// </summary>
     /// <value>A <see cref="int"/> with currently selected trials sequence number.</value>
     public int TrialSequence
@@ -111,7 +111,7 @@ namespace Ogama.Modules.Common.Types
     }
 
     /// <summary>
-    /// Gets last selected section time for the currently active Document
+    /// Gets last selected section time for the currently active document
     /// </summary>
     /// <value>An <see cref="int"/> with the trials current section time.</value>
     public int TrialSectionTime

@@ -19,7 +19,7 @@ namespace Ogama.MainWindow.Dialogs
 
   /// <summary>
   /// Splash <see cref="Form"/> with animated gif and marquee progress bar.
-  /// Is invoked from <see cref="MainForm"/>, when Document is loading.
+  /// Is invoked from <see cref="MainForm"/>, when document is loading.
   /// Informs the user, that database loading is going on.
   /// </summary>
   public partial class LoadDocSplash : Form
@@ -36,7 +36,7 @@ namespace Ogama.MainWindow.Dialogs
     #region FIELDS
 
     /// <summary>
-    /// Backgroundworker, that detects loading of Document
+    /// Backgroundworker, that detects loading of document
     /// </summary>
     private BackgroundWorker worker;
 

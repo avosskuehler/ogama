@@ -299,7 +299,7 @@ namespace Ogama.MainWindow
     /// <summary>
     /// The <see cref="Control.Click"/> event handler
     /// for the <see cref="ToolStripMenuItem"/> <see cref="mnuFileCloseExperiment"/>
-    /// Closes all views and releases Document.
+    /// Closes all views and releases document.
     /// </summary>
     /// <param name="sender">Source of the event</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
@@ -359,7 +359,7 @@ namespace Ogama.MainWindow
           }
         }
 
-        // Save Document to disk
+        // Save document to disk
         if (!Document.ActiveDocument.SaveDocument(Document.ActiveDocument.ExperimentSettings.DocumentFilename, null))
         {
           ExceptionMethods.ProcessErrorMessage("Couldn't save experiment.");
@@ -474,7 +474,7 @@ namespace Ogama.MainWindow
       ////  Document.ActiveDocument = newdocument;
       ////  if (newdocument == null)
       ////  {
-      ////    MessageBox.Show("Couldn't create Document",
+      ////    MessageBox.Show("Couldn't create document",
       ////        Application.ProductName,
       ////        MessageBoxButtons.OK,
       ////        MessageBoxIcon.Exclamation);
@@ -754,7 +754,7 @@ namespace Ogama.MainWindow
     /// for the <see cref="ToolStripMenuItem"/> <see cref="mnuViewsCloseChild"/>
     /// Closes current active view.
     /// <remarks>In the view_closing event, it will be checked whether
-    /// this is the last view, so then the Document will
+    /// this is the last view, so then the document will
     /// also be closed.</remarks>
     /// </summary>
     /// <param name="sender">Source of the event</param>

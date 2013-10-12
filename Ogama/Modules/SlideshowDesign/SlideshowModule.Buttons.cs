@@ -39,7 +39,7 @@ namespace Ogama.Modules.SlideshowDesign
   public partial class SlideshowModule
   {
     /// <summary>
-    /// This method updates the experiments Document with the designed slideshow
+    /// This method updates the experiments document with the designed slideshow
     /// of this module, but does not itself writes the slideshow to file.
     /// This is done via MainModule File-Save.
     /// </summary>
@@ -650,7 +650,7 @@ namespace Ogama.Modules.SlideshowDesign
           XmlSerializer serializer = new XmlSerializer(typeof(Slideshow));
 
           /* Use the Deserialize method to restore the object's state with
-          data from the XML Document. */
+          data from the XML document. */
           newSlideshow = (Slideshow)serializer.Deserialize(fs);
           newSlideshow.SetModifiedToAllSlides();
         }

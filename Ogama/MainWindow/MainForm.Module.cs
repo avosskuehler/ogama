@@ -465,7 +465,7 @@ namespace Ogama.MainWindow
 
     /// <summary>
     /// The <see cref="Form.FormClosing"/> event handler for all modules.
-    /// Checks for modified Document, saves it if choosen and closes it.
+    /// Checks for modified document, saves it if choosen and closes it.
     /// It is raised after the <see cref="Form.Closing"/> event which is handled
     /// in each module separately.
     /// </summary>
