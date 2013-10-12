@@ -41,6 +41,7 @@ namespace Ogama.Modules.Recording.Presenter
   using VectorGraphics.StopConditions;
   using VectorGraphics.Tools;
   using VectorGraphics.Tools.Trigger;
+  using System.Runtime.CompilerServices;
 
   /// <summary>
   /// A <see cref="Form"/> that is used for stimuli presentation. 
@@ -256,6 +257,12 @@ namespace Ogama.Modules.Recording.Presenter
     /// web browsing to prevent sending double scroll trial events with same data.
     /// </summary>
     private Point lastScrollEventPosition;
+
+    /// <summary>
+    /// Lock for parallel file access used in WebBrowser_Navigating.
+    /// 
+    /// </summary>
+    private Object WebBrowser_Navigating_Lock = new Object();
 
     #endregion //FIELDS
 
@@ -1057,6 +1064,8 @@ namespace Ogama.Modules.Recording.Presenter
     /// </summary>
     /// <param name="sender">Source of the event</param>
     /// <param name="e">A <see cref="WebBrowserNavigatingEventArgs"/> with the event data</param>
+    
+    [MethodImpl(MethodImplOptions.Synchronized)]
     private void WebBrowser_Navigating(object sender, WebBrowserNavigatingEventArgs e)
     {
       try
@@ -1086,12 +1095,15 @@ namespace Ogama.Modules.Recording.Presenter
           string screenshotFilename = BrowserDialog.GetFilenameFromUrl(e.Url);
           WebsiteScreenshot.Instance.ScreenshotFilename = screenshotFilename;
 
-          if (!File.Exists(screenshotFilename) || !this.currentBrowserTreeNode.UrlToID.ContainsKey(screenshotFilename))
+          lock (WebBrowser_Navigating_Lock)
           {
-            var newTrialId = Convert.ToInt32(documentsSlideshow.GetUnusedNodeID());
-            this.currentBrowserTreeNode.UrlToID.Add(screenshotFilename, newTrialId);
+              if (!File.Exists(screenshotFilename) || !this.currentBrowserTreeNode.UrlToID.ContainsKey(screenshotFilename))
+              {
+                  var newTrialId = Convert.ToInt32(documentsSlideshow.GetUnusedNodeID());
+                  this.currentBrowserTreeNode.UrlToID.Add(screenshotFilename, newTrialId);
+              }
           }
-
+          
           // Now update slideshow with new trial
           if (this.getTimeMethod != null)
           {
@@ -1191,7 +1203,7 @@ namespace Ogama.Modules.Recording.Presenter
       }
       catch (Exception ex)
       {
-        ExceptionMethods.HandleException(ex);
+        ExceptionMethods.HandleExceptionSilent(ex);
       }
     }
 

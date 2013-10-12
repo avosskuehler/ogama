@@ -48,6 +48,7 @@ namespace Ogama.Modules.Database
       this.cmsDataGridView = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.cmsSelect = new System.Windows.Forms.ToolStripMenuItem();
       this.cmsCopy = new System.Windows.Forms.ToolStripMenuItem();
+      this.cmsModifyData = new System.Windows.Forms.ToolStripMenuItem();
       this.dgvRawData = new System.Windows.Forms.DataGridView();
       this.dgvTrials = new System.Windows.Forms.DataGridView();
       this.colTrialsID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -275,7 +276,9 @@ namespace Ogama.Modules.Database
       // 
       this.cmsDataGridView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cmsSelect,
-            this.cmsCopy});
+            this.cmsCopy,
+            this.cmsModifyData
+      });
       this.cmsDataGridView.Name = "cmsDataGridView";
       this.cmsDataGridView.Size = new System.Drawing.Size(219, 48);
       // 
@@ -294,6 +297,15 @@ namespace Ogama.Modules.Database
       this.cmsCopy.Size = new System.Drawing.Size(218, 22);
       this.cmsCopy.Text = "Copy selected rows";
       this.cmsCopy.Click += new System.EventHandler(this.cmsCopy_Click);
+
+
+      //
+      // modify data
+      //
+      this.cmsModifyData.Name = "cmsModifyData";
+      this.cmsModifyData.Text = "modify data";
+      this.cmsModifyData.Click += new System.EventHandler(this.cmsModifyData_Click);
+
       // 
       // dgvRawData
       // 
@@ -1281,6 +1293,7 @@ namespace Ogama.Modules.Database
     private ContextMenuStrip cmsDataGridView;
     private ToolStripMenuItem cmsSelect;
     private ToolStripMenuItem cmsCopy;
+    private ToolStripMenuItem cmsModifyData;
     private ToolStripButton btnSpecial;
     private ToolStripButton btnImportOgamaFormat;
     private BackgroundWorker bgwExport;

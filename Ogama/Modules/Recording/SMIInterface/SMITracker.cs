@@ -53,6 +53,14 @@ namespace Ogama.Modules.Recording.SMIInterface
     /// </summary>
     private SMIClient smiClient;
 
+    
+    
+    /// <summary>
+    /// The parent recording module.
+    /// 
+    /// </summary>
+    private RecordModule owningRecordModule;
+
     #endregion //FIELDS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -93,6 +101,7 @@ namespace Ogama.Modules.Recording.SMIInterface
     {
       // Call the initialize methods of derived classes
       this.Initialize();
+      this.owningRecordModule = owningRecordModule;
     }
 
     #endregion //CONSTRUCTION
@@ -203,6 +212,8 @@ namespace Ogama.Modules.Recording.SMIInterface
         }
 
         this.smiClient.Calibrate();
+
+        this.RecordButton.Enabled = true;
       }
       catch (Exception ex)
       {
@@ -238,6 +249,8 @@ namespace Ogama.Modules.Recording.SMIInterface
       }
 
       base.CleanUp();
+
+
     }
 
     /// <summary>
@@ -373,7 +386,14 @@ namespace Ogama.Modules.Recording.SMIInterface
     /// <param name="e">Empty <see cref="EventArgs"/></param>
     private void SMIInterfaceCalibrationFinished(object sender, EventArgs e)
     {
-      this.RecordButton.Enabled = true;
+        try
+        {
+            //this.RecordButton.Enabled = true;
+        }
+        catch (System.Exception error)
+        {
+          ExceptionMethods.HandleExceptionSilent(error);
+        }
     }
 
     /// <summary>
