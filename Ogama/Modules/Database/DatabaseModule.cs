@@ -677,6 +677,8 @@ namespace Ogama.Modules.Database
       this.mainWindow_EditCopy(this, EventArgs.Empty);
     }
 
+   
+
     #endregion //WINDOWSEVENTHANDLER
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -1168,6 +1170,147 @@ namespace Ogama.Modules.Database
         {
           this.Cursor = Cursors.Default;
         }
+      }
+    }
+
+  
+
+    //
+    // modify data form
+    //
+    TextBox tbPox = new TextBox();
+
+    private void cmsModifyData_Click(object sender, EventArgs e)
+    {
+      try
+      {
+        if (dgvRawData.Rows.Count == 0)
+        {
+          return;
+        }
+
+        ModifyForm form = new ModifyForm();
+        form.databaseModule = this;
+        form.ShowDialog();
+
+      }
+      catch (Exception error)
+      {
+        Console.WriteLine(error);
+      }
+
+    }
+
+    /*private void buttonOk_MouseDown(object sender, MouseEventArgs e)
+    {
+      string value = tbPox.Text;
+      try
+      {
+        int iValue = Int16.Parse(value);
+        handleRawDataUpdate(iValue);
+      }
+      catch (Exception error)
+      {
+        Console.WriteLine(error);
+      }
+    }*/
+
+    /// <summary>
+    /// update raw data position x
+    /// </summary>
+    /// <param name="deltaX"></param>
+    public void handleRawDataUpdate(int deltaX, int deltaY)
+    {
+      if (dgvRawData.Rows.Count == 0)
+      {
+        return;
+      }
+
+      string subjectName = dgvRawData.Rows[0].Cells[1].Value.ToString();
+
+      OgamaDataSet.RawdataDataTable subjectRawDataTable = Queries.GetRawDataBySubject(subjectName);
+     
+      List<OgamaDataSet.RawdataRow> dataRows = new List<OgamaDataSet.RawdataRow>();
+     
+      for (int i = 0; i < subjectRawDataTable.Count; i++)
+      {
+        OgamaDataSet.RawdataRow row = subjectRawDataTable[i];
+        if (row != null)
+        {
+          try
+          {
+            row.GazePosX += deltaX;
+            row.GazePosY += deltaY;
+
+            dataRows.Add(row);
+            
+          }
+          catch (Exception error)
+          {
+            ExceptionHandling.ExceptionMethods.HandleExceptionSilent(error);
+          }
+        }
+      }
+      
+      this.UpdateDatabaseWithRawDataModified(subjectName,dataRows);
+
+      this.PopulateRawDataFromSubject(subjectName);
+      
+    }
+
+
+    private void UpdateDatabaseWithRawDataModified(string subjectName,List<OgamaDataSet.RawdataRow> dataRows)
+    {
+      DataTable rawTable = null;
+      try
+      {
+        this.bsoRawdata = (BindingSource)this.dgvRawData.DataSource;
+        rawTable = (DataTable)this.bsoRawdata.DataSource;
+
+        if (dataRows != null)
+        {
+          foreach (DataRow rawRow in dataRows)
+          {
+            Queries.UpdateRowBySubjectAndID(rawRow, subjectName, Convert.ToInt32(rawRow["ID"]));
+          }
+        }
+
+        if (rawTable != null)
+        {
+          rawTable.Dispose();
+        }
+      }
+      catch (Exception ex)
+      {
+        if (rawTable != null)
+        {
+          rawTable.RejectChanges();
+        }
+
+        Document.ActiveDocument.DocDataSet.RejectChanges();
+
+        ExceptionMethods.HandleException(ex);
+      }
+
+      if (rawTable != null)
+      {
+        rawTable.AcceptChanges();
+      }
+    }
+
+    private void PopulateRawDataFromSubject(string subjectName)
+    {
+      if (this.dgvSubjects.Rows.Count > 0)
+      {
+        if (this.dgvSubjects.SelectedRows.Count == 0)
+        {
+          this.dgvSubjects.Rows[0].Selected = true;
+        }
+
+        DataGridViewRow currentRow = this.dgvSubjects.Rows[this.dgvSubjects.SelectedRows[0].Index];
+
+        DataTable table = Queries.GetRawDataBySubject(subjectName);
+        this.bsoRawdata.DataSource = table;
       }
     }
 
