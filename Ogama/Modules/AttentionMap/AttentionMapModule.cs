@@ -18,15 +18,10 @@ namespace Ogama.Modules.AttentionMap
   using System.ComponentModel;
   using System.Data;
   using System.Drawing;
-  using System.Drawing.Drawing2D;
-  using System.Drawing.Imaging;
-  using System.IO;
-  using System.Text;
   using System.Windows.Forms;
 
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
-  using Ogama.Modules.Common;
   using Ogama.Modules.Common.FormTemplates;
   using Ogama.Modules.Common.Tools;
   using Ogama.Modules.Common.TrialEvents;
@@ -34,7 +29,6 @@ namespace Ogama.Modules.AttentionMap
   using Ogama.Properties;
   using OgamaControls;
 
-  using VectorGraphics;
   using VectorGraphics.StopConditions;
 
   /// <summary>

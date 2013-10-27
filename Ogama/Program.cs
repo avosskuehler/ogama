@@ -14,12 +14,10 @@
 namespace Ogama
 {
   using System;
-  using System.Collections.Generic;
   using System.IO;
   using System.Windows.Forms;
 
   using Ogama.ExceptionHandling;
-  using Ogama.MainWindow;
   using Ogama.MainWindow.Dialogs;
 
   /// <summary>

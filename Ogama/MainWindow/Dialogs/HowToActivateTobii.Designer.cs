@@ -40,7 +40,7 @@
       // 
       // pictureBox1
       // 
-      this.pictureBox1.Image = global::Ogama.Properties.Resources.tobii;
+      this.pictureBox1.Image = global::Ogama.Properties.Resources.TobiiLogo;
       this.pictureBox1.Location = new System.Drawing.Point(12, 62);
       this.pictureBox1.Name = "pictureBox1";
       this.pictureBox1.Size = new System.Drawing.Size(65, 71);
@@ -63,7 +63,7 @@
       this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.btnOK.AutoSize = true;
       this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-      this.btnOK.Location = new System.Drawing.Point(411, 309);
+      this.btnOK.Location = new System.Drawing.Point(420, 309);
       this.btnOK.Name = "btnOK";
       this.btnOK.Size = new System.Drawing.Size(76, 23);
       this.btnOK.TabIndex = 3;
@@ -81,7 +81,7 @@
       // 
       // pcbTobiiLogo
       // 
-      this.pcbTobiiLogo.Image = global::Ogama.Properties.Resources.TobiiLogo;
+      this.pcbTobiiLogo.Image = global::Ogama.Properties.Resources.TobiiBanner;
       this.pcbTobiiLogo.Location = new System.Drawing.Point(0, 0);
       this.pcbTobiiLogo.Margin = new System.Windows.Forms.Padding(0);
       this.pcbTobiiLogo.Name = "pcbTobiiLogo";
@@ -95,7 +95,7 @@
       this.AcceptButton = this.btnOK;
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(499, 344);
+      this.ClientSize = new System.Drawing.Size(508, 344);
       this.Controls.Add(this.label3);
       this.Controls.Add(this.btnOK);
       this.Controls.Add(this.label1);

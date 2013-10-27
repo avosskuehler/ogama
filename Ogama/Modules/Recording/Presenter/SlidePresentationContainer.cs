@@ -13,17 +13,14 @@
 
 namespace Ogama.Modules.Recording.Presenter
 {
-  using System;
   using System.Drawing;
   using System.Windows.Forms;
-  using Ogama.ExceptionHandling;
-  using Ogama.Modules.Common;
+
   using Ogama.Modules.Common.SlideCollections;
 
   using OgamaControls;
-  using VectorGraphics.Controls;
+
   using VectorGraphics.Controls.Timer;
-  using VectorGraphics.Elements;
   using VectorGraphics.Elements.ElementCollections;
 
   /// <summary>

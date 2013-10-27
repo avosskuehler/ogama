@@ -5,14 +5,8 @@
 //  section in the code.
 // *************************************************************************************** //
 
-using System;
-using System.Collections;
-using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Data;
 using System.Windows.Forms;
-using System.Diagnostics;
 
 namespace OgamaControls
 {

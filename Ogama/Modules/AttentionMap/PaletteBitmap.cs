@@ -14,10 +14,8 @@
 namespace Ogama.Modules.AttentionMap
 {
   using System;
-  using System.Collections.Generic;
   using System.Drawing;
   using System.Drawing.Imaging;
-  using System.Text;
 
   /// <summary>
   /// Class for creating color arrays from bitmaps to get

@@ -40,19 +40,12 @@ using System.Windows.Threading;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
-using GTLibrary.Calibration;
-using GTLibrary.Detection;
-using GTLibrary.EyeMovement;
-using GTLibrary.EyeMovementDetection;
-using GTLibrary.Log;
-using GTLibrary.Logging;
-using GTLibrary.Network;
+
 using GTCommons.Enum;
 using GTSettings;
-using GTLibrary.Utils;
+
 using GTCommons;
-using GTHardware;
-using Size = System.Drawing.Size;
+
 using log4net;
 using GTHardware.Cameras.DirectShow;
 

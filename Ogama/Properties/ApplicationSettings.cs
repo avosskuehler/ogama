@@ -13,10 +13,8 @@
 
 namespace Ogama.Properties
 {
-  using System;
   using System.IO;
   using System.Windows.Forms;
-  using Ogama.Modules.Recording;
 
   /// <summary>
   /// Program and user settings class provided by Visual Studio.

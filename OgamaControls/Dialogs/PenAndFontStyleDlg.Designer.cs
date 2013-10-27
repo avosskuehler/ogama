@@ -1,5 +1,3 @@
-using VectorGraphics;
-
 namespace OgamaControls.Dialogs
 {
   using VectorGraphics.Tools.CustomEventArgs;

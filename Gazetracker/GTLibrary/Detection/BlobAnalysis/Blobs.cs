@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using AForge;
-using GTLibrary.Utils;
 
 namespace GTLibrary.Detection.BlobAnalysis
 {

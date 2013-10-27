@@ -13,10 +13,6 @@
 
 namespace Ogama.Modules.SlideshowDesign
 {
-  using System;
-  using System.Collections.Generic;
-  using System.Text;
-
   /// <summary>
   /// Type of stimulus objects that can be created or displayed.
   /// Can be None, Shape, Instruction, Image, Flash.

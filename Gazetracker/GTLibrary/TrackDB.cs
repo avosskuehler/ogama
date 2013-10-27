@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Linq;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
-using GTLibrary.Utils;
+
 using GTCommons.Enum;
 
 namespace GTLibrary

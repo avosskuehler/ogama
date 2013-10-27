@@ -20,12 +20,10 @@ namespace Ogama.Modules.Recording.MouseOnlyInterface
   using System.Xml.Serialization;
 
   using Ogama.ExceptionHandling;
-  using Ogama.Modules.Common;
   using Ogama.Modules.Common.CustomEventArgs;
   using Ogama.Modules.Common.Tools;
   using Ogama.Modules.Recording.TrackerBase;
 
-  using VectorGraphics.Controls;
   using VectorGraphics.Controls.Timer;
 
   /// <summary>

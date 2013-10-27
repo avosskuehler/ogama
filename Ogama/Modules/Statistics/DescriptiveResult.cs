@@ -13,8 +13,6 @@
 
 namespace Ogama.Modules.Statistics
 {
-  using System;
-
   /// <summary>
   /// The result class the holds the analysis results
   /// </summary>

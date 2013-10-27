@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using GTSettings;
-using GTLibrary.Utils;
 
 namespace GTLibrary.EyeMovement
 {

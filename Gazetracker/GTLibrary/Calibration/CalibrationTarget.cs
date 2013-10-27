@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using GTLibrary.Detection.Glint;
+
 using GTSettings;
-using GTLibrary.Utils;
 
 namespace GTLibrary.Calibration
 {

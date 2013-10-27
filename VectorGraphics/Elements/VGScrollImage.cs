@@ -14,15 +14,11 @@
 namespace VectorGraphics.Elements
 {
   using System;
-  using System.ComponentModel;
   using System.Drawing;
   using System.Drawing.Drawing2D;
-  using System.Drawing.Imaging;
   using System.IO;
   using System.Text;
   using System.Windows.Forms;
-  using System.Xml.Serialization;
-  using VectorGraphics.Tools;
 
   /// <summary>
   /// Inherited from <see cref="VGImage"/>. 

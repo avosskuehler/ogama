@@ -21,7 +21,6 @@ namespace Ogama.Modules.Recording.GazegroupInterface
   using GTOgamaClient.API;
   using GTOgamaClient.Controls;
   using Ogama.ExceptionHandling;
-  using Ogama.Modules.Common;
   using Ogama.Modules.Common.CustomEventArgs;
   using Ogama.Modules.Recording.Dialogs;
   using Ogama.Modules.Recording.TrackerBase;
@@ -175,7 +174,7 @@ namespace Ogama.Modules.Recording.GazegroupInterface
     /// <param name="errorMessage">Out. A <see cref="String"/> with an error message.</param>
     /// <returns><strong>True</strong>, if ITU Gazetracker with an camera
     /// is available in the system, otherwise <strong>false</strong></returns>
-    public static bool IsAvailable(out string errorMessage)
+    public static TrackerStatus IsAvailable(out string errorMessage)
     {
       errorMessage = string.Empty;
 
@@ -187,28 +186,28 @@ namespace Ogama.Modules.Recording.GazegroupInterface
             errorMessage = "Gazetracker was unable to connect a camera. " + Environment.NewLine +
               "Make sure that the device is connected and that the device drivers are installed. " +
               "Verified configurations can be found in the forum located at http://forum.gazegroup.org";
-            return false;
+            return TrackerStatus.NotAvailable;
           case Camera.DeviceTypeEnum.DirectShow:
             errorMessage = "Gazetracker found a camera. ";
-            return true;
+            return TrackerStatus.Available;
           case Camera.DeviceTypeEnum.Thorlabs:
             errorMessage = "Gazetracker found a thorlabs camera. ";
-            return true;
+            return TrackerStatus.Available;
           case Camera.DeviceTypeEnum.PS3Eye:
             errorMessage = "Gazetracker found a PS3Eye camera. ";
-            return true;
+            return TrackerStatus.Available;
           case Camera.DeviceTypeEnum.Kinect:
             errorMessage = "Gazetracker found a kinect camera. ";
-            return true;
+            return TrackerStatus.Available;
         }
       }
       catch (Exception)
       {
         errorMessage = "Initialization of the GazeTracker failed.";
-        return false;
+        return TrackerStatus.NotAvailable;
       }
 
-      return true;
+      return TrackerStatus.NotAvailable;
     }
 
     /// <summary>

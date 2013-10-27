@@ -15,29 +15,22 @@ namespace Ogama.Modules.AOI
 {
   using System;
   using System.Collections.Generic;
-  using System.ComponentModel;
   using System.Data;
-  using System.Data.SqlClient;
   using System.Drawing;
-  using System.Drawing.Drawing2D;
-  using System.Drawing.Imaging;
   using System.IO;
-  using System.Text;
   using System.Windows.Forms;
 
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
   using Ogama.Modules.AOI.Dialogs;
-  using Ogama.Modules.Common;
   using Ogama.Modules.Common.FormTemplates;
   using Ogama.Modules.Common.SlideCollections;
   using Ogama.Modules.Common.Tools;
   using Ogama.Modules.Common.Types;
-  using Ogama.Modules.ImportExport;
   using Ogama.Modules.ImportExport.AOIData;
   using Ogama.Modules.ImportExport.Common;
   using Ogama.Properties;
-  using OgamaControls;
+
   using OgamaControls.Dialogs;
 
   using VectorGraphics.Elements;

@@ -23,7 +23,6 @@ namespace Ogama.Modules.Recording.SMIInterface
   using System.Windows.Forms;
 
   using Ogama.ExceptionHandling;
-  using Ogama.Modules.Common;
   using Ogama.Modules.Common.CustomEventArgs;
   using Ogama.Modules.Common.Tools;
 

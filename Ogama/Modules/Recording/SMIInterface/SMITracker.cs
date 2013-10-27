@@ -19,7 +19,6 @@ namespace Ogama.Modules.Recording.SMIInterface
   using System.Xml.Serialization;
 
   using Ogama.ExceptionHandling;
-  using Ogama.Modules.Common;
   using Ogama.Modules.Common.CustomEventArgs;
   using Ogama.Modules.Recording.Dialogs;
   using Ogama.Modules.Recording.TrackerBase;
@@ -53,8 +52,8 @@ namespace Ogama.Modules.Recording.SMIInterface
     /// </summary>
     private SMIClient smiClient;
 
-    
-    
+
+
     /// <summary>
     /// The parent recording module.
     /// 
@@ -146,6 +145,18 @@ namespace Ogama.Modules.Recording.SMIInterface
     // Public methods                                                            //
     ///////////////////////////////////////////////////////////////////////////////
     #region PUBLICMETHODS
+
+    /// <summary>
+    /// Checks if the mirametrix tracker is available in the system.
+    /// </summary>
+    /// <param name="errorMessage">Out. A <see cref="String"/> with an error message.</param>
+    /// <returns><strong>True</strong>, if Mirametrix tracker
+    /// is available in the system, otherwise <strong>false</strong></returns>
+    public static TrackerStatus IsAvailable(out string errorMessage)
+    {
+      errorMessage = "The status of the SMI tracking device cannot be automatically determined.";
+      return TrackerStatus.Undetermined;
+    }
 
     /// <summary>
     /// Method to return the current timing of the tracking system.
@@ -386,14 +397,14 @@ namespace Ogama.Modules.Recording.SMIInterface
     /// <param name="e">Empty <see cref="EventArgs"/></param>
     private void SMIInterfaceCalibrationFinished(object sender, EventArgs e)
     {
-        try
-        {
-            //this.RecordButton.Enabled = true;
-        }
-        catch (System.Exception error)
-        {
-          ExceptionMethods.HandleExceptionSilent(error);
-        }
+      try
+      {
+        //this.RecordButton.Enabled = true;
+      }
+      catch (System.Exception error)
+      {
+        ExceptionMethods.HandleExceptionSilent(error);
+      }
     }
 
     /// <summary>

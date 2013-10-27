@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Drawing;
-
-namespace OgamaControls
+﻿namespace OgamaControls
 {
   /// <summary>
   /// Indicates the position of the time line event relative to its center

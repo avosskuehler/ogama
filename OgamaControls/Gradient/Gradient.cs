@@ -18,12 +18,9 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.ComponentModel;
-using System.Drawing.Design;
 
 namespace OgamaControls
 {

@@ -17,7 +17,6 @@ namespace VectorGraphics.Tools.CustomTypeConverter
   using System.ComponentModel;
   using System.Globalization;
 
-  using VectorGraphics.Elements;
   using VectorGraphics.Elements.ElementCollections;
 
   /// <summary>

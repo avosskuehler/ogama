@@ -1,6 +1,4 @@
-﻿using GTLibrary.Detection.BlobAnalysis;
-using GTLibrary.Utils;
-using GTCommons.Enum;
+﻿using GTCommons.Enum;
 
 namespace GTLibrary.Detection.Pupil
 {

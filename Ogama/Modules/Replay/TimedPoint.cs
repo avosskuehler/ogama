@@ -13,10 +13,7 @@
 
 namespace Ogama.Modules.Replay
 {
-  using System;
-  using System.Collections.Generic;
   using System.Drawing;
-  using System.Text;
 
   /// <summary>
   /// This structure saves a location with its associated time.

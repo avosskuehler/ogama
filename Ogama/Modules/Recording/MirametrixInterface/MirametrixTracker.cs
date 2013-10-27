@@ -239,26 +239,23 @@ namespace Ogama.Modules.Recording.MirametrixInterface
     /// <param name="errorMessage">Out. A <see cref="String"/> with an error message.</param>
     /// <returns><strong>True</strong>, if Mirametrix tracker
     /// is available in the system, otherwise <strong>false</strong></returns>
-    public static bool IsAvailable(out string errorMessage)
+    public static TrackerStatus IsAvailable(out string errorMessage)
     {
-      errorMessage = string.Empty;
-
       // Check Mirametrix process
       if (!IsProcessOpen("tracker"))
       {
         if (!IsApplicationInstalled("Mirametrix"))
         {
           errorMessage = "Can't find Mirametrix S2 Eye Tracker on this computer. Maybe Mirametrix S2 Eye Tracker is not installed or installation is corrupted." + Environment.NewLine + "Please reinstall Mirametrix S2 Eye Tracker.";
-          return false;
+          return TrackerStatus.NotAvailable;
         }
-        else
-        {
-          errorMessage = "Warning : Mirametrix S2 Eye tracker does not seem to be connected on this computer. Please connect Mirametrix S2 Eye tracker.";
-          return true;
-        }
+
+        errorMessage = "Warning : Mirametrix S2 Eye tracker does not seem to be connected on this computer. Please connect Mirametrix S2 Eye tracker.";
+        return TrackerStatus.NotAvailable;
       }
 
-      return true;
+      errorMessage = "Mirametrix S2 installed on this computer.";
+      return TrackerStatus.Available;
     }
 
     /// <summary>

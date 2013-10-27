@@ -18,17 +18,12 @@ namespace Ogama.Modules.Statistics
   using System.ComponentModel;
   using System.Data;
   using System.Drawing;
-  using System.Drawing.Drawing2D;
-  using System.Text;
   using System.Windows.Forms;
 
-  using Ogama.DataSet;
   using Ogama.Modules.AOI;
-  using Ogama.Modules.Common;
   using Ogama.Modules.Common.Tools;
   using Ogama.Modules.Common.TrialEvents;
   using Ogama.Modules.Common.Types;
-  using Ogama.Modules.SlideshowDesign;
   using Ogama.Modules.Statistics.Variables;
 
   using VectorGraphics.Elements;

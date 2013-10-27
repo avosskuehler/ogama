@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace OgamaControls.Media
+﻿namespace OgamaControls.Media
 {
   /// <summary>
   /// A callback interface that can be implemented by callers to DESCombine 

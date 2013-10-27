@@ -16,18 +16,14 @@ namespace Ogama.Properties
   using System;
   using System.Collections.Generic;
   using System.ComponentModel;
-  using System.Drawing;
   using System.IO;
   using System.Reflection;
   using System.Windows.Forms;
   using System.Xml.Serialization;
 
   using Ogama.ExceptionHandling;
-  using Ogama.Modules.Common;
   using Ogama.Modules.Common.SlideCollections;
   using Ogama.Modules.Scanpath.Colorization;
-
-  using VectorGraphics;
 
   /// <summary>
   /// Class to store experiment specific settings like database file,

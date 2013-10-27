@@ -13,10 +13,6 @@
 
 namespace VectorGraphics.Elements
 {
-  using System;
-  using System.Collections.Generic;
-  using System.Text;
-
   /// <summary>
   /// Type of selected shape to be drawn or created.
   /// Can be None, Rectangle, Ellipse, Polyline, Text, Image, Cursor, Line.

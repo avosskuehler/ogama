@@ -1,9 +1,4 @@
 ﻿using System.Drawing;
-using GTLibrary.Calibration;
-using GTLibrary.Detection.Glint;
-using GTLibrary.Detection.Pupil;
-using GTLibrary.EyeMovement;
-using GTLibrary.Utils;
 
 namespace GTLibrary
 {

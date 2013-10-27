@@ -1,12 +1,5 @@
-﻿using System;
-using System.ComponentModel;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using VectorGraphics;
 
 namespace OgamaControls
 {

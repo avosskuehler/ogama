@@ -22,12 +22,10 @@
 using System;
 using System.IO;
 using System.Text;
-using System.Windows.Forms;
+
 using GTNetworkClient;
-using GTLibrary.Network;
+
 using GTCommons.Enum;
-using GTSettings;
-using GTLibrary.Utils;
 
 namespace GTLibrary.Logging
 {

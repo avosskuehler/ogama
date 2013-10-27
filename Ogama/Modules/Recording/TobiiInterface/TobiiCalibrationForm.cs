@@ -18,7 +18,6 @@ namespace Ogama.Modules.Recording.TobiiInterface
   using System.Drawing.Drawing2D;
   using System.Windows.Forms;
 
-  using Ogama.Modules.Common;
   using Ogama.Modules.Common.Tools;
 
   using Tobii.Eyetracking.Sdk;

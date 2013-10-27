@@ -14,12 +14,9 @@
 namespace Ogama.Modules.Saliency
 {
   using System;
-  using System.Collections.Generic;
-  using System.ComponentModel;
   using System.Data;
   using System.Diagnostics;
   using System.Drawing;
-  using System.Drawing.Drawing2D;
   using System.Drawing.Imaging;
   using System.Globalization;
   using System.IO;
@@ -30,14 +27,11 @@ namespace Ogama.Modules.Saliency
   using Ogama.DataSet;
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
-  using Ogama.Modules.Common;
   using Ogama.Modules.Common.FormTemplates;
   using Ogama.Modules.Common.PictureTemplates;
   using Ogama.Modules.Common.Types;
-  using Ogama.Modules.Fixations;
-  using Ogama.Modules.ImportExport;
   using Ogama.Properties;
-  using OgamaControls;
+
   using OgamaControls.Dialogs;
 
   using VectorGraphics.Elements;

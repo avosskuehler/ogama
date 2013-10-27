@@ -27,7 +27,7 @@ using System.Threading;
 using DirectShowLib;
 using Emgu.CV;
 using Emgu.CV.Structure;
-using GTHardware;
+
 //using GazeTrackingLibrary.Logging;
 //using GazeTrackingLibrary.Settings;
 

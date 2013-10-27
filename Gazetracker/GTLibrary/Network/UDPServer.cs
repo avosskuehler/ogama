@@ -4,8 +4,6 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using GTNetworkClient;
-using GTLibrary.Logging;
-using GTSettings;
 
 namespace GTLibrary.Network
 {

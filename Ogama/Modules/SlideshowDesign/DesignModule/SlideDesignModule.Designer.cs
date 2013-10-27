@@ -4,8 +4,6 @@
 
   using Ogama.Modules.Common.Controls;
 
-  using VectorGraphics.Tools.CustomEventArgs;
-
   partial class SlideDesignModule
   {
     /// <summary>

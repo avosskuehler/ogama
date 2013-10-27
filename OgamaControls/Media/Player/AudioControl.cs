@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
-using OgamaControls.Dialogs;
-using VectorGraphics;
 using System.IO;
 using VectorGraphics.Tools;
 

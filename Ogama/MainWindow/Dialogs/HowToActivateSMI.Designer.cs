@@ -71,10 +71,10 @@
       // 
       // pcbSMI
       // 
-      this.pcbSMI.Image = global::Ogama.Properties.Resources.SMI_61_25;
+      this.pcbSMI.Image = global::Ogama.Properties.Resources.SMIFoto64;
       this.pcbSMI.Location = new System.Drawing.Point(12, 84);
       this.pcbSMI.Name = "pcbSMI";
-      this.pcbSMI.Size = new System.Drawing.Size(54, 75);
+      this.pcbSMI.Size = new System.Drawing.Size(64, 64);
       this.pcbSMI.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
       this.pcbSMI.TabIndex = 8;
       this.pcbSMI.TabStop = false;

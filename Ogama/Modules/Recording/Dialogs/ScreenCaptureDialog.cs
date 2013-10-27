@@ -21,8 +21,6 @@ namespace Ogama.Modules.Recording.Dialogs
 
   using GTHardware.Cameras.DirectShow;
 
-  using OgamaControls;
-
   /// <summary>
   /// This dialog <see cref="Form"/> shows the options available
   /// for screen capturing using the Ogama Screen Capture filter.

@@ -14,9 +14,7 @@
 namespace Ogama.Modules.Replay
 {
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
 
   /// <summary>
   /// Structure which saves state of replay loop in between refreshing cycles

@@ -19,9 +19,7 @@ namespace Ogama
   using System.Configuration.Install;
   using System.IO;
   using System.Reflection;
-  using System.Security.AccessControl;
   using System.Security.Permissions;
-  using System.Security.Principal;
   using System.Windows.Forms;
 
   /// <summary>

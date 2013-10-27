@@ -16,7 +16,6 @@ namespace VectorGraphics.Tools
   using System;
   using System.Drawing;
   using System.Drawing.Imaging;
-  using System.Runtime.InteropServices;
 
   using VectorGraphics.Tools.Win32;
 

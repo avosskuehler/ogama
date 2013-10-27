@@ -14,7 +14,6 @@
 namespace Ogama.Modules.Replay
 {
   using System;
-  using System.Collections;
   using System.Collections.Generic;
   using System.Data;
   using System.Drawing;
@@ -29,7 +28,6 @@ namespace Ogama.Modules.Replay
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
   using Ogama.MainWindow.ContextPanel;
-  using Ogama.Modules.Common;
   using Ogama.Modules.Common.Controls;
   using Ogama.Modules.Common.CustomEventArgs;
   using Ogama.Modules.Common.FormTemplates;

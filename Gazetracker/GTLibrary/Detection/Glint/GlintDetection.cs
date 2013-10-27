@@ -1,10 +1,9 @@
 ﻿using System;
 using Emgu.CV;
 using Emgu.CV.Structure;
-using GTLibrary.Detection.BlobAnalysis;
+
 using GTCommons.Enum;
 using GTSettings;
-using GTLibrary.Utils;
 
 namespace GTLibrary.Detection.Glint
 {

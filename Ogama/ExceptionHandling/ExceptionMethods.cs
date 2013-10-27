@@ -14,13 +14,10 @@
 namespace Ogama.ExceptionHandling
 {
   using System;
-  using System.Collections.Generic;
   using System.Diagnostics;
   using System.IO;
   using System.Text;
   using System.Windows.Forms;
-
-  using Ogama.MainWindow;
 
   /// <summary>
   /// Static methods used for OGAMAs exception handling.
@@ -98,10 +95,10 @@ namespace Ogama.ExceptionHandling
     public static void HandleExceptionSilent(Exception ex)
     {
       // Add error to error log
-      string exceptionLogFile = Path.Combine(Properties.Settings.Default.LogfilePath, "exception.log");
-      string message = GetLogEntryForException(ex);
+      var exceptionLogFile = Path.Combine(Properties.Settings.Default.LogfilePath, "exception.log");
+      var message = GetLogEntryForException(ex);
 
-      using (StreamWriter w = File.AppendText(exceptionLogFile))
+      using (var w = File.AppendText(exceptionLogFile))
       {
         Log(message, w);
 
@@ -118,10 +115,10 @@ namespace Ogama.ExceptionHandling
     public static void HandleException(Exception e)
     {
       // Add error to error log
-      string exceptionLogFile = Path.Combine(Properties.Settings.Default.LogfilePath, "exception.log");
+      var exceptionLogFile = Path.Combine(Properties.Settings.Default.LogfilePath, "exception.log");
 
       var message = new StringBuilder(e.Message);
-      Exception innerException = e;
+      var innerException = e;
       message.AppendLine("------------------------------------");
 
       var trace = new StackTrace(e, true);
@@ -138,7 +135,7 @@ namespace Ogama.ExceptionHandling
 
       message.AppendLine(GetLogEntryForException(innerException));
 
-      using (StreamWriter w = File.AppendText(exceptionLogFile))
+      using (var w = File.AppendText(exceptionLogFile))
       {
         Log(message.ToString(), w);
 
@@ -183,7 +180,7 @@ namespace Ogama.ExceptionHandling
       {
         // Something has gone wrong during HandleException (e.g. incorrect configuration of the block).
         // Exit the application
-        string errorMsg = "An unexpected exception occured while calling HandleException.";
+        var errorMsg = "An unexpected exception occured while calling HandleException.";
         errorMsg += Environment.NewLine;
 
         MessageBox.Show(errorMsg, "Application Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
@@ -204,8 +201,8 @@ namespace Ogama.ExceptionHandling
       }
 
       // Add error to error log
-      string errorLogFile = Path.Combine(Properties.Settings.Default.LogfilePath, "error.log");
-      using (StreamWriter w = File.AppendText(errorLogFile))
+      var errorLogFile = Path.Combine(Properties.Settings.Default.LogfilePath, "error.log");
+      using (var w = File.AppendText(errorLogFile))
       {
         Log(message, w);
 
@@ -214,7 +211,7 @@ namespace Ogama.ExceptionHandling
       }
 
       // Show error message dialog
-      ErrorDialog newErrorDlg = new ErrorDialog(message);
+      var newErrorDlg = new ErrorDialog(message);
 
       // Exits the program when the user clicks Abort
       if (newErrorDlg.ShowDialog() == DialogResult.Abort)
@@ -231,7 +228,7 @@ namespace Ogama.ExceptionHandling
     public static void ProcessMessage(string title, string message)
     {
       // Show message dialog
-      InformationDialog newDlg = new InformationDialog(title, message, false, MessageBoxIcon.Information);
+      var newDlg = new InformationDialog(title, message, false, MessageBoxIcon.Information);
       newDlg.ShowDialog();
     }
 
@@ -400,10 +397,14 @@ namespace Ogama.ExceptionHandling
     /// <returns>A human readable <see cref="String"/> for the exception</returns>
     private static string GetLogEntryForException(Exception e)
     {
-      StringBuilder sb = new StringBuilder();
+      var sb = new StringBuilder();
       sb.AppendLine("Message: " + e.Message);
       sb.AppendLine("Source: " + e.Source);
-      sb.AppendLine("TargetSite: " + e.TargetSite.ToString());
+      if (e.TargetSite != null)
+      {
+        sb.AppendLine("TargetSite: " + e.TargetSite);
+      }
+
       sb.AppendLine("StackTrace: " + e.StackTrace);
 
       return sb.ToString();

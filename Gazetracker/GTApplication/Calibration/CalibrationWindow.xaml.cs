@@ -2,10 +2,9 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-using GTApplication.Tools;
+
 using GTLibrary;
 using GTLibrary.Logging;
 using GTLibrary.Utils;
@@ -13,7 +12,6 @@ using GTCommons;
 using System.IO;
 using GTCommons.Enum;
 using GTSettings;
-using GTCommons.Events;
 
 namespace GTApplication.CalibrationUI
 {

@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Emgu.CV;
-using GTLibrary.Detection.BlobAnalysis;
-using GTLibrary.Detection.Glint;
+
 using GTCommons.Enum;
 using GTSettings;
-using GTLibrary.Utils;
 
 namespace GTLibrary.Calibration
 {

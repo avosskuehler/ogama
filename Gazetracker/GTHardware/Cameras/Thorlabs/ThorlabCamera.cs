@@ -2,15 +2,12 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
-using System.Reflection;
-using System.Text;
 using System.Threading;
 using System.Windows.Interop;
 using Emgu.CV;
 using Emgu.CV.Structure;
-using GTHardware;
+
 using log4net;
-using System.Diagnostics;
 
 namespace GTHardware.Cameras.Thorlabs
 {

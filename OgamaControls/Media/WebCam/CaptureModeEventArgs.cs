@@ -14,10 +14,6 @@
 namespace OgamaControls
 {
   using System;
-  using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Drawing;
-  using System.Text;
 
   /// <summary>
   /// Delegate. Handles capture mode changed event.

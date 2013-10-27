@@ -3,8 +3,7 @@ using System.Drawing;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
-using GTLibrary.Log;
-using GTLibrary.Logging;
+
 using GTSettings;
 
 namespace GTLibrary.Detection.Eyes
