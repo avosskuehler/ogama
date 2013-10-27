@@ -72,10 +72,10 @@
             // 
             // pcbAlea
             // 
-            this.pcbAlea.Image = global::Ogama.Properties.Resources.Alea_54_75;
+            this.pcbAlea.Image = global::Ogama.Properties.Resources.AleaFoto64;
             this.pcbAlea.Location = new System.Drawing.Point(12, 62);
             this.pcbAlea.Name = "pcbAlea";
-            this.pcbAlea.Size = new System.Drawing.Size(54, 75);
+            this.pcbAlea.Size = new System.Drawing.Size(64, 64);
             this.pcbAlea.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pcbAlea.TabIndex = 8;
             this.pcbAlea.TabStop = false;
@@ -84,7 +84,7 @@
             // 
             this.pcbAleaLogo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pcbAleaLogo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pcbAleaLogo.Image = global::Ogama.Properties.Resources.alea_banner3;
+            this.pcbAleaLogo.Image = global::Ogama.Properties.Resources.AleaBanner;
             this.pcbAleaLogo.Location = new System.Drawing.Point(0, 0);
             this.pcbAleaLogo.Margin = new System.Windows.Forms.Padding(0);
             this.pcbAleaLogo.Name = "pcbAleaLogo";

@@ -24,7 +24,6 @@ namespace Ogama.Modules.Recording.AleaInterface
   using Alea.Api;
   using Microsoft.Win32;
   using Ogama.ExceptionHandling;
-  using Ogama.Modules.Common;
   using Ogama.Modules.Common.CustomEventArgs;
   using Ogama.Modules.Common.Tools;
   using Ogama.Modules.Recording.Dialogs;
@@ -252,7 +251,7 @@ namespace Ogama.Modules.Recording.AleaInterface
     /// <param name="errorMessage">Out. A <see cref="String"/> with an error message.</param>
     /// <returns><strong>True</strong>, if Alea tracker with intelligaze
     /// is available in the system, otherwise <strong>false</strong></returns>
-    public static bool IsAvailable(out string errorMessage)
+    public static TrackerStatus IsAvailable(out string errorMessage)
     {
       errorMessage = string.Empty;
 
@@ -267,7 +266,7 @@ namespace Ogama.Modules.Recording.AleaInterface
         if (fullpath.Length == 0 || !new FileInfo(fullpath + "\\" + FILENAME).Exists)
         {
           errorMessage = "Can't find Intelligaze folder. Maybe Intelligaze is not installed or installation is corrupted." + Environment.NewLine + "Please reinstall Intelligaze.";
-          return false;
+          return TrackerStatus.NotAvailable;
         }
       }
 
@@ -277,7 +276,7 @@ namespace Ogama.Modules.Recording.AleaInterface
       if (statusControlType == null)
       {
         errorMessage = "The Alea ActiveX Control is not registered. Please reinstall Intelligaze.";
-        return false;
+        return TrackerStatus.NotAvailable;
       }
 
       // do some further registry checks
@@ -290,12 +289,13 @@ namespace Ogama.Modules.Recording.AleaInterface
       {
         if (clsIDs[i].ToLower() == aleaCLSID)
         {
-          return true;
+          errorMessage = "Intelligaze found.";
+          return TrackerStatus.Available;
         }
       }
 
       errorMessage = "The Alea ActiveX Control is not registered. Please reinstall Intelligaze.";
-      return false;
+      return TrackerStatus.NotAvailable;
     }
 
     #region ITrackerInterfaceImplementation
@@ -613,7 +613,7 @@ namespace Ogama.Modules.Recording.AleaInterface
     public override void Dispose()
     {
       base.Dispose();
-      this.CalibrationDone -= new EventHandler<CalibrationDoneEventArgs>(this.aleaInterface_CalibrationDone);
+      this.CalibrationDone -= this.aleaInterface_CalibrationDone;
     }
 
     /// <summary>

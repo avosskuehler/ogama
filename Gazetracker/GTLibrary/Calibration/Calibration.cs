@@ -1,18 +1,17 @@
 ﻿using System;
 using System.IO;
-using System.Reflection;
+
 using Emgu.CV;
 using Emgu.CV.Structure;
-using GTLibrary.Detection.Glint;
+
 using GTCommons.Enum;
 using GTSettings;
-using GTLibrary.Utils;
+
 using System.ComponentModel;
 
 namespace GTLibrary.Calibration
 {
-    using System.Windows;
-    using GTCommons;
+  using GTCommons;
 
     using GTLibrary.Detection.Glint;
     using GTLibrary.Utils;

@@ -24,9 +24,7 @@ namespace Ogama.DataSet
 
   using Ogama.DataSet.OgamaDataSetTableAdapters;
   using Ogama.ExceptionHandling;
-  using Ogama.MainWindow;
   using Ogama.MainWindow.Dialogs;
-  using Ogama.Modules.Common;
   using Ogama.Modules.Common.SlideCollections;
   using Ogama.Modules.Common.Tools;
   using Ogama.Modules.Common.TrialEvents;

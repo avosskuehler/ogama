@@ -19,10 +19,8 @@ namespace Ogama.Modules.Recording.TrackerBase
   using System.Xml.Serialization;
 
   using Ogama.ExceptionHandling;
-  using Ogama.Modules.Common;
   using Ogama.Modules.Common.CustomEventArgs;
   using Ogama.Modules.Common.Tools;
-  using Ogama.Modules.ImportExport;
   using Ogama.Modules.ImportExport.Common;
   using Ogama.Modules.Recording.Dialogs;
 

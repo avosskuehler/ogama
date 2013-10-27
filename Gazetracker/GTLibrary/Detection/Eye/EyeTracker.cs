@@ -25,10 +25,10 @@ using System.Reflection;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
-using GTLibrary.Logging;
+
 using GTCommons.Enum;
 using GTSettings;
-using GTLibrary.Utils;
+
 using log4net;
 
 namespace GTLibrary.Detection.Eye

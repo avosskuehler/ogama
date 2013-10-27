@@ -14,6 +14,7 @@
 namespace Ogama.Modules.Recording.Dialogs
 {
   using System;
+  using System.Drawing;
   using System.Windows.Forms;
 
   using Ogama.ExceptionHandling;
@@ -24,6 +25,7 @@ namespace Ogama.Modules.Recording.Dialogs
   using Ogama.Modules.Recording.GazegroupInterface;
   using Ogama.Modules.Recording.MirametrixInterface;
   using Ogama.Modules.Recording.GazepointInterface;
+  using Ogama.Modules.Recording.SMIInterface;
   using Ogama.Modules.Recording.TobiiInterface;
   using Ogama.Modules.Recording.TrackerBase;
 
@@ -81,7 +83,7 @@ namespace Ogama.Modules.Recording.Dialogs
     {
       get
       {
-        HardwareTracker returnValue = HardwareTracker.None;
+        var returnValue = HardwareTracker.None;
         if (this.chbAlea.Checked)
         {
           returnValue |= HardwareTracker.Alea;
@@ -112,7 +114,7 @@ namespace Ogama.Modules.Recording.Dialogs
           returnValue |= HardwareTracker.GazetrackerDirectClient;
         }
 
-        if (this.chbAsl.Checked)
+        if (this.chbASL.Checked)
         {
           returnValue |= HardwareTracker.ASL; // = 64
         }
@@ -127,7 +129,7 @@ namespace Ogama.Modules.Recording.Dialogs
           returnValue |= HardwareTracker.Gazepoint;
         }
 
-        if (this.chbEyeTech.Checked)
+        if (this.chbEyetech.Checked)
         {
           returnValue |= HardwareTracker.EyeTech;
         }
@@ -242,6 +244,19 @@ namespace Ogama.Modules.Recording.Dialogs
 
     /// <summary>
     /// The <see cref="Control.Click"/> event handler for
+    /// the <see cref="PictureBox"/> <see cref="pcbEyetech"/>.
+    /// User clicked the Eye Tech logo,
+    /// so open eye tech website.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void PcbEyetechClick(object sender, EventArgs e)
+    {
+      System.Diagnostics.Process.Start("https://www.eyetechds.com");
+    }
+
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler for
     /// the <see cref="PictureBox"/> <see cref="pcbSMI"/>.
     /// User clicked the SMI logo,
     /// so open senso motoric instruments website.
@@ -304,7 +319,7 @@ namespace Ogama.Modules.Recording.Dialogs
 
     /// <summary>
     /// The <see cref="Control.Click"/> event handler for
-    /// the <see cref="PictureBox"/> <see cref="pcbAsl"/>.
+    /// the <see cref="PictureBox"/> <see cref="pcbASL"/>.
     /// User clicked the ASL logo,
     /// so open senso motoric instruments website.
     /// </summary>
@@ -343,7 +358,7 @@ namespace Ogama.Modules.Recording.Dialogs
 
     /// <summary>
     /// The <see cref="Control.Click"/> event handler
-    /// for the <see cref="PictureBox"/> <see cref="pcbHelpAsl"/>
+    /// for the <see cref="PictureBox"/> <see cref="pcbHelpASL"/>
     /// Displays instructions to activate ASL recording.
     /// </summary>
     /// <param name="sender">Source of the event</param>
@@ -419,29 +434,20 @@ namespace Ogama.Modules.Recording.Dialogs
       this.UpdateMirametrixStatus();
       this.UpdateGazepointStatus();
       this.UpdateEyeTechStatus();
+      this.UpdateSMITrackStatus();
     }
+
+    /// <summary>
+    /// Support for IsAvailable delegate
+    /// </summary>
+    private delegate TrackerStatus IsAvailable(out string error);
 
     /// <summary>
     /// Updates the status of the Tobii tracking devices
     /// </summary>
     private void UpdateTobiiStatus()
     {
-      string error;
-      string tobiiDefaultText = "The Tobii technologies T60,T120,X120 gaze tracker series."
-                                + Environment.NewLine;
-      if (!TobiiTracker.IsAvailable(out error))
-      {
-        this.chbTobii.Enabled = false;
-        this.chbTobii.Checked = false;
-        this.pcbTobii.Enabled = false;
-      }
-      else
-      {
-        this.chbTobii.Enabled = true;
-        this.pcbTobii.Enabled = true;
-      }
-
-      this.chbTobii.Text = tobiiDefaultText + "Status: " + error;
+      this.SetStatus(TobiiTracker.IsAvailable, this.chbTobii, this.pcbTobiiStatus, this.lblTobiiStatus);
     }
 
     /// <summary>
@@ -449,63 +455,24 @@ namespace Ogama.Modules.Recording.Dialogs
     /// </summary>
     private void UpdateMirametrixStatus()
     {
-      string error;
-      if (!MirametrixTracker.IsAvailable(out error))
-      {
-        this.chbMirametrix.Text = "Mirametrix S2 Eye tracker. Need to have Mirametrix S2 installed on this computer ! \n" + error;
-        this.chbMirametrix.Enabled = false;
-        this.chbMirametrix.Checked = false;
-        this.pcbMirametrix.Enabled = false;
-      }
-      else
-      {
-        this.chbMirametrix.Enabled = true;
-        this.pcbMirametrix.Enabled = true;
-        this.chbMirametrix.Text = "Mirametrix S2 installed on this computer ! \n" + error;
-      }
+      this.SetStatus(MirametrixTracker.IsAvailable, this.chbMirametrix, this.pcbMirametrixStatus, this.lblMirametrixStatus);
     }
+
     /// <summary>
     /// Updates the status of the Gazepoint tracking devices
     /// </summary>
-   
+
     private void UpdateGazepointStatus()
     {
-        string error;
-        if (!GazepointTracker.IsAvailable(out error))
-        {
-            this.chbGazepoint.Text = "Gazepoint GP3 eye tracker. Need to have Gazepoint S2 installed on this computer ! \n" + error;
-            this.chbGazepoint.Enabled = false;
-            this.chbGazepoint.Checked = false;
-            this.pcbGazepoint.Enabled = false;
-        }
-        else
-        {
-            this.chbGazepoint.Enabled = true;
-            this.pcbGazepoint.Enabled = true;
-            this.chbGazepoint.Text = "Gazepoint GP3 installed on this computer ! \n" + error;
-        }
+      this.SetStatus(GazepointTracker.IsAvailable, this.chbGazepoint, this.pcbGazepointStatus, this.lblGazepointStatus);
     }
-
 
     /// <summary>
     /// Updates the status of the Eyetech tracking devices
     /// </summary>
     private void UpdateEyeTechStatus()
     {
-      string error;
-      if (!EyeTechTracker.IsAvailable(out error))
-      {
-        this.chbEyeTech.Text = "The EyeTech TM3 eyetracker. Needs to have quickglance application installed on your computer. \n" + error;
-        this.chbEyeTech.Enabled = false;
-        this.chbEyeTech.Checked = false;
-        this.pcbEyeTech.Enabled = false;
-      }
-      else
-      {
-        this.chbEyeTech.Enabled = true;
-        this.pcbEyeTech.Enabled = true;
-        this.chbEyeTech.Text = "The EyeTech TM3 eyetracker. \n" + error;
-      }
+      this.SetStatus(EyeTechTracker.IsAvailable, this.chbEyetech, this.pcbEyetechStatus, this.lblEyetechStatus);
     }
 
     /// <summary>
@@ -513,25 +480,7 @@ namespace Ogama.Modules.Recording.Dialogs
     /// </summary>
     private void UpdateASLStatus()
     {
-      string error;
-
-      // ASL 
-      // "If you have purchased and installed an ASL " +
-      // "model 5000 Eye Tracker control unit (materials and softwares)" + Environment.NewLine;
-      const string AslDefaultText = "ASL software must be installed on this computer.";
-      if (!AslTracker.IsAvailable(out error))
-      {
-        this.chbAsl.Enabled = false;
-        this.chbAsl.Checked = false;
-        this.pcbAsl.Enabled = false;
-        this.chbAsl.Text = AslDefaultText + error;
-      }
-      else
-      {
-        this.chbAsl.Enabled = true;
-        this.pcbAsl.Enabled = true;
-        this.chbAsl.Text = AslDefaultText + "(ASL library found)";
-      }
+      this.SetStatus(AslTracker.IsAvailable, this.chbASL, this.pcbASLStatus, this.lblASLStatus);
     }
 
     /// <summary>
@@ -539,22 +488,15 @@ namespace Ogama.Modules.Recording.Dialogs
     /// </summary>
     private void UpdateAleaTrackStatus()
     {
-      string error;
-      string aleaDefaultText = "The alea technologies IG-30 Pro Eyetracking-System. "
-                               + "Needs to have Intelligaze Software 1.2 to be installed." + Environment.NewLine;
-      if (!AleaTracker.IsAvailable(out error))
-      {
-        this.chbAlea.Enabled = false;
-        this.chbAlea.Checked = false;
-        this.pcbAlea.Enabled = false;
-        this.chbAlea.Text = aleaDefaultText + "Status: " + error;
-      }
-      else
-      {
-        this.chbAlea.Enabled = true;
-        this.pcbAlea.Enabled = true;
-        this.chbAlea.Text = aleaDefaultText + "Status: Intelligaze found.";
-      }
+      this.SetStatus(AleaTracker.IsAvailable, this.chbAlea, this.pcbAleaStatus, this.lblAleaStatus);
+    }
+
+    /// <summary>
+    /// Updates the status of the SMI tracking devices
+    /// </summary>
+    private void UpdateSMITrackStatus()
+    {
+      this.SetStatus(SMITracker.IsAvailable, this.chbSMI, this.pcbSMIStatus, this.lblSMIStatus);
     }
 
     /// <summary>
@@ -563,35 +505,119 @@ namespace Ogama.Modules.Recording.Dialogs
     private void UpdateGazetrackerDirectClientStatus()
     {
       string error;
-      string ituDefaultText = "Gazetracker DIRECT connection." +
-        Environment.NewLine + "This is the Gazetracker which uses a webcam as "
-                              + "an eye tracker and can be used in both remote and head-mounted setups."
-                              + Environment.NewLine;
 
-      if (!GazetrackerDirectClientTracker.IsAvailable(out error))
+      switch (GazetrackerDirectClientTracker.IsAvailable(out error))
       {
-        this.chbGazetrackerDirectClient.Enabled = false;
-        this.chbGazetrackerDirectClient.Checked = false;
+        case TrackerStatus.Available:
+          this.chbGazetrackerDirectClient.Enabled = true;
+          break;
+        case TrackerStatus.NotAvailable:
+        case TrackerStatus.Undetermined:
+        case TrackerStatus.None:
+          this.chbGazetrackerDirectClient.Enabled = false;
+          this.chbGazetrackerDirectClient.Checked = false;
+          break;
       }
-      else
-      {
-        this.chbGazetrackerDirectClient.Enabled = true;
-      }
-
-      this.chbGazetrackerDirectClient.Text = ituDefaultText + "Status: " + error;
     }
 
     #endregion //METHODS
 
-    private void chbGazepoint_CheckedChanged(object sender, EventArgs e)
+    private void GrpTobiiEnter(object sender, EventArgs e)
     {
+      this.UpdateInfobar(TobiiTracker.IsAvailable, Properties.Resources.TobiiPhoto64, Properties.Resources.TobiiLogo);
+    }
 
+    private void GrpAleaEnter(object sender, EventArgs e)
+    {
+      this.UpdateInfobar(AleaTracker.IsAvailable, Properties.Resources.AleaFoto64, Properties.Resources.AleaLogo);
+    }
+
+    private void GrpSMIEnter(object sender, EventArgs e)
+    {
+      this.UpdateInfobar(SMITracker.IsAvailable, Properties.Resources.SMIFoto64, Properties.Resources.SMILogo);
+    }
+
+    private void GrpASLEnter(object sender, EventArgs e)
+    {
+      this.UpdateInfobar(AslTracker.IsAvailable, Properties.Resources.ASLFoto64, Properties.Resources.ASLLogo);
+    }
+
+    private void GrpMirametrixEnter(object sender, EventArgs e)
+    {
+      this.UpdateInfobar(MirametrixTracker.IsAvailable, Properties.Resources.MirametrixFoto64, Properties.Resources.MirametrixLogo);
+    }
+
+    private void GrpEyetechEnter(object sender, EventArgs e)
+    {
+      this.UpdateInfobar(EyeTechTracker.IsAvailable, Properties.Resources.EyetechFoto64, Properties.Resources.EyeTechLogo);
+    }
+
+    private void GrpGazepointEnter(object sender, EventArgs e)
+    {
+      this.UpdateInfobar(GazepointTracker.IsAvailable, Properties.Resources.GazepointFoto64, Properties.Resources.GazepointLogo);
     }
 
     ///////////////////////////////////////////////////////////////////////////////
     // Small helping Methods                                                     //
     ///////////////////////////////////////////////////////////////////////////////
     #region HELPER
+
+    /// <summary>
+    /// This method updates the infobar with the given tracker information.
+    /// </summary>
+    /// <param name="availableMethod">The IsAvailable method of the tracker.</param>
+    /// <param name="image">The bitmap of the tracker</param>
+    /// <param name="logo">The bitmap of the logo</param>
+    private void UpdateInfobar(
+      IsAvailable availableMethod,
+      Image image,
+      Image logo)
+    {
+      this.pcbSelectedTrackerLogo.Image = logo;
+      this.pcbSelectedTrackerImage.Image = image;
+      string error;
+      availableMethod(out error);
+      this.lblSelectedStatus.Text = error;
+    }
+
+    /// <summary>
+    /// Updates the status of the given tracking group box.
+    /// </summary>
+    /// <param name="availableMethod">The IsAvailable method of the tracker.</param>
+    /// <param name="checkBox">The checkbox to select the tracker.</param>
+    /// <param name="pcbStatus">The tracker status image picture box.</param>
+    /// <param name="lblStatus">The tracker status label.</param>
+    private void SetStatus(IsAvailable availableMethod, CheckBox checkBox, PictureBox pcbStatus, Label lblStatus)
+    {
+      string error;
+      switch (availableMethod(out error))
+      {
+        case TrackerStatus.Available:
+          checkBox.Enabled = true;
+          checkBox.Enabled = true;
+          pcbStatus.Image = Properties.Resources.Valid16;
+          this.toolTip1.SetToolTip(pcbStatus, "Tracker is available for recording");
+          lblStatus.Text = "Available";
+          break;
+        case TrackerStatus.None:
+        case TrackerStatus.NotAvailable:
+          checkBox.Enabled = false;
+          checkBox.Checked = false;
+          pcbStatus.Image = Properties.Resources.Error16;
+          this.toolTip1.SetToolTip(pcbStatus, "Tracker is not available for recording");
+          lblStatus.Text = "Not Available";
+          break;
+        case TrackerStatus.Undetermined:
+          checkBox.Enabled = true;
+          pcbStatus.Image = Properties.Resources.Warning16;
+          this.toolTip1.SetToolTip(pcbStatus, "Tracker status cannot be resolved");
+          lblStatus.Text = "Undetermined";
+          break;
+      }
+    }
+
     #endregion //HELPER
+
+
   }
 }

@@ -23,7 +23,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using DirectShowLib;
-using GTHardware.Cameras.DirectShow;
+
 //using GazeTrackingLibrary.Logging;
 
 namespace GTHardware.Cameras.DirectShow

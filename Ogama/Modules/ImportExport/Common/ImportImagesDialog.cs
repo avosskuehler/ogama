@@ -19,7 +19,6 @@ namespace Ogama.Modules.ImportExport.Common
   using System.Windows.Forms;
 
   using Ogama.ExceptionHandling;
-  using Ogama.Modules.Common;
   using Ogama.Modules.Common.FormTemplates;
   using Ogama.Modules.Common.Tools;
   using Ogama.Modules.ImportExport.FixationData;

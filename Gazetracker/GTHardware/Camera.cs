@@ -3,7 +3,6 @@ using System.Linq;
 
 using GTHardware.Cameras.DirectShow;
 //using GTHardware.Cameras.Thorlabs;
-using GTHardware.Cameras.Kinect;
 
 namespace GTHardware
 {

@@ -54,7 +54,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TOBII;VHUNLOCK</DefineConstants>
+    <DefineConstants>DEBUG;TOBII</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -476,6 +476,7 @@
     <Compile Include="Modules\Recording\TobiiInterface\TobiiTrackStatusControl.designer.cs">
       <DependentUpon>TobiiTrackStatusControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Recording\TrackerBase\TrackerStatus.cs" />
     <Compile Include="Modules\Recording\TrackerBase\TrackerWithStatusControls.cs" />
     <Compile Include="Modules\Recording\AleaInterface\AleaTracker.cs">
     </Compile>
@@ -1638,9 +1639,6 @@
     <None Include="Resources\Control_TrackBar.bmp" />
     <None Include="Resources\VSObject_Class.bmp" />
     <None Include="Resources\UpdateOgama1.png" />
-    <None Include="Resources\Alea_54_75.png" />
-    <None Include="Resources\Alea_16_16.png" />
-    <None Include="Resources\alea_banner3.png" />
     <None Include="Resources\MoveNext.png" />
     <None Include="Resources\MoveFirst.png" />
     <None Include="Resources\MouseDown.png" />
@@ -1659,17 +1657,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\SMILogo.gif" />
-    <None Include="Resources\SMI_61_25.png" />
     <None Include="Resources\OgamaV3.ico" />
     <None Include="Resources\StartUpSplash.png" />
     <None Include="Resources\ITUBanner.png" />
     <None Include="Resources\Globe32.png" />
-    <None Include="Resources\ASL01.gif" />
-    <None Include="Resources\ASL_61_46.gif" />
-    <None Include="Resources\ASL0.gif" />
     <None Include="Resources\ASLBanner.gif" />
-    <None Include="Resources\ASLico.gif" />
-    <None Include="Resources\ASLlogo.gif" />
     <None Include="Resources\ASLmire_1024x768.bmp" />
     <None Include="Resources\ASLmire_1280x1024.bmp" />
     <None Include="Resources\ASLmire_defaultSize.bmp" />
@@ -1678,16 +1670,36 @@
     <None Include="Resources\Desktop32.png" />
     <None Include="Resources\Desktop48.png" />
     <None Include="Resources\Disabled16.png" />
-    <Content Include="Resources\EyeTechLogo_S.png" />
-    <None Include="Resources\Eyetech_tracker.png" />
+    <None Include="Resources\Error21.png" />
+    <None Include="Resources\Error16.png" />
+    <None Include="Resources\Information21.png" />
+    <None Include="Resources\Information16.png" />
+    <None Include="Resources\AleaBanner.png" />
+    <None Include="Resources\AleaFoto16.png" />
+    <None Include="Resources\AleaFoto64.png" />
+    <None Include="Resources\ASLFoto16.jpg" />
+    <None Include="Resources\ASLFoto64.jpg" />
+    <None Include="Resources\EyetechFoto16.png" />
+    <None Include="Resources\EyetechFoto64.png" />
+    <None Include="Resources\EyeTechLogo.png" />
+    <None Include="Resources\GazepointBanner.png" />
+    <None Include="Resources\GazepointFoto16.png" />
+    <None Include="Resources\GazepointFoto64.png" />
+    <None Include="Resources\MirametrixBanner.png" />
+    <None Include="Resources\MirametrixFoto16.png" />
+    <None Include="Resources\MirametrixFoto64.png" />
+    <None Include="Resources\ASLLogo.gif" />
     <Content Include="Resources\MirametrixLogo.png" />
-    <Content Include="Resources\MirametrixLogo_150_33.png" />
-    <Content Include="Resources\Mirametrix_S2.png" />
-    <Content Include="Resources\Mirametrix_S2_16_8.png" />
     <Content Include="Resources\GazepointLogo.png" />
-    <Content Include="Resources\GazepointLogo_150_33.png" />
-    <Content Include="Resources\Gazepoint_GP3.png" />
-    <Content Include="Resources\Gazepoint_GP3_16_8.png" />
+    <None Include="Resources\Warning21.png" />
+    <None Include="Resources\Valid21.png" />
+    <None Include="Resources\Valid16.png" />
+    <None Include="Resources\Warning16.png" />
+    <None Include="Resources\SMIFoto16.png" />
+    <None Include="Resources\SMIFoto64.png" />
+    <None Include="Resources\TobiiBanner.png" />
+    <None Include="Resources\TobiiPhoto16.png" />
+    <None Include="Resources\TobiiPhoto64.png" />
     <Content Include="SaliencyCalculation\cygblas.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1776,10 +1788,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\AleaLogo.png" />
-    <None Include="Resources\TobiiLogoText.png" />
-    <None Include="Resources\Alea_61_75.png" />
     <None Include="Resources\Maus_61_61.png" />
-    <None Include="Resources\Tobii_61_75.png" />
     <None Include="Resources\Saliency.ico" />
     <None Include="Resources\ATM.ico" />
     <None Include="Resources\LineColorHS.png" />
@@ -1821,7 +1830,6 @@
     <None Include="Resources\LegendHS.png" />
     <None Include="Resources\flash.jpg" />
     <None Include="Resources\FlashPlayer.ico" />
-    <None Include="Resources\t60.png" />
     <None Include="Resources\StopHS.png" />
     <None Include="Resources\Run.ico" />
     <None Include="Resources\Design.ico" />

@@ -14,9 +14,7 @@
 namespace Ogama.Modules.Recording.MirametrixInterface
 {
   using System.Drawing;
-  using System.Drawing.Drawing2D;
   using System.Windows.Forms;
-  using System.Windows.Media;
 
   /// <summary>
   /// A dialog which exposes a track status meter to the subject.

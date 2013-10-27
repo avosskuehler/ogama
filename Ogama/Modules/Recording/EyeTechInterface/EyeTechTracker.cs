@@ -175,7 +175,7 @@ namespace Ogama.Modules.Recording.EyeTechInterface
     /// <param name="errorMessage">Out. A <see cref="String"/> with an error message.</param>
     /// <returns><strong>True</strong>, if eyetech tracker is available in the system, 
     /// otherwise <strong>false</strong></returns>.
-    public static bool IsAvailable(out string errorMessage)
+    public static TrackerStatus IsAvailable(out string errorMessage)
     {
       // No options available in the API for checking this
       // FIXME Add method for Quick Glance detection
@@ -185,11 +185,11 @@ namespace Ogama.Modules.Recording.EyeTechInterface
         errorMessage =
           "Quick Glance application not found in registry. EyeTech tracker will not work. Please install the "
           + "Quick glance application.";
-        return false;
+        return TrackerStatus.NotAvailable;
       }
 
-      errorMessage = string.Empty;
-      return true;
+      errorMessage = "EyeTech Quick Glance application is found.";
+      return TrackerStatus.Available;
     }
 
     #endregion //PUBLICMETHODS

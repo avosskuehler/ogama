@@ -15,7 +15,6 @@ namespace Ogama.Modules.ImportExport.Common
 {
   using System;
 
-  using Ogama.Modules.Common;
   using Ogama.Modules.Common.TrialEvents;
 
   using VectorGraphics.Elements;

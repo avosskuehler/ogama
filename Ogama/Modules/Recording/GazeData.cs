@@ -13,10 +13,6 @@
 
 namespace Ogama.Modules.Recording
 {
-  using System;
-  using System.Collections.Generic;
-  using System.Text;
-
   using Ogama.Modules.ImportExport.Common;
 
   /// <summary>

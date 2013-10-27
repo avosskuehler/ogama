@@ -26,7 +26,6 @@ namespace Ogama.Modules.Recording.ASLInterface
   using ASLSERIALOUTLIB2Lib;
 
   using Ogama.ExceptionHandling;
-  using Ogama.Modules.Common;
   using Ogama.Modules.Common.CustomEventArgs;
   using Ogama.Modules.Common.Tools;
   using Ogama.Modules.Recording.TrackerBase;
@@ -326,7 +325,7 @@ namespace Ogama.Modules.Recording.ASLInterface
     /// <param name="errorMessage">Out. A <see cref="String"/> with an error message.</param>
     /// <returns><strong>True</strong>, if Asl tracker is available in the system, 
     /// otherwise <strong>false</strong></returns>.
-    public static bool IsAvailable(out string errorMessage)
+    public static TrackerStatus IsAvailable(out string errorMessage)
     {
       // Search if the needed dll exists in the Application
       errorMessage = string.Empty;
@@ -336,12 +335,11 @@ namespace Ogama.Modules.Recording.ASLInterface
       {
         errorMessage = "The needed library does not exist in the good" +
             " application directory.";
-        return false;
+        return TrackerStatus.NotAvailable;
       }
-      else
-      {
-        return true;
-      }
+
+      errorMessage = "The connection library is found, the tracker cannot automatically detected.";
+      return TrackerStatus.Undetermined;
     }
 
     /// <summary>

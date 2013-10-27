@@ -681,7 +681,7 @@ namespace Ogama.MainWindow
             // 
             // mnuHelpHowToTobii
             // 
-            this.mnuHelpHowToTobii.Image = global::Ogama.Properties.Resources.tobii;
+            this.mnuHelpHowToTobii.Image = global::Ogama.Properties.Resources.TobiiPhoto16;
             this.mnuHelpHowToTobii.Name = "mnuHelpHowToTobii";
             this.mnuHelpHowToTobii.Size = new System.Drawing.Size(307, 22);
             this.mnuHelpHowToTobii.Text = "HowTo: Install Tobii Recording ...";
@@ -689,7 +689,7 @@ namespace Ogama.MainWindow
             // 
             // mnuHelpHowToAlea
             // 
-            this.mnuHelpHowToAlea.Image = global::Ogama.Properties.Resources.Alea_16_16;
+            this.mnuHelpHowToAlea.Image = global::Ogama.Properties.Resources.AleaFoto16;
             this.mnuHelpHowToAlea.Name = "mnuHelpHowToAlea";
             this.mnuHelpHowToAlea.Size = new System.Drawing.Size(307, 22);
             this.mnuHelpHowToAlea.Text = "HowTo: Install Alea Recording ...";
@@ -697,7 +697,7 @@ namespace Ogama.MainWindow
             // 
             // mnuHelpHowToAsl
             // 
-            this.mnuHelpHowToAsl.Image = global::Ogama.Properties.Resources.ASLico;
+            this.mnuHelpHowToAsl.Image = global::Ogama.Properties.Resources.ASLFoto16;
             this.mnuHelpHowToAsl.Name = "mnuHelpHowToAsl";
             this.mnuHelpHowToAsl.Size = new System.Drawing.Size(307, 22);
             this.mnuHelpHowToAsl.Text = "HowTo: Install ASL Recording ...";
@@ -705,7 +705,7 @@ namespace Ogama.MainWindow
             // 
             // mnuHelpHowToSMI
             // 
-            this.mnuHelpHowToSMI.Image = global::Ogama.Properties.Resources.SMI_61_25;
+            this.mnuHelpHowToSMI.Image = global::Ogama.Properties.Resources.SMIFoto16;
             this.mnuHelpHowToSMI.Name = "mnuHelpHowToSMI";
             this.mnuHelpHowToSMI.Size = new System.Drawing.Size(307, 22);
             this.mnuHelpHowToSMI.Text = "HowTo: Install SMI Recording ...";
@@ -989,7 +989,7 @@ namespace Ogama.MainWindow
             // 
             // mnuHelpHowToMirametrix
             // 
-            this.mnuHelpHowToMirametrix.Image = global::Ogama.Properties.Resources.Mirametrix_S2;
+            this.mnuHelpHowToMirametrix.Image = global::Ogama.Properties.Resources.MirametrixFoto16;
             this.mnuHelpHowToMirametrix.Name = "mnuHelpHowToMirametrix";
             this.mnuHelpHowToMirametrix.Size = new System.Drawing.Size(307, 22);
             this.mnuHelpHowToMirametrix.Text = "HowTo: Install Mirametrix S2 Recording ...";
@@ -998,7 +998,7 @@ namespace Ogama.MainWindow
 // 
             // mnuHelpHowToGazepoint
             // 
-            this.mnuHelpHowToGazepoint.Image = global::Ogama.Properties.Resources.Gazepoint_GP3;
+            this.mnuHelpHowToGazepoint.Image = global::Ogama.Properties.Resources.GazepointFoto16;
             this.mnuHelpHowToGazepoint.Name = "mnuHelpHowToGazepoint";
             this.mnuHelpHowToGazepoint.Size = new System.Drawing.Size(307, 22);
             this.mnuHelpHowToGazepoint.Text = "HowTo: Install Gazepoint GP3 Recording ...";

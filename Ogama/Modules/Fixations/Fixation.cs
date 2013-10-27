@@ -13,10 +13,6 @@
 
 namespace Ogama.Modules.Fixations
 {
-  using System;
-  using System.Collections.Generic;
-  using System.Text;
-  using Ogama.Modules.Common;
   using Ogama.Modules.Common.Types;
 
   /// <summary>

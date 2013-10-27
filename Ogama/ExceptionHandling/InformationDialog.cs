@@ -14,11 +14,7 @@
 namespace Ogama.ExceptionHandling
 {
   using System;
-  using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Data;
   using System.Drawing;
-  using System.Text;
   using System.Windows.Forms;
 
   /// <summary>
@@ -144,7 +140,7 @@ namespace Ogama.ExceptionHandling
     /// <returns>One of the <see cref="DialogResult"/> values.</returns>
     public static DialogResult Show(string caption, string message, bool isYesNoCancel, MessageBoxIcon icon)
     {
-      InformationDialog dlg = new InformationDialog(caption, message, isYesNoCancel, icon);
+      var dlg = new InformationDialog(caption, message, isYesNoCancel, icon);
       return dlg.ShowDialog();
     }
 

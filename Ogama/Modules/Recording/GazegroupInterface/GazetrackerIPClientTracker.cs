@@ -26,7 +26,6 @@ namespace Ogama.Modules.Recording.GazegroupInterface
   using GTNetworkClient;
 
   using Ogama.ExceptionHandling;
-  using Ogama.Modules.Common;
   using Ogama.Modules.Common.CustomEventArgs;
   using Ogama.Modules.Common.Tools;
   using Ogama.Modules.Recording.Dialogs;
@@ -225,10 +224,10 @@ namespace Ogama.Modules.Recording.GazegroupInterface
     /// </summary>
     /// <param name="errorMessage">Out. A <see cref="String"/> with an error message.</param>
     /// <returns>Always true.</returns>
-    public static bool IsAvailable(out string errorMessage)
+    public static TrackerStatus IsAvailable(out string errorMessage)
     {
       errorMessage = string.Empty;
-      return true;
+      return TrackerStatus.Undetermined;
     }
 
     /// <summary>

@@ -17,26 +17,16 @@ namespace Ogama.Modules.Database
   using System.Collections.Generic;
   using System.ComponentModel;
   using System.Data;
-  using System.Data.SqlClient;
-  using System.Data.SqlTypes;
-  using System.Drawing;
-  using System.Globalization;
   using System.IO;
-  using System.Text;
   using System.Windows.Forms;
 
   using Ogama.DataSet;
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
-  using Ogama.Modules.Common;
   using Ogama.Modules.Common.FormTemplates;
-  using Ogama.Modules.Common.SlideCollections;
   using Ogama.Modules.Common.Tools;
   using Ogama.Modules.ImportExport.OgamaData;
   using Ogama.Modules.ImportExport.RawData;
-
-  using VectorGraphics.Elements;
-  using VectorGraphics.StopConditions;
 
   /// <summary>
   /// Derived from <see cref="FormWithAccellerators"/>.

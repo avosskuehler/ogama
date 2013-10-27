@@ -70,7 +70,7 @@
             // 
             // pcbAsl
             // 
-            this.pcbAsl.Image = global::Ogama.Properties.Resources.ASLlogo;
+            this.pcbAsl.Image = global::Ogama.Properties.Resources.ASLLogo;
             this.pcbAsl.Location = new System.Drawing.Point(0, 91);
             this.pcbAsl.Name = "pcbAsl";
             this.pcbAsl.Size = new System.Drawing.Size(115, 69);

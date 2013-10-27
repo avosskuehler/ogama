@@ -62,10 +62,10 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Ogama.Properties.Resources.Gazepoint_GP3;
+            this.pictureBox1.Image = global::Ogama.Properties.Resources.GazepointFoto64;
             this.pictureBox1.Location = new System.Drawing.Point(15, 86);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(65, 71);
+            this.pictureBox1.Size = new System.Drawing.Size(64, 64);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 8;
             this.pictureBox1.TabStop = false;
@@ -74,7 +74,7 @@
             // pcbTobiiLogo
             // 
             this.pcbTobiiLogo.BackColor = System.Drawing.Color.LightGray;
-            this.pcbTobiiLogo.Image = global::Ogama.Properties.Resources.GazepointLogo;
+            this.pcbTobiiLogo.Image = global::Ogama.Properties.Resources.GazepointBanner;
             this.pcbTobiiLogo.Location = new System.Drawing.Point(-1, -3);
             this.pcbTobiiLogo.Margin = new System.Windows.Forms.Padding(0);
             this.pcbTobiiLogo.Name = "pcbTobiiLogo";

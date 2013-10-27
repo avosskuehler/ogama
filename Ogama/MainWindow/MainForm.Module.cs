@@ -14,14 +14,10 @@
 namespace Ogama.MainWindow
 {
   using System;
-  using System.Collections.Generic;
-  using System.Text;
   using System.Windows.Forms;
-  using Ogama.Modules.Common;
+
   using Ogama.Modules.Common.FormTemplates;
   using Ogama.Modules.Scanpath;
-
-  using OgamaControls;
 
   /// <summary>
   /// The MainWindow.Module.cs contains methods referring

@@ -13,25 +13,12 @@
 
 namespace Ogama.Modules.Saliency
 {
-  using System;
-  using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Data;
-  using System.Diagnostics;
   using System.Drawing;
-  using System.Drawing.Drawing2D;
-  using System.Drawing.Imaging;
-  using System.Text;
   using System.Windows.Forms;
 
-  using Ogama.ExceptionHandling;
   using Ogama.Modules.AttentionMap;
-  using Ogama.Modules.Common;
   using Ogama.Modules.Common.PictureTemplates;
-  using Ogama.Modules.Fixations;
-  using Ogama.Modules.ImportExport;
-  using OgamaControls;
-  using VectorGraphics;
+
   using VectorGraphics.Elements;
 
   /// <summary>

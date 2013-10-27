@@ -2,11 +2,9 @@
 using System.Drawing;
 using Emgu.CV;
 using Emgu.CV.Structure;
-using GTLibrary.Detection.Glint;
-using GTLibrary.Log;
+
 using GTCommons.Enum;
 using GTSettings;
-using GTLibrary.Utils;
 
 namespace GTLibrary
 {

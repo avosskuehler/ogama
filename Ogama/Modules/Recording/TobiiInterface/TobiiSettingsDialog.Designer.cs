@@ -223,10 +223,10 @@ namespace Ogama.Modules.Recording.TobiiInterface
       // 
       // pictureBox1
       // 
-      this.pictureBox1.Image = global::Ogama.Properties.Resources.tobii;
+      this.pictureBox1.Image = global::Ogama.Properties.Resources.TobiiPhoto64;
       this.pictureBox1.Location = new System.Drawing.Point(12, 12);
       this.pictureBox1.Name = "pictureBox1";
-      this.pictureBox1.Size = new System.Drawing.Size(57, 69);
+      this.pictureBox1.Size = new System.Drawing.Size(64, 64);
       this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
       this.pictureBox1.TabIndex = 23;
       this.pictureBox1.TabStop = false;

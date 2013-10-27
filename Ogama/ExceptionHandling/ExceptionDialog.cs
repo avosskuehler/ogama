@@ -14,11 +14,6 @@
 namespace Ogama.ExceptionHandling
 {
   using System;
-  using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Data;
-  using System.Drawing;
-  using System.Text;
   using System.Windows.Forms;
 
   /// <summary>
@@ -111,7 +106,7 @@ namespace Ogama.ExceptionHandling
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void btnViewLog_Click(object sender, EventArgs e)
     {
-      ShowLogDialog logForm =
+      var logForm =
         new ShowLogDialog(System.IO.Path.Combine(Properties.Settings.Default.LogfilePath, "exception.log"));
       logForm.ShowDialog();
     }

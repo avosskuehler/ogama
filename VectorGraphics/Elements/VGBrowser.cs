@@ -20,8 +20,7 @@ namespace VectorGraphics.Elements
   using System.Text;
   using System.Windows.Forms;
   using System.Xml.Serialization;
-  
-  using VectorGraphics.Controls;
+
   using VectorGraphics.Controls.Flash;
 
   /// <summary>

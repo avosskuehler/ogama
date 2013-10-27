@@ -11,9 +11,7 @@ using System.Windows.Forms.Design;
 using System.Collections;
 using System.Drawing;
 using System.Drawing.Design;
-using System.Runtime.InteropServices;
 using System.Globalization;
-using System.Reflection;
 
 namespace OgamaControls
 {

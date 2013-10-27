@@ -22,7 +22,6 @@ namespace Ogama.Modules.AOI
   using System.Windows.Forms;
   using Ogama.ExceptionHandling;
   using Ogama.Modules.AOI.Dialogs;
-  using Ogama.Modules.Common;
   using Ogama.Modules.Common.Types;
 
   using VectorGraphics.Canvas;

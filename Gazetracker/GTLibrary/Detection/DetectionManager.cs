@@ -24,20 +24,13 @@ using System;
 using System.Drawing;
 using Emgu.CV;
 using Emgu.CV.Structure;
-using GTLibrary.Detection.Eye;
-using GTLibrary.Detection.Eyes;
-using GTLibrary.Detection.Glint;
-using GTLibrary.Detection.Pupil;
-using GTLibrary.Log;
+
 using GTCommons.Enum;
 using GTSettings;
-using GTLibrary.Utils;
-using GTHardware;
 
 namespace GTLibrary.Detection
 {
   using GTLibrary.Detection.Eye;
-  using GTLibrary.Detection.Eyes;
   using GTLibrary.Detection.Glint;
   using GTLibrary.Detection.Pupil;
   using GTLibrary.Log;

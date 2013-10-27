@@ -27,7 +27,6 @@ namespace Ogama.Modules.Recording
   using Ogama.DataSet;
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
-  using Ogama.Modules.Common;
   using Ogama.Modules.Common.CustomEventArgs;
   using Ogama.Modules.Common.FormTemplates;
   using Ogama.Modules.Common.SlideCollections;

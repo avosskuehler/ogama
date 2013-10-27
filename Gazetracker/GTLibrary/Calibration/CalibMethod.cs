@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using GTLibrary.Detection.Glint;
+
 using GTCommons.Enum;
 using GTSettings;
-using GTLibrary.Utils;
 
 namespace GTLibrary.Calibration
 {

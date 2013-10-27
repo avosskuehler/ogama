@@ -13,7 +13,6 @@
 
 namespace Ogama.Modules.AOI
 {
-  using System;
   using System.Collections.Generic;
 
   /// <summary>

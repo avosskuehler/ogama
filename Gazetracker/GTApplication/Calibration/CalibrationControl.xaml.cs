@@ -9,12 +9,11 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Windows.Threading;
-using GTApplication.Tools;
+
 using GTLibrary.Calibration;
 using GTLibrary.Logging;
 using GTLibrary.Utils;
-using GTCommons;
+
 using GTCommons.Enum;
 using GTSettings;
 

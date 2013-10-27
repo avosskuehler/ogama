@@ -993,9 +993,9 @@ namespace OgamaControls.Media
         {
           DESError.ThrowExceptionForHR(hr);
         }
-        FilterState fs;
-        m_pControl.GetState(200, out fs);
-        //DESError.ThrowExceptionForHR(hr);
+        //FilterState fs;
+        //m_pControl.GetState(200, out fs);
+        ////DESError.ThrowExceptionForHR(hr);
 
       } while (m_State < ClassState.GraphCompleting);
 

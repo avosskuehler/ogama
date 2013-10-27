@@ -26,7 +26,6 @@
 //  Based on 1998 original version by: Don Cross <dcross@intersrv.com>
 ///////////////////////////////////////////////////////////////////////////////
 using System;
-using System.Collections.Generic;
 
 namespace OgamaControls
 {

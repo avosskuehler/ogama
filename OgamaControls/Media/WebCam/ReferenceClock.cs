@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace OgamaControls.Media.WebCam
+﻿namespace OgamaControls.Media.WebCam
 {
   using System;
   using System.Runtime.InteropServices;
   using System.ComponentModel;
   using System.Threading;
-  using System.Diagnostics;
 
   using DirectShowLib;
 

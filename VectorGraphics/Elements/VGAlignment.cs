@@ -13,8 +13,6 @@
 
 namespace VectorGraphics.Elements
 {
-  using System;
-
   /// <summary>
   /// This enumeration specifies how to align 
   /// name of elements.

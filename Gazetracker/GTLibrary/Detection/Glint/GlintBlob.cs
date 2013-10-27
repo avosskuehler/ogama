@@ -1,7 +1,5 @@
 ﻿using System.Linq;
 using Emgu.CV;
-using GTLibrary.Detection.BlobAnalysis;
-using GTLibrary.Utils;
 
 //using AForge.Imaging;
 

@@ -14,10 +14,7 @@
 namespace Ogama.ExceptionHandling
 {
   using System;
-  using System.Collections.Generic;
   using System.ComponentModel;
-  using System.Data;
-  using System.Drawing;
   using System.IO;
   using System.Text;
   using System.Windows.Forms;
@@ -55,7 +52,7 @@ namespace Ogama.ExceptionHandling
     {
       this.InitializeComponent();
       this.PopulateDialogWithFileContents(file);
-      StringBuilder mailtoStatement = new StringBuilder();
+      var mailtoStatement = new StringBuilder();
       mailtoStatement.Append("mailto:adrian.vosskuehler@physik.fu-berlin.de");
       mailtoStatement.Append("?subject=OGAMA%20error%20report");
       mailtoStatement.Append("&body=Please insert a copy of the logfile here by pressing Ctrl+V.");
@@ -96,7 +93,7 @@ namespace Ogama.ExceptionHandling
 
       // Display the appropriate link based on the value of the 
       // LinkData property of the Link object.
-      string target = e.Link.LinkData as string;
+      var target = e.Link.LinkData as string;
 
       // If the value looks like a URL, navigate to it.
       // Otherwise, display it in a message box.
@@ -157,12 +154,12 @@ namespace Ogama.ExceptionHandling
       this.lblFileName.Text = Path.GetFileName(file);
       if (File.Exists(file))
       {
-        string backupLogFile = Path.Combine(Properties.Settings.Default.LogfilePath, "copyOfLog.log");
+        var backupLogFile = Path.Combine(Properties.Settings.Default.LogfilePath, "copyOfLog.log");
         File.Copy(file, backupLogFile, true);
 
         // Create an instance of StreamReader to read from a file.
         // The using statement also closes the StreamReader.
-        using (StreamReader sr = new StreamReader(backupLogFile))
+        using (var sr = new StreamReader(backupLogFile))
         {
           // Read and display lines from the file until the end of 
           // the file is reached.

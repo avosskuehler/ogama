@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.IO;
 
 namespace GTHardware.Cameras.Thorlabs
 {

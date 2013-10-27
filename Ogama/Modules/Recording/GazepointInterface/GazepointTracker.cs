@@ -240,26 +240,23 @@ namespace Ogama.Modules.Recording.GazepointInterface
     /// <param name="errorMessage">Out. A <see cref="String"/> with an error message.</param>
     /// <returns><strong>True</strong>, if Gazepoint tracker
     /// is available in the system, otherwise <strong>false</strong></returns>
-    public static bool IsAvailable(out string errorMessage)
+    public static TrackerStatus IsAvailable(out string errorMessage)
     {
-      errorMessage = string.Empty;
-
       // Check Gazepoint process
       if (!IsProcessOpen("Gazepoint"))
       {
         if (!IsApplicationInstalled("Gazepoint"))
         {
           errorMessage = "Can't find Gazepoint GP3 Eye Tracker on this computer. Maybe Gazepoint GP3 Eye Tracker is not installed or installation is corrupted." + Environment.NewLine + "Please reinstall Gazepoint GP3 Eye Tracker.";
-          return false;
+          return TrackerStatus.NotAvailable;
         }
-        else
-        {
-          errorMessage = "Warning: Gazepoint GP3 Eye tracker does not seem to be connected on this computer. Please connect Gazepoint GP3 Eye tracker.";
-          return true;
-        }
+
+        errorMessage = "Warning: Gazepoint GP3 Eye tracker does not seem to be connected on this computer. Please connect Gazepoint GP3 Eye tracker.";
+        return TrackerStatus.Undetermined;
       }
 
-      return true;
+      errorMessage = "Gazepoint GP3 Eye Tracker found on this computer.";
+      return TrackerStatus.Available;
     }
 
     /// <summary>

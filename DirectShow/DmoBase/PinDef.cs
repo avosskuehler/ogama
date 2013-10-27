@@ -9,7 +9,6 @@
 
 namespace DmoBase
 {
-  using System;
   using DirectShowLib;
 
   /// <summary>

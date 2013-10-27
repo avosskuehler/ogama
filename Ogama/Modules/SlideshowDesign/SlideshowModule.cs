@@ -14,33 +14,17 @@
 namespace Ogama.Modules.SlideshowDesign
 {
   using System;
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.Collections.Specialized;
-  using System.ComponentModel;
-  using System.Data;
-  using System.Drawing;
-  using System.Drawing.Drawing2D;
-  using System.IO;
-  using System.Text;
-  using System.Threading;
   using System.Windows.Forms;
-  using System.Xml;
-  using System.Xml.Serialization;
 
   using Ogama.ExceptionHandling;
-  using Ogama.MainWindow;
-  using Ogama.Modules.Common;
   using Ogama.Modules.Common.FormTemplates;
   using Ogama.Modules.Common.SlideCollections;
   using Ogama.Modules.Common.Types;
-  using Ogama.Modules.Recording;
   using Ogama.Modules.SlideshowDesign.DesignModule;
   using Ogama.Modules.SlideshowDesign.DesignModule.StimuliDialogs;
-  using Ogama.Properties;
+
   using OgamaControls;
-  using VectorGraphics;
-  using VectorGraphics.Elements;
+
   using VectorGraphics.Elements.ElementCollections;
 
   /// <summary>

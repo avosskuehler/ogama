@@ -13,10 +13,6 @@
 
 namespace Ogama.MainWindow
 {
-  using System;
-  using System.Collections.Generic;
-  using System.Text;
-
   using Ogama.Modules.AOI;
   using Ogama.Modules.AttentionMap;
   using Ogama.Modules.Fixations;

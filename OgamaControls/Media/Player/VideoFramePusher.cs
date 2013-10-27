@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+
 using DirectShowLib;
 using System.Runtime.InteropServices;
 using System.Diagnostics;

@@ -13,9 +13,7 @@
 
 namespace Ogama.Modules.Fixations
 {
-  using System;
   using System.Collections.Generic;
-  using System.Text;
 
   /// <summary>
   /// This class encapsulates properties of how to

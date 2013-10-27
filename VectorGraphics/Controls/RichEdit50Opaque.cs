@@ -13,12 +13,6 @@
 
 namespace VectorGraphics.Controls
 {
-  using System;
-  using System.Collections.Generic;
-  using System.Runtime.InteropServices;
-  using System.Text;
-  using System.Windows.Forms;
-
   /// <summary>
   /// Derived from <see cref="RichEdit50"/>.
   /// This is the opaque version of the control.

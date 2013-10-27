@@ -17,7 +17,6 @@ namespace Ogama.Modules.Fixations
   using System.Data;
   using System.Windows.Forms;
 
-  using Ogama.Modules.Common;
   using Ogama.Modules.Common.FormTemplates;
   using Ogama.Modules.Statistics;
 

@@ -1,9 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
-using VectorGraphics;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Printing;

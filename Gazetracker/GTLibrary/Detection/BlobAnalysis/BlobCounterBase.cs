@@ -6,7 +6,7 @@ using AForge;
 using AForge.Imaging;
 using Emgu.CV;
 using Emgu.CV.Structure;
-using GTLibrary.Utils;
+
 using Image = System.Drawing.Image;
 
 namespace GTLibrary.Detection.BlobAnalysis

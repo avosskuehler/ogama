@@ -19,7 +19,6 @@ namespace Ogama.Modules.SlideshowDesign.DesignModule.StimuliDialogs
 
   using Ogama.Modules.Common.Controls;
 
-  using VectorGraphics.Elements;
   using VectorGraphics.Elements.ElementCollections;
   using VectorGraphics.StopConditions;
 

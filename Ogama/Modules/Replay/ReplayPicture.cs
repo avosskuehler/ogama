@@ -17,23 +17,18 @@ namespace Ogama.Modules.Replay
   using System.Collections.Generic;
   using System.ComponentModel;
   using System.Data;
-  using System.Diagnostics;
   using System.Drawing;
   using System.Drawing.Drawing2D;
   using System.Media;
-  using System.Text;
   using System.Windows.Forms;
 
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
-  using Ogama.Modules.Common;
   using Ogama.Modules.Common.CustomEventArgs;
   using Ogama.Modules.Common.FormTemplates;
   using Ogama.Modules.Common.Tools;
   using Ogama.Modules.Common.TrialEvents;
   using Ogama.Modules.Common.Types;
-
-  using OgamaControls;
 
   using VectorGraphics.Canvas;
   using VectorGraphics.Elements;

@@ -14,9 +14,7 @@
 namespace Ogama.MainWindow
 {
   using System;
-  using System.Collections.Generic;
   using System.IO;
-  using System.Text;
   using System.Windows.Forms;
 
   using Ogama.ExceptionHandling;

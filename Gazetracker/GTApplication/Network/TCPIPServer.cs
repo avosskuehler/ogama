@@ -4,7 +4,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using System.Collections.Generic;
+
 using GTNetworkClient;
 using GTLibrary.Logging;
 using GTCommons;

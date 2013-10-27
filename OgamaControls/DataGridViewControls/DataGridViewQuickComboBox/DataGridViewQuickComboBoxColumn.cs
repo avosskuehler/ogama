@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Text;
-using System.Diagnostics;
 using System.Globalization;
 using System.Windows.Forms;
 using System.ComponentModel;
-using System.Drawing;
 
 namespace OgamaControls
 {

@@ -21,8 +21,7 @@
 using System;
 using System.Windows;
 using System.Windows.Input;
-using GTApplication.SettingsUI;
-using GTApplication.Tools;
+
 using GTLibrary;
 using GTCommons.Enum;
 using GTSettings;

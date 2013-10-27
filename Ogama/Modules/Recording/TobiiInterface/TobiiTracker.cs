@@ -22,7 +22,6 @@ namespace Ogama.Modules.Recording.TobiiInterface
   using System.Xml.Serialization;
 
   using Ogama.ExceptionHandling;
-  using Ogama.Modules.Common;
   using Ogama.Modules.Common.CustomEventArgs;
   using Ogama.Modules.Common.Tools;
   using Ogama.Modules.Recording.Dialogs;
@@ -255,13 +254,13 @@ namespace Ogama.Modules.Recording.TobiiInterface
     /// Checks if the tobii tracker is available in the system.
     /// </summary>
     /// <param name="errorMessage">
-    /// Out. A <see cref="string"/> with an error message.
+    ///   Out. A <see cref="string"/> with an error message.
     /// </param>
     /// <returns>
     /// <strong>True</strong>, if Tobii tracker 
     ///   is available in the system, otherwise <strong>false</strong>
     /// </returns>
-    public static bool IsAvailable(out string errorMessage)
+    public static TrackerStatus IsAvailable(out string errorMessage)
     {
       if (availableEyetracker.Count > 0)
       {
@@ -274,11 +273,11 @@ namespace Ogama.Modules.Recording.TobiiInterface
 
         errorMessage += " is found";
 
-        return true;
+        return TrackerStatus.Available;
       }
 
       errorMessage = "No tobii eyetracker has been found on the system. ";
-      return false;
+      return TrackerStatus.NotAvailable;
     }
 
     /// <summary>
@@ -875,7 +874,7 @@ namespace Ogama.Modules.Recording.TobiiInterface
 
       // Convert Tobii gazestamp in milliseconds.
       var newGazeData = new GazeData { Time = gd.TimeStamp / 1000 };
-      
+
       // The validity code takes one of five values for each eye ranging from 0 to 4, with the
       // following interpretation:
       // 0 - The eye tracker is certain that the data for this eye is right. There is no risk of

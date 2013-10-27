@@ -1,4 +1,3 @@
-using System;
 namespace OgamaControls
 {
     partial class PeakMeterCtrl

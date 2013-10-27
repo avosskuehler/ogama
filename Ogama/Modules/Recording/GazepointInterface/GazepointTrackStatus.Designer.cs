@@ -76,7 +76,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Ogama.Properties.Resources.GazepointLogo_150_33;
+            this.pictureBox1.Image = global::Ogama.Properties.Resources.GazepointLogo;
             this.pictureBox1.Location = new System.Drawing.Point(1, 3);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(154, 34);

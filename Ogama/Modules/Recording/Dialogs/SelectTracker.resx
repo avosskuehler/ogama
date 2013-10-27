@@ -380,6 +380,9 @@
         +kf3v9lfwf8ACef8I5/218nP/oef/Hq9TXl/v8p9Rryf9PvZ/O3+f6n/2Q==
 </value>
   </data>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <data name="chbGazetrackerDirectClient.Text" xml:space="preserve">
     <value>Gazetracker DIRECT client: 
 The Gazegroup GazeTracker application which uses a webcam as an eye tracker and can be used in both remote and head-mounted setup.

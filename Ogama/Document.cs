@@ -26,10 +26,8 @@ namespace Ogama
   using Microsoft.SqlServer.Management.Smo;
   using Ogama.DataSet;
   using Ogama.ExceptionHandling;
-  using Ogama.MainWindow;
   using Ogama.MainWindow.ContextPanel;
   using Ogama.MainWindow.Dialogs;
-  using Ogama.Modules.Common;
   using Ogama.Modules.Common.Tools;
   using Ogama.Modules.Common.Types;
   using Ogama.Properties;

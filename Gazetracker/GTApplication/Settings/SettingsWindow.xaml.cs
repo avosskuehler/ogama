@@ -10,7 +10,7 @@ using System.Windows.Media;
 using GazeGUI;
 using GTLibrary.Utils;
 using GTSettings;
-using GTCommons;
+
 using Microsoft.Win32;
 
 using Application = System.Windows.Forms.Application;
