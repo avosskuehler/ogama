@@ -23,6 +23,7 @@ namespace Ogama.Modules.Recording.SMIInterface
   using System.Windows.Forms;
 
   using Ogama.ExceptionHandling;
+  using Ogama.Modules.Common;
   using Ogama.Modules.Common.CustomEventArgs;
   using Ogama.Modules.Common.Tools;
 
@@ -98,8 +99,20 @@ namespace Ogama.Modules.Recording.SMIInterface
     public SMIClient()
     {
       this.lastTime = 0;
-      this.presentationScreenSize = Document.ActiveDocument.PresentationSize;
       this.stopListenThread = false;
+      Document document = Document.ActiveDocument;
+      if (document != null)
+      {
+        this.presentationScreenSize = Document.ActiveDocument.PresentationSize;
+      }
+      
+    }
+
+    public SMIClient(int drawingWidth, int drawingHeight)
+    {
+      this.lastTime = 0;
+      this.stopListenThread = false;
+      this.presentationScreenSize = new Size(drawingWidth, drawingHeight);
     }
 
     /// <summary>
@@ -501,6 +514,7 @@ namespace Ogama.Modules.Recording.SMIInterface
           // Indicates calibration point change. Available only during calibration.
           string[] tmp = receivedString.Split(seperator);
           int pointNumber = Convert.ToInt32(tmp[1]);
+          Console.WriteLine("NewBytesReceived, ET_CHG, pointnumber:"+pointNumber);
           this.ShowNewCalibrationPoint(pointNumber);
           break;
         case "ET_FIN":
@@ -557,24 +571,30 @@ namespace Ogama.Modules.Recording.SMIInterface
     /// <summary>
     /// Extracts the received sample into a <see cref="GazeData"/>
     /// struct.
+		/// A dataStr may contain the following data:
+		/// ET_SPL 91555722812 b 420 420 564 564 17.219431 17.855097 17.219431 17.855097 -53.704  9.674 13.589 15.935 624.140 612.472 419.313368 680.213202 455.167761 443.716013 4.72 4.72 3
     /// </summary>
     /// <param name="dataStr">The <see cref="String"/> with the data line from the iViewX.</param>
     /// <returns>A filled <see cref="GazeData"/> that represents the line
     /// according to the <see cref="SMISetting"/></returns>
-    private GazeData ExtractTrackerData(string dataStr)
+    public GazeData ExtractTrackerData(string dataStr)
     {
-      GazeData data = new GazeData();
+      
+			Console.WriteLine("ExtractTrackerData:" + dataStr);
+
+			GazeData data = new GazeData();
       char[] seperator = { ' ' };
       string[] tmp = dataStr.Split(seperator);
-      string availableEye = tmp[1];
+			
       try
-      {
-          this.lastTime = Convert.ToInt64(tmp[2]);
+      {	
+				this.lastTime = Convert.ToInt64(tmp[1]);
       }
       catch (System.Exception)
       {
 
       }
+			string availableEye = tmp[2];
       switch (availableEye)
       {
         case "b":
