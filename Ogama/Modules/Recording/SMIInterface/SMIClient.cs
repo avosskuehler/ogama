@@ -107,7 +107,11 @@ namespace Ogama.Modules.Recording.SMIInterface
       }
       
     }
-
+		/// <summary>
+		/// SMIClient constructor
+		/// </summary>
+		/// <param name="drawingWidth"></param>
+		/// <param name="drawingHeight"></param>
     public SMIClient(int drawingWidth, int drawingHeight)
     {
       this.lastTime = 0;
@@ -514,7 +518,7 @@ namespace Ogama.Modules.Recording.SMIInterface
           // Indicates calibration point change. Available only during calibration.
           string[] tmp = receivedString.Split(seperator);
           int pointNumber = Convert.ToInt32(tmp[1]);
-          Console.WriteLine("NewBytesReceived, ET_CHG, pointnumber:"+pointNumber);
+          //Console.WriteLine("NewBytesReceived, ET_CHG, pointnumber:"+pointNumber);
           this.ShowNewCalibrationPoint(pointNumber);
           break;
         case "ET_FIN":
@@ -580,7 +584,7 @@ namespace Ogama.Modules.Recording.SMIInterface
     public GazeData ExtractTrackerData(string dataStr)
     {
       
-			Console.WriteLine("ExtractTrackerData:" + dataStr);
+			//Console.WriteLine("ExtractTrackerData:" + dataStr);
 
 			GazeData data = new GazeData();
       char[] seperator = { ' ' };

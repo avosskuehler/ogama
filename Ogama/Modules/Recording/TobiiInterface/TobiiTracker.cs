@@ -262,7 +262,8 @@ namespace Ogama.Modules.Recording.TobiiInterface
     /// </returns>
     public static TrackerStatus IsAvailable(out string errorMessage)
     {
-      if (availableEyetracker.Count > 0)
+		
+      if (availableEyetracker != null && availableEyetracker.Count > 0)
       {
         var name = availableEyetracker[0].GivenName;
         errorMessage = "Tobii: " + availableEyetracker[0].Model;
