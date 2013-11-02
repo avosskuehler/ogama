@@ -1209,6 +1209,7 @@ namespace Ogama.Modules.Database
     /// update raw data position x
     /// </summary>
     /// <param name="deltaX"></param>
+		/// <param name="deltaY"></param>
     public void handleRawDataUpdate(int deltaX, int deltaY)
     {
       if (dgvRawData.Rows.Count == 0)
