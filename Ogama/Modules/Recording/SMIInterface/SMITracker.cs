@@ -22,6 +22,7 @@ namespace Ogama.Modules.Recording.SMIInterface
   using Ogama.Modules.Common.CustomEventArgs;
   using Ogama.Modules.Recording.Dialogs;
   using Ogama.Modules.Recording.TrackerBase;
+	using Ogama.Modules.Recording.SMIInterface.RedM;
 
   /// <summary>
   /// This class implements the <see cref="ITracker"/> interface to represent 
@@ -50,7 +51,8 @@ namespace Ogama.Modules.Recording.SMIInterface
     /// <summary>
     /// Handles the calls to the SMI iViewX application layer. 
     /// </summary>
-    private SMIClient smiClient;
+		//    private SMIClient smiClient;
+		private SmiRedmClient smiClient;
 
 
 
@@ -192,7 +194,7 @@ namespace Ogama.Modules.Recording.SMIInterface
         // Start the SMI client
         if (!this.smiClient.IsTracking)
         {
-          this.smiClient.StartTracking();
+         //RB:  this.smiClient.StartTracking();
         }
       }
       catch (Exception ex)
@@ -351,7 +353,8 @@ namespace Ogama.Modules.Recording.SMIInterface
       this.CalibrationFinished += this.SMIInterfaceCalibrationFinished;
 
       // Set up the SMI client object and it's events
-      this.smiClient = new SMIClient();
+      //this.smiClient = new SMIClient();
+			this.smiClient = new SmiRedmClient();
       this.smiClient.GazeDataAvailable += this.SMIClientGazeDataAvailable;
       this.smiClient.CalibrationFinished += this.SMIClientCalibrationFinished;
 
