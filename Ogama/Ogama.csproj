@@ -457,6 +457,10 @@
     <Compile Include="Modules\Recording\Presenter\DSScreenCapture.cs" />
     <Compile Include="Modules\Recording\Presenter\ScreenCaptureProperties.cs" />
     <Compile Include="Modules\Recording\EyeTechInterface\QuickLinkAPI.cs" />
+    <Compile Include="Modules\Recording\SMIInterface\RedM\EyeTrackingController.cs" />
+    <Compile Include="Modules\Recording\SMIInterface\RedM\SmiRedmClient.cs" />
+    <Compile Include="Modules\Recording\SMIInterface\RedM\SmiRedmWrapper.cs" />
+    <Compile Include="Modules\Recording\SMIInterface\RedM\SmiRedmWrapperListener.cs" />
     <Compile Include="Modules\Recording\TobiiInterface\TobiiCalibrationRunner.cs" />
     <Compile Include="Modules\Recording\TobiiInterface\TobiiCalibrationForm.cs">
       <SubType>Form</SubType>
