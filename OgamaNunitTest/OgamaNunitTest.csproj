@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modules\Recording\SMIInterface\RedM\SmiRedmClientUnitTest.cs" />
     <Compile Include="Modules\Recording\SMIInterface\SMIClientIntegrationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
