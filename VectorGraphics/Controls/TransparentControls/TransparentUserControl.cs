@@ -19,7 +19,10 @@ namespace VectorGraphics.Controls
       this.DoubleBuffered = true;
 			InitializeComponent();
 		}
-
+		/// <summary>
+		/// OnPaintBackground
+		/// </summary>
+		/// <param name="pevent"></param>
     protected override void OnPaintBackground(PaintEventArgs pevent)
     {
       //do not allow the background to be painted  
