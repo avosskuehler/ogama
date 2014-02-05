@@ -255,20 +255,27 @@ namespace Ogama.Modules.Recording.SMIInterface.RedM
 		}
 
 
-		
 
+		private Object LOCK = new Object();
 
 		public void onSampleData(EyeTrackingController.SampleStruct data)
 		{
-			if (this.GazeDataAvailable == null)
+			lock (LOCK)
 			{
-				return;
+				if (!IsTracking)
+				{
+					return;
+				}
+				if (this.GazeDataAvailable == null)
+				{
+					return;
+				}
+				GazeData gazeData = ExtractTrackerData(data);
+
+				GazeDataChangedEventArgs eventArgs = new GazeDataChangedEventArgs(gazeData);
+
+				this.OnGazeDataAvailable(eventArgs);
 			}
-			GazeData gazeData = ExtractTrackerData(data);
-
-			GazeDataChangedEventArgs eventArgs = new GazeDataChangedEventArgs(gazeData);
-
-			this.OnGazeDataAvailable(eventArgs);
 		}
 	}
 }

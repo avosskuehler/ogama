@@ -714,6 +714,11 @@ namespace Ogama.Modules.Common.FormTemplates
       // including explicit disposing of flash objects
       this.Picture.ResetBackground();
 
+			if (slide == null)
+			{
+				return;
+			}
+
       // Set presentation size
       slide.PresentationSize = Document.ActiveDocument.PresentationSize;
 
