@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>3.8</ProductVersion>
+    <ProjectGuid>14b91359-9a99-4ed7-b5ed-b3786c6f1af8</ProjectGuid>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputName>OgamaSetupV45</OutputName>
+    <OutputType>Package</OutputType>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+    <Name>SetupProject</Name>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <OutputPath>..\..\Debug86\Setup\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>Debug</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>..\..\Release86\Setup\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DefineConstants>Debug</DefineConstants>
+    <OutputPath>..\..\Debug64\Setup\</OutputPath>
+    <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <OutputPath>..\..\Release64\Setup\</OutputPath>
+    <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Common\RegistryEntries.wxs" />
+    <Compile Include="DirectShow\DirectShow.wxs" />
+    <Compile Include="Help.wxs" />
+    <Compile Include="Libs.wxs" />
+    <Compile Include="Saliency.wxs" />
+    <Compile Include="DirectShow\DmoMixer.wxs" />
+    <Compile Include="DirectShow\DmoOverlay.wxs" />
+    <Compile Include="DirectShow\GenericSampleSourceFilter.wxs" />
+    <Compile Include="DirectShow\OgamaCaptureX86.wxs" />
+    <Compile Include="DirectShow\proppage.wxs" />
+    <Compile Include="Gazetracker.wxs" />
+    <Compile Include="Ogama.wxs" />
+    <Compile Include="Product.wxs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WixExtension Include="WixUtilExtension">
+      <HintPath>$(WixExtDir)\WixUtilExtension.dll</HintPath>
+      <Name>WixUtilExtension</Name>
+    </WixExtension>
+    <WixExtension Include="WixUIExtension">
+      <HintPath>$(WixExtDir)\WixUIExtension.dll</HintPath>
+      <Name>WixUIExtension</Name>
+    </WixExtension>
+    <WixExtension Include="WixNetFxExtension">
+      <HintPath>$(WixExtDir)\WixNetFxExtension.dll</HintPath>
+      <Name>WixNetFxExtension</Name>
+    </WixExtension>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DirectShow" />
+    <Folder Include="Common" />
+    <Folder Include="Resources" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Common\Config.wxi" />
+    <Content Include="Resources\BannerInstaller.bmp" />
+    <Content Include="Resources\InstallUtilLib.dll" />
+    <Content Include="Resources\License.rtf" />
+    <Content Include="Resources\Microsoft_VC120_CRT_x64.msm" />
+    <Content Include="Resources\Microsoft_VC120_CRT_x86.msm" />
+    <Content Include="Resources\NewFldrBtn.bmp" />
+    <Content Include="Resources\Ogama.ico" />
+    <Content Include="Resources\OgamaImportSettings.ico" />
+    <Content Include="Resources\SourceDocumentation.ico" />
+    <Content Include="Resources\UpFldrBtn.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Common\en-US.wxl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DirectShow\DmoBase\DmoBase.csproj">
+      <Name>DmoBase</Name>
+      <Project>{d8704cbe-f446-4af1-bca2-ffb0de267395}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DirectShow\DmoMixer\DmoMixer.csproj">
+      <Name>DmoMixer</Name>
+      <Project>{d7ef4866-4217-466a-b336-c941cb7d5760}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DirectShow\DmoOverlay\DmoOverlay.csproj">
+      <Name>DmoOverlay</Name>
+      <Project>{369d647a-7f80-4f06-bedb-d62ac1627862}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Gazetracker\GTApplication\GTApplication.csproj">
+      <Name>GTApplication</Name>
+      <Project>{41ce4be5-ab35-45ed-945f-de384454215c}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Gazetracker\GTCommons\GTCommons.csproj">
+      <Name>GTCommons</Name>
+      <Project>{02e8476c-305d-4fad-83bc-3a70cca37260}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Gazetracker\GTHardware\GTHardware.csproj">
+      <Name>GTHardware</Name>
+      <Project>{4ef59290-9005-460e-8919-5003414bdc92}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Gazetracker\GTLibrary\GTLibrary.csproj">
+      <Name>GTLibrary</Name>
+      <Project>{bf8d4e7f-f8e1-4204-b438-55b35233f590}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Gazetracker\GTNetworkClient\GTNetworkClient.csproj">
+      <Name>GTNetworkClient</Name>
+      <Project>{bd8916ff-de52-4932-a71b-5e748af559f0}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Gazetracker\GTOgamaClient\GTOgamaClient.csproj">
+      <Name>GTOgamaClient</Name>
+      <Project>{2f1306d9-f01d-4431-8122-9dbc888480cd}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Gazetracker\GTSettings\GTSettings.csproj">
+      <Name>GTSettings</Name>
+      <Project>{64c7d526-f5ae-4b60-87ab-5ad67104c581}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\OgamaControls\OgamaControls.csproj">
+      <Name>OgamaControls</Name>
+      <Project>{63ef9d30-447a-4f79-9ec8-e4956dc0abf8}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Ogama\Ogama.csproj">
+      <Name>Ogama</Name>
+      <Project>{84de2c81-ce99-4ed3-b4f3-3c47cdd85e3d}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\VectorGraphics\VectorGraphics.csproj">
+      <Name>VectorGraphics</Name>
+      <Project>{8230aed9-33a2-42fd-bdf7-4f7e4efa73db}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(WixTargetsPath)" />
+  <!--
+	To modify your build process, add your task inside one of the targets below and uncomment it.
+	Other similar extension points exist, see Wix.targets.
+	<Target Name="BeforeBuild">
+	</Target>
+	<Target Name="AfterBuild">
+	</Target>
+	-->
+</Project>

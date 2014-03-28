@@ -1,2 +1,2 @@
-4.3.4840.39362
+4.4.5049.37409
 This is a maintenance release, containing bugfixes and usability improvements.

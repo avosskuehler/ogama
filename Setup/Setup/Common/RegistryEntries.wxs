@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Fragment>
+    <!-- Registers Ogama not to use win7 emulation mode -->
+    <DirectoryRef Id="INSTALLLOCATION">
+      <Component Id="RegistryEntries" Guid="{926E775C-2805-4BDD-B536-DF19FFC2240F}">
+        <RegistryKey Root="HKLM"
+                     Key="Software\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION">
+          <RegistryValue Type="integer" Name="Ogama.exe" Value="9999" KeyPath="yes"/>
+        </RegistryKey>
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+</Wix>
