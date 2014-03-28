@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?include $(sys.CURRENTDIR)Common\Config.wxi?>
+  <Fragment>
+    <DirectoryRef Id="INSTALLLOCATION">
+      <Directory Id="HelpDirectory" Name="Help">
+        <Component Id="C_OgamaSourceDocumentation" Guid="{7E4C5CFC-D5FF-E88C-A61D-CD3F89FE1241}" Win64="$(var.Win64)">
+          <File Id="OgamaSourceDocumentation" Name="OgamaSourceDocumentation.chm" KeyPath="yes" DiskId="1"
+              Source="$(var.SolutionDir)SourceDocumentation\" />
+          <Shortcut Id="OgamaSourceDocumentationShortcut" Directory="Ogama" Name="Source Documentation" Description="Source code documentation help file." Icon="SourceDocumentation.ico" IconIndex="0" Show="normal" WorkingDirectory="HelpDirectory" Advertise="yes" />
+        </Component>
+        <Component Id="C_FixationSourceCodePermission" Guid="{0963AD81-F505-64CC-3217-A87C4ADAD700}" Win64="$(var.Win64)">
+          <File Id="FixationSourceCodePermission" Name="FixationSourceCodePermission.txt" KeyPath="yes" DiskId="1"
+              Source="$(var.SolutionDir)Setup\Setup\Resources\" />
+        </Component>
+        <Component Id="C_FIX" Guid="{F79A1ACF-CC9C-FBD7-D631-DD451E4945F1}" Win64="$(var.Win64)">
+          <File Id="FIX" Name="FIX.rtf" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)Help\" />
+        </Component>
+        <Component Id="C_ATM" Guid="{47CE0376-FFDB-14F1-C01C-DBA2BE539ACA}" Win64="$(var.Win64)">
+          <File Id="ATM" Name="ATM.rtf" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)Help\" />
+        </Component>
+        <Component Id="C_RPL" Guid="{0F85C103-5A37-401B-E2F0-6F772A6D98FF}" Win64="$(var.Win64)">
+          <File Id="RPL" Name="RPL.rtf" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)Help\" />
+        </Component>
+        <Component Id="C_SAL" Guid="{5566C86B-F0C8-D5D5-996A-901EB357F48B}" Win64="$(var.Win64)">
+          <File Id="SAL" Name="SAL.rtf" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)Help\" />
+        </Component>
+        <Component Id="C_AOI" Guid="{68988694-B13F-2F36-4204-BEB0899BADB7}" Win64="$(var.Win64)">
+          <File Id="AOI" Name="AOI.rtf" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)Help\" />
+        </Component>
+        <Component Id="C_REC" Guid="{77496759-3C50-B6FB-A6D8-8987947CA4FE}" Win64="$(var.Win64)">
+          <File Id="REC" Name="REC.rtf" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)Help\" />
+        </Component>
+        <Component Id="C_SCA" Guid="{EBEA1B7D-824F-927C-B2EA-3C8C2C0B802C}" Win64="$(var.Win64)">
+          <File Id="SCA" Name="SCA.rtf" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)Help\" />
+        </Component>
+        <Component Id="C_DTB" Guid="{A5BED26B-C2BE-B2CD-7EF4-CBC690027299}" Win64="$(var.Win64)">
+          <File Id="DTB" Name="DTB.rtf" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)Help\" />
+        </Component>
+        <Component Id="C_SCR" Guid="{C5CF4DAB-3918-F17E-708E-ADFD8F72B4CE}" Win64="$(var.Win64)">
+          <File Id="SCR" Name="SCR.rtf" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)Help\" />
+        </Component>
+        <Component Id="C_STA" Guid="{9FA0C919-1AE5-7989-BC77-D233448F7F3F}" Win64="$(var.Win64)">
+          <File Id="STA" Name="STA.rtf" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)Help\" />
+        </Component>
+      </Directory>
+    </DirectoryRef>
+
+    <Feature Id='HelpFeature' Title='Help components' Description='Installs help components, like module tipps and source documentation.' Level='1'>
+      <ComponentRef Id='C_OgamaSourceDocumentation' />
+      <ComponentRef Id='C_FixationSourceCodePermission' />
+      <ComponentRef Id='C_FIX' />
+      <ComponentRef Id='C_ATM' />
+      <ComponentRef Id='C_RPL' />
+      <ComponentRef Id='C_SAL' />
+      <ComponentRef Id='C_AOI' />
+      <ComponentRef Id='C_REC' />
+      <ComponentRef Id='C_SCA' />
+      <ComponentRef Id='C_DTB' />
+      <ComponentRef Id='C_SCR' />
+      <ComponentRef Id='C_STA' />
+    </Feature>
+  </Fragment>
+</Wix>

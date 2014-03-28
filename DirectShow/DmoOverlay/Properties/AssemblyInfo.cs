@@ -18,13 +18,13 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Freie Universität Berlin")]
 [assembly: AssemblyProduct("OGAMA")]
-[assembly: AssemblyCopyright("Copyright © Dr. Adrian Voßkühler 2013")]
+[assembly: AssemblyCopyright("Copyright © Dr. Adrian Voßkühler 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-[assembly: AssemblyVersion("4.3.*")]
+[assembly: AssemblyVersion("4.5")]
 
 [assembly: AssemblyDelaySign(false)]
 [assembly: AssemblyKeyName("")]
-[assembly: AssemblyFileVersionAttribute("4.3")]
+[assembly: AssemblyFileVersionAttribute("4.5")]
 [assembly: GuidAttribute("DFF225E1-36D2-4b77-A8CD-907A80B0A698")]

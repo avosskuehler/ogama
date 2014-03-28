@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?include $(sys.CURRENTDIR)Common\Config.wxi?>
+  <Fragment>
+    <DirectoryRef Id="INSTALLLOCATION">
+      <Component Id="C_OgamaExe" Guid="{202F4CF6-9B18-11FB-0969-4254EDC18E44}" Win64="$(var.Win64)">
+        <File Id="OgamaExe" Name="Ogama.exe" KeyPath="yes" Assembly=".net" AssemblyManifest="OgamaExe" AssemblyApplication="OgamaExe" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+        <ProgId Id="OgamaImportSettings" Description="An xml file with import settings for raw data or fixations." Icon="OgamaImportSettings.ico" IconIndex="0" Advertise="yes">
+          <Extension Id="ois" Advertise="yes">
+            <Verb Id="nothing" Command="Internal" Sequence="1" />
+          </Extension>
+        </ProgId>
+        <ProgId Id="Ogama" Description="Ogama experiment description xml file." Icon="Ogama.ico" IconIndex="0" Advertise="yes">
+          <Extension Id="oga" Advertise="yes">
+            <Verb Id="open" Command="&amp;Open" Argument="&quot;%1&quot;" Sequence="1" />
+          </Extension>
+        </ProgId>
+        <Shortcut Id="_A07C5294E7E24F4CB7D6F426AE6326AB" Directory="DesktopFolder" Name="Ogama" Description="Launches Ogama" Icon="Ogama.ico" IconIndex="0" Show="normal" WorkingDirectory="TARGETDIR" Advertise="yes" />
+        <Shortcut Id="_A2BF88A82C6947B294A261A87EBACFC4" Directory="Ogama" Name="Ogama" Description="Launches Ogama" Icon="Ogama.ico" IconIndex="0" Show="normal" WorkingDirectory="TARGETDIR" Advertise="yes" />
+      </Component>
+      <Component Id="C_OgamaConfig" Guid="{A5DCF465-A9B5-4B96-341F-66BC43F8B985}" Win64="$(var.Win64)">
+        <File Id="_7262B43160C9C2035D3C73BFF21D58A1" Name="Ogama.exe.config" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_OgamaControls" Guid="{A644B803-B905-443E-CB58-2068C2D8C199}" Win64="$(var.Win64)">
+        <File Id="OgamaControls" Name="OgamaControls.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="OgamaControls" AssemblyApplication="OgamaControls" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_VectorGraphics" Guid="{72D87859-DB0E-0FA6-C9AE-78A834A9B257}" Win64="$(var.Win64)">
+        <File Id="VectorGraphics" Name="VectorGraphics.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="VectorGraphics" AssemblyApplication="VectorGraphics" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+ 
+      <Directory Id="DataSetDirectory" Name="DataSet">
+        <Component Id="C_OgamaDatabaseTemplate_log" Guid="{BF6EA906-948E-9D15-28A2-C193F7272EC4}" Win64="$(var.Win64)">
+          <File Id="OgamaDatabaseTemplate_log" Name="OgamaDatabaseTemplate_log.ldf" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)DataSet\" />
+        </Component>
+        <Component Id="C_OgamaDatabaseTemplate" Guid="{0ADE105C-3474-F79A-FC2E-B857B3222234}" Win64="$(var.Win64)">
+          <File Id="OgamaDatabaseTemplate" Name="OgamaDatabaseTemplate.mdf" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)DataSet\" />
+        </Component>
+      </Directory>
+
+    </DirectoryRef>
+
+    <Feature Id='OgamaMainApplicationFeature' Title='Main Ogama application' Description='Installs ogamas core components.' Level='1'>
+      <ComponentRef Id='C_OgamaExe' />
+      <ComponentRef Id="C_OgamaConfig" />
+      <ComponentRef Id="C_OgamaControls" Primary="yes" />
+      <ComponentRef Id="C_VectorGraphics" />
+      <ComponentRef Id="C_OgamaDatabaseTemplate_log" />
+      <ComponentRef Id="C_OgamaDatabaseTemplate" />
+    </Feature>
+
+  </Fragment>
+</Wix>

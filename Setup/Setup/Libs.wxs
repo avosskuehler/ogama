@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?include $(sys.CURRENTDIR)Common\Config.wxi?>
+  <Fragment>
+    <DirectoryRef Id="INSTALLLOCATION">
+
+      <Component Id="C_cvaux210" Guid="{AA7E73DA-2E2F-BDA7-2634-44D1015B2F4D}" Win64="$(var.Win64)">
+        <File Id="cvaux210" Name="cvaux210.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_cv210" Guid="{7D6C72CD-97F4-D601-9279-56B6088C11FA}" Win64="$(var.Win64)">
+        <File Id="cv210" Name="cv210.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_cxcore210" Guid="{1CBEF883-9DB6-34D6-43FE-24F6ECF5661E}" Win64="$(var.Win64)">
+        <File Id="cxcore210" Name="cxcore210.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_Emgu.Util" Guid="{A865884F-9DDF-C5CD-224A-9BEC362C7EE0}" Win64="$(var.Win64)">
+        <File Id="Emgu.Util" Name="Emgu.Util.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="Emgu.Util" AssemblyApplication="Emgu.Util" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_Emgu.CV" Guid="{A28DD8F5-917F-7D0C-4F7F-BF97779D43B8}" Win64="$(var.Win64)">
+        <File Id="Emgu.CV" Name="Emgu.CV.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="Emgu.CV" AssemblyApplication="Emgu.CV" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_Emgu.CV.UI" Guid="{2EC3F28C-0908-1D9D-BFCA-76B40F52C701}" Win64="$(var.Win64)">
+        <File Id="Emgu.CV.UI" Name="Emgu.CV.UI.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="Emgu.CV.UI" AssemblyApplication="Emgu.CV.UI" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+
+      <Component Id="C_AxShockwaveFlashObjects" Guid="{48B293E1-9F27-B5C7-626D-CD6A77235DA8}" Win64="$(var.Win64)">
+        <File Id="AxShockwaveFlashObjects" Name="AxShockwaveFlashObjects.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="AxShockwaveFlashObjects" AssemblyApplication="AxShockwaveFlashObjects" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_ShockwaveFlashObjects" Guid="{6EB847D7-4192-96D0-7C16-E421E4A28562}" Win64="$(var.Win64)">
+        <File Id="ShockwaveFlashObjects" Name="ShockwaveFlashObjects.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="ShockwaveFlashObjects" AssemblyApplication="ShockwaveFlashObjects" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_Dotway.WPF.Controls" Guid="{1C21B097-31D6-E95E-E476-8449E3C239DB}" Win64="$(var.Win64)">
+        <File Id="Dotway.WPF.Controls" Name="Dotway.WPF.Controls.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="Dotway.WPF.Controls" AssemblyApplication="Dotway.WPF.Controls" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_AvalonControlsLibrary" Guid="{4AE6045B-396F-30A9-814D-7C43E3CB5E54}" Win64="$(var.Win64)">
+        <File Id="AvalonControlsLibrary" Name="AvalonControlsLibrary.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="AvalonControlsLibrary" AssemblyApplication="AvalonControlsLibrary" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_MediaInfo" Guid="{3F369D22-05DE-E84F-900B-49DABC582A1D}" Win64="$(var.Win64)">
+        <File Id="MediaInfo" Name="MediaInfo.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_DirectShowLib" Guid="{8EBCD1D6-675E-C9DB-DBD0-6B035349A16E}" Win64="$(var.Win64)">
+        <File Id="DirectShowLib" Name="DirectShowLib-2005.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="DirectShowLib" AssemblyApplication="DirectShowLib" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_zlib" Guid="{7BB87CD2-7F30-855E-0163-135BB0A8053B}" Win64="$(var.Win64)">
+        <File Id="zlib" Name="zlib.net.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="zlib" AssemblyApplication="zlib" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_ZedGraph" Guid="{EA9A48A4-389F-BD57-BF43-1FDD8F21DCFD}" Win64="$(var.Win64)">
+        <File Id="ZedGraph" Name="ZedGraph.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="ZedGraph" AssemblyApplication="ZedGraph" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_stdole" Guid="{F91E18C9-3A83-976E-463E-A80B44AE8613}" Win64="$(var.Win64)">
+        <File Id="stdole" Name="stdole.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="stdole" AssemblyApplication="stdole" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_Microsoft.VisualStudio.OLE.Interop" Guid="{15073329-7FEF-A49B-360F-56E1B53C6368}" Win64="$(var.Win64)">
+        <File Id="Microsoft.VisualStudio.OLE.Interop" Name="Microsoft.VisualStudio.OLE.Interop.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="Microsoft.VisualStudio.OLE.Interop" AssemblyApplication="Microsoft.VisualStudio.OLE.Interop" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_log4net" Guid="{CFAC5D1B-BF1E-06F2-0733-35F35BE7F047}" Win64="$(var.Win64)">
+        <File Id="log4net" Name="log4net.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="log4net" AssemblyApplication="log4net" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_inpout32" Guid="{A0F74A40-FB0E-1E36-69F0-C0E87EE34D79}" Win64="$(var.Win64)">
+        <File Id="inpout32" Name="inpout32.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+
+      <Component Id="C_AForge" Guid="{163A81C8-E1CA-5077-6811-CE0B5EE5F2B4}" Win64="$(var.Win64)">
+        <File Id="AForge" Name="AForge.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="AForge" AssemblyApplication="AForge" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_AForge.Imaging" Guid="{1054348F-803E-B762-C9B0-95008DBB44F8}" Win64="$(var.Win64)">
+        <File Id="AForge.Imaging" Name="AForge.Imaging.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="AForge.Imaging" AssemblyApplication="AForge.Imaging" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_AForge.Math" Guid="{29ADB723-DAC1-1837-A386-C53E50691909}" Win64="$(var.Win64)">
+        <File Id="AForge.Math" Name="AForge.Math.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="AForge.Math" AssemblyApplication="AForge.Math" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_AForge.Video" Guid="{E29EF6E9-C50B-1207-C7BC-60760C1AAD5B}" Win64="$(var.Win64)">
+        <File Id="AForge.Video" Name="AForge.Video.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="AForge.Video" AssemblyApplication="AForge.Video" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_AForge.Video.DirectShow" Guid="{6DAFEC61-D742-EA04-5D15-48C1218D61D4}" Win64="$(var.Win64)">
+        <File Id="AForge.Video.DirectShow" Name="AForge.Video.DirectShow.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="AForge.Video.DirectShow" AssemblyApplication="AForge.Video.DirectShow" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+
+
+      <Component Id="C_Interop.ASLSERIALOUTLIB2Lib" Guid="{94084B19-6E22-8DB9-76B3-615ADD1FB292}" Win64="$(var.Win64)">
+        <File Id="Interop.ASLSERIALOUTLIB2Lib" Name="Interop.ASLSERIALOUTLIB2Lib.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="Interop.ASLSERIALOUTLIB2Lib" AssemblyApplication="Interop.ASLSERIALOUTLIB2Lib" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_ASLSerialOutLib2" Guid="{BD487794-7925-D24E-AEA5-9FB99EA7C564}" Win64="$(var.Win64)">
+        <File Id="ASLSerialOutLib2" Name="ASLSerialOutLib2.dll" KeyPath="yes" SelfRegCost="0" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_QuickLinkAPI" Guid="{8218F315-2AA6-AB37-BB51-C38AAD084118}" Win64="$(var.Win64)">
+        <File Id="QuickLinkAPI" Name="QuickLinkAPI.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_EtApi" Guid="{DEE1B855-98A8-EB3E-BB9D-61AF7A6679BD}" Win64="$(var.Win64)">
+        <File Id="EtApi" Name="EtApi.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="EtApi" AssemblyApplication="EtApi" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_tobiisdk" Guid="{B7EB4265-CC5F-BF2E-0389-19F37531ACCD}" Win64="$(var.Win64)">
+        <File Id="tobiisdk" Name="tobiisdk.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_cleye.config" Guid="{52D2E82B-3DAE-A630-58E3-813A298FBA7F}" Win64="$(var.Win64)">
+        <File Id="cleye.config" Name="cleye.config" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_Tobii.Eyetracking.Sdk" Guid="{A78311BC-528C-63FA-470E-08F88D8546FE}" Win64="$(var.Win64)">
+        <File Id="Tobii.Eyetracking.Sdk" Name="Tobii.Eyetracking.Sdk.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="Tobii.Eyetracking.Sdk" AssemblyApplication="Tobii.Eyetracking.Sdk" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_ASL_Utilities" Guid="{E825CAF1-0012-DE15-8E11-A35B55B0CADF}" Win64="$(var.Win64)">
+        <File Id="ASL_Utilities" Name="ASL_Utilities.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="ASL_Utilities" AssemblyApplication="ASL_Utilities" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+
+      <Component Id="C_Microsoft.SqlServer.Management.Sdk.Sfc" Guid="{A1F64A66-74A9-79E7-AEB8-8B35D9220060}" Win64="$(var.Win64)">
+        <File Id="Microsoft.SqlServer.Management.Sdk.Sfc" Name="Microsoft.SqlServer.Management.Sdk.Sfc.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="Microsoft.SqlServer.Management.Sdk.Sfc" AssemblyApplication="Microsoft.SqlServer.Management.Sdk.Sfc" DiskId="1"
+              Source="$(var.SolutionDir)Libs\Managed\" />
+      </Component>
+      <Component Id="C_Microsoft.SqlServer.ConnectionInfo" Guid="{A1C39A8A-CAC3-C735-80F6-4DDAE98CDF85}" Win64="$(var.Win64)">
+        <File Id="Microsoft.SqlServer.ConnectionInfo" Name="Microsoft.SqlServer.ConnectionInfo.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="Microsoft.SqlServer.ConnectionInfo" AssemblyApplication="Microsoft.SqlServer.ConnectionInfo" DiskId="1"
+              Source="$(var.SolutionDir)Libs\Managed\" />
+      </Component>
+      <Component Id="C_Microsoft.Data.ConnectionUI" Guid="{15DA7F66-A1E0-A45A-88E4-74026D337A55}" Win64="$(var.Win64)">
+        <File Id="Microsoft.Data.ConnectionUI" Name="Microsoft.Data.ConnectionUI.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="Microsoft.Data.ConnectionUI" AssemblyApplication="Microsoft.Data.ConnectionUI" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_Microsoft.Data.ConnectionUI.Dialog" Guid="{28730F28-11A4-C1AA-A6F5-40C7C20037B8}" Win64="$(var.Win64)">
+        <File Id="Microsoft.Data.ConnectionUI.Dialog" Name="Microsoft.Data.ConnectionUI.Dialog.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="Microsoft.Data.ConnectionUI.Dialog" AssemblyApplication="Microsoft.Data.ConnectionUI.Dialog" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_Microsoft.Data.ConnectionUI.XML" Guid="{8953EFDD-DCF4-FE06-2C81-64BA001E5CF5}" Win64="$(var.Win64)">
+        <File Id="Microsoft.Data.ConnectionUIXML" Name="Microsoft.Data.ConnectionUI.xml" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_Microsoft.SqlServer.SqlEnum" Guid="{54FE877D-B5B1-3D0B-793E-97704D443827}" Win64="$(var.Win64)">
+        <File Id="Microsoft.SqlServer.SqlEnum" Name="Microsoft.SqlServer.SqlEnum.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="Microsoft.SqlServer.SqlEnum" AssemblyApplication="Microsoft.SqlServer.SqlEnum" DiskId="1"
+              Source="$(var.SolutionDir)Libs\Managed\" />
+      </Component>
+      <Component Id="C_Microsoft.SqlServer.Smo" Guid="{9A65D364-DF3D-4A42-B32E-C6C92A5947CC}" Win64="$(var.Win64)">
+        <File Id="Microsoft.SqlServer.Smo" Name="Microsoft.SqlServer.Smo.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="Microsoft.SqlServer.Smo" AssemblyApplication="Microsoft.SqlServer.Smo" DiskId="1"
+              Source="$(var.SolutionDir)Libs\Managed\" />
+      </Component>
+    </DirectoryRef>
+
+    <Feature Id='LibsFeature' Title='Libs' Description='Installs libraries for the application.' Level='1'>
+      <Feature Id='OpenCVFeature' Title='OpenCV' Description='Installs opencv libraries for the application.' Level='1'>
+        <ComponentRef Id='C_cvaux210' />
+        <ComponentRef Id='C_cv210' />
+        <ComponentRef Id='C_cxcore210' />
+        <ComponentRef Id='C_Emgu.Util' />
+        <ComponentRef Id='C_Emgu.CV' />
+        <ComponentRef Id='C_Emgu.CV.UI' />
+      </Feature>
+
+      <Feature Id='ExternalLibsFeature' Title='ExternalLibs' Description='Installs external libraries for the application.' Level='1'>
+        <ComponentRef Id='C_AxShockwaveFlashObjects' />
+        <ComponentRef Id='C_ShockwaveFlashObjects' />
+        <ComponentRef Id='C_Dotway.WPF.Controls' />
+        <ComponentRef Id='C_AvalonControlsLibrary' />
+        <ComponentRef Id='C_MediaInfo' />
+        <ComponentRef Id='C_DirectShowLib' />
+        <ComponentRef Id='C_zlib' />
+        <ComponentRef Id='C_ZedGraph' />
+        <ComponentRef Id='C_stdole' />
+        <ComponentRef Id='C_Microsoft.VisualStudio.OLE.Interop' />
+        <ComponentRef Id='C_log4net' />
+        <ComponentRef Id='C_inpout32' />
+      </Feature>
+
+      <Feature Id='AForgeFeature' Title='AForge' Description='Installs AForge libraries for the application.' Level='1'>
+        <ComponentRef Id='C_AForge' />
+        <ComponentRef Id='C_AForge.Imaging' />
+        <ComponentRef Id='C_AForge.Math' />
+        <ComponentRef Id='C_AForge.Video' />
+        <ComponentRef Id='C_AForge.Video.DirectShow' />
+      </Feature>
+
+      <Feature Id='TrackerLibsFeature' Title='TrackerLibraries' Description='Installs libraries for the tracking hardware.' Level='1'>
+        <ComponentRef Id='C_Interop.ASLSERIALOUTLIB2Lib' />
+        <ComponentRef Id='C_ASLSerialOutLib2' />
+        <ComponentRef Id='C_ASL_Utilities' />
+        <ComponentRef Id='C_QuickLinkAPI' />
+        <ComponentRef Id='C_EtApi' />
+        <ComponentRef Id='C_tobiisdk' />
+        <ComponentRef Id='C_cleye.config' />
+        <ComponentRef Id='C_Tobii.Eyetracking.Sdk' />
+      </Feature>
+
+      <Feature Id='SQLServerManagementFeature' Title='SQL Server Management' Description='Installs libraries for the connection with the sql server.' Level='1'>
+        <ComponentRef Id='C_Microsoft.SqlServer.Management.Sdk.Sfc' />
+        <ComponentRef Id='C_Microsoft.SqlServer.ConnectionInfo' />
+        <ComponentRef Id='C_Microsoft.Data.ConnectionUI' />
+        <ComponentRef Id='C_Microsoft.Data.ConnectionUI.Dialog' />
+        <ComponentRef Id='C_Microsoft.Data.ConnectionUI.XML' />
+        <ComponentRef Id='C_Microsoft.SqlServer.SqlEnum' />
+        <ComponentRef Id='C_Microsoft.SqlServer.Smo' />
+      </Feature>
+    </Feature>
+  </Fragment>
+</Wix>

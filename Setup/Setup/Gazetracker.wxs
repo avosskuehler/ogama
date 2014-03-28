@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?include $(sys.CURRENTDIR)Common\Config.wxi?>
+  <Fragment>
+    <DirectoryRef Id="INSTALLLOCATION">
+      <Component Id="C_GazeGUIVelocity" Guid="{4C3C3D3C-4A71-D937-7D87-90AEFAE7DD0F}" Win64="$(var.Win64)">
+        <File Id="GazeGUIVelocity" Name="GazeGUIVelocity.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="GazeGUIVelocity" AssemblyApplication="GazeGUIVelocity" DiskId="1" Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_GazeGUI" Guid="{5ABB0C72-862E-84E9-6BC5-0D1768FE3F6C}" Win64="$(var.Win64)">
+        <File Id="GazeGUI" Name="GazeGUI.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="GazeGUI" AssemblyApplication="GazeGUI" DiskId="1" Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_GTHardware" Guid="{4E9FE400-B9C1-8A2F-753C-72E2B7B91344}" Win64="$(var.Win64)">
+        <File Id="GTHardware" Name="GTHardware.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="GTHardware" AssemblyApplication="GTHardware" DiskId="1" Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_GTNetworkClient" Guid="{8505FB71-4057-6987-FBA1-BC287B0D40A3}" Win64="$(var.Win64)">
+        <File Id="GTNetworkClient" Name="GTNetworkClient.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="GTNetworkClient" AssemblyApplication="GTNetworkClient" DiskId="1" Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_GTSettings" Guid="{6D287E65-1CD1-E2EB-5D6A-524AC92E5305}" Win64="$(var.Win64)">
+        <File Id="GTSettings" Name="GTSettings.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="GTSettings" AssemblyApplication="GTSettings" DiskId="1" Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_GTLibrary" Guid="{D1831C3A-B969-3513-2B82-A043FA785272}" Win64="$(var.Win64)">
+        <File Id="GTLibrary" Name="GTLibrary.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="GTLibrary" AssemblyApplication="GTLibrary" DiskId="1" Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_GTCommons" Guid="{775630FC-BE9C-7832-93A0-0F2633D17DB5}" Win64="$(var.Win64)">
+        <File Id="GTCommons" Name="GTCommons.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="GTCommons" AssemblyApplication="GTCommons" DiskId="1" Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_GTApplication" Guid="{46FBF2AC-29D2-6EE2-CA35-B7A8A0C4195B}" Win64="$(var.Win64)">
+        <File Id="GTApplication" Name="GTApplication.exe" KeyPath="yes" Assembly=".net" AssemblyManifest="GTApplication" AssemblyApplication="GTApplication" DiskId="1" Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_GTOgamaClient" Guid="{8779E20F-92FF-D6C5-D6C8-0F9BE4E1F142}" Win64="$(var.Win64)">
+        <File Id="GTOgamaClient" Name="GTOgamaClient.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="GTOgamaClient" AssemblyApplication="GTOgamaClient" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+
+
+      <Component Id="C_haarcascade_mcs_righteye" Guid="{77CCC754-B59C-3EB5-EC62-01BF558E0775}" Win64="$(var.Win64)">
+        <File Id="haarcascade_mcs_righteye" Name="haarcascade_mcs_righteye.xml" KeyPath="yes" DiskId="1" Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_haarcascade_lefteye_2splits" Guid="{1660AE6C-B829-9A17-BAED-1308EE498DFE}" Win64="$(var.Win64)">
+        <File Id="haarcascade_lefteye_2splits" Name="haarcascade_lefteye_2splits.xml" KeyPath="yes" DiskId="1" Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_haarcascade_eye" Guid="{78A00E30-0CA0-0C79-B45F-7F5E1908B3D4}" Win64="$(var.Win64)">
+        <File Id="haarcascade_eye" Name="haarcascade_eye.xml" KeyPath="yes" DiskId="1" Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_haarcascade_frontalface_alt3" Guid="{03837DF7-99BE-76BD-1514-B90AAF15391C}" Win64="$(var.Win64)">
+        <File Id="haarcascade_frontalface_alt3" Name="haarcascade_frontalface_alt3.xml" KeyPath="yes" DiskId="1" Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_haarcascade_mcs_eyepair_small" Guid="{2FACD6D4-F969-0405-8612-B9AB57242F42}" Win64="$(var.Win64)">
+        <File Id="haarcascade_mcs_eyepair_small" Name="haarcascade_mcs_eyepair_small.xml" KeyPath="yes" DiskId="1" Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_haarcascade_eye_tree_eyeglasses" Guid="{E4F72F38-42BA-004C-8A02-BB606390DADD}" Win64="$(var.Win64)">
+        <File Id="haarcascade_eye_tree_eyeglasses" Name="haarcascade_eye_tree_eyeglasses.xml" KeyPath="yes" DiskId="1" Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_haarcascade_mcs_eyepair_big" Guid="{7898B5E1-5461-26A2-0AFF-CBF871342F57}" Win64="$(var.Win64)">
+        <File Id="haarcascade_mcs_eyepair_big" Name="haarcascade_mcs_eyepair_big.xml" KeyPath="yes" DiskId="1" Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_haarcascade_righteye_2splits" Guid="{16A3D121-162B-2862-DDF4-9F3DB0D5BFC6}" Win64="$(var.Win64)">
+        <File Id="haarcascade_righteye_2splits" Name="haarcascade_righteye_2splits.xml" KeyPath="yes" DiskId="1" Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_haarcascade_mcs_lefteye" Guid="{65C4A00C-2A69-3B71-8CBF-A57D7D3F5F16}" Win64="$(var.Win64)">
+        <File Id="haarcascade_mcs_lefteye" Name="haarcascade_mcs_lefteye.xml" KeyPath="yes" DiskId="1" Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      
+
+      <Directory Id="InfantGraphicsDirectory" Name="InfantGraphics">
+        <Component Id="C_ladybug" Guid="{EDC08E91-F4CD-9EB3-5084-4AB300F8E75E}" Win64="$(var.Win64)">
+          <File Id="ladybug" Name="ladybug.png" KeyPath="yes" DiskId="1" Source="$(var.Ogama.TargetDir)InfantGraphics\" />
+        </Component>
+        <Component Id="C_Cat" Guid="{144FF044-51A8-53AC-EDB5-41336CB3BB16}" Win64="$(var.Win64)">
+          <File Id="Cat" Name="Cat.png" KeyPath="yes" DiskId="1" Source="$(var.Ogama.TargetDir)InfantGraphics\" />
+        </Component>
+        <Component Id="C_Dino" Guid="{632B0D0B-98AA-62EC-7365-A79C71B27C0F}" Win64="$(var.Win64)">
+          <File Id="Dino" Name="Dino.png" KeyPath="yes" DiskId="1" Source="$(var.Ogama.TargetDir)InfantGraphics\" />
+        </Component>
+        <Component Id="C_duck" Guid="{1B9C339B-F8DF-CBB5-BEA9-FCD4C64D890A}" Win64="$(var.Win64)">
+          <File Id="duck" Name="duck.png" KeyPath="yes" DiskId="1" Source="$(var.Ogama.TargetDir)InfantGraphics\" />
+        </Component>
+        <Component Id="C_Mouse" Guid="{605F8AEB-B53C-03AF-422A-5614434F140F}" Win64="$(var.Win64)">
+          <File Id="Mouse" Name="Mouse.png" KeyPath="yes"  DiskId="1" Source="$(var.Ogama.TargetDir)InfantGraphics\" />
+        </Component>
+        <Component Id="C_Butterfly" Guid="{122451A5-8F06-B580-2054-7C0743565CF3}" Win64="$(var.Win64)">
+          <File Id="Butterfly" Name="Butterfly.png" KeyPath="yes" DiskId="1" Source="$(var.Ogama.TargetDir)InfantGraphics\" />
+        </Component>
+      </Directory>
+    </DirectoryRef>
+    
+    <Feature Id='GazetrackerFeature' Title='Gazetracker application' Description='Installs gazetracker components.' Level='1'>
+      <ComponentRef Id='C_GazeGUIVelocity' />
+      <ComponentRef Id='C_GazeGUI' />
+      <ComponentRef Id='C_GTHardware' />
+      <ComponentRef Id='C_GTNetworkClient' />
+      <ComponentRef Id='C_GTSettings' />
+      <ComponentRef Id='C_GTLibrary' />
+      <ComponentRef Id='C_GTCommons' />
+      <ComponentRef Id='C_GTApplication' />
+      <ComponentRef Id='C_GTOgamaClient' />
+      
+      <ComponentRef Id='C_haarcascade_mcs_righteye' />
+      <ComponentRef Id='C_haarcascade_lefteye_2splits' />
+      <ComponentRef Id='C_haarcascade_eye' />
+      <ComponentRef Id='C_haarcascade_frontalface_alt3' />
+      <ComponentRef Id='C_haarcascade_mcs_eyepair_small' />
+      <ComponentRef Id='C_haarcascade_eye_tree_eyeglasses' />
+      <ComponentRef Id='C_haarcascade_mcs_eyepair_big' />
+      <ComponentRef Id='C_haarcascade_righteye_2splits' />
+      <ComponentRef Id='C_haarcascade_mcs_lefteye' />
+      
+      <ComponentRef Id='C_ladybug' />
+      <ComponentRef Id='C_Cat' />
+      <ComponentRef Id='C_Dino' />
+      <ComponentRef Id='C_duck' />
+      <ComponentRef Id='C_Mouse' />
+      <ComponentRef Id='C_Butterfly' />
+    </Feature>
+  </Fragment>
+</Wix>
