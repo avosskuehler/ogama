@@ -10,7 +10,7 @@ namespace GTSettings
         #region Constants
 
         public const string Name = "HeadtrackerSettings";
-        public const string defaultHaarCascade = "haarcascade_mcs_eyepair_big.xml";
+        public const string defaultHaarCascade = "haarcascade_frontalface_default.xml";
 
         #endregion
 

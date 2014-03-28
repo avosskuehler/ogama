@@ -95,7 +95,6 @@
     </Reference>
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

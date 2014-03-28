@@ -4,10 +4,10 @@
   <Fragment>
     <DirectoryRef Id="INSTALLLOCATION">
 
-      <Component Id="C_cvaux210" Guid="{AA7E73DA-2E2F-BDA7-2634-44D1015B2F4D}" Win64="$(var.Win64)">
+      <!--<Component Id="C_cvaux210" Guid="{AA7E73DA-2E2F-BDA7-2634-44D1015B2F4D}" Win64="$(var.Win64)">
         <File Id="cvaux210" Name="cvaux210.dll" KeyPath="yes" DiskId="1"
               Source="$(var.Ogama.TargetDir)" />
-      </Component>
+      </Component>-->
       <Component Id="C_cv210" Guid="{7D6C72CD-97F4-D601-9279-56B6088C11FA}" Win64="$(var.Win64)">
         <File Id="cv210" Name="cv210.dll" KeyPath="yes" DiskId="1"
               Source="$(var.Ogama.TargetDir)" />
@@ -73,10 +73,17 @@
         <File Id="log4net" Name="log4net.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="log4net" AssemblyApplication="log4net" DiskId="1"
               Source="$(var.Ogama.TargetDir)" />
       </Component>
-      <Component Id="C_inpout32" Guid="{A0F74A40-FB0E-1E36-69F0-C0E87EE34D79}" Win64="$(var.Win64)">
+      <?if $(sys.BUILDARCH)=x64?>
+      <Component Id="C_inpoutx64" Guid="{CAC407CF-2056-4FE9-8A70-A5975D76F2F5}" Win64="yes">
+        <File Id="inpoutx64" Name="inpoutx64.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <?else?>
+      <Component Id="C_inpout32" Guid="{A0F74A40-FB0E-1E36-69F0-C0E87EE34D79}" Win64="no">
         <File Id="inpout32" Name="inpout32.dll" KeyPath="yes" DiskId="1"
               Source="$(var.Ogama.TargetDir)" />
       </Component>
+      <?endif?>
 
       <Component Id="C_AForge" Guid="{163A81C8-E1CA-5077-6811-CE0B5EE5F2B4}" Win64="$(var.Win64)">
         <File Id="AForge" Name="AForge.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="AForge" AssemblyApplication="AForge" DiskId="1"
@@ -100,18 +107,21 @@
       </Component>
 
 
-      <Component Id="C_Interop.ASLSERIALOUTLIB2Lib" Guid="{94084B19-6E22-8DB9-76B3-615ADD1FB292}" Win64="$(var.Win64)">
-        <File Id="Interop.ASLSERIALOUTLIB2Lib" Name="Interop.ASLSERIALOUTLIB2Lib.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="Interop.ASLSERIALOUTLIB2Lib" AssemblyApplication="Interop.ASLSERIALOUTLIB2Lib" DiskId="1"
-              Source="$(var.Ogama.TargetDir)" />
+      <?if $(sys.BUILDARCH)=x86?>
+      <Component Id="C_Interop.ASLSERIALOUTLIB2Lib" Guid="{94084B19-6E22-8DB9-76B3-615ADD1FB292}" Win64="no">
+        <File Id="Interop.ASLSERIALOUTLIB2Lib" Name="Interop.ASLSERIALOUTLIB2Lib.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="Interop.ASLSERIALOUTLIB2Lib" AssemblyApplication="Interop.ASLSERIALOUTLIB2Lib" DiskId="1" Source="$(var.Ogama.TargetDir)" />
       </Component>
-      <Component Id="C_ASLSerialOutLib2" Guid="{BD487794-7925-D24E-AEA5-9FB99EA7C564}" Win64="$(var.Win64)">
-        <File Id="ASLSerialOutLib2" Name="ASLSerialOutLib2.dll" KeyPath="yes" SelfRegCost="0" DiskId="1"
-              Source="$(var.Ogama.TargetDir)" />
+      <Component Id="C_ASLSerialOutLib2" Guid="{BD487794-7925-D24E-AEA5-9FB99EA7C564}" Win64="no">
+        <File Id="ASLSerialOutLib2" Name="ASLSerialOutLib2.dll" KeyPath="yes" SelfRegCost="0" DiskId="1" Source="$(var.Ogama.TargetDir)" />
       </Component>
-      <Component Id="C_QuickLinkAPI" Guid="{8218F315-2AA6-AB37-BB51-C38AAD084118}" Win64="$(var.Win64)">
-        <File Id="QuickLinkAPI" Name="QuickLinkAPI.dll" KeyPath="yes" DiskId="1"
-              Source="$(var.Ogama.TargetDir)" />
+      <Component Id="C_ASL_Utilities" Guid="{E825CAF1-0012-DE15-8E11-A35B55B0CADF}" Win64="no">
+        <File Id="ASL_Utilities" Name="ASL_Utilities.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="ASL_Utilities" AssemblyApplication="ASL_Utilities" DiskId="1" Source="$(var.Ogama.TargetDir)" />
       </Component>
+      <Component Id="C_QuickLinkAPI" Guid="{8218F315-2AA6-AB37-BB51-C38AAD084118}" Win64="no">
+        <File Id="QuickLinkAPI" Name="QuickLinkAPI.dll" KeyPath="yes" DiskId="1" Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <?endif?>
+
       <Component Id="C_EtApi" Guid="{DEE1B855-98A8-EB3E-BB9D-61AF7A6679BD}" Win64="$(var.Win64)">
         <File Id="EtApi" Name="EtApi.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="EtApi" AssemblyApplication="EtApi" DiskId="1"
               Source="$(var.Ogama.TargetDir)" />
@@ -120,16 +130,8 @@
         <File Id="tobiisdk" Name="tobiisdk.dll" KeyPath="yes" DiskId="1"
               Source="$(var.Ogama.TargetDir)" />
       </Component>
-      <Component Id="C_cleye.config" Guid="{52D2E82B-3DAE-A630-58E3-813A298FBA7F}" Win64="$(var.Win64)">
-        <File Id="cleye.config" Name="cleye.config" KeyPath="yes" DiskId="1"
-              Source="$(var.Ogama.TargetDir)" />
-      </Component>
       <Component Id="C_Tobii.Eyetracking.Sdk" Guid="{A78311BC-528C-63FA-470E-08F88D8546FE}" Win64="$(var.Win64)">
         <File Id="Tobii.Eyetracking.Sdk" Name="Tobii.Eyetracking.Sdk.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="Tobii.Eyetracking.Sdk" AssemblyApplication="Tobii.Eyetracking.Sdk" DiskId="1"
-              Source="$(var.Ogama.TargetDir)" />
-      </Component>
-      <Component Id="C_ASL_Utilities" Guid="{E825CAF1-0012-DE15-8E11-A35B55B0CADF}" Win64="$(var.Win64)">
-        <File Id="ASL_Utilities" Name="ASL_Utilities.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="ASL_Utilities" AssemblyApplication="ASL_Utilities" DiskId="1"
               Source="$(var.Ogama.TargetDir)" />
       </Component>
 
@@ -149,10 +151,10 @@
         <File Id="Microsoft.Data.ConnectionUI.Dialog" Name="Microsoft.Data.ConnectionUI.Dialog.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="Microsoft.Data.ConnectionUI.Dialog" AssemblyApplication="Microsoft.Data.ConnectionUI.Dialog" DiskId="1"
               Source="$(var.Ogama.TargetDir)" />
       </Component>
-      <Component Id="C_Microsoft.Data.ConnectionUI.XML" Guid="{8953EFDD-DCF4-FE06-2C81-64BA001E5CF5}" Win64="$(var.Win64)">
+      <!--<Component Id="C_Microsoft.Data.ConnectionUI.XML" Guid="{8953EFDD-DCF4-FE06-2C81-64BA001E5CF5}" Win64="$(var.Win64)">
         <File Id="Microsoft.Data.ConnectionUIXML" Name="Microsoft.Data.ConnectionUI.xml" KeyPath="yes" DiskId="1"
               Source="$(var.Ogama.TargetDir)" />
-      </Component>
+      </Component>-->
       <Component Id="C_Microsoft.SqlServer.SqlEnum" Guid="{54FE877D-B5B1-3D0B-793E-97704D443827}" Win64="$(var.Win64)">
         <File Id="Microsoft.SqlServer.SqlEnum" Name="Microsoft.SqlServer.SqlEnum.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="Microsoft.SqlServer.SqlEnum" AssemblyApplication="Microsoft.SqlServer.SqlEnum" DiskId="1"
               Source="$(var.SolutionDir)Libs\Managed\" />
@@ -165,7 +167,7 @@
 
     <Feature Id='LibsFeature' Title='Libs' Description='Installs libraries for the application.' Level='1'>
       <Feature Id='OpenCVFeature' Title='OpenCV' Description='Installs opencv libraries for the application.' Level='1'>
-        <ComponentRef Id='C_cvaux210' />
+        <!--<ComponentRef Id='C_cvaux210' />-->
         <ComponentRef Id='C_cv210' />
         <ComponentRef Id='C_cxcore210' />
         <ComponentRef Id='C_Emgu.Util' />
@@ -185,7 +187,11 @@
         <ComponentRef Id='C_stdole' />
         <ComponentRef Id='C_Microsoft.VisualStudio.OLE.Interop' />
         <ComponentRef Id='C_log4net' />
+        <?if $(sys.BUILDARCH)=x64?>
+        <ComponentRef Id='C_inpoutx64' />
+        <?else?>
         <ComponentRef Id='C_inpout32' />
+        <?endif?>
       </Feature>
 
       <Feature Id='AForgeFeature' Title='AForge' Description='Installs AForge libraries for the application.' Level='1'>
@@ -197,13 +203,14 @@
       </Feature>
 
       <Feature Id='TrackerLibsFeature' Title='TrackerLibraries' Description='Installs libraries for the tracking hardware.' Level='1'>
+        <?if $(sys.BUILDARCH)=x86?>
         <ComponentRef Id='C_Interop.ASLSERIALOUTLIB2Lib' />
         <ComponentRef Id='C_ASLSerialOutLib2' />
         <ComponentRef Id='C_ASL_Utilities' />
         <ComponentRef Id='C_QuickLinkAPI' />
+        <?endif?>
         <ComponentRef Id='C_EtApi' />
         <ComponentRef Id='C_tobiisdk' />
-        <ComponentRef Id='C_cleye.config' />
         <ComponentRef Id='C_Tobii.Eyetracking.Sdk' />
       </Feature>
 
@@ -212,7 +219,7 @@
         <ComponentRef Id='C_Microsoft.SqlServer.ConnectionInfo' />
         <ComponentRef Id='C_Microsoft.Data.ConnectionUI' />
         <ComponentRef Id='C_Microsoft.Data.ConnectionUI.Dialog' />
-        <ComponentRef Id='C_Microsoft.Data.ConnectionUI.XML' />
+        <!--<ComponentRef Id='C_Microsoft.Data.ConnectionUI.XML' />-->
         <ComponentRef Id='C_Microsoft.SqlServer.SqlEnum' />
         <ComponentRef Id='C_Microsoft.SqlServer.Smo' />
       </Feature>

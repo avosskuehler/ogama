@@ -6,53 +6,170 @@ using System.Text;
 
 namespace Ogama.Modules.Recording.SMIInterface.RedM
 {
+  /// <summary>
+  /// 
+  /// </summary>
 	public class SmiRedmWrapper
 	{
+    /// <summary>
+    /// The et device
+    /// </summary>
 		EyeTrackingController ETDevice;
+    /// <summary>
+    /// The m_ calibration data
+    /// </summary>
 		EyeTrackingController.CalibrationStruct m_CalibrationData;
+    /// <summary>
+    /// The m_ accuracy data
+    /// </summary>
 		EyeTrackingController.AccuracyStruct m_AccuracyData;
-		EyeTrackingController.SampleStruct m_SampleData;
-		EyeTrackingController.EventStruct m_EventData;
+    ///// <summary>
+    ///// The m_ sample data
+    ///// </summary>
+    //EyeTrackingController.SampleStruct m_SampleData;
+    ///// <summary>
+    ///// The m_ event data
+    ///// </summary>
+    //EyeTrackingController.EventStruct m_EventData;
 
 
 		// callback routine declaration
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="calibrationPointData">The calibration point data.</param>
 		private delegate void CalibrationCallback(EyeTrackingController.CalibrationPointStruct calibrationPointData);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="sampleData">The sample data.</param>
 		private delegate void GetSampleCallback(EyeTrackingController.SampleStruct sampleData);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="eventData">The event data.</param>
 		private delegate void GetEventCallback(EyeTrackingController.EventStruct eventData);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="imageData">The image data.</param>
 		private delegate void GetEyeImageCallback(EyeTrackingController.ImageStruct imageData);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="imageData">The image data.</param>
 		private delegate void GetSceneVideoCallback(EyeTrackingController.ImageStruct imageData);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="imageData">The image data.</param>
 		private delegate void GetTrackingMonitorCallback(EyeTrackingController.ImageStruct imageData);
 
 
 		// callback function instances
+    /// <summary>
+    /// The m_ calibration callback
+    /// </summary>
 		CalibrationCallback m_CalibrationCallback;
+    /// <summary>
+    /// The m_ sample callback
+    /// </summary>
 		GetSampleCallback m_SampleCallback;
+    /// <summary>
+    /// The m_ event callback
+    /// </summary>
 		GetEventCallback m_EventCallback;
+    /// <summary>
+    /// The m_ eye image callback
+    /// </summary>
 		GetEyeImageCallback m_EyeImageCallback;
+    /// <summary>
+    /// The m_ scene video callback
+    /// </summary>
 		GetSceneVideoCallback m_SceneVideoCallback;
+    /// <summary>
+    /// The m_ tracking monitor callback
+    /// </summary>
 		GetTrackingMonitorCallback m_TrackingMonitorCallback;
 
 
 		// delegates which will be used by invoking functions 
+    /// <summary>
+    /// 
+    /// </summary>
 		public delegate void DisplayTrackingMonitor();
+    /// <summary>
+    /// 
+    /// </summary>
 		public delegate void DisplayEyeImage();
+    /// <summary>
+    /// 
+    /// </summary>
 		public delegate void DisplaySceneVideo();
+    /// <summary>
+    /// 
+    /// </summary>
 		public delegate void DisplayLog1();
+    /// <summary>
+    /// 
+    /// </summary>
 		public delegate void DisplayLog2();
+    /// <summary>
+    /// 
+    /// </summary>
 		public delegate void DisplayLog3();
 
+    /// <summary>
+    /// Gets or sets the sendip.
+    /// </summary>
+    /// <value>
+    /// The sendip.
+    /// </value>
 		public string sendip { get; set; }
+    /// <summary>
+    /// Gets or sets the sendport.
+    /// </summary>
+    /// <value>
+    /// The sendport.
+    /// </value>
 		public int sendport { get; set; }
+    /// <summary>
+    /// Gets or sets the receiveip.
+    /// </summary>
+    /// <value>
+    /// The receiveip.
+    /// </value>
 		public string receiveip { get; set; }
+    /// <summary>
+    /// Gets or sets the receiveport.
+    /// </summary>
+    /// <value>
+    /// The receiveport.
+    /// </value>
 		public int receiveport { get; set; }
+    /// <summary>
+    /// The display device
+    /// </summary>
 		private int displayDevice = 0;
+    /// <summary>
+    /// The listener
+    /// </summary>
 		private SmiRedmWrapperListener listener;
 
+    /// <summary>
+    /// Registers the specified listener.
+    /// </summary>
+    /// <param name="listener">The listener.</param>
 		public void register(SmiRedmWrapperListener listener)
 		{
 			this.listener = listener;
 		}
 
+    /// <summary>
+    /// Sets the display device.
+    /// </summary>
+    /// <param name="display">The display.</param>
+    /// <exception cref="System.Exception">only values of {0,1} expected.</exception>
 		public void setDisplayDevice(int display)
 		{
 			if (display != 0 || display != 1)
@@ -62,21 +179,37 @@ namespace Ogama.Modules.Recording.SMIInterface.RedM
 			this.displayDevice = display;
 		}
 
+    /// <summary>
+    /// Gets the tracking monitor callback function.
+    /// </summary>
+    /// <param name="image">The image.</param>
 		void GetTrackingMonitorCallbackFunction(EyeTrackingController.ImageStruct image)
 		{
 		
 		}
 
+    /// <summary>
+    /// Gets the eye image callback function.
+    /// </summary>
+    /// <param name="image">The image.</param>
 		void GetEyeImageCallbackFunction(EyeTrackingController.ImageStruct image)
 		{
 		
 		}
 
+    /// <summary>
+    /// Gets the scene video callback function.
+    /// </summary>
+    /// <param name="image">The image.</param>
 		void GetSceneVideoCallbackFunction(EyeTrackingController.ImageStruct image)
 		{
 			
 		}
 
+    /// <summary>
+    /// Gets the sample callback function.
+    /// </summary>
+    /// <param name="sampleData">The sample data.</param>
 		void GetSampleCallbackFunction(EyeTrackingController.SampleStruct sampleData)
 		{
 			string data = ("Data from SampleCallback - timestamp: " + sampleData.timestamp.ToString() +
@@ -96,6 +229,10 @@ namespace Ogama.Modules.Recording.SMIInterface.RedM
 		}
 
 
+    /// <summary>
+    /// Gets the event callback function.
+    /// </summary>
+    /// <param name="eventData">The event data.</param>
 		void GetEventCallbackFunction(EyeTrackingController.EventStruct eventData)
 		{
 			string data = ("Data from EventCallback - eye: " + eventData.eye.ToString() +
@@ -105,12 +242,19 @@ namespace Ogama.Modules.Recording.SMIInterface.RedM
 			//log("GetEventCallbackFunction: " + data);
 		}
 
+    /// <summary>
+    /// Calibrations the callback function.
+    /// </summary>
+    /// <param name="calibrationPoint">The calibration point.</param>
 		void CalibrationCallbackFunction(EyeTrackingController.CalibrationPointStruct calibrationPoint)
 		{
 			string data = ("Data from CalibrationCallback - Number:" + calibrationPoint.number + " PosX:" + calibrationPoint.positionX + " PosY:" + calibrationPoint.positionY);
 			log("CalibrationCallbackFunction: " + data);
 		}
 
+    /// <summary>
+    /// Initializes this instance.
+    /// </summary>
 		public void initialize()
 		{
 			ETDevice = new EyeTrackingController();
@@ -122,6 +266,9 @@ namespace Ogama.Modules.Recording.SMIInterface.RedM
        m_TrackingMonitorCallback = new GetTrackingMonitorCallback(GetTrackingMonitorCallbackFunction);
 		}
 
+    /// <summary>
+    /// Disconnectings this instance.
+    /// </summary>
 		public void disconnecting()
 		{
 			int ret = 0;
@@ -138,6 +285,9 @@ namespace Ogama.Modules.Recording.SMIInterface.RedM
 			}
 		}
 
+    /// <summary>
+    /// Connects this instance.
+    /// </summary>
 		public void connect()
 		{
 			int ret = 0;
@@ -167,12 +317,12 @@ namespace Ogama.Modules.Recording.SMIInterface.RedM
 
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="calibrationPoints" 1,2,5,8,9,13></param>
-		/// <param name="displayDevice" 0,1></param>
-		/// <param name="targetSize" 20></param>
+    /// <summary>
+    /// Calibrates the specified calibration points.
+    /// </summary>
+    /// <param name="calibrationPoints">The calibration points.</param>
+    /// <param name="displayDevice">The display device.</param>
+    /// <param name="targetSize">Size of the target.</param>
 		public void calibrate(	int calibrationPoints, int displayDevice, int targetSize)
 		{
 			int ret = 0;
@@ -214,6 +364,9 @@ namespace Ogama.Modules.Recording.SMIInterface.RedM
 
 		}
 
+    /// <summary>
+    /// Validates this instance.
+    /// </summary>
 		public void validate()
 		{
 			int ret = 0;
@@ -235,6 +388,10 @@ namespace Ogama.Modules.Recording.SMIInterface.RedM
 			}
 		}
 
+    /// <summary>
+    /// Getcalibrationpoints the specified calibration identifier.
+    /// </summary>
+    /// <param name="calibrationID">The calibration identifier.</param>
 		public void getcalibrationpoint(string calibrationID)
 		{
 			int ret = 0;
@@ -252,6 +409,9 @@ namespace Ogama.Modules.Recording.SMIInterface.RedM
 			}
 		}
 
+    /// <summary>
+    /// Startrecordings this instance.
+    /// </summary>
 		public void startrecording()
 		{
 			int ret = 0;
@@ -268,6 +428,9 @@ namespace Ogama.Modules.Recording.SMIInterface.RedM
 			}
 		}
 
+    /// <summary>
+    /// Stoprecordings this instance.
+    /// </summary>
 		public void stoprecording()
 		{
 			int ret = 0;
@@ -284,6 +447,10 @@ namespace Ogama.Modules.Recording.SMIInterface.RedM
 			}
 		}
 
+    /// <summary>
+    /// Getaccuracies this instance.
+    /// </summary>
+    /// <returns></returns>
 		public string getaccuracy()
 		{
 			int ret = 0;
@@ -304,6 +471,10 @@ namespace Ogama.Modules.Recording.SMIInterface.RedM
 			return result;
 		}
 
+    /// <summary>
+    /// Logs the specified s.
+    /// </summary>
+    /// <param name="s">The s.</param>
 		protected void log(string s)
 		{
 			Console.WriteLine("LOG:" + s);
