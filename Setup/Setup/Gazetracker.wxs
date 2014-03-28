@@ -33,14 +33,17 @@
       </Component>
 
 
-      <Component Id="C_haarcascade_mcs_righteye" Guid="{77CCC754-B59C-3EB5-EC62-01BF558E0775}" Win64="$(var.Win64)">
+      <Component Id="C_haarcascade_frontalface_default" Guid="{7898B5E1-5461-26A2-0AFF-CBF871342F57}" Win64="$(var.Win64)">
+        <File Id="haarcascade_frontalface_default" Name="haarcascade_frontalface_default.xml" KeyPath="yes" DiskId="1" Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_haarcascade_eye" Guid="{78A00E30-0CA0-0C79-B45F-7F5E1908B3D4}" Win64="$(var.Win64)">
+        <File Id="haarcascade_eye" Name="haarcascade_eye.xml" KeyPath="yes" DiskId="1" Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <!--<Component Id="C_haarcascade_mcs_righteye" Guid="{77CCC754-B59C-3EB5-EC62-01BF558E0775}" Win64="$(var.Win64)">
         <File Id="haarcascade_mcs_righteye" Name="haarcascade_mcs_righteye.xml" KeyPath="yes" DiskId="1" Source="$(var.Ogama.TargetDir)" />
       </Component>
       <Component Id="C_haarcascade_lefteye_2splits" Guid="{1660AE6C-B829-9A17-BAED-1308EE498DFE}" Win64="$(var.Win64)">
         <File Id="haarcascade_lefteye_2splits" Name="haarcascade_lefteye_2splits.xml" KeyPath="yes" DiskId="1" Source="$(var.Ogama.TargetDir)" />
-      </Component>
-      <Component Id="C_haarcascade_eye" Guid="{78A00E30-0CA0-0C79-B45F-7F5E1908B3D4}" Win64="$(var.Win64)">
-        <File Id="haarcascade_eye" Name="haarcascade_eye.xml" KeyPath="yes" DiskId="1" Source="$(var.Ogama.TargetDir)" />
       </Component>
       <Component Id="C_haarcascade_frontalface_alt3" Guid="{03837DF7-99BE-76BD-1514-B90AAF15391C}" Win64="$(var.Win64)">
         <File Id="haarcascade_frontalface_alt3" Name="haarcascade_frontalface_alt3.xml" KeyPath="yes" DiskId="1" Source="$(var.Ogama.TargetDir)" />
@@ -51,15 +54,12 @@
       <Component Id="C_haarcascade_eye_tree_eyeglasses" Guid="{E4F72F38-42BA-004C-8A02-BB606390DADD}" Win64="$(var.Win64)">
         <File Id="haarcascade_eye_tree_eyeglasses" Name="haarcascade_eye_tree_eyeglasses.xml" KeyPath="yes" DiskId="1" Source="$(var.Ogama.TargetDir)" />
       </Component>
-      <Component Id="C_haarcascade_mcs_eyepair_big" Guid="{7898B5E1-5461-26A2-0AFF-CBF871342F57}" Win64="$(var.Win64)">
-        <File Id="haarcascade_mcs_eyepair_big" Name="haarcascade_mcs_eyepair_big.xml" KeyPath="yes" DiskId="1" Source="$(var.Ogama.TargetDir)" />
-      </Component>
       <Component Id="C_haarcascade_righteye_2splits" Guid="{16A3D121-162B-2862-DDF4-9F3DB0D5BFC6}" Win64="$(var.Win64)">
         <File Id="haarcascade_righteye_2splits" Name="haarcascade_righteye_2splits.xml" KeyPath="yes" DiskId="1" Source="$(var.Ogama.TargetDir)" />
       </Component>
       <Component Id="C_haarcascade_mcs_lefteye" Guid="{65C4A00C-2A69-3B71-8CBF-A57D7D3F5F16}" Win64="$(var.Win64)">
         <File Id="haarcascade_mcs_lefteye" Name="haarcascade_mcs_lefteye.xml" KeyPath="yes" DiskId="1" Source="$(var.Ogama.TargetDir)" />
-      </Component>
+      </Component>-->
       
 
       <Directory Id="InfantGraphicsDirectory" Name="InfantGraphics">
@@ -95,15 +95,15 @@
       <ComponentRef Id='C_GTApplication' />
       <ComponentRef Id='C_GTOgamaClient' />
       
-      <ComponentRef Id='C_haarcascade_mcs_righteye' />
-      <ComponentRef Id='C_haarcascade_lefteye_2splits' />
       <ComponentRef Id='C_haarcascade_eye' />
+      <ComponentRef Id='C_haarcascade_frontalface_default' />
+      <!--<ComponentRef Id='C_haarcascade_mcs_righteye' />
+      <ComponentRef Id='C_haarcascade_lefteye_2splits' />
       <ComponentRef Id='C_haarcascade_frontalface_alt3' />
       <ComponentRef Id='C_haarcascade_mcs_eyepair_small' />
       <ComponentRef Id='C_haarcascade_eye_tree_eyeglasses' />
-      <ComponentRef Id='C_haarcascade_mcs_eyepair_big' />
       <ComponentRef Id='C_haarcascade_righteye_2splits' />
-      <ComponentRef Id='C_haarcascade_mcs_lefteye' />
+      <ComponentRef Id='C_haarcascade_mcs_lefteye' />-->
       
       <ComponentRef Id='C_ladybug' />
       <ComponentRef Id='C_Cat' />

@@ -1,39 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-    <Fragment>
-        <DirectoryRef Id="INSTALLLOCATION">
-            <Component Id="DmoOverlayComponent" Guid="{FAF8D5A4-4E73-4D1D-81E1-F3BC808F80C4}" Win64="no">
-                <Class Id="{4EFE45F5-77C3-3D9C-A1F3-D51714AD2673}" Context="InprocServer32" Description="DmoOverlay.RegisterDll" ThreadingModel="both" ForeignServer="mscoree.dll">
-                    <ProgId Id="DmoOverlay.RegisterDll" Description="DmoOverlay.RegisterDll" />
-                </Class>
-                <Class Id="{DFF225E1-36D2-4B77-A8CD-907A80B0A698}" Context="InprocServer32" Description="DmoOverlay.DmoOverlay" ThreadingModel="both" ForeignServer="mscoree.dll">
-                    <ProgId Id="DmoOverlay.DmoOverlay" Description="DmoOverlay.DmoOverlay" />
-                </Class>
-                <File Id="DmoOverlayFile" KeyPath="yes" Source="$(var.Ogama.TargetDir)DmoOverlay.dll" Assembly=".net" AssemblyManifest="DmoOverlayFile" AssemblyApplication="DmoOverlayFile" DiskId="1"/>
-                <RegistryValue Root="HKCR" Key="CLSID\{4EFE45F5-77C3-3D9C-A1F3-D51714AD2673}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{4EFE45F5-77C3-3D9C-A1F3-D51714AD2673}\InprocServer32\4.5" Name="Class" Value="DmoOverlay.RegisterDll" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{4EFE45F5-77C3-3D9C-A1F3-D51714AD2673}\InprocServer32\4.5" Name="Assembly" Value="DmoOverlay, Version=4.5, Culture=neutral, PublicKeyToken=a069c3b789cacb0e" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{4EFE45F5-77C3-3D9C-A1F3-D51714AD2673}\InprocServer32\4.5" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{4EFE45F5-77C3-3D9C-A1F3-D51714AD2673}\InprocServer32\4.5" Name="CodeBase" Value="file:///[#DmoOverlayFile]" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{4EFE45F5-77C3-3D9C-A1F3-D51714AD2673}\InprocServer32" Name="Class" Value="DmoOverlay.RegisterDll" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{4EFE45F5-77C3-3D9C-A1F3-D51714AD2673}\InprocServer32" Name="Assembly" Value="DmoOverlay, Version=4.5, Culture=neutral, PublicKeyToken=a069c3b789cacb0e" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{4EFE45F5-77C3-3D9C-A1F3-D51714AD2673}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{4EFE45F5-77C3-3D9C-A1F3-D51714AD2673}\InprocServer32" Name="CodeBase" Value="file:///[#DmoOverlayFile]" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{DFF225E1-36D2-4B77-A8CD-907A80B0A698}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{DFF225E1-36D2-4B77-A8CD-907A80B0A698}\InprocServer32\4.5" Name="Class" Value="DmoOverlay.DmoOverlay" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{DFF225E1-36D2-4B77-A8CD-907A80B0A698}\InprocServer32\4.5" Name="Assembly" Value="DmoOverlay, Version=4.5, Culture=neutral, PublicKeyToken=a069c3b789cacb0e" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{DFF225E1-36D2-4B77-A8CD-907A80B0A698}\InprocServer32\4.5" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{DFF225E1-36D2-4B77-A8CD-907A80B0A698}\InprocServer32\4.5" Name="CodeBase" Value="file:///[#DmoOverlayFile]" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{DFF225E1-36D2-4B77-A8CD-907A80B0A698}\InprocServer32" Name="Class" Value="DmoOverlay.DmoOverlay" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{DFF225E1-36D2-4B77-A8CD-907A80B0A698}\InprocServer32" Name="Assembly" Value="DmoOverlay, Version=4.5, Culture=neutral, PublicKeyToken=a069c3b789cacb0e" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{DFF225E1-36D2-4B77-A8CD-907A80B0A698}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{DFF225E1-36D2-4B77-A8CD-907A80B0A698}\InprocServer32" Name="CodeBase" Value="file:///[#DmoOverlayFile]" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="DirectShow\MediaObjects\Categories\d990ee14-776c-4723-be46-3da2f56f10b9\dff225e1-36d2-4b77-a8cd-907a80b0a698" Value="" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="DirectShow\MediaObjects\Categories\d990ee14-776c-4723-be46-3da2f56f10b9" Value="Video effects" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="DirectShow\MediaObjects\dff225e1-36d2-4b77-a8cd-907a80b0a698" Value="DmoOverlay" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="DirectShow\MediaObjects\dff225e1-36d2-4b77-a8cd-907a80b0a698" Name="InputTypes" Value="7669647300001000800000AA00389B717DEB36E44F52CE119F530020AF0BA7707669647300001000800000AA00389B717EEB36E44F52CE119F530020AF0BA770" Type="binary" Action="write" />
-                <RegistryValue Root="HKCR" Key="DirectShow\MediaObjects\dff225e1-36d2-4b77-a8cd-907a80b0a698" Name="OutputTypes" Value="7669647300001000800000AA00389B717DEB36E44F52CE119F530020AF0BA7707669647300001000800000AA00389B717EEB36E44F52CE119F530020AF0BA770" Type="binary" Action="write" />
-            </Component>
-        </DirectoryRef>
-    </Fragment>
+  <?include $(sys.CURRENTDIR)Common\Config.wxi?>
+  <Fragment>
+    <DirectoryRef Id="DIRECTSHOWINSTALLLOCATION">
+      <Component Id="DmoOverlayComponent" Guid="{FAF8D5A4-4E73-4D1D-81E1-F3BC808F80C4}" Win64="no">
+        <Class Id="{4EFE45F5-77C3-3D9C-A1F3-D51714AD2673}" Context="InprocServer32" Description="DmoOverlay.RegisterDll" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="DmoOverlay.RegisterDll" Description="DmoOverlay.RegisterDll" />
+        </Class>
+        <Class Id="{DFF225E1-36D2-4B77-A8CD-907A80B0A698}" Context="InprocServer32" Description="DmoOverlay.DmoOverlay" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="DmoOverlay.DmoOverlay" Description="DmoOverlay.DmoOverlay" />
+        </Class>
+        <File Id="DmoOverlayFile" KeyPath="yes" Source="$(var.SolutionDir)Release86\DmoOverlay.dll" Assembly=".net" AssemblyManifest="DmoOverlayFile" AssemblyApplication="DmoOverlayFile" DiskId="1"/>
+        <RegistryValue Root="HKCR" Key="CLSID\{4EFE45F5-77C3-3D9C-A1F3-D51714AD2673}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{4EFE45F5-77C3-3D9C-A1F3-D51714AD2673}\InprocServer32\4.5" Name="Class" Value="DmoOverlay.RegisterDll" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{4EFE45F5-77C3-3D9C-A1F3-D51714AD2673}\InprocServer32\4.5" Name="Assembly" Value="DmoOverlay, Version=4.5, Culture=neutral, PublicKeyToken=a069c3b789cacb0e" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{4EFE45F5-77C3-3D9C-A1F3-D51714AD2673}\InprocServer32\4.5" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{4EFE45F5-77C3-3D9C-A1F3-D51714AD2673}\InprocServer32\4.5" Name="CodeBase" Value="file:///[#DmoOverlayFile]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{4EFE45F5-77C3-3D9C-A1F3-D51714AD2673}\InprocServer32" Name="Class" Value="DmoOverlay.RegisterDll" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{4EFE45F5-77C3-3D9C-A1F3-D51714AD2673}\InprocServer32" Name="Assembly" Value="DmoOverlay, Version=4.5, Culture=neutral, PublicKeyToken=a069c3b789cacb0e" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{4EFE45F5-77C3-3D9C-A1F3-D51714AD2673}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{4EFE45F5-77C3-3D9C-A1F3-D51714AD2673}\InprocServer32" Name="CodeBase" Value="file:///[#DmoOverlayFile]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{DFF225E1-36D2-4B77-A8CD-907A80B0A698}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{DFF225E1-36D2-4B77-A8CD-907A80B0A698}\InprocServer32\4.5" Name="Class" Value="DmoOverlay.DmoOverlay" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{DFF225E1-36D2-4B77-A8CD-907A80B0A698}\InprocServer32\4.5" Name="Assembly" Value="DmoOverlay, Version=4.5, Culture=neutral, PublicKeyToken=a069c3b789cacb0e" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{DFF225E1-36D2-4B77-A8CD-907A80B0A698}\InprocServer32\4.5" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{DFF225E1-36D2-4B77-A8CD-907A80B0A698}\InprocServer32\4.5" Name="CodeBase" Value="file:///[#DmoOverlayFile]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{DFF225E1-36D2-4B77-A8CD-907A80B0A698}\InprocServer32" Name="Class" Value="DmoOverlay.DmoOverlay" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{DFF225E1-36D2-4B77-A8CD-907A80B0A698}\InprocServer32" Name="Assembly" Value="DmoOverlay, Version=4.5, Culture=neutral, PublicKeyToken=a069c3b789cacb0e" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{DFF225E1-36D2-4B77-A8CD-907A80B0A698}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{DFF225E1-36D2-4B77-A8CD-907A80B0A698}\InprocServer32" Name="CodeBase" Value="file:///[#DmoOverlayFile]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="DirectShow\MediaObjects\Categories\d990ee14-776c-4723-be46-3da2f56f10b9\dff225e1-36d2-4b77-a8cd-907a80b0a698" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="DirectShow\MediaObjects\Categories\d990ee14-776c-4723-be46-3da2f56f10b9" Value="Video effects" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="DirectShow\MediaObjects\dff225e1-36d2-4b77-a8cd-907a80b0a698" Value="DmoOverlay" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="DirectShow\MediaObjects\dff225e1-36d2-4b77-a8cd-907a80b0a698" Name="InputTypes" Value="7669647300001000800000AA00389B717DEB36E44F52CE119F530020AF0BA7707669647300001000800000AA00389B717EEB36E44F52CE119F530020AF0BA770" Type="binary" Action="write" />
+        <RegistryValue Root="HKCR" Key="DirectShow\MediaObjects\dff225e1-36d2-4b77-a8cd-907a80b0a698" Name="OutputTypes" Value="7669647300001000800000AA00389B717DEB36E44F52CE119F530020AF0BA7707669647300001000800000AA00389B717EEB36E44F52CE119F530020AF0BA770" Type="binary" Action="write" />
+      </Component>
+    </DirectoryRef>
+  </Fragment>
 </Wix>

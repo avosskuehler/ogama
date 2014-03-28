@@ -634,13 +634,13 @@ namespace Ogama.Modules.Recording.ASLInterface
     /// </summary>
     protected override void Initialize()
     {
+#if ASL
       // Create Port COM Object
       this.aslPort = new ASLSerialOutPort3Class();
 
       // ???
       this.stopwatch2 = new Stopwatch();
 
-#if ASL
       // Load Asl tracker settings.
       if (File.Exists(this.UserSettingsFile))
       {

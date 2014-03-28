@@ -1,15 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-    <Fragment>
-        <DirectoryRef Id="INSTALLLOCATION">
-            <Component Id="OgamaCaptureX86Component" Guid="{960FDA8F-6F36-4542-937C-DB9921E33FBC}" Win64="no">
-                <File Id="fil28FCD5D6CC68B3FCF5C0C48A2694E364" KeyPath="yes" Source="$(var.Ogama.TargetDir)OgamaCaptureX86.ax">
-                    <Class Id="{90B82CB3-719B-426E-AE46-28CF7A57B586}" Context="InprocServer32" Description="OgamaCapture" ThreadingModel="both" />
-                </File>
-                <RegistryValue Root="HKCR" Key="CLSID\{860BB310-5D01-11D0-BD3B-00A0C911CE86}\Instance\{90B82CB3-719B-426E-AE46-28CF7A57B586}" Name="FriendlyName" Value="OgamaCapture" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{860BB310-5D01-11D0-BD3B-00A0C911CE86}\Instance\{90B82CB3-719B-426E-AE46-28CF7A57B586}" Name="CLSID" Value="{90B82CB3-719B-426E-AE46-28CF7A57B586}" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{860BB310-5D01-11D0-BD3B-00A0C911CE86}\Instance\{90B82CB3-719B-426E-AE46-28CF7A57B586}" Name="FilterData" Value="02000000000020000100000000000000307069330800000000000000010000000000000000000000307479330000000038000000480000007669647300001000800000AA00389B7100000000000000000000000000000000" Type="binary" Action="write" />
-            </Component>
-        </DirectoryRef>
-    </Fragment>
+  <?include $(sys.CURRENTDIR)Common\Config.wxi?>
+  <Fragment>
+    <DirectoryRef Id="DIRECTSHOWINSTALLLOCATION">
+      <Component Id="OgamaCaptureX86Component" Guid="{960FDA8F-6F36-4542-937C-DB9921E33FBC}" Win64="no">
+        <File Id="fil28FCD5D6CC68B3FCF5C0C48A2694E364" KeyPath="yes" Source="$(var.SolutionDir)Release86\OgamaCaptureX86.ax">
+          <Class Id="{90B82CB3-719B-426E-AE46-28CF7A57B586}" Context="InprocServer32" Description="OgamaCapture" ThreadingModel="both" />
+        </File>
+        <RegistryValue Root="HKCR" Key="CLSID\{860BB310-5D01-11D0-BD3B-00A0C911CE86}\Instance\{90B82CB3-719B-426E-AE46-28CF7A57B586}" Name="FriendlyName" Value="OgamaCapture" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{860BB310-5D01-11D0-BD3B-00A0C911CE86}\Instance\{90B82CB3-719B-426E-AE46-28CF7A57B586}" Name="CLSID" Value="{90B82CB3-719B-426E-AE46-28CF7A57B586}" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{860BB310-5D01-11D0-BD3B-00A0C911CE86}\Instance\{90B82CB3-719B-426E-AE46-28CF7A57B586}" Name="FilterData" Value="02000000000020000100000000000000307069330800000000000000010000000000000000000000307479330000000038000000480000007669647300001000800000AA00389B7100000000000000000000000000000000" Type="binary" Action="write" />
+      </Component>
+    </DirectoryRef>
+  </Fragment>
 </Wix>

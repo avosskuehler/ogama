@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?include $(sys.CURRENTDIR)Common\Config.wxi?>
   <Fragment>
-    <DirectoryRef Id="INSTALLLOCATION">
+    <DirectoryRef Id="DIRECTSHOWINSTALLLOCATION">
       <Component Id="DmoMixerComponent" Guid="{201F00C6-B552-4A34-A427-16B6B3BF50FE}" Win64="no">
         <Class Id="{188D2520-FBB0-3D3F-A07B-11C39E75A661}" Context="InprocServer32" Description="DmoMixer.VideoStream" ThreadingModel="both" ForeignServer="mscoree.dll">
           <ProgId Id="DmoMixer.VideoStream" Description="DmoMixer.VideoStream" />
@@ -12,7 +13,7 @@
         <Class Id="{EE738B44-222F-3074-8EC2-2A743CAB946A}" Context="InprocServer32" Description="DmoMixer.RegisterDll" ThreadingModel="both" ForeignServer="mscoree.dll">
           <ProgId Id="DmoMixer.RegisterDll" Description="DmoMixer.RegisterDll" />
         </Class>
-        <File Id="DmoMixerFile" KeyPath="yes" Source="$(var.Ogama.TargetDir)DmoMixer.dll" Assembly=".net" AssemblyManifest="DmoMixerFile" AssemblyApplication="DmoMixerFile" DiskId="1"/>
+        <File Id="DmoMixerFile" KeyPath="yes" Source="$(var.SolutionDir)Release86\DmoMixer.dll" Assembly=".net" AssemblyManifest="DmoMixerFile" AssemblyApplication="DmoMixerFile" DiskId="1"/>
         <RegistryValue Root="HKCR" Key="CLSID\{188D2520-FBB0-3D3F-A07B-11C39E75A661}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{188D2520-FBB0-3D3F-A07B-11C39E75A661}\InprocServer32\4.5" Name="Class" Value="DmoMixer.VideoStream" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{188D2520-FBB0-3D3F-A07B-11C39E75A661}\InprocServer32\4.5" Name="Assembly" Value="DmoMixer, Version=4.5, Culture=neutral, PublicKeyToken=a990574be1a1688e" Type="string" Action="write" />
