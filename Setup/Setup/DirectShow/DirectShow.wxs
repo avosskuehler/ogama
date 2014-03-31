@@ -3,14 +3,12 @@
   <?include $(sys.CURRENTDIR)Common\Config.wxi?>
 
   <Fragment>
-    <DirectoryRef Id="TARGETDIR">
-      <Directory Id="ProgramFilesFolder">
-        <Directory Id="DIRECTSHOWINSTALLLOCATION" Name="$(var.ProductName)">
-          <Component Id="C_DmoBase" Guid="{05ADBB08-88A4-0CA7-8D31-D261F623014D}" Win64="no">
-            <File Id="DmoBase" Name="DmoBase.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="DmoBase" AssemblyApplication="DmoBase" DiskId="1"
-                  Source="$(var.SolutionDir)Release86\" />
-          </Component>
-        </Directory>
+    <DirectoryRef Id="ProgramFilesFolder">
+      <Directory Id="DIRECTSHOWINSTALLLOCATION" Name="$(var.ProductName)">
+        <Component Id="C_DmoBase" Guid="{05ADBB08-88A4-0CA7-8D31-D261F623014D}" Win64="no">
+          <File Id="DmoBase" Name="DmoBase.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="DmoBase" AssemblyApplication="DmoBase" DiskId="1"
+                Source="$(var.SolutionDir)Release86\" />
+        </Component>
       </Directory>
     </DirectoryRef>
 

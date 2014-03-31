@@ -87,9 +87,9 @@
       <!--<ComponentRef Id="C_ffdshow" />-->
     </Feature>
 
-    <Icon Id="OgamaImportSettings.ico" SourceFile="$(var.SolutionDir)Setup\Setup\Resources\OgamaImportSettings.ico" />
-    <Icon Id="Ogama.ico" SourceFile="$(var.SolutionDir)Setup\Setup\Resources\Ogama.ico" />
-    <Icon Id="SourceDocumentation.ico" SourceFile="$(var.SolutionDir)Setup\Setup\Resources\SourceDocumentation.ico" />
+    <Icon Id="OgamaImport.ico" SourceFile="$(var.SolutionDir)Ogama\Resources\OgamaImport.ico" />
+    <Icon Id="Ogama.ico" SourceFile="$(var.SolutionDir)Ogama\Resources\Ogama.ico" />
+    <Icon Id="SourceDocumentation.ico" SourceFile="$(var.SolutionDir)SourceDocumentation\Icons\SourceDocumentation.ico" />
 
     <Media Id="1" Cabinet="cab1.cab" EmbedCab="yes" />
     <Property Id="VSDFrameworkVersion" Value="v4.0" />

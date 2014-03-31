@@ -6,7 +6,7 @@
       <Component Id="C_OgamaExe" Guid="{202F4CF6-9B18-11FB-0969-4254EDC18E44}" Win64="$(var.Win64)">
         <File Id="OgamaExe" Name="Ogama.exe" KeyPath="yes" Assembly=".net" AssemblyManifest="OgamaExe" AssemblyApplication="OgamaExe" DiskId="1"
               Source="$(var.Ogama.TargetDir)" />
-        <ProgId Id="OgamaImportSettings" Description="An xml file with import settings for raw data or fixations." Icon="OgamaImportSettings.ico" IconIndex="0" Advertise="yes">
+        <ProgId Id="OgamaImportSettings" Description="An xml file with import settings for raw data or fixations." Icon="OgamaImport.ico" IconIndex="0" Advertise="yes">
           <Extension Id="ois" Advertise="yes">
             <Verb Id="nothing" Command="Internal" Sequence="1" />
           </Extension>

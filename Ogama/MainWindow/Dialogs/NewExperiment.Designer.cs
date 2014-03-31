@@ -40,7 +40,7 @@
       this.lblDescription = new System.Windows.Forms.Label();
       this.lblFolder = new System.Windows.Forms.Label();
       this.lblName = new System.Windows.Forms.Label();
-      this.dialogTop1 = new DialogTop();
+      this.dialogTop1 = new Ogama.Modules.Common.Controls.DialogTop();
       this.SuspendLayout();
       // 
       // btnOK
@@ -103,7 +103,7 @@
       this.lblDescription.Size = new System.Drawing.Size(382, 26);
       this.lblDescription.TabIndex = 5;
       this.lblDescription.Text = "A folder with the experiments name will be created in the selected parent folder." +
-          " \r\nTherein all files and folders that are used for the experiment are located.";
+    " \r\nTherein all files and folders that are used for the experiment are located.";
       // 
       // lblFolder
       // 
@@ -130,12 +130,12 @@
       this.dialogTop1.Description = "Specify the parent folder and a name for the experiment.";
       this.dialogTop1.Dock = System.Windows.Forms.DockStyle.Top;
       this.dialogTop1.Location = new System.Drawing.Point(0, 0);
-      this.dialogTop1.Logo = global::Ogama.Properties.Resources.OgamaDocNew;
+      this.dialogTop1.Logo = global::Ogama.Properties.Resources.OgamaNew;
       this.dialogTop1.Name = "dialogTop1";
       this.dialogTop1.Size = new System.Drawing.Size(438, 60);
       this.dialogTop1.TabIndex = 7;
       // 
-      // frmNewExperimentDlg
+      // NewExperiment
       // 
       this.AcceptButton = this.btnOK;
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -155,7 +155,7 @@
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.MaximizeBox = false;
       this.MinimizeBox = false;
-      this.Name = "frmNewExperimentDlg";
+      this.Name = "NewExperiment";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
       this.Text = "Create new experiment ...";
       this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmNewExperimentDlg_FormClosing);

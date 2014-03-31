@@ -19,7 +19,7 @@
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>
     </AssemblyOriginatorKeyFile>
-    <ApplicationIcon>Resources\OgamaV3.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\Ogama.ico</ApplicationIcon>
     <TargetZone>LocalIntranet</TargetZone>
     <StartupObject>Ogama.Program</StartupObject>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
@@ -1704,6 +1704,7 @@
     <None Include="Resources\TobiiBanner.png" />
     <None Include="Resources\TobiiPhoto16.png" />
     <None Include="Resources\TobiiPhoto64.png" />
+    <None Include="Resources\OgamaNew.ico" />
     <Content Include="SaliencyCalculation\cygblas.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

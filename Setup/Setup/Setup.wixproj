@@ -62,19 +62,17 @@
   <ItemGroup>
     <Folder Include="DirectShow" />
     <Folder Include="Common" />
-    <Folder Include="Resources" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Common\Config.wxi" />
     <Content Include="Resources\BannerInstaller.bmp" />
+    <Content Include="Resources\FixationSourceCodePermission.txt" />
     <Content Include="Resources\InstallUtilLib.dll" />
     <Content Include="Resources\License.rtf" />
     <Content Include="Resources\Microsoft_VC120_CRT_x64.msm" />
     <Content Include="Resources\Microsoft_VC120_CRT_x86.msm" />
     <Content Include="Resources\NewFldrBtn.bmp" />
-    <Content Include="Resources\Ogama.ico" />
-    <Content Include="Resources\OgamaImportSettings.ico" />
-    <Content Include="Resources\SourceDocumentation.ico" />
     <Content Include="Resources\UpFldrBtn.bmp" />
   </ItemGroup>
   <ItemGroup>
