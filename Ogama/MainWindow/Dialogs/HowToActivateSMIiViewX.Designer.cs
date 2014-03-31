@@ -1,6 +1,6 @@
 ﻿namespace Ogama.MainWindow.Dialogs
 {
-  partial class HowToActivateSMI
+  partial class HowToActivateSMIiViewX
   {
     /// <summary>
     /// Required designer variable.
@@ -28,7 +28,7 @@
     /// </summary>
     private void InitializeComponent()
     {
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HowToActivateSMI));
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HowToActivateSMIiViewX));
       this.label3 = new System.Windows.Forms.Label();
       this.btnOK = new System.Windows.Forms.Button();
       this.label1 = new System.Windows.Forms.Label();
@@ -71,7 +71,7 @@
       // 
       // pcbSMI
       // 
-      this.pcbSMI.Image = global::Ogama.Properties.Resources.SMIFoto64;
+      this.pcbSMI.Image = global::Ogama.Properties.Resources.SMIiViewXFoto64;
       this.pcbSMI.Location = new System.Drawing.Point(12, 84);
       this.pcbSMI.Name = "pcbSMI";
       this.pcbSMI.Size = new System.Drawing.Size(64, 64);
@@ -108,7 +108,7 @@
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
       this.MaximizeBox = false;
       this.MinimizeBox = false;
-      this.Name = "HowToActivateSMI";
+      this.Name = "HowToActivateSMIiViewX";
       this.ShowInTaskbar = false;
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
       this.Text = "HowTo: Activate SMI iViewX recording...";

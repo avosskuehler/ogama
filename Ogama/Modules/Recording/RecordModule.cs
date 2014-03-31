@@ -45,6 +45,8 @@ namespace Ogama.Modules.Recording
   using Ogama.Modules.Recording.MouseOnlyInterface;
   using Ogama.Modules.Recording.Presenter;
   using Ogama.Modules.Recording.SMIInterface;
+  using Ogama.Modules.Recording.SMIInterface.iViewX;
+  using Ogama.Modules.Recording.SMIInterface.RedM;
   using Ogama.Modules.Recording.TobiiInterface;
   using Ogama.Modules.Recording.TrackerBase;
   using Ogama.Properties;
@@ -1703,7 +1705,8 @@ namespace Ogama.Modules.Recording
       this.tclEyetracker.TabPages.Add(this.tbpGazepoint);
       this.tclEyetracker.TabPages.Add(this.tbpTobii);
       this.tclEyetracker.TabPages.Add(this.tbpAlea);
-      this.tclEyetracker.TabPages.Add(this.tbpSMI);
+      this.tclEyetracker.TabPages.Add(this.tbpSMIiViewX);
+      this.tclEyetracker.TabPages.Add(this.tbpSMIRedM);
       this.tclEyetracker.TabPages.Add(this.tbpAsl);
       this.tclEyetracker.TabPages.Add(this.tbpMouseOnly);
       this.tclEyetracker.TabPages.Add(this.tbpGazetrackerIPClient);
@@ -1879,24 +1882,44 @@ namespace Ogama.Modules.Recording
         }
       }
 
-      if (tracker == (tracker | HardwareTracker.SMI))
+      if (tracker == (tracker | HardwareTracker.SMIiViewX))
       {
-        // Create mouse only tracker
-        var newSMI = new SMITracker(
+        // Create SMI tracker
+        var newSMI = new SMIiViewXTracker(
           this,
-          this.btnSMIConnect,
-          this.btnSMISubjectName,
-          this.btnSMICalibrate,
-          this.btnSMIRecord,
-          this.txbSMISubjectName);
+          this.btnSMIiViewXConnect,
+          this.btnSMIiViewXSubjectName,
+          this.btnSMIiViewXCalibrate,
+          this.btnSMIiViewXRecord,
+          this.txbSMIiViewXSubjectName);
 
-        this.trackerInterfaces.Add(HardwareTracker.SMI, newSMI);
+        this.trackerInterfaces.Add(HardwareTracker.SMIiViewX, newSMI);
       }
       else
       {
-        if (this.tclEyetracker.TabPages.Contains(this.tbpSMI))
+        if (this.tclEyetracker.TabPages.Contains(this.tbpSMIiViewX))
         {
-          this.tclEyetracker.TabPages.Remove(this.tbpSMI);
+          this.tclEyetracker.TabPages.Remove(this.tbpSMIiViewX);
+        }
+      }
+
+      if (tracker == (tracker | HardwareTracker.SMIRedM))
+      {
+        // Create SMI tracker
+        var newSMI = new SMIRedMTracker(
+          this,
+          this.btnSMIRedMConnect,
+          this.btnSMIRedMSubject,
+          this.btnSMIRedMCalibrate,
+          this.btnSMIRedMRecord,
+          this.txbSMIRedMSubject);
+        this.trackerInterfaces.Add(HardwareTracker.SMIRedM, newSMI);
+      }
+      else
+      {
+        if (this.tclEyetracker.TabPages.Contains(this.tbpSMIRedM))
+        {
+          this.tclEyetracker.TabPages.Remove(this.tbpSMIRedM);
         }
       }
 
@@ -2464,9 +2487,9 @@ namespace Ogama.Modules.Recording
 
           break;
         case "tbpSMI":
-          if (this.trackerInterfaces.ContainsKey(HardwareTracker.SMI))
+          if (this.trackerInterfaces.ContainsKey(HardwareTracker.SMIiViewX))
           {
-            this.currentTracker = this.trackerInterfaces[HardwareTracker.SMI];
+            this.currentTracker = this.trackerInterfaces[HardwareTracker.SMIiViewX];
           }
 
           break;

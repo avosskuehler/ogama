@@ -141,6 +141,18 @@ namespace Ogama.Modules.Recording.MouseOnlyInterface
     #region PUBLICMETHODS
 
     /// <summary>
+    /// Checks if the mouse tracker is available in the system.
+    /// </summary>
+    /// <param name="errorMessage">Out. A <see cref="String"/> with an error message.</param>
+    /// <returns><strong>True</strong>, if mouse tracker
+    /// is available in the system, otherwise <strong>false</strong></returns>
+    public static TrackerStatus IsAvailable(out string errorMessage)
+    {
+      errorMessage = "The mouse tracker is always available. You can use this for testing purposes, if you have no eyetracking device at hand.";
+      return TrackerStatus.Available;
+    }
+
+    /// <summary>
     /// Method to return the current timing of the tracking system.
     /// </summary>
     /// <returns>A <see cref="Int64"/> with the current time in milliseconds

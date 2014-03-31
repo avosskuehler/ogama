@@ -251,11 +251,17 @@
     <Compile Include="MainWindow\Dialogs\HowToActivateGazepoint.Designer.cs">
       <DependentUpon>HowToActivateGazepoint.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow\Dialogs\HowToActivateSMI.cs">
+    <Compile Include="MainWindow\Dialogs\HowToActivateSMIRedM.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainWindow\Dialogs\HowToActivateSMI.Designer.cs">
-      <DependentUpon>HowToActivateSMI.cs</DependentUpon>
+    <Compile Include="MainWindow\Dialogs\HowToActivateSMIRedM.Designer.cs">
+      <DependentUpon>HowToActivateSMIRedM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\HowToActivateSMIiViewX.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\HowToActivateSMIiViewX.Designer.cs">
+      <DependentUpon>HowToActivateSMIiViewX.cs</DependentUpon>
     </Compile>
     <Compile Include="MainWindow\Dialogs\HowToActivateAlea.cs">
       <SubType>Form</SubType>
@@ -457,10 +463,13 @@
     <Compile Include="Modules\Recording\Presenter\DSScreenCapture.cs" />
     <Compile Include="Modules\Recording\Presenter\ScreenCaptureProperties.cs" />
     <Compile Include="Modules\Recording\EyeTechInterface\QuickLinkAPI.cs" />
+    <Compile Include="Modules\Recording\SMIInterface\ISMIClient.cs" />
+    <Compile Include="Modules\Recording\SMIInterface\iViewX\SMIiViewXTracker.cs" />
     <Compile Include="Modules\Recording\SMIInterface\RedM\EyeTrackingController.cs" />
-    <Compile Include="Modules\Recording\SMIInterface\RedM\SmiRedmClient.cs" />
-    <Compile Include="Modules\Recording\SMIInterface\RedM\SmiRedmWrapper.cs" />
-    <Compile Include="Modules\Recording\SMIInterface\RedM\SmiRedmWrapperListener.cs" />
+    <Compile Include="Modules\Recording\SMIInterface\RedM\SMIRedMTracker.cs" />
+    <Compile Include="Modules\Recording\SMIInterface\RedM\SMIRedMClient.cs" />
+    <Compile Include="Modules\Recording\SMIInterface\RedM\SMIRedMWrapper.cs" />
+    <Compile Include="Modules\Recording\SMIInterface\RedM\SMIRedMWrapperListener.cs" />
     <Compile Include="Modules\Recording\TobiiInterface\TobiiCalibrationRunner.cs" />
     <Compile Include="Modules\Recording\TobiiInterface\TobiiCalibrationForm.cs">
       <SubType>Form</SubType>
@@ -543,13 +552,13 @@
     <Compile Include="Modules\ImportExport\OgamaData\ImportOgamaData.cs" />
     <Compile Include="Modules\Recording\SMIInterface\AvailableEye.cs" />
     <Compile Include="Modules\Recording\SMIInterface\CalibrationPointSize.cs" />
-    <Compile Include="Modules\Recording\SMIInterface\SMICalibrationForm.cs">
+    <Compile Include="Modules\Recording\SMIInterface\iViewX\SMIiViewXCalibrationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Modules\Recording\SMIInterface\SMICalibrationForm.Designer.cs">
-      <DependentUpon>SMICalibrationForm.cs</DependentUpon>
+    <Compile Include="Modules\Recording\SMIInterface\iViewX\SMIiViewXCalibrationForm.Designer.cs">
+      <DependentUpon>SMIiViewXCalibrationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Recording\SMIInterface\SMIClient.cs" />
+    <Compile Include="Modules\Recording\SMIInterface\iViewX\SMIiViewXClient.cs" />
     <Compile Include="Modules\Recording\SMIInterface\SMITracker.cs" />
     <Compile Include="Modules\Recording\SMIInterface\SMISetting.cs" />
     <Compile Include="Modules\Recording\SMIInterface\SMISettingsDlg.cs">
@@ -1096,8 +1105,12 @@
     <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateGazepoint.resx">
       <DependentUpon>HowToActivateGazepoint.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateSMI.resx">
-      <DependentUpon>HowToActivateSMI.cs</DependentUpon>
+    <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateSMIRedM.resx">
+      <DependentUpon>HowToActivateSMIRedM.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateSMIiViewX.resx">
+      <DependentUpon>HowToActivateSMIiViewX.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateAlea.resx">
@@ -1201,8 +1214,8 @@
     <EmbeddedResource Include="Modules\Recording\RecordingPicture.resx">
       <DependentUpon>RecordingPicture.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Recording\SMIInterface\SMICalibrationForm.resx">
-      <DependentUpon>SMICalibrationForm.cs</DependentUpon>
+    <EmbeddedResource Include="Modules\Recording\SMIInterface\iViewX\SMIiViewXCalibrationForm.resx">
+      <DependentUpon>SMIiViewXCalibrationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\SMIInterface\SMISettingsDlg.resx">
       <DependentUpon>SMISettingsDlg.cs</DependentUpon>
@@ -1693,6 +1706,8 @@
     <None Include="Resources\MirametrixFoto16.png" />
     <None Include="Resources\MirametrixFoto64.png" />
     <None Include="Resources\ASLLogo.gif" />
+    <None Include="Resources\ITUNetworkFoto64.png" />
+    <None Include="Resources\ITUDirectFoto64.png" />
     <Content Include="Resources\MirametrixLogo.png" />
     <Content Include="Resources\GazepointLogo.png" />
     <None Include="Resources\Warning21.png" />
@@ -1705,6 +1720,10 @@
     <None Include="Resources\TobiiPhoto16.png" />
     <None Include="Resources\TobiiPhoto64.png" />
     <None Include="Resources\OgamaNew.ico" />
+    <None Include="Resources\SMIRedMFoto64.png" />
+    <None Include="Resources\SMIiViewXFoto64.png" />
+    <None Include="Resources\SMIRedMFoto16.png" />
+    <None Include="Resources\SMIiViewXFoto16.png" />
     <Content Include="SaliencyCalculation\cygblas.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

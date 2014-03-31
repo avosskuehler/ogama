@@ -7,12 +7,14 @@ using NUnit.Framework;
 
 namespace OgamaTrackerTests.Modules.Recording.SMIInterface
 {
+  using Ogama.Modules.Recording.SMIInterface.iViewX;
+
   //[TestClass]
   [TestFixture]
   public class SMIClientIntegrationTest
   {
 		
-		Ogama.Modules.Recording.SMIInterface.SMIClient cut = new Ogama.Modules.Recording.SMIInterface.SMIClient(1000, 500);
+		SMIiViewXClient cut = new SMIiViewXClient(1000, 500);
     //[TestMethod]
     [Test]
     public void TestExtractTrackerData()

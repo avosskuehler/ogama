@@ -3,7 +3,7 @@
      xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
   <?include $(sys.CURRENTDIR)Common\Config.wxi?>
 
-  <Product Id="{D706BD34-DC58-460F-9863-B75537D1A197}"
+  <Product Id="*"
            Codepage="1252"
            Language="!(loc.Property_ProductLanguage)"
            Name="$(var.ProductName)"
@@ -761,7 +761,7 @@
     </UI>
     <Upgrade Id="$(var.UpgradeGuid)">
       <UpgradeVersion Maximum="4.4" Property="PREVIOUSVERSIONSINSTALLED" />
-      <UpgradeVersion Minimum="4.4" Property="NEWERPRODUCTFOUND" OnlyDetect="yes" IncludeMinimum="yes" />
+      <UpgradeVersion Minimum="4.5" Property="NEWERPRODUCTFOUND" OnlyDetect="yes" IncludeMinimum="yes" />
     </Upgrade>
     <InstallExecuteSequence>
       <Custom Action="ERRCA_CANCELNEWERVERSION" Sequence="201">NEWERPRODUCTFOUND AND NOT Installed</Custom>
@@ -780,6 +780,7 @@
       <CostFinalize Sequence="1000" />
       <SetODBCFolders Sequence="1100">NOT Installed</SetODBCFolders>
       <InstallValidate Sequence="1400" />
+      <RemoveExistingProducts Before="InstallInitialize" />
       <InstallInitialize Sequence="1500" />
       <AllocateRegistrySpace Sequence="1550">NOT Installed</AllocateRegistrySpace>
       <ProcessComponents Sequence="1600" />
@@ -830,7 +831,6 @@
       <PublishFeatures Sequence="6300" />
       <PublishProduct Sequence="6400" />
       <InstallFinalize Sequence="6600" />
-      <RemoveExistingProducts Sequence="6550" />
       <InstallExecute Sequence="6500" />
       <MsiPublishAssemblies Sequence="6250" />
       <MsiUnpublishAssemblies Sequence="1650" />

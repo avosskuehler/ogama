@@ -1,4 +1,4 @@
-﻿// <copyright file="SMICalibrationForm.cs" company="FU Berlin">
+﻿// <copyright file="SMITracker.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
 // Copyright (C) 2013 Dr. Adrian Voßkühler  
@@ -11,19 +11,26 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian@ogama.net</email>
 
-namespace Ogama.Modules.Recording.SMIInterface
+namespace Ogama.Modules.Recording.SMIInterface.RedM
 {
-  using System.Collections.Generic;
-  using System.Drawing;
-  using System.Windows.Forms;
   using System;
+  using System.IO;
+  using System.Windows.Forms;
+  using System.Xml.Serialization;
+
+  using Ogama.ExceptionHandling;
+  using Ogama.Modules.Common.CustomEventArgs;
+  using Ogama.Modules.Recording.Dialogs;
+  using Ogama.Modules.Recording.TrackerBase;
+  using Ogama.Modules.Recording.SMIInterface.RedM;
 
   /// <summary>
-  /// This <see cref="Form"/> is used to show calibration points in
-  /// a top most and presentation fullscreen window with the given
-  /// color, backgroundcolor and size.
+  /// This class implements the <see cref="SMITracker"/> interface to represent 
+  /// an OGAMA known SMI eyetracker.
+  /// It encapsulates a SMI http://www.smivision.com/ eyetracker (Red-M series).
+  /// It is tested with the SMI Red-M series.
   /// </summary>
-  public partial class SMICalibrationForm : Form
+  public class SMIRedMTracker : SMITracker
   {
     ///////////////////////////////////////////////////////////////////////////////
     // Defining Constants                                                        //
@@ -35,30 +42,7 @@ namespace Ogama.Modules.Recording.SMIInterface
     // Defining Variables, Enumerations, Events                                  //
     ///////////////////////////////////////////////////////////////////////////////
     #region FIELDS
-
-    /// <summary>
-    /// This is the diameter value for the calibration points.
-    /// </summary>
-    private int usedPointSize;
-
-    /// <summary>
-    /// The <see cref="Color"/> for the calibration
-    /// points.
-    /// </summary>
-    private Color calibPointColor;
-
-    /// <summary>
-    /// The <see cref="Point"/> with the current shown 
-    /// calibration points location.
-    /// </summary>
-    private Point currentPointLocation;
-
-    /// <summary>
-    /// The <see cref="List{Point}"/> with the calibration points.
-    /// </summary>
-    private List<Point> calibrationPoints;
-
-    #endregion //FIELDS
+   #endregion //FIELDS
 
     ///////////////////////////////////////////////////////////////////////////////
     // Construction and Initializing methods                                     //
@@ -66,14 +50,39 @@ namespace Ogama.Modules.Recording.SMIInterface
     #region CONSTRUCTION
 
     /// <summary>
-    /// Initializes a new instance of the SMICalibrationForm class.
+    /// Initializes a new instance of the SMITracker class.
     /// </summary>
-    public SMICalibrationForm()
+    /// <param name="owningRecordModule">The <see cref="RecordModule"/>
+    /// form wich host the recorder.</param>
+    /// <param name="trackerConnectButton">The <see cref="Button"/>
+    /// named "Connect" at the tab page of the SMI device.</param>
+    /// <param name="trackerSubjectButton">The <see cref="Button"/>
+    /// named "Subject" at the tab page of the SMI device.</param>
+    /// <param name="trackerCalibrateButton">The <see cref="Button"/>
+    /// named "Calibrate" at the tab page of the SMI device.</param>
+    /// <param name="trackerRecordButton">The <see cref="Button"/>
+    /// named "Record" at the tab page of the SMI device.</param>
+    /// <param name="trackerSubjectNameTextBox">The <see cref="TextBox"/>
+    /// which should contain the subject name at the tab page of the SMI device.</param>
+    public SMIRedMTracker(
+      RecordModule owningRecordModule,
+      Button trackerConnectButton,
+      Button trackerSubjectButton,
+      Button trackerCalibrateButton,
+      Button trackerRecordButton,
+      TextBox trackerSubjectNameTextBox)
+      : base(
+      owningRecordModule,
+      trackerConnectButton,
+      trackerSubjectButton,
+      trackerCalibrateButton,
+      trackerRecordButton,
+      trackerSubjectNameTextBox,
+      Properties.Settings.Default.EyeTrackerSettingsPath + "SMIRedMSetting.xml",
+      new SMIRedMClient())
     {
-      this.InitializeComponent();
-      this.currentPointLocation = new Point(100, 100);
-      this.calibrationPoints = new List<Point>();
-      this.usedPointSize = 20;
+      // Call the initialize methods of derived classes
+      this.Initialize();
     }
 
     #endregion //CONSTRUCTION
@@ -88,50 +97,6 @@ namespace Ogama.Modules.Recording.SMIInterface
     // Defining Properties                                                       //
     ///////////////////////////////////////////////////////////////////////////////
     #region PROPERTIES
-
-    /// <summary>
-    /// Gets or sets the <see cref="List{Point}"/>
-    /// with the calibration point locations.
-    /// </summary>
-    public List<Point> CalibrationPoints
-    {
-      get { return this.calibrationPoints; }
-      set { this.calibrationPoints = value; }
-    }
-
-    /// <summary>
-    /// Sets the <see cref="Color"/> for
-    /// the calibration points.
-    /// </summary>
-    public Color CalibPointColor
-    {
-      set { this.calibPointColor = value; }
-    }
-
-    /// <summary>
-    /// Sets the <see cref="CalibrationPointSize"/>
-    /// for the calibration points.
-    /// </summary>
-    public CalibrationPointSize CalibPointSize
-    {
-      set
-      {
-        switch (value)
-        {
-          case CalibrationPointSize.Small:
-            this.usedPointSize = 20;
-            break;
-          default:
-          case CalibrationPointSize.Medium:
-            this.usedPointSize = 40;
-            break;
-          case CalibrationPointSize.Large:
-            this.usedPointSize = 80;
-            break;
-        }
-      }
-    }
-
     #endregion //PROPERTIES
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -140,34 +105,15 @@ namespace Ogama.Modules.Recording.SMIInterface
     #region PUBLICMETHODS
 
     /// <summary>
-    /// This method changes the shown calibration point index to
-    /// the new value. This is NOT zero-based (1-based)
+    /// Checks if the RedM tracker is available in the system.
     /// </summary>
-    /// <param name="calibrationPointIndex">A (1-based) index of the new point
-    /// to be shown.</param>
-    public void ShowCalibrationPoint(int calibrationPointIndex)
+    /// <param name="errorMessage">Out. A <see cref="String"/> with an error message.</param>
+    /// <returns><strong>True</strong>, if RedM tracker
+    /// is available in the system, otherwise <strong>false</strong></returns>
+    public static TrackerStatus IsAvailable(out string errorMessage)
     {
-      if (this.calibrationPoints.Count >= calibrationPointIndex)
-      {
-        this.currentPointLocation = this.calibrationPoints[calibrationPointIndex - 1];
-        this.Invalidate();
-        Console.WriteLine("ShowCalibrationPoint, currentPointLocation:" + currentPointLocation);
-      }
-    }
-
-    /// <summary>
-    /// This method is a thread safe version for the <see cref="Form.Close()"/>
-    /// method.
-    /// </summary>
-    public void ThreadSafeClose()
-    {
-      if (this.InvokeRequired)
-      {
-        this.Invoke(new MethodInvoker(this.Close));
-        return;
-      }
-
-      this.Close();
+      errorMessage = "The status of the SMI RedM tracking device cannot be automatically determined.";
+      return TrackerStatus.Undetermined;
     }
 
     #endregion //PUBLICMETHODS
@@ -178,30 +124,29 @@ namespace Ogama.Modules.Recording.SMIInterface
     #region OVERRIDES
 
     /// <summary>
-    /// The <see cref="Control.Paint"/> event handler for this <see cref="Form"/>.
-    /// Paints the current calibration point.
+    /// Connects to the SMI iView system.
     /// </summary>
-    /// <param name="e">A <see cref="PaintEventArgs"/> with the event data.</param>
-    protected override void OnPaint(PaintEventArgs e)
+    /// <returns><strong>True</strong> if connection succeded, otherwise
+    /// <strong>false</strong>.</returns>
+    public override bool Connect()
     {
-      base.OnPaint(e);
-      SolidBrush brush = new SolidBrush(this.calibPointColor);
+      try
+      {
+        // Connect to the SMI server if necessary
+        if (!this.smiClient.IsConnected)
+        {
+          this.smiClient.Connect();
+        }
+      }
+      catch (Exception ex)
+      {
+        var dlg = new ConnectionFailedDialog { ErrorMessage = ex.Message };
+        dlg.ShowDialog();
+        this.CleanUp();
+        return false;
+      }
 
-      // Draw bounding circle
-      e.Graphics.FillEllipse(
-        brush,
-        this.currentPointLocation.X - this.usedPointSize / 2,
-        this.currentPointLocation.Y - this.usedPointSize / 2,
-        this.usedPointSize,
-        this.usedPointSize);
-
-      // Draw center point
-      e.Graphics.FillEllipse(
-        Brushes.Black,
-        this.currentPointLocation.X - 1,
-        this.currentPointLocation.Y - 1,
-        2,
-        2);
+      return true;
     }
 
     #endregion //OVERRIDES

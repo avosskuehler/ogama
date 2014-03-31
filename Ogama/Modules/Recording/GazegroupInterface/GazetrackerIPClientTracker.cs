@@ -226,7 +226,7 @@ namespace Ogama.Modules.Recording.GazegroupInterface
     /// <returns>Always true.</returns>
     public static TrackerStatus IsAvailable(out string errorMessage)
     {
-      errorMessage = string.Empty;
+      errorMessage = "The hardware status of the gazetracker network client can not be automatically determined.";
       return TrackerStatus.Undetermined;
     }
 

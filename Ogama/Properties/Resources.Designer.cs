@@ -1230,6 +1230,26 @@ namespace Ogama.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ITUDirectFoto64 {
+            get {
+                object obj = ResourceManager.GetObject("ITUDirectFoto64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ITUNetworkFoto64 {
+            get {
+                object obj = ResourceManager.GetObject("ITUNetworkFoto64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap lanconnect {
             get {
                 object obj = ResourceManager.GetObject("lanconnect", resourceCulture);
@@ -1940,9 +1960,9 @@ namespace Ogama.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap SMIFoto16 {
+        internal static System.Drawing.Bitmap SMIiViewXFoto16 {
             get {
-                object obj = ResourceManager.GetObject("SMIFoto16", resourceCulture);
+                object obj = ResourceManager.GetObject("SMIiViewXFoto16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1950,9 +1970,9 @@ namespace Ogama.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap SMIFoto64 {
+        internal static System.Drawing.Bitmap SMIiViewXFoto64 {
             get {
-                object obj = ResourceManager.GetObject("SMIFoto64", resourceCulture);
+                object obj = ResourceManager.GetObject("SMIiViewXFoto64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1963,6 +1983,26 @@ namespace Ogama.Properties {
         internal static System.Drawing.Bitmap SMILogo {
             get {
                 object obj = ResourceManager.GetObject("SMILogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SMIRedMFoto16 {
+            get {
+                object obj = ResourceManager.GetObject("SMIRedMFoto16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SMIRedMFoto64 {
+            get {
+                object obj = ResourceManager.GetObject("SMIRedMFoto64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

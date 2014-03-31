@@ -45,7 +45,7 @@ namespace Ogama.Modules.Recording.TrackerBase
     /// <summary>
     /// The Senso motoric instruments iViewX System based tracking.
     /// </summary>
-    SMI = 8,
+    SMIiViewX = 8,
 
     /// <summary>
     /// The Gazegroup GazeTracker using the ogama client.
@@ -76,5 +76,11 @@ namespace Ogama.Modules.Recording.TrackerBase
     /// The Gazepoint GP3 using open-gaze API
     /// </summary>
     Gazepoint = 512,
+
+    /// <summary>
+    /// The Senso motoric instruments RedM System based tracking.
+    /// </summary>
+    SMIRedM = 1024,
   }
 }
+

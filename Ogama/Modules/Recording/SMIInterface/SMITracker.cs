@@ -22,7 +22,7 @@ namespace Ogama.Modules.Recording.SMIInterface
   using Ogama.Modules.Common.CustomEventArgs;
   using Ogama.Modules.Recording.Dialogs;
   using Ogama.Modules.Recording.TrackerBase;
-	using Ogama.Modules.Recording.SMIInterface.RedM;
+  using Ogama.Modules.Recording.SMIInterface.RedM;
 
   /// <summary>
   /// This class implements the <see cref="ITracker"/> interface to represent 
@@ -30,7 +30,7 @@ namespace Ogama.Modules.Recording.SMIInterface
   /// It encapsulates a SMI http://www.smivision.com/ eyetracker (iViewX series).
   /// It is tested with the SMI HED series.
   /// </summary>
-  public class SMITracker : Tracker
+  public abstract class SMITracker : Tracker
   {
     ///////////////////////////////////////////////////////////////////////////////
     // Defining Constants                                                        //
@@ -49,16 +49,7 @@ namespace Ogama.Modules.Recording.SMIInterface
     private SMISetting smiSettings;
 
     /// <summary>
-    /// Handles the calls to the SMI iViewX application layer. 
-    /// </summary>
-		//    private SMIClient smiClient;
-		private SmiRedmClient smiClient;
-
-
-
-    /// <summary>
     /// The parent recording module.
-    /// 
     /// </summary>
     private RecordModule owningRecordModule;
 
@@ -84,13 +75,18 @@ namespace Ogama.Modules.Recording.SMIInterface
     /// named "Record" at the tab page of the SMI device.</param>
     /// <param name="trackerSubjectNameTextBox">The <see cref="TextBox"/>
     /// which should contain the subject name at the tab page of the SMI device.</param>
+    /// <param name="trackerSettingsFile">The file with full path to the settings
+    /// xml file of the tracking device.</param>
+    /// <param name="smiClient">The specialized smi client.</param>
     public SMITracker(
       RecordModule owningRecordModule,
       Button trackerConnectButton,
       Button trackerSubjectButton,
       Button trackerCalibrateButton,
       Button trackerRecordButton,
-      TextBox trackerSubjectNameTextBox)
+      TextBox trackerSubjectNameTextBox,
+      string trackerSettingsFile,
+      ISMIClient smiClient)
       : base(
       owningRecordModule,
       trackerConnectButton,
@@ -98,8 +94,11 @@ namespace Ogama.Modules.Recording.SMIInterface
       trackerCalibrateButton,
       trackerRecordButton,
       trackerSubjectNameTextBox,
-      Properties.Settings.Default.EyeTrackerSettingsPath + "SMISetting.xml")
+      trackerSettingsFile)
     {
+      // Setup client
+      this.smiClient = smiClient;
+
       // Call the initialize methods of derived classes
       this.Initialize();
       this.owningRecordModule = owningRecordModule;
@@ -125,6 +124,11 @@ namespace Ogama.Modules.Recording.SMIInterface
     #region PROPERTIES
 
     /// <summary>
+    /// Handles the calls to the SMI client layer. 
+    /// </summary>
+    protected ISMIClient smiClient { get; private set; }
+    
+    /// <summary>
     /// Gets the current SMI settings.
     /// </summary>
     /// <value>A <see cref="SMISetting"/> with the current tracker settings.</value>
@@ -149,18 +153,6 @@ namespace Ogama.Modules.Recording.SMIInterface
     #region PUBLICMETHODS
 
     /// <summary>
-    /// Checks if the mirametrix tracker is available in the system.
-    /// </summary>
-    /// <param name="errorMessage">Out. A <see cref="String"/> with an error message.</param>
-    /// <returns><strong>True</strong>, if Mirametrix tracker
-    /// is available in the system, otherwise <strong>false</strong></returns>
-    public static TrackerStatus IsAvailable(out string errorMessage)
-    {
-      errorMessage = "The status of the SMI tracking device cannot be automatically determined.";
-      return TrackerStatus.Undetermined;
-    }
-
-    /// <summary>
     /// Method to return the current timing of the tracking system.
     /// </summary>
     /// <returns>A <see cref="Int64"/> with the time in milliseconds.</returns>
@@ -177,36 +169,11 @@ namespace Ogama.Modules.Recording.SMIInterface
     #region OVERRIDES
 
     /// <summary>
-    /// Connects to the SMI iView system.
+    /// Connects to the SMI system.
     /// </summary>
     /// <returns><strong>True</strong> if connection succeded, otherwise
     /// <strong>false</strong>.</returns>
-    public override bool Connect()
-    {
-      try
-      {
-        // Connect to the SMI server if necessary
-        if (!this.smiClient.IsConnected)
-        {
-          this.smiClient.Connect();
-        }
-
-        // Start the SMI client
-        if (!this.smiClient.IsTracking)
-        {
-         //RB:  this.smiClient.StartTracking();
-        }
-      }
-      catch (Exception ex)
-      {
-        var dlg = new ConnectionFailedDialog { ErrorMessage = ex.Message };
-        dlg.ShowDialog();
-        this.CleanUp();
-        return false;
-      }
-
-      return true;
-    }
+    public abstract override bool Connect();
 
     /// <summary>
     /// Starts calibration.
@@ -230,7 +197,7 @@ namespace Ogama.Modules.Recording.SMIInterface
       }
       catch (Exception ex)
       {
-        string message = "SMI iViewX calibration failed with the following message: " +
+        string message = "SMI calibration failed with the following message: " +
           Environment.NewLine + ex;
         ExceptionMethods.ProcessErrorMessage(message);
         this.CleanUp();
@@ -262,8 +229,6 @@ namespace Ogama.Modules.Recording.SMIInterface
       }
 
       base.CleanUp();
-
-
     }
 
     /// <summary>
@@ -284,12 +249,10 @@ namespace Ogama.Modules.Recording.SMIInterface
           // Start tracking gaze data
           this.smiClient.StartTracking();
         }
-
-        this.smiClient.StartStreaming();
       }
       catch (Exception ex)
       {
-        string message = "SMI iViewX record failed with the following message: " +
+        string message = "SMI record failed with the following message: " +
          Environment.NewLine + ex;
         ExceptionMethods.ProcessErrorMessage(message);
         this.CleanUp();
@@ -353,9 +316,7 @@ namespace Ogama.Modules.Recording.SMIInterface
       this.CalibrationFinished += this.SMIInterfaceCalibrationFinished;
 
       // Set up the SMI client object and it's events
-      //this.smiClient = new SMIClient();
-			this.smiClient = new SmiRedmClient();
-      this.smiClient.GazeDataAvailable += this.SMIClientGazeDataAvailable;
+      this.smiClient.GazeDataChanged += this.SMIClientGazeDataChanged;
       this.smiClient.CalibrationFinished += this.SMIClientCalibrationFinished;
 
       // Load SMI tracker settings.
@@ -416,7 +377,7 @@ namespace Ogama.Modules.Recording.SMIInterface
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">A <see cref="GazeDataChangedEventArgs"/> with the event data.</param>
-    private void SMIClientGazeDataAvailable(object sender, GazeDataChangedEventArgs e)
+    private void SMIClientGazeDataChanged(object sender, GazeDataChangedEventArgs e)
     {
       this.OnGazeDataChanged(new GazeDataChangedEventArgs(e.Gazedata));
     }

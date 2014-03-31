@@ -25,7 +25,10 @@ namespace Ogama.Modules.Recording.Dialogs
   using Ogama.Modules.Recording.GazegroupInterface;
   using Ogama.Modules.Recording.MirametrixInterface;
   using Ogama.Modules.Recording.GazepointInterface;
+  using Ogama.Modules.Recording.MouseOnlyInterface;
   using Ogama.Modules.Recording.SMIInterface;
+  using Ogama.Modules.Recording.SMIInterface.iViewX;
+  using Ogama.Modules.Recording.SMIInterface.RedM;
   using Ogama.Modules.Recording.TobiiInterface;
   using Ogama.Modules.Recording.TrackerBase;
 
@@ -99,9 +102,14 @@ namespace Ogama.Modules.Recording.Dialogs
           returnValue |= HardwareTracker.Tobii;
         }
 
-        if (this.chbSMI.Checked)
+        if (this.chbSMIiViewX.Checked)
         {
-          returnValue |= HardwareTracker.SMI;
+          returnValue |= HardwareTracker.SMIiViewX;
+        }
+
+        if (this.chbSMIRedM.Checked)
+        {
+          returnValue |= HardwareTracker.SMIRedM;
         }
 
         if (this.chbGazetrackerIPClient.Checked)
@@ -257,7 +265,7 @@ namespace Ogama.Modules.Recording.Dialogs
 
     /// <summary>
     /// The <see cref="Control.Click"/> event handler for
-    /// the <see cref="PictureBox"/> <see cref="pcbSMI"/>.
+    /// the <see cref="PictureBox"/> <see cref="pcbSMIiViewX"/>.
     /// User clicked the SMI logo,
     /// so open senso motoric instruments website.
     /// </summary>
@@ -270,7 +278,7 @@ namespace Ogama.Modules.Recording.Dialogs
 
     /// <summary>
     /// The <see cref="Control.Click"/> event handler for
-    /// the <see cref="PictureBox"/> <see cref="pcbITU"/>.
+    /// the <see cref="PictureBox"/>
     /// User clicked the ITU logo,
     /// so open GAZE GROUP website.
     /// </summary>
@@ -345,14 +353,27 @@ namespace Ogama.Modules.Recording.Dialogs
 
     /// <summary>
     /// The <see cref="Control.Click"/> event handler
-    /// for the <see cref="PictureBox"/> <see cref="pcbHelpSMI"/>
+    /// for the <see cref="PictureBox"/> <see cref="pcbHelpSMIiViewX"/>
     /// Displays instructions to activate SMI iViewX recording.
     /// </summary>
     /// <param name="sender">Source of the event</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void PcbHelpSMIClick(object sender, EventArgs e)
+    private void PcbHelpSMIiViewXClick(object sender, EventArgs e)
     {
-      var objActivateSMI = new HowToActivateSMI();
+      var objActivateSMI = new HowToActivateSMIiViewX();
+      objActivateSMI.ShowDialog();
+    }
+
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler
+    /// for the <see cref="PictureBox"/> <see cref="pcbHelpSMIRedM"/>
+    /// Displays instructions to activate SMI RedM recording.
+    /// </summary>
+    /// <param name="sender">Source of the event</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void PcbHelpSMIRedMClick(object sender, EventArgs e)
+    {
+      var objActivateSMI = new HowToActivateSMIRedM();
       objActivateSMI.ShowDialog();
     }
 
@@ -427,14 +448,17 @@ namespace Ogama.Modules.Recording.Dialogs
     /// </summary>
     private void UpdateTrackerStatus()
     {
+      this.UpdateMouseStatus();
       this.UpdateGazetrackerDirectClientStatus();
+      this.UpdateGazetrackerNetworkClientStatus();
       this.UpdateAleaTrackStatus();
       this.UpdateTobiiStatus();
       this.UpdateASLStatus();
       this.UpdateMirametrixStatus();
       this.UpdateGazepointStatus();
       this.UpdateEyeTechStatus();
-      this.UpdateSMITrackStatus();
+      this.UpdateSMIiViewXTrackStatus();
+      this.UpdateSMIRedMTrackStatus();
     }
 
     /// <summary>
@@ -492,11 +516,19 @@ namespace Ogama.Modules.Recording.Dialogs
     }
 
     /// <summary>
-    /// Updates the status of the SMI tracking devices
+    /// Updates the status of the SMI iViewX tracking devices
     /// </summary>
-    private void UpdateSMITrackStatus()
+    private void UpdateSMIiViewXTrackStatus()
     {
-      this.SetStatus(SMITracker.IsAvailable, this.chbSMI, this.pcbSMIStatus, this.lblSMIStatus);
+      this.SetStatus(SMIiViewXTracker.IsAvailable, this.chbSMIiViewX, this.pcbSMIiVIewXStatus, this.lblSMIiViewXStatus);
+    }
+
+    /// <summary>
+    /// Updates the status of the SMI RedM tracking devices
+    /// </summary>
+    private void UpdateSMIRedMTrackStatus()
+    {
+      this.SetStatus(SMIRedMTracker.IsAvailable, this.chbSMIRedM, this.pcbSMIRedMStatus, this.lblSMIRedMStatus);
     }
 
     /// <summary>
@@ -504,20 +536,23 @@ namespace Ogama.Modules.Recording.Dialogs
     /// </summary>
     private void UpdateGazetrackerDirectClientStatus()
     {
-      string error;
+      this.SetStatus(GazetrackerDirectClientTracker.IsAvailable, this.chbGazetrackerDirectClient, this.pcbGazetrackerDirectStatus, this.lblGazetrackerDirectStatus);
+    }
 
-      switch (GazetrackerDirectClientTracker.IsAvailable(out error))
-      {
-        case TrackerStatus.Available:
-          this.chbGazetrackerDirectClient.Enabled = true;
-          break;
-        case TrackerStatus.NotAvailable:
-        case TrackerStatus.Undetermined:
-        case TrackerStatus.None:
-          this.chbGazetrackerDirectClient.Enabled = false;
-          this.chbGazetrackerDirectClient.Checked = false;
-          break;
-      }
+    /// <summary>
+    /// Updates the status of the gazetracker network client devices.
+    /// </summary>
+    private void UpdateGazetrackerNetworkClientStatus()
+    {
+      this.SetStatus(GazetrackerIPClientTracker.IsAvailable, this.chbGazetrackerIPClient, this.pcbGazetrackerNetworkStatus, this.lblGazetrackerNetworkStatus);
+    }
+
+    /// <summary>
+    /// Updates the status of the mouse device.
+    /// </summary>
+    private void UpdateMouseStatus()
+    {
+      this.SetStatus(MouseOnlyTracker.IsAvailable, this.chbMouseOnly, this.pcbMouseStatus, this.lblMouseStatus);
     }
 
     #endregion //METHODS
@@ -532,9 +567,14 @@ namespace Ogama.Modules.Recording.Dialogs
       this.UpdateInfobar(AleaTracker.IsAvailable, Properties.Resources.AleaFoto64, Properties.Resources.AleaLogo);
     }
 
-    private void GrpSMIEnter(object sender, EventArgs e)
+    private void GrpSMIiViewXEnter(object sender, EventArgs e)
     {
-      this.UpdateInfobar(SMITracker.IsAvailable, Properties.Resources.SMIFoto64, Properties.Resources.SMILogo);
+      this.UpdateInfobar(SMIiViewXTracker.IsAvailable, Properties.Resources.SMIiViewXFoto64, Properties.Resources.SMILogo);
+    }
+
+    private void GrpSMIRedMEnter(object sender, EventArgs e)
+    {
+      this.UpdateInfobar(SMIRedMTracker.IsAvailable, Properties.Resources.SMIRedMFoto64, Properties.Resources.SMILogo);
     }
 
     private void GrpASLEnter(object sender, EventArgs e)
@@ -555,6 +595,21 @@ namespace Ogama.Modules.Recording.Dialogs
     private void GrpGazepointEnter(object sender, EventArgs e)
     {
       this.UpdateInfobar(GazepointTracker.IsAvailable, Properties.Resources.GazepointFoto64, Properties.Resources.GazepointLogo);
+    }
+
+    private void GrpGazetrackerDirectEnter(object sender, EventArgs e)
+    {
+      this.UpdateInfobar(GazetrackerDirectClientTracker.IsAvailable, Properties.Resources.ITUDirectFoto64, Properties.Resources.ITU_Logo);
+    }
+
+    private void GrpGazetrackerNetworkEnter(object sender, EventArgs e)
+    {
+      this.UpdateInfobar(GazetrackerIPClientTracker.IsAvailable, Properties.Resources.ITUNetworkFoto64, Properties.Resources.ITU_Logo);
+    }
+
+    private void GrpMouseOnlyEnter(object sender, EventArgs e)
+    {
+      this.UpdateInfobar(MouseOnlyTracker.IsAvailable, Properties.Resources.Mouse, Properties.Resources.Mouse);
     }
 
     ///////////////////////////////////////////////////////////////////////////////

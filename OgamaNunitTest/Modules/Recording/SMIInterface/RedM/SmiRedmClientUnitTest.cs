@@ -12,14 +12,14 @@ namespace OgamaNunitTest.Modules.Recording.SMIInterface.RedM
 	public class SmiRedmClientUnitTest
 	{
 
-		private SmiRedmClient cut = null;
+		private SMIRedMClient cut = null;
 		private int screenWidth = 1680;
 		private int screenHeight = 1080;
 
 		[SetUp]
 		public void setup()
 		{
-			cut = new SmiRedmClient(true, screenWidth, screenHeight);
+			cut = new SMIRedMClient(true, screenWidth, screenHeight);
 			Assert.IsNotNull(cut);
 		}
 
