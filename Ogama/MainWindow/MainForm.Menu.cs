@@ -1063,17 +1063,30 @@ namespace Ogama.MainWindow
 
     /// <summary>
     /// The <see cref="Control.Click"/> event handler
-    /// for the <see cref="ToolStripMenuItem"/> <see cref="mnuHelpHowToSMI"/>
+    /// for the <see cref="ToolStripMenuItem"/> <see cref="mnuHelpHowToSMIiViewX"/>
     /// Displays instructions to activate SMI iViewX recording.
     /// </summary>
     /// <param name="sender">Source of the event</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void mnuHelpHowToSMI_Click(object sender, EventArgs e)
     {
-      HowToActivateSMI objActivateSMI = new HowToActivateSMI();
-      objActivateSMI.ShowDialog();
+      HowToActivateSMIiViewX objActivateSmIiViewX = new HowToActivateSMIiViewX();
+      objActivateSmIiViewX.ShowDialog();
     }
 
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler
+    /// for the <see cref="ToolStripMenuItem"/> <see cref="mnuHelpHowToSMIiViewX"/>
+    /// Displays instructions to activate SMI iViewX recording.
+    /// </summary>
+    /// <param name="sender">Source of the event</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void mnuHelpHowToSMIRedM_Click(object sender, EventArgs e)
+    {
+      var objActivateSmIRedM = new HowToActivateSMIRedM();
+      objActivateSmIRedM.ShowDialog();
+    }
+    
     /// <summary>
     /// The <see cref="Control.Click"/> event handler
     /// for the <see cref="ToolStripMenuItem"/> <see cref="mnuHelpHowToITU"/>

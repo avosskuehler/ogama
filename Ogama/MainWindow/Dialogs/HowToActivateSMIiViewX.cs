@@ -20,7 +20,7 @@ namespace Ogama.MainWindow.Dialogs
   /// A small popup <see cref="Form"/> for showing a dialog on how to
   /// install the alea recording option.
   /// </summary>
-  public partial class HowToActivateSMI : Form
+  public partial class HowToActivateSMIiViewX : Form
   {
     ///////////////////////////////////////////////////////////////////////////////
     // Defining Constants                                                        //
@@ -40,9 +40,9 @@ namespace Ogama.MainWindow.Dialogs
     #region CONSTRUCTION
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="HowToActivateSMI"/> class.
+    /// Initializes a new instance of the <see cref="HowToActivateSMIiViewX"/> class.
     /// </summary>
-    public HowToActivateSMI()
+    public HowToActivateSMIiViewX()
     {
       this.InitializeComponent();
     }

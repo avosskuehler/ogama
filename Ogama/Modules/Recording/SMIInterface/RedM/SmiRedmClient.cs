@@ -1,21 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Ogama.Modules.Common.CustomEventArgs;
-
-namespace Ogama.Modules.Recording.SMIInterface.RedM
+﻿namespace Ogama.Modules.Recording.SMIInterface.RedM
 {
+  using System;
+  using System.Collections.Generic;
+  using System.Linq;
+  using System.Text;
+
+  using Ogama.Modules.Common.CustomEventArgs;
+  using Ogama.Modules.Recording.TrackerBase;
+
   /// <summary>
-  /// 
+  /// This class encapsulates the connection to a SMI red-m hardware device.
   /// </summary>
-  public class SmiRedmClient : SmiRedmWrapperListener
+  public class SMIRedMClient : SMIRedMWrapperListener, ISMIClient
   {
     /// <summary>
     /// The smi wrapper
     /// </summary>
-    private SmiRedmWrapper smiWrapper;
+    private SMIRedMWrapper smiWrapper;
+
     /// <summary>
     /// Gets or sets a value indicating whether this instance is tracking.
     /// </summary>
@@ -23,6 +25,7 @@ namespace Ogama.Modules.Recording.SMIInterface.RedM
     /// <c>true</c> if this instance is tracking; otherwise, <c>false</c>.
     /// </value>
     public bool IsTracking { get; set; }
+
     /// <summary>
     /// Gets or sets a value indicating whether this instance is connected.
     /// </summary>
@@ -30,26 +33,26 @@ namespace Ogama.Modules.Recording.SMIInterface.RedM
     /// <c>true</c> if this instance is connected; otherwise, <c>false</c>.
     /// </value>
     public bool IsConnected { get; set; }
+
     /// <summary>
     /// The last time
     /// </summary>
     private long lastTime;
+
     /// <summary>
     /// The screen width
     /// </summary>
     private int screenWidth;
+
     /// <summary>
     /// The screen height
     /// </summary>
     private int screenHeight;
-    /// <summary>
-    /// The smi settings
-    /// </summary>
-    private SMISetting smiSettings;
+
     /// <summary>
     /// Event. Raised, when new gaze data is available.
     /// </summary>
-    public event GazeDataChangedEventHandler GazeDataAvailable;
+    public event GazeDataChangedEventHandler GazeDataChanged;
 
     /// <summary>
     /// Event. Raised, when calibration has finished.
@@ -57,9 +60,9 @@ namespace Ogama.Modules.Recording.SMIInterface.RedM
     public event EventHandler CalibrationFinished;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="SmiRedmClient"/> class.
+    /// Initializes a new instance of the <see cref="SMIRedMClient"/> class.
     /// </summary>
-    public SmiRedmClient()
+    public SMIRedMClient()
     {
       this.init();
     }
@@ -70,7 +73,7 @@ namespace Ogama.Modules.Recording.SMIInterface.RedM
     /// <param name="isConnected">if set to <c>true</c> [is connected].</param>
     /// <param name="screenWidth">Width of the screen.</param>
     /// <param name="screenHeight">Height of the screen.</param>
-    public SmiRedmClient(bool isConnected, int screenWidth, int screenHeight)
+    public SMIRedMClient(bool isConnected, int screenWidth, int screenHeight)
     {
       this.IsConnected = isConnected;
       this.screenWidth = screenWidth;
@@ -78,9 +81,9 @@ namespace Ogama.Modules.Recording.SMIInterface.RedM
     }
 
     /// <summary>
-    /// Finalizes an instance of the <see cref="SmiRedmClient"/> class.
+    /// Finalizes an instance of the <see cref="SMIRedMClient"/> class.
     /// </summary>
-    ~SmiRedmClient()
+    ~SMIRedMClient()
     {
       if (this.smiWrapper != null)
       {
@@ -93,7 +96,7 @@ namespace Ogama.Modules.Recording.SMIInterface.RedM
     /// </summary>
     public void init()
     {
-      this.smiWrapper = new SmiRedmWrapper();
+      this.smiWrapper = new SMIRedMWrapper();
       this.smiWrapper.initialize();
       this.smiWrapper.register(this);
       this.IsTracking = false;
@@ -113,19 +116,7 @@ namespace Ogama.Modules.Recording.SMIInterface.RedM
     /// <value>
     /// The settings.
     /// </value>
-    public SMISetting Settings
-    {
-      get
-      {
-        return this.smiSettings;
-      }
-      set
-      {
-        this.smiSettings = value;
-      }
-    }
-
-
+    public SMISetting Settings { get; set; }
 
     /// <summary>
     /// Configures this instance.
@@ -142,10 +133,10 @@ namespace Ogama.Modules.Recording.SMIInterface.RedM
     {
       try
       {
-        this.smiWrapper.receiveip = this.smiSettings.SMIServerAddress;
-        this.smiWrapper.receiveport = this.smiSettings.OGAMAServerPort;
-        this.smiWrapper.sendip = this.smiSettings.SMIServerAddress;
-        this.smiWrapper.sendport = this.smiSettings.SMIServerPort;
+        this.smiWrapper.receiveip = this.Settings.SMIServerAddress;
+        this.smiWrapper.receiveport = this.Settings.OGAMAServerPort;
+        this.smiWrapper.sendip = this.Settings.SMIServerAddress;
+        this.smiWrapper.sendport = this.Settings.SMIServerPort;
 
         this.smiWrapper.connect();
 
@@ -228,7 +219,20 @@ namespace Ogama.Modules.Recording.SMIInterface.RedM
       {
         display = 0;
       }
-      int pointSize = 20;
+
+      var pointSize = 20;
+      switch (this.Settings.CalibPointSize)
+      {
+        case CalibrationPointSize.Small:
+          pointSize = 10;
+          break;
+        case CalibrationPointSize.Medium:
+          pointSize = 20;
+          break;
+        case CalibrationPointSize.Large:
+          pointSize = 40;
+          break;
+      }
 
       this.smiWrapper.calibrate(calibrationPoints, display, pointSize);
 
@@ -273,11 +277,11 @@ namespace Ogama.Modules.Recording.SMIInterface.RedM
     /// </summary>
     /// <param name="e"><see cref="GazeDataChangedEventArgs" /> event arguments</param>
     /// .
-    private void OnGazeDataAvailable(GazeDataChangedEventArgs e)
+    private void OnGazeDataChanged(GazeDataChangedEventArgs e)
     {
-      if (this.GazeDataAvailable != null)
+      if (this.GazeDataChanged != null)
       {
-        this.GazeDataAvailable(this, e);
+        this.GazeDataChanged(this, e);
       }
     }
 
@@ -311,7 +315,7 @@ namespace Ogama.Modules.Recording.SMIInterface.RedM
         {
           return;
         }
-        if (this.GazeDataAvailable == null)
+        if (this.GazeDataChanged == null)
         {
           return;
         }
@@ -319,7 +323,7 @@ namespace Ogama.Modules.Recording.SMIInterface.RedM
 
         GazeDataChangedEventArgs eventArgs = new GazeDataChangedEventArgs(gazeData);
 
-        this.OnGazeDataAvailable(eventArgs);
+        this.OnGazeDataChanged(eventArgs);
       }
     }
   }

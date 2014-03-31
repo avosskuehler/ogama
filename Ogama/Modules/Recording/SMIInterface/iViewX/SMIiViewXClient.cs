@@ -11,7 +11,7 @@
 // <author>Adrian Voßkühler</author>
 // <email>adrian@ogama.net</email>
 
-namespace Ogama.Modules.Recording.SMIInterface
+namespace Ogama.Modules.Recording.SMIInterface.iViewX
 {
   using System;
   using System.Collections.Generic;
@@ -23,15 +23,15 @@ namespace Ogama.Modules.Recording.SMIInterface
   using System.Windows.Forms;
 
   using Ogama.ExceptionHandling;
-  using Ogama.Modules.Common;
   using Ogama.Modules.Common.CustomEventArgs;
   using Ogama.Modules.Common.Tools;
+  using Ogama.Modules.Recording.TrackerBase;
 
   /// <summary>
   /// This class is the abstraction layer for the communication
   /// via UDP with the SMI iViewX eyetracker.
   /// </summary>
-  public class SMIClient
+  public class SMIiViewXClient : ISMIClient
   {
     ///////////////////////////////////////////////////////////////////////////////
     // Defining Constants                                                        //
@@ -84,7 +84,7 @@ namespace Ogama.Modules.Recording.SMIInterface
     /// <summary>
     /// Saves the form to display the calibration dots.
     /// </summary>
-    private SMICalibrationForm newCalibrationForm;
+    private SMIiViewXCalibrationForm newCalibrationForm;
 
     #endregion //FIELDS
 
@@ -96,7 +96,7 @@ namespace Ogama.Modules.Recording.SMIInterface
     /// <summary>
     /// Initializes a new instance of the SMIClient class.
     /// </summary>
-    public SMIClient()
+    public SMIiViewXClient()
     {
       this.lastTime = 0;
       this.stopListenThread = false;
@@ -105,14 +105,15 @@ namespace Ogama.Modules.Recording.SMIInterface
       {
         this.presentationScreenSize = Document.ActiveDocument.PresentationSize;
       }
-      
+
     }
-		/// <summary>
-		/// SMIClient constructor
-		/// </summary>
-		/// <param name="drawingWidth"></param>
-		/// <param name="drawingHeight"></param>
-    public SMIClient(int drawingWidth, int drawingHeight)
+
+    /// <summary>
+    /// SMIClient constructor
+    /// </summary>
+    /// <param name="drawingWidth"></param>
+    /// <param name="drawingHeight"></param>
+    public SMIiViewXClient(int drawingWidth, int drawingHeight)
     {
       this.lastTime = 0;
       this.stopListenThread = false;
@@ -122,7 +123,7 @@ namespace Ogama.Modules.Recording.SMIInterface
     /// <summary>
     /// Finalizes an instance of the SMIClient class
     /// </summary>
-    ~SMIClient()
+    ~SMIiViewXClient()
     {
       this.udpClient.Close();
     }
@@ -137,7 +138,7 @@ namespace Ogama.Modules.Recording.SMIInterface
     /// <summary>
     /// Event. Raised, when new gaze data is available.
     /// </summary>
-    public event GazeDataChangedEventHandler GazeDataAvailable;
+    public event GazeDataChangedEventHandler GazeDataChanged;
 
     /// <summary>
     /// Event. Raised, when calibration has finished.
@@ -221,7 +222,7 @@ namespace Ogama.Modules.Recording.SMIInterface
       {
         this.udpClient.Connect(this.smiSettings.SMIServerAddress, this.smiSettings.SMIServerPort);
         this.Configure();
-        
+
       }
       catch (Exception ex)
       {
@@ -236,7 +237,7 @@ namespace Ogama.Modules.Recording.SMIInterface
     {
       try
       {
-        this.udpClient.Close();        
+        this.udpClient.Close();
       }
       catch (Exception ex)
       {
@@ -248,7 +249,7 @@ namespace Ogama.Modules.Recording.SMIInterface
     /// Starts the data streaming by sending the ET_STR command to
     /// iViewX
     /// </summary>
-    public void StartStreaming()
+    private void StartStreaming()
     {
       this.SendString("ET_STR");
     }
@@ -257,7 +258,7 @@ namespace Ogama.Modules.Recording.SMIInterface
     /// Starts the data streaming by sending the ET_EST command to
     /// iViewX
     /// </summary>
-    public void StopStreaming()
+    private void StopStreaming()
     {
       this.SendString("ET_EST");
     }
@@ -274,6 +275,7 @@ namespace Ogama.Modules.Recording.SMIInterface
         this.listenThread = new Thread(new ThreadStart(this.StartListen));
         this.listenThread.Start();
         this.isTracking = true;
+        this.StartStreaming();
       }
       catch (Exception ex)
       {
@@ -298,7 +300,7 @@ namespace Ogama.Modules.Recording.SMIInterface
 
       this.stopListenThread = true;
       this.isTracking = false;
-      
+
     }
 
     /// <summary>
@@ -319,7 +321,7 @@ namespace Ogama.Modules.Recording.SMIInterface
       {
         this.Connect();
       }
-      
+
       // Get presentation size
       Size presentationSize = PresentationScreen.GetPresentationResolution();
 
@@ -358,7 +360,7 @@ namespace Ogama.Modules.Recording.SMIInterface
       ////this.SendString("ET_PNT 4 " + bottomLeft.X.ToString() + " " + bottomLeft.Y.ToString());
       ////this.SendString("ET_PNT 5 " + bottomRight.X.ToString() + " " + bottomRight.Y.ToString());
 
-      this.newCalibrationForm = new SMICalibrationForm();
+      this.newCalibrationForm = new SMIiViewXCalibrationForm();
       this.newCalibrationForm.CalibPointColor = this.smiSettings.CalibPointColor;
       this.newCalibrationForm.CalibPointSize = this.smiSettings.CalibPointSize;
       this.newCalibrationForm.BackColor = this.smiSettings.CalibBackgroundColor;
@@ -366,9 +368,9 @@ namespace Ogama.Modules.Recording.SMIInterface
       this.newCalibrationForm.Height = presentationSize.Height;
       this.newCalibrationForm.CalibrationPoints = calibrationPoints;
 
-      
+
       PresentationScreen.PutFormOnPresentationScreen(this.newCalibrationForm, true);
-      
+
       this.newCalibrationForm.Show();
 
       // Starts calibration.
@@ -416,11 +418,11 @@ namespace Ogama.Modules.Recording.SMIInterface
     /// Raised when new gaze data is available.
     /// </summary>
     /// <param name="e"><see cref="GazeDataChangedEventArgs"/> event arguments</param>.
-    private void OnGazeDataAvailable(GazeDataChangedEventArgs e)
+    private void OnGazeDataChanged(GazeDataChangedEventArgs e)
     {
-      if (this.GazeDataAvailable != null)
+      if (this.GazeDataChanged != null)
       {
-        this.GazeDataAvailable(this, e);
+        this.GazeDataChanged(this, e);
       }
     }
 
@@ -528,7 +530,7 @@ namespace Ogama.Modules.Recording.SMIInterface
           break;
         case "ET_SPL":
           // The command is sent by iView everytime a data sample is generated and data streaming is on.
-          this.OnGazeDataAvailable(new GazeDataChangedEventArgs(this.ExtractTrackerData(receivedString)));
+          this.OnGazeDataChanged(new GazeDataChangedEventArgs(this.ExtractTrackerData(receivedString)));
           break;
         case "ET_IMG":
           // Sent by iView X with single mime-encoded eye video images, after the ET_SIM command has been received.
@@ -575,30 +577,30 @@ namespace Ogama.Modules.Recording.SMIInterface
     /// <summary>
     /// Extracts the received sample into a <see cref="GazeData"/>
     /// struct.
-		/// A dataStr may contain the following data:
-		/// ET_SPL 91555722812 b 420 420 564 564 17.219431 17.855097 17.219431 17.855097 -53.704  9.674 13.589 15.935 624.140 612.472 419.313368 680.213202 455.167761 443.716013 4.72 4.72 3
+    /// A dataStr may contain the following data:
+    /// ET_SPL 91555722812 b 420 420 564 564 17.219431 17.855097 17.219431 17.855097 -53.704  9.674 13.589 15.935 624.140 612.472 419.313368 680.213202 455.167761 443.716013 4.72 4.72 3
     /// </summary>
     /// <param name="dataStr">The <see cref="String"/> with the data line from the iViewX.</param>
     /// <returns>A filled <see cref="GazeData"/> that represents the line
     /// according to the <see cref="SMISetting"/></returns>
     public GazeData ExtractTrackerData(string dataStr)
     {
-      
-			//Console.WriteLine("ExtractTrackerData:" + dataStr);
 
-			GazeData data = new GazeData();
+      //Console.WriteLine("ExtractTrackerData:" + dataStr);
+
+      GazeData data = new GazeData();
       char[] seperator = { ' ' };
       string[] tmp = dataStr.Split(seperator);
-			
+
       try
-      {	
-				this.lastTime = Convert.ToInt64(tmp[1]);
+      {
+        this.lastTime = Convert.ToInt64(tmp[1]);
       }
       catch (System.Exception)
       {
 
       }
-			string availableEye = tmp[2];
+      string availableEye = tmp[2];
       switch (availableEye)
       {
         case "b":
@@ -635,8 +637,8 @@ namespace Ogama.Modules.Recording.SMIInterface
           data.GazePosY = Convert.ToSingle(tmp[6]) / this.presentationScreenSize.Height;
           break;
       }
-     
-      
+
+
       data.Time = this.lastTime;
       return data;
     }

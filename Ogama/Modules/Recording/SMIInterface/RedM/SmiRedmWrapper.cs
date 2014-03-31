@@ -9,7 +9,7 @@ namespace Ogama.Modules.Recording.SMIInterface.RedM
   /// <summary>
   /// 
   /// </summary>
-	public class SmiRedmWrapper
+	public class SMIRedMWrapper
 	{
     /// <summary>
     /// The et device
@@ -154,13 +154,13 @@ namespace Ogama.Modules.Recording.SMIInterface.RedM
     /// <summary>
     /// The listener
     /// </summary>
-		private SmiRedmWrapperListener listener;
+		private SMIRedMWrapperListener listener;
 
     /// <summary>
     /// Registers the specified listener.
     /// </summary>
     /// <param name="listener">The listener.</param>
-		public void register(SmiRedmWrapperListener listener)
+		public void register(SMIRedMWrapperListener listener)
 		{
 			this.listener = listener;
 		}

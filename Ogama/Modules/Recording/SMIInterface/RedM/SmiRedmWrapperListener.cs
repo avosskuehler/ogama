@@ -8,7 +8,7 @@ namespace Ogama.Modules.Recording.SMIInterface.RedM
   /// <summary>
   /// 
   /// </summary>
-  public interface SmiRedmWrapperListener
+  public interface SMIRedMWrapperListener
   {
     /// <summary>
     /// Ons the sample data.
