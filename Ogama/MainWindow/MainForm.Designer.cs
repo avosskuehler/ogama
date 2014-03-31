@@ -185,7 +185,7 @@ namespace Ogama.MainWindow
             // 
             // mnuFileNewExperiment
             // 
-            this.mnuFileNewExperiment.Image = global::Ogama.Properties.Resources.OgamaDocNew;
+            this.mnuFileNewExperiment.Image = global::Ogama.Properties.Resources.OgamaNew;
             this.mnuFileNewExperiment.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.mnuFileNewExperiment.Name = "mnuFileNewExperiment";
             this.mnuFileNewExperiment.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));

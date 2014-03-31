@@ -39,7 +39,7 @@
       this.btnClearRecentFilesList = new System.Windows.Forms.Button();
       this.pictureBox2 = new System.Windows.Forms.PictureBox();
       this.pictureBox3 = new System.Windows.Forms.PictureBox();
-      this.dialogTop1 = new DialogTop();
+      this.dialogTop1 = new Ogama.Modules.Common.Controls.DialogTop();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
       this.SuspendLayout();
@@ -98,8 +98,8 @@
       this.lsbRecentProjects.Name = "lsbRecentProjects";
       this.lsbRecentProjects.Size = new System.Drawing.Size(287, 108);
       this.lsbRecentProjects.TabIndex = 6;
-      this.lsbRecentProjects.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lsbRecentProjects_MouseDoubleClick);
       this.lsbRecentProjects.SelectedIndexChanged += new System.EventHandler(this.lsbRecentProjects_SelectedIndexChanged);
+      this.lsbRecentProjects.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lsbRecentProjects_MouseDoubleClick);
       // 
       // btnClearRecentFilesList
       // 
@@ -125,7 +125,7 @@
       // pictureBox3
       // 
       this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
-      this.pictureBox3.Image = global::Ogama.Properties.Resources.OgamaDocNew;
+      this.pictureBox3.Image = global::Ogama.Properties.Resources.OgamaNew;
       this.pictureBox3.Location = new System.Drawing.Point(12, 240);
       this.pictureBox3.Name = "pictureBox3";
       this.pictureBox3.Size = new System.Drawing.Size(34, 41);
@@ -140,7 +140,7 @@
       this.dialogTop1.Description = "What would you like to do ?";
       this.dialogTop1.Dock = System.Windows.Forms.DockStyle.Top;
       this.dialogTop1.Location = new System.Drawing.Point(0, 0);
-      this.dialogTop1.Logo = ((System.Drawing.Image)(resources.GetObject("dialogTop1.Logo")));
+      this.dialogTop1.Logo = null;
       this.dialogTop1.Name = "dialogTop1";
       this.dialogTop1.Size = new System.Drawing.Size(354, 60);
       this.dialogTop1.TabIndex = 8;
