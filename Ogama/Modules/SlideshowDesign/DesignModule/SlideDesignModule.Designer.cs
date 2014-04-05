@@ -1195,7 +1195,7 @@
       this.lsbStopConditions.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
       this.lsbStopConditions.Size = new System.Drawing.Size(256, 82);
       this.lsbStopConditions.TabIndex = 5;
-      this.lsbStopConditions.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBox_KeyDown);
+      this.lsbStopConditions.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ListBoxKeyDown);
       // 
       // cbbKeys
       // 
@@ -1350,7 +1350,7 @@
       this.lsbCorrectResponses.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
       this.lsbCorrectResponses.Size = new System.Drawing.Size(256, 82);
       this.lsbCorrectResponses.TabIndex = 20;
-      this.lsbCorrectResponses.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBox_KeyDown);
+      this.lsbCorrectResponses.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ListBoxKeyDown);
       // 
       // label7
       // 
@@ -1590,7 +1590,7 @@
       this.lsbLinks.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
       this.lsbLinks.Size = new System.Drawing.Size(256, 82);
       this.lsbLinks.TabIndex = 31;
-      this.lsbLinks.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBox_KeyDown);
+      this.lsbLinks.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ListBoxKeyDown);
       // 
       // label19
       // 
@@ -1981,7 +1981,7 @@
       this.designPicture.ShapeDeleted += new VectorGraphics.Tools.CustomEventArgs.ShapeEventHandler(this.picPreview_ShapeDeleted);
       this.designPicture.ShapeSelected += new VectorGraphics.Tools.CustomEventArgs.ShapeEventHandler(this.picPreview_ShapeSelected);
       this.designPicture.ShapeDeselected += new System.EventHandler(this.PicPreviewShapeDeselected);
-      this.designPicture.ShapeChanged += new VectorGraphics.Tools.CustomEventArgs.ShapeEventHandler(this.designPicture_ShapeChanged);
+      this.designPicture.ShapeChanged += new VectorGraphics.Tools.CustomEventArgs.ShapeEventHandler(this.DesignPictureShapeChanged);
       this.designPicture.ShapeDoubleClick += new VectorGraphics.Tools.CustomEventArgs.ShapeEventHandler(this.PicPreviewShapeDoubleClick);
       // 
       // dltForm
@@ -2111,9 +2111,9 @@
       this.Name = "SlideDesignModule";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "Create new stimulus slide ...";
-      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmStimulusDesign_FormClosing);
-      this.Load += new System.EventHandler(this.SlideDesignModule_Load);
-      this.Shown += new System.EventHandler(this.SlideDesignModule_Shown);
+      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmStimulusDesignFormClosing);
+      this.Load += new System.EventHandler(this.SlideDesignModuleLoad);
+      this.Shown += new System.EventHandler(this.SlideDesignModuleShown);
       ((System.ComponentModel.ISupportInitialize)(this.bsoSubjects)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.bsoFKSubjectsTrials)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.ogamaDataSet)).EndInit();

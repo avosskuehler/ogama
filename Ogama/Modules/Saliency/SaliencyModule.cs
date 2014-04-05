@@ -336,7 +336,7 @@ namespace Ogama.Modules.Saliency
     /// Reads dropdown settings and loads corresponding images and data from database.
     /// Then notifys picture the changes.
     /// </summary>
-    /// <returns><strong>True</strong>, if trial selection was succesfull, otherwise
+    /// <returns><strong>True</strong>, if trial selection was successful, otherwise
     /// <strong>false</strong>.</returns>
     protected override bool NewTrialSelected()
     {

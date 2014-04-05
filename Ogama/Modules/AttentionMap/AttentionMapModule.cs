@@ -133,7 +133,7 @@ namespace Ogama.Modules.AttentionMap
     /// Reads dropdown settings and loads corresponding images and data from database.
     /// Then notifys picture the changes.
     /// </summary>
-    /// <returns><strong>True</strong> if selection was succesfull, otherwise <strong>false</strong>.
+    /// <returns><strong>True</strong> if selection was successful, otherwise <strong>false</strong>.
     /// </returns>
     protected override bool NewTrialSelected()
     {

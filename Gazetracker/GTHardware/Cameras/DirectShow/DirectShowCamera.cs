@@ -265,7 +265,7 @@ namespace GTHardware.Cameras.DirectShow
 
     /// <summary>
     /// Gets a value indicating whether the graph is 
-    /// succesfully rendered.
+    /// successfully rendered.
     /// </summary>
     public bool HasValidGraph
     {
@@ -740,7 +740,7 @@ namespace GTHardware.Cameras.DirectShow
     /// <param name="frameRate">The framerate to use.</param>
     /// <param name="width">The width to use.</param>
     /// <param name="height">The height to use.</param>
-    /// <returns>True, if succesfull, otherwise false.</returns>
+    /// <returns>True, if successful, otherwise false.</returns>
     private bool SetupGraph(DsDevice dev, int frameRate, int width, int height)
     {
       int hr;

@@ -353,7 +353,7 @@ namespace Ogama.Modules.Recording.Dialogs
 
     /// <summary>
     /// The <see cref="Control.Click"/> event handler
-    /// for the <see cref="PictureBox"/> <see cref="pcbHelpSMIiViewX"/>
+    /// for the <see cref="PictureBox"/> <see cref="pcbHelpSMI"/>
     /// Displays instructions to activate SMI iViewX recording.
     /// </summary>
     /// <param name="sender">Source of the event</param>

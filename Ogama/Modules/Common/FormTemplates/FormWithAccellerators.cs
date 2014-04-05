@@ -219,7 +219,7 @@ namespace Ogama.Modules.Common.FormTemplates
     /// </summary>
     /// <param name="msg">Message send from windows</param>
     /// <param name="keyData">Key params</param>
-    /// <returns><strong>True</strong> if succesfully processed, otherwise
+    /// <returns><strong>True</strong> if successfully processed, otherwise
     /// <strong>false</strong>.</returns>
     protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
     {

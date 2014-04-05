@@ -151,7 +151,7 @@ namespace Ogama.Modules.ImportExport.OgamaData
           // Inform user about success.
           if (succesful)
           {
-            ExceptionMethods.ProcessMessage("Success", "Import data succesfully written to database.");
+            ExceptionMethods.ProcessMessage("Success", "Import data successfully written to database.");
           }
           else
           {
@@ -407,7 +407,7 @@ namespace Ogama.Modules.ImportExport.OgamaData
     /// <summary>
     /// This method writes the data that is written in the lists during
     /// import to OGAMAs dataset.
-    /// If this could be succesfully done the whole new data is
+    /// If this could be successfully done the whole new data is
     /// written to the database (.mdf).
     /// </summary>
     /// <returns><strong>True</strong> if succesful, otherwise

@@ -354,6 +354,9 @@ namespace Ogama.Modules.SlideshowDesign
 
       // Show presenter form, that starts presentation.
       objPresenter.ShowDialog();
+
+      // Update slideshow pictures of newly created trials
+      Document.ActiveDocument.ExperimentSettings.SlideShow.UpdateExperimentPathOfResources(Document.ActiveDocument.ExperimentSettings.SlideResourcesPath);
     }
 
     /// <summary>

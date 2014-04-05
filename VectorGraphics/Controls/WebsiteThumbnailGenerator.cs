@@ -285,6 +285,7 @@ namespace VectorGraphics.Controls
       {
         WebBrowser webBrowser = new WebBrowser();
         webBrowser.ScrollBarsEnabled = true;
+        webBrowser.ScriptErrorsSuppressed = true;
         webBrowser.Navigate(this.BaseUrl);
         if (this.NavigatingArgs != null)
         {

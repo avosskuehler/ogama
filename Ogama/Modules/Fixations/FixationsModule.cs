@@ -192,7 +192,7 @@ namespace Ogama.Modules.Fixations
     /// Reads dropdown settings and loads corresponding images and data from database.
     /// Then notifys picture the changes.
     /// </summary>
-    /// <returns><strong>True</strong> if trial could be succesfully loaded,
+    /// <returns><strong>True</strong> if trial could be successfully loaded,
     /// otherwise <strong>false</strong>.</returns>
     protected override bool NewTrialSelected()
     {
@@ -1478,7 +1478,7 @@ namespace Ogama.Modules.Fixations
     /// <param name="subjectName">A <see cref="String"/> with the subject name.</param>
     /// <param name="trialSequence">An <see cref="Int32"/> with the trials sequence number
     /// in the subjects recording.</param>
-    /// <returns><strong>True</strong> if fixational data could be succesfully loaded,
+    /// <returns><strong>True</strong> if fixational data could be successfully loaded,
     /// otherwise <strong>false</strong>.</returns>
     private bool LoadFixations(string subjectName, int trialSequence)
     {

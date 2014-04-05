@@ -36,7 +36,7 @@ namespace OgamaControls
     private AudioPlayer player;
 
     /// <summary>
-    /// A path where to put the audio file if succesfully loaded.
+    /// A path where to put the audio file if successfully loaded.
     /// </summary>
     private string pathToCopyTo;
 
@@ -87,7 +87,7 @@ namespace OgamaControls
     }
 
     /// <summary>
-    /// A path where to put the audio file if succesfully loaded.
+    /// A path where to put the audio file if successfully loaded.
     /// </summary>
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     [Browsable(false)]

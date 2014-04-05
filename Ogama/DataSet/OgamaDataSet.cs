@@ -249,7 +249,7 @@ namespace Ogama.DataSet
     /// </summary>
     /// <param name="splash">A <see cref="BackgroundWorker"/> for the progress splash
     /// window which can be cancelled and restarted when showing dialogs.</param>
-    /// <returns><strong>True</strong> if loading was succesfull, otherwise
+    /// <returns><strong>True</strong> if loading was successful, otherwise
     /// <strong>false</strong>.</returns>
     public bool LoadData(BackgroundWorker splash)
     {
@@ -511,8 +511,8 @@ namespace Ogama.DataSet
     /// </summary>
     /// <param name="splash">A <see cref="BackgroundWorker"/> for the progress splash
     /// window which can be cancelled and restarted when showing dialogs.</param>
-    /// <returns><strong>True</strong> if upgrade was succesfull, and <strong>false</strong>
-    /// if unsuccesfull or cancelled by user.</returns>
+    /// <returns><strong>True</strong> if upgrade was successful, and <strong>false</strong>
+    /// if unsuccessful or cancelled by user.</returns>
     private bool UpgradeDatabase(BackgroundWorker splash)
     {
       if (Queries.ColumnExists("Subjects", "Param1") || Queries.TableExists("TableMainExperiment"))
@@ -670,7 +670,7 @@ namespace Ogama.DataSet
           + Environment.NewLine +
           "This was quite a hard work for your computer ... stay tuned.";
         InformationDialog.Show(
-          "Upgrade succesfull",
+          "Upgrade successful",
           message,
           false,
           MessageBoxIcon.Information);
@@ -1086,7 +1086,7 @@ namespace Ogama.DataSet
         if (responseConverterErrorCount > 0)
         {
           string message = "Please note: " + responseConverterErrorCount.ToString() +
-            " responses could not be converted succesfully." + Environment.NewLine +
+            " responses could not be converted successfully." + Environment.NewLine +
             "This error is not critical, but statistical parameters 'Response' " +
             "and 'ResponseCorrectnes' will be not correct.";
           ExceptionMethods.ProcessMessage("Unknown responses found", message);
@@ -1278,7 +1278,7 @@ namespace Ogama.DataSet
       if (responseConverterErrorCount > 0)
       {
         string message = "Please note: " + responseConverterErrorCount.ToString() +
-          " responses could not be converted succesfully." + Environment.NewLine +
+          " responses could not be converted successfully." + Environment.NewLine +
           "This error is not critical, but some Mouse or Key events will be missing.";
         ExceptionMethods.ProcessMessage("Unknown responses found", message);
       }

@@ -22,6 +22,7 @@ namespace Ogama.Modules.Recording.Presenter
   using Ogama.ExceptionHandling;
 
   using OgamaControls;
+  using System.IO;
 
   /// <summary>
   /// This class creates screenshots of websites.
@@ -144,7 +145,7 @@ namespace Ogama.Modules.Recording.Presenter
     }
 
     /// <summary>
-    /// Gets or sets the filename with full path to the screenshot 
+    /// Gets or sets the filename without path for the screenshot 
     /// this class should write to.
     /// </summary>
     public string ScreenshotFilename { get; set; }
@@ -297,8 +298,10 @@ namespace Ogama.Modules.Recording.Presenter
           websiteImage,
           new Rectangle(0, 0, scrollSize.Width, scrollSize.Height));
 
+        var filename = Path.Combine(Document.ActiveDocument.ExperimentSettings.SlideResourcesPath, this.ScreenshotFilename);
+
         // Save to disk
-        websiteImage.Save(this.ScreenshotFilename, ImageFormat.Png);
+        websiteImage.Save(filename, ImageFormat.Png);
       }
     }
 
@@ -389,9 +392,9 @@ namespace Ogama.Modules.Recording.Presenter
         };
 
       this.dummyForm.Controls.Add(this.webBrowser);
-      this.dummyForm.SendToBack();
+      //this.dummyForm.SendToBack();
       this.dummyForm.Show();
-      this.dummyForm.ShowInTaskbar = false;
+      //this.dummyForm.ShowInTaskbar = false;
       this.webBrowser.ScrollBarsEnabled = true;
       this.webBrowser.DocumentCompleted += this.WebBrowser_DocumentCompleted;
     }

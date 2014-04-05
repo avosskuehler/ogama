@@ -110,7 +110,7 @@ namespace GTOgamaClient.API
 
     /// <summary>
     /// Event that is raised whenever a calibration process
-    /// has been succesfully finished.
+    /// has been successfully finished.
     /// </summary>
     public event EventHandler CalibrationFinishedEvent;
 

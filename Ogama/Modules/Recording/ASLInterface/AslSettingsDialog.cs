@@ -633,7 +633,7 @@ namespace Ogama.Modules.Recording.ASLInterface
     /// Checks for new data samples
     /// </summary>
     /// <param name="dataItems">Out. Returns the newly samples data.</param>
-    /// <returns>True if succesfull, otherwise false.</returns>
+    /// <returns>True if successful, otherwise false.</returns>
     private bool GetRecord(out Array dataItems)
     {
       int count;

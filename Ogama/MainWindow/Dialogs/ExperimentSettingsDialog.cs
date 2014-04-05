@@ -132,7 +132,7 @@ namespace Ogama.MainWindow.Dialogs
     /// <summary>
     /// The <see cref="Control.Click"/> event handler for
     /// the <see cref="Button"/> <see cref="btnTestSQLConnection"/>
-    /// Tests for a succesfull connection to the SQL server.
+    /// Tests for a successful connection to the SQL server.
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
@@ -292,7 +292,7 @@ namespace Ogama.MainWindow.Dialogs
     /// </summary>
     /// <param name="showMessage">Indicates whether this method should be run
     /// in silent or verbose mode.</param>
-    /// <returns>True if succesfull, otherwise false.</returns>
+    /// <returns>True if successful, otherwise false.</returns>
     private bool TestSQLServerConnection(bool showMessage)
     {
       this.Cursor = Cursors.WaitCursor;
@@ -324,7 +324,7 @@ namespace Ogama.MainWindow.Dialogs
 
       if (showMessage)
       {
-        MessageBox.Show("Connection succesfull");
+        MessageBox.Show("Connection successful");
       }
 
       return true;
