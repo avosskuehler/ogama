@@ -1063,7 +1063,7 @@ namespace Ogama.MainWindow
 
     /// <summary>
     /// The <see cref="Control.Click"/> event handler
-    /// for the <see cref="ToolStripMenuItem"/> <see cref="mnuHelpHowToSMIiViewX"/>
+    /// for the <see cref="ToolStripMenuItem"/>
     /// Displays instructions to activate SMI iViewX recording.
     /// </summary>
     /// <param name="sender">Source of the event</param>
@@ -1076,7 +1076,7 @@ namespace Ogama.MainWindow
 
     /// <summary>
     /// The <see cref="Control.Click"/> event handler
-    /// for the <see cref="ToolStripMenuItem"/> <see cref="mnuHelpHowToSMIiViewX"/>
+    /// for the <see cref="ToolStripMenuItem"/> <see cref="mnuHelpHowToSMI"/>
     /// Displays instructions to activate SMI iViewX recording.
     /// </summary>
     /// <param name="sender">Source of the event</param>

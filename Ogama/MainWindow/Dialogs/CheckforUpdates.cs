@@ -315,7 +315,7 @@ namespace Ogama.MainWindow.Dialogs
     /// This method parses the version.txt which 
     /// gives the current version of ogama on the server.
     /// </summary>
-    /// <returns><strong>True</strong> if parsing was succesfull, otherwise
+    /// <returns><strong>True</strong> if parsing was successful, otherwise
     /// <strong>false</strong>.</returns>
     /// <exception cref="FileNotFoundException">If version.txt could not be found.</exception>
     private bool ParseVersionTxt()
@@ -381,7 +381,7 @@ namespace Ogama.MainWindow.Dialogs
 
           if (parsingFailed)
           {
-            string message = "The version.txt from the server could not be succesfully parsed."
+            string message = "The version.txt from the server could not be successfully parsed."
             + Environment.NewLine + "Please go to the website by yourself.";
             ExceptionMethods.ProcessErrorMessage(message);
             return false;

@@ -231,7 +231,7 @@ namespace Ogama.Modules.ImportExport.RawData
                     // Inform user about success.
                     if (succesful)
                     {
-                      string message = "Import data succesfully written to database." + Environment.NewLine +
+                      string message = "Import data successfully written to database." + Environment.NewLine +
                         "Please don´t forget to move the stimuli images to the SlideResources subfolder" +
                         "of the experiment, otherwise no images will be shown.";
                       ExceptionMethods.ProcessMessage("Success", message);
@@ -873,7 +873,7 @@ namespace Ogama.Modules.ImportExport.RawData
       if (rawDataList.Count == 0)
       {
         // string message = "The parsing of the log file into OGAMAs " +
-        //  "Raw data columns failed. No lines have been succesfully read. " +
+        //  "Raw data columns failed. No lines have been successfully read. " +
         //  Environment.NewLine +
         //  "So the trial generation could not be started." +
         //  Environment.NewLine + "Please change the import settings and try again";
@@ -1171,7 +1171,7 @@ namespace Ogama.Modules.ImportExport.RawData
     /// <summary>
     /// This method writes the data that is written in the lists during
     /// import to OGAMAs dataset.
-    /// If this could be succesfully done the whole new data is
+    /// If this could be successfully done the whole new data is
     /// written to the database (.mdf).
     /// </summary>
     /// <returns><strong>True</strong> if succesful, otherwise

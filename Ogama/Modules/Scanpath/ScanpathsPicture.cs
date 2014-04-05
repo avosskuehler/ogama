@@ -68,7 +68,7 @@ namespace Ogama.Modules.Scanpath
     #region FIELDS
 
     /// <summary>
-    /// The millisecond of the time the last animation timer tick was succesfully
+    /// The millisecond of the time the last animation timer tick was successfully
     /// processed
     /// </summary>
     private int lastPlayTime;

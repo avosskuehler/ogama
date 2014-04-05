@@ -575,6 +575,7 @@ namespace Ogama.Modules.Common.SlideCollections
           image.Filename = System.IO.Path.GetFileName(image.Filename);
           image.Filepath = newResourcesPath;
           image.Canvas = Document.ActiveDocument.PresentationSize;
+          image.CreateInternalImage();
         }
       }
       else if (element is VGFlash)

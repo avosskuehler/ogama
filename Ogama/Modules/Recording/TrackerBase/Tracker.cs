@@ -448,7 +448,7 @@ namespace Ogama.Modules.Recording.TrackerBase
     /// This information is stored for later writing to the database.
     /// </summary>
     /// <param name="subjectname">Ref. A <see cref="string"/> with the subject name to update.</param>
-    /// <returns><strong>True</strong>if succesfull, otherswise <strong>false</strong>.</returns>
+    /// <returns><strong>True</strong>if successful, otherswise <strong>false</strong>.</returns>
     protected bool OpenSubjectDialog(ref string subjectname)
     {
       var dlg = new SubjectDetailsDialog { SubjectName = subjectname };

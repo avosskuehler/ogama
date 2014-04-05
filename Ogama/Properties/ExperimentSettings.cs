@@ -691,7 +691,7 @@ namespace Ogama.Properties
     /// This method checks for moved experiment locations
     /// and updates the database path.
     /// </summary>
-    /// <returns><strong>True</strong> if database connection is succesfully revised,
+    /// <returns><strong>True</strong> if database connection is successfully revised,
     /// <strong>false</strong> if user selected to cancel the connection revision.</returns>
     public bool CheckDatabasePath()
     {

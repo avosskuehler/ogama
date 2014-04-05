@@ -176,7 +176,7 @@ namespace Ogama.Modules.ImportExport.AOIData
                 asciiSettings.WaitingSplash.CancelAsync();
 
                 // Inform user about success.
-                string message = "AOI import data succesfully written to database.";
+                string message = "AOI import data successfully written to database.";
                 ExceptionMethods.ProcessMessage("Successfull", message);
               }
               else if (resultAssign == DialogResult.Cancel)
@@ -247,7 +247,7 @@ namespace Ogama.Modules.ImportExport.AOIData
     /// <summary>
     /// This method writes the data that is written in the lists during
     /// import to OGAMAs dataset.
-    /// If this could be succesfully done the whole new data is
+    /// If this could be successfully done the whole new data is
     /// written to the database (.mdf).
     /// </summary>
     private static void SaveImportIntoTablesAndDB()

@@ -522,10 +522,10 @@ namespace Ogama.Modules.Recording.GazegroupInterface
       }
       else if (!this.clientStatus.IsCalibrated)
       {
-        informationString = "Connection to gazetracker succesfully established."
+        informationString = "Connection to gazetracker successfully established."
                             + "Now configure the gazetracker to track the eyes using the "
                             + "user interface of the gazetracker application."
-                            + "Return to ogama when tracking is succesfully calibrated. "
+                            + "Return to ogama when tracking is successfully calibrated. "
                             + "Then specify subject and start recording.";
       }
       else if (!this.clientStatus.IsStreaming)

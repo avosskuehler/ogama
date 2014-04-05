@@ -646,7 +646,7 @@ namespace Ogama.Modules.Recording.SMIInterface.iViewX
     /// <summary>
     /// This method tests for a valid udp connection to the iViewX.
     /// </summary>
-    /// <returns><strong>True</strong> if connection is succesfully established,
+    /// <returns><strong>True</strong> if connection is successfully established,
     /// otherwise <strong>false</strong></returns>
     private bool TestForConnection()
     {

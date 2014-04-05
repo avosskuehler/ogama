@@ -966,7 +966,7 @@ namespace Ogama.Modules.Database
       ((MainForm)this.MdiParent).StatusLabel.Text = "Ready ...";
       ((MainForm)this.MdiParent).StatusProgressbar.Value = 0;
       this.Cursor = Cursors.Default;
-      MessageBox.Show("Selected subjects succesfully exported");
+      MessageBox.Show("Selected subjects successfully exported");
     }
 
     #endregion //BACKGROUNDWORKER

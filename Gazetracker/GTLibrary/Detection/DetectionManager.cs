@@ -375,7 +375,7 @@ namespace GTLibrary.Detection
         /// <param name="image">Input image</param>
         /// <param name="center">Central point</param>
         /// <param name="radius">The radius of the roi.</param>
-        /// <returns>True if succesfull, otherwise false.</returns>
+        /// <returns>True if successful, otherwise false.</returns>
         /// 
         private static Rectangle SetROI(Size imageSize, GTPoint center, double diameter)
         {

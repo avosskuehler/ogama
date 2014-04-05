@@ -17,6 +17,7 @@ namespace Ogama.Modules.SlideshowDesign
   using System.Collections.Generic;
   using System.ComponentModel;
   using System.Drawing;
+  using System.IO;
   using System.Windows.Forms;
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common.SlideCollections;
@@ -370,7 +371,7 @@ namespace Ogama.Modules.SlideshowDesign
     {
       this.cmuDisable.Text = "Disable Slide";
       this.cmuDisable.Checked = false;
- 
+
       int itemCount = this.trvSlideshow.SelectedNodes.Count;
       if (itemCount > 1)
       {
@@ -752,6 +753,12 @@ namespace Ogama.Modules.SlideshowDesign
 
         if (keyToRemove != string.Empty)
         {
+          var fileName = Path.Combine(Document.ActiveDocument.ExperimentSettings.SlideResourcesPath, keyToRemove);
+          if (File.Exists(fileName))
+          {
+            File.Delete(fileName);
+          }
+
           parent.UrlToID.Remove(keyToRemove);
         }
       }

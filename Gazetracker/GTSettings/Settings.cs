@@ -394,7 +394,7 @@ namespace GTSettings
     /// This method loads the latest saved configuration from
     /// disk into the Instance settings instance.
     /// </summary>
-    /// <returns>True if succesfull, otherwise false.</returns>
+    /// <returns>True if successful, otherwise false.</returns>
     public bool LoadLatestConfiguration()
     {
       int numSettings = 0;

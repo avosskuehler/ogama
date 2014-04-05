@@ -260,9 +260,6 @@ namespace VectorGraphics.Elements
             this.Filepath = newPath;
             this.filename = Path.GetFileName(this.filename);
           }
-          else
-          {
-          }
         }
 
         return Path.Combine(this.Filepath, this.filename);

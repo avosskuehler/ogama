@@ -205,15 +205,9 @@ namespace Ogama.Modules.SlideshowDesign
     /// </summary>
     private void InitializeDetailListView()
     {
-      this.colPosition.AspectToStringConverter = delegate(object cellValue)
-      {
-        return cellValue.ToString();
-      };
+      this.colPosition.AspectToStringConverter = cellValue => cellValue.ToString();
 
-      this.colPosition.AspectGetter = delegate(object row)
-      {
-        return ((SlideshowTreeNode)row).Index;
-      };
+      this.colPosition.AspectGetter = row => ((SlideshowTreeNode)row).Index;
 
       this.colPosition.ToolTipGetter = delegate(object row)
       {

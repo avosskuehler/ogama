@@ -57,6 +57,11 @@ namespace Ogama.Modules.SlideshowDesign.DesignModule.StimuliDialogs
     /// </summary>
     private BrowserTreeNode browserTreeNode;
 
+    /// <summary>
+    /// Indicates whether the zoom is already performed
+    /// </summary>
+    private bool isZoomed;
+
     #endregion //FIELDS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -70,6 +75,7 @@ namespace Ogama.Modules.SlideshowDesign.DesignModule.StimuliDialogs
     public BrowserDialog()
     {
       this.InitializeComponent();
+      this.webBrowserPreview.Navigated += webBrowserPreview_Navigated;
 
       // Timing Tab
       SlideDesignModule.FillKeyCombo(this.cbbKeys);
@@ -142,7 +148,7 @@ namespace Ogama.Modules.SlideshowDesign.DesignModule.StimuliDialogs
 
     /// <summary>
     /// Create a unique filename from the given <see cref="Uri"/>
-    /// with path to the slide resources folder of the experiment
+    /// without path to the slide resources folder of the experiment
     /// </summary>
     /// <param name="url">The <see cref="Uri"/> to be converted to a filename</param>
     /// <returns>A <see cref="String"/> with a valid and unique filename.</returns>
@@ -151,7 +157,6 @@ namespace Ogama.Modules.SlideshowDesign.DesignModule.StimuliDialogs
       // string filename = Regex.Replace(url.ToString(), @"(\\|\/|\:|\*|\?|\""|\<|\>|\|)?", string.Empty);
       var filename = FilenameFromTitle(url.ToString());
       filename += ".png";
-      filename = Path.Combine(Document.ActiveDocument.ExperimentSettings.SlideResourcesPath, filename);
       return filename;
     }
 
@@ -208,6 +213,25 @@ namespace Ogama.Modules.SlideshowDesign.DesignModule.StimuliDialogs
     // Eventhandler                                                              //
     ///////////////////////////////////////////////////////////////////////////////
     #region EVENTHANDLER
+
+    /// <summary>
+    /// Handles the Navigated event of the webBrowserPreview control.
+    /// Zooms in.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="WebBrowserNavigatedEventArgs"/> instance containing the event data.</param>
+    private void webBrowserPreview_Navigated(object sender, WebBrowserNavigatedEventArgs e)
+    {
+      if (!this.isZoomed)
+      {
+        // Zoom out by sending [CTRL]+[-], cause of small preview window
+        this.webBrowserPreview.Focus();
+        SendKeys.Send("^-");
+        SendKeys.Send("^-"); 
+        SendKeys.Send("^-"); 
+        this.isZoomed = true;
+      }
+    }
 
     /// <summary>
     /// The TextBox.TextChanged event handler 
@@ -462,7 +486,8 @@ namespace Ogama.Modules.SlideshowDesign.DesignModule.StimuliDialogs
         this.txbURL.Text,
         Document.ActiveDocument.PresentationSize);
       string screenshotFilename = GetFilenameFromUrl(new Uri(this.txbURL.Text));
-      screenshot.Save(screenshotFilename, System.Drawing.Imaging.ImageFormat.Png);
+      var filename = Path.Combine(Document.ActiveDocument.ExperimentSettings.SlideResourcesPath, screenshotFilename);
+      screenshot.Save(filename, System.Drawing.Imaging.ImageFormat.Png);
 
       VGScrollImage baseURLScreenshot = new VGScrollImage(
         ShapeDrawAction.None,

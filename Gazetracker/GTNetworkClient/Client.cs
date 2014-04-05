@@ -442,7 +442,7 @@ namespace GTNetworkClient
     /// Raises the <see cref="ClientConnectionChanged"/> event.
     /// </summary>
     /// <param name="success">A <see cref="Boolean"/> which should
-    /// be true, when the connections is succesfully established.</param>.
+    /// be true, when the connections is successfully established.</param>.
     private void OnClientConnectionChanged(bool success)
     {
       if (this.ClientConnectionChanged != null)

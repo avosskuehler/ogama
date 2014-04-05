@@ -52,7 +52,7 @@
 			this.dialogTop1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
 			this.dialogTop1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("dialogTop1.BackgroundImage")));
 			this.dialogTop1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-			this.dialogTop1.Description = "The tracking data has been succesfully written into OGAMAs database.";
+			this.dialogTop1.Description = "The tracking data has been successfully written into OGAMAs database.";
 			this.dialogTop1.Dock = System.Windows.Forms.DockStyle.Top;
 			this.dialogTop1.Location = new System.Drawing.Point(0, 0);
 			this.dialogTop1.Logo = global::Ogama.Properties.Resources.propertiesORoptions;

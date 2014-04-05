@@ -1,7 +1,4 @@
 <StyleCopSettings Version="105">
-  <GlobalSettings>
-    <BooleanProperty Name="WriteCache">False</BooleanProperty>
-  </GlobalSettings>
   <Parsers>
     <Parser ParserId="StyleCop.CSharp.CsParser">
       <ParserSettings>
@@ -70,7 +67,12 @@
           </RuleSettings>
         </Rule>
       </Rules>
-      <AnalyzerSettings />
+      <AnalyzerSettings>
+        <StringProperty Name="CompanyName">Freie Universität Berlin</StringProperty>
+        <StringProperty Name="Copyright">OGAMA - open gaze and mouse analyzer 
+Copyright (C) 2014 Dr. Adrian Voßkühler  
+Licensed under GPL V3</StringProperty>
+      </AnalyzerSettings>
     </Analyzer>
   </Analyzers>
 </StyleCopSettings>

@@ -40,8 +40,8 @@
       this.panelOne.Name = "panelOne";
       this.panelOne.Size = new System.Drawing.Size(640, 480);
       this.panelOne.TabIndex = 0;
-      this.panelOne.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmPresenter_MouseDown);
-      this.panelOne.MouseUp += new System.Windows.Forms.MouseEventHandler(this.frmPresenter_MouseUp);
+      this.panelOne.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FrmPresenterMouseDown);
+      this.panelOne.MouseUp += new System.Windows.Forms.MouseEventHandler(this.FrmPresenterMouseUp);
       // 
       // panelTwo
       // 
@@ -51,8 +51,8 @@
       this.panelTwo.Name = "panelTwo";
       this.panelTwo.Size = new System.Drawing.Size(640, 480);
       this.panelTwo.TabIndex = 0;
-      this.panelTwo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmPresenter_MouseDown);
-      this.panelTwo.MouseUp += new System.Windows.Forms.MouseEventHandler(this.frmPresenter_MouseUp);
+      this.panelTwo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FrmPresenterMouseDown);
+      this.panelTwo.MouseUp += new System.Windows.Forms.MouseEventHandler(this.FrmPresenterMouseUp);
       // 
       // PresenterModule
       // 
@@ -66,11 +66,11 @@
       this.Name = "PresenterModule";
       this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
       this.Text = "frmPresenter";
-      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmPresenter_FormClosing);
-      this.Load += new System.EventHandler(this.PresenterModule_Load);
-      this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmPresenter_KeyDown);
-      this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmPresenter_MouseDown);
-      this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.frmPresenter_MouseUp);
+      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmPresenterFormClosing);
+      this.Load += new System.EventHandler(this.PresenterModuleLoad);
+      this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmPresenterKeyDown);
+      this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FrmPresenterMouseDown);
+      this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.FrmPresenterMouseUp);
       this.ResumeLayout(false);
 
     }

@@ -323,7 +323,7 @@ namespace Ogama.Modules.Common.FormTemplates
     /// Virtual empty method that should be overwritten with code
     /// that loads data from the database and updates the canvas with the new contents.
     /// </summary>
-    /// <returns><strong>True</strong> if succesfull, otherwise <strong>false</strong>.</returns>
+    /// <returns><strong>True</strong> if successful, otherwise <strong>false</strong>.</returns>
     protected virtual bool NewTrialSelected()
     {
       return false;
@@ -420,7 +420,7 @@ namespace Ogama.Modules.Common.FormTemplates
       {
         if (Images.ExportImageToFile(this.picture.RenderToImage()))
         {
-          ((MainForm)this.MdiParent).StatusLabel.Text = "Image succesfully saved";
+          ((MainForm)this.MdiParent).StatusLabel.Text = "Image successfully saved";
         }
       }
     }
@@ -536,7 +536,7 @@ namespace Ogama.Modules.Common.FormTemplates
     /// if there is any.
     /// </summary>
     /// <param name="trialID">An <see cref="Int32"/> with the trial ID.</param>
-    /// <returns><strong>True</strong> if succesfull, otherwise <strong>false</strong>.</returns>
+    /// <returns><strong>True</strong> if successful, otherwise <strong>false</strong>.</returns>
     protected bool LoadTrialStimulus(int trialID)
     {
       this.currentTrial = Document.ActiveDocument.ExperimentSettings.SlideShow.GetTrialByID(trialID);
@@ -600,7 +600,7 @@ namespace Ogama.Modules.Common.FormTemplates
     /// </summary>
     /// <param name="trialEvents">The complete <see cref="SortedList{Int32, TrialEvent}"/>
     /// of trial events to be parsed for audio stimuli.</param>
-    /// <returns><strong>True</strong> if succesfull, otherwise <strong>false</strong>.</returns>
+    /// <returns><strong>True</strong> if successful, otherwise <strong>false</strong>.</returns>
     protected bool LoadAudioStimuli(SortedList<int, TrialEvent> trialEvents)
     {
       try

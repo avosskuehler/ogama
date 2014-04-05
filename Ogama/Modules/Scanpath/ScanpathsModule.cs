@@ -188,7 +188,7 @@ namespace Ogama.Modules.Scanpath
     /// Reads dropdown settings and loads corresponding images and data from database.
     /// Then notifys picture the changes.
     /// </summary>
-    /// <returns><strong>True</strong> if trial could be succesfully loaded,
+    /// <returns><strong>True</strong> if trial could be successfully loaded,
     /// otherwise <strong>false</strong></returns>
     protected override bool NewTrialSelected()
     {
@@ -1257,7 +1257,7 @@ namespace Ogama.Modules.Scanpath
     /// </summary>
     /// <param name="trialID">An <see cref="Int32"/> with the trial id to 
     /// be selected.</param>
-    /// <returns><strong>True</strong> if raw data could be succesfully found and loaded,
+    /// <returns><strong>True</strong> if raw data could be successfully found and loaded,
     /// otherwise <strong>false</strong>.</returns>
     private bool LoadRawData(int trialID)
     {

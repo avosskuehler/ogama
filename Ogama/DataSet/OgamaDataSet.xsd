@@ -9,7 +9,7 @@
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="TadSubjectParameters" GeneratorDataComponentClassName="TadSubjectParameters" Name="SubjectParameters" UserDataComponentName="TadSubjectParameters">
             <MainSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.SubjectParameters" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.SubjectParameters" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [SubjectParameters] WHERE (([ID] = @Original_ID) AND ([SubjectName] = @Original_SubjectName) AND ([Param] = @Original_Param) AND ((@IsNull_ParamValue = 1 AND [ParamValue] IS NULL) OR ([ParamValue] = @Original_ParamValue)))</CommandText>
@@ -66,7 +66,7 @@ SELECT ID, SubjectName, Param, ParamValue FROM SubjectParameters WHERE (ID = @ID
               <Mapping SourceColumn="ParamValue" DataSetColumn="ParamValue" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteBySubjectName" Modifier="Public" Name="DeleteBySubjectName" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="DeleteBySubjectName">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteBySubjectName" Modifier="Public" Name="DeleteBySubjectName" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="DeleteBySubjectName">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>DELETE FROM [SubjectParameters] WHERE ([SubjectName] = @Original_SubjectName)</CommandText>
@@ -76,7 +76,7 @@ SELECT ID, SubjectName, Param, ParamValue FROM SubjectParameters WHERE (ID = @ID
                   </DbCommand>
                 </DeleteCommand>
               </DbSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.SubjectParameters" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySubject" GetMethodModifier="Public" GetMethodName="GetDataBySubject" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySubject" UserSourceName="GetDataBySubject">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.SubjectParameters" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySubject" GetMethodModifier="Public" GetMethodName="GetDataBySubject" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySubject" UserSourceName="GetDataBySubject">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT     ID, SubjectName, Param, ParamValue
@@ -92,7 +92,7 @@ WHERE     (SubjectName = @Param1)</CommandText>
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="TadSubjects" GeneratorDataComponentClassName="TadSubjects" Name="Subjects" UserDataComponentName="TadSubjects">
             <MainSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.Subjects" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.Subjects" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [Subjects] WHERE (([ID] = @Original_ID) AND ([SubjectName] = @Original_SubjectName) AND ((@IsNull_Category = 1 AND [Category] IS NULL) OR ([Category] = @Original_Category)) AND ((@IsNull_Age = 1 AND [Age] IS NULL) OR ([Age] = @Original_Age)) AND ((@IsNull_Sex = 1 AND [Sex] IS NULL) OR ([Sex] = @Original_Sex)) AND ((@IsNull_Handedness = 1 AND [Handedness] IS NULL) OR ([Handedness] = @Original_Handedness)) AND ((@IsNull_Comments = 1 AND [Comments] IS NULL) OR ([Comments] = @Original_Comments)))</CommandText>
@@ -172,7 +172,7 @@ SELECT ID, SubjectName, Category, Age, Sex, Handedness, Comments FROM Subjects W
               <Mapping SourceColumn="Comments" DataSetColumn="Comments" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.Subjects" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetCategories" GetMethodModifier="Public" GetMethodName="GetCategories" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetCategories" UserSourceName="GetCategories">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.Subjects" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetCategories" GetMethodModifier="Public" GetMethodName="GetCategories" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetCategories" UserSourceName="GetCategories">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT     MIN(ID) AS MinID, COUNT(SubjectName) AS SubjectCount, Category
@@ -182,7 +182,7 @@ GROUP BY Category</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.Subjects" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetCategoryRows" GetMethodModifier="Public" GetMethodName="GetCategoryRows" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetCategoryRows" UserSourceName="GetCategoryRows">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.Subjects" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetCategoryRows" GetMethodModifier="Public" GetMethodName="GetCategoryRows" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetCategoryRows" UserSourceName="GetCategoryRows">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT     COUNT(*) AS [RowCount], Category
@@ -192,7 +192,7 @@ GROUP BY Category</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.Subjects" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySubject" GetMethodModifier="Public" GetMethodName="GetDataBySubject" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySubject" UserSourceName="GetDataBySubject">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.Subjects" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySubject" GetMethodModifier="Public" GetMethodName="GetDataBySubject" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySubject" UserSourceName="GetDataBySubject">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT Age, Category, Comments, Handedness, ID, Sex, SubjectName FROM Subjects WHERE (SubjectName = @Param1)</CommandText>
@@ -206,7 +206,7 @@ GROUP BY Category</CommandText>
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="TadTrials" GeneratorDataComponentClassName="TadTrials" Name="Trials" UserDataComponentName="TadTrials">
             <MainSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.Trials" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.Trials" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [Trials] WHERE (([ID] = @Original_ID) AND ([SubjectName] = @Original_SubjectName) AND ([TrialID] = @Original_TrialID) AND ((@IsNull_TrialName = 1 AND [TrialName] IS NULL) OR ([TrialName] = @Original_TrialName)) AND ([TrialSequence] = @Original_TrialSequence) AND ((@IsNull_Category = 1 AND [Category] IS NULL) OR ([Category] = @Original_Category)) AND ((@IsNull_TrialStartTime = 1 AND [TrialStartTime] IS NULL) OR ([TrialStartTime] = @Original_TrialStartTime)) AND ((@IsNull_Duration = 1 AND [Duration] IS NULL) OR ([Duration] = @Original_Duration)) AND ((@IsNull_EliminateData = 1 AND [EliminateData] IS NULL) OR ([EliminateData] = @Original_EliminateData)))</CommandText>
@@ -296,7 +296,7 @@ SELECT ID, SubjectName, TrialID, TrialName, TrialSequence, Category, TrialStartT
               <Mapping SourceColumn="EliminateData" DataSetColumn="EliminateData" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteBySubjectName" Modifier="Public" Name="DeleteBySubjectName" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="DeleteBySubjectName">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteBySubjectName" Modifier="Public" Name="DeleteBySubjectName" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="DeleteBySubjectName">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>DELETE FROM [Trials] WHERE ([SubjectName] = @Original_SubjectName)</CommandText>
@@ -306,7 +306,7 @@ SELECT ID, SubjectName, TrialID, TrialName, TrialSequence, Category, TrialStartT
                   </DbCommand>
                 </DeleteCommand>
               </DbSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.Trials" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetCategories" GetMethodModifier="Public" GetMethodName="GetCategories" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetCategories" UserSourceName="GetCategories">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.Trials" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetCategories" GetMethodModifier="Public" GetMethodName="GetCategories" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetCategories" UserSourceName="GetCategories">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT     Category
@@ -316,7 +316,7 @@ GROUP BY Category</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.Trials" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySubject" GetMethodModifier="Public" GetMethodName="GetDataBySubject" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySubject" UserSourceName="GetDataBySubject">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.Trials" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySubject" GetMethodModifier="Public" GetMethodName="GetDataBySubject" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySubject" UserSourceName="GetDataBySubject">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT Category, Duration, EliminateData, ID, SubjectName, TrialID, TrialName, TrialSequence, TrialStartTime FROM Trials WHERE (SubjectName = @Param1)</CommandText>
@@ -326,7 +326,7 @@ GROUP BY Category</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.Trials" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySubjectAndSequence" GetMethodModifier="Public" GetMethodName="GetDataBySubjectAndSequence" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySubjectAndSequence" UserSourceName="GetDataBySubjectAndSequence">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.Trials" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySubjectAndSequence" GetMethodModifier="Public" GetMethodName="GetDataBySubjectAndSequence" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySubjectAndSequence" UserSourceName="GetDataBySubjectAndSequence">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT Category, Duration, EliminateData, ID, SubjectName, TrialID, TrialName, TrialSequence, TrialStartTime FROM Trials WHERE (SubjectName = @Param1) AND (TrialSequence = @Param2)</CommandText>
@@ -337,7 +337,7 @@ GROUP BY Category</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.Trials" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySubjectAndTrialID" GetMethodModifier="Public" GetMethodName="GetDataBySubjectAndTrialID" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySubjectAndTrialID" UserSourceName="GetDataBySubjectAndTrialID">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.Trials" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySubjectAndTrialID" GetMethodModifier="Public" GetMethodName="GetDataBySubjectAndTrialID" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySubjectAndTrialID" UserSourceName="GetDataBySubjectAndTrialID">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT Category, Duration, EliminateData, ID, SubjectName, TrialID, TrialName, TrialSequence, TrialStartTime FROM Trials WHERE (SubjectName = @Param1) AND (TrialID = @Param2)</CommandText>
@@ -348,7 +348,7 @@ GROUP BY Category</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.Trials" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetTrialSequenceBySubjectAndTrialID" GeneratorSourceName="FillBy" GetMethodModifier="Public" GetMethodName="GetTrialSequenceBySubjectAndTrialID" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetTrialSequenceBySubjectAndTrialID" UserSourceName="GetTrialSequenceBySubjectAndTrialID">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.Trials" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetTrialSequenceBySubjectAndTrialID" GeneratorSourceName="FillBy" GetMethodModifier="Public" GetMethodName="GetTrialSequenceBySubjectAndTrialID" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetTrialSequenceBySubjectAndTrialID" UserSourceName="GetTrialSequenceBySubjectAndTrialID">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT     SubjectName, TrialID, TrialSequence
@@ -362,7 +362,7 @@ GROUP BY SubjectName, TrialID, TrialSequence</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateEliminateByID" Modifier="Public" Name="UpdateEliminateByID" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="UpdateEliminateByID">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateEliminateByID" Modifier="Public" Name="UpdateEliminateByID" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="UpdateEliminateByID">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE    Trials
@@ -379,7 +379,7 @@ WHERE     (ID = @Original_ID);   </CommandText>
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="TadTrialEvents" GeneratorDataComponentClassName="TadTrialEvents" Name="TrialEvents" UserDataComponentName="TadTrialEvents">
             <MainSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.TrialEvents" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.TrialEvents" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [TrialEvents] WHERE (([ID] = @Original_ID) AND ([SubjectName] = @Original_SubjectName) AND ([TrialSequence] = @Original_TrialSequence) AND ([EventID] = @Original_EventID) AND ([EventTime] = @Original_EventTime) AND ([EventType] = @Original_EventType) AND ((@IsNull_EventTask = 1 AND [EventTask] IS NULL) OR ([EventTask] = @Original_EventTask)) AND ((@IsNull_EventParam = 1 AND [EventParam] IS NULL) OR ([EventParam] = @Original_EventParam)))</CommandText>
@@ -458,7 +458,7 @@ SELECT ID, SubjectName, TrialSequence, EventID, EventTime, EventType, EventTask,
               <Mapping SourceColumn="EventParam" DataSetColumn="EventParam" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteBySubjectName" Modifier="Public" Name="DeleteBySubjectName" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="DeleteBySubjectName">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteBySubjectName" Modifier="Public" Name="DeleteBySubjectName" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="DeleteBySubjectName">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>DELETE FROM [dbo].[TrialEvents] WHERE  (SubjectName = @Original_SubjectName)</CommandText>
@@ -468,7 +468,7 @@ SELECT ID, SubjectName, TrialSequence, EventID, EventTime, EventType, EventTask,
                   </DbCommand>
                 </DeleteCommand>
               </DbSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy3" GeneratorSourceName="DeleteEventBySubjectNameTrialSequenceEventID" Modifier="Public" Name="DeleteEventBySubjectNameTrialSequenceEventID" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="DeleteEventBySubjectNameTrialSequenceEventID">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy3" GeneratorSourceName="DeleteEventBySubjectNameTrialSequenceEventID" Modifier="Public" Name="DeleteEventBySubjectNameTrialSequenceEventID" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="DeleteEventBySubjectNameTrialSequenceEventID">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>DELETE FROM [TrialEvents] 
@@ -481,7 +481,7 @@ WHERE (([SubjectName] = @Original_SubjectName) AND ([TrialSequence] = @Original_
                   </DbCommand>
                 </DeleteCommand>
               </DbSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.TrialEvents" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySubject" GetMethodModifier="Public" GetMethodName="GetDataBySubject" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySubject" UserSourceName="GetDataBySubject">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.TrialEvents" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySubject" GetMethodModifier="Public" GetMethodName="GetDataBySubject" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySubject" UserSourceName="GetDataBySubject">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT EventID, EventParam, EventTask, EventTime, EventType, ID, SubjectName, TrialSequence FROM TrialEvents WHERE (SubjectName = @Param1)</CommandText>
@@ -491,7 +491,7 @@ WHERE (([SubjectName] = @Original_SubjectName) AND ([TrialSequence] = @Original_
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.TrialEvents" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySubjectAndSequence" GetMethodModifier="Public" GetMethodName="GetDataBySubjectAndSequence" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySubjectAndSequence" UserSourceName="GetDataBySubjectAndSequence">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.TrialEvents" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySubjectAndSequence" GetMethodModifier="Public" GetMethodName="GetDataBySubjectAndSequence" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySubjectAndSequence" UserSourceName="GetDataBySubjectAndSequence">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT EventID, EventParam, EventTask, EventTime, EventType, ID, SubjectName, TrialSequence FROM TrialEvents WHERE (SubjectName = @Param1) AND (TrialSequence = @Param2)</CommandText>
@@ -502,7 +502,7 @@ WHERE (([SubjectName] = @Original_SubjectName) AND ([TrialSequence] = @Original_
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.TrialEvents" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySubjectNameTrialSequenceButOnlySlideChangeResponses" GetMethodModifier="Public" GetMethodName="GetDataBySubjectNameTrialSequenceButOnlySlideChangeResponses" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySubjectNameTrialSequenceButOnlySlideChangeResponses" UserSourceName="GetDataBySubjectNameTrialSequenceButOnlySlideChangeResponses">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.TrialEvents" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySubjectNameTrialSequenceButOnlySlideChangeResponses" GetMethodModifier="Public" GetMethodName="GetDataBySubjectNameTrialSequenceButOnlySlideChangeResponses" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySubjectNameTrialSequenceButOnlySlideChangeResponses" UserSourceName="GetDataBySubjectNameTrialSequenceButOnlySlideChangeResponses">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT     ID, SubjectName, TrialSequence, EventID, EventTime, EventType, EventTask, EventParam
@@ -515,7 +515,7 @@ WHERE     (SubjectName = @Param1) AND (TrialSequence = @Param2) AND (EventType =
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="GetMaxEventID" Modifier="Public" Name="GetMaxEventID" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="GetMaxEventID">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="GetMaxEventID" Modifier="Public" Name="GetMaxEventID" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="GetMaxEventID">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT     MAX(EventID) AS Expr1
@@ -524,7 +524,7 @@ FROM         TrialEvents</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateEventParamBySubjectNameTrialSequenceEventID" Modifier="Public" Name="UpdateEventParamBySubjectNameTrialSequenceEventID" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="UpdateEventParamBySubjectNameTrialSequenceEventID">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateEventParamBySubjectNameTrialSequenceEventID" Modifier="Public" Name="UpdateEventParamBySubjectNameTrialSequenceEventID" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="UpdateEventParamBySubjectNameTrialSequenceEventID">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE    TrialEvents
@@ -539,7 +539,7 @@ WHERE     (SubjectName = @Original_SubjectName) AND (TrialSequence = @Original_T
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateEventTimeBySubjectSequenceID" Modifier="Public" Name="UpdateEventTimeBySubjectSequenceID" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy4" UserSourceName="UpdateEventTimeBySubjectSequenceID">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateEventTimeBySubjectSequenceID" Modifier="Public" Name="UpdateEventTimeBySubjectSequenceID" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy4" UserSourceName="UpdateEventTimeBySubjectSequenceID">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE    TrialEvents
@@ -558,7 +558,7 @@ WHERE     (SubjectName = @Original_SubjectName) AND (TrialSequence = @Original_T
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="TadRawdata" GeneratorDataComponentClassName="TadRawdata" Name="Rawdata" UserDataComponentName="TadRawdata">
             <MainSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.Rawdata" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.Rawdata" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [Rawdata] WHERE (([ID] = @Original_ID) AND ([SubjectName] = @Original_SubjectName) AND ([TrialSequence] = @Original_TrialSequence) AND ([Time] = @Original_Time) AND ((@IsNull_PupilDiaX = 1 AND [PupilDiaX] IS NULL) OR ([PupilDiaX] = @Original_PupilDiaX)) AND ((@IsNull_PupilDiaY = 1 AND [PupilDiaY] IS NULL) OR ([PupilDiaY] = @Original_PupilDiaY)) AND ((@IsNull_GazePosX = 1 AND [GazePosX] IS NULL) OR ([GazePosX] = @Original_GazePosX)) AND ((@IsNull_GazePosY = 1 AND [GazePosY] IS NULL) OR ([GazePosY] = @Original_GazePosY)) AND ((@IsNull_MousePosX = 1 AND [MousePosX] IS NULL) OR ([MousePosX] = @Original_MousePosX)) AND ((@IsNull_MousePosY = 1 AND [MousePosY] IS NULL) OR ([MousePosY] = @Original_MousePosY)) AND ((@IsNull_EventID = 1 AND [EventID] IS NULL) OR ([EventID] = @Original_EventID)))</CommandText>
@@ -665,7 +665,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="TadAOIs" GeneratorDataComponentClassName="TadAOIs" Name="AOIs" UserDataComponentName="TadAOIs">
             <MainSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.AOIs" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.AOIs" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [AOIs] WHERE (([ID] = @Original_ID) AND ([TrialID] = @Original_TrialID) AND ([SlideNr] = @Original_SlideNr) AND ((@IsNull_ShapeName = 1 AND [ShapeName] IS NULL) OR ([ShapeName] = @Original_ShapeName)) AND ((@IsNull_ShapeType = 1 AND [ShapeType] IS NULL) OR ([ShapeType] = @Original_ShapeType)) AND ((@IsNull_ShapeNumPts = 1 AND [ShapeNumPts] IS NULL) OR ([ShapeNumPts] = @Original_ShapeNumPts)) AND ((@IsNull_ShapePts = 1 AND [ShapePts] IS NULL) OR ([ShapePts] = @Original_ShapePts)) AND ((@IsNull_ShapeGroup = 1 AND [ShapeGroup] IS NULL) OR ([ShapeGroup] = @Original_ShapeGroup)))</CommandText>
@@ -750,7 +750,7 @@ SELECT ID, TrialID, SlideNr, ShapeName, ShapeType, ShapeNumPts, ShapePts, ShapeG
               <Mapping SourceColumn="ShapeGroup" DataSetColumn="ShapeGroup" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteByID" Modifier="Public" Name="DeleteByID" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="DeleteByID">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteByID" Modifier="Public" Name="DeleteByID" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="DeleteByID">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>DELETE FROM AOIs
@@ -761,7 +761,7 @@ WHERE     (ID = @Original_ID)</CommandText>
                   </DbCommand>
                 </DeleteCommand>
               </DbSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.AOIs" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByTrialID" GetMethodModifier="Public" GetMethodName="GetDataByTrialID" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByTrialID" UserSourceName="GetDataByTrialID">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.AOIs" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByTrialID" GetMethodModifier="Public" GetMethodName="GetDataByTrialID" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByTrialID" UserSourceName="GetDataByTrialID">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT ID, ShapeGroup, ShapeName, ShapeNumPts, ShapePts, ShapeType, SlideNr, TrialID FROM AOIs WHERE (TrialID = @Param1)</CommandText>
@@ -771,7 +771,7 @@ WHERE     (ID = @Original_ID)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.AOIs" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByTrialIDAndGroup" GetMethodModifier="Public" GetMethodName="GetDataByTrialIDAndGroup" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByTrialIDAndGroup" UserSourceName="GetDataByTrialIDAndGroup">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.AOIs" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByTrialIDAndGroup" GetMethodModifier="Public" GetMethodName="GetDataByTrialIDAndGroup" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByTrialIDAndGroup" UserSourceName="GetDataByTrialIDAndGroup">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT ID, ShapeGroup, ShapeName, ShapeNumPts, ShapePts, ShapeType, SlideNr, TrialID FROM AOIs WHERE (TrialID = @Param1) AND (ShapeGroup = @Param2)</CommandText>
@@ -782,7 +782,7 @@ WHERE     (ID = @Original_ID)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.AOIs" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByTrialIDAndShapeName" GetMethodModifier="Public" GetMethodName="GetDataByTrialIDAndShapeName" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByTrialIDAndShapeName" UserSourceName="GetDataByTrialIDAndShapeName">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.AOIs" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByTrialIDAndShapeName" GetMethodModifier="Public" GetMethodName="GetDataByTrialIDAndShapeName" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByTrialIDAndShapeName" UserSourceName="GetDataByTrialIDAndShapeName">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT ID, ShapeGroup, ShapeName, ShapeNumPts, ShapePts, ShapeType, SlideNr, TrialID FROM AOIs WHERE (TrialID = @Param1) AND (ShapeName = @Param2)</CommandText>
@@ -793,7 +793,7 @@ WHERE     (ID = @Original_ID)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.AOIs" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetGroupsByTrialID" GetMethodModifier="Public" GetMethodName="GetGroupsByTrialID" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetGroupsByTrialID" UserSourceName="GetGroupsByTrialID">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.AOIs" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetGroupsByTrialID" GetMethodModifier="Public" GetMethodName="GetGroupsByTrialID" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetGroupsByTrialID" UserSourceName="GetGroupsByTrialID">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT ID, ShapeGroup, ShapeName, ShapeNumPts, ShapePts, ShapeType, SlideNr, TrialID FROM AOIs GROUP BY ShapeGroup, TrialID HAVING (TrialID = @Param1)</CommandText>
@@ -803,7 +803,7 @@ WHERE     (ID = @Original_ID)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.AOIs" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetTargetsByTrialID" GetMethodModifier="Public" GetMethodName="GetTargetsByTrialID" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetTargetsByTrialID" UserSourceName="GetTargetsByTrialID">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.AOIs" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetTargetsByTrialID" GetMethodModifier="Public" GetMethodName="GetTargetsByTrialID" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetTargetsByTrialID" UserSourceName="GetTargetsByTrialID">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT ID, ShapeGroup, ShapeName, ShapeNumPts, ShapePts, ShapeType, SlideNr, TrialID FROM AOIs WHERE (TrialID = @Param1) AND (ShapeGroup = 'Target')</CommandText>
@@ -817,7 +817,7 @@ WHERE     (ID = @Original_ID)</CommandText>
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="TadShapeGroups" GeneratorDataComponentClassName="TadShapeGroups" Name="ShapeGroups" UserDataComponentName="TadShapeGroups">
             <MainSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.ShapeGroups" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.ShapeGroups" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [ShapeGroups] WHERE (([ID] = @Original_ID) AND ([ShapeGroup] = @Original_ShapeGroup))</CommandText>
@@ -862,7 +862,7 @@ SELECT ID, ShapeGroup FROM ShapeGroups WHERE (ID = @ID)</CommandText>
               <Mapping SourceColumn="ShapeGroup" DataSetColumn="ShapeGroup" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.ShapeGroups" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByGroup" GetMethodModifier="Public" GetMethodName="GetDataByGroup" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByGroup" UserSourceName="GetDataByGroup">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.ShapeGroups" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByGroup" GetMethodModifier="Public" GetMethodName="GetDataByGroup" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByGroup" UserSourceName="GetDataByGroup">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT ID, ShapeGroup FROM ShapeGroups WHERE (ShapeGroup = @Param1)</CommandText>
@@ -876,7 +876,7 @@ SELECT ID, ShapeGroup FROM ShapeGroups WHERE (ID = @ID)</CommandText>
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="TadGazeFixations" GeneratorDataComponentClassName="TadGazeFixations" Name="GazeFixations" UserDataComponentName="TadGazeFixations">
             <MainSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.GazeFixations" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.GazeFixations" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [GazeFixations] WHERE (([SubjectName] = @Original_SubjectName) AND ([TrialID] = @Original_TrialID) AND ([TrialSequence] = @Original_TrialSequence) AND ((@IsNull_CountInTrial = 1 AND [CountInTrial] IS NULL) OR ([CountInTrial] = @Original_CountInTrial)) AND ((@IsNull_StartTime = 1 AND [StartTime] IS NULL) OR ([StartTime] = @Original_StartTime)) AND ((@IsNull_Length = 1 AND [Length] IS NULL) OR ([Length] = @Original_Length)) AND ((@IsNull_PosX = 1 AND [PosX] IS NULL) OR ([PosX] = @Original_PosX)) AND ((@IsNull_PosY = 1 AND [PosY] IS NULL) OR ([PosY] = @Original_PosY)) AND ([ID] = @Original_ID))</CommandText>
@@ -965,7 +965,7 @@ SELECT SubjectName, TrialID, TrialSequence, CountInTrial, StartTime, Length, Pos
               <Mapping SourceColumn="ID" DataSetColumn="ID" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteAll" Modifier="Public" Name="DeleteAll" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="DeleteAll">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteAll" Modifier="Public" Name="DeleteAll" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="DeleteAll">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>DELETE FROM [GazeFixations] </CommandText>
@@ -973,7 +973,7 @@ SELECT SubjectName, TrialID, TrialSequence, CountInTrial, StartTime, Length, Pos
                   </DbCommand>
                 </DeleteCommand>
               </DbSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteBySubject" Modifier="Public" Name="DeleteBySubject" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="DeleteBySubject">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteBySubject" Modifier="Public" Name="DeleteBySubject" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="DeleteBySubject">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>DELETE FROM GazeFixations
@@ -984,7 +984,7 @@ WHERE     (SubjectName = @Original_SubjectName)</CommandText>
                   </DbCommand>
                 </DeleteCommand>
               </DbSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.GazeFixations" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySubject" GetMethodModifier="Public" GetMethodName="GetDataBySubject" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySubject" UserSourceName="GetDataBySubject">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.GazeFixations" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySubject" GetMethodModifier="Public" GetMethodName="GetDataBySubject" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySubject" UserSourceName="GetDataBySubject">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT CountInTrial, ID, Length, PosX, PosY, StartTime, SubjectName, TrialID, TrialSequence FROM GazeFixations WHERE (SubjectName = @Param1)</CommandText>
@@ -994,7 +994,7 @@ WHERE     (SubjectName = @Original_SubjectName)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.GazeFixations" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySubjectAndSequence" GetMethodModifier="Public" GetMethodName="GetDataBySubjectAndSequence" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySubjectAndSequence" UserSourceName="GetDataBySubjectAndSequence">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.GazeFixations" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySubjectAndSequence" GetMethodModifier="Public" GetMethodName="GetDataBySubjectAndSequence" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySubjectAndSequence" UserSourceName="GetDataBySubjectAndSequence">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT CountInTrial, ID, Length, PosX, PosY, StartTime, SubjectName, TrialID, TrialSequence FROM GazeFixations WHERE (SubjectName = @Param1) AND (TrialSequence = @Param2)</CommandText>
@@ -1005,7 +1005,7 @@ WHERE     (SubjectName = @Original_SubjectName)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.GazeFixations" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySubjectAndTrialID" GetMethodModifier="Public" GetMethodName="GetDataBySubjectAndTrialID" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySubjectAndTrialID" UserSourceName="GetDataBySubjectAndTrialID">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.GazeFixations" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySubjectAndTrialID" GetMethodModifier="Public" GetMethodName="GetDataBySubjectAndTrialID" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySubjectAndTrialID" UserSourceName="GetDataBySubjectAndTrialID">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT CountInTrial, ID, Length, PosX, PosY, StartTime, SubjectName, TrialID, TrialSequence FROM GazeFixations WHERE (SubjectName = @Param1) AND (TrialID = @Param2)</CommandText>
@@ -1016,7 +1016,7 @@ WHERE     (SubjectName = @Original_SubjectName)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.GazeFixations" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByTrialID" GetMethodModifier="Public" GetMethodName="GetDataByTrialID" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByTrialID" UserSourceName="GetDataByTrialID">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.GazeFixations" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByTrialID" GetMethodModifier="Public" GetMethodName="GetDataByTrialID" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByTrialID" UserSourceName="GetDataByTrialID">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT CountInTrial, ID, Length, PosX, PosY, StartTime, SubjectName, TrialID, TrialSequence FROM GazeFixations WHERE (TrialID = @Param1)</CommandText>
@@ -1026,7 +1026,7 @@ WHERE     (SubjectName = @Original_SubjectName)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.GazeFixations" DbObjectType="Table" GenerateShortCommands="true" GeneratorSourceName="GetMaxStartTimeOfTrial" Modifier="Public" Name="GetMaxStartTimeOfTrial" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="GetMaxStartTimeOfTrial">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.GazeFixations" DbObjectType="Table" GenerateShortCommands="true" GeneratorSourceName="GetMaxStartTimeOfTrial" Modifier="Public" Name="GetMaxStartTimeOfTrial" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="GetMaxStartTimeOfTrial">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT     MAX(StartTime) AS MaxTime, TrialID
@@ -1043,7 +1043,7 @@ HAVING      (TrialID= @Param1)</CommandText>
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="TadMouseFixations" GeneratorDataComponentClassName="TadMouseFixations" Name="MouseFixations" UserDataComponentName="TadMouseFixations">
             <MainSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.MouseFixations" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.MouseFixations" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [MouseFixations] WHERE (([SubjectName] = @Original_SubjectName) AND ([TrialID] = @Original_TrialID) AND ([TrialSequence] = @Original_TrialSequence) AND ((@IsNull_CountInTrial = 1 AND [CountInTrial] IS NULL) OR ([CountInTrial] = @Original_CountInTrial)) AND ((@IsNull_StartTime = 1 AND [StartTime] IS NULL) OR ([StartTime] = @Original_StartTime)) AND ((@IsNull_Length = 1 AND [Length] IS NULL) OR ([Length] = @Original_Length)) AND ((@IsNull_PosX = 1 AND [PosX] IS NULL) OR ([PosX] = @Original_PosX)) AND ((@IsNull_PosY = 1 AND [PosY] IS NULL) OR ([PosY] = @Original_PosY)) AND ([ID] = @Original_ID))</CommandText>
@@ -1132,7 +1132,7 @@ SELECT SubjectName, TrialID, TrialSequence, CountInTrial, StartTime, Length, Pos
               <Mapping SourceColumn="ID" DataSetColumn="ID" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteAll" Modifier="Public" Name="DeleteAll" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="DeleteAll">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteAll" Modifier="Public" Name="DeleteAll" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="DeleteAll">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>DELETE FROM [MouseFixations]</CommandText>
@@ -1140,7 +1140,7 @@ SELECT SubjectName, TrialID, TrialSequence, CountInTrial, StartTime, Length, Pos
                   </DbCommand>
                 </DeleteCommand>
               </DbSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteBySubject" Modifier="Public" Name="DeleteBySubject" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="DeleteBySubject">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteBySubject" Modifier="Public" Name="DeleteBySubject" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="DeleteBySubject">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>DELETE FROM MouseFixations
@@ -1151,7 +1151,7 @@ WHERE     (SubjectName = @Original_SubjectName)</CommandText>
                   </DbCommand>
                 </DeleteCommand>
               </DbSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.MouseFixations" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySubject" GetMethodModifier="Public" GetMethodName="GetDataBySubject" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySubject" UserSourceName="GetDataBySubject">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.MouseFixations" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySubject" GetMethodModifier="Public" GetMethodName="GetDataBySubject" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySubject" UserSourceName="GetDataBySubject">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT CountInTrial, ID, Length, PosX, PosY, StartTime, SubjectName, TrialID, TrialSequence FROM MouseFixations WHERE (SubjectName = @Param1)</CommandText>
@@ -1161,7 +1161,7 @@ WHERE     (SubjectName = @Original_SubjectName)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.MouseFixations" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySubjectAndSequence" GetMethodModifier="Public" GetMethodName="GetDataBySubjectAndSequence" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySubjectAndSequence" UserSourceName="GetDataBySubjectAndSequence">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.MouseFixations" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySubjectAndSequence" GetMethodModifier="Public" GetMethodName="GetDataBySubjectAndSequence" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySubjectAndSequence" UserSourceName="GetDataBySubjectAndSequence">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT CountInTrial, ID, Length, PosX, PosY, StartTime, SubjectName, TrialID, TrialSequence FROM MouseFixations WHERE (SubjectName = @Param1) AND (TrialSequence = @Param2)</CommandText>
@@ -1172,7 +1172,7 @@ WHERE     (SubjectName = @Original_SubjectName)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.MouseFixations" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySubjectAndTrialID" GetMethodModifier="Public" GetMethodName="GetDataBySubjectAndTrialID" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySubjectAndTrialID" UserSourceName="GetDataBySubjectAndTrialID">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.MouseFixations" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySubjectAndTrialID" GetMethodModifier="Public" GetMethodName="GetDataBySubjectAndTrialID" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySubjectAndTrialID" UserSourceName="GetDataBySubjectAndTrialID">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT CountInTrial, ID, Length, PosX, PosY, StartTime, SubjectName, TrialID, TrialSequence FROM MouseFixations WHERE (SubjectName = @Param1) AND (TrialID = @Param2)</CommandText>
@@ -1183,7 +1183,7 @@ WHERE     (SubjectName = @Original_SubjectName)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.MouseFixations" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByTrialID" GeneratorSourceName="FillBy3" GetMethodModifier="Public" GetMethodName="GetDataByTrialID" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByTrialID" UserSourceName="GetDataByTrialID">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.MouseFixations" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByTrialID" GeneratorSourceName="FillBy3" GetMethodModifier="Public" GetMethodName="GetDataByTrialID" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByTrialID" UserSourceName="GetDataByTrialID">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT CountInTrial, ID, Length, PosX, PosY, StartTime, SubjectName, TrialID, TrialSequence FROM MouseFixations WHERE (TrialID = @Param1)</CommandText>
@@ -1193,7 +1193,7 @@ WHERE     (SubjectName = @Original_SubjectName)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.MouseFixations" DbObjectType="Table" GenerateShortCommands="true" GeneratorSourceName="GetMaxStartTimeOfTrial" Modifier="Public" Name="GetMaxStartTimeOfTrial" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="GetMaxStartTimeOfTrial">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.MouseFixations" DbObjectType="Table" GenerateShortCommands="true" GeneratorSourceName="GetMaxStartTimeOfTrial" Modifier="Public" Name="GetMaxStartTimeOfTrial" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="GetMaxStartTimeOfTrial">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT     MAX(StartTime) AS MaxTime, TrialID
@@ -1210,7 +1210,7 @@ HAVING      (TrialID= @Param1)</CommandText>
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="TadParams" GeneratorDataComponentClassName="TadParams" Name="Params" UserDataComponentName="TadParams">
             <MainSource>
-              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.Params" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="OgamaDatabaseTemplateConnectionString (Settings)" DbObjectName="dbo.Params" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [dbo].[Params] WHERE (([ID] = @Original_ID) AND ([Param] = @Original_Param) AND ((@IsNull_Description = 1 AND [Description] IS NULL) OR ([Description] = @Original_Description)))</CommandText>
@@ -1267,28 +1267,28 @@ SELECT ID, Param, Description FROM Params WHERE (ID = @ID)</CommandText>
       </DataSource>
     </xs:appinfo>
   </xs:annotation>
-  <xs:element name="OgamaDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="OgamaDataSet" msprop:Generator_DataSetName="OgamaDataSet">
+  <xs:element name="OgamaDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="OgamaDataSet" msprop:Generator_UserDSName="OgamaDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="SubjectParameters" msprop:Generator_UserTableName="SubjectParameters" msprop:Generator_RowDeletedName="SubjectParametersRowDeleted" msprop:Generator_RowChangedName="SubjectParametersRowChanged" msprop:Generator_RowClassName="SubjectParametersRow" msprop:Generator_RowChangingName="SubjectParametersRowChanging" msprop:Generator_RowEvArgName="SubjectParametersRowChangeEvent" msprop:Generator_RowEvHandlerName="SubjectParametersRowChangeEventHandler" msprop:Generator_TableClassName="SubjectParametersDataTable" msprop:Generator_TableVarName="tableSubjectParameters" msprop:Generator_RowDeletingName="SubjectParametersRowDeleting" msprop:Generator_TablePropName="SubjectParameters">
+        <xs:element name="SubjectParameters" msprop:Generator_UserTableName="SubjectParameters" msprop:Generator_RowEvArgName="SubjectParametersRowChangeEvent" msprop:Generator_TableVarName="tableSubjectParameters" msprop:Generator_TablePropName="SubjectParameters" msprop:Generator_RowDeletingName="SubjectParametersRowDeleting" msprop:Generator_RowChangingName="SubjectParametersRowChanging" msprop:Generator_RowDeletedName="SubjectParametersRowDeleted" msprop:Generator_RowEvHandlerName="SubjectParametersRowChangeEventHandler" msprop:Generator_TableClassName="SubjectParametersDataTable" msprop:Generator_RowChangedName="SubjectParametersRowChanged" msprop:Generator_RowClassName="SubjectParametersRow">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_UserColumnName="ID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInTable="IDColumn" type="xs:int" />
-              <xs:element name="SubjectName" msprop:Generator_UserColumnName="SubjectName" msprop:Generator_ColumnPropNameInRow="SubjectName" msprop:Generator_ColumnVarNameInTable="columnSubjectName" msprop:Generator_ColumnPropNameInTable="SubjectNameColumn">
+              <xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
+              <xs:element name="SubjectName" msprop:Generator_ColumnVarNameInTable="columnSubjectName" msprop:Generator_ColumnPropNameInRow="SubjectName" msprop:Generator_ColumnPropNameInTable="SubjectNameColumn" msprop:Generator_UserColumnName="SubjectName">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="Param" msprop:Generator_UserColumnName="Param" msprop:Generator_ColumnPropNameInRow="Param" msprop:Generator_ColumnVarNameInTable="columnParam" msprop:Generator_ColumnPropNameInTable="ParamColumn">
+              <xs:element name="Param" msprop:Generator_ColumnVarNameInTable="columnParam" msprop:Generator_ColumnPropNameInRow="Param" msprop:Generator_ColumnPropNameInTable="ParamColumn" msprop:Generator_UserColumnName="Param">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="ParamValue" msprop:Generator_UserColumnName="ParamValue" msprop:Generator_ColumnPropNameInRow="ParamValue" msprop:Generator_ColumnVarNameInTable="columnParamValue" msprop:Generator_ColumnPropNameInTable="ParamValueColumn" minOccurs="0">
+              <xs:element name="ParamValue" msprop:Generator_ColumnVarNameInTable="columnParamValue" msprop:Generator_ColumnPropNameInRow="ParamValue" msprop:Generator_ColumnPropNameInTable="ParamValueColumn" msprop:Generator_UserColumnName="ParamValue" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="500" />
@@ -1298,40 +1298,40 @@ SELECT ID, Param, Description FROM Params WHERE (ID = @ID)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Subjects" msprop:Generator_UserTableName="Subjects" msprop:Generator_RowDeletedName="SubjectsRowDeleted" msprop:Generator_RowChangedName="SubjectsRowChanged" msprop:Generator_RowClassName="SubjectsRow" msprop:Generator_RowChangingName="SubjectsRowChanging" msprop:Generator_RowEvArgName="SubjectsRowChangeEvent" msprop:Generator_RowEvHandlerName="SubjectsRowChangeEventHandler" msprop:Generator_TableClassName="SubjectsDataTable" msprop:Generator_TableVarName="tableSubjects" msprop:Generator_RowDeletingName="SubjectsRowDeleting" msprop:Generator_TablePropName="Subjects">
+        <xs:element name="Subjects" msprop:Generator_UserTableName="Subjects" msprop:Generator_RowEvArgName="SubjectsRowChangeEvent" msprop:Generator_TableVarName="tableSubjects" msprop:Generator_TablePropName="Subjects" msprop:Generator_RowDeletingName="SubjectsRowDeleting" msprop:Generator_RowChangingName="SubjectsRowChanging" msprop:Generator_RowDeletedName="SubjectsRowDeleted" msprop:Generator_RowEvHandlerName="SubjectsRowChangeEventHandler" msprop:Generator_TableClassName="SubjectsDataTable" msprop:Generator_RowChangedName="SubjectsRowChanged" msprop:Generator_RowClassName="SubjectsRow">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_UserColumnName="ID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInTable="IDColumn" type="xs:long" />
-              <xs:element name="SubjectName" msprop:Generator_UserColumnName="SubjectName" msprop:Generator_ColumnPropNameInRow="SubjectName" msprop:Generator_ColumnVarNameInTable="columnSubjectName" msprop:Generator_ColumnPropNameInTable="SubjectNameColumn">
+              <xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:long" />
+              <xs:element name="SubjectName" msprop:Generator_ColumnVarNameInTable="columnSubjectName" msprop:Generator_ColumnPropNameInRow="SubjectName" msprop:Generator_ColumnPropNameInTable="SubjectNameColumn" msprop:Generator_UserColumnName="SubjectName">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="Category" msprop:Generator_UserColumnName="Category" msprop:Generator_ColumnPropNameInRow="Category" msprop:Generator_ColumnVarNameInTable="columnCategory" msprop:Generator_ColumnPropNameInTable="CategoryColumn" minOccurs="0">
+              <xs:element name="Category" msprop:Generator_ColumnVarNameInTable="columnCategory" msprop:Generator_ColumnPropNameInRow="Category" msprop:Generator_ColumnPropNameInTable="CategoryColumn" msprop:Generator_UserColumnName="Category" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="Age" msprop:Generator_UserColumnName="Age" msprop:Generator_ColumnPropNameInRow="Age" msprop:Generator_ColumnVarNameInTable="columnAge" msprop:Generator_ColumnPropNameInTable="AgeColumn" type="xs:int" minOccurs="0" />
-              <xs:element name="Sex" msprop:Generator_UserColumnName="Sex" msprop:Generator_ColumnPropNameInRow="Sex" msprop:Generator_ColumnVarNameInTable="columnSex" msprop:Generator_ColumnPropNameInTable="SexColumn" minOccurs="0">
+              <xs:element name="Age" msprop:Generator_ColumnVarNameInTable="columnAge" msprop:Generator_ColumnPropNameInRow="Age" msprop:Generator_ColumnPropNameInTable="AgeColumn" msprop:Generator_UserColumnName="Age" type="xs:int" minOccurs="0" />
+              <xs:element name="Sex" msprop:Generator_ColumnVarNameInTable="columnSex" msprop:Generator_ColumnPropNameInRow="Sex" msprop:Generator_ColumnPropNameInTable="SexColumn" msprop:Generator_UserColumnName="Sex" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="Handedness" msprop:Generator_UserColumnName="Handedness" msprop:Generator_ColumnPropNameInRow="Handedness" msprop:Generator_ColumnVarNameInTable="columnHandedness" msprop:Generator_ColumnPropNameInTable="HandednessColumn" minOccurs="0">
+              <xs:element name="Handedness" msprop:Generator_ColumnVarNameInTable="columnHandedness" msprop:Generator_ColumnPropNameInRow="Handedness" msprop:Generator_ColumnPropNameInTable="HandednessColumn" msprop:Generator_UserColumnName="Handedness" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="Comments" msprop:Generator_UserColumnName="Comments" msprop:Generator_ColumnPropNameInRow="Comments" msprop:Generator_ColumnVarNameInTable="columnComments" msprop:Generator_ColumnPropNameInTable="CommentsColumn" minOccurs="0">
+              <xs:element name="Comments" msprop:Generator_ColumnVarNameInTable="columnComments" msprop:Generator_ColumnPropNameInRow="Comments" msprop:Generator_ColumnPropNameInTable="CommentsColumn" msprop:Generator_UserColumnName="Comments" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="4000" />
@@ -1341,36 +1341,36 @@ SELECT ID, Param, Description FROM Params WHERE (ID = @ID)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Trials" msprop:Generator_UserTableName="Trials" msprop:Generator_RowDeletedName="TrialsRowDeleted" msprop:Generator_RowChangedName="TrialsRowChanged" msprop:Generator_RowClassName="TrialsRow" msprop:Generator_RowChangingName="TrialsRowChanging" msprop:Generator_RowEvArgName="TrialsRowChangeEvent" msprop:Generator_RowEvHandlerName="TrialsRowChangeEventHandler" msprop:Generator_TableClassName="TrialsDataTable" msprop:Generator_TableVarName="tableTrials" msprop:Generator_RowDeletingName="TrialsRowDeleting" msprop:Generator_TablePropName="Trials">
+        <xs:element name="Trials" msprop:Generator_UserTableName="Trials" msprop:Generator_RowEvArgName="TrialsRowChangeEvent" msprop:Generator_TableVarName="tableTrials" msprop:Generator_TablePropName="Trials" msprop:Generator_RowDeletingName="TrialsRowDeleting" msprop:Generator_RowChangingName="TrialsRowChanging" msprop:Generator_RowDeletedName="TrialsRowDeleted" msprop:Generator_RowEvHandlerName="TrialsRowChangeEventHandler" msprop:Generator_TableClassName="TrialsDataTable" msprop:Generator_RowChangedName="TrialsRowChanged" msprop:Generator_RowClassName="TrialsRow">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_UserColumnName="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" type="xs:long" />
-              <xs:element name="SubjectName" msprop:Generator_UserColumnName="SubjectName" msprop:Generator_ColumnVarNameInTable="columnSubjectName" msprop:Generator_ColumnPropNameInRow="SubjectName" msprop:Generator_ColumnPropNameInTable="SubjectNameColumn">
+              <xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:long" />
+              <xs:element name="SubjectName" msprop:Generator_ColumnVarNameInTable="columnSubjectName" msprop:Generator_ColumnPropNameInRow="SubjectName" msprop:Generator_ColumnPropNameInTable="SubjectNameColumn" msprop:Generator_UserColumnName="SubjectName">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="255" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="TrialID" msprop:Generator_UserColumnName="TrialID" msprop:Generator_ColumnVarNameInTable="columnTrialID" msprop:Generator_ColumnPropNameInRow="TrialID" msprop:Generator_ColumnPropNameInTable="TrialIDColumn" type="xs:int" />
-              <xs:element name="TrialName" msprop:Generator_UserColumnName="TrialName" msprop:Generator_ColumnVarNameInTable="columnTrialName" msprop:Generator_ColumnPropNameInRow="TrialName" msprop:Generator_ColumnPropNameInTable="TrialNameColumn" minOccurs="0">
+              <xs:element name="TrialID" msprop:Generator_ColumnVarNameInTable="columnTrialID" msprop:Generator_ColumnPropNameInRow="TrialID" msprop:Generator_ColumnPropNameInTable="TrialIDColumn" msprop:Generator_UserColumnName="TrialID" type="xs:int" />
+              <xs:element name="TrialName" msprop:Generator_ColumnVarNameInTable="columnTrialName" msprop:Generator_ColumnPropNameInRow="TrialName" msprop:Generator_ColumnPropNameInTable="TrialNameColumn" msprop:Generator_UserColumnName="TrialName" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="255" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="TrialSequence" msprop:Generator_UserColumnName="TrialSequence" msprop:Generator_ColumnVarNameInTable="columnTrialSequence" msprop:Generator_ColumnPropNameInRow="TrialSequence" msprop:Generator_ColumnPropNameInTable="TrialSequenceColumn" type="xs:int" />
-              <xs:element name="Category" msprop:Generator_UserColumnName="Category" msprop:Generator_ColumnVarNameInTable="columnCategory" msprop:Generator_ColumnPropNameInRow="Category" msprop:Generator_ColumnPropNameInTable="CategoryColumn" minOccurs="0">
+              <xs:element name="TrialSequence" msprop:Generator_ColumnVarNameInTable="columnTrialSequence" msprop:Generator_ColumnPropNameInRow="TrialSequence" msprop:Generator_ColumnPropNameInTable="TrialSequenceColumn" msprop:Generator_UserColumnName="TrialSequence" type="xs:int" />
+              <xs:element name="Category" msprop:Generator_ColumnVarNameInTable="columnCategory" msprop:Generator_ColumnPropNameInRow="Category" msprop:Generator_ColumnPropNameInTable="CategoryColumn" msprop:Generator_UserColumnName="Category" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="255" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="TrialStartTime" msprop:Generator_UserColumnName="TrialStartTime" msprop:Generator_ColumnVarNameInTable="columnTrialStartTime" msprop:Generator_ColumnPropNameInRow="TrialStartTime" msprop:Generator_ColumnPropNameInTable="TrialStartTimeColumn" type="xs:long" minOccurs="0" />
-              <xs:element name="Duration" msprop:Generator_UserColumnName="Duration" msprop:Generator_ColumnVarNameInTable="columnDuration" msprop:Generator_ColumnPropNameInRow="Duration" msprop:Generator_ColumnPropNameInTable="DurationColumn" type="xs:int" minOccurs="0" />
-              <xs:element name="EliminateData" msprop:Generator_UserColumnName="EliminateData" msprop:Generator_ColumnVarNameInTable="columnEliminateData" msprop:Generator_ColumnPropNameInRow="EliminateData" msprop:Generator_ColumnPropNameInTable="EliminateDataColumn" minOccurs="0">
+              <xs:element name="TrialStartTime" msprop:Generator_ColumnVarNameInTable="columnTrialStartTime" msprop:Generator_ColumnPropNameInRow="TrialStartTime" msprop:Generator_ColumnPropNameInTable="TrialStartTimeColumn" msprop:Generator_UserColumnName="TrialStartTime" type="xs:long" minOccurs="0" />
+              <xs:element name="Duration" msprop:Generator_ColumnVarNameInTable="columnDuration" msprop:Generator_ColumnPropNameInRow="Duration" msprop:Generator_ColumnPropNameInTable="DurationColumn" msprop:Generator_UserColumnName="Duration" type="xs:int" minOccurs="0" />
+              <xs:element name="EliminateData" msprop:Generator_ColumnVarNameInTable="columnEliminateData" msprop:Generator_ColumnPropNameInRow="EliminateData" msprop:Generator_ColumnPropNameInTable="EliminateDataColumn" msprop:Generator_UserColumnName="EliminateData" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
@@ -1380,35 +1380,35 @@ SELECT ID, Param, Description FROM Params WHERE (ID = @ID)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="TrialEvents" msprop:Generator_UserTableName="TrialEvents" msprop:Generator_RowDeletedName="TrialEventsRowDeleted" msprop:Generator_RowChangedName="TrialEventsRowChanged" msprop:Generator_RowClassName="TrialEventsRow" msprop:Generator_RowChangingName="TrialEventsRowChanging" msprop:Generator_RowEvArgName="TrialEventsRowChangeEvent" msprop:Generator_RowEvHandlerName="TrialEventsRowChangeEventHandler" msprop:Generator_TableClassName="TrialEventsDataTable" msprop:Generator_TableVarName="tableTrialEvents" msprop:Generator_RowDeletingName="TrialEventsRowDeleting" msprop:Generator_TablePropName="TrialEvents">
+        <xs:element name="TrialEvents" msprop:Generator_UserTableName="TrialEvents" msprop:Generator_RowEvArgName="TrialEventsRowChangeEvent" msprop:Generator_TableVarName="tableTrialEvents" msprop:Generator_TablePropName="TrialEvents" msprop:Generator_RowDeletingName="TrialEventsRowDeleting" msprop:Generator_RowChangingName="TrialEventsRowChanging" msprop:Generator_RowDeletedName="TrialEventsRowDeleted" msprop:Generator_RowEvHandlerName="TrialEventsRowChangeEventHandler" msprop:Generator_TableClassName="TrialEventsDataTable" msprop:Generator_RowChangedName="TrialEventsRowChanged" msprop:Generator_RowClassName="TrialEventsRow">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_UserColumnName="ID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInTable="IDColumn" type="xs:int" />
-              <xs:element name="SubjectName" msprop:Generator_UserColumnName="SubjectName" msprop:Generator_ColumnPropNameInRow="SubjectName" msprop:Generator_ColumnVarNameInTable="columnSubjectName" msprop:Generator_ColumnPropNameInTable="SubjectNameColumn">
+              <xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
+              <xs:element name="SubjectName" msprop:Generator_ColumnVarNameInTable="columnSubjectName" msprop:Generator_ColumnPropNameInRow="SubjectName" msprop:Generator_ColumnPropNameInTable="SubjectNameColumn" msprop:Generator_UserColumnName="SubjectName">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="TrialSequence" msprop:Generator_UserColumnName="TrialSequence" msprop:Generator_ColumnPropNameInRow="TrialSequence" msprop:Generator_ColumnVarNameInTable="columnTrialSequence" msprop:Generator_ColumnPropNameInTable="TrialSequenceColumn" type="xs:int" />
-              <xs:element name="EventID" msprop:Generator_UserColumnName="EventID" msprop:Generator_ColumnPropNameInRow="EventID" msprop:Generator_ColumnVarNameInTable="columnEventID" msprop:Generator_ColumnPropNameInTable="EventIDColumn" type="xs:int" />
-              <xs:element name="EventTime" msprop:Generator_UserColumnName="EventTime" msprop:Generator_ColumnPropNameInRow="EventTime" msprop:Generator_ColumnVarNameInTable="columnEventTime" msprop:Generator_ColumnPropNameInTable="EventTimeColumn" type="xs:long" />
-              <xs:element name="EventType" msprop:Generator_UserColumnName="EventType" msprop:Generator_ColumnPropNameInRow="EventType" msprop:Generator_ColumnVarNameInTable="columnEventType" msprop:Generator_ColumnPropNameInTable="EventTypeColumn">
+              <xs:element name="TrialSequence" msprop:Generator_ColumnVarNameInTable="columnTrialSequence" msprop:Generator_ColumnPropNameInRow="TrialSequence" msprop:Generator_ColumnPropNameInTable="TrialSequenceColumn" msprop:Generator_UserColumnName="TrialSequence" type="xs:int" />
+              <xs:element name="EventID" msprop:Generator_ColumnVarNameInTable="columnEventID" msprop:Generator_ColumnPropNameInRow="EventID" msprop:Generator_ColumnPropNameInTable="EventIDColumn" msprop:Generator_UserColumnName="EventID" type="xs:int" />
+              <xs:element name="EventTime" msprop:Generator_ColumnVarNameInTable="columnEventTime" msprop:Generator_ColumnPropNameInRow="EventTime" msprop:Generator_ColumnPropNameInTable="EventTimeColumn" msprop:Generator_UserColumnName="EventTime" type="xs:long" />
+              <xs:element name="EventType" msprop:Generator_ColumnVarNameInTable="columnEventType" msprop:Generator_ColumnPropNameInRow="EventType" msprop:Generator_ColumnPropNameInTable="EventTypeColumn" msprop:Generator_UserColumnName="EventType">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="EventTask" msprop:Generator_UserColumnName="EventTask" msprop:Generator_ColumnPropNameInRow="EventTask" msprop:Generator_ColumnVarNameInTable="columnEventTask" msprop:Generator_ColumnPropNameInTable="EventTaskColumn" minOccurs="0">
+              <xs:element name="EventTask" msprop:Generator_ColumnVarNameInTable="columnEventTask" msprop:Generator_ColumnPropNameInRow="EventTask" msprop:Generator_ColumnPropNameInTable="EventTaskColumn" msprop:Generator_UserColumnName="EventTask" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="EventParam" msprop:Generator_UserColumnName="EventParam" msprop:Generator_ColumnPropNameInRow="EventParam" msprop:Generator_ColumnVarNameInTable="columnEventParam" msprop:Generator_ColumnPropNameInTable="EventParamColumn" minOccurs="0">
+              <xs:element name="EventParam" msprop:Generator_ColumnVarNameInTable="columnEventParam" msprop:Generator_ColumnPropNameInRow="EventParam" msprop:Generator_ColumnPropNameInTable="EventParamColumn" msprop:Generator_UserColumnName="EventParam" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="4000" />
@@ -1418,58 +1418,58 @@ SELECT ID, Param, Description FROM Params WHERE (ID = @ID)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Rawdata" msprop:Generator_UserTableName="Rawdata" msprop:Generator_RowDeletedName="RawdataRowDeleted" msprop:Generator_RowChangedName="RawdataRowChanged" msprop:Generator_RowClassName="RawdataRow" msprop:Generator_RowChangingName="RawdataRowChanging" msprop:Generator_RowEvArgName="RawdataRowChangeEvent" msprop:Generator_RowEvHandlerName="RawdataRowChangeEventHandler" msprop:Generator_TableClassName="RawdataDataTable" msprop:Generator_TableVarName="tableRawdata" msprop:Generator_RowDeletingName="RawdataRowDeleting" msprop:Generator_TablePropName="Rawdata">
+        <xs:element name="Rawdata" msprop:Generator_UserTableName="Rawdata" msprop:Generator_RowEvArgName="RawdataRowChangeEvent" msprop:Generator_TableVarName="tableRawdata" msprop:Generator_TablePropName="Rawdata" msprop:Generator_RowDeletingName="RawdataRowDeleting" msprop:Generator_RowChangingName="RawdataRowChanging" msprop:Generator_RowDeletedName="RawdataRowDeleted" msprop:Generator_RowEvHandlerName="RawdataRowChangeEventHandler" msprop:Generator_TableClassName="RawdataDataTable" msprop:Generator_RowChangedName="RawdataRowChanged" msprop:Generator_RowClassName="RawdataRow">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:Generator_UserColumnName="ID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInTable="IDColumn" type="xs:long" />
-              <xs:element name="SubjectName" msprop:Generator_UserColumnName="SubjectName" msprop:Generator_ColumnPropNameInRow="SubjectName" msprop:Generator_ColumnVarNameInTable="columnSubjectName" msprop:Generator_ColumnPropNameInTable="SubjectNameColumn">
+              <xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:long" />
+              <xs:element name="SubjectName" msprop:Generator_ColumnVarNameInTable="columnSubjectName" msprop:Generator_ColumnPropNameInRow="SubjectName" msprop:Generator_ColumnPropNameInTable="SubjectNameColumn" msprop:Generator_UserColumnName="SubjectName">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="TrialSequence" msprop:Generator_UserColumnName="TrialSequence" msprop:Generator_ColumnPropNameInRow="TrialSequence" msprop:Generator_ColumnVarNameInTable="columnTrialSequence" msprop:Generator_ColumnPropNameInTable="TrialSequenceColumn" type="xs:int" />
-              <xs:element name="Time" msprop:Generator_UserColumnName="Time" msprop:Generator_ColumnPropNameInRow="Time" msprop:Generator_ColumnVarNameInTable="columnTime" msprop:Generator_ColumnPropNameInTable="TimeColumn" type="xs:long" />
-              <xs:element name="PupilDiaX" msprop:Generator_UserColumnName="PupilDiaX" msprop:Generator_ColumnPropNameInRow="PupilDiaX" msprop:Generator_ColumnVarNameInTable="columnPupilDiaX" msprop:Generator_ColumnPropNameInTable="PupilDiaXColumn" type="xs:double" minOccurs="0" />
-              <xs:element name="PupilDiaY" msprop:Generator_UserColumnName="PupilDiaY" msprop:Generator_ColumnPropNameInRow="PupilDiaY" msprop:Generator_ColumnVarNameInTable="columnPupilDiaY" msprop:Generator_ColumnPropNameInTable="PupilDiaYColumn" type="xs:double" minOccurs="0" />
-              <xs:element name="GazePosX" msprop:Generator_UserColumnName="GazePosX" msprop:Generator_ColumnPropNameInRow="GazePosX" msprop:Generator_ColumnVarNameInTable="columnGazePosX" msprop:Generator_ColumnPropNameInTable="GazePosXColumn" type="xs:double" minOccurs="0" />
-              <xs:element name="GazePosY" msprop:Generator_UserColumnName="GazePosY" msprop:Generator_ColumnPropNameInRow="GazePosY" msprop:Generator_ColumnVarNameInTable="columnGazePosY" msprop:Generator_ColumnPropNameInTable="GazePosYColumn" type="xs:double" minOccurs="0" />
-              <xs:element name="MousePosX" msprop:Generator_UserColumnName="MousePosX" msprop:Generator_ColumnPropNameInRow="MousePosX" msprop:Generator_ColumnVarNameInTable="columnMousePosX" msprop:Generator_ColumnPropNameInTable="MousePosXColumn" type="xs:double" minOccurs="0" />
-              <xs:element name="MousePosY" msprop:Generator_UserColumnName="MousePosY" msprop:Generator_ColumnPropNameInRow="MousePosY" msprop:Generator_ColumnVarNameInTable="columnMousePosY" msprop:Generator_ColumnPropNameInTable="MousePosYColumn" type="xs:double" minOccurs="0" />
-              <xs:element name="EventID" msprop:Generator_UserColumnName="EventID" msprop:Generator_ColumnPropNameInRow="EventID" msprop:Generator_ColumnVarNameInTable="columnEventID" msprop:Generator_ColumnPropNameInTable="EventIDColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="TrialSequence" msprop:Generator_ColumnVarNameInTable="columnTrialSequence" msprop:Generator_ColumnPropNameInRow="TrialSequence" msprop:Generator_ColumnPropNameInTable="TrialSequenceColumn" msprop:Generator_UserColumnName="TrialSequence" type="xs:int" />
+              <xs:element name="Time" msprop:Generator_ColumnVarNameInTable="columnTime" msprop:Generator_ColumnPropNameInRow="Time" msprop:Generator_ColumnPropNameInTable="TimeColumn" msprop:Generator_UserColumnName="Time" type="xs:long" />
+              <xs:element name="PupilDiaX" msprop:Generator_ColumnVarNameInTable="columnPupilDiaX" msprop:Generator_ColumnPropNameInRow="PupilDiaX" msprop:Generator_ColumnPropNameInTable="PupilDiaXColumn" msprop:Generator_UserColumnName="PupilDiaX" type="xs:double" minOccurs="0" />
+              <xs:element name="PupilDiaY" msprop:Generator_ColumnVarNameInTable="columnPupilDiaY" msprop:Generator_ColumnPropNameInRow="PupilDiaY" msprop:Generator_ColumnPropNameInTable="PupilDiaYColumn" msprop:Generator_UserColumnName="PupilDiaY" type="xs:double" minOccurs="0" />
+              <xs:element name="GazePosX" msprop:Generator_ColumnVarNameInTable="columnGazePosX" msprop:Generator_ColumnPropNameInRow="GazePosX" msprop:Generator_ColumnPropNameInTable="GazePosXColumn" msprop:Generator_UserColumnName="GazePosX" type="xs:double" minOccurs="0" />
+              <xs:element name="GazePosY" msprop:Generator_ColumnVarNameInTable="columnGazePosY" msprop:Generator_ColumnPropNameInRow="GazePosY" msprop:Generator_ColumnPropNameInTable="GazePosYColumn" msprop:Generator_UserColumnName="GazePosY" type="xs:double" minOccurs="0" />
+              <xs:element name="MousePosX" msprop:Generator_ColumnVarNameInTable="columnMousePosX" msprop:Generator_ColumnPropNameInRow="MousePosX" msprop:Generator_ColumnPropNameInTable="MousePosXColumn" msprop:Generator_UserColumnName="MousePosX" type="xs:double" minOccurs="0" />
+              <xs:element name="MousePosY" msprop:Generator_ColumnVarNameInTable="columnMousePosY" msprop:Generator_ColumnPropNameInRow="MousePosY" msprop:Generator_ColumnPropNameInTable="MousePosYColumn" msprop:Generator_UserColumnName="MousePosY" type="xs:double" minOccurs="0" />
+              <xs:element name="EventID" msprop:Generator_ColumnVarNameInTable="columnEventID" msprop:Generator_ColumnPropNameInRow="EventID" msprop:Generator_ColumnPropNameInTable="EventIDColumn" msprop:Generator_UserColumnName="EventID" type="xs:int" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="AOIs" msprop:Generator_UserTableName="AOIs" msprop:Generator_RowDeletedName="AOIsRowDeleted" msprop:Generator_RowChangedName="AOIsRowChanged" msprop:Generator_RowClassName="AOIsRow" msprop:Generator_RowChangingName="AOIsRowChanging" msprop:Generator_RowEvArgName="AOIsRowChangeEvent" msprop:Generator_RowEvHandlerName="AOIsRowChangeEventHandler" msprop:Generator_TableClassName="AOIsDataTable" msprop:Generator_TableVarName="tableAOIs" msprop:Generator_RowDeletingName="AOIsRowDeleting" msprop:Generator_TablePropName="AOIs">
+        <xs:element name="AOIs" msprop:Generator_UserTableName="AOIs" msprop:Generator_RowEvArgName="AOIsRowChangeEvent" msprop:Generator_TableVarName="tableAOIs" msprop:Generator_TablePropName="AOIs" msprop:Generator_RowDeletingName="AOIsRowDeleting" msprop:Generator_RowChangingName="AOIsRowChanging" msprop:Generator_RowDeletedName="AOIsRowDeleted" msprop:Generator_RowEvHandlerName="AOIsRowChangeEventHandler" msprop:Generator_TableClassName="AOIsDataTable" msprop:Generator_RowChangedName="AOIsRowChanged" msprop:Generator_RowClassName="AOIsRow">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_UserColumnName="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" type="xs:int" />
-              <xs:element name="TrialID" msprop:Generator_UserColumnName="TrialID" msprop:Generator_ColumnVarNameInTable="columnTrialID" msprop:Generator_ColumnPropNameInRow="TrialID" msprop:Generator_ColumnPropNameInTable="TrialIDColumn" type="xs:int" />
-              <xs:element name="SlideNr" msprop:Generator_UserColumnName="SlideNr" msprop:Generator_ColumnVarNameInTable="columnSlideNr" msprop:Generator_ColumnPropNameInRow="SlideNr" msprop:Generator_ColumnPropNameInTable="SlideNrColumn" type="xs:int" />
-              <xs:element name="ShapeName" msprop:Generator_UserColumnName="ShapeName" msprop:Generator_ColumnVarNameInTable="columnShapeName" msprop:Generator_ColumnPropNameInRow="ShapeName" msprop:Generator_ColumnPropNameInTable="ShapeNameColumn" minOccurs="0">
+              <xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
+              <xs:element name="TrialID" msprop:Generator_ColumnVarNameInTable="columnTrialID" msprop:Generator_ColumnPropNameInRow="TrialID" msprop:Generator_ColumnPropNameInTable="TrialIDColumn" msprop:Generator_UserColumnName="TrialID" type="xs:int" />
+              <xs:element name="SlideNr" msprop:Generator_ColumnVarNameInTable="columnSlideNr" msprop:Generator_ColumnPropNameInRow="SlideNr" msprop:Generator_ColumnPropNameInTable="SlideNrColumn" msprop:Generator_UserColumnName="SlideNr" type="xs:int" />
+              <xs:element name="ShapeName" msprop:Generator_ColumnVarNameInTable="columnShapeName" msprop:Generator_ColumnPropNameInRow="ShapeName" msprop:Generator_ColumnPropNameInTable="ShapeNameColumn" msprop:Generator_UserColumnName="ShapeName" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="ShapeType" msprop:Generator_UserColumnName="ShapeType" msprop:Generator_ColumnVarNameInTable="columnShapeType" msprop:Generator_ColumnPropNameInRow="ShapeType" msprop:Generator_ColumnPropNameInTable="ShapeTypeColumn" minOccurs="0">
+              <xs:element name="ShapeType" msprop:Generator_ColumnVarNameInTable="columnShapeType" msprop:Generator_ColumnPropNameInRow="ShapeType" msprop:Generator_ColumnPropNameInTable="ShapeTypeColumn" msprop:Generator_UserColumnName="ShapeType" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="ShapeNumPts" msprop:Generator_UserColumnName="ShapeNumPts" msprop:Generator_ColumnVarNameInTable="columnShapeNumPts" msprop:Generator_ColumnPropNameInRow="ShapeNumPts" msprop:Generator_ColumnPropNameInTable="ShapeNumPtsColumn" type="xs:int" minOccurs="0" />
-              <xs:element name="ShapePts" msprop:Generator_UserColumnName="ShapePts" msprop:Generator_ColumnVarNameInTable="columnShapePts" msprop:Generator_ColumnPropNameInRow="ShapePts" msprop:Generator_ColumnPropNameInTable="ShapePtsColumn" minOccurs="0">
+              <xs:element name="ShapeNumPts" msprop:Generator_ColumnVarNameInTable="columnShapeNumPts" msprop:Generator_ColumnPropNameInRow="ShapeNumPts" msprop:Generator_ColumnPropNameInTable="ShapeNumPtsColumn" msprop:Generator_UserColumnName="ShapeNumPts" type="xs:int" minOccurs="0" />
+              <xs:element name="ShapePts" msprop:Generator_ColumnVarNameInTable="columnShapePts" msprop:Generator_ColumnPropNameInRow="ShapePts" msprop:Generator_ColumnPropNameInTable="ShapePtsColumn" msprop:Generator_UserColumnName="ShapePts" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="4000" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="ShapeGroup" msprop:Generator_UserColumnName="ShapeGroup" msprop:Generator_ColumnVarNameInTable="columnShapeGroup" msprop:Generator_ColumnPropNameInRow="ShapeGroup" msprop:Generator_ColumnPropNameInTable="ShapeGroupColumn" minOccurs="0">
+              <xs:element name="ShapeGroup" msprop:Generator_ColumnVarNameInTable="columnShapeGroup" msprop:Generator_ColumnPropNameInRow="ShapeGroup" msprop:Generator_ColumnPropNameInTable="ShapeGroupColumn" msprop:Generator_UserColumnName="ShapeGroup" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
@@ -1479,11 +1479,11 @@ SELECT ID, Param, Description FROM Params WHERE (ID = @ID)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="ShapeGroups" msprop:Generator_UserTableName="ShapeGroups" msprop:Generator_RowDeletedName="ShapeGroupsRowDeleted" msprop:Generator_RowChangedName="ShapeGroupsRowChanged" msprop:Generator_RowClassName="ShapeGroupsRow" msprop:Generator_RowChangingName="ShapeGroupsRowChanging" msprop:Generator_RowEvArgName="ShapeGroupsRowChangeEvent" msprop:Generator_RowEvHandlerName="ShapeGroupsRowChangeEventHandler" msprop:Generator_TableClassName="ShapeGroupsDataTable" msprop:Generator_TableVarName="tableShapeGroups" msprop:Generator_RowDeletingName="ShapeGroupsRowDeleting" msprop:Generator_TablePropName="ShapeGroups">
+        <xs:element name="ShapeGroups" msprop:Generator_UserTableName="ShapeGroups" msprop:Generator_RowEvArgName="ShapeGroupsRowChangeEvent" msprop:Generator_TableVarName="tableShapeGroups" msprop:Generator_TablePropName="ShapeGroups" msprop:Generator_RowDeletingName="ShapeGroupsRowDeleting" msprop:Generator_RowChangingName="ShapeGroupsRowChanging" msprop:Generator_RowDeletedName="ShapeGroupsRowDeleted" msprop:Generator_RowEvHandlerName="ShapeGroupsRowChangeEventHandler" msprop:Generator_TableClassName="ShapeGroupsDataTable" msprop:Generator_RowChangedName="ShapeGroupsRowChanged" msprop:Generator_RowClassName="ShapeGroupsRow">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_UserColumnName="ID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInTable="IDColumn" type="xs:int" />
-              <xs:element name="ShapeGroup" msprop:Generator_UserColumnName="ShapeGroup" msprop:Generator_ColumnPropNameInRow="ShapeGroup" msprop:Generator_ColumnVarNameInTable="columnShapeGroup" msprop:Generator_ColumnPropNameInTable="ShapeGroupColumn">
+              <xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
+              <xs:element name="ShapeGroup" msprop:Generator_ColumnVarNameInTable="columnShapeGroup" msprop:Generator_ColumnPropNameInRow="ShapeGroup" msprop:Generator_ColumnPropNameInTable="ShapeGroupColumn" msprop:Generator_UserColumnName="ShapeGroup">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
@@ -1493,60 +1493,60 @@ SELECT ID, Param, Description FROM Params WHERE (ID = @ID)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="GazeFixations" msprop:Generator_UserTableName="GazeFixations" msprop:Generator_RowDeletedName="GazeFixationsRowDeleted" msprop:Generator_RowChangedName="GazeFixationsRowChanged" msprop:Generator_RowClassName="GazeFixationsRow" msprop:Generator_RowChangingName="GazeFixationsRowChanging" msprop:Generator_RowEvArgName="GazeFixationsRowChangeEvent" msprop:Generator_RowEvHandlerName="GazeFixationsRowChangeEventHandler" msprop:Generator_TableClassName="GazeFixationsDataTable" msprop:Generator_TableVarName="tableGazeFixations" msprop:Generator_RowDeletingName="GazeFixationsRowDeleting" msprop:Generator_TablePropName="GazeFixations">
+        <xs:element name="GazeFixations" msprop:Generator_UserTableName="GazeFixations" msprop:Generator_RowEvArgName="GazeFixationsRowChangeEvent" msprop:Generator_TableVarName="tableGazeFixations" msprop:Generator_TablePropName="GazeFixations" msprop:Generator_RowDeletingName="GazeFixationsRowDeleting" msprop:Generator_RowChangingName="GazeFixationsRowChanging" msprop:Generator_RowDeletedName="GazeFixationsRowDeleted" msprop:Generator_RowEvHandlerName="GazeFixationsRowChangeEventHandler" msprop:Generator_TableClassName="GazeFixationsDataTable" msprop:Generator_RowChangedName="GazeFixationsRowChanged" msprop:Generator_RowClassName="GazeFixationsRow">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_UserColumnName="ID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInTable="IDColumn" type="xs:long" />
-              <xs:element name="SubjectName" msprop:Generator_UserColumnName="SubjectName" msprop:Generator_ColumnPropNameInRow="SubjectName" msprop:Generator_ColumnVarNameInTable="columnSubjectName" msprop:Generator_ColumnPropNameInTable="SubjectNameColumn">
+              <xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:long" />
+              <xs:element name="SubjectName" msprop:Generator_ColumnVarNameInTable="columnSubjectName" msprop:Generator_ColumnPropNameInRow="SubjectName" msprop:Generator_ColumnPropNameInTable="SubjectNameColumn" msprop:Generator_UserColumnName="SubjectName">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="TrialID" msprop:Generator_UserColumnName="TrialID" msprop:Generator_ColumnPropNameInRow="TrialID" msprop:Generator_ColumnVarNameInTable="columnTrialID" msprop:Generator_ColumnPropNameInTable="TrialIDColumn" type="xs:int" />
-              <xs:element name="TrialSequence" msprop:Generator_UserColumnName="TrialSequence" msprop:Generator_ColumnPropNameInRow="TrialSequence" msprop:Generator_ColumnVarNameInTable="columnTrialSequence" msprop:Generator_ColumnPropNameInTable="TrialSequenceColumn" type="xs:int" />
-              <xs:element name="CountInTrial" msprop:Generator_UserColumnName="CountInTrial" msprop:Generator_ColumnPropNameInRow="CountInTrial" msprop:Generator_ColumnVarNameInTable="columnCountInTrial" msprop:Generator_ColumnPropNameInTable="CountInTrialColumn" type="xs:int" minOccurs="0" />
-              <xs:element name="StartTime" msprop:Generator_UserColumnName="StartTime" msprop:Generator_ColumnPropNameInRow="StartTime" msprop:Generator_ColumnVarNameInTable="columnStartTime" msprop:Generator_ColumnPropNameInTable="StartTimeColumn" type="xs:long" minOccurs="0" />
-              <xs:element name="Length" msprop:Generator_UserColumnName="Length" msprop:Generator_ColumnPropNameInRow="Length" msprop:Generator_ColumnVarNameInTable="columnLength" msprop:Generator_ColumnPropNameInTable="LengthColumn" type="xs:int" minOccurs="0" />
-              <xs:element name="PosX" msprop:Generator_UserColumnName="PosX" msprop:Generator_ColumnPropNameInRow="PosX" msprop:Generator_ColumnVarNameInTable="columnPosX" msprop:Generator_ColumnPropNameInTable="PosXColumn" type="xs:double" minOccurs="0" />
-              <xs:element name="PosY" msprop:Generator_UserColumnName="PosY" msprop:Generator_ColumnPropNameInRow="PosY" msprop:Generator_ColumnVarNameInTable="columnPosY" msprop:Generator_ColumnPropNameInTable="PosYColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="TrialID" msprop:Generator_ColumnVarNameInTable="columnTrialID" msprop:Generator_ColumnPropNameInRow="TrialID" msprop:Generator_ColumnPropNameInTable="TrialIDColumn" msprop:Generator_UserColumnName="TrialID" type="xs:int" />
+              <xs:element name="TrialSequence" msprop:Generator_ColumnVarNameInTable="columnTrialSequence" msprop:Generator_ColumnPropNameInRow="TrialSequence" msprop:Generator_ColumnPropNameInTable="TrialSequenceColumn" msprop:Generator_UserColumnName="TrialSequence" type="xs:int" />
+              <xs:element name="CountInTrial" msprop:Generator_ColumnVarNameInTable="columnCountInTrial" msprop:Generator_ColumnPropNameInRow="CountInTrial" msprop:Generator_ColumnPropNameInTable="CountInTrialColumn" msprop:Generator_UserColumnName="CountInTrial" type="xs:int" minOccurs="0" />
+              <xs:element name="StartTime" msprop:Generator_ColumnVarNameInTable="columnStartTime" msprop:Generator_ColumnPropNameInRow="StartTime" msprop:Generator_ColumnPropNameInTable="StartTimeColumn" msprop:Generator_UserColumnName="StartTime" type="xs:long" minOccurs="0" />
+              <xs:element name="Length" msprop:Generator_ColumnVarNameInTable="columnLength" msprop:Generator_ColumnPropNameInRow="Length" msprop:Generator_ColumnPropNameInTable="LengthColumn" msprop:Generator_UserColumnName="Length" type="xs:int" minOccurs="0" />
+              <xs:element name="PosX" msprop:Generator_ColumnVarNameInTable="columnPosX" msprop:Generator_ColumnPropNameInRow="PosX" msprop:Generator_ColumnPropNameInTable="PosXColumn" msprop:Generator_UserColumnName="PosX" type="xs:double" minOccurs="0" />
+              <xs:element name="PosY" msprop:Generator_ColumnVarNameInTable="columnPosY" msprop:Generator_ColumnPropNameInRow="PosY" msprop:Generator_ColumnPropNameInTable="PosYColumn" msprop:Generator_UserColumnName="PosY" type="xs:double" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="MouseFixations" msprop:Generator_UserTableName="MouseFixations" msprop:Generator_RowDeletedName="MouseFixationsRowDeleted" msprop:Generator_RowChangedName="MouseFixationsRowChanged" msprop:Generator_RowClassName="MouseFixationsRow" msprop:Generator_RowChangingName="MouseFixationsRowChanging" msprop:Generator_RowEvArgName="MouseFixationsRowChangeEvent" msprop:Generator_RowEvHandlerName="MouseFixationsRowChangeEventHandler" msprop:Generator_TableClassName="MouseFixationsDataTable" msprop:Generator_TableVarName="tableMouseFixations" msprop:Generator_RowDeletingName="MouseFixationsRowDeleting" msprop:Generator_TablePropName="MouseFixations">
+        <xs:element name="MouseFixations" msprop:Generator_UserTableName="MouseFixations" msprop:Generator_RowEvArgName="MouseFixationsRowChangeEvent" msprop:Generator_TableVarName="tableMouseFixations" msprop:Generator_TablePropName="MouseFixations" msprop:Generator_RowDeletingName="MouseFixationsRowDeleting" msprop:Generator_RowChangingName="MouseFixationsRowChanging" msprop:Generator_RowDeletedName="MouseFixationsRowDeleted" msprop:Generator_RowEvHandlerName="MouseFixationsRowChangeEventHandler" msprop:Generator_TableClassName="MouseFixationsDataTable" msprop:Generator_RowChangedName="MouseFixationsRowChanged" msprop:Generator_RowClassName="MouseFixationsRow">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_UserColumnName="ID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInTable="IDColumn" type="xs:long" />
-              <xs:element name="SubjectName" msprop:Generator_UserColumnName="SubjectName" msprop:Generator_ColumnPropNameInRow="SubjectName" msprop:Generator_ColumnVarNameInTable="columnSubjectName" msprop:Generator_ColumnPropNameInTable="SubjectNameColumn">
+              <xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:long" />
+              <xs:element name="SubjectName" msprop:Generator_ColumnVarNameInTable="columnSubjectName" msprop:Generator_ColumnPropNameInRow="SubjectName" msprop:Generator_ColumnPropNameInTable="SubjectNameColumn" msprop:Generator_UserColumnName="SubjectName">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="TrialID" msprop:Generator_UserColumnName="TrialID" msprop:Generator_ColumnPropNameInRow="TrialID" msprop:Generator_ColumnVarNameInTable="columnTrialID" msprop:Generator_ColumnPropNameInTable="TrialIDColumn" type="xs:int" />
-              <xs:element name="TrialSequence" msprop:Generator_UserColumnName="TrialSequence" msprop:Generator_ColumnPropNameInRow="TrialSequence" msprop:Generator_ColumnVarNameInTable="columnTrialSequence" msprop:Generator_ColumnPropNameInTable="TrialSequenceColumn" type="xs:int" />
-              <xs:element name="CountInTrial" msprop:Generator_UserColumnName="CountInTrial" msprop:Generator_ColumnPropNameInRow="CountInTrial" msprop:Generator_ColumnVarNameInTable="columnCountInTrial" msprop:Generator_ColumnPropNameInTable="CountInTrialColumn" type="xs:int" minOccurs="0" />
-              <xs:element name="StartTime" msprop:Generator_UserColumnName="StartTime" msprop:Generator_ColumnPropNameInRow="StartTime" msprop:Generator_ColumnVarNameInTable="columnStartTime" msprop:Generator_ColumnPropNameInTable="StartTimeColumn" type="xs:long" minOccurs="0" />
-              <xs:element name="Length" msprop:Generator_UserColumnName="Length" msprop:Generator_ColumnPropNameInRow="Length" msprop:Generator_ColumnVarNameInTable="columnLength" msprop:Generator_ColumnPropNameInTable="LengthColumn" type="xs:int" minOccurs="0" />
-              <xs:element name="PosX" msprop:Generator_UserColumnName="PosX" msprop:Generator_ColumnPropNameInRow="PosX" msprop:Generator_ColumnVarNameInTable="columnPosX" msprop:Generator_ColumnPropNameInTable="PosXColumn" type="xs:double" minOccurs="0" />
-              <xs:element name="PosY" msprop:Generator_UserColumnName="PosY" msprop:Generator_ColumnPropNameInRow="PosY" msprop:Generator_ColumnVarNameInTable="columnPosY" msprop:Generator_ColumnPropNameInTable="PosYColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="TrialID" msprop:Generator_ColumnVarNameInTable="columnTrialID" msprop:Generator_ColumnPropNameInRow="TrialID" msprop:Generator_ColumnPropNameInTable="TrialIDColumn" msprop:Generator_UserColumnName="TrialID" type="xs:int" />
+              <xs:element name="TrialSequence" msprop:Generator_ColumnVarNameInTable="columnTrialSequence" msprop:Generator_ColumnPropNameInRow="TrialSequence" msprop:Generator_ColumnPropNameInTable="TrialSequenceColumn" msprop:Generator_UserColumnName="TrialSequence" type="xs:int" />
+              <xs:element name="CountInTrial" msprop:Generator_ColumnVarNameInTable="columnCountInTrial" msprop:Generator_ColumnPropNameInRow="CountInTrial" msprop:Generator_ColumnPropNameInTable="CountInTrialColumn" msprop:Generator_UserColumnName="CountInTrial" type="xs:int" minOccurs="0" />
+              <xs:element name="StartTime" msprop:Generator_ColumnVarNameInTable="columnStartTime" msprop:Generator_ColumnPropNameInRow="StartTime" msprop:Generator_ColumnPropNameInTable="StartTimeColumn" msprop:Generator_UserColumnName="StartTime" type="xs:long" minOccurs="0" />
+              <xs:element name="Length" msprop:Generator_ColumnVarNameInTable="columnLength" msprop:Generator_ColumnPropNameInRow="Length" msprop:Generator_ColumnPropNameInTable="LengthColumn" msprop:Generator_UserColumnName="Length" type="xs:int" minOccurs="0" />
+              <xs:element name="PosX" msprop:Generator_ColumnVarNameInTable="columnPosX" msprop:Generator_ColumnPropNameInRow="PosX" msprop:Generator_ColumnPropNameInTable="PosXColumn" msprop:Generator_UserColumnName="PosX" type="xs:double" minOccurs="0" />
+              <xs:element name="PosY" msprop:Generator_ColumnVarNameInTable="columnPosY" msprop:Generator_ColumnPropNameInRow="PosY" msprop:Generator_ColumnPropNameInTable="PosYColumn" msprop:Generator_UserColumnName="PosY" type="xs:double" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Params" msprop:Generator_UserTableName="Params" msprop:Generator_RowDeletedName="ParamsRowDeleted" msprop:Generator_RowChangedName="ParamsRowChanged" msprop:Generator_RowClassName="ParamsRow" msprop:Generator_RowChangingName="ParamsRowChanging" msprop:Generator_RowEvArgName="ParamsRowChangeEvent" msprop:Generator_RowEvHandlerName="ParamsRowChangeEventHandler" msprop:Generator_TableClassName="ParamsDataTable" msprop:Generator_TableVarName="tableParams" msprop:Generator_RowDeletingName="ParamsRowDeleting" msprop:Generator_TablePropName="Params">
+        <xs:element name="Params" msprop:Generator_UserTableName="Params" msprop:Generator_RowEvArgName="ParamsRowChangeEvent" msprop:Generator_TableVarName="tableParams" msprop:Generator_TablePropName="Params" msprop:Generator_RowDeletingName="ParamsRowDeleting" msprop:Generator_RowChangingName="ParamsRowChanging" msprop:Generator_RowDeletedName="ParamsRowDeleted" msprop:Generator_RowEvHandlerName="ParamsRowChangeEventHandler" msprop:Generator_TableClassName="ParamsDataTable" msprop:Generator_RowChangedName="ParamsRowChanged" msprop:Generator_RowClassName="ParamsRow">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_UserColumnName="ID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInTable="IDColumn" type="xs:int" />
-              <xs:element name="Param" msprop:Generator_UserColumnName="Param" msprop:Generator_ColumnPropNameInRow="Param" msprop:Generator_ColumnVarNameInTable="columnParam" msprop:Generator_ColumnPropNameInTable="ParamColumn">
+              <xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
+              <xs:element name="Param" msprop:Generator_ColumnVarNameInTable="columnParam" msprop:Generator_ColumnPropNameInRow="Param" msprop:Generator_ColumnPropNameInTable="ParamColumn" msprop:Generator_UserColumnName="Param">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="Description" msprop:Generator_UserColumnName="Description" msprop:Generator_ColumnPropNameInRow="Description" msprop:Generator_ColumnVarNameInTable="columnDescription" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" minOccurs="0">
+              <xs:element name="Description" msprop:Generator_ColumnVarNameInTable="columnDescription" msprop:Generator_ColumnPropNameInRow="Description" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" msprop:Generator_UserColumnName="Description" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="400" />
@@ -1616,26 +1616,26 @@ SELECT ID, Param, Description FROM Params WHERE (ID = @ID)</CommandText>
       <xs:selector xpath=".//mstns:Params" />
       <xs:field xpath="mstns:Param" />
     </xs:unique>
-    <xs:keyref name="FK_Subjects_Trials" refer="Constraint2" msprop:rel_Generator_UserRelationName="FK_Subjects_Trials" msprop:rel_Generator_RelationVarName="relationFK_Subjects_Trials" msprop:rel_Generator_UserChildTable="Trials" msprop:rel_Generator_UserParentTable="Subjects" msprop:rel_Generator_ParentPropName="SubjectsRow" msprop:rel_Generator_ChildPropName="GetTrialsRows" msdata:AcceptRejectRule="Cascade">
+    <xs:keyref name="FK_Subjects_Trials" refer="Constraint2" msprop:rel_Generator_UserChildTable="Trials" msprop:rel_Generator_ChildPropName="GetTrialsRows" msprop:rel_Generator_UserRelationName="FK_Subjects_Trials" msprop:rel_Generator_RelationVarName="relationFK_Subjects_Trials" msprop:rel_Generator_UserParentTable="Subjects" msprop:rel_Generator_ParentPropName="SubjectsRow" msdata:AcceptRejectRule="Cascade">
       <xs:selector xpath=".//mstns:Trials" />
-      <xs:field xpath="mstns:SubjectName" />
-    </xs:keyref>
-    <xs:keyref name="FK_Subjects_SubjectParameters" refer="Constraint2" msprop:rel_Generator_UserRelationName="FK_Subjects_SubjectParameters" msprop:rel_Generator_RelationVarName="relationFK_Subjects_SubjectParameters" msprop:rel_Generator_UserChildTable="SubjectParameters" msprop:rel_Generator_UserParentTable="Subjects" msprop:rel_Generator_ParentPropName="SubjectsRow" msprop:rel_Generator_ChildPropName="GetSubjectParametersRows">
-      <xs:selector xpath=".//mstns:SubjectParameters" />
       <xs:field xpath="mstns:SubjectName" />
     </xs:keyref>
     <xs:keyref name="Params_SubjectParameters" refer="Params_Constraint2" msdata:ConstraintOnly="true" msdata:AcceptRejectRule="Cascade">
       <xs:selector xpath=".//mstns:SubjectParameters" />
       <xs:field xpath="mstns:Param" />
     </xs:keyref>
+    <xs:keyref name="FK_Subjects_SubjectParameters" refer="Constraint2" msprop:rel_Generator_UserChildTable="SubjectParameters" msprop:rel_Generator_ChildPropName="GetSubjectParametersRows" msprop:rel_Generator_UserRelationName="FK_Subjects_SubjectParameters" msprop:rel_Generator_RelationVarName="relationFK_Subjects_SubjectParameters" msprop:rel_Generator_UserParentTable="Subjects" msprop:rel_Generator_ParentPropName="SubjectsRow">
+      <xs:selector xpath=".//mstns:SubjectParameters" />
+      <xs:field xpath="mstns:SubjectName" />
+    </xs:keyref>
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
-      <msdata:Relationship name="FK_Trials_Events" msdata:parent="Trials" msdata:child="TrialEvents" msdata:parentkey="SubjectName TrialSequence" msdata:childkey="SubjectName TrialSequence" msprop:Generator_UserRelationName="FK_Trials_Events" msprop:Generator_RelationVarName="relationFK_Trials_Events" msprop:Generator_UserChildTable="TrialEvents" msprop:Generator_UserParentTable="Trials" msprop:Generator_ParentPropName="TrialsRowParent" msprop:Generator_ChildPropName="GetTrialEventsRows" />
-      <msdata:Relationship name="Trials_AOIs" msdata:parent="Trials" msdata:child="AOIs" msdata:parentkey="TrialID" msdata:childkey="TrialID" msprop:Generator_UserRelationName="Trials_AOIs" msprop:Generator_RelationVarName="relationTrials_AOIs" msprop:Generator_UserChildTable="AOIs" msprop:Generator_UserParentTable="Trials" msprop:Generator_ParentPropName="TrialsRow" msprop:Generator_ChildPropName="GetAOIsRows" />
-      <msdata:Relationship name="Trials_GazeFixations" msdata:parent="Trials" msdata:child="GazeFixations" msdata:parentkey="SubjectName TrialID TrialSequence" msdata:childkey="SubjectName TrialID TrialSequence" msprop:Generator_UserRelationName="Trials_GazeFixations" msprop:Generator_RelationVarName="relationTrials_GazeFixations" msprop:Generator_UserChildTable="GazeFixations" msprop:Generator_UserParentTable="Trials" msprop:Generator_ParentPropName="TrialsRowParent" msprop:Generator_ChildPropName="GetGazeFixationsRows" />
-      <msdata:Relationship name="Trials_MouseFixations" msdata:parent="Trials" msdata:child="MouseFixations" msdata:parentkey="SubjectName TrialID TrialSequence" msdata:childkey="SubjectName TrialID TrialSequence" msprop:Generator_UserRelationName="Trials_MouseFixations" msprop:Generator_RelationVarName="relationTrials_MouseFixations" msprop:Generator_UserChildTable="MouseFixations" msprop:Generator_UserParentTable="Trials" msprop:Generator_ParentPropName="TrialsRowParent" msprop:Generator_ChildPropName="GetMouseFixationsRows" />
-      <msdata:Relationship name="ShapeGroups_AOIs" msdata:parent="ShapeGroups" msdata:child="AOIs" msdata:parentkey="ShapeGroup" msdata:childkey="ShapeGroup" msprop:Generator_UserRelationName="ShapeGroups_AOIs" msprop:Generator_RelationVarName="relationShapeGroups_AOIs" msprop:Generator_UserChildTable="AOIs" msprop:Generator_UserParentTable="ShapeGroups" msprop:Generator_ParentPropName="ShapeGroupsRow" msprop:Generator_ChildPropName="GetAOIsRows" />
+      <msdata:Relationship name="FK_Trials_Events" msdata:parent="Trials" msdata:child="TrialEvents" msdata:parentkey="SubjectName TrialSequence" msdata:childkey="SubjectName TrialSequence" msprop:Generator_UserChildTable="TrialEvents" msprop:Generator_ChildPropName="GetTrialEventsRows" msprop:Generator_UserRelationName="FK_Trials_Events" msprop:Generator_RelationVarName="relationFK_Trials_Events" msprop:Generator_UserParentTable="Trials" msprop:Generator_ParentPropName="TrialsRowParent" />
+      <msdata:Relationship name="Trials_AOIs" msdata:parent="Trials" msdata:child="AOIs" msdata:parentkey="TrialID" msdata:childkey="TrialID" msprop:Generator_UserChildTable="AOIs" msprop:Generator_ChildPropName="GetAOIsRows" msprop:Generator_UserRelationName="Trials_AOIs" msprop:Generator_RelationVarName="relationTrials_AOIs" msprop:Generator_UserParentTable="Trials" msprop:Generator_ParentPropName="TrialsRow" />
+      <msdata:Relationship name="ShapeGroups_AOIs" msdata:parent="ShapeGroups" msdata:child="AOIs" msdata:parentkey="ShapeGroup" msdata:childkey="ShapeGroup" msprop:Generator_UserChildTable="AOIs" msprop:Generator_ChildPropName="GetAOIsRows" msprop:Generator_UserRelationName="ShapeGroups_AOIs" msprop:Generator_RelationVarName="relationShapeGroups_AOIs" msprop:Generator_UserParentTable="ShapeGroups" msprop:Generator_ParentPropName="ShapeGroupsRow" />
+      <msdata:Relationship name="Trials_GazeFixations" msdata:parent="Trials" msdata:child="GazeFixations" msdata:parentkey="SubjectName TrialSequence" msdata:childkey="SubjectName TrialSequence" msprop:Generator_UserChildTable="GazeFixations" msprop:Generator_ChildPropName="GetGazeFixationsRows" msprop:Generator_UserRelationName="Trials_GazeFixations" msprop:Generator_ParentPropName="TrialsRowParent" msprop:Generator_RelationVarName="relationTrials_GazeFixations" msprop:Generator_UserParentTable="Trials" />
+      <msdata:Relationship name="Trials_MouseFixations" msdata:parent="Trials" msdata:child="MouseFixations" msdata:parentkey="SubjectName TrialSequence" msdata:childkey="SubjectName TrialSequence" msprop:Generator_UserChildTable="MouseFixations" msprop:Generator_ChildPropName="GetMouseFixationsRows" msprop:Generator_UserRelationName="Trials_MouseFixations" msprop:Generator_ParentPropName="TrialsRowParent" msprop:Generator_RelationVarName="relationTrials_MouseFixations" msprop:Generator_UserParentTable="Trials" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>

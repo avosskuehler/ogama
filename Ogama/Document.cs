@@ -491,7 +491,7 @@ namespace Ogama
         goto Attach;
       }
 
-      // Now that we succesfully attached the file, test the connection
+      // Now that we successfully attached the file, test the connection
       // Test connection string
       using (SqlConnection conn = new SqlConnection(Document.ActiveDocument.ExperimentSettings.DatabaseConnectionString))
       {
@@ -730,7 +730,7 @@ namespace Ogama
     /// to update Ogama 0.X folder layout structure to new format.
     /// </summary>
     /// <param name="filePath">A <see cref="string"/> with the full path to .oga xml file.</param>
-    /// <returns><strong>True</strong> if everything is ok, or layout is succesfull converted,
+    /// <returns><strong>True</strong> if everything is ok, or layout is successful converted,
     /// if user cancelled update returns <strong>false</strong>.</returns>
     private bool CheckCorrectSubFolderLayout(string filePath)
     {

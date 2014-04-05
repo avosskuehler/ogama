@@ -446,6 +446,32 @@ namespace VectorGraphics.Elements.ElementCollections
     public bool IsDesktopSlide { get; set; }
 
     /// <summary>
+    /// Gets or sets a value indicating whether the slide is 
+    /// a browser slide containing activeX browser element
+    /// </summary>
+    /// <value>A <see cref="Boolean"/> indicating that this is
+    /// a browser slide.</value>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    [Browsable(false)]
+    public bool IsBrowserSlide
+    {
+      get
+      {
+        if (this.HasActiveXContent)
+        {
+          foreach (var activeXElement in this.activeXElements)
+          {
+            if (activeXElement is VGBrowser)
+            {
+              return true;
+            }
+          }
+        }
+        return false;
+      }
+    }
+
+    /// <summary>
     /// Gets or sets the list of vector graphic stimuli for this slide.
     /// </summary>
     /// <value>A <see cref="VGElementCollection"/> with the vector graphic
