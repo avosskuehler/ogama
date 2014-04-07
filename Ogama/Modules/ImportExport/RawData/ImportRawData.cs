@@ -371,7 +371,7 @@ namespace Ogama.Modules.ImportExport.RawData
     {
       // Clear existing values
       rawDataList.Clear();
-      double lastTimeInFileTime = 0;
+      double lastTimeInFileTime = -1;
 
       // Retrieve existing slideshow trials (to check matching filenames for 
       // correct trial ID numbering
