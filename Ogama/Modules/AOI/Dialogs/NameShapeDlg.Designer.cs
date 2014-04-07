@@ -36,7 +36,7 @@ namespace Ogama.Modules.AOI.Dialogs
       this.btnOK = new System.Windows.Forms.Button();
       this.btnCancel = new System.Windows.Forms.Button();
       this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-      this.dialogTop1 = new DialogTop();
+      this.dialogTop1 = new Ogama.Modules.Common.Controls.DialogTop();
       this.SuspendLayout();
       // 
       // txbShapeName
@@ -51,12 +51,12 @@ namespace Ogama.Modules.AOI.Dialogs
       // btnOK
       // 
       this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
       this.btnOK.Location = new System.Drawing.Point(113, 107);
       this.btnOK.Name = "btnOK";
       this.btnOK.Size = new System.Drawing.Size(75, 23);
       this.btnOK.TabIndex = 25;
       this.btnOK.Text = "&OK";
+      this.btnOK.Click += new System.EventHandler(this.BtnOkClick);
       // 
       // btnCancel
       // 

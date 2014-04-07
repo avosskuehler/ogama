@@ -1989,24 +1989,27 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     /// new AOI information.</param>
     /// <param name="splashDialog">A <see cref="System.ComponentModel.BackgroundWorker"/> with the 
     /// background splash loading dialog worker which shows progress.</param>
-    public static void WriteAOIDataToDataSet(AOIData aoi, System.ComponentModel.BackgroundWorker splashDialog)
+    public static bool WriteAOIDataToDataSet(AOIData aoi, System.ComponentModel.BackgroundWorker splashDialog)
     {
       // Validate AOIData
-      if (ValidateShape(ref aoi, splashDialog))
+      if (!ValidateShape(ref aoi, splashDialog))
       {
-        // Insert Data in AOI Table
-        OgamaDataSet.AOIsRow workAOIData;
-        workAOIData = Document.ActiveDocument.DocDataSet.AOIs.NewAOIsRow();
-        workAOIData.ShapeName = aoi.ShapeName;
-        workAOIData.ShapeNumPts = aoi.ShapeNumPts;
-        workAOIData.ShapePts = aoi.ShapePts;
-        workAOIData.ShapeType = aoi.ShapeType.ToString().Replace("VectorGraphics.VG", string.Empty);
-        workAOIData.TrialID = aoi.TrialID;
-        workAOIData.ShapeGroup = aoi.Group;
-        workAOIData.SlideNr = aoi.SlideNr;
-
-        Document.ActiveDocument.DocDataSet.AOIs.AddAOIsRow(workAOIData);
+        return false;
       }
+      // Insert Data in AOI Table
+      OgamaDataSet.AOIsRow workAOIData;
+      workAOIData = Document.ActiveDocument.DocDataSet.AOIs.NewAOIsRow();
+      workAOIData.ShapeName = aoi.ShapeName;
+      workAOIData.ShapeNumPts = aoi.ShapeNumPts;
+      workAOIData.ShapePts = aoi.ShapePts;
+      workAOIData.ShapeType = aoi.ShapeType.ToString().Replace("VectorGraphics.VG", string.Empty);
+      workAOIData.TrialID = aoi.TrialID;
+      workAOIData.ShapeGroup = aoi.Group;
+      workAOIData.SlideNr = aoi.SlideNr;
+
+      Document.ActiveDocument.DocDataSet.AOIs.AddAOIsRow(workAOIData);
+
+      return true;
     }
 
     /// <summary>

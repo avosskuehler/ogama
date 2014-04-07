@@ -664,7 +664,7 @@ namespace Ogama.Modules.AOI
       this.btnArrowBrush.TabIndex = 0;
       this.btnArrowBrush.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.btnArrowBrush.UseVisualStyleBackColor = true;
-      this.btnArrowBrush.Click += new System.EventHandler(this.btnArrowBrush_Click);
+      this.btnArrowBrush.Click += new System.EventHandler(this.BtnArrowBrushClick);
       // 
       // imlToolbar
       // 
@@ -700,7 +700,7 @@ namespace Ogama.Modules.AOI
       this.btnArrowFont.TabIndex = 0;
       this.btnArrowFont.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.btnArrowFont.UseVisualStyleBackColor = true;
-      this.btnArrowFont.Click += new System.EventHandler(this.btnArrowFont_Click);
+      this.btnArrowFont.Click += new System.EventHandler(this.BtnArrowFontClick);
       // 
       // chbArrowPen
       // 
@@ -725,7 +725,7 @@ namespace Ogama.Modules.AOI
       this.btnArrowPen.TabIndex = 0;
       this.btnArrowPen.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.btnArrowPen.UseVisualStyleBackColor = true;
-      this.btnArrowPen.Click += new System.EventHandler(this.btnArrowPen_Click);
+      this.btnArrowPen.Click += new System.EventHandler(this.BtnArrowPenClick);
       // 
       // label3
       // 
@@ -822,7 +822,7 @@ namespace Ogama.Modules.AOI
       this.btnBubbleBrush.TabIndex = 0;
       this.btnBubbleBrush.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.btnBubbleBrush.UseVisualStyleBackColor = true;
-      this.btnBubbleBrush.Click += new System.EventHandler(this.btnBubbleBrush_Click);
+      this.btnBubbleBrush.Click += new System.EventHandler(this.BtnBubbleBrushClick);
       // 
       // btnBubbleFont
       // 
@@ -834,7 +834,7 @@ namespace Ogama.Modules.AOI
       this.btnBubbleFont.TabIndex = 0;
       this.btnBubbleFont.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.btnBubbleFont.UseVisualStyleBackColor = true;
-      this.btnBubbleFont.Click += new System.EventHandler(this.btnBubbleFont_Click);
+      this.btnBubbleFont.Click += new System.EventHandler(this.BtnBubbleFontClick);
       // 
       // btnBubblePen
       // 
@@ -846,7 +846,7 @@ namespace Ogama.Modules.AOI
       this.btnBubblePen.TabIndex = 0;
       this.btnBubblePen.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.btnBubblePen.UseVisualStyleBackColor = true;
-      this.btnBubblePen.Click += new System.EventHandler(this.btnBubblePen_Click);
+      this.btnBubblePen.Click += new System.EventHandler(this.BtnBubblePenClick);
       // 
       // label1
       // 
@@ -1018,9 +1018,9 @@ namespace Ogama.Modules.AOI
       this.aoiPicture.TabIndex = 0;
       this.aoiPicture.TabStop = false;
       this.aoiPicture.ZoomFactor = 0F;
-      this.aoiPicture.ShapeChanged += new ShapeEventHandler(this.aoiPicture_ShapeChanged);
-      this.aoiPicture.ShapeDeleted += new ShapeEventHandler(this.aoiPicture_ShapeDeleted);
-      this.aoiPicture.ShapeAdded += new ShapeEventHandler(this.aoiPicture_ShapeAdded);
+      this.aoiPicture.ShapeChanged += new ShapeEventHandler(this.AOIPictureShapeChanged);
+      this.aoiPicture.ShapeDeleted += new ShapeEventHandler(this.AOIPictureShapeDeleted);
+      this.aoiPicture.ShapeAdded += new ShapeEventHandler(this.AOIPictureShapeAdded);
       // 
       // toolStrip2
       // 
@@ -1181,7 +1181,7 @@ namespace Ogama.Modules.AOI
       this.btnAddShapeGroup.Name = "btnAddShapeGroup";
       this.btnAddShapeGroup.Size = new System.Drawing.Size(23, 22);
       this.btnAddShapeGroup.Text = "Add shape group";
-      this.btnAddShapeGroup.Click += new System.EventHandler(this.btnAddShapeGroup_Click);
+      this.btnAddShapeGroup.Click += new System.EventHandler(this.BtnAddShapeGroupClick);
       // 
       // toolStripSeparator2
       // 
