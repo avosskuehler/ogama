@@ -76,7 +76,7 @@ namespace Ogama.Modules.ImportExport.AOIData
       this.dGVAssignments.TabIndex = 17;
       this.toolTip1.SetToolTip(this.dGVAssignments, "Please select from the dropdowns \r\nthe columns from your text file \r\nthat best ma" +
               "tch the given\r\nOgama columns.");
-      this.dGVAssignments.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dGVAssignments_DataError);
+      this.dGVAssignments.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.DGvAssignmentsDataError);
       // 
       // ColumnAOITableColumns
       // 
@@ -100,7 +100,7 @@ namespace Ogama.Modules.ImportExport.AOIData
       this.toolTip1.SetToolTip(this.rdbSimpleRects, "Use this setting, if you have a file with named\r\nrectangles in screen coordinates" +
               ".\r\nYou can define the assignments to the Ogama \r\ncolumns below.");
       this.rdbSimpleRects.UseVisualStyleBackColor = true;
-      this.rdbSimpleRects.CheckedChanged += new System.EventHandler(this.rdbImportFormat_CheckedChanged);
+      this.rdbSimpleRects.CheckedChanged += new System.EventHandler(this.RdbImportFormatCheckedChanged);
       // 
       // rdbOgamaFormat
       // 
@@ -116,7 +116,7 @@ namespace Ogama.Modules.ImportExport.AOIData
               "fore and you would like to reimport it.\r\nThis will automatically assign the corr" +
               "ect column mappings.");
       this.rdbOgamaFormat.UseVisualStyleBackColor = true;
-      this.rdbOgamaFormat.CheckedChanged += new System.EventHandler(this.rdbImportFormat_CheckedChanged);
+      this.rdbOgamaFormat.CheckedChanged += new System.EventHandler(this.RdbImportFormatCheckedChanged);
       // 
       // ofdImport
       // 
@@ -159,7 +159,7 @@ namespace Ogama.Modules.ImportExport.AOIData
       this.btnImport.TabIndex = 26;
       this.btnImport.Text = "&Import";
       this.toolTip1.SetToolTip(this.btnImport, "Start importing with given settings.");
-      this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
+      this.btnImport.Click += new System.EventHandler(this.BtnImportClick);
       // 
       // btnBack
       // 
@@ -265,8 +265,8 @@ namespace Ogama.Modules.ImportExport.AOIData
       this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
       this.Text = "AOI Import assistant ... step 3 - assign columns";
-      this.Load += new System.EventHandler(this.frmImportAOIAssignColumns_Load);
-      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmImportAOIAssignColumns_FormClosing);
+      this.Load += new System.EventHandler(this.FrmImportAOIAssignColumnsLoad);
+      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmImportAOIAssignColumnsFormClosing);
       ((System.ComponentModel.ISupportInitialize)(this.dGVAssignments)).EndInit();
       this.groupBox1.ResumeLayout(false);
       this.groupBox1.PerformLayout();
