@@ -64,7 +64,7 @@ namespace Ogama.Modules.ImportExport.Common
       this.groupBox2 = new System.Windows.Forms.GroupBox();
       this.splitContainer1 = new System.Windows.Forms.SplitContainer();
       this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-      this.dialogTop1 = new DialogTop();
+      this.dialogTop1 = new Ogama.Modules.Common.Controls.DialogTop();
       this.splitContainer3 = new System.Windows.Forms.SplitContainer();
       ((System.ComponentModel.ISupportInitialize)(this.dGVPreviewImport)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.dataSetImport)).BeginInit();
@@ -74,12 +74,15 @@ namespace Ogama.Modules.ImportExport.Common
       this.panel1.SuspendLayout();
       this.groupBox3.SuspendLayout();
       this.groupBox2.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
       this.splitContainer1.Panel1.SuspendLayout();
       this.splitContainer1.Panel2.SuspendLayout();
       this.splitContainer1.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
       this.splitContainer2.Panel1.SuspendLayout();
       this.splitContainer2.Panel2.SuspendLayout();
       this.splitContainer2.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
       this.splitContainer3.Panel1.SuspendLayout();
       this.splitContainer3.Panel2.SuspendLayout();
       this.splitContainer3.SuspendLayout();
@@ -132,7 +135,7 @@ namespace Ogama.Modules.ImportExport.Common
       this.dGVPreviewImport.Size = new System.Drawing.Size(640, 143);
       this.dGVPreviewImport.TabIndex = 14;
       this.toolTip1.SetToolTip(this.dGVPreviewImport, "This is the preview of your import file as read\r\nby the parser using the settings" +
-              " above.\r\nIt will be updated immediately when you change\r\nimport settings.");
+        " above.\r\nIt will be updated immediately when you change\r\nimport settings.");
       this.dGVPreviewImport.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dGVPreviewImport_ColumnHeaderMouseClick);
       // 
       // label1
@@ -214,8 +217,6 @@ namespace Ogama.Modules.ImportExport.Common
       // chbIgnoreSmallLines
       // 
       this.chbIgnoreSmallLines.AutoSize = true;
-      this.chbIgnoreSmallLines.Checked = true;
-      this.chbIgnoreSmallLines.CheckState = System.Windows.Forms.CheckState.Checked;
       this.chbIgnoreSmallLines.Location = new System.Drawing.Point(16, 88);
       this.chbIgnoreSmallLines.Name = "chbIgnoreSmallLines";
       this.chbIgnoreSmallLines.Size = new System.Drawing.Size(281, 17);
@@ -249,8 +250,6 @@ namespace Ogama.Modules.ImportExport.Common
       // chbIgnoreNotNumberLines
       // 
       this.chbIgnoreNotNumberLines.AutoSize = true;
-      this.chbIgnoreNotNumberLines.Checked = true;
-      this.chbIgnoreNotNumberLines.CheckState = System.Windows.Forms.CheckState.Checked;
       this.chbIgnoreNotNumberLines.Location = new System.Drawing.Point(16, 65);
       this.chbIgnoreNotNumberLines.Name = "chbIgnoreNotNumberLines";
       this.chbIgnoreNotNumberLines.Size = new System.Drawing.Size(223, 17);
@@ -480,7 +479,7 @@ namespace Ogama.Modules.ImportExport.Common
       this.dialogTop1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("dialogTop1.BackgroundImage")));
       this.dialogTop1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
       this.dialogTop1.Description = "Choose import settings: Try the following import settings until the datagrid view" +
-          " shows the correct representation of the import file.";
+    " shows the correct representation of the import file.";
       this.dialogTop1.Dock = System.Windows.Forms.DockStyle.Top;
       this.dialogTop1.Location = new System.Drawing.Point(0, 0);
       this.dialogTop1.Logo = global::Ogama.Properties.Resources.MagicWand;
@@ -524,8 +523,8 @@ namespace Ogama.Modules.ImportExport.Common
       this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
       this.Text = "Import assistant ... step 2 - Reading file";
-      this.Load += new System.EventHandler(this.frmImportReadFile_Load);
       this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmImportReadFile_FormClosing);
+      this.Load += new System.EventHandler(this.frmImportReadFile_Load);
       ((System.ComponentModel.ISupportInitialize)(this.dGVPreviewImport)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.dataSetImport)).EndInit();
       this.groupBox1.ResumeLayout(false);
@@ -539,12 +538,15 @@ namespace Ogama.Modules.ImportExport.Common
       this.groupBox2.ResumeLayout(false);
       this.splitContainer1.Panel1.ResumeLayout(false);
       this.splitContainer1.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
       this.splitContainer1.ResumeLayout(false);
       this.splitContainer2.Panel1.ResumeLayout(false);
       this.splitContainer2.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
       this.splitContainer2.ResumeLayout(false);
       this.splitContainer3.Panel1.ResumeLayout(false);
       this.splitContainer3.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
       this.splitContainer3.ResumeLayout(false);
       this.ResumeLayout(false);
 

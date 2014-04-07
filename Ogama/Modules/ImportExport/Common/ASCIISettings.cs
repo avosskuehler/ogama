@@ -169,8 +169,8 @@ namespace Ogama.Modules.ImportExport.Common
       this.columnSeparatorCharacter = '\t';
       this.decimalSeparatorCharacter = '.';
       this.ignoreQuotes = true;
-      this.ignoreSmallLines = true;
-      this.ignoreNotNumeralLines = true;
+      this.ignoreSmallLines = false;
+      this.ignoreNotNumeralLines = false;
       this.ignoreQuotationString = "#";
       this.ignoreTriggerStringLines = true;
       this.ignoreTriggerString = "Keyboard";
