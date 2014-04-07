@@ -1,16 +1,15 @@
-﻿// <copyright file="ImportRawData.cs" company="FU Berlin">
-// ******************************************************
-// OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2013 Dr. Adrian Voßkühler  
-// ------------------------------------------------------------------------
-// This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
-// This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-// You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-// **************************************************************
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ImportRawData.cs" company="Freie Universität Berlin">
+//   OGAMA - open gaze and mouse analyzer 
+//   Copyright (C) 2014 Dr. Adrian Voßkühler  
+//   Licensed under GPL V3
 // </copyright>
 // <author>Adrian Voßkühler</author>
 // <email>adrian@ogama.net</email>
-
+// <summary>
+//   Class for importing raw data through multiple dialogs.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 namespace Ogama.Modules.ImportExport.RawData
 {
   using System;
@@ -35,108 +34,353 @@ namespace Ogama.Modules.ImportExport.RawData
   using VectorGraphics.StopConditions;
 
   /// <summary>
-  /// Class for importing raw data through multiple dialogs.
+  ///   Class for importing raw data through multiple dialogs.
   /// </summary>
   public class ImportRawData
   {
     ///////////////////////////////////////////////////////////////////////////////
     // Defining Constants                                                        //
     ///////////////////////////////////////////////////////////////////////////////
-    #region CONSTANTS
-    #endregion //CONSTANTS
 
     ///////////////////////////////////////////////////////////////////////////////
     // Defining Variables, Enumerations, Events                                  //
     ///////////////////////////////////////////////////////////////////////////////
-    #region FIELDS
+    #region Static Fields
 
     /// <summary>
-    /// List to fill with imported and filtered <see cref="RawData"/>
+    ///   List to fill with imported and filtered <see cref="RawData" />
     /// </summary>
-    private static List<RawData> rawDataList;
+    private static readonly List<RawData> RawDataList;
 
     /// <summary>
-    /// List to fill with generated or imported <see cref="TrialsData"/>
+    ///   List to fill with generated <see cref="SubjectsData" />
     /// </summary>
-    private static List<TrialsData> trialList;
+    private static readonly List<SubjectsData> SubjectList;
 
     /// <summary>
-    /// List to fill with generated <see cref="SubjectsData"/>
+    ///   List to fill with generated or imported <see cref="TrialsData" />
     /// </summary>
-    private static List<SubjectsData> subjectList;
+    private static readonly List<TrialsData> TrialList;
 
     /// <summary>
-    /// Saves the specialized settings used during this import session.
-    /// </summary>
-    private static DetectionSettings detectionSetting;
-
-    /// <summary>
-    /// Saves the ASCII file import specialized settings
-    /// during this import session.
+    ///   Saves the ASCII file import specialized settings
+    ///   during this import session.
     /// </summary>
     private static ASCIISettings asciiSetting;
 
-    #endregion //FIELDS
+    /// <summary>
+    ///   Saves the specialized settings used during this import session.
+    /// </summary>
+    private static DetectionSettings detectionSetting;
+
+    #endregion
 
     ///////////////////////////////////////////////////////////////////////////////
     // Construction and Initializing methods                                     //
     ///////////////////////////////////////////////////////////////////////////////
-
-    #region CONSTRUCTION
+    #region Constructors and Destructors
 
     /// <summary>
-    /// Initializes static members of the ImportRawData class.
+    ///   Initializes static members of the ImportRawData class.
     /// </summary>
     static ImportRawData()
     {
-      subjectList = new List<SubjectsData>();
-      trialList = new List<TrialsData>();
-      rawDataList = new List<RawData>();
+      SubjectList = new List<SubjectsData>();
+      TrialList = new List<TrialsData>();
+      RawDataList = new List<RawData>();
 
       detectionSetting = new DetectionSettings();
       asciiSetting = new ASCIISettings();
     }
 
-    #endregion //CONSTRUCTION
+    #endregion
 
     ///////////////////////////////////////////////////////////////////////////////
     // Defining Properties                                                       //
     ///////////////////////////////////////////////////////////////////////////////
-    #region PROPERTIES
+    #region Public Properties
 
     /// <summary>
-    /// Gets the specialized settings used during this import session.
+    ///   Gets the ASCII file import specialized settings
+    ///   during this import session.
     /// </summary>
-    /// <value>A <see cref="DetectionSettings"/>.</value>
-    /// <seealso cref="DetectionSettings"/>
-    public static DetectionSettings DetectionSetting
-    {
-      get { return detectionSetting; }
-    }
-
-    /// <summary>
-    /// Gets the ASCII file import specialized settings
-    /// during this import session.
-    /// </summary>
-    /// <value>A <see cref="ASCIISettings"/>.</value>
-    /// <seealso cref="ASCIISettings"/>
+    /// <value>A <see cref="ASCIISettings" />.</value>
+    /// <seealso cref="ASCIISettings" />
     public static ASCIISettings ASCIISettings
     {
-      get { return asciiSetting; }
+      get
+      {
+        return asciiSetting;
+      }
     }
 
-    #endregion //PROPERTIES
+    /// <summary>
+    ///   Gets the specialized settings used during this import session.
+    /// </summary>
+    /// <value>A <see cref="DetectionSettings" />.</value>
+    /// <seealso cref="DetectionSettings" />
+    public static DetectionSettings DetectionSetting
+    {
+      get
+      {
+        return detectionSetting;
+      }
+    }
+
+    #endregion
+
+    #region Public Methods and Operators
+
+    /// <summary>
+    /// This method extracts a filename of a iViewX msg line
+    ///   with the given trigger string.
+    /// </summary>
+    /// <param name="line">
+    /// The line to search for.
+    /// </param>
+    /// <param name="triggerString">
+    /// The trigger string in the message after which the filename
+    ///   appears.
+    /// </param>
+    /// <param name="currentTrialID">
+    /// The ID of the current trial.
+    /// </param>
+    public static void ExtractImageNameFromiViewXmsg(string line, string triggerString, int currentTrialID)
+    {
+      if (line.Contains(triggerString))
+      {
+        string[] items = line.Trim().Split(asciiSetting.ColumnSeparatorCharacter);
+        foreach (string item in items)
+        {
+          // Find item with trigger string
+          if (item.Contains(triggerString))
+          {
+            // Remove "Scene Image" Prefix to get the filename
+            string imagepath = item.Replace(triggerString, string.Empty);
+            string stimulusFile = Path.GetFileName(imagepath).Trim();
+            if (!detectionSetting.ImageDictionary.ContainsKey(currentTrialID))
+            {
+              detectionSetting.ImageDictionary.Add(currentTrialID, stimulusFile);
+            }
+            else
+            {
+              detectionSetting.ImageDictionary[currentTrialID] = stimulusFile;
+            }
+
+            detectionSetting.TrialSequenceToTrialIDAssignments[currentTrialID] = currentTrialID;
+
+            if (!detectionSetting.TrialIDToImageAssignments.ContainsKey(currentTrialID))
+            {
+              detectionSetting.TrialIDToImageAssignments.Add(currentTrialID, stimulusFile);
+            }
+
+            break;
+          }
+        }
+      }
+    }
+
+    /// <summary>
+    /// This static method creates a slide with a sized image
+    ///   for each trial and adds it to the slideshow.
+    /// </summary>
+    /// <param name="detectonSettings">
+    /// The <see cref="DetectionSettings"/>
+    ///   used in this import.
+    /// </param>
+    /// <param name="mainWindow">
+    /// The <see cref="MainForm"/> to get access to the status label.
+    /// </param>
+    public static void GenerateOgamaSlideshowTrials(DetectionSettings detectonSettings, MainForm mainWindow)
+    {
+      // Stores found stimuli files
+      List<string> trialNames = Document.ActiveDocument.ExperimentSettings.SlideShow.GetTrialNames();
+
+      foreach (KeyValuePair<int, int> kvp in detectonSettings.TrialSequenceToTrialIDAssignments)
+      {
+        int trialID = kvp.Value;
+        string file = string.Empty;
+        if (detectonSettings.TrialIDToImageAssignments.ContainsKey(trialID))
+        {
+          file = detectonSettings.TrialIDToImageAssignments[trialID];
+        }
+
+        string filename = Path.GetFileNameWithoutExtension(file);
+
+        // Create slide
+        var stopConditions = new StopConditionCollection
+                               {
+                                 new MouseStopCondition(
+                                   MouseButtons.Left, 
+                                   true, 
+                                   string.Empty, 
+                                   null, 
+                                   Point.Empty)
+                               };
+
+        VGImage stimulusImage = null;
+
+        if (file != string.Empty)
+        {
+          stimulusImage = new VGImage(
+            ShapeDrawAction.None,
+            Pens.Black,
+            Brushes.Black,
+            SystemFonts.MenuFont,
+            Color.White,
+            Path.GetFileName(file),
+            Document.ActiveDocument.ExperimentSettings.SlideResourcesPath,
+            ImageLayout.Zoom,
+            1f,
+            Document.ActiveDocument.PresentationSize,
+            VGStyleGroup.None,
+            filename,
+            string.Empty,
+            true)
+            {
+              Size = Document.ActiveDocument.PresentationSize
+            };
+        }
+
+        var newSlide = new Slide(
+          filename,
+          Color.White,
+          null,
+          stopConditions,
+          null,
+          string.Empty,
+          Document.ActiveDocument.PresentationSize) { Modified = true, MouseCursorVisible = true };
+
+        // Only add stimulus if an image exists
+        if (file != string.Empty)
+        {
+          newSlide.VGStimuli.Add(stimulusImage);
+        }
+        else
+        {
+          newSlide.Name = "No stimulus detected";
+        }
+
+        // Create trial
+        if (Document.ActiveDocument.ExperimentSettings.SlideShow.GetNodeByID(trialID) != null)
+        {
+          // trialID = int.Parse(Document.ActiveDocument.ExperimentSettings.SlideShow.GetUnusedNodeID());
+          // var message = string.Format("The trial with the ID:{0} exists already in the slideshow so it will not be created."
+          // + Environment.NewLine + "Delete the trial with this ID in the slideshow design module if you want it to be newly created by the importer, or assign a new ID to the imported data.", trialID);
+          // ExceptionMethods.ProcessMessage("This trial exists already", message);
+          continue;
+        }
+
+        var newTrial = new Trial(filename, trialID) { Name = filename };
+
+        newTrial.Add(newSlide);
+
+        if (trialNames.Contains(filename) || (filename == string.Empty && trialNames.Contains("No stimulus detected")))
+        {
+          // Trial already exists
+          continue;
+        }
+
+        trialNames.Add(filename);
+
+        // Create slide node
+        var slideNode = new SlideshowTreeNode(newSlide.Name)
+                          {
+                            Name = trialID.ToString(CultureInfo.InvariantCulture),
+                            Slide = newSlide
+                          };
+
+        // Add slide node to slideshow
+        Document.ActiveDocument.ExperimentSettings.SlideShow.Nodes.Add(slideNode);
+        Document.ActiveDocument.Modified = true;
+      }
+
+      mainWindow.StatusLabel.Text = "Saving slideshow to file ...";
+      if (!Document.ActiveDocument.SaveSettingsToFile(Document.ActiveDocument.ExperimentSettings.DocumentFilename))
+      {
+        ExceptionMethods.ProcessErrorMessage("Couldn't save slideshow to experiment settings.");
+      }
+
+      mainWindow.StatusLabel.Text = "Refreshing context panel ...";
+      mainWindow.RefreshContextPanelImageTabs();
+      mainWindow.StatusLabel.Text = "Ready ...";
+      mainWindow.StatusProgressbar.Value = 0;
+    }
 
     ///////////////////////////////////////////////////////////////////////////////
     // Public methods                                                            //
     ///////////////////////////////////////////////////////////////////////////////
-    #region PUBLICMETHODS
+
+    /// <summary>
+    /// Generates the trial list for the current import settings
+    ///   up to the number of lines that are given.
+    /// </summary>
+    /// <param name="numberOfImportLines">
+    /// An <see cref="int"/>
+    ///   with the max number of lines to import.
+    ///   Set it to -1 to use all lines.
+    /// </param>
+    /// <returns>
+    /// A <see cref="List{TrialsData}"/> with the calculated trials.
+    /// </returns>
+    public static List<TrialsData> GetTrialList(int numberOfImportLines)
+    {
+      // Convert the import file into ogama column format
+      GenerateOgamaRawDataList(numberOfImportLines);
+
+      // Generate the trial list from the raw data with the current settings.
+      GenerateOgamaSubjectAndTrialList();
+
+      return TrialList;
+    }
+
+    /// <summary>
+    /// This method splits the given trials data list into a
+    ///   dictionary of trial data lists separated by subjects.
+    /// </summary>
+    /// <param name="wholeTrialDataList">
+    /// A <see cref="List{TrialsData}"/>
+    ///   with all the imported samples.
+    /// </param>
+    /// <returns>
+    /// A Dictionary with the splitted input.
+    /// </returns>
+    public static Dictionary<string, List<TrialsData>> SplitTrialDataListBySubjects(List<TrialsData> wholeTrialDataList)
+    {
+      // Create the return dictionary
+      var trialDataBySubject = new Dictionary<string, List<TrialsData>>();
+
+      // Get First subject name
+      string lastSubjectName = string.Empty; // = wholeTrialDataList[0].SubjectName;
+
+      // Create list for current subject
+      var currentList = new List<TrialsData>();
+
+      // Iterate whole raw data list and add for each subject a 
+      // new entry in the rawDataBySubject list.
+      foreach (TrialsData data in wholeTrialDataList)
+      {
+        if (data.SubjectName != lastSubjectName)
+        {
+          currentList = new List<TrialsData>();
+          trialDataBySubject.Add(data.SubjectName, currentList);
+          lastSubjectName = data.SubjectName;
+        }
+
+        currentList.Add(data);
+      }
+
+      // Return list.
+      return trialDataBySubject;
+    }
 
     /// <summary>
     /// Starts a multiple dialog routine (raw data import assistant)
-    /// for reading raw data files into the programs database
+    ///   for reading raw data files into the programs database
     /// </summary>
-    /// <param name="mainWindow">The <see cref="MainForm"/> to get access to the status label.</param>
+    /// <param name="mainWindow">
+    /// The <see cref="MainForm"/> to get access to the status label.
+    /// </param>
     public static void Start(MainForm mainWindow)
     {
       try
@@ -144,7 +388,7 @@ namespace Ogama.Modules.ImportExport.RawData
         asciiSetting = new ASCIISettings();
         detectionSetting = new DetectionSettings();
 
-        ImportRawDataAssistentDialog objfrmImportAssistent = new ImportRawDataAssistentDialog();
+        var objfrmImportAssistent = new ImportRawDataAssistentDialog();
         if (objfrmImportAssistent.ShowDialog() == DialogResult.OK)
         {
         OpenFile:
@@ -163,29 +407,24 @@ namespace Ogama.Modules.ImportExport.RawData
             // Set import mode
             detectionSetting.ImportType = ImportTypes.Rawdata;
 
-            ImportParseFileDialog objfrmImportReadFile = new ImportParseFileDialog(ref asciiSetting);
+            var objfrmImportReadFile = new ImportParseFileDialog(ref asciiSetting);
           ReadFile:
             DialogResult resultRawData = objfrmImportReadFile.ShowDialog();
             if (resultRawData == DialogResult.OK)
             {
-              ImportRawDataAssignColumnsDialog objfrmImportRawDataAssignColumns
-                = new ImportRawDataAssignColumnsDialog();
+              var objfrmImportRawDataAssignColumns = new ImportRawDataAssignColumnsDialog();
 
             MakeAssignments:
               DialogResult resultAssign = objfrmImportRawDataAssignColumns.ShowDialog();
               if (resultAssign == DialogResult.OK)
               {
-                ImportTrialsDialog objfrmImportTrials = new ImportTrialsDialog(
-                  ref asciiSetting,
-                  ref detectionSetting);
+                var objfrmImportTrials = new ImportTrialsDialog(ref asciiSetting, ref detectionSetting);
 
               CheckTrials:
                 DialogResult resultTrials = objfrmImportTrials.ShowDialog();
                 if (resultTrials == DialogResult.OK)
                 {
-                  ImportImagesDialog objfrmImportImages = new ImportImagesDialog(
-                    ref asciiSetting,
-                  ref detectionSetting);
+                  var objfrmImportImages = new ImportImagesDialog(ref asciiSetting, ref detectionSetting);
 
                   DialogResult resultImages = objfrmImportImages.ShowDialog();
                   if (resultImages == DialogResult.OK)
@@ -196,7 +435,7 @@ namespace Ogama.Modules.ImportExport.RawData
                       MessageBoxButtons.YesNo,
                       MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                      SaveImportSettings(asciiSetting, detectionSetting);
+                      SaveImportSettings();
                     }
 
                     // Show import splash window
@@ -212,7 +451,7 @@ namespace Ogama.Modules.ImportExport.RawData
                     GenerateOgamaSubjectAndTrialList();
 
                     // Save the import into ogamas database and the mdf file.
-                    var successful = SaveImportIntoTablesAndDB();
+                    bool successful = SaveImportIntoTablesAndDB();
 
                     // Create slideshow trials
                     GenerateOgamaSlideshowTrials(detectionSetting, mainWindow);
@@ -221,9 +460,9 @@ namespace Ogama.Modules.ImportExport.RawData
                     CalculateFixations(mainWindow);
 
                     // Clear lists
-                    subjectList.Clear();
-                    trialList.Clear();
-                    rawDataList.Clear();
+                    SubjectList.Clear();
+                    TrialList.Clear();
+                    RawDataList.Clear();
 
                     // Import has finished.
                     asciiSetting.WaitingSplash.CancelAsync();
@@ -231,15 +470,15 @@ namespace Ogama.Modules.ImportExport.RawData
                     // Inform user about success.
                     if (successful)
                     {
-                      string message = "Import data successfully written to database." + Environment.NewLine +
-                        "Please don´t forget to move the stimuli images to the SlideResources subfolder" +
-                        "of the experiment, otherwise no images will be shown.";
+                      string message = "Import data successfully written to database." + Environment.NewLine
+                                       + "Please don´t forget to move the stimuli images to the SlideResources subfolder"
+                                       + "of the experiment, otherwise no images will be shown.";
                       ExceptionMethods.ProcessMessage("Success", message);
                     }
                     else
                     {
-                      string message = "Import had errors. Some or all of the import data " +
-                        "could not be written the database.";
+                      string message = "Import had errors. Some or all of the import data "
+                                       + "could not be written the database.";
                       ExceptionMethods.ProcessErrorMessage(message);
                     }
                   }
@@ -268,8 +507,7 @@ namespace Ogama.Modules.ImportExport.RawData
       catch (Exception ex)
       {
         string message = "Something failed during import." + Environment.NewLine
-          + "Please try again with other settings. " + Environment.NewLine +
-          "Error: " + ex.Message;
+                         + "Please try again with other settings. " + Environment.NewLine + "Error: " + ex.Message;
         ExceptionMethods.ProcessErrorMessage(message);
         if (asciiSetting.WaitingSplash.IsBusy)
         {
@@ -278,79 +516,62 @@ namespace Ogama.Modules.ImportExport.RawData
       }
     }
 
+    #endregion
+
+    #region Methods
+
     /// <summary>
-    /// Generates the trial list for the current import settings
-    /// up to the number of lines that are given.
+    ///   This method shows a dialog, that gives the option
+    ///   to use a import settings file during import.
     /// </summary>
-    /// <param name="numberOfImportLines">An <see cref="int"/>
-    /// with the max number of lines to import.
-    /// Set it to -1 to use all lines.</param>
-    /// <returns>A <see cref="List{TrialsData}"/> with the calculated trials.</returns>
-    public static List<TrialsData> GetTrialList(int numberOfImportLines)
+    /// <remarks>
+    ///   This functionality is extremely useful, when multiple log
+    ///   files of the same type should be imported.
+    /// </remarks>
+    private static void AskforUsingSettingsFile()
     {
-      // Convert the import file into ogama column format
-      GenerateOgamaRawDataList(numberOfImportLines);
+      if (MessageBox.Show(
+        "Would you like to use a settings file ?",
+        Application.ProductName,
+        MessageBoxButtons.YesNo,
+        MessageBoxIcon.Question) == DialogResult.Yes)
+      {
+        var ofdOpenSettings = new OpenFileDialog();
+        ofdOpenSettings.DefaultExt = "ois";
+        ofdOpenSettings.FileName = "*.ois";
+        ofdOpenSettings.FilterIndex = 1;
 
-      // Generate the trial list from the raw data with the current settings.
-      GenerateOgamaSubjectAndTrialList();
-
-      return trialList;
+        // ofdOpenSettings.InitialDirectory = Properties.Settings.Default.ImportSettingsPath;
+        ofdOpenSettings.Filter = "Ogama import settings files|*.ois";
+        ofdOpenSettings.Title = "Please select import settings file ...";
+        if (ofdOpenSettings.ShowDialog() == DialogResult.OK)
+        {
+          string settingsFilename = ofdOpenSettings.FileName;
+          DeserializeSettings(settingsFilename);
+          detectionSetting.SubjectName = "Subject1";
+          detectionSetting.SavedSettings = true;
+        }
+      }
     }
-
-    #endregion //PUBLICMETHODS
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Eventhandler                                                              //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region EVENTS
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Eventhandler for UI, Menu, Buttons, Toolbars etc.                         //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region WINDOWSEVENTHANDLER
-    #endregion //WINDOWSEVENTHANDLER
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Eventhandler for Custom Defined Events                                    //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region CUSTOMEVENTHANDLER
-    #endregion //CUSTOMEVENTHANDLER
-
-    #endregion //EVENTS
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Methods and Eventhandling for Background tasks                            //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region BACKGROUNDWORKER
-    #endregion //BACKGROUNDWORKER
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Inherited methods                                                         //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region OVERRIDES
-    #endregion //OVERRIDES
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Methods for doing main class job                                          //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region METHODS
 
     /// <summary>
     /// This method calculates the fixations for the subjects
-    /// that are currently imported.
+    ///   that are currently imported.
     /// </summary>
-    /// <param name="mainWindow">The <see cref="MainForm"/> to get access to the status label.</param>
+    /// <param name="mainWindow">
+    /// The <see cref="MainForm"/> to get access to the status label.
+    /// </param>
     private static void CalculateFixations(MainForm mainWindow)
     {
       mainWindow.StatusLabel.Text = "Calculating Fixations ...";
 
-      foreach (SubjectsData subject in subjectList)
+      foreach (SubjectsData subject in SubjectList)
       {
         // Get trial data of current subject
         DataTable trialsTable = Document.ActiveDocument.DocDataSet.TrialsAdapter.GetDataBySubject(subject.SubjectName);
 
         // Calculate fixations
-        FixationCalculation calculationObject = new FixationCalculation();
+        var calculationObject = new FixationCalculation();
         calculationObject.CalcFixations(SampleType.Gaze, subject.SubjectName, trialsTable, null, null);
         calculationObject.CalcFixations(SampleType.Mouse, subject.SubjectName, trialsTable, null, null);
       }
@@ -359,18 +580,61 @@ namespace Ogama.Modules.ImportExport.RawData
     }
 
     /// <summary>
-    /// Generate the list of raw data under the current
-    /// parsing conditions.
+    /// Reads an OGAMA import settings file.
     /// </summary>
-    /// <param name="numberOfImportLines">An <see cref="int"/>
-    /// with the max number of lines to import.
-    /// Set it to -1 to use all lines.</param>
-    /// <remarks>This is the heart of the class. If something does not work as expected,
-    /// first have a look here.</remarks>
+    /// <param name="filePath">
+    /// A <see cref="string"/> with the path to the
+    ///   OGAMA import settings xml file.
+    /// </param>
+    /// <returns>
+    /// <strong>True</strong> if successful,
+    ///   otherwise <strong>null</strong>.
+    /// </returns>
+    private static bool DeserializeSettings(string filePath)
+    {
+      try
+      {
+        using (var fs = new FileStream(filePath, FileMode.Open))
+        {
+          // Create an instance of the XmlSerializer class;
+          // specify the type of object to be deserialized 
+          var serializer = new XmlSerializer(typeof(MergedSettings));
+
+          /* Use the Deserialize method to restore the object's state with
+          data from the XML document. */
+          var settings = (MergedSettings)serializer.Deserialize(fs);
+
+          asciiSetting = settings.AsciiSetting;
+          detectionSetting = settings.DetectionSetting;
+        }
+      }
+      catch (Exception ex)
+      {
+        ExceptionMethods.HandleException(ex);
+
+        return false;
+      }
+
+      return true;
+    }
+
+    /// <summary>
+    /// Generate the list of raw data under the current
+    ///   parsing conditions.
+    /// </summary>
+    /// <param name="numberOfImportLines">
+    /// An <see cref="int"/>
+    ///   with the max number of lines to import.
+    ///   Set it to -1 to use all lines.
+    /// </param>
+    /// <remarks>
+    /// This is the heart of the class. If something does not work as expected,
+    ///   first have a look here.
+    /// </remarks>
     private static void GenerateOgamaRawDataList(int numberOfImportLines)
     {
       // Clear existing values
-      rawDataList.Clear();
+      RawDataList.Clear();
       double lastTimeInFileTime = -1;
 
       // Retrieve existing slideshow trials (to check matching filenames for 
@@ -386,7 +650,7 @@ namespace Ogama.Modules.ImportExport.RawData
       }
 
       // Enumerate the columns in the import file and assign their title.
-      Dictionary<string, int> columnsImportNum = new Dictionary<string, int>();
+      var columnsImportNum = new Dictionary<string, int>();
       for (int i = 0; i < asciiSetting.ColumnHeaders.Count; i++)
       {
         if (!columnsImportNum.ContainsKey(asciiSetting.ColumnHeaders[i]))
@@ -414,18 +678,40 @@ namespace Ogama.Modules.ImportExport.RawData
       string strMousePosYImportColumn = asciiSetting.ColumnAssignments["MousePosY"];
 
       // Convert the names into column counters.
-      int numSubjectImportColumn = strSubjectNameImportColumn == string.Empty ? -1 : columnsImportNum[strSubjectNameImportColumn];
-      int numTrialSequenceImportColumn = strTrialSequenceImportColumn == string.Empty ? -1 : columnsImportNum[strTrialSequenceImportColumn];
-      int numTrialIDImportColumn = strTrialIDImportColumn == string.Empty ? -1 : columnsImportNum[strTrialIDImportColumn];
-      int numTrialImageImportColumn = strTrialImageImportColumn == string.Empty ? -1 : columnsImportNum[strTrialImageImportColumn];
-      int numCategoryImportColumn = strCategoryImportColumn == string.Empty ? -1 : columnsImportNum[strCategoryImportColumn];
+      int numSubjectImportColumn = strSubjectNameImportColumn == string.Empty
+                                     ? -1
+                                     : columnsImportNum[strSubjectNameImportColumn];
+      int numTrialSequenceImportColumn = strTrialSequenceImportColumn == string.Empty
+                                           ? -1
+                                           : columnsImportNum[strTrialSequenceImportColumn];
+      int numTrialIDImportColumn = strTrialIDImportColumn == string.Empty
+                                     ? -1
+                                     : columnsImportNum[strTrialIDImportColumn];
+      int numTrialImageImportColumn = strTrialImageImportColumn == string.Empty
+                                        ? -1
+                                        : columnsImportNum[strTrialImageImportColumn];
+      int numCategoryImportColumn = strCategoryImportColumn == string.Empty
+                                      ? -1
+                                      : columnsImportNum[strCategoryImportColumn];
       int numTimeImportColumn = strTimeImportColumn == string.Empty ? -1 : columnsImportNum[strTimeImportColumn];
-      int numPupilDiaXImportColumn = strPupilDiaXImportColumn == string.Empty ? -1 : columnsImportNum[strPupilDiaXImportColumn];
-      int numPupilDiaYImportColumn = strPupilDiaYImportColumn == string.Empty ? -1 : columnsImportNum[strPupilDiaYImportColumn];
-      int numGazePosXImportColumn = strGazePosXImportColumn == string.Empty ? -1 : columnsImportNum[strGazePosXImportColumn];
-      int numGazePosYImportColumn = strGazePosYImportColumn == string.Empty ? -1 : columnsImportNum[strGazePosYImportColumn];
-      int numMousePosXImportColumn = strMousePosXImportColumn == string.Empty ? -1 : columnsImportNum[strMousePosXImportColumn];
-      int numMousePosYImportColumn = strMousePosYImportColumn == string.Empty ? -1 : columnsImportNum[strMousePosYImportColumn];
+      int numPupilDiaXImportColumn = strPupilDiaXImportColumn == string.Empty
+                                       ? -1
+                                       : columnsImportNum[strPupilDiaXImportColumn];
+      int numPupilDiaYImportColumn = strPupilDiaYImportColumn == string.Empty
+                                       ? -1
+                                       : columnsImportNum[strPupilDiaYImportColumn];
+      int numGazePosXImportColumn = strGazePosXImportColumn == string.Empty
+                                      ? -1
+                                      : columnsImportNum[strGazePosXImportColumn];
+      int numGazePosYImportColumn = strGazePosYImportColumn == string.Empty
+                                      ? -1
+                                      : columnsImportNum[strGazePosYImportColumn];
+      int numMousePosXImportColumn = strMousePosXImportColumn == string.Empty
+                                       ? -1
+                                       : columnsImportNum[strMousePosXImportColumn];
+      int numMousePosYImportColumn = strMousePosYImportColumn == string.Empty
+                                       ? -1
+                                       : columnsImportNum[strMousePosYImportColumn];
 
       // Create a list of starting times from the list of the trial dialog
       // if this mode is selected.
@@ -459,7 +745,7 @@ namespace Ogama.Modules.ImportExport.RawData
         detectionSetting.TrialSequenceToStarttimeAssignments.Clear();
       }
 
-      string line = string.Empty;
+      string line;
       int counter = 0;
       int columncount = 0;
       int trialCounter = 0;
@@ -477,11 +763,8 @@ namespace Ogama.Modules.ImportExport.RawData
       try
       {
         // Open file
-        using (StreamReader importReader = new StreamReader(asciiSetting.Filename))
+        using (var importReader = new StreamReader(asciiSetting.Filename))
         {
-          // field for checking for doubled times
-          long lastTimeInMs = -100;
-
           // Clear old entries except parses from table
           if (detectionSetting.StimuliImportMode != StimuliImportModes.UseAssignmentTable)
           {
@@ -499,9 +782,9 @@ namespace Ogama.Modules.ImportExport.RawData
             }
 
             // Ignore Quotes if applicable
-            if (asciiSetting.IgnoreQuotes &&
-              line.Trim().Substring(0, asciiSetting.IgnoreQuotationString.Length) ==
-              asciiSetting.IgnoreQuotationString)
+            if (asciiSetting.IgnoreQuotes
+                && line.Trim().Substring(0, asciiSetting.IgnoreQuotationString.Length)
+                == asciiSetting.IgnoreQuotationString)
             {
               continue;
             }
@@ -510,6 +793,7 @@ namespace Ogama.Modules.ImportExport.RawData
             switch (detectionSetting.TrialImportMode)
             {
               case TrialSequenceImportModes.UseMSGLines:
+
                 // Check for MSG lines containing the trigger string if applicable
                 if (line.Contains(detectionSetting.TrialTriggerString))
                 {
@@ -520,6 +804,7 @@ namespace Ogama.Modules.ImportExport.RawData
                 break;
               case TrialSequenceImportModes.UseAssignmentTable:
               case TrialSequenceImportModes.UseImportColumn:
+
                 // No trial counting needed
                 break;
             }
@@ -529,10 +814,11 @@ namespace Ogama.Modules.ImportExport.RawData
             {
               // Read iViewX Scene Image Lines if applicable
               case StimuliImportModes.UseiViewXMSG:
+
                 // Two cases: Lines with "scene image: bitmap.bmp" or 
                 // lines with "# Message: bitmap.bmp" possible.
-                ExtractImageNameFromiViewXMSG(line, "Scene Image: ", currentTrialSequence);
-                ExtractImageNameFromiViewXMSG(line, "# Message", currentTrialSequence);
+                ExtractImageNameFromiViewXmsg(line, "Scene Image: ", currentTrialSequence);
+                ExtractImageNameFromiViewXmsg(line, "# Message", currentTrialSequence);
                 break;
 
               // Search for Image filenames if applicable
@@ -604,21 +890,20 @@ namespace Ogama.Modules.ImportExport.RawData
                 break;
               case StimuliImportModes.UseAssignmentTable:
               case StimuliImportModes.UseImportColumn:
+
                 // No image extraction needed.
                 break;
             }
 
             // Ignore lines that do not have the "use only" quotation
             // string
-            if (asciiSetting.UseQuotes &&
-              !line.Contains(asciiSetting.UseQuotationString))
+            if (asciiSetting.UseQuotes && !line.Contains(asciiSetting.UseQuotationString))
             {
               continue;
             }
 
             // ignore lines with ignore trigger
-            if (asciiSetting.IgnoreTriggerStringLines &&
-              line.Contains(asciiSetting.IgnoreTriggerString))
+            if (asciiSetting.IgnoreTriggerStringLines && line.Contains(asciiSetting.IgnoreTriggerString))
             {
               continue;
             }
@@ -652,9 +937,10 @@ namespace Ogama.Modules.ImportExport.RawData
             }
 
             // Create Ogama columns placeholder
-            RawData newRawData = new RawData();
+            var newRawData = new RawData();
 
-            var subjectChanged = false;
+            bool subjectChanged = false;
+
             // Write subject name value
             if (numSubjectImportColumn != -1)
             {
@@ -697,21 +983,20 @@ namespace Ogama.Modules.ImportExport.RawData
             // Check for duplicate time entries
             if (timeInFileTime == lastTimeInFileTime)
             {
-              string message = string.Format(
-                "Two consecutive raw data samples had the same sampling time {0}."
-                + Environment.NewLine + "Time in FileTime is {1}" + Environment.NewLine +
-                "PrevTime in FileTime is {2}" + Environment.NewLine +
-                "This indicates an logfile error or wrong timescale."
-                + Environment.NewLine + "Please try to change the timescale to milliseconds.",
-                timeInMs,
-                timeInFileTime,
-                lastTimeInFileTime);
+              string message =
+                string.Format(
+                  "Two consecutive raw data samples had the same sampling time {0}." + Environment.NewLine
+                  + "Time in FileTime is {1}" + Environment.NewLine + "PrevTime in FileTime is {2}"
+                  + Environment.NewLine + "This indicates an logfile error or wrong timescale." + Environment.NewLine
+                  + "Please try to change the timescale to milliseconds.",
+                  timeInMs,
+                  timeInFileTime,
+                  lastTimeInFileTime);
               ExceptionMethods.ProcessErrorMessage(message);
               return;
             }
 
             // Set time check value
-            lastTimeInMs = timeInMs;
             lastTimeInFileTime = timeInFileTime;
 
             // Save time value
@@ -724,8 +1009,7 @@ namespace Ogama.Modules.ImportExport.RawData
                 newRawData.TrialSequence = currentTrialSequence;
                 break;
               case TrialSequenceImportModes.UseAssignmentTable:
-                if (!isLastTrial &&
-                  newRawData.Time + asciiSetting.StartTime >= trial2Time.Values[trialCounter])
+                if (!isLastTrial && newRawData.Time + asciiSetting.StartTime >= trial2Time.Values[trialCounter])
                 {
                   trialCounter++;
                   if (trialCounter >= trial2Time.Count)
@@ -744,8 +1028,6 @@ namespace Ogama.Modules.ImportExport.RawData
                   newRawData.TrialSequence = currentTrialSequence;
                 }
 
-                break;
-              default:
                 break;
             }
 
@@ -784,7 +1066,7 @@ namespace Ogama.Modules.ImportExport.RawData
             // Write trial category
             if (numCategoryImportColumn != -1)
             {
-              newRawData.Category = items[numCategoryImportColumn].ToString();
+              newRawData.Category = items[numCategoryImportColumn];
             }
 
             // Write PupilDiameters
@@ -839,7 +1121,7 @@ namespace Ogama.Modules.ImportExport.RawData
             }
 
             // Add the parsed raw data row to the list.
-            rawDataList.Add(newRawData);
+            RawDataList.Add(newRawData);
 
             // Increase counter
             counter++;
@@ -861,24 +1143,24 @@ namespace Ogama.Modules.ImportExport.RawData
     }
 
     /// <summary>
-    /// This method iterates the imported raw data rows to
-    /// catch the trial changes that are detected during the call
-    /// of <see cref="GenerateOgamaRawDataList(int)"/>.
-    /// The trials are then written into the trial list.
+    ///   This method iterates the imported raw data rows to
+    ///   catch the trial changes that are detected during the call
+    ///   of <see cref="GenerateOgamaRawDataList(int)" />.
+    ///   The trials are then written into the trial list.
     /// </summary>
     private static void GenerateOgamaSubjectAndTrialList()
     {
       // Clear foregoing imports.
-      trialList.Clear();
-      subjectList.Clear();
+      TrialList.Clear();
+      SubjectList.Clear();
 
-      if (rawDataList.Count == 0)
+      if (RawDataList.Count == 0)
       {
         // string message = "The parsing of the log file into OGAMAs " +
-        //  "Raw data columns failed. No lines have been successfully read. " +
-        //  Environment.NewLine +
-        //  "So the trial generation could not be started." +
-        //  Environment.NewLine + "Please change the import settings and try again";
+        // "Raw data columns failed. No lines have been successfully read. " +
+        // Environment.NewLine +
+        // "So the trial generation could not be started." +
+        // Environment.NewLine + "Please change the import settings and try again";
         // ExceptionMethods.ProcessErrorMessage(message);
         return;
       }
@@ -893,24 +1175,24 @@ namespace Ogama.Modules.ImportExport.RawData
       int subjectCounter = 0;
 
       // Iterate raw data list
-      for (int i = 0; i < rawDataList.Count; i++)
+      for (int i = 0; i < RawDataList.Count; i++)
       {
-        RawData importRow = rawDataList[i];
+        RawData importRow = RawDataList[i];
         currentSequence = importRow.TrialSequence;
         currentSubject = importRow.SubjectName;
 
         // If subject has changed write new subject table entry.
         if (currentSubject != lastSubject)
         {
-          SubjectsData newSubjectsData = new SubjectsData();
+          var newSubjectsData = new SubjectsData();
           newSubjectsData.SubjectName = currentSubject;
-          subjectList.Add(newSubjectsData);
+          SubjectList.Add(newSubjectsData);
 
           if (subjectCounter > 0)
           {
-            TrialsData tempSubjetData = trialList[overallTrialCounter - 1];
-            tempSubjetData.Duration = (int)(rawDataList[i - 1].Time - tempSubjetData.TrialStartTime);
-            trialList[overallTrialCounter - 1] = tempSubjetData;
+            TrialsData tempSubjetData = TrialList[overallTrialCounter - 1];
+            tempSubjetData.Duration = (int)(RawDataList[i - 1].Time - tempSubjetData.TrialStartTime);
+            TrialList[overallTrialCounter - 1] = tempSubjetData;
           }
 
           lastSubject = currentSubject;
@@ -965,7 +1247,7 @@ namespace Ogama.Modules.ImportExport.RawData
 
           // Add empty trial to sequence numbering.
           if (detectionSetting.StimuliImportMode != StimuliImportModes.UseImportColumn
-            && image == "No image file specified")
+              && image == "No image file specified")
           {
             if (!detectionSetting.TrialSequenceToTrialIDAssignments.ContainsKey(currentSequence))
             {
@@ -982,17 +1264,17 @@ namespace Ogama.Modules.ImportExport.RawData
             ////  time = detectionSetting.TrialSequenceToStarttimeAssignments[currentSequence];
             ////}
             //// break;
-
             case TrialSequenceImportModes.UseAssignmentTable:
             case TrialSequenceImportModes.UseMSGLines:
             case TrialSequenceImportModes.UseImportColumn:
+
               // Use the raw data timing
               time = importRow.Time;
               break;
           }
 
           // Create trial row
-          TrialsData newTrialData = new TrialsData();
+          var newTrialData = new TrialsData();
           newTrialData.SubjectName = subject;
           newTrialData.TrialSequence = currentSequence;
           newTrialData.TrialID = trialID;
@@ -1000,7 +1282,7 @@ namespace Ogama.Modules.ImportExport.RawData
           newTrialData.Category = categorie;
           newTrialData.TrialStartTime = time;
           newTrialData.Duration = -1;
-          trialList.Add(newTrialData);
+          TrialList.Add(newTrialData);
 
           lastSequence = currentSequence;
           trialCounter++;
@@ -1009,18 +1291,20 @@ namespace Ogama.Modules.ImportExport.RawData
           // Calculate trial duration for foregoing trial.
           if (trialCounter > 1)
           {
-            TrialsData tempSubjetData = trialList[overallTrialCounter - 2];
+            TrialsData tempSubjetData = TrialList[overallTrialCounter - 2];
             int duration = 0;
             switch (detectionSetting.TrialImportMode)
             {
               case TrialSequenceImportModes.UseAssignmentTable:
+
                 // Use the table timing
                 duration = (int)(time - tempSubjetData.TrialStartTime);
                 break;
               case TrialSequenceImportModes.UseMSGLines:
               case TrialSequenceImportModes.UseImportColumn:
+
                 // Use the raw data timing
-                duration = (int)(rawDataList[i].Time - tempSubjetData.TrialStartTime);
+                duration = (int)(RawDataList[i].Time - tempSubjetData.TrialStartTime);
                 break;
             }
 
@@ -1030,9 +1314,8 @@ namespace Ogama.Modules.ImportExport.RawData
             ////{
             ////  duration = (int)(rawDataList[i - 1].Time - tempSubjetData.TrialStartTime);
             ////}
-
             tempSubjetData.Duration = duration;
-            trialList[overallTrialCounter - 2] = tempSubjetData;
+            TrialList[overallTrialCounter - 2] = tempSubjetData;
           }
         }
       }
@@ -1040,150 +1323,30 @@ namespace Ogama.Modules.ImportExport.RawData
       // Reached end of rawdatalist, so add last trial duration value from last entry
       if (trialCounter >= 1)
       {
-        TrialsData tempSubjetData = trialList[overallTrialCounter - 1];
-        tempSubjetData.Duration = (int)(rawDataList[rawDataList.Count - 1].Time - tempSubjetData.TrialStartTime);
-        trialList[overallTrialCounter - 1] = tempSubjetData;
+        TrialsData tempSubjetData = TrialList[overallTrialCounter - 1];
+        tempSubjetData.Duration = (int)(RawDataList[RawDataList.Count - 1].Time - tempSubjetData.TrialStartTime);
+        TrialList[overallTrialCounter - 1] = tempSubjetData;
       }
     }
 
     /// <summary>
-    /// This static method creates a slide with a sized image 
-    /// for each trial and adds it to the slideshow.
+    ///   This method writes the data that is written in the lists during
+    ///   import to OGAMAs dataset.
+    ///   If this could be successfully done the whole new data is
+    ///   written to the database (.mdf).
     /// </summary>
-    /// <param name="detectonSettings">The <see cref="DetectionSettings"/>
-    /// used in this import.</param>
-    /// <param name="mainWindow">The <see cref="MainForm"/> to get access to the status label.</param>
-    public static void GenerateOgamaSlideshowTrials(DetectionSettings detectonSettings, MainForm mainWindow)
-    {
-      // Stores found stimuli files
-      List<string> trialNames = Document.ActiveDocument.ExperimentSettings.SlideShow.GetTrialNames();
-
-      foreach (KeyValuePair<int, int> kvp in detectonSettings.TrialSequenceToTrialIDAssignments)
-      {
-        int trialID = kvp.Value;
-        string file = string.Empty;
-        if (detectonSettings.TrialIDToImageAssignments.ContainsKey(trialID))
-        {
-          file = detectonSettings.TrialIDToImageAssignments[trialID];
-        }
-
-        string filename = Path.GetFileNameWithoutExtension(file);
-
-        // Create slide
-        var stopConditions = new StopConditionCollection
-          {
-            new MouseStopCondition(MouseButtons.Left, true, string.Empty, null, Point.Empty)
-          };
-
-        VGImage stimulusImage = null;
-
-        if (file != string.Empty)
-        {
-          stimulusImage = new VGImage(
-            ShapeDrawAction.None,
-            Pens.Black,
-            Brushes.Black,
-            SystemFonts.MenuFont,
-            Color.White,
-            Path.GetFileName(file),
-            Document.ActiveDocument.ExperimentSettings.SlideResourcesPath,
-            ImageLayout.Zoom,
-            1f,
-            Document.ActiveDocument.PresentationSize,
-            VGStyleGroup.None,
-            filename,
-            string.Empty,
-            true)
-            {
-              Size = Document.ActiveDocument.PresentationSize
-            };
-        }
-
-        var newSlide = new Slide(
-          filename, Color.White, null, stopConditions, null, string.Empty, Document.ActiveDocument.PresentationSize)
-          {
-            Modified = true,
-            MouseCursorVisible = true
-          };
-
-        // Only add stimulus if an image exists
-        if (file != string.Empty)
-        {
-          newSlide.VGStimuli.Add(stimulusImage);
-        }
-        else
-        {
-          newSlide.Name = "No stimulus detected";
-        }
-
-        // Create trial
-        trialID = int.Parse(Document.ActiveDocument.ExperimentSettings.SlideShow.GetUnusedNodeID());
-
-        var newTrial = new Trial(filename, trialID)
-          {
-            Name = filename
-          };
-
-        newTrial.Add(newSlide);
-
-        if (trialNames.Contains(filename)
-          ||
-          (filename == string.Empty && trialNames.Contains("No stimulus detected")))
-        {
-          // Trial already exists
-          continue;
-        }
-
-        trialNames.Add(filename);
-
-        // Create slide node
-        var slideNode = new SlideshowTreeNode(newSlide.Name)
-        {
-          Name = trialID.ToString(CultureInfo.InvariantCulture),
-          Slide = newSlide
-        };
-
-        // Add slide node to slideshow
-        Document.ActiveDocument.ExperimentSettings.SlideShow.Nodes.Add(slideNode);
-
-        ////if (stimulusImage != null)
-        ////{
-        ////  stimulusImage.Dispose();
-        ////}
-
-        ////newSlide.Dispose();
-
-        Document.ActiveDocument.Modified = true;
-      }
-
-      mainWindow.StatusLabel.Text = "Saving slideshow to file ...";
-      if (!Document.ActiveDocument.SaveSettingsToFile(Document.ActiveDocument.ExperimentSettings.DocumentFilename))
-      {
-        ExceptionMethods.ProcessErrorMessage("Couldn't save slideshow to experiment settings.");
-      }
-
-      mainWindow.StatusLabel.Text = "Refreshing context panel ...";
-      mainWindow.RefreshContextPanelImageTabs();
-      mainWindow.StatusLabel.Text = "Ready ...";
-      mainWindow.StatusProgressbar.Value = 0;
-    }
-
-    /// <summary>
-    /// This method writes the data that is written in the lists during
-    /// import to OGAMAs dataset.
-    /// If this could be successfully done the whole new data is
-    /// written to the database (.mdf).
-    /// </summary>
-    /// <returns><strong>True</strong> if successful, otherwise
-    /// <strong>false</strong>.</returns>
+    /// <returns>
+    ///   <strong>True</strong> if successful, otherwise
+    ///   <strong>false</strong>.
+    /// </returns>
     private static bool SaveImportIntoTablesAndDB()
     {
-      Dictionary<string, List<RawData>> rawDataBySubject = SplitRawDataListBySubjects(rawDataList);
-      Dictionary<string, List<TrialsData>> trialDataBySubject = SplitTrialDataListBySubjects(trialList);
+      Dictionary<string, List<RawData>> rawDataBySubject = SplitRawDataListBySubjects(RawDataList);
+      Dictionary<string, List<TrialsData>> trialDataBySubject = SplitTrialDataListBySubjects(TrialList);
       int subjectErrorCounter = 0;
       try
       {
-        foreach (SubjectsData subject in subjectList)
+        foreach (SubjectsData subject in SubjectList)
         {
           string testSub = subject.SubjectName;
           if (!Queries.ValidateSubjectName(ref testSub, false))
@@ -1201,6 +1364,9 @@ namespace Ogama.Modules.ImportExport.RawData
 
           // Creates an empty raw data table in the mdf database
           Queries.CreateRawDataTableInDB(subject.SubjectName);
+
+          // Push changes to database
+          Document.ActiveDocument.DocDataSet.AcceptChanges();
 
           // Write RawDataTable into File with Bulk Statement
           Queries.WriteRawDataWithBulkStatement(subject.SubjectName);
@@ -1221,11 +1387,11 @@ namespace Ogama.Modules.ImportExport.RawData
         Document.ActiveDocument.DocDataSet.EnforceConstraints = false;
 
         // Update subjects and trials table in the mdf database
-        int affectedRows = Document.ActiveDocument.DocDataSet.TrialsAdapter.Update(
-          Document.ActiveDocument.DocDataSet.Trials);
-        affectedRows = Document.ActiveDocument.DocDataSet.SubjectsAdapter.Update(
-         Document.ActiveDocument.DocDataSet.Subjects);
-
+        int affectedRows = Document.ActiveDocument.DocDataSet.TrialsAdapter.Update(Document.ActiveDocument.DocDataSet.Trials);
+        Console.WriteLine(affectedRows + "Trial updates written");
+        affectedRows = Document.ActiveDocument.DocDataSet.SubjectsAdapter.Update(Document.ActiveDocument.DocDataSet.Subjects);
+        Console.WriteLine(affectedRows + "Subject updates written");
+        
         Document.ActiveDocument.DocDataSet.AcceptChanges();
         Document.ActiveDocument.DocDataSet.CreateRawDataAdapters();
       }
@@ -1237,7 +1403,7 @@ namespace Ogama.Modules.ImportExport.RawData
         // First reject changes (remove trial and subject table modifications)
         Document.ActiveDocument.DocDataSet.RejectChanges();
 
-        foreach (SubjectsData subject in subjectList)
+        foreach (SubjectsData subject in SubjectList)
         {
           // Remove eventually added raw data table in dataset
           if (Document.ActiveDocument.DocDataSet.Tables.Contains(subject.SubjectName + "Rawdata"))
@@ -1258,10 +1424,10 @@ namespace Ogama.Modules.ImportExport.RawData
 
       if (subjectErrorCounter > 0)
       {
-        string message = subjectErrorCounter.ToString() + " subject(s) have unallowed names or " +
-          "their names already exist in the experiments database." +
-          Environment.NewLine + "Please modify your import file and change the subject name(s), or delete " +
-          "the existing database entry.";
+        string message = subjectErrorCounter + " subject(s) have unallowed names or "
+                         + "their names already exist in the experiments database." + Environment.NewLine
+                         + "Please modify your import file and change the subject name(s), or delete "
+                         + "the existing database entry.";
         ExceptionMethods.ProcessMessage("Unallowed subject names", message);
         return false;
       }
@@ -1270,23 +1436,82 @@ namespace Ogama.Modules.ImportExport.RawData
     }
 
     /// <summary>
-    /// This method splits the given raw data list into a 
-    /// dictionary of raw data lists separated by subjects.
+    /// This method shows a dialog asking for saving the current
+    ///   import settings to hard disk.
+    ///   They are persited in xml format.
     /// </summary>
-    /// <remarks>This is done to enable writing a raw data table for each subject.</remarks>
-    /// <param name="wholeRawDataList">A <see cref="List{RawData}"/>
-    /// with all the imported samples.</param>
-    /// <returns>A Dictionary with the splitted input.</returns>
+    private static void SaveImportSettings()
+    {
+      var ofdSaveSettings = new SaveFileDialog
+                              {
+                                DefaultExt = "ois",
+                                FileName = "*.ois",
+                                FilterIndex = 1,
+                                Filter = "Ogama import settings files|*.ois",
+                                Title = "Please specify settings filename",
+                                InitialDirectory = Properties.Settings.Default.ImportSettingsPath
+                              };
+
+      if (ofdSaveSettings.ShowDialog() == DialogResult.OK)
+      {
+        SerializeSettings(ofdSaveSettings.FileName);
+      }
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////
+    // Small helping Methods                                                     //
+    ///////////////////////////////////////////////////////////////////////////////
+
+    /// <summary>
+    /// Saves the current import setting to a OGAMA import settings file.
+    ///   Extension ".ois"
+    /// </summary>
+    /// <param name="filePath">
+    /// A <see cref="string"/> with the path to the
+    ///   OGAMA target import settings xml file.
+    /// </param>
+    private static void SerializeSettings(string filePath)
+    {
+      try
+      {
+        using (TextWriter writer = new StreamWriter(filePath))
+        {
+          var settings = new MergedSettings { AsciiSetting = asciiSetting, DetectionSetting = detectionSetting };
+
+          var serializer = new XmlSerializer(typeof(MergedSettings));
+          serializer.Serialize(writer, settings);
+        }
+      }
+      catch (Exception ex)
+      {
+        ExceptionMethods.HandleException(ex);
+      }
+    }
+
+    /// <summary>
+    /// This method splits the given raw data list into a
+    ///   dictionary of raw data lists separated by subjects.
+    /// </summary>
+    /// <remarks>
+    /// This is done to enable writing a raw data table for each subject.
+    /// </remarks>
+    /// <param name="wholeRawDataList">
+    /// A <see cref="List{RawData}"/>
+    ///   with all the imported samples.
+    /// </param>
+    /// <returns>
+    /// A Dictionary with the splitted input.
+    /// </returns>
     private static Dictionary<string, List<RawData>> SplitRawDataListBySubjects(List<RawData> wholeRawDataList)
     {
       // Create the return dictionary
-      Dictionary<string, List<RawData>> rawDataBySubject = new Dictionary<string, List<RawData>>();
+      var rawDataBySubject = new Dictionary<string, List<RawData>>();
 
       // Get First subject name
       string lastSubjectName = wholeRawDataList[0].SubjectName;
 
       // Create list for current subject
-      List<RawData> currentList = new List<RawData>();
+      var currentList = new List<RawData>();
 
       // Iterate whole raw data list and add for each subject a 
       // new entry in the rawDataBySubject list.
@@ -1309,213 +1534,6 @@ namespace Ogama.Modules.ImportExport.RawData
       return rawDataBySubject;
     }
 
-    /// <summary>
-    /// This method splits the given trials data list into a 
-    /// dictionary of trial data lists separated by subjects.
-    /// </summary>
-    /// <param name="wholeTrialDataList">A <see cref="List{TrialsData}"/>
-    /// with all the imported samples.</param>
-    /// <returns>A Dictionary with the splitted input.</returns>
-    public static Dictionary<string, List<TrialsData>> SplitTrialDataListBySubjects(List<TrialsData> wholeTrialDataList)
-    {
-      // Create the return dictionary
-      Dictionary<string, List<TrialsData>> trialDataBySubject = new Dictionary<string, List<TrialsData>>();
-
-      // Get First subject name
-      string lastSubjectName = string.Empty; // = wholeTrialDataList[0].SubjectName;
-
-      // Create list for current subject
-      List<TrialsData> currentList = new List<TrialsData>();
-
-      // Iterate whole raw data list and add for each subject a 
-      // new entry in the rawDataBySubject list.
-      foreach (TrialsData data in wholeTrialDataList)
-      {
-        if (data.SubjectName != lastSubjectName)
-        {
-          trialDataBySubject.Add(data.SubjectName, currentList);
-          currentList = new List<TrialsData>();
-          lastSubjectName = data.SubjectName;
-        }
-
-        currentList.Add(data);
-      }
-
-      // Return list.
-      return trialDataBySubject;
-    }
-
-    /// <summary>
-    /// This method shows a dialog, that gives the option
-    /// to use a import settings file during import.
-    /// </summary>
-    /// <remarks>This functionality is extremely useful, when multiple log
-    /// files of the same type should be imported.</remarks>
-    private static void AskforUsingSettingsFile()
-    {
-      if (MessageBox.Show(
-        "Would you like to use a settings file ?",
-        Application.ProductName,
-        MessageBoxButtons.YesNo,
-        MessageBoxIcon.Question) == DialogResult.Yes)
-      {
-        OpenFileDialog ofdOpenSettings = new OpenFileDialog();
-        ofdOpenSettings.DefaultExt = "ois";
-        ofdOpenSettings.FileName = "*.ois";
-        ofdOpenSettings.FilterIndex = 1;
-        ofdOpenSettings.InitialDirectory = Properties.Settings.Default.ImportSettingsPath;
-        ofdOpenSettings.Filter = "Ogama import settings files|*.ois";
-        ofdOpenSettings.Title = "Please select import settings file ...";
-        if (ofdOpenSettings.ShowDialog() == DialogResult.OK)
-        {
-          string settingsFilename = ofdOpenSettings.FileName;
-          ImportRawData.DeserializeSettings(settingsFilename);
-          detectionSetting.SubjectName = "Subject1";
-          detectionSetting.SavedSettings = true;
-        }
-      }
-    }
-
-    /// <summary>
-    /// This method shows a dialog asking for saving the current
-    /// import settings to hard disk.
-    /// They are persited in xml format.
-    /// </summary>
-    /// <param name="logFileImportSettings">A <see cref="ASCIISettings"/> with the ascii parsing settings.</param>
-    /// <param name="rawdataSettings">A <see cref="DetectionSettings"/> with the raw data parsing settings.</param>
-    private static void SaveImportSettings(
-      ASCIISettings logFileImportSettings,
-      DetectionSettings rawdataSettings)
-    {
-      var ofdSaveSettings = new SaveFileDialog
-        {
-          DefaultExt = "ois",
-          FileName = "*.ois",
-          FilterIndex = 1,
-          Filter = "Ogama import settings files|*.ois",
-          Title = "Please specify settings filename",
-          InitialDirectory = Properties.Settings.Default.ImportSettingsPath
-        };
-
-      if (ofdSaveSettings.ShowDialog() == DialogResult.OK)
-      {
-        SerializeSettings(ofdSaveSettings.FileName);
-      }
-    }
-
-    #endregion //METHODS
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Small helping Methods                                                     //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region HELPER
-
-    /// <summary>
-    /// This method extracts a filename of a iViewX msg line
-    /// with the given trigger string.
-    /// </summary>
-    /// <param name="line">The line to search for.</param>
-    /// <param name="triggerString">The trigger string in the message after which the filename
-    /// appears.</param>
-    /// <param name="currentTrialID">The ID of the current trial.</param>
-    public static void ExtractImageNameFromiViewXMSG(string line, string triggerString, int currentTrialID)
-    {
-      if (line.Contains(triggerString))
-      {
-        string[] items = line.Trim().Split(asciiSetting.ColumnSeparatorCharacter);
-        foreach (string item in items)
-        {
-          // Find item with trigger string
-          if (item.Contains(triggerString))
-          {
-            // Remove "Scene Image" Prefix to get the filename
-            string imagepath = item.Replace(triggerString, string.Empty);
-            string stimulusFile = Path.GetFileName(imagepath).Trim();
-            if (!detectionSetting.ImageDictionary.ContainsKey(currentTrialID))
-            {
-              detectionSetting.ImageDictionary.Add(currentTrialID, stimulusFile);
-            }
-            else
-            {
-              detectionSetting.ImageDictionary[currentTrialID] = stimulusFile;
-            }
-
-            detectionSetting.TrialSequenceToTrialIDAssignments[currentTrialID] = currentTrialID;
-
-            if (!detectionSetting.TrialIDToImageAssignments.ContainsKey(currentTrialID))
-            {
-              detectionSetting.TrialIDToImageAssignments.Add(currentTrialID, stimulusFile);
-            }
-
-            break;
-          }
-        }
-      }
-    }
-
-    /// <summary>
-    /// Saves the current import setting to a OGAMA import settings file.
-    /// Extension ".ois"
-    /// </summary>
-    /// <param name="filePath">A <see cref="string"/> with the path to the 
-    /// OGAMA target import settings xml file.</param>
-    private static void SerializeSettings(string filePath)
-    {
-      try
-      {
-        using (TextWriter writer = new StreamWriter(filePath))
-        {
-          var settings = new MergedSettings
-            {
-              AsciiSetting = asciiSetting,
-              DetectionSetting = detectionSetting
-            };
-
-          var serializer = new XmlSerializer(typeof(MergedSettings));
-          serializer.Serialize(writer, settings);
-        }
-      }
-      catch (Exception ex)
-      {
-        ExceptionMethods.HandleException(ex);
-      }
-    }
-
-    /// <summary>
-    /// Reads an OGAMA import settings file.
-    /// </summary>
-    /// <param name="filePath">A <see cref="string"/> with the path to the 
-    /// OGAMA import settings xml file.</param>
-    /// <returns><strong>True</strong> if successful, 
-    /// otherwise <strong>null</strong>.</returns>
-    private static bool DeserializeSettings(string filePath)
-    {
-      try
-      {
-        using (var fs = new FileStream(filePath, FileMode.Open))
-        {
-          // Create an instance of the XmlSerializer class;
-          // specify the type of object to be deserialized 
-          var serializer = new XmlSerializer(typeof(MergedSettings));
-
-          /* Use the Deserialize method to restore the object's state with
-          data from the XML document. */
-          var settings = (MergedSettings)serializer.Deserialize(fs);
-
-          asciiSetting = settings.AsciiSetting;
-          detectionSetting = settings.DetectionSetting;
-        }
-      }
-      catch (Exception ex)
-      {
-        ExceptionMethods.HandleException(ex);
-
-        return false;
-      }
-
-      return true;
-    }
-
-    #endregion //HELPER
+    #endregion
   }
 }
