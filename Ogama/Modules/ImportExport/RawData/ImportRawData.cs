@@ -654,6 +654,25 @@ namespace Ogama.Modules.ImportExport.RawData
             // Create Ogama columns placeholder
             RawData newRawData = new RawData();
 
+            var subjectChanged = false;
+            // Write subject name value
+            if (numSubjectImportColumn != -1)
+            {
+              currentSubjectName = items[numSubjectImportColumn];
+              newRawData.SubjectName = currentSubjectName;
+              if (currentSubjectName != lastSubjectName)
+              {
+                lastSubjectName = currentSubjectName;
+                currentTrialSequence = 0;
+                trialCounter = 0;
+                subjectChanged = true;
+              }
+            }
+            else
+            {
+              newRawData.SubjectName = detectionSetting.SubjectName;
+            }
+
             // Calculate time value
             double timeInFileTime = Convert.ToDouble(items[numTimeImportColumn], nfi);
             long timeInMs = Convert.ToInt64(timeInFileTime * detectionSetting.TimeFactor);
@@ -668,7 +687,7 @@ namespace Ogama.Modules.ImportExport.RawData
             }
 
             // Save starttime
-            if (counter == 0 || (asciiSetting.ColumnTitlesAtFirstRow && counter == 1))
+            if (counter == 0 || (asciiSetting.ColumnTitlesAtFirstRow && counter == 1) || subjectChanged)
             {
               asciiSetting.StartTime = timeInMs;
               trial2Time[currentTrialSequence] = timeInMs;
@@ -697,23 +716,6 @@ namespace Ogama.Modules.ImportExport.RawData
 
             // Save time value
             newRawData.Time = timeInMs - asciiSetting.StartTime;
-
-            // Write subject name value
-            if (numSubjectImportColumn != -1)
-            {
-              currentSubjectName = items[numSubjectImportColumn];
-              newRawData.SubjectName = currentSubjectName;
-              if (currentSubjectName != lastSubjectName)
-              {
-                lastSubjectName = currentSubjectName;
-                currentTrialSequence = 0;
-                trialCounter = 0;
-              }
-            }
-            else
-            {
-              newRawData.SubjectName = detectionSetting.SubjectName;
-            }
 
             // Write Trial Sequence
             switch (detectionSetting.TrialImportMode)
@@ -907,8 +909,7 @@ namespace Ogama.Modules.ImportExport.RawData
           if (subjectCounter > 0)
           {
             TrialsData tempSubjetData = trialList[overallTrialCounter - 1];
-            tempSubjetData.Duration =
-              (int)(rawDataList[i - 1].Time - tempSubjetData.TrialStartTime);
+            tempSubjetData.Duration = (int)(rawDataList[i - 1].Time - tempSubjetData.TrialStartTime);
             trialList[overallTrialCounter - 1] = tempSubjetData;
           }
 
@@ -1008,7 +1009,7 @@ namespace Ogama.Modules.ImportExport.RawData
           // Calculate trial duration for foregoing trial.
           if (trialCounter > 1)
           {
-            TrialsData tempSubjetData = trialList[trialCounter - 2];
+            TrialsData tempSubjetData = trialList[overallTrialCounter - 2];
             int duration = 0;
             switch (detectionSetting.TrialImportMode)
             {
@@ -1031,7 +1032,7 @@ namespace Ogama.Modules.ImportExport.RawData
             ////}
 
             tempSubjetData.Duration = duration;
-            trialList[trialCounter - 2] = tempSubjetData;
+            trialList[overallTrialCounter - 2] = tempSubjetData;
           }
         }
       }
@@ -1040,8 +1041,7 @@ namespace Ogama.Modules.ImportExport.RawData
       if (trialCounter >= 1)
       {
         TrialsData tempSubjetData = trialList[overallTrialCounter - 1];
-        tempSubjetData.Duration =
-          (int)(rawDataList[rawDataList.Count - 1].Time - tempSubjetData.TrialStartTime);
+        tempSubjetData.Duration = (int)(rawDataList[rawDataList.Count - 1].Time - tempSubjetData.TrialStartTime);
         trialList[overallTrialCounter - 1] = tempSubjetData;
       }
     }
@@ -1322,7 +1322,7 @@ namespace Ogama.Modules.ImportExport.RawData
       Dictionary<string, List<TrialsData>> trialDataBySubject = new Dictionary<string, List<TrialsData>>();
 
       // Get First subject name
-      string lastSubjectName = wholeTrialDataList[0].SubjectName;
+      string lastSubjectName = string.Empty; // = wholeTrialDataList[0].SubjectName;
 
       // Create list for current subject
       List<TrialsData> currentList = new List<TrialsData>();
@@ -1333,16 +1333,13 @@ namespace Ogama.Modules.ImportExport.RawData
       {
         if (data.SubjectName != lastSubjectName)
         {
-          trialDataBySubject.Add(lastSubjectName, currentList);
+          trialDataBySubject.Add(data.SubjectName, currentList);
           currentList = new List<TrialsData>();
           lastSubjectName = data.SubjectName;
         }
 
         currentList.Add(data);
       }
-
-      // Add last subject
-      trialDataBySubject.Add(lastSubjectName, currentList);
 
       // Return list.
       return trialDataBySubject;
