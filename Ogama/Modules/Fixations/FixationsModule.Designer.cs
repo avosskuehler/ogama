@@ -774,7 +774,7 @@ namespace Ogama.Modules.Fixations
       this.btnImport.Size = new System.Drawing.Size(23, 23);
       this.btnImport.Text = "Import Fixations";
       this.btnImport.ToolTipText = "Imports ascii file with fixation into OGAMAs table.";
-      this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
+      this.btnImport.Click += new System.EventHandler(this.BtnImportClick);
       // 
       // btnExport
       // 

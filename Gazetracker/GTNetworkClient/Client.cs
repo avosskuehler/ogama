@@ -370,7 +370,7 @@ namespace GTNetworkClient
     /// Sending simple string commands to the tracker
     /// </summary>
     /// <param name="cmd">A command <see cref="String"/></param>
-    /// <returns>True if succesful, otherwise false</returns>
+    /// <returns>True if successful, otherwise false</returns>
     public bool SendCommand(string cmd)
     {
       return SendCommand(cmd, null);
@@ -381,7 +381,7 @@ namespace GTNetworkClient
     /// </summary>
     /// <param name="cmd">A command <see cref="String"/></param>
     /// <param name="value">A <see cref="String"/> containing the parameter value</param>
-    /// <returns>True if succesful, otherwise false</returns>
+    /// <returns>True if successful, otherwise false</returns>
     public bool SendCommand(string cmd, string value)
     {
       if (cmd == null || this.tcpClient == null)

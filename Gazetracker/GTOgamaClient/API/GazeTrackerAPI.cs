@@ -165,7 +165,7 @@ namespace GTOgamaClient.API
     /// The implementation of this method connects the client, so that the
     /// system is ready for calibration.
     /// </summary>
-    /// <returns><strong>True</strong> if succesful connected to tracker,
+    /// <returns><strong>True</strong> if successful connected to tracker,
     /// otherwise <strong>false</strong>.</returns>
     public virtual bool Connect()
     {
@@ -410,7 +410,7 @@ namespace GTOgamaClient.API
 
     /// <summary>
     /// This virtual method sets the default gazetracker settings
-    /// for a succesful ogama connection.
+    /// for a successful ogama connection.
     /// </summary>
     protected virtual void InitSettings()
     {

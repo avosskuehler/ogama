@@ -2249,7 +2249,7 @@ namespace Ogama.Modules.Replay
           break;
       }
 
-      bool succesful = true;
+      bool successful = true;
 
       try
       {
@@ -2280,10 +2280,10 @@ namespace Ogama.Modules.Replay
           "Try to disable the audio stream of the video player in the context panel, by using its context menu and disable the audio playback of this interface by clicking on the sound button. Unfortunately most of the audio stream formats don´t support other replay speed than 1.");
 
         this.cbbSpeed.SelectedIndex = 4;
-        succesful = false;
+        successful = false;
       }
 
-      if (succesful)
+      if (successful)
       {
         this.replayPicture.Speed = speed;
       }

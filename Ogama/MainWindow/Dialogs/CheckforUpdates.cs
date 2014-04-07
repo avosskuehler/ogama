@@ -235,7 +235,7 @@ namespace Ogama.MainWindow.Dialogs
     /// The <see cref="WebClient.DownloadFileCompleted"/> event for the
     /// <see cref="WebClient"/> <see cref="updateClient"/>.
     /// Occurs when an asynchronous file download operation completes.
-    /// So download was finished. Check for errors and if succesful,
+    /// So download was finished. Check for errors and if successful,
     /// start parsing version.txt and display results.
     /// </summary>
     /// <param name="sender">Source of the event.</param>
@@ -251,7 +251,7 @@ namespace Ogama.MainWindow.Dialogs
       }
       else
       {
-        this.lblDownloadStatus.Text = "Download succesful";
+        this.lblDownloadStatus.Text = "Download successful";
         if (this.ParseVersionTxt())
         {
           int result = this.serverVersion.CompareTo(this.assemblyVersion);

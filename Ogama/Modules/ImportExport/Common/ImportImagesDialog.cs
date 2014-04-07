@@ -181,7 +181,7 @@ namespace Ogama.Modules.ImportExport.Common
     /// The <see cref="Control.Click"/> event handler for
     /// the <see cref="Button"/> <see cref="btnImport"/>.
     /// Saves the imported images and validates the filenames. If
-    /// validating is succesful returns a <see cref="DialogResult.OK"/>.
+    /// validating is successful returns a <see cref="DialogResult.OK"/>.
     /// otherwise the <see cref="DialogResult.Retry"/> flag is set,
     /// which will cancel the closing of the form in the
     /// <see cref="Form.FormClosing"/> event handler.

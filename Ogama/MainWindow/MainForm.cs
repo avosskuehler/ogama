@@ -258,7 +258,7 @@ namespace Ogama.MainWindow
     {
       if (this.loadFileFromCommandLine)
       {
-        // after succesful loading enable main menu items
+        // after successful loading enable main menu items
         if (this.OpenDocument(this.commandLineFileName))
         {
           this.ChangeMenuItems(true);
@@ -487,9 +487,9 @@ namespace Ogama.MainWindow
 
     /// <summary>
     /// This method shows an dialog to ask for saving settings,
-    /// and returns true if succesful and false, if saving has been cancelled.
+    /// and returns true if successful and false, if saving has been cancelled.
     /// </summary>
-    /// <returns><strong>True</strong> if succesful and <strong>false</strong>,
+    /// <returns><strong>True</strong> if successful and <strong>false</strong>,
     /// if saving has been cancelled.</returns>
     private bool SaveAndDisposeDocument()
     {
@@ -559,7 +559,7 @@ namespace Ogama.MainWindow
     /// </summary>
     /// <param name="filename">A <see cref="string"/> with 
     /// full path to experiment settings file</param>
-    /// <returns><strong>True</strong> if opening was succesful,
+    /// <returns><strong>True</strong> if opening was successful,
     /// otherwise <strong>false</strong>.</returns>
     private bool OpenDocument(string filename)
     {
@@ -687,7 +687,7 @@ namespace Ogama.MainWindow
             }
             else
             {
-              // after succesful loading enable main menu items
+              // after successful loading enable main menu items
               if (this.OpenDocument(recentFilesWithPath[selectedItem]))
               {
                 this.ChangeMenuItems(true);

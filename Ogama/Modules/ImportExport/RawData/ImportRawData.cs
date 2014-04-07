@@ -212,7 +212,7 @@ namespace Ogama.Modules.ImportExport.RawData
                     GenerateOgamaSubjectAndTrialList();
 
                     // Save the import into ogamas database and the mdf file.
-                    var succesful = SaveImportIntoTablesAndDB();
+                    var successful = SaveImportIntoTablesAndDB();
 
                     // Create slideshow trials
                     GenerateOgamaSlideshowTrials(detectionSetting, mainWindow);
@@ -229,7 +229,7 @@ namespace Ogama.Modules.ImportExport.RawData
                     asciiSetting.WaitingSplash.CancelAsync();
 
                     // Inform user about success.
-                    if (succesful)
+                    if (successful)
                     {
                       string message = "Import data successfully written to database." + Environment.NewLine +
                         "Please don´t forget to move the stimuli images to the SlideResources subfolder" +
@@ -1053,18 +1053,18 @@ namespace Ogama.Modules.ImportExport.RawData
     /// <param name="detectonSettings">The <see cref="DetectionSettings"/>
     /// used in this import.</param>
     /// <param name="mainWindow">The <see cref="MainForm"/> to get access to the status label.</param>
-    private static void GenerateOgamaSlideshowTrials(DetectionSettings detectonSettings, MainForm mainWindow)
+    public static void GenerateOgamaSlideshowTrials(DetectionSettings detectonSettings, MainForm mainWindow)
     {
       // Stores found stimuli files
       List<string> trialNames = Document.ActiveDocument.ExperimentSettings.SlideShow.GetTrialNames();
 
-      foreach (KeyValuePair<int, int> kvp in detectionSetting.TrialSequenceToTrialIDAssignments)
+      foreach (KeyValuePair<int, int> kvp in detectonSettings.TrialSequenceToTrialIDAssignments)
       {
         int trialID = kvp.Value;
         string file = string.Empty;
-        if (detectionSetting.TrialIDToImageAssignments.ContainsKey(trialID))
+        if (detectonSettings.TrialIDToImageAssignments.ContainsKey(trialID))
         {
-          file = detectionSetting.TrialIDToImageAssignments[trialID];
+          file = detectonSettings.TrialIDToImageAssignments[trialID];
         }
 
         string filename = Path.GetFileNameWithoutExtension(file);
@@ -1174,7 +1174,7 @@ namespace Ogama.Modules.ImportExport.RawData
     /// If this could be successfully done the whole new data is
     /// written to the database (.mdf).
     /// </summary>
-    /// <returns><strong>True</strong> if succesful, otherwise
+    /// <returns><strong>True</strong> if successful, otherwise
     /// <strong>false</strong>.</returns>
     private static bool SaveImportIntoTablesAndDB()
     {
@@ -1316,7 +1316,7 @@ namespace Ogama.Modules.ImportExport.RawData
     /// <param name="wholeTrialDataList">A <see cref="List{TrialsData}"/>
     /// with all the imported samples.</param>
     /// <returns>A Dictionary with the splitted input.</returns>
-    private static Dictionary<string, List<TrialsData>> SplitTrialDataListBySubjects(List<TrialsData> wholeTrialDataList)
+    public static Dictionary<string, List<TrialsData>> SplitTrialDataListBySubjects(List<TrialsData> wholeTrialDataList)
     {
       // Create the return dictionary
       Dictionary<string, List<TrialsData>> trialDataBySubject = new Dictionary<string, List<TrialsData>>();
@@ -1421,7 +1421,7 @@ namespace Ogama.Modules.ImportExport.RawData
     /// <param name="triggerString">The trigger string in the message after which the filename
     /// appears.</param>
     /// <param name="currentTrialID">The ID of the current trial.</param>
-    private static void ExtractImageNameFromiViewXMSG(string line, string triggerString, int currentTrialID)
+    public static void ExtractImageNameFromiViewXMSG(string line, string triggerString, int currentTrialID)
     {
       if (line.Contains(triggerString))
       {

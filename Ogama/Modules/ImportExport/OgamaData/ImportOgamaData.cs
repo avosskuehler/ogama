@@ -143,13 +143,13 @@ namespace Ogama.Modules.ImportExport.OgamaData
           GenerateSubjectTrialRawdataList();
 
           // Save the import into ogamas database and the mdf file.
-          var succesful = SaveImportIntoTablesAndDB();
+          var successful = SaveImportIntoTablesAndDB();
 
           // Import has finished.
           asciiSettings.WaitingSplash.CancelAsync();
 
           // Inform user about success.
-          if (succesful)
+          if (successful)
           {
             ExceptionMethods.ProcessMessage("Success", "Import data successfully written to database.");
           }
@@ -410,7 +410,7 @@ namespace Ogama.Modules.ImportExport.OgamaData
     /// If this could be successfully done the whole new data is
     /// written to the database (.mdf).
     /// </summary>
-    /// <returns><strong>True</strong> if succesful, otherwise
+    /// <returns><strong>True</strong> if successful, otherwise
     /// <strong>false</strong>.</returns>
     private static bool SaveImportIntoTablesAndDB()
     {

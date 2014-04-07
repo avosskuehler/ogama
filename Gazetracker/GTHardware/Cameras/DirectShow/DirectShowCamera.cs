@@ -840,7 +840,7 @@ namespace GTHardware.Cameras.DirectShow
         if (frameRate + height + width > 0)
           SetConfigParms(capGraph, capFilter, frameRate, width, height);
 
-        // Check for succesful rendering, if this failed the class cannot be used, so dispose the resources and return false.
+        // Check for successful rendering, if this failed the class cannot be used, so dispose the resources and return false.
         if (hr < 0)
         {
           Cleanup();

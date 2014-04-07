@@ -276,7 +276,7 @@ namespace Ogama.Modules.Recording.TrackerBase
     /// connection routines for the specific hardware, so that the
     /// system is ready for calibration.
     /// </summary>
-    /// <returns><strong>True</strong> if succesful connected to tracker,
+    /// <returns><strong>True</strong> if successful connected to tracker,
     /// otherwise <strong>false</strong>.</returns>
     public abstract bool Connect();
 
@@ -288,7 +288,7 @@ namespace Ogama.Modules.Recording.TrackerBase
     /// <param name="isRecalibrating"><strong>True</strong> if calibration
     /// is in recalibration mode, indicating to renew only a few points,
     /// otherwise <strong>false</strong>.</param>
-    /// <returns><strong>True</strong> if succesful calibrated,
+    /// <returns><strong>True</strong> if successful calibrated,
     /// otherwise <strong>false</strong>.</returns>
     /// <remarks>Implementors do not have to use the recalibrating 
     /// parameter.</remarks>

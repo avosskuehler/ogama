@@ -10,7 +10,7 @@
 //   Derived from <see cref="FormWithPicture" />.
 //   This <see cref="Form" /> is the recording module of OGAMA.
 //   It is intended to receive the sampling data from the
-//   <see cref="ITracker" /> interfaces and stores them after succesful
+//   <see cref="ITracker" /> interfaces and stores them after successful
 //   presentation of the slideshow via the <see cref="PresenterModule" />
 //   into OGAMAs database.
 // </summary>

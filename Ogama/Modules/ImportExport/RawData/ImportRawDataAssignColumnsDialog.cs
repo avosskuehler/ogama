@@ -100,7 +100,7 @@ namespace Ogama.Modules.ImportExport.RawData
     /// <summary>
     /// The <see cref="Control.Click"/> event handler for
     /// the <see cref="Button"/> <see cref="btnNext"/>.
-    /// Save assignments and if it is not succesful set the
+    /// Save assignments and if it is not successful set the
     /// <see cref="DialogResult.Retry"/> to cancel closing
     /// during <see cref="Form.FormClosing"/> and have a second try.
     /// </summary>
@@ -209,7 +209,7 @@ namespace Ogama.Modules.ImportExport.RawData
     /// This method checks for assigning of all minimum relevant columns,
     /// and returns false if some are missing.
     /// </summary>
-    /// <returns><strong>True</strong> if succesful, otherwise
+    /// <returns><strong>True</strong> if successful, otherwise
     /// <strong>false</strong>.</returns>
     private bool ValidateAssignments()
     {

@@ -1563,7 +1563,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     /// Document.ActiveDocument.DocDataSet.Subjects);</code></remarks>
     /// <param name="subjectData">A <see cref="SubjectsData"/> with the 
     /// new subject information.</param>
-    /// <returns><strong>True</strong>, if succesful otherwise, <strong>false</strong>.</returns>
+    /// <returns><strong>True</strong>, if successful otherwise, <strong>false</strong>.</returns>
     public static bool WriteSubjectToDataSet(SubjectsData subjectData)
     {
       OgamaDataSet.SubjectsRow workSubjectData;
@@ -1641,7 +1641,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     /// Document.ActiveDocument.DocDataSet.Trials);</code></remarks>
     /// <param name="lstTrialData">A <see cref="List{TrialsData}"/> with the 
     /// new trials information.</param>
-    /// <returns><strong>True</strong>, if succesful otherwise, <strong>false</strong>.</returns>
+    /// <returns><strong>True</strong>, if successful otherwise, <strong>false</strong>.</returns>
     public static bool WriteTrialsDataListToDataSet(List<TrialsData> lstTrialData)
     {
       // Notify start loading data into the dataset.
@@ -1650,9 +1650,14 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
       {
         foreach (TrialsData trial in lstTrialData)
         {
+          // Check for duplicate entries
+          if (Document.ActiveDocument.DocDataSet.Trials.Count(o => o.SubjectName == trial.SubjectName && o.TrialID == trial.TrialID && o.TrialSequence == trial.TrialSequence) > 0)
+          {
+            continue;
+          }
+
           // Insert Data in Trials Table
-          OgamaDataSet.TrialsRow workTrialData;
-          workTrialData = Document.ActiveDocument.DocDataSet.Trials.NewTrialsRow();
+          var workTrialData = Document.ActiveDocument.DocDataSet.Trials.NewTrialsRow();
           workTrialData.SubjectName = trial.SubjectName;
           workTrialData.TrialID = trial.TrialID;
           workTrialData.TrialName = trial.TrialName;
@@ -1693,7 +1698,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     /// Document.ActiveDocument.DocDataSet.TrialEvents);</code></remarks>
     /// <param name="lstTrialEventsData">A <see cref="List{TrialEventsData}"/> with the 
     /// new trial events information.</param>
-    /// <returns><strong>True</strong>, if succesful otherwise, <strong>false</strong>.</returns>
+    /// <returns><strong>True</strong>, if successful otherwise, <strong>false</strong>.</returns>
     public static bool WriteTrialEventsDataListToDataSet(List<TrialEventsData> lstTrialEventsData)
     {
       // Notify start loading data into the dataset.
@@ -1945,7 +1950,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     /// new AOI information.</param>
     /// <param name="splashDialog">A <see cref="System.ComponentModel.BackgroundWorker"/> with the 
     /// background splash loading dialog worker which shows progress.</param>
-    /// <returns><strong>True</strong>, if succesful otherwise, <strong>false</strong>.</returns>
+    /// <returns><strong>True</strong>, if successful otherwise, <strong>false</strong>.</returns>
     public static bool WriteAOIDataListToDataSet(List<AOIData> lstAOIData, System.ComponentModel.BackgroundWorker splashDialog)
     {
       // Notify start loading data into the dataset.
@@ -2016,7 +2021,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     /// data is of. That switches the fixations table: gaze or mouse.</param>
     /// <param name="lstFixations">A <see cref="List{AOIData}"/> with the 
     /// new AOI information.</param>
-    /// <returns><strong>True</strong>, if succesful otherwise, <strong>false</strong>.</returns>
+    /// <returns><strong>True</strong>, if successful otherwise, <strong>false</strong>.</returns>
     public static bool WriteFixationListToDataSet(SampleType sampleType, List<FixationData> lstFixations)
     {
       // Get all subjects in the list
@@ -2163,7 +2168,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     /// method.
     /// </summary>
     /// <param name="subjectName">A <see cref="string"/> with the subject name.</param>
-    /// <returns><strong>True</strong>, if succesful, otherwise <strong>false</strong>.</returns>
+    /// <returns><strong>True</strong>, if successful, otherwise <strong>false</strong>.</returns>
     public static bool CheckDatabaseForExistingSubject(string subjectName)
     {
       // Check for existing subject data

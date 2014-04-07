@@ -101,7 +101,7 @@ namespace Ogama.Modules.ImportExport.AOIData
     /// The <see cref="Control.Click"/> event handler for
     /// the <see cref="Button"/> <see cref="btnImport"/>.
     /// Saves the assignments in the static settings and if
-    /// validating is succesful returns a <see cref="DialogResult.OK"/>.
+    /// validating is successful returns a <see cref="DialogResult.OK"/>.
     /// otherwise the <see cref="DialogResult.Retry"/> flag is set,
     /// which will cancel the closing of the form in the
     /// <see cref="Form.FormClosing"/> event handler.
@@ -195,7 +195,7 @@ namespace Ogama.Modules.ImportExport.AOIData
     /// and returns false if some are missing.
     /// That depends on the import mode.
     /// </summary>
-    /// <returns><strong>True</strong> if succesful, otherwise
+    /// <returns><strong>True</strong> if successful, otherwise
     /// <strong>false</strong>.</returns>
     private bool ValidateAssignments()
     {
