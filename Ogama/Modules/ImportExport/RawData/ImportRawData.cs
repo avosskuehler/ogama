@@ -911,16 +911,11 @@ namespace Ogama.Modules.ImportExport.RawData
             // Split Tab separated line items
             string[] items = line.Split(asciiSetting.ColumnSeparatorCharacter);
 
-            // Set columncount in first valid line
-            if (counter == 0)
-            {
-              columncount = items.Length;
-            }
-
             // Skip first line if filled with column titles
             if (asciiSetting.ColumnTitlesAtFirstRow && counter == 0)
             {
               counter++;
+              columncount = items.Length;
               continue;
             }
 
@@ -930,8 +925,14 @@ namespace Ogama.Modules.ImportExport.RawData
               continue;
             }
 
+            // Set columncount in first valid line
+            if (counter == 0)
+            {
+              columncount = items.Length;
+            }
+
             // Skip small lines if applicable
-            if (asciiSetting.IgnoreSmallLines && columncount != items.Length)
+            if (asciiSetting.IgnoreSmallLines && columncount > items.Length)
             {
               continue;
             }
@@ -1034,7 +1035,7 @@ namespace Ogama.Modules.ImportExport.RawData
             int? columnTrialID = null;
 
             // Write trialID to detection settings.
-            if (numTrialIDImportColumn != -1)
+            if (numTrialIDImportColumn != -1 && items.Length > numTrialIDImportColumn)
             {
               columnTrialID = Convert.ToInt32(items[numTrialIDImportColumn]);
               if (!detectionSetting.TrialSequenceToTrialIDAssignments.ContainsKey(currentTrialSequence))
@@ -1044,7 +1045,7 @@ namespace Ogama.Modules.ImportExport.RawData
             }
 
             // Write Stimulus file to detection settings.
-            if (numTrialImageImportColumn != -1)
+            if (numTrialImageImportColumn != -1 && items.Length > numTrialImageImportColumn)
             {
               int usedTrialID = currentTrialSequence;
               if (columnTrialID.HasValue)
@@ -1064,13 +1065,13 @@ namespace Ogama.Modules.ImportExport.RawData
             }
 
             // Write trial category
-            if (numCategoryImportColumn != -1)
+            if (numCategoryImportColumn != -1 && items.Length > numCategoryImportColumn)
             {
               newRawData.Category = items[numCategoryImportColumn];
             }
 
             // Write PupilDiameters
-            if (numPupilDiaXImportColumn != -1)
+            if (numPupilDiaXImportColumn != -1 && items.Length > numPupilDiaXImportColumn)
             {
               if (IOHelpers.IsNumeric(items[numPupilDiaXImportColumn]))
               {
@@ -1078,7 +1079,7 @@ namespace Ogama.Modules.ImportExport.RawData
               }
             }
 
-            if (numPupilDiaYImportColumn != -1)
+            if (numPupilDiaYImportColumn != -1 && items.Length > numPupilDiaYImportColumn)
             {
               if (IOHelpers.IsNumeric(items[numPupilDiaYImportColumn]))
               {
@@ -1087,7 +1088,7 @@ namespace Ogama.Modules.ImportExport.RawData
             }
 
             // Write gaze positions
-            if (numGazePosXImportColumn != -1)
+            if (numGazePosXImportColumn != -1 && items.Length > numGazePosXImportColumn)
             {
               if (IOHelpers.IsNumeric(items[numGazePosXImportColumn]))
               {
@@ -1095,7 +1096,7 @@ namespace Ogama.Modules.ImportExport.RawData
               }
             }
 
-            if (numGazePosYImportColumn != -1)
+            if (numGazePosYImportColumn != -1 && items.Length > numGazePosYImportColumn)
             {
               if (IOHelpers.IsNumeric(items[numGazePosYImportColumn]))
               {
@@ -1104,7 +1105,7 @@ namespace Ogama.Modules.ImportExport.RawData
             }
 
             // Write mouse positions
-            if (numMousePosXImportColumn != -1)
+            if (numMousePosXImportColumn != -1 && items.Length > numMousePosXImportColumn)
             {
               if (IOHelpers.IsNumeric(items[numMousePosXImportColumn]))
               {
@@ -1112,7 +1113,7 @@ namespace Ogama.Modules.ImportExport.RawData
               }
             }
 
-            if (numMousePosYImportColumn != -1)
+            if (numMousePosYImportColumn != -1 && items.Length > numMousePosYImportColumn)
             {
               if (IOHelpers.IsNumeric(items[numMousePosYImportColumn]))
               {
@@ -1391,7 +1392,7 @@ namespace Ogama.Modules.ImportExport.RawData
         Console.WriteLine(affectedRows + "Trial updates written");
         affectedRows = Document.ActiveDocument.DocDataSet.SubjectsAdapter.Update(Document.ActiveDocument.DocDataSet.Subjects);
         Console.WriteLine(affectedRows + "Subject updates written");
-        
+
         Document.ActiveDocument.DocDataSet.AcceptChanges();
         Document.ActiveDocument.DocDataSet.CreateRawDataAdapters();
       }
