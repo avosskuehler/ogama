@@ -419,7 +419,7 @@ namespace Ogama.Modules.ImportExport.Common
     /// <exception cref="System.IO.FileNotFoundException">Thrown, when
     /// the file to import does not exist.</exception>
     public List<string[]> ParseFile(
-      string importFile, 
+      string importFile,
       int numberOfImportLines,
       ref List<string> columnHeaders)
     {
@@ -470,15 +470,13 @@ namespace Ogama.Modules.ImportExport.Common
 
             // Ignore lines that do not have the "use only" quotation
             // string
-            if (this.UseQuotes &&
-              !line.Contains(this.UseQuotationString))
+            if (this.UseQuotes && !line.Contains(this.UseQuotationString))
             {
               continue;
             }
 
             // ignore lines with ignore trigger
-            if (this.IgnoreTriggerStringLines &&
-              line.Contains(this.IgnoreTriggerString))
+            if (this.IgnoreTriggerStringLines && line.Contains(this.IgnoreTriggerString))
             {
               continue;
             }
@@ -486,35 +484,47 @@ namespace Ogama.Modules.ImportExport.Common
             // Split Tab separated line items
             string[] items = line.Split(this.ColumnSeparatorCharacter);
 
+            // Skip first line if filled with column titles
+            if (this.ColumnTitlesAtFirstRow && counter == 0)
+            {
+              counter++;
+              columncount = items.Length;
+
+              // Fill column header list
+              for (int i = 0; i < columncount; i++)
+              {
+                string headerText = items[i].Replace(' ', '-');
+                columnHeaders.Add(headerText);
+              }
+              continue;
+            }
+
             // Use only numeric starting lines if applicable
             if (this.IgnoreNotNumeralLines && !IOHelpers.IsNumeric(line[0]))
             {
               continue;
             }
 
-            // Skip small lines if applicable
-            if (this.IgnoreSmallLines && columncount != items.Length)
-            {
-              continue;
-            }
-
+            // Set columncount in first valid line
             if (counter == 0)
             {
               columncount = items.Length;
+            }
 
+            // Skip small lines if applicable
+            if (this.IgnoreSmallLines && columncount > items.Length)
+            {
+              continue;
+            }
+
+            if (counter == 0 && !this.ColumnTitlesAtFirstRow)
+            {
               // Fill column header list
               for (int i = 0; i < items.Length; i++)
               {
-                string headerText = this.ColumnTitlesAtFirstRow ? items[i].Replace(' ', '-') : "Column" + i.ToString();
+                string headerText = "Column" + i;
                 columnHeaders.Add(headerText);
               }
-            }
-
-            // Skip first line if filled with column titles
-            if (this.ColumnTitlesAtFirstRow && counter == 0)
-            {
-              counter++;
-              continue;
             }
 
             // Add row to import list

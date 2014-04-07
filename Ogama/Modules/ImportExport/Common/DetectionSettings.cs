@@ -117,7 +117,7 @@ namespace Ogama.Modules.ImportExport.Common
       this.timeFactor = 1D;
       this.stimuliImportMode = StimuliImportModes.UseiViewXMSG;
       this.trialImportMode = TrialSequenceImportModes.UseMSGLines;
-      this.trialTriggerString = "msg";
+      this.trialTriggerString = "MSG";
       this.stimuliImportFile = string.Empty;
       this.stimuliFileExtension = "bmp";
       this.subjectName = string.Empty;
