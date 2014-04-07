@@ -465,8 +465,10 @@ namespace Ogama.Modules.ImportExport.FixationData
       }
 
       int counter = 0;
+      int countInTrialCounter = 1;
       int columncount = 0;
       int trialCounter = 0;
+      int lastTrialSequence = 0;
       int currentTrialSequence = 0;
       int lengthConverterErrorCounter = 0;
       bool isLastTrial = false;
@@ -575,16 +577,6 @@ namespace Ogama.Modules.ImportExport.FixationData
             double timeInFileTime = Convert.ToDouble(items[numStartTimeImportColumn], nfi);
             long timeInMs = Convert.ToInt64(timeInFileTime * detectionSetting.TimeFactor);
 
-            // Write count in trial
-            if (numCountInTrialImportColumn != -1)
-            {
-              newFixationData.CountInTrial = IOHelpers.IsNumeric(items[numCountInTrialImportColumn]) ? Convert.ToInt32(items[numCountInTrialImportColumn], nfi) : counter;
-            }
-            else
-            {
-              newFixationData.CountInTrial = counter;
-            }
-
             // Write subject name value
             newFixationData.SubjectName = numSubjectImportColumn != -1 ? items[numSubjectImportColumn] : detectionSetting.SubjectName;
 
@@ -615,6 +607,26 @@ namespace Ogama.Modules.ImportExport.FixationData
             }
 
             newFixationData.TrialSequence = currentTrialSequence;
+
+            if (currentTrialSequence != lastTrialSequence)
+            {
+              countInTrialCounter = 1;
+              lastTrialSequence = currentTrialSequence;
+            }
+            else
+            {
+              countInTrialCounter++;
+            }
+
+            // Write count in trial
+            if (numCountInTrialImportColumn != -1)
+            {
+              newFixationData.CountInTrial = IOHelpers.IsNumeric(items[numCountInTrialImportColumn]) ? Convert.ToInt32(items[numCountInTrialImportColumn], nfi) : counter;
+            }
+            else
+            {
+              newFixationData.CountInTrial = countInTrialCounter;
+            }
 
             // Get trial start time from database
             long currentTrialStarttime = 0;
@@ -853,7 +865,7 @@ namespace Ogama.Modules.ImportExport.FixationData
       return true;
     }
 
-     /// <summary>
+    /// <summary>
     ///   This method shows a dialog asking for saving the current
     ///   import settings to hard disk.
     ///   They are persisted in xml format.
