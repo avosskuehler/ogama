@@ -522,7 +522,15 @@ namespace Ogama.Modules.ImportExport.Common
 
             break;
           case ImportTypes.Fixations:
-            foreach (TrialsData trial in ImportFixations.GetTrialList(this.numberOfImportLines))
+            var trials = ImportFixations.GetTrialList(this.numberOfImportLines);
+            if (trials == null)
+            {
+              this.DialogResult = DialogResult.Abort;
+              this.Close();
+              break;
+            }
+
+            foreach (TrialsData trial in trials)
             {
               this.dgvTrialsPreview.Rows.Add(new object[] 
                 {

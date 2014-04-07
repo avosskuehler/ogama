@@ -128,7 +128,7 @@ namespace Ogama.Modules.ImportExport.Common
     /// <summary>
     /// The <see cref="Control.Click"/> event handler for
     /// the <see cref="Button"/> <see cref="btnNext"/>.
-    /// Check parsing and if it is not succesful set the
+    /// Check parsing and if it is not successful set the
     /// <see cref="DialogResult.Retry"/> to cancel closing
     /// during <see cref="Form.FormClosing"/> and have a second try.
     /// </summary>
@@ -561,7 +561,7 @@ namespace Ogama.Modules.ImportExport.Common
     /// This method checks for correct parsing
     /// and returns false if no columns are found in the import file.
     /// </summary>
-    /// <returns><strong>True</strong> if succesful, otherwise
+    /// <returns><strong>True</strong> if successful, otherwise
     /// <strong>false</strong>.</returns>
     private bool ValidateParsing()
     {

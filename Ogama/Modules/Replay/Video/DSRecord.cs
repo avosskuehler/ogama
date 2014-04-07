@@ -278,7 +278,7 @@ namespace Ogama.Modules.Replay.Video
     /// <summary>
     /// Build the filter graph
     /// </summary>
-    /// <returns>True if succesful, otherwise false.</returns>
+    /// <returns>True if successful, otherwise false.</returns>
     private bool SetupGraph()
     {
       int hr;

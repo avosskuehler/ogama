@@ -924,11 +924,11 @@ namespace Ogama.Modules.Fixations
     /// </summary>
     /// <param name="sender">Source of the event</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void btnImport_Click(object sender, EventArgs e)
+    private void BtnImportClick(object sender, EventArgs e)
     {
       try
       {
-        ImportFixations.Start();
+        ImportFixations.Start();//(MainForm)this.MdiParent);
         this.NewTrialSelected();
         ((MainForm)this.MdiParent).StatusLabel.Text = "File successfully imported.";
       }
@@ -1467,7 +1467,7 @@ namespace Ogama.Modules.Fixations
         ExceptionMethods.ProcessMessage("Old subject fixations found", message);
       }
 
-      ExceptionMethods.ProcessMessage("Export succesful.", "Fixations were successfully exported to file");
+      ExceptionMethods.ProcessMessage("Export successful.", "Fixations were successfully exported to file");
     }
 
     /// <summary>

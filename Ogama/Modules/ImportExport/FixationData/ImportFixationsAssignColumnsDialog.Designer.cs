@@ -40,28 +40,33 @@ namespace Ogama.Modules.ImportExport.FixationData
       this.btnCancel = new System.Windows.Forms.Button();
       this.btnNext = new System.Windows.Forms.Button();
       this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-      this.btnBack = new System.Windows.Forms.Button();
-      this.splitContainer2 = new System.Windows.Forms.SplitContainer();
       this.label14 = new System.Windows.Forms.Label();
       this.label11 = new System.Windows.Forms.Label();
-      this.label2 = new System.Windows.Forms.Label();
       this.label6 = new System.Windows.Forms.Label();
       this.label5 = new System.Windows.Forms.Label();
+      this.label10 = new System.Windows.Forms.Label();
+      this.btnBack = new System.Windows.Forms.Button();
+      this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+      this.label2 = new System.Windows.Forms.Label();
+      this.label1 = new System.Windows.Forms.Label();
       this.label17 = new System.Windows.Forms.Label();
       this.label4 = new System.Windows.Forms.Label();
-      this.label10 = new System.Windows.Forms.Label();
       this.label9 = new System.Windows.Forms.Label();
       this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-      this.dialogTop1 = new DialogTop();
+      this.dialogTop1 = new Ogama.Modules.Common.Controls.DialogTop();
       this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+      this.label15 = new System.Windows.Forms.Label();
       ((System.ComponentModel.ISupportInitialize)(this.dGVAssignments)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.dataSetImport)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
       this.splitContainer2.Panel1.SuspendLayout();
       this.splitContainer2.Panel2.SuspendLayout();
       this.splitContainer2.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
       this.splitContainer1.Panel1.SuspendLayout();
       this.splitContainer1.Panel2.SuspendLayout();
       this.splitContainer1.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
       this.splitContainer3.Panel1.SuspendLayout();
       this.splitContainer3.Panel2.SuspendLayout();
       this.splitContainer3.SuspendLayout();
@@ -79,12 +84,12 @@ namespace Ogama.Modules.ImportExport.FixationData
       this.dGVAssignments.Dock = System.Windows.Forms.DockStyle.Fill;
       this.dGVAssignments.Location = new System.Drawing.Point(0, 0);
       this.dGVAssignments.Name = "dGVAssignments";
-      this.dGVAssignments.Size = new System.Drawing.Size(369, 200);
+      this.dGVAssignments.Size = new System.Drawing.Size(369, 270);
       this.dGVAssignments.TabIndex = 17;
       this.toolTip1.SetToolTip(this.dGVAssignments, "Please select from the dropdowns \r\nthe columns from your text file \r\nthat best ma" +
-              "tch the given\r\nOgama columns.");
-      this.dGVAssignments.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dGVAssignments_CellValidated);
-      this.dGVAssignments.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dGVAssignments_DataError);
+        "tch the given\r\nOgama columns.");
+      this.dGVAssignments.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGvAssignmentsCellValidated);
+      this.dGVAssignments.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.DGvAssignmentsDataError);
       // 
       // ColumnFixationTableColumns
       // 
@@ -107,14 +112,14 @@ namespace Ogama.Modules.ImportExport.FixationData
       // 
       this.ofdImport.DefaultExt = "txt";
       this.ofdImport.Filter = "ASCII-Files (*.csv,*.txt,*.asc)|*.csv;*.txt;*.asc|Text-Files (*.txt)|*.txt|Comma " +
-          "separated-values (*.csv)|*.csv|ASC-Files (*.asc)|*.asc|All files|*.*";
+    "separated-values (*.csv)|*.csv|ASC-Files (*.asc)|*.asc|All files|*.*";
       this.ofdImport.Title = "Please select ASCII file to import";
       // 
       // btnCancel
       // 
       this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Abort;
-      this.btnCancel.Location = new System.Drawing.Point(486, 10);
+      this.btnCancel.Location = new System.Drawing.Point(486, 18);
       this.btnCancel.Name = "btnCancel";
       this.btnCancel.Size = new System.Drawing.Size(75, 23);
       this.btnCancel.TabIndex = 27;
@@ -126,20 +131,70 @@ namespace Ogama.Modules.ImportExport.FixationData
       this.btnNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.btnNext.Cursor = System.Windows.Forms.Cursors.Arrow;
       this.btnNext.DialogResult = System.Windows.Forms.DialogResult.OK;
-      this.btnNext.Location = new System.Drawing.Point(405, 10);
+      this.btnNext.Location = new System.Drawing.Point(405, 18);
       this.btnNext.Name = "btnNext";
       this.btnNext.Size = new System.Drawing.Size(75, 23);
       this.btnNext.TabIndex = 26;
       this.btnNext.Text = "&Next >";
       this.toolTip1.SetToolTip(this.btnNext, "Start importing with given settings.");
-      this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+      this.btnNext.Click += new System.EventHandler(this.BtnNextClick);
+      // 
+      // label14
+      // 
+      this.label14.AutoSize = true;
+      this.label14.Location = new System.Drawing.Point(0, 48);
+      this.label14.Name = "label14";
+      this.label14.Size = new System.Drawing.Size(200, 13);
+      this.label14.TabIndex = 51;
+      this.label14.Text = "... gives the trials presentation sequence.";
+      this.toolTip1.SetToolTip(this.label14, "unique sequence (1,2,3,etc. ) for each subject");
+      // 
+      // label11
+      // 
+      this.label11.AutoSize = true;
+      this.label11.Location = new System.Drawing.Point(11, 114);
+      this.label11.Name = "label11";
+      this.label11.Size = new System.Drawing.Size(188, 13);
+      this.label11.TabIndex = 50;
+      this.label11.Text = "... gives the order of the fixation in trial.";
+      this.toolTip1.SetToolTip(this.label11, "the index of the fixation relative to the trial");
+      // 
+      // label6
+      // 
+      this.label6.AutoSize = true;
+      this.label6.Location = new System.Drawing.Point(44, 223);
+      this.label6.Name = "label6";
+      this.label6.Size = new System.Drawing.Size(153, 13);
+      this.label6.TabIndex = 44;
+      this.label6.Text = "... gives the fixations y-position.";
+      this.toolTip1.SetToolTip(this.label6, "measured in pixel");
+      // 
+      // label5
+      // 
+      this.label5.AutoSize = true;
+      this.label5.Location = new System.Drawing.Point(44, 201);
+      this.label5.Name = "label5";
+      this.label5.Size = new System.Drawing.Size(153, 13);
+      this.label5.TabIndex = 43;
+      this.label5.Text = "... gives the fixations x-position.";
+      this.toolTip1.SetToolTip(this.label5, "measured in pixel");
+      // 
+      // label10
+      // 
+      this.label10.AutoSize = true;
+      this.label10.Location = new System.Drawing.Point(31, 70);
+      this.label10.Name = "label10";
+      this.label10.Size = new System.Drawing.Size(168, 13);
+      this.label10.TabIndex = 36;
+      this.label10.Text = " ... distinguishes the different trials.";
+      this.toolTip1.SetToolTip(this.label10, "Unique identifier for the trial (ID)");
       // 
       // btnBack
       // 
       this.btnBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.btnBack.Cursor = System.Windows.Forms.Cursors.Arrow;
       this.btnBack.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-      this.btnBack.Location = new System.Drawing.Point(324, 10);
+      this.btnBack.Location = new System.Drawing.Point(324, 18);
       this.btnBack.Name = "btnBack";
       this.btnBack.Size = new System.Drawing.Size(75, 23);
       this.btnBack.TabIndex = 30;
@@ -155,11 +210,13 @@ namespace Ogama.Modules.ImportExport.FixationData
       // 
       // splitContainer2.Panel1
       // 
+      this.splitContainer2.Panel1.Controls.Add(this.label15);
       this.splitContainer2.Panel1.Controls.Add(this.label14);
       this.splitContainer2.Panel1.Controls.Add(this.label11);
       this.splitContainer2.Panel1.Controls.Add(this.label2);
       this.splitContainer2.Panel1.Controls.Add(this.label6);
       this.splitContainer2.Panel1.Controls.Add(this.label5);
+      this.splitContainer2.Panel1.Controls.Add(this.label1);
       this.splitContainer2.Panel1.Controls.Add(this.label17);
       this.splitContainer2.Panel1.Controls.Add(this.label4);
       this.splitContainer2.Panel1.Controls.Add(this.label10);
@@ -168,27 +225,9 @@ namespace Ogama.Modules.ImportExport.FixationData
       // splitContainer2.Panel2
       // 
       this.splitContainer2.Panel2.Controls.Add(this.dGVAssignments);
-      this.splitContainer2.Size = new System.Drawing.Size(573, 200);
+      this.splitContainer2.Size = new System.Drawing.Size(573, 270);
       this.splitContainer2.SplitterDistance = 200;
       this.splitContainer2.TabIndex = 32;
-      // 
-      // label14
-      // 
-      this.label14.AutoSize = true;
-      this.label14.Location = new System.Drawing.Point(0, 48);
-      this.label14.Name = "label14";
-      this.label14.Size = new System.Drawing.Size(200, 13);
-      this.label14.TabIndex = 51;
-      this.label14.Text = "... gives the trials presentation sequence.";
-      // 
-      // label11
-      // 
-      this.label11.AutoSize = true;
-      this.label11.Location = new System.Drawing.Point(11, 88);
-      this.label11.Name = "label11";
-      this.label11.Size = new System.Drawing.Size(188, 13);
-      this.label11.TabIndex = 50;
-      this.label11.Text = "... gives the order of the fixation in trial.";
       // 
       // label2
       // 
@@ -200,28 +239,19 @@ namespace Ogama.Modules.ImportExport.FixationData
       this.label2.TabIndex = 48;
       this.label2.Text = "Select the column that ...";
       // 
-      // label6
+      // label1
       // 
-      this.label6.AutoSize = true;
-      this.label6.Location = new System.Drawing.Point(44, 168);
-      this.label6.Name = "label6";
-      this.label6.Size = new System.Drawing.Size(153, 13);
-      this.label6.TabIndex = 44;
-      this.label6.Text = "... gives the fixations y-position.";
-      // 
-      // label5
-      // 
-      this.label5.AutoSize = true;
-      this.label5.Location = new System.Drawing.Point(44, 148);
-      this.label5.Name = "label5";
-      this.label5.Size = new System.Drawing.Size(153, 13);
-      this.label5.TabIndex = 43;
-      this.label5.Text = "... gives the fixations x-position.";
+      this.label1.AutoSize = true;
+      this.label1.Location = new System.Drawing.Point(53, 157);
+      this.label1.Name = "label1";
+      this.label1.Size = new System.Drawing.Size(144, 13);
+      this.label1.TabIndex = 45;
+      this.label1.Text = "... gives the fixation end time.";
       // 
       // label17
       // 
       this.label17.AutoSize = true;
-      this.label17.Location = new System.Drawing.Point(53, 108);
+      this.label17.Location = new System.Drawing.Point(53, 135);
       this.label17.Name = "label17";
       this.label17.Size = new System.Drawing.Size(146, 13);
       this.label17.TabIndex = 45;
@@ -230,25 +260,16 @@ namespace Ogama.Modules.ImportExport.FixationData
       // label4
       // 
       this.label4.AutoSize = true;
-      this.label4.Location = new System.Drawing.Point(55, 128);
+      this.label4.Location = new System.Drawing.Point(55, 179);
       this.label4.Name = "label4";
       this.label4.Size = new System.Drawing.Size(142, 13);
       this.label4.TabIndex = 46;
       this.label4.Text = "... gives the fixation duration.";
       // 
-      // label10
-      // 
-      this.label10.AutoSize = true;
-      this.label10.Location = new System.Drawing.Point(31, 68);
-      this.label10.Name = "label10";
-      this.label10.Size = new System.Drawing.Size(168, 13);
-      this.label10.TabIndex = 36;
-      this.label10.Text = " ... distinguishes the different trials.";
-      // 
       // label9
       // 
       this.label9.AutoSize = true;
-      this.label9.Location = new System.Drawing.Point(65, 28);
+      this.label9.Location = new System.Drawing.Point(65, 26);
       this.label9.Name = "label9";
       this.label9.Size = new System.Drawing.Size(134, 13);
       this.label9.TabIndex = 35;
@@ -270,7 +291,7 @@ namespace Ogama.Modules.ImportExport.FixationData
       // splitContainer1.Panel2
       // 
       this.splitContainer1.Panel2.Controls.Add(this.splitContainer3);
-      this.splitContainer1.Size = new System.Drawing.Size(573, 310);
+      this.splitContainer1.Size = new System.Drawing.Size(573, 388);
       this.splitContainer1.SplitterDistance = 60;
       this.splitContainer1.SplitterWidth = 1;
       this.splitContainer1.TabIndex = 52;
@@ -281,7 +302,7 @@ namespace Ogama.Modules.ImportExport.FixationData
       this.dialogTop1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("dialogTop1.BackgroundImage")));
       this.dialogTop1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
       this.dialogTop1.Description = "Assign columns: Please select from the dropdown settings the columns, that match " +
-          "the columns in OGAMAs fixation table.";
+    "the columns in OGAMAs fixation table.";
       this.dialogTop1.Dock = System.Windows.Forms.DockStyle.Fill;
       this.dialogTop1.Location = new System.Drawing.Point(0, 0);
       this.dialogTop1.Logo = global::Ogama.Properties.Resources.MagicWand;
@@ -307,16 +328,25 @@ namespace Ogama.Modules.ImportExport.FixationData
       this.splitContainer3.Panel2.Controls.Add(this.btnNext);
       this.splitContainer3.Panel2.Controls.Add(this.btnCancel);
       this.splitContainer3.Panel2.Controls.Add(this.btnBack);
-      this.splitContainer3.Size = new System.Drawing.Size(573, 249);
-      this.splitContainer3.SplitterDistance = 200;
+      this.splitContainer3.Size = new System.Drawing.Size(573, 327);
+      this.splitContainer3.SplitterDistance = 270;
       this.splitContainer3.TabIndex = 0;
+      // 
+      // label15
+      // 
+      this.label15.AutoSize = true;
+      this.label15.Location = new System.Drawing.Point(78, 91);
+      this.label15.Name = "label15";
+      this.label15.Size = new System.Drawing.Size(120, 13);
+      this.label15.TabIndex = 52;
+      this.label15.Text = "... gives the trials image.";
       // 
       // ImportFixationsAssignColumnsDialog
       // 
       this.AcceptButton = this.btnNext;
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
       this.CancelButton = this.btnCancel;
-      this.ClientSize = new System.Drawing.Size(573, 310);
+      this.ClientSize = new System.Drawing.Size(573, 388);
       this.Controls.Add(this.splitContainer1);
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.MaximizeBox = false;
@@ -325,19 +355,22 @@ namespace Ogama.Modules.ImportExport.FixationData
       this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
       this.Text = "Fixations import assistant ... step 3 - assign columns";
-      this.Load += new System.EventHandler(this.frmImportFixationsAssignColumns_Load);
-      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmImportFixationsAssignColumns_FormClosing);
+      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmImportFixationsAssignColumnsFormClosing);
+      this.Load += new System.EventHandler(this.FrmImportFixationsAssignColumnsLoad);
       ((System.ComponentModel.ISupportInitialize)(this.dGVAssignments)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.dataSetImport)).EndInit();
       this.splitContainer2.Panel1.ResumeLayout(false);
       this.splitContainer2.Panel1.PerformLayout();
       this.splitContainer2.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
       this.splitContainer2.ResumeLayout(false);
       this.splitContainer1.Panel1.ResumeLayout(false);
       this.splitContainer1.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
       this.splitContainer1.ResumeLayout(false);
       this.splitContainer3.Panel1.ResumeLayout(false);
       this.splitContainer3.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
       this.splitContainer3.ResumeLayout(false);
       this.ResumeLayout(false);
 
@@ -367,6 +400,8 @@ namespace Ogama.Modules.ImportExport.FixationData
     private System.Windows.Forms.SplitContainer splitContainer1;
     private DialogTop dialogTop1;
     private System.Windows.Forms.SplitContainer splitContainer3;
+    private System.Windows.Forms.Label label1;
+    private System.Windows.Forms.Label label15;
 
 
   }

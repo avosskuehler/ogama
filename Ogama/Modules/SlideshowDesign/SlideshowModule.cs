@@ -399,7 +399,7 @@ namespace Ogama.Modules.SlideshowDesign
     }
 
     /// <summary>
-    /// Opens a <see cref="SlideDesignModule"/> form, waits for succesful
+    /// Opens a <see cref="SlideDesignModule"/> form, waits for successful
     /// design and updates slideshow with the designed <see cref="Slide"/>.
     /// </summary>
     /// <param name="newDesignForm">A <see cref="SlideDesignModule"/> with the design form to display.</param>
@@ -427,7 +427,7 @@ namespace Ogama.Modules.SlideshowDesign
     }
 
     /// <summary>
-    /// Opens a <see cref="DesktopDialog"/> form, waits for succesful
+    /// Opens a <see cref="DesktopDialog"/> form, waits for successful
     /// design and updates slideshow with the designed <see cref="Slide"/>.
     /// </summary>
     /// <param name="newDesignForm">A <see cref="DesktopDialog"/> with the desktop design form to display.</param>
@@ -452,7 +452,7 @@ namespace Ogama.Modules.SlideshowDesign
     }
 
     /// <summary>
-    /// Opens a <see cref="BrowserDialog"/> form, waits for succesful
+    /// Opens a <see cref="BrowserDialog"/> form, waits for successful
     /// design and updates slideshow with the designed <see cref="BrowserTreeNode"/>.
     /// </summary>
     /// <param name="node">Contains the node that is 

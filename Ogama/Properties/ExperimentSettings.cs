@@ -567,7 +567,7 @@ namespace Ogama.Properties
     /// <remarks>The xml file should have the .oga extension to achieve its affiliation to OGAMA</remarks>
     /// <param name="settings">The <see cref="ExperimentSettings"/> object to serialize.</param>
     /// <param name="filePath">Full file path to the .oga xml settings file.</param>
-    /// <returns><strong>True</strong> if succesful.</returns>
+    /// <returns><strong>True</strong> if successful.</returns>
     public static bool Serialize(ExperimentSettings settings, string filePath)
     {
       try
@@ -596,7 +596,7 @@ namespace Ogama.Properties
     /// </summary>
     /// <remarks>The xml file is named *.oga to achieve its affiliation to OGAMA</remarks>
     /// <param name="filePath">Full file path to the .oga xml settings file.</param>
-    /// <returns>A <see cref="ExperimentSettings"/> object if succesful 
+    /// <returns>A <see cref="ExperimentSettings"/> object if successful 
     /// or <strong>null</strong> if failed.</returns>
     public static ExperimentSettings Deserialize(string filePath)
     {

@@ -50,7 +50,7 @@ namespace Ogama.Modules.Recording.TrackerBase
     /// connection routines for the specific hardware, so that the
     /// system is ready for calibration.
     /// </summary>
-    /// <returns><strong>True</strong> if succesful connected to tracker,
+    /// <returns><strong>True</strong> if successful connected to tracker,
     /// otherwise <strong>false</strong>.</returns>
     bool Connect();
 
@@ -60,7 +60,7 @@ namespace Ogama.Modules.Recording.TrackerBase
     /// system is ready for recording.
     /// </summary>
     /// <param name="isRecalibrating">whether to use recalibration or not.</param>
-    /// <returns><strong>True</strong> if succesful calibrated,
+    /// <returns><strong>True</strong> if successful calibrated,
     /// otherwise <strong>false</strong>.</returns>
     bool Calibrate(bool isRecalibrating);
 
