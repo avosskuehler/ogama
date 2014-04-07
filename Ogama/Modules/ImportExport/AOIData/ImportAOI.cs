@@ -1,16 +1,16 @@
-﻿// <copyright file="ImportAOI.cs" company="FU Berlin">
-// ******************************************************
-// OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2013 Dr. Adrian Voßkühler  
-// ------------------------------------------------------------------------
-// This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
-// This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-// You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-// **************************************************************
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ImportAOI.cs" company="Freie Universität Berlin">
+//   OGAMA - open gaze and mouse analyzer 
+//   Copyright (C) 2014 Dr. Adrian Voßkühler  
+//   Licensed under GPL V3
 // </copyright>
 // <author>Adrian Voßkühler</author>
 // <email>adrian@ogama.net</email>
-
+// <summary>
+//   Class for importing areas of interest through multiple dialogs,
+//   called import assistant.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 namespace Ogama.Modules.ImportExport.AOIData
 {
   using System;
@@ -27,104 +27,114 @@ namespace Ogama.Modules.ImportExport.AOIData
   using VectorGraphics.Elements;
 
   /// <summary>
-  /// Class for importing areas of interest through multiple dialogs,
-  /// called import assistant.
+  ///   Class for importing areas of interest through multiple dialogs,
+  ///   called import assistant.
   /// </summary>
-  /// <remarks>All the members are marked as static to make them
-  /// available in all the dialogs without the need to ship the
-  /// objects. The main entry point is <see cref="ImportAOI.Start()"/>
-  /// which starts the import assistant.</remarks>
+  /// <remarks>
+  ///   All the members are marked as static to make them
+  ///   available in all the dialogs without the need to ship the
+  ///   objects. The main entry point is <see cref="ImportAOI.Start()" />
+  ///   which starts the import assistant.
+  /// </remarks>
   public class ImportAOI
   {
     ///////////////////////////////////////////////////////////////////////////////
     // Defining Constants                                                        //
     ///////////////////////////////////////////////////////////////////////////////
-    #region CONSTANTS
-    #endregion //CONSTANTS
 
     ///////////////////////////////////////////////////////////////////////////////
     // Defining Variables, Enumerations, Events                                  //
     ///////////////////////////////////////////////////////////////////////////////
-    #region FIELDS
+    #region Static Fields
 
     /// <summary>
-    /// Saves the list to fill with imported <see cref="AOIData"/>.
+    ///   Saves the list to fill with imported <see cref="AOIData" />.
     /// </summary>
-    private static List<AOIData> aoiDataList;
+    private static readonly List<AOIData> AOIDataList;
 
     /// <summary>
-    /// Saves the AOI specialized settings used during this import session.
+    ///   Saves the AOI specialized settings used during this import session.
     /// </summary>
-    private static AOIDataSettings aoiSettings;
+    private static readonly AOIDataSettings AOISettings;
 
     /// <summary>
-    /// Saves the ASCII file import specialized settings
-    /// during this import session.
+    ///   Saves the ASCII file import specialized settings
+    ///   during this import session.
     /// </summary>
     private static ASCIISettings asciiSettings;
 
-    #endregion //FIELDS
+    #endregion
 
     ///////////////////////////////////////////////////////////////////////////////
     // Construction and Initializing methods                                     //
     ///////////////////////////////////////////////////////////////////////////////
-    #region CONSTRUCTION
+    #region Constructors and Destructors
 
     /// <summary>
-    /// Initializes static members of the ImportAOI class.
+    ///   Initializes static members of the ImportAOI class.
     /// </summary>
     static ImportAOI()
     {
-      aoiDataList = new List<AOIData>();
-      aoiSettings = new AOIDataSettings();
+      AOIDataList = new List<AOIData>();
+      AOISettings = new AOIDataSettings();
       asciiSettings = new ASCIISettings();
     }
 
-    #endregion //CONSTRUCTION
+    #endregion
 
     ///////////////////////////////////////////////////////////////////////////////
     // Defining Properties                                                       //
     ///////////////////////////////////////////////////////////////////////////////
-    #region PROPERTIES
+    #region Public Properties
 
     /// <summary>
-    /// Gets the AOI specialized settings used during this import session.
+    ///   Gets the AOI specialized settings used during this import session.
     /// </summary>
-    /// <value>A <see cref="AOIDataSettings"/> with the current 
-    /// AOI data import settings.</value>
+    /// <value>
+    ///   A <see cref="AOIDataSettings" /> with the current
+    ///   AOI data import settings.
+    /// </value>
     public static AOIDataSettings AoiSettings
     {
-      get { return aoiSettings; }
+      get
+      {
+        return AOISettings;
+      }
     }
 
     /// <summary>
-    /// Gets the ASCII file import specialized settings
-    /// during this import session.
+    ///   Gets the ASCII file import specialized settings
+    ///   during this import session.
     /// </summary>
-    /// <value>A <see cref="ASCIISettings"/> with the current 
-    /// ascii file import settings.</value>
+    /// <value>
+    ///   A <see cref="ASCIISettings" /> with the current
+    ///   ascii file import settings.
+    /// </value>
     public static ASCIISettings FileImport
     {
-      get { return asciiSettings; }
+      get
+      {
+        return asciiSettings;
+      }
     }
 
-    #endregion //PROPERTIES
+    #endregion
 
     ///////////////////////////////////////////////////////////////////////////////
     // Public methods                                                            //
     ///////////////////////////////////////////////////////////////////////////////
-    #region PUBLICMETHODS
+    #region Public Methods and Operators
 
     /// <summary>
-    /// Starts a multiple dialog routine for reading AOIs
-    /// from a log file into the programs database.
+    ///   Starts a multiple dialog routine for reading AOIs
+    ///   from a log file into the programs database.
     /// </summary>
     public static void Start()
     {
       try
       {
         // Show assistant start screen with instructions
-        ImportAOIAssistentDialog objfrmImportAssistent = new ImportAOIAssistentDialog();
+        var objfrmImportAssistent = new ImportAOIAssistentDialog();
         if (objfrmImportAssistent.ShowDialog() == DialogResult.OK)
         {
         // Show open file dialog
@@ -135,14 +145,13 @@ namespace Ogama.Modules.ImportExport.AOIData
             asciiSettings.Filename = asciiSettings.FileDialog.FileName;
 
             // Show ascii file parse dialog with preview
-            ImportParseFileDialog objfrmImportReadFile = new ImportParseFileDialog(ref asciiSettings);
+            var objfrmImportReadFile = new ImportParseFileDialog(ref asciiSettings);
           ReadFile:
             DialogResult resultReadFile = objfrmImportReadFile.ShowDialog();
             if (resultReadFile == DialogResult.OK)
             {
               // Show assign columns dialog
-              ImportAOIAssignColumnsDialog objfrmImportAOIAssignColumns
-                = new ImportAOIAssignColumnsDialog();
+              var objfrmImportAOIAssignColumns = new ImportAOIAssignColumnsDialog();
 
               DialogResult resultAssign = objfrmImportAOIAssignColumns.ShowDialog();
               if (resultAssign == DialogResult.OK)
@@ -153,24 +162,16 @@ namespace Ogama.Modules.ImportExport.AOIData
                 // Give some time to show the splash ...
                 Application.DoEvents();
 
-                List<string> columnHeaders = new List<string>();
+                var columnHeaders = new List<string>();
 
                 // Read import log file
-                asciiSettings.Rows = FileImport.ParseFile(
-                  asciiSettings.Filename,
-                  -1, 
-                  ref columnHeaders);
-
-                // Do not use the new generated headers, because
-                // that is already done in the objfrmImportReadFile dialog
-                // and could there been modified by the user.
-                // _asciiSettings.ColumnHeaders = columnHeaders;
+                asciiSettings.Rows = FileImport.ParseFile(asciiSettings.Filename, -1, ref columnHeaders);
 
                 // Convert log file to AOI
-                ImportAOI.GenerateOgamaAOIDataList();
+                GenerateOgamaAOIDataList();
 
                 // Save the import into ogamas database and the mdf file.
-                ImportAOI.SaveImportIntoTablesAndDB();
+                SaveImportIntoTablesAndDB();
 
                 // Import has finished.
                 asciiSettings.WaitingSplash.CancelAsync();
@@ -194,8 +195,7 @@ namespace Ogama.Modules.ImportExport.AOIData
       catch (Exception ex)
       {
         string message = "Something failed during import." + Environment.NewLine
-          + "Please try again with other settings. " + Environment.NewLine +
-          "Error: " + ex.Message;
+                         + "Please try again with other settings. " + Environment.NewLine + "Error: " + ex.Message;
         ExceptionMethods.ProcessErrorMessage(message);
 
         // CleanUp
@@ -206,106 +206,41 @@ namespace Ogama.Modules.ImportExport.AOIData
       }
     }
 
-    #endregion //PUBLICMETHODS
+    #endregion
 
     ///////////////////////////////////////////////////////////////////////////////
     // Eventhandler                                                              //
     ///////////////////////////////////////////////////////////////////////////////
-    #region EVENTS
 
     ///////////////////////////////////////////////////////////////////////////////
     // Eventhandler for UI, Menu, Buttons, Toolbars etc.                         //
     ///////////////////////////////////////////////////////////////////////////////
-    #region WINDOWSEVENTHANDLER
-    #endregion //WINDOWSEVENTHANDLER
 
     ///////////////////////////////////////////////////////////////////////////////
     // Eventhandler for Custom Defined Events                                    //
     ///////////////////////////////////////////////////////////////////////////////
-    #region CUSTOMEVENTHANDLER
-    #endregion //CUSTOMEVENTHANDLER
-
-    #endregion //EVENTS
 
     ///////////////////////////////////////////////////////////////////////////////
     // Methods and Eventhandling for Background tasks                            //
     ///////////////////////////////////////////////////////////////////////////////
-    #region BACKGROUNDWORKER
-    #endregion //BACKGROUNDWORKER
 
     ///////////////////////////////////////////////////////////////////////////////
     // Inherited methods                                                         //
     ///////////////////////////////////////////////////////////////////////////////
-    #region OVERRIDES
-    #endregion //OVERRIDES
 
     ///////////////////////////////////////////////////////////////////////////////
     // Methods for doing main class job                                          //
     ///////////////////////////////////////////////////////////////////////////////
-    #region METHODS
+    #region Methods
 
     /// <summary>
-    /// This method writes the data that is written in the lists during
-    /// import to OGAMAs dataset.
-    /// If this could be successfully done the whole new data is
-    /// written to the database (.mdf).
-    /// </summary>
-    private static void SaveImportIntoTablesAndDB()
-    {
-      try
-      {
-        // Try to submit the new values to the database
-        if (!Queries.WriteAOIDataListToDataSet(aoiDataList, asciiSettings.WaitingSplash))
-        {
-          throw new DataException("The new areas of interest could not be written into the dataset.");
-        }
-
-        // Update aoi table in the mdf database
-        int affectedRows = Document.ActiveDocument.DocDataSet.AOIsAdapter.Update(
-          Document.ActiveDocument.DocDataSet.AOIs);
-
-        // Submit changes
-        Document.ActiveDocument.DocDataSet.AcceptChanges();
-      }
-      catch (Exception ex)
-      {
-        ExceptionMethods.HandleException(ex);
-
-        // CleanUp
-        Document.ActiveDocument.DocDataSet.RejectChanges();
-      }
-      finally
-      {
-        aoiDataList.Clear();
-      }
-    }
-
-    /// <summary>
-    /// This method calls the correct import row
-    /// parsing method referring to the current
-    /// <see cref="AOIImportModes"/>.
-    /// </summary>
-    private static void GenerateOgamaAOIDataList()
-    {
-      switch (aoiSettings.ImportMode)
-      {
-        case AOIImportModes.UseSimpleRectangles:
-          GenerateAOIFromRectangles();
-          break;
-        case AOIImportModes.UseOgamaColumns:
-          GenerateAOIFromOgamaTable();
-          break;
-      }
-    }
-
-    /// <summary>
-    /// This method generates <see cref="AOIData"/> from each 
-    /// row of the import file, that has to be on OGAMA import format.
+    ///   This method generates <see cref="AOIData" /> from each
+    ///   row of the import file, that has to be on OGAMA import format.
     /// </summary>
     private static void GenerateAOIFromOgamaTable()
     {
       // Clear existing values
-      aoiDataList.Clear();
+      AOIDataList.Clear();
 
       // Use the decimal separator specified.
       NumberFormatInfo nfi = CultureInfo.GetCultureInfo("en-US").NumberFormat;
@@ -315,7 +250,7 @@ namespace Ogama.Modules.ImportExport.AOIData
       }
 
       // Enumerate the columns in the import file and assign their title.
-      Dictionary<string, int> columnsImportNum = new Dictionary<string, int>();
+      var columnsImportNum = new Dictionary<string, int>();
       for (int i = 0; i < asciiSettings.ColumnHeaders.Count; i++)
       {
         columnsImportNum.Add(asciiSettings.ColumnHeaders[i], i);
@@ -331,30 +266,41 @@ namespace Ogama.Modules.ImportExport.AOIData
       string importColumnTitleForShapeGroup = asciiSettings.ColumnAssignments["ShapeGroup"];
 
       // Convert the names into column counters.
-      int numTrialIDImportColumn = importColumnTitleForTrialID == string.Empty ? -1 : columnsImportNum[importColumnTitleForTrialID];
-      int numSlideNrImportColumn = importColumnTitleForSlideNr == string.Empty ? -1 : columnsImportNum[importColumnTitleForSlideNr];
-      int numShapeNameImportColumn = importColumnTitleForShapeName == string.Empty ? -1 : columnsImportNum[importColumnTitleForShapeName];
-      int numShapeTypeImportColumn = importColumnTitleForShapeType == string.Empty ? -1 : columnsImportNum[importColumnTitleForShapeType];
-      int numShapeNumPtsImportColumn = importColumnTitleForShapeNumPts == string.Empty ? -1 : columnsImportNum[importColumnTitleForShapeNumPts];
-      int numShapePtsImportColumn = importColumnTitleForShapePts == string.Empty ? -1 : columnsImportNum[importColumnTitleForShapePts];
-      int numShapeGroupImportColumn = importColumnTitleForShapeGroup == string.Empty ? -1 : columnsImportNum[importColumnTitleForShapeGroup];
+      int numTrialIDImportColumn = importColumnTitleForTrialID == string.Empty
+                                     ? -1
+                                     : columnsImportNum[importColumnTitleForTrialID];
+      int numSlideNrImportColumn = importColumnTitleForSlideNr == string.Empty
+                                     ? -1
+                                     : columnsImportNum[importColumnTitleForSlideNr];
+      int numShapeNameImportColumn = importColumnTitleForShapeName == string.Empty
+                                       ? -1
+                                       : columnsImportNum[importColumnTitleForShapeName];
+      int numShapeTypeImportColumn = importColumnTitleForShapeType == string.Empty
+                                       ? -1
+                                       : columnsImportNum[importColumnTitleForShapeType];
+      int numShapeNumPtsImportColumn = importColumnTitleForShapeNumPts == string.Empty
+                                         ? -1
+                                         : columnsImportNum[importColumnTitleForShapeNumPts];
+      int numShapePtsImportColumn = importColumnTitleForShapePts == string.Empty
+                                      ? -1
+                                      : columnsImportNum[importColumnTitleForShapePts];
+      int numShapeGroupImportColumn = importColumnTitleForShapeGroup == string.Empty
+                                        ? -1
+                                        : columnsImportNum[importColumnTitleForShapeGroup];
 
       foreach (string[] items in asciiSettings.Rows)
       {
         try
         {
           // Create Ogama columns placeholder
-          AOIData newAOIData = new AOIData();
+          var newAOIData = new AOIData();
 
           if (numTrialIDImportColumn != -1)
           {
-            newAOIData.TrialID = Convert.ToInt32(items[numTrialIDImportColumn]);
+            newAOIData.TrialID = Convert.ToInt32(items[numTrialIDImportColumn], nfi);
           }
 
-          if (numSlideNrImportColumn != -1)
-          {
-            newAOIData.SlideNr = Convert.ToInt32(items[numSlideNrImportColumn]);
-          }
+          newAOIData.SlideNr = numSlideNrImportColumn != -1 ? Convert.ToInt32(items[numSlideNrImportColumn], nfi) : 0;
 
           if (numShapeNameImportColumn != -1)
           {
@@ -368,7 +314,7 @@ namespace Ogama.Modules.ImportExport.AOIData
 
           if (numShapeNumPtsImportColumn != -1)
           {
-            newAOIData.ShapeNumPts = Convert.ToInt32(items[numShapeNumPtsImportColumn]);
+            newAOIData.ShapeNumPts = Convert.ToInt32(items[numShapeNumPtsImportColumn], nfi);
           }
 
           if (numShapePtsImportColumn != -1)
@@ -381,12 +327,12 @@ namespace Ogama.Modules.ImportExport.AOIData
             newAOIData.Group = items[numShapeGroupImportColumn];
           }
 
-          if (newAOIData.Group == null || newAOIData.Group == string.Empty)
+          if (string.IsNullOrEmpty(newAOIData.Group))
           {
             newAOIData.Group = " ";
           }
 
-          aoiDataList.Add(newAOIData);
+          AOIDataList.Add(newAOIData);
         }
         catch (Exception ex)
         {
@@ -396,13 +342,13 @@ namespace Ogama.Modules.ImportExport.AOIData
     }
 
     /// <summary>
-    /// This method generates <see cref="AOIData"/> from each 
-    /// row of the import file, which has coordinates of simple rectangles in it.
+    ///   This method generates <see cref="AOIData" /> from each
+    ///   row of the import file, which has coordinates of simple rectangles in it.
     /// </summary>
     private static void GenerateAOIFromRectangles()
     {
       // Clear existing values
-      aoiDataList.Clear();
+      AOIDataList.Clear();
 
       // Use the decimal separator specified.
       NumberFormatInfo nfi = CultureInfo.GetCultureInfo("en-US").NumberFormat;
@@ -412,7 +358,7 @@ namespace Ogama.Modules.ImportExport.AOIData
       }
 
       // Enumerate the columns in the import file and assign their title.
-      Dictionary<string, int> columnsImportNum = new Dictionary<string, int>();
+      var columnsImportNum = new Dictionary<string, int>();
       for (int i = 0; i < asciiSettings.ColumnHeaders.Count; i++)
       {
         columnsImportNum.Add(asciiSettings.ColumnHeaders[i], i);
@@ -429,20 +375,36 @@ namespace Ogama.Modules.ImportExport.AOIData
       string importColumnTitleForShapeGroup = asciiSettings.ColumnAssignments["ShapeGroup"];
 
       // Convert the names into column counters.
-      int numTrialIDImportColumn = importColumnTitleForTrialID == string.Empty ? -1 : columnsImportNum[importColumnTitleForTrialID];
-      int numSlideNrImportColumn = importColumnTitleForSlideNr == string.Empty ? -1 : columnsImportNum[importColumnTitleForSlideNr];
-      int numShapeNameImportColumn = importColumnTitleForShapeName == string.Empty ? -1 : columnsImportNum[importColumnTitleForShapeName];
-      int numTopLeftCornerXImportColumn = importColumnTitleForTopLeftCornerX == string.Empty ? -1 : columnsImportNum[importColumnTitleForTopLeftCornerX];
-      int numTopLeftCornerYImportColumn = importColumnTitleForTopLeftCornerY == string.Empty ? -1 : columnsImportNum[importColumnTitleForTopLeftCornerY];
-      int numBottomRightCornerXImportColumn = importColumnTitleForBottomRightCornerX == string.Empty ? -1 : columnsImportNum[importColumnTitleForBottomRightCornerX];
-      int numBottomRightCornerYImportColumn = importColumnTitleForBottomRightCornerY == string.Empty ? -1 : columnsImportNum[importColumnTitleForBottomRightCornerY];
-      int numShapeGroupImportColumn = importColumnTitleForShapeGroup == string.Empty ? -1 : columnsImportNum[importColumnTitleForShapeGroup];
+      int numTrialIDImportColumn = importColumnTitleForTrialID == string.Empty
+                                     ? -1
+                                     : columnsImportNum[importColumnTitleForTrialID];
+      int numSlideNrImportColumn = importColumnTitleForSlideNr == string.Empty
+                                     ? -1
+                                     : columnsImportNum[importColumnTitleForSlideNr];
+      int numShapeNameImportColumn = importColumnTitleForShapeName == string.Empty
+                                       ? -1
+                                       : columnsImportNum[importColumnTitleForShapeName];
+      int numTopLeftCornerXImportColumn = importColumnTitleForTopLeftCornerX == string.Empty
+                                            ? -1
+                                            : columnsImportNum[importColumnTitleForTopLeftCornerX];
+      int numTopLeftCornerYImportColumn = importColumnTitleForTopLeftCornerY == string.Empty
+                                            ? -1
+                                            : columnsImportNum[importColumnTitleForTopLeftCornerY];
+      int numBottomRightCornerXImportColumn = importColumnTitleForBottomRightCornerX == string.Empty
+                                                ? -1
+                                                : columnsImportNum[importColumnTitleForBottomRightCornerX];
+      int numBottomRightCornerYImportColumn = importColumnTitleForBottomRightCornerY == string.Empty
+                                                ? -1
+                                                : columnsImportNum[importColumnTitleForBottomRightCornerY];
+      int numShapeGroupImportColumn = importColumnTitleForShapeGroup == string.Empty
+                                        ? -1
+                                        : columnsImportNum[importColumnTitleForShapeGroup];
 
       foreach (string[] items in asciiSettings.Rows)
       {
         try
         {
-          RectangleF boundingRect = new RectangleF();
+          var boundingRect = new RectangleF();
 
           // Calc bounding Rect from X1,X2,Y1,Y2 as given
           string x1 = "0";
@@ -451,17 +413,14 @@ namespace Ogama.Modules.ImportExport.AOIData
           string y2 = "0";
 
           // Create Ogama columns placeholder
-          AOIData newAOIData = new AOIData();
+          var newAOIData = new AOIData();
 
           if (numTrialIDImportColumn != -1)
           {
-            newAOIData.TrialID = Convert.ToInt32(items[numTrialIDImportColumn]);
+            newAOIData.TrialID = Convert.ToInt32(items[numTrialIDImportColumn], nfi);
           }
 
-          if (numSlideNrImportColumn != -1)
-          {
-            newAOIData.SlideNr = Convert.ToInt32(items[numSlideNrImportColumn]);
-          }
+          newAOIData.SlideNr = numSlideNrImportColumn != -1 ? Convert.ToInt32(items[numSlideNrImportColumn], nfi) : 0;
 
           if (numShapeNameImportColumn != -1)
           {
@@ -491,19 +450,18 @@ namespace Ogama.Modules.ImportExport.AOIData
             y2 = items[numBottomRightCornerYImportColumn];
           }
 
-          boundingRect.X = Convert.ToSingle(x1);
-          boundingRect.Y = Convert.ToSingle(y1);
-          boundingRect.Width = Convert.ToSingle(x2) - boundingRect.X;
-          boundingRect.Height = Convert.ToSingle(y2) - boundingRect.Y;
+          boundingRect.X = Convert.ToSingle(x1, nfi);
+          boundingRect.Y = Convert.ToSingle(y1, nfi);
+          boundingRect.Width = Convert.ToSingle(x2, nfi) - boundingRect.X;
+          boundingRect.Height = Convert.ToSingle(y2, nfi) - boundingRect.Y;
 
-          string pts = "P1:(" + string.Format("{0:F1}", boundingRect.Left) + ";" +
-                        string.Format("{0:F1}", boundingRect.Top) + ") P2:(" +
-                        string.Format("{0:F1}", boundingRect.Right) + ";" +
-                        string.Format("{0:F1}", boundingRect.Top) + ") P3:(" +
-                        string.Format("{0:F1}", boundingRect.Right) + ";" +
-                        string.Format("{0:F1}", boundingRect.Bottom) + ") P4:(" +
-                        string.Format("{0:F1}", boundingRect.Left) + ";" +
-                        string.Format("{0:F1}", boundingRect.Bottom) + ")";
+          string pts = "P1:(" + string.Format("{0:F1}", boundingRect.Left) + ";"
+                       + string.Format("{0:F1}", boundingRect.Top) + ") P2:("
+                       + string.Format("{0:F1}", boundingRect.Right) + ";" + string.Format("{0:F1}", boundingRect.Top)
+                       + ") P3:(" + string.Format("{0:F1}", boundingRect.Right) + ";"
+                       + string.Format("{0:F1}", boundingRect.Bottom) + ") P4:("
+                       + string.Format("{0:F1}", boundingRect.Left) + ";" + string.Format("{0:F1}", boundingRect.Bottom)
+                       + ")";
           newAOIData.ShapePts = pts;
 
           if (numShapeGroupImportColumn != -1)
@@ -511,13 +469,13 @@ namespace Ogama.Modules.ImportExport.AOIData
             newAOIData.Group = items[numShapeGroupImportColumn];
           }
 
-          if (newAOIData.Group == null || newAOIData.Group == string.Empty)
+          if (string.IsNullOrEmpty(newAOIData.Group))
           {
             newAOIData.Group = " ";
           }
 
           // Add new Element to AOITable
-          aoiDataList.Add(newAOIData);
+          AOIDataList.Add(newAOIData);
         }
         catch (Exception ex)
         {
@@ -525,12 +483,60 @@ namespace Ogama.Modules.ImportExport.AOIData
         }
       }
     }
-    #endregion //METHODS
 
-    ///////////////////////////////////////////////////////////////////////////////
-    // Small helping Methods                                                     //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region HELPER
-    #endregion //HELPER
+    /// <summary>
+    ///   This method calls the correct import row
+    ///   parsing method referring to the current
+    ///   <see cref="AOIImportModes" />.
+    /// </summary>
+    private static void GenerateOgamaAOIDataList()
+    {
+      switch (AOISettings.ImportMode)
+      {
+        case AOIImportModes.UseSimpleRectangles:
+          GenerateAOIFromRectangles();
+          break;
+        case AOIImportModes.UseOgamaColumns:
+          GenerateAOIFromOgamaTable();
+          break;
+      }
+    }
+
+    /// <summary>
+    ///   This method writes the data that is written in the lists during
+    ///   import to OGAMAs dataset.
+    ///   If this could be successfully done the whole new data is
+    ///   written to the database (.mdf).
+    /// </summary>
+    private static void SaveImportIntoTablesAndDB()
+    {
+      try
+      {
+        // Try to submit the new values to the database
+        if (!Queries.WriteAOIDataListToDataSet(AOIDataList, asciiSettings.WaitingSplash))
+        {
+          throw new DataException("The new areas of interest could not be written into the dataset.");
+        }
+
+        // Update aoi table in the mdf database
+        Document.ActiveDocument.DocDataSet.AOIsAdapter.Update(Document.ActiveDocument.DocDataSet.AOIs);
+
+        // Submit changes
+        Document.ActiveDocument.DocDataSet.AcceptChanges();
+      }
+      catch (Exception ex)
+      {
+        ExceptionMethods.HandleException(ex);
+
+        // CleanUp
+        Document.ActiveDocument.DocDataSet.RejectChanges();
+      }
+      finally
+      {
+        AOIDataList.Clear();
+      }
+    }
+
+    #endregion
   }
 }
