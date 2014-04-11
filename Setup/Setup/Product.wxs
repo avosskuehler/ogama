@@ -78,6 +78,7 @@
       <FeatureRef Id='DirectShowFeature'/>
       <ComponentRef Id="RegistryEntries" />
       <FeatureRef Id='GazetrackerFeature'/>
+      <FeatureRef Id='HaythamFeature'/>
       <FeatureRef Id='HelpFeature'/>
       <FeatureRef Id='LibsFeature'/>
       <FeatureRef Id='OgamaMainApplicationFeature'/>

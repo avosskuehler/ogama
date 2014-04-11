@@ -118,11 +118,17 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="MouseDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MouseDown.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="LineColorHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LineColorHS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SequenceSimilarity" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SequenceSimilarity.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AleaLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AleaLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ChainHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ChainHS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -142,26 +148,20 @@
   <data name="Images" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Design" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Design.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="textdoc1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\textdoc1.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="ATMFirst" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ATMFirst.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="landisconnect" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lan disconnect.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="TableHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TableHS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DiceLeftPart" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DiceLeftPart.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Tempt_Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Tempt_Logo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ThumbnailView" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ThumbnailView.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="user1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\user.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Globe32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Globe32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -178,14 +178,14 @@
   <data name="Information16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Information16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="FixationsLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FixationsLogo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="RPLCut" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RPLCut.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DiceHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DiceHS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="globe" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\globe.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="TextboxHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TextboxHS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Shape" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Shape.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -208,9 +208,6 @@
   <data name="ASLmire_1024x768" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ASLmire_1024x768.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="RPLFixPen" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RPLFixPen.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="GazepointFoto16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\GazepointFoto16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -226,11 +223,11 @@
   <data name="helpdoc" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\helpdoc.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="FormRunHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\FormRunHS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="RPL" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RPL.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ITUDirectFoto64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ITUDirectFoto64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="GazeCursor1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\GazeCursor.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -268,14 +265,11 @@
   <data name="RPLFixCon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RPLFixCon.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AleaFoto64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AleaFoto64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="RPLFixPen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RPLFixPen.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Event" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Event.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CheckBoxHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CheckBoxHS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="DataContainer_MoveFirstHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataContainer_MoveFirstHS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Eye" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Eye.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -303,6 +297,9 @@
   </data>
   <data name="DiceNotHS16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DiceNotHS16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AttentionMapLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AttentionMapLogo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="RPLCursorPenIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RPLCursorPen.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -334,20 +331,17 @@
   <data name="RPLFixPenIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RPLFixPen.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="OgamaNew" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\OgamaNew.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="clickRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\clickRight.wav;System.IO.MemoryStream, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="users" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\users.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="CharacterSimilarity" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CharacterSimilarity.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="RPLFix" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RPLFix.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="DatabaseSaving" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DatabaseSaving.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ASLFoto16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ASLFoto16.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="TobiiPhoto16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TobiiPhoto16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="MirametrixFoto16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MirametrixFoto16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -357,9 +351,6 @@
   </data>
   <data name="Data_Dataset" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Data_Dataset.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="HelpIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\help.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="RPLPathPenIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RPLPathPen.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -403,17 +394,23 @@
   <data name="saveHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\saveHS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="AOIFontIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AOIFontIcon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="ShowGridlines2HS" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ShowGridlines2HS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="RPLFixConPenIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RPLFixConPen.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="user1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\user.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SMIRedMFoto64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SMIRedMFoto64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="user16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\user16.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Filter2HS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Filter2HS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Libra" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Libra.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -435,6 +432,9 @@
   </data>
   <data name="RPLCursorTyp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RPLCursorTyp.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SMIiViewXFoto16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SMIiViewXFoto16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="MultiplePagesHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MultiplePagesHS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -472,14 +472,8 @@
   <data name="ReplayLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ReplayLogo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="underlineHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\underlineHS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="RecolorPictureHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RecolorPictureHS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Color_fontHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Color_fontHS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Warning16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Warning16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -487,8 +481,8 @@
   <data name="OutdentHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\OutdentHS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CheckBoard" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CheckBoard.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BrowserIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\globe.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ASLBanner" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ASLBanner.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -498,9 +492,6 @@
   </data>
   <data name="PasteHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PasteHS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SMIRedMFoto64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SMIRedMFoto64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ITUNetworkFoto64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ITUNetworkFoto64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -514,8 +505,8 @@
   <data name="ITU_61_61" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ITU_61_61.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="FixationsLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\FixationsLogo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Color_fontHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Color_fontHS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ChainLeftPart" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ChainLeftPart.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -526,17 +517,20 @@
   <data name="Record" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Record.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ChainRightPart" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ChainRightPart.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="AOILogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AOILogo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Rectangle" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Rectangle.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="GenericShape" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GenericShape.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="CheckGrammarHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CheckGrammarHS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UpdateOgama1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\UpdateOgama1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sound" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sound.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="GenericPicDoc" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\GenericPicDoc.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -550,17 +544,20 @@
   <data name="ImportDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Import Document.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DataContainer_MoveFirstHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DataContainer_MoveFirstHS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="globe" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\globe.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AttentionMapLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AttentionMapLogo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="DiceHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DiceHS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DisplayInColorHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DisplayInColorHS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="textdoc" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\textdoc.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Error16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Error16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PropertiesHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PropertiesHS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -586,8 +583,8 @@
   <data name="IgnoreDoubles" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\IgnoreDoubles.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="MouseDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MouseDown.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="textdoc1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\textdoc1.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Desktop32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Desktop32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -622,14 +619,14 @@
   <data name="DatabaseLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DatabaseLogo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="BrowserIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\globe.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="RPLFix" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RPLFix.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="RPLBlink" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RPLBlink.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Filter2HS" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Filter2HS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Design" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Design.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="MoveNext" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MoveNext.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -640,11 +637,11 @@
   <data name="SMIRedMFoto16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SMIRedMFoto16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="TextboxHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\TextboxHS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AleaFoto64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AleaFoto64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="SMIiViewXFoto16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SMIiViewXFoto16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AOILogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AOILogo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="RecordHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RecordHS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -654,6 +651,9 @@
   </data>
   <data name="VSObject_Type" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\VSObject_Type.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="StrikeoutHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\StrikeoutHS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ChainNotHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ChainNotHS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -673,11 +673,14 @@
   <data name="EyeTechLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\EyeTechLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="propertiesORoptions" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\propertiesORoptions.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="StopHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\StopHS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AleaLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AleaLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="clickRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\clickRight.wav;System.IO.MemoryStream, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="video" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\video.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -688,8 +691,8 @@
   <data name="PS3_61_61" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PS3_61_61.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="propertiesORoptions" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\propertiesORoptions.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="FormRunHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FormRunHS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Ogama" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Ogama.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -715,14 +718,14 @@
   <data name="Tasks" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Tasks.ICO;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="TobiiPhoto16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\TobiiPhoto16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ThumbnailView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ThumbnailView.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="GenMixedMediaDoc" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\GenMixedMediaDoc.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="sound" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sound.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Event" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Event.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DiceRightPart" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DiceRightPart.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -742,17 +745,17 @@
   <data name="update2_00" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\update2_00.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GenericShape" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GenericShape.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ChainRightPart" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ChainRightPart.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AOIFontIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AOIFontIcon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="DiceLeftPart" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DiceLeftPart.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Sharp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sharp.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DatabaseSaving" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DatabaseSaving.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="OgamaNew" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\OgamaNew.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Desktop" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Desktop.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -763,11 +766,11 @@
   <data name="document" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\document.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Error16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Error16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="HelpIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\help.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="StrikeoutHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\StrikeoutHS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ASLFoto16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ASLFoto16.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="RPLFixConPen" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RPLFixConPen.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -796,8 +799,8 @@
   <data name="ImportData" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ImportData.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="users" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\users.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="underlineHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\underlineHS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Monitor2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Monitor2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -805,11 +808,11 @@
   <data name="ExportToPictureDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Export To Picture Document.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="landisconnect" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\lan disconnect.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CheckBoxHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CheckBoxHS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="UpdateOgama1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\UpdateOgama1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CheckBoard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CheckBoard.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="error" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\error.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -826,7 +829,13 @@
   <data name="OrgChartHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\OrgChartHS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ITUDirectFoto64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ITUDirectFoto64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Haytham64Foto" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Haytham64Foto.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HaythamBanner" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\HaythamBanner.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HaythamLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\HaythamLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -48,6 +48,7 @@ namespace Ogama.Modules.Recording
   using Ogama.Modules.Recording.EyeTechInterface;
   using Ogama.Modules.Recording.GazegroupInterface;
   using Ogama.Modules.Recording.GazepointInterface;
+  using Ogama.Modules.Recording.HaythamInterface;
   using Ogama.Modules.Recording.MirametrixInterface;
   using Ogama.Modules.Recording.MouseOnlyInterface;
   using Ogama.Modules.Recording.Presenter;
@@ -1096,6 +1097,7 @@ namespace Ogama.Modules.Recording
       this.tclEyetracker.TabPages.Add(this.tbpGazetrackerIPClient);
       this.tclEyetracker.TabPages.Add(this.tbpGazetrackerDirectClient);
       this.tclEyetracker.TabPages.Add(this.tbpEyeTech);
+      this.tclEyetracker.TabPages.Add(this.tbpHaytham);
 
       // Read activated tracker value from the application settings
       string activatedTracker = Settings.Default.ActivatedHardwareTracker;
@@ -1383,6 +1385,37 @@ namespace Ogama.Modules.Recording
         if (this.tclEyetracker.TabPages.Contains(this.tbpGazetrackerDirectClient))
         {
           this.tclEyetracker.TabPages.Remove(this.tbpGazetrackerDirectClient);
+        }
+      }
+
+      if (tracker == (tracker | HardwareTracker.Haytham))
+      {
+        // Create ITU Haytham tracker
+        var newHaythamClient = new HaythamTracker(
+          this,
+          this.spcHaytham,
+          this.tscHaytham,
+          this.txbHaythamStatus,
+          this.btnHaythamLaunch,
+          this.btnHaythamConnect,
+          //this.btnHaythamCalibrate,
+          this.btnHaythamSubject,
+          this.btnHaythamRecord,
+          this.txbHaythamSubject);
+
+        this.trackerInterfaces.Add(HardwareTracker.Haytham, newHaythamClient);
+
+        // Disable Usercam button by default,
+        // because gazetracker often uses the first connected camera device
+        // which would otherwise used by the usercam
+        this.btnUsercam.Checked = false;
+        this.spcPanelUserCam.Panel2Collapsed = true;
+      }
+      else
+      {
+        if (this.tclEyetracker.TabPages.Contains(this.tbpHaytham))
+        {
+          this.tclEyetracker.TabPages.Remove(this.tbpHaytham);
         }
       }
 
@@ -2598,10 +2631,17 @@ namespace Ogama.Modules.Recording
           }
 
           break;
-        case "tbpSMI":
+        case "tbpSMIiViewX":
           if (this.trackerInterfaces.ContainsKey(HardwareTracker.SMIiViewX))
           {
             this.currentTracker = this.trackerInterfaces[HardwareTracker.SMIiViewX];
+          }
+
+          break;
+        case "tbpSMIRedM":
+          if (this.trackerInterfaces.ContainsKey(HardwareTracker.SMIRedM))
+          {
+            this.currentTracker = this.trackerInterfaces[HardwareTracker.SMIRedM];
           }
 
           break;
@@ -2616,6 +2656,13 @@ namespace Ogama.Modules.Recording
           if (this.trackerInterfaces.ContainsKey(HardwareTracker.GazetrackerIPClient))
           {
             this.currentTracker = this.trackerInterfaces[HardwareTracker.GazetrackerIPClient];
+          }
+
+          break;
+        case "tbpHaytham":
+          if (this.trackerInterfaces.ContainsKey(HardwareTracker.Haytham))
+          {
+            this.currentTracker = this.trackerInterfaces[HardwareTracker.Haytham];
           }
 
           break;

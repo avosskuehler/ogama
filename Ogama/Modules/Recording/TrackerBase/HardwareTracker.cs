@@ -81,6 +81,11 @@ namespace Ogama.Modules.Recording.TrackerBase
     /// The Senso motoric instruments RedM System based tracking.
     /// </summary>
     SMIRedM = 1024,
+
+    /// <summary>
+    /// The ITU Haytham tracker project
+    /// </summary>
+    Haytham = 2048,
   }
 }
 

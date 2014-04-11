@@ -33,6 +33,7 @@
       this.components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SelectTracker));
       this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+      this.dialogTop1 = new Ogama.Modules.Common.Controls.DialogTop();
       this.splitContainer2 = new System.Windows.Forms.SplitContainer();
       this.splitContainer15 = new System.Windows.Forms.SplitContainer();
       this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -149,6 +150,16 @@
       this.splitContainer14 = new System.Windows.Forms.SplitContainer();
       this.pictureBox3 = new System.Windows.Forms.PictureBox();
       this.label15 = new System.Windows.Forms.Label();
+      this.grpHaytham = new System.Windows.Forms.GroupBox();
+      this.tableLayoutPanel24 = new System.Windows.Forms.TableLayoutPanel();
+      this.tableLayoutPanel25 = new System.Windows.Forms.TableLayoutPanel();
+      this.pcbHelpHaytham = new System.Windows.Forms.PictureBox();
+      this.chbHaytham = new System.Windows.Forms.CheckBox();
+      this.pcbHaythamStatus = new System.Windows.Forms.PictureBox();
+      this.lblHaythamStatus = new System.Windows.Forms.Label();
+      this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+      this.pcbHaytham = new System.Windows.Forms.PictureBox();
+      this.label6 = new System.Windows.Forms.Label();
       this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
       this.pcbSelectedTrackerLogo = new System.Windows.Forms.PictureBox();
       this.pcbSelectedTrackerImage = new System.Windows.Forms.PictureBox();
@@ -156,7 +167,6 @@
       this.btnCancel = new System.Windows.Forms.Button();
       this.btnOK = new System.Windows.Forms.Button();
       this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-      this.dialogTop1 = new Ogama.Modules.Common.Controls.DialogTop();
       ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
       this.splitContainer1.Panel1.SuspendLayout();
       this.splitContainer1.Panel2.SuspendLayout();
@@ -283,6 +293,16 @@
       this.splitContainer14.Panel2.SuspendLayout();
       this.splitContainer14.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+      this.grpHaytham.SuspendLayout();
+      this.tableLayoutPanel24.SuspendLayout();
+      this.tableLayoutPanel25.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.pcbHelpHaytham)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.pcbHaythamStatus)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
+      this.splitContainer3.Panel1.SuspendLayout();
+      this.splitContainer3.Panel2.SuspendLayout();
+      this.splitContainer3.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.pcbHaytham)).BeginInit();
       this.tableLayoutPanel2.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.pcbSelectedTrackerLogo)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pcbSelectedTrackerImage)).BeginInit();
@@ -308,6 +328,19 @@
       this.splitContainer1.SplitterDistance = 60;
       this.splitContainer1.SplitterWidth = 1;
       this.splitContainer1.TabIndex = 6;
+      // 
+      // dialogTop1
+      // 
+      this.dialogTop1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
+      this.dialogTop1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("dialogTop1.BackgroundImage")));
+      this.dialogTop1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+      this.dialogTop1.Description = "Check the tracking devices that should be available in the recording module.";
+      this.dialogTop1.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.dialogTop1.Location = new System.Drawing.Point(0, 0);
+      this.dialogTop1.Logo = global::Ogama.Properties.Resources.Record;
+      this.dialogTop1.Name = "dialogTop1";
+      this.dialogTop1.Size = new System.Drawing.Size(641, 60);
+      this.dialogTop1.TabIndex = 0;
       // 
       // splitContainer2
       // 
@@ -429,11 +462,11 @@
       this.tableLayoutPanel5.Controls.Add(this.pcbTobiiStatus, 2, 0);
       this.tableLayoutPanel5.Controls.Add(this.lblTobiiStatus, 1, 0);
       this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 84);
+      this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 82);
       this.tableLayoutPanel5.Name = "tableLayoutPanel5";
       this.tableLayoutPanel5.RowCount = 1;
       this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-      this.tableLayoutPanel5.Size = new System.Drawing.Size(194, 18);
+      this.tableLayoutPanel5.Size = new System.Drawing.Size(194, 20);
       this.tableLayoutPanel5.TabIndex = 0;
       // 
       // pcbHelpTobii
@@ -443,7 +476,7 @@
       this.pcbHelpTobii.Location = new System.Drawing.Point(173, 3);
       this.pcbHelpTobii.Margin = new System.Windows.Forms.Padding(0, 3, 3, 0);
       this.pcbHelpTobii.Name = "pcbHelpTobii";
-      this.pcbHelpTobii.Size = new System.Drawing.Size(18, 15);
+      this.pcbHelpTobii.Size = new System.Drawing.Size(18, 17);
       this.pcbHelpTobii.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
       this.pcbHelpTobii.TabIndex = 16;
       this.pcbHelpTobii.TabStop = false;
@@ -464,10 +497,10 @@
       // 
       this.pcbTobiiStatus.Dock = System.Windows.Forms.DockStyle.Fill;
       this.pcbTobiiStatus.Image = global::Ogama.Properties.Resources.Information16;
-      this.pcbTobiiStatus.Location = new System.Drawing.Point(155, 3);
+      this.pcbTobiiStatus.Location = new System.Drawing.Point(152, 3);
       this.pcbTobiiStatus.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
       this.pcbTobiiStatus.Name = "pcbTobiiStatus";
-      this.pcbTobiiStatus.Size = new System.Drawing.Size(15, 15);
+      this.pcbTobiiStatus.Size = new System.Drawing.Size(18, 17);
       this.pcbTobiiStatus.TabIndex = 1;
       this.pcbTobiiStatus.TabStop = false;
       // 
@@ -477,7 +510,7 @@
       this.lblTobiiStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblTobiiStatus.Location = new System.Drawing.Point(24, 0);
       this.lblTobiiStatus.Name = "lblTobiiStatus";
-      this.lblTobiiStatus.Size = new System.Drawing.Size(125, 18);
+      this.lblTobiiStatus.Size = new System.Drawing.Size(122, 20);
       this.lblTobiiStatus.TabIndex = 2;
       this.lblTobiiStatus.Text = "Available";
       this.lblTobiiStatus.MouseHover += new System.EventHandler(this.GrpTobiiEnter);
@@ -495,7 +528,7 @@
       // splitContainer4.Panel2
       // 
       this.splitContainer4.Panel2.Controls.Add(this.label3);
-      this.splitContainer4.Size = new System.Drawing.Size(194, 75);
+      this.splitContainer4.Size = new System.Drawing.Size(194, 73);
       this.splitContainer4.SplitterDistance = 64;
       this.splitContainer4.TabIndex = 0;
       // 
@@ -505,7 +538,7 @@
       this.pcbTobii.Image = global::Ogama.Properties.Resources.TobiiPhoto64;
       this.pcbTobii.Location = new System.Drawing.Point(0, 0);
       this.pcbTobii.Name = "pcbTobii";
-      this.pcbTobii.Size = new System.Drawing.Size(64, 75);
+      this.pcbTobii.Size = new System.Drawing.Size(64, 73);
       this.pcbTobii.TabIndex = 0;
       this.pcbTobii.TabStop = false;
       this.pcbTobii.Click += new System.EventHandler(this.PcbTobiiClick);
@@ -518,7 +551,7 @@
       this.label3.Location = new System.Drawing.Point(0, 0);
       this.label3.Margin = new System.Windows.Forms.Padding(0);
       this.label3.Name = "label3";
-      this.label3.Size = new System.Drawing.Size(126, 75);
+      this.label3.Size = new System.Drawing.Size(126, 73);
       this.label3.TabIndex = 0;
       this.label3.Text = "The Tobii technologies T60,T120,X120 eye tracker.";
       this.label3.MouseHover += new System.EventHandler(this.GrpTobiiEnter);
@@ -562,11 +595,11 @@
       this.tableLayoutPanel1.Controls.Add(this.pcbAleaStatus, 2, 0);
       this.tableLayoutPanel1.Controls.Add(this.lblAleaStatus, 1, 0);
       this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 84);
+      this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 82);
       this.tableLayoutPanel1.Name = "tableLayoutPanel1";
       this.tableLayoutPanel1.RowCount = 1;
       this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-      this.tableLayoutPanel1.Size = new System.Drawing.Size(194, 18);
+      this.tableLayoutPanel1.Size = new System.Drawing.Size(194, 20);
       this.tableLayoutPanel1.TabIndex = 0;
       // 
       // pcbHelpAlea
@@ -576,7 +609,7 @@
       this.pcbHelpAlea.Location = new System.Drawing.Point(173, 3);
       this.pcbHelpAlea.Margin = new System.Windows.Forms.Padding(0, 3, 3, 0);
       this.pcbHelpAlea.Name = "pcbHelpAlea";
-      this.pcbHelpAlea.Size = new System.Drawing.Size(18, 15);
+      this.pcbHelpAlea.Size = new System.Drawing.Size(18, 17);
       this.pcbHelpAlea.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
       this.pcbHelpAlea.TabIndex = 16;
       this.pcbHelpAlea.TabStop = false;
@@ -597,10 +630,10 @@
       // 
       this.pcbAleaStatus.Dock = System.Windows.Forms.DockStyle.Fill;
       this.pcbAleaStatus.Image = global::Ogama.Properties.Resources.Information16;
-      this.pcbAleaStatus.Location = new System.Drawing.Point(155, 3);
+      this.pcbAleaStatus.Location = new System.Drawing.Point(152, 3);
       this.pcbAleaStatus.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
       this.pcbAleaStatus.Name = "pcbAleaStatus";
-      this.pcbAleaStatus.Size = new System.Drawing.Size(15, 15);
+      this.pcbAleaStatus.Size = new System.Drawing.Size(18, 17);
       this.pcbAleaStatus.TabIndex = 1;
       this.pcbAleaStatus.TabStop = false;
       // 
@@ -610,7 +643,7 @@
       this.lblAleaStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblAleaStatus.Location = new System.Drawing.Point(24, 0);
       this.lblAleaStatus.Name = "lblAleaStatus";
-      this.lblAleaStatus.Size = new System.Drawing.Size(125, 18);
+      this.lblAleaStatus.Size = new System.Drawing.Size(122, 20);
       this.lblAleaStatus.TabIndex = 2;
       this.lblAleaStatus.Text = "Available";
       this.lblAleaStatus.MouseHover += new System.EventHandler(this.GrpAleaEnter);
@@ -628,7 +661,7 @@
       // splitContainer5.Panel2
       // 
       this.splitContainer5.Panel2.Controls.Add(this.label1);
-      this.splitContainer5.Size = new System.Drawing.Size(194, 75);
+      this.splitContainer5.Size = new System.Drawing.Size(194, 73);
       this.splitContainer5.SplitterDistance = 64;
       this.splitContainer5.TabIndex = 0;
       // 
@@ -638,7 +671,7 @@
       this.pcbAlea.Image = global::Ogama.Properties.Resources.AleaFoto64;
       this.pcbAlea.Location = new System.Drawing.Point(0, 0);
       this.pcbAlea.Name = "pcbAlea";
-      this.pcbAlea.Size = new System.Drawing.Size(64, 75);
+      this.pcbAlea.Size = new System.Drawing.Size(64, 73);
       this.pcbAlea.TabIndex = 0;
       this.pcbAlea.TabStop = false;
       this.pcbAlea.Click += new System.EventHandler(this.PcbAleaClick);
@@ -651,7 +684,7 @@
       this.label1.Location = new System.Drawing.Point(0, 0);
       this.label1.Margin = new System.Windows.Forms.Padding(0);
       this.label1.Name = "label1";
-      this.label1.Size = new System.Drawing.Size(126, 75);
+      this.label1.Size = new System.Drawing.Size(126, 73);
       this.label1.TabIndex = 0;
       this.label1.Text = "The alea technologies IG-30 Pro eye tracker.";
       this.label1.MouseHover += new System.EventHandler(this.GrpAleaEnter);
@@ -695,11 +728,11 @@
       this.tableLayoutPanel11.Controls.Add(this.pcbMirametrixStatus, 2, 0);
       this.tableLayoutPanel11.Controls.Add(this.lblMirametrixStatus, 1, 0);
       this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.tableLayoutPanel11.Location = new System.Drawing.Point(3, 84);
+      this.tableLayoutPanel11.Location = new System.Drawing.Point(3, 82);
       this.tableLayoutPanel11.Name = "tableLayoutPanel11";
       this.tableLayoutPanel11.RowCount = 1;
       this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-      this.tableLayoutPanel11.Size = new System.Drawing.Size(194, 18);
+      this.tableLayoutPanel11.Size = new System.Drawing.Size(194, 20);
       this.tableLayoutPanel11.TabIndex = 0;
       // 
       // pcbHelpMirametrix
@@ -709,7 +742,7 @@
       this.pcbHelpMirametrix.Location = new System.Drawing.Point(173, 3);
       this.pcbHelpMirametrix.Margin = new System.Windows.Forms.Padding(0, 3, 3, 0);
       this.pcbHelpMirametrix.Name = "pcbHelpMirametrix";
-      this.pcbHelpMirametrix.Size = new System.Drawing.Size(18, 15);
+      this.pcbHelpMirametrix.Size = new System.Drawing.Size(18, 17);
       this.pcbHelpMirametrix.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
       this.pcbHelpMirametrix.TabIndex = 16;
       this.pcbHelpMirametrix.TabStop = false;
@@ -730,10 +763,10 @@
       // 
       this.pcbMirametrixStatus.Dock = System.Windows.Forms.DockStyle.Fill;
       this.pcbMirametrixStatus.Image = global::Ogama.Properties.Resources.Information16;
-      this.pcbMirametrixStatus.Location = new System.Drawing.Point(155, 3);
+      this.pcbMirametrixStatus.Location = new System.Drawing.Point(152, 3);
       this.pcbMirametrixStatus.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
       this.pcbMirametrixStatus.Name = "pcbMirametrixStatus";
-      this.pcbMirametrixStatus.Size = new System.Drawing.Size(15, 15);
+      this.pcbMirametrixStatus.Size = new System.Drawing.Size(18, 17);
       this.pcbMirametrixStatus.TabIndex = 1;
       this.pcbMirametrixStatus.TabStop = false;
       // 
@@ -743,7 +776,7 @@
       this.lblMirametrixStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblMirametrixStatus.Location = new System.Drawing.Point(24, 0);
       this.lblMirametrixStatus.Name = "lblMirametrixStatus";
-      this.lblMirametrixStatus.Size = new System.Drawing.Size(125, 18);
+      this.lblMirametrixStatus.Size = new System.Drawing.Size(122, 20);
       this.lblMirametrixStatus.TabIndex = 2;
       this.lblMirametrixStatus.Text = "Available";
       this.lblMirametrixStatus.MouseHover += new System.EventHandler(this.GrpMirametrixEnter);
@@ -761,7 +794,7 @@
       // splitContainer8.Panel2
       // 
       this.splitContainer8.Panel2.Controls.Add(this.label9);
-      this.splitContainer8.Size = new System.Drawing.Size(194, 75);
+      this.splitContainer8.Size = new System.Drawing.Size(194, 73);
       this.splitContainer8.SplitterDistance = 64;
       this.splitContainer8.TabIndex = 0;
       // 
@@ -771,7 +804,7 @@
       this.pcbMirametrix.Image = global::Ogama.Properties.Resources.MirametrixFoto64;
       this.pcbMirametrix.Location = new System.Drawing.Point(0, 0);
       this.pcbMirametrix.Name = "pcbMirametrix";
-      this.pcbMirametrix.Size = new System.Drawing.Size(64, 75);
+      this.pcbMirametrix.Size = new System.Drawing.Size(64, 73);
       this.pcbMirametrix.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
       this.pcbMirametrix.TabIndex = 0;
       this.pcbMirametrix.TabStop = false;
@@ -785,7 +818,7 @@
       this.label9.Location = new System.Drawing.Point(0, 0);
       this.label9.Margin = new System.Windows.Forms.Padding(0);
       this.label9.Name = "label9";
-      this.label9.Size = new System.Drawing.Size(126, 75);
+      this.label9.Size = new System.Drawing.Size(126, 73);
       this.label9.TabIndex = 0;
       this.label9.Text = "The Mirametrix S2 eye tracker.";
       this.label9.MouseHover += new System.EventHandler(this.GrpMirametrixEnter);
@@ -829,11 +862,11 @@
       this.tableLayoutPanel17.Controls.Add(this.pcbSMIRedMStatus, 2, 0);
       this.tableLayoutPanel17.Controls.Add(this.lblSMIRedMStatus, 1, 0);
       this.tableLayoutPanel17.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.tableLayoutPanel17.Location = new System.Drawing.Point(3, 84);
+      this.tableLayoutPanel17.Location = new System.Drawing.Point(3, 82);
       this.tableLayoutPanel17.Name = "tableLayoutPanel17";
       this.tableLayoutPanel17.RowCount = 1;
       this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-      this.tableLayoutPanel17.Size = new System.Drawing.Size(194, 18);
+      this.tableLayoutPanel17.Size = new System.Drawing.Size(194, 20);
       this.tableLayoutPanel17.TabIndex = 0;
       // 
       // pcbHelpSMIRedM
@@ -843,7 +876,7 @@
       this.pcbHelpSMIRedM.Location = new System.Drawing.Point(173, 3);
       this.pcbHelpSMIRedM.Margin = new System.Windows.Forms.Padding(0, 3, 3, 0);
       this.pcbHelpSMIRedM.Name = "pcbHelpSMIRedM";
-      this.pcbHelpSMIRedM.Size = new System.Drawing.Size(18, 15);
+      this.pcbHelpSMIRedM.Size = new System.Drawing.Size(18, 17);
       this.pcbHelpSMIRedM.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
       this.pcbHelpSMIRedM.TabIndex = 16;
       this.pcbHelpSMIRedM.TabStop = false;
@@ -865,10 +898,10 @@
       // 
       this.pcbSMIRedMStatus.Dock = System.Windows.Forms.DockStyle.Fill;
       this.pcbSMIRedMStatus.Image = global::Ogama.Properties.Resources.Information16;
-      this.pcbSMIRedMStatus.Location = new System.Drawing.Point(155, 3);
+      this.pcbSMIRedMStatus.Location = new System.Drawing.Point(152, 3);
       this.pcbSMIRedMStatus.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
       this.pcbSMIRedMStatus.Name = "pcbSMIRedMStatus";
-      this.pcbSMIRedMStatus.Size = new System.Drawing.Size(15, 15);
+      this.pcbSMIRedMStatus.Size = new System.Drawing.Size(18, 17);
       this.pcbSMIRedMStatus.TabIndex = 1;
       this.pcbSMIRedMStatus.TabStop = false;
       // 
@@ -878,7 +911,7 @@
       this.lblSMIRedMStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblSMIRedMStatus.Location = new System.Drawing.Point(24, 0);
       this.lblSMIRedMStatus.Name = "lblSMIRedMStatus";
-      this.lblSMIRedMStatus.Size = new System.Drawing.Size(125, 18);
+      this.lblSMIRedMStatus.Size = new System.Drawing.Size(122, 20);
       this.lblSMIRedMStatus.TabIndex = 2;
       this.lblSMIRedMStatus.Text = "Available";
       this.lblSMIRedMStatus.MouseHover += new System.EventHandler(this.GrpSMIRedMEnter);
@@ -896,7 +929,7 @@
       // splitContainer11.Panel2
       // 
       this.splitContainer11.Panel2.Controls.Add(this.label4);
-      this.splitContainer11.Size = new System.Drawing.Size(194, 75);
+      this.splitContainer11.Size = new System.Drawing.Size(194, 73);
       this.splitContainer11.SplitterDistance = 64;
       this.splitContainer11.TabIndex = 0;
       // 
@@ -906,7 +939,7 @@
       this.pictureBox5.Image = global::Ogama.Properties.Resources.SMIRedMFoto64;
       this.pictureBox5.Location = new System.Drawing.Point(0, 0);
       this.pictureBox5.Name = "pictureBox5";
-      this.pictureBox5.Size = new System.Drawing.Size(64, 75);
+      this.pictureBox5.Size = new System.Drawing.Size(64, 73);
       this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
       this.pictureBox5.TabIndex = 0;
       this.pictureBox5.TabStop = false;
@@ -919,7 +952,7 @@
       this.label4.Location = new System.Drawing.Point(0, 0);
       this.label4.Margin = new System.Windows.Forms.Padding(0);
       this.label4.Name = "label4";
-      this.label4.Size = new System.Drawing.Size(126, 75);
+      this.label4.Size = new System.Drawing.Size(126, 73);
       this.label4.TabIndex = 0;
       this.label4.Text = "The SMI Red-M eye tracker interface.";
       this.label4.MouseHover += new System.EventHandler(this.GrpSMIRedMEnter);
@@ -934,7 +967,7 @@
       this.grpSMIiViewX.TabIndex = 0;
       this.grpSMIiViewX.TabStop = false;
       this.grpSMIiViewX.Text = "SMI iViewX";
-      this.grpSMIiViewX.MouseHover += new System.EventHandler(this.GrpSMIiViewXEnter);
+      this.grpSMIiViewX.MouseHover += new System.EventHandler(this.GrpSmIiViewXEnter);
       // 
       // tableLayoutPanel6
       // 
@@ -963,11 +996,11 @@
       this.tableLayoutPanel7.Controls.Add(this.pcbSMIiVIewXStatus, 2, 0);
       this.tableLayoutPanel7.Controls.Add(this.lblSMIiViewXStatus, 1, 0);
       this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 84);
+      this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 82);
       this.tableLayoutPanel7.Name = "tableLayoutPanel7";
       this.tableLayoutPanel7.RowCount = 1;
       this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-      this.tableLayoutPanel7.Size = new System.Drawing.Size(194, 18);
+      this.tableLayoutPanel7.Size = new System.Drawing.Size(194, 20);
       this.tableLayoutPanel7.TabIndex = 0;
       // 
       // pcbHelpSMI
@@ -977,12 +1010,12 @@
       this.pcbHelpSMI.Location = new System.Drawing.Point(173, 3);
       this.pcbHelpSMI.Margin = new System.Windows.Forms.Padding(0, 3, 3, 0);
       this.pcbHelpSMI.Name = "pcbHelpSMI";
-      this.pcbHelpSMI.Size = new System.Drawing.Size(18, 15);
+      this.pcbHelpSMI.Size = new System.Drawing.Size(18, 17);
       this.pcbHelpSMI.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
       this.pcbHelpSMI.TabIndex = 16;
       this.pcbHelpSMI.TabStop = false;
       this.toolTip1.SetToolTip(this.pcbHelpSMI, "Display help on how to install this eye tracker.");
-      this.pcbHelpSMI.Click += new System.EventHandler(this.PcbHelpSMIiViewXClick);
+      this.pcbHelpSMI.Click += new System.EventHandler(this.PcbHelpSmIiViewXClick);
       // 
       // chbSMIiViewX
       // 
@@ -998,10 +1031,10 @@
       // 
       this.pcbSMIiVIewXStatus.Dock = System.Windows.Forms.DockStyle.Fill;
       this.pcbSMIiVIewXStatus.Image = global::Ogama.Properties.Resources.Information16;
-      this.pcbSMIiVIewXStatus.Location = new System.Drawing.Point(155, 3);
+      this.pcbSMIiVIewXStatus.Location = new System.Drawing.Point(152, 3);
       this.pcbSMIiVIewXStatus.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
       this.pcbSMIiVIewXStatus.Name = "pcbSMIiVIewXStatus";
-      this.pcbSMIiVIewXStatus.Size = new System.Drawing.Size(15, 15);
+      this.pcbSMIiVIewXStatus.Size = new System.Drawing.Size(18, 17);
       this.pcbSMIiVIewXStatus.TabIndex = 1;
       this.pcbSMIiVIewXStatus.TabStop = false;
       // 
@@ -1011,10 +1044,10 @@
       this.lblSMIiViewXStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblSMIiViewXStatus.Location = new System.Drawing.Point(24, 0);
       this.lblSMIiViewXStatus.Name = "lblSMIiViewXStatus";
-      this.lblSMIiViewXStatus.Size = new System.Drawing.Size(125, 18);
+      this.lblSMIiViewXStatus.Size = new System.Drawing.Size(122, 20);
       this.lblSMIiViewXStatus.TabIndex = 2;
       this.lblSMIiViewXStatus.Text = "Available";
-      this.lblSMIiViewXStatus.MouseHover += new System.EventHandler(this.GrpSMIiViewXEnter);
+      this.lblSMIiViewXStatus.MouseHover += new System.EventHandler(this.GrpSmIiViewXEnter);
       // 
       // splitContainer6
       // 
@@ -1029,7 +1062,7 @@
       // splitContainer6.Panel2
       // 
       this.splitContainer6.Panel2.Controls.Add(this.label5);
-      this.splitContainer6.Size = new System.Drawing.Size(194, 75);
+      this.splitContainer6.Size = new System.Drawing.Size(194, 73);
       this.splitContainer6.SplitterDistance = 64;
       this.splitContainer6.TabIndex = 0;
       // 
@@ -1039,12 +1072,12 @@
       this.pcbSMIiViewX.Image = global::Ogama.Properties.Resources.SMIiViewXFoto64;
       this.pcbSMIiViewX.Location = new System.Drawing.Point(0, 0);
       this.pcbSMIiViewX.Name = "pcbSMIiViewX";
-      this.pcbSMIiViewX.Size = new System.Drawing.Size(64, 75);
+      this.pcbSMIiViewX.Size = new System.Drawing.Size(64, 73);
       this.pcbSMIiViewX.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
       this.pcbSMIiViewX.TabIndex = 0;
       this.pcbSMIiViewX.TabStop = false;
       this.pcbSMIiViewX.Click += new System.EventHandler(this.PcbSMIClick);
-      this.pcbSMIiViewX.MouseHover += new System.EventHandler(this.GrpSMIiViewXEnter);
+      this.pcbSMIiViewX.MouseHover += new System.EventHandler(this.GrpSmIiViewXEnter);
       // 
       // label5
       // 
@@ -1053,10 +1086,10 @@
       this.label5.Location = new System.Drawing.Point(0, 0);
       this.label5.Margin = new System.Windows.Forms.Padding(0);
       this.label5.Name = "label5";
-      this.label5.Size = new System.Drawing.Size(126, 75);
+      this.label5.Size = new System.Drawing.Size(126, 73);
       this.label5.TabIndex = 0;
       this.label5.Text = "The SMI iViewX eye tracker interface.";
-      this.label5.MouseHover += new System.EventHandler(this.GrpSMIiViewXEnter);
+      this.label5.MouseHover += new System.EventHandler(this.GrpSmIiViewXEnter);
       // 
       // grpASL
       // 
@@ -1097,11 +1130,11 @@
       this.tableLayoutPanel9.Controls.Add(this.pcbASLStatus, 2, 0);
       this.tableLayoutPanel9.Controls.Add(this.lblASLStatus, 1, 0);
       this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 84);
+      this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 82);
       this.tableLayoutPanel9.Name = "tableLayoutPanel9";
       this.tableLayoutPanel9.RowCount = 1;
       this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-      this.tableLayoutPanel9.Size = new System.Drawing.Size(194, 18);
+      this.tableLayoutPanel9.Size = new System.Drawing.Size(194, 20);
       this.tableLayoutPanel9.TabIndex = 0;
       // 
       // pcbHelpASL
@@ -1111,7 +1144,7 @@
       this.pcbHelpASL.Location = new System.Drawing.Point(173, 3);
       this.pcbHelpASL.Margin = new System.Windows.Forms.Padding(0, 3, 3, 0);
       this.pcbHelpASL.Name = "pcbHelpASL";
-      this.pcbHelpASL.Size = new System.Drawing.Size(18, 15);
+      this.pcbHelpASL.Size = new System.Drawing.Size(18, 17);
       this.pcbHelpASL.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
       this.pcbHelpASL.TabIndex = 16;
       this.pcbHelpASL.TabStop = false;
@@ -1132,10 +1165,10 @@
       // 
       this.pcbASLStatus.Dock = System.Windows.Forms.DockStyle.Fill;
       this.pcbASLStatus.Image = global::Ogama.Properties.Resources.Information16;
-      this.pcbASLStatus.Location = new System.Drawing.Point(155, 3);
+      this.pcbASLStatus.Location = new System.Drawing.Point(152, 3);
       this.pcbASLStatus.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
       this.pcbASLStatus.Name = "pcbASLStatus";
-      this.pcbASLStatus.Size = new System.Drawing.Size(15, 15);
+      this.pcbASLStatus.Size = new System.Drawing.Size(18, 17);
       this.pcbASLStatus.TabIndex = 1;
       this.pcbASLStatus.TabStop = false;
       // 
@@ -1145,7 +1178,7 @@
       this.lblASLStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblASLStatus.Location = new System.Drawing.Point(24, 0);
       this.lblASLStatus.Name = "lblASLStatus";
-      this.lblASLStatus.Size = new System.Drawing.Size(125, 18);
+      this.lblASLStatus.Size = new System.Drawing.Size(122, 20);
       this.lblASLStatus.TabIndex = 2;
       this.lblASLStatus.Text = "Available";
       this.lblASLStatus.MouseHover += new System.EventHandler(this.GrpASLEnter);
@@ -1165,7 +1198,7 @@
       // 
       this.splitContainer7.Panel2.Controls.Add(this.label7);
       this.splitContainer7.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-      this.splitContainer7.Size = new System.Drawing.Size(194, 75);
+      this.splitContainer7.Size = new System.Drawing.Size(194, 73);
       this.splitContainer7.SplitterDistance = 64;
       this.splitContainer7.TabIndex = 0;
       // 
@@ -1175,7 +1208,7 @@
       this.pcbASL.Image = global::Ogama.Properties.Resources.ASLFoto64;
       this.pcbASL.Location = new System.Drawing.Point(0, 0);
       this.pcbASL.Name = "pcbASL";
-      this.pcbASL.Size = new System.Drawing.Size(64, 75);
+      this.pcbASL.Size = new System.Drawing.Size(64, 73);
       this.pcbASL.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
       this.pcbASL.TabIndex = 0;
       this.pcbASL.TabStop = false;
@@ -1189,7 +1222,7 @@
       this.label7.Location = new System.Drawing.Point(0, 0);
       this.label7.Margin = new System.Windows.Forms.Padding(0);
       this.label7.Name = "label7";
-      this.label7.Size = new System.Drawing.Size(126, 75);
+      this.label7.Size = new System.Drawing.Size(126, 73);
       this.label7.TabIndex = 0;
       this.label7.Text = "The ASL model 5000 eye tracker.";
       this.label7.MouseHover += new System.EventHandler(this.GrpASLEnter);
@@ -1233,11 +1266,11 @@
       this.tableLayoutPanel13.Controls.Add(this.pcbEyetechStatus, 2, 0);
       this.tableLayoutPanel13.Controls.Add(this.lblEyetechStatus, 1, 0);
       this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.tableLayoutPanel13.Location = new System.Drawing.Point(3, 84);
+      this.tableLayoutPanel13.Location = new System.Drawing.Point(3, 82);
       this.tableLayoutPanel13.Name = "tableLayoutPanel13";
       this.tableLayoutPanel13.RowCount = 1;
       this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-      this.tableLayoutPanel13.Size = new System.Drawing.Size(194, 18);
+      this.tableLayoutPanel13.Size = new System.Drawing.Size(194, 20);
       this.tableLayoutPanel13.TabIndex = 0;
       // 
       // pchHelpEyetech
@@ -1247,7 +1280,7 @@
       this.pchHelpEyetech.Location = new System.Drawing.Point(173, 3);
       this.pchHelpEyetech.Margin = new System.Windows.Forms.Padding(0, 3, 3, 0);
       this.pchHelpEyetech.Name = "pchHelpEyetech";
-      this.pchHelpEyetech.Size = new System.Drawing.Size(18, 15);
+      this.pchHelpEyetech.Size = new System.Drawing.Size(18, 17);
       this.pchHelpEyetech.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
       this.pchHelpEyetech.TabIndex = 16;
       this.pchHelpEyetech.TabStop = false;
@@ -1267,10 +1300,10 @@
       // 
       this.pcbEyetechStatus.Dock = System.Windows.Forms.DockStyle.Fill;
       this.pcbEyetechStatus.Image = global::Ogama.Properties.Resources.Information16;
-      this.pcbEyetechStatus.Location = new System.Drawing.Point(155, 3);
+      this.pcbEyetechStatus.Location = new System.Drawing.Point(152, 3);
       this.pcbEyetechStatus.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
       this.pcbEyetechStatus.Name = "pcbEyetechStatus";
-      this.pcbEyetechStatus.Size = new System.Drawing.Size(15, 15);
+      this.pcbEyetechStatus.Size = new System.Drawing.Size(18, 17);
       this.pcbEyetechStatus.TabIndex = 1;
       this.pcbEyetechStatus.TabStop = false;
       // 
@@ -1280,7 +1313,7 @@
       this.lblEyetechStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblEyetechStatus.Location = new System.Drawing.Point(24, 0);
       this.lblEyetechStatus.Name = "lblEyetechStatus";
-      this.lblEyetechStatus.Size = new System.Drawing.Size(125, 18);
+      this.lblEyetechStatus.Size = new System.Drawing.Size(122, 20);
       this.lblEyetechStatus.TabIndex = 2;
       this.lblEyetechStatus.Text = "Available";
       this.lblEyetechStatus.MouseHover += new System.EventHandler(this.GrpEyetechEnter);
@@ -1298,7 +1331,7 @@
       // splitContainer9.Panel2
       // 
       this.splitContainer9.Panel2.Controls.Add(this.label11);
-      this.splitContainer9.Size = new System.Drawing.Size(194, 75);
+      this.splitContainer9.Size = new System.Drawing.Size(194, 73);
       this.splitContainer9.SplitterDistance = 64;
       this.splitContainer9.TabIndex = 0;
       // 
@@ -1308,7 +1341,7 @@
       this.pcbEyetech.Image = global::Ogama.Properties.Resources.EyetechFoto64;
       this.pcbEyetech.Location = new System.Drawing.Point(0, 0);
       this.pcbEyetech.Name = "pcbEyetech";
-      this.pcbEyetech.Size = new System.Drawing.Size(64, 75);
+      this.pcbEyetech.Size = new System.Drawing.Size(64, 73);
       this.pcbEyetech.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
       this.pcbEyetech.TabIndex = 0;
       this.pcbEyetech.TabStop = false;
@@ -1322,7 +1355,7 @@
       this.label11.Location = new System.Drawing.Point(0, 0);
       this.label11.Margin = new System.Windows.Forms.Padding(0);
       this.label11.Name = "label11";
-      this.label11.Size = new System.Drawing.Size(126, 75);
+      this.label11.Size = new System.Drawing.Size(126, 73);
       this.label11.TabIndex = 0;
       this.label11.Text = "The EyeTech eye tracker.";
       this.label11.MouseHover += new System.EventHandler(this.GrpEyetechEnter);
@@ -1366,11 +1399,11 @@
       this.tableLayoutPanel15.Controls.Add(this.pcbGazepointStatus, 2, 0);
       this.tableLayoutPanel15.Controls.Add(this.lblGazepointStatus, 1, 0);
       this.tableLayoutPanel15.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.tableLayoutPanel15.Location = new System.Drawing.Point(3, 84);
+      this.tableLayoutPanel15.Location = new System.Drawing.Point(3, 82);
       this.tableLayoutPanel15.Name = "tableLayoutPanel15";
       this.tableLayoutPanel15.RowCount = 1;
       this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-      this.tableLayoutPanel15.Size = new System.Drawing.Size(194, 18);
+      this.tableLayoutPanel15.Size = new System.Drawing.Size(194, 20);
       this.tableLayoutPanel15.TabIndex = 0;
       // 
       // pcbHelpGazepoint
@@ -1380,7 +1413,7 @@
       this.pcbHelpGazepoint.Location = new System.Drawing.Point(173, 3);
       this.pcbHelpGazepoint.Margin = new System.Windows.Forms.Padding(0, 3, 3, 0);
       this.pcbHelpGazepoint.Name = "pcbHelpGazepoint";
-      this.pcbHelpGazepoint.Size = new System.Drawing.Size(18, 15);
+      this.pcbHelpGazepoint.Size = new System.Drawing.Size(18, 17);
       this.pcbHelpGazepoint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
       this.pcbHelpGazepoint.TabIndex = 16;
       this.pcbHelpGazepoint.TabStop = false;
@@ -1401,10 +1434,10 @@
       // 
       this.pcbGazepointStatus.Dock = System.Windows.Forms.DockStyle.Fill;
       this.pcbGazepointStatus.Image = global::Ogama.Properties.Resources.Information16;
-      this.pcbGazepointStatus.Location = new System.Drawing.Point(155, 3);
+      this.pcbGazepointStatus.Location = new System.Drawing.Point(152, 3);
       this.pcbGazepointStatus.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
       this.pcbGazepointStatus.Name = "pcbGazepointStatus";
-      this.pcbGazepointStatus.Size = new System.Drawing.Size(15, 15);
+      this.pcbGazepointStatus.Size = new System.Drawing.Size(18, 17);
       this.pcbGazepointStatus.TabIndex = 1;
       this.pcbGazepointStatus.TabStop = false;
       // 
@@ -1414,7 +1447,7 @@
       this.lblGazepointStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblGazepointStatus.Location = new System.Drawing.Point(24, 0);
       this.lblGazepointStatus.Name = "lblGazepointStatus";
-      this.lblGazepointStatus.Size = new System.Drawing.Size(125, 18);
+      this.lblGazepointStatus.Size = new System.Drawing.Size(122, 20);
       this.lblGazepointStatus.TabIndex = 2;
       this.lblGazepointStatus.Text = "Available";
       this.lblGazepointStatus.MouseHover += new System.EventHandler(this.GrpGazepointEnter);
@@ -1432,7 +1465,7 @@
       // splitContainer10.Panel2
       // 
       this.splitContainer10.Panel2.Controls.Add(this.label13);
-      this.splitContainer10.Size = new System.Drawing.Size(194, 75);
+      this.splitContainer10.Size = new System.Drawing.Size(194, 73);
       this.splitContainer10.SplitterDistance = 64;
       this.splitContainer10.TabIndex = 0;
       // 
@@ -1442,7 +1475,7 @@
       this.pcbGazepoint.Image = global::Ogama.Properties.Resources.GazepointFoto64;
       this.pcbGazepoint.Location = new System.Drawing.Point(0, 0);
       this.pcbGazepoint.Name = "pcbGazepoint";
-      this.pcbGazepoint.Size = new System.Drawing.Size(64, 75);
+      this.pcbGazepoint.Size = new System.Drawing.Size(64, 73);
       this.pcbGazepoint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
       this.pcbGazepoint.TabIndex = 0;
       this.pcbGazepoint.TabStop = false;
@@ -1456,7 +1489,7 @@
       this.label13.Location = new System.Drawing.Point(0, 0);
       this.label13.Margin = new System.Windows.Forms.Padding(0);
       this.label13.Name = "label13";
-      this.label13.Size = new System.Drawing.Size(126, 75);
+      this.label13.Size = new System.Drawing.Size(126, 73);
       this.label13.TabIndex = 0;
       this.label13.Text = "The Gazepoint GP3 eye tracker.";
       this.label13.MouseHover += new System.EventHandler(this.GrpGazepointEnter);
@@ -1476,6 +1509,7 @@
       // 
       this.flowLayoutPanel2.Controls.Add(this.grpGazetrackerDirect);
       this.flowLayoutPanel2.Controls.Add(this.grbGazetrackerNetwork);
+      this.flowLayoutPanel2.Controls.Add(this.grpHaytham);
       this.flowLayoutPanel2.Controls.Add(this.grpMouseTracker);
       this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
       this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 3);
@@ -1599,6 +1633,7 @@
       this.pcbITUDirect.Location = new System.Drawing.Point(0, 0);
       this.pcbITUDirect.Name = "pcbITUDirect";
       this.pcbITUDirect.Size = new System.Drawing.Size(95, 83);
+      this.pcbITUDirect.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
       this.pcbITUDirect.TabIndex = 0;
       this.pcbITUDirect.TabStop = false;
       this.pcbITUDirect.Click += new System.EventHandler(this.PcbITUClick);
@@ -1692,10 +1727,10 @@
       // 
       this.pcbGazetrackerNetworkStatus.Dock = System.Windows.Forms.DockStyle.Fill;
       this.pcbGazetrackerNetworkStatus.Image = global::Ogama.Properties.Resources.Information16;
-      this.pcbGazetrackerNetworkStatus.Location = new System.Drawing.Point(249, 3);
+      this.pcbGazetrackerNetworkStatus.Location = new System.Drawing.Point(246, 3);
       this.pcbGazetrackerNetworkStatus.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
       this.pcbGazetrackerNetworkStatus.Name = "pcbGazetrackerNetworkStatus";
-      this.pcbGazetrackerNetworkStatus.Size = new System.Drawing.Size(15, 17);
+      this.pcbGazetrackerNetworkStatus.Size = new System.Drawing.Size(18, 17);
       this.pcbGazetrackerNetworkStatus.TabIndex = 1;
       this.pcbGazetrackerNetworkStatus.TabStop = false;
       // 
@@ -1705,7 +1740,7 @@
       this.lblGazetrackerNetworkStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblGazetrackerNetworkStatus.Location = new System.Drawing.Point(24, 0);
       this.lblGazetrackerNetworkStatus.Name = "lblGazetrackerNetworkStatus";
-      this.lblGazetrackerNetworkStatus.Size = new System.Drawing.Size(219, 20);
+      this.lblGazetrackerNetworkStatus.Size = new System.Drawing.Size(216, 20);
       this.lblGazetrackerNetworkStatus.TabIndex = 2;
       this.lblGazetrackerNetworkStatus.Text = "Available";
       this.lblGazetrackerNetworkStatus.MouseHover += new System.EventHandler(this.GrpGazetrackerNetworkEnter);
@@ -1734,6 +1769,7 @@
       this.pcbITUNetwork.Location = new System.Drawing.Point(0, 0);
       this.pcbITUNetwork.Name = "pcbITUNetwork";
       this.pcbITUNetwork.Size = new System.Drawing.Size(95, 83);
+      this.pcbITUNetwork.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
       this.pcbITUNetwork.TabIndex = 0;
       this.pcbITUNetwork.TabStop = false;
       this.pcbITUNetwork.Click += new System.EventHandler(this.PcbITUClick);
@@ -1811,10 +1847,10 @@
       // 
       this.pcbMouseStatus.Dock = System.Windows.Forms.DockStyle.Fill;
       this.pcbMouseStatus.Image = global::Ogama.Properties.Resources.Information16;
-      this.pcbMouseStatus.Location = new System.Drawing.Point(249, 3);
+      this.pcbMouseStatus.Location = new System.Drawing.Point(246, 3);
       this.pcbMouseStatus.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
       this.pcbMouseStatus.Name = "pcbMouseStatus";
-      this.pcbMouseStatus.Size = new System.Drawing.Size(15, 17);
+      this.pcbMouseStatus.Size = new System.Drawing.Size(18, 17);
       this.pcbMouseStatus.TabIndex = 1;
       this.pcbMouseStatus.TabStop = false;
       // 
@@ -1824,7 +1860,7 @@
       this.lblMouseStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblMouseStatus.Location = new System.Drawing.Point(24, 0);
       this.lblMouseStatus.Name = "lblMouseStatus";
-      this.lblMouseStatus.Size = new System.Drawing.Size(219, 20);
+      this.lblMouseStatus.Size = new System.Drawing.Size(216, 20);
       this.lblMouseStatus.TabIndex = 2;
       this.lblMouseStatus.Text = "Available";
       this.lblMouseStatus.MouseHover += new System.EventHandler(this.GrpMouseOnlyEnter);
@@ -1853,6 +1889,7 @@
       this.pictureBox3.Location = new System.Drawing.Point(0, 0);
       this.pictureBox3.Name = "pictureBox3";
       this.pictureBox3.Size = new System.Drawing.Size(95, 83);
+      this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
       this.pictureBox3.TabIndex = 0;
       this.pictureBox3.TabStop = false;
       this.pictureBox3.MouseHover += new System.EventHandler(this.GrpMouseOnlyEnter);
@@ -1869,6 +1906,140 @@
       this.label15.Text = "This recorder captures just mouse movements and events. This can be used when gaz" +
     "e tracking is not needed.";
       this.label15.MouseHover += new System.EventHandler(this.GrpMouseOnlyEnter);
+      // 
+      // grpHaytham
+      // 
+      this.grpHaytham.Controls.Add(this.tableLayoutPanel24);
+      this.grpHaytham.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.grpHaytham.Location = new System.Drawing.Point(309, 149);
+      this.grpHaytham.Name = "grpHaytham";
+      this.grpHaytham.Size = new System.Drawing.Size(300, 140);
+      this.grpHaytham.TabIndex = 4;
+      this.grpHaytham.TabStop = false;
+      this.grpHaytham.Text = "Haytham";
+      // 
+      // tableLayoutPanel24
+      // 
+      this.tableLayoutPanel24.ColumnCount = 1;
+      this.tableLayoutPanel24.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+      this.tableLayoutPanel24.Controls.Add(this.tableLayoutPanel25, 0, 1);
+      this.tableLayoutPanel24.Controls.Add(this.splitContainer3, 0, 0);
+      this.tableLayoutPanel24.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.tableLayoutPanel24.Location = new System.Drawing.Point(3, 22);
+      this.tableLayoutPanel24.Name = "tableLayoutPanel24";
+      this.tableLayoutPanel24.RowCount = 2;
+      this.tableLayoutPanel24.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+      this.tableLayoutPanel24.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+      this.tableLayoutPanel24.Size = new System.Drawing.Size(294, 115);
+      this.tableLayoutPanel24.TabIndex = 1;
+      // 
+      // tableLayoutPanel25
+      // 
+      this.tableLayoutPanel25.ColumnCount = 4;
+      this.tableLayoutPanel25.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 21F));
+      this.tableLayoutPanel25.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+      this.tableLayoutPanel25.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 24F));
+      this.tableLayoutPanel25.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 21F));
+      this.tableLayoutPanel25.Controls.Add(this.pcbHelpHaytham, 3, 0);
+      this.tableLayoutPanel25.Controls.Add(this.chbHaytham, 0, 0);
+      this.tableLayoutPanel25.Controls.Add(this.pcbHaythamStatus, 2, 0);
+      this.tableLayoutPanel25.Controls.Add(this.lblHaythamStatus, 1, 0);
+      this.tableLayoutPanel25.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.tableLayoutPanel25.Location = new System.Drawing.Point(3, 92);
+      this.tableLayoutPanel25.Name = "tableLayoutPanel25";
+      this.tableLayoutPanel25.RowCount = 1;
+      this.tableLayoutPanel25.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+      this.tableLayoutPanel25.Size = new System.Drawing.Size(288, 20);
+      this.tableLayoutPanel25.TabIndex = 0;
+      // 
+      // pcbHelpHaytham
+      // 
+      this.pcbHelpHaytham.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.pcbHelpHaytham.Image = global::Ogama.Properties.Resources.HelpBmp;
+      this.pcbHelpHaytham.Location = new System.Drawing.Point(267, 3);
+      this.pcbHelpHaytham.Margin = new System.Windows.Forms.Padding(0, 3, 3, 0);
+      this.pcbHelpHaytham.Name = "pcbHelpHaytham";
+      this.pcbHelpHaytham.Size = new System.Drawing.Size(18, 17);
+      this.pcbHelpHaytham.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+      this.pcbHelpHaytham.TabIndex = 16;
+      this.pcbHelpHaytham.TabStop = false;
+      this.toolTip1.SetToolTip(this.pcbHelpHaytham, "Display help on how to install this eye tracker.");
+      this.pcbHelpHaytham.Click += new System.EventHandler(this.PcbHelpHaythamClick);
+      // 
+      // chbHaytham
+      // 
+      this.chbHaytham.AutoSize = true;
+      this.chbHaytham.Location = new System.Drawing.Point(3, 3);
+      this.chbHaytham.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+      this.chbHaytham.Name = "chbHaytham";
+      this.chbHaytham.Size = new System.Drawing.Size(15, 14);
+      this.chbHaytham.TabIndex = 0;
+      this.chbHaytham.UseVisualStyleBackColor = true;
+      // 
+      // pcbHaythamStatus
+      // 
+      this.pcbHaythamStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.pcbHaythamStatus.Image = global::Ogama.Properties.Resources.Information16;
+      this.pcbHaythamStatus.Location = new System.Drawing.Point(246, 3);
+      this.pcbHaythamStatus.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+      this.pcbHaythamStatus.Name = "pcbHaythamStatus";
+      this.pcbHaythamStatus.Size = new System.Drawing.Size(18, 17);
+      this.pcbHaythamStatus.TabIndex = 1;
+      this.pcbHaythamStatus.TabStop = false;
+      // 
+      // lblHaythamStatus
+      // 
+      this.lblHaythamStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.lblHaythamStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.lblHaythamStatus.Location = new System.Drawing.Point(24, 0);
+      this.lblHaythamStatus.Name = "lblHaythamStatus";
+      this.lblHaythamStatus.Size = new System.Drawing.Size(216, 20);
+      this.lblHaythamStatus.TabIndex = 2;
+      this.lblHaythamStatus.Text = "Available";
+      this.lblHaythamStatus.MouseHover += new System.EventHandler(this.GrpHaythamEnter);
+      // 
+      // splitContainer3
+      // 
+      this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.splitContainer3.Location = new System.Drawing.Point(3, 3);
+      this.splitContainer3.Name = "splitContainer3";
+      // 
+      // splitContainer3.Panel1
+      // 
+      this.splitContainer3.Panel1.Controls.Add(this.pcbHaytham);
+      // 
+      // splitContainer3.Panel2
+      // 
+      this.splitContainer3.Panel2.Controls.Add(this.label6);
+      this.splitContainer3.Size = new System.Drawing.Size(288, 83);
+      this.splitContainer3.SplitterDistance = 95;
+      this.splitContainer3.TabIndex = 0;
+      // 
+      // pcbHaytham
+      // 
+      this.pcbHaytham.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.pcbHaytham.Image = global::Ogama.Properties.Resources.Haytham64Foto;
+      this.pcbHaytham.Location = new System.Drawing.Point(0, 0);
+      this.pcbHaytham.Name = "pcbHaytham";
+      this.pcbHaytham.Size = new System.Drawing.Size(95, 83);
+      this.pcbHaytham.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+      this.pcbHaytham.TabIndex = 0;
+      this.pcbHaytham.TabStop = false;
+      this.pcbHaytham.Click += new System.EventHandler(this.PcHaythamClick);
+      this.pcbHaytham.MouseHover += new System.EventHandler(this.GrpHaythamEnter);
+      // 
+      // label6
+      // 
+      this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label6.Location = new System.Drawing.Point(0, 0);
+      this.label6.Margin = new System.Windows.Forms.Padding(0);
+      this.label6.Name = "label6";
+      this.label6.Size = new System.Drawing.Size(189, 83);
+      this.label6.TabIndex = 0;
+      this.label6.Text = "The ITU Haytham tracker which uses a webcam as an eye tracker and can be used in " +
+    "both remote and head-mounted setup.";
+      this.label6.MouseHover += new System.EventHandler(this.GrpHaythamEnter);
       // 
       // tableLayoutPanel2
       // 
@@ -1895,7 +2066,7 @@
       this.pcbSelectedTrackerLogo.Location = new System.Drawing.Point(3, 3);
       this.pcbSelectedTrackerLogo.Name = "pcbSelectedTrackerLogo";
       this.pcbSelectedTrackerLogo.Size = new System.Drawing.Size(144, 64);
-      this.pcbSelectedTrackerLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+      this.pcbSelectedTrackerLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
       this.pcbSelectedTrackerLogo.TabIndex = 0;
       this.pcbSelectedTrackerLogo.TabStop = false;
       // 
@@ -1906,6 +2077,7 @@
       this.pcbSelectedTrackerImage.Location = new System.Drawing.Point(153, 3);
       this.pcbSelectedTrackerImage.Name = "pcbSelectedTrackerImage";
       this.pcbSelectedTrackerImage.Size = new System.Drawing.Size(64, 64);
+      this.pcbSelectedTrackerImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
       this.pcbSelectedTrackerImage.TabIndex = 1;
       this.pcbSelectedTrackerImage.TabStop = false;
       // 
@@ -1940,19 +2112,6 @@
       this.btnOK.TabIndex = 7;
       this.btnOK.Text = "OK";
       this.btnOK.UseVisualStyleBackColor = true;
-      // 
-      // dialogTop1
-      // 
-      this.dialogTop1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
-      this.dialogTop1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("dialogTop1.BackgroundImage")));
-      this.dialogTop1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-      this.dialogTop1.Description = "Check the tracking devices that should be available in the recording module.";
-      this.dialogTop1.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.dialogTop1.Location = new System.Drawing.Point(0, 0);
-      this.dialogTop1.Logo = global::Ogama.Properties.Resources.Record;
-      this.dialogTop1.Name = "dialogTop1";
-      this.dialogTop1.Size = new System.Drawing.Size(641, 60);
-      this.dialogTop1.TabIndex = 0;
       // 
       // SelectTracker
       // 
@@ -2108,6 +2267,17 @@
       ((System.ComponentModel.ISupportInitialize)(this.splitContainer14)).EndInit();
       this.splitContainer14.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+      this.grpHaytham.ResumeLayout(false);
+      this.tableLayoutPanel24.ResumeLayout(false);
+      this.tableLayoutPanel25.ResumeLayout(false);
+      this.tableLayoutPanel25.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.pcbHelpHaytham)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.pcbHaythamStatus)).EndInit();
+      this.splitContainer3.Panel1.ResumeLayout(false);
+      this.splitContainer3.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
+      this.splitContainer3.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.pcbHaytham)).EndInit();
       this.tableLayoutPanel2.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.pcbSelectedTrackerLogo)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.pcbSelectedTrackerImage)).EndInit();
@@ -2242,6 +2412,16 @@
     private System.Windows.Forms.PictureBox pcbSelectedTrackerLogo;
     private System.Windows.Forms.PictureBox pcbSelectedTrackerImage;
     private System.Windows.Forms.Label lblSelectedStatus;
+    private System.Windows.Forms.GroupBox grpHaytham;
+    private System.Windows.Forms.TableLayoutPanel tableLayoutPanel24;
+    private System.Windows.Forms.TableLayoutPanel tableLayoutPanel25;
+    private System.Windows.Forms.PictureBox pcbHelpHaytham;
+    private System.Windows.Forms.CheckBox chbHaytham;
+    private System.Windows.Forms.PictureBox pcbHaythamStatus;
+    private System.Windows.Forms.Label lblHaythamStatus;
+    private System.Windows.Forms.SplitContainer splitContainer3;
+    private System.Windows.Forms.PictureBox pcbHaytham;
+    private System.Windows.Forms.Label label6;
 
   }
 }

@@ -14,6 +14,7 @@
 namespace Ogama.Modules.Recording
 {
   using Ogama.Modules.ImportExport.Common;
+  using Ogama.Modules.Recording.TrackerBase;
 
   /// <summary>
   /// Gaze data structure with fields that match the database columns

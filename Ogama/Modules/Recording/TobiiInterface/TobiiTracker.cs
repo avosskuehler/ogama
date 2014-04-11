@@ -1,16 +1,19 @@
-﻿// <copyright file="TobiiTracker.cs" company="FU Berlin">
-// ******************************************************
-// OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2013 Dr. Adrian Voßkühler  
-// ------------------------------------------------------------------------
-// This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
-// This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-// You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-// **************************************************************
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TobiiTracker.cs" company="Freie Universität Berlin">
+//   OGAMA - open gaze and mouse analyzer 
+//   Copyright (C) 2014 Dr. Adrian Voßkühler  
+//   Licensed under GPL V3
 // </copyright>
 // <author>Adrian Voßkühler</author>
 // <email>adrian@ogama.net</email>
-
+// <summary>
+//   This class implements the <see cref="TrackerWithStatusControls" /> class
+//   to represent an OGAMA known eyetracker.
+//   It encapsulates a TOBII http://www.tobii.com eyetracker
+//   and is written with the SDK 3 from Tobii Systems.
+//   It is tested with the Tobii T60/T120 series.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 namespace Ogama.Modules.Recording.TobiiInterface
 {
   using System;
@@ -33,32 +36,29 @@ namespace Ogama.Modules.Recording.TobiiInterface
   using Tobii.Eyetracking.Sdk.Time;
 
   /// <summary>
-  /// This class implements the <see cref="TrackerWithStatusControls"/> class
+  ///   This class implements the <see cref="TrackerWithStatusControls" /> class
   ///   to represent an OGAMA known eyetracker.
-  ///   It encapsulates a TOBII http://www.tobii.com eyetracker 
+  ///   It encapsulates a TOBII http://www.tobii.com eyetracker
   ///   and is written with the SDK 3 from Tobii Systems.
   ///   It is tested with the Tobii T60/T120 series.
   /// </summary>
   public class TobiiTracker : TrackerWithStatusControls
   {
-    ///////////////////////////////////////////////////////////////////////////////
-    // Defining Constants                                                        //
-    ///////////////////////////////////////////////////////////////////////////////
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Defining Variables, Enumerations, Events                                  //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region Constants and Fields
+    #region Static Fields
 
     /// <summary>
-    /// The available eyetracker.
+    ///   The available eyetracker.
     /// </summary>
     private static List<EyetrackerInfo> availableEyetracker;
 
     /// <summary>
-    /// The connected tracker.
+    ///   The connected tracker.
     /// </summary>
     private static IEyetracker connectedTracker;
+
+    #endregion
+
+    #region Fields
 
     /// <summary>
     ///   Saves the track status dialog that can be shown
@@ -68,18 +68,18 @@ namespace Ogama.Modules.Recording.TobiiInterface
     private TobiiTrackStatus dlgTrackStatus;
 
     /// <summary>
-    /// The is tracking.
+    ///   The is tracking.
     /// </summary>
     private bool isTracking;
 
     /// <summary>
-    /// The sync manager.
+    ///   The sync manager.
     /// </summary>
     private SyncManager syncManager;
 
     /// <summary>
     ///   It displays the result of a calibration, and can be used to provide
-    ///   information to decide if the calibration should be accepted, 
+    ///   information to decide if the calibration should be accepted,
     ///   rejected or improved.
     /// </summary>
     /// <remarks>
@@ -98,12 +98,12 @@ namespace Ogama.Modules.Recording.TobiiInterface
     private TobiiSetting tobiiSettings;
 
     /// <summary>
-    ///   The TetTrackStatus is a help tool to provide a real time display 
-    ///   of the tracking ability of the subject being eye tracked and 
-    ///   to make it easy to verify that the subject is advantageous 
-    ///   positioned. Preferably use it before the gaze tracking starts to 
-    ///   verify that the eyes of the subject are found. Note that 
-    ///   the subjects gaze point is not represented in any way, 
+    ///   The TetTrackStatus is a help tool to provide a real time display
+    ///   of the tracking ability of the subject being eye tracked and
+    ///   to make it easy to verify that the subject is advantageous
+    ///   positioned. Preferably use it before the gaze tracking starts to
+    ///   verify that the eyes of the subject are found. Note that
+    ///   the subjects gaze point is not represented in any way,
     ///   only the position of the eyes in the eye tracker sensor are shown.
     /// </summary>
     /// <remarks>
@@ -113,9 +113,6 @@ namespace Ogama.Modules.Recording.TobiiInterface
 
     #endregion
 
-    ///////////////////////////////////////////////////////////////////////////////
-    // Construction and Initializing methods                                     //
-    ///////////////////////////////////////////////////////////////////////////////
     #region Constructors and Destructors
 
     /// <summary>
@@ -172,31 +169,31 @@ namespace Ogama.Modules.Recording.TobiiInterface
     ///   which should contain the subject name at the tab page of the Tobii device.
     /// </param>
     public TobiiTracker(
-      RecordModule owningRecordModule,
-      SplitContainer trackerTrackerControlsContainer,
-      Panel trackerTrackStatusPanel,
-      Panel trackerCalibrationResultPanel,
-      Button trackerShowOnSecondaryScreenButton,
-      Button trackerAcceptButton,
-      Button trackerRecalibrateButton,
-      Button trackerConnectButton,
-      Button trackerSubjectButton,
-      Button trackerCalibrateButton,
-      Button trackerRecordButton,
+      RecordModule owningRecordModule, 
+      SplitContainer trackerTrackerControlsContainer, 
+      Panel trackerTrackStatusPanel, 
+      Panel trackerCalibrationResultPanel, 
+      Button trackerShowOnSecondaryScreenButton, 
+      Button trackerAcceptButton, 
+      Button trackerRecalibrateButton, 
+      Button trackerConnectButton, 
+      Button trackerSubjectButton, 
+      Button trackerCalibrateButton, 
+      Button trackerRecordButton, 
       TextBox trackerSubjectNameTextBox)
       : base(
-        owningRecordModule,
-        trackerTrackerControlsContainer,
-        trackerTrackStatusPanel,
-        trackerCalibrationResultPanel,
-        trackerShowOnSecondaryScreenButton,
-        trackerAcceptButton,
-        trackerRecalibrateButton,
-        trackerConnectButton,
-        trackerSubjectButton,
-        trackerCalibrateButton,
-        trackerRecordButton,
-        trackerSubjectNameTextBox,
+        owningRecordModule, 
+        trackerTrackerControlsContainer, 
+        trackerTrackStatusPanel, 
+        trackerCalibrationResultPanel, 
+        trackerShowOnSecondaryScreenButton, 
+        trackerAcceptButton, 
+        trackerRecalibrateButton, 
+        trackerConnectButton, 
+        trackerSubjectButton, 
+        trackerCalibrateButton, 
+        trackerRecordButton, 
+        trackerSubjectNameTextBox, 
         Properties.Settings.Default.EyeTrackerSettingsPath + "TobiiSetting.xml")
     {
       // Call the initialize methods of derived classes
@@ -208,7 +205,7 @@ namespace Ogama.Modules.Recording.TobiiInterface
     #region Public Properties
 
     /// <summary>
-    /// Gets the tracker browser.
+    ///   Gets the tracker browser.
     /// </summary>
     public static EyetrackerBrowser TrackerBrowser { get; private set; }
 
@@ -234,7 +231,7 @@ namespace Ogama.Modules.Recording.TobiiInterface
     /// <summary>
     ///   Gets the current tobii settings.
     /// </summary>
-    /// <value>A <see cref = "TobiiSetting" /> with the current tracker settings.</value>
+    /// <value>A <see cref="TobiiSetting" /> with the current tracker settings.</value>
     public TobiiSetting Settings
     {
       get
@@ -245,27 +242,23 @@ namespace Ogama.Modules.Recording.TobiiInterface
 
     #endregion
 
-    ///////////////////////////////////////////////////////////////////////////////
-    // Public methods                                                            //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region Public Methods
+    #region Public Methods and Operators
 
     /// <summary>
     /// Checks if the tobii tracker is available in the system.
     /// </summary>
     /// <param name="errorMessage">
-    ///   Out. A <see cref="string"/> with an error message.
+    /// Out. A <see cref="string"/> with an error message.
     /// </param>
     /// <returns>
-    /// <strong>True</strong>, if Tobii tracker 
+    /// <strong>True</strong>, if Tobii tracker
     ///   is available in the system, otherwise <strong>false</strong>
     /// </returns>
     public static TrackerStatus IsAvailable(out string errorMessage)
     {
-		
       if (availableEyetracker != null && availableEyetracker.Count > 0)
       {
-        var name = availableEyetracker[0].GivenName;
+        string name = availableEyetracker[0].GivenName;
         errorMessage = "Tobii: " + availableEyetracker[0].Model;
         if (name != string.Empty)
         {
@@ -282,7 +275,7 @@ namespace Ogama.Modules.Recording.TobiiInterface
     }
 
     /// <summary>
-    /// The static dispose.
+    ///   The static dispose.
     /// </summary>
     public static void StaticDispose()
     {
@@ -290,7 +283,7 @@ namespace Ogama.Modules.Recording.TobiiInterface
     }
 
     /// <summary>
-    /// The static initialize.
+    ///   The static initialize.
     /// </summary>
     public static void StaticInitialize()
     {
@@ -330,7 +323,7 @@ namespace Ogama.Modules.Recording.TobiiInterface
           }
 
           // Start a new calibration procedure
-          var result = runner.RunCalibration(connectedTracker);
+          Calibration result = runner.RunCalibration(connectedTracker);
 
           // Show a calibration plot if everything went OK
           if (result != null)
@@ -346,15 +339,18 @@ namespace Ogama.Modules.Recording.TobiiInterface
         catch (EyetrackerException ee)
         {
           MessageBox.Show(
-            "Failed to calibrate. Got exception " + ee, "Calibration Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            "Failed to calibrate. Got exception " + ee, 
+            "Calibration Failed", 
+            MessageBoxButtons.OK, 
+            MessageBoxIcon.Error);
         }
       }
       catch (Exception ex)
       {
         InformationDialog.Show(
-          "Calibration failed",
-          "Tobii calibration failed with the following message: " + Environment.NewLine + ex.Message,
-          false,
+          "Calibration failed", 
+          "Tobii calibration failed with the following message: " + Environment.NewLine + ex.Message, 
+          false, 
           MessageBoxIcon.Error);
 
         this.CleanUp();
@@ -365,7 +361,7 @@ namespace Ogama.Modules.Recording.TobiiInterface
     }
 
     /// <summary>
-    /// Raises <see cref="TobiiSettingsDialog"/> to change the settings
+    ///   Raises <see cref="TobiiSettingsDialog" /> to change the settings
     ///   for this interface.
     /// </summary>
     public override void ChangeSettings()
@@ -382,7 +378,7 @@ namespace Ogama.Modules.Recording.TobiiInterface
     }
 
     /// <summary>
-    /// Clean up objects.
+    ///   Clean up objects.
     /// </summary>
     public override void CleanUp()
     {
@@ -394,9 +390,9 @@ namespace Ogama.Modules.Recording.TobiiInterface
       catch (Exception ex)
       {
         InformationDialog.Show(
-          "CleanUp failed",
-          "Tobii CleanUp failed with the following message: " + Environment.NewLine + ex.Message,
-          false,
+          "CleanUp failed", 
+          "Tobii CleanUp failed with the following message: " + Environment.NewLine + ex.Message, 
+          false, 
           MessageBoxIcon.Error);
       }
 
@@ -404,10 +400,10 @@ namespace Ogama.Modules.Recording.TobiiInterface
     }
 
     /// <summary>
-    /// Connects the track status object to the tobii system.
+    ///   Connects the track status object to the tobii system.
     /// </summary>
     /// <returns>
-    /// <strong>True</strong> if connection succeded, otherwise
+    ///   <strong>True</strong> if connection succeded, otherwise
     ///   <strong>false</strong>.
     /// </returns>
     public override bool Connect()
@@ -433,10 +429,10 @@ namespace Ogama.Modules.Recording.TobiiInterface
     }
 
     /// <summary>
-    /// Method to return the current timing of the tracking system.
+    ///   Method to return the current timing of the tracking system.
     /// </summary>
     /// <returns>
-    /// A <see cref="long"/> with the time in milliseconds.
+    ///   A <see cref="long" /> with the time in milliseconds.
     /// </returns>
     public long GetCurrentTime()
     {
@@ -444,7 +440,7 @@ namespace Ogama.Modules.Recording.TobiiInterface
     }
 
     /// <summary>
-    /// Start tracking.
+    ///   Start tracking.
     /// </summary>
     public override void Record()
     {
@@ -453,23 +449,23 @@ namespace Ogama.Modules.Recording.TobiiInterface
         if (!this.isTracking)
         {
           // Start subscribing to gaze data stream
-          //connectedTracker.StartTracking();
+          // connectedTracker.StartTracking();
           this.isTracking = true;
         }
       }
       catch (Exception ex)
       {
         InformationDialog.Show(
-          "Record failed",
-          "Tobii Record failed with the following message: " + Environment.NewLine + ex.Message,
-          false,
+          "Record failed", 
+          "Tobii Record failed with the following message: " + Environment.NewLine + ex.Message, 
+          false, 
           MessageBoxIcon.Error);
         this.Stop();
       }
     }
 
     /// <summary>
-    /// Stops tracking.
+    ///   Stops tracking.
     /// </summary>
     public override void Stop()
     {
@@ -481,14 +477,15 @@ namespace Ogama.Modules.Recording.TobiiInterface
         }
 
         this.isTracking = false;
-        //connectedTracker.StopTracking();
+
+        // connectedTracker.StopTracking();
       }
       catch (Exception ex)
       {
         InformationDialog.Show(
-          "Stop failed",
-          "Tobii stop tracking failed with the following message: " + Environment.NewLine + ex.Message,
-          false,
+          "Stop failed", 
+          "Tobii stop tracking failed with the following message: " + Environment.NewLine + ex.Message, 
+          false, 
           MessageBoxIcon.Error);
       }
     }
@@ -524,7 +521,7 @@ namespace Ogama.Modules.Recording.TobiiInterface
 
         this.dlgTrackStatus.Location =
           new Point(
-            presentationBounds.Left + presentationBounds.Width / 2 - this.dlgTrackStatus.Width / 2,
+            presentationBounds.Left + presentationBounds.Width / 2 - this.dlgTrackStatus.Width / 2, 
             presentationBounds.Top + presentationBounds.Height / 2 - this.dlgTrackStatus.Height / 2);
 
         // Dialog will be disposed when connection failed.
@@ -548,7 +545,7 @@ namespace Ogama.Modules.Recording.TobiiInterface
     }
 
     /// <summary>
-    /// Sets up calibration procedure and the tracking client
+    ///   Sets up calibration procedure and the tracking client
     ///   and wires the events. Reads settings from file.
     /// </summary>
     protected override sealed void Initialize()
@@ -570,7 +567,7 @@ namespace Ogama.Modules.Recording.TobiiInterface
     }
 
     /// <summary>
-    /// This method initializes the designer components for the
+    ///   This method initializes the designer components for the
     ///   tobii interface tab page.
     ///   This is from the visual studio designer removed, because it crashes,
     ///   when tobii sdk dlls are not installed on the target computer.
@@ -616,7 +613,7 @@ namespace Ogama.Modules.Recording.TobiiInterface
     }
 
     /// <summary>
-    /// Overridden.
+    ///   Overridden.
     ///   Check visibility of the track status window before starting to record.
     /// </summary>
     protected override void PrepareRecording()
@@ -629,10 +626,6 @@ namespace Ogama.Modules.Recording.TobiiInterface
         this.dlgTrackStatus.Close();
       }
     }
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Eventhandler                                                              //
-    ///////////////////////////////////////////////////////////////////////////////
 
     /// <summary>
     /// The eyetracker found.
@@ -650,11 +643,15 @@ namespace Ogama.Modules.Recording.TobiiInterface
     }
 
     /// <summary>
-    /// The static event handler method that is called whenever an eyetracker 
-    /// has been removed.
+    /// The static event handler method that is called whenever an eyetracker
+    ///   has been removed.
     /// </summary>
-    /// <param name="sender">Source of the event</param>
-    /// <param name="e">A <see cref="EyetrackerInfoEventArgs"/> with the event data.</param>
+    /// <param name="sender">
+    /// Source of the event
+    /// </param>
+    /// <param name="e">
+    /// A <see cref="EyetrackerInfoEventArgs"/> with the event data.
+    /// </param>
     private static void EyetrackerRemoved(object sender, EyetrackerInfoEventArgs e)
     {
       // When an eyetracker disappears from the network we remove it from the listview
@@ -662,11 +659,15 @@ namespace Ogama.Modules.Recording.TobiiInterface
     }
 
     /// <summary>
-    /// The static event handler method that is called whenever an eyetracker 
-    /// has been updated.
+    /// The static event handler method that is called whenever an eyetracker
+    ///   has been updated.
     /// </summary>
-    /// <param name="sender">Source of the event</param>
-    /// <param name="e">A <see cref="EyetrackerInfoEventArgs"/> with the event data.</param>
+    /// <param name="sender">
+    /// Source of the event
+    /// </param>
+    /// <param name="e">
+    /// A <see cref="EyetrackerInfoEventArgs"/> with the event data.
+    /// </param>
     private static void EyetrackerUpdated(object sender, EyetrackerInfoEventArgs e)
     {
     }
@@ -674,8 +675,10 @@ namespace Ogama.Modules.Recording.TobiiInterface
     /// <summary>
     /// This methods connects to the tracker.
     /// </summary>
-    /// <param name="info">A <see cref="EyetrackerInfo"/>with information about the
-    /// eyetracker to connect to.</param>
+    /// <param name="info">
+    /// A <see cref="EyetrackerInfo"/>with information about the
+    ///   eyetracker to connect to.
+    /// </param>
     private void ConnectToTracker(EyetrackerInfo info)
     {
       try
@@ -695,7 +698,10 @@ namespace Ogama.Modules.Recording.TobiiInterface
         if (ee.ErrorCode == 0x20000402)
         {
           MessageBox.Show(
-            Resources.TobiiTracker_ConnectToTrackerFailed, "Upgrade Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            Resources.TobiiTracker_ConnectToTrackerFailed, 
+            "Upgrade Failed", 
+            MessageBoxButtons.OK, 
+            MessageBoxIcon.Error);
         }
         else
         {
@@ -707,141 +713,29 @@ namespace Ogama.Modules.Recording.TobiiInterface
       catch (Exception)
       {
         MessageBox.Show(
-          "Could not connect to eyetracker.", "Connection Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+          "Could not connect to eyetracker.", 
+          "Connection Failed", 
+          MessageBoxButtons.OK, 
+          MessageBoxIcon.Error);
         this.DisconnectTracker();
       }
     }
 
     /// <summary>
-    /// Deserializes the <see cref="TobiiSetting"/> from the given xml file.
-    /// </summary>
-    /// <param name="filePath">Full file path to the xml settings file. </param>
-    /// <returns> A <see cref="TobiiSetting"/> object. </returns>
-    private TobiiSetting DeserializeSettings(string filePath)
-    {
-      var settings = new TobiiSetting();
-
-      // Create an instance of the XmlSerializer class;
-      // specify the type of object to be deserialized 
-      var serializer = new XmlSerializer(typeof(TobiiSetting));
-
-      // If the XML document has been altered with unknown 
-      // nodes or attributes, handle them with the 
-      // UnknownNode and UnknownAttribute events.
-      serializer.UnknownNode += this.SerializerUnknownNode;
-      serializer.UnknownAttribute += this.SerializerUnknownAttribute;
-
-      try
-      {
-        // A FileStream is needed to read the XML document.
-        var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-
-        // Use the Deserialize method to restore the object's state with
-        // data from the XML document.
-        settings = (TobiiSetting)serializer.Deserialize(fs);
-        fs.Close();
-      }
-      catch (Exception ex)
-      {
-        InformationDialog.Show(
-          "Error occured",
-          "Deserialization of TobiiSettings failed with the following message: " + Environment.NewLine + ex.Message,
-          false,
-          MessageBoxIcon.Error);
-      }
-
-      return settings;
-    }
-
-    /// <summary>
-    /// The disconnect tracker method.
-    /// </summary>
-    private void DisconnectTracker()
-    {
-      if (connectedTracker == null)
-      {
-        return;
-      }
-
-      connectedTracker.GazeDataReceived -= this.ConnectedTrackerGazeDataReceived;
-      connectedTracker.Dispose();
-      connectedTracker = null;
-      this.isTracking = false;
-
-      this.syncManager.Dispose();
-    }
-
-    /// <summary>
-    /// This method handles a connection error by disconnecting.
-    /// </summary>
-    /// <param name="sender">Source of the event</param>
-    /// <param name="e">The <see cref="ConnectionErrorEventArgs"/> with the new gaze data
-    /// from the device.</param>
-    private void HandleConnectionError(object sender, ConnectionErrorEventArgs e)
-    {
-      // If the connection goes down we dispose 
-      // the IAsyncEyetracker instance. This will release 
-      // all resources held by the connection
-      this.DisconnectTracker();
-    }
-
-    /// <summary>
-    /// Serializes the <see cref="TobiiSetting"/> into the given file in a xml structure.
-    /// </summary>
-    /// <param name="settings">
-    /// The <see cref="TobiiSetting"/> object to serialize.
-    /// </param>
-    /// <param name="filePath">
-    /// Full file path to the xml settings file.
-    /// </param>
-    private void SerializeSettings(TobiiSetting settings, string filePath)
-    {
-      // Create an instance of the XmlSerializer class;
-      // specify the type of object to serialize 
-      var serializer = new XmlSerializer(typeof(TobiiSetting));
-
-      // Serialize the TobiiSetting, and close the TextWriter.
-      try
-      {
-        TextWriter writer = new StreamWriter(filePath, false);
-        serializer.Serialize(writer, settings);
-        writer.Close();
-      }
-      catch (Exception ex)
-      {
-        InformationDialog.Show(
-          "Error occured",
-          "Serialization of TobiiSettings failed with the following message: " + Environment.NewLine + ex.Message,
-          false,
-          MessageBoxIcon.Error);
-      }
-    }
-
-    /// <summary>
-    /// This method sets up the user interface to use 
-    /// the new settings for the calibration.
-    /// </summary>
-    private void UpdateSettings()
-    {
-      // TODO: Adapt to SDK 3.
-      // this.tobiiCalibPlot.PointColor = (uint)ColorTranslator.ToOle(this.tobiiSettings.TetCalibPointColor);
-      // this.tetCalibProc.PointSize = this.tobiiSettings.TetCalibPointSizes;
-      // this.tetCalibProc.PointSpeed = this.tobiiSettings.TetCalibPointSpeeds;
-      // this.tetCalibProc.NumPoints = this.tobiiSettings.TetNumCalibPoint;
-      // this.tetCalibProc.BackgroundColor = (uint)ColorTranslator.ToOle(this.tobiiSettings.TetCalibBackgroundColor);
-    }
-
-    /// <summary>
     /// OnGazeData event handler for connected tracker.
-    ///   This event fires whenever there are new gaze data 
+    ///   This event fires whenever there are new gaze data
     ///   to receive.
     ///   It converts the interface internal gaze structure into
     ///   a OGAMA readable format and fires the <see cref="Tracker.OnGazeDataChanged"/>
     ///   event to the recorder.
     /// </summary>
-    /// <param name="sender">Source of the event</param>
-    /// <param name="e">The <see cref="GazeDataEventArgs"/> with the new gaze data
-    /// from the device.</param>
+    /// <param name="sender">
+    /// Source of the event
+    /// </param>
+    /// <param name="e">
+    /// The <see cref="GazeDataEventArgs"/> with the new gaze data
+    ///   from the device.
+    /// </param>
     private void ConnectedTrackerGazeDataReceived(object sender, GazeDataEventArgs e)
     {
       // Send the gaze data to the track status control.
@@ -851,27 +745,6 @@ namespace Ogama.Modules.Recording.TobiiInterface
       {
         this.dlgTrackStatus.Update(gd);
       }
-
-      if (this.syncManager.SyncState.StateFlag == SyncStateFlag.Synchronized)
-      {
-        var convertedTime = this.syncManager.RemoteToLocal(gd.TimeStamp);
-        var localTime = this.tobiiClock.GetTime();
-      }
-      else
-      {
-        Console.WriteLine("Warning. Sync state is " + this.syncManager.SyncState.StateFlag);
-      }
-
-      //if (this.lasttime == gd.TimeStamp)
-      //{
-      //  var message = string.Format(
-      //    "TobiiTracker, ConnectedTrackerGazeDataReceived: Data sample with time {0} "
-      //    + "has same timestamp as foregoing sample ",
-      //    gd.TimeStamp);
-      //  throw new ArgumentException(message);
-      //}
-
-      //this.lasttime = gd.TimeStamp;
 
       // Convert Tobii gazestamp in milliseconds.
       var newGazeData = new GazeData { Time = gd.TimeStamp / 1000 };
@@ -960,6 +833,133 @@ namespace Ogama.Modules.Recording.TobiiInterface
       }
 
       this.OnGazeDataChanged(new GazeDataChangedEventArgs(newGazeData));
+    }
+
+    /// <summary>
+    /// Deserializes the <see cref="TobiiSetting"/> from the given xml file.
+    /// </summary>
+    /// <param name="filePath">
+    /// Full file path to the xml settings file. 
+    /// </param>
+    /// <returns>
+    /// A <see cref="TobiiSetting"/> object. 
+    /// </returns>
+    private TobiiSetting DeserializeSettings(string filePath)
+    {
+      var settings = new TobiiSetting();
+
+      // Create an instance of the XmlSerializer class;
+      // specify the type of object to be deserialized 
+      var serializer = new XmlSerializer(typeof(TobiiSetting));
+
+      // If the XML document has been altered with unknown 
+      // nodes or attributes, handle them with the 
+      // UnknownNode and UnknownAttribute events.
+      serializer.UnknownNode += this.SerializerUnknownNode;
+      serializer.UnknownAttribute += this.SerializerUnknownAttribute;
+
+      try
+      {
+        // A FileStream is needed to read the XML document.
+        var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+
+        // Use the Deserialize method to restore the object's state with
+        // data from the XML document.
+        settings = (TobiiSetting)serializer.Deserialize(fs);
+        fs.Close();
+      }
+      catch (Exception ex)
+      {
+        InformationDialog.Show(
+          "Error occured", 
+          "Deserialization of TobiiSettings failed with the following message: " + Environment.NewLine + ex.Message, 
+          false, 
+          MessageBoxIcon.Error);
+      }
+
+      return settings;
+    }
+
+    /// <summary>
+    ///   The disconnect tracker method.
+    /// </summary>
+    private void DisconnectTracker()
+    {
+      if (connectedTracker == null)
+      {
+        return;
+      }
+
+      connectedTracker.GazeDataReceived -= this.ConnectedTrackerGazeDataReceived;
+      connectedTracker.Dispose();
+      connectedTracker = null;
+      this.isTracking = false;
+
+      this.syncManager.Dispose();
+    }
+
+    /// <summary>
+    /// This method handles a connection error by disconnecting.
+    /// </summary>
+    /// <param name="sender">
+    /// Source of the event
+    /// </param>
+    /// <param name="e">
+    /// The <see cref="ConnectionErrorEventArgs"/> with the new gaze data
+    ///   from the device.
+    /// </param>
+    private void HandleConnectionError(object sender, ConnectionErrorEventArgs e)
+    {
+      // If the connection goes down we dispose 
+      // the IAsyncEyetracker instance. This will release 
+      // all resources held by the connection
+      this.DisconnectTracker();
+    }
+
+    /// <summary>
+    /// Serializes the <see cref="TobiiSetting"/> into the given file in a xml structure.
+    /// </summary>
+    /// <param name="settings">
+    /// The <see cref="TobiiSetting"/> object to serialize.
+    /// </param>
+    /// <param name="filePath">
+    /// Full file path to the xml settings file.
+    /// </param>
+    private void SerializeSettings(TobiiSetting settings, string filePath)
+    {
+      // Create an instance of the XmlSerializer class;
+      // specify the type of object to serialize 
+      var serializer = new XmlSerializer(typeof(TobiiSetting));
+
+      // Serialize the TobiiSetting, and close the TextWriter.
+      try
+      {
+        TextWriter writer = new StreamWriter(filePath, false);
+        serializer.Serialize(writer, settings);
+        writer.Close();
+      }
+      catch (Exception ex)
+      {
+        InformationDialog.Show(
+          "Error occured", 
+          "Serialization of TobiiSettings failed with the following message: " + Environment.NewLine + ex.Message, 
+          false, 
+          MessageBoxIcon.Error);
+      }
+    }
+
+    /// <summary>
+    ///   This method sets up the user interface to use
+    ///   the new settings for the calibration.
+    /// </summary>
+    private void UpdateSettings()
+    {
+      // TODO: Adapt to SDK 3.
+      // this.tobiiCalibPlot.PointColor = (uint)ColorTranslator.ToOle(this.tobiiSettings.TetCalibPointColor);
+      // this.tetCalibProc.PointSize = this.tobiiSettings.TetCalibPointSizes;
+      // this.tetCalibProc.PointSpeed = this.tobiiSettings.TetCalibPointSpeeds;
+      // this.tetCalibProc.NumPoints = this.tobiiSettings.TetNumCalibPoint;
+      // this.tetCalibProc.BackgroundColor = (uint)ColorTranslator.ToOle(this.tobiiSettings.TetCalibBackgroundColor);
     }
 
     #endregion

@@ -140,6 +140,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\EtApi.dll</HintPath>
     </Reference>
+    <Reference Include="Haytham.ExtData">
+      <HintPath>..\Libs\Managed\Haytham.ExtData.dll</HintPath>
+    </Reference>
     <Reference Include="Interop.ASLSERIALOUTLIB2Lib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\Interop.ASLSERIALOUTLIB2Lib.dll</HintPath>
@@ -236,46 +239,54 @@
       <DependentUpon>ShowLogDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="ExceptionHandling\ExceptionMethods.cs" />
-    <Compile Include="MainWindow\Dialogs\HowToActivateAsl.cs">
+    <Compile Include="Modules\AttentionMap\GradientExtensions.cs" />
+    <Compile Include="Modules\Common\CustomEventArgs\TrackStatusDataChangedEventArgs.cs" />
+    <Compile Include="Modules\Recording\ASLInterface\HowToActivateAsl.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainWindow\Dialogs\HowToActivateAsl.designer.cs">
+    <Compile Include="Modules\Recording\ASLInterface\HowToActivateAsl.designer.cs">
       <DependentUpon>HowToActivateAsl.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow\Dialogs\HowToActivateGazetracker.cs">
+    <Compile Include="Modules\Recording\GazegroupInterface\HowToActivateGazetracker.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainWindow\Dialogs\HowToActivateGazetracker.Designer.cs">
+    <Compile Include="Modules\Recording\GazegroupInterface\HowToActivateGazetracker.Designer.cs">
       <DependentUpon>HowToActivateGazetracker.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow\Dialogs\HowToActivateMirametrix.cs">
+    <Compile Include="Modules\Recording\HaythamInterface\HowToActivateHaytham.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainWindow\Dialogs\HowToActivateMirametrix.Designer.cs">
+    <Compile Include="Modules\Recording\HaythamInterface\HowToActivateHaytham.Designer.cs">
+      <DependentUpon>HowToActivateHaytham.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\MirametrixInterface\HowToActivateMirametrix.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\MirametrixInterface\HowToActivateMirametrix.Designer.cs">
       <DependentUpon>HowToActivateMirametrix.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow\Dialogs\HowToActivateGazepoint.cs">
+    <Compile Include="Modules\Recording\GazepointInterface\HowToActivateGazepoint.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainWindow\Dialogs\HowToActivateGazepoint.Designer.cs">
+    <Compile Include="Modules\Recording\GazepointInterface\HowToActivateGazepoint.Designer.cs">
       <DependentUpon>HowToActivateGazepoint.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow\Dialogs\HowToActivateSMIRedM.cs">
+    <Compile Include="Modules\Recording\SMIInterface\RedM\HowToActivateSMIRedM.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainWindow\Dialogs\HowToActivateSMIRedM.Designer.cs">
+    <Compile Include="Modules\Recording\SMIInterface\RedM\HowToActivateSMIRedM.Designer.cs">
       <DependentUpon>HowToActivateSMIRedM.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow\Dialogs\HowToActivateSMIiViewX.cs">
+    <Compile Include="Modules\Recording\SMIInterface\iViewX\HowToActivateSMIiViewX.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainWindow\Dialogs\HowToActivateSMIiViewX.Designer.cs">
+    <Compile Include="Modules\Recording\SMIInterface\iViewX\HowToActivateSMIiViewX.Designer.cs">
       <DependentUpon>HowToActivateSMIiViewX.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow\Dialogs\HowToActivateAlea.cs">
+    <Compile Include="Modules\Recording\AleaInterface\HowToActivateAlea.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainWindow\Dialogs\HowToActivateAlea.Designer.cs">
+    <Compile Include="Modules\Recording\AleaInterface\HowToActivateAlea.Designer.cs">
       <DependentUpon>HowToActivateAlea.cs</DependentUpon>
     </Compile>
     <Compile Include="MainWindow\Dialogs\UpgradeDocumentSplash.cs">
@@ -370,6 +381,7 @@
     <Compile Include="Modules\Common\Tools\NumericComparer.cs" />
     <Compile Include="Modules\Common\Tools\StringLogicalComparer.cs" />
     <Compile Include="Modules\Common\Types\ActiveXMode.cs" />
+    <Compile Include="Modules\Common\Types\EnumExtensions.cs" />
     <Compile Include="Modules\Common\Types\SampleValidity.cs" />
     <Compile Include="Modules\Common\Types\StringEnum.cs" />
     <Compile Include="Modules\Common\Types\StringValueAttribute.cs" />
@@ -425,6 +437,16 @@
     <Compile Include="Modules\Recording\GazegroupInterface\GazetrackerIPClientStatus.cs" />
     <Compile Include="Modules\Recording\GazegroupInterface\GazetrackerIPClientTracker.cs" />
     <Compile Include="Modules\Recording\GazegroupInterface\GazetrackerDirectClientTracker.cs" />
+    <Compile Include="Modules\Recording\HaythamInterface\HaythamClient.cs" />
+    <Compile Include="Modules\Recording\HaythamInterface\HaythamSetting.cs" />
+    <Compile Include="Modules\Recording\HaythamInterface\HaythamSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\HaythamInterface\HaythamSettingsDialog.Designer.cs">
+      <DependentUpon>HaythamSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\HaythamInterface\HaythamStatus.cs" />
+    <Compile Include="Modules\Recording\HaythamInterface\HaythamTracker.cs" />
     <Compile Include="Modules\Recording\MirametrixInterface\ClientNetworkManager.cs" />
     <Compile Include="Modules\Recording\MirametrixInterface\MirametrixSetting.cs" />
     <Compile Include="Modules\Recording\MirametrixInterface\MirametrixSettingsDialog.cs">
@@ -497,6 +519,15 @@
     </Compile>
     <Compile Include="Modules\Recording\TobiiInterface\TobiiTrackStatusControl.designer.cs">
       <DependentUpon>TobiiTrackStatusControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\TrackerBase\Eyes.cs" />
+    <Compile Include="Modules\Recording\TrackerBase\TrackStatusData.cs" />
+    <Compile Include="Modules\Recording\TrackerBase\DataValidity.cs" />
+    <Compile Include="Modules\Recording\TrackerBase\TrackStatusControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\TrackerBase\TrackStatusControl.Designer.cs">
+      <DependentUpon>TrackStatusControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Recording\TrackerBase\TrackerStatus.cs" />
     <Compile Include="Modules\Recording\TrackerBase\TrackerWithStatusControls.cs" />
@@ -893,10 +924,10 @@
     <Compile Include="Modules\ImportExport\Common\ImportDataSplash.Designer.cs">
       <DependentUpon>ImportDataSplash.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow\Dialogs\HowToActivateTobii.cs">
+    <Compile Include="Modules\Recording\TobiiInterface\HowToActivateTobii.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainWindow\Dialogs\HowToActivateTobii.Designer.cs">
+    <Compile Include="Modules\Recording\TobiiInterface\HowToActivateTobii.Designer.cs">
       <DependentUpon>HowToActivateTobii.cs</DependentUpon>
     </Compile>
     <Compile Include="MainWindow\Dialogs\FlashMissing.cs">
@@ -1101,28 +1132,32 @@
       <SubType>Designer</SubType>
       <DependentUpon>ShowLogDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateAsl.resx">
+    <EmbeddedResource Include="Modules\Recording\ASLInterface\HowToActivateAsl.resx">
       <DependentUpon>HowToActivateAsl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateGazetracker.resx">
+    <EmbeddedResource Include="Modules\Recording\GazegroupInterface\HowToActivateGazetracker.resx">
       <DependentUpon>HowToActivateGazetracker.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateMirametrix.resx">
+    <EmbeddedResource Include="Modules\Recording\HaythamInterface\HowToActivateHaytham.resx">
+      <DependentUpon>HowToActivateHaytham.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\MirametrixInterface\HowToActivateMirametrix.resx">
       <DependentUpon>HowToActivateMirametrix.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateGazepoint.resx">
+    <EmbeddedResource Include="Modules\Recording\GazepointInterface\HowToActivateGazepoint.resx">
       <DependentUpon>HowToActivateGazepoint.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateSMIRedM.resx">
+    <EmbeddedResource Include="Modules\Recording\SMIInterface\RedM\HowToActivateSMIRedM.resx">
       <DependentUpon>HowToActivateSMIRedM.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateSMIiViewX.resx">
+    <EmbeddedResource Include="Modules\Recording\SMIInterface\iViewX\HowToActivateSMIiViewX.resx">
       <DependentUpon>HowToActivateSMIiViewX.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateAlea.resx">
+    <EmbeddedResource Include="Modules\Recording\AleaInterface\HowToActivateAlea.resx">
       <DependentUpon>HowToActivateAlea.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -1202,6 +1237,10 @@
       <DependentUpon>GazetrackerIPClientSettingsDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\HaythamInterface\HaythamSettingsDialog.resx">
+      <DependentUpon>HaythamSettingsDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\MirametrixInterface\MirametrixSettingsDialog.resx">
       <DependentUpon>MirametrixSettingsDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -1237,6 +1276,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\TobiiInterface\TobiiTrackStatusControl.resx">
       <DependentUpon>TobiiTrackStatusControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\TrackerBase\TrackStatusControl.resx">
+      <DependentUpon>TrackStatusControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Replay\Video\SaveVideoSplash.resx">
       <DependentUpon>SaveVideoSplash.cs</DependentUpon>
@@ -1382,7 +1424,7 @@
       <DependentUpon>ImportFixationsAssignColumnsDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainWindow\Dialogs\HowToActivateTobii.resx">
+    <EmbeddedResource Include="Modules\Recording\TobiiInterface\HowToActivateTobii.resx">
       <DependentUpon>HowToActivateTobii.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -1717,6 +1759,9 @@
     <None Include="Resources\ASLLogo.gif" />
     <None Include="Resources\ITUNetworkFoto64.png" />
     <None Include="Resources\ITUDirectFoto64.png" />
+    <None Include="Resources\Haytham64Foto.png" />
+    <None Include="Resources\HaythamLogo.png" />
+    <None Include="Resources\HaythamBanner.jpg" />
     <Content Include="Resources\MirametrixLogo.png" />
     <Content Include="Resources\GazepointLogo.png" />
     <None Include="Resources\Warning21.png" />
