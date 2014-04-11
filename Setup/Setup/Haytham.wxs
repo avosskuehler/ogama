@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?include $(sys.CURRENTDIR)Common\Config.wxi?>
+  <Fragment>
+    <DirectoryRef Id="INSTALLLOCATION">
+      <Directory Id="HaythamDirectory" Name="Haytham">
+        <Component Id="C_AForge2" Guid="{CB0C09B6-51F9-4831-854C-7C75F5AFD8C4}" Win64="no">
+          <File Id="AForge2" Name="AForge.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="AForge2" AssemblyApplication="AForge2" DiskId="1"
+                Source="$(var.SolutionDir)Libs\Installer\Haytham\" />
+        </Component>
+        <Component Id="C_AForge.Imaging2" Guid="{4143BDE4-1B00-4063-BF51-EF49E371BADD}" Win64="no">
+          <File Id="AForge.Imaging2" Name="AForge.Imaging.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="AForge.Imaging2" AssemblyApplication="AForge.Imaging2" DiskId="1"
+                Source="$(var.SolutionDir)Libs\Installer\Haytham\" />
+        </Component>
+        <Component Id="C_AForge.Math2" Guid="{3636CDD7-DDD2-4699-B99D-CBB2B3DE6A11}" Win64="no">
+          <File Id="AForge.Math2" Name="AForge.Math.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="AForge.Math2" AssemblyApplication="AForge.Math2" DiskId="1"
+                Source="$(var.SolutionDir)Libs\Installer\Haytham\" />
+        </Component>
+        <Component Id="C_AForge.Video.DirectShow2" Guid="{EA2B3E24-AF35-44DA-B0D2-BD714000B9FB}" Win64="no">
+          <File Id="AForge.Video.DirectShow2" Name="AForge.Video.DirectShow.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="AForge.Video.DirectShow2" AssemblyApplication="AForge.Video.DirectShow2" DiskId="1"
+                Source="$(var.SolutionDir)Libs\Installer\Haytham\" />
+        </Component>
+        <Component Id="C_AForge.Video2" Guid="{293E623E-60A3-4877-9D5D-DAC10481D8BC}" Win64="no">
+          <File Id="AForge.Video2" Name="AForge.Video.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="AForge.Video2" AssemblyApplication="AForge.Video2" DiskId="1"
+                Source="$(var.SolutionDir)Libs\Installer\Haytham\" />
+        </Component>
+        <Component Id="C_AForge.Vision2" Guid="{71797004-4141-4083-AE29-94F9109C7432}" Win64="no">
+          <File Id="AForge.Vision2" Name="AForge.Vision.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="AForge.Vision2" AssemblyApplication="AForge.Vision2" DiskId="1"
+                Source="$(var.SolutionDir)Libs\Installer\Haytham\" />
+        </Component>
+        <Component Id="C_AForge.Vision.GlyphRecognition2" Guid="{030D4034-2CBE-4424-BA6F-7D1C8C3589A2}" Win64="no">
+          <File Id="AForge.Vision.GlyphRecognition2" Name="AForge.Vision.GlyphRecognition.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="AForge.Vision.GlyphRecognition2" AssemblyApplication="AForge.Vision.GlyphRecognition2" DiskId="1"
+                Source="$(var.SolutionDir)Libs\Installer\Haytham\" />
+        </Component>
+        <Component Id="C_Emgu.CV2" Guid="{B077B051-6CAB-4F46-8D37-A29E3B7113C5}" Win64="no">
+          <File Id="Emgu.CV2" Name="Emgu.CV.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="Emgu.CV2" AssemblyApplication="Emgu.CV2" DiskId="1"
+                Source="$(var.SolutionDir)Libs\Installer\Haytham\" />
+        </Component>
+        <Component Id="C_Emgu.CV.UI2" Guid="{24C1AE27-2F28-4E48-B584-FB40B4F73BD9}" Win64="no">
+          <File Id="Emgu.CV.UI2" Name="Emgu.CV.UI.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="Emgu.CV.UI2" AssemblyApplication="Emgu.CV.UI2" DiskId="1"
+                Source="$(var.SolutionDir)Libs\Installer\Haytham\" />
+        </Component>
+        <Component Id="C_Emgu.Util2" Guid="{F1C90D77-BFFC-4CCB-9C63-FC10113999A7}" Win64="no">
+          <File Id="Emgu.Util2" Name="Emgu.Util.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="Emgu.Util2" AssemblyApplication="Emgu.Util2" DiskId="1"
+                Source="$(var.SolutionDir)Libs\Installer\Haytham\" />
+        </Component>
+
+        <Component Id="C_Haytham" Guid="{649AF4DE-A195-4544-9A3E-52F1C207F8FE}" Win64="no">
+          <File Id="Haytham" Name="Haytham.exe" KeyPath="yes" Assembly=".net" AssemblyManifest="Haytham" AssemblyApplication="Haytham" DiskId="1"
+                Source="$(var.SolutionDir)Libs\Installer\Haytham\" />
+        </Component>
+        <Component Id="C_HaythamConfig" Guid="{8DF7D677-686D-4864-A18E-1FCA10AA6AF8}" Win64="no">
+          <File Id="HaythamConfig" Name="Haytham.exe.config" KeyPath="yes" DiskId="1"
+                Source="$(var.SolutionDir)Libs\Installer\Haytham\" />
+        </Component>
+        <Component Id="C_Haytham.ExtData2" Guid="{CB445649-ED95-4F46-B422-870E372B3947}" Win64="no">
+          <File Id="Haytham.ExtData2" Name="Haytham.ExtData.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="Haytham.ExtData" AssemblyApplication="Haytham.ExtData" DiskId="1"
+                Source="$(var.SolutionDir)Libs\Installer\Haytham\" />
+        </Component>
+
+
+        <Directory Id="OpenCVDirectory" Name="x86">
+          <Component Id="C_opencv_calib3d242" Guid="{2CCFCE24-593A-458D-933B-28D89B22726B}" Win64="no">
+            <File Id="opencv_calib3d242" Name="opencv_calib3d242.dll" KeyPath="yes"
+                  DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x86\" />
+          </Component>
+          <Component Id="C_opencv_contrib242" Guid="{0A8B8DB0-C2F4-499C-A223-7766ABE51988}" Win64="no">
+            <File Id="opencv_contrib242" Name="opencv_contrib242.dll" KeyPath="yes"
+                  DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x86\" />
+          </Component>
+          <Component Id="C_opencv_core242" Guid="{CE064216-EBC8-4EA0-8E1A-28E689078411}" Win64="no">
+            <File Id="opencv_core242" Name="opencv_core242.dll" KeyPath="yes"
+                  DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x86\" />
+          </Component>
+          <Component Id="C_opencv_features2d242" Guid="{9235C4B0-ABD3-4C70-B32A-61BDB2622913}" Win64="no">
+            <File Id="opencv_features2d242" Name="opencv_features2d242.dll" KeyPath="yes"
+                  DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x86\" />
+          </Component>
+          <Component Id="C_opencv_ffmpeg242" Guid="{2C0882EE-3BC7-4127-AB33-15B29369A54C}" Win64="no">
+            <File Id="opencv_ffmpeg242" Name="opencv_ffmpeg242.dll" KeyPath="yes"
+                  DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x86\" />
+          </Component>
+          <Component Id="C_opencv_flann242" Guid="{61B0FB8C-ABF1-4C88-A240-83F0455D13A4}" Win64="no">
+            <File Id="opencv_flann242" Name="opencv_flann242.dll" KeyPath="yes"
+                  DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x86\" />
+          </Component>
+          <Component Id="C_opencv_gpu242" Guid="{E347F965-60CC-4B61-A5CB-DD7973FD6257}" Win64="no">
+            <File Id="opencv_gpu242" Name="opencv_gpu242.dll" KeyPath="yes"
+                  DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x86\" />
+          </Component>
+          <Component Id="C_opencv_highgui242" Guid="{CBE37835-267C-44BE-87CA-678362E58795}" Win64="no">
+            <File Id="opencv_highgui242" Name="opencv_highgui242.dll" KeyPath="yes"
+                  DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x86\" />
+          </Component>
+          <Component Id="C_opencv_imgproc242" Guid="{66077710-E972-46C3-8D5C-DDBC0505B2E1}" Win64="no">
+            <File Id="opencv_imgproc242" Name="opencv_imgproc242.dll" KeyPath="yes"
+                  DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x86\" />
+          </Component>
+          <Component Id="C_opencv_legacy242" Guid="{6B35CEB1-1A7D-4A50-87E8-4399129D5027}" Win64="no">
+            <File Id="opencv_legacy242" Name="opencv_legacy242.dll" KeyPath="yes"
+                  DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x86\" />
+          </Component>
+          <Component Id="C_opencv_ml242" Guid="{1200248D-8FD3-4DC5-AC93-53251DE1109C}" Win64="no">
+            <File Id="opencv_ml242" Name="opencv_ml242.dll" KeyPath="yes"
+                  DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x86\" />
+          </Component>
+          <Component Id="C_opencv_nonfree242" Guid="{9159BE82-7101-4090-82A5-A686390C4066}" Win64="no">
+            <File Id="opencv_nonfree242" Name="opencv_nonfree242.dll" KeyPath="yes"
+                  DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x86\" />
+          </Component>
+          <Component Id="C_opencv_objdetect242" Guid="{E81957D1-9673-421B-933D-1774B07619D5}" Win64="no">
+            <File Id="opencv_objdetect242" Name="opencv_objdetect242.dll" KeyPath="yes"
+                  DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x86\" />
+          </Component>
+          <Component Id="C_opencv_photo242" Guid="{DCA584C1-0133-40CD-B55C-8F7B58086DFF}" Win64="no">
+            <File Id="opencv_photo242" Name="opencv_photo242.dll" KeyPath="yes"
+                  DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x86\" />
+          </Component>
+          <Component Id="C_opencv_video242" Guid="{295461ED-C3E5-49ED-BD5C-5D0F8E0CF346}" Win64="no">
+            <File Id="opencv_video242" Name="opencv_video242.dll" KeyPath="yes"
+                  DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x86\" />
+          </Component>
+          <Component Id="C_tbb" Guid="{D0CB67BF-3C41-4838-A336-43CB9668E3E5}" Win64="no">
+            <File Id="tbb" Name="tbb.dll" KeyPath="yes"
+                  DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x86\" />
+          </Component>
+        </Directory>
+      </Directory>
+    </DirectoryRef>
+
+    <Feature Id='HaythamFeature' Title='Haytham application' Description='Installs haytham components.' Level='1'>
+      <ComponentRef Id='C_AForge2' />
+      <ComponentRef Id='C_AForge.Imaging2' />
+      <ComponentRef Id='C_AForge.Math2' />
+      <ComponentRef Id='C_AForge.Video.DirectShow2' />
+      <ComponentRef Id='C_AForge.Video2' />
+      <ComponentRef Id='C_AForge.Vision2' />
+      <ComponentRef Id='C_AForge.Vision.GlyphRecognition2' />
+      <ComponentRef Id='C_Emgu.CV2' />
+      <ComponentRef Id='C_Emgu.CV.UI2' />
+      <ComponentRef Id='C_Emgu.Util2' />
+      <ComponentRef Id='C_Haytham' />
+      <ComponentRef Id='C_HaythamConfig' />
+      <ComponentRef Id='C_Haytham.ExtData2' />
+
+      <ComponentRef Id='C_opencv_calib3d242' />
+      <ComponentRef Id='C_opencv_contrib242' />
+      <ComponentRef Id='C_opencv_core242' />
+      <ComponentRef Id='C_opencv_features2d242' />
+      <ComponentRef Id='C_opencv_ffmpeg242' />
+      <ComponentRef Id='C_opencv_flann242' />
+      <ComponentRef Id='C_opencv_gpu242' />
+      <ComponentRef Id='C_opencv_highgui242' />
+      <ComponentRef Id='C_opencv_imgproc242' />
+      <ComponentRef Id='C_opencv_legacy242' />
+      <ComponentRef Id='C_opencv_ml242' />
+      <ComponentRef Id='C_opencv_nonfree242' />
+      <ComponentRef Id='C_opencv_objdetect242' />
+      <ComponentRef Id='C_opencv_photo242' />
+      <ComponentRef Id='C_opencv_video242' />
+      <ComponentRef Id='C_tbb' />
+    </Feature>
+  </Fragment>
+</Wix>

@@ -49,6 +49,10 @@
         <File Id="MediaInfo" Name="MediaInfo.dll" KeyPath="yes" DiskId="1"
               Source="$(var.Ogama.TargetDir)" />
       </Component>
+      <Component Id="C_Haytham.ExtData" Guid="{FEFCA75A-C33A-47FD-947B-09FDA60FD604}" Win64="$(var.Win64)">
+        <File Id="Haytham.ExtData" Name="Haytham.ExtData.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="Haytham.ExtData" AssemblyApplication="Haytham.ExtData" DiskId="1"
+              Source="$(var.SolutionDir)Libs\Managed\" />
+      </Component>
       <Component Id="C_DirectShowLib" Guid="{8EBCD1D6-675E-C9DB-DBD0-6B035349A16E}" Win64="$(var.Win64)">
         <File Id="DirectShowLib" Name="DirectShowLib-2005.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="DirectShowLib" AssemblyApplication="DirectShowLib" DiskId="1"
               Source="$(var.Ogama.TargetDir)" />
@@ -182,6 +186,7 @@
         <ComponentRef Id='C_AvalonControlsLibrary' />
         <ComponentRef Id='C_MediaInfo' />
         <ComponentRef Id='C_DirectShowLib' />
+        <ComponentRef Id='C_Haytham.ExtData' />
         <ComponentRef Id='C_zlib' />
         <ComponentRef Id='C_ZedGraph' />
         <ComponentRef Id='C_stdole' />

@@ -40,6 +40,12 @@ namespace Ogama.Modules.Recording.TrackerBase
     /// </summary>
     event GazeDataChangedEventHandler GazeDataChanged;
 
+    ///// <summary>
+    ///// An implementation of this event should
+    ///// send the track status data to update the track status control.
+    ///// </summary>
+    //event TrackStatusDataChangedEventHandler TrackStatusDataChanged;
+
     /// <summary>
     /// Gets a value indicating whether the tracker is connected
     /// </summary>

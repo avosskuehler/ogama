@@ -188,6 +188,35 @@
       this.tbpNoDevice = new System.Windows.Forms.TabPage();
       this.label12 = new System.Windows.Forms.Label();
       this.btnNoDeviceTabSelectTracker = new System.Windows.Forms.Button();
+      this.tbpSMIRedM = new System.Windows.Forms.TabPage();
+      this.groupBox18 = new System.Windows.Forms.GroupBox();
+      this.textBox16 = new System.Windows.Forms.TextBox();
+      this.txbSMIRedMSubject = new System.Windows.Forms.TextBox();
+      this.btnSMIRedMRecord = new System.Windows.Forms.Button();
+      this.btnSMIRedMCalibrate = new System.Windows.Forms.Button();
+      this.label92 = new System.Windows.Forms.Label();
+      this.label97 = new System.Windows.Forms.Label();
+      this.label98 = new System.Windows.Forms.Label();
+      this.label99 = new System.Windows.Forms.Label();
+      this.btnSMIRedMSubject = new System.Windows.Forms.Button();
+      this.btnSMIRedMConnect = new System.Windows.Forms.Button();
+      this.tbpHaytham = new System.Windows.Forms.TabPage();
+      this.panel13 = new System.Windows.Forms.Panel();
+      this.btnHaythamCalibrate = new System.Windows.Forms.Button();
+      this.label104 = new System.Windows.Forms.Label();
+      this.label100 = new System.Windows.Forms.Label();
+      this.btnHaythamLaunch = new System.Windows.Forms.Button();
+      this.groupBox19 = new System.Windows.Forms.GroupBox();
+      this.spcHaytham = new System.Windows.Forms.SplitContainer();
+      this.txbHaythamStatus = new System.Windows.Forms.TextBox();
+      this.tscHaytham = new Ogama.Modules.Recording.TrackerBase.TrackStatusControl();
+      this.label101 = new System.Windows.Forms.Label();
+      this.txbHaythamSubject = new System.Windows.Forms.TextBox();
+      this.btnHaythamRecord = new System.Windows.Forms.Button();
+      this.label102 = new System.Windows.Forms.Label();
+      this.label103 = new System.Windows.Forms.Label();
+      this.btnHaythamSubject = new System.Windows.Forms.Button();
+      this.btnHaythamConnect = new System.Windows.Forms.Button();
       this.imlEyetracker = new System.Windows.Forms.ImageList(this.components);
       this.panel4 = new System.Windows.Forms.Panel();
       this.lblRecordedTime = new System.Windows.Forms.Label();
@@ -424,18 +453,6 @@
       this.tabPage12 = new System.Windows.Forms.TabPage();
       this.label79 = new System.Windows.Forms.Label();
       this.button65 = new System.Windows.Forms.Button();
-      this.tbpSMIRedM = new System.Windows.Forms.TabPage();
-      this.groupBox18 = new System.Windows.Forms.GroupBox();
-      this.textBox16 = new System.Windows.Forms.TextBox();
-      this.txbSMIRedMSubject = new System.Windows.Forms.TextBox();
-      this.btnSMIRedMRecord = new System.Windows.Forms.Button();
-      this.btnSMIRedMCalibrate = new System.Windows.Forms.Button();
-      this.label92 = new System.Windows.Forms.Label();
-      this.label97 = new System.Windows.Forms.Label();
-      this.label98 = new System.Windows.Forms.Label();
-      this.label99 = new System.Windows.Forms.Label();
-      this.btnSMIRedMSubject = new System.Windows.Forms.Button();
-      this.btnSMIRedMConnect = new System.Windows.Forms.Button();
       ((System.ComponentModel.ISupportInitialize)(this.bsoSubjects)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.bsoFKSubjectsTrials)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.ogamaDataSet)).BeginInit();
@@ -540,6 +557,15 @@
       this.groupBox20.SuspendLayout();
       this.tbpMouseOnly.SuspendLayout();
       this.tbpNoDevice.SuspendLayout();
+      this.tbpSMIRedM.SuspendLayout();
+      this.groupBox18.SuspendLayout();
+      this.tbpHaytham.SuspendLayout();
+      this.panel13.SuspendLayout();
+      this.groupBox19.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.spcHaytham)).BeginInit();
+      this.spcHaytham.Panel1.SuspendLayout();
+      this.spcHaytham.Panel2.SuspendLayout();
+      this.spcHaytham.SuspendLayout();
       this.panel4.SuspendLayout();
       this.grpUsercam.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
@@ -667,8 +693,6 @@
       this.groupBox14.SuspendLayout();
       this.tabPage11.SuspendLayout();
       this.tabPage12.SuspendLayout();
-      this.tbpSMIRedM.SuspendLayout();
-      this.groupBox18.SuspendLayout();
       this.SuspendLayout();
       // 
       // toolStripContainer1
@@ -765,6 +789,7 @@
       this.tclEyetracker.Controls.Add(this.tbpMouseOnly);
       this.tclEyetracker.Controls.Add(this.tbpNoDevice);
       this.tclEyetracker.Controls.Add(this.tbpSMIRedM);
+      this.tclEyetracker.Controls.Add(this.tbpHaytham);
       this.tclEyetracker.Dock = System.Windows.Forms.DockStyle.Fill;
       this.tclEyetracker.ImageList = this.imlEyetracker;
       this.tclEyetracker.Location = new System.Drawing.Point(0, 0);
@@ -843,6 +868,7 @@
       this.imlButtons.Images.SetKeyName(6, "Adjust");
       this.imlButtons.Images.SetKeyName(7, "ITU");
       this.imlButtons.Images.SetKeyName(8, "PS3");
+      this.imlButtons.Images.SetKeyName(9, "Haytham");
       // 
       // groupBox15
       // 
@@ -2149,7 +2175,7 @@
       this.btnAleaConnect.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.btnAleaConnect.UseVisualStyleBackColor = true;
       // 
-      // tbpSMI
+      // tbpSMIiViewX
       // 
       this.tbpSMIiViewX.Controls.Add(this.groupBox3);
       this.tbpSMIiViewX.Controls.Add(this.txbSMIiViewXSubjectName);
@@ -2669,6 +2695,367 @@
       this.btnNoDeviceTabSelectTracker.UseVisualStyleBackColor = true;
       this.btnNoDeviceTabSelectTracker.Click += new System.EventHandler(this.BtnNoDeviceTabSelectTrackerClick);
       // 
+      // tbpSMIRedM
+      // 
+      this.tbpSMIRedM.Controls.Add(this.groupBox18);
+      this.tbpSMIRedM.Controls.Add(this.txbSMIRedMSubject);
+      this.tbpSMIRedM.Controls.Add(this.btnSMIRedMRecord);
+      this.tbpSMIRedM.Controls.Add(this.btnSMIRedMCalibrate);
+      this.tbpSMIRedM.Controls.Add(this.label92);
+      this.tbpSMIRedM.Controls.Add(this.label97);
+      this.tbpSMIRedM.Controls.Add(this.label98);
+      this.tbpSMIRedM.Controls.Add(this.label99);
+      this.tbpSMIRedM.Controls.Add(this.btnSMIRedMSubject);
+      this.tbpSMIRedM.Controls.Add(this.btnSMIRedMConnect);
+      this.tbpSMIRedM.ImageKey = "SMIRedM";
+      this.tbpSMIRedM.Location = new System.Drawing.Point(4, 23);
+      this.tbpSMIRedM.Name = "tbpSMIRedM";
+      this.tbpSMIRedM.Padding = new System.Windows.Forms.Padding(3);
+      this.tbpSMIRedM.Size = new System.Drawing.Size(212, 385);
+      this.tbpSMIRedM.TabIndex = 13;
+      this.tbpSMIRedM.Text = "SMI RedM";
+      this.tbpSMIRedM.UseVisualStyleBackColor = true;
+      // 
+      // groupBox18
+      // 
+      this.groupBox18.Controls.Add(this.textBox16);
+      this.groupBox18.Location = new System.Drawing.Point(8, 5);
+      this.groupBox18.Name = "groupBox18";
+      this.groupBox18.Size = new System.Drawing.Size(196, 183);
+      this.groupBox18.TabIndex = 40;
+      this.groupBox18.TabStop = false;
+      this.groupBox18.Text = "Track status";
+      // 
+      // textBox16
+      // 
+      this.textBox16.Location = new System.Drawing.Point(6, 19);
+      this.textBox16.Multiline = true;
+      this.textBox16.Name = "textBox16";
+      this.textBox16.Size = new System.Drawing.Size(184, 137);
+      this.textBox16.TabIndex = 0;
+      this.textBox16.Text = resources.GetString("textBox16.Text");
+      // 
+      // txbSMIRedMSubject
+      // 
+      this.txbSMIRedMSubject.Location = new System.Drawing.Point(110, 231);
+      this.txbSMIRedMSubject.Name = "txbSMIRedMSubject";
+      this.txbSMIRedMSubject.ReadOnly = true;
+      this.txbSMIRedMSubject.Size = new System.Drawing.Size(91, 20);
+      this.txbSMIRedMSubject.TabIndex = 31;
+      this.txbSMIRedMSubject.Text = "Subject1";
+      // 
+      // btnSMIRedMRecord
+      // 
+      this.btnSMIRedMRecord.Enabled = false;
+      this.btnSMIRedMRecord.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnSMIRedMRecord.ImageKey = "Record";
+      this.btnSMIRedMRecord.ImageList = this.imlButtons;
+      this.btnSMIRedMRecord.Location = new System.Drawing.Point(32, 287);
+      this.btnSMIRedMRecord.Name = "btnSMIRedMRecord";
+      this.btnSMIRedMRecord.Size = new System.Drawing.Size(72, 23);
+      this.btnSMIRedMRecord.TabIndex = 38;
+      this.btnSMIRedMRecord.Text = "&Record";
+      this.btnSMIRedMRecord.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      // 
+      // btnSMIRedMCalibrate
+      // 
+      this.btnSMIRedMCalibrate.Enabled = false;
+      this.btnSMIRedMCalibrate.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnSMIRedMCalibrate.ImageKey = "Calibrate";
+      this.btnSMIRedMCalibrate.ImageList = this.imlButtons;
+      this.btnSMIRedMCalibrate.Location = new System.Drawing.Point(32, 258);
+      this.btnSMIRedMCalibrate.Name = "btnSMIRedMCalibrate";
+      this.btnSMIRedMCalibrate.Size = new System.Drawing.Size(72, 23);
+      this.btnSMIRedMCalibrate.TabIndex = 39;
+      this.btnSMIRedMCalibrate.Text = "&Calibrate";
+      this.btnSMIRedMCalibrate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      // 
+      // label92
+      // 
+      this.label92.AutoSize = true;
+      this.label92.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label92.Location = new System.Drawing.Point(8, 258);
+      this.label92.Name = "label92";
+      this.label92.Size = new System.Drawing.Size(25, 24);
+      this.label92.TabIndex = 37;
+      this.label92.Text = "3.";
+      // 
+      // label97
+      // 
+      this.label97.AutoSize = true;
+      this.label97.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label97.Location = new System.Drawing.Point(8, 287);
+      this.label97.Name = "label97";
+      this.label97.Size = new System.Drawing.Size(25, 24);
+      this.label97.TabIndex = 36;
+      this.label97.Text = "4.";
+      // 
+      // label98
+      // 
+      this.label98.AutoSize = true;
+      this.label98.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label98.Location = new System.Drawing.Point(8, 229);
+      this.label98.Name = "label98";
+      this.label98.Size = new System.Drawing.Size(25, 24);
+      this.label98.TabIndex = 34;
+      this.label98.Text = "2.";
+      // 
+      // label99
+      // 
+      this.label99.AutoSize = true;
+      this.label99.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label99.Location = new System.Drawing.Point(8, 200);
+      this.label99.Margin = new System.Windows.Forms.Padding(0);
+      this.label99.Name = "label99";
+      this.label99.Size = new System.Drawing.Size(25, 24);
+      this.label99.TabIndex = 35;
+      this.label99.Text = "1.";
+      // 
+      // btnSMIRedMSubject
+      // 
+      this.btnSMIRedMSubject.Enabled = false;
+      this.btnSMIRedMSubject.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnSMIRedMSubject.ImageKey = "Subject";
+      this.btnSMIRedMSubject.ImageList = this.imlButtons;
+      this.btnSMIRedMSubject.Location = new System.Drawing.Point(32, 230);
+      this.btnSMIRedMSubject.Name = "btnSMIRedMSubject";
+      this.btnSMIRedMSubject.Size = new System.Drawing.Size(72, 23);
+      this.btnSMIRedMSubject.TabIndex = 32;
+      this.btnSMIRedMSubject.Text = "Subject";
+      this.btnSMIRedMSubject.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.btnSMIRedMSubject.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.btnSMIRedMSubject.UseVisualStyleBackColor = true;
+      // 
+      // btnSMIRedMConnect
+      // 
+      this.btnSMIRedMConnect.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnSMIRedMConnect.ImageKey = "Connect";
+      this.btnSMIRedMConnect.ImageList = this.imlButtons;
+      this.btnSMIRedMConnect.Location = new System.Drawing.Point(32, 200);
+      this.btnSMIRedMConnect.Name = "btnSMIRedMConnect";
+      this.btnSMIRedMConnect.Size = new System.Drawing.Size(73, 23);
+      this.btnSMIRedMConnect.TabIndex = 33;
+      this.btnSMIRedMConnect.Text = "Connect";
+      this.btnSMIRedMConnect.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.btnSMIRedMConnect.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.btnSMIRedMConnect.UseVisualStyleBackColor = true;
+      // 
+      // tbpHaytham
+      // 
+      this.tbpHaytham.Controls.Add(this.panel13);
+      this.tbpHaytham.ImageKey = "Haytham";
+      this.tbpHaytham.Location = new System.Drawing.Point(4, 23);
+      this.tbpHaytham.Name = "tbpHaytham";
+      this.tbpHaytham.Padding = new System.Windows.Forms.Padding(3);
+      this.tbpHaytham.Size = new System.Drawing.Size(212, 385);
+      this.tbpHaytham.TabIndex = 14;
+      this.tbpHaytham.Text = "Haytham";
+      this.tbpHaytham.UseVisualStyleBackColor = true;
+      // 
+      // panel13
+      // 
+      this.panel13.AutoScroll = true;
+      this.panel13.Controls.Add(this.btnHaythamCalibrate);
+      this.panel13.Controls.Add(this.label104);
+      this.panel13.Controls.Add(this.label100);
+      this.panel13.Controls.Add(this.btnHaythamLaunch);
+      this.panel13.Controls.Add(this.groupBox19);
+      this.panel13.Controls.Add(this.label101);
+      this.panel13.Controls.Add(this.txbHaythamSubject);
+      this.panel13.Controls.Add(this.btnHaythamRecord);
+      this.panel13.Controls.Add(this.label102);
+      this.panel13.Controls.Add(this.label103);
+      this.panel13.Controls.Add(this.btnHaythamSubject);
+      this.panel13.Controls.Add(this.btnHaythamConnect);
+      this.panel13.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.panel13.Location = new System.Drawing.Point(3, 3);
+      this.panel13.Name = "panel13";
+      this.panel13.Size = new System.Drawing.Size(206, 379);
+      this.panel13.TabIndex = 12;
+      // 
+      // btnHaythamCalibrate
+      // 
+      this.btnHaythamCalibrate.Enabled = false;
+      this.btnHaythamCalibrate.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnHaythamCalibrate.ImageKey = "Calibrate";
+      this.btnHaythamCalibrate.ImageList = this.imlButtons;
+      this.btnHaythamCalibrate.Location = new System.Drawing.Point(28, 279);
+      this.btnHaythamCalibrate.Name = "btnHaythamCalibrate";
+      this.btnHaythamCalibrate.Size = new System.Drawing.Size(72, 23);
+      this.btnHaythamCalibrate.TabIndex = 41;
+      this.btnHaythamCalibrate.Text = "&Calibrate";
+      this.btnHaythamCalibrate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.btnHaythamCalibrate.Visible = false;
+      // 
+      // label104
+      // 
+      this.label104.AutoSize = true;
+      this.label104.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label104.Location = new System.Drawing.Point(4, 279);
+      this.label104.Name = "label104";
+      this.label104.Size = new System.Drawing.Size(25, 24);
+      this.label104.TabIndex = 40;
+      this.label104.Text = "4.";
+      this.label104.Visible = false;
+      // 
+      // label100
+      // 
+      this.label100.AutoSize = true;
+      this.label100.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label100.Location = new System.Drawing.Point(4, 131);
+      this.label100.Margin = new System.Windows.Forms.Padding(0);
+      this.label100.Name = "label100";
+      this.label100.Size = new System.Drawing.Size(25, 24);
+      this.label100.TabIndex = 33;
+      this.label100.Text = "1.";
+      // 
+      // btnHaythamLaunch
+      // 
+      this.btnHaythamLaunch.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnHaythamLaunch.ImageKey = "Haytham";
+      this.btnHaythamLaunch.ImageList = this.imlButtons;
+      this.btnHaythamLaunch.Location = new System.Drawing.Point(28, 131);
+      this.btnHaythamLaunch.Name = "btnHaythamLaunch";
+      this.btnHaythamLaunch.Size = new System.Drawing.Size(73, 23);
+      this.btnHaythamLaunch.TabIndex = 32;
+      this.btnHaythamLaunch.Text = "Launch";
+      this.btnHaythamLaunch.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.btnHaythamLaunch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.btnHaythamLaunch.UseVisualStyleBackColor = true;
+      // 
+      // groupBox19
+      // 
+      this.groupBox19.Controls.Add(this.spcHaytham);
+      this.groupBox19.Dock = System.Windows.Forms.DockStyle.Top;
+      this.groupBox19.Location = new System.Drawing.Point(0, 0);
+      this.groupBox19.Name = "groupBox19";
+      this.groupBox19.Size = new System.Drawing.Size(206, 120);
+      this.groupBox19.TabIndex = 31;
+      this.groupBox19.TabStop = false;
+      this.groupBox19.Text = "Track status";
+      // 
+      // spcHaytham
+      // 
+      this.spcHaytham.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.spcHaytham.Location = new System.Drawing.Point(3, 16);
+      this.spcHaytham.Name = "spcHaytham";
+      this.spcHaytham.Orientation = System.Windows.Forms.Orientation.Horizontal;
+      // 
+      // spcHaytham.Panel1
+      // 
+      this.spcHaytham.Panel1.Controls.Add(this.txbHaythamStatus);
+      // 
+      // spcHaytham.Panel2
+      // 
+      this.spcHaytham.Panel2.Controls.Add(this.tscHaytham);
+      this.spcHaytham.Size = new System.Drawing.Size(200, 101);
+      this.spcHaytham.SplitterDistance = 48;
+      this.spcHaytham.TabIndex = 1;
+      // 
+      // txbHaythamStatus
+      // 
+      this.txbHaythamStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.txbHaythamStatus.Location = new System.Drawing.Point(0, 0);
+      this.txbHaythamStatus.Multiline = true;
+      this.txbHaythamStatus.Name = "txbHaythamStatus";
+      this.txbHaythamStatus.Size = new System.Drawing.Size(200, 48);
+      this.txbHaythamStatus.TabIndex = 0;
+      this.txbHaythamStatus.Text = "Please note:\r\n- The track status and the quality of\r\n   the calibration are shown" +
+    " in the \r\n   haytham application.\r\n- Turn off the firewalls if connecting\r\n   fa" +
+    "ils.";
+      // 
+      // tscHaytham
+      // 
+      this.tscHaytham.BackColor = System.Drawing.Color.Black;
+      this.tscHaytham.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.tscHaytham.Location = new System.Drawing.Point(0, 0);
+      this.tscHaytham.Name = "tscHaytham";
+      this.tscHaytham.Size = new System.Drawing.Size(200, 49);
+      this.tscHaytham.TabIndex = 0;
+      // 
+      // label101
+      // 
+      this.label101.AutoSize = true;
+      this.label101.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label101.Location = new System.Drawing.Point(4, 183);
+      this.label101.Margin = new System.Windows.Forms.Padding(0);
+      this.label101.Name = "label101";
+      this.label101.Size = new System.Drawing.Size(25, 24);
+      this.label101.TabIndex = 22;
+      this.label101.Text = "3.";
+      // 
+      // txbHaythamSubject
+      // 
+      this.txbHaythamSubject.Location = new System.Drawing.Point(106, 185);
+      this.txbHaythamSubject.Name = "txbHaythamSubject";
+      this.txbHaythamSubject.ReadOnly = true;
+      this.txbHaythamSubject.Size = new System.Drawing.Size(91, 20);
+      this.txbHaythamSubject.TabIndex = 11;
+      this.txbHaythamSubject.Text = "Subject1";
+      // 
+      // btnHaythamRecord
+      // 
+      this.btnHaythamRecord.Enabled = false;
+      this.btnHaythamRecord.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnHaythamRecord.ImageKey = "Record";
+      this.btnHaythamRecord.ImageList = this.imlButtons;
+      this.btnHaythamRecord.Location = new System.Drawing.Point(28, 211);
+      this.btnHaythamRecord.Name = "btnHaythamRecord";
+      this.btnHaythamRecord.Size = new System.Drawing.Size(73, 23);
+      this.btnHaythamRecord.TabIndex = 17;
+      this.btnHaythamRecord.Text = "&Record";
+      this.btnHaythamRecord.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      // 
+      // label102
+      // 
+      this.label102.AutoSize = true;
+      this.label102.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label102.Location = new System.Drawing.Point(4, 209);
+      this.label102.Name = "label102";
+      this.label102.Size = new System.Drawing.Size(25, 24);
+      this.label102.TabIndex = 13;
+      this.label102.Text = "4.";
+      // 
+      // label103
+      // 
+      this.label103.AutoSize = true;
+      this.label103.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label103.Location = new System.Drawing.Point(4, 157);
+      this.label103.Margin = new System.Windows.Forms.Padding(0);
+      this.label103.Name = "label103";
+      this.label103.Size = new System.Drawing.Size(25, 24);
+      this.label103.TabIndex = 13;
+      this.label103.Text = "2.";
+      // 
+      // btnHaythamSubject
+      // 
+      this.btnHaythamSubject.Enabled = false;
+      this.btnHaythamSubject.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnHaythamSubject.ImageKey = "Subject";
+      this.btnHaythamSubject.ImageList = this.imlButtons;
+      this.btnHaythamSubject.Location = new System.Drawing.Point(28, 184);
+      this.btnHaythamSubject.Name = "btnHaythamSubject";
+      this.btnHaythamSubject.Size = new System.Drawing.Size(73, 23);
+      this.btnHaythamSubject.TabIndex = 12;
+      this.btnHaythamSubject.Text = "Subject";
+      this.btnHaythamSubject.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.btnHaythamSubject.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.btnHaythamSubject.UseVisualStyleBackColor = true;
+      // 
+      // btnHaythamConnect
+      // 
+      this.btnHaythamConnect.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+      this.btnHaythamConnect.ImageKey = "Connect";
+      this.btnHaythamConnect.ImageList = this.imlButtons;
+      this.btnHaythamConnect.Location = new System.Drawing.Point(28, 157);
+      this.btnHaythamConnect.Name = "btnHaythamConnect";
+      this.btnHaythamConnect.Size = new System.Drawing.Size(73, 23);
+      this.btnHaythamConnect.TabIndex = 12;
+      this.btnHaythamConnect.Text = "Connect";
+      this.btnHaythamConnect.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.btnHaythamConnect.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.btnHaythamConnect.UseVisualStyleBackColor = true;
+      // 
       // imlEyetracker
       // 
       this.imlEyetracker.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imlEyetracker.ImageStream")));
@@ -2683,6 +3070,8 @@
       this.imlEyetracker.Images.SetKeyName(7, "ITU");
       this.imlEyetracker.Images.SetKeyName(8, "Mirametrix");
       this.imlEyetracker.Images.SetKeyName(9, "Gazepoint_GP3");
+      this.imlEyetracker.Images.SetKeyName(10, "Haytham");
+      this.imlEyetracker.Images.SetKeyName(11, "SMIRedM");
       // 
       // panel4
       // 
@@ -5598,150 +5987,6 @@
       this.button65.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.button65.UseVisualStyleBackColor = true;
       // 
-      // tbpSMIRedM
-      // 
-      this.tbpSMIRedM.Controls.Add(this.groupBox18);
-      this.tbpSMIRedM.Controls.Add(this.txbSMIRedMSubject);
-      this.tbpSMIRedM.Controls.Add(this.btnSMIRedMRecord);
-      this.tbpSMIRedM.Controls.Add(this.btnSMIRedMCalibrate);
-      this.tbpSMIRedM.Controls.Add(this.label92);
-      this.tbpSMIRedM.Controls.Add(this.label97);
-      this.tbpSMIRedM.Controls.Add(this.label98);
-      this.tbpSMIRedM.Controls.Add(this.label99);
-      this.tbpSMIRedM.Controls.Add(this.btnSMIRedMSubject);
-      this.tbpSMIRedM.Controls.Add(this.btnSMIRedMConnect);
-      this.tbpSMIRedM.Location = new System.Drawing.Point(4, 23);
-      this.tbpSMIRedM.Name = "tbpSMIRedM";
-      this.tbpSMIRedM.Padding = new System.Windows.Forms.Padding(3);
-      this.tbpSMIRedM.Size = new System.Drawing.Size(212, 385);
-      this.tbpSMIRedM.TabIndex = 13;
-      this.tbpSMIRedM.Text = "SMI RedM";
-      this.tbpSMIRedM.UseVisualStyleBackColor = true;
-      // 
-      // groupBox18
-      // 
-      this.groupBox18.Controls.Add(this.textBox16);
-      this.groupBox18.Location = new System.Drawing.Point(8, 5);
-      this.groupBox18.Name = "groupBox18";
-      this.groupBox18.Size = new System.Drawing.Size(196, 183);
-      this.groupBox18.TabIndex = 40;
-      this.groupBox18.TabStop = false;
-      this.groupBox18.Text = "Track status";
-      // 
-      // textBox16
-      // 
-      this.textBox16.Location = new System.Drawing.Point(6, 19);
-      this.textBox16.Multiline = true;
-      this.textBox16.Name = "textBox16";
-      this.textBox16.Size = new System.Drawing.Size(184, 137);
-      this.textBox16.TabIndex = 0;
-      this.textBox16.Text = resources.GetString("textBox16.Text");
-      // 
-      // txbSMIRedMSubject
-      // 
-      this.txbSMIRedMSubject.Location = new System.Drawing.Point(110, 231);
-      this.txbSMIRedMSubject.Name = "txbSMIRedMSubject";
-      this.txbSMIRedMSubject.ReadOnly = true;
-      this.txbSMIRedMSubject.Size = new System.Drawing.Size(91, 20);
-      this.txbSMIRedMSubject.TabIndex = 31;
-      this.txbSMIRedMSubject.Text = "Subject1";
-      // 
-      // btnSMIRedMRecord
-      // 
-      this.btnSMIRedMRecord.Enabled = false;
-      this.btnSMIRedMRecord.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-      this.btnSMIRedMRecord.ImageKey = "Record";
-      this.btnSMIRedMRecord.ImageList = this.imlButtons;
-      this.btnSMIRedMRecord.Location = new System.Drawing.Point(32, 287);
-      this.btnSMIRedMRecord.Name = "btnSMIRedMRecord";
-      this.btnSMIRedMRecord.Size = new System.Drawing.Size(72, 23);
-      this.btnSMIRedMRecord.TabIndex = 38;
-      this.btnSMIRedMRecord.Text = "&Record";
-      this.btnSMIRedMRecord.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-      // 
-      // btnSMIRedMCalibrate
-      // 
-      this.btnSMIRedMCalibrate.Enabled = false;
-      this.btnSMIRedMCalibrate.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-      this.btnSMIRedMCalibrate.ImageKey = "Calibrate";
-      this.btnSMIRedMCalibrate.ImageList = this.imlButtons;
-      this.btnSMIRedMCalibrate.Location = new System.Drawing.Point(32, 258);
-      this.btnSMIRedMCalibrate.Name = "btnSMIRedMCalibrate";
-      this.btnSMIRedMCalibrate.Size = new System.Drawing.Size(72, 23);
-      this.btnSMIRedMCalibrate.TabIndex = 39;
-      this.btnSMIRedMCalibrate.Text = "&Calibrate";
-      this.btnSMIRedMCalibrate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-      // 
-      // label92
-      // 
-      this.label92.AutoSize = true;
-      this.label92.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label92.Location = new System.Drawing.Point(8, 258);
-      this.label92.Name = "label92";
-      this.label92.Size = new System.Drawing.Size(25, 24);
-      this.label92.TabIndex = 37;
-      this.label92.Text = "3.";
-      // 
-      // label97
-      // 
-      this.label97.AutoSize = true;
-      this.label97.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label97.Location = new System.Drawing.Point(8, 287);
-      this.label97.Name = "label97";
-      this.label97.Size = new System.Drawing.Size(25, 24);
-      this.label97.TabIndex = 36;
-      this.label97.Text = "4.";
-      // 
-      // label98
-      // 
-      this.label98.AutoSize = true;
-      this.label98.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label98.Location = new System.Drawing.Point(8, 229);
-      this.label98.Name = "label98";
-      this.label98.Size = new System.Drawing.Size(25, 24);
-      this.label98.TabIndex = 34;
-      this.label98.Text = "2.";
-      // 
-      // label99
-      // 
-      this.label99.AutoSize = true;
-      this.label99.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label99.Location = new System.Drawing.Point(8, 200);
-      this.label99.Margin = new System.Windows.Forms.Padding(0);
-      this.label99.Name = "label99";
-      this.label99.Size = new System.Drawing.Size(25, 24);
-      this.label99.TabIndex = 35;
-      this.label99.Text = "1.";
-      // 
-      // btnSMIRedMSubject
-      // 
-      this.btnSMIRedMSubject.Enabled = false;
-      this.btnSMIRedMSubject.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-      this.btnSMIRedMSubject.ImageKey = "Subject";
-      this.btnSMIRedMSubject.ImageList = this.imlButtons;
-      this.btnSMIRedMSubject.Location = new System.Drawing.Point(32, 230);
-      this.btnSMIRedMSubject.Name = "btnSMIRedMSubject";
-      this.btnSMIRedMSubject.Size = new System.Drawing.Size(72, 23);
-      this.btnSMIRedMSubject.TabIndex = 32;
-      this.btnSMIRedMSubject.Text = "Subject";
-      this.btnSMIRedMSubject.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.btnSMIRedMSubject.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-      this.btnSMIRedMSubject.UseVisualStyleBackColor = true;
-      // 
-      // btnSMIRedMConnect
-      // 
-      this.btnSMIRedMConnect.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-      this.btnSMIRedMConnect.ImageKey = "Connect";
-      this.btnSMIRedMConnect.ImageList = this.imlButtons;
-      this.btnSMIRedMConnect.Location = new System.Drawing.Point(32, 200);
-      this.btnSMIRedMConnect.Name = "btnSMIRedMConnect";
-      this.btnSMIRedMConnect.Size = new System.Drawing.Size(73, 23);
-      this.btnSMIRedMConnect.TabIndex = 33;
-      this.btnSMIRedMConnect.Text = "Connect";
-      this.btnSMIRedMConnect.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.btnSMIRedMConnect.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-      this.btnSMIRedMConnect.UseVisualStyleBackColor = true;
-      // 
       // RecordModule
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5881,6 +6126,19 @@
       this.tbpMouseOnly.ResumeLayout(false);
       this.tbpMouseOnly.PerformLayout();
       this.tbpNoDevice.ResumeLayout(false);
+      this.tbpSMIRedM.ResumeLayout(false);
+      this.tbpSMIRedM.PerformLayout();
+      this.groupBox18.ResumeLayout(false);
+      this.groupBox18.PerformLayout();
+      this.tbpHaytham.ResumeLayout(false);
+      this.panel13.ResumeLayout(false);
+      this.panel13.PerformLayout();
+      this.groupBox19.ResumeLayout(false);
+      this.spcHaytham.Panel1.ResumeLayout(false);
+      this.spcHaytham.Panel1.PerformLayout();
+      this.spcHaytham.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.spcHaytham)).EndInit();
+      this.spcHaytham.ResumeLayout(false);
       this.panel4.ResumeLayout(false);
       this.panel4.PerformLayout();
       this.grpUsercam.ResumeLayout(false);
@@ -6028,10 +6286,6 @@
       this.tabPage11.ResumeLayout(false);
       this.tabPage11.PerformLayout();
       this.tabPage12.ResumeLayout(false);
-      this.tbpSMIRedM.ResumeLayout(false);
-      this.tbpSMIRedM.PerformLayout();
-      this.groupBox18.ResumeLayout(false);
-      this.groupBox18.PerformLayout();
       this.ResumeLayout(false);
 
     }
@@ -6441,5 +6695,22 @@
     private Label label99;
     private Button btnSMIRedMSubject;
     private Button btnSMIRedMConnect;
+    private TabPage tbpHaytham;
+    private Panel panel13;
+    private Button btnHaythamCalibrate;
+    private Label label104;
+    private Label label100;
+    private Button btnHaythamLaunch;
+    private GroupBox groupBox19;
+    private TextBox txbHaythamStatus;
+    private Label label101;
+    private TextBox txbHaythamSubject;
+    private Button btnHaythamRecord;
+    private Label label102;
+    private Label label103;
+    private Button btnHaythamSubject;
+    private Button btnHaythamConnect;
+    private SplitContainer spcHaytham;
+    private TrackerBase.TrackStatusControl tscHaytham;
   }
 }

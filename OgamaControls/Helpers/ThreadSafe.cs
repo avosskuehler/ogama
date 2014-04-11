@@ -53,6 +53,16 @@ namespace OgamaControls
     private delegate void EnableDisableButtonInvoker(Button control, bool enable);
 
     /// <summary>
+    /// This delegate enables asynchronous calls for setting
+    /// the visible property on a SplitContainer.Panel control.
+    /// </summary>
+    /// <param name="control">The SplitContainer parent for the panel to be asynchronously shown or hidden.</param>
+    /// <param name="show">A <see cref="Boolean"/> for the visible property
+    /// of the Panel.</param>
+    /// <param name="panel1">True if panel1 of the splitcontainer should be modified, for panel2 set this to false.</param>
+    private delegate void ShowHidePanelInvoker(SplitContainer control, bool show, bool panel1);
+
+    /// <summary>
     /// A thread safe version to receive the <see cref="Control.Handle"/>
     /// property of the control.
     /// </summary>
@@ -175,6 +185,29 @@ namespace OgamaControls
       }
 
       button.Enabled = enable;
+    }
+
+    /// <summary>
+    /// Thread safe version to show or hide a split container panel.
+    /// </summary>
+    /// <param name="splitContainer"> The <see cref="SplitContainer"/> control. </param>
+    /// <param name="show"> True, if the panel should be visible, otherwise false. </param>
+    /// <param name="panel1">True if panel1 of the splitcontainer should be modified, for panel2 set this to false.</param>
+    public static void ShowHideSplitContainerPanel(SplitContainer splitContainer, bool show, bool panel1)
+    {
+      if (splitContainer.InvokeRequired)
+      {
+        splitContainer.Invoke(new ShowHidePanelInvoker(ShowHideSplitContainerPanel), splitContainer, show, panel1);
+      }
+
+      if (panel1)
+      {
+        splitContainer.Panel1Collapsed = !show;
+      }
+      else
+      {
+        splitContainer.Panel2Collapsed = !show;
+      }
     }
   }
 }

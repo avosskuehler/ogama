@@ -1,78 +1,81 @@
-// <copyright file="TobiiTrackStatusControl.cs" company="FU Berlin">
-// ******************************************************
-// OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2013 Dr. Adrian Voßkühler  
-// ------------------------------------------------------------------------
-// This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
-// This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-// You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-// **************************************************************
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TobiiTrackStatusControl.cs" company="Freie Universität Berlin">
+//   OGAMA - open gaze and mouse analyzer 
+//   Copyright (C) 2014 Dr. Adrian Voßkühler  
+//   Licensed under GPL V3
 // </copyright>
 // <author>Adrian Voßkühler</author>
 // <email>adrian@ogama.net</email>
-
+// <summary>
+//   The tobii track status control.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 namespace Ogama.Modules.Recording.TobiiInterface
 {
   using System.Collections.Generic;
   using System.Drawing;
   using System.Windows.Forms;
 
-  using global::Tobii.Eyetracking.Sdk;
+  using Tobii.Eyetracking.Sdk;
 
   /// <summary>
-  /// The tobii track status control.
+  ///   The tobii track status control.
   /// </summary>
   public partial class TobiiTrackStatusControl : UserControl
   {
-    #region Constants and Fields
+    #region Constants
 
     /// <summary>
-    /// The brush.
-    /// </summary>
-    private readonly SolidBrush brush;
-
-    /// <summary>
-    /// The data history.
-    /// </summary>
-    private readonly Queue<GazeDataItem> dataHistory;
-
-    /// <summary>
-    /// The eye brush.
-    /// </summary>
-    private readonly SolidBrush eyeBrush;
-
-    /// <summary>
-    /// The bar height.
+    ///   The bar height.
     /// </summary>
     private const int BarHeight = 25;
 
     /// <summary>
-    /// The eye radius.
+    ///   The eye radius.
     /// </summary>
     private const int EyeRadius = 8;
 
     /// <summary>
-    /// The history size.
+    ///   The history size.
     /// </summary>
     private const int HistorySize = 30;
 
+    #endregion
+
+    #region Fields
+
     /// <summary>
-    /// The left eye <see cref="Point3D"/>
+    ///   The brush.
+    /// </summary>
+    private readonly SolidBrush brush;
+
+    /// <summary>
+    ///   The data history.
+    /// </summary>
+    private readonly Queue<GazeDataItem> dataHistory;
+
+    /// <summary>
+    ///   The eye brush.
+    /// </summary>
+    private readonly SolidBrush eyeBrush;
+
+    /// <summary>
+    ///   The left eye <see cref="Point3D" />
     /// </summary>
     private Point3D leftEye;
 
     /// <summary>
-    /// The left eyes validity.
+    ///   The left eyes validity.
     /// </summary>
     private int leftValidity;
 
     /// <summary>
-    /// The right eye <see cref="Point3D"/>
+    ///   The right eye <see cref="Point3D" />
     /// </summary>
     private Point3D rightEye;
 
     /// <summary>
-    /// The right eyes validity.
+    ///   The right eyes validity.
     /// </summary>
     private int rightValidity;
 
@@ -81,7 +84,7 @@ namespace Ogama.Modules.Recording.TobiiInterface
     #region Constructors and Destructors
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="TobiiTrackStatusControl"/> class.
+    ///   Initializes a new instance of the <see cref="TobiiTrackStatusControl" /> class.
     /// </summary>
     public TobiiTrackStatusControl()
     {
@@ -134,10 +137,10 @@ namespace Ogama.Modules.Recording.TobiiInterface
 
     #endregion
 
-    #region Public Methods
+    #region Public Methods and Operators
 
     /// <summary>
-    /// The clear.
+    ///   The clear.
     /// </summary>
     public void Clear()
     {
@@ -200,9 +203,9 @@ namespace Ogama.Modules.Recording.TobiiInterface
       if (this.leftValidity <= 2)
       {
         var r = new RectangleF(
-          (float)((1.0 - this.leftEye.X) * this.Width - EyeRadius),
-          (float)(this.leftEye.Y * this.Height - EyeRadius),
-          2 * EyeRadius,
+          (float)((1.0 - this.leftEye.X) * this.Width - EyeRadius), 
+          (float)(this.leftEye.Y * this.Height - EyeRadius), 
+          2 * EyeRadius, 
           2 * EyeRadius);
         e.Graphics.FillEllipse(this.eyeBrush, r);
       }
@@ -210,18 +213,18 @@ namespace Ogama.Modules.Recording.TobiiInterface
       if (this.rightValidity <= 2)
       {
         var r = new RectangleF(
-          (float)((1 - this.rightEye.X) * this.Width - EyeRadius),
-          (float)(this.rightEye.Y * this.Height - EyeRadius),
-          2 * EyeRadius,
+          (float)((1 - this.rightEye.X) * this.Width - EyeRadius), 
+          (float)(this.rightEye.Y * this.Height - EyeRadius), 
+          2 * EyeRadius, 
           2 * EyeRadius);
         e.Graphics.FillEllipse(this.eyeBrush, r);
       }
     }
 
     /// <summary>
-    /// This method computes the status color.
+    ///   This method computes the status color.
     /// </summary>
-    /// <returns>The <see cref="Color"/> indicating the tracking quality.</returns>
+    /// <returns>The <see cref="Color" /> indicating the tracking quality.</returns>
     private Color ComputeStatusColor()
     {
       if (!this.Enabled)

@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Common\RegistryEntries.wxs" />
+    <Compile Include="Haytham.wxs" />
     <Compile Include="DirectShow\DirectShow.wxs" />
     <Compile Include="Help.wxs" />
     <Compile Include="Libs.wxs" />
