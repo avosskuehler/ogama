@@ -7,7 +7,7 @@
            Codepage="1252"
            Language="!(loc.Property_ProductLanguage)"
            Name="$(var.ProductName)"
-           Version="!(bind.FileVersion.OgamaExe)"
+           Version="$(var.ProductVersion)"
            Manufacturer="$(var.Manufactor)"
            UpgradeCode="$(var.UpgradeGuid)">
     <Package Comments="Installs OGAMA - open gaze and mouse analyzer"
@@ -761,7 +761,13 @@
       </Dialog>
     </UI>
     <Upgrade Id="$(var.UpgradeGuid)">
-      <UpgradeVersion Maximum="4.4" Property="PREVIOUSVERSIONSINSTALLED" />
+      <UpgradeVersion Minimum="1.0.0"
+                     IncludeMinimum="yes"
+                     OnlyDetect="no"
+                     Maximum="$(var.ProductVersion)"
+                     IncludeMaximum="no"
+                     Property="PREVIOUSVERSIONSINSTALLED" />
+           <!--<UpgradeVersion Maximum="4.4" Property="PREVIOUSVERSIONSINSTALLED" />-->
       <UpgradeVersion Minimum="4.5" Property="NEWERPRODUCTFOUND" OnlyDetect="yes" IncludeMinimum="yes" />
     </Upgrade>
     <InstallExecuteSequence>

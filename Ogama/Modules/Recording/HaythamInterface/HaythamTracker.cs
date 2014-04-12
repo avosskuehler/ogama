@@ -356,9 +356,9 @@ namespace Ogama.Modules.Recording.HaythamInterface
       try
       {
         this.haythamClient = new HaythamClient
-                               {
-                                 ServerIPAddress = IPAddress.Parse(this.Settings.HaythamServerIPAddress)
-                               };
+                     {
+                       ServerIPAddress = IPAddress.Parse(this.Settings.HaythamServerIPAddress)
+                     };
 
         this.haythamClient.CalibrationFinished += this.CalibrationFinished;
         this.haythamClient.GazeDataReceived += this.GazeDataReceived;
@@ -523,8 +523,8 @@ namespace Ogama.Modules.Recording.HaythamInterface
 
           // show IPv4 address if exists
           IPAddress server =
-            Dns.GetHostAddresses(hostUri.DnsSafeHost)
-              .FirstOrDefault(adr => adr.AddressFamily == AddressFamily.InterNetwork);
+          Dns.GetHostAddresses(hostUri.DnsSafeHost)
+            .FirstOrDefault(adr => adr.AddressFamily == AddressFamily.InterNetwork);
           if (server != null)
           {
             this.settings.HaythamServerIPAddress = server.ToString();
@@ -714,7 +714,7 @@ namespace Ogama.Modules.Recording.HaythamInterface
     {
       if (!this.IsHaythamApplicationRunning())
       {
-        string haythamPath = Path.Combine(Application.StartupPath, "Haytham.exe");
+        string haythamPath = Path.Combine(Application.StartupPath, Path.Combine("Haytham", "Haytham.exe"));
         Process.Start(haythamPath);
       }
       else
@@ -783,9 +783,9 @@ namespace Ogama.Modules.Recording.HaythamInterface
       else if (!this.clientStatus.IsFlagSet(HaythamStatus.IsCalibrated))
       {
         informationString = "Connection to haytham tracker successfully established."
-                            + "Now configure the haytham tracker to track the eyes using the "
-                            + "user interface of the haytham tracker application asn calibrate the subject."
-                            + "Return to ogama when gaze tracking is successfully established. ";
+                  + "Now configure the haytham tracker to track the eyes using the "
+                  + "user interface of the haytham tracker application asn calibrate the subject."
+                  + "Return to ogama when gaze tracking is successfully established. ";
       }
 
       this.DisplayMessage(informationString);
