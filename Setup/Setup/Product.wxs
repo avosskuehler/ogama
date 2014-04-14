@@ -31,8 +31,6 @@
     <Binary Id="UpFldrBtn" SourceFile="$(var.SolutionDir)Setup\Setup\Resources\UpFldrBtn.bmp" />
     <Binary Id="NewFldrBtn" SourceFile="$(var.SolutionDir)Setup\Setup\Resources\NewFldrBtn.bmp" />
     <Binary Id="DefBannerBitmap" SourceFile="$(var.SolutionDir)Setup\Setup\Resources\BannerInstaller.bmp" />
-    <!--<CustomAction Id="UninstallFFDSHOW" FileKey="ffdshow" ExeCommand="/u /verysilent" Execute="deferred" Impersonate="no" />
-    <CustomAction Id="InstallFFDSHOW" FileKey="ffdshow" ExeCommand="/verysilent" Execute="deferred" Impersonate="no" />-->
     <CustomAction Id="DIRCA_TARGETDIR" Property="TARGETDIR" Value="[$(var.PlatformProgramFilesFolder)]\$(var.ProductName)" Execute="firstSequence" />
     <CustomAction Id="ERRCA_CANCELNEWERVERSION" Error="[VSDVERSIONMSG]" />
     <CustomAction Id="ERRCA_UIANDADVERTISED" Error="[VSDUIANDADVERTISED]" />
@@ -45,11 +43,7 @@
             <File Id="License" Name="License.rtf" KeyPath="yes" DiskId="1"
                   Source="$(var.SolutionDir)Setup\Setup\Resources\" />
           </Component>
-          <!--<Component Id="C_ffdshow" Guid="{744898D7-ABBE-F21A-A33B-F51366E4895B}" Win64="$(var.Win64)">
-            <File Id="ffdshow" Name="ffdshow.exe" KeyPath="yes" DiskId="1"
-                  Source="$(var.SolutionDir)Libs\Installer\" />
-          </Component>-->
-        </Directory>
+         </Directory>
       </Directory>
       <Directory Id="DesktopFolder" SourceName="User's Desktop" />
       <Directory Id="ProgramMenuFolder" SourceName="User's Programs Menu">
@@ -85,7 +79,6 @@
       <FeatureRef Id='SaliencyFeature'/>
       <ComponentRef Id="ShortCutComponent" />
       <ComponentRef Id="C_License" />
-      <!--<ComponentRef Id="C_ffdshow" />-->
     </Feature>
 
     <Icon Id="OgamaImport.ico" SourceFile="$(var.SolutionDir)Ogama\Resources\OgamaImport.ico" />
@@ -99,7 +92,7 @@
     <Property Id="ARPHELPLINK" Value="$(var.Link)" />
     <Property Id="ARPCONTACT" Value="$(var.Manufactor)" />
     <Property Id="ARPCOMMENTS" Value="$(var.InstallDescription)" />
-    <Property Id="ARPURLINFOABOUT" Value="http://www.ogama.net" />
+    <Property Id="ARPURLINFOABOUT" Value="$(var.Link)" />
     <!--<Property Id="ALLUSERS" Value="2" />-->
     <Property Id="ARPPRODUCTICON" Value="Ogama.ico" />
     <Property Id="PREVIOUSVERSIONSINSTALLED" Secure="yes" />
@@ -761,14 +754,8 @@
       </Dialog>
     </UI>
     <Upgrade Id="$(var.UpgradeGuid)">
-      <UpgradeVersion Minimum="1.0.0"
-                     IncludeMinimum="yes"
-                     OnlyDetect="no"
-                     Maximum="$(var.ProductVersion)"
-                     IncludeMaximum="no"
-                     Property="PREVIOUSVERSIONSINSTALLED" />
-           <!--<UpgradeVersion Maximum="4.4" Property="PREVIOUSVERSIONSINSTALLED" />-->
-      <UpgradeVersion Minimum="4.5" Property="NEWERPRODUCTFOUND" OnlyDetect="yes" IncludeMinimum="yes" />
+      <UpgradeVersion Minimum="1.0.0" IncludeMinimum="yes" OnlyDetect="no" Maximum="$(var.ProductVersion)" IncludeMaximum="no" Property="PREVIOUSVERSIONSINSTALLED" />
+      <UpgradeVersion Minimum="$(var.ProductVersion)" Property="NEWERPRODUCTFOUND" OnlyDetect="yes" IncludeMinimum="no" />
     </Upgrade>
     <InstallExecuteSequence>
       <Custom Action="ERRCA_CANCELNEWERVERSION" Sequence="201">NEWERPRODUCTFOUND AND NOT Installed</Custom>
