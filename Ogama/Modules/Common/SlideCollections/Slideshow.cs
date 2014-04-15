@@ -567,7 +567,19 @@ namespace Ogama.Modules.Common.SlideCollections
       }
 
       // check file based elements
-      if (element is VGImage)
+      if (element is VGScrollImage)
+      {
+        var scrollImage = (VGScrollImage)element;
+        if (scrollImage.Filepath != newResourcesPath)
+        {
+          scrollImage.Filename = System.IO.Path.GetFileName(scrollImage.Filename);
+          scrollImage.Filepath = newResourcesPath;
+          scrollImage.Canvas = Document.ActiveDocument.PresentationSize;
+        }
+
+        scrollImage.CreateInternalImage();
+      }
+      else if (element is VGImage)
       {
         VGImage image = (VGImage)element;
         if (image.Filepath != newResourcesPath)

@@ -25,6 +25,8 @@ namespace Ogama.Modules.Recording.Presenter
   using System.Threading;
   using System.Windows.Forms;
 
+  using mshtml;
+
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common.CustomEventArgs;
   using Ogama.Modules.Common.SlideCollections;
@@ -34,6 +36,8 @@ namespace Ogama.Modules.Recording.Presenter
 
   using OgamaControls;
 
+  using SHDocVw;
+
   using VectorGraphics.Controls;
   using VectorGraphics.Controls.Flash;
   using VectorGraphics.Controls.Timer;
@@ -42,6 +46,8 @@ namespace Ogama.Modules.Recording.Presenter
   using VectorGraphics.StopConditions;
   using VectorGraphics.Tools;
   using VectorGraphics.Tools.Trigger;
+
+  using WebBrowser = System.Windows.Forms.WebBrowser;
 
   /// <summary>
   ///   A <see cref="Form" /> that is used for stimuli presentation.
@@ -706,7 +712,7 @@ namespace Ogama.Modules.Recording.Presenter
         }
         catch (UnauthorizedAccessException ex)
         {
-          ExceptionMethods.HandleExceptionSilent(ex);
+          //ExceptionMethods.HandleExceptionSilent(ex);
         }
       }
     }
@@ -1492,7 +1498,10 @@ namespace Ogama.Modules.Recording.Presenter
     /// </param>
     private void NavigateMirror(object data)
     {
-      WebsiteScreenshot.Instance.Navigate((WebBrowserNavigatingEventArgs)data);
+      var parameters = (object[])data;
+
+      //WebsiteScreenshot.Instance.Navigate((WebBrowserNavigatingEventArgs)data);
+      WebsiteScreenshot.DoScreenshot((WebBrowserNavigatingEventArgs)parameters[0], (string)parameters[1]);
     }
 
     /// <summary>
@@ -2190,7 +2199,7 @@ namespace Ogama.Modules.Recording.Presenter
 
       browser.Document.MouseDown -= this.WebBrowserMouseDown;
       browser.Document.MouseDown += this.WebBrowserMouseDown;
-      
+
       if (browser.Document.Window != null)
       {
         browser.Document.Window.Scroll -= this.WebBrowserScroll;
@@ -2301,13 +2310,10 @@ namespace Ogama.Modules.Recording.Presenter
           // Make screenshot of newly navigated web page in 
           // separate thread, if it is not already there.
           string screenshotFilename = BrowserDialog.GetFilenameFromUrl(e.Url);
-          WebsiteScreenshot.Instance.ScreenshotFilename = screenshotFilename;
+          //WebsiteScreenshot.Instance.ScreenshotFilename = screenshotFilename;
 
-          var webpageAlreadyVisited = true;
           if (!this.currentBrowserTreeNode.UrlToID.ContainsKey(screenshotFilename))
           {
-            webpageAlreadyVisited = false;
-
             // This webpage has never been visited before, so get a new id
             // and create slide and slideshownode for the slideshow
             int newTrialId = Convert.ToInt32(documentsSlideshow.GetUnusedNodeID());
@@ -2403,13 +2409,17 @@ namespace Ogama.Modules.Recording.Presenter
           this.shownSlideContainer.Trial = trial;
           this.shownSlideContainer.Slide = trial[0];
 
-          if (!webpageAlreadyVisited)
+          var fullFile = Path.Combine(Document.ActiveDocument.ExperimentSettings.SlideResourcesPath, screenshotFilename);
+          if (!File.Exists(fullFile))
           {
             // Create screenshot on Document completed event using
             // the filename stated above
             var navigateThread = new Thread(this.NavigateMirror);
             navigateThread.SetApartmentState(ApartmentState.STA);
-            navigateThread.Start(e);
+            var parameters = new object[2];
+            parameters[0] = e;
+            parameters[1] = fullFile;
+            navigateThread.Start(parameters);
           }
         }
       }
@@ -2499,11 +2509,11 @@ namespace Ogama.Modules.Recording.Presenter
     {
       this.watch.Stop();
 
-      // Cleanup website screenshot creator
-      if (WebsiteScreenshot.HasBeenUsed)
-      {
-        WebsiteScreenshot.Instance.Dispose();
-      }
+      //// Cleanup website screenshot creator
+      //if (WebsiteScreenshot.HasBeenUsed)
+      //{
+      //  WebsiteScreenshot.Instance.Dispose();
+      //}
     }
 
     /// <summary>

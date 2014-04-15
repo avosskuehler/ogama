@@ -82,12 +82,15 @@
       this.btnPreviewSlideshow = new System.Windows.Forms.ToolStripButton();
       this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
       this.btnHelp = new System.Windows.Forms.ToolStripButton();
+      this.btnPrimary = new System.Windows.Forms.ToolStripButton();
+      this.btnSecondary = new System.Windows.Forms.ToolStripButton();
       this.sfdSlideshow = new System.Windows.Forms.SaveFileDialog();
       this.ofdSlideshow = new System.Windows.Forms.OpenFileDialog();
       this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
       this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
       ((System.ComponentModel.ISupportInitialize)(this.bsoSubjects)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.bsoFKSubjectsTrials)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.ogamaDataSet)).BeginInit();
@@ -139,11 +142,13 @@
       // toolStripContainer1.ContentPanel
       // 
       this.toolStripContainer1.ContentPanel.Controls.Add(this.spcTreeDetail);
-      this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(863, 548);
+      this.toolStripContainer1.ContentPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1294, 854);
       this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
       this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
+      this.toolStripContainer1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.toolStripContainer1.Name = "toolStripContainer1";
-      this.toolStripContainer1.Size = new System.Drawing.Size(863, 573);
+      this.toolStripContainer1.Size = new System.Drawing.Size(1294, 882);
       this.toolStripContainer1.TabIndex = 0;
       this.toolStripContainer1.Text = "toolStripContainer1";
       // 
@@ -155,6 +160,7 @@
       // 
       this.spcTreeDetail.Dock = System.Windows.Forms.DockStyle.Fill;
       this.spcTreeDetail.Location = new System.Drawing.Point(0, 0);
+      this.spcTreeDetail.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.spcTreeDetail.Name = "spcTreeDetail";
       // 
       // spcTreeDetail.Panel1
@@ -164,8 +170,9 @@
       // spcTreeDetail.Panel2
       // 
       this.spcTreeDetail.Panel2.Controls.Add(this.spcSlidesProperties);
-      this.spcTreeDetail.Size = new System.Drawing.Size(863, 548);
-      this.spcTreeDetail.SplitterDistance = 287;
+      this.spcTreeDetail.Size = new System.Drawing.Size(1294, 854);
+      this.spcTreeDetail.SplitterDistance = 430;
+      this.spcTreeDetail.SplitterWidth = 6;
       this.spcTreeDetail.TabIndex = 1;
       // 
       // spcToolbarTreeView
@@ -174,6 +181,7 @@
       this.spcToolbarTreeView.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
       this.spcToolbarTreeView.IsSplitterFixed = true;
       this.spcToolbarTreeView.Location = new System.Drawing.Point(0, 0);
+      this.spcToolbarTreeView.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.spcToolbarTreeView.Name = "spcToolbarTreeView";
       this.spcToolbarTreeView.Orientation = System.Windows.Forms.Orientation.Horizontal;
       // 
@@ -184,9 +192,9 @@
       // spcToolbarTreeView.Panel2
       // 
       this.spcToolbarTreeView.Panel2.Controls.Add(this.trvSlideshow);
-      this.spcToolbarTreeView.Size = new System.Drawing.Size(287, 548);
+      this.spcToolbarTreeView.Size = new System.Drawing.Size(430, 854);
       this.spcToolbarTreeView.SplitterDistance = 25;
-      this.spcToolbarTreeView.SplitterWidth = 1;
+      this.spcToolbarTreeView.SplitterWidth = 2;
       this.spcToolbarTreeView.TabIndex = 2;
       // 
       // toolStrip1
@@ -202,7 +210,8 @@
             this.btnCustomShuffling});
       this.toolStrip1.Location = new System.Drawing.Point(0, 0);
       this.toolStrip1.Name = "toolStrip1";
-      this.toolStrip1.Size = new System.Drawing.Size(287, 25);
+      this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+      this.toolStrip1.Size = new System.Drawing.Size(430, 25);
       this.toolStrip1.TabIndex = 1;
       // 
       // btnAddFolder
@@ -274,11 +283,12 @@
       this.trvSlideshow.ImageKey = "Folder";
       this.trvSlideshow.ImageList = this.imlSlideTypes;
       this.trvSlideshow.Location = new System.Drawing.Point(0, 0);
+      this.trvSlideshow.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.trvSlideshow.Name = "trvSlideshow";
       this.trvSlideshow.SelectedImageIndex = 0;
       this.trvSlideshow.SelectionBackColor = System.Drawing.SystemColors.Highlight;
       this.trvSlideshow.SelectionMode = OgamaControls.TreeViewSelectionMode.MultiSelectSameLevel;
-      this.trvSlideshow.Size = new System.Drawing.Size(287, 522);
+      this.trvSlideshow.Size = new System.Drawing.Size(430, 827);
       this.trvSlideshow.TabIndex = 0;
       this.trvSlideshow.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.trvSlideshow_AfterLabelEdit);
       this.trvSlideshow.DrawNode += new System.Windows.Forms.DrawTreeNodeEventHandler(this.trvSlideshow_DrawNode);
@@ -303,7 +313,7 @@
             this.cmuCombineToTrial,
             this.cmuDelete});
       this.cmuItemView.Name = "contextMenuStrip1";
-      this.cmuItemView.Size = new System.Drawing.Size(525, 197);
+      this.cmuItemView.Size = new System.Drawing.Size(760, 233);
       this.cmuItemView.Opening += new System.ComponentModel.CancelEventHandler(this.cmuItemView_Opening);
       // 
       // cmuDisable
@@ -311,14 +321,14 @@
       this.cmuDisable.CheckOnClick = true;
       this.cmuDisable.Image = global::Ogama.Properties.Resources.Disabled16;
       this.cmuDisable.Name = "cmuDisable";
-      this.cmuDisable.Size = new System.Drawing.Size(524, 22);
+      this.cmuDisable.Size = new System.Drawing.Size(759, 30);
       this.cmuDisable.Text = "Disable Slide";
       this.cmuDisable.Click += new System.EventHandler(this.cmuDisable_Click);
       // 
       // toolStripSeparator4
       // 
       this.toolStripSeparator4.Name = "toolStripSeparator4";
-      this.toolStripSeparator4.Size = new System.Drawing.Size(521, 6);
+      this.toolStripSeparator4.Size = new System.Drawing.Size(756, 6);
       this.toolStripSeparator4.Visible = false;
       // 
       // cmuShuffle
@@ -326,14 +336,14 @@
       this.cmuShuffle.CheckOnClick = true;
       this.cmuShuffle.Image = global::Ogama.Properties.Resources.DiceHS16;
       this.cmuShuffle.Name = "cmuShuffle";
-      this.cmuShuffle.Size = new System.Drawing.Size(524, 22);
+      this.cmuShuffle.Size = new System.Drawing.Size(759, 30);
       this.cmuShuffle.Text = "Shuffle subitems of selected item";
       this.cmuShuffle.Click += new System.EventHandler(this.cmuShuffle_Click);
       // 
       // cmuDescription
       // 
       this.cmuDescription.Name = "cmuDescription";
-      this.cmuDescription.Size = new System.Drawing.Size(524, 22);
+      this.cmuDescription.Size = new System.Drawing.Size(759, 30);
       this.cmuDescription.Text = "Choose the following number of items from the shuffled section during presentatio" +
     "n:";
       // 
@@ -341,20 +351,20 @@
       // 
       this.cmuCountCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.cmuCountCombo.Name = "cmuCountCombo";
-      this.cmuCountCombo.Size = new System.Drawing.Size(121, 23);
+      this.cmuCountCombo.Size = new System.Drawing.Size(121, 33);
       this.cmuCountCombo.SelectedIndexChanged += new System.EventHandler(this.cmuCountCombo_SelectedIndexChanged);
       // 
       // toolStripSeparator2
       // 
       this.toolStripSeparator2.Name = "toolStripSeparator2";
-      this.toolStripSeparator2.Size = new System.Drawing.Size(521, 6);
+      this.toolStripSeparator2.Size = new System.Drawing.Size(756, 6);
       // 
       // cmuJoin
       // 
       this.cmuJoin.CheckOnClick = true;
       this.cmuJoin.Image = global::Ogama.Properties.Resources.ChainHS;
       this.cmuJoin.Name = "cmuJoin";
-      this.cmuJoin.Size = new System.Drawing.Size(524, 22);
+      this.cmuJoin.Size = new System.Drawing.Size(759, 30);
       this.cmuJoin.Text = "join selected items";
       this.cmuJoin.Visible = false;
       // 
@@ -363,7 +373,7 @@
       this.cmuCombineToTrial.CheckOnClick = true;
       this.cmuCombineToTrial.Image = global::Ogama.Properties.Resources.OrgChartHS;
       this.cmuCombineToTrial.Name = "cmuCombineToTrial";
-      this.cmuCombineToTrial.Size = new System.Drawing.Size(524, 22);
+      this.cmuCombineToTrial.Size = new System.Drawing.Size(759, 30);
       this.cmuCombineToTrial.Text = "Combine selected slides to one trial";
       this.cmuCombineToTrial.Click += new System.EventHandler(this.cmuCombineToTrial_Click);
       // 
@@ -371,7 +381,7 @@
       // 
       this.cmuDelete.Image = global::Ogama.Properties.Resources.DeleteHS;
       this.cmuDelete.Name = "cmuDelete";
-      this.cmuDelete.Size = new System.Drawing.Size(524, 22);
+      this.cmuDelete.Size = new System.Drawing.Size(759, 30);
       this.cmuDelete.Text = "Delete selected Slides";
       this.cmuDelete.Click += new System.EventHandler(this.cmuDelete_Click);
       // 
@@ -399,6 +409,7 @@
       this.spcSlidesProperties.Dock = System.Windows.Forms.DockStyle.Fill;
       this.spcSlidesProperties.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
       this.spcSlidesProperties.Location = new System.Drawing.Point(0, 0);
+      this.spcSlidesProperties.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.spcSlidesProperties.Name = "spcSlidesProperties";
       this.spcSlidesProperties.Orientation = System.Windows.Forms.Orientation.Horizontal;
       // 
@@ -410,8 +421,9 @@
       // spcSlidesProperties.Panel2
       // 
       this.spcSlidesProperties.Panel2.Controls.Add(this.spcPropertiesPreview);
-      this.spcSlidesProperties.Size = new System.Drawing.Size(572, 548);
+      this.spcSlidesProperties.Size = new System.Drawing.Size(858, 854);
       this.spcSlidesProperties.SplitterDistance = 175;
+      this.spcSlidesProperties.SplitterWidth = 6;
       this.spcSlidesProperties.TabIndex = 1;
       // 
       // lsvDetails
@@ -427,11 +439,12 @@
       this.lsvDetails.FullRowSelect = true;
       this.lsvDetails.GridLines = true;
       this.lsvDetails.Location = new System.Drawing.Point(0, 0);
+      this.lsvDetails.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.lsvDetails.Name = "lsvDetails";
       this.lsvDetails.OwnerDraw = true;
       this.lsvDetails.ShowGroups = false;
       this.lsvDetails.ShowItemToolTips = true;
-      this.lsvDetails.Size = new System.Drawing.Size(572, 175);
+      this.lsvDetails.Size = new System.Drawing.Size(858, 175);
       this.lsvDetails.SmallImageList = this.imlSlideTypes;
       this.lsvDetails.TabIndex = 0;
       this.lsvDetails.UseCompatibleStateImageBehavior = false;
@@ -451,30 +464,34 @@
       // 
       this.spcPropertiesPreview.Dock = System.Windows.Forms.DockStyle.Fill;
       this.spcPropertiesPreview.Location = new System.Drawing.Point(0, 0);
+      this.spcPropertiesPreview.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.spcPropertiesPreview.Name = "spcPropertiesPreview";
       // 
       // spcPropertiesPreview.Panel1
       // 
       this.spcPropertiesPreview.Panel1.Controls.Add(this.grbSlideProperties);
-      this.spcPropertiesPreview.Panel1.Margin = new System.Windows.Forms.Padding(3);
-      this.spcPropertiesPreview.Panel1.Padding = new System.Windows.Forms.Padding(3);
+      this.spcPropertiesPreview.Panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.spcPropertiesPreview.Panel1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
       // 
       // spcPropertiesPreview.Panel2
       // 
       this.spcPropertiesPreview.Panel2.Controls.Add(this.grbPreview);
-      this.spcPropertiesPreview.Panel2.Margin = new System.Windows.Forms.Padding(3);
-      this.spcPropertiesPreview.Panel2.Padding = new System.Windows.Forms.Padding(3);
-      this.spcPropertiesPreview.Size = new System.Drawing.Size(572, 369);
-      this.spcPropertiesPreview.SplitterDistance = 190;
+      this.spcPropertiesPreview.Panel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.spcPropertiesPreview.Panel2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.spcPropertiesPreview.Size = new System.Drawing.Size(858, 673);
+      this.spcPropertiesPreview.SplitterDistance = 285;
+      this.spcPropertiesPreview.SplitterWidth = 6;
       this.spcPropertiesPreview.TabIndex = 0;
       // 
       // grbSlideProperties
       // 
       this.grbSlideProperties.Controls.Add(this.prgSlides);
       this.grbSlideProperties.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.grbSlideProperties.Location = new System.Drawing.Point(3, 3);
+      this.grbSlideProperties.Location = new System.Drawing.Point(4, 5);
+      this.grbSlideProperties.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.grbSlideProperties.Name = "grbSlideProperties";
-      this.grbSlideProperties.Size = new System.Drawing.Size(184, 363);
+      this.grbSlideProperties.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.grbSlideProperties.Size = new System.Drawing.Size(277, 663);
       this.grbSlideProperties.TabIndex = 1;
       this.grbSlideProperties.TabStop = false;
       this.grbSlideProperties.Text = "Slide Properties";
@@ -482,10 +499,11 @@
       // prgSlides
       // 
       this.prgSlides.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.prgSlides.Location = new System.Drawing.Point(3, 16);
+      this.prgSlides.Location = new System.Drawing.Point(4, 24);
+      this.prgSlides.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.prgSlides.Name = "prgSlides";
       this.prgSlides.PropertySort = System.Windows.Forms.PropertySort.Categorized;
-      this.prgSlides.Size = new System.Drawing.Size(178, 344);
+      this.prgSlides.Size = new System.Drawing.Size(269, 634);
       this.prgSlides.TabIndex = 0;
       this.prgSlides.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.prgSlides_PropertyValueChanged);
       // 
@@ -493,9 +511,11 @@
       // 
       this.grbPreview.Controls.Add(this.pnlCanvas);
       this.grbPreview.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.grbPreview.Location = new System.Drawing.Point(3, 3);
+      this.grbPreview.Location = new System.Drawing.Point(4, 5);
+      this.grbPreview.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.grbPreview.Name = "grbPreview";
-      this.grbPreview.Size = new System.Drawing.Size(372, 363);
+      this.grbPreview.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.grbPreview.Size = new System.Drawing.Size(559, 663);
       this.grbPreview.TabIndex = 1;
       this.grbPreview.TabStop = false;
       this.grbPreview.Text = "Slide Preview";
@@ -507,18 +527,20 @@
       this.pnlCanvas.Controls.Add(this.pnlPicture);
       this.pnlCanvas.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::Ogama.Properties.Settings.Default, "BackgroundColorForms", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
       this.pnlCanvas.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.pnlCanvas.Location = new System.Drawing.Point(3, 16);
+      this.pnlCanvas.Location = new System.Drawing.Point(4, 24);
+      this.pnlCanvas.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.pnlCanvas.Name = "pnlCanvas";
-      this.pnlCanvas.Size = new System.Drawing.Size(366, 344);
+      this.pnlCanvas.Size = new System.Drawing.Size(551, 634);
       this.pnlCanvas.TabIndex = 1;
       // 
       // pnlPicture
       // 
       this.pnlPicture.BackColor = System.Drawing.Color.White;
       this.pnlPicture.Controls.Add(this.slidePreviewPicture);
-      this.pnlPicture.Location = new System.Drawing.Point(61, 18);
+      this.pnlPicture.Location = new System.Drawing.Point(92, 28);
+      this.pnlPicture.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.pnlPicture.Name = "pnlPicture";
-      this.pnlPicture.Size = new System.Drawing.Size(417, 250);
+      this.pnlPicture.Size = new System.Drawing.Size(626, 385);
       this.pnlPicture.TabIndex = 0;
       // 
       // slidePreviewPicture
@@ -527,8 +549,9 @@
       this.slidePreviewPicture.BackColor = System.Drawing.Color.Black;
       this.slidePreviewPicture.InvalidateInterval = 500;
       this.slidePreviewPicture.Location = new System.Drawing.Point(0, 0);
+      this.slidePreviewPicture.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.slidePreviewPicture.Name = "slidePreviewPicture";
-      this.slidePreviewPicture.Size = new System.Drawing.Size(417, 250);
+      this.slidePreviewPicture.Size = new System.Drawing.Size(626, 385);
       this.slidePreviewPicture.TabIndex = 0;
       this.slidePreviewPicture.ZoomFactor = 0F;
       this.slidePreviewPicture.DoubleClick += new System.EventHandler(this.slidePreviewPicture_DoubleClick);
@@ -553,12 +576,15 @@
             this.btnExport,
             this.btnImportFolderContent,
             this.toolStripSeparator3,
+            this.btnPrimary,
+            this.btnSecondary,
+            this.toolStripSeparator6,
             this.btnPreviewSlideshow,
             this.toolStripSeparator5,
             this.btnHelp});
       this.tosStimuli.Location = global::Ogama.Properties.Settings.Default.SCRToolbarLocation;
       this.tosStimuli.Name = "tosStimuli";
-      this.tosStimuli.Size = new System.Drawing.Size(375, 25);
+      this.tosStimuli.Size = new System.Drawing.Size(473, 28);
       this.tosStimuli.TabIndex = 0;
       // 
       // btnInstruction
@@ -567,7 +593,7 @@
       this.btnInstruction.Image = global::Ogama.Properties.Resources.textdoc1;
       this.btnInstruction.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnInstruction.Name = "btnInstruction";
-      this.btnInstruction.Size = new System.Drawing.Size(23, 22);
+      this.btnInstruction.Size = new System.Drawing.Size(23, 25);
       this.btnInstruction.Text = "Add instruction slide ...";
       this.btnInstruction.Click += new System.EventHandler(this.btnInstruction_Click);
       // 
@@ -577,7 +603,7 @@
       this.btnRtfInstruction.Image = global::Ogama.Properties.Resources.Rtf;
       this.btnRtfInstruction.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnRtfInstruction.Name = "btnRtfInstruction";
-      this.btnRtfInstruction.Size = new System.Drawing.Size(23, 22);
+      this.btnRtfInstruction.Size = new System.Drawing.Size(23, 25);
       this.btnRtfInstruction.Text = "Add Rich Text instruction";
       this.btnRtfInstruction.Click += new System.EventHandler(this.btnRtfInstruction_Click);
       // 
@@ -587,7 +613,7 @@
       this.btnImage.Image = global::Ogama.Properties.Resources.GenericPicDoc;
       this.btnImage.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnImage.Name = "btnImage";
-      this.btnImage.Size = new System.Drawing.Size(23, 22);
+      this.btnImage.Size = new System.Drawing.Size(23, 25);
       this.btnImage.Text = "Add image slide ...";
       this.btnImage.Click += new System.EventHandler(this.btnImage_Click);
       // 
@@ -597,7 +623,7 @@
       this.btnShapes.Image = global::Ogama.Properties.Resources.GenericShape;
       this.btnShapes.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnShapes.Name = "btnShapes";
-      this.btnShapes.Size = new System.Drawing.Size(23, 22);
+      this.btnShapes.Size = new System.Drawing.Size(23, 25);
       this.btnShapes.Text = "Add shape elements slide ...";
       this.btnShapes.Click += new System.EventHandler(this.btnShapes_Click);
       // 
@@ -607,7 +633,7 @@
       this.btnMixed.Image = global::Ogama.Properties.Resources.GenMixedMediaDoc;
       this.btnMixed.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnMixed.Name = "btnMixed";
-      this.btnMixed.Size = new System.Drawing.Size(23, 22);
+      this.btnMixed.Size = new System.Drawing.Size(23, 25);
       this.btnMixed.Text = "Add mixed slide ...";
       this.btnMixed.Click += new System.EventHandler(this.btnMixed_Click);
       // 
@@ -617,7 +643,7 @@
       this.btnInternet.Image = global::Ogama.Properties.Resources.AlignTableCellMiddleLeftJustHS;
       this.btnInternet.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnInternet.Name = "btnInternet";
-      this.btnInternet.Size = new System.Drawing.Size(23, 22);
+      this.btnInternet.Size = new System.Drawing.Size(23, 25);
       this.btnInternet.Text = "Add browser slide ...";
       this.btnInternet.Click += new System.EventHandler(this.btnInternet_Click);
       // 
@@ -627,7 +653,7 @@
       this.btnFlash.Image = global::Ogama.Properties.Resources.FlashPlayer;
       this.btnFlash.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnFlash.Name = "btnFlash";
-      this.btnFlash.Size = new System.Drawing.Size(23, 22);
+      this.btnFlash.Size = new System.Drawing.Size(23, 25);
       this.btnFlash.Text = "Add flash movie slide ...";
       this.btnFlash.Click += new System.EventHandler(this.btnFlash_Click);
       // 
@@ -637,7 +663,7 @@
       this.btnDesktop.Image = global::Ogama.Properties.Resources.Desktop1;
       this.btnDesktop.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnDesktop.Name = "btnDesktop";
-      this.btnDesktop.Size = new System.Drawing.Size(23, 22);
+      this.btnDesktop.Size = new System.Drawing.Size(23, 25);
       this.btnDesktop.Text = "Add desktop recording ...";
       this.btnDesktop.Click += new System.EventHandler(this.btnDesktop_Click);
       // 
@@ -647,14 +673,14 @@
       this.btnBlank.Image = global::Ogama.Properties.Resources.document;
       this.btnBlank.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnBlank.Name = "btnBlank";
-      this.btnBlank.Size = new System.Drawing.Size(23, 22);
+      this.btnBlank.Size = new System.Drawing.Size(23, 25);
       this.btnBlank.Text = "Add blank slide ...";
       this.btnBlank.Click += new System.EventHandler(this.btnBlank_Click);
       // 
       // toolStripSeparator1
       // 
       this.toolStripSeparator1.Name = "toolStripSeparator1";
-      this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+      this.toolStripSeparator1.Size = new System.Drawing.Size(6, 28);
       // 
       // btnSaveSlideshow
       // 
@@ -662,7 +688,7 @@
       this.btnSaveSlideshow.Image = global::Ogama.Properties.Resources.saveHS;
       this.btnSaveSlideshow.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnSaveSlideshow.Name = "btnSaveSlideshow";
-      this.btnSaveSlideshow.Size = new System.Drawing.Size(23, 22);
+      this.btnSaveSlideshow.Size = new System.Drawing.Size(23, 25);
       this.btnSaveSlideshow.Text = "Save slideshow to experiment settings, update context panel and create stimulus f" +
     "iles for each slide ...";
       this.btnSaveSlideshow.Click += new System.EventHandler(this.btnSaveSlideshow_Click);
@@ -673,7 +699,7 @@
       this.btnImport.Image = global::Ogama.Properties.Resources.ImportDocument;
       this.btnImport.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnImport.Name = "btnImport";
-      this.btnImport.Size = new System.Drawing.Size(23, 22);
+      this.btnImport.Size = new System.Drawing.Size(23, 25);
       this.btnImport.Text = "Imports slideshow from file...";
       this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
       // 
@@ -683,7 +709,7 @@
       this.btnExport.Image = global::Ogama.Properties.Resources.ExportToDocument;
       this.btnExport.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnExport.Name = "btnExport";
-      this.btnExport.Size = new System.Drawing.Size(23, 22);
+      this.btnExport.Size = new System.Drawing.Size(23, 25);
       this.btnExport.Text = "Exports current slideshow to file...";
       this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
       // 
@@ -693,14 +719,14 @@
       this.btnImportFolderContent.Image = global::Ogama.Properties.Resources.ImportData;
       this.btnImportFolderContent.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnImportFolderContent.Name = "btnImportFolderContent";
-      this.btnImportFolderContent.Size = new System.Drawing.Size(23, 22);
+      this.btnImportFolderContent.Size = new System.Drawing.Size(23, 25);
       this.btnImportFolderContent.Text = "Import folder content as slides.";
       this.btnImportFolderContent.Click += new System.EventHandler(this.btnImportFolderContent_Click);
       // 
       // toolStripSeparator3
       // 
       this.toolStripSeparator3.Name = "toolStripSeparator3";
-      this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+      this.toolStripSeparator3.Size = new System.Drawing.Size(6, 28);
       // 
       // btnPreviewSlideshow
       // 
@@ -708,7 +734,7 @@
       this.btnPreviewSlideshow.Image = global::Ogama.Properties.Resources.FormRunHS;
       this.btnPreviewSlideshow.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnPreviewSlideshow.Name = "btnPreviewSlideshow";
-      this.btnPreviewSlideshow.Size = new System.Drawing.Size(23, 22);
+      this.btnPreviewSlideshow.Size = new System.Drawing.Size(23, 25);
       this.btnPreviewSlideshow.Text = "Preview slideshow";
       this.btnPreviewSlideshow.ToolTipText = "Preview slideshow...";
       this.btnPreviewSlideshow.Click += new System.EventHandler(this.btnPreviewSlideshow_Click);
@@ -716,7 +742,7 @@
       // toolStripSeparator5
       // 
       this.toolStripSeparator5.Name = "toolStripSeparator5";
-      this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
+      this.toolStripSeparator5.Size = new System.Drawing.Size(6, 28);
       // 
       // btnHelp
       // 
@@ -724,8 +750,32 @@
       this.btnHelp.Image = global::Ogama.Properties.Resources.HelpBmp;
       this.btnHelp.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.btnHelp.Name = "btnHelp";
-      this.btnHelp.Size = new System.Drawing.Size(23, 22);
+      this.btnHelp.Size = new System.Drawing.Size(23, 25);
       this.btnHelp.Text = "Show context help";
+      // 
+      // btnPrimary
+      // 
+      this.btnPrimary.CheckOnClick = true;
+      this.btnPrimary.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.btnPrimary.Image = global::Ogama.Properties.Resources.Monitor1;
+      this.btnPrimary.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.btnPrimary.Name = "btnPrimary";
+      this.btnPrimary.Size = new System.Drawing.Size(23, 25);
+      this.btnPrimary.Text = "Primary Screen";
+      this.btnPrimary.ToolTipText = "Show slide show on primary screen";
+      this.btnPrimary.Click += new System.EventHandler(this.BtnPrimaryClick);
+      // 
+      // btnSecondary
+      // 
+      this.btnSecondary.CheckOnClick = true;
+      this.btnSecondary.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.btnSecondary.Image = global::Ogama.Properties.Resources.Monitor2;
+      this.btnSecondary.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.btnSecondary.Name = "btnSecondary";
+      this.btnSecondary.Size = new System.Drawing.Size(23, 25);
+      this.btnSecondary.Text = "Secondary Screen";
+      this.btnSecondary.ToolTipText = "Show slide show on secondary screen";
+      this.btnSecondary.Click += new System.EventHandler(this.BtnSecondaryClick);
       // 
       // sfdSlideshow
       // 
@@ -769,16 +819,22 @@
       this.dataGridViewTextBoxColumn3.ToolTipText = "A category to cluster slides.";
       this.dataGridViewTextBoxColumn3.Width = 120;
       // 
+      // toolStripSeparator6
+      // 
+      this.toolStripSeparator6.Name = "toolStripSeparator6";
+      this.toolStripSeparator6.Size = new System.Drawing.Size(6, 28);
+      // 
       // SlideshowModule
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+      this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(863, 573);
+      this.ClientSize = new System.Drawing.Size(1294, 882);
       this.Controls.Add(this.toolStripContainer1);
       this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::Ogama.Properties.Settings.Default, "SlideshowModuleLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.Location = global::Ogama.Properties.Settings.Default.SlideshowModuleLocation;
       this.Logo = global::Ogama.Properties.Resources.Design;
+      this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.Name = "SlideshowModule";
       this.Text = "Slideshow design module";
       this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmStimuli_FormClosing);
@@ -894,5 +950,8 @@
     private System.Windows.Forms.ToolStripButton btnInternet;
     private System.Windows.Forms.ToolStripButton btnDesktop;
     private System.Windows.Forms.ToolStripMenuItem cmuDisable;
+    private System.Windows.Forms.ToolStripButton btnPrimary;
+    private System.Windows.Forms.ToolStripButton btnSecondary;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
   }
 }

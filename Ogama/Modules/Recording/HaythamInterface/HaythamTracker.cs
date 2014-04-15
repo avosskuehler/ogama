@@ -141,7 +141,6 @@ namespace Ogama.Modules.Recording.HaythamInterface
     /// <param name="trackerConnectButton">
     /// The <see cref="Button"/> named "Connect" at the tab page of the device.
     /// </param>
-    /// </param>
     /// <param name="trackerSubjectButton">
     /// The <see cref="Button"/> named "Subject" at the tab page of the device. 
     /// </param>
