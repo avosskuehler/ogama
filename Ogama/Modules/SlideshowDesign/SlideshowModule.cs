@@ -19,9 +19,11 @@ namespace Ogama.Modules.SlideshowDesign
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common.FormTemplates;
   using Ogama.Modules.Common.SlideCollections;
+  using Ogama.Modules.Common.Tools;
   using Ogama.Modules.Common.Types;
   using Ogama.Modules.SlideshowDesign.DesignModule;
   using Ogama.Modules.SlideshowDesign.DesignModule.StimuliDialogs;
+  using Ogama.Properties;
 
   using OgamaControls;
 
@@ -146,6 +148,25 @@ namespace Ogama.Modules.SlideshowDesign
       this.toolTip = new ToolTip();
       this.toolTip.ShowAlways = true;
 
+      if (SecondaryScreen.SystemHasSecondaryScreen())
+      {
+        if (Settings.Default.PresentationScreenMonitor == "Primary")
+        {
+          this.btnPrimary.Checked = true;
+          this.btnSecondary.Checked = false;
+        }
+        else
+        {
+          this.btnPrimary.Checked = false;
+          this.btnSecondary.Checked = true;
+        }
+      }
+      else
+      {
+        this.btnPrimary.Visible = false;
+        this.btnSecondary.Visible = false;
+      }
+
       // Hide PropertyGrid
       this.spcPropertiesPreview.Panel1Collapsed = true;
 
@@ -164,6 +185,40 @@ namespace Ogama.Modules.SlideshowDesign
     // Eventhandler for UI, Menu, Buttons, Toolbars etc.                         //
     ///////////////////////////////////////////////////////////////////////////////
     #region WINDOWSEVENTHANDLER
+
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler for the
+    ///   <see cref="Button"/> <see cref="btnPrimary"/>.
+    ///   Updates the presentation screen.
+    /// </summary>
+    /// <param name="sender">
+    /// Source of the event.
+    /// </param>
+    /// <param name="e">
+    /// An empty <see cref="EventArgs"/>.
+    /// </param>
+    private void BtnPrimaryClick(object sender, EventArgs e)
+    {
+      this.btnSecondary.Checked = !this.btnPrimary.Checked;
+      this.SubmitPresentationScreenToSettings();
+    }
+
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler for the
+    ///   <see cref="Button"/> <see cref="btnSecondary"/>.
+    ///   Updates the presentation screen.
+    /// </summary>
+    /// <param name="sender">
+    /// Source of the event.
+    /// </param>
+    /// <param name="e">
+    /// An empty <see cref="EventArgs"/>.
+    /// </param>
+    private void BtnSecondaryClick(object sender, EventArgs e)
+    {
+      this.btnPrimary.Checked = !this.btnSecondary.Checked;
+      this.SubmitPresentationScreenToSettings();
+    }
 
     /// <summary>
     /// The <see cref="Form.Load"/> event handler.
@@ -251,6 +306,16 @@ namespace Ogama.Modules.SlideshowDesign
     // Methods for doing main class job                                          //
     ///////////////////////////////////////////////////////////////////////////////
     #region METHODS
+
+    /// <summary>
+    ///   This method updates the current application settings
+    ///   with the newly selected presentation screen monitor.
+    /// </summary>
+    private void SubmitPresentationScreenToSettings()
+    {
+      Settings.Default.PresentationScreenMonitor = this.btnPrimary.Checked ? "Primary" : "Secondary";
+      Settings.Default.Save();
+    }
 
     /// <summary>
     /// This method opens the given slide in a new <see cref="SlideDesignModule"/> form

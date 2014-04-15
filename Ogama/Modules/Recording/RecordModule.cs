@@ -1512,13 +1512,9 @@ namespace Ogama.Modules.Recording
           if (this.currentSlide.VGStimuli[0] is VGScrollImage)
           {
             var webpageScreenshot = (VGScrollImage)this.currentSlide.VGStimuli[0];
-            while (!File.Exists(webpageScreenshot.FullFilename))
-            {
-              Application.DoEvents();
-            }
 
             // When the file exists it must be ensured, that it is released
-            // by its creator...
+            // by its creator... if it does not exist, it fails either.
             int attempts = 0;
 
             // Loop allow multiple attempts
@@ -1535,7 +1531,7 @@ namespace Ogama.Modules.Recording
               catch (IOException)
               {
                 // IOExcception is thrown if the file is in use by another process.
-                // Check the numbere of attempts to ensure no infinite loop
+                // Check the number of attempts to ensure no infinite loop
                 attempts++;
                 if (attempts > 20)
                 {
@@ -1545,6 +1541,7 @@ namespace Ogama.Modules.Recording
                 }
 
                 // Sleep before making another attempt
+                Application.DoEvents();
                 Thread.Sleep(200);
               }
             }
@@ -1691,6 +1688,9 @@ namespace Ogama.Modules.Recording
 
         this.trialEventList.Clear();
         this.trialDataList.Clear();
+
+        // Update slideshow pictures of newly created trials
+        Document.ActiveDocument.ExperimentSettings.SlideShow.UpdateExperimentPathOfResources(Document.ActiveDocument.ExperimentSettings.SlideResourcesPath);
 
         // Reset recording flag
         this.recordingBusy = false;

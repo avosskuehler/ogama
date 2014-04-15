@@ -1,410 +1,316 @@
-﻿// <copyright file="WebsiteScreenshot.cs" company="alea technologies">
-// ******************************************************
-// OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2013 Dr. Adrian Voßkühler  
-// ------------------------------------------------------------------------
-// This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
-// This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-// You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-// **************************************************************
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="WebsiteScreenshot.cs" company="Freie Universität Berlin">
+//   OGAMA - open gaze and mouse analyzer 
+//   Copyright (C) 2014 Dr. Adrian Voßkühler  
+//   Licensed under GPL V3
 // </copyright>
 // <author>Adrian Voßkühler</author>
 // <email>adrian@ogama.net</email>
-
+// <summary>
+//   This class creates screenshots of websites.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 namespace Ogama.Modules.Recording.Presenter
 {
   using System;
   using System.Drawing;
   using System.Drawing.Imaging;
-  using System.Runtime.InteropServices;
+  using System.IO;
   using System.Windows.Forms;
+
+  using Microsoft.VisualStudio.OLE.Interop;
 
   using Ogama.ExceptionHandling;
 
-  using OgamaControls;
-  using System.IO;
+  using IViewObject = VectorGraphics.Tools.Interfaces.IViewObject;
 
   /// <summary>
-  /// This class creates screenshots of websites.
+  ///   This class creates screenshots of websites.
   /// </summary>
-  public class WebsiteScreenshot : IDisposable
+  public class WebsiteScreenshot
   {
-    ///////////////////////////////////////////////////////////////////////////////
-    // Defining Constants                                                        //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region CONSTANTS
-    #endregion //CONSTANTS
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Defining Variables, Enumerations, Events                                  //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region FIELDS
+    #region Static Fields
 
     /// <summary>
-    /// The static member, that holds the recent files list.
+    ///   The new screenshot filename.
     /// </summary>
-    private static WebsiteScreenshot instance;
+    private static string newScreenshotFilename;
 
     /// <summary>
-    /// The <see cref="WebBrowser"/> duplicate of the site to
-    /// be navigated to, used to create the screenshots
+    ///   The new target url.
     /// </summary>
-    private WebBrowser webBrowser;
+    private static Uri newTargetUrl;
+
+    #endregion
+
+    #region Public Methods and Operators
 
     /// <summary>
-    /// This <see cref="Form"/> contains the <see cref="WebBrowser"/>
-    /// control but is minimal sized and at the back of the z-order.
+    /// This method creates a new form with a webbrowser of correct size on it,
+    /// to make a fullsize website screenhot.
     /// </summary>
-    private Form dummyForm;
-
-    /// <summary>
-    /// The url that is targeted for navigating.
-    /// When this is receiving the message document completed,
-    /// all sub frames are loaded.
-    /// </summary>
-    private Uri targetUrl;
-
-    #endregion //FIELDS
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Construction and Initializing methods                                     //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region CONSTRUCTION
-
-    /// <summary>
-    /// Prevents a default instance of the WebsiteScreenshot class from being created.
-    /// </summary>
-    private WebsiteScreenshot()
+    /// <param name="navigatingArgs">The <see cref="WebBrowserNavigatingEventArgs"/> instance containing the event data,
+    /// especially the url.</param>
+    /// <param name="filename">The filename to save the screenshot to.</param>
+    public static void DoScreenshot(WebBrowserNavigatingEventArgs navigatingArgs, string filename)
     {
-      this.CreateBrowserObject();
-    }
+      newTargetUrl = navigatingArgs.Url;
+      newScreenshotFilename = filename;
 
-    #endregion //CONSTRUCTION
+      var tempBrowser = new WebBrowser();
+      var dummyForm = new Form { ClientSize = new Size(1, 1), FormBorderStyle = FormBorderStyle.None };
 
-    ///////////////////////////////////////////////////////////////////////////////
-    // Defining events, enums, delegates                                         //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region EVENTS
+      dummyForm.Controls.Add(tempBrowser);
+      dummyForm.Show();
+      tempBrowser.ScrollBarsEnabled = true;
+      tempBrowser.ScriptErrorsSuppressed = true;
+      tempBrowser.DocumentCompleted += WebBrowserDocumentCompleted;
 
-    /// <summary>
-    /// This delegate is used for calling the navigate method
-    /// in a separate thread.
-    /// </summary>
-    /// <param name="navigatingArgs">A <see cref="WebBrowserNavigatingEventArgs"/>
-    /// with the event data to navigate to.</param>
-    public delegate void NavigateInvoker(WebBrowserNavigatingEventArgs navigatingArgs);
-
-    /// <summary>
-    /// The delegate for the thread safe call to a navigate.
-    /// </summary>
-    /// <param name="newUri">The new <see cref="Uri"/> to navigate to.</param>
-    private delegate void NavigateCallback(Uri newUri);
-
-    /// <summary>
-    /// The delegate for the thread safe call to a navigate.
-    /// </summary>
-    /// <param name="newUri">The new <see cref="Uri"/> to navigate to.</param>
-    /// <param name="newFrame">The frame <see cref="String"/> to navigate to.</param>
-    private delegate void NavigateFrameCallback(Uri newUri, string newFrame);
-
-    #endregion EVENTS
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Defining Properties                                                       //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region PROPERTIES
-
-    /// <summary>
-    /// Gets the singleton instance of this class.
-    /// </summary>
-    /// <value>A <see cref="WebsiteScreenshot"/> with the 
-    /// singleton instance of this class.</value>
-    public static WebsiteScreenshot Instance
-    {
-      get
+      if (navigatingArgs.TargetFrameName != string.Empty)
       {
-        if (instance == null)
-        {
-          instance = new WebsiteScreenshot();
-        }
-
-        return instance;
+        tempBrowser.Navigate(navigatingArgs.Url, navigatingArgs.TargetFrameName);
       }
-    }
-
-    /// <summary>
-    /// Gets a value indicating whether this class has been used,
-    /// to be aware of its disposal.
-    /// </summary>
-    public static bool HasBeenUsed
-    {
-      get
+      else
       {
-        return instance != null;
+        tempBrowser.Navigate(newTargetUrl);
       }
+
+      while (tempBrowser.ReadyState != WebBrowserReadyState.Complete)
+      {
+        Application.DoEvents();
+      }
+
+      tempBrowser.Dispose();
     }
 
-    /// <summary>
-    /// Gets or sets the filename without path for the screenshot 
-    /// this class should write to.
-    /// </summary>
-    public string ScreenshotFilename { get; set; }
+    #endregion
 
-    #endregion //PROPERTIES
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Public methods                                                            //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region PUBLICMETHODS
+    #region Methods
 
     /// <summary>
-    /// Implementation of the IDispose interface.
-    /// Releases the <see cref="WebBrowser"/> object.
+    /// This method iterates recursively through the <see cref="HtmlWindowCollection"/>
+    ///   of a webbrowser document get the maximal scroll size of the containing frames.
     /// </summary>
-    public void Dispose()
+    /// <param name="htmlWindows">
+    /// The first <see cref="HtmlWindowCollection"/>
+    ///   to start parsing. You get it from browser.Document.Window.Frames
+    /// </param>
+    /// <param name="currentScrollsize">
+    /// Ref. A <see cref="Size"/> to be updated with
+    ///   maximal scroll size values.
+    /// </param>
+    private static void GetLargestScrollSizeOfAllFrames(HtmlWindowCollection htmlWindows, ref Size currentScrollsize)
     {
-      if (this.webBrowser != null)
+      foreach (HtmlWindow window in htmlWindows)
       {
         try
         {
-          ThreadSafe.Dispose(this.webBrowser);
+          HtmlDocument document = window.Document;
+          if (document == null)
+          {
+            continue;
+          }
+
+          GetMaxScrollSizeOfDocument(document, ref currentScrollsize);
+          if (document.Window != null)
+          {
+            GetLargestScrollSizeOfAllFrames(document.Window.Frames, ref currentScrollsize);
+          }
         }
-        catch (InvalidComObjectException ex)
+        catch (UnauthorizedAccessException ex)
         {
           ExceptionMethods.HandleExceptionSilent(ex);
         }
-
-        this.webBrowser = null;
-      }
-
-      if (this.dummyForm != null)
-      {
-        try
-        {
-          ThreadSafe.Close(this.dummyForm);
-        }
-        catch (Exception ex)
-        {
-          ExceptionMethods.HandleExceptionSilent(ex);
-        }
-
-        this.dummyForm = null;
       }
     }
-
-    /// <summary>
-    /// Navigates the internal <see cref="WebBrowser"/> to the given url,
-    /// using the given <see cref="WebBrowserNavigatingEventArgs"/>.
-    /// Can include frames.
-    /// </summary>
-    /// <param name="navigatingArgs">A <see cref="WebBrowserNavigatingEventArgs"/>
-    /// with the url and optional frame name.</param>
-    public void Navigate(WebBrowserNavigatingEventArgs navigatingArgs)
-    {
-      this.CreateBrowserObject();
-      this.targetUrl = navigatingArgs.Url;
-
-      if (navigatingArgs.TargetFrameName == string.Empty)
-      {
-        // There is no frame navigated
-        this.ThreadSafeNavigate(navigatingArgs.Url);
-      }
-      else
-      {
-        // The url is called in a specific target frame.
-        this.ThreadSafeNavigate(navigatingArgs.Url, navigatingArgs.TargetFrameName);
-      }
-    }
-
-    #endregion //PUBLICMETHODS
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Inherited methods                                                         //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region OVERRIDES
-
-    /// <summary>
-    /// Thread safe navigate to a uri with frame.
-    /// </summary>
-    /// <param name="newUri">A <see cref="Uri"/> to navigate to.</param>
-    protected void ThreadSafeNavigate(Uri newUri)
-    {
-      if (this.webBrowser.InvokeRequired)
-      {
-        var d = new NavigateCallback(this.ThreadSafeNavigate);
-        this.webBrowser.Invoke(d, new object[] { newUri });
-      }
-      else
-      {
-        this.webBrowser.Navigate(newUri);
-      }
-    }
-
-    /// <summary>
-    /// Thread safe navigate to a uri with frame.
-    /// </summary>
-    /// <param name="newUri">A <see cref="Size"/> to navigate to.</param>
-    /// <param name="newFrame">The frame <see cref="String"/> to navigate to.</param>
-    protected void ThreadSafeNavigate(Uri newUri, string newFrame)
-    {
-      if (this.webBrowser.InvokeRequired)
-      {
-        var d = new NavigateFrameCallback(this.ThreadSafeNavigate);
-        this.webBrowser.Invoke(d, new object[] { newUri, newFrame });
-      }
-      else
-      {
-        this.webBrowser.Navigate(newUri, newFrame);
-      }
-    }
-
-    #endregion //OVERRIDES
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Eventhandler                                                              //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region EVENTHANDLER
-
-    /// <summary>
-    /// The <see cref="WebBrowser.DocumentCompleted"/> event handler.
-    /// That takes a full size screenshot including scroll rectangle
-    /// via DrawToBitmap.
-    /// </summary>
-    /// <param name="sender">Source of the event</param>
-    /// <param name="e">A <see cref="WebBrowserDocumentCompletedEventArgs"/> with the event data.</param>
-    private void WebBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-    {
-      if (e.Url == this.targetUrl)
-      {
-        WebBrowser webBrowser = (WebBrowser)sender;
-
-        // Reset window to default size
-        Size scrollSize = Document.ActiveDocument.PresentationSize;
-        webBrowser.ClientSize = scrollSize;
-
-        // Get maximal sizes
-        GetMaxScrollSizeOfDocument(webBrowser.Document, ref scrollSize);
-        this.GetLargestScrollSizeOfAllFrames(webBrowser.Document.Window.Frames, ref scrollSize);
-
-        // Update the undocked webbrowser controls client size
-        // to have the fully sized content
-        webBrowser.ClientSize = scrollSize;
-
-        // Create a bitmap with the size
-        Bitmap websiteImage = new Bitmap(scrollSize.Width, scrollSize.Height);
-
-        // Fill the bitmap
-        webBrowser.DrawToBitmap(
-          websiteImage,
-          new Rectangle(0, 0, scrollSize.Width, scrollSize.Height));
-
-        var filename = Path.Combine(Document.ActiveDocument.ExperimentSettings.SlideResourcesPath, this.ScreenshotFilename);
-
-        // Save to disk
-        websiteImage.Save(filename, ImageFormat.Png);
-      }
-    }
-
-    #endregion //EVENTHANDLER
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Methods and Eventhandling for Background tasks                            //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region THREAD
-    #endregion //THREAD
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Methods for doing main class job                                          //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region PRIVATEMETHODS
 
     /// <summary>
     /// Static method to parse the current <see cref="HtmlDocument"/> of the
-    /// <see cref="WebBrowser"/> for its maximal scrollsize.
-    /// Returns the maximum of the given scrollsize and the documents scrollsize.
-    /// So be sure to reset currentSrollsize first.
+    ///   <see cref="WebBrowser"/> for its maximal scrollsize.
+    ///   Returns the maximum of the given scrollsize and the documents scrollsize.
+    ///   So be sure to reset current srollsize first.
     /// </summary>
-    /// <param name="document">The <see cref="HtmlDocument"/> to check its maximal
-    /// size.</param>
-    /// <param name="currentScrollsize">Ref. A <see cref="Size"/> to be updated with
-    /// maximal scroll size values.</param>
+    /// <param name="document"> The <see cref="HtmlDocument"/> to check its maximal size.
+    /// </param>
+    /// <param name="currentScrollsize"> Ref. A <see cref="Size"/> to be updated with
+    ///   maximal scroll size values.
+    /// </param>
     private static void GetMaxScrollSizeOfDocument(HtmlDocument document, ref Size currentScrollsize)
     {
       if (document.GetElementsByTagName("HTML").Count > 0 && document.Body != null)
       {
-        var htmlWidth = document.GetElementsByTagName("HTML")[0].ScrollRectangle.Width;
-        var htmlHeight = document.GetElementsByTagName("HTML")[0].ScrollRectangle.Height;
-        var scrollWidth = document.Body.ScrollRectangle.Width;
-        var scrollHeight = document.Body.ScrollRectangle.Height;
-
-        var maxWidth = (int)Math.Max(htmlWidth, scrollWidth);
-        var maxHeight = (int)Math.Max(htmlHeight, scrollHeight);
-
-        currentScrollsize.Width = Math.Max(currentScrollsize.Width, maxWidth);
-        currentScrollsize.Height = Math.Max(currentScrollsize.Height, maxHeight);
-      }
-    }
-
-    /// <summary>
-    /// This method iterates recursively through the <see cref="HtmlWindowCollection"/>
-    /// of a webbrowser document get the maximal scroll size of the containing frames.
-    /// </summary>
-    /// <param name="htmlWindows">The first <see cref="HtmlWindowCollection"/>
-    /// to start parsing. You get it from browser.Document.Window.Frames</param>
-    /// <param name="currentScrollsize">Ref. A <see cref="Size"/> to be updated with
-    /// maximal scroll size values.</param>
-    private void GetLargestScrollSizeOfAllFrames(HtmlWindowCollection htmlWindows, ref Size currentScrollsize)
-    {
-      try
-      {
-        foreach (HtmlWindow window in htmlWindows)
+        int htmlWidth = document.GetElementsByTagName("HTML")[0].ScrollRectangle.Width;
+        int htmlHeight = document.GetElementsByTagName("HTML")[0].ScrollRectangle.Height;
+        if (document.Body != null)
         {
-          GetMaxScrollSizeOfDocument(window.Document, ref currentScrollsize);
-          this.GetLargestScrollSizeOfAllFrames(window.Document.Window.Frames, ref currentScrollsize);
+          int scrollWidth = document.Body.ScrollRectangle.Width;
+          int scrollHeight = document.Body.ScrollRectangle.Height;
+
+          int maxWidth = Math.Max(htmlWidth, scrollWidth);
+          int maxHeight = Math.Max(htmlHeight, scrollHeight);
+
+          currentScrollsize.Width = Math.Max(currentScrollsize.Width, maxWidth);
+          currentScrollsize.Height = Math.Max(currentScrollsize.Height, maxHeight);
         }
       }
-      catch (UnauthorizedAccessException ex)
-      {
-        ExceptionMethods.HandleExceptionSilent(ex);
-      }
     }
 
     /// <summary>
-    /// Initializes the <see cref="WebBrowser"/> for the first time
-    /// in a form. Attaches the <see cref="WebBrowser.DocumentCompleted"/> event.
-    /// Puts the container form in the background and hide it from the taskbar.
+    /// The web browser document completed event handler which creates the screenshot for
+    /// the correct URL.
     /// </summary>
-    private void CreateBrowserObject()
+    /// <param name="sender">The sender.</param>
+    /// <param name="e">The <see cref="WebBrowserDocumentCompletedEventArgs"/> instance containing the event data.</param>
+    private static void WebBrowserDocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
     {
-      if (this.webBrowser != null)
+      if (e.Url == newTargetUrl)
       {
-        return;
-      }
+        var localBrowser = (WebBrowser)sender;
 
-      // The webbrowser is not docked, because
-      // the screenshot works if its client size is correctly sized
-      // but the form does not have to.
-      this.webBrowser = new WebBrowser();
-      this.dummyForm = new Form
+        if (localBrowser.Document == null)
         {
-          ClientSize = new Size(1, 1),
-          FormBorderStyle = FormBorderStyle.None
-        };
+          return;
+        }
 
-      this.dummyForm.Controls.Add(this.webBrowser);
-      //this.dummyForm.SendToBack();
-      this.dummyForm.Show();
-      //this.dummyForm.ShowInTaskbar = false;
-      this.webBrowser.ScrollBarsEnabled = true;
-      this.webBrowser.DocumentCompleted += this.WebBrowser_DocumentCompleted;
+        try
+        {
+          // Reset window to default size
+          Size scrollSize = Document.ActiveDocument.PresentationSize;
+          
+          // ! This line is critical to receive correct scroll sizes
+          // in the next step
+          localBrowser.ClientSize = Document.ActiveDocument.PresentationSize;
+
+          // Get maximal sizes
+          GetMaxScrollSizeOfDocument(localBrowser.Document, ref scrollSize);
+          if (localBrowser.Document.Window != null)
+          {
+            GetLargestScrollSizeOfAllFrames(localBrowser.Document.Window.Frames, ref scrollSize);
+          }
+
+          // Now update the clientsize to full size, not screen size
+          localBrowser.ClientSize = scrollSize;
+
+          // create a bitmap object 
+          var bitmap = new Bitmap(scrollSize.Width, scrollSize.Height);
+
+          // get the viewobject of the WebBrowser to draw to bitmap
+          var ivo = localBrowser.Document.DomDocument as IViewObject;
+
+          using (Graphics g = Graphics.FromImage(bitmap))
+          {
+            // get the handle to the device context and draw
+            IntPtr hdc = g.GetHdc();
+
+            if (ivo != null)
+            {
+              // get the size of the document's body
+              var docRectangle = new RECTL { top = 0, left = 0, right = scrollSize.Width, bottom = scrollSize.Height };
+
+              ivo.Draw(
+                DVASPECT.DVASPECT_CONTENT, 
+                -1, 
+                IntPtr.Zero, 
+                IntPtr.Zero, 
+                IntPtr.Zero, 
+                hdc, 
+                ref docRectangle, 
+                ref docRectangle, 
+                IntPtr.Zero, 
+                0);
+            }
+
+            g.ReleaseHdc(hdc);
+          }
+
+          // Alternative to IViewObject, not allowed but works...
+          //// localBrowser.DrawToBitmap(bitmap, new Rectangle(0, 0, scrollSize.Width, scrollSize.Height));
+          
+          string filename = Path.Combine(
+            Document.ActiveDocument.ExperimentSettings.SlideResourcesPath, 
+            newScreenshotFilename);
+          bitmap.Save(filename, ImageFormat.Png);
+          bitmap.Dispose();
+        }
+        catch (Exception ex)
+        {
+          ExceptionMethods.HandleException(ex);
+        }
+      }
     }
 
-    #endregion //PRIVATEMETHODS
+    #endregion
 
-    ///////////////////////////////////////////////////////////////////////////////
-    // Small helping Methods                                                     //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region HELPER
-    #endregion //HELPER
+    // TODO: Maybe of use for the unauthorized exception which is currently ignored
+    ////public static dynamic GetDocumentFromWindow(IHTMLWindow2 htmlWindow)
+    ////{
+    ////  if (htmlWindow == null)
+    ////  {
+    ////    return null;
+    ////  }
+
+    ////  // First try the usual way to get the document.
+    ////  try
+    ////  {
+    ////    IHTMLDocument2 doc = htmlWindow.document;
+
+    ////    return doc;
+    ////  }
+    ////  catch (COMException comEx)
+    ////  {
+    ////    // I think COMException won't be ever fired but just to be sure ...
+    ////    if (comEx.ErrorCode != E_ACCESSDENIED)
+    ////    {
+    ////      return null;
+    ////    }
+    ////  }
+    ////  catch (System.UnauthorizedAccessException)
+    ////  {
+    ////  }
+    ////  catch
+    ////  {
+    ////    // Any other error.
+    ////    return null;
+    ////  }
+
+    ////  // At this point the error was E_ACCESSDENIED because the frame contains a document from another domain.
+    ////  // IE tries to prevent a cross frame scripting security issue.
+    ////  try
+    ////  {
+    ////    // Convert IHTMLWindow2 to IWebBrowser2 using IServiceProvider.
+    ////    IServiceProvider sp = (IServiceProvider)htmlWindow;
+
+    ////    // Use IServiceProvider.QueryService to get IWebBrowser2 object.
+    ////    Object brws = null;
+    ////    sp.QueryService(ref IID_IWebBrowserApp, ref IID_IWebBrowser2, out brws);
+
+    ////    // Get the document from IWebBrowser2.
+    ////    IWebBrowser2 browser = (IWebBrowser2)(brws);
+
+    ////    return browser.Document;
+    ////  }
+    ////  catch
+    ////  {
+    ////  }
+
+    ////  return null;
+    ////}
+
+    ////private const int E_ACCESSDENIED = unchecked((int)0x80070005L);
+
+    ////private static Guid IID_IWebBrowserApp = new Guid("0002DF05-0000-0000-C000-000000000046");
+
+    ////private static Guid IID_IWebBrowser2 = new Guid("D30C1661-CDAF-11D0-8A3E-00C04FC9E26E");
+
+    ////// This is the COM IServiceProvider interface, not System.IServiceProvider .Net interface!
+
+    ////[ComImport(), ComVisible(true), Guid("6D5140C1-7436-11CE-8034-00AA006009FA"),
+    //// InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    ////public interface IServiceProvider
+    ////{
+    ////  [return: MarshalAs(UnmanagedType.I4)]
+    ////  [PreserveSig]
+    ////  int QueryService(ref Guid guidService, ref Guid riid, [MarshalAs(UnmanagedType.Interface)] out object ppvObject);
+    ////}
   }
 }

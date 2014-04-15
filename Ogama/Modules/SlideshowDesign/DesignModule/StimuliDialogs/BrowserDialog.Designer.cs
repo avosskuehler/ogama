@@ -1,6 +1,7 @@
 ﻿namespace Ogama.Modules.SlideshowDesign.DesignModule.StimuliDialogs
 {
   using Ogama.Modules.Common.Controls;
+  using System.Windows.Forms;
 
   partial class BrowserDialog
   {
@@ -65,7 +66,7 @@
       this.label1 = new System.Windows.Forms.Label();
       this.nudBrowseDepth = new System.Windows.Forms.NumericUpDown();
       this.grpPreview = new System.Windows.Forms.GroupBox();
-      this.webBrowserPreview = new OgamaControls.CommonControls.Browser.ExtendedBrowser();
+      this.webBrowserPreview = new WebBrowser();
       this.btnHelp = new System.Windows.Forms.Button();
       this.panel1 = new System.Windows.Forms.Panel();
       this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -635,7 +636,7 @@
     private System.Windows.Forms.GroupBox grpPreview;
     private System.Windows.Forms.ToolTip toolTip1;
     private System.Windows.Forms.GroupBox grpImageProperties;
-    private OgamaControls.CommonControls.Browser.ExtendedBrowser webBrowserPreview;
+    private WebBrowser webBrowserPreview;
     private System.Windows.Forms.TabControl tabControl1;
     private System.Windows.Forms.TabPage tbpTiming;
     private System.Windows.Forms.PictureBox pcbHelpTiming;
