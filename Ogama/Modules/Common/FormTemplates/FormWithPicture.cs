@@ -714,22 +714,20 @@ namespace Ogama.Modules.Common.FormTemplates
       // including explicit disposing of flash objects
       this.Picture.ResetBackground();
 
-			if (slide == null)
-			{
-				return;
-			}
+      if (slide == null)
+      {
+        return;
+      }
 
       // Set presentation size
       slide.PresentationSize = Document.ActiveDocument.PresentationSize;
 
-      if (slide.StimulusSize != null)
+      if (slide.StimulusSize != Size.Empty)
       {
-        this.Picture.PresentationSize = slide.StimulusSize;
+        this.Picture.StimulusSize = slide.StimulusSize;
       }
-      else
-      {
-        this.Picture.PresentationSize = slide.PresentationSize;
-      }
+
+      this.Picture.PresentationSize = slide.PresentationSize;
 
       Slide slideCopy = (Slide)slide.Clone();
       switch (activeXMode)
@@ -829,16 +827,18 @@ namespace Ogama.Modules.Common.FormTemplates
         float screenRatio = width / (float)height;
 
         float zoomFactor = 1;
-        if (canvasHeight * screenRatio > canvasWidth)
-        {
-          // Width is correct
-          zoomFactor = canvasWidth / (float)width;
-        }
-        else
-        {
+
+        // TODO: This has been left out, cause lead to wrong scalings on VGScrollImages...
+        //if (canvasHeight * screenRatio > canvasWidth)
+        //{
+        //  // Width is correct
+        //  zoomFactor = canvasWidth / (float)width;
+        //}
+        //else
+        //{
           // Height is correct
           zoomFactor = canvasHeight / (float)height;
-        }
+        //}
 
         // Paranoia Check
         if (zoomFactor == 0)
@@ -864,6 +864,10 @@ namespace Ogama.Modules.Common.FormTemplates
 
       this.Picture.ZoomFactor = zoomfactor;
       Size presentationSize = this.Picture.PresentationSize;
+      if (this.Picture.StimulusSize != Size.Empty)
+      {
+        presentationSize = this.Picture.StimulusSize;
+      }
 
       this.ThreadSafeSetSize(new Size(
         (int)(presentationSize.Width * zoomfactor),

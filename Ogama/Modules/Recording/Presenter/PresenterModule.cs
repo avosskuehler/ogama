@@ -25,8 +25,6 @@ namespace Ogama.Modules.Recording.Presenter
   using System.Threading;
   using System.Windows.Forms;
 
-  using mshtml;
-
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common.CustomEventArgs;
   using Ogama.Modules.Common.SlideCollections;
@@ -36,9 +34,6 @@ namespace Ogama.Modules.Recording.Presenter
 
   using OgamaControls;
 
-  using SHDocVw;
-
-  using VectorGraphics.Controls;
   using VectorGraphics.Controls.Flash;
   using VectorGraphics.Controls.Timer;
   using VectorGraphics.Elements;
@@ -46,8 +41,6 @@ namespace Ogama.Modules.Recording.Presenter
   using VectorGraphics.StopConditions;
   using VectorGraphics.Tools;
   using VectorGraphics.Tools.Trigger;
-
-  using WebBrowser = System.Windows.Forms.WebBrowser;
 
   /// <summary>
   ///   A <see cref="Form" /> that is used for stimuli presentation.
@@ -123,6 +116,11 @@ namespace Ogama.Modules.Recording.Presenter
     ///   tree at the correct position.
     /// </summary>
     private BrowserTreeNode currentBrowserTreeNode;
+
+    /// <summary>
+    ///   Contains the <see cref="VGBrowser" /> for the current webpage.
+    /// </summary>
+    private VGBrowser currentVGBrowser;
 
     /// <summary>
     ///   Saves the currently pressed key
@@ -696,10 +694,12 @@ namespace Ogama.Modules.Recording.Presenter
     {
       foreach (HtmlWindow window in htmlWindows)
       {
-        window.Scroll -= this.WebBrowserScroll;
-        window.Scroll += this.WebBrowserScroll;
+        //window.Scroll -= this.WebBrowserScroll;
+        //window.Scroll += this.WebBrowserScroll;
         try
         {
+          window.AttachEventHandler("onscroll", this.WebBrowserScroll);
+
           if (window.Document != null)
           {
             window.Document.MouseDown -= this.WebBrowserMouseDown;
@@ -1327,7 +1327,17 @@ namespace Ogama.Modules.Recording.Presenter
           else if (element is VGBrowser)
           {
             var browser = element as VGBrowser;
+            this.currentVGBrowser = browser;
             browser.InitializeOnControl(slideContainer.ContainerControl, true);
+            browser.WebBrowser.NewWindow += this.WebBrowser_NewWindow;
+            browser.WebBrowser.DocumentCompleted += this.WebBrowserDocumentCompleted;
+            browser.WebBrowser.Navigating += this.WebBrowserNavigating;
+            if (browser.WebBrowser.Document != null)
+            {
+              // Attach Scroll events in document completed handler
+              browser.WebBrowser.Document.MouseDown += this.WebBrowserMouseDown;
+            }
+
             browser.WebBrowser.Navigate(browser.BrowserURL);
             this.numberOfTimesNavigated = 0;
             this.maxBrowseDepth = browser.BrowseDepth;
@@ -1678,17 +1688,6 @@ namespace Ogama.Modules.Recording.Presenter
             // mouse will not act like a webbrowser mouse showing a
             // hand on a link etc.
             browser.WebBrowser.Focus();
-            browser.WebBrowser.NewWindow += this.WebBrowser_NewWindow;
-            browser.WebBrowser.DocumentCompleted += this.WebBrowserDocumentCompleted;
-            browser.WebBrowser.Navigating += this.WebBrowserNavigating;
-            if (browser.WebBrowser.Document != null)
-            {
-              if (browser.WebBrowser.Document.Window != null)
-              {
-                browser.WebBrowser.Document.Window.Scroll += this.WebBrowserScroll;
-              }
-              browser.WebBrowser.Document.MouseDown += this.WebBrowserMouseDown;
-            }
           }
         }
       }
@@ -1883,7 +1882,7 @@ namespace Ogama.Modules.Recording.Presenter
               {
                 if (browser.WebBrowser.Document.Window != null)
                 {
-                  browser.WebBrowser.Document.Window.Scroll -= this.WebBrowserScroll;
+                  //browser.WebBrowser.Document.Window.Scroll -= this.WebBrowserScroll;
                 }
                 browser.WebBrowser.DocumentCompleted -= this.WebBrowserDocumentCompleted;
                 browser.WebBrowser.Navigating -= this.WebBrowserNavigating;
@@ -2197,14 +2196,18 @@ namespace Ogama.Modules.Recording.Presenter
         return;
       }
 
-      browser.Document.MouseDown -= this.WebBrowserMouseDown;
-      browser.Document.MouseDown += this.WebBrowserMouseDown;
-
-      if (browser.Document.Window != null)
+      if (e.Url == browser.Url)
       {
-        browser.Document.Window.Scroll -= this.WebBrowserScroll;
-        browser.Document.Window.Scroll += this.WebBrowserScroll;
-        this.AttachEventHandlerForFrames(browser.Document.Window.Frames);
+        browser.Document.MouseDown -= this.WebBrowserMouseDown;
+        browser.Document.MouseDown += this.WebBrowserMouseDown;
+
+        if (browser.Document.Window != null)
+        {
+          browser.Document.Window.AttachEventHandler("onscroll", this.WebBrowserScroll);
+          //browser.Document.Window.Scroll -= this.WebBrowserScroll;
+          //browser.Document.Window.Scroll += this.WebBrowserScroll;
+          this.AttachEventHandlerForFrames(browser.Document.Window.Frames);
+        }
       }
     }
 
@@ -2455,9 +2458,9 @@ namespace Ogama.Modules.Recording.Presenter
     /// <param name="e">
     /// A <see cref="HtmlElementEventArgs"/> with the event data.
     /// </param>
-    private void WebBrowserScroll(object sender, HtmlElementEventArgs e)
+    private void WebBrowserScroll(object sender, EventArgs e)
     {
-      var browserControl = sender as HtmlWindow;
+      var browserControl = this.currentVGBrowser.WebBrowser;
       if (browserControl == null)
       {
         return;
@@ -2469,7 +2472,12 @@ namespace Ogama.Modules.Recording.Presenter
       }
 
       var htmlElement = browserControl.Document.GetElementsByTagName("HTML")[0];
+
       var bodyElement = browserControl.Document.Body;
+      if (bodyElement == null)
+      {
+        return;
+      }
 
       int scrollTop = htmlElement.ScrollTop > bodyElement.ScrollTop ? htmlElement.ScrollTop : bodyElement.ScrollTop;
       int scrollLeft = htmlElement.ScrollLeft > bodyElement.ScrollLeft ? htmlElement.ScrollLeft : bodyElement.ScrollLeft;
