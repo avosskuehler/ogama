@@ -331,6 +331,14 @@ namespace VectorGraphics.Canvas
     }
 
     /// <summary>
+    /// Gets or sets the size of the stimulus that should be displayed
+    /// in this picture
+    /// </summary>
+    [Browsable(false)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    public Size StimulusSize { get; set; }
+
+    /// <summary>
     /// Gets or sets the current sections start time. 
     /// Used to skip samples outside the selected time section.
     /// </summary>
@@ -810,10 +818,17 @@ namespace VectorGraphics.Canvas
     /// that transforms output coordinates in client size coordinates.</returns>
     protected Matrix GetTransformationMatrix()
     {
-      int widthData = this.presentationSize.Width;
-      int heightData = this.presentationSize.Height;
       if (this.Width != 0 && this.Height != 0)
       {
+        int widthData = this.presentationSize.Width;
+        int heightData = this.presentationSize.Height;
+
+        if (this.StimulusSize != Size.Empty)
+        {
+          widthData = this.StimulusSize.Width;
+          heightData = this.StimulusSize.Height;
+        }
+
         float largestRatio = (float)Math.Max(
           (double)widthData / (double)this.Width,
           (double)heightData / (double)this.Height);
