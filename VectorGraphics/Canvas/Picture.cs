@@ -57,6 +57,11 @@ namespace VectorGraphics.Canvas
     /////// A debug time timing watch.
     /////// </summary>
     ////private Stopwatch watch;
+    
+    /// <summary>
+    /// A lock object for the graphics object
+    /// </summary>
+    private readonly object thisLock = new object();
 
     /// <summary>
     /// This member holds an background slide with the 
@@ -518,7 +523,7 @@ namespace VectorGraphics.Canvas
         return;
       }
 
-      lock (this.foregroundGraphics)
+      lock (this.thisLock)
       {
         this.foregroundGraphics.Clear(Color.Transparent);
       }
@@ -553,10 +558,8 @@ namespace VectorGraphics.Canvas
         return;
       }
 
-      // If the graphics is currently working elsewhere just return
-      // cause there can me multiple simultaneous calls to redraw all
-      // which will be of no use...
-      lock (this.foregroundGraphics)
+      // Care about single usage of the graphics object
+      lock (thisLock)
       {
         this.isRedrawing = true;
         this.foregroundGraphics.Clear(Color.Transparent);
@@ -763,14 +766,14 @@ namespace VectorGraphics.Canvas
       int heightData = this.Height;
       if (widthData > 0 && heightData > 0)
       {
-        if (this.foregroundBitmap != null)
-        {
-          this.foregroundBitmap.Dispose();
-        }
-
         if (this.foregroundGraphics != null)
         {
           this.foregroundGraphics.Dispose();
+        }
+
+        if (this.foregroundBitmap != null)
+        {
+          this.foregroundBitmap.Dispose();
         }
 
         this.foregroundBitmap = new Bitmap(widthData, heightData, PixelFormat.Format32bppArgb);

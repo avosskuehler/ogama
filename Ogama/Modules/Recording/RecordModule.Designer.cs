@@ -578,7 +578,6 @@
       this.toolStripContainer2.SuspendLayout();
       this.toolStrip2.SuspendLayout();
       this.pnlCanvas.SuspendLayout();
-      this.pnlPicture.SuspendLayout();
       this.toolStrip1.SuspendLayout();
       this.tabPage1.SuspendLayout();
       this.panel5.SuspendLayout();
@@ -3193,6 +3192,7 @@
       // 
       // toolStripContainer2.ContentPanel
       // 
+      this.toolStripContainer2.ContentPanel.Controls.Add(this.recordPicture);
       this.toolStripContainer2.ContentPanel.Controls.Add(this.pnlCanvas);
       this.toolStripContainer2.ContentPanel.Size = new System.Drawing.Size(639, 594);
       this.toolStripContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -3242,7 +3242,6 @@
       // 
       // pnlPicture
       // 
-      this.pnlPicture.Controls.Add(this.recordPicture);
       this.pnlPicture.Location = new System.Drawing.Point(117, 87);
       this.pnlPicture.Name = "pnlPicture";
       this.pnlPicture.Size = new System.Drawing.Size(200, 100);
@@ -3250,16 +3249,14 @@
       // 
       // recordPicture
       // 
-      this.recordPicture.AnimationInterval = 40;
       this.recordPicture.BackColor = System.Drawing.Color.Black;
       this.recordPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-      this.recordPicture.InvalidateInterval = 500;
+      this.recordPicture.Dock = System.Windows.Forms.DockStyle.Fill;
       this.recordPicture.Location = new System.Drawing.Point(0, 0);
       this.recordPicture.Name = "recordPicture";
-      this.recordPicture.Size = new System.Drawing.Size(200, 100);
+      this.recordPicture.Size = new System.Drawing.Size(639, 594);
       this.recordPicture.TabIndex = 0;
       this.recordPicture.TabStop = false;
-      this.recordPicture.ZoomFactor = 0F;
       // 
       // toolStrip1
       // 
@@ -6155,7 +6152,6 @@
       this.toolStrip2.ResumeLayout(false);
       this.toolStrip2.PerformLayout();
       this.pnlCanvas.ResumeLayout(false);
-      this.pnlPicture.ResumeLayout(false);
       this.toolStrip1.ResumeLayout(false);
       this.toolStrip1.PerformLayout();
       this.tabPage1.ResumeLayout(false);

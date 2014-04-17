@@ -45,7 +45,7 @@ namespace Ogama.Modules.Recording
       // 
       // RecordingPicture
       // 
-      this.AnimationInterval = 50;
+      //this.AnimationInterval = 50;
       this.Name = "RecordingPicture";
       this.ResumeLayout(false);
 
