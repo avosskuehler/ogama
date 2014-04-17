@@ -1,8 +1,8 @@
-﻿using System.Drawing;
-using System.Windows.Forms;
-
-namespace OgamaControls
+﻿namespace OgamaControls
 {
+  using System.Drawing;
+  using System.Windows.Forms;
+
   /// <summary>
   /// Double buffered panel which renders the <see cref="BufferedGraphics"/>
   /// given.
@@ -22,12 +22,17 @@ namespace OgamaControls
     #region FIELDS
 
     /// <summary>
+    /// A lock object for the graphics object
+    /// </summary>
+    private readonly object thisLock = new object();
+ 
+    /// <summary>
     /// The <see cref="BufferedGraphics"/> that makes up the 
     /// graphics buffer that should be drawn onto this
     /// <see cref="Panel"/>s surface.
     /// </summary>
     private BufferedGraphics drawingSurface;
-    
+
     #endregion //FIELDS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -42,12 +47,13 @@ namespace OgamaControls
     /// </summary>
     public BufferedGraphicsRenderPanel()
     {
-      this.SetStyle(ControlStyles.AllPaintingInWmPaint |
+      this.SetStyle(
+        ControlStyles.AllPaintingInWmPaint |
         ControlStyles.UserPaint |
         ControlStyles.DoubleBuffer,
         true);
       this.UpdateStyles();
-      InitializeComponent();
+      this.InitializeComponent();
     }
 
 
@@ -105,13 +111,16 @@ namespace OgamaControls
     protected override void OnPaint(PaintEventArgs e)
     {
       // base.OnPaint(e);
-      if (this.drawingSurface != null&&this.drawingSurface.Graphics!=null)
+      lock (this.thisLock)
       {
-        this.drawingSurface.Render(e.Graphics);
-      }
-      else
-      {
-        e.Graphics.Clear(this.BackColor);
+        if (this.drawingSurface != null && this.drawingSurface.Graphics != null)
+        {
+          this.drawingSurface.Render(e.Graphics);
+        }
+        else
+        {
+          e.Graphics.Clear(this.BackColor);
+        }
       }
     }
 

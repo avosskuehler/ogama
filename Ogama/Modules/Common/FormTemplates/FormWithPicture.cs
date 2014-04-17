@@ -798,9 +798,9 @@ namespace Ogama.Modules.Common.FormTemplates
     /// <exception cref="ArgumentNullException">Thrown, when canvas of picture (which is the parent of its parent) is null.</exception>
     protected void ResizeCanvas()
     {
-      if (this.Picture.Parent.Parent == null)
+      //if (this.Picture.Parent.Parent == null)
       {
-        throw new ArgumentNullException("Canvas Panel should not be null calling ResizePicture");
+        //throw new ArgumentNullException("Canvas Panel should not be null calling ResizePicture");
       }
 
       if (this.Picture != null && this.Picture.Parent != null)
@@ -836,8 +836,8 @@ namespace Ogama.Modules.Common.FormTemplates
         //}
         //else
         //{
-          // Height is correct
-          zoomFactor = canvasHeight / (float)height;
+        // Height is correct
+        zoomFactor = canvasHeight / (float)height;
         //}
 
         // Paranoia Check
@@ -937,6 +937,11 @@ namespace Ogama.Modules.Common.FormTemplates
     /// <param name="scrollPosition">A <see cref="Point"/> with the new scroll position.</param>
     protected void ThreadSafeSetAutoScrollPosition(Point scrollPosition)
     {
+      if (this.Picture == null)
+      {
+        return;
+      }
+
       if (this.Picture.Parent.Parent == null)
       {
         return;

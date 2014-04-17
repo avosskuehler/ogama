@@ -60,6 +60,7 @@ namespace Ogama.Modules.Recording
 
   using OgamaControls;
 
+  using VectorGraphics.Canvas;
   using VectorGraphics.Elements;
   using VectorGraphics.Elements.ElementCollections;
   using VectorGraphics.StopConditions;
@@ -136,13 +137,13 @@ namespace Ogama.Modules.Recording
     ///   This field saves the gaze cursor center in presentation
     ///   screen coordinates.
     /// </summary>
-    private PointF currentGazeCursorCenter;
+    private static PointF currentGazeCursorCenter;
 
     /// <summary>
     ///   This field saves the mouse cursor center in presentation
     ///   screen coordinates.
     /// </summary>
-    private PointF currentMouseCursorCenter;
+    private static PointF currentMouseCursorCenter;
 
     /// <summary>
     ///   Saves the current shown slide.
@@ -349,8 +350,8 @@ namespace Ogama.Modules.Recording
     public RecordModule()
     {
       this.InitializeComponent();
-
-      this.Picture = this.recordPicture;
+      //var dummy = new Picture();
+      //this.Picture = dummy;
       this.ZoomTrackBar = this.trbZoom;
 
       this.InitAccelerators();
@@ -472,6 +473,8 @@ namespace Ogama.Modules.Recording
       return true;
     }
 
+    private static object lockObject = new object();
+
     /// <summary>
     /// This method polls the current cursor centers for the gaze
     ///   and the mouse cursor and writes them into the parameters.
@@ -482,22 +485,12 @@ namespace Ogama.Modules.Recording
     /// <param name="mouseCenter">
     /// Out. A <see cref="PointF"/> with the new mouse center location.
     /// </param>
-    public void GetCurrentCursorPositions(out PointF gazeCenter, out PointF mouseCenter)
+    public static void GetCurrentCursorPositions(out PointF gazeCenter, out PointF mouseCenter)
     {
-      lock (this)
+      lock (lockObject)
       {
-        gazeCenter = this.currentGazeCursorCenter;
-        mouseCenter = this.currentMouseCursorCenter;
-      }
-
-      // Send cursor positions to video overlay DMO
-      // during capturing of live stream
-      if (this.presenterForm != null)
-      {
-        if (this.presenterForm.CurrentScreenCapture != null)
-        {
-          this.presenterForm.CurrentScreenCapture.UpdateDMOParams(Point.Round(gazeCenter), Point.Round(mouseCenter));
-        }
+        gazeCenter = currentGazeCursorCenter;
+        mouseCenter = currentMouseCursorCenter;
       }
     }
 
@@ -623,24 +616,24 @@ namespace Ogama.Modules.Recording
 
         if (this.smoothing)
         {
-          if (this.PointsArNear(newCursorPos, this.currentGazeCursorCenter))
+          if (this.PointsArNear(newCursorPos, currentGazeCursorCenter))
           {
             this.numberOfSamplesInRegion++;
             this.sumOfSamplesInRegion.X += newCursorPos.X;
             this.sumOfSamplesInRegion.Y += newCursorPos.Y;
-            this.currentGazeCursorCenter.X = this.sumOfSamplesInRegion.X / this.numberOfSamplesInRegion;
-            this.currentGazeCursorCenter.Y = this.sumOfSamplesInRegion.Y / this.numberOfSamplesInRegion;
+            currentGazeCursorCenter.X = this.sumOfSamplesInRegion.X / this.numberOfSamplesInRegion;
+            currentGazeCursorCenter.Y = this.sumOfSamplesInRegion.Y / this.numberOfSamplesInRegion;
           }
           else
           {
             this.numberOfSamplesInRegion = 0;
             this.sumOfSamplesInRegion = PointF.Empty;
-            this.currentGazeCursorCenter = newCursorPos;
+            currentGazeCursorCenter = newCursorPos;
           }
         }
         else
         {
-          this.currentGazeCursorCenter = newCursorPos;
+          currentGazeCursorCenter = newCursorPos;
         }
       }
 
@@ -651,8 +644,18 @@ namespace Ogama.Modules.Recording
         {
           if (newRawData.MousePosX.HasValue && newRawData.MousePosY.HasValue)
           {
-            this.currentMouseCursorCenter = new PointF(newRawData.MousePosX.Value, newRawData.MousePosY.Value);
+            currentMouseCursorCenter = new PointF(newRawData.MousePosX.Value, newRawData.MousePosY.Value);
           }
+        }
+      }
+
+      // Send cursor positions to video overlay DMO
+      // during capturing of live stream
+      if (this.presenterForm != null)
+      {
+        if (this.presenterForm.CurrentScreenCapture != null)
+        {
+          this.presenterForm.CurrentScreenCapture.UpdateDMOParams(Point.Round(currentGazeCursorCenter), Point.Round(currentMouseCursorCenter));
         }
       }
 
@@ -1551,11 +1554,40 @@ namespace Ogama.Modules.Recording
         }
 
         // Load Slide into picture
-        this.LoadSlide(this.currentSlide, ActiveXMode.Off);
+        this.LoadSlide(this.currentSlide);
 
         // Show or hide duplicated mouse cursor
         this.recordPicture.MouseCursorVisible = this.currentSlide.MouseCursorVisible;
       }
+    }
+
+    private void LoadSlide(Slide slide)
+    {
+      if (slide == null)
+      {
+        return;
+      }
+
+      //// Set presentation size
+      //slide.PresentationSize = Document.ActiveDocument.PresentationSize;
+
+      if (slide.StimulusSize != Size.Empty)
+      {
+        this.recordPicture.StimulusSize = slide.StimulusSize;
+      }
+
+      this.recordPicture.PresentationSize = slide.PresentationSize;
+
+      Slide slideCopy = (Slide)slide.Clone();
+
+      // set Pictures new background slide
+      this.recordPicture.BGSlide = slideCopy;
+
+      // Set autozoom, because websites could have changed in size
+      this.recordPicture.AutoZoomPicture();
+
+      // Redraw picture
+      this.recordPicture.Invalidate();
     }
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -1589,7 +1621,7 @@ namespace Ogama.Modules.Recording
         this.tmrRecordClock.Start();
 
         // Start update timer of control panel viewer
-        this.Picture.StartAnimation();
+        this.recordPicture.StartAnimation();
       }
 
       lock (this)
@@ -2140,7 +2172,7 @@ namespace Ogama.Modules.Recording
       this.smoothing = false;
 
       // Intialize replay picture
-      this.recordPicture.OwningForm = this;
+      //this.recordPicture.OwningForm = this;
       this.recordPicture.PresentationSize = Document.ActiveDocument.PresentationSize;
       this.ResizeCanvas();
 
@@ -2240,8 +2272,8 @@ namespace Ogama.Modules.Recording
       this.tmrRecordClock.Tick += this.TmrRecordClockTick;
 
       // Stop updating viewer
-      this.Picture.StopAnimation();
-      this.Picture.ResetPicture();
+      this.recordPicture.StopAnimation();
+      //this.Picture.ResetPicture();
 
       // Redraw panel
       this.NewSlideAvailable();

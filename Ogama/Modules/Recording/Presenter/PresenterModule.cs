@@ -1100,36 +1100,6 @@ namespace Ogama.Modules.Recording.Presenter
     /// </param>
     private void DisposeSlideContainer(SlidePresentationContainer slideContainer)
     {
-      // Explicitely dispose flash objects 
-      // otherwise we will get an exception from 
-      // the MDA reportAvOnComRelease
-      if (slideContainer.ContainerControl.Controls.Count > 0)
-      {
-        foreach (Control ctrl in slideContainer.ContainerControl.Controls)
-        {
-          if (ctrl is AxFlashControl)
-          {
-            if (ctrl.InvokeRequired)
-            {
-              MethodInvoker ctrlDisposeDelegate = ctrl.Dispose;
-              ctrl.Invoke(ctrlDisposeDelegate);
-            }
-            else
-            {
-              ctrl.Dispose();
-            }
-          }
-          else if (ctrl is WebBrowser)
-          {
-            if (ctrl.InvokeRequired)
-            {
-              MethodInvoker ctrlDisposeDelegate = ctrl.Dispose;
-              ctrl.Invoke(ctrlDisposeDelegate);
-            }
-          }
-        }
-      }
-
       foreach (VGElement element in slideContainer.Slide.ActiveXStimuli)
       {
         if (element is VGFlash)
@@ -1144,17 +1114,63 @@ namespace Ogama.Modules.Recording.Presenter
         }
       }
 
-      if (this.InvokeRequired)
+      slideContainer.Slide.Dispose();
+
+      // Explicitely dispose flash objects 
+      // otherwise we will get an exception from 
+      // the MDA reportAvOnComRelease
+      if (slideContainer.ContainerControl.Controls.Count > 0)
       {
-        MethodInvoker controlsClearMethod = slideContainer.ContainerControl.Controls.Clear;
-        this.Invoke(controlsClearMethod);
-      }
-      else
-      {
-        slideContainer.ContainerControl.Controls.Clear();
+        foreach (Control ctrl in slideContainer.ContainerControl.Controls)
+        {
+          slideContainer.ContainerControl.Controls.Remove(ctrl);
+
+          if (ctrl is AxFlashControl)
+          {
+            if (ctrl.InvokeRequired)
+            {
+              MethodInvoker ctrlDisposeDelegate = ctrl.Dispose;
+              ctrl.Invoke(ctrlDisposeDelegate);
+            }
+            else
+            {
+              ctrl.Dispose();
+            }
+          }
+          else if (ctrl is WebBrowser)
+          {
+            var browser = ctrl as WebBrowser;
+            browser.NewWindow -= this.WebBrowser_NewWindow;
+            browser.DocumentCompleted -= this.WebBrowserDocumentCompleted;
+            browser.Navigating -= this.WebBrowserNavigating;
+            if (browser.Document != null)
+            {
+              browser.Document.MouseDown -= this.WebBrowserMouseDown;
+            }
+
+            if (browser.InvokeRequired)
+            {
+              MethodInvoker ctrlDisposeDelegate = browser.Dispose;
+              browser.Invoke(ctrlDisposeDelegate);
+            }
+            else
+            {
+              browser.Dispose();
+            }
+          }
+        }
       }
 
-      slideContainer.Slide.Dispose();
+      //if (this.InvokeRequired)
+      //{
+      //  MethodInvoker controlsClearMethod = slideContainer.ContainerControl.Controls.Clear;
+      //  this.Invoke(controlsClearMethod);
+      //}
+      //else
+      //{
+      //  slideContainer.ContainerControl.Controls.Clear();
+      //}
+
 
       // Stop audio playback and release player
       slideContainer.AudioPlayer.CloseAudioFile();
@@ -1867,35 +1883,35 @@ namespace Ogama.Modules.Recording.Presenter
     /// </summary>
     private void PresentPreparedSlide()
     {
-      // Detach scroll event listeners
-      if (this.shownSlideContainer != null)
-      {
-        foreach (VGElement element in this.shownSlideContainer.Slide.ActiveXStimuli)
-        {
-          if (element is VGBrowser)
-          {
-            var browser = element as VGBrowser;
-            try
-            {
-              browser.WebBrowser.NewWindow -= this.WebBrowser_NewWindow;
-              if (browser.WebBrowser.Document != null)
-              {
-                if (browser.WebBrowser.Document.Window != null)
-                {
-                  //browser.WebBrowser.Document.Window.Scroll -= this.WebBrowserScroll;
-                }
-                browser.WebBrowser.DocumentCompleted -= this.WebBrowserDocumentCompleted;
-                browser.WebBrowser.Navigating -= this.WebBrowserNavigating;
-                browser.WebBrowser.Document.MouseDown -= this.WebBrowserMouseDown;
-              }
-            }
-            catch (NullReferenceException ex)
-            {
-              ExceptionMethods.HandleExceptionSilent(ex);
-            }
-          }
-        }
-      }
+      //// Detach scroll event listeners
+      //if (this.shownSlideContainer != null)
+      //{
+      //  foreach (VGElement element in this.shownSlideContainer.Slide.ActiveXStimuli)
+      //  {
+      //    if (element is VGBrowser)
+      //    {
+      //      var browser = element as VGBrowser;
+      //      try
+      //      {
+      //        browser.WebBrowser.NewWindow -= this.WebBrowser_NewWindow;
+      //        if (browser.WebBrowser.Document != null)
+      //        {
+      //          if (browser.WebBrowser.Document.Window != null)
+      //          {
+      //            //browser.WebBrowser.Document.Window.Scroll -= this.WebBrowserScroll;
+      //          }
+      //          browser.WebBrowser.DocumentCompleted -= this.WebBrowserDocumentCompleted;
+      //          browser.WebBrowser.Navigating -= this.WebBrowserNavigating;
+      //          browser.WebBrowser.Document.MouseDown -= this.WebBrowserMouseDown;
+      //        }
+      //      }
+      //      catch (NullReferenceException ex)
+      //      {
+      //        ExceptionMethods.HandleExceptionSilent(ex);
+      //      }
+      //    }
+      //  }
+      //}
 
       switch (this.shownContainer)
       {
