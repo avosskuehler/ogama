@@ -169,7 +169,7 @@ namespace Ogama.Modules.Recording
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     /// <remarks>Starts updating the readed samples for the timespan that
     /// is over since the last update.</remarks>
-    protected override void OnUpdatePicture(object sender, EventArgs e)
+    protected override void ForegroundTimerTick(object sender, EventArgs e)
     {
       // Retreive new cursor positions.
       PointF gazeCenter;
@@ -179,7 +179,7 @@ namespace Ogama.Modules.Recording
       this.gazeCursor.Center = gazeCenter;
       this.mouseCursor.Center = mouseCenter;
 
-      base.OnUpdatePicture(sender, e);
+      base.ForegroundTimerTick(sender, e);
     }
 
     #endregion //OVERRIDES

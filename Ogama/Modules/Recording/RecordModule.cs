@@ -775,7 +775,7 @@ namespace Ogama.Modules.Recording
     ///   This method checks if there are any unsaved changes to the current slideshow.
     /// </summary>
     /// <returns>True if the slideshow has unsaved changes, otherwise false.</returns>
-    private static bool CheckForModifiedSlideshow()
+    private bool CheckForModifiedSlideshow()
     {
       if (Document.ActiveDocument.ExperimentSettings.SlideShow.IsModified)
       {
@@ -784,6 +784,17 @@ namespace Ogama.Modules.Recording
 
         ExceptionMethods.ProcessMessage("Please save the modified slideshow first.", message);
         return true;
+      }
+
+      // Close slideshow module, because we need
+      // exclusive access to the slideshow
+      foreach (var form in this.MdiParent.MdiChildren)
+      {
+        if (form is SlideshowDesign.SlideshowModule)
+        {
+          form.Close();
+          break;
+        }
       }
 
       return false;
@@ -1691,6 +1702,13 @@ namespace Ogama.Modules.Recording
 
         // Update slideshow pictures of newly created trials
         Document.ActiveDocument.ExperimentSettings.SlideShow.UpdateExperimentPathOfResources(Document.ActiveDocument.ExperimentSettings.SlideResourcesPath);
+        Document.ActiveDocument.ExperimentSettings.SlideShow.IsModified = false;
+
+        // Save document to disk
+        if (!Document.ActiveDocument.SaveDocument(Document.ActiveDocument.ExperimentSettings.DocumentFilename, null))
+        {
+          ExceptionMethods.ProcessErrorMessage("Couldn't save experiment.");
+        }
 
         // Reset recording flag
         this.recordingBusy = false;
@@ -2747,6 +2765,11 @@ namespace Ogama.Modules.Recording
         }
 
         this.OnRecordingFinished(new StringEventArgs(string.Empty));
+
+        ((MainForm)this.MdiParent).StatusLabel.Text = "Refreshing context panel ...";
+        ((MainForm)this.MdiParent).RefreshContextPanelImageTabs();
+        ((MainForm)this.MdiParent).StatusLabel.Text = "Ready ...";
+        ((MainForm)this.MdiParent).StatusProgressbar.Value = 0;
 
         Cursor.Current = Cursors.Default;
 

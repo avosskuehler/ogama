@@ -694,8 +694,6 @@ namespace Ogama.Modules.Recording.Presenter
     {
       foreach (HtmlWindow window in htmlWindows)
       {
-        //window.Scroll -= this.WebBrowserScroll;
-        //window.Scroll += this.WebBrowserScroll;
         try
         {
           window.AttachEventHandler("onscroll", this.WebBrowserScroll);
@@ -710,9 +708,11 @@ namespace Ogama.Modules.Recording.Presenter
             }
           }
         }
-        catch (UnauthorizedAccessException ex)
+        catch (UnauthorizedAccessException)
         {
-          //ExceptionMethods.HandleExceptionSilent(ex);
+          // Ignore cross domain access exceptions
+          // the workaround would need to use mshtml which is 
+          // not easy...
         }
       }
     }
@@ -754,6 +754,7 @@ namespace Ogama.Modules.Recording.Presenter
             {
               newTrialID = linkMsc.TrialID.Value;
             }
+
             isLink = true;
             break;
           }
@@ -768,6 +769,7 @@ namespace Ogama.Modules.Recording.Presenter
             {
               newTrialID = linkKsc.TrialID.Value;
             }
+
             isLink = true;
             break;
           }
@@ -938,7 +940,7 @@ namespace Ogama.Modules.Recording.Presenter
           return true;
         }
 
-        bool changeSlide = false;
+        bool changeSlide;
         StopCondition response = null;
         if (!timeOver)
         {
@@ -1034,12 +1036,8 @@ namespace Ogama.Modules.Recording.Presenter
           AsyncHelper.FireAndForget(new SendTriggerDelegate(this.SendTrigger), this.shownSlideContainer);
 
           // Send counter update in synchronous call
-          //var trial = this.shownSlideContainer.Trial;
-          //if (trial != null)
-          {
             // Always update counter
             this.OnCounterChanged(new CounterChangedEventArgs(trialID, this.slideCounter));
-          }
 
           // Changes the mouse position and occurence according
           // to slide properties

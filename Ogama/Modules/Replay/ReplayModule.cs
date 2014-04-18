@@ -1753,7 +1753,7 @@ namespace Ogama.Modules.Replay
             int indexOfHash = parameter.IndexOf('#');
             int slideCounter = Convert.ToInt32(parameter.Substring(0, indexOfHash));
             Slide newSlide = this.CurrentTrial[slideCounter];
-            if (this.replayPicture.BGSlide != newSlide)
+            if (this.replayPicture.BgSlide != newSlide)
             {
               this.LoadSlide(newSlide, ActiveXMode.Off);
             }
@@ -2627,7 +2627,7 @@ namespace Ogama.Modules.Replay
       if (this.CurrentTrial.Count > 1)
       {
         Slide newSlide = this.CurrentTrial[0];
-        if (this.replayPicture.BGSlide != newSlide)
+        if (this.replayPicture.BgSlide != newSlide)
         {
           this.LoadSlide(newSlide, ActiveXMode.Off);
         }

@@ -1,72 +1,73 @@
-﻿// <copyright file="StimuliTypes.cs" company="FU Berlin">
-// ******************************************************
-// OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2013 Dr. Adrian Voßkühler  
-// ------------------------------------------------------------------------
-// This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
-// This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-// You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-// **************************************************************
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="StimuliTypes.cs" company="Freie Universität Berlin">
+//   OGAMA - open gaze and mouse analyzer 
+//   Copyright (C) 2014 Dr. Adrian Voßkühler  
+//   Licensed under GPL V3
 // </copyright>
 // <author>Adrian Voßkühler</author>
 // <email>adrian@ogama.net</email>
-
+// <summary>
+//   Type of stimulus objects that can be created or displayed.
+//   Can be None, Shape, Instruction, Image, Flash.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 namespace Ogama.Modules.SlideshowDesign
 {
   /// <summary>
-  /// Type of stimulus objects that can be created or displayed.
-  /// Can be None, Shape, Instruction, Image, Flash.
+  ///   Type of stimulus objects that can be created or displayed.
+  ///   Can be None, Shape, Instruction, Image, Flash.
   /// </summary>
   public enum StimuliTypes
   {
     /// <summary>
-    /// Undefined stimulus.
+    ///   Undefined stimulus.
     /// </summary>
-    None,
+    None, 
 
     /// <summary>
-    /// An empty stimulus.
+    ///   An empty stimulus.
     /// </summary>
-    Blank,
+    Blank, 
 
     /// <summary>
-    /// Shape stimuli like <see cref="VectorGraphics.Elements.VGPolyline"/>, <see cref="VectorGraphics.Elements.VGRectangle"/>
+    ///   Shape stimuli like <see cref="VectorGraphics.Elements.VGPolyline" />,
+    ///   <see cref="VectorGraphics.Elements.VGRectangle" />
     /// </summary>
-    Shape,
+    Shape, 
 
     /// <summary>
-    /// Instructional stimuli (textual stimuli).
+    ///   Instructional stimuli (textual stimuli).
     /// </summary>
-    Instruction,
+    Instruction, 
 
     /// <summary>
-    /// Textual stimuli based on RTF format
+    ///   Textual stimuli based on RTF format
     /// </summary>
-    RTFInstruction,
+    RTFInstruction, 
 
     /// <summary>
-    /// Image stimuli, like pictures.
+    ///   Image stimuli, like pictures.
     /// </summary>
-    Image,
+    Image, 
 
     /// <summary>
-    /// Macromedia Flash stimuli.
+    ///   Macromedia Flash stimuli.
     /// </summary>
-    Flash,
+    Flash, 
 
     /// <summary>
-    /// Browser based stimuli.
+    ///   Browser based stimuli.
     /// </summary>
-    Browser,
+    Browser, 
 
     /// <summary>
-    /// The stimulus is the desktop.
+    ///   The stimulus is the desktop.
     /// </summary>
-    Desktop,
+    Desktop, 
 
     /// <summary>
-    /// Different types of stimuli
+    ///   Different types of stimuli
     /// </summary>
-    Mixed,
+    Mixed, 
   }
 }

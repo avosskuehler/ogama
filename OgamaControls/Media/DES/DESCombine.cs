@@ -723,9 +723,38 @@ namespace OgamaControls.Media
           int hr = 0;
           if (timeToStart.HasValue)
           {
-            hr = ((IMediaSeeking)m_pGraph).SetPositions(timeToStart.Value * 10000, AMSeekingSeekingFlags.AbsolutePositioning,
-              null, AMSeekingSeekingFlags.NoPositioning);
+            //this.m_pControl.Pause();
+            //FilterState state;
+            //this.m_pControl.GetState(50, out state);
+            var mediaSeeking = this.m_pGraph as IMediaSeeking;
+
+            if (mediaSeeking == null)
+            {
+              return;
+            }
+
+            long currentPosition;
+
+            hr = mediaSeeking.GetCurrentPosition(out currentPosition);
             DsError.ThrowExceptionForHR(hr);
+
+            var newPosition = timeToStart.Value * 10000;
+            if (currentPosition != newPosition)
+            {
+              hr = mediaSeeking.SetPositions(
+                newPosition,
+                AMSeekingSeekingFlags.AbsolutePositioning,
+                null,
+                AMSeekingSeekingFlags.NoPositioning);
+              DsError.ThrowExceptionForHR(hr);
+            }
+
+            //m_pControl->Run();
+            //m_pControl->GetState(1000, NULL);
+
+            //m_pControl->Stop();
+            //m_pControl->GetState(1000, NULL);
+
           }
         }
       }

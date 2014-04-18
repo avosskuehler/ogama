@@ -54,12 +54,12 @@ namespace VectorGraphics.Canvas
       // 
       this.tmrForeground.Period = 10;
       this.tmrForeground.SynchronizingObject = this;
-      this.tmrForeground.Tick += new System.EventHandler(this.OnUpdatePicture);
+      this.tmrForeground.Tick += new System.EventHandler(this.ForegroundTimerTick);
       // 
       // tmrBackground
       // 
       this.tmrBackground.Interval = 500;
-      this.tmrBackground.Tick += new System.EventHandler(this.tmrBackground_Tick);
+      this.tmrBackground.Tick += new System.EventHandler(this.TmrBackgroundTick);
       // 
       // Picture
       // 

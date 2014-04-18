@@ -175,14 +175,14 @@ namespace Ogama.Modules.AttentionMap
     #region OVERRIDES
 
     /// <summary>
-    /// Overridden <see cref="Picture.InitalizeOverlayGraphics"/>. 
+    /// Overridden <see cref="Picture.CalculateTransformMatrix"/>. 
     /// Creates transparent bitmap for drawing and the corresponding graphics
     /// with correct transformation matrix.
     /// Updates heat map size with the presentation size.
     /// </summary>
-    protected override void InitalizeOverlayGraphics()
+    protected override void CalculateTransformMatrix()
     {
-      base.InitalizeOverlayGraphics();
+      base.CalculateTransformMatrix();
       if (this.heatMap.Width != this.PresentationSize.Width ||
          this.heatMap.Height != this.PresentationSize.Height)
       {

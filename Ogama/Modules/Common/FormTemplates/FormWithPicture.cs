@@ -734,12 +734,12 @@ namespace Ogama.Modules.Common.FormTemplates
       {
         case ActiveXMode.Off:
           // set Pictures new background slide
-          this.Picture.BGSlide = slideCopy;
+          this.Picture.BgSlide = slideCopy;
           break;
         default:
         case ActiveXMode.BehindPicture:
           // set Pictures new background slide
-          this.Picture.BGSlide = slideCopy;
+          this.Picture.BgSlide = slideCopy;
 
           foreach (VGElement element in slideCopy.ActiveXStimuli)
           {
@@ -759,7 +759,7 @@ namespace Ogama.Modules.Common.FormTemplates
           break;
         case ActiveXMode.OnTop:
           // set Pictures new background slide
-          this.Picture.BGSlide = slideCopy;
+          this.Picture.BgSlide = slideCopy;
 
           foreach (VGElement element in slideCopy.ActiveXStimuli)
           {
@@ -778,7 +778,7 @@ namespace Ogama.Modules.Common.FormTemplates
           break;
         case ActiveXMode.Video:
           // Don´t use Slide
-          this.Picture.BGSlide = null;
+          this.Picture.BgSlide = null;
           break;
       }
 
@@ -857,8 +857,6 @@ namespace Ogama.Modules.Common.FormTemplates
     /// with the zoom factor, can be from 0.1 to 2.</param>
     protected void ZoomPicture(float zoomfactor)
     {
-      this.Picture.BeginUpdate();
-
       // Reset scroll position
       this.ThreadSafeSetAutoScrollPosition(Point.Empty);
 
@@ -881,8 +879,6 @@ namespace Ogama.Modules.Common.FormTemplates
         this.zoomTrackBar.Value = (int)Math.Max(1, (zoomfactor * 50));
         this.zoomTrackBar.SendValueChangedEvents = true;
       }
-
-      this.Picture.EndUpdate();
     }
 
     #endregion //METHODS

@@ -1259,10 +1259,10 @@ namespace Ogama.Modules.Replay
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     /// <remarks>Starts updating the readed samples for the timespan that
     /// is over since the last update.</remarks>
-    protected override void OnUpdatePicture(object sender, EventArgs e)
+    protected override void ForegroundTimerTick(object sender, EventArgs e)
     {
       this.DisplayUpdating();
-      base.OnUpdatePicture(sender, e);
+      base.ForegroundTimerTick(sender, e);
     }
 
     /// <summary>
