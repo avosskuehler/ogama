@@ -59,7 +59,7 @@ namespace Ogama.Modules.Recording.Presenter
 
       var tempBrowser = new WebBrowser();
       var dummyForm = new Form { ClientSize = new Size(1, 1), FormBorderStyle = FormBorderStyle.None };
-
+      dummyForm.ShowInTaskbar = false;
       dummyForm.Controls.Add(tempBrowser);
       dummyForm.Show();
       tempBrowser.ScrollBarsEnabled = true;

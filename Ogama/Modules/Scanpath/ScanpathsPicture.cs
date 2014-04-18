@@ -505,7 +505,7 @@ namespace Ogama.Modules.Scanpath
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     /// <remarks>Starts updating the readed samples for the timespan that
     /// is over since the last update.</remarks>
-    protected override void OnUpdatePicture(object sender, EventArgs e)
+    protected override void ForegroundTimerTick(object sender, EventArgs e)
     {
       TimeSpan timeLeft = new TimeSpan(DateTime.Now.Ticks - this.animationStartTime);
       this.playTime = (int)timeLeft.TotalMilliseconds;

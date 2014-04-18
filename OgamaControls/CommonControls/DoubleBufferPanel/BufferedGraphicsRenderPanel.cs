@@ -27,7 +27,7 @@ namespace OgamaControls
     /// <see cref="Panel"/>s surface.
     /// </summary>
     private BufferedGraphics drawingSurface;
-    
+
     #endregion //FIELDS
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -105,7 +105,7 @@ namespace OgamaControls
     protected override void OnPaint(PaintEventArgs e)
     {
       // base.OnPaint(e);
-      if (this.drawingSurface != null&&this.drawingSurface.Graphics!=null)
+      if (this.drawingSurface != null && this.drawingSurface.Graphics != null)
       {
         this.drawingSurface.Render(e.Graphics);
       }

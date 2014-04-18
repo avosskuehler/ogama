@@ -379,7 +379,7 @@ namespace Ogama.Modules.SlideshowDesign.DesignModule
           this.designPicture.PresentationSize.Width / 2f, 
           this.designPicture.PresentationSize.Height / 2f);
         this.UpdateShapePositionAndSizeNumerics(this.designPicture.SelectedElement);
-        this.designPicture.RedrawAll();
+        //this.designPicture.RedrawAll();
         this.designPicture.Invalidate();
       }
     }
@@ -538,7 +538,7 @@ namespace Ogama.Modules.SlideshowDesign.DesignModule
         }
 
         this.UpdateShapePositionAndSizeNumerics(this.designPicture.SelectedElement);
-        this.designPicture.RedrawAll();
+        //this.designPicture.RedrawAll();
         this.designPicture.Invalidate();
       }
     }
@@ -563,7 +563,7 @@ namespace Ogama.Modules.SlideshowDesign.DesignModule
         SizeF newSize = this.designPicture.SelectedElement.Size;
         newSize.Height = (float)this.nudLayoutHeight.Value;
         this.designPicture.SelectedElement.Size = newSize;
-        this.designPicture.RedrawAll();
+        //this.designPicture.RedrawAll();
         this.designPicture.Invalidate();
       }
     }
@@ -618,7 +618,7 @@ namespace Ogama.Modules.SlideshowDesign.DesignModule
             }
           }
 
-          this.designPicture.RedrawAll();
+          this.designPicture.Refresh();
           break;
       }
     }
@@ -1110,7 +1110,7 @@ namespace Ogama.Modules.SlideshowDesign.DesignModule
         PointF newLocation = this.designPicture.SelectedElement.Location;
         newLocation.X = (float)this.nudLayoutLeft.Value;
         this.designPicture.SelectedElement.Location = newLocation;
-        this.designPicture.RedrawAll();
+        //this.designPicture.RedrawAll();
         this.designPicture.Invalidate();
       }
     }
@@ -1135,7 +1135,7 @@ namespace Ogama.Modules.SlideshowDesign.DesignModule
         PointF newLocation = this.designPicture.SelectedElement.Location;
         newLocation.Y = (float)this.nudLayoutTop.Value;
         this.designPicture.SelectedElement.Location = newLocation;
-        this.designPicture.RedrawAll();
+        //this.designPicture.RedrawAll();
         this.designPicture.Invalidate();
       }
     }
@@ -1160,7 +1160,7 @@ namespace Ogama.Modules.SlideshowDesign.DesignModule
         SizeF newSize = this.designPicture.SelectedElement.Size;
         newSize.Width = (float)this.nudLayoutWidth.Value;
         this.designPicture.SelectedElement.Size = newSize;
-        this.designPicture.RedrawAll();
+        //this.designPicture.RedrawAll();
         this.designPicture.Invalidate();
       }
     }
@@ -1188,7 +1188,7 @@ namespace Ogama.Modules.SlideshowDesign.DesignModule
         this.designPicture.SelectedElement.Font = e.NewFont;
         this.designPicture.SelectedElement.FontColor = e.NewFontColor;
         this.designPicture.SelectedElement.Name = e.NewName;
-        this.designPicture.RedrawAll();
+        //this.designPicture.RedrawAll();
         this.designPicture.Invalidate();
       }
     }
