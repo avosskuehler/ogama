@@ -2170,6 +2170,46 @@ namespace Ogama.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap TheEyeTribeBanner {
+            get {
+                object obj = ResourceManager.GetObject("TheEyeTribeBanner", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TheEyeTribeFoto16 {
+            get {
+                object obj = ResourceManager.GetObject("TheEyeTribeFoto16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TheEyeTribeFoto64 {
+            get {
+                object obj = ResourceManager.GetObject("TheEyeTribeFoto64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TheEyeTribeLogo {
+            get {
+                object obj = ResourceManager.GetObject("TheEyeTribeLogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ThumbnailLoadingHS {
             get {
                 object obj = ResourceManager.GetObject("ThumbnailLoadingHS", resourceCulture);

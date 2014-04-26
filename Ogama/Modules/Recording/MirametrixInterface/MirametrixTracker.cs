@@ -242,7 +242,7 @@ namespace Ogama.Modules.Recording.MirametrixInterface
     public static TrackerStatus IsAvailable(out string errorMessage)
     {
       // Check Mirametrix process
-      if (!IsProcessOpen("tracker"))
+      if (!IOHelpers.IsProcessOpen("tracker"))
       {
         if (!IsApplicationInstalled("Mirametrix"))
         {
@@ -720,16 +720,6 @@ namespace Ogama.Modules.Recording.MirametrixInterface
 
     [DllImport("Kernel32.dll", SetLastError = true)]
     private static extern bool QueryPerformanceFrequency(out ulong frequency);
-
-    /// <summary>
-    /// Searches a specified process
-    /// </summary>
-    /// <param name="name">Name of process, without extension .exe or .dll</param>
-    /// <returns>True if process is running, false otherwise</returns>
-    private static bool IsProcessOpen(string name)
-    {
-      return Process.GetProcesses().Any(clsProcess => clsProcess.ProcessName == name);
-    }
 
     /// <summary>
     /// Searches a specified application in windows registries

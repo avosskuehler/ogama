@@ -1,92 +1,41 @@
-// <copyright file="IOHelpers.cs" company="FU Berlin">
-// ******************************************************
-// OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2013 Dr. Adrian Voßkühler  
-// ------------------------------------------------------------------------
-// This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
-// This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-// You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-// **************************************************************
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="IOHelpers.cs" company="Freie Universität Berlin">
+//   OGAMA - open gaze and mouse analyzer 
+//   Copyright (C) 2014 Dr. Adrian Voßkühler  
+//   Licensed under GPL V3
 // </copyright>
 // <author>Adrian Voßkühler</author>
 // <email>adrian@ogama.net</email>
-
+// <summary>
+//   Class for import and export functionality.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 namespace Ogama.Modules.Common.Tools
 {
   using System;
+  using System.Diagnostics;
   using System.IO;
+  using System.Linq;
+
+  using Microsoft.Win32;
 
   /// <summary>
-  /// Class for import and export functionality.
+  ///   Class for import and export functionality.
   /// </summary>
   public sealed class IOHelpers
   {
-    ///////////////////////////////////////////////////////////////////////////////
-    // Defining Constants                                                        //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region CONSTANTS
-    #endregion //CONSTANTS
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Defining Variables, Enumerations, Events                                  //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region FIELDS
-    #endregion //FIELDS
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Defining Properties                                                       //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region PROPERTIES
-    #endregion //PROPERTIES
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Construction and Initializing methods                                     //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region CONSTRUCTION
-    #endregion //CONSTRUCTION
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Eventhandler                                                              //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region EVENTS
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Eventhandler for UI, Menu, Buttons, Toolbars etc.                         //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region WINDOWSEVENTHANDLER
-    #endregion //WINDOWSEVENTHANDLER
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Eventhandler for Custom Defined Events                                    //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region CUSTOMEVENTHANDLER
-    #endregion //CUSTOMEVENTHANDLER
-
-    #endregion //EVENTS
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Methods and Eventhandling for Background tasks                            //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region BACKGROUNDWORKER
-    #endregion //BACKGROUNDWORKER
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Inherited methods                                                         //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region OVERRIDES
-    #endregion //OVERRIDES
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Methods for doing main class job                                          //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region METHODS
+    #region Public Methods and Operators
 
     /// <summary>
-    /// Returns a Boolean value indicating whether an expression can be evaluated as a number. 
+    /// Returns a Boolean value indicating whether an expression can be evaluated as a number.
     /// </summary>
-    /// <param name="expression">object to test</param>
-    /// <returns><strong>True</strong> if given expression is a number,
-    /// otherwise <strong>false</strong>.</returns>
+    /// <param name="expression">
+    /// object to test
+    /// </param>
+    /// <returns>
+    /// <strong>True</strong> if given expression is a number,
+    ///   otherwise <strong>false</strong>.
+    /// </returns>
     public static bool IsNumeric(object expression)
     {
       // Variable to collect the Return value of the TryParse method.
@@ -103,7 +52,7 @@ namespace Ogama.Modules.Common.Tools
       isNum = double.TryParse(
         Convert.ToString(expression),
         System.Globalization.NumberStyles.Any,
-        System.Globalization.NumberFormatInfo.InvariantInfo, 
+        System.Globalization.NumberFormatInfo.InvariantInfo,
         out retNum);
 
       return isNum;
@@ -111,13 +60,17 @@ namespace Ogama.Modules.Common.Tools
 
     /// <summary>
     /// This method checks for the appearance of invalid
-    /// characters for filenames in the given string,
-    /// linke white space or slashes etc.
+    ///   characters for filenames in the given string,
+    ///   linke white space or slashes etc.
     /// </summary>
-    /// <param name="filename">A <see cref="string"/> with the filename (without)
-    /// path to check for.</param>
-    /// <returns><strong>True</strong>, if filename is valid,
-    /// otherwise <strong>false</strong>.</returns>
+    /// <param name="filename">
+    /// A <see cref="string"/> with the filename (without)
+    ///   path to check for.
+    /// </param>
+    /// <returns>
+    /// <strong>True</strong>, if filename is valid,
+    ///   otherwise <strong>false</strong>.
+    /// </returns>
     public static bool IsValidFilename(string filename)
     {
       // Get a list of invalid file characters.
@@ -126,12 +79,80 @@ namespace Ogama.Modules.Common.Tools
       return filename.IndexOfAny(invalidFileChars) < 0;
     }
 
-    #endregion //METHODS
+    /// <summary>
+    /// Searches a specified process
+    /// </summary>
+    /// <param name="name">Name of process, without extension .exe or .dll</param>
+    /// <returns>True if process is running, false otherwise</returns>
+    public static bool IsProcessOpen(string name)
+    {
+      return Process.GetProcesses().Any(clsProcess => clsProcess.ProcessName == name);
+    }
 
-    ///////////////////////////////////////////////////////////////////////////////
-    // Small helping Methods                                                     //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region HELPER
-    #endregion //HELPER
+    /// <summary>
+    /// Searches a specified application in windows registries
+    /// </summary>
+    /// <param name="appName">Name of application</param>
+    /// <returns>True if application installed, false otherwise</returns>
+    public static bool IsApplicationInstalled(string appName)
+    {
+      // search in: CurrentUser
+      var keyName = @"SOFTWARE";
+      if (ExistsInSubKey(Registry.CurrentUser, keyName, "STARTMENU_REGISTRYNAME", appName))
+      {
+        return true;
+      }
+
+      // search in: LocalMachine_32            
+      if (ExistsInSubKey(Registry.LocalMachine, keyName, "STARTMENU_REGISTRYNAME", appName))
+      {
+        return true;
+      }
+
+      // search in: LocalMachine_64
+      keyName = @"SOFTWARE\Wow6432Node";
+      if (ExistsInSubKey(Registry.LocalMachine, keyName, "STARTMENU_REGISTRYNAME", appName))
+      {
+        return true;
+      }
+
+      return false;
+    }
+
+    /// <summary>
+    /// Find matching application's name with specified subkey's name in subkeys of a root registry directory
+    /// </summary>
+    /// <param name="root">Registry root</param>
+    /// <param name="subKeyName">Searching root</param>
+    /// <param name="attributeName">Subkey name to find</param>
+    /// <param name="appName">Application name</param>
+    /// <returns>True if we found matching subkey name, false otherwise</returns>
+    private static bool ExistsInSubKey(RegistryKey root, string subKeyName, string attributeName, string appName)
+    {
+      using (var key = root.OpenSubKey(subKeyName))
+      {
+        if (key == null)
+        {
+          return false;
+        }
+
+        foreach (string kn in key.GetSubKeyNames())
+        {
+          RegistryKey subkey;
+          using (subkey = key.OpenSubKey(kn))
+          {
+            var displayName = subkey.GetValue(attributeName) as string;
+            if (appName.Equals(displayName, StringComparison.OrdinalIgnoreCase))
+            {
+              return true;
+            }
+          }
+        }
+      }
+
+      return false;
+    }
+
+    #endregion
   }
 }

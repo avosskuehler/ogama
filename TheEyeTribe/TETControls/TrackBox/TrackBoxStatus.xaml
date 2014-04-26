@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="TETControls.TrackBox.TrackBoxStatus"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	d:DesignWidth="1200" d:DesignHeight="1000">
+    <Grid x:Name="LayoutRoot">
+        <Image x:Name="GridImageBackground" Source="GFX/main_bg.png" Visibility="Visible" Stretch="Fill" />
+        <Label x:Name="labelDeviceConnected" Foreground="White" FontSize="13"  Width="Auto" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        
+        <Grid x:Name="gridContent">
+            <Grid x:Name="GridImages">
+                <Image x:Name="status_quality_inverted" Source="GFX/gradient_red_128.png" Visibility="Visible" Stretch="Fill" Opacity="1" />
+                <Image x:Name="status_quality" Source="GFX/gradient_green_128.png" Visibility="Visible" Stretch="Fill" Opacity="0" />
+                <Image x:Name="status_no_tracking" Source="GFX/trackinglost.png" Visibility="Visible"  />
+            </Grid>
+            <Canvas Name="Drawing_Canvas" ClipToBounds="true" >
+                <Image x:Name="eye_right" Source="GFX/tb_eye_128.png" ClipToBounds="True" Visibility="Collapsed" RenderTransformOrigin="0.5, 0.5" />
+                <Image x:Name="eye_left" Source="GFX/tb_eye_128.png" ClipToBounds="True" Visibility="Collapsed" RenderTransformOrigin="0.5, 0.5" />
+            </Canvas>
+        </Grid>
+        
+    </Grid>
+</UserControl>

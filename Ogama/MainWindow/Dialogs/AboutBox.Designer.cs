@@ -44,7 +44,7 @@ namespace Ogama.MainWindow.Dialogs
       this.pcbWWW = new System.Windows.Forms.PictureBox();
       this.groupBox2 = new System.Windows.Forms.GroupBox();
       this.lblDescription = new System.Windows.Forms.Label();
-      this.dialogTop1 = new DialogTop();
+      this.dialogTop1 = new Ogama.Modules.Common.Controls.DialogTop();
       ((System.ComponentModel.ISupportInitialize)(this.pcbFUBerlin)).BeginInit();
       this.grpAssembly.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.pcbWWW)).BeginInit();
@@ -79,7 +79,7 @@ namespace Ogama.MainWindow.Dialogs
       this.textBoxDescription.TabIndex = 23;
       this.textBoxDescription.TabStop = false;
       this.textBoxDescription.Text = "It is developed by Adrian Voßkühler and written in C#.NET. It is published under " +
-          "GPL, uses .NET Framework 3.5 and SQL Databases and is open source.\r\n";
+    "GPL, uses .NET Framework 4 and SQL Database and is open source.\r\n";
       // 
       // labelProductName
       // 
@@ -147,8 +147,8 @@ namespace Ogama.MainWindow.Dialogs
       this.label1.Size = new System.Drawing.Size(240, 81);
       this.label1.TabIndex = 25;
       this.label1.Text = "- Dixon Cleveland from LC Technologies allowed us to use their fixation detection" +
-          " algorithm.\r\n- The Gazegroup for creating the Gazetracker.\r\n- Many users providi" +
-          "ng bug fixes and improvement requests.";
+    " algorithm.\r\n- The Gazegroup for creating the Gazetracker.\r\n- Many users providi" +
+    "ng bug fixes and improvement requests.";
       // 
       // link
       // 
@@ -203,14 +203,14 @@ namespace Ogama.MainWindow.Dialogs
       this.lblDescription.Size = new System.Drawing.Size(405, 13);
       this.lblDescription.TabIndex = 34;
       this.lblDescription.Text = "This program is intended to analyze still images overlayed with mouse and gaze da" +
-          "ta.";
+    "ta.";
       // 
       // dialogTop1
       // 
       this.dialogTop1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
       this.dialogTop1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("dialogTop1.BackgroundImage")));
       this.dialogTop1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-      this.dialogTop1.Description = "This is all about -";
+      this.dialogTop1.Description = "About this software ...";
       this.dialogTop1.Dock = System.Windows.Forms.DockStyle.Top;
       this.dialogTop1.Location = new System.Drawing.Point(0, 0);
       this.dialogTop1.Logo = ((System.Drawing.Image)(resources.GetObject("dialogTop1.Logo")));

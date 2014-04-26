@@ -86,6 +86,10 @@ namespace Ogama.Modules.Recording.TrackerBase
     /// The ITU Haytham tracker project
     /// </summary>
     Haytham = 2048,
+
+    /// <summary>
+    /// The Eye Tribe project
+    /// </summary>
+    TheEyeTribe = 4096,
   }
 }
-

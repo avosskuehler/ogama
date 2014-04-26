@@ -737,7 +737,7 @@
       this.btnPreviewSlideshow.Size = new System.Drawing.Size(23, 25);
       this.btnPreviewSlideshow.Text = "Preview slideshow";
       this.btnPreviewSlideshow.ToolTipText = "Preview slideshow...";
-      this.btnPreviewSlideshow.Click += new System.EventHandler(this.btnPreviewSlideshow_Click);
+      this.btnPreviewSlideshow.Click += new System.EventHandler(this.BtnPreviewSlideshowClick);
       // 
       // toolStripSeparator5
       // 

@@ -175,6 +175,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Windows\assembly\GAC\Microsoft.VisualStudio.OLE.Interop\7.1.40304.0__b03f5f7f11d50a3a\Microsoft.VisualStudio.OLE.Interop.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -199,14 +203,20 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.XML" />
+    <Reference Include="TETCSharpClient">
+      <HintPath>..\Libs\Managed\TETCSharpClient.dll</HintPath>
+    </Reference>
     <Reference Include="Tobii.Eyetracking.Sdk, Version=3.0.2.0, Culture=neutral, PublicKeyToken=8f83ae3e0f6e46ef, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\Tobii.Eyetracking.Sdk.dll</HintPath>
     </Reference>
+    <Reference Include="UIAutomationProvider" />
     <Reference Include="WindowsBase">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataSet\OgamaDataSet.cs">
@@ -505,6 +515,33 @@
     <Compile Include="Modules\Recording\SMIInterface\RedM\SMIRedMClient.cs" />
     <Compile Include="Modules\Recording\SMIInterface\RedM\SMIRedMWrapper.cs" />
     <Compile Include="Modules\Recording\SMIInterface\RedM\SMIRedMWrapperListener.cs" />
+    <Compile Include="Modules\Recording\TheEyeTribeInterface\TheEyeTribeCalibrationPoints.cs" />
+    <Compile Include="Modules\Recording\TheEyeTribeInterface\HowToActivateTheEyeTribe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\TheEyeTribeInterface\HowToActivateTheEyeTribe.Designer.cs">
+      <DependentUpon>HowToActivateTheEyeTribe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\TheEyeTribeInterface\TheEyeTribeSetting.cs" />
+    <Compile Include="Modules\Recording\TheEyeTribeInterface\TheEyeTribeSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\TheEyeTribeInterface\TheEyeTribeSettingsDialog.Designer.cs">
+      <DependentUpon>TheEyeTribeSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\TheEyeTribeInterface\TheEyeTribeTracker.cs" />
+    <Compile Include="Modules\Recording\TheEyeTribeInterface\TheEyeTribeCalibrationResultPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\TheEyeTribeInterface\TheEyeTribeCalibrationResultPanel.Designer.cs">
+      <DependentUpon>TheEyeTribeCalibrationResultPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\TheEyeTribeInterface\TheEyeTribeTrackStatusDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\TheEyeTribeInterface\TheEyeTribeTrackStatusDialog.Designer.cs">
+      <DependentUpon>TheEyeTribeTrackStatusDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Recording\TobiiInterface\TobiiCalibrationRunner.cs" />
     <Compile Include="Modules\Recording\TobiiInterface\TobiiCalibrationForm.cs">
       <SubType>Form</SubType>
@@ -1272,6 +1309,21 @@
     <EmbeddedResource Include="Modules\Recording\SMIInterface\SMISettingsDlg.resx">
       <DependentUpon>SMISettingsDlg.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\TheEyeTribeInterface\HowToActivateTheEyeTribe.resx">
+      <DependentUpon>HowToActivateTheEyeTribe.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\TheEyeTribeInterface\TheEyeTribeSettingsDialog.resx">
+      <DependentUpon>TheEyeTribeSettingsDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\TheEyeTribeInterface\TheEyeTribeCalibrationResultPanel.resx">
+      <DependentUpon>TheEyeTribeCalibrationResultPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\TheEyeTribeInterface\TheEyeTribeTrackStatusDialog.resx">
+      <DependentUpon>TheEyeTribeTrackStatusDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\TobiiInterface\TobiiCalibrationForm.resx">
       <DependentUpon>TobiiCalibrationForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -1782,6 +1834,10 @@
     <None Include="Resources\SMIiViewXFoto64.png" />
     <None Include="Resources\SMIRedMFoto16.png" />
     <None Include="Resources\SMIiViewXFoto16.png" />
+    <None Include="Resources\TheEyeTribeBanner.png" />
+    <None Include="Resources\TheEyeTribeFoto16.png" />
+    <None Include="Resources\TheEyeTribeFoto64.png" />
+    <None Include="Resources\TheEyeTribeLogo.jpg" />
     <Content Include="SaliencyCalculation\cygblas.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1998,6 +2054,10 @@
     <ProjectReference Include="..\OgamaControls\OgamaControls.csproj">
       <Project>{63EF9D30-447A-4F79-9EC8-E4956DC0ABF8}</Project>
       <Name>OgamaControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TheEyeTribe\TETControls\TETControls.csproj">
+      <Project>{c93b12c7-9872-47a3-a2db-d92623476fe5}</Project>
+      <Name>TETControls</Name>
     </ProjectReference>
     <ProjectReference Include="..\VectorGraphics\VectorGraphics.csproj">
       <Project>{8230AED9-33A2-42FD-BDF7-4F7E4EFA73DB}</Project>
