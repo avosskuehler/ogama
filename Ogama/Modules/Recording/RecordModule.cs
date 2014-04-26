@@ -54,6 +54,7 @@ namespace Ogama.Modules.Recording
   using Ogama.Modules.Recording.Presenter;
   using Ogama.Modules.Recording.SMIInterface.iViewX;
   using Ogama.Modules.Recording.SMIInterface.RedM;
+  using Ogama.Modules.Recording.TheEyeTribeInterface;
   using Ogama.Modules.Recording.TobiiInterface;
   using Ogama.Modules.Recording.TrackerBase;
   using Ogama.Properties;
@@ -431,23 +432,25 @@ namespace Ogama.Modules.Recording
     #region Public Methods and Operators
 
     /// <summary>
-    ///   This method test the presentation screen for equal size with the size
+    /// This method test the presentation screen for equal size with the size
     ///   specified in the experiment settings and returns true if successful.
     /// </summary>
+    /// <param name="newResolution">
+    /// The new resolution to check.
+    /// </param>
     /// <returns>
-    ///   <strong>True</strong>, if presentation screen size is correct,
+    /// <strong>True</strong>, if presentation screen size is correct,
     ///   otherwise <strong>false</strong>.
     /// </returns>
-    public static bool CheckForCorrectPresentationScreenResolution()
+    public static bool CheckForCorrectPresentationScreenResolution(Size newResolution)
     {
-      Size presentationScreenWorkingArea = PresentationScreen.GetPresentationResolution();
       int presentationWidth = Document.ActiveDocument.ExperimentSettings.WidthStimulusScreen;
       int presentationHeight = Document.ActiveDocument.ExperimentSettings.HeightStimulusScreen;
-      if (presentationScreenWorkingArea.Width != presentationWidth
-          || presentationScreenWorkingArea.Height != presentationHeight)
+      if (newResolution.Width != presentationWidth
+          || newResolution.Height != presentationHeight)
       {
-        string message = "The resolution of the presentation screen: " + presentationScreenWorkingArea.Width + "x"
-                         + presentationScreenWorkingArea.Height + " is different from the size "
+        string message = "The resolution of the presentation screen: " + newResolution.Width + "x"
+                         + newResolution.Height + " is different from the size "
                          + "specified in the experiment settings: " + presentationWidth + "x" + presentationHeight + "."
                          + Environment.NewLine
                          + "Please change the resolution of the presentation screen to fit the resolution specified in the experiment settings."
@@ -874,14 +877,6 @@ namespace Ogama.Modules.Recording
       this.CreateTrackerInterfaces();
     }
 
-    ///////////////////////////////////////////////////////////////////////////////
-    // Eventhandler                                                              //
-    ///////////////////////////////////////////////////////////////////////////////
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Eventhandler for UI, Menu, Buttons, Toolbars etc.                         //
-    ///////////////////////////////////////////////////////////////////////////////
-
     /// <summary>
     /// The <see cref="Control.Click"/> event handler for the
     ///   <see cref="Button"/> <see cref="btnPrimary"/>.
@@ -895,8 +890,39 @@ namespace Ogama.Modules.Recording
     /// </param>
     private void BtnPrimaryClick(object sender, EventArgs e)
     {
-      this.btnSecondary.Checked = !this.btnPrimary.Checked;
-      this.SubmitPresentationScreenToSettings();
+      if (CheckForCorrectPresentationScreenResolution(Screen.PrimaryScreen.Bounds.Size))
+      {
+        this.btnSecondary.Checked = !this.btnPrimary.Checked;
+        this.SubmitPresentationScreenToSettings();
+      }
+      else
+      {
+        this.btnPrimary.Checked = false;
+      }
+    }
+
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler for the
+    ///   <see cref="Button"/> <see cref="btnSecondary"/>.
+    ///   Updates the presentation screen.
+    /// </summary>
+    /// <param name="sender">
+    /// Source of the event.
+    /// </param>
+    /// <param name="e">
+    /// An empty <see cref="EventArgs"/>.
+    /// </param>
+    private void BtnSecondaryClick(object sender, EventArgs e)
+    {
+      if (CheckForCorrectPresentationScreenResolution(SecondaryScreen.GetSecondaryScreen().Bounds.Size))
+      {
+        this.btnPrimary.Checked = !this.btnSecondary.Checked;
+        this.SubmitPresentationScreenToSettings();
+      }
+      else
+      {
+        this.btnSecondary.Checked = false;
+      }
     }
 
     /// <summary>
@@ -914,23 +940,6 @@ namespace Ogama.Modules.Recording
     private void BtnScreenCaptureSettingsClick(object sender, EventArgs e)
     {
       this.ShowScreenCaptureDialog();
-    }
-
-    /// <summary>
-    /// The <see cref="Control.Click"/> event handler for the
-    ///   <see cref="Button"/> <see cref="btnSecondary"/>.
-    ///   Updates the presentation screen.
-    /// </summary>
-    /// <param name="sender">
-    /// Source of the event.
-    /// </param>
-    /// <param name="e">
-    /// An empty <see cref="EventArgs"/>.
-    /// </param>
-    private void BtnSecondaryClick(object sender, EventArgs e)
-    {
-      this.btnPrimary.Checked = !this.btnSecondary.Checked;
-      this.SubmitPresentationScreenToSettings();
     }
 
     /// <summary>
@@ -1109,6 +1118,7 @@ namespace Ogama.Modules.Recording
       this.tclEyetracker.TabPages.Add(this.tbpGazetrackerDirectClient);
       this.tclEyetracker.TabPages.Add(this.tbpEyeTech);
       this.tclEyetracker.TabPages.Add(this.tbpHaytham);
+      this.tclEyetracker.TabPages.Add(this.tbpEyeTribe);
 
       // Read activated tracker value from the application settings
       string activatedTracker = Settings.Default.ActivatedHardwareTracker;
@@ -1427,6 +1437,33 @@ namespace Ogama.Modules.Recording
         if (this.tclEyetracker.TabPages.Contains(this.tbpHaytham))
         {
           this.tclEyetracker.TabPages.Remove(this.tbpHaytham);
+        }
+      }
+
+      if (tracker == (tracker | HardwareTracker.TheEyeTribe))
+      {
+        // Create the eye tribe tracker
+        var newTheEyeTribe = new TheEyeTribeTracker(
+          this,
+          this.spcEyeTribeControls,
+          this.spcEyeTribeTrackStatus.Panel1,
+          this.spcEyeTribeCalibrationResult.Panel1,
+          this.btnEyeTribeShowOnPresentationScreen,
+          this.btnEyeTribeAccept,
+          this.btnEyeTribeRecalibrate,
+          this.btnEyeTribeConnect,
+          this.btnEyeTribeSubject,
+          this.btnEyeTribeCalibrate,
+          this.btnEyeTribeRecord,
+          this.txbEyeTribeSubject);
+
+        this.trackerInterfaces.Add(HardwareTracker.TheEyeTribe, newTheEyeTribe);
+      }
+      else
+      {
+        if (this.tclEyetracker.TabPages.Contains(this.tbpEyeTribe))
+        {
+          this.tclEyetracker.TabPages.Remove(this.tbpEyeTribe);
         }
       }
 
@@ -2455,7 +2492,7 @@ namespace Ogama.Modules.Recording
         return false;
       }
 
-      if (!CheckForCorrectPresentationScreenResolution())
+      if (!CheckForCorrectPresentationScreenResolution(PresentationScreen.GetPresentationResolution()))
       {
         return false;
       }
@@ -2681,6 +2718,13 @@ namespace Ogama.Modules.Recording
           if (this.trackerInterfaces.ContainsKey(HardwareTracker.Haytham))
           {
             this.currentTracker = this.trackerInterfaces[HardwareTracker.Haytham];
+          }
+
+          break;
+        case "tbpEyeTribe":
+          if (this.trackerInterfaces.ContainsKey(HardwareTracker.TheEyeTribe))
+          {
+            this.currentTracker = this.trackerInterfaces[HardwareTracker.TheEyeTribe];
           }
 
           break;

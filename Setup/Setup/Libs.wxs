@@ -138,7 +138,20 @@
         <File Id="Tobii.Eyetracking.Sdk" Name="Tobii.Eyetracking.Sdk.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="Tobii.Eyetracking.Sdk" AssemblyApplication="Tobii.Eyetracking.Sdk" DiskId="1"
               Source="$(var.Ogama.TargetDir)" />
       </Component>
+      <Component Id="C_Newtonsoft.Json" Guid="{438D2414-2AE2-4443-9BA1-F994E88A88FD}" Win64="$(var.Win64)">
+        <File Id="Newtonsoft.Json" Name="Newtonsoft.Json.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="Newtonsoft.Json" AssemblyApplication="Newtonsoft.Json" DiskId="1"
+              Source="$(var.SolutionDir)Libs\Managed\" />
+      </Component>
+      <Component Id="C_TETCSharpClient" Guid="{810FEA7C-AC63-4827-87F0-49CB2940B189}" Win64="$(var.Win64)">
+        <File Id="TETCSharpClient" Name="TETCSharpClient.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="TETCSharpClient" AssemblyApplication="TETCSharpClient" DiskId="1"
+              Source="$(var.SolutionDir)Libs\Managed\" />
+      </Component>
+      <Component Id="C_TETControls" Guid="{9FF24EF6-7496-4432-BA70-F4DAB0120B77}" Win64="$(var.Win64)">
+        <File Id="TETControls" Name="TETControls.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="TETControls" AssemblyApplication="TETControls" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
 
+      
       <Component Id="C_Microsoft.SqlServer.Management.Sdk.Sfc" Guid="{A1F64A66-74A9-79E7-AEB8-8B35D9220060}" Win64="$(var.Win64)">
         <File Id="Microsoft.SqlServer.Management.Sdk.Sfc" Name="Microsoft.SqlServer.Management.Sdk.Sfc.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="Microsoft.SqlServer.Management.Sdk.Sfc" AssemblyApplication="Microsoft.SqlServer.Management.Sdk.Sfc" DiskId="1"
               Source="$(var.SolutionDir)Libs\Managed\" />
@@ -217,6 +230,9 @@
         <ComponentRef Id='C_EtApi' />
         <ComponentRef Id='C_tobiisdk' />
         <ComponentRef Id='C_Tobii.Eyetracking.Sdk' />
+        <ComponentRef Id='C_Newtonsoft.Json' />
+        <ComponentRef Id='C_TETCSharpClient' />
+        <ComponentRef Id='C_TETControls' />
       </Feature>
 
       <Feature Id='SQLServerManagementFeature' Title='SQL Server Management' Description='Installs libraries for the connection with the sql server.' Level='1'>

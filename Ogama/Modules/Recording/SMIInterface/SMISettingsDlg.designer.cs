@@ -272,7 +272,7 @@
       this.txbiViewXPort.Name = "txbiViewXPort";
       this.txbiViewXPort.Size = new System.Drawing.Size(52, 20);
       this.txbiViewXPort.TabIndex = 27;
-      this.txbiViewXPort.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txbPort_KeyDown);
+      this.txbiViewXPort.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxbPortKeyDown);
       // 
       // label4
       // 
@@ -316,7 +316,7 @@
       this.txbOGAMAPort.Name = "txbOGAMAPort";
       this.txbOGAMAPort.Size = new System.Drawing.Size(52, 20);
       this.txbOGAMAPort.TabIndex = 30;
-      this.txbOGAMAPort.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txbPort_KeyDown);
+      this.txbOGAMAPort.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxbPortKeyDown);
       // 
       // txbOGAMAAddress
       // 

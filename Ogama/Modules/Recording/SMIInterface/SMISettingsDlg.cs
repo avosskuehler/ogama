@@ -1,16 +1,15 @@
-﻿// <copyright file="SMISettingsDlg.cs" company="FU Berlin">
-// ******************************************************
-// OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2013 Dr. Adrian Voßkühler  
-// ------------------------------------------------------------------------
-// This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
-// This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-// You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-// **************************************************************
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="SMISettingsDlg.cs" company="Freie Universität Berlin">
+//   OGAMA - open gaze and mouse analyzer 
+//   Copyright (C) 2014 Dr. Adrian Voßkühler  
+//   Licensed under GPL V3
 // </copyright>
 // <author>Adrian Voßkühler</author>
 // <email>adrian@ogama.net</email>
-
+// <summary>
+//   Popup form to specify settings for the SMI iViewX system.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 namespace Ogama.Modules.Recording.SMIInterface
 {
   using System;
@@ -20,47 +19,29 @@ namespace Ogama.Modules.Recording.SMIInterface
   using System.Windows.Forms;
 
   /// <summary>
-  /// Popup form to specify settings for the SMI iViewX system.
+  ///   Popup form to specify settings for the SMI iViewX system.
   /// </summary>
   public partial class SMISettingsDlg : Form
   {
-    ///////////////////////////////////////////////////////////////////////////////
-    // Defining Constants                                                        //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region CONSTANTS
-    #endregion //CONSTANTS
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Defining Variables, Enumerations, Events                                  //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region FIELDS
-    #endregion //FIELDS
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Construction and Initializing methods                                     //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region CONSTRUCTION
+    #region Constructors and Destructors
 
     /// <summary>
-    /// Initializes a new instance of the SMISettingsDlg class.
+    ///   Initializes a new instance of the SMISettingsDlg class.
     /// </summary>
     public SMISettingsDlg()
     {
       this.InitializeComponent();
-      this.SetOGAMAServerIP();
+      this.SetOgamaServerIP();
     }
 
-    #endregion //CONSTRUCTION
+    #endregion
 
-    ///////////////////////////////////////////////////////////////////////////////
-    // Defining Properties                                                       //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region PROPERTIES
+    #region Public Properties
 
     /// <summary>
-    /// Gets or sets the <see cref="SMISetting"/> class.
+    ///   Gets or sets the <see cref="SMISetting" /> class.
     /// </summary>
-    /// <value>A <see cref="SMISetting"/> with the current settings.</value>
+    /// <value>A <see cref="SMISetting" /> with the current settings.</value>
     public SMISetting SMISettings
     {
       get
@@ -74,96 +55,66 @@ namespace Ogama.Modules.Recording.SMIInterface
       }
     }
 
-    #endregion //PROPERTIES
+    #endregion
 
-    ///////////////////////////////////////////////////////////////////////////////
-    // Eventhandler                                                              //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region EVENTS
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Eventhandler for UI, Menu, Buttons, Toolbars etc.                         //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region WINDOWSEVENTHANDLER
+    #region Public Methods and Operators
 
     /// <summary>
-    /// The <see cref="Control.KeyDown"/> event handler for
-    /// the port <see cref="TextBox"/>es
+    /// Check if key entered is "numeric".
     /// </summary>
-    /// <param name="sender">Source of the event.</param>
-    /// <param name="e">The <see cref="KeyEventArgs"/> with the event data.</param>
-    private void txbPort_KeyDown(object sender, KeyEventArgs e)
+    /// <param name="key">
+    /// A <see cref="Keys"/> to check.
+    /// </param>
+    /// <returns>
+    /// <strong>True</strong> if given key is numeric or backspace,
+    ///   otherwise <strong>false</strong>
+    /// </returns>
+    public static bool CheckIfNumericKey(Keys key)
     {
-      if (this.CheckIfNumericKey(e.KeyCode))
+      if (key == Keys.Back)
       {
-        e.SuppressKeyPress = true;
+        // backspace?        
+        return true;
       }
+
+      if ((key >= Keys.D0) && (key <= Keys.D9))
+      {
+        // digit from top of keyboard?        
+        return true;
+      }
+
+      if ((key >= Keys.NumPad0) && (key <= Keys.NumPad9))
+      {
+        // digit from keypad?        
+        return true;
+      }
+
+      // no "numeric" key
+      return false;
     }
 
-    #endregion //WINDOWSEVENTHANDLER
+    #endregion
 
-    ///////////////////////////////////////////////////////////////////////////////
-    // Eventhandler for Custom Defined Events                                    //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region CUSTOMEVENTHANDLER
-    #endregion //CUSTOMEVENTHANDLER
-
-    #endregion //EVENTS
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Methods and Eventhandling for Background tasks                            //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region BACKGROUNDWORKER
-    #endregion //BACKGROUNDWORKER
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Inherited methods                                                         //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region OVERRIDES
-    #endregion //OVERRIDES
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Methods for doing main class job                                          //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region METHODS
+    #region Methods
 
     /// <summary>
-    /// Reads the ip address of the computer on which OGAMA is running
+    ///   This method generates a new SMISetting out of the
+    ///   options choosen in the UI.
     /// </summary>
-    private void SetOGAMAServerIP()
-    {
-      // Getting Ip address of local machine...
-      // First get the host name of local machine.
-      var strHostName = Dns.GetHostName();
-
-      // Then using host name, get the IP address list..
-      var addr = Dns.GetHostAddresses(strHostName);
-
-      if (addr.Length > 0)
-      {
-        var add = addr.First(ip => ip.AddressFamily == AddressFamily.InterNetwork);
-        this.txbOGAMAAddress.Text = add.ToString();
-      }
-      else
-      {
-        this.txbOGAMAAddress.Text = "No local IP found";
-      }
-    }
-
-    /// <summary>
-    /// This method generates a new SMISetting out of the
-    /// options choosen in the UI.
-    /// </summary>
-    /// <returns>A <see cref="SMISetting"/> containing the values of the
-    /// dialog.</returns>
+    /// <returns>
+    ///   A <see cref="SMISetting" /> containing the values of the
+    ///   dialog.
+    /// </returns>
     private SMISetting GenerateSMISettings()
     {
-      SMISetting newSetting = new SMISetting();
-      newSetting.SMIServerAddress = this.txbiViewXAddress.Text;
-      newSetting.SMIServerPort = Convert.ToInt32(this.txbiViewXPort.Text);
-      newSetting.OGAMAServerPort = Convert.ToInt32(this.txbOGAMAPort.Text);
-      newSetting.CalibPointColor = this.clbSMIPointColor.CurrentColor;
-      newSetting.CalibBackgroundColor = this.clbSMIBackColor.CurrentColor;
+      var newSetting = new SMISetting
+                         {
+                           SMIServerAddress = this.txbiViewXAddress.Text,
+                           SMIServerPort = Convert.ToInt32(this.txbiViewXPort.Text),
+                           OGAMAServerPort = Convert.ToInt32(this.txbOGAMAPort.Text),
+                           CalibPointColor = this.clbSMIPointColor.CurrentColor,
+                           CalibBackgroundColor = this.clbSMIBackColor.CurrentColor
+                         };
 
       if (this.rdbSMISizeLarge.Checked)
       {
@@ -195,11 +146,36 @@ namespace Ogama.Modules.Recording.SMIInterface
     }
 
     /// <summary>
-    /// Updates the forms UI with the new settings from the 
-    /// <see cref="SMISetting"/> member.
+    ///   Reads the ip address of the computer on which OGAMA is running
     /// </summary>
-    /// <param name="setting">A <see cref="SMISetting"/> with the settings
-    /// to apply.</param>
+    private void SetOgamaServerIP()
+    {
+      // Getting Ip address of local machine...
+      // First get the host name of local machine.
+      string strHostName = Dns.GetHostName();
+
+      // Then using host name, get the IP address list..
+      IPAddress[] addr = Dns.GetHostAddresses(strHostName);
+
+      if (addr.Length > 0)
+      {
+        IPAddress add = addr.First(ip => ip.AddressFamily == AddressFamily.InterNetwork);
+        this.txbOGAMAAddress.Text = add.ToString();
+      }
+      else
+      {
+        this.txbOGAMAAddress.Text = "No local IP found";
+      }
+    }
+
+    /// <summary>
+    /// Updates the forms UI with the new settings from the
+    ///   <see cref="SMISetting"/> member.
+    /// </summary>
+    /// <param name="setting">
+    /// A <see cref="SMISetting"/> with the settings
+    ///   to apply.
+    /// </param>
     private void SetupUIWithNewSettings(SMISetting setting)
     {
       switch (setting.CalibPointSize)
@@ -223,43 +199,24 @@ namespace Ogama.Modules.Recording.SMIInterface
       this.clbSMIPointColor.CurrentColor = setting.CalibPointColor;
     }
 
-    #endregion //METHODS
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // Small helping Methods                                                     //
-    ///////////////////////////////////////////////////////////////////////////////
-    #region HELPER
-
     /// <summary>
-    /// Check if key entered is "numeric".
+    /// The <see cref="Control.KeyDown"/> event handler for
+    ///   the port <see cref="TextBox"/>es
     /// </summary>
-    /// <param name="key">A <see cref="Keys"/> to check.</param>
-    /// <returns><strong>True</strong> if given key is numeric or backspace,
-    /// otherwise <strong>false</strong></returns>
-    private bool CheckIfNumericKey(Keys key)
+    /// <param name="sender">
+    /// Source of the event.
+    /// </param>
+    /// <param name="e">
+    /// The <see cref="KeyEventArgs"/> with the event data.
+    /// </param>
+    private void TxbPortKeyDown(object sender, KeyEventArgs e)
     {
-      if (key == Keys.Back)
+      if (CheckIfNumericKey(e.KeyCode))
       {
-        // backspace?        
-        return true;
-      }
-      else if ((key >= Keys.D0) && (key <= Keys.D9))
-      {
-        // digit from top of keyboard?        
-        return true;
-      }
-      else if ((key >= Keys.NumPad0) && (key <= Keys.NumPad9))
-      {
-        // digit from keypad?        
-        return true;
-      }
-      else
-      {
-        // no "numeric" key
-        return false;
+        e.SuppressKeyPress = true;
       }
     }
 
-    #endregion //HELPER
+    #endregion
   }
 }

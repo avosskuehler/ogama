@@ -22,6 +22,7 @@ namespace Ogama.Modules.SlideshowDesign
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
   using Ogama.Modules.Common.SlideCollections;
+  using Ogama.Modules.Common.Tools;
   using Ogama.Modules.Recording;
   using Ogama.Modules.Recording.Presenter;
   using Ogama.Modules.SlideshowDesign.DesignModule;
@@ -334,9 +335,9 @@ namespace Ogama.Modules.SlideshowDesign
     /// </summary>
     /// <param name="sender">Source of the event.</param>
     /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void btnPreviewSlideshow_Click(object sender, EventArgs e)
+    private void BtnPreviewSlideshowClick(object sender, EventArgs e)
     {
-      if (!RecordModule.CheckForCorrectPresentationScreenResolution())
+      if (!RecordModule.CheckForCorrectPresentationScreenResolution(PresentationScreen.GetPresentationResolution()))
       {
         return;
       }

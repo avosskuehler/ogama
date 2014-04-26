@@ -243,9 +243,9 @@ namespace Ogama.Modules.Recording.GazepointInterface
     public static TrackerStatus IsAvailable(out string errorMessage)
     {
       // Check Gazepoint process
-      if (!IsProcessOpen("Gazepoint"))
+      if (!IOHelpers.IsProcessOpen("Gazepoint"))
       {
-        if (!IsApplicationInstalled("Gazepoint"))
+        if (!IOHelpers.IsApplicationInstalled("Gazepoint"))
         {
           errorMessage = "Can't find Gazepoint GP3 Eye Tracker on this computer. Maybe Gazepoint GP3 Eye Tracker is not installed or installation is corrupted." + Environment.NewLine + "Please reinstall Gazepoint GP3 Eye Tracker.";
           return TrackerStatus.NotAvailable;
@@ -724,80 +724,6 @@ namespace Ogama.Modules.Recording.GazepointInterface
     /// </returns>
     [DllImport("Kernel32.dll", SetLastError = true)]
     public static extern bool QueryPerformanceFrequency(out ulong frequency);
-
-    /// <summary>
-    /// Searches a specified process
-    /// </summary>
-    /// <param name="name">Name of process, without extension .exe or .dll</param>
-    /// <returns>True if process is running, false otherwise</returns>
-    private static bool IsProcessOpen(string name)
-    {
-      return Process.GetProcesses().Any(clsProcess => clsProcess.ProcessName == name);
-    }
-
-    /// <summary>
-    /// Searches a specified application in windows registries
-    /// </summary>
-    /// <param name="appName">Name of application</param>
-    /// <returns>True if application installed, false otherwise</returns>
-    private static bool IsApplicationInstalled(string appName)
-    {
-      // search in: CurrentUser
-      var keyName = @"SOFTWARE";
-      if (ExistsInSubKey(Registry.CurrentUser, keyName, "STARTMENU_REGISTRYNAME", appName) == true)
-      {
-        return true;
-      }
-
-      // search in: LocalMachine_32            
-      if (ExistsInSubKey(Registry.LocalMachine, keyName, "STARTMENU_REGISTRYNAME", appName) == true)
-      {
-        return true;
-      }
-
-      // search in: LocalMachine_64
-      keyName = @"SOFTWARE\Wow6432Node";
-      if (ExistsInSubKey(Registry.LocalMachine, keyName, "STARTMENU_REGISTRYNAME", appName) == true)
-      {
-        return true;
-      }
-
-      return false;
-    }
-
-    /// <summary>
-    /// Find matching application's name with specified subkey's name in subkeys of a root registry directory
-    /// </summary>
-    /// <param name="root">Registry root</param>
-    /// <param name="subKeyName">Searching root</param>
-    /// <param name="attributeName">Subkey name to find</param>
-    /// <param name="appName">Application name</param>
-    /// <returns>True if we found matching subkey name, false otherwise</returns>
-    private static bool ExistsInSubKey(RegistryKey root, string subKeyName, string attributeName, string appName)
-    {
-      RegistryKey subkey;
-      string displayName;
-
-      using (RegistryKey key = root.OpenSubKey(subKeyName))
-      {
-        if (key != null)
-        {
-          foreach (string kn in key.GetSubKeyNames())
-          {
-            using (subkey = key.OpenSubKey(kn))
-            {
-              displayName = subkey.GetValue(attributeName) as string;
-              if (appName.Equals(displayName, StringComparison.OrdinalIgnoreCase) == true)
-              {
-                return true;
-              }
-            }
-          }
-        }
-      }
-
-      return false;
-    }
 
     /// <summary>
     /// Deserializes the <see cref="GazepointSetting"/> from the given xml file.

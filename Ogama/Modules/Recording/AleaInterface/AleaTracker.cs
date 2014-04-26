@@ -253,10 +253,8 @@ namespace Ogama.Modules.Recording.AleaInterface
     /// is available in the system, otherwise <strong>false</strong></returns>
     public static TrackerStatus IsAvailable(out string errorMessage)
     {
-      errorMessage = string.Empty;
-
       // Check intelligaze process
-      if (!IsProcessOpen("IntelliGaze"))
+      if (!IOHelpers.IsProcessOpen("IntelliGaze"))
       {
         const string FILENAME = "Intelligaze.exe";
 
@@ -308,7 +306,7 @@ namespace Ogama.Modules.Recording.AleaInterface
     public override bool Connect()
     {
       // Check intelligaze process
-      if (!IsProcessOpen("IntelliGaze"))
+      if (!IOHelpers.IsProcessOpen("IntelliGaze"))
       {
         const string FILENAME = "Intelligaze.exe";
 
@@ -940,24 +938,6 @@ namespace Ogama.Modules.Recording.AleaInterface
     #region METHODS
 
     /// <summary>
-    /// Searchs a specified process
-    /// </summary>
-    /// <param name="name">Name of process, without .exe or .dll</param>
-    /// <returns>True if process is running, otherwise false</returns>
-    private static bool IsProcessOpen(string name)
-    {
-      foreach (Process clsProcess in Process.GetProcesses())
-      {
-        if (clsProcess.ProcessName == name)
-        {
-          return true;
-        }
-      }
-
-      return false;
-    }
-
-    /// <summary>
     /// Get the Path of Intelligaze installation
     /// </summary>
     /// <returns>Full Path of Intelligaze</returns>
@@ -971,14 +951,12 @@ namespace Ogama.Modules.Recording.AleaInterface
       {
         return string.Empty;
       }
-      else
-      {
-        // Read file
-        StreamReader reader = new StreamReader(intelligazePathFile);
-        string binaryPath = reader.ReadLine();
-        reader.Close();
-        return binaryPath;
-      }
+
+      // Read file
+      StreamReader reader = new StreamReader(intelligazePathFile);
+      string binaryPath = reader.ReadLine();
+      reader.Close();
+      return binaryPath;
     }
 
     /// <summary>

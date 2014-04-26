@@ -21,6 +21,7 @@ namespace Ogama.Modules.SlideshowDesign
   using Ogama.Modules.Common.SlideCollections;
   using Ogama.Modules.Common.Tools;
   using Ogama.Modules.Common.Types;
+  using Ogama.Modules.Recording;
   using Ogama.Modules.SlideshowDesign.DesignModule;
   using Ogama.Modules.SlideshowDesign.DesignModule.StimuliDialogs;
   using Ogama.Properties;
@@ -199,8 +200,15 @@ namespace Ogama.Modules.SlideshowDesign
     /// </param>
     private void BtnPrimaryClick(object sender, EventArgs e)
     {
-      this.btnSecondary.Checked = !this.btnPrimary.Checked;
-      this.SubmitPresentationScreenToSettings();
+      if (RecordModule.CheckForCorrectPresentationScreenResolution(Screen.PrimaryScreen.Bounds.Size))
+      {
+        this.btnSecondary.Checked = !this.btnPrimary.Checked;
+        this.SubmitPresentationScreenToSettings();
+      }
+      else
+      {
+        this.btnPrimary.Checked = false;
+      }
     }
 
     /// <summary>
@@ -216,8 +224,15 @@ namespace Ogama.Modules.SlideshowDesign
     /// </param>
     private void BtnSecondaryClick(object sender, EventArgs e)
     {
-      this.btnPrimary.Checked = !this.btnSecondary.Checked;
-      this.SubmitPresentationScreenToSettings();
+      if (RecordModule.CheckForCorrectPresentationScreenResolution(SecondaryScreen.GetSecondaryScreen().Bounds.Size))
+      {
+        this.btnPrimary.Checked = !this.btnSecondary.Checked;
+        this.SubmitPresentationScreenToSettings();
+      }
+      else
+      {
+        this.btnSecondary.Checked = false;
+      }
     }
 
     /// <summary>

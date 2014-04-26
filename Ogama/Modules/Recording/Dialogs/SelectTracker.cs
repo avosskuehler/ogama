@@ -28,6 +28,7 @@ namespace Ogama.Modules.Recording.Dialogs
   using Ogama.Modules.Recording.MouseOnlyInterface;
   using Ogama.Modules.Recording.SMIInterface.iViewX;
   using Ogama.Modules.Recording.SMIInterface.RedM;
+  using Ogama.Modules.Recording.TheEyeTribeInterface;
   using Ogama.Modules.Recording.TobiiInterface;
   using Ogama.Modules.Recording.TrackerBase;
 
@@ -140,6 +141,11 @@ namespace Ogama.Modules.Recording.Dialogs
         if (this.chbHaytham.Checked)
         {
           returnValue |= HardwareTracker.Haytham;
+        }
+
+        if (this.chbTheEyeTribe.Checked)
+        {
+          returnValue |= HardwareTracker.TheEyeTribe;
         }
 
         return returnValue;
@@ -306,6 +312,16 @@ namespace Ogama.Modules.Recording.Dialogs
     }
 
     /// <summary>
+    /// Update the info bar on hovering over the control.
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+    private void GrpTheEyeTribeEnter(object sender, EventArgs e)
+    {
+      this.UpdateInfobar(TheEyeTribeTracker.IsAvailable, Properties.Resources.TheEyeTribeFoto64, Properties.Resources.TheEyeTribeLogo);
+    }
+
+    /// <summary>
     /// The <see cref="Control.Click"/> event handler for
     ///   the <see cref="PictureBox"/>
     ///   User clicked the haytham logo, so open haytham website.
@@ -384,6 +400,84 @@ namespace Ogama.Modules.Recording.Dialogs
     private void PcbGazepointClick(object sender, EventArgs e)
     {
       System.Diagnostics.Process.Start("http://www.gazept.com");
+    }
+
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler for
+    ///   the <see cref="PictureBox"/>
+    ///   User clicked the ITU logo,
+    ///   so open GAZE GROUP website.
+    /// </summary>
+    /// <param name="sender">
+    /// Source of the event.
+    /// </param>
+    /// <param name="e">
+    /// An empty <see cref="EventArgs"/>
+    /// </param>
+    private void PcbITUClick(object sender, EventArgs e)
+    {
+      System.Diagnostics.Process.Start("http://www.gazegroup.org/downloads/23-gazetracker");
+    }
+
+    /// <summary>
+    /// The event handler for the User clicked the mirametrix logo, so open mirametrix website
+    /// </summary>
+    /// <param name="sender">
+    /// Source of the event.
+    /// </param>
+    /// <param name="e">
+    /// An empty <see cref="EventArgs"/>
+    /// </param>
+    private void PcbMirametrixClick(object sender, EventArgs e)
+    {
+      System.Diagnostics.Process.Start("http://www.mirametrix.com");
+    }
+
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler for
+    ///   the <see cref="PictureBox"/> <see cref="pcbSMIiViewX"/>.
+    ///   User clicked the SMI logo,
+    ///   so open senso motoric instruments website.
+    /// </summary>
+    /// <param name="sender">
+    /// Source of the event.
+    /// </param>
+    /// <param name="e">
+    /// An empty <see cref="EventArgs"/>
+    /// </param>
+    private void PcbSMIClick(object sender, EventArgs e)
+    {
+      System.Diagnostics.Process.Start("http://www.smivision.com");
+    }
+
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler for
+    ///   the <see cref="PictureBox"/> <see cref="pcbTobii"/>.
+    ///   User clicked the tobii logo,
+    ///   so open tobii technologies website.
+    /// </summary>
+    /// <param name="sender">
+    /// Source of the event.
+    /// </param>
+    /// <param name="e">
+    /// An empty <see cref="EventArgs"/>
+    /// </param>
+    private void PcbTobiiClick(object sender, EventArgs e)
+    {
+      System.Diagnostics.Process.Start("http://www.tobii.com");
+    }
+
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler for
+    ///   the <see cref="PictureBox"/> <see cref="pcbTheEyeTribe"/>.
+    ///   User clicked the eye tribe logo,
+    ///   so open eye tribe website.
+    /// </summary>
+    /// <param name="sender"> Source of the event. </param>
+    /// <param name="e"> An empty <see cref="EventArgs"/> </param>
+    private void PcbTheEyeTribeClick(object sender, EventArgs e)
+    {
+      System.Diagnostics.Process.Start("http://theeyetribe.com");
     }
 
     /// <summary>
@@ -553,68 +647,16 @@ namespace Ogama.Modules.Recording.Dialogs
     }
 
     /// <summary>
-    /// The <see cref="Control.Click"/> event handler for
-    ///   the <see cref="PictureBox"/>
-    ///   User clicked the ITU logo,
-    ///   so open GAZE GROUP website.
+    /// The <see cref="Control.Click"/> event handler
+    ///   for the <see cref="PictureBox"/> <see cref="pcbHelpTheEyeTribe"/>
+    ///   Displays instructions to activate the eye tribe recording.
     /// </summary>
-    /// <param name="sender">
-    /// Source of the event.
-    /// </param>
-    /// <param name="e">
-    /// An empty <see cref="EventArgs"/>
-    /// </param>
-    private void PcbITUClick(object sender, EventArgs e)
+    /// <param name="sender"> Source of the event </param>
+    /// <param name="e"> An empty <see cref="EventArgs"/> </param>
+    private void PcbHelpTheEyeTribeClick(object sender, EventArgs e)
     {
-      System.Diagnostics.Process.Start("http://www.gazegroup.org/downloads/23-gazetracker");
-    }
-
-    /// <summary>
-    /// The event handler for the User clicked the mirametrix logo, so open mirametrix website
-    /// </summary>
-    /// <param name="sender">
-    /// Source of the event.
-    /// </param>
-    /// <param name="e">
-    /// An empty <see cref="EventArgs"/>
-    /// </param>
-    private void PcbMirametrixClick(object sender, EventArgs e)
-    {
-      System.Diagnostics.Process.Start("http://www.mirametrix.com");
-    }
-
-    /// <summary>
-    /// The <see cref="Control.Click"/> event handler for
-    ///   the <see cref="PictureBox"/> <see cref="pcbSMIiViewX"/>.
-    ///   User clicked the SMI logo,
-    ///   so open senso motoric instruments website.
-    /// </summary>
-    /// <param name="sender">
-    /// Source of the event.
-    /// </param>
-    /// <param name="e">
-    /// An empty <see cref="EventArgs"/>
-    /// </param>
-    private void PcbSMIClick(object sender, EventArgs e)
-    {
-      System.Diagnostics.Process.Start("http://www.smivision.com");
-    }
-
-    /// <summary>
-    /// The <see cref="Control.Click"/> event handler for
-    ///   the <see cref="PictureBox"/> <see cref="pcbTobii"/>.
-    ///   User clicked the tobii logo,
-    ///   so open tobii technologies website.
-    /// </summary>
-    /// <param name="sender">
-    /// Source of the event.
-    /// </param>
-    /// <param name="e">
-    /// An empty <see cref="EventArgs"/>
-    /// </param>
-    private void PcbTobiiClick(object sender, EventArgs e)
-    {
-      System.Diagnostics.Process.Start("http://www.tobii.com");
+      var objActivateTheEyeTribe = new HowToActivateTheEyeTribe();
+      objActivateTheEyeTribe.ShowDialog();
     }
 
     /// <summary>
@@ -833,6 +875,14 @@ namespace Ogama.Modules.Recording.Dialogs
     }
 
     /// <summary>
+    ///   Updates the status of the eye tribe tracking devices
+    /// </summary>
+    private void UpdateTheEyeTribeStatus()
+    {
+      this.SetStatus(TheEyeTribeTracker.IsAvailable, this.chbTheEyeTribe, this.pcbTheEyeTribeStatus, this.lblTheEyeTribeStatus);
+    }
+
+    /// <summary>
     ///   Updates the status of all connected devices.
     /// </summary>
     private void UpdateTrackerStatus()
@@ -849,6 +899,7 @@ namespace Ogama.Modules.Recording.Dialogs
       this.UpdateSmIiViewXTrackStatus();
       this.UpdateSMIRedMTrackStatus();
       this.UpdateHaythamTrackStatus();
+      this.UpdateTheEyeTribeStatus();
     }
 
     #endregion
