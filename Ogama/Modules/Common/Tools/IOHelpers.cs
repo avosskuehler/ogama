@@ -141,6 +141,11 @@ namespace Ogama.Modules.Common.Tools
           RegistryKey subkey;
           using (subkey = key.OpenSubKey(kn))
           {
+            if (subkey == null)
+            {
+              continue;
+            }
+
             var displayName = subkey.GetValue(attributeName) as string;
             if (appName.Equals(displayName, StringComparison.OrdinalIgnoreCase))
             {
