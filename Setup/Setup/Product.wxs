@@ -774,8 +774,8 @@
       <CostFinalize Sequence="1000" />
       <SetODBCFolders Sequence="1100">NOT Installed</SetODBCFolders>
       <InstallValidate Sequence="1400" />
-      <RemoveExistingProducts Before="InstallInitialize" />
       <InstallInitialize Sequence="1500" />
+      <RemoveExistingProducts After="InstallInitialize" />
       <AllocateRegistrySpace Sequence="1550">NOT Installed</AllocateRegistrySpace>
       <ProcessComponents Sequence="1600" />
       <UnpublishComponents Sequence="1700" />

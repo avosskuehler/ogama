@@ -244,7 +244,7 @@ namespace Ogama.Modules.Recording.MirametrixInterface
       // Check Mirametrix process
       if (!IOHelpers.IsProcessOpen("tracker"))
       {
-        if (!IsApplicationInstalled("Mirametrix"))
+        if (!IOHelpers.IsApplicationInstalled("Mirametrix"))
         {
           errorMessage = "Can't find Mirametrix S2 Eye Tracker on this computer. Maybe Mirametrix S2 Eye Tracker is not installed or installation is corrupted." + Environment.NewLine + "Please reinstall Mirametrix S2 Eye Tracker.";
           return TrackerStatus.NotAvailable;
@@ -720,70 +720,6 @@ namespace Ogama.Modules.Recording.MirametrixInterface
 
     [DllImport("Kernel32.dll", SetLastError = true)]
     private static extern bool QueryPerformanceFrequency(out ulong frequency);
-
-    /// <summary>
-    /// Searches a specified application in windows registries
-    /// </summary>
-    /// <param name="appName">Name of application</param>
-    /// <returns>True if application installed, false otherwise</returns>
-    private static bool IsApplicationInstalled(string appName)
-    {
-      // search in: CurrentUser
-      var keyName = @"SOFTWARE";
-      if (ExistsInSubKey(Registry.CurrentUser, keyName, "STARTMENU_REGISTRYNAME", appName) == true)
-      {
-        return true;
-      }
-
-      // search in: LocalMachine_32            
-      if (ExistsInSubKey(Registry.LocalMachine, keyName, "STARTMENU_REGISTRYNAME", appName) == true)
-      {
-        return true;
-      }
-
-      // search in: LocalMachine_64
-      keyName = @"SOFTWARE\Wow6432Node";
-      if (ExistsInSubKey(Registry.LocalMachine, keyName, "STARTMENU_REGISTRYNAME", appName) == true)
-      {
-        return true;
-      }
-
-      return false;
-    }
-
-    /// <summary>
-    /// Find matching application's name with specified subkey's name in subkeys of a root registry directory
-    /// </summary>
-    /// <param name="root">Registry root</param>
-    /// <param name="subKeyName">Searching root</param>
-    /// <param name="attributeName">Subkey name to find</param>
-    /// <param name="appName">Application name</param>
-    /// <returns>True if we found matching subkey name, false otherwise</returns>
-    private static bool ExistsInSubKey(RegistryKey root, string subKeyName, string attributeName, string appName)
-    {
-      RegistryKey subkey;
-      string displayName;
-
-      using (RegistryKey key = root.OpenSubKey(subKeyName))
-      {
-        if (key != null)
-        {
-          foreach (string kn in key.GetSubKeyNames())
-          {
-            using (subkey = key.OpenSubKey(kn))
-            {
-              displayName = subkey.GetValue(attributeName) as string;
-              if (appName.Equals(displayName, StringComparison.OrdinalIgnoreCase) == true)
-              {
-                return true;
-              }
-            }
-          }
-        }
-      }
-
-      return false;
-    }
 
     /// <summary>
     /// Deserializes the <see cref="MirametrixSetting"/> from the given xml file.
