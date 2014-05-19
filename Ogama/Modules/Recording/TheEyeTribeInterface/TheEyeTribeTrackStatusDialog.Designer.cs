@@ -56,6 +56,7 @@ namespace Ogama.Modules.Recording.TheEyeTribeInterface
       this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
       this.pictureBox1.Image = global::Ogama.Properties.Resources.TheEyeTribeLogo;
       this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+      this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.pictureBox1.Name = "pictureBox1";
       this.pictureBox1.Size = new System.Drawing.Size(100, 100);
       this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -65,9 +66,10 @@ namespace Ogama.Modules.Recording.TheEyeTribeInterface
       // lblDescription
       // 
       this.lblDescription.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.lblDescription.Location = new System.Drawing.Point(5, 5);
+      this.lblDescription.Location = new System.Drawing.Point(8, 8);
+      this.lblDescription.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.lblDescription.Name = "lblDescription";
-      this.lblDescription.Size = new System.Drawing.Size(363, 90);
+      this.lblDescription.Size = new System.Drawing.Size(594, 84);
       this.lblDescription.TabIndex = 3;
       this.lblDescription.Text = resources.GetString("lblDescription.Text");
       // 
@@ -76,6 +78,7 @@ namespace Ogama.Modules.Recording.TheEyeTribeInterface
       this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
       this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
       this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+      this.splitContainer1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.splitContainer1.Name = "splitContainer1";
       this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
       // 
@@ -86,8 +89,9 @@ namespace Ogama.Modules.Recording.TheEyeTribeInterface
       // splitContainer1.Panel2
       // 
       this.splitContainer1.Panel2.Controls.Add(this.elementHost1);
-      this.splitContainer1.Size = new System.Drawing.Size(477, 460);
+      this.splitContainer1.Size = new System.Drawing.Size(716, 708);
       this.splitContainer1.SplitterDistance = 100;
+      this.splitContainer1.SplitterWidth = 6;
       this.splitContainer1.TabIndex = 4;
       this.splitContainer1.TabStop = false;
       // 
@@ -98,6 +102,7 @@ namespace Ogama.Modules.Recording.TheEyeTribeInterface
       this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
       this.splitContainer2.IsSplitterFixed = true;
       this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+      this.splitContainer2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.splitContainer2.Name = "splitContainer2";
       // 
       // splitContainer2.Panel1
@@ -107,9 +112,10 @@ namespace Ogama.Modules.Recording.TheEyeTribeInterface
       // splitContainer2.Panel2
       // 
       this.splitContainer2.Panel2.Controls.Add(this.lblDescription);
-      this.splitContainer2.Panel2.Padding = new System.Windows.Forms.Padding(5);
-      this.splitContainer2.Size = new System.Drawing.Size(477, 100);
+      this.splitContainer2.Panel2.Padding = new System.Windows.Forms.Padding(8, 8, 8, 8);
+      this.splitContainer2.Size = new System.Drawing.Size(716, 100);
       this.splitContainer2.SplitterDistance = 100;
+      this.splitContainer2.SplitterWidth = 6;
       this.splitContainer2.TabIndex = 4;
       this.splitContainer2.TabStop = false;
       // 
@@ -117,25 +123,24 @@ namespace Ogama.Modules.Recording.TheEyeTribeInterface
       // 
       this.elementHost1.Dock = System.Windows.Forms.DockStyle.Fill;
       this.elementHost1.Location = new System.Drawing.Point(0, 0);
-      this.elementHost1.Margin = new System.Windows.Forms.Padding(2);
       this.elementHost1.Name = "elementHost1";
-      this.elementHost1.Size = new System.Drawing.Size(477, 356);
+      this.elementHost1.Size = new System.Drawing.Size(716, 602);
       this.elementHost1.TabIndex = 0;
       this.elementHost1.Text = "elementHost1";
       this.elementHost1.Child = this.trackBoxStatus;
       // 
       // TheEyeTribeTrackStatusDialog
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+      this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(477, 460);
+      this.ClientSize = new System.Drawing.Size(716, 708);
       this.Controls.Add(this.splitContainer1);
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+      this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.Name = "TheEyeTribeTrackStatusDialog";
       this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
       this.Text = "Track status ...";
       this.TopMost = true;
-      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TheEyeTribeTrackStatusDialogFormClosing);
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
       this.splitContainer1.Panel1.ResumeLayout(false);
       this.splitContainer1.Panel2.ResumeLayout(false);
@@ -156,7 +161,7 @@ namespace Ogama.Modules.Recording.TheEyeTribeInterface
     private System.Windows.Forms.SplitContainer splitContainer1;
     private System.Windows.Forms.SplitContainer splitContainer2;
     private System.Windows.Forms.Integration.ElementHost elementHost1;
-    private TrackBoxStatus trackBoxStatus;
+    public TrackBoxStatus trackBoxStatus;
   }
 }
 
