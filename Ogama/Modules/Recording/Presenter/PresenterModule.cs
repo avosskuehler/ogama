@@ -1036,8 +1036,8 @@ namespace Ogama.Modules.Recording.Presenter
           AsyncHelper.FireAndForget(new SendTriggerDelegate(this.SendTrigger), this.shownSlideContainer);
 
           // Send counter update in synchronous call
-            // Always update counter
-            this.OnCounterChanged(new CounterChangedEventArgs(trialID, this.slideCounter));
+          // Always update counter
+          this.OnCounterChanged(new CounterChangedEventArgs(trialID, this.slideCounter));
 
           // Changes the mouse position and occurence according
           // to slide properties
@@ -1330,11 +1330,12 @@ namespace Ogama.Modules.Recording.Presenter
             browser.WebBrowser.NewWindow += this.WebBrowser_NewWindow;
             browser.WebBrowser.DocumentCompleted += this.WebBrowserDocumentCompleted;
             browser.WebBrowser.Navigating += this.WebBrowserNavigating;
-            if (browser.WebBrowser.Document != null)
-            {
-              // Attach Scroll events in document completed handler
-              browser.WebBrowser.Document.MouseDown += this.WebBrowserMouseDown;
-            }
+
+            //if (browser.WebBrowser.Url != null && browser.WebBrowser.Document != null)
+            //{
+            //  // Attach Scroll events in document completed handler
+            //  browser.WebBrowser.Document.MouseDown += this.WebBrowserMouseDown;
+            //}
 
             browser.WebBrowser.Navigate(browser.BrowserURL);
             this.numberOfTimesNavigated = 0;
@@ -1346,7 +1347,7 @@ namespace Ogama.Modules.Recording.Presenter
       }
       catch (Exception ex)
       {
-        ExceptionMethods.HandleException(ex);
+        ExceptionMethods.HandleExceptionSilent(ex);
       }
     }
 

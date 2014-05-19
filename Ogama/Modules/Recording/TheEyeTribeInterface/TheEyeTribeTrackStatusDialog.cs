@@ -27,20 +27,8 @@ namespace Ogama.Modules.Recording.TheEyeTribeInterface
     public TheEyeTribeTrackStatusDialog()
     {
       this.InitializeComponent();
-      this.trackBoxStatus.Connect();
     }
-
 
     #endregion
-
-    /// <summary>
-    /// Disconnects the eye tribe track status when dialog form is closing.
-    /// </summary>
-    /// <param name="sender">The sender.</param>
-    /// <param name="e">The <see cref="FormClosingEventArgs"/> instance containing the event data.</param>
-    private void TheEyeTribeTrackStatusDialogFormClosing(object sender, FormClosingEventArgs e)
-    {
-      this.trackBoxStatus.Disconnect();
-    }
   }
 }

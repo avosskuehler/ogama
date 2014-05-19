@@ -148,7 +148,7 @@
       </Component>
       <Component Id="C_TETControls" Guid="{9FF24EF6-7496-4432-BA70-F4DAB0120B77}" Win64="$(var.Win64)">
         <File Id="TETControls" Name="TETControls.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="TETControls" AssemblyApplication="TETControls" DiskId="1"
-              Source="$(var.Ogama.TargetDir)" />
+              Source="$(var.SolutionDir)Libs\Managed\" />
       </Component>
 
       

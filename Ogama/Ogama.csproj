@@ -205,6 +205,10 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.XML" />
+    <Reference Include="TETControls, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\TETControls.dll</HintPath>
+    </Reference>
     <Reference Include="TETCSharpClient">
       <HintPath>..\Libs\Managed\TETCSharpClient.dll</HintPath>
     </Reference>
@@ -2054,10 +2058,6 @@
     <ProjectReference Include="..\OgamaControls\OgamaControls.csproj">
       <Project>{63EF9D30-447A-4F79-9EC8-E4956DC0ABF8}</Project>
       <Name>OgamaControls</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TheEyeTribe\TETControls\TETControls.csproj">
-      <Project>{c93b12c7-9872-47a3-a2db-d92623476fe5}</Project>
-      <Name>TETControls</Name>
     </ProjectReference>
     <ProjectReference Include="..\VectorGraphics\VectorGraphics.csproj">
       <Project>{8230AED9-33A2-42FD-BDF7-4F7E4EFA73DB}</Project>

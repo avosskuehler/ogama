@@ -9,9 +9,8 @@
 // <summary>
 //   This class implements the <see cref="TrackerWithStatusControls" /> class
 //   to represent an OGAMA known eyetracker.
-//   It encapsulates a TOBII http://www.theEyeTribe.com eyetracker
-//   and is written with the SDK 3 from TheEyeTribe Systems.
-//   It is tested with the TheEyeTribe T60/T120 series.
+//   It encapsulates a http://www.theEyeTribe.com eyetracker.
+//   It is tested with the TheEyeTribe device.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace Ogama.Modules.Recording.TheEyeTribeInterface
@@ -20,6 +19,7 @@ namespace Ogama.Modules.Recording.TheEyeTribeInterface
   using System.Diagnostics;
   using System.Drawing;
   using System.IO;
+  using System.Threading;
   using System.Windows.Forms;
   using System.Windows.Forms.Integration;
   using System.Xml.Serialization;
@@ -36,16 +36,14 @@ namespace Ogama.Modules.Recording.TheEyeTribeInterface
   using TETControls.TrackBox;
 
   using TETCSharpClient;
-  using TETCSharpClient.Data;
 
   using GazeData = Ogama.Modules.Recording.GazeData;
 
   /// <summary>
   ///   This class implements the <see cref="TrackerWithStatusControls" /> class
   ///   to represent an OGAMA known eyetracker.
-  ///   It encapsulates a TOBII http://www.theEyeTribe.com eyetracker
-  ///   and is written with the SDK 3 from TheEyeTribe Systems.
-  ///   It is tested with the TheEyeTribe T60/T120 series.
+  ///   It encapsulates a http://www.theEyeTribe.com eyetracker.
+  ///   It is tested with the TheEyeTribe device.
   /// </summary>
   public class TheEyeTribeTracker : TrackerWithStatusControls, IGazeListener, IConnectionStateListener
   {
@@ -87,9 +85,14 @@ namespace Ogama.Modules.Recording.TheEyeTribeInterface
     private TheEyeTribeSetting theEyeTribeSettings;
 
     /// <summary>
-    ///   Saves the sample time of the last received gaze sample-
+    ///   Saves the sample time of the last received gaze sample.
     /// </summary>
     private long lastTime;
+
+    /// <summary>
+    /// Stores the server process that was started from within ogama.
+    /// </summary>
+    private Process eyeTribeServerProcess;
 
     #endregion
 
@@ -97,7 +100,6 @@ namespace Ogama.Modules.Recording.TheEyeTribeInterface
 
     /// <summary>
     /// Initializes a new instance of the TheEyeTribeTracker class.
-    ///   Initializes COM objects and other.
     /// </summary>
     /// <param name="owningRecordModule">
     /// The <see cref="RecordModule"/>
@@ -298,7 +300,7 @@ namespace Ogama.Modules.Recording.TheEyeTribeInterface
           return false;
         }
 
-        CalibrationResult result = GazeManager.Instance.LastCalibrationResult;
+        var result = GazeManager.Instance.LastCalibrationResult;
 
         // Show a calibration plot if everything went OK
         if (result != null)
@@ -345,7 +347,7 @@ namespace Ogama.Modules.Recording.TheEyeTribeInterface
             // Need to restart the eye tribe server if it is running
             if (IOHelpers.IsProcessOpen("EyeTribe"))
             {
-              KillEyeTribeProcess();
+              this.KillEyeTribeProcess();
 
               // Now restart 
               this.StartEyeTribeProcess();
@@ -409,9 +411,11 @@ namespace Ogama.Modules.Recording.TheEyeTribeInterface
           throw new Exception("Could not connect to the eye tribe tracker, please start the server manually and try again.");
         }
 
+        this.eyeTribeTrackStatus.Connect();
+
         // Register this class for events
         GazeManager.Instance.AddGazeListener(this);
-        this.eyeTribeTrackStatus.Connect();
+        //GazeManager.Instance.AddTrackerStateListener(this);
       }
       catch (Exception ex)
       {
@@ -569,6 +573,7 @@ namespace Ogama.Modules.Recording.TheEyeTribeInterface
           this.ShowOnSecondaryScreenButton.Text = "Hide from presentation screen";
           this.ShowOnSecondaryScreenButton.BackColor = Color.Red;
           this.dlgTrackStatus.Show();
+          this.dlgTrackStatus.trackBoxStatus.Connect();
         }
       }
       else
@@ -578,6 +583,7 @@ namespace Ogama.Modules.Recording.TheEyeTribeInterface
         {
           this.ShowOnSecondaryScreenButton.BackColor = Color.Transparent;
           this.ShowOnSecondaryScreenButton.Text = "Show on presentation screen";
+          this.dlgTrackStatus.trackBoxStatus.Disconnect();
           this.dlgTrackStatus.Close();
         }
       }
@@ -652,16 +658,15 @@ namespace Ogama.Modules.Recording.TheEyeTribeInterface
     /// <summary>
     /// Kills the eye tribe process.
     /// </summary>
-    private static void KillEyeTribeProcess()
+    private void KillEyeTribeProcess()
     {
       // Kill EyeTribe Server
-      if (IOHelpers.IsProcessOpen("EyeTribe"))
+      if (this.eyeTribeServerProcess != null)
       {
-        var serverProcesses = Process.GetProcessesByName("EyeTribe");
-        foreach (var process in serverProcesses)
-        {
-          process.Kill();
-        }
+        // Wait for shutdown
+        Thread.Sleep(1000);
+        this.eyeTribeServerProcess.Kill();
+        this.eyeTribeServerProcess = null;
       }
     }
 
@@ -685,7 +690,7 @@ namespace Ogama.Modules.Recording.TheEyeTribeInterface
             true
         };
 
-        Process.Start(psi);
+        this.eyeTribeServerProcess = Process.Start(psi);
         System.Threading.Thread.Sleep(2000);
       }
     }
@@ -744,11 +749,13 @@ namespace Ogama.Modules.Recording.TheEyeTribeInterface
 
       // Unregister this class for gaze events
       GazeManager.Instance.RemoveGazeListener(this);
+      //GazeManager.Instance.RemoveTrackerStateListener(this);
 
       // Disconnect 
       GazeManager.Instance.Deactivate();
-
-      KillEyeTribeProcess();
+      
+      // Close server if it was opened from within ogama.
+      this.KillEyeTribeProcess();
 
       this.isTracking = false;
     }
