@@ -262,6 +262,15 @@
       result.GazePosX = (gazePosXLeft + gazePosXRight) / 2;
       result.GazePosY = (gazePosYLeft + gazePosYRight) / 2;
 
+      if (result.GazePosX > 1000 * 10)
+      {
+          result.GazePosX = result.GazePosX / 1000;
+      }
+      if (result.GazePosY > 1000 * 10)
+      {
+          result.GazePosY = result.GazePosY / 1000;
+      }
+
       long MICROSECONDS = 1000;
       result.Time = (data.timestamp / MICROSECONDS);
       this.lastTime = result.Time;
