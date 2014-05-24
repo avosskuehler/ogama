@@ -349,13 +349,26 @@ namespace Ogama.Modules.Recording
     /// </summary>
     public RecordModule()
     {
-      this.InitializeComponent();
+        try
+        {
+            Init();
+        }
+        catch (Exception e)
+        {
+            //TODO RB
+        }
+        
+    }
 
-      this.Picture = this.recordPicture;
-      this.ZoomTrackBar = this.trbZoom;
+    private void Init()
+    {
+        this.InitializeComponent();
 
-      this.InitAccelerators();
-      this.InitializeCustomElements();
+        this.Picture = this.recordPicture;
+        this.ZoomTrackBar = this.trbZoom;
+
+        this.InitAccelerators();
+        this.InitializeCustomElements();
     }
 
     #endregion
@@ -566,14 +579,6 @@ namespace Ogama.Modules.Recording
       // Save current timestamp
       lock (this.timeLock)
       {
-        // if (this.lastTimeStamp == e.Gazedata.Time&&t)
-        // {
-        // var message = string.Format(
-        // "TrackerGazeDataChanged: Data sample with time {0} "
-        // + "has same timestamp as foregoing sample ", 
-        // e.Gazedata.Time);
-        // throw new ArgumentException(message);
-        // }
         this.lastTimeStamp = e.Gazedata.Time;
       }
 
@@ -590,18 +595,7 @@ namespace Ogama.Modules.Recording
                            GazePosY = e.Gazedata.GazePosY
                          };
 
-      // The GazePos data is in values from 0 to 1
-      // so scale it to SCREEN COORDINATES
-      // and add optional scroll offset
-      if (newRawData.GazePosX != null)
-      {
-        newRawData.GazePosX = newRawData.GazePosX * this.xResolution + this.xScrollOffset;
-      }
-
-      if (newRawData.GazePosY != null)
-      {
-        newRawData.GazePosY = newRawData.GazePosY * this.yResolution + this.yScrollOffset;
-      }
+      newRawData = ModifyGazeDataWhenBetweenZeroAndOne(newRawData);
 
       newRawData.PupilDiaX = e.Gazedata.PupilDiaX;
       newRawData.PupilDiaY = e.Gazedata.PupilDiaY;
@@ -663,6 +657,36 @@ namespace Ogama.Modules.Recording
       {
         this.OnNewRawDataAvailable(new NewRawDataAvailableEventArgs(newRawData));
       }
+    }
+
+    /// <summary>
+    /// 
+    /// 
+    /// </summary>
+    /// <param name="newRawData"></param>
+    /// <returns></returns>
+    public RawData ModifyGazeDataWhenBetweenZeroAndOne(RawData newRawData)
+    {
+        
+        // The GazePos data is in values from 0 to 1
+        // so scale it to SCREEN COORDINATES
+        // and add optional scroll offset
+        if (newRawData.GazePosX != null)
+        {
+            if (newRawData.GazePosX >= 0 && newRawData.GazePosX <= 1)
+            {
+                newRawData.GazePosX = newRawData.GazePosX * this.xResolution + this.xScrollOffset;
+            }
+        }
+
+        if (newRawData.GazePosY != null)
+        {
+            if (newRawData.GazePosY >= 0 && newRawData.GazePosY <= 1)
+            {
+                newRawData.GazePosY = newRawData.GazePosY * this.yResolution + this.yScrollOffset;
+            }
+        }
+        return newRawData;
     }
 
     #endregion

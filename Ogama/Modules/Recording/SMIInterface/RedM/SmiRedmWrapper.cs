@@ -248,7 +248,7 @@ namespace Ogama.Modules.Recording.SMIInterface.RedM
     /// <param name="calibrationPoint">The calibration point.</param>
 		void CalibrationCallbackFunction(EyeTrackingController.CalibrationPointStruct calibrationPoint)
 		{
-			string data = ("Data from CalibrationCallback - Number:" + calibrationPoint.number + " PosX:" + calibrationPoint.positionX + " PosY:" + calibrationPoint.positionY);
+			 string data = ("Data from CalibrationCallback - Number:" + calibrationPoint.number + " PosX:" + calibrationPoint.positionX + " PosY:" + calibrationPoint.positionY);
 			log("CalibrationCallbackFunction: " + data);
 		}
 
