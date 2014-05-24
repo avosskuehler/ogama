@@ -1,0 +1,90 @@
+Von: Dixon Cleveland [dixon@eyegaze.com]
+Gesendet: Freitag, 25. Mai 2007 16:54
+An: Adrian Vosskuehler
+Betreff: DetectFixation Source Code
+
+Hi Adrian,
+
+You are free to use the LC Technologies fixation detection source code as you wish.
+
+As you suggested in your email, we ask only that you reference LC Technologies when you publish any adaptations.
+
+It is wonderful that you have adapted the code to C#.NET.  If you would like to make your version available on the Internet, we'd be happy to create a link to your site from ours.
+
+We appreciate your interest and good work.
+
+Sincerely,
+
+Dixon
+
+----------------------------
+Dixon Cleveland, CEO, CTO
+LC Technologies, Inc.
+1483 Chain Bridge Road, Suite 104
+McLean, VA  22101   USA
+703-385-7133
+dcleveland@eyegaze.com
+----------------------------
+
+
+-----Original Message-----
+From: Jeff Hamilton [mailto:jeff@eyegaze.com]
+Sent: Wednesday, May 23, 2007 10:12 AM
+To: Dixon
+Subject: FW: Fixation source code
+
+
+
+
+-----Original Message-----
+From: Adrian Voßkühler (Freie Universität Berlin) [mailto:adrian.vosskuehler@physik.fu-berlin.de]
+Sent: Wednesday, May 23, 2007 8:49 AM
+To: support0309@eyegaze.com
+Subject: Fixation source code
+
+
+Dear Mr. Hamilton,
+
+Under which conditions it is possible to use the published fixation detection source code of LC Technologies in an open source gaze and mouse tracking analysis software ? I adopted the code to C#.NET and added a time estimation support.
+The open source software is designed to analyze both eye and mouse data in parallel for which we could not find a applicable commercial software solution.
+It would be very kind from you to allow us to use and adopt your code and publish it with the software keeping your original copyright. We think it is a good approach to rely on professional and experienced solutions. The software is intended for non-commercial use in academic environments.
+
+Hope for a reply and thanks for publishing the code,
+
+Adrian Voßkühler
+
+Freie Universität Berlin
+Fachbereich Physik
+Didaktik der Physik
+Arnimallee 14
+14195 Berlin
+Germany
+Tel +49.(0)30.838.56713/53031
+Fax +49.(0)30.838.56771
+E-Mail adrian.vosskuehler@physik.fu-berlin.de
+
+
+
+
+__________ NOD32 2286 (20070523) Information __________
+
+This message was checked by NOD32 antivirus system.
+http://www.eset.com
+
+
+
+
+__________ NOD32 2286 (20070523) Information __________
+
+This message was checked by NOD32 antivirus system.
+http://www.eset.com
+
+
+----------------------------
+Dixon Cleveland
+LC Technologies, Inc.
+1483 Chain Bridge Road, Suite 104
+McLean, VA  22101   USA
+703-385-7133
+dcleveland@eyegaze.com
+----------------------------

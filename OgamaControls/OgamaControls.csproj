@@ -1,0 +1,755 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{63EF9D30-447A-4F79-9EC8-E4956DC0ABF8}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>OgamaControls</AssemblyName>
+    <AssemblyOriginatorKeyFile>Properties\OgamaControlsKey.snk</AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>OgamaControls</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <SignAssembly>true</SignAssembly>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>..\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>..\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>..\Release\Docs\OgamaControls.xml</DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\Debug86\</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <DocumentationFile>..\Debug86\Docs\OgamaControls.xml</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>..\Release86\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <DocumentationFile>..\Release86\Docs\OgamaControls.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>
+    </DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\Debug64\</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <FileAlignment>4096</FileAlignment>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <OutputPath>..\Release64\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <DocumentationFile>..\Release64\Docs\OgamaControls.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <FileAlignment>4096</FileAlignment>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>2</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DirectShowLib-2005, Version=2.1.0.0, Culture=neutral, PublicKeyToken=67e7b740cdfc2d3f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\DirectShowLib-2005.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CommonControls\Browser\ExtendedBrowser.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CommonControls\Buttons\ColorButton\ColorButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CommonControls\Buttons\ColorButton\ColorButton.Designer.cs">
+      <DependentUpon>ColorButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonControls\Buttons\ColorButton\ColorPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CommonControls\Buttons\ColorButton\ColorPanel.Designer.cs">
+      <DependentUpon>ColorPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonControls\Buttons\ColorButton\IColorControl.cs" />
+    <Compile Include="CommonControls\Buttons\ColorButton\ColorDropdown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CommonControls\Buttons\ColorButton\ColorDropdown.Designer.cs">
+      <DependentUpon>ColorDropdown.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonControls\DoubleBufferPanel\BufferedGraphicsRenderPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CommonControls\DoubleBufferPanel\BufferedGraphicsRenderPanel.Designer.cs">
+      <DependentUpon>BufferedGraphicsRenderPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonControls\ListView\DoubleBufferListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CommonControls\ListView\DoubleBufferListView.Designer.cs">
+      <DependentUpon>DoubleBufferListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonControls\DoubleBufferPanel\DoubleBufferPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CommonControls\DoubleBufferPanel\DoubleBufferPanel.Designer.cs">
+      <DependentUpon>DoubleBufferPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonControls\Buttons\FontButton\FontButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CommonControls\Buttons\FontButton\FontButton.Designer.cs">
+      <DependentUpon>FontButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonControls\ListView\ObjectListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CommonControls\PeakMeter\PeakMeterCtrl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CommonControls\PeakMeter\PeakMeterCtrl.designer.cs">
+      <DependentUpon>PeakMeterCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonControls\RangeTrackBar\TimeLineMarkerCollection.cs" />
+    <Compile Include="CommonControls\RangeTrackBar\TimeLineMarkerComparer.cs" />
+    <Compile Include="CommonControls\RangeTrackBar\TimeLineMarker.cs" />
+    <Compile Include="CommonControls\RangeTrackBar\TimeLinePosition.cs" />
+    <Compile Include="CommonControls\RangeTrackBar\TimeLineRange.cs" />
+    <Compile Include="CommonControls\RangeTrackBar\TimeLineEventCollection.cs">
+    </Compile>
+    <Compile Include="CommonControls\RangeTrackBar\TimeLine.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CommonControls\RangeTrackBar\TimeLineEvent.cs" />
+    <Compile Include="CommonControls\RangeTrackBar\TimeLineEventComparer.cs" />
+    <Compile Include="CommonControls\RichTextBox\PrintableRichTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CommonControls\RichTextBox\PrintableRichTextBox.Designer.cs">
+      <DependentUpon>PrintableRichTextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonControls\RichTextBox\RTBTextControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CommonControls\RichTextBox\RTBTextControl.designer.cs">
+      <DependentUpon>RTBTextControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonControls\Styles\BrushSelectControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CommonControls\Styles\BrushSelectControl.Designer.cs">
+      <DependentUpon>BrushSelectControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonControls\Styles\BrushStyleArea.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CommonControls\Styles\BrushStyleArea.Designer.cs">
+      <DependentUpon>BrushStyleArea.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonControls\Styles\ColorSelectControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CommonControls\Styles\ColorSelectControl.Designer.cs">
+      <DependentUpon>ColorSelectControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonControls\TreeView\CheckboxTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CommonControls\TreeView\CheckboxTreeView.Designer.cs">
+      <DependentUpon>CheckboxTreeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonControls\TreeView\MultiselectTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CommonControls\TreeView\NodesCollection.cs" />
+    <Compile Include="CommonControls\TreeView\TreeNodeComparer.cs" />
+    <Compile Include="DataGridViewControls\DataGridViewQuickComboBox\DataGridViewQuickComboBoxCell.cs" />
+    <Compile Include="DataGridViewControls\DataGridViewQuickComboBox\DataGridViewQuickComboBoxColumn.cs" />
+    <Compile Include="DataGridViewControls\DataGridViewWithBackground\DataGridViewWithBackground.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="IO\TriggerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="IO\TriggerControl.Designer.cs">
+      <DependentUpon>TriggerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Media\DES\AVCallback.cs" />
+    <Compile Include="Media\DES\DESCombine.cs" />
+    <Compile Include="Media\DES\DESAudioPlayer.cs" />
+    <Compile Include="Media\DES\IDESCombineCB.cs" />
+    <Compile Include="Media\DES\MediaFile.cs" />
+    <Compile Include="Media\DES\MediaGroup.cs" />
+    <Compile Include="Media\DES\MediaInfo.cs" />
+    <Compile Include="Media\EVR\ComImport.cs" />
+    <Compile Include="Media\Player\AudioControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Media\Player\AudioControl.Designer.cs">
+      <DependentUpon>AudioControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonControls\Styles\CursorSelectControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CommonControls\Styles\CursorSelectControl.Designer.cs">
+      <DependentUpon>CursorSelectControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonControls\RangeTrackBar\RangeTrackBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CommonControls\Styles\FontSelectControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CommonControls\Styles\FontSelectControl.Designer.cs">
+      <DependentUpon>FontSelectControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonControls\Styles\PenAndBrushControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CommonControls\Styles\PenAndBrushControl.Designer.cs">
+      <DependentUpon>PenAndBrushControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonControls\Styles\PenSelectControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CommonControls\Styles\PenSelectControl.Designer.cs">
+      <DependentUpon>PenSelectControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataGridViewControls\DataGridViewImageButton\DataGridViewImageButtonCell.cs" />
+    <Compile Include="DataGridViewControls\DataGridViewImageButton\DataGridViewImageButtonColumn.cs">
+    </Compile>
+    <Compile Include="DataGridViewControls\DataGridViewPositionButton\DataGridViewPositionButtonCell.cs" />
+    <Compile Include="DataGridViewControls\DataGridViewPositionButton\DataGridViewPositionButtonColumn.cs" />
+    <Compile Include="DataGridViewControls\DataGridViewPositionButton\DataGridViewPositionButtonControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataGridViewControls\DataGridViewFontButton\DataGridViewFontButtonCell.cs" />
+    <Compile Include="DataGridViewControls\DataGridViewFontButton\DataGridViewFontButtonColumn.cs" />
+    <Compile Include="DataGridViewControls\DataGridViewFontButton\DataGridViewFontButtonControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CommonControls\Buttons\PositionButton\IPositionControl.cs" />
+    <Compile Include="CommonControls\Buttons\PositionButton\PositionButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CommonControls\Buttons\PositionButton\PositionButton.Designer.cs">
+      <DependentUpon>PositionButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataGridViewControls\DataGridViewColorButton\DataGridViewColorCell.cs" />
+    <Compile Include="DataGridViewControls\DataGridViewColorButton\DataGridViewColorColumn.cs" />
+    <Compile Include="DataGridViewControls\DataGridViewColorButton\DataGridViewColorEditingControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataGridViewControls\DataGridViewNumericUpDown\DataGridViewNumericUpDownCell.cs" />
+    <Compile Include="DataGridViewControls\DataGridViewNumericUpDown\DataGridViewNumericUpDownColumn.cs" />
+    <Compile Include="DataGridViewControls\DataGridViewNumericUpDown\DataGridViewNumericUpDownEditingControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CommonControls\Buttons\ArrowButton\ArrowButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Dialogs\BrushStyleDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\BrushStyleDlg.Designer.cs">
+      <DependentUpon>BrushStyleDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\Win32.cs" />
+    <Compile Include="Media\Player\AVPlayer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Media\Player\AVPlayer.Designer.cs">
+      <DependentUpon>AVPlayer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Media\Player\AudioPlayer.cs">
+    </Compile>
+    <Compile Include="Media\Player\PlayState.cs" />
+    <Compile Include="Media\Player\VideoFramePusher.cs" />
+    <Compile Include="Media\WebCam\BitmapEventArgs.cs" />
+    <Compile Include="Media\WebCam\CaptureMode.cs" />
+    <Compile Include="Media\WebCam\CaptureModeEventArgs.cs" />
+    <Compile Include="Media\WebCam\DSVideoProperties.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Media\WebCam\DSVideoProperties.Designer.cs">
+      <DependentUpon>DSVideoProperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Media\WebCam\DXCapture.cs" />
+    <Compile Include="Media\WebCam\ReferenceClock.cs" />
+    <Compile Include="Media\WebCam\Webcam.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Media\WebCam\Webcam.Designer.cs">
+      <DependentUpon>Webcam.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Media\WMEncode\WMScreenCapture.cs" />
+    <Compile Include="MenuAndToolbarControls\ToolStripTrackBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MenuAndToolbarControls\ToolStripAlignmentDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MenuAndToolbarControls\ToolStripColorDropDownOld.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MenuAndToolbarControls\ToolStripColorDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MenuAndToolbarControls\ToolStripRadioButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Gradient\ColorMarker.cs" />
+    <Compile Include="CommonControls\Styles\FontStyleArea.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CommonControls\Styles\FontStyleArea.Designer.cs">
+      <DependentUpon>FontStyleArea.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gradient\GenericValueEditor.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Gradient\Gradient.cs" />
+    <Compile Include="Gradient\GradientBuilder.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Gradient\GradientTypeEditorUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gradient\GradientTypeEditorUI.designer.cs">
+      <DependentUpon>GradientTypeEditorUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonControls\Styles\PenStyleArea.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CommonControls\Styles\PenStyleArea.Designer.cs">
+      <DependentUpon>PenStyleArea.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonControls\Buttons\PositionButton\PositionDropdown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CommonControls\Buttons\PositionButton\PositionDropdown.Designer.cs">
+      <DependentUpon>PositionDropdown.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonControls\Buttons\PositionButton\PositionSelector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CommonControls\Buttons\PositionButton\PositionSelector.Designer.cs">
+      <DependentUpon>PositionSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CursorStyleDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CursorStyleDlg.Designer.cs">
+      <DependentUpon>CursorStyleDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\PenAndFontStyleDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\PenAndFontStyleDlg.Designer.cs">
+      <DependentUpon>PenAndFontStyleDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FontStyleDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FontStyleDlg.Designer.cs">
+      <DependentUpon>FontStyleDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\CustomEventArgs.cs" />
+    <Compile Include="Dialogs\PenStyleDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\PenStyleDlg.Designer.cs">
+      <DependentUpon>PenStyleDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuAndToolbarControls\ToolStripNumericUpDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Media\WebCam\FFT.cs" />
+    <Compile Include="Media\WebCam\CaptureDeviceProperties.cs" />
+    <Compile Include="Media\WebCam\WebcamPropertiesDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Media\WebCam\WebcamPropertiesDlg.designer.cs">
+      <DependentUpon>WebcamPropertiesDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\ThreadSafe.cs" />
+    <EmbeddedResource Include="CommonControls\Buttons\ColorButton\ColorButton.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ColorButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonControls\Buttons\ColorButton\ColorDropdown.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ColorDropdown.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonControls\Buttons\ColorButton\ColorPanel.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ColorPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonControls\Buttons\FontButton\FontButton.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FontButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonControls\Styles\CursorSelectControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>CursorSelectControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataGridViewControls\DataGridViewColorButton\DataGridViewColorEditingControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DataGridViewColorEditingControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataGridViewControls\DataGridViewPositionButton\DataGridViewPositionButtonControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DataGridViewPositionButtonControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataGridViewControls\DataGridViewFontButton\DataGridViewFontButtonControl.resx">
+      <DependentUpon>DataGridViewFontButtonControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonControls\Buttons\ArrowButton\ArrowButton.resx">
+      <DependentUpon>ArrowButton.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonControls\Styles\FontStyleArea.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FontStyleArea.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gradient\GenericValueEditor.resx">
+      <DependentUpon>GenericValueEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gradient\GradientTypeEditorUI.resx">
+      <DependentUpon>GradientTypeEditorUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonControls\Styles\PenStyleArea.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PenStyleArea.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonControls\Buttons\PositionButton\PositionButton.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PositionButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonControls\Buttons\PositionButton\PositionDropdown.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PositionDropdown.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonControls\Buttons\PositionButton\PositionSelector.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PositionSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CursorStyleDlg.resx">
+      <DependentUpon>CursorStyleDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\PenAndFontStyleDlg.resx">
+      <DependentUpon>PenAndFontStyleDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FontStyleDlg.resx">
+      <DependentUpon>FontStyleDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\PenStyleDlg.resx">
+      <DependentUpon>PenStyleDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Gazetracker\GTHardware\GTHardware.csproj">
+      <Project>{4EF59290-9005-460E-8919-5003414BDC92}</Project>
+      <Name>GTHardware</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VectorGraphics\VectorGraphics.csproj">
+      <Project>{8230AED9-33A2-42FD-BDF7-4F7E4EFA73DB}</Project>
+      <Name>VectorGraphics</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\caret.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Control_TrackBar.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CommonControls\Buttons\ArrowButton\ArrowButton.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CommonControls\Buttons\ColorButton\ColorButton.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CommonControls\Buttons\ColorButton\ColorDropdown.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CommonControls\Styles\ColorSelectControl.bmp" />
+    <EmbeddedResource Include="CommonControls\ListView\DoubleBufferListView.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DoubleBufferListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonControls\RichTextBox\PrintableRichTextBox.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PrintableRichTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonControls\RichTextBox\RTBTextControl.resx">
+      <DependentUpon>RTBTextControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonControls\Styles\BrushSelectControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>BrushSelectControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonControls\Styles\BrushStyleArea.resx">
+      <DependentUpon>BrushStyleArea.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonControls\Styles\ColorSelectControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ColorSelectControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IO\TriggerControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>TriggerControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Media\Player\AudioControl.resx">
+      <DependentUpon>AudioControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonControls\Styles\FontSelectControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FontSelectControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonControls\Styles\PenAndBrushControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PenAndBrushControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonControls\Styles\PenSelectControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PenSelectControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonControls\Styles\CursorSelectControl.bmp" />
+    <EmbeddedResource Include="Dialogs\CursorStyleDlg.bmp" />
+    <EmbeddedResource Include="Dialogs\BrushStyleDlg.resx">
+      <DependentUpon>BrushStyleDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonControls\Styles\FontSelectControl.bmp" />
+    <EmbeddedResource Include="CommonControls\Styles\FontStyleArea.bmp" />
+    <EmbeddedResource Include="Gradient\GradientTypeEditorUI.bmp" />
+    <EmbeddedResource Include="Media\Player\AVPlayer.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>AVPlayer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\PenAndFontStyleDlg.bmp" />
+    <EmbeddedResource Include="CommonControls\Styles\PenSelectControl.bmp" />
+    <EmbeddedResource Include="CommonControls\Styles\PenStyleArea.bmp" />
+    <EmbeddedResource Include="Dialogs\PenStyleDlg.bmp" />
+    <EmbeddedResource Include="CommonControls\Buttons\PositionButton\PositionButton.bmp" />
+    <EmbeddedResource Include="CommonControls\Buttons\PositionButton\PositionDropdown.bmp" />
+    <EmbeddedResource Include="Media\WebCam\WebcamPropertiesDlg.resx">
+      <DependentUpon>WebcamPropertiesDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\openHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AlignTableCellMiddleCenterHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AlignTableCellMiddleLeftHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AlignTableCellMiddleRightHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\boldhs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Color_fontHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CopyHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CutHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Edit_RedoHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Edit_UndoHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fonfont.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FontHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ItalicHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\openHS1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PasteHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\saveHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StrikeoutHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SymbolHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\underlineHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LineColorHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RecolorPictureHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\video.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sound.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CommonControls\PeakMeter\PeakMeter.bmp" />
+    <EmbeddedResource Include="Media\WebCam\DSVideoProperties.resx">
+      <DependentUpon>DSVideoProperties.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Media\WebCam\Webcam.resx">
+      <DependentUpon>Webcam.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="Resources\StopHS.png" />
+    <None Include="Resources\PlayHS.png" />
+    <None Include="Resources\DeleteHS.png" />
+    <None Include="Resources\sound16.ico" />
+    <None Include="Resources\PropertiesHS.png" />
+    <None Include="Resources\otheroptions.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TopArrowHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\OgamaControlsKey.snk" />
+    <None Include="Resources\DownArrowHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CommonControls\Timer\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

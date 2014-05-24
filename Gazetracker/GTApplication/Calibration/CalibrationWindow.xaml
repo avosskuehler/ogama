@@ -1,0 +1,19 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"  
+    xmlns:Calibration="clr-namespace:GTApplication.CalibrationUI" 
+    x:Class="GTApplication.CalibrationUI.CalibrationWindow"
+	WindowStyle="None" AllowsTransparency="True"
+    Title="CalibrationWindow"
+    Background="Black" ResizeMode="NoResize" Topmost="False">
+
+        
+	<Canvas x:Name="CanvasRoot" Background="Black" AllowDrop="True">
+		<Calibration:CalibrationControl x:Name="calibrationControl"/>
+		<Calibration:CalibrationMenuUC x:Name="calibrationMenu" Width="320" Height="130" Canvas.Left="250.5" Canvas.Top="160.5" Visibility="Collapsed"/>
+		<Calibration:SharingControlUC x:Name="sharingUC" Width="280" Height="90" Canvas.Left="269" Canvas.Top="191.5" Visibility="Collapsed"/>
+	</Canvas>
+
+</Window>

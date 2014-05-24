@@ -1,0 +1,560 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{41CE4BE5-AB35-45ED-945F-DE384454215C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GTApplication</RootNamespace>
+    <AssemblyName>GTApplication</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <StartupObject>GTApplication.App</StartupObject>
+    <ApplicationIcon>Graphics\eye.ico</ApplicationIcon>
+    <ManifestCertificateThumbprint>457963A073CEDA37B15D762A0DDA1CA155D1FFC9</ManifestCertificateThumbprint>
+    <ManifestKeyFile>GazeTrackerUI_TemporaryKey.pfx</ManifestKeyFile>
+    <GenerateManifests>true</GenerateManifests>
+    <SignManifests>false</SignManifests>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <ExpressionBlendVersion>3.0.1927.0</ExpressionBlendVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <NoWin32Manifest>true</NoWin32Manifest>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <TargetFrameworkProfile />
+    <PublishUrl>ftp://ftp.gazegroup.org/software/gazetracker/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>http://www.gazegroup.org/software/gazetracker/</InstallUrl>
+    <SupportUrl>http://forum.gazegroup.org</SupportUrl>
+    <PublisherName>GazeTracker</PublisherName>
+    <MinimumRequiredVersion>1.0.0.4</MinimumRequiredVersion>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
+    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>true</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Release64\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\Debug86\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>..\..\Release86\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\Debug64\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <OutputPath>..\..\Release64\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AvalonControlsLibrary, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\AvalonControlsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="DirectShowLib-2005, Version=2.1.0.0, Culture=neutral, PublicKeyToken=67e7b740cdfc2d3f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\DirectShowLib-2005.dll</HintPath>
+    </Reference>
+    <Reference Include="Dotway.WPF.Controls">
+      <HintPath>..\Libs\Managed\Dotway.WPF.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV, Version=2.1.0.793, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\Emgu.CV.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.UI, Version=2.1.0.793, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\Emgu.CV.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.Util, Version=2.1.0.793, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\Emgu.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="GazeGUI, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\GazeGUI.dll</HintPath>
+    </Reference>
+    <Reference Include="GazeGUIVelocity, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\GazeGUIVelocity.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsFormsIntegration">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Resource Include="Graphics\fullscreen2.png" />
+    <Resource Include="Graphics\GTagt_utilities.png" />
+    <Resource Include="Graphics\GTsystem_run.png" />
+    <Resource Include="Graphics\GTxeyes.png" />
+    <Page Include="Calibration\VisualGazePoint.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Calibration\VisualGazePoint.xaml.cs">
+      <DependentUpon>VisualGazePoint.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Calibration\CalibrationMenuUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Calibration\CalibrationWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Calibration\CalibrationControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Calibration\CalibrationFeedbackPoint.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Calibration\CalibrationPoint.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Calibration\SharingControlUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MenubarIconsUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MessageWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Settings\CameraIconUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Settings\ComponentPlacingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Settings\IlluminationEllipseUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Settings\SettingsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Style\style_editslider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\Simple Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Style\style_datagrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Style\style_iphone.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\style_iphonesmall.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Style\style_tabcontrol.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\ColorPickerUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tools\CrosshairDriver.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TrackerViewer\PerformanceCountersUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TrackerViewer\TrackBoxUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TrackerViewer\VideoImageControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GazeTrackerUIMainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TrackerViewer\VideoImageOverlay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TrackerViewer\VideoViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GazeTrackerUIMainWindow.xaml.cs">
+      <DependentUpon>GazeTrackerUIMainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Calibration\CalibrationMenuUC.xaml.cs">
+      <DependentUpon>CalibrationMenuUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Calibration\CalibrationWindow.xaml.cs">
+      <DependentUpon>CalibrationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Calibration\CommunitySharing\HttpUploadHelper.cs" />
+    <Compile Include="Calibration\CommunitySharing\MimePart.cs" />
+    <Compile Include="Calibration\CommunitySharing\StreamMimePart.cs" />
+    <Compile Include="Calibration\CommunitySharing\StringMimePart.cs" />
+    <Compile Include="Calibration\CommunitySharing\UploadFile.cs" />
+    <Compile Include="Calibration\SharingControlUC.xaml.cs">
+      <DependentUpon>SharingControlUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\CameraIconUC.xaml.cs">
+      <DependentUpon>CameraIconUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\ComponentPlacingWindow.xaml.cs">
+      <DependentUpon>ComponentPlacingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\IlluminationEllipseUC.xaml.cs">
+      <DependentUpon>IlluminationEllipseUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\DragCanvasControl.cs" />
+    <Compile Include="MenubarIconsUserControl.xaml.cs">
+      <DependentUpon>MenubarIconsUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MessageWindow.xaml.cs">
+      <DependentUpon>MessageWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Network\TCPIPServer.cs" />
+    <Compile Include="Output.cs" />
+    <Compile Include="Settings\SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\ColorPickerUserControl.xaml.cs">
+      <DependentUpon>ColorPickerUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\ComboBoxBackgroundColorFix.cs" />
+    <Compile Include="Calibration\CalibrationControl.xaml.cs">
+      <DependentUpon>CalibrationControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Calibration\CalibrationFeedbackPoint.xaml.cs">
+      <DependentUpon>CalibrationFeedbackPoint.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Calibration\CalibrationPoint.xaml.cs">
+      <DependentUpon>CalibrationPoint.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\CrosshairDriver.xaml.cs">
+      <DependentUpon>CrosshairDriver.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\EditSlider.cs" />
+    <Compile Include="Tools\ExportToBitmap.cs" />
+    <Compile Include="Tools\MouseDriver.cs" />
+    <Compile Include="Tools\Screenshot.cs" />
+    <Compile Include="Tools\TrackingScreen.cs" />
+    <Compile Include="TrackerViewer\PerformanceCountersUC.xaml.cs">
+      <DependentUpon>PerformanceCountersUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TrackerViewer\TrackBoxUC.xaml.cs">
+      <DependentUpon>TrackBoxUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TrackerViewer\VideoImageControl.xaml.cs">
+      <DependentUpon>VideoImageControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TrackerViewer\VideoImageOverlay.xaml.cs">
+      <DependentUpon>VideoImageOverlay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TrackerViewer\VideoViewer.xaml.cs">
+      <DependentUpon>VideoViewer.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Graphics\eye.ico" />
+    <Resource Include="Graphics\book.png" />
+    <Resource Include="Graphics\cameraSmall.gif" />
+    <Resource Include="Graphics\icon_network.gif" />
+    <Resource Include="Graphics\little_tv_256.png" />
+    <Resource Include="Graphics\users.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="GazeTrackerUI.exe.log4net">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="app.config" />
+    <None Include="Properties\app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GTLibrary\GTLibrary.csproj">
+      <Project>{BF8D4E7F-F8E1-4204-B438-55B35233F590}</Project>
+      <Name>GTLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GTCommons\GTCommons.csproj">
+      <Project>{02E8476C-305D-4FAD-83BC-3A70CCA37260}</Project>
+      <Name>GTCommons</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GTHardware\GTHardware.csproj">
+      <Project>{4EF59290-9005-460E-8919-5003414BDC92}</Project>
+      <Name>GTHardware</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GTNetworkClient\GTNetworkClient.csproj">
+      <Project>{BD8916FF-DE52-4932-A71B-5E748AF559F0}</Project>
+      <Name>GTNetworkClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GTSettings\GTSettings.csproj">
+      <Project>{64C7D526-F5AE-4B60-87AB-5AD67104C581}</Project>
+      <Name>GTSettings</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Graphics\brightnessMax.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Graphics\brightnessMin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Graphics\contrastMax.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Graphics\contrastMin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Graphics\exposureMax.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Graphics\exposureMin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Graphics\focusMax.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Graphics\focusMin.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Graphics\saturationMax.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Graphics\saturationMin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Graphics\sepiaMax.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Graphics\sepiaMin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Graphics\sharpnessMax.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Graphics\sharpnessMin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Graphics\temperatureMax.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Graphics\temperatureMin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Graphics\tintMax.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Graphics\tintMin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Graphics\colorChart.PNG" />
+    <Resource Include="Graphics\colorPicker.png" />
+    <Resource Include="Graphics\f8e14b4df4c3413852893f1754a09ce037db2c70_m.jpg" />
+    <Resource Include="Graphics\IconSettings.png" />
+    <Resource Include="Graphics\iconTrackStats.png" />
+    <Resource Include="Graphics\icon_lightbulb3.png" />
+    <Resource Include="Graphics\lensGray.png" />
+    <Resource Include="Graphics\lightBulb.png" />
+    <Resource Include="Graphics\lightbulbWhite.png" />
+    <Resource Include="Graphics\wizard.png" />
+    <Resource Include="Graphics\zoomLevel.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>if $(PlatformName) == x64 (
+  xcopy "$(SolutionDir)Gazetracker\Libs\Native\x64\*.*" "$(TargetDir)" /s /e /y /f
+) ELSE (
+  xcopy "$(SolutionDir)Gazetracker\Libs\Native\x86\*.*" "$(TargetDir)" /s /e /y /f
+)</PostBuildEvent>
+  </PropertyGroup>
+</Project>

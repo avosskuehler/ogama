@@ -1,0 +1,12 @@
+<StyleCopSettings Version="105">
+  <Analyzers>
+    <Analyzer AnalyzerId="StyleCop.CSharp.DocumentationRules">
+      <AnalyzerSettings>
+        <StringProperty Name="CompanyName">Freie Universität Berlin</StringProperty>
+        <StringProperty Name="Copyright">OGAMA - open gaze and mouse analyzer 
+Copyright (C) 2014 Dr. Adrian Voßkühler  
+Licensed under GPL V3</StringProperty>
+      </AnalyzerSettings>
+    </Analyzer>
+  </Analyzers>
+</StyleCopSettings>

@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8230AED9-33A2-42FD-BDF7-4F7E4EFA73DB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VectorGraphics</RootNamespace>
+    <AssemblyName>VectorGraphics</AssemblyName>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Properties\VectorGraphicsKey.snk</AssemblyOriginatorKeyFile>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Debug\</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Release\</OutputPath>
+    <DefineConstants>TRACE;TOBII;VHUNLOCK</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\Release\Docs\VectorGraphics.XML</DocumentationFile>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\Debug86\</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <DocumentationFile>..\Debug86\Docs\VectorGraphics.xml</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>..\Release86\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>..\Release86\Docs\VectorGraphics.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\Debug64\</OutputPath>
+    <DefineConstants>DEBUG;WIN64</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <OutputPath>..\Release64\</OutputPath>
+    <DefineConstants>TRACE;WIN64</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>..\Release64\Docs\VectorGraphics.XML</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.OLE.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ShockwaveFlashObjects, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Managed\ShockwaveFlashObjects.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Canvas\BuildState.cs" />
+    <Compile Include="Canvas\Picture.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Canvas\Picture.Designer.cs">
+      <DependentUpon>Picture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Canvas\PictureModifiable.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Canvas\PictureModifiable.Designer.cs">
+      <DependentUpon>PictureModifiable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TransparentControls\TransparentUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TransparentControls\TransparentUserControl.Designer.cs">
+      <DependentUpon>TransparentUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Elements\VGScrollImage.cs" />
+    <Compile Include="Elements\VGBrowser.cs" />
+    <Compile Include="Elements\VGAlignment.cs" />
+    <Compile Include="Elements\VGArrow.cs" />
+    <Compile Include="Elements\ElementCollections\Slide.cs" />
+    <Compile Include="StopConditions\NavigatedStopCondition.cs" />
+    <Compile Include="Tools\AsyncHelper.cs" />
+    <Compile Include="Controls\Flash\FlashMouseLeaveMessageFilter.cs" />
+    <Compile Include="Controls\Timer\TimerStartException.cs" />
+    <Compile Include="Controls\Timer\TimerMode.cs" />
+    <Compile Include="Controls\Timer\TimerCaps.cs" />
+    <Compile Include="Controls\Timer\MultimediaTimer.cs" />
+    <Compile Include="Controls\WebsiteThumbnailGenerator.cs" />
+    <Compile Include="Tools\CustomTypeConverter\SlideConverter.cs" />
+    <Compile Include="Elements\VGRegion.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="StopConditions\StopConditionCollectionConverter.cs" />
+    <Compile Include="StopConditions\StopConditionCollectionPropertyDescriptor.cs" />
+    <Compile Include="StopConditions\StopConditionConverter.cs" />
+    <Compile Include="Elements\VGFlash.cs" />
+    <Compile Include="Elements\VGSound.cs" />
+    <Compile Include="Elements\VGSharp.cs" />
+    <Compile Include="Elements\VGRichText.cs" />
+    <Compile Include="StopConditions\InputStopCondition.cs" />
+    <Compile Include="StopConditions\KeyStopCondition.cs" />
+    <Compile Include="StopConditions\MouseStopCondition.cs" />
+    <Compile Include="StopConditions\StopCondition.cs" />
+    <Compile Include="StopConditions\StopConditionCollection.cs" />
+    <Compile Include="StopConditions\TimeStopCondition.cs" />
+    <Compile Include="Tools\AudioFile.cs" />
+    <Compile Include="Controls\Flash\AxFlash.cs">
+      <SubType>Component</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Controls\Flash\AxFlashReadyStateChangeEvent.cs">
+    </Compile>
+    <Compile Include="Controls\Flash\AxFlashProgressEvent.cs" />
+    <Compile Include="Controls\Flash\AxFlashFSCommandEvent.cs" />
+    <Compile Include="Controls\Flash\AxFlashEventMulticaster.cs" />
+    <Compile Include="Controls\Flash\AxFlashCallEvent.cs" />
+    <Compile Include="Tools\CustomEventArgs\ShapePropertiesChangedEventArgs.cs" />
+    <Compile Include="Tools\CustomEventArgs\BrushChangedEventArgs.cs" />
+    <Compile Include="Tools\CustomEventArgs\PenChangedEventArgs.cs" />
+    <Compile Include="Tools\CustomEventArgs\FontChangedEventArgs.cs" />
+    <Compile Include="Tools\CustomEventArgs\ShapeEventArgs.cs" />
+    <Compile Include="Tools\CustomTypeConverter\PointFConverter.cs" />
+    <Compile Include="Tools\CustomTypeConverter\PenConverter.cs" />
+    <Compile Include="Tools\CustomTypeConverter\BrushConverter.cs" />
+    <Compile Include="Tools\CustomTypeConverter\VGElementConverter.cs" />
+    <Compile Include="Tools\VGExceptionMethods.cs" />
+    <Compile Include="Tools\Interfaces\IViewObject.cs" />
+    <Compile Include="Controls\RichEdit50.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Tools\CustomCursors.cs" />
+    <Compile Include="Controls\Flash\AxFlashControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\Flash\FlashMessageFilter.cs" />
+    <Compile Include="Controls\Flash\FlashCapture.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Flash\FlashCapture.Designer.cs">
+      <DependentUpon>FlashCapture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\Interfaces\IClonableNamedObject.cs" />
+    <Compile Include="Tools\Images.cs" />
+    <Compile Include="Tools\Interfaces\INamedObject.cs" />
+    <Compile Include="Controls\RichEdit50Opaque.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Tools\CustomEventArgs\ProgressEventArgs.cs" />
+    <Compile Include="Tools\CustomTypeConverter\VGElementCollectionConverter.cs" />
+    <Compile Include="Controls\RichEdit50Transparent.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Elements\ElementCollections\VGElementCollectionPropertyDescriptor.cs" />
+    <Compile Include="Elements\ElementCollections\VGElementCollection.cs" />
+    <Compile Include="Elements\VGCursor.cs" />
+    <Compile Include="Elements\VGImage.cs" />
+    <Compile Include="Elements\ShapeDrawAction.cs" />
+    <Compile Include="Tools\CustomTypeConverter\ObjectStringConverter.cs" />
+    <Compile Include="Elements\VGEllipse.cs" />
+    <Compile Include="Elements\GrabHandle.cs">
+    </Compile>
+    <Compile Include="Elements\VGElement.cs">
+    </Compile>
+    <Compile Include="Elements\VGLine.cs" />
+    <Compile Include="Elements\VGPolyline.cs" />
+    <Compile Include="Elements\VGRectangle.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tools\ScreenCapture.cs" />
+    <Compile Include="Elements\VGShapeType.cs" />
+    <Compile Include="Elements\VGText.cs" />
+    <Compile Include="Elements\VGStyleGroup.cs" />
+    <Compile Include="Tools\Win32\User32.cs" />
+    <Compile Include="Tools\Win32\Gdi32.cs" />
+    <Compile Include="Tools\Trigger\ParallelPort.cs" />
+    <Compile Include="Tools\Trigger\Trigger.cs" />
+    <Compile Include="Tools\Trigger\TriggerOutputDevices.cs" />
+    <Compile Include="Tools\Trigger\TriggerSignaling.cs" />
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Cursors\Ellipse.Cur" />
+    <EmbeddedResource Include="Cursors\Image.Cur" />
+    <EmbeddedResource Include="Cursors\Line.Cur" />
+    <EmbeddedResource Include="Cursors\Polyline.Cur" />
+    <EmbeddedResource Include="Cursors\Rectangle.Cur" />
+    <EmbeddedResource Include="Cursors\Text.Cur" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MouseRight.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Mouse.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MouseLeft.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sound.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Cursors\Sound.Cur" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Canvas\Picture.resx">
+      <DependentUpon>Picture.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Canvas\PictureModifiable.resx">
+      <DependentUpon>PictureModifiable.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cursors\Sharp.Cur" />
+    <EmbeddedResource Include="Controls\Flash\FlashCapture.resx">
+      <DependentUpon>FlashCapture.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RecordingBackground.png" />
+    <None Include="Properties\VectorGraphicsKey.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\TransparentControls\TransparentUserControl.bmp" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!--
+    <Import Project="$(ProgramFiles)\MSBuild\Microsoft\StyleCop\v4.3\Microsoft.StyleCop.targets" />
+  -->
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

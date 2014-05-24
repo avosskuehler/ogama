@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?include $(sys.CURRENTDIR)Common\Config.wxi?>
+  <Fragment>
+    <DirectoryRef Id="INSTALLLOCATION">
+      <Directory Id="SaliencyDirectory" Name="SaliencyCalculation" >
+        <Component Id="C_cygpng12" Guid="{C6D15A38-D366-1D5E-83D7-209D0AB588BC}" Win64="$(var.Win64)">
+          <File Id="cygpng12" Name="cygpng12.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)SaliencyCalculation\" />
+        </Component>
+        <Component Id="C_cygXcursor_1" Guid="{DB8BADBD-896D-D261-6DC7-3DDDC14CF447}" Win64="$(var.Win64)">
+          <File Id="cygXcursor_1" Name="cygXcursor-1.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)SaliencyCalculation\" />
+        </Component>
+        <Component Id="C_cygXt_6" Guid="{C7090C71-A139-B46C-1B74-64505027477E}" Win64="$(var.Win64)">
+          <File Id="cygXt_6" Name="cygXt-6.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)SaliencyCalculation\" />
+        </Component>
+        <Component Id="C_cygXft_2" Guid="{A70D72A0-8626-8CD3-1758-72701D6EC123}" Win64="$(var.Win64)">
+          <File Id="cygXft_2" Name="cygXft-2.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)SaliencyCalculation\" />
+        </Component>
+        <Component Id="C_cygXrandr_2" Guid="{7AE5EB87-2044-25E6-2ABD-25BEA83B4FFE}" Win64="$(var.Win64)">
+          <File Id="cygXrandr_2" Name="cygXrandr-2.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)SaliencyCalculation\" />
+        </Component>
+        <Component Id="C_cygfftw3_3" Guid="{12FA1A7A-5140-4253-AA34-03D1DE8B80A6}" Win64="$(var.Win64)">
+          <File Id="cygfftw3_3" Name="cygfftw3-3.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)SaliencyCalculation\" />
+        </Component>
+        <Component Id="C_cygminires" Guid="{113966F5-C365-7531-7315-BA659D6C6B95}" Win64="$(var.Win64)">
+          <File Id="cygminires" Name="cygminires.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)SaliencyCalculation\" />
+        </Component>
+        <Component Id="C_cygqt_mt_3" Guid="{6E84DC88-7BE7-8911-5677-852B6B3B26BB}" Win64="$(var.Win64)">
+          <File Id="cygqt_mt_3" Name="cygqt-mt-3.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)SaliencyCalculation\" />
+        </Component>
+        <Component Id="C_cygbz2_1" Guid="{A1C61E27-A1D5-3AE5-F676-4E8A22DF0CBF}" Win64="$(var.Win64)">
+          <File Id="cygbz2_1" Name="cygbz2-1.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)SaliencyCalculation\" />
+        </Component>
+        <Component Id="C_cygXext_6" Guid="{AD0E0EEF-364E-082C-9AD7-A7DB13A97E65}" Win64="$(var.Win64)">
+          <File Id="cygXext_6" Name="cygXext-6.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)SaliencyCalculation\" />
+        </Component>
+
+
+        <Component Id="C_cygX11_6" Guid="{660552A9-656A-6710-42B5-D86D8FC4C860}" Win64="$(var.Win64)">
+          <File Id="cygX11_6" Name="cygX11-6.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)SaliencyCalculation\" />
+        </Component>
+        <Component Id="C_cygXmu_6" Guid="{C33E91FF-6B47-995A-40BA-4DFEE1AE97C9}" Win64="$(var.Win64)">
+          <File Id="cygXmu_6" Name="cygXmu-6.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)SaliencyCalculation\" />
+        </Component>
+        <Component Id="C_cygGL_1" Guid="{E8678B84-1AEF-7237-D1F8-26E6C048DED1}" Win64="$(var.Win64)">
+          <File Id="cygGL_1" Name="cygGL-1.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)SaliencyCalculation\" />
+        </Component>
+        <Component Id="C_cygICE_6" Guid="{95482044-AC2A-68AA-21CE-DB900CA0EB77}" Win64="$(var.Win64)">
+          <File Id="cygICE_6" Name="cygICE-6.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)SaliencyCalculation\" />
+        </Component>
+        <Component Id="C_cyglapack" Guid="{43821B44-77F1-6416-C653-D8127228273C}" Win64="$(var.Win64)">
+          <File Id="cyglapack" Name="cyglapack.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)SaliencyCalculation\" />
+        </Component>
+        <Component Id="C_cygjpeg_62" Guid="{1A8B0968-D76A-6DD4-8D49-C5D7D0F353B7}" Win64="$(var.Win64)">
+          <File Id="cygjpeg_62" Name="cygjpeg-62.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)SaliencyCalculation\" />
+        </Component>
+        <Component Id="C_cygz" Guid="{FF4BD823-ED59-B1BC-F5A5-306704E8D852}" Win64="$(var.Win64)">
+          <File Id="cygz" Name="cygz.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)SaliencyCalculation\" />
+        </Component>
+        <Component Id="C_cygSM_6" Guid="{04B9C717-24B0-AC15-1888-CBBEB5DA4910}" Win64="$(var.Win64)">
+          <File Id="cygSM_6" Name="cygSM-6.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)SaliencyCalculation\" />
+        </Component>
+        <Component Id="C_cygblas" Guid="{4E8D88F4-BE32-CE59-E1C1-CC788F1258EB}" Win64="$(var.Win64)">
+          <File Id="cygblas" Name="cygblas.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)SaliencyCalculation\" />
+        </Component>
+        <Component Id="C_cygfontconfig_1" Guid="{8A706F03-3892-D440-7686-8195D3261753}" Win64="$(var.Win64)">
+          <File Id="cygfontconfig_1" Name="cygfontconfig-1.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)SaliencyCalculation\" />
+        </Component>
+
+        <Component Id="C_cygexpat_0" Guid="{532F2794-83ED-0C50-B6DE-626C6D679C79}" Win64="$(var.Win64)">
+          <File Id="cygexpat_0" Name="cygexpat-0.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)SaliencyCalculation\" />
+        </Component>
+        <Component Id="C_cygiconv_2" Guid="{21F31208-A670-DDF5-5D7A-DFD65702148B}" Win64="$(var.Win64)">
+          <File Id="cygiconv_2" Name="cygiconv-2.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)SaliencyCalculation\" />
+        </Component>
+        <Component Id="C_cygwin1" Guid="{F5C817A3-1A36-5DFE-8BA4-3B87DE3C44F9}" Win64="$(var.Win64)">
+          <File Id="cygwin1" Name="cygwin1.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)SaliencyCalculation\" />
+        </Component>
+        <Component Id="C_cygXrender_1" Guid="{8294CDF4-5F8A-5ED0-0AA3-C03DFA634722}" Win64="$(var.Win64)">
+          <File Id="cygXrender_1" Name="cygXrender-1.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)SaliencyCalculation\" />
+        </Component>
+        <Component Id="C_cygxml2_2" Guid="{AA4155F8-7C10-837D-C043-66DDDD35F7C1}" Win64="$(var.Win64)">
+          <File Id="cygxml2_2" Name="cygxml2-2.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)SaliencyCalculation\" />
+        </Component>
+        <Component Id="C_cygXi_6" Guid="{4B94F857-13D6-FAE4-E27A-8D310EF55B28}" Win64="$(var.Win64)">
+          <File Id="cygXi_6" Name="cygXi-6.dll" KeyPath="yes"  DiskId="1"
+              Source="$(var.Ogama.TargetDir)SaliencyCalculation\" />
+        </Component>
+        <Component Id="C_cygfreetype_6" Guid="{EF7C239C-619B-07DF-947E-8B2D1AC1A55A}" Win64="$(var.Win64)">
+          <File Id="cygfreetype_6" Name="cygfreetype-6.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)SaliencyCalculation\" />
+        </Component>
+        <Component Id="C_cygXfixes_3" Guid="{BC79C610-E312-A2B2-F1E7-9C9E92F3C996}" Win64="$(var.Win64)">
+          <File Id="cygXfixes_3" Name="cygXfixes-3.dll" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)SaliencyCalculation\" />
+        </Component>
+        <Component Id="C_ezvision" Guid="{6F1A35FB-50C0-751C-D878-7C9FC673BFA9}" Win64="$(var.Win64)">
+          <File Id="ezvision" Name="ezvision.exe" KeyPath="yes" DiskId="1"
+              Source="$(var.Ogama.TargetDir)SaliencyCalculation\" />
+        </Component>
+      </Directory>
+    </DirectoryRef>
+
+    <Feature Id='SaliencyFeature' Title='Saliency calculation' Description='Installs the ezvision components used to calculate salience maps.' Level='1'>
+      <ComponentRef Id='C_cygpng12' />
+      <ComponentRef Id='C_cygXcursor_1' />
+      <ComponentRef Id='C_cygXt_6' />
+      <ComponentRef Id='C_cygXft_2' />
+      <ComponentRef Id='C_cygXrandr_2' />
+      <ComponentRef Id='C_cygfftw3_3' />
+      <ComponentRef Id='C_cygminires' />
+      <ComponentRef Id='C_cygqt_mt_3' />
+      <ComponentRef Id='C_cygbz2_1' />
+      <ComponentRef Id='C_cygXext_6' />
+      <ComponentRef Id='C_cygX11_6' />
+      <ComponentRef Id='C_cygXmu_6' />
+      <ComponentRef Id='C_cygGL_1' />
+      <ComponentRef Id='C_cygICE_6' />
+      <ComponentRef Id='C_cyglapack' />
+      <ComponentRef Id='C_cygjpeg_62' />
+      <ComponentRef Id='C_cygz' />
+      <ComponentRef Id='C_cygSM_6' />
+      <ComponentRef Id='C_cygblas' />
+      <ComponentRef Id='C_cygfontconfig_1' />
+      <ComponentRef Id='C_cygexpat_0' />
+      <ComponentRef Id='C_cygiconv_2' />
+      <ComponentRef Id='C_cygwin1' />
+      <ComponentRef Id='C_cygXrender_1' />
+      <ComponentRef Id='C_cygxml2_2' />
+      <ComponentRef Id='C_cygXi_6' />
+      <ComponentRef Id='C_cygfreetype_6' />
+      <ComponentRef Id='C_cygXfixes_3' />
+      <ComponentRef Id='C_ezvision' />
+    </Feature>
+  </Fragment>
+</Wix>
