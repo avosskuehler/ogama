@@ -89,7 +89,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <TargetExt>.ax</TargetExt>
-    <OutDir>$(SolutionDir)Debug86\</OutDir>
+    <OutDir>$(SolutionDir)$(Configuration)$(PlatformArchitecture)\</OutDir>
     <IntDir>$(ProjectDir)$(Configuration)$(PlatformArchitecture)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -99,7 +99,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <TargetExt>.ax</TargetExt>
-    <OutDir>$(SolutionDir)Release86\</OutDir>
+    <OutDir>$(SolutionDir)$(Configuration)$(PlatformArchitecture)\</OutDir>
     <IntDir>$(ProjectDir)$(Configuration)$(PlatformArchitecture)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -173,7 +173,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>..\BaseClasses\Release32\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\BaseClasses\Release64\</AdditionalLibraryDirectories>
       <AdditionalDependencies>strmbase.lib;winmm.lib;msvcrt.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>GSSF.def</ModuleDefinitionFile>
     </Link>
