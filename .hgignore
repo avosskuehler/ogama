@@ -1,0 +1,10 @@
+syntax: glob
+DesignResources/Video/*
+*/obj/*
+*.user
+*Release*
+Ogama.sdf
+*.DotSettings
+*.suo
+*.chm
+*Debug*

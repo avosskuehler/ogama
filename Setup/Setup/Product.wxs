@@ -43,7 +43,7 @@
             <File Id="License" Name="License.rtf" KeyPath="yes" DiskId="1"
                   Source="$(var.SolutionDir)Setup\Setup\Resources\" />
           </Component>
-         </Directory>
+        </Directory>
       </Directory>
       <Directory Id="DesktopFolder" SourceName="User's Desktop" />
       <Directory Id="ProgramMenuFolder" SourceName="User's Programs Menu">

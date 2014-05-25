@@ -161,6 +161,9 @@ namespace Ogama.Modules.Recording.TheEyeTribeInterface
     private System.Windows.Forms.SplitContainer splitContainer1;
     private System.Windows.Forms.SplitContainer splitContainer2;
     private System.Windows.Forms.Integration.ElementHost elementHost1;
+    /// <summary>
+    /// The track box status
+    /// </summary>
     public TrackBoxStatus trackBoxStatus;
   }
 }
