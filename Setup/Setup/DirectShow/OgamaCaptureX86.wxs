@@ -3,8 +3,8 @@
   <?include $(sys.CURRENTDIR)Common\Config.wxi?>
   <Fragment>
     <DirectoryRef Id="DIRECTSHOWINSTALLLOCATION">
-      <Component Id="OgamaCaptureX86Component" Guid="{960FDA8F-6F36-4542-937C-DB9921E33FBC}" Win64="no">
-        <File Id="fil28FCD5D6CC68B3FCF5C0C48A2694E364" KeyPath="yes" Source="$(var.SolutionDir)Release86\OgamaCaptureX86.ax">
+      <Component Id="OgamaCaptureX86Component" Guid="{960FDA8F-6F36-4542-937C-DB9921E33FBC}" Win64="$(var.Win64)">
+        <File Id="fil28FCD5D6CC68B3FCF5C0C48A2694E364" KeyPath="yes" Source="$(var.Ogama.TargetDir)OgamaCapture.ax">
           <Class Id="{90B82CB3-719B-426E-AE46-28CF7A57B586}" Context="InprocServer32" Description="OgamaCapture" ThreadingModel="both" />
         </File>
         <RegistryValue Root="HKCR" Key="CLSID\{860BB310-5D01-11D0-BD3B-00A0C911CE86}\Instance\{90B82CB3-719B-426E-AE46-28CF7A57B586}" Name="FriendlyName" Value="OgamaCapture" Type="string" Action="write" />
