@@ -1,4 +1,4 @@
-LIBRARY     OgamaCaptureX86.ax
+LIBRARY     OgamaCapture.ax
 
 EXPORTS
             DllMain                 PRIVATE
