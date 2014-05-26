@@ -98,7 +98,7 @@ namespace Ogama.MainWindow.Dialogs
     /// </summary>
     public string AssemblyVersion
     {
-      get { return Assembly.GetExecutingAssembly().GetName().Version.ToString(); }
+      get { return Assembly.GetExecutingAssembly().GetName().Version.ToString(3); }
     }
 
     /// <summary>

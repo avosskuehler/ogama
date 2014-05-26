@@ -36,7 +36,11 @@
     <CustomAction Id="ERRCA_UIANDADVERTISED" Error="[VSDUIANDADVERTISED]" />
     <CustomAction Id="VSDCA_FolderForm_AllUsers" Property="FolderForm_AllUsers" Value="ALL" />
 
+
     <Directory Id="TARGETDIR" Name="SourceDir">
+      <?if $(sys.BUILDARCH)=x64?>
+      <Directory Id="ProgramFilesFolder"/>
+      <?endif?>
       <Directory Id="$(var.PlatformProgramFilesFolder)">
         <Directory Id="INSTALLLOCATION" Name="$(var.ProductName)">
           <Component Id="C_License" Guid="{0785ABA2-6FD4-77F7-115C-7C1341B22B90}" Win64="$(var.Win64)">

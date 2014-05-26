@@ -8,3 +8,4 @@ Ogama.sdf
 *.suo
 *.chm
 *Debug*
+*.opensdf

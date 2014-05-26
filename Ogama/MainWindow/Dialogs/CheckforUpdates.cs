@@ -107,7 +107,7 @@ namespace Ogama.MainWindow.Dialogs
     /// <param name="e">An empty <see cref="EventArgs"/></param>
     private void frmCheckForUpdates_Load(object sender, EventArgs e)
     {
-      this.lblYourVersionNumber.Text = this.assemblyVersion.ToString();
+      this.lblYourVersionNumber.Text = this.assemblyVersion.ToString(3);
     }
 
     /// <summary>
