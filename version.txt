@@ -1,2 +1,2 @@
-4.5.5259
+4.5.5259.0
 This introduces new tracking devices and bugfixes.
