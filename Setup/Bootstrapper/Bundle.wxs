@@ -3,8 +3,11 @@
      xmlns:bal="http://schemas.microsoft.com/wix/BalExtension"
      xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
   <Bundle Name="Ogama V4.5" Version="4.5" Manufacturer="Dr. Adrian Voßkühler" UpgradeCode="2a768c10-b493-4279-84d7-11e0815e3a92">
-    <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense">
-      <bal:WixStandardBootstrapperApplication LicenseFile="Resources\License.rtf" LogoFile="Resources\Logo.png" />
+    <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLargeTheme">
+      <bal:WixStandardBootstrapperApplication 
+        LicenseFile="Resources\License.rtf"
+        ShowVersion="yes"
+        LogoFile="Resources\Logo.png" />
     </BootstrapperApplicationRef>
 
     <util:RegistrySearch Root="HKLM" Key="SOFTWARE\Microsoft\Net Framework Setup\NDP\v4\Full" Value="Version" Variable="Net4FullVersion" />
