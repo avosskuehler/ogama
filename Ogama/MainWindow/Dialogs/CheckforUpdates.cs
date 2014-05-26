@@ -75,7 +75,8 @@ namespace Ogama.MainWindow.Dialogs
       this.updateClient = new WebClient();
       this.updateClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(this.updateClient_DownloadProgressChanged);
       this.updateClient.DownloadFileCompleted += new AsyncCompletedEventHandler(this.updateClient_DownloadFileCompleted);
-      this.assemblyVersion = Assembly.GetExecutingAssembly().GetName().Version;
+      var fullVersion = Assembly.GetExecutingAssembly().GetName().Version;
+      this.assemblyVersion = new Version(fullVersion.Major, fullVersion.Minor, fullVersion.Build);
       this.versionLocalFilename = Path.Combine(Properties.Settings.Default.LogfilePath, "version.txt");
 
       this.llbDownloadUri.Links.Add(0, 51, Properties.Settings.Default.OgamaUri);
@@ -388,7 +389,7 @@ namespace Ogama.MainWindow.Dialogs
           }
           else
           {
-            this.serverVersion = new Version(majorVersion, minorVersion, build, revision);
+            this.serverVersion = new Version(majorVersion, minorVersion, build);
           }
         }
       }
