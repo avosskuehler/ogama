@@ -713,7 +713,8 @@ namespace Ogama.Modules.Recording.HaythamInterface
     {
       if (!this.IsHaythamApplicationRunning())
       {
-        string haythamPath = Path.Combine(Application.StartupPath, Path.Combine("Haytham", "Haytham.exe"));
+        var programFilesFolder = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
+        string haythamPath = Path.Combine(programFilesFolder, Path.Combine("Haytham", "Haytham.exe"));
         Process.Start(haythamPath);
       }
       else

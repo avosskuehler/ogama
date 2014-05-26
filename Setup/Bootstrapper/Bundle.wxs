@@ -2,8 +2,17 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:bal="http://schemas.microsoft.com/wix/BalExtension"
      xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
-  <Bundle Name="Ogama V4.5" Version="4.5" Manufacturer="Dr. Adrian Voßkühler" UpgradeCode="2a768c10-b493-4279-84d7-11e0815e3a92">
-    <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLargeTheme">
+  <Bundle 
+    Name="Ogama V4.5" 
+    Version="4.5.3" 
+    Manufacturer="Dr. Adrian Voßkühler"  
+    UpgradeCode="{4F9B223A-EE75-489A-8EDD-C8740626D263}" 
+    AboutUrl="http://www.ogama.net" 
+    Copyright="Freie Universität Berlin" 
+    HelpTelephone="adrian@ogama.net" 
+    HelpUrl="http://www.ogama.net"
+    IconSourceFile="$(var.SolutionDir)Ogama\Resources\Ogama.ico">
+    <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLargeLicense">
       <bal:WixStandardBootstrapperApplication 
         LicenseFile="Resources\License.rtf"
         ShowVersion="yes"
