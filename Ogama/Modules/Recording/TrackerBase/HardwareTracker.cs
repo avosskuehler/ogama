@@ -91,5 +91,10 @@ namespace Ogama.Modules.Recording.TrackerBase
     /// The Eye Tribe project
     /// </summary>
     TheEyeTribe = 4096,
+
+    /// <summary>
+    /// Smart Eye Aurora
+    /// </summary>
+    SmartEye = 8192,
   }
 }
