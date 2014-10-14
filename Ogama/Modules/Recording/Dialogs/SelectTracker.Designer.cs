@@ -177,6 +177,16 @@
       this.btnCancel = new System.Windows.Forms.Button();
       this.btnOK = new System.Windows.Forms.Button();
       this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+      this.grpSmartEye = new System.Windows.Forms.GroupBox();
+      this.tableLayoutPanel28 = new System.Windows.Forms.TableLayoutPanel();
+      this.tableLayoutPanel29 = new System.Windows.Forms.TableLayoutPanel();
+      this.pcbHelpSmartEye = new System.Windows.Forms.PictureBox();
+      this.chbSmartEye = new System.Windows.Forms.CheckBox();
+      this.pcbSmartEyeStatus = new System.Windows.Forms.PictureBox();
+      this.lblSmartEyeStatus = new System.Windows.Forms.Label();
+      this.splitContainer17 = new System.Windows.Forms.SplitContainer();
+      this.pcbSmartEye = new System.Windows.Forms.PictureBox();
+      this.label14 = new System.Windows.Forms.Label();
       ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
       this.splitContainer1.Panel1.SuspendLayout();
       this.splitContainer1.Panel2.SuspendLayout();
@@ -326,6 +336,16 @@
       this.tableLayoutPanel2.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.pcbSelectedTrackerLogo)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pcbSelectedTrackerImage)).BeginInit();
+      this.grpSmartEye.SuspendLayout();
+      this.tableLayoutPanel28.SuspendLayout();
+      this.tableLayoutPanel29.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.pcbHelpSmartEye)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.pcbSmartEyeStatus)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer17)).BeginInit();
+      this.splitContainer17.Panel1.SuspendLayout();
+      this.splitContainer17.Panel2.SuspendLayout();
+      this.splitContainer17.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.pcbSmartEye)).BeginInit();
       this.SuspendLayout();
       // 
       // splitContainer1
@@ -344,7 +364,7 @@
       // splitContainer1.Panel2
       // 
       this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-      this.splitContainer1.Size = new System.Drawing.Size(641, 646);
+      this.splitContainer1.Size = new System.Drawing.Size(641, 766);
       this.splitContainer1.SplitterDistance = 60;
       this.splitContainer1.SplitterWidth = 1;
       this.splitContainer1.TabIndex = 6;
@@ -380,8 +400,8 @@
       this.splitContainer2.Panel2.Controls.Add(this.btnCancel);
       this.splitContainer2.Panel2.Controls.Add(this.btnOK);
       this.splitContainer2.Panel2MinSize = 35;
-      this.splitContainer2.Size = new System.Drawing.Size(641, 585);
-      this.splitContainer2.SplitterDistance = 546;
+      this.splitContainer2.Size = new System.Drawing.Size(641, 705);
+      this.splitContainer2.SplitterDistance = 666;
       this.splitContainer2.TabIndex = 15;
       // 
       // splitContainer15
@@ -400,8 +420,8 @@
       // 
       this.splitContainer15.Panel2.Controls.Add(this.tableLayoutPanel2);
       this.splitContainer15.Panel2MinSize = 70;
-      this.splitContainer15.Size = new System.Drawing.Size(641, 546);
-      this.splitContainer15.SplitterDistance = 472;
+      this.splitContainer15.Size = new System.Drawing.Size(641, 666);
+      this.splitContainer15.SplitterDistance = 592;
       this.splitContainer15.TabIndex = 19;
       // 
       // tabControl1
@@ -412,7 +432,7 @@
       this.tabControl1.Location = new System.Drawing.Point(0, 0);
       this.tabControl1.Name = "tabControl1";
       this.tabControl1.SelectedIndex = 0;
-      this.tabControl1.Size = new System.Drawing.Size(641, 472);
+      this.tabControl1.Size = new System.Drawing.Size(641, 592);
       this.tabControl1.TabIndex = 14;
       // 
       // tabPage1
@@ -421,7 +441,7 @@
       this.tabPage1.Location = new System.Drawing.Point(4, 22);
       this.tabPage1.Name = "tabPage1";
       this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPage1.Size = new System.Drawing.Size(633, 446);
+      this.tabPage1.Size = new System.Drawing.Size(633, 566);
       this.tabPage1.TabIndex = 0;
       this.tabPage1.Text = "Commercial Tracker";
       this.tabPage1.UseVisualStyleBackColor = true;
@@ -438,10 +458,11 @@
       this.flowLayoutPanel1.Controls.Add(this.grpEyetech);
       this.flowLayoutPanel1.Controls.Add(this.grpGazepoint);
       this.flowLayoutPanel1.Controls.Add(this.grpASL);
+      this.flowLayoutPanel1.Controls.Add(this.grpSmartEye);
       this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
       this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
       this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-      this.flowLayoutPanel1.Size = new System.Drawing.Size(627, 440);
+      this.flowLayoutPanel1.Size = new System.Drawing.Size(627, 560);
       this.flowLayoutPanel1.TabIndex = 0;
       // 
       // grpTobii
@@ -2267,13 +2288,149 @@
       this.btnOK.Text = "OK";
       this.btnOK.UseVisualStyleBackColor = true;
       // 
+      // grpSmartEye
+      // 
+      this.grpSmartEye.Controls.Add(this.tableLayoutPanel28);
+      this.grpSmartEye.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.grpSmartEye.Location = new System.Drawing.Point(3, 411);
+      this.grpSmartEye.Name = "grpSmartEye";
+      this.grpSmartEye.Size = new System.Drawing.Size(200, 130);
+      this.grpSmartEye.TabIndex = 3;
+      this.grpSmartEye.TabStop = false;
+      this.grpSmartEye.Text = "Smart Eye";
+      this.grpSmartEye.MouseHover += new System.EventHandler(this.GrpSmartEyeEnter);
+      // 
+      // tableLayoutPanel28
+      // 
+      this.tableLayoutPanel28.ColumnCount = 1;
+      this.tableLayoutPanel28.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+      this.tableLayoutPanel28.Controls.Add(this.tableLayoutPanel29, 0, 1);
+      this.tableLayoutPanel28.Controls.Add(this.splitContainer17, 0, 0);
+      this.tableLayoutPanel28.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.tableLayoutPanel28.Location = new System.Drawing.Point(3, 22);
+      this.tableLayoutPanel28.Name = "tableLayoutPanel28";
+      this.tableLayoutPanel28.RowCount = 2;
+      this.tableLayoutPanel28.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+      this.tableLayoutPanel28.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+      this.tableLayoutPanel28.Size = new System.Drawing.Size(194, 105);
+      this.tableLayoutPanel28.TabIndex = 1;
+      // 
+      // tableLayoutPanel29
+      // 
+      this.tableLayoutPanel29.ColumnCount = 4;
+      this.tableLayoutPanel29.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 21F));
+      this.tableLayoutPanel29.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+      this.tableLayoutPanel29.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 24F));
+      this.tableLayoutPanel29.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 21F));
+      this.tableLayoutPanel29.Controls.Add(this.pcbHelpSmartEye, 3, 0);
+      this.tableLayoutPanel29.Controls.Add(this.chbSmartEye, 0, 0);
+      this.tableLayoutPanel29.Controls.Add(this.pcbSmartEyeStatus, 2, 0);
+      this.tableLayoutPanel29.Controls.Add(this.lblSmartEyeStatus, 1, 0);
+      this.tableLayoutPanel29.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.tableLayoutPanel29.Location = new System.Drawing.Point(3, 82);
+      this.tableLayoutPanel29.Name = "tableLayoutPanel29";
+      this.tableLayoutPanel29.RowCount = 1;
+      this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+      this.tableLayoutPanel29.Size = new System.Drawing.Size(194, 20);
+      this.tableLayoutPanel29.TabIndex = 0;
+      // 
+      // pcbHelpSmartEye
+      // 
+      this.pcbHelpSmartEye.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.pcbHelpSmartEye.Image = global::Ogama.Properties.Resources.HelpBmp;
+      this.pcbHelpSmartEye.Location = new System.Drawing.Point(173, 3);
+      this.pcbHelpSmartEye.Margin = new System.Windows.Forms.Padding(0, 3, 3, 0);
+      this.pcbHelpSmartEye.Name = "pcbHelpSmartEye";
+      this.pcbHelpSmartEye.Size = new System.Drawing.Size(18, 17);
+      this.pcbHelpSmartEye.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+      this.pcbHelpSmartEye.TabIndex = 16;
+      this.pcbHelpSmartEye.TabStop = false;
+      this.toolTip1.SetToolTip(this.pcbHelpSmartEye, "Display help on how to install this eye tracker.");
+      this.pcbHelpSmartEye.Click += new System.EventHandler(this.PcbHelpSmartEyeClick);
+      // 
+      // chbSmartEye
+      // 
+      this.chbSmartEye.AutoSize = true;
+      this.chbSmartEye.Location = new System.Drawing.Point(3, 3);
+      this.chbSmartEye.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+      this.chbSmartEye.Name = "chbSmartEye";
+      this.chbSmartEye.Size = new System.Drawing.Size(15, 14);
+      this.chbSmartEye.TabIndex = 0;
+      this.chbSmartEye.UseVisualStyleBackColor = true;
+      // 
+      // pcbSmartEyeStatus
+      // 
+      this.pcbSmartEyeStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.pcbSmartEyeStatus.Image = global::Ogama.Properties.Resources.Information16;
+      this.pcbSmartEyeStatus.Location = new System.Drawing.Point(152, 3);
+      this.pcbSmartEyeStatus.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+      this.pcbSmartEyeStatus.Name = "pcbSmartEyeStatus";
+      this.pcbSmartEyeStatus.Size = new System.Drawing.Size(18, 17);
+      this.pcbSmartEyeStatus.TabIndex = 1;
+      this.pcbSmartEyeStatus.TabStop = false;
+      // 
+      // lblSmartEyeStatus
+      // 
+      this.lblSmartEyeStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.lblSmartEyeStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.lblSmartEyeStatus.Location = new System.Drawing.Point(24, 0);
+      this.lblSmartEyeStatus.Name = "lblSmartEyeStatus";
+      this.lblSmartEyeStatus.Size = new System.Drawing.Size(122, 20);
+      this.lblSmartEyeStatus.TabIndex = 2;
+      this.lblSmartEyeStatus.Text = "Available";
+      this.lblSmartEyeStatus.MouseHover += new System.EventHandler(this.GrpSmartEyeEnter);
+      // 
+      // splitContainer17
+      // 
+      this.splitContainer17.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.splitContainer17.Location = new System.Drawing.Point(3, 3);
+      this.splitContainer17.Name = "splitContainer17";
+      // 
+      // splitContainer17.Panel1
+      // 
+      this.splitContainer17.Panel1.Controls.Add(this.pcbSmartEye);
+      this.splitContainer17.Panel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+      // 
+      // splitContainer17.Panel2
+      // 
+      this.splitContainer17.Panel2.Controls.Add(this.label14);
+      this.splitContainer17.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+      this.splitContainer17.Size = new System.Drawing.Size(194, 73);
+      this.splitContainer17.SplitterDistance = 64;
+      this.splitContainer17.TabIndex = 0;
+      // 
+      // pcbSmartEye
+      // 
+      this.pcbSmartEye.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.pcbSmartEye.Image = global::Ogama.Properties.Resources.SmartEyeAuroraFoto64;
+      this.pcbSmartEye.Location = new System.Drawing.Point(0, 0);
+      this.pcbSmartEye.Name = "pcbSmartEye";
+      this.pcbSmartEye.Size = new System.Drawing.Size(64, 73);
+      this.pcbSmartEye.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+      this.pcbSmartEye.TabIndex = 0;
+      this.pcbSmartEye.TabStop = false;
+      this.pcbSmartEye.Click += new System.EventHandler(this.PcbSmartEyeClick);
+      this.pcbSmartEye.MouseHover += new System.EventHandler(this.GrpSmartEyeEnter);
+      // 
+      // label14
+      // 
+      this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label14.Location = new System.Drawing.Point(0, 0);
+      this.label14.Margin = new System.Windows.Forms.Padding(0);
+      this.label14.Name = "label14";
+      this.label14.Size = new System.Drawing.Size(126, 73);
+      this.label14.TabIndex = 0;
+      this.label14.Text = "The Smart Eye Aurora eye tracker.";
+      this.label14.MouseHover += new System.EventHandler(this.GrpSmartEyeEnter);
+      // 
       // SelectTracker
       // 
       this.AcceptButton = this.btnOK;
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.CancelButton = this.btnCancel;
-      this.ClientSize = new System.Drawing.Size(641, 646);
+      this.ClientSize = new System.Drawing.Size(641, 766);
       this.Controls.Add(this.splitContainer1);
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.MaximizeBox = false;
@@ -2446,6 +2603,17 @@
       this.tableLayoutPanel2.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.pcbSelectedTrackerLogo)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.pcbSelectedTrackerImage)).EndInit();
+      this.grpSmartEye.ResumeLayout(false);
+      this.tableLayoutPanel28.ResumeLayout(false);
+      this.tableLayoutPanel29.ResumeLayout(false);
+      this.tableLayoutPanel29.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.pcbHelpSmartEye)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.pcbSmartEyeStatus)).EndInit();
+      this.splitContainer17.Panel1.ResumeLayout(false);
+      this.splitContainer17.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainer17)).EndInit();
+      this.splitContainer17.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.pcbSmartEye)).EndInit();
       this.ResumeLayout(false);
 
     }
@@ -2597,6 +2765,16 @@
     private System.Windows.Forms.SplitContainer splitContainer16;
     private System.Windows.Forms.PictureBox pcbTheEyeTribe;
     private System.Windows.Forms.Label label10;
+    private System.Windows.Forms.GroupBox grpSmartEye;
+    private System.Windows.Forms.TableLayoutPanel tableLayoutPanel28;
+    private System.Windows.Forms.TableLayoutPanel tableLayoutPanel29;
+    private System.Windows.Forms.PictureBox pcbHelpSmartEye;
+    private System.Windows.Forms.CheckBox chbSmartEye;
+    private System.Windows.Forms.PictureBox pcbSmartEyeStatus;
+    private System.Windows.Forms.Label lblSmartEyeStatus;
+    private System.Windows.Forms.SplitContainer splitContainer17;
+    private System.Windows.Forms.PictureBox pcbSmartEye;
+    private System.Windows.Forms.Label label14;
 
   }
 }

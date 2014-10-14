@@ -189,6 +189,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\ShockwaveFlashObjects.dll</HintPath>
     </Reference>
+    <Reference Include="SmartEye.Libraries">
+      <HintPath>..\Libs\Managed\SmartEye.Libraries.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Configuration.Install" />
@@ -288,6 +291,49 @@
     </Compile>
     <Compile Include="Modules\Recording\GazepointInterface\HowToActivateGazepoint.Designer.cs">
       <DependentUpon>HowToActivateGazepoint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\SmartEyeInterface\CalibrationResult.cs" />
+    <Compile Include="Modules\Recording\SmartEyeInterface\GazeDataReceivedEventHandler.cs" />
+    <Compile Include="Modules\Recording\SmartEyeInterface\HowToActivateSmartEye.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\SmartEyeInterface\HowToActivateSmartEye.designer.cs">
+      <DependentUpon>HowToActivateSmartEye.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\SmartEyeInterface\SmartEyeCalibrationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\SmartEyeInterface\SmartEyeCalibrationForm.Designer.cs">
+      <DependentUpon>SmartEyeCalibrationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\SmartEyeInterface\SmartEyeCalibrationResultPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\SmartEyeInterface\SmartEyeCalibrationResultPanel.Designer.cs">
+      <DependentUpon>SmartEyeCalibrationResultPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\SmartEyeInterface\SmartEyeCalibrationRunner.cs" />
+    <Compile Include="Modules\Recording\SmartEyeInterface\SmartEyeClient.cs" />
+    <Compile Include="Modules\Recording\SmartEyeInterface\SmartEyeGazeData.cs" />
+    <Compile Include="Modules\Recording\SmartEyeInterface\SmartEyeSetting.cs" />
+    <Compile Include="Modules\Recording\SmartEyeInterface\SmartEyeSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\SmartEyeInterface\SmartEyeSettingsDialog.designer.cs">
+      <DependentUpon>SmartEyeSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\SmartEyeInterface\SmartEyeTracker.cs" />
+    <Compile Include="Modules\Recording\SmartEyeInterface\SmartEyeTrackStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\SmartEyeInterface\SmartEyeTrackStatus.Designer.cs">
+      <DependentUpon>SmartEyeTrackStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\SmartEyeInterface\SmartEyeTrackStatusControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\SmartEyeInterface\SmartEyeTrackStatusControl.Designer.cs">
+      <DependentUpon>SmartEyeTrackStatusControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Recording\SMIInterface\RedM\HowToActivateSMIRedM.cs">
       <SubType>Form</SubType>
@@ -1194,6 +1240,24 @@
     <EmbeddedResource Include="Modules\Recording\GazepointInterface\HowToActivateGazepoint.resx">
       <DependentUpon>HowToActivateGazepoint.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\SmartEyeInterface\HowToActivateSmartEye.resx">
+      <DependentUpon>HowToActivateSmartEye.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\SmartEyeInterface\SmartEyeCalibrationForm.resx">
+      <DependentUpon>SmartEyeCalibrationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\SmartEyeInterface\SmartEyeCalibrationResultPanel.resx">
+      <DependentUpon>SmartEyeCalibrationResultPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\SmartEyeInterface\SmartEyeSettingsDialog.resx">
+      <DependentUpon>SmartEyeSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\SmartEyeInterface\SmartEyeTrackStatus.resx">
+      <DependentUpon>SmartEyeTrackStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\SmartEyeInterface\SmartEyeTrackStatusControl.resx">
+      <DependentUpon>SmartEyeTrackStatusControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\SMIInterface\RedM\HowToActivateSMIRedM.resx">
       <DependentUpon>HowToActivateSMIRedM.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1842,6 +1906,9 @@
     <None Include="Resources\TheEyeTribeFoto16.png" />
     <None Include="Resources\TheEyeTribeFoto64.png" />
     <None Include="Resources\TheEyeTribeLogo.jpg" />
+    <Content Include="Resources\SmartEyeAuroraFoto16.png" />
+    <Content Include="Resources\SmartEyeAuroraFoto64.png" />
+    <Content Include="Resources\SmartEyeLogo.png" />
     <Content Include="SaliencyCalculation\cygblas.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

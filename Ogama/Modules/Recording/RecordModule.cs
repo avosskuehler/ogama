@@ -52,6 +52,7 @@ namespace Ogama.Modules.Recording
   using Ogama.Modules.Recording.MirametrixInterface;
   using Ogama.Modules.Recording.MouseOnlyInterface;
   using Ogama.Modules.Recording.Presenter;
+  using Ogama.Modules.Recording.SmartEyeInterface;
   using Ogama.Modules.Recording.SMIInterface.iViewX;
   using Ogama.Modules.Recording.SMIInterface.RedM;
   using Ogama.Modules.Recording.TheEyeTribeInterface;
@@ -349,26 +350,26 @@ namespace Ogama.Modules.Recording
     /// </summary>
     public RecordModule()
     {
-        try
-        {
-            Init();
-        }
-        catch (Exception e)
-        {
-            //TODO RB
-        }
-        
+      try
+      {
+        Init();
+      }
+      catch (Exception e)
+      {
+        //TODO RB
+      }
+
     }
 
     private void Init()
     {
-        this.InitializeComponent();
+      this.InitializeComponent();
 
-        this.Picture = this.recordPicture;
-        this.ZoomTrackBar = this.trbZoom;
+      this.Picture = this.recordPicture;
+      this.ZoomTrackBar = this.trbZoom;
 
-        this.InitAccelerators();
-        this.InitializeCustomElements();
+      this.InitAccelerators();
+      this.InitializeCustomElements();
     }
 
     #endregion
@@ -667,26 +668,26 @@ namespace Ogama.Modules.Recording
     /// <returns></returns>
     public RawData ModifyGazeDataWhenBetweenZeroAndOne(RawData newRawData)
     {
-        
-        // The GazePos data is in values from 0 to 1
-        // so scale it to SCREEN COORDINATES
-        // and add optional scroll offset
-        if (newRawData.GazePosX != null)
-        {
-            if (newRawData.GazePosX >= 0 && newRawData.GazePosX <= 1)
-            {
-                newRawData.GazePosX = newRawData.GazePosX * this.xResolution + this.xScrollOffset;
-            }
-        }
 
-        if (newRawData.GazePosY != null)
+      // The GazePos data is in values from 0 to 1
+      // so scale it to SCREEN COORDINATES
+      // and add optional scroll offset
+      if (newRawData.GazePosX != null)
+      {
+        if (newRawData.GazePosX >= 0 && newRawData.GazePosX <= 1)
         {
-            if (newRawData.GazePosY >= 0 && newRawData.GazePosY <= 1)
-            {
-                newRawData.GazePosY = newRawData.GazePosY * this.yResolution + this.yScrollOffset;
-            }
+          newRawData.GazePosX = newRawData.GazePosX * this.xResolution + this.xScrollOffset;
         }
-        return newRawData;
+      }
+
+      if (newRawData.GazePosY != null)
+      {
+        if (newRawData.GazePosY >= 0 && newRawData.GazePosY <= 1)
+        {
+          newRawData.GazePosY = newRawData.GazePosY * this.yResolution + this.yScrollOffset;
+        }
+      }
+      return newRawData;
     }
 
     #endregion
@@ -1143,6 +1144,7 @@ namespace Ogama.Modules.Recording
       this.tclEyetracker.TabPages.Add(this.tbpEyeTech);
       this.tclEyetracker.TabPages.Add(this.tbpHaytham);
       this.tclEyetracker.TabPages.Add(this.tbpEyeTribe);
+      this.tclEyetracker.TabPages.Add(this.tbpSmartEye);
 
       // Read activated tracker value from the application settings
       string activatedTracker = Settings.Default.ActivatedHardwareTracker;
@@ -1488,6 +1490,33 @@ namespace Ogama.Modules.Recording
         if (this.tclEyetracker.TabPages.Contains(this.tbpEyeTribe))
         {
           this.tclEyetracker.TabPages.Remove(this.tbpEyeTribe);
+        }
+      }
+
+      if (tracker == (tracker | HardwareTracker.SmartEye))
+      {
+        // Create Smart Eye Tracker
+        var newSmartEyeTracker = new SmartEyeTracker(
+          this,
+          this.spcSmartEyeControls,
+          this.spcSmartEyeTrackStatus.Panel1,
+          this.spcSmartEyeCalibPlot.Panel1,
+          this.btnSmartEyeShowOnPresentationScreen,
+          this.btnSmartEyeAcceptCalibration,
+          this.btnSmartEyeRecalibrate,
+          this.btnSmartEyeConnect,
+          this.btnSmartEyeSubjectName,
+          this.btnSmartEyeCalibrate,
+          this.btnSmartEyeRecord,
+          this.txbSmartEyeSubjectName);
+
+        this.trackerInterfaces.Add(HardwareTracker.SmartEye, newSmartEyeTracker);
+      }
+      else
+      {
+        if (this.tclEyetracker.TabPages.Contains(this.tbpSmartEye))
+        {
+          this.tclEyetracker.TabPages.Remove(this.tbpSmartEye);
         }
       }
 
@@ -2749,6 +2778,13 @@ namespace Ogama.Modules.Recording
           if (this.trackerInterfaces.ContainsKey(HardwareTracker.TheEyeTribe))
           {
             this.currentTracker = this.trackerInterfaces[HardwareTracker.TheEyeTribe];
+          }
+
+          break;
+        case "tbpSmartEye":
+          if (this.trackerInterfaces.ContainsKey(HardwareTracker.SmartEye))
+          {
+            this.currentTracker = this.trackerInterfaces[HardwareTracker.SmartEye];
           }
 
           break;
