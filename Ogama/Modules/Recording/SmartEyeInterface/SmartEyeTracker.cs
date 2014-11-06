@@ -66,9 +66,14 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
     private SmartEyeCalibrationRunner smartEyeCalibration;
 
     /// <summary>
-    /// The timer for getting live image updates.
+    /// The thread for getting live image updates.
     /// </summary>
-    private System.Windows.Forms.Timer liveImageUpdateTimer;
+    private Thread liveImageThread;
+
+    /// <summary>
+    /// The flag to stop the thread for getting live image updates.
+    /// </summary>
+    private bool stopliveImageThread;
 
     /// <summary>
     /// The track status dialog.
@@ -137,7 +142,10 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
     {
       // Call the initialize methods of derived classes
       this.Initialize();
+
+      this.smartEyeTrackStatus.PropertyChanged += this.SmartEyeTrackStatusPropertyChanged;
     }
+
     #endregion CONSTRUCTION
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -180,7 +188,6 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
     /// </returns>
     public static TrackerStatus IsAvailable(out string errorMessage)
     {
-      // TODO: update registry checks
       var p = Process.GetProcessesByName("eye_tracker_core");
       if (p.Length > 0)
       {
@@ -300,12 +307,7 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
 
       if (this.smartEyeClient.MajorVersion >= 1 && this.smartEyeClient.MinorVersion >= 1)
       {
-        this.liveImageUpdateTimer = new System.Windows.Forms.Timer { Interval = 200 };
-        this.liveImageUpdateTimer.Tick += this.GetLiveImage;
-        if (this.smartEyeClient.RpcIsConnected)
-        {
-          this.liveImageUpdateTimer.Start();
-        }
+        this.StartLiveImageThread();
       }
 
       return this.smartEyeClient.RpcIsConnected;
@@ -325,6 +327,31 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
     /// parameter.</remarks>
     public override bool Calibrate(bool isRecalibrating)
     {
+      try
+      {
+        int? auroraConfigured = (int?)Registry.GetValue(@"HKEY_CURRENT_USER\Software\Smart Eye AB\Aurora Configuration Tool", "isConfigured", null);
+        if (auroraConfigured == null || auroraConfigured == 0)
+        {
+          var message = "Calibration cannot be started as the Aurora Hardware has not yet been linked to a screen." +
+            Environment.NewLine + "Please set up the system correctly in the Aurora Configuration Tool software before using it in OGAMA.";
+          ExceptionMethods.ProcessMessage(
+            "Aurora not configured via Aurora Configuration Tool",
+            message);
+          return false;
+        }
+      }
+      catch (Exception e)
+      {
+        if (this.smartEyeSettings.SilentMode)
+        {
+          ExceptionMethods.HandleExceptionSilent(e);
+        }
+        else
+        {
+          ExceptionMethods.HandleException(e);
+        }
+      }
+
       if (!this.IsTrackerTracking("Calibration"))
       {
         return false;
@@ -340,10 +367,9 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
 
       this.ShowTrackStatus();
 
-      if (this.liveImageUpdateTimer != null)
+      if (this.liveImageThread.IsAlive)
       {
-        this.liveImageUpdateTimer.Stop();
-        this.smartEyeTrackStatus.OnLiveImage(null);
+        this.stopliveImageThread = true;
       }
 
       try
@@ -352,9 +378,6 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
       }
       catch (Exception ex)
       {
-        //string message = "Smart Eye Gaze Calibration failed with the following message: " +
-        //     Environment.NewLine + ex.Message;
-        
         if (this.smartEyeSettings.SilentMode)
         {
           ExceptionMethods.HandleExceptionSilent(ex);
@@ -364,10 +387,7 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
           ExceptionMethods.HandleException(ex);
         }
 
-        if (this.liveImageUpdateTimer != null)
-        {
-          this.liveImageUpdateTimer.Start();
-        }
+        this.StartLiveImageThread();
 
         return false;
       }
@@ -410,8 +430,6 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
             }
             catch (Exception ex)
             {
-              //MessageBox.Show("Could not get physical size of the presentation screen, the calibration result visualization might not reflect the actual gaze values properly.");
-              
               if (this.smartEyeSettings.SilentMode)
               {
                 ExceptionMethods.HandleExceptionSilent(ex);
@@ -441,19 +459,13 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
             ExceptionMethods.ProcessMessage("Calibration failed", "Not enough data to create a calibration (or calibration aborted).");
           }
 
-          if (this.liveImageUpdateTimer != null)
-          {
-            this.liveImageUpdateTimer.Start();
-          }
+          this.StartLiveImageThread();
 
           return false;
         }
       }
       catch (Exception ee)
       {
-        //string message = "Smart Eye Gaze Calibration failed with the following message: " +
-        //        Environment.NewLine + ee.Message;
-
         if (this.smartEyeSettings.SilentMode)
         {
           ExceptionMethods.HandleExceptionSilent(ee);
@@ -463,10 +475,7 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
           ExceptionMethods.HandleException(ee);
         }
 
-        if (this.liveImageUpdateTimer != null)
-        {
-          this.liveImageUpdateTimer.Start();
-        }
+        this.StartLiveImageThread();
 
         return false;
       }
@@ -505,10 +514,6 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
         }
         catch (Exception ex)
         {
-          //string message = "Smart Eye Stop Tracking failed with the following message: " +
-          //    Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine +
-          //"If this error is recurring, please make sure the hardware is connected and set up correctly, and try to reconnect.";
-
           if (this.smartEyeSettings.SilentMode)
           {
             ExceptionMethods.HandleExceptionSilent(ex);
@@ -517,7 +522,7 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
           {
             ExceptionMethods.HandleException(ex);
           }
-          
+
           this.IsRpcConnected();
           return;
         }
@@ -561,10 +566,9 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
 
       try
       {
-        if (this.liveImageUpdateTimer != null)
+        if (this.liveImageThread != null && this.liveImageThread.IsAlive)
         {
-          this.liveImageUpdateTimer.Stop();
-          this.smartEyeTrackStatus.OnLiveImage(null);
+          this.stopliveImageThread = true;
         }
 
         this.smartEyeTrackStatus.OnGazeData(new SmartEyeGazeData());
@@ -579,9 +583,6 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
       }
       catch (Exception ex)
       {
-        //string message = "Smart Eye Clean Up failed with the following message: " +
-        // Environment.NewLine + ex.Message;
-
         if (this.smartEyeSettings.SilentMode)
         {
           ExceptionMethods.HandleExceptionSilent(ex);
@@ -754,10 +755,6 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
         }
         catch (Exception ex)
         {
-          //string message = "Smart Eye Gaze Restart Tracking failed with the following message: " +
-          //     Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine +
-          //"If this error is recurring, please make sure the hardware is connected and set up correctly, and try to reconnect.";
-
           if (this.smartEyeSettings.SilentMode)
           {
             ExceptionMethods.HandleExceptionSilent(ex);
@@ -800,10 +797,6 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
       }
       catch (Exception ex)
       {
-        //string message = "Smart Eye Apply Gaze Calibration failed with the following message: " +
-        //    Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine +
-        //    "If this error is recurring, please make sure the hardware is connected and set up correctly, and try to reconnect.";
-
         if (this.smartEyeSettings.SilentMode)
         {
           ExceptionMethods.HandleExceptionSilent(ex);
@@ -818,10 +811,8 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
       }
 
       base.BtnAcceptCalibrationClick(sender, e);
-      if (this.liveImageUpdateTimer != null)
-      {
-        this.liveImageUpdateTimer.Start();
-      }
+
+      this.StartLiveImageThread();
     }
 
     /// <summary>
@@ -945,69 +936,113 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
     }
 
     /// <summary>
+    /// Property changed on track status panel
+    /// </summary>
+    /// <param name="sender">The sender</param>
+    /// <param name="e">The event</param>
+    private void SmartEyeTrackStatusPropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+      if (e.PropertyName == "ToggleLiveImageDisplay")
+      {
+        if (this.liveImageThread != null)
+        {
+          if (this.liveImageThread.IsAlive)
+          {
+            this.stopliveImageThread = true;
+          }
+          else
+          {
+            if (this.IsRpcConnected())
+            {
+              this.StartLiveImageThread();
+            }
+          }
+        }
+      }
+    }
+
+    /// <summary>
+    /// Start the live image thread
+    /// </summary>
+    private void StartLiveImageThread()
+    {
+      if (this.liveImageThread == null || !this.liveImageThread.IsAlive)
+      {
+        this.liveImageThread = new Thread(this.GetLiveImage);
+        this.liveImageThread.Name = "LiveImageThread";
+        if (this.smartEyeClient.RpcIsConnected)
+        {
+          this.liveImageThread.Start();
+          this.stopliveImageThread = false;
+        }
+      }
+    }
+
+    /// <summary>
     /// Gets a live image from the Smart Eye client on each liveImageUpdateTimer-tick
     /// </summary>
-    /// <param name="sender">The Sender.</param>
-    /// <param name="e">Event arguments.</param>
-    private void GetLiveImage(object sender, EventArgs e)
+    private void GetLiveImage()
     {
-      string base64String;
-      int width, height, stride;
-      int index = 0;
-
-      if (this.smartEyeClient == null || this.smartEyeClient.RpcClient == null)
+      while (!this.stopliveImageThread)
       {
-        return;
+        string base64String;
+        int width, height, stride;
+        int index = 0;
+
+        if (this.smartEyeClient == null || this.smartEyeClient.RpcClient == null)
+        {
+          return;
+        }
+
+        try
+        {
+          this.smartEyeClient.RpcClient.GetCameraImage(index, out base64String, out width, out height, out stride);
+
+          byte[] binaryData = Convert.FromBase64String(base64String);
+
+          Bitmap bitmap = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format8bppIndexed);
+
+          ColorPalette ncp = bitmap.Palette;
+          for (int i = 0; i < 256; i++)
+          {
+            ncp.Entries[i] = System.Drawing.Color.FromArgb(255, i, i, i);
+          }
+
+          bitmap.Palette = ncp;
+
+          BitmapData bitmapData = bitmap.LockBits(new System.Drawing.Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, bitmap.PixelFormat);
+          IntPtr intPointer = bitmapData.Scan0;
+          Marshal.Copy(binaryData, 0, intPointer, binaryData.Length);
+          bitmap.UnlockBits(bitmapData);
+
+          this.smartEyeTrackStatus.OnLiveImage(bitmap);
+
+          if (this.dlgTrackStatus != null && this.dlgTrackStatus.Visible)
+          {
+            this.dlgTrackStatus.UpdateLiveImage(bitmap);
+          }
+        }
+        catch (Exception ex)
+        {
+          if (this.smartEyeSettings.SilentMode)
+          {
+            ExceptionMethods.HandleExceptionSilent(ex);
+          }
+          else
+          {
+            ExceptionMethods.HandleException(ex);
+          }
+
+          this.IsRpcConnected();
+          Thread.Sleep(200);
+        }
+
+        Thread.Sleep(100);
       }
 
-      try
+      if (this.stopliveImageThread)
       {
-        this.smartEyeClient.RpcClient.GetCameraImage(index, out base64String, out width, out height, out stride);
-
-        byte[] binaryData = Convert.FromBase64String(base64String);
-
-        Bitmap bitmap = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format8bppIndexed);
-
-        ColorPalette ncp = bitmap.Palette;
-        for (int i = 0; i < 256; i++)
-        {
-          ncp.Entries[i] = System.Drawing.Color.FromArgb(255, i, i, i);
-        }
-
-        bitmap.Palette = ncp;
-
-        BitmapData bitmapData = bitmap.LockBits(new System.Drawing.Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, bitmap.PixelFormat);
-        IntPtr intPointer = bitmapData.Scan0;
-        Marshal.Copy(binaryData, 0, intPointer, binaryData.Length);
-        bitmap.UnlockBits(bitmapData);
-
-        this.smartEyeTrackStatus.OnLiveImage(bitmap);
-
-        if (this.dlgTrackStatus != null && this.dlgTrackStatus.Visible)
-        {
-          this.dlgTrackStatus.UpdateLiveImage(bitmap);
-        }
-      }
-      catch (Exception ex)
-      {
-        this.liveImageUpdateTimer.Stop();
-        //string message = "Smart Eye Get Live Image failed with the following message: " +
-        // Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine +
-        //    "If this error is recurring, please make sure the hardware is connected and set up correctly, and try to reconnect.";
-
-        if (this.smartEyeSettings.SilentMode)
-        {
-          ExceptionMethods.HandleExceptionSilent(ex);
-        }
-        else
-        {
-          ExceptionMethods.HandleException(ex);
-        }
-
-        if (this.IsRpcConnected())
-        {
-          this.liveImageUpdateTimer.Start();
-        }
+        this.smartEyeTrackStatus.OnLiveImage(null);
       }
     }
 
@@ -1044,9 +1079,6 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
       }
       catch (Exception ex)
       {
-        //string message = "Deserialization of SmartEyeSettings failed with the following message: " +
-        //  Environment.NewLine + ex.Message;
-
         if (this.smartEyeSettings.SilentMode)
         {
           ExceptionMethods.HandleExceptionSilent(ex);

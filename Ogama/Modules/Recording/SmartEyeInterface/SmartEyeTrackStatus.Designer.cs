@@ -80,7 +80,7 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.smartEyeTrackStatusControl);
-            this.splitContainer1.Size = new System.Drawing.Size(435, 444);
+            this.splitContainer1.Size = new System.Drawing.Size(435, 385);
             this.splitContainer1.SplitterDistance = 109;
             this.splitContainer1.TabIndex = 0;
             this.splitContainer1.TabStop = false;
@@ -121,7 +121,7 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(435, 444);
+            this.ClientSize = new System.Drawing.Size(435, 385);
             this.Controls.Add(this.splitContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "SmartEyeTrackStatus";

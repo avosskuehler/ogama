@@ -258,9 +258,6 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
         }
         catch (Exception ex)
         {
-          //string message = "Smart Eye Gaze Calibration stop collect samples failed with the following message: " +
-          // Environment.NewLine + ex.Message;
-
           if (this.settings.SilentMode)
           {
             ExceptionMethods.HandleExceptionSilent(ex);
@@ -368,9 +365,6 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
       }
       catch (Exception ex)
       {
-        //string message = "Smart Eye Gaze Calibration preparation failed with the following message: " +
-        // Environment.NewLine + ex.Message;
-
         if (this.settings.SilentMode)
         {
           ExceptionMethods.HandleExceptionSilent(ex);
@@ -418,9 +412,6 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
       }
       catch (Exception ex)
       {
-        //string message = "Smart Eye Gaze Calibration resetting values failed with the following message: " +
-        // Environment.NewLine + ex.Message;
-
         if (this.settings.SilentMode)
         {
           ExceptionMethods.HandleExceptionSilent(ex);
@@ -504,7 +495,7 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
     private void SmartEyeCalibrationFormLoaded(object sender, EventArgs e)
     {
       this.initTimer.Start();
-      this.smartEyeCalibrationForm.ShowMessage("Initializing Calibration...\n\nPlease look at the screen,\nthen focus on the appearing point!");
+      this.smartEyeCalibrationForm.ShowMessage("Initializing Calibration...\n\nPlease look at the screen,\nthen focus on the appearing point!", this.settings.CalibPointColor);
       Cursor.Current = Cursors.WaitCursor;
     }
 
@@ -597,9 +588,6 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
       }
       catch (Exception ex)
       {
-        //string message = "Smart Eye Gaze Calibration collect samples failed with the following message: " +
-        // Environment.NewLine + ex.Message;
-
         if (this.settings.SilentMode)
         {
           ExceptionMethods.HandleExceptionSilent(ex);
@@ -640,9 +628,6 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
       }
       catch (Exception ex)
       {
-        //string message = "Smart Eye Gaze Calibration stop collect samples failed with the following message: " +
-        // Environment.NewLine + ex.Message;
-
         if (this.settings.SilentMode)
         {
           ExceptionMethods.HandleExceptionSilent(ex);
@@ -672,7 +657,7 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
     {
       this.state = CalibrationState.Calculating;
 
-      this.smartEyeCalibrationForm.ShowMessage("Calculating Calibration...");
+      this.smartEyeCalibrationForm.ShowMessage("Calculating Calibration...", this.settings.CalibPointColor);
       Cursor.Current = Cursors.WaitCursor;
 
       this.calibrationWorker = new BackgroundWorker();
@@ -705,9 +690,6 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
       }
       catch (Exception ex)
       {
-        //string message = "Smart Eye Gaze Calibration calculation failed with the following message: " +
-        //    Environment.NewLine + e.Message;
-
         if (this.settings.SilentMode)
         {
           ExceptionMethods.HandleExceptionSilent(ex);
@@ -769,7 +751,7 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
         this.client.IsCalibrating = false;
       }
 
-      this.smartEyeCalibrationForm.ShowMessage("The Calibration has been calculated successfully.");
+      this.smartEyeCalibrationForm.ShowMessage("The Calibration has been calculated successfully.", this.settings.CalibPointColor);
       Cursor.Current = Cursors.Default;
       this.client.UdpSocket.PacketReceived -= this.BaseClientOnPacketReceived;
       this.smartEyeCalibrationForm.BeginInvoke(new Action(() => this.smartEyeCalibrationForm.Dispose()));
@@ -807,9 +789,6 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
           }
           catch (Exception ex)
           {
-            //string message = "Smart Eye Gaze Calibration retrieve statistics failed with the following message: " +
-            //    Environment.NewLine + ex.Message;
-
             if (this.settings.SilentMode)
             {
               ExceptionMethods.HandleExceptionSilent(ex);
