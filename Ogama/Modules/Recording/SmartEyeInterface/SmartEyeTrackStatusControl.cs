@@ -15,11 +15,13 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
 {
   using System;
   using System.Collections.Generic;
+  using System.ComponentModel;
   using System.Diagnostics;
   using System.Drawing;
   using System.IO;
   using System.Windows.Forms;
   using System.Windows.Media.Imaging;
+  using Ogama.ExceptionHandling;
   using SmartEye.Geometry;
 
   /// <summary>
@@ -43,7 +45,7 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
     private readonly SolidBrush headBrush;
 
     /// <summary>
-    /// The data history.
+    /// The current gaze data.
     /// </summary>
     private SmartEyeGazeData gazeData;
 
@@ -79,6 +81,11 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
     // Methods for doing main class job                                          //
     ///////////////////////////////////////////////////////////////////////////////
     #region METHODS
+
+    /// <summary>
+    /// The property changed event handler
+    /// </summary>
+    public event PropertyChangedEventHandler PropertyChanged;
 
     /// <summary>
     /// The clear.
@@ -122,9 +129,29 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
     /// </param>
     public void OnLiveImage(Bitmap bmp)
     {
-      liveImagePictureBox.Image = bmp;
+      if (this.liveImagePictureBox != null && !this.liveImagePictureBox.IsDisposed)
+      {
+        try
+        {
+          this.liveImagePictureBox.Invoke((MethodInvoker)delegate
+          {
+            try
+            {
+              this.liveImagePictureBox.Image = bmp;
+            }
+            catch (ObjectDisposedException ode)
+            {
+              ExceptionMethods.HandleExceptionSilent(ode);
+            }
+          });
 
-      this.Invalidate();
+          this.Invalidate();
+        }
+        catch (InvalidOperationException ioe)
+        {
+          ExceptionMethods.HandleExceptionSilent(ioe);
+        }
+      }
     }
 
     /// <summary>
@@ -139,11 +166,11 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
         return;
       }
 
-      // Draw frame - TODO: positioned to DR120 setup, should be fitted to Aurora
-      var left = this.Left + this.Width / 6;
+      // Draw frame
+      var left = this.Left + this.Width / 4;
       var width = this.Width / 2;
       var top = this.Top + this.Height / 20;
-      var height = (int)Math.Floor(this.Height * 0.8);
+      var height = (int)Math.Floor(this.Height * 0.9);
 
       if (this.liveImagePictureBox.Image != null)
       {
@@ -166,7 +193,7 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
           float filler = Math.Abs(h_c - scaledHeight) / 2;
 
           top = (int)Math.Floor(this.Top + (this.Height - filler * 2) / 20 + filler);
-          height = (int)Math.Floor((this.Height - filler * 2) * 0.8);
+          height = (int)Math.Floor((this.Height - filler * 2) * 0.9);
         }
         else
         {
@@ -175,7 +202,7 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
           float scaledWidth = w_i * scaleFactor;
           float filler = Math.Abs(w_c - scaledWidth) / 2;
 
-          left = (int)Math.Floor(this.Left + (this.Width - filler * 2) / 6 + filler);
+          left = (int)Math.Floor(this.Left + (this.Width - filler * 2) / 4 + filler);
           width = (int)Math.Floor((this.Width - filler * 2) / 2);
         }
       }
@@ -184,6 +211,20 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
 
       // Draw gaze quality indicator
       e.Graphics.FillEllipse(this.brush, this.Left + 5, this.Top + 5, 12, 12);
+    }
+
+    /// <summary>
+    /// This method handles the click on the tracker status
+    /// </summary>
+    /// <param name="sender">The sender</param>
+    /// <param name="e">The event</param>
+    private void LiveImagePictureBoxClick(object sender, EventArgs e)
+    {
+      PropertyChangedEventHandler handler = this.PropertyChanged;
+      if (handler != null)
+      {
+        handler(this, new PropertyChangedEventArgs("ToggleLiveImageDisplay"));
+      }
     }
 
     #endregion EVENTS
@@ -216,6 +257,7 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
     }
 
     #endregion HELPER
+
     #endregion METHODS
   }
 }

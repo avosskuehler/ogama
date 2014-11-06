@@ -81,21 +81,21 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
 
       Process smartEyeTrackingProcess;
 
-      var smartEyeVersion = Registry.GetValue(@"HKEY_CURRENT_USER\Software\Smart Eye AB\Shared", "SmartEyeProVersion", null);
+      var smartEyeVersion = Registry.GetValue(@"HKEY_CURRENT_USER\Software\Smart Eye AB\Shared", "EyeTrackerCoreVersion", null);
       if (smartEyeVersion != null)
       {
-        var smartEyeTrackingPath = Registry.GetValue(string.Format(@"HKEY_CURRENT_USER\Software\Smart Eye AB\Smart Eye Pro {0}\DefaultPaths", smartEyeVersion), "ProgramDirectory", null).ToString();
+        var smartEyeTrackingPath = Registry.GetValue(
+          string.Format(@"HKEY_CURRENT_USER\Software\Smart Eye AB\Eye tracker core {0}\DefaultPaths", smartEyeVersion.ToString()),
+          "ProgramDirectory",
+          null);
         if (smartEyeTrackingPath != null)
         {
-          smartEyeTrackingPath += "SmartEyePro.exe";
-
           smartEyeTrackingProcess = new Process
           {
             StartInfo =
             {
-              FileName = smartEyeTrackingPath,
-              ////TODO: get registry parameter
-              ////FileName = @"C:\Program Files (x86)\SmartEye\EyeTrackerCore\eye_tracker_core.exe",
+              WorkingDirectory = smartEyeTrackingPath.ToString(),
+              FileName = smartEyeTrackingPath + "\\eye_tracker_core.exe",
               UseShellExecute = false,
               RedirectStandardError = true
             }
@@ -274,13 +274,6 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
       }
       catch (Exception ex)
       {
-        //ConnectionFailedDialog dlg = new ConnectionFailedDialog();
-        //dlg.ErrorMessage = "Cannot connect to the Smart Eye RPC server, failed with the following message: " +
-        //     Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine +
-        //    "If this error is recurring, please make sure the hardware is connected and set up correctly, and try to reconnect.";
-        //dlg.ShowDialog();
-        //ExceptionMethods.HandleExceptionSilent(ex);
-
         if (this.smartEyeSettings.SilentMode)
         {
           ExceptionMethods.HandleExceptionSilent(ex);
@@ -304,13 +297,6 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
       }
       catch (Exception ex)
       {
-        //ConnectionFailedDialog dlg = new ConnectionFailedDialog();
-        //dlg.ErrorMessage = "Smart Eye Get Version failed with the following message: " +
-        //     Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine +
-        //    "If this error is recurring, please make sure the hardware is connected and set up correctly, and try to reconnect.";
-        //dlg.ShowDialog();
-        //ExceptionMethods.HandleExceptionSilent(ex);
-
         if (this.smartEyeSettings.SilentMode)
         {
           ExceptionMethods.HandleExceptionSilent(ex);
@@ -329,13 +315,6 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
       }
       catch (Exception ex)
       {
-        //ConnectionFailedDialog dlg = new ConnectionFailedDialog();
-        //dlg.ErrorMessage = "Smart Eye Start Tracking failed with the following message: " +
-        //     Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine +
-        //    "If this error is recurring, please make sure the hardware is connected and set up correctly, and try to reconnect.";
-        //dlg.ShowDialog();
-        //ExceptionMethods.HandleExceptionSilent(ex);
-
         if (this.smartEyeSettings.SilentMode)
         {
           ExceptionMethods.HandleExceptionSilent(ex);
@@ -352,7 +331,6 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
     /// </summary>
     public void SetupNetworkDataSubscription()
     {
-      // TODO: is done in Aurora as well when starting session, remove
       var dataList = new List<TrackerDataId>();
 
       dataList.AddRange(new[] 
@@ -370,13 +348,6 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
       }
       catch (Exception ex)
       {
-        //ConnectionFailedDialog dlg = new ConnectionFailedDialog();
-        //dlg.ErrorMessage = "Setting up the Smart Eye UDP datastream to OGAMA failed with the following message: " +
-        //     Environment.NewLine + ex.Message + Environment.NewLine + Environment.NewLine +
-        //    "If this error is recurring, please make sure the hardware is connected and set up correctly, and try to reconnect.";
-        //dlg.ShowDialog();
-        //ExceptionMethods.HandleExceptionSilent(ex);
-
         if (this.smartEyeSettings.SilentMode)
         {
           ExceptionMethods.HandleExceptionSilent(ex);
@@ -421,21 +392,6 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
     public bool ConnectUDP()
     {
       this.SetupNetworkDataSubscription();
-
-      //IPAddress ip = IPAddress.Parse(this.smartEyeSettings.SmartEyeServerAddress);
-      //IPEndPoint ipEndPoint = new IPEndPoint(ip, this.smartEyeSettings.OgamaPort);
-
-      //try
-      //{
-      //  this.UdpSocket.Connect(ipEndPoint);
-      //}
-      //catch (Exception ex)
-      //{
-      //  ExceptionMethods.HandleExceptionSilent(ex);
-      //  return false;
-      //}
-
-      //this.UdpSocket.PacketReceived += this.OnGazePacketReceived;
 
       return this.UdpIsConnected = this.UdpSocket.IsReceivingData;
     }
@@ -653,7 +609,7 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
     /// </summary>
     private void KillRunningEyeTrackerProcess()
     {
-      var p = Process.GetProcessesByName("SmartEyePro"); // eye_tracker_core");
+      var p = Process.GetProcessesByName("eye_tracker_core");
       if (p.Length > 0)
       {
         Process runningETC = p.First();

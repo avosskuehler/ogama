@@ -166,6 +166,7 @@
             this.txbSmartEyeAddress.Size = new System.Drawing.Size(120, 20);
             this.txbSmartEyeAddress.TabIndex = 27;
             this.txbSmartEyeAddress.Validating += new System.ComponentModel.CancelEventHandler(this.TxbSmartEyeAddress_Validating);
+            this.txbSmartEyeAddress.ReadOnly = true;
             // 
             // txbSmartEyePort
             // 

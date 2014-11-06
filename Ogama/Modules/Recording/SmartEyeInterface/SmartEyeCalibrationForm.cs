@@ -69,6 +69,11 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
     /// </summary>
     public string Message { get; set; }
 
+    /// <summary>
+    /// Gets or sets MessageColor.
+    /// </summary>
+    public Color MessageColor { get; set; }
+
     #endregion PROPERTIES
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -109,9 +114,11 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
     /// Show a message
     /// </summary>
     /// <param name="message">The message</param>
-    public void ShowMessage(string message)
+    /// <param name="color">The color</param>
+    public void ShowMessage(string message, Color color)
     {
       this.Message = message;
+      this.MessageColor = color;
       this.Refresh();
     }
 
@@ -144,11 +151,9 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
         // Measure string.
         SizeF stringSize = new SizeF();
         stringSize = e.Graphics.MeasureString(this.Message, stringFont);
-
-        var foregroundColor = Color.FromArgb(this.PointColor.R, this.PointColor.G, this.PointColor.B);
-
+        
         // Draw string to screen.
-        e.Graphics.DrawString(this.Message, stringFont, new SolidBrush(foregroundColor), new PointF(x - stringSize.Width / 2, y - stringSize.Height / 2));
+        e.Graphics.DrawString(this.Message, stringFont, new SolidBrush(this.MessageColor), new PointF(x - stringSize.Width / 2, y - stringSize.Height / 2));
       }
 
       // Draw calibration circle

@@ -31,33 +31,34 @@ namespace Ogama.Modules.Recording.SmartEyeInterface
         /// </summary>
         private void InitializeComponent()
         {
-            this.liveImagePictureBox = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.liveImagePictureBox)).BeginInit();
-            this.SuspendLayout();
-            // 
-            // liveImagePictureBox
-            // 
-            this.liveImagePictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+      this.liveImagePictureBox = new System.Windows.Forms.PictureBox();
+      ((System.ComponentModel.ISupportInitialize)(this.liveImagePictureBox)).BeginInit();
+      this.SuspendLayout();
+      // 
+      // liveImagePictureBox
+      // 
+      this.liveImagePictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.liveImagePictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.liveImagePictureBox.Location = new System.Drawing.Point(0, 0);
-            this.liveImagePictureBox.Name = "liveImagePictureBox";
-            this.liveImagePictureBox.Size = new System.Drawing.Size(320, 240);
-            this.liveImagePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.liveImagePictureBox.TabIndex = 0;
-            this.liveImagePictureBox.TabStop = false;
-            // 
-            // SmartEyeTrackStatusControl
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Black;
-            this.Controls.Add(this.liveImagePictureBox);
-            this.Name = "SmartEyeTrackStatusControl";
-            this.Size = new System.Drawing.Size(320, 240);
-            ((System.ComponentModel.ISupportInitialize)(this.liveImagePictureBox)).EndInit();
-            this.ResumeLayout(false);
+      this.liveImagePictureBox.BackColor = System.Drawing.Color.Transparent;
+      this.liveImagePictureBox.Location = new System.Drawing.Point(0, 0);
+      this.liveImagePictureBox.Name = "liveImagePictureBox";
+      this.liveImagePictureBox.Size = new System.Drawing.Size(320, 240);
+      this.liveImagePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+      this.liveImagePictureBox.TabIndex = 0;
+      this.liveImagePictureBox.TabStop = false;
+      this.liveImagePictureBox.Click += new System.EventHandler(this.LiveImagePictureBoxClick);
+      // 
+      // SmartEyeTrackStatusControl
+      // 
+      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      this.BackColor = System.Drawing.Color.Black;
+      this.Controls.Add(this.liveImagePictureBox);
+      this.Name = "SmartEyeTrackStatusControl";
+      this.Size = new System.Drawing.Size(320, 240);
+      ((System.ComponentModel.ISupportInitialize)(this.liveImagePictureBox)).EndInit();
+      this.ResumeLayout(false);
 
         }
 
