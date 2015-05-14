@@ -1134,7 +1134,7 @@ namespace Ogama.Modules.AOI
 
           exportFile.WriteLine();
 
-          foreach (OgamaDataSet.AOIsRow aoiRow in aois.Rows)
+          foreach (SQLiteOgamaDataSet.AOIsRow aoiRow in aois.Rows)
           {
             exportFile.Write(aoiRow.ID);
             exportFile.Write("\t");

@@ -1,4 +1,4 @@
-﻿// <copyright file="OgamaDataSet.cs" company="FU Berlin">
+﻿// <copyright file="SQLiteOgamaDataSet.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
 // Copyright (C) 2013 Dr. Adrian Voßkühler  
@@ -39,42 +39,99 @@ namespace Ogama.DataSet
   /// </summary>
   public class SQLiteOgamaDataSet : DataSet
   {
+    /// <summary>
+    /// The table subject parameters
+    /// </summary>
     private SubjectParametersDataTable tableSubjectParameters;
 
+    /// <summary>
+    /// The table subjects
+    /// </summary>
     private SubjectsDataTable tableSubjects;
 
+    /// <summary>
+    /// The table trials
+    /// </summary>
     private TrialsDataTable tableTrials;
 
+    /// <summary>
+    /// The table trial events
+    /// </summary>
     private TrialEventsDataTable tableTrialEvents;
 
+    /// <summary>
+    /// The table rawdata
+    /// </summary>
     private RawdataDataTable tableRawdata;
 
+    /// <summary>
+    /// The table ao is
+    /// </summary>
     private AOIsDataTable tableAOIs;
 
+    /// <summary>
+    /// The table shape groups
+    /// </summary>
     private ShapeGroupsDataTable tableShapeGroups;
 
+    /// <summary>
+    /// The table gaze fixations
+    /// </summary>
     private GazeFixationsDataTable tableGazeFixations;
 
+    /// <summary>
+    /// The table mouse fixations
+    /// </summary>
     private MouseFixationsDataTable tableMouseFixations;
 
+    /// <summary>
+    /// The table parameters
+    /// </summary>
     private ParamsDataTable tableParams;
 
+    /// <summary>
+    /// The relation f k_ subjects_ subject parameters
+    /// </summary>
     private DataRelation relationFK_Subjects_SubjectParameters;
 
+    /// <summary>
+    /// The relation f k_ subjects_ trials
+    /// </summary>
     private DataRelation relationFK_Subjects_Trials;
 
+    /// <summary>
+    /// The relation f k_ trials_ events
+    /// </summary>
     private DataRelation relationFK_Trials_Events;
 
+    /// <summary>
+    /// The relation trials_ ao is
+    /// </summary>
     private DataRelation relationTrials_AOIs;
 
+    /// <summary>
+    /// The relation shape groups_ ao is
+    /// </summary>
     private DataRelation relationShapeGroups_AOIs;
 
+    /// <summary>
+    /// The relation trials_ gaze fixations
+    /// </summary>
     private DataRelation relationTrials_GazeFixations;
 
+    /// <summary>
+    /// The relation trials_ mouse fixations
+    /// </summary>
     private DataRelation relationTrials_MouseFixations;
 
+    /// <summary>
+    /// The _schema serialization mode
+    /// </summary>
     private SchemaSerializationMode _schemaSerializationMode = SchemaSerializationMode.IncludeSchema;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SQLiteOgamaDataSet"/> class.
+    /// </summary>
     public SQLiteOgamaDataSet()
     {
       this.BeginInit();
@@ -85,6 +142,11 @@ namespace Ogama.DataSet
       this.EndInit();
     }
 
+    /// <summary>
+    /// Initializes a new instance of a <see cref="T:System.Data.DataSet" /> class that has the given serialization information and context.
+    /// </summary>
+    /// <param name="info">The data needed to serialize or deserialize an object.</param>
+    /// <param name="context">The source and destination of a given serialized stream.</param>
     protected SQLiteOgamaDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
       base(info, context, false)
     {
@@ -160,6 +222,10 @@ namespace Ogama.DataSet
       this.Relations.CollectionChanged += schemaChangedHandler;
     }
 
+    /// <summary>
+    /// Gets the subject parameters.
+    /// </summary>
+    /// <value>The subject parameters.</value>
     public SubjectParametersDataTable SubjectParameters
     {
       get
@@ -168,6 +234,10 @@ namespace Ogama.DataSet
       }
     }
 
+    /// <summary>
+    /// Gets the subjects.
+    /// </summary>
+    /// <value>The subjects.</value>
     public SubjectsDataTable Subjects
     {
       get
@@ -176,6 +246,10 @@ namespace Ogama.DataSet
       }
     }
 
+    /// <summary>
+    /// Gets the trials.
+    /// </summary>
+    /// <value>The trials.</value>
     public TrialsDataTable Trials
     {
       get
@@ -184,6 +258,10 @@ namespace Ogama.DataSet
       }
     }
 
+    /// <summary>
+    /// Gets the trial events.
+    /// </summary>
+    /// <value>The trial events.</value>
     public TrialEventsDataTable TrialEvents
     {
       get
@@ -192,6 +270,10 @@ namespace Ogama.DataSet
       }
     }
 
+    /// <summary>
+    /// Gets the rawdata.
+    /// </summary>
+    /// <value>The rawdata.</value>
     public RawdataDataTable Rawdata
     {
       get
@@ -200,6 +282,10 @@ namespace Ogama.DataSet
       }
     }
 
+    /// <summary>
+    /// Gets the ao is.
+    /// </summary>
+    /// <value>The ao is.</value>
     public AOIsDataTable AOIs
     {
       get
@@ -208,6 +294,10 @@ namespace Ogama.DataSet
       }
     }
 
+    /// <summary>
+    /// Gets the shape groups.
+    /// </summary>
+    /// <value>The shape groups.</value>
     public ShapeGroupsDataTable ShapeGroups
     {
       get
@@ -216,6 +306,10 @@ namespace Ogama.DataSet
       }
     }
 
+    /// <summary>
+    /// Gets the gaze fixations.
+    /// </summary>
+    /// <value>The gaze fixations.</value>
     public GazeFixationsDataTable GazeFixations
     {
       get
@@ -224,6 +318,10 @@ namespace Ogama.DataSet
       }
     }
 
+    /// <summary>
+    /// Gets the mouse fixations.
+    /// </summary>
+    /// <value>The mouse fixations.</value>
     public MouseFixationsDataTable MouseFixations
     {
       get
@@ -232,6 +330,10 @@ namespace Ogama.DataSet
       }
     }
 
+    /// <summary>
+    /// Gets the parameters.
+    /// </summary>
+    /// <value>The parameters.</value>
     public ParamsDataTable Params
     {
       get
@@ -240,6 +342,10 @@ namespace Ogama.DataSet
       }
     }
 
+    /// <summary>
+    /// Gets or sets a <see cref="T:System.Data.SchemaSerializationMode" /> for a <see cref="T:System.Data.DataSet" />.
+    /// </summary>
+    /// <value>The schema serialization mode.</value>
     public override SchemaSerializationMode SchemaSerializationMode
     {
       get
@@ -252,6 +358,10 @@ namespace Ogama.DataSet
       }
     }
 
+    /// <summary>
+    /// Gets the collection of tables contained in the <see cref="T:System.Data.DataSet" />.
+    /// </summary>
+    /// <value>The tables.</value>
     public new DataTableCollection Tables
     {
       get
@@ -260,6 +370,10 @@ namespace Ogama.DataSet
       }
     }
 
+    /// <summary>
+    /// Get the collection of relations that link tables and allow navigation from parent tables to child tables.
+    /// </summary>
+    /// <value>The relations.</value>
     public new DataRelationCollection Relations
     {
       get
@@ -268,6 +382,9 @@ namespace Ogama.DataSet
       }
     }
 
+    /// <summary>
+    /// Deserialize all of the tables data of the DataSet from the binary or XML stream.
+    /// </summary>
     protected override void InitializeDerivedDataSet()
     {
       this.BeginInit();
@@ -275,6 +392,15 @@ namespace Ogama.DataSet
       this.EndInit();
     }
 
+    /// <summary>
+    /// Copies the structure of the <see cref="T:System.Data.DataSet" />, including all <see cref="T:System.Data.DataTable" /> schemas, relations, and constraints. Does not copy any data.
+    /// </summary>
+    /// <returns>A new <see cref="T:System.Data.DataSet" /> with the same schema as the current <see cref="T:System.Data.DataSet" />, but none of the data.</returns>
+    /// <PermissionSet>
+    ///   <IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true" />
+    ///   <IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true" />
+    ///   <IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="ControlEvidence" />
+    /// </PermissionSet>
     public override DataSet Clone()
     {
       SQLiteOgamaDataSet cln = ((SQLiteOgamaDataSet)(base.Clone()));
@@ -285,6 +411,10 @@ namespace Ogama.DataSet
 
 
 
+    /// <summary>
+    /// Gets a value indicating whether <see cref="P:System.Data.DataSet.Tables" /> property should be persisted.
+    /// </summary>
+    /// <returns>true if the property value has been changed from its default; otherwise false.</returns>
     protected override bool ShouldSerializeTables()
     {
       return false;
@@ -292,6 +422,10 @@ namespace Ogama.DataSet
 
 
 
+    /// <summary>
+    /// Gets a value indicating whether <see cref="P:System.Data.DataSet.Relations" /> property should be persisted.
+    /// </summary>
+    /// <returns>true if the property value has been changed from its default; otherwise false.</returns>
     protected override bool ShouldSerializeRelations()
     {
       return false;
@@ -299,6 +433,10 @@ namespace Ogama.DataSet
 
 
 
+    /// <summary>
+    /// Ignores attributes and returns an empty DataSet.
+    /// </summary>
+    /// <param name="reader">The specified XML reader.</param>
     protected override void ReadXmlSerializable(global::System.Xml.XmlReader reader)
     {
       if ((this.DetermineSchemaSerializationMode(reader) == SchemaSerializationMode.IncludeSchema))
@@ -364,6 +502,10 @@ namespace Ogama.DataSet
 
 
 
+    /// <summary>
+    /// Returns a serializable <see cref="T:System.Xml.Schema.XMLSchema" /> instance.
+    /// </summary>
+    /// <returns>The <see cref="T:System.Xml.Schema.XMLSchema" /> instance.</returns>
     protected override global::System.Xml.Schema.XmlSchema GetSchemaSerializable()
     {
       global::System.IO.MemoryStream stream = new global::System.IO.MemoryStream();
@@ -374,6 +516,9 @@ namespace Ogama.DataSet
 
 
 
+    /// <summary>
+    /// Initializes the vars.
+    /// </summary>
     internal void InitVars()
     {
       this.InitVars(true);
@@ -381,6 +526,10 @@ namespace Ogama.DataSet
 
 
 
+    /// <summary>
+    /// Initializes the vars.
+    /// </summary>
+    /// <param name="initTable">if set to <c>true</c> [initialize table].</param>
     internal void InitVars(bool initTable)
     {
       this.tableSubjectParameters = ((SubjectParametersDataTable)(base.Tables["SubjectParameters"]));
@@ -474,6 +623,9 @@ namespace Ogama.DataSet
 
 
 
+    /// <summary>
+    /// Initializes the class.
+    /// </summary>
     private void InitClass()
     {
       this.DataSetName = "SQLiteOgamaDataSet";
@@ -561,6 +713,10 @@ namespace Ogama.DataSet
 
 
 
+    /// <summary>
+    /// Shoulds the serialize subject parameters.
+    /// </summary>
+    /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
     private bool ShouldSerializeSubjectParameters()
     {
       return false;
@@ -568,6 +724,10 @@ namespace Ogama.DataSet
 
 
 
+    /// <summary>
+    /// Shoulds the serialize subjects.
+    /// </summary>
+    /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
     private bool ShouldSerializeSubjects()
     {
       return false;
@@ -575,6 +735,10 @@ namespace Ogama.DataSet
 
 
 
+    /// <summary>
+    /// Shoulds the serialize trials.
+    /// </summary>
+    /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
     private bool ShouldSerializeTrials()
     {
       return false;
@@ -582,6 +746,10 @@ namespace Ogama.DataSet
 
 
 
+    /// <summary>
+    /// Shoulds the serialize trial events.
+    /// </summary>
+    /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
     private bool ShouldSerializeTrialEvents()
     {
       return false;
@@ -589,6 +757,10 @@ namespace Ogama.DataSet
 
 
 
+    /// <summary>
+    /// Shoulds the serialize rawdata.
+    /// </summary>
+    /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
     private bool ShouldSerializeRawdata()
     {
       return false;
@@ -596,6 +768,10 @@ namespace Ogama.DataSet
 
 
 
+    /// <summary>
+    /// Shoulds the serialize ao is.
+    /// </summary>
+    /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
     private bool ShouldSerializeAOIs()
     {
       return false;
@@ -603,6 +779,10 @@ namespace Ogama.DataSet
 
 
 
+    /// <summary>
+    /// Shoulds the serialize shape groups.
+    /// </summary>
+    /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
     private bool ShouldSerializeShapeGroups()
     {
       return false;
@@ -610,6 +790,10 @@ namespace Ogama.DataSet
 
 
 
+    /// <summary>
+    /// Shoulds the serialize gaze fixations.
+    /// </summary>
+    /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
     private bool ShouldSerializeGazeFixations()
     {
       return false;
@@ -617,6 +801,10 @@ namespace Ogama.DataSet
 
 
 
+    /// <summary>
+    /// Shoulds the serialize mouse fixations.
+    /// </summary>
+    /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
     private bool ShouldSerializeMouseFixations()
     {
       return false;
@@ -624,6 +812,10 @@ namespace Ogama.DataSet
 
 
 
+    /// <summary>
+    /// Shoulds the serialize parameters.
+    /// </summary>
+    /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
     private bool ShouldSerializeParams()
     {
       return false;
@@ -631,6 +823,11 @@ namespace Ogama.DataSet
 
 
 
+    /// <summary>
+    /// Schemas the changed.
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="e">The <see cref="System.ComponentModel.CollectionChangeEventArgs"/> instance containing the event data.</param>
     private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e)
     {
       if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove))
@@ -641,6 +838,11 @@ namespace Ogama.DataSet
 
 
 
+    /// <summary>
+    /// Gets the typed data set schema.
+    /// </summary>
+    /// <param name="xs">The xs.</param>
+    /// <returns>System.Xml.Schema.XmlSchemaComplexType.</returns>
     public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs)
     {
       SQLiteOgamaDataSet ds = new SQLiteOgamaDataSet();
@@ -697,53 +899,118 @@ namespace Ogama.DataSet
     }
 
 
+    /// <summary>
+    /// Delegate SubjectParametersRowChangeEventHandler
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="e">The e.</param>
     public delegate void SubjectParametersRowChangeEventHandler(object sender, SubjectParametersRowChangeEvent e);
 
 
+    /// <summary>
+    /// Delegate SubjectsRowChangeEventHandler
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="e">The e.</param>
     public delegate void SubjectsRowChangeEventHandler(object sender, SubjectsRowChangeEvent e);
 
 
+    /// <summary>
+    /// Delegate TrialsRowChangeEventHandler
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="e">The e.</param>
     public delegate void TrialsRowChangeEventHandler(object sender, TrialsRowChangeEvent e);
 
 
+    /// <summary>
+    /// Delegate TrialEventsRowChangeEventHandler
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="e">The e.</param>
     public delegate void TrialEventsRowChangeEventHandler(object sender, TrialEventsRowChangeEvent e);
 
 
+    /// <summary>
+    /// Delegate RawdataRowChangeEventHandler
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="e">The e.</param>
     public delegate void RawdataRowChangeEventHandler(object sender, RawdataRowChangeEvent e);
 
 
+    /// <summary>
+    /// Delegate AOIsRowChangeEventHandler
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="e">The e.</param>
     public delegate void AOIsRowChangeEventHandler(object sender, AOIsRowChangeEvent e);
 
 
+    /// <summary>
+    /// Delegate ShapeGroupsRowChangeEventHandler
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="e">The e.</param>
     public delegate void ShapeGroupsRowChangeEventHandler(object sender, ShapeGroupsRowChangeEvent e);
 
 
+    /// <summary>
+    /// Delegate GazeFixationsRowChangeEventHandler
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="e">The e.</param>
     public delegate void GazeFixationsRowChangeEventHandler(object sender, GazeFixationsRowChangeEvent e);
 
 
+    /// <summary>
+    /// Delegate MouseFixationsRowChangeEventHandler
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="e">The e.</param>
     public delegate void MouseFixationsRowChangeEventHandler(object sender, MouseFixationsRowChangeEvent e);
 
 
+    /// <summary>
+    /// Delegate ParamsRowChangeEventHandler
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="e">The e.</param>
     public delegate void ParamsRowChangeEventHandler(object sender, ParamsRowChangeEvent e);
 
     /// <summary>
-    ///Represents the strongly named DataTable class.
-    ///</summary>
+    /// Represents the strongly named DataTable class.
+    /// </summary>
     [global::System.Serializable()]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
     public partial class SubjectParametersDataTable : TypedTableBase<SubjectParametersRow>
     {
 
+      /// <summary>
+      /// The column identifier
+      /// </summary>
       private DataColumn columnID;
 
+      /// <summary>
+      /// The column subject name
+      /// </summary>
       private DataColumn columnSubjectName;
 
+      /// <summary>
+      /// The column parameter
+      /// </summary>
       private DataColumn columnParam;
 
+      /// <summary>
+      /// The column parameter value
+      /// </summary>
       private DataColumn columnParamValue;
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="SubjectParametersDataTable"/> class.
+      /// </summary>
       public SubjectParametersDataTable()
       {
         this.TableName = "SubjectParameters";
@@ -754,6 +1021,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="SubjectParametersDataTable"/> class.
+      /// </summary>
+      /// <param name="table">The table.</param>
       internal SubjectParametersDataTable(DataTable table)
       {
         this.TableName = table.TableName;
@@ -775,6 +1046,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="SubjectParametersDataTable"/> class.
+      /// </summary>
+      /// <param name="info">The information.</param>
+      /// <param name="context">The context.</param>
       protected SubjectParametersDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
         base(info, context)
       {
@@ -783,6 +1059,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the identifier column.
+      /// </summary>
+      /// <value>The identifier column.</value>
       public DataColumn IDColumn
       {
         get
@@ -793,6 +1073,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the subject name column.
+      /// </summary>
+      /// <value>The subject name column.</value>
       public DataColumn SubjectNameColumn
       {
         get
@@ -803,6 +1087,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the parameter column.
+      /// </summary>
+      /// <value>The parameter column.</value>
       public DataColumn ParamColumn
       {
         get
@@ -813,6 +1101,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the parameter value column.
+      /// </summary>
+      /// <value>The parameter value column.</value>
       public DataColumn ParamValueColumn
       {
         get
@@ -824,6 +1116,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the count.
+      /// </summary>
+      /// <value>The count.</value>
       public int Count
       {
         get
@@ -834,6 +1130,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the <see cref="SubjectParametersRow"/> at the specified index.
+      /// </summary>
+      /// <param name="index">The index.</param>
+      /// <returns>SubjectParametersRow.</returns>
       public SubjectParametersRow this[int index]
       {
         get
@@ -843,19 +1144,35 @@ namespace Ogama.DataSet
       }
 
 
+      /// <summary>
+      /// Occurs when [subject parameters row changing].
+      /// </summary>
       public event SubjectParametersRowChangeEventHandler SubjectParametersRowChanging;
 
 
+      /// <summary>
+      /// Occurs when [subject parameters row changed].
+      /// </summary>
       public event SubjectParametersRowChangeEventHandler SubjectParametersRowChanged;
 
 
+      /// <summary>
+      /// Occurs when [subject parameters row deleting].
+      /// </summary>
       public event SubjectParametersRowChangeEventHandler SubjectParametersRowDeleting;
 
 
+      /// <summary>
+      /// Occurs when [subject parameters row deleted].
+      /// </summary>
       public event SubjectParametersRowChangeEventHandler SubjectParametersRowDeleted;
 
 
 
+      /// <summary>
+      /// Adds the subject parameters row.
+      /// </summary>
+      /// <param name="row">The row.</param>
       public void AddSubjectParametersRow(SubjectParametersRow row)
       {
         this.Rows.Add(row);
@@ -863,6 +1180,13 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Adds the subject parameters row.
+      /// </summary>
+      /// <param name="parentSubjectsRowByFK_Subjects_SubjectParameters">The parent subjects row by f k_ subjects_ subject parameters.</param>
+      /// <param name="Param">The parameter.</param>
+      /// <param name="ParamValue">The parameter value.</param>
+      /// <returns>SubjectParametersRow.</returns>
       public SubjectParametersRow AddSubjectParametersRow(SubjectsRow parentSubjectsRowByFK_Subjects_SubjectParameters, string Param, string ParamValue)
       {
         SubjectParametersRow rowSubjectParametersRow = ((SubjectParametersRow)(this.NewRow()));
@@ -882,6 +1206,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Finds the by identifier.
+      /// </summary>
+      /// <param name="ID">The identifier.</param>
+      /// <returns>SubjectParametersRow.</returns>
       public SubjectParametersRow FindByID(int ID)
       {
         return ((SubjectParametersRow)(this.Rows.Find(new object[] {
@@ -890,6 +1219,15 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Clones the structure of the <see cref="T:System.Data.DataTable" />, including all <see cref="T:System.Data.DataTable" /> schemas and constraints.
+      /// </summary>
+      /// <returns>A new <see cref="T:System.Data.DataTable" /> with the same schema as the current <see cref="T:System.Data.DataTable" />.</returns>
+      /// <PermissionSet>
+      ///   <IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true" />
+      ///   <IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true" />
+      ///   <IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="ControlEvidence" />
+      /// </PermissionSet>
       public override DataTable Clone()
       {
         SubjectParametersDataTable cln = ((SubjectParametersDataTable)(base.Clone()));
@@ -899,6 +1237,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Creates a new instance of <see cref="T:System.Data.DataTable" />.
+      /// </summary>
+      /// <returns>The new expression.</returns>
       protected override DataTable CreateInstance()
       {
         return new SubjectParametersDataTable();
@@ -906,6 +1248,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes the vars.
+      /// </summary>
       internal void InitVars()
       {
         this.columnID = base.Columns["ID"];
@@ -916,6 +1261,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes the class.
+      /// </summary>
       private void InitClass()
       {
         this.columnID = new DataColumn("ID", typeof(int), null, MappingType.Element);
@@ -942,6 +1290,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// News the subject parameters row.
+      /// </summary>
+      /// <returns>SubjectParametersRow.</returns>
       public SubjectParametersRow NewSubjectParametersRow()
       {
         return ((SubjectParametersRow)(this.NewRow()));
@@ -949,6 +1301,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Creates a new row from an existing row.
+      /// </summary>
+      /// <param name="builder">A <see cref="T:System.Data.DataRowBuilder" /> object.</param>
+      /// <returns>A <see cref="T:System.Data.DataRow" /> derived class.</returns>
       protected override DataRow NewRowFromBuilder(DataRowBuilder builder)
       {
         return new SubjectParametersRow(builder);
@@ -956,6 +1313,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the row type.
+      /// </summary>
+      /// <returns>Returns the type of the <see cref="T:System.Data.DataRow" />.</returns>
       protected override global::System.Type GetRowType()
       {
         return typeof(SubjectParametersRow);
@@ -963,6 +1324,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowChanged" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowChanged(DataRowChangeEventArgs e)
       {
         base.OnRowChanged(e);
@@ -974,6 +1339,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowChanging" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowChanging(DataRowChangeEventArgs e)
       {
         base.OnRowChanging(e);
@@ -985,6 +1354,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowDeleted" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowDeleted(DataRowChangeEventArgs e)
       {
         base.OnRowDeleted(e);
@@ -996,6 +1369,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowDeleting" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowDeleting(DataRowChangeEventArgs e)
       {
         base.OnRowDeleting(e);
@@ -1007,6 +1384,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Removes the subject parameters row.
+      /// </summary>
+      /// <param name="row">The row.</param>
       public void RemoveSubjectParametersRow(SubjectParametersRow row)
       {
         this.Rows.Remove(row);
@@ -1014,6 +1395,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the typed table schema.
+      /// </summary>
+      /// <param name="xs">The xs.</param>
+      /// <returns>System.Xml.Schema.XmlSchemaComplexType.</returns>
       public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs)
       {
         global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
@@ -1087,29 +1473,53 @@ namespace Ogama.DataSet
     }
 
     /// <summary>
-    ///Represents the strongly named DataTable class.
-    ///</summary>
+    /// Represents the strongly named DataTable class.
+    /// </summary>
     [global::System.Serializable()]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
     public partial class SubjectsDataTable : TypedTableBase<SubjectsRow>
     {
 
+      /// <summary>
+      /// The column identifier
+      /// </summary>
       private DataColumn columnID;
 
+      /// <summary>
+      /// The column subject name
+      /// </summary>
       private DataColumn columnSubjectName;
 
+      /// <summary>
+      /// The column category
+      /// </summary>
       private DataColumn columnCategory;
 
+      /// <summary>
+      /// The column age
+      /// </summary>
       private DataColumn columnAge;
 
+      /// <summary>
+      /// The column sex
+      /// </summary>
       private DataColumn columnSex;
 
+      /// <summary>
+      /// The column handedness
+      /// </summary>
       private DataColumn columnHandedness;
 
+      /// <summary>
+      /// The column comments
+      /// </summary>
       private DataColumn columnComments;
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="SubjectsDataTable"/> class.
+      /// </summary>
       public SubjectsDataTable()
       {
         this.TableName = "Subjects";
@@ -1120,6 +1530,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="SubjectsDataTable"/> class.
+      /// </summary>
+      /// <param name="table">The table.</param>
       internal SubjectsDataTable(DataTable table)
       {
         this.TableName = table.TableName;
@@ -1141,6 +1555,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="SubjectsDataTable"/> class.
+      /// </summary>
+      /// <param name="info">The information.</param>
+      /// <param name="context">The context.</param>
       protected SubjectsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
         base(info, context)
       {
@@ -1149,6 +1568,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the identifier column.
+      /// </summary>
+      /// <value>The identifier column.</value>
       public DataColumn IDColumn
       {
         get
@@ -1159,6 +1582,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the subject name column.
+      /// </summary>
+      /// <value>The subject name column.</value>
       public DataColumn SubjectNameColumn
       {
         get
@@ -1169,6 +1596,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the category column.
+      /// </summary>
+      /// <value>The category column.</value>
       public DataColumn CategoryColumn
       {
         get
@@ -1179,6 +1610,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the age column.
+      /// </summary>
+      /// <value>The age column.</value>
       public DataColumn AgeColumn
       {
         get
@@ -1189,6 +1624,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the sex column.
+      /// </summary>
+      /// <value>The sex column.</value>
       public DataColumn SexColumn
       {
         get
@@ -1199,6 +1638,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the handedness column.
+      /// </summary>
+      /// <value>The handedness column.</value>
       public DataColumn HandednessColumn
       {
         get
@@ -1209,6 +1652,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the comments column.
+      /// </summary>
+      /// <value>The comments column.</value>
       public DataColumn CommentsColumn
       {
         get
@@ -1220,6 +1667,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the count.
+      /// </summary>
+      /// <value>The count.</value>
       public int Count
       {
         get
@@ -1230,6 +1681,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the <see cref="SubjectsRow"/> at the specified index.
+      /// </summary>
+      /// <param name="index">The index.</param>
+      /// <returns>SubjectsRow.</returns>
       public SubjectsRow this[int index]
       {
         get
@@ -1239,19 +1695,35 @@ namespace Ogama.DataSet
       }
 
 
+      /// <summary>
+      /// Occurs when [subjects row changing].
+      /// </summary>
       public event SubjectsRowChangeEventHandler SubjectsRowChanging;
 
 
+      /// <summary>
+      /// Occurs when [subjects row changed].
+      /// </summary>
       public event SubjectsRowChangeEventHandler SubjectsRowChanged;
 
 
+      /// <summary>
+      /// Occurs when [subjects row deleting].
+      /// </summary>
       public event SubjectsRowChangeEventHandler SubjectsRowDeleting;
 
 
+      /// <summary>
+      /// Occurs when [subjects row deleted].
+      /// </summary>
       public event SubjectsRowChangeEventHandler SubjectsRowDeleted;
 
 
 
+      /// <summary>
+      /// Adds the subjects row.
+      /// </summary>
+      /// <param name="row">The row.</param>
       public void AddSubjectsRow(SubjectsRow row)
       {
         this.Rows.Add(row);
@@ -1259,6 +1731,16 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Adds the subjects row.
+      /// </summary>
+      /// <param name="SubjectName">Name of the subject.</param>
+      /// <param name="Category">The category.</param>
+      /// <param name="Age">The age.</param>
+      /// <param name="Sex">The sex.</param>
+      /// <param name="Handedness">The handedness.</param>
+      /// <param name="Comments">The comments.</param>
+      /// <returns>SubjectsRow.</returns>
       public SubjectsRow AddSubjectsRow(string SubjectName, string Category, int Age, string Sex, string Handedness, string Comments)
       {
         SubjectsRow rowSubjectsRow = ((SubjectsRow)(this.NewRow()));
@@ -1277,6 +1759,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Finds the by identifier.
+      /// </summary>
+      /// <param name="ID">The identifier.</param>
+      /// <returns>SubjectsRow.</returns>
       public SubjectsRow FindByID(long ID)
       {
         return ((SubjectsRow)(this.Rows.Find(new object[] {
@@ -1285,6 +1772,15 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Clones the structure of the <see cref="T:System.Data.DataTable" />, including all <see cref="T:System.Data.DataTable" /> schemas and constraints.
+      /// </summary>
+      /// <returns>A new <see cref="T:System.Data.DataTable" /> with the same schema as the current <see cref="T:System.Data.DataTable" />.</returns>
+      /// <PermissionSet>
+      ///   <IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true" />
+      ///   <IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true" />
+      ///   <IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="ControlEvidence" />
+      /// </PermissionSet>
       public override DataTable Clone()
       {
         SubjectsDataTable cln = ((SubjectsDataTable)(base.Clone()));
@@ -1294,6 +1790,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Creates a new instance of <see cref="T:System.Data.DataTable" />.
+      /// </summary>
+      /// <returns>The new expression.</returns>
       protected override DataTable CreateInstance()
       {
         return new SubjectsDataTable();
@@ -1301,6 +1801,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes the vars.
+      /// </summary>
       internal void InitVars()
       {
         this.columnID = base.Columns["ID"];
@@ -1314,6 +1817,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes the class.
+      /// </summary>
       private void InitClass()
       {
         this.columnID = new DataColumn("ID", typeof(long), null, MappingType.Element);
@@ -1353,6 +1859,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// News the subjects row.
+      /// </summary>
+      /// <returns>SubjectsRow.</returns>
       public SubjectsRow NewSubjectsRow()
       {
         return ((SubjectsRow)(this.NewRow()));
@@ -1360,6 +1870,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Creates a new row from an existing row.
+      /// </summary>
+      /// <param name="builder">A <see cref="T:System.Data.DataRowBuilder" /> object.</param>
+      /// <returns>A <see cref="T:System.Data.DataRow" /> derived class.</returns>
       protected override DataRow NewRowFromBuilder(DataRowBuilder builder)
       {
         return new SubjectsRow(builder);
@@ -1367,6 +1882,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the row type.
+      /// </summary>
+      /// <returns>Returns the type of the <see cref="T:System.Data.DataRow" />.</returns>
       protected override global::System.Type GetRowType()
       {
         return typeof(SubjectsRow);
@@ -1374,6 +1893,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowChanged" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowChanged(DataRowChangeEventArgs e)
       {
         base.OnRowChanged(e);
@@ -1385,6 +1908,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowChanging" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowChanging(DataRowChangeEventArgs e)
       {
         base.OnRowChanging(e);
@@ -1396,6 +1923,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowDeleted" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowDeleted(DataRowChangeEventArgs e)
       {
         base.OnRowDeleted(e);
@@ -1407,6 +1938,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowDeleting" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowDeleting(DataRowChangeEventArgs e)
       {
         base.OnRowDeleting(e);
@@ -1418,6 +1953,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Removes the subjects row.
+      /// </summary>
+      /// <param name="row">The row.</param>
       public void RemoveSubjectsRow(SubjectsRow row)
       {
         this.Rows.Remove(row);
@@ -1425,6 +1964,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the typed table schema.
+      /// </summary>
+      /// <param name="xs">The xs.</param>
+      /// <returns>System.Xml.Schema.XmlSchemaComplexType.</returns>
       public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs)
       {
         global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
@@ -1498,33 +2042,63 @@ namespace Ogama.DataSet
     }
 
     /// <summary>
-    ///Represents the strongly named DataTable class.
-    ///</summary>
+    /// Represents the strongly named DataTable class.
+    /// </summary>
     [global::System.Serializable()]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
     public partial class TrialsDataTable : TypedTableBase<TrialsRow>
     {
 
+      /// <summary>
+      /// The column identifier
+      /// </summary>
       private DataColumn columnID;
 
+      /// <summary>
+      /// The column subject name
+      /// </summary>
       private DataColumn columnSubjectName;
 
+      /// <summary>
+      /// The column trial identifier
+      /// </summary>
       private DataColumn columnTrialID;
 
+      /// <summary>
+      /// The column trial name
+      /// </summary>
       private DataColumn columnTrialName;
 
+      /// <summary>
+      /// The column trial sequence
+      /// </summary>
       private DataColumn columnTrialSequence;
 
+      /// <summary>
+      /// The column category
+      /// </summary>
       private DataColumn columnCategory;
 
+      /// <summary>
+      /// The column trial start time
+      /// </summary>
       private DataColumn columnTrialStartTime;
 
+      /// <summary>
+      /// The column duration
+      /// </summary>
       private DataColumn columnDuration;
 
+      /// <summary>
+      /// The column eliminate data
+      /// </summary>
       private DataColumn columnEliminateData;
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="TrialsDataTable"/> class.
+      /// </summary>
       public TrialsDataTable()
       {
         this.TableName = "Trials";
@@ -1535,6 +2109,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="TrialsDataTable"/> class.
+      /// </summary>
+      /// <param name="table">The table.</param>
       internal TrialsDataTable(DataTable table)
       {
         this.TableName = table.TableName;
@@ -1556,6 +2134,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="TrialsDataTable"/> class.
+      /// </summary>
+      /// <param name="info">The information.</param>
+      /// <param name="context">The context.</param>
       protected TrialsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
         base(info, context)
       {
@@ -1564,6 +2147,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the identifier column.
+      /// </summary>
+      /// <value>The identifier column.</value>
       public DataColumn IDColumn
       {
         get
@@ -1574,6 +2161,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the subject name column.
+      /// </summary>
+      /// <value>The subject name column.</value>
       public DataColumn SubjectNameColumn
       {
         get
@@ -1584,6 +2175,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the trial identifier column.
+      /// </summary>
+      /// <value>The trial identifier column.</value>
       public DataColumn TrialIDColumn
       {
         get
@@ -1594,6 +2189,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the trial name column.
+      /// </summary>
+      /// <value>The trial name column.</value>
       public DataColumn TrialNameColumn
       {
         get
@@ -1604,6 +2203,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the trial sequence column.
+      /// </summary>
+      /// <value>The trial sequence column.</value>
       public DataColumn TrialSequenceColumn
       {
         get
@@ -1614,6 +2217,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the category column.
+      /// </summary>
+      /// <value>The category column.</value>
       public DataColumn CategoryColumn
       {
         get
@@ -1624,6 +2231,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the trial start time column.
+      /// </summary>
+      /// <value>The trial start time column.</value>
       public DataColumn TrialStartTimeColumn
       {
         get
@@ -1634,6 +2245,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the duration column.
+      /// </summary>
+      /// <value>The duration column.</value>
       public DataColumn DurationColumn
       {
         get
@@ -1644,6 +2259,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the eliminate data column.
+      /// </summary>
+      /// <value>The eliminate data column.</value>
       public DataColumn EliminateDataColumn
       {
         get
@@ -1655,6 +2274,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the count.
+      /// </summary>
+      /// <value>The count.</value>
       public int Count
       {
         get
@@ -1665,6 +2288,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the <see cref="TrialsRow"/> at the specified index.
+      /// </summary>
+      /// <param name="index">The index.</param>
+      /// <returns>TrialsRow.</returns>
       public TrialsRow this[int index]
       {
         get
@@ -1674,19 +2302,35 @@ namespace Ogama.DataSet
       }
 
 
+      /// <summary>
+      /// Occurs when [trials row changing].
+      /// </summary>
       public event TrialsRowChangeEventHandler TrialsRowChanging;
 
 
+      /// <summary>
+      /// Occurs when [trials row changed].
+      /// </summary>
       public event TrialsRowChangeEventHandler TrialsRowChanged;
 
 
+      /// <summary>
+      /// Occurs when [trials row deleting].
+      /// </summary>
       public event TrialsRowChangeEventHandler TrialsRowDeleting;
 
 
+      /// <summary>
+      /// Occurs when [trials row deleted].
+      /// </summary>
       public event TrialsRowChangeEventHandler TrialsRowDeleted;
 
 
 
+      /// <summary>
+      /// Adds the trials row.
+      /// </summary>
+      /// <param name="row">The row.</param>
       public void AddTrialsRow(TrialsRow row)
       {
         this.Rows.Add(row);
@@ -1694,6 +2338,18 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Adds the trials row.
+      /// </summary>
+      /// <param name="parentSubjectsRowByFK_Subjects_Trials">The parent subjects row by f k_ subjects_ trials.</param>
+      /// <param name="TrialID">The trial identifier.</param>
+      /// <param name="TrialName">Name of the trial.</param>
+      /// <param name="TrialSequence">The trial sequence.</param>
+      /// <param name="Category">The category.</param>
+      /// <param name="TrialStartTime">The trial start time.</param>
+      /// <param name="Duration">The duration.</param>
+      /// <param name="EliminateData">The eliminate data.</param>
+      /// <returns>TrialsRow.</returns>
       public TrialsRow AddTrialsRow(SubjectsRow parentSubjectsRowByFK_Subjects_Trials, int TrialID, string TrialName, int TrialSequence, string Category, long TrialStartTime, int Duration, string EliminateData)
       {
         TrialsRow rowTrialsRow = ((TrialsRow)(this.NewRow()));
@@ -1718,6 +2374,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Finds the by identifier.
+      /// </summary>
+      /// <param name="ID">The identifier.</param>
+      /// <returns>TrialsRow.</returns>
       public TrialsRow FindByID(long ID)
       {
         return ((TrialsRow)(this.Rows.Find(new object[] {
@@ -1726,6 +2387,15 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Clones the structure of the <see cref="T:System.Data.DataTable" />, including all <see cref="T:System.Data.DataTable" /> schemas and constraints.
+      /// </summary>
+      /// <returns>A new <see cref="T:System.Data.DataTable" /> with the same schema as the current <see cref="T:System.Data.DataTable" />.</returns>
+      /// <PermissionSet>
+      ///   <IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true" />
+      ///   <IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true" />
+      ///   <IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="ControlEvidence" />
+      /// </PermissionSet>
       public override DataTable Clone()
       {
         TrialsDataTable cln = ((TrialsDataTable)(base.Clone()));
@@ -1735,6 +2405,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Creates a new instance of <see cref="T:System.Data.DataTable" />.
+      /// </summary>
+      /// <returns>The new expression.</returns>
       protected override DataTable CreateInstance()
       {
         return new TrialsDataTable();
@@ -1742,6 +2416,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes the vars.
+      /// </summary>
       internal void InitVars()
       {
         this.columnID = base.Columns["ID"];
@@ -1757,6 +2434,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes the class.
+      /// </summary>
       private void InitClass()
       {
         this.columnID = new DataColumn("ID", typeof(long), null, MappingType.Element);
@@ -1798,6 +2478,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// News the trials row.
+      /// </summary>
+      /// <returns>TrialsRow.</returns>
       public TrialsRow NewTrialsRow()
       {
         return ((TrialsRow)(this.NewRow()));
@@ -1805,6 +2489,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Creates a new row from an existing row.
+      /// </summary>
+      /// <param name="builder">A <see cref="T:System.Data.DataRowBuilder" /> object.</param>
+      /// <returns>A <see cref="T:System.Data.DataRow" /> derived class.</returns>
       protected override DataRow NewRowFromBuilder(DataRowBuilder builder)
       {
         return new TrialsRow(builder);
@@ -1812,6 +2501,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the row type.
+      /// </summary>
+      /// <returns>Returns the type of the <see cref="T:System.Data.DataRow" />.</returns>
       protected override global::System.Type GetRowType()
       {
         return typeof(TrialsRow);
@@ -1819,6 +2512,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowChanged" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowChanged(DataRowChangeEventArgs e)
       {
         base.OnRowChanged(e);
@@ -1830,6 +2527,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowChanging" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowChanging(DataRowChangeEventArgs e)
       {
         base.OnRowChanging(e);
@@ -1841,6 +2542,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowDeleted" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowDeleted(DataRowChangeEventArgs e)
       {
         base.OnRowDeleted(e);
@@ -1852,6 +2557,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowDeleting" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowDeleting(DataRowChangeEventArgs e)
       {
         base.OnRowDeleting(e);
@@ -1863,6 +2572,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Removes the trials row.
+      /// </summary>
+      /// <param name="row">The row.</param>
       public void RemoveTrialsRow(TrialsRow row)
       {
         this.Rows.Remove(row);
@@ -1870,6 +2583,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the typed table schema.
+      /// </summary>
+      /// <param name="xs">The xs.</param>
+      /// <returns>System.Xml.Schema.XmlSchemaComplexType.</returns>
       public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs)
       {
         global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
@@ -1943,31 +2661,58 @@ namespace Ogama.DataSet
     }
 
     /// <summary>
-    ///Represents the strongly named DataTable class.
-    ///</summary>
+    /// Represents the strongly named DataTable class.
+    /// </summary>
     [global::System.Serializable()]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
     public partial class TrialEventsDataTable : TypedTableBase<TrialEventsRow>
     {
 
+      /// <summary>
+      /// The column identifier
+      /// </summary>
       private DataColumn columnID;
 
+      /// <summary>
+      /// The column subject name
+      /// </summary>
       private DataColumn columnSubjectName;
 
+      /// <summary>
+      /// The column trial sequence
+      /// </summary>
       private DataColumn columnTrialSequence;
 
+      /// <summary>
+      /// The column event identifier
+      /// </summary>
       private DataColumn columnEventID;
 
+      /// <summary>
+      /// The column event time
+      /// </summary>
       private DataColumn columnEventTime;
 
+      /// <summary>
+      /// The column event type
+      /// </summary>
       private DataColumn columnEventType;
 
+      /// <summary>
+      /// The column event task
+      /// </summary>
       private DataColumn columnEventTask;
 
+      /// <summary>
+      /// The column event parameter
+      /// </summary>
       private DataColumn columnEventParam;
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="TrialEventsDataTable"/> class.
+      /// </summary>
       public TrialEventsDataTable()
       {
         this.TableName = "TrialEvents";
@@ -1978,6 +2723,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="TrialEventsDataTable"/> class.
+      /// </summary>
+      /// <param name="table">The table.</param>
       internal TrialEventsDataTable(DataTable table)
       {
         this.TableName = table.TableName;
@@ -1999,6 +2748,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="TrialEventsDataTable"/> class.
+      /// </summary>
+      /// <param name="info">The information.</param>
+      /// <param name="context">The context.</param>
       protected TrialEventsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
         base(info, context)
       {
@@ -2007,6 +2761,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the identifier column.
+      /// </summary>
+      /// <value>The identifier column.</value>
       public DataColumn IDColumn
       {
         get
@@ -2017,6 +2775,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the subject name column.
+      /// </summary>
+      /// <value>The subject name column.</value>
       public DataColumn SubjectNameColumn
       {
         get
@@ -2027,6 +2789,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the trial sequence column.
+      /// </summary>
+      /// <value>The trial sequence column.</value>
       public DataColumn TrialSequenceColumn
       {
         get
@@ -2037,6 +2803,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the event identifier column.
+      /// </summary>
+      /// <value>The event identifier column.</value>
       public DataColumn EventIDColumn
       {
         get
@@ -2047,6 +2817,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the event time column.
+      /// </summary>
+      /// <value>The event time column.</value>
       public DataColumn EventTimeColumn
       {
         get
@@ -2057,6 +2831,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the event type column.
+      /// </summary>
+      /// <value>The event type column.</value>
       public DataColumn EventTypeColumn
       {
         get
@@ -2067,6 +2845,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the event task column.
+      /// </summary>
+      /// <value>The event task column.</value>
       public DataColumn EventTaskColumn
       {
         get
@@ -2077,6 +2859,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the event parameter column.
+      /// </summary>
+      /// <value>The event parameter column.</value>
       public DataColumn EventParamColumn
       {
         get
@@ -2088,6 +2874,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the count.
+      /// </summary>
+      /// <value>The count.</value>
       public int Count
       {
         get
@@ -2098,6 +2888,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the <see cref="TrialEventsRow"/> at the specified index.
+      /// </summary>
+      /// <param name="index">The index.</param>
+      /// <returns>TrialEventsRow.</returns>
       public TrialEventsRow this[int index]
       {
         get
@@ -2107,19 +2902,35 @@ namespace Ogama.DataSet
       }
 
 
+      /// <summary>
+      /// Occurs when [trial events row changing].
+      /// </summary>
       public event TrialEventsRowChangeEventHandler TrialEventsRowChanging;
 
 
+      /// <summary>
+      /// Occurs when [trial events row changed].
+      /// </summary>
       public event TrialEventsRowChangeEventHandler TrialEventsRowChanged;
 
 
+      /// <summary>
+      /// Occurs when [trial events row deleting].
+      /// </summary>
       public event TrialEventsRowChangeEventHandler TrialEventsRowDeleting;
 
 
+      /// <summary>
+      /// Occurs when [trial events row deleted].
+      /// </summary>
       public event TrialEventsRowChangeEventHandler TrialEventsRowDeleted;
 
 
 
+      /// <summary>
+      /// Adds the trial events row.
+      /// </summary>
+      /// <param name="row">The row.</param>
       public void AddTrialEventsRow(TrialEventsRow row)
       {
         this.Rows.Add(row);
@@ -2127,6 +2938,17 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Adds the trial events row.
+      /// </summary>
+      /// <param name="SubjectName">Name of the subject.</param>
+      /// <param name="TrialSequence">The trial sequence.</param>
+      /// <param name="EventID">The event identifier.</param>
+      /// <param name="EventTime">The event time.</param>
+      /// <param name="EventType">Type of the event.</param>
+      /// <param name="EventTask">The event task.</param>
+      /// <param name="EventParam">The event parameter.</param>
+      /// <returns>TrialEventsRow.</returns>
       public TrialEventsRow AddTrialEventsRow(string SubjectName, int TrialSequence, int EventID, long EventTime, string EventType, string EventTask, string EventParam)
       {
         TrialEventsRow rowTrialEventsRow = ((TrialEventsRow)(this.NewRow()));
@@ -2146,6 +2968,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Finds the by identifier.
+      /// </summary>
+      /// <param name="ID">The identifier.</param>
+      /// <returns>TrialEventsRow.</returns>
       public TrialEventsRow FindByID(int ID)
       {
         return ((TrialEventsRow)(this.Rows.Find(new object[] {
@@ -2154,6 +2981,15 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Clones the structure of the <see cref="T:System.Data.DataTable" />, including all <see cref="T:System.Data.DataTable" /> schemas and constraints.
+      /// </summary>
+      /// <returns>A new <see cref="T:System.Data.DataTable" /> with the same schema as the current <see cref="T:System.Data.DataTable" />.</returns>
+      /// <PermissionSet>
+      ///   <IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true" />
+      ///   <IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true" />
+      ///   <IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="ControlEvidence" />
+      /// </PermissionSet>
       public override DataTable Clone()
       {
         TrialEventsDataTable cln = ((TrialEventsDataTable)(base.Clone()));
@@ -2163,6 +2999,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Creates a new instance of <see cref="T:System.Data.DataTable" />.
+      /// </summary>
+      /// <returns>The new expression.</returns>
       protected override DataTable CreateInstance()
       {
         return new TrialEventsDataTable();
@@ -2170,6 +3010,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes the vars.
+      /// </summary>
       internal void InitVars()
       {
         this.columnID = base.Columns["ID"];
@@ -2184,6 +3027,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes the class.
+      /// </summary>
       private void InitClass()
       {
         this.columnID = new DataColumn("ID", typeof(int), null, MappingType.Element);
@@ -2222,6 +3068,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// News the trial events row.
+      /// </summary>
+      /// <returns>TrialEventsRow.</returns>
       public TrialEventsRow NewTrialEventsRow()
       {
         return ((TrialEventsRow)(this.NewRow()));
@@ -2229,6 +3079,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Creates a new row from an existing row.
+      /// </summary>
+      /// <param name="builder">A <see cref="T:System.Data.DataRowBuilder" /> object.</param>
+      /// <returns>A <see cref="T:System.Data.DataRow" /> derived class.</returns>
       protected override DataRow NewRowFromBuilder(DataRowBuilder builder)
       {
         return new TrialEventsRow(builder);
@@ -2236,6 +3091,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the row type.
+      /// </summary>
+      /// <returns>Returns the type of the <see cref="T:System.Data.DataRow" />.</returns>
       protected override global::System.Type GetRowType()
       {
         return typeof(TrialEventsRow);
@@ -2243,6 +3102,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowChanged" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowChanged(DataRowChangeEventArgs e)
       {
         base.OnRowChanged(e);
@@ -2254,6 +3117,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowChanging" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowChanging(DataRowChangeEventArgs e)
       {
         base.OnRowChanging(e);
@@ -2265,6 +3132,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowDeleted" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowDeleted(DataRowChangeEventArgs e)
       {
         base.OnRowDeleted(e);
@@ -2276,6 +3147,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowDeleting" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowDeleting(DataRowChangeEventArgs e)
       {
         base.OnRowDeleting(e);
@@ -2287,6 +3162,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Removes the trial events row.
+      /// </summary>
+      /// <param name="row">The row.</param>
       public void RemoveTrialEventsRow(TrialEventsRow row)
       {
         this.Rows.Remove(row);
@@ -2294,6 +3173,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the typed table schema.
+      /// </summary>
+      /// <param name="xs">The xs.</param>
+      /// <returns>System.Xml.Schema.XmlSchemaComplexType.</returns>
       public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs)
       {
         global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
@@ -2367,37 +3251,73 @@ namespace Ogama.DataSet
     }
 
     /// <summary>
-    ///Represents the strongly named DataTable class.
-    ///</summary>
+    /// Represents the strongly named DataTable class.
+    /// </summary>
     [global::System.Serializable()]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
     public partial class RawdataDataTable : TypedTableBase<RawdataRow>
     {
 
+      /// <summary>
+      /// The column identifier
+      /// </summary>
       private DataColumn columnID;
 
+      /// <summary>
+      /// The column subject name
+      /// </summary>
       private DataColumn columnSubjectName;
 
+      /// <summary>
+      /// The column trial sequence
+      /// </summary>
       private DataColumn columnTrialSequence;
 
+      /// <summary>
+      /// The column time
+      /// </summary>
       private DataColumn columnTime;
 
+      /// <summary>
+      /// The column pupil dia x
+      /// </summary>
       private DataColumn columnPupilDiaX;
 
+      /// <summary>
+      /// The column pupil dia y
+      /// </summary>
       private DataColumn columnPupilDiaY;
 
+      /// <summary>
+      /// The column gaze position x
+      /// </summary>
       private DataColumn columnGazePosX;
 
+      /// <summary>
+      /// The column gaze position y
+      /// </summary>
       private DataColumn columnGazePosY;
 
+      /// <summary>
+      /// The column mouse position x
+      /// </summary>
       private DataColumn columnMousePosX;
 
+      /// <summary>
+      /// The column mouse position y
+      /// </summary>
       private DataColumn columnMousePosY;
 
+      /// <summary>
+      /// The column event identifier
+      /// </summary>
       private DataColumn columnEventID;
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="RawdataDataTable"/> class.
+      /// </summary>
       public RawdataDataTable()
       {
         this.TableName = "Rawdata";
@@ -2408,6 +3328,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="RawdataDataTable"/> class.
+      /// </summary>
+      /// <param name="table">The table.</param>
       internal RawdataDataTable(DataTable table)
       {
         this.TableName = table.TableName;
@@ -2429,6 +3353,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="RawdataDataTable"/> class.
+      /// </summary>
+      /// <param name="info">The information.</param>
+      /// <param name="context">The context.</param>
       protected RawdataDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
         base(info, context)
       {
@@ -2437,6 +3366,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the identifier column.
+      /// </summary>
+      /// <value>The identifier column.</value>
       public DataColumn IDColumn
       {
         get
@@ -2447,6 +3380,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the subject name column.
+      /// </summary>
+      /// <value>The subject name column.</value>
       public DataColumn SubjectNameColumn
       {
         get
@@ -2457,6 +3394,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the trial sequence column.
+      /// </summary>
+      /// <value>The trial sequence column.</value>
       public DataColumn TrialSequenceColumn
       {
         get
@@ -2467,6 +3408,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the time column.
+      /// </summary>
+      /// <value>The time column.</value>
       public DataColumn TimeColumn
       {
         get
@@ -2477,6 +3422,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the pupil dia x column.
+      /// </summary>
+      /// <value>The pupil dia x column.</value>
       public DataColumn PupilDiaXColumn
       {
         get
@@ -2487,6 +3436,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the pupil dia y column.
+      /// </summary>
+      /// <value>The pupil dia y column.</value>
       public DataColumn PupilDiaYColumn
       {
         get
@@ -2497,6 +3450,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the gaze position x column.
+      /// </summary>
+      /// <value>The gaze position x column.</value>
       public DataColumn GazePosXColumn
       {
         get
@@ -2507,6 +3464,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the gaze position y column.
+      /// </summary>
+      /// <value>The gaze position y column.</value>
       public DataColumn GazePosYColumn
       {
         get
@@ -2517,6 +3478,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the mouse position x column.
+      /// </summary>
+      /// <value>The mouse position x column.</value>
       public DataColumn MousePosXColumn
       {
         get
@@ -2527,6 +3492,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the mouse position y column.
+      /// </summary>
+      /// <value>The mouse position y column.</value>
       public DataColumn MousePosYColumn
       {
         get
@@ -2537,6 +3506,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the event identifier column.
+      /// </summary>
+      /// <value>The event identifier column.</value>
       public DataColumn EventIDColumn
       {
         get
@@ -2548,6 +3521,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the count.
+      /// </summary>
+      /// <value>The count.</value>
       public int Count
       {
         get
@@ -2558,6 +3535,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the <see cref="RawdataRow"/> at the specified index.
+      /// </summary>
+      /// <param name="index">The index.</param>
+      /// <returns>RawdataRow.</returns>
       public RawdataRow this[int index]
       {
         get
@@ -2567,19 +3549,35 @@ namespace Ogama.DataSet
       }
 
 
+      /// <summary>
+      /// Occurs when [rawdata row changing].
+      /// </summary>
       public event RawdataRowChangeEventHandler RawdataRowChanging;
 
 
+      /// <summary>
+      /// Occurs when [rawdata row changed].
+      /// </summary>
       public event RawdataRowChangeEventHandler RawdataRowChanged;
 
 
+      /// <summary>
+      /// Occurs when [rawdata row deleting].
+      /// </summary>
       public event RawdataRowChangeEventHandler RawdataRowDeleting;
 
 
+      /// <summary>
+      /// Occurs when [rawdata row deleted].
+      /// </summary>
       public event RawdataRowChangeEventHandler RawdataRowDeleted;
 
 
 
+      /// <summary>
+      /// Adds the rawdata row.
+      /// </summary>
+      /// <param name="row">The row.</param>
       public void AddRawdataRow(RawdataRow row)
       {
         this.Rows.Add(row);
@@ -2587,6 +3585,20 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Adds the rawdata row.
+      /// </summary>
+      /// <param name="SubjectName">Name of the subject.</param>
+      /// <param name="TrialSequence">The trial sequence.</param>
+      /// <param name="Time">The time.</param>
+      /// <param name="PupilDiaX">The pupil dia x.</param>
+      /// <param name="PupilDiaY">The pupil dia y.</param>
+      /// <param name="GazePosX">The gaze position x.</param>
+      /// <param name="GazePosY">The gaze position y.</param>
+      /// <param name="MousePosX">The mouse position x.</param>
+      /// <param name="MousePosY">The mouse position y.</param>
+      /// <param name="EventID">The event identifier.</param>
+      /// <returns>RawdataRow.</returns>
       public RawdataRow AddRawdataRow(string SubjectName, int TrialSequence, long Time, double PupilDiaX, double PupilDiaY, double GazePosX, double GazePosY, double MousePosX, double MousePosY, int EventID)
       {
         RawdataRow rowRawdataRow = ((RawdataRow)(this.NewRow()));
@@ -2609,6 +3621,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Finds the by identifier.
+      /// </summary>
+      /// <param name="ID">The identifier.</param>
+      /// <returns>RawdataRow.</returns>
       public RawdataRow FindByID(long ID)
       {
         return ((RawdataRow)(this.Rows.Find(new object[] {
@@ -2617,6 +3634,15 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Clones the structure of the <see cref="T:System.Data.DataTable" />, including all <see cref="T:System.Data.DataTable" /> schemas and constraints.
+      /// </summary>
+      /// <returns>A new <see cref="T:System.Data.DataTable" /> with the same schema as the current <see cref="T:System.Data.DataTable" />.</returns>
+      /// <PermissionSet>
+      ///   <IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true" />
+      ///   <IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true" />
+      ///   <IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="ControlEvidence" />
+      /// </PermissionSet>
       public override DataTable Clone()
       {
         RawdataDataTable cln = ((RawdataDataTable)(base.Clone()));
@@ -2626,6 +3652,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Creates a new instance of <see cref="T:System.Data.DataTable" />.
+      /// </summary>
+      /// <returns>The new expression.</returns>
       protected override DataTable CreateInstance()
       {
         return new RawdataDataTable();
@@ -2633,6 +3663,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes the vars.
+      /// </summary>
       internal void InitVars()
       {
         this.columnID = base.Columns["ID"];
@@ -2650,6 +3683,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes the class.
+      /// </summary>
       private void InitClass()
       {
         this.columnID = new DataColumn("ID", typeof(long), null, MappingType.Element);
@@ -2688,6 +3724,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// News the rawdata row.
+      /// </summary>
+      /// <returns>RawdataRow.</returns>
       public RawdataRow NewRawdataRow()
       {
         return ((RawdataRow)(this.NewRow()));
@@ -2695,6 +3735,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Creates a new row from an existing row.
+      /// </summary>
+      /// <param name="builder">A <see cref="T:System.Data.DataRowBuilder" /> object.</param>
+      /// <returns>A <see cref="T:System.Data.DataRow" /> derived class.</returns>
       protected override DataRow NewRowFromBuilder(DataRowBuilder builder)
       {
         return new RawdataRow(builder);
@@ -2702,6 +3747,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the row type.
+      /// </summary>
+      /// <returns>Returns the type of the <see cref="T:System.Data.DataRow" />.</returns>
       protected override global::System.Type GetRowType()
       {
         return typeof(RawdataRow);
@@ -2709,6 +3758,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowChanged" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowChanged(DataRowChangeEventArgs e)
       {
         base.OnRowChanged(e);
@@ -2720,6 +3773,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowChanging" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowChanging(DataRowChangeEventArgs e)
       {
         base.OnRowChanging(e);
@@ -2731,6 +3788,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowDeleted" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowDeleted(DataRowChangeEventArgs e)
       {
         base.OnRowDeleted(e);
@@ -2742,6 +3803,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowDeleting" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowDeleting(DataRowChangeEventArgs e)
       {
         base.OnRowDeleting(e);
@@ -2753,6 +3818,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Removes the rawdata row.
+      /// </summary>
+      /// <param name="row">The row.</param>
       public void RemoveRawdataRow(RawdataRow row)
       {
         this.Rows.Remove(row);
@@ -2760,6 +3829,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the typed table schema.
+      /// </summary>
+      /// <param name="xs">The xs.</param>
+      /// <returns>System.Xml.Schema.XmlSchemaComplexType.</returns>
       public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs)
       {
         global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
@@ -2833,31 +3907,58 @@ namespace Ogama.DataSet
     }
 
     /// <summary>
-    ///Represents the strongly named DataTable class.
-    ///</summary>
+    /// Represents the strongly named DataTable class.
+    /// </summary>
     [global::System.Serializable()]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
     public partial class AOIsDataTable : TypedTableBase<AOIsRow>
     {
 
+      /// <summary>
+      /// The column identifier
+      /// </summary>
       private DataColumn columnID;
 
+      /// <summary>
+      /// The column trial identifier
+      /// </summary>
       private DataColumn columnTrialID;
 
+      /// <summary>
+      /// The column slide nr
+      /// </summary>
       private DataColumn columnSlideNr;
 
+      /// <summary>
+      /// The column shape name
+      /// </summary>
       private DataColumn columnShapeName;
 
+      /// <summary>
+      /// The column shape type
+      /// </summary>
       private DataColumn columnShapeType;
 
+      /// <summary>
+      /// The column shape number PTS
+      /// </summary>
       private DataColumn columnShapeNumPts;
 
+      /// <summary>
+      /// The column shape PTS
+      /// </summary>
       private DataColumn columnShapePts;
 
+      /// <summary>
+      /// The column shape group
+      /// </summary>
       private DataColumn columnShapeGroup;
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="AOIsDataTable"/> class.
+      /// </summary>
       public AOIsDataTable()
       {
         this.TableName = "AOIs";
@@ -2868,6 +3969,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="AOIsDataTable"/> class.
+      /// </summary>
+      /// <param name="table">The table.</param>
       internal AOIsDataTable(DataTable table)
       {
         this.TableName = table.TableName;
@@ -2889,6 +3994,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="AOIsDataTable"/> class.
+      /// </summary>
+      /// <param name="info">The information.</param>
+      /// <param name="context">The context.</param>
       protected AOIsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
         base(info, context)
       {
@@ -2897,6 +4007,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the identifier column.
+      /// </summary>
+      /// <value>The identifier column.</value>
       public DataColumn IDColumn
       {
         get
@@ -2907,6 +4021,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the trial identifier column.
+      /// </summary>
+      /// <value>The trial identifier column.</value>
       public DataColumn TrialIDColumn
       {
         get
@@ -2917,6 +4035,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the slide nr column.
+      /// </summary>
+      /// <value>The slide nr column.</value>
       public DataColumn SlideNrColumn
       {
         get
@@ -2927,6 +4049,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the shape name column.
+      /// </summary>
+      /// <value>The shape name column.</value>
       public DataColumn ShapeNameColumn
       {
         get
@@ -2937,6 +4063,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the shape type column.
+      /// </summary>
+      /// <value>The shape type column.</value>
       public DataColumn ShapeTypeColumn
       {
         get
@@ -2947,6 +4077,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the shape number PTS column.
+      /// </summary>
+      /// <value>The shape number PTS column.</value>
       public DataColumn ShapeNumPtsColumn
       {
         get
@@ -2957,6 +4091,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the shape PTS column.
+      /// </summary>
+      /// <value>The shape PTS column.</value>
       public DataColumn ShapePtsColumn
       {
         get
@@ -2967,6 +4105,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the shape group column.
+      /// </summary>
+      /// <value>The shape group column.</value>
       public DataColumn ShapeGroupColumn
       {
         get
@@ -2978,6 +4120,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the count.
+      /// </summary>
+      /// <value>The count.</value>
       public int Count
       {
         get
@@ -2988,6 +4134,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the <see cref="AOIsRow"/> at the specified index.
+      /// </summary>
+      /// <param name="index">The index.</param>
+      /// <returns>AOIsRow.</returns>
       public AOIsRow this[int index]
       {
         get
@@ -2997,19 +4148,35 @@ namespace Ogama.DataSet
       }
 
 
+      /// <summary>
+      /// Occurs when [ao is row changing].
+      /// </summary>
       public event AOIsRowChangeEventHandler AOIsRowChanging;
 
 
+      /// <summary>
+      /// Occurs when [ao is row changed].
+      /// </summary>
       public event AOIsRowChangeEventHandler AOIsRowChanged;
 
 
+      /// <summary>
+      /// Occurs when [ao is row deleting].
+      /// </summary>
       public event AOIsRowChangeEventHandler AOIsRowDeleting;
 
 
+      /// <summary>
+      /// Occurs when [ao is row deleted].
+      /// </summary>
       public event AOIsRowChangeEventHandler AOIsRowDeleted;
 
 
 
+      /// <summary>
+      /// Adds the ao is row.
+      /// </summary>
+      /// <param name="row">The row.</param>
       public void AddAOIsRow(AOIsRow row)
       {
         this.Rows.Add(row);
@@ -3017,6 +4184,17 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Adds the ao is row.
+      /// </summary>
+      /// <param name="parentTrialsRowByTrials_AOIs">The parent trials row by trials_ ao is.</param>
+      /// <param name="SlideNr">The slide nr.</param>
+      /// <param name="ShapeName">Name of the shape.</param>
+      /// <param name="ShapeType">Type of the shape.</param>
+      /// <param name="ShapeNumPts">The shape number PTS.</param>
+      /// <param name="ShapePts">The shape PTS.</param>
+      /// <param name="parentShapeGroupsRowByShapeGroups_AOIs">The parent shape groups row by shape groups_ ao is.</param>
+      /// <returns>AOIsRow.</returns>
       public AOIsRow AddAOIsRow(TrialsRow parentTrialsRowByTrials_AOIs, int SlideNr, string ShapeName, string ShapeType, int ShapeNumPts, string ShapePts, ShapeGroupsRow parentShapeGroupsRowByShapeGroups_AOIs)
       {
         AOIsRow rowAOIsRow = ((AOIsRow)(this.NewRow()));
@@ -3044,6 +4222,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Finds the by identifier.
+      /// </summary>
+      /// <param name="ID">The identifier.</param>
+      /// <returns>AOIsRow.</returns>
       public AOIsRow FindByID(int ID)
       {
         return ((AOIsRow)(this.Rows.Find(new object[] {
@@ -3052,6 +4235,15 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Clones the structure of the <see cref="T:System.Data.DataTable" />, including all <see cref="T:System.Data.DataTable" /> schemas and constraints.
+      /// </summary>
+      /// <returns>A new <see cref="T:System.Data.DataTable" /> with the same schema as the current <see cref="T:System.Data.DataTable" />.</returns>
+      /// <PermissionSet>
+      ///   <IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true" />
+      ///   <IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true" />
+      ///   <IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="ControlEvidence" />
+      /// </PermissionSet>
       public override DataTable Clone()
       {
         AOIsDataTable cln = ((AOIsDataTable)(base.Clone()));
@@ -3061,6 +4253,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Creates a new instance of <see cref="T:System.Data.DataTable" />.
+      /// </summary>
+      /// <returns>The new expression.</returns>
       protected override DataTable CreateInstance()
       {
         return new AOIsDataTable();
@@ -3068,6 +4264,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes the vars.
+      /// </summary>
       internal void InitVars()
       {
         this.columnID = base.Columns["ID"];
@@ -3082,6 +4281,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes the class.
+      /// </summary>
       private void InitClass()
       {
         this.columnID = new DataColumn("ID", typeof(int), null, MappingType.Element);
@@ -3117,6 +4319,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// News the ao is row.
+      /// </summary>
+      /// <returns>AOIsRow.</returns>
       public AOIsRow NewAOIsRow()
       {
         return ((AOIsRow)(this.NewRow()));
@@ -3124,6 +4330,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Creates a new row from an existing row.
+      /// </summary>
+      /// <param name="builder">A <see cref="T:System.Data.DataRowBuilder" /> object.</param>
+      /// <returns>A <see cref="T:System.Data.DataRow" /> derived class.</returns>
       protected override DataRow NewRowFromBuilder(DataRowBuilder builder)
       {
         return new AOIsRow(builder);
@@ -3131,6 +4342,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the row type.
+      /// </summary>
+      /// <returns>Returns the type of the <see cref="T:System.Data.DataRow" />.</returns>
       protected override global::System.Type GetRowType()
       {
         return typeof(AOIsRow);
@@ -3138,6 +4353,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowChanged" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowChanged(DataRowChangeEventArgs e)
       {
         base.OnRowChanged(e);
@@ -3149,6 +4368,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowChanging" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowChanging(DataRowChangeEventArgs e)
       {
         base.OnRowChanging(e);
@@ -3160,6 +4383,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowDeleted" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowDeleted(DataRowChangeEventArgs e)
       {
         base.OnRowDeleted(e);
@@ -3171,6 +4398,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowDeleting" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowDeleting(DataRowChangeEventArgs e)
       {
         base.OnRowDeleting(e);
@@ -3182,6 +4413,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Removes the ao is row.
+      /// </summary>
+      /// <param name="row">The row.</param>
       public void RemoveAOIsRow(AOIsRow row)
       {
         this.Rows.Remove(row);
@@ -3189,6 +4424,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the typed table schema.
+      /// </summary>
+      /// <param name="xs">The xs.</param>
+      /// <returns>System.Xml.Schema.XmlSchemaComplexType.</returns>
       public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs)
       {
         global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
@@ -3262,19 +4502,28 @@ namespace Ogama.DataSet
     }
 
     /// <summary>
-    ///Represents the strongly named DataTable class.
-    ///</summary>
+    /// Represents the strongly named DataTable class.
+    /// </summary>
     [global::System.Serializable()]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
     public partial class ShapeGroupsDataTable : TypedTableBase<ShapeGroupsRow>
     {
 
+      /// <summary>
+      /// The column identifier
+      /// </summary>
       private DataColumn columnID;
 
+      /// <summary>
+      /// The column shape group
+      /// </summary>
       private DataColumn columnShapeGroup;
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="ShapeGroupsDataTable"/> class.
+      /// </summary>
       public ShapeGroupsDataTable()
       {
         this.TableName = "ShapeGroups";
@@ -3285,6 +4534,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="ShapeGroupsDataTable"/> class.
+      /// </summary>
+      /// <param name="table">The table.</param>
       internal ShapeGroupsDataTable(DataTable table)
       {
         this.TableName = table.TableName;
@@ -3306,6 +4559,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="ShapeGroupsDataTable"/> class.
+      /// </summary>
+      /// <param name="info">The information.</param>
+      /// <param name="context">The context.</param>
       protected ShapeGroupsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
         base(info, context)
       {
@@ -3314,6 +4572,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the identifier column.
+      /// </summary>
+      /// <value>The identifier column.</value>
       public DataColumn IDColumn
       {
         get
@@ -3324,6 +4586,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the shape group column.
+      /// </summary>
+      /// <value>The shape group column.</value>
       public DataColumn ShapeGroupColumn
       {
         get
@@ -3335,6 +4601,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the count.
+      /// </summary>
+      /// <value>The count.</value>
       public int Count
       {
         get
@@ -3345,6 +4615,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the <see cref="ShapeGroupsRow"/> at the specified index.
+      /// </summary>
+      /// <param name="index">The index.</param>
+      /// <returns>ShapeGroupsRow.</returns>
       public ShapeGroupsRow this[int index]
       {
         get
@@ -3354,19 +4629,35 @@ namespace Ogama.DataSet
       }
 
 
+      /// <summary>
+      /// Occurs when [shape groups row changing].
+      /// </summary>
       public event ShapeGroupsRowChangeEventHandler ShapeGroupsRowChanging;
 
 
+      /// <summary>
+      /// Occurs when [shape groups row changed].
+      /// </summary>
       public event ShapeGroupsRowChangeEventHandler ShapeGroupsRowChanged;
 
 
+      /// <summary>
+      /// Occurs when [shape groups row deleting].
+      /// </summary>
       public event ShapeGroupsRowChangeEventHandler ShapeGroupsRowDeleting;
 
 
+      /// <summary>
+      /// Occurs when [shape groups row deleted].
+      /// </summary>
       public event ShapeGroupsRowChangeEventHandler ShapeGroupsRowDeleted;
 
 
 
+      /// <summary>
+      /// Adds the shape groups row.
+      /// </summary>
+      /// <param name="row">The row.</param>
       public void AddShapeGroupsRow(ShapeGroupsRow row)
       {
         this.Rows.Add(row);
@@ -3374,6 +4665,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Adds the shape groups row.
+      /// </summary>
+      /// <param name="ShapeGroup">The shape group.</param>
+      /// <returns>ShapeGroupsRow.</returns>
       public ShapeGroupsRow AddShapeGroupsRow(string ShapeGroup)
       {
         ShapeGroupsRow rowShapeGroupsRow = ((ShapeGroupsRow)(this.NewRow()));
@@ -3387,6 +4683,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Finds the by identifier.
+      /// </summary>
+      /// <param name="ID">The identifier.</param>
+      /// <returns>ShapeGroupsRow.</returns>
       public ShapeGroupsRow FindByID(int ID)
       {
         return ((ShapeGroupsRow)(this.Rows.Find(new object[] {
@@ -3395,6 +4696,15 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Clones the structure of the <see cref="T:System.Data.DataTable" />, including all <see cref="T:System.Data.DataTable" /> schemas and constraints.
+      /// </summary>
+      /// <returns>A new <see cref="T:System.Data.DataTable" /> with the same schema as the current <see cref="T:System.Data.DataTable" />.</returns>
+      /// <PermissionSet>
+      ///   <IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true" />
+      ///   <IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true" />
+      ///   <IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="ControlEvidence" />
+      /// </PermissionSet>
       public override DataTable Clone()
       {
         ShapeGroupsDataTable cln = ((ShapeGroupsDataTable)(base.Clone()));
@@ -3404,6 +4714,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Creates a new instance of <see cref="T:System.Data.DataTable" />.
+      /// </summary>
+      /// <returns>The new expression.</returns>
       protected override DataTable CreateInstance()
       {
         return new ShapeGroupsDataTable();
@@ -3411,6 +4725,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes the vars.
+      /// </summary>
       internal void InitVars()
       {
         this.columnID = base.Columns["ID"];
@@ -3419,6 +4736,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes the class.
+      /// </summary>
       private void InitClass()
       {
         this.columnID = new DataColumn("ID", typeof(int), null, MappingType.Element);
@@ -3438,6 +4758,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// News the shape groups row.
+      /// </summary>
+      /// <returns>ShapeGroupsRow.</returns>
       public ShapeGroupsRow NewShapeGroupsRow()
       {
         return ((ShapeGroupsRow)(this.NewRow()));
@@ -3445,6 +4769,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Creates a new row from an existing row.
+      /// </summary>
+      /// <param name="builder">A <see cref="T:System.Data.DataRowBuilder" /> object.</param>
+      /// <returns>A <see cref="T:System.Data.DataRow" /> derived class.</returns>
       protected override DataRow NewRowFromBuilder(DataRowBuilder builder)
       {
         return new ShapeGroupsRow(builder);
@@ -3452,6 +4781,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the row type.
+      /// </summary>
+      /// <returns>Returns the type of the <see cref="T:System.Data.DataRow" />.</returns>
       protected override global::System.Type GetRowType()
       {
         return typeof(ShapeGroupsRow);
@@ -3459,6 +4792,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowChanged" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowChanged(DataRowChangeEventArgs e)
       {
         base.OnRowChanged(e);
@@ -3470,6 +4807,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowChanging" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowChanging(DataRowChangeEventArgs e)
       {
         base.OnRowChanging(e);
@@ -3481,6 +4822,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowDeleted" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowDeleted(DataRowChangeEventArgs e)
       {
         base.OnRowDeleted(e);
@@ -3492,6 +4837,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowDeleting" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowDeleting(DataRowChangeEventArgs e)
       {
         base.OnRowDeleting(e);
@@ -3503,6 +4852,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Removes the shape groups row.
+      /// </summary>
+      /// <param name="row">The row.</param>
       public void RemoveShapeGroupsRow(ShapeGroupsRow row)
       {
         this.Rows.Remove(row);
@@ -3510,6 +4863,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the typed table schema.
+      /// </summary>
+      /// <param name="xs">The xs.</param>
+      /// <returns>System.Xml.Schema.XmlSchemaComplexType.</returns>
       public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs)
       {
         global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
@@ -3583,33 +4941,63 @@ namespace Ogama.DataSet
     }
 
     /// <summary>
-    ///Represents the strongly named DataTable class.
-    ///</summary>
+    /// Represents the strongly named DataTable class.
+    /// </summary>
     [global::System.Serializable()]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
     public partial class GazeFixationsDataTable : TypedTableBase<GazeFixationsRow>
     {
 
+      /// <summary>
+      /// The column identifier
+      /// </summary>
       private DataColumn columnID;
 
+      /// <summary>
+      /// The column subject name
+      /// </summary>
       private DataColumn columnSubjectName;
 
+      /// <summary>
+      /// The column trial identifier
+      /// </summary>
       private DataColumn columnTrialID;
 
+      /// <summary>
+      /// The column trial sequence
+      /// </summary>
       private DataColumn columnTrialSequence;
 
+      /// <summary>
+      /// The column count in trial
+      /// </summary>
       private DataColumn columnCountInTrial;
 
+      /// <summary>
+      /// The column start time
+      /// </summary>
       private DataColumn columnStartTime;
 
+      /// <summary>
+      /// The column length
+      /// </summary>
       private DataColumn columnLength;
 
+      /// <summary>
+      /// The column position x
+      /// </summary>
       private DataColumn columnPosX;
 
+      /// <summary>
+      /// The column position y
+      /// </summary>
       private DataColumn columnPosY;
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="GazeFixationsDataTable"/> class.
+      /// </summary>
       public GazeFixationsDataTable()
       {
         this.TableName = "GazeFixations";
@@ -3620,6 +5008,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="GazeFixationsDataTable"/> class.
+      /// </summary>
+      /// <param name="table">The table.</param>
       internal GazeFixationsDataTable(DataTable table)
       {
         this.TableName = table.TableName;
@@ -3641,6 +5033,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="GazeFixationsDataTable"/> class.
+      /// </summary>
+      /// <param name="info">The information.</param>
+      /// <param name="context">The context.</param>
       protected GazeFixationsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
         base(info, context)
       {
@@ -3649,6 +5046,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the identifier column.
+      /// </summary>
+      /// <value>The identifier column.</value>
       public DataColumn IDColumn
       {
         get
@@ -3659,6 +5060,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the subject name column.
+      /// </summary>
+      /// <value>The subject name column.</value>
       public DataColumn SubjectNameColumn
       {
         get
@@ -3669,6 +5074,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the trial identifier column.
+      /// </summary>
+      /// <value>The trial identifier column.</value>
       public DataColumn TrialIDColumn
       {
         get
@@ -3679,6 +5088,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the trial sequence column.
+      /// </summary>
+      /// <value>The trial sequence column.</value>
       public DataColumn TrialSequenceColumn
       {
         get
@@ -3689,6 +5102,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the count in trial column.
+      /// </summary>
+      /// <value>The count in trial column.</value>
       public DataColumn CountInTrialColumn
       {
         get
@@ -3699,6 +5116,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the start time column.
+      /// </summary>
+      /// <value>The start time column.</value>
       public DataColumn StartTimeColumn
       {
         get
@@ -3709,6 +5130,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the length column.
+      /// </summary>
+      /// <value>The length column.</value>
       public DataColumn LengthColumn
       {
         get
@@ -3719,6 +5144,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the position x column.
+      /// </summary>
+      /// <value>The position x column.</value>
       public DataColumn PosXColumn
       {
         get
@@ -3729,6 +5158,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the position y column.
+      /// </summary>
+      /// <value>The position y column.</value>
       public DataColumn PosYColumn
       {
         get
@@ -3740,6 +5173,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the count.
+      /// </summary>
+      /// <value>The count.</value>
       public int Count
       {
         get
@@ -3750,6 +5187,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the <see cref="GazeFixationsRow"/> at the specified index.
+      /// </summary>
+      /// <param name="index">The index.</param>
+      /// <returns>GazeFixationsRow.</returns>
       public GazeFixationsRow this[int index]
       {
         get
@@ -3759,19 +5201,35 @@ namespace Ogama.DataSet
       }
 
 
+      /// <summary>
+      /// Occurs when [gaze fixations row changing].
+      /// </summary>
       public event GazeFixationsRowChangeEventHandler GazeFixationsRowChanging;
 
 
+      /// <summary>
+      /// Occurs when [gaze fixations row changed].
+      /// </summary>
       public event GazeFixationsRowChangeEventHandler GazeFixationsRowChanged;
 
 
+      /// <summary>
+      /// Occurs when [gaze fixations row deleting].
+      /// </summary>
       public event GazeFixationsRowChangeEventHandler GazeFixationsRowDeleting;
 
 
+      /// <summary>
+      /// Occurs when [gaze fixations row deleted].
+      /// </summary>
       public event GazeFixationsRowChangeEventHandler GazeFixationsRowDeleted;
 
 
 
+      /// <summary>
+      /// Adds the gaze fixations row.
+      /// </summary>
+      /// <param name="row">The row.</param>
       public void AddGazeFixationsRow(GazeFixationsRow row)
       {
         this.Rows.Add(row);
@@ -3779,6 +5237,18 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Adds the gaze fixations row.
+      /// </summary>
+      /// <param name="SubjectName">Name of the subject.</param>
+      /// <param name="TrialID">The trial identifier.</param>
+      /// <param name="TrialSequence">The trial sequence.</param>
+      /// <param name="CountInTrial">The count in trial.</param>
+      /// <param name="StartTime">The start time.</param>
+      /// <param name="Length">The length.</param>
+      /// <param name="PosX">The position x.</param>
+      /// <param name="PosY">The position y.</param>
+      /// <returns>GazeFixationsRow.</returns>
       public GazeFixationsRow AddGazeFixationsRow(string SubjectName, int TrialID, int TrialSequence, int CountInTrial, long StartTime, int Length, double PosX, double PosY)
       {
         GazeFixationsRow rowGazeFixationsRow = ((GazeFixationsRow)(this.NewRow()));
@@ -3799,6 +5269,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Finds the by identifier.
+      /// </summary>
+      /// <param name="ID">The identifier.</param>
+      /// <returns>GazeFixationsRow.</returns>
       public GazeFixationsRow FindByID(long ID)
       {
         return ((GazeFixationsRow)(this.Rows.Find(new object[] {
@@ -3807,6 +5282,15 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Clones the structure of the <see cref="T:System.Data.DataTable" />, including all <see cref="T:System.Data.DataTable" /> schemas and constraints.
+      /// </summary>
+      /// <returns>A new <see cref="T:System.Data.DataTable" /> with the same schema as the current <see cref="T:System.Data.DataTable" />.</returns>
+      /// <PermissionSet>
+      ///   <IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true" />
+      ///   <IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true" />
+      ///   <IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="ControlEvidence" />
+      /// </PermissionSet>
       public override DataTable Clone()
       {
         GazeFixationsDataTable cln = ((GazeFixationsDataTable)(base.Clone()));
@@ -3816,6 +5300,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Creates a new instance of <see cref="T:System.Data.DataTable" />.
+      /// </summary>
+      /// <returns>The new expression.</returns>
       protected override DataTable CreateInstance()
       {
         return new GazeFixationsDataTable();
@@ -3823,6 +5311,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes the vars.
+      /// </summary>
       internal void InitVars()
       {
         this.columnID = base.Columns["ID"];
@@ -3838,6 +5329,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes the class.
+      /// </summary>
       private void InitClass()
       {
         this.columnID = new DataColumn("ID", typeof(long), null, MappingType.Element);
@@ -3873,6 +5367,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// News the gaze fixations row.
+      /// </summary>
+      /// <returns>GazeFixationsRow.</returns>
       public GazeFixationsRow NewGazeFixationsRow()
       {
         return ((GazeFixationsRow)(this.NewRow()));
@@ -3880,6 +5378,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Creates a new row from an existing row.
+      /// </summary>
+      /// <param name="builder">A <see cref="T:System.Data.DataRowBuilder" /> object.</param>
+      /// <returns>A <see cref="T:System.Data.DataRow" /> derived class.</returns>
       protected override DataRow NewRowFromBuilder(DataRowBuilder builder)
       {
         return new GazeFixationsRow(builder);
@@ -3887,6 +5390,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the row type.
+      /// </summary>
+      /// <returns>Returns the type of the <see cref="T:System.Data.DataRow" />.</returns>
       protected override global::System.Type GetRowType()
       {
         return typeof(GazeFixationsRow);
@@ -3894,6 +5401,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowChanged" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowChanged(DataRowChangeEventArgs e)
       {
         base.OnRowChanged(e);
@@ -3905,6 +5416,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowChanging" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowChanging(DataRowChangeEventArgs e)
       {
         base.OnRowChanging(e);
@@ -3916,6 +5431,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowDeleted" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowDeleted(DataRowChangeEventArgs e)
       {
         base.OnRowDeleted(e);
@@ -3927,6 +5446,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowDeleting" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowDeleting(DataRowChangeEventArgs e)
       {
         base.OnRowDeleting(e);
@@ -3938,6 +5461,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Removes the gaze fixations row.
+      /// </summary>
+      /// <param name="row">The row.</param>
       public void RemoveGazeFixationsRow(GazeFixationsRow row)
       {
         this.Rows.Remove(row);
@@ -3945,6 +5472,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the typed table schema.
+      /// </summary>
+      /// <param name="xs">The xs.</param>
+      /// <returns>System.Xml.Schema.XmlSchemaComplexType.</returns>
       public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs)
       {
         global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
@@ -4018,33 +5550,63 @@ namespace Ogama.DataSet
     }
 
     /// <summary>
-    ///Represents the strongly named DataTable class.
-    ///</summary>
+    /// Represents the strongly named DataTable class.
+    /// </summary>
     [global::System.Serializable()]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
     public partial class MouseFixationsDataTable : TypedTableBase<MouseFixationsRow>
     {
 
+      /// <summary>
+      /// The column identifier
+      /// </summary>
       private DataColumn columnID;
 
+      /// <summary>
+      /// The column subject name
+      /// </summary>
       private DataColumn columnSubjectName;
 
+      /// <summary>
+      /// The column trial identifier
+      /// </summary>
       private DataColumn columnTrialID;
 
+      /// <summary>
+      /// The column trial sequence
+      /// </summary>
       private DataColumn columnTrialSequence;
 
+      /// <summary>
+      /// The column count in trial
+      /// </summary>
       private DataColumn columnCountInTrial;
 
+      /// <summary>
+      /// The column start time
+      /// </summary>
       private DataColumn columnStartTime;
 
+      /// <summary>
+      /// The column length
+      /// </summary>
       private DataColumn columnLength;
 
+      /// <summary>
+      /// The column position x
+      /// </summary>
       private DataColumn columnPosX;
 
+      /// <summary>
+      /// The column position y
+      /// </summary>
       private DataColumn columnPosY;
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="MouseFixationsDataTable"/> class.
+      /// </summary>
       public MouseFixationsDataTable()
       {
         this.TableName = "MouseFixations";
@@ -4055,6 +5617,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="MouseFixationsDataTable"/> class.
+      /// </summary>
+      /// <param name="table">The table.</param>
       internal MouseFixationsDataTable(DataTable table)
       {
         this.TableName = table.TableName;
@@ -4076,6 +5642,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="MouseFixationsDataTable"/> class.
+      /// </summary>
+      /// <param name="info">The information.</param>
+      /// <param name="context">The context.</param>
       protected MouseFixationsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
         base(info, context)
       {
@@ -4084,6 +5655,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the identifier column.
+      /// </summary>
+      /// <value>The identifier column.</value>
       public DataColumn IDColumn
       {
         get
@@ -4094,6 +5669,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the subject name column.
+      /// </summary>
+      /// <value>The subject name column.</value>
       public DataColumn SubjectNameColumn
       {
         get
@@ -4104,6 +5683,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the trial identifier column.
+      /// </summary>
+      /// <value>The trial identifier column.</value>
       public DataColumn TrialIDColumn
       {
         get
@@ -4114,6 +5697,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the trial sequence column.
+      /// </summary>
+      /// <value>The trial sequence column.</value>
       public DataColumn TrialSequenceColumn
       {
         get
@@ -4124,6 +5711,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the count in trial column.
+      /// </summary>
+      /// <value>The count in trial column.</value>
       public DataColumn CountInTrialColumn
       {
         get
@@ -4134,6 +5725,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the start time column.
+      /// </summary>
+      /// <value>The start time column.</value>
       public DataColumn StartTimeColumn
       {
         get
@@ -4144,6 +5739,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the length column.
+      /// </summary>
+      /// <value>The length column.</value>
       public DataColumn LengthColumn
       {
         get
@@ -4154,6 +5753,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the position x column.
+      /// </summary>
+      /// <value>The position x column.</value>
       public DataColumn PosXColumn
       {
         get
@@ -4164,6 +5767,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the position y column.
+      /// </summary>
+      /// <value>The position y column.</value>
       public DataColumn PosYColumn
       {
         get
@@ -4175,6 +5782,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the count.
+      /// </summary>
+      /// <value>The count.</value>
       public int Count
       {
         get
@@ -4185,6 +5796,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the <see cref="MouseFixationsRow"/> at the specified index.
+      /// </summary>
+      /// <param name="index">The index.</param>
+      /// <returns>MouseFixationsRow.</returns>
       public MouseFixationsRow this[int index]
       {
         get
@@ -4194,19 +5810,35 @@ namespace Ogama.DataSet
       }
 
 
+      /// <summary>
+      /// Occurs when [mouse fixations row changing].
+      /// </summary>
       public event MouseFixationsRowChangeEventHandler MouseFixationsRowChanging;
 
 
+      /// <summary>
+      /// Occurs when [mouse fixations row changed].
+      /// </summary>
       public event MouseFixationsRowChangeEventHandler MouseFixationsRowChanged;
 
 
+      /// <summary>
+      /// Occurs when [mouse fixations row deleting].
+      /// </summary>
       public event MouseFixationsRowChangeEventHandler MouseFixationsRowDeleting;
 
 
+      /// <summary>
+      /// Occurs when [mouse fixations row deleted].
+      /// </summary>
       public event MouseFixationsRowChangeEventHandler MouseFixationsRowDeleted;
 
 
 
+      /// <summary>
+      /// Adds the mouse fixations row.
+      /// </summary>
+      /// <param name="row">The row.</param>
       public void AddMouseFixationsRow(MouseFixationsRow row)
       {
         this.Rows.Add(row);
@@ -4214,6 +5846,18 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Adds the mouse fixations row.
+      /// </summary>
+      /// <param name="SubjectName">Name of the subject.</param>
+      /// <param name="TrialID">The trial identifier.</param>
+      /// <param name="TrialSequence">The trial sequence.</param>
+      /// <param name="CountInTrial">The count in trial.</param>
+      /// <param name="StartTime">The start time.</param>
+      /// <param name="Length">The length.</param>
+      /// <param name="PosX">The position x.</param>
+      /// <param name="PosY">The position y.</param>
+      /// <returns>MouseFixationsRow.</returns>
       public MouseFixationsRow AddMouseFixationsRow(string SubjectName, int TrialID, int TrialSequence, int CountInTrial, long StartTime, int Length, double PosX, double PosY)
       {
         MouseFixationsRow rowMouseFixationsRow = ((MouseFixationsRow)(this.NewRow()));
@@ -4234,6 +5878,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Finds the by identifier.
+      /// </summary>
+      /// <param name="ID">The identifier.</param>
+      /// <returns>MouseFixationsRow.</returns>
       public MouseFixationsRow FindByID(long ID)
       {
         return ((MouseFixationsRow)(this.Rows.Find(new object[] {
@@ -4242,6 +5891,15 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Clones the structure of the <see cref="T:System.Data.DataTable" />, including all <see cref="T:System.Data.DataTable" /> schemas and constraints.
+      /// </summary>
+      /// <returns>A new <see cref="T:System.Data.DataTable" /> with the same schema as the current <see cref="T:System.Data.DataTable" />.</returns>
+      /// <PermissionSet>
+      ///   <IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true" />
+      ///   <IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true" />
+      ///   <IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="ControlEvidence" />
+      /// </PermissionSet>
       public override DataTable Clone()
       {
         MouseFixationsDataTable cln = ((MouseFixationsDataTable)(base.Clone()));
@@ -4251,6 +5909,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Creates a new instance of <see cref="T:System.Data.DataTable" />.
+      /// </summary>
+      /// <returns>The new expression.</returns>
       protected override DataTable CreateInstance()
       {
         return new MouseFixationsDataTable();
@@ -4258,6 +5920,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes the vars.
+      /// </summary>
       internal void InitVars()
       {
         this.columnID = base.Columns["ID"];
@@ -4273,6 +5938,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes the class.
+      /// </summary>
       private void InitClass()
       {
         this.columnID = new DataColumn("ID", typeof(long), null, MappingType.Element);
@@ -4308,6 +5976,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// News the mouse fixations row.
+      /// </summary>
+      /// <returns>MouseFixationsRow.</returns>
       public MouseFixationsRow NewMouseFixationsRow()
       {
         return ((MouseFixationsRow)(this.NewRow()));
@@ -4315,6 +5987,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Creates a new row from an existing row.
+      /// </summary>
+      /// <param name="builder">A <see cref="T:System.Data.DataRowBuilder" /> object.</param>
+      /// <returns>A <see cref="T:System.Data.DataRow" /> derived class.</returns>
       protected override DataRow NewRowFromBuilder(DataRowBuilder builder)
       {
         return new MouseFixationsRow(builder);
@@ -4322,6 +5999,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the row type.
+      /// </summary>
+      /// <returns>Returns the type of the <see cref="T:System.Data.DataRow" />.</returns>
       protected override global::System.Type GetRowType()
       {
         return typeof(MouseFixationsRow);
@@ -4329,6 +6010,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowChanged" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowChanged(DataRowChangeEventArgs e)
       {
         base.OnRowChanged(e);
@@ -4340,6 +6025,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowChanging" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowChanging(DataRowChangeEventArgs e)
       {
         base.OnRowChanging(e);
@@ -4351,6 +6040,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowDeleted" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowDeleted(DataRowChangeEventArgs e)
       {
         base.OnRowDeleted(e);
@@ -4362,6 +6055,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowDeleting" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowDeleting(DataRowChangeEventArgs e)
       {
         base.OnRowDeleting(e);
@@ -4373,6 +6070,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Removes the mouse fixations row.
+      /// </summary>
+      /// <param name="row">The row.</param>
       public void RemoveMouseFixationsRow(MouseFixationsRow row)
       {
         this.Rows.Remove(row);
@@ -4380,6 +6081,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the typed table schema.
+      /// </summary>
+      /// <param name="xs">The xs.</param>
+      /// <returns>System.Xml.Schema.XmlSchemaComplexType.</returns>
       public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs)
       {
         global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
@@ -4453,21 +6159,33 @@ namespace Ogama.DataSet
     }
 
     /// <summary>
-    ///Represents the strongly named DataTable class.
-    ///</summary>
+    /// Represents the strongly named DataTable class.
+    /// </summary>
     [global::System.Serializable()]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
     public partial class ParamsDataTable : TypedTableBase<ParamsRow>
     {
 
+      /// <summary>
+      /// The column identifier
+      /// </summary>
       private DataColumn columnID;
 
+      /// <summary>
+      /// The column parameter
+      /// </summary>
       private DataColumn columnParam;
 
+      /// <summary>
+      /// The column description
+      /// </summary>
       private DataColumn columnDescription;
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="ParamsDataTable"/> class.
+      /// </summary>
       public ParamsDataTable()
       {
         this.TableName = "Params";
@@ -4478,6 +6196,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="ParamsDataTable"/> class.
+      /// </summary>
+      /// <param name="table">The table.</param>
       internal ParamsDataTable(DataTable table)
       {
         this.TableName = table.TableName;
@@ -4499,6 +6221,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="ParamsDataTable"/> class.
+      /// </summary>
+      /// <param name="info">The information.</param>
+      /// <param name="context">The context.</param>
       protected ParamsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
         base(info, context)
       {
@@ -4507,6 +6234,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the identifier column.
+      /// </summary>
+      /// <value>The identifier column.</value>
       public DataColumn IDColumn
       {
         get
@@ -4517,6 +6248,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the parameter column.
+      /// </summary>
+      /// <value>The parameter column.</value>
       public DataColumn ParamColumn
       {
         get
@@ -4527,6 +6262,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the description column.
+      /// </summary>
+      /// <value>The description column.</value>
       public DataColumn DescriptionColumn
       {
         get
@@ -4538,6 +6277,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the count.
+      /// </summary>
+      /// <value>The count.</value>
       public int Count
       {
         get
@@ -4548,6 +6291,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the <see cref="ParamsRow"/> at the specified index.
+      /// </summary>
+      /// <param name="index">The index.</param>
+      /// <returns>ParamsRow.</returns>
       public ParamsRow this[int index]
       {
         get
@@ -4557,19 +6305,35 @@ namespace Ogama.DataSet
       }
 
 
+      /// <summary>
+      /// Occurs when [parameters row changing].
+      /// </summary>
       public event ParamsRowChangeEventHandler ParamsRowChanging;
 
 
+      /// <summary>
+      /// Occurs when [parameters row changed].
+      /// </summary>
       public event ParamsRowChangeEventHandler ParamsRowChanged;
 
 
+      /// <summary>
+      /// Occurs when [parameters row deleting].
+      /// </summary>
       public event ParamsRowChangeEventHandler ParamsRowDeleting;
 
 
+      /// <summary>
+      /// Occurs when [parameters row deleted].
+      /// </summary>
       public event ParamsRowChangeEventHandler ParamsRowDeleted;
 
 
 
+      /// <summary>
+      /// Adds the parameters row.
+      /// </summary>
+      /// <param name="row">The row.</param>
       public void AddParamsRow(ParamsRow row)
       {
         this.Rows.Add(row);
@@ -4577,6 +6341,12 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Adds the parameters row.
+      /// </summary>
+      /// <param name="Param">The parameter.</param>
+      /// <param name="Description">The description.</param>
+      /// <returns>ParamsRow.</returns>
       public ParamsRow AddParamsRow(string Param, string Description)
       {
         ParamsRow rowParamsRow = ((ParamsRow)(this.NewRow()));
@@ -4591,6 +6361,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Finds the by identifier.
+      /// </summary>
+      /// <param name="ID">The identifier.</param>
+      /// <returns>ParamsRow.</returns>
       public ParamsRow FindByID(int ID)
       {
         return ((ParamsRow)(this.Rows.Find(new object[] {
@@ -4599,6 +6374,15 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Clones the structure of the <see cref="T:System.Data.DataTable" />, including all <see cref="T:System.Data.DataTable" /> schemas and constraints.
+      /// </summary>
+      /// <returns>A new <see cref="T:System.Data.DataTable" /> with the same schema as the current <see cref="T:System.Data.DataTable" />.</returns>
+      /// <PermissionSet>
+      ///   <IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true" />
+      ///   <IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true" />
+      ///   <IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="ControlEvidence" />
+      /// </PermissionSet>
       public override DataTable Clone()
       {
         ParamsDataTable cln = ((ParamsDataTable)(base.Clone()));
@@ -4608,6 +6392,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Creates a new instance of <see cref="T:System.Data.DataTable" />.
+      /// </summary>
+      /// <returns>The new expression.</returns>
       protected override DataTable CreateInstance()
       {
         return new ParamsDataTable();
@@ -4615,6 +6403,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes the vars.
+      /// </summary>
       internal void InitVars()
       {
         this.columnID = base.Columns["ID"];
@@ -4624,6 +6415,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Initializes the class.
+      /// </summary>
       private void InitClass()
       {
         this.columnID = new DataColumn("ID", typeof(int), null, MappingType.Element);
@@ -4649,6 +6443,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// News the parameters row.
+      /// </summary>
+      /// <returns>ParamsRow.</returns>
       public ParamsRow NewParamsRow()
       {
         return ((ParamsRow)(this.NewRow()));
@@ -4656,6 +6454,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Creates a new row from an existing row.
+      /// </summary>
+      /// <param name="builder">A <see cref="T:System.Data.DataRowBuilder" /> object.</param>
+      /// <returns>A <see cref="T:System.Data.DataRow" /> derived class.</returns>
       protected override DataRow NewRowFromBuilder(DataRowBuilder builder)
       {
         return new ParamsRow(builder);
@@ -4663,6 +6466,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the row type.
+      /// </summary>
+      /// <returns>Returns the type of the <see cref="T:System.Data.DataRow" />.</returns>
       protected override global::System.Type GetRowType()
       {
         return typeof(ParamsRow);
@@ -4670,6 +6477,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowChanged" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowChanged(DataRowChangeEventArgs e)
       {
         base.OnRowChanged(e);
@@ -4681,6 +6492,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowChanging" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowChanging(DataRowChangeEventArgs e)
       {
         base.OnRowChanging(e);
@@ -4692,6 +6507,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowDeleted" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowDeleted(DataRowChangeEventArgs e)
       {
         base.OnRowDeleted(e);
@@ -4703,6 +6522,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Raises the <see cref="E:System.Data.DataTable.RowDeleting" /> event.
+      /// </summary>
+      /// <param name="e">A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.</param>
       protected override void OnRowDeleting(DataRowChangeEventArgs e)
       {
         base.OnRowDeleting(e);
@@ -4714,6 +6537,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Removes the parameters row.
+      /// </summary>
+      /// <param name="row">The row.</param>
       public void RemoveParamsRow(ParamsRow row)
       {
         this.Rows.Remove(row);
@@ -4721,6 +6548,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the typed table schema.
+      /// </summary>
+      /// <param name="xs">The xs.</param>
+      /// <returns>System.Xml.Schema.XmlSchemaComplexType.</returns>
       public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs)
       {
         global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
@@ -4794,15 +6626,22 @@ namespace Ogama.DataSet
     }
 
     /// <summary>
-    ///Represents strongly named DataRow class.
-    ///</summary>
+    /// Represents strongly named DataRow class.
+    /// </summary>
     public partial class SubjectParametersRow : DataRow
     {
 
+      /// <summary>
+      /// The table subject parameters
+      /// </summary>
       private SubjectParametersDataTable tableSubjectParameters;
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="SubjectParametersRow"/> class.
+      /// </summary>
+      /// <param name="rb">The rb.</param>
       internal SubjectParametersRow(DataRowBuilder rb) :
         base(rb)
       {
@@ -4811,6 +6650,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the identifier.
+      /// </summary>
+      /// <value>The identifier.</value>
       public int ID
       {
         get
@@ -4825,6 +6668,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the name of the subject.
+      /// </summary>
+      /// <value>The name of the subject.</value>
       public string SubjectName
       {
         get
@@ -4839,6 +6686,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the parameter.
+      /// </summary>
+      /// <value>The parameter.</value>
       public string Param
       {
         get
@@ -4853,6 +6704,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the parameter value.
+      /// </summary>
+      /// <value>The parameter value.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'ParamValue\' in table \'SubjectParameters\' is DBNull.</exception>
       public string ParamValue
       {
         get
@@ -4874,6 +6730,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the subjects row.
+      /// </summary>
+      /// <value>The subjects row.</value>
       public SubjectsRow SubjectsRow
       {
         get
@@ -4888,6 +6748,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is parameter value null].
+      /// </summary>
+      /// <returns><c>true</c> if [is parameter value null]; otherwise, <c>false</c>.</returns>
       public bool IsParamValueNull()
       {
         return this.IsNull(this.tableSubjectParameters.ParamValueColumn);
@@ -4895,6 +6759,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the parameter value null.
+      /// </summary>
       public void SetParamValueNull()
       {
         this[this.tableSubjectParameters.ParamValueColumn] = global::System.Convert.DBNull;
@@ -4902,15 +6769,22 @@ namespace Ogama.DataSet
     }
 
     /// <summary>
-    ///Represents strongly named DataRow class.
-    ///</summary>
+    /// Represents strongly named DataRow class.
+    /// </summary>
     public partial class SubjectsRow : DataRow
     {
 
+      /// <summary>
+      /// The table subjects
+      /// </summary>
       private SubjectsDataTable tableSubjects;
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="SubjectsRow"/> class.
+      /// </summary>
+      /// <param name="rb">The rb.</param>
       internal SubjectsRow(DataRowBuilder rb) :
         base(rb)
       {
@@ -4919,6 +6793,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the identifier.
+      /// </summary>
+      /// <value>The identifier.</value>
       public long ID
       {
         get
@@ -4933,6 +6811,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the name of the subject.
+      /// </summary>
+      /// <value>The name of the subject.</value>
       public string SubjectName
       {
         get
@@ -4947,6 +6829,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the category.
+      /// </summary>
+      /// <value>The category.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'Category\' in table \'Subjects\' is DBNull.</exception>
       public string Category
       {
         get
@@ -4968,6 +6855,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the age.
+      /// </summary>
+      /// <value>The age.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'Age\' in table \'Subjects\' is DBNull.</exception>
       public int Age
       {
         get
@@ -4989,6 +6881,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the sex.
+      /// </summary>
+      /// <value>The sex.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'Sex\' in table \'Subjects\' is DBNull.</exception>
       public string Sex
       {
         get
@@ -5010,6 +6907,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the handedness.
+      /// </summary>
+      /// <value>The handedness.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'Handedness\' in table \'Subjects\' is DBNull.</exception>
       public string Handedness
       {
         get
@@ -5031,6 +6933,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the comments.
+      /// </summary>
+      /// <value>The comments.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'Comments\' in table \'Subjects\' is DBNull.</exception>
       public string Comments
       {
         get
@@ -5052,6 +6959,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is category null].
+      /// </summary>
+      /// <returns><c>true</c> if [is category null]; otherwise, <c>false</c>.</returns>
       public bool IsCategoryNull()
       {
         return this.IsNull(this.tableSubjects.CategoryColumn);
@@ -5059,6 +6970,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the category null.
+      /// </summary>
       public void SetCategoryNull()
       {
         this[this.tableSubjects.CategoryColumn] = global::System.Convert.DBNull;
@@ -5066,6 +6980,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is age null].
+      /// </summary>
+      /// <returns><c>true</c> if [is age null]; otherwise, <c>false</c>.</returns>
       public bool IsAgeNull()
       {
         return this.IsNull(this.tableSubjects.AgeColumn);
@@ -5073,6 +6991,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the age null.
+      /// </summary>
       public void SetAgeNull()
       {
         this[this.tableSubjects.AgeColumn] = global::System.Convert.DBNull;
@@ -5080,6 +7001,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is sex null].
+      /// </summary>
+      /// <returns><c>true</c> if [is sex null]; otherwise, <c>false</c>.</returns>
       public bool IsSexNull()
       {
         return this.IsNull(this.tableSubjects.SexColumn);
@@ -5087,6 +7012,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the sex null.
+      /// </summary>
       public void SetSexNull()
       {
         this[this.tableSubjects.SexColumn] = global::System.Convert.DBNull;
@@ -5094,6 +7022,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is handedness null].
+      /// </summary>
+      /// <returns><c>true</c> if [is handedness null]; otherwise, <c>false</c>.</returns>
       public bool IsHandednessNull()
       {
         return this.IsNull(this.tableSubjects.HandednessColumn);
@@ -5101,6 +7033,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the handedness null.
+      /// </summary>
       public void SetHandednessNull()
       {
         this[this.tableSubjects.HandednessColumn] = global::System.Convert.DBNull;
@@ -5108,6 +7043,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is comments null].
+      /// </summary>
+      /// <returns><c>true</c> if [is comments null]; otherwise, <c>false</c>.</returns>
       public bool IsCommentsNull()
       {
         return this.IsNull(this.tableSubjects.CommentsColumn);
@@ -5115,6 +7054,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the comments null.
+      /// </summary>
       public void SetCommentsNull()
       {
         this[this.tableSubjects.CommentsColumn] = global::System.Convert.DBNull;
@@ -5122,6 +7064,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the trials rows.
+      /// </summary>
+      /// <returns>TrialsRow[].</returns>
       public TrialsRow[] GetTrialsRows()
       {
         if ((this.Table.ChildRelations["FK_Subjects_Trials"] == null))
@@ -5136,6 +7082,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the subject parameters rows.
+      /// </summary>
+      /// <returns>SubjectParametersRow[].</returns>
       public SubjectParametersRow[] GetSubjectParametersRows()
       {
         if ((this.Table.ChildRelations["FK_Subjects_SubjectParameters"] == null))
@@ -5150,15 +7100,22 @@ namespace Ogama.DataSet
     }
 
     /// <summary>
-    ///Represents strongly named DataRow class.
-    ///</summary>
+    /// Represents strongly named DataRow class.
+    /// </summary>
     public partial class TrialsRow : DataRow
     {
 
+      /// <summary>
+      /// The table trials
+      /// </summary>
       private TrialsDataTable tableTrials;
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="TrialsRow"/> class.
+      /// </summary>
+      /// <param name="rb">The rb.</param>
       internal TrialsRow(DataRowBuilder rb) :
         base(rb)
       {
@@ -5167,6 +7124,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the identifier.
+      /// </summary>
+      /// <value>The identifier.</value>
       public long ID
       {
         get
@@ -5181,6 +7142,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the name of the subject.
+      /// </summary>
+      /// <value>The name of the subject.</value>
       public string SubjectName
       {
         get
@@ -5195,6 +7160,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the trial identifier.
+      /// </summary>
+      /// <value>The trial identifier.</value>
       public int TrialID
       {
         get
@@ -5209,6 +7178,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the name of the trial.
+      /// </summary>
+      /// <value>The name of the trial.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'TrialName\' in table \'Trials\' is DBNull.</exception>
       public string TrialName
       {
         get
@@ -5230,6 +7204,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the trial sequence.
+      /// </summary>
+      /// <value>The trial sequence.</value>
       public int TrialSequence
       {
         get
@@ -5244,6 +7222,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the category.
+      /// </summary>
+      /// <value>The category.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'Category\' in table \'Trials\' is DBNull.</exception>
       public string Category
       {
         get
@@ -5265,6 +7248,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the trial start time.
+      /// </summary>
+      /// <value>The trial start time.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'TrialStartTime\' in table \'Trials\' is DBNull.</exception>
       public long TrialStartTime
       {
         get
@@ -5286,6 +7274,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the duration.
+      /// </summary>
+      /// <value>The duration.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'Duration\' in table \'Trials\' is DBNull.</exception>
       public int Duration
       {
         get
@@ -5307,6 +7300,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the eliminate data.
+      /// </summary>
+      /// <value>The eliminate data.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'EliminateData\' in table \'Trials\' is DBNull.</exception>
       public string EliminateData
       {
         get
@@ -5328,6 +7326,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the subjects row.
+      /// </summary>
+      /// <value>The subjects row.</value>
       public SubjectsRow SubjectsRow
       {
         get
@@ -5342,6 +7344,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is trial name null].
+      /// </summary>
+      /// <returns><c>true</c> if [is trial name null]; otherwise, <c>false</c>.</returns>
       public bool IsTrialNameNull()
       {
         return this.IsNull(this.tableTrials.TrialNameColumn);
@@ -5349,6 +7355,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the trial name null.
+      /// </summary>
       public void SetTrialNameNull()
       {
         this[this.tableTrials.TrialNameColumn] = global::System.Convert.DBNull;
@@ -5356,6 +7365,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is category null].
+      /// </summary>
+      /// <returns><c>true</c> if [is category null]; otherwise, <c>false</c>.</returns>
       public bool IsCategoryNull()
       {
         return this.IsNull(this.tableTrials.CategoryColumn);
@@ -5363,6 +7376,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the category null.
+      /// </summary>
       public void SetCategoryNull()
       {
         this[this.tableTrials.CategoryColumn] = global::System.Convert.DBNull;
@@ -5370,6 +7386,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is trial start time null].
+      /// </summary>
+      /// <returns><c>true</c> if [is trial start time null]; otherwise, <c>false</c>.</returns>
       public bool IsTrialStartTimeNull()
       {
         return this.IsNull(this.tableTrials.TrialStartTimeColumn);
@@ -5377,6 +7397,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the trial start time null.
+      /// </summary>
       public void SetTrialStartTimeNull()
       {
         this[this.tableTrials.TrialStartTimeColumn] = global::System.Convert.DBNull;
@@ -5384,6 +7407,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is duration null].
+      /// </summary>
+      /// <returns><c>true</c> if [is duration null]; otherwise, <c>false</c>.</returns>
       public bool IsDurationNull()
       {
         return this.IsNull(this.tableTrials.DurationColumn);
@@ -5391,6 +7418,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the duration null.
+      /// </summary>
       public void SetDurationNull()
       {
         this[this.tableTrials.DurationColumn] = global::System.Convert.DBNull;
@@ -5398,6 +7428,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is eliminate data null].
+      /// </summary>
+      /// <returns><c>true</c> if [is eliminate data null]; otherwise, <c>false</c>.</returns>
       public bool IsEliminateDataNull()
       {
         return this.IsNull(this.tableTrials.EliminateDataColumn);
@@ -5405,6 +7439,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the eliminate data null.
+      /// </summary>
       public void SetEliminateDataNull()
       {
         this[this.tableTrials.EliminateDataColumn] = global::System.Convert.DBNull;
@@ -5412,6 +7449,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the trial events rows.
+      /// </summary>
+      /// <returns>TrialEventsRow[].</returns>
       public TrialEventsRow[] GetTrialEventsRows()
       {
         if ((this.Table.ChildRelations["FK_Trials_Events"] == null))
@@ -5426,6 +7467,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the ao is rows.
+      /// </summary>
+      /// <returns>AOIsRow[].</returns>
       public AOIsRow[] GetAOIsRows()
       {
         if ((this.Table.ChildRelations["Trials_AOIs"] == null))
@@ -5440,6 +7485,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the gaze fixations rows.
+      /// </summary>
+      /// <returns>GazeFixationsRow[].</returns>
       public GazeFixationsRow[] GetGazeFixationsRows()
       {
         if ((this.Table.ChildRelations["Trials_GazeFixations"] == null))
@@ -5454,6 +7503,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the mouse fixations rows.
+      /// </summary>
+      /// <returns>MouseFixationsRow[].</returns>
       public MouseFixationsRow[] GetMouseFixationsRows()
       {
         if ((this.Table.ChildRelations["Trials_MouseFixations"] == null))
@@ -5468,15 +7521,22 @@ namespace Ogama.DataSet
     }
 
     /// <summary>
-    ///Represents strongly named DataRow class.
-    ///</summary>
+    /// Represents strongly named DataRow class.
+    /// </summary>
     public partial class TrialEventsRow : DataRow
     {
 
+      /// <summary>
+      /// The table trial events
+      /// </summary>
       private TrialEventsDataTable tableTrialEvents;
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="TrialEventsRow"/> class.
+      /// </summary>
+      /// <param name="rb">The rb.</param>
       internal TrialEventsRow(DataRowBuilder rb) :
         base(rb)
       {
@@ -5485,6 +7545,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the identifier.
+      /// </summary>
+      /// <value>The identifier.</value>
       public int ID
       {
         get
@@ -5499,6 +7563,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the name of the subject.
+      /// </summary>
+      /// <value>The name of the subject.</value>
       public string SubjectName
       {
         get
@@ -5513,6 +7581,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the trial sequence.
+      /// </summary>
+      /// <value>The trial sequence.</value>
       public int TrialSequence
       {
         get
@@ -5527,6 +7599,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the event identifier.
+      /// </summary>
+      /// <value>The event identifier.</value>
       public int EventID
       {
         get
@@ -5541,6 +7617,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the event time.
+      /// </summary>
+      /// <value>The event time.</value>
       public long EventTime
       {
         get
@@ -5555,6 +7635,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the type of the event.
+      /// </summary>
+      /// <value>The type of the event.</value>
       public string EventType
       {
         get
@@ -5569,6 +7653,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the event task.
+      /// </summary>
+      /// <value>The event task.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'EventTask\' in table \'TrialEvents\' is DBNull.</exception>
       public string EventTask
       {
         get
@@ -5590,6 +7679,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the event parameter.
+      /// </summary>
+      /// <value>The event parameter.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'EventParam\' in table \'TrialEvents\' is DBNull.</exception>
       public string EventParam
       {
         get
@@ -5611,6 +7705,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the trials row parent.
+      /// </summary>
+      /// <value>The trials row parent.</value>
       public TrialsRow TrialsRowParent
       {
         get
@@ -5625,6 +7723,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is event task null].
+      /// </summary>
+      /// <returns><c>true</c> if [is event task null]; otherwise, <c>false</c>.</returns>
       public bool IsEventTaskNull()
       {
         return this.IsNull(this.tableTrialEvents.EventTaskColumn);
@@ -5632,6 +7734,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the event task null.
+      /// </summary>
       public void SetEventTaskNull()
       {
         this[this.tableTrialEvents.EventTaskColumn] = global::System.Convert.DBNull;
@@ -5639,6 +7744,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is event parameter null].
+      /// </summary>
+      /// <returns><c>true</c> if [is event parameter null]; otherwise, <c>false</c>.</returns>
       public bool IsEventParamNull()
       {
         return this.IsNull(this.tableTrialEvents.EventParamColumn);
@@ -5646,6 +7755,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the event parameter null.
+      /// </summary>
       public void SetEventParamNull()
       {
         this[this.tableTrialEvents.EventParamColumn] = global::System.Convert.DBNull;
@@ -5653,15 +7765,22 @@ namespace Ogama.DataSet
     }
 
     /// <summary>
-    ///Represents strongly named DataRow class.
-    ///</summary>
+    /// Represents strongly named DataRow class.
+    /// </summary>
     public partial class RawdataRow : DataRow
     {
 
+      /// <summary>
+      /// The table rawdata
+      /// </summary>
       private RawdataDataTable tableRawdata;
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="RawdataRow"/> class.
+      /// </summary>
+      /// <param name="rb">The rb.</param>
       internal RawdataRow(DataRowBuilder rb) :
         base(rb)
       {
@@ -5670,6 +7789,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the identifier.
+      /// </summary>
+      /// <value>The identifier.</value>
       public long ID
       {
         get
@@ -5684,6 +7807,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the name of the subject.
+      /// </summary>
+      /// <value>The name of the subject.</value>
       public string SubjectName
       {
         get
@@ -5698,6 +7825,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the trial sequence.
+      /// </summary>
+      /// <value>The trial sequence.</value>
       public int TrialSequence
       {
         get
@@ -5712,6 +7843,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the time.
+      /// </summary>
+      /// <value>The time.</value>
       public long Time
       {
         get
@@ -5726,6 +7861,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the pupil dia x.
+      /// </summary>
+      /// <value>The pupil dia x.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'PupilDiaX\' in table \'Rawdata\' is DBNull.</exception>
       public double PupilDiaX
       {
         get
@@ -5747,6 +7887,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the pupil dia y.
+      /// </summary>
+      /// <value>The pupil dia y.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'PupilDiaY\' in table \'Rawdata\' is DBNull.</exception>
       public double PupilDiaY
       {
         get
@@ -5768,6 +7913,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the gaze position x.
+      /// </summary>
+      /// <value>The gaze position x.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'GazePosX\' in table \'Rawdata\' is DBNull.</exception>
       public double GazePosX
       {
         get
@@ -5789,6 +7939,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the gaze position y.
+      /// </summary>
+      /// <value>The gaze position y.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'GazePosY\' in table \'Rawdata\' is DBNull.</exception>
       public double GazePosY
       {
         get
@@ -5810,6 +7965,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the mouse position x.
+      /// </summary>
+      /// <value>The mouse position x.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'MousePosX\' in table \'Rawdata\' is DBNull.</exception>
       public double MousePosX
       {
         get
@@ -5831,6 +7991,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the mouse position y.
+      /// </summary>
+      /// <value>The mouse position y.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'MousePosY\' in table \'Rawdata\' is DBNull.</exception>
       public double MousePosY
       {
         get
@@ -5852,6 +8017,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the event identifier.
+      /// </summary>
+      /// <value>The event identifier.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'EventID\' in table \'Rawdata\' is DBNull.</exception>
       public int EventID
       {
         get
@@ -5873,6 +8043,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is pupil dia x null].
+      /// </summary>
+      /// <returns><c>true</c> if [is pupil dia x null]; otherwise, <c>false</c>.</returns>
       public bool IsPupilDiaXNull()
       {
         return this.IsNull(this.tableRawdata.PupilDiaXColumn);
@@ -5880,6 +8054,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the pupil dia x null.
+      /// </summary>
       public void SetPupilDiaXNull()
       {
         this[this.tableRawdata.PupilDiaXColumn] = global::System.Convert.DBNull;
@@ -5887,6 +8064,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is pupil dia y null].
+      /// </summary>
+      /// <returns><c>true</c> if [is pupil dia y null]; otherwise, <c>false</c>.</returns>
       public bool IsPupilDiaYNull()
       {
         return this.IsNull(this.tableRawdata.PupilDiaYColumn);
@@ -5894,6 +8075,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the pupil dia y null.
+      /// </summary>
       public void SetPupilDiaYNull()
       {
         this[this.tableRawdata.PupilDiaYColumn] = global::System.Convert.DBNull;
@@ -5901,6 +8085,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is gaze position x null].
+      /// </summary>
+      /// <returns><c>true</c> if [is gaze position x null]; otherwise, <c>false</c>.</returns>
       public bool IsGazePosXNull()
       {
         return this.IsNull(this.tableRawdata.GazePosXColumn);
@@ -5908,6 +8096,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the gaze position x null.
+      /// </summary>
       public void SetGazePosXNull()
       {
         this[this.tableRawdata.GazePosXColumn] = global::System.Convert.DBNull;
@@ -5915,6 +8106,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is gaze position y null].
+      /// </summary>
+      /// <returns><c>true</c> if [is gaze position y null]; otherwise, <c>false</c>.</returns>
       public bool IsGazePosYNull()
       {
         return this.IsNull(this.tableRawdata.GazePosYColumn);
@@ -5922,6 +8117,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the gaze position y null.
+      /// </summary>
       public void SetGazePosYNull()
       {
         this[this.tableRawdata.GazePosYColumn] = global::System.Convert.DBNull;
@@ -5929,6 +8127,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is mouse position x null].
+      /// </summary>
+      /// <returns><c>true</c> if [is mouse position x null]; otherwise, <c>false</c>.</returns>
       public bool IsMousePosXNull()
       {
         return this.IsNull(this.tableRawdata.MousePosXColumn);
@@ -5936,6 +8138,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the mouse position x null.
+      /// </summary>
       public void SetMousePosXNull()
       {
         this[this.tableRawdata.MousePosXColumn] = global::System.Convert.DBNull;
@@ -5943,6 +8148,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is mouse position y null].
+      /// </summary>
+      /// <returns><c>true</c> if [is mouse position y null]; otherwise, <c>false</c>.</returns>
       public bool IsMousePosYNull()
       {
         return this.IsNull(this.tableRawdata.MousePosYColumn);
@@ -5950,6 +8159,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the mouse position y null.
+      /// </summary>
       public void SetMousePosYNull()
       {
         this[this.tableRawdata.MousePosYColumn] = global::System.Convert.DBNull;
@@ -5957,6 +8169,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is event identifier null].
+      /// </summary>
+      /// <returns><c>true</c> if [is event identifier null]; otherwise, <c>false</c>.</returns>
       public bool IsEventIDNull()
       {
         return this.IsNull(this.tableRawdata.EventIDColumn);
@@ -5964,6 +8180,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the event identifier null.
+      /// </summary>
       public void SetEventIDNull()
       {
         this[this.tableRawdata.EventIDColumn] = global::System.Convert.DBNull;
@@ -5971,15 +8190,22 @@ namespace Ogama.DataSet
     }
 
     /// <summary>
-    ///Represents strongly named DataRow class.
-    ///</summary>
+    /// Represents strongly named DataRow class.
+    /// </summary>
     public partial class AOIsRow : DataRow
     {
 
+      /// <summary>
+      /// The table ao is
+      /// </summary>
       private AOIsDataTable tableAOIs;
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="AOIsRow"/> class.
+      /// </summary>
+      /// <param name="rb">The rb.</param>
       internal AOIsRow(DataRowBuilder rb) :
         base(rb)
       {
@@ -5988,6 +8214,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the identifier.
+      /// </summary>
+      /// <value>The identifier.</value>
       public int ID
       {
         get
@@ -6002,6 +8232,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the trial identifier.
+      /// </summary>
+      /// <value>The trial identifier.</value>
       public int TrialID
       {
         get
@@ -6016,6 +8250,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the slide nr.
+      /// </summary>
+      /// <value>The slide nr.</value>
       public int SlideNr
       {
         get
@@ -6030,6 +8268,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the name of the shape.
+      /// </summary>
+      /// <value>The name of the shape.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'ShapeName\' in table \'AOIs\' is DBNull.</exception>
       public string ShapeName
       {
         get
@@ -6051,6 +8294,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the type of the shape.
+      /// </summary>
+      /// <value>The type of the shape.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'ShapeType\' in table \'AOIs\' is DBNull.</exception>
       public string ShapeType
       {
         get
@@ -6072,6 +8320,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the shape number PTS.
+      /// </summary>
+      /// <value>The shape number PTS.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'ShapeNumPts\' in table \'AOIs\' is DBNull.</exception>
       public int ShapeNumPts
       {
         get
@@ -6093,6 +8346,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the shape PTS.
+      /// </summary>
+      /// <value>The shape PTS.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'ShapePts\' in table \'AOIs\' is DBNull.</exception>
       public string ShapePts
       {
         get
@@ -6114,6 +8372,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the shape group.
+      /// </summary>
+      /// <value>The shape group.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'ShapeGroup\' in table \'AOIs\' is DBNull.</exception>
       public string ShapeGroup
       {
         get
@@ -6135,6 +8398,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the trials row.
+      /// </summary>
+      /// <value>The trials row.</value>
       public TrialsRow TrialsRow
       {
         get
@@ -6149,6 +8416,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the shape groups row.
+      /// </summary>
+      /// <value>The shape groups row.</value>
       public ShapeGroupsRow ShapeGroupsRow
       {
         get
@@ -6163,6 +8434,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is shape name null].
+      /// </summary>
+      /// <returns><c>true</c> if [is shape name null]; otherwise, <c>false</c>.</returns>
       public bool IsShapeNameNull()
       {
         return this.IsNull(this.tableAOIs.ShapeNameColumn);
@@ -6170,6 +8445,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the shape name null.
+      /// </summary>
       public void SetShapeNameNull()
       {
         this[this.tableAOIs.ShapeNameColumn] = global::System.Convert.DBNull;
@@ -6177,6 +8455,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is shape type null].
+      /// </summary>
+      /// <returns><c>true</c> if [is shape type null]; otherwise, <c>false</c>.</returns>
       public bool IsShapeTypeNull()
       {
         return this.IsNull(this.tableAOIs.ShapeTypeColumn);
@@ -6184,6 +8466,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the shape type null.
+      /// </summary>
       public void SetShapeTypeNull()
       {
         this[this.tableAOIs.ShapeTypeColumn] = global::System.Convert.DBNull;
@@ -6191,6 +8476,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is shape number PTS null].
+      /// </summary>
+      /// <returns><c>true</c> if [is shape number PTS null]; otherwise, <c>false</c>.</returns>
       public bool IsShapeNumPtsNull()
       {
         return this.IsNull(this.tableAOIs.ShapeNumPtsColumn);
@@ -6198,6 +8487,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the shape number PTS null.
+      /// </summary>
       public void SetShapeNumPtsNull()
       {
         this[this.tableAOIs.ShapeNumPtsColumn] = global::System.Convert.DBNull;
@@ -6205,6 +8497,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is shape PTS null].
+      /// </summary>
+      /// <returns><c>true</c> if [is shape PTS null]; otherwise, <c>false</c>.</returns>
       public bool IsShapePtsNull()
       {
         return this.IsNull(this.tableAOIs.ShapePtsColumn);
@@ -6212,6 +8508,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the shape PTS null.
+      /// </summary>
       public void SetShapePtsNull()
       {
         this[this.tableAOIs.ShapePtsColumn] = global::System.Convert.DBNull;
@@ -6219,6 +8518,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is shape group null].
+      /// </summary>
+      /// <returns><c>true</c> if [is shape group null]; otherwise, <c>false</c>.</returns>
       public bool IsShapeGroupNull()
       {
         return this.IsNull(this.tableAOIs.ShapeGroupColumn);
@@ -6226,6 +8529,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the shape group null.
+      /// </summary>
       public void SetShapeGroupNull()
       {
         this[this.tableAOIs.ShapeGroupColumn] = global::System.Convert.DBNull;
@@ -6233,15 +8539,22 @@ namespace Ogama.DataSet
     }
 
     /// <summary>
-    ///Represents strongly named DataRow class.
-    ///</summary>
+    /// Represents strongly named DataRow class.
+    /// </summary>
     public partial class ShapeGroupsRow : DataRow
     {
 
+      /// <summary>
+      /// The table shape groups
+      /// </summary>
       private ShapeGroupsDataTable tableShapeGroups;
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="ShapeGroupsRow"/> class.
+      /// </summary>
+      /// <param name="rb">The rb.</param>
       internal ShapeGroupsRow(DataRowBuilder rb) :
         base(rb)
       {
@@ -6250,6 +8563,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the identifier.
+      /// </summary>
+      /// <value>The identifier.</value>
       public int ID
       {
         get
@@ -6264,6 +8581,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the shape group.
+      /// </summary>
+      /// <value>The shape group.</value>
       public string ShapeGroup
       {
         get
@@ -6278,6 +8599,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the ao is rows.
+      /// </summary>
+      /// <returns>AOIsRow[].</returns>
       public AOIsRow[] GetAOIsRows()
       {
         if ((this.Table.ChildRelations["ShapeGroups_AOIs"] == null))
@@ -6292,15 +8617,22 @@ namespace Ogama.DataSet
     }
 
     /// <summary>
-    ///Represents strongly named DataRow class.
-    ///</summary>
+    /// Represents strongly named DataRow class.
+    /// </summary>
     public partial class GazeFixationsRow : DataRow
     {
 
+      /// <summary>
+      /// The table gaze fixations
+      /// </summary>
       private GazeFixationsDataTable tableGazeFixations;
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="GazeFixationsRow"/> class.
+      /// </summary>
+      /// <param name="rb">The rb.</param>
       internal GazeFixationsRow(DataRowBuilder rb) :
         base(rb)
       {
@@ -6309,6 +8641,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the identifier.
+      /// </summary>
+      /// <value>The identifier.</value>
       public long ID
       {
         get
@@ -6323,6 +8659,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the name of the subject.
+      /// </summary>
+      /// <value>The name of the subject.</value>
       public string SubjectName
       {
         get
@@ -6337,6 +8677,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the trial identifier.
+      /// </summary>
+      /// <value>The trial identifier.</value>
       public int TrialID
       {
         get
@@ -6351,6 +8695,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the trial sequence.
+      /// </summary>
+      /// <value>The trial sequence.</value>
       public int TrialSequence
       {
         get
@@ -6365,6 +8713,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the count in trial.
+      /// </summary>
+      /// <value>The count in trial.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'CountInTrial\' in table \'GazeFixations\' is DBNull.</exception>
       public int CountInTrial
       {
         get
@@ -6386,6 +8739,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the start time.
+      /// </summary>
+      /// <value>The start time.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'StartTime\' in table \'GazeFixations\' is DBNull.</exception>
       public long StartTime
       {
         get
@@ -6407,6 +8765,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the length.
+      /// </summary>
+      /// <value>The length.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'Length\' in table \'GazeFixations\' is DBNull.</exception>
       public int Length
       {
         get
@@ -6428,6 +8791,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the position x.
+      /// </summary>
+      /// <value>The position x.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'PosX\' in table \'GazeFixations\' is DBNull.</exception>
       public double PosX
       {
         get
@@ -6449,6 +8817,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the position y.
+      /// </summary>
+      /// <value>The position y.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'PosY\' in table \'GazeFixations\' is DBNull.</exception>
       public double PosY
       {
         get
@@ -6470,6 +8843,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the trials row parent.
+      /// </summary>
+      /// <value>The trials row parent.</value>
       public TrialsRow TrialsRowParent
       {
         get
@@ -6484,6 +8861,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is count in trial null].
+      /// </summary>
+      /// <returns><c>true</c> if [is count in trial null]; otherwise, <c>false</c>.</returns>
       public bool IsCountInTrialNull()
       {
         return this.IsNull(this.tableGazeFixations.CountInTrialColumn);
@@ -6491,6 +8872,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the count in trial null.
+      /// </summary>
       public void SetCountInTrialNull()
       {
         this[this.tableGazeFixations.CountInTrialColumn] = global::System.Convert.DBNull;
@@ -6498,6 +8882,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is start time null].
+      /// </summary>
+      /// <returns><c>true</c> if [is start time null]; otherwise, <c>false</c>.</returns>
       public bool IsStartTimeNull()
       {
         return this.IsNull(this.tableGazeFixations.StartTimeColumn);
@@ -6505,6 +8893,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the start time null.
+      /// </summary>
       public void SetStartTimeNull()
       {
         this[this.tableGazeFixations.StartTimeColumn] = global::System.Convert.DBNull;
@@ -6512,6 +8903,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is length null].
+      /// </summary>
+      /// <returns><c>true</c> if [is length null]; otherwise, <c>false</c>.</returns>
       public bool IsLengthNull()
       {
         return this.IsNull(this.tableGazeFixations.LengthColumn);
@@ -6519,6 +8914,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the length null.
+      /// </summary>
       public void SetLengthNull()
       {
         this[this.tableGazeFixations.LengthColumn] = global::System.Convert.DBNull;
@@ -6526,6 +8924,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is position x null].
+      /// </summary>
+      /// <returns><c>true</c> if [is position x null]; otherwise, <c>false</c>.</returns>
       public bool IsPosXNull()
       {
         return this.IsNull(this.tableGazeFixations.PosXColumn);
@@ -6533,6 +8935,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the position x null.
+      /// </summary>
       public void SetPosXNull()
       {
         this[this.tableGazeFixations.PosXColumn] = global::System.Convert.DBNull;
@@ -6540,6 +8945,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is position y null].
+      /// </summary>
+      /// <returns><c>true</c> if [is position y null]; otherwise, <c>false</c>.</returns>
       public bool IsPosYNull()
       {
         return this.IsNull(this.tableGazeFixations.PosYColumn);
@@ -6547,6 +8956,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the position y null.
+      /// </summary>
       public void SetPosYNull()
       {
         this[this.tableGazeFixations.PosYColumn] = global::System.Convert.DBNull;
@@ -6554,15 +8966,22 @@ namespace Ogama.DataSet
     }
 
     /// <summary>
-    ///Represents strongly named DataRow class.
-    ///</summary>
+    /// Represents strongly named DataRow class.
+    /// </summary>
     public class MouseFixationsRow : DataRow
     {
 
+      /// <summary>
+      /// The table mouse fixations
+      /// </summary>
       private MouseFixationsDataTable tableMouseFixations;
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="MouseFixationsRow"/> class.
+      /// </summary>
+      /// <param name="rb">The rb.</param>
       internal MouseFixationsRow(DataRowBuilder rb) :
         base(rb)
       {
@@ -6571,6 +8990,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the identifier.
+      /// </summary>
+      /// <value>The identifier.</value>
       public long ID
       {
         get
@@ -6585,6 +9008,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the name of the subject.
+      /// </summary>
+      /// <value>The name of the subject.</value>
       public string SubjectName
       {
         get
@@ -6599,6 +9026,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the trial identifier.
+      /// </summary>
+      /// <value>The trial identifier.</value>
       public int TrialID
       {
         get
@@ -6613,6 +9044,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the trial sequence.
+      /// </summary>
+      /// <value>The trial sequence.</value>
       public int TrialSequence
       {
         get
@@ -6627,6 +9062,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the count in trial.
+      /// </summary>
+      /// <value>The count in trial.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'CountInTrial\' in table \'MouseFixations\' is DBNull.</exception>
       public int CountInTrial
       {
         get
@@ -6648,6 +9088,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the start time.
+      /// </summary>
+      /// <value>The start time.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'StartTime\' in table \'MouseFixations\' is DBNull.</exception>
       public long StartTime
       {
         get
@@ -6669,6 +9114,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the length.
+      /// </summary>
+      /// <value>The length.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'Length\' in table \'MouseFixations\' is DBNull.</exception>
       public int Length
       {
         get
@@ -6690,6 +9140,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the position x.
+      /// </summary>
+      /// <value>The position x.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'PosX\' in table \'MouseFixations\' is DBNull.</exception>
       public double PosX
       {
         get
@@ -6711,6 +9166,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the position y.
+      /// </summary>
+      /// <value>The position y.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'PosY\' in table \'MouseFixations\' is DBNull.</exception>
       public double PosY
       {
         get
@@ -6732,6 +9192,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the trials row parent.
+      /// </summary>
+      /// <value>The trials row parent.</value>
       public TrialsRow TrialsRowParent
       {
         get
@@ -6746,6 +9210,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is count in trial null].
+      /// </summary>
+      /// <returns><c>true</c> if [is count in trial null]; otherwise, <c>false</c>.</returns>
       public bool IsCountInTrialNull()
       {
         return this.IsNull(this.tableMouseFixations.CountInTrialColumn);
@@ -6753,6 +9221,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the count in trial null.
+      /// </summary>
       public void SetCountInTrialNull()
       {
         this[this.tableMouseFixations.CountInTrialColumn] = global::System.Convert.DBNull;
@@ -6760,6 +9231,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is start time null].
+      /// </summary>
+      /// <returns><c>true</c> if [is start time null]; otherwise, <c>false</c>.</returns>
       public bool IsStartTimeNull()
       {
         return this.IsNull(this.tableMouseFixations.StartTimeColumn);
@@ -6767,6 +9242,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the start time null.
+      /// </summary>
       public void SetStartTimeNull()
       {
         this[this.tableMouseFixations.StartTimeColumn] = global::System.Convert.DBNull;
@@ -6774,6 +9252,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is length null].
+      /// </summary>
+      /// <returns><c>true</c> if [is length null]; otherwise, <c>false</c>.</returns>
       public bool IsLengthNull()
       {
         return this.IsNull(this.tableMouseFixations.LengthColumn);
@@ -6781,6 +9263,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the length null.
+      /// </summary>
       public void SetLengthNull()
       {
         this[this.tableMouseFixations.LengthColumn] = global::System.Convert.DBNull;
@@ -6788,6 +9273,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is position x null].
+      /// </summary>
+      /// <returns><c>true</c> if [is position x null]; otherwise, <c>false</c>.</returns>
       public bool IsPosXNull()
       {
         return this.IsNull(this.tableMouseFixations.PosXColumn);
@@ -6795,6 +9284,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the position x null.
+      /// </summary>
       public void SetPosXNull()
       {
         this[this.tableMouseFixations.PosXColumn] = global::System.Convert.DBNull;
@@ -6802,6 +9294,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is position y null].
+      /// </summary>
+      /// <returns><c>true</c> if [is position y null]; otherwise, <c>false</c>.</returns>
       public bool IsPosYNull()
       {
         return this.IsNull(this.tableMouseFixations.PosYColumn);
@@ -6809,6 +9305,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the position y null.
+      /// </summary>
       public void SetPosYNull()
       {
         this[this.tableMouseFixations.PosYColumn] = global::System.Convert.DBNull;
@@ -6816,15 +9315,22 @@ namespace Ogama.DataSet
     }
 
     /// <summary>
-    ///Represents strongly named DataRow class.
-    ///</summary>
+    /// Represents strongly named DataRow class.
+    /// </summary>
     public class ParamsRow : DataRow
     {
 
+      /// <summary>
+      /// The table parameters
+      /// </summary>
       private ParamsDataTable tableParams;
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="ParamsRow"/> class.
+      /// </summary>
+      /// <param name="rb">The rb.</param>
       internal ParamsRow(DataRowBuilder rb) :
         base(rb)
       {
@@ -6833,6 +9339,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the identifier.
+      /// </summary>
+      /// <value>The identifier.</value>
       public int ID
       {
         get
@@ -6847,6 +9357,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the parameter.
+      /// </summary>
+      /// <value>The parameter.</value>
       public string Param
       {
         get
@@ -6861,6 +9375,11 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets or sets the description.
+      /// </summary>
+      /// <value>The description.</value>
+      /// <exception cref="System.Data.StrongTypingException">The value for column \'Description\' in table \'Params\' is DBNull.</exception>
       public string Description
       {
         get
@@ -6882,6 +9401,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Determines whether [is description null].
+      /// </summary>
+      /// <returns><c>true</c> if [is description null]; otherwise, <c>false</c>.</returns>
       public bool IsDescriptionNull()
       {
         return this.IsNull(this.tableParams.DescriptionColumn);
@@ -6889,6 +9412,9 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Sets the description null.
+      /// </summary>
       public void SetDescriptionNull()
       {
         this[this.tableParams.DescriptionColumn] = global::System.Convert.DBNull;
@@ -6896,18 +9422,29 @@ namespace Ogama.DataSet
     }
 
     /// <summary>
-    ///Row event argument class
-    ///</summary>
+    /// Row event argument class
+    /// </summary>
 
     public class SubjectParametersRowChangeEvent : global::System.EventArgs
     {
 
+      /// <summary>
+      /// The event row
+      /// </summary>
       private SubjectParametersRow eventRow;
 
+      /// <summary>
+      /// The event action
+      /// </summary>
       private DataRowAction eventAction;
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="SubjectParametersRowChangeEvent"/> class.
+      /// </summary>
+      /// <param name="row">The row.</param>
+      /// <param name="action">The action.</param>
       public SubjectParametersRowChangeEvent(SubjectParametersRow row, DataRowAction action)
       {
         this.eventRow = row;
@@ -6916,6 +9453,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the row.
+      /// </summary>
+      /// <value>The row.</value>
       public SubjectParametersRow Row
       {
         get
@@ -6926,6 +9467,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the action.
+      /// </summary>
+      /// <value>The action.</value>
       public DataRowAction Action
       {
         get
@@ -6936,18 +9481,29 @@ namespace Ogama.DataSet
     }
 
     /// <summary>
-    ///Row event argument class
-    ///</summary>
+    /// Row event argument class
+    /// </summary>
 
     public class SubjectsRowChangeEvent : global::System.EventArgs
     {
 
+      /// <summary>
+      /// The event row
+      /// </summary>
       private SubjectsRow eventRow;
 
+      /// <summary>
+      /// The event action
+      /// </summary>
       private DataRowAction eventAction;
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="SubjectsRowChangeEvent"/> class.
+      /// </summary>
+      /// <param name="row">The row.</param>
+      /// <param name="action">The action.</param>
       public SubjectsRowChangeEvent(SubjectsRow row, DataRowAction action)
       {
         this.eventRow = row;
@@ -6956,6 +9512,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the row.
+      /// </summary>
+      /// <value>The row.</value>
       public SubjectsRow Row
       {
         get
@@ -6966,6 +9526,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the action.
+      /// </summary>
+      /// <value>The action.</value>
       public DataRowAction Action
       {
         get
@@ -6976,18 +9540,29 @@ namespace Ogama.DataSet
     }
 
     /// <summary>
-    ///Row event argument class
-    ///</summary>
+    /// Row event argument class
+    /// </summary>
 
     public class TrialsRowChangeEvent : global::System.EventArgs
     {
 
+      /// <summary>
+      /// The event row
+      /// </summary>
       private TrialsRow eventRow;
 
+      /// <summary>
+      /// The event action
+      /// </summary>
       private DataRowAction eventAction;
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="TrialsRowChangeEvent"/> class.
+      /// </summary>
+      /// <param name="row">The row.</param>
+      /// <param name="action">The action.</param>
       public TrialsRowChangeEvent(TrialsRow row, DataRowAction action)
       {
         this.eventRow = row;
@@ -6996,6 +9571,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the row.
+      /// </summary>
+      /// <value>The row.</value>
       public TrialsRow Row
       {
         get
@@ -7006,6 +9585,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the action.
+      /// </summary>
+      /// <value>The action.</value>
       public DataRowAction Action
       {
         get
@@ -7016,18 +9599,29 @@ namespace Ogama.DataSet
     }
 
     /// <summary>
-    ///Row event argument class
-    ///</summary>
+    /// Row event argument class
+    /// </summary>
 
     public class TrialEventsRowChangeEvent : global::System.EventArgs
     {
 
+      /// <summary>
+      /// The event row
+      /// </summary>
       private TrialEventsRow eventRow;
 
+      /// <summary>
+      /// The event action
+      /// </summary>
       private DataRowAction eventAction;
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="TrialEventsRowChangeEvent"/> class.
+      /// </summary>
+      /// <param name="row">The row.</param>
+      /// <param name="action">The action.</param>
       public TrialEventsRowChangeEvent(TrialEventsRow row, DataRowAction action)
       {
         this.eventRow = row;
@@ -7036,6 +9630,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the row.
+      /// </summary>
+      /// <value>The row.</value>
       public TrialEventsRow Row
       {
         get
@@ -7046,6 +9644,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the action.
+      /// </summary>
+      /// <value>The action.</value>
       public DataRowAction Action
       {
         get
@@ -7056,18 +9658,29 @@ namespace Ogama.DataSet
     }
 
     /// <summary>
-    ///Row event argument class
-    ///</summary>
+    /// Row event argument class
+    /// </summary>
 
     public class RawdataRowChangeEvent : global::System.EventArgs
     {
 
+      /// <summary>
+      /// The event row
+      /// </summary>
       private RawdataRow eventRow;
 
+      /// <summary>
+      /// The event action
+      /// </summary>
       private DataRowAction eventAction;
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="RawdataRowChangeEvent"/> class.
+      /// </summary>
+      /// <param name="row">The row.</param>
+      /// <param name="action">The action.</param>
       public RawdataRowChangeEvent(RawdataRow row, DataRowAction action)
       {
         this.eventRow = row;
@@ -7076,6 +9689,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the row.
+      /// </summary>
+      /// <value>The row.</value>
       public RawdataRow Row
       {
         get
@@ -7086,6 +9703,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the action.
+      /// </summary>
+      /// <value>The action.</value>
       public DataRowAction Action
       {
         get
@@ -7096,18 +9717,29 @@ namespace Ogama.DataSet
     }
 
     /// <summary>
-    ///Row event argument class
-    ///</summary>
+    /// Row event argument class
+    /// </summary>
 
     public class AOIsRowChangeEvent : global::System.EventArgs
     {
 
+      /// <summary>
+      /// The event row
+      /// </summary>
       private AOIsRow eventRow;
 
+      /// <summary>
+      /// The event action
+      /// </summary>
       private DataRowAction eventAction;
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="AOIsRowChangeEvent"/> class.
+      /// </summary>
+      /// <param name="row">The row.</param>
+      /// <param name="action">The action.</param>
       public AOIsRowChangeEvent(AOIsRow row, DataRowAction action)
       {
         this.eventRow = row;
@@ -7116,6 +9748,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the row.
+      /// </summary>
+      /// <value>The row.</value>
       public AOIsRow Row
       {
         get
@@ -7126,6 +9762,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the action.
+      /// </summary>
+      /// <value>The action.</value>
       public DataRowAction Action
       {
         get
@@ -7136,18 +9776,29 @@ namespace Ogama.DataSet
     }
 
     /// <summary>
-    ///Row event argument class
-    ///</summary>
+    /// Row event argument class
+    /// </summary>
 
     public class ShapeGroupsRowChangeEvent : global::System.EventArgs
     {
 
+      /// <summary>
+      /// The event row
+      /// </summary>
       private ShapeGroupsRow eventRow;
 
+      /// <summary>
+      /// The event action
+      /// </summary>
       private DataRowAction eventAction;
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="ShapeGroupsRowChangeEvent"/> class.
+      /// </summary>
+      /// <param name="row">The row.</param>
+      /// <param name="action">The action.</param>
       public ShapeGroupsRowChangeEvent(ShapeGroupsRow row, DataRowAction action)
       {
         this.eventRow = row;
@@ -7156,6 +9807,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the row.
+      /// </summary>
+      /// <value>The row.</value>
       public ShapeGroupsRow Row
       {
         get
@@ -7164,6 +9819,10 @@ namespace Ogama.DataSet
         }
       }
 
+      /// <summary>
+      /// Gets the action.
+      /// </summary>
+      /// <value>The action.</value>
       public DataRowAction Action
       {
         get
@@ -7174,17 +9833,28 @@ namespace Ogama.DataSet
     }
 
     /// <summary>
-    ///Row event argument class
-    ///</summary>
+    /// Row event argument class
+    /// </summary>
     public class GazeFixationsRowChangeEvent : global::System.EventArgs
     {
 
+      /// <summary>
+      /// The event row
+      /// </summary>
       private GazeFixationsRow eventRow;
 
+      /// <summary>
+      /// The event action
+      /// </summary>
       private DataRowAction eventAction;
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="GazeFixationsRowChangeEvent"/> class.
+      /// </summary>
+      /// <param name="row">The row.</param>
+      /// <param name="action">The action.</param>
       public GazeFixationsRowChangeEvent(GazeFixationsRow row, DataRowAction action)
       {
         this.eventRow = row;
@@ -7193,6 +9863,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the row.
+      /// </summary>
+      /// <value>The row.</value>
       public GazeFixationsRow Row
       {
         get
@@ -7203,6 +9877,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the action.
+      /// </summary>
+      /// <value>The action.</value>
       public DataRowAction Action
       {
         get
@@ -7213,18 +9891,29 @@ namespace Ogama.DataSet
     }
 
     /// <summary>
-    ///Row event argument class
-    ///</summary>
+    /// Row event argument class
+    /// </summary>
 
     public class MouseFixationsRowChangeEvent : global::System.EventArgs
     {
 
+      /// <summary>
+      /// The event row
+      /// </summary>
       private MouseFixationsRow eventRow;
 
+      /// <summary>
+      /// The event action
+      /// </summary>
       private DataRowAction eventAction;
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="MouseFixationsRowChangeEvent"/> class.
+      /// </summary>
+      /// <param name="row">The row.</param>
+      /// <param name="action">The action.</param>
       public MouseFixationsRowChangeEvent(MouseFixationsRow row, DataRowAction action)
       {
         this.eventRow = row;
@@ -7233,6 +9922,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the row.
+      /// </summary>
+      /// <value>The row.</value>
       public MouseFixationsRow Row
       {
         get
@@ -7243,6 +9936,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the action.
+      /// </summary>
+      /// <value>The action.</value>
       public DataRowAction Action
       {
         get
@@ -7253,18 +9950,29 @@ namespace Ogama.DataSet
     }
 
     /// <summary>
-    ///Row event argument class
-    ///</summary>
+    /// Row event argument class
+    /// </summary>
 
     public class ParamsRowChangeEvent : global::System.EventArgs
     {
 
+      /// <summary>
+      /// The event row
+      /// </summary>
       private ParamsRow eventRow;
 
+      /// <summary>
+      /// The event action
+      /// </summary>
       private DataRowAction eventAction;
 
 
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="ParamsRowChangeEvent"/> class.
+      /// </summary>
+      /// <param name="row">The row.</param>
+      /// <param name="action">The action.</param>
       public ParamsRowChangeEvent(ParamsRow row, DataRowAction action)
       {
         this.eventRow = row;
@@ -7273,6 +9981,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the row.
+      /// </summary>
+      /// <value>The row.</value>
       public ParamsRow Row
       {
         get
@@ -7283,6 +9995,10 @@ namespace Ogama.DataSet
 
 
 
+      /// <summary>
+      /// Gets the action.
+      /// </summary>
+      /// <value>The action.</value>
       public DataRowAction Action
       {
         get
@@ -7369,6 +10085,7 @@ namespace Ogama.DataSet
     /// <summary>
     /// Gets or sets TableAdapter for SubjectsTable
     /// </summary>
+    /// <value>The subjects adapter.</value>
     [Browsable(false)]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public SQLiteTadSubjects SubjectsAdapter
@@ -7380,6 +10097,7 @@ namespace Ogama.DataSet
     /// <summary>
     /// Gets or sets TableAdapter for SubjectParametersTable
     /// </summary>
+    /// <value>The subject parameters adapter.</value>
     [Browsable(false)]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public SQLiteTadSubjectParameters SubjectParametersAdapter
@@ -7391,6 +10109,7 @@ namespace Ogama.DataSet
     /// <summary>
     /// Gets or sets TableAdapter for ParamsTable
     /// </summary>
+    /// <value>The parameters adapter.</value>
     [Browsable(false)]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public SQLiteTadParams ParamsAdapter
@@ -7402,6 +10121,7 @@ namespace Ogama.DataSet
     /// <summary>
     /// Gets or sets TableAdapter for TrialsTable
     /// </summary>
+    /// <value>The trials adapter.</value>
     [Browsable(false)]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public SQLiteTadTrials TrialsAdapter
@@ -7413,6 +10133,7 @@ namespace Ogama.DataSet
     /// <summary>
     /// Gets or sets TableAdapter for TrialEvents table
     /// </summary>
+    /// <value>The trial events adapter.</value>
     [Browsable(false)]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public SQLiteTadTrialEvents TrialEventsAdapter
@@ -7424,6 +10145,7 @@ namespace Ogama.DataSet
     /// <summary>
     /// Gets or sets TableAdapter for AOITable
     /// </summary>
+    /// <value>The ao is adapter.</value>
     [Browsable(false)]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public SQLiteTadAOIs AOIsAdapter
@@ -7435,6 +10157,7 @@ namespace Ogama.DataSet
     /// <summary>
     /// Gets or sets TableAdapter for GazeFixationsTable
     /// </summary>
+    /// <value>The gaze fixations adapter.</value>
     [Browsable(false)]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public SQLiteTadGazeFixations GazeFixationsAdapter
@@ -7446,6 +10169,7 @@ namespace Ogama.DataSet
     /// <summary>
     /// Gets or sets TableAdapter for MouseFixationsTable
     /// </summary>
+    /// <value>The mouse fixations adapter.</value>
     [Browsable(false)]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public SQLiteTadMouseFixations MouseFixationsAdapter
@@ -7457,6 +10181,7 @@ namespace Ogama.DataSet
     /// <summary>
     /// Gets or sets TableAdapter for ShapeGroupsTable
     /// </summary>
+    /// <value>The shape groups adapter.</value>
     [Browsable(false)]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public SQLiteTadShapeGroups ShapeGroupsAdapter
@@ -7468,6 +10193,7 @@ namespace Ogama.DataSet
     /// <summary>
     /// Gets RawTableAdapterList, can be accessed through SubjectName.
     /// </summary>
+    /// <value>The raw data adapter dictionary.</value>
     [Browsable(false)]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public Dictionary<string, SQLiteDataAdapter> RawDataAdapterDict
@@ -7476,8 +10202,9 @@ namespace Ogama.DataSet
     }
 
     /// <summary>
-    /// Gets the <see cref="SqlConnection"/> for the SQLExpress Database.
+    /// Gets the <see cref="SqlConnection" /> for the SQLExpress Database.
     /// </summary>
+    /// <value>The database connection.</value>
     [Browsable(false)]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public SQLiteConnection DatabaseConnection
@@ -7501,7 +10228,7 @@ namespace Ogama.DataSet
     /// <summary>
     /// Creates TableAdapters and Loads Data from SQLDatabase into TableAdapters
     /// </summary>
-    /// <param name="splash">A <see cref="BackgroundWorker"/> for the progress splash
+    /// <param name="splash">A <see cref="BackgroundWorker" /> for the progress splash
     /// window which can be cancelled and restarted when showing dialogs.</param>
     /// <returns><strong>True</strong> if loading was successful, otherwise
     /// <strong>false</strong>.</returns>
@@ -7595,7 +10322,7 @@ namespace Ogama.DataSet
     }
 
     /// <summary>
-    ///  Create raw data table adapter and add it to AdapterDictionary
+    /// Create raw data table adapter and add it to AdapterDictionary
     /// </summary>
     public void CreateRawDataAdapters()
     {
@@ -7612,7 +10339,7 @@ namespace Ogama.DataSet
     /// Creates a RawDataTableAdapter for a given subject
     /// </summary>
     /// <param name="subject">SubjectName as given in subjects table</param>
-    /// <returns><see cref="SqlDataAdapter"/> that can be used for queries</returns>
+    /// <returns><see cref="SqlDataAdapter" /> that can be used for queries</returns>
     public SQLiteDataAdapter CreateAdapterBySubject(string subject)
     {
       var adapter = new SQLiteDataAdapter();
@@ -7733,13 +10460,13 @@ namespace Ogama.DataSet
     #region BACKGROUNDWORKER
 
     /// <summary>
-    /// The <see cref="BackgroundWorker.DoWork"/> event handler for
-    /// the local <see cref="BackgroundWorker"/> bgwUpgradeSplash.
-    /// Shows the <see cref="UpgradeDocumentSplash"/> form with a splash screen
+    /// The <see cref="BackgroundWorker.DoWork" /> event handler for
+    /// the local <see cref="BackgroundWorker" /> bgwUpgradeSplash.
+    /// Shows the <see cref="UpgradeDocumentSplash" /> form with a splash screen
     /// wait dialog.
     /// </summary>
     /// <param name="sender">Source of the event</param>
-    /// <param name="e">A <see cref="DoWorkEventArgs"/> with the event data.</param>
+    /// <param name="e">A <see cref="DoWorkEventArgs" /> with the event data.</param>
     private void bgwUpgradeSplash_DoWork(object sender, DoWorkEventArgs e)
     {
       // Get the BackgroundWorker that raised this event.
@@ -7761,7 +10488,7 @@ namespace Ogama.DataSet
     /// This method renames and adds columns and tables in the given database,
     /// reflecting the changes made in the versions history
     /// </summary>
-    /// <param name="splash">A <see cref="BackgroundWorker"/> for the progress splash
+    /// <param name="splash">A <see cref="BackgroundWorker" /> for the progress splash
     /// window which can be cancelled and restarted when showing dialogs.</param>
     /// <returns><strong>True</strong> if upgrade was successful, and <strong>false</strong>
     /// if unsuccessful or cancelled by user.</returns>
@@ -8027,7 +10754,7 @@ namespace Ogama.DataSet
     /// the slideshow tree with an id given by the stimulus index in the list.
     /// This method is only valid when no other nodes are in the slideshow already.
     /// </summary>
-    /// <param name="stimulusFiles">A <see cref="List{String}"/> with the stimulus files.</param>
+    /// <param name="stimulusFiles">A <see cref="List{String}" /> with the stimulus files.</param>
     private void GenerateTrials(List<string> stimulusFiles)
     {
       foreach (string stimulus in stimulusFiles)
@@ -8087,7 +10814,7 @@ namespace Ogama.DataSet
     /// <summary>
     /// This method parses the trials table for the trialIDs of the stimulus files.
     /// </summary>
-    /// <returns>A <see cref="List{String}"/> with all stimuli files of the 
+    /// <returns>A <see cref="List{String}" /> with all stimuli files of the
     /// experiment sorted by appearance in the database.</returns>
     private List<string> GetStimulusFiles()
     {
@@ -8119,13 +10846,13 @@ namespace Ogama.DataSet
 
     /// <summary>
     /// This method gets the StimulusFile column values and
-    /// fills the empty trialID column with the index of the retreived StimulusFile 
+    /// fills the empty trialID column with the index of the retreived StimulusFile
     /// to have a unique represenation for the stimulusFile.
     /// </summary>
-    /// <param name="tableName">A <see cref="String"/> with the name of the table with
+    /// <param name="tableName">A <see cref="String" /> with the name of the table with
     /// at least has a filled column 'StimulusFile' which is filled and an empty
     /// column 'TrialID' which should be filled.</param>
-    /// <param name="stimulusFiles">A <see cref="List{String}"/> with the stimulus files.</param>
+    /// <param name="stimulusFiles">A <see cref="List{String}" /> with the stimulus files.</param>
     private void AddTrialIDsforStimulusFiles(string tableName, List<string> stimulusFiles)
     {
       if (Queries.ColumnExists(tableName, "StimulusFile") && Queries.ColumnExists(tableName, "TrialID"))
@@ -8260,7 +10987,7 @@ namespace Ogama.DataSet
     /// This method moves the response and response correctness columns of the old trial table
     /// to the new trial events table.
     /// </summary>
-    /// <param name="splash">A <see cref="BackgroundWorker"/> for the progress splash
+    /// <param name="splash">A <see cref="BackgroundWorker" /> for the progress splash
     /// window which can be cancelled and restarted when showing dialogs.</param>
     private void UpgradeResponses(BackgroundWorker splash)
     {

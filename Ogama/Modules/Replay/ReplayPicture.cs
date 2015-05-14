@@ -22,6 +22,7 @@ namespace Ogama.Modules.Replay
   using System.Media;
   using System.Windows.Forms;
 
+  using Ogama.DataSet;
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
   using Ogama.Modules.Common.CustomEventArgs;
@@ -602,7 +603,7 @@ namespace Ogama.Modules.Replay
 
     /// <summary>
     /// Gets or sets new data table with sampling information from
-    /// <see cref="Ogama.DataSet.OgamaDataSet.RawdataDataTable"/></summary>
+    /// <see cref="SQLiteOgamaDataSet.RawdataDataTable"/></summary>
     /// <value>A <see cref="DataTable"/> that holds the samples for replay.</value>
     [Browsable(false)]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]

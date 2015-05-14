@@ -42,52 +42,52 @@ namespace Ogama.MainWindow.Dialogs
       this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
       this.txbSQLInstanceName = new System.Windows.Forms.TextBox();
       this.btnTestSQLConnection = new System.Windows.Forms.Button();
+      this.txbSamplingRateMouse = new System.Windows.Forms.TextBox();
+      this.txbSamplingRateGaze = new System.Windows.Forms.TextBox();
+      this.nudMinGazeSamples = new System.Windows.Forms.NumericUpDown();
+      this.nudMaxDistanceGaze = new System.Windows.Forms.NumericUpDown();
+      this.chbEliminateFirstFixationSimple = new System.Windows.Forms.CheckBox();
+      this.chbMergeConsecutiveFixations = new System.Windows.Forms.CheckBox();
+      this.nudFixationRingSize = new System.Windows.Forms.NumericUpDown();
+      this.nudMaxDistanceMouse = new System.Windows.Forms.NumericUpDown();
+      this.nudMinMouseSamples = new System.Windows.Forms.NumericUpDown();
+      this.nudGazeDiameterDiv = new System.Windows.Forms.NumericUpDown();
       this.groupBox2 = new System.Windows.Forms.GroupBox();
       this.label10 = new System.Windows.Forms.Label();
       this.label9 = new System.Windows.Forms.Label();
       this.label11 = new System.Windows.Forms.Label();
       this.label5 = new System.Windows.Forms.Label();
-      this.txbSamplingRateMouse = new System.Windows.Forms.TextBox();
-      this.txbSamplingRateGaze = new System.Windows.Forms.TextBox();
-      this.nudMinGazeSamples = new System.Windows.Forms.NumericUpDown();
-      this.nudMaxDistanceGaze = new System.Windows.Forms.NumericUpDown();
       this.label6 = new System.Windows.Forms.Label();
       this.label7 = new System.Windows.Forms.Label();
       this.groupBox3 = new System.Windows.Forms.GroupBox();
-      this.chbEliminateFirstFixationSimple = new System.Windows.Forms.CheckBox();
       this.label4 = new System.Windows.Forms.Label();
       this.nudFixationLimit = new System.Windows.Forms.NumericUpDown();
       this.chbEliminateFirstFixationOfGivenLength = new System.Windows.Forms.CheckBox();
-      this.chbMergeConsecutiveFixations = new System.Windows.Forms.CheckBox();
       this.label3 = new System.Windows.Forms.Label();
-      this.nudFixationRingSize = new System.Windows.Forms.NumericUpDown();
       this.groupBox5 = new System.Windows.Forms.GroupBox();
-      this.nudMaxDistanceMouse = new System.Windows.Forms.NumericUpDown();
-      this.nudMinMouseSamples = new System.Windows.Forms.NumericUpDown();
       this.groupBox4 = new System.Windows.Forms.GroupBox();
       this.label8 = new System.Windows.Forms.Label();
       this.grbFixParams = new System.Windows.Forms.GroupBox();
       this.groupBox6 = new System.Windows.Forms.GroupBox();
-      this.nudGazeDiameterDiv = new System.Windows.Forms.NumericUpDown();
       this.groupBox7 = new System.Windows.Forms.GroupBox();
       this.nudMouseDiameterDiv = new System.Windows.Forms.NumericUpDown();
       this.groupBox8 = new System.Windows.Forms.GroupBox();
       this.label12 = new System.Windows.Forms.Label();
       this.dialogTop1 = new Ogama.Modules.Common.Controls.DialogTop();
       this.groupBox1.SuspendLayout();
-      this.groupBox2.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.nudMinGazeSamples)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.nudMaxDistanceGaze)).BeginInit();
-      this.groupBox3.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.nudFixationLimit)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.nudFixationRingSize)).BeginInit();
-      this.groupBox5.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.nudMaxDistanceMouse)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.nudMinMouseSamples)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.nudGazeDiameterDiv)).BeginInit();
+      this.groupBox2.SuspendLayout();
+      this.groupBox3.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.nudFixationLimit)).BeginInit();
+      this.groupBox5.SuspendLayout();
       this.groupBox4.SuspendLayout();
       this.grbFixParams.SuspendLayout();
       this.groupBox6.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.nudGazeDiameterDiv)).BeginInit();
       this.groupBox7.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.nudMouseDiameterDiv)).BeginInit();
       this.groupBox8.SuspendLayout();
@@ -189,57 +189,6 @@ namespace Ogama.MainWindow.Dialogs
       this.btnTestSQLConnection.UseVisualStyleBackColor = true;
       this.btnTestSQLConnection.Click += new System.EventHandler(this.btnTestSQLConnection_Click);
       // 
-      // groupBox2
-      // 
-      this.groupBox2.Controls.Add(this.label10);
-      this.groupBox2.Controls.Add(this.label9);
-      this.groupBox2.Controls.Add(this.label11);
-      this.groupBox2.Controls.Add(this.label5);
-      this.groupBox2.Controls.Add(this.txbSamplingRateMouse);
-      this.groupBox2.Controls.Add(this.txbSamplingRateGaze);
-      this.groupBox2.Location = new System.Drawing.Point(257, 123);
-      this.groupBox2.Name = "groupBox2";
-      this.groupBox2.Size = new System.Drawing.Size(198, 80);
-      this.groupBox2.TabIndex = 12;
-      this.groupBox2.TabStop = false;
-      this.groupBox2.Text = "Sampling rates";
-      // 
-      // label10
-      // 
-      this.label10.AutoSize = true;
-      this.label10.Location = new System.Drawing.Point(6, 53);
-      this.label10.Name = "label10";
-      this.label10.Size = new System.Drawing.Size(39, 13);
-      this.label10.TabIndex = 2;
-      this.label10.Text = "Mouse";
-      // 
-      // label9
-      // 
-      this.label9.AutoSize = true;
-      this.label9.Location = new System.Drawing.Point(6, 27);
-      this.label9.Name = "label9";
-      this.label9.Size = new System.Drawing.Size(32, 13);
-      this.label9.TabIndex = 2;
-      this.label9.Text = "Gaze";
-      // 
-      // label11
-      // 
-      this.label11.AutoSize = true;
-      this.label11.Location = new System.Drawing.Point(139, 53);
-      this.label11.Name = "label11";
-      this.label11.Size = new System.Drawing.Size(20, 13);
-      this.label11.TabIndex = 1;
-      this.label11.Text = "Hz";
-      // 
-      // label5
-      // 
-      this.label5.AutoSize = true;
-      this.label5.Location = new System.Drawing.Point(139, 27);
-      this.label5.Name = "label5";
-      this.label5.Size = new System.Drawing.Size(20, 13);
-      this.label5.TabIndex = 1;
-      this.label5.Text = "Hz";
-      // 
       // txbSamplingRateMouse
       // 
       this.txbSamplingRateMouse.Location = new System.Drawing.Point(58, 50);
@@ -317,43 +266,6 @@ namespace Ogama.MainWindow.Dialogs
             0,
             0});
       // 
-      // label6
-      // 
-      this.label6.Location = new System.Drawing.Point(6, 71);
-      this.label6.Name = "label6";
-      this.label6.Size = new System.Drawing.Size(249, 26);
-      this.label6.TabIndex = 14;
-      this.label6.Text = "Minimum number of samples that can be considered a fixation.";
-      // 
-      // label7
-      // 
-      this.label7.Location = new System.Drawing.Point(6, 23);
-      this.label7.Name = "label7";
-      this.label7.Size = new System.Drawing.Size(249, 41);
-      this.label7.TabIndex = 13;
-      this.label7.Text = "Maximum distance in pixels that a point may vary from the average fixation point " +
-    "and still be considered part of the fixation.";
-      // 
-      // groupBox3
-      // 
-      this.groupBox3.Controls.Add(this.chbEliminateFirstFixationSimple);
-      this.groupBox3.Controls.Add(this.label4);
-      this.groupBox3.Controls.Add(this.nudFixationLimit);
-      this.groupBox3.Controls.Add(this.chbEliminateFirstFixationOfGivenLength);
-      this.groupBox3.Controls.Add(this.chbMergeConsecutiveFixations);
-      this.groupBox3.Controls.Add(this.label3);
-      this.groupBox3.Controls.Add(this.nudFixationRingSize);
-      this.groupBox3.Controls.Add(this.groupBox5);
-      this.groupBox3.Controls.Add(this.groupBox4);
-      this.groupBox3.Controls.Add(this.label7);
-      this.groupBox3.Controls.Add(this.label6);
-      this.groupBox3.Location = new System.Drawing.Point(54, 209);
-      this.groupBox3.Name = "groupBox3";
-      this.groupBox3.Size = new System.Drawing.Size(401, 264);
-      this.groupBox3.TabIndex = 17;
-      this.groupBox3.TabStop = false;
-      this.groupBox3.Text = "Fixation calculation parameters";
-      // 
       // chbEliminateFirstFixationSimple
       // 
       this.chbEliminateFirstFixationSimple.AutoSize = true;
@@ -368,50 +280,6 @@ namespace Ogama.MainWindow.Dialogs
       this.chbEliminateFirstFixationSimple.UseVisualStyleBackColor = true;
       this.chbEliminateFirstFixationSimple.CheckedChanged += new System.EventHandler(this.chbEliminateFirstFixationSimple_CheckedChanged);
       // 
-      // label4
-      // 
-      this.label4.AutoSize = true;
-      this.label4.Location = new System.Drawing.Point(369, 202);
-      this.label4.Name = "label4";
-      this.label4.Size = new System.Drawing.Size(20, 13);
-      this.label4.TabIndex = 23;
-      this.label4.Text = "ms";
-      // 
-      // nudFixationLimit
-      // 
-      this.nudFixationLimit.Increment = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-      this.nudFixationLimit.Location = new System.Drawing.Point(299, 198);
-      this.nudFixationLimit.Maximum = new decimal(new int[] {
-            5000,
-            0,
-            0,
-            0});
-      this.nudFixationLimit.Name = "nudFixationLimit";
-      this.nudFixationLimit.Size = new System.Drawing.Size(63, 20);
-      this.nudFixationLimit.TabIndex = 22;
-      this.nudFixationLimit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-      this.nudFixationLimit.Value = new decimal(new int[] {
-            300,
-            0,
-            0,
-            0});
-      // 
-      // chbEliminateFirstFixationOfGivenLength
-      // 
-      this.chbEliminateFirstFixationOfGivenLength.AutoSize = true;
-      this.chbEliminateFirstFixationOfGivenLength.Location = new System.Drawing.Point(9, 198);
-      this.chbEliminateFirstFixationOfGivenLength.Name = "chbEliminateFirstFixationOfGivenLength";
-      this.chbEliminateFirstFixationOfGivenLength.Size = new System.Drawing.Size(290, 30);
-      this.chbEliminateFirstFixationOfGivenLength.TabIndex = 21;
-      this.chbEliminateFirstFixationOfGivenLength.Text = "Eliminate first fixation if it is at same place as last fixation \r\nof foregoing t" +
-    "rial and shorter than";
-      this.chbEliminateFirstFixationOfGivenLength.UseVisualStyleBackColor = true;
-      this.chbEliminateFirstFixationOfGivenLength.CheckedChanged += new System.EventHandler(this.chbEliminateFirstFixationOfGivenLength_CheckedChanged);
-      // 
       // chbMergeConsecutiveFixations
       // 
       this.chbMergeConsecutiveFixations.AutoSize = true;
@@ -424,14 +292,6 @@ namespace Ogama.MainWindow.Dialogs
       this.chbMergeConsecutiveFixations.Text = "Merge consecutive fixations within max distance into one fixation.";
       this.toolTip1.SetToolTip(this.chbMergeConsecutiveFixations, resources.GetString("chbMergeConsecutiveFixations.ToolTip"));
       this.chbMergeConsecutiveFixations.UseVisualStyleBackColor = true;
-      // 
-      // label3
-      // 
-      this.label3.Location = new System.Drawing.Point(6, 111);
-      this.label3.Name = "label3";
-      this.label3.Size = new System.Drawing.Size(258, 52);
-      this.label3.TabIndex = 20;
-      this.label3.Text = resources.GetString("label3.Text");
       // 
       // nudFixationRingSize
       // 
@@ -461,17 +321,6 @@ namespace Ogama.MainWindow.Dialogs
             0,
             0,
             0});
-      // 
-      // groupBox5
-      // 
-      this.groupBox5.Controls.Add(this.nudMaxDistanceMouse);
-      this.groupBox5.Controls.Add(this.nudMinMouseSamples);
-      this.groupBox5.Location = new System.Drawing.Point(331, 13);
-      this.groupBox5.Name = "groupBox5";
-      this.groupBox5.Size = new System.Drawing.Size(64, 94);
-      this.groupBox5.TabIndex = 19;
-      this.groupBox5.TabStop = false;
-      this.groupBox5.Text = "Mouse";
       // 
       // nudMaxDistanceMouse
       // 
@@ -525,6 +374,181 @@ namespace Ogama.MainWindow.Dialogs
             0,
             0});
       // 
+      // nudGazeDiameterDiv
+      // 
+      this.nudGazeDiameterDiv.DecimalPlaces = 1;
+      this.nudGazeDiameterDiv.Increment = new decimal(new int[] {
+            2,
+            0,
+            0,
+            65536});
+      this.nudGazeDiameterDiv.Location = new System.Drawing.Point(11, 19);
+      this.nudGazeDiameterDiv.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+      this.nudGazeDiameterDiv.Name = "nudGazeDiameterDiv";
+      this.nudGazeDiameterDiv.Size = new System.Drawing.Size(43, 20);
+      this.nudGazeDiameterDiv.TabIndex = 7;
+      this.toolTip1.SetToolTip(this.nudGazeDiameterDiv, "This is just a display parameter on how big the fixation\r\ncircles are drawn.");
+      this.nudGazeDiameterDiv.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+      // 
+      // groupBox2
+      // 
+      this.groupBox2.Controls.Add(this.label10);
+      this.groupBox2.Controls.Add(this.label9);
+      this.groupBox2.Controls.Add(this.label11);
+      this.groupBox2.Controls.Add(this.label5);
+      this.groupBox2.Controls.Add(this.txbSamplingRateMouse);
+      this.groupBox2.Controls.Add(this.txbSamplingRateGaze);
+      this.groupBox2.Location = new System.Drawing.Point(257, 123);
+      this.groupBox2.Name = "groupBox2";
+      this.groupBox2.Size = new System.Drawing.Size(198, 80);
+      this.groupBox2.TabIndex = 12;
+      this.groupBox2.TabStop = false;
+      this.groupBox2.Text = "Sampling rates";
+      // 
+      // label10
+      // 
+      this.label10.AutoSize = true;
+      this.label10.Location = new System.Drawing.Point(6, 53);
+      this.label10.Name = "label10";
+      this.label10.Size = new System.Drawing.Size(39, 13);
+      this.label10.TabIndex = 2;
+      this.label10.Text = "Mouse";
+      // 
+      // label9
+      // 
+      this.label9.AutoSize = true;
+      this.label9.Location = new System.Drawing.Point(6, 27);
+      this.label9.Name = "label9";
+      this.label9.Size = new System.Drawing.Size(32, 13);
+      this.label9.TabIndex = 2;
+      this.label9.Text = "Gaze";
+      // 
+      // label11
+      // 
+      this.label11.AutoSize = true;
+      this.label11.Location = new System.Drawing.Point(139, 53);
+      this.label11.Name = "label11";
+      this.label11.Size = new System.Drawing.Size(20, 13);
+      this.label11.TabIndex = 1;
+      this.label11.Text = "Hz";
+      // 
+      // label5
+      // 
+      this.label5.AutoSize = true;
+      this.label5.Location = new System.Drawing.Point(139, 27);
+      this.label5.Name = "label5";
+      this.label5.Size = new System.Drawing.Size(20, 13);
+      this.label5.TabIndex = 1;
+      this.label5.Text = "Hz";
+      // 
+      // label6
+      // 
+      this.label6.Location = new System.Drawing.Point(6, 71);
+      this.label6.Name = "label6";
+      this.label6.Size = new System.Drawing.Size(249, 26);
+      this.label6.TabIndex = 14;
+      this.label6.Text = "Minimum number of samples that can be considered a fixation.";
+      // 
+      // label7
+      // 
+      this.label7.Location = new System.Drawing.Point(6, 23);
+      this.label7.Name = "label7";
+      this.label7.Size = new System.Drawing.Size(249, 41);
+      this.label7.TabIndex = 13;
+      this.label7.Text = "Maximum distance in pixels that a point may vary from the average fixation point " +
+    "and still be considered part of the fixation.";
+      // 
+      // groupBox3
+      // 
+      this.groupBox3.Controls.Add(this.chbEliminateFirstFixationSimple);
+      this.groupBox3.Controls.Add(this.label4);
+      this.groupBox3.Controls.Add(this.nudFixationLimit);
+      this.groupBox3.Controls.Add(this.chbEliminateFirstFixationOfGivenLength);
+      this.groupBox3.Controls.Add(this.chbMergeConsecutiveFixations);
+      this.groupBox3.Controls.Add(this.label3);
+      this.groupBox3.Controls.Add(this.nudFixationRingSize);
+      this.groupBox3.Controls.Add(this.groupBox5);
+      this.groupBox3.Controls.Add(this.groupBox4);
+      this.groupBox3.Controls.Add(this.label7);
+      this.groupBox3.Controls.Add(this.label6);
+      this.groupBox3.Location = new System.Drawing.Point(54, 209);
+      this.groupBox3.Name = "groupBox3";
+      this.groupBox3.Size = new System.Drawing.Size(401, 264);
+      this.groupBox3.TabIndex = 17;
+      this.groupBox3.TabStop = false;
+      this.groupBox3.Text = "Fixation calculation parameters";
+      // 
+      // label4
+      // 
+      this.label4.AutoSize = true;
+      this.label4.Location = new System.Drawing.Point(369, 202);
+      this.label4.Name = "label4";
+      this.label4.Size = new System.Drawing.Size(20, 13);
+      this.label4.TabIndex = 23;
+      this.label4.Text = "ms";
+      // 
+      // nudFixationLimit
+      // 
+      this.nudFixationLimit.Increment = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+      this.nudFixationLimit.Location = new System.Drawing.Point(299, 198);
+      this.nudFixationLimit.Maximum = new decimal(new int[] {
+            5000,
+            0,
+            0,
+            0});
+      this.nudFixationLimit.Name = "nudFixationLimit";
+      this.nudFixationLimit.Size = new System.Drawing.Size(63, 20);
+      this.nudFixationLimit.TabIndex = 22;
+      this.nudFixationLimit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+      this.nudFixationLimit.Value = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+      // 
+      // chbEliminateFirstFixationOfGivenLength
+      // 
+      this.chbEliminateFirstFixationOfGivenLength.AutoSize = true;
+      this.chbEliminateFirstFixationOfGivenLength.Location = new System.Drawing.Point(9, 198);
+      this.chbEliminateFirstFixationOfGivenLength.Name = "chbEliminateFirstFixationOfGivenLength";
+      this.chbEliminateFirstFixationOfGivenLength.Size = new System.Drawing.Size(290, 30);
+      this.chbEliminateFirstFixationOfGivenLength.TabIndex = 21;
+      this.chbEliminateFirstFixationOfGivenLength.Text = "Eliminate first fixation if it is at same place as last fixation \r\nof foregoing t" +
+    "rial and shorter than";
+      this.chbEliminateFirstFixationOfGivenLength.UseVisualStyleBackColor = true;
+      this.chbEliminateFirstFixationOfGivenLength.CheckedChanged += new System.EventHandler(this.chbEliminateFirstFixationOfGivenLength_CheckedChanged);
+      // 
+      // label3
+      // 
+      this.label3.Location = new System.Drawing.Point(6, 111);
+      this.label3.Name = "label3";
+      this.label3.Size = new System.Drawing.Size(258, 52);
+      this.label3.TabIndex = 20;
+      this.label3.Text = resources.GetString("label3.Text");
+      // 
+      // groupBox5
+      // 
+      this.groupBox5.Controls.Add(this.nudMaxDistanceMouse);
+      this.groupBox5.Controls.Add(this.nudMinMouseSamples);
+      this.groupBox5.Location = new System.Drawing.Point(331, 13);
+      this.groupBox5.Name = "groupBox5";
+      this.groupBox5.Size = new System.Drawing.Size(64, 94);
+      this.groupBox5.TabIndex = 19;
+      this.groupBox5.TabStop = false;
+      this.groupBox5.Text = "Mouse";
+      // 
       // groupBox4
       // 
       this.groupBox4.Controls.Add(this.nudMaxDistanceGaze);
@@ -566,30 +590,6 @@ namespace Ogama.MainWindow.Dialogs
       this.groupBox6.TabIndex = 19;
       this.groupBox6.TabStop = false;
       this.groupBox6.Text = "Gaze";
-      // 
-      // nudGazeDiameterDiv
-      // 
-      this.nudGazeDiameterDiv.DecimalPlaces = 1;
-      this.nudGazeDiameterDiv.Increment = new decimal(new int[] {
-            2,
-            0,
-            0,
-            65536});
-      this.nudGazeDiameterDiv.Location = new System.Drawing.Point(11, 19);
-      this.nudGazeDiameterDiv.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-      this.nudGazeDiameterDiv.Name = "nudGazeDiameterDiv";
-      this.nudGazeDiameterDiv.Size = new System.Drawing.Size(43, 20);
-      this.nudGazeDiameterDiv.TabIndex = 7;
-      this.toolTip1.SetToolTip(this.nudGazeDiameterDiv, "This is just a display parameter on how big the fixation\r\ncircles are drawn.");
-      this.nudGazeDiameterDiv.Value = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
       // 
       // groupBox7
       // 
@@ -635,6 +635,7 @@ namespace Ogama.MainWindow.Dialogs
       this.groupBox8.TabIndex = 21;
       this.groupBox8.TabStop = false;
       this.groupBox8.Text = "SQL Server instance";
+      this.groupBox8.Visible = false;
       // 
       // label12
       // 
@@ -683,21 +684,21 @@ namespace Ogama.MainWindow.Dialogs
       this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ExperimentSettingsDialog_FormClosing);
       this.groupBox1.ResumeLayout(false);
       this.groupBox1.PerformLayout();
-      this.groupBox2.ResumeLayout(false);
-      this.groupBox2.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.nudMinGazeSamples)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.nudMaxDistanceGaze)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.nudFixationRingSize)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.nudMaxDistanceMouse)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.nudMinMouseSamples)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.nudGazeDiameterDiv)).EndInit();
+      this.groupBox2.ResumeLayout(false);
+      this.groupBox2.PerformLayout();
       this.groupBox3.ResumeLayout(false);
       this.groupBox3.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.nudFixationLimit)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.nudFixationRingSize)).EndInit();
       this.groupBox5.ResumeLayout(false);
-      ((System.ComponentModel.ISupportInitialize)(this.nudMaxDistanceMouse)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.nudMinMouseSamples)).EndInit();
       this.groupBox4.ResumeLayout(false);
       this.grbFixParams.ResumeLayout(false);
       this.groupBox6.ResumeLayout(false);
-      ((System.ComponentModel.ISupportInitialize)(this.nudGazeDiameterDiv)).EndInit();
       this.groupBox7.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.nudMouseDiameterDiv)).EndInit();
       this.groupBox8.ResumeLayout(false);

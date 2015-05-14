@@ -30,18 +30,18 @@ namespace Ogama.Modules.Recording
     public RawData[] RawDataList;
 
     /// <summary>
-    /// A <see cref="OgamaDataSet.RawdataDataTable"/> of the current subject
+    /// A <see cref="SQLiteOgamaDataSet.RawdataDataTable"/> of the current subject
     /// where to write the data to.
     /// </summary>
-    public OgamaDataSet.RawdataDataTable RawDataTable;
+    public SQLiteOgamaDataSet.RawdataDataTable RawDataTable;
 
     /// <summary>
     /// Initializes a new instance of the DataToTable structure.
     /// </summary>
     /// <param name="newRawData">A <see cref="List{RawData}"/> with the new data.</param>
-    /// <param name="newRawDataTable">A <see cref="OgamaDataSet.RawdataDataTable"/> of the current subject
+    /// <param name="newRawDataTable">A <see cref="SQLiteOgamaDataSet.RawdataDataTable"/> of the current subject
     /// where to write the data to.</param>
-    public DataToTable(List<RawData> newRawData, OgamaDataSet.RawdataDataTable newRawDataTable)
+    public DataToTable(List<RawData> newRawData, SQLiteOgamaDataSet.RawdataDataTable newRawDataTable)
     {
       this.RawDataList = newRawData.ToArray();
       this.RawDataTable = newRawDataTable;

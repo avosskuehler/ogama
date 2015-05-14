@@ -645,6 +645,7 @@ namespace Ogama.Modules.Fixations
         sbi.AddParameter("ID", DbType.Int64);
         sbi.AddParameter("SubjectName", DbType.String);
         sbi.AddParameter("TrialSequence", DbType.Int32);
+        sbi.AddParameter("TrialId", DbType.Int32);
         sbi.AddParameter("CountInTrial", DbType.Int32);
         sbi.AddParameter("StartTime", DbType.Int64);
         sbi.AddParameter("Length", DbType.Int32);
@@ -653,8 +654,16 @@ namespace Ogama.Modules.Fixations
 
         foreach (var row in fixTable.Rows)
         {
-          var rawRow = row as OgamaDataSet.GazeFixationsRow;
-          sbi.Insert(new object[] { rawRow.ID, rawRow.SubjectName, rawRow.TrialSequence, rawRow.CountInTrial, rawRow.StartTime, rawRow.Length, rawRow.PosX, rawRow.PosY });
+          if (row is SQLiteOgamaDataSet.GazeFixationsRow)
+          {
+            var rawRow = row as SQLiteOgamaDataSet.GazeFixationsRow;
+            sbi.Insert(new object[] { rawRow.ID, rawRow.SubjectName, rawRow.TrialSequence, rawRow.TrialID, rawRow.CountInTrial, rawRow.StartTime, rawRow.Length, rawRow.PosX, rawRow.PosY });
+          }
+          else if (row is SQLiteOgamaDataSet.MouseFixationsRow)
+          {
+            var rawRow = row as SQLiteOgamaDataSet.MouseFixationsRow;
+            sbi.Insert(new object[] { rawRow.ID, rawRow.SubjectName, rawRow.TrialSequence, rawRow.TrialID, rawRow.CountInTrial, rawRow.StartTime, rawRow.Length, rawRow.PosX, rawRow.PosY });
+          }
         }
 
         sbi.Flush();

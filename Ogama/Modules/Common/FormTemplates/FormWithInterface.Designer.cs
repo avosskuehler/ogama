@@ -2,6 +2,8 @@
 {
   using System.Windows.Forms;
 
+  using Ogama.DataSet;
+
   partial class FormWithInterface
   {
     /// <summary>
@@ -32,7 +34,7 @@
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
-      this.ogamaDataSet = new Ogama.DataSet.OgamaDataSet();
+      this.ogamaDataSet = new SQLiteOgamaDataSet();
       this.bsoSubjects = new System.Windows.Forms.BindingSource(this.components);
       this.bsoFKSubjectsTrials = new System.Windows.Forms.BindingSource(this.components);
       this.bsoFKTrialsEvents = new System.Windows.Forms.BindingSource(this.components);
@@ -196,11 +198,11 @@
     /// </summary>
     protected BindingSource bsoFKSubjectsTrials;
     /// <summary>
-    /// The dummy <see cref="Ogama.DataSet.OgamaDataSet"/> that is replaced with the 
+    /// The dummy <see cref="SQLiteOgamaDataSet"/> that is replaced with the 
     /// dataset defined in each <see cref="Document"/>.
     /// </summary>
     /// <remarks>Needed for Design-Support.</remarks>
-    protected Ogama.DataSet.OgamaDataSet ogamaDataSet;
+    protected SQLiteOgamaDataSet ogamaDataSet;
     /// <summary>
     /// The <see cref="BindingSource"/> for the trials-events foreign key.
     /// </summary>
