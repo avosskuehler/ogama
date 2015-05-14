@@ -1074,7 +1074,7 @@ namespace Ogama.Modules.Database
         this.bsoAOIs.EndEdit();
         this.bsoShapeGroups.EndEdit();
 
-        OgamaDataSet dataset = Document.ActiveDocument.DocDataSet;
+        var dataset = Document.ActiveDocument.DocDataSet;
 
         int affectedRows = dataset.SubjectsAdapter.Update(dataset.Subjects);
         affectedRows = dataset.SubjectParametersAdapter.Update(dataset.SubjectParameters);

@@ -18,6 +18,7 @@ namespace Ogama
   using System.Collections.Specialized;
   using System.ComponentModel;
   using System.Data.SqlClient;
+  using System.Data.SQLite;
   using System.Drawing;
   using System.IO;
   using System.Windows.Forms;
@@ -96,7 +97,7 @@ namespace Ogama
     /// <summary>
     /// Dataset assigned with this document.
     /// </summary>
-    private OgamaDataSet dataSet;
+    private SQLiteOgamaDataSet dataSet;
 
     /// <summary>
     /// Flag. True, if document parameters were modified.
@@ -211,7 +212,7 @@ namespace Ogama
     /// Gets or sets assigned dataset.
     /// </summary>
     /// <value>The <see cref="OgamaDataSet"/> for the current document.</value>
-    public OgamaDataSet DocDataSet
+    public SQLiteOgamaDataSet DocDataSet
     {
       get { return this.dataSet; }
       set { this.dataSet = value; }
@@ -392,17 +393,18 @@ namespace Ogama
     public bool LoadSQLData(BackgroundWorker splash)
     {
       // Creates new DataSet
-      this.dataSet = new OgamaDataSet();
+      this.dataSet = new SQLiteOgamaDataSet();
 
-      bool automaticCorrectMachineNameTried = false;
-      bool automaticResetConnectionTried = false;
-      bool logRebuild = false;
+      // Data Source=C:\Users\Adrian\Documents\OgamaExperiments\SlideshowDemo\Database\SlideshowDemo.sdf;Max Database Size=4091
+      //bool automaticCorrectMachineNameTried = false;
+      //bool automaticResetConnectionTried = false;
+      //bool logRebuild = false;
 
       // Check for existing database
-      if (!File.Exists(this.experimentSettings.DatabaseMDFFile))
+      if (!File.Exists(this.experimentSettings.DatabaseSQLiteFile))
       {
         string message = "The experiments database: " + Environment.NewLine +
-          this.experimentSettings.DatabaseMDFFile + Environment.NewLine +
+          this.experimentSettings.DatabaseSQLiteFile + Environment.NewLine +
           "does not exist. This error could not be automically resolved." +
           Environment.NewLine + "Please move the database to the above location, " +
           "or create a new experiment.";
@@ -410,90 +412,91 @@ namespace Ogama
         return false;
       }
 
-    Test:
+      
+    //Test:
       // Show loading splash screen if it is not running
       if (splash != null && !splash.IsBusy)
       {
         splash.RunWorkerAsync();
       }
 
-      SqlConnection connectionString = new SqlConnection(Document.ActiveDocument.ExperimentSettings.ServerConnectionString);
-      ServerConnection connection = new ServerConnection(connectionString);
-      Server sqlServer = new Server(connection);
-    Attach:
-      try
-      {
-        StringCollection sc = new StringCollection();
-        sc.Add(Document.ActiveDocument.ExperimentSettings.DatabaseMDFFile);
-        if (logRebuild)
-        {
-          if (File.Exists(Document.ActiveDocument.ExperimentSettings.DatabaseLDFFile))
-          {
-            File.Delete(Document.ActiveDocument.ExperimentSettings.DatabaseLDFFile);
-          }
-        }
-        else
-        {
-          sc.Add(Document.ActiveDocument.ExperimentSettings.DatabaseLDFFile);
-        }
+    //  SqlConnection connectionString = new SqlConnection(Document.ActiveDocument.ExperimentSettings.ServerConnectionString);
+    //  ServerConnection connection = new ServerConnection(connectionString);
+    //  Server sqlServer = new Server(connection);
+    //Attach:
+    //  try
+    //  {
+    //    StringCollection sc = new StringCollection();
+    //    sc.Add(Document.ActiveDocument.ExperimentSettings.DatabaseMDFFile);
+    //    if (logRebuild)
+    //    {
+    //      if (File.Exists(Document.ActiveDocument.ExperimentSettings.DatabaseLDFFile))
+    //      {
+    //        File.Delete(Document.ActiveDocument.ExperimentSettings.DatabaseLDFFile);
+    //      }
+    //    }
+    //    else
+    //    {
+    //      sc.Add(Document.ActiveDocument.ExperimentSettings.DatabaseLDFFile);
+    //    }
 
-        // Attach database file
-        if (!sqlServer.Databases.Contains(Document.ActiveDocument.ExperimentSettings.Name))
-        {
-          sqlServer.AttachDatabase(
-            Document.ActiveDocument.ExperimentSettings.Name,
-            sc,
-            logRebuild ? AttachOptions.RebuildLog : AttachOptions.None);
-        }
+    //    // Attach database file
+    //    if (!sqlServer.Databases.Contains(Document.ActiveDocument.ExperimentSettings.Name))
+    //    {
+    //      sqlServer.AttachDatabase(
+    //        Document.ActiveDocument.ExperimentSettings.Name,
+    //        sc,
+    //        logRebuild ? AttachOptions.RebuildLog : AttachOptions.None);
+    //    }
 
-        sqlServer.ConnectionContext.Disconnect();
-        logRebuild = false;
-      }
-      catch (Exception ex)
-      {
-        // Check for the SQLError 9004, which indicates a failure 
-        // in the log file, which can be fixed by rebuilding the log.
-        if (ex.InnerException != null)
-        {
-          if (ex.InnerException.InnerException != null)
-          {
-            if (ex.InnerException.InnerException is SqlException)
-            {
-              if (((SqlException)ex.InnerException.InnerException).Number == 9004)
-              {
-                logRebuild = true;
-              }
-            }
-          }
-        }
+    //    sqlServer.ConnectionContext.Disconnect();
+    //    logRebuild = false;
+    //  }
+    //  catch (Exception ex)
+    //  {
+    //    // Check for the SQLError 9004, which indicates a failure 
+    //    // in the log file, which can be fixed by rebuilding the log.
+    //    if (ex.InnerException != null)
+    //    {
+    //      if (ex.InnerException.InnerException != null)
+    //      {
+    //        if (ex.InnerException.InnerException is SqlException)
+    //        {
+    //          if (((SqlException)ex.InnerException.InnerException).Number == 9004)
+    //          {
+    //            logRebuild = true;
+    //          }
+    //        }
+    //      }
+    //    }
 
-        if (!logRebuild)
-        {
-          string message = @"The following error occured: " + ex.Message + Environment.NewLine + Environment.NewLine +
-            @"If it is the following: 'Failed to generate a user instance of SQL Server due to a failure in starting the process for the user instance. The connection will be closed.'" +
-            @"Please delete the folder 'Local Settings\Application Data\Microsoft\Microsoft SQL Server Data\" + Document.ActiveDocument.ExperimentSettings.SqlInstanceName +
-            "' in WinXP or " +
-            @"'AppData\Local\Microsoft\Microsoft SQL Server Data\" + Document.ActiveDocument.ExperimentSettings.SqlInstanceName + "' on Vista and Windows 7 and try again.";
-          ExceptionMethods.ProcessMessage("SQL Server connection failed.", message);
-          ExceptionMethods.ProcessUnhandledException(ex);
-          if (splash != null && splash.IsBusy)
-          {
-            splash.CancelAsync();
-          }
+    //    if (!logRebuild)
+    //    {
+    //      string message = @"The following error occured: " + ex.Message + Environment.NewLine + Environment.NewLine +
+    //        @"If it is the following: 'Failed to generate a user instance of SQL Server due to a failure in starting the process for the user instance. The connection will be closed.'" +
+    //        @"Please delete the folder 'Local Settings\Application Data\Microsoft\Microsoft SQL Server Data\" + Document.ActiveDocument.ExperimentSettings.SqlInstanceName +
+    //        "' in WinXP or " +
+    //        @"'AppData\Local\Microsoft\Microsoft SQL Server Data\" + Document.ActiveDocument.ExperimentSettings.SqlInstanceName + "' on Vista and Windows 7 and try again.";
+    //      ExceptionMethods.ProcessMessage("SQL Server connection failed.", message);
+    //      ExceptionMethods.ProcessUnhandledException(ex);
+    //      if (splash != null && splash.IsBusy)
+    //      {
+    //        splash.CancelAsync();
+    //      }
 
-          return false;
-        }
-      }
+    //      return false;
+    //    }
+    //  }
 
-      // Go back and rebuild the log file.
-      if (logRebuild)
-      {
-        goto Attach;
-      }
+    //  // Go back and rebuild the log file.
+    //  if (logRebuild)
+    //  {
+    //    goto Attach;
+    //  }
 
       // Now that we successfully attached the file, test the connection
       // Test connection string
-      using (SqlConnection conn = new SqlConnection(Document.ActiveDocument.ExperimentSettings.DatabaseConnectionString))
+      using (var conn = new SQLiteConnection(Document.ActiveDocument.ExperimentSettings.DatabaseConnectionString))
       {
         try
         {
@@ -501,55 +504,53 @@ namespace Ogama
         }
         catch (Exception ex)
         {
-          if (splash != null && splash.IsBusy)
-          {
-            splash.CancelAsync();
-          }
+          //if (splash != null && splash.IsBusy)
+          //{
+          //  splash.CancelAsync();
+          //}
 
-          if (!automaticResetConnectionTried)
-          {
-            this.experimentSettings.CustomConnectionString = string.Empty;
-            this.isModified = true;
-            automaticResetConnectionTried = true;
-            goto Test;
-          }
+          //if (!automaticResetConnectionTried)
+          //{
+          //  this.experimentSettings.CustomConnectionString = string.Empty;
+          //  this.isModified = true;
+          //  automaticResetConnectionTried = true;
+          //  goto Test;
+          //}
 
-          if (!automaticCorrectMachineNameTried)
-          {
-            string currentConnectionString = this.experimentSettings.DatabaseConnectionString;
-            int firstEqualSign = currentConnectionString.IndexOf('=', 0);
-            int firstBackslash = currentConnectionString.IndexOf('\\', 0);
-            string machineName = currentConnectionString.Substring(firstEqualSign + 1, firstBackslash - firstEqualSign - 1);
-            string currentMachineName = Environment.MachineName;
-            currentConnectionString = currentConnectionString.Replace(machineName + "\\", currentMachineName + "\\");
-            this.experimentSettings.CustomConnectionString = currentConnectionString;
-            automaticCorrectMachineNameTried = true;
-            this.isModified = true;
-            goto Test;
-          }
+          //if (!automaticCorrectMachineNameTried)
+          //{
+          //  string currentConnectionString = this.experimentSettings.DatabaseConnectionString;
+          //  int firstEqualSign = currentConnectionString.IndexOf('=', 0);
+          //  int firstBackslash = currentConnectionString.IndexOf('\\', 0);
+          //  string machineName = currentConnectionString.Substring(firstEqualSign + 1, firstBackslash - firstEqualSign - 1);
+          //  string currentMachineName = Environment.MachineName;
+          //  currentConnectionString = currentConnectionString.Replace(machineName + "\\", currentMachineName + "\\");
+          //  this.experimentSettings.CustomConnectionString = currentConnectionString;
+          //  automaticCorrectMachineNameTried = true;
+          //  this.isModified = true;
+          //  goto Test;
+          //}
 
-          string message = "Connection to SQL server failed." + Environment.NewLine +
-            "Please use the following dialog to specify customized connection properties."
-            + Environment.NewLine + Environment.NewLine +
+          string message = "Connection to SQLite database failed." + Environment.NewLine +
             "Take a careful look at the database file to attach and its path. " +
-            "The .mdf file should be named the same as the experiment .oga file and located in the "
+            "The .db file should be named the same as the experiment .oga file and located in the "
             + "Database subfolder of the experiment." + Environment.NewLine + "The error message is: "
             + Environment.NewLine + ex.Message + Environment.NewLine;
           ExceptionMethods.ProcessErrorMessage(message);
 
-          SQLConnectionDialog connectionDialog = new SQLConnectionDialog();
-          connectionDialog.ConnectionString = this.experimentSettings.DatabaseConnectionString;
-          if (connectionDialog.ShowDialog() == DialogResult.OK)
-          {
-            this.experimentSettings.CustomConnectionString = connectionDialog.ConnectionString;
-            this.isModified = true;
-          }
-          else
-          {
-            return false;
-          }
+          //SQLConnectionDialog connectionDialog = new SQLConnectionDialog();
+          //connectionDialog.ConnectionString = this.experimentSettings.DatabaseConnectionString;
+          //if (connectionDialog.ShowDialog() == DialogResult.OK)
+          //{
+          //  this.experimentSettings.CustomConnectionString = connectionDialog.ConnectionString;
+          //  this.isModified = true;
+          //}
+          //else
+          //{
+          //  return false;
+          //}
 
-          goto Test;
+          //goto Test;
         }
         finally
         {
@@ -575,10 +576,8 @@ namespace Ogama
       {
         return true;
       }
-      else
-      {
-        return false;
-      }
+
+      return false;
     }
 
     /// <summary>

@@ -22,7 +22,6 @@ namespace Ogama.DataSet
   using System.IO;
   using System.Windows.Forms;
 
-  using Ogama.DataSet.OgamaDataSetTableAdapters;
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow.Dialogs;
   using Ogama.Modules.Common.SlideCollections;
@@ -32,6 +31,7 @@ namespace Ogama.DataSet
   using VectorGraphics.Elements;
   using VectorGraphics.Elements.ElementCollections;
   using VectorGraphics.StopConditions;
+  using Ogama.DataSet.OgamaDataSetTableAdapters;
 
   /// <summary>
   /// Gaze and mouse viewer dataset.

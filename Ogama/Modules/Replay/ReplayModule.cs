@@ -25,6 +25,7 @@ namespace Ogama.Modules.Replay
 
   using GTHardware.Cameras.DirectShow;
 
+  using Ogama.DataSet;
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
   using Ogama.MainWindow.ContextPanel;
@@ -1534,7 +1535,7 @@ namespace Ogama.Modules.Replay
       markerEvent.Type = EventType.Marker;
 
       // Insert Data in TrialEvents Table
-      Ogama.DataSet.OgamaDataSet.TrialEventsRow workTrialEventRow;
+      SQLiteOgamaDataSet.TrialEventsRow workTrialEventRow;
       workTrialEventRow = Document.ActiveDocument.DocDataSet.TrialEvents.NewTrialEventsRow();
       workTrialEventRow.EventID = markerEvent.EventID;
       workTrialEventRow.EventParam = markerEvent.Param;

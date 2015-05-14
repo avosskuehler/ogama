@@ -159,7 +159,7 @@ namespace Ogama.MainWindow
         string ldfSource = Application.StartupPath + "\\DataSet\\OgamaDatabaseTemplate_log.ldf";
         if (File.Exists(mdfSource))
         {
-          string mdfDestination = newSettings.DatabaseMDFFile;
+          string mdfDestination = newSettings.DatabaseSQLiteFile;
           string ldfDestination = mdfDestination.Replace(".mdf", "_log.ldf");
 
           bool overwrite = false;
