@@ -272,8 +272,8 @@ namespace Ogama.Properties
     /// </summary>
     public bool EliminateFirstFixationSimple
     {
-        get { return this.eliminateFirstFixationSimple; }
-        set { this.eliminateFirstFixationSimple = value; }
+      get { return this.eliminateFirstFixationSimple; }
+      set { this.eliminateFirstFixationSimple = value; }
     }
 
     /// <summary>
@@ -458,18 +458,9 @@ namespace Ogama.Properties
     /// Gets full file path for the database mdf file.
     /// </summary>
     /// <value>A <see cref="string"/> with the database file.</value>
-    public string DatabaseMDFFile
+    public string DatabaseSQLiteFile
     {
-      get { return Path.Combine(this.CreateDatabasePath(), this.experimentName + ".mdf"); }
-    }
-
-    /// <summary>
-    /// Gets full file path for the database ldf LOG file.
-    /// </summary>
-    /// <value>A <see cref="string"/> with the database log file.</value>
-    public string DatabaseLDFFile
-    {
-      get { return Path.Combine(this.CreateDatabasePath(), this.experimentName + "_log.ldf"); }
+      get { return Path.Combine(this.CreateDatabasePath(), this.experimentName + ".db"); }
     }
 
     /// <summary>
@@ -707,7 +698,7 @@ namespace Ogama.Properties
           "and afterwards has beeing renamed." +
           Environment.NewLine +
           "Would you like to use the default database connection to the file:" +
-          Environment.NewLine + this.DatabaseMDFFile + "?";
+          Environment.NewLine + this.DatabaseSQLiteFile + "?";
         DialogResult result = InformationDialog.Show(
           "Database has not default settings",
           message,
@@ -780,8 +771,9 @@ namespace Ogama.Properties
       }
       else
       {
-        usedConnection = @"Data Source=.\" + this.sqlInstanceName + ";Initial Catalog=" +
-          this.experimentName + ";Integrated Security=True;User Instance=True;Connection Timeout=30";
+        //usedConnection = @"Data Source=.\" + this.sqlInstanceName + ";Initial Catalog=" +
+        //  this.experimentName + ";Integrated Security=True;User Instance=True;Connection Timeout=30";
+        usedConnection = @"Data Source=" + this.DatabaseSQLiteFile;
       }
 
       return usedConnection;

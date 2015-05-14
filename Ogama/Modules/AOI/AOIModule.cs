@@ -555,7 +555,7 @@ namespace Ogama.Modules.AOI
       var dlg = new GroupNameDlg();
       if (dlg.ShowDialog() == DialogResult.OK)
       {
-        OgamaDataSet.ShapeGroupsRow workRowShapeGroups =
+        SQLiteOgamaDataSet.ShapeGroupsRow workRowShapeGroups =
           Document.ActiveDocument.DocDataSet.ShapeGroups.NewShapeGroupsRow();
         workRowShapeGroups.ShapeGroup = dlg.GroupName;
         Document.ActiveDocument.DocDataSet.ShapeGroups.AddShapeGroupsRow(workRowShapeGroups);
@@ -628,7 +628,7 @@ namespace Ogama.Modules.AOI
     /// </summary>
     private void DeleteAOIinDatabase()
     {
-      string queryString = "DELETE FROM dbo.AOIs;";
+      string queryString = "DELETE FROM AOIs;";
       Queries.ExecuteSQLCommand(queryString);
     }
 
@@ -1120,7 +1120,7 @@ namespace Ogama.Modules.AOI
           exportFile.WriteLine("# Applies to Projekt:" + Document.ActiveDocument.ExperimentSettings.Name);
           exportFile.WriteLine("#");
 
-          OgamaDataSet.AOIsDataTable aois = Document.ActiveDocument.DocDataSet.AOIs;
+          var aois = Document.ActiveDocument.DocDataSet.AOIs;
 
           // Write Column Names
           foreach (DataColumn dataColumn in aois.Columns)

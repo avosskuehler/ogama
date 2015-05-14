@@ -559,7 +559,7 @@ namespace Ogama.Modules.Fixations
       string activeSubject = Document.ActiveDocument.SelectionState.SubjectName;
       if (activeSubject != null)
       {
-        OgamaDataSet.TrialsDataTable trialsTable = Document.ActiveDocument.DocDataSet.TrialsAdapter.GetDataBySubjectAndSequence(activeSubject, currentTrialSequence);
+        var trialsTable = Document.ActiveDocument.DocDataSet.TrialsAdapter.GetDataBySubjectAndSequence(activeSubject, currentTrialSequence);
         Document.ActiveDocument.DocDataSet.TrialsAdapter.UpdateEliminateByID("yes", (long)trialsTable.Rows[0]["ID"]);
         Document.ActiveDocument.DocDataSet.TrialsAdapter.Fill(Document.ActiveDocument.DocDataSet.Trials);
       }
@@ -725,7 +725,7 @@ namespace Ogama.Modules.Fixations
         }
       }
 
-      int affectedRows = Document.ActiveDocument.DocDataSet.GazeFixationsAdapter.Update((OgamaDataSet.GazeFixationsDataTable)this.fixationsPicture.GazeFixations);
+      int affectedRows = Document.ActiveDocument.DocDataSet.GazeFixationsAdapter.Update((SQLiteOgamaDataSet.GazeFixationsDataTable)this.fixationsPicture.GazeFixations);
       affectedRows = Queries.UpdateRawDataBySubject(rawData, subjectName);
 
       this.ResetDriftCorrections();
