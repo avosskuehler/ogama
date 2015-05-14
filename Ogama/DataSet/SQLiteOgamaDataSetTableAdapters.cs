@@ -712,7 +712,7 @@ namespace Ogama.DataSet.SQLiteOgamaDataSetTableAdapters
       this._adapter.InsertCommand.CommandText =
         "INSERT INTO [SubjectParameters] ([SubjectName], [Param], [ParamValue]) VALUES (@S"
         + "ubjectName, @Param, @ParamValue);\r\nSELECT ID, SubjectName, Param, ParamValue FRO"
-        + "M SubjectParameters WHERE (ID = SCOPE_IDENTITY())";
+        + "M SubjectParameters WHERE (ID = last_insert_rowid())";
       this._adapter.InsertCommand.CommandType = CommandType.Text;
       this._adapter.InsertCommand.Parameters.Add(
         new SQLiteParameter(
@@ -1898,7 +1898,7 @@ SELECT ID, SubjectName, Param, ParamValue FROM SubjectParameters WHERE (ID = @ID
       this._adapter.InsertCommand.Connection = this.Connection;
       this._adapter.InsertCommand.CommandText =
         @"INSERT INTO [Subjects] ([SubjectName], [Category], [Age], [Sex], [Handedness], [Comments]) VALUES (@SubjectName, @Category, @Age, @Sex, @Handedness, @Comments);
-SELECT ID, SubjectName, Category, Age, Sex, Handedness, Comments FROM Subjects WHERE (ID = SCOPE_IDENTITY())";
+SELECT ID, SubjectName, Category, Age, Sex, Handedness, Comments FROM Subjects WHERE (ID = last_insert_rowid())";
       this._adapter.InsertCommand.CommandType = CommandType.Text;
       this._adapter.InsertCommand.Parameters.Add(
         new SQLiteParameter(
@@ -3497,7 +3497,7 @@ SELECT ID, SubjectName, Category, Age, Sex, Handedness, Comments FROM Subjects W
       this._adapter.InsertCommand.Connection = this.Connection;
       this._adapter.InsertCommand.CommandText =
         @"INSERT INTO [Trials] ([SubjectName], [TrialID], [TrialName], [TrialSequence], [Category], [TrialStartTime], [Duration], [EliminateData]) VALUES (@SubjectName, @TrialID, @TrialName, @TrialSequence, @Category, @TrialStartTime, @Duration, @EliminateData);
-SELECT ID, SubjectName, TrialID, TrialName, TrialSequence, Category, TrialStartTime, Duration, EliminateData FROM Trials WHERE (ID = SCOPE_IDENTITY())";
+SELECT ID, SubjectName, TrialID, TrialName, TrialSequence, Category, TrialStartTime, Duration, EliminateData FROM Trials WHERE (ID = last_insert_rowid())";
       this._adapter.InsertCommand.CommandType = CommandType.Text;
       this._adapter.InsertCommand.Parameters.Add(
         new SQLiteParameter(
@@ -5269,7 +5269,7 @@ SELECT ID, SubjectName, TrialID, TrialName, TrialSequence, Category, TrialStartT
       this._adapter.InsertCommand.Connection = this.Connection;
       this._adapter.InsertCommand.CommandText =
         @"INSERT INTO [TrialEvents] ([SubjectName], [TrialSequence], [EventID], [EventTime], [EventType], [EventTask], [EventParam]) VALUES (@SubjectName, @TrialSequence, @EventID, @EventTime, @EventType, @EventTask, @EventParam);
-SELECT ID, SubjectName, TrialSequence, EventID, EventTime, EventType, EventTask, EventParam FROM TrialEvents WHERE (ID = SCOPE_IDENTITY())";
+SELECT ID, SubjectName, TrialSequence, EventID, EventTime, EventType, EventTask, EventParam FROM TrialEvents WHERE (ID = last_insert_rowid())";
       this._adapter.InsertCommand.CommandType = CommandType.Text;
       this._adapter.InsertCommand.Parameters.Add(
         new SQLiteParameter(
@@ -7040,7 +7040,7 @@ SELECT ID, SubjectName, TrialSequence, EventID, EventTime, EventType, EventTask,
       this._adapter.InsertCommand.Connection = this.Connection;
       this._adapter.InsertCommand.CommandText =
         @"INSERT INTO [Rawdata] ([SubjectName], [TrialSequence], [Time], [PupilDiaX], [PupilDiaY], [GazePosX], [GazePosY], [MousePosX], [MousePosY], [EventID]) VALUES (@SubjectName, @TrialSequence, @Time, @PupilDiaX, @PupilDiaY, @GazePosX, @GazePosY, @MousePosX, @MousePosY, @EventID);
-SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, GazePosY, MousePosX, MousePosY, EventID FROM Rawdata WHERE (ID = SCOPE_IDENTITY())";
+SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, GazePosY, MousePosX, MousePosY, EventID FROM Rawdata WHERE (ID = last_insert_rowid())";
       this._adapter.InsertCommand.CommandType = CommandType.Text;
       this._adapter.InsertCommand.Parameters.Add(
         new SQLiteParameter(
@@ -8634,7 +8634,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
       this._adapter.InsertCommand.Connection = this.Connection;
       this._adapter.InsertCommand.CommandText =
         @"INSERT INTO [AOIs] ([TrialID], [SlideNr], [ShapeName], [ShapeType], [ShapeNumPts], [ShapePts], [ShapeGroup]) VALUES (@TrialID, @SlideNr, @ShapeName, @ShapeType, @ShapeNumPts, @ShapePts, @ShapeGroup);
-SELECT ID, TrialID, SlideNr, ShapeName, ShapeType, ShapeNumPts, ShapePts, ShapeGroup FROM AOIs WHERE (ID = SCOPE_IDENTITY())";
+SELECT ID, TrialID, SlideNr, ShapeName, ShapeType, ShapeNumPts, ShapePts, ShapeGroup FROM AOIs WHERE (ID = last_insert_rowid())";
       this._adapter.InsertCommand.CommandType = CommandType.Text;
       this._adapter.InsertCommand.Parameters.Add(
         new SQLiteParameter(
@@ -9611,7 +9611,7 @@ SELECT ID, TrialID, SlideNr, ShapeName, ShapeType, ShapeNumPts, ShapePts, ShapeG
       this._adapter.InsertCommand.Connection = this.Connection;
       this._adapter.InsertCommand.CommandText =
         "INSERT INTO [ShapeGroups] ([ShapeGroup]) VALUES (@ShapeGroup);\r\nSELECT ID, ShapeG"
-        + "roup FROM ShapeGroups WHERE (ID = SCOPE_IDENTITY())";
+        + "roup FROM ShapeGroups WHERE (ID = last_insert_rowid())";
       this._adapter.InsertCommand.CommandType = CommandType.Text;
       this._adapter.InsertCommand.Parameters.Add(
         new SQLiteParameter(
@@ -10954,7 +10954,7 @@ SELECT ID, TrialID, SlideNr, ShapeName, ShapeType, ShapeNumPts, ShapePts, ShapeG
       this._adapter.InsertCommand.Connection = this.Connection;
       this._adapter.InsertCommand.CommandText =
         @"INSERT INTO [GazeFixations] ([SubjectName], [TrialID], [TrialSequence], [CountInTrial], [StartTime], [Length], [PosX], [PosY]) VALUES (@SubjectName, @TrialID, @TrialSequence, @CountInTrial, @StartTime, @Length, @PosX, @PosY);
-SELECT SubjectName, TrialID, TrialSequence, CountInTrial, StartTime, Length, PosX, PosY, ID FROM GazeFixations WHERE (ID = SCOPE_IDENTITY())";
+SELECT SubjectName, TrialID, TrialSequence, CountInTrial, StartTime, Length, PosX, PosY, ID FROM GazeFixations WHERE (ID = last_insert_rowid())";
       this._adapter.InsertCommand.CommandType = CommandType.Text;
       this._adapter.InsertCommand.Parameters.Add(
         new SQLiteParameter(
@@ -12730,7 +12730,7 @@ SELECT SubjectName, TrialID, TrialSequence, CountInTrial, StartTime, Length, Pos
       this._adapter.InsertCommand.Connection = this.Connection;
       this._adapter.InsertCommand.CommandText =
         @"INSERT INTO [MouseFixations] ([SubjectName], [TrialID], [TrialSequence], [CountInTrial], [StartTime], [Length], [PosX], [PosY]) VALUES (@SubjectName, @TrialID, @TrialSequence, @CountInTrial, @StartTime, @Length, @PosX, @PosY);
-SELECT SubjectName, TrialID, TrialSequence, CountInTrial, StartTime, Length, PosX, PosY, ID FROM MouseFixations WHERE (ID = SCOPE_IDENTITY())";
+SELECT SubjectName, TrialID, TrialSequence, CountInTrial, StartTime, Length, PosX, PosY, ID FROM MouseFixations WHERE (ID = last_insert_rowid())";
       this._adapter.InsertCommand.CommandType = CommandType.Text;
       this._adapter.InsertCommand.Parameters.Add(
         new SQLiteParameter(
@@ -13816,7 +13816,7 @@ SELECT SubjectName, TrialID, TrialSequence, CountInTrial, StartTime, Length, Pos
       this._adapter.InsertCommand.Connection = this.Connection;
       this._adapter.InsertCommand.CommandText =
         "INSERT INTO [Params] ([Param], [Description]) VALUES (@Param, @Description)"
-        + ";\r\nSELECT ID, Param, Description FROM Params WHERE (ID = SCOPE_IDENTITY())";
+        + ";\r\nSELECT ID, Param, Description FROM Params WHERE (ID = last_insert_rowid())";
       this._adapter.InsertCommand.CommandType = CommandType.Text;
       this._adapter.InsertCommand.Parameters.Add(
         new SQLiteParameter(

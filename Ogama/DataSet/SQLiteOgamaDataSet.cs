@@ -7866,18 +7866,16 @@ namespace Ogama.DataSet
       /// </summary>
       /// <value>The pupil dia x.</value>
       /// <exception cref="System.Data.StrongTypingException">The value for column \'PupilDiaX\' in table \'Rawdata\' is DBNull.</exception>
-      public double PupilDiaX
+      public double? PupilDiaX
       {
         get
         {
-          try
+          if (this.IsNull(this.tableRawdata.PupilDiaXColumn))
           {
-            return ((double)(this[this.tableRawdata.PupilDiaXColumn]));
+            return null;
           }
-          catch (global::System.InvalidCastException e)
-          {
-            throw new StrongTypingException("The value for column \'PupilDiaX\' in table \'Rawdata\' is DBNull.", e);
-          }
+
+          return (double)this[this.tableRawdata.PupilDiaXColumn];
         }
         set
         {
@@ -7892,18 +7890,16 @@ namespace Ogama.DataSet
       /// </summary>
       /// <value>The pupil dia y.</value>
       /// <exception cref="System.Data.StrongTypingException">The value for column \'PupilDiaY\' in table \'Rawdata\' is DBNull.</exception>
-      public double PupilDiaY
+      public double? PupilDiaY
       {
         get
         {
-          try
+          if (this.IsNull(this.tableRawdata.PupilDiaYColumn))
           {
-            return ((double)(this[this.tableRawdata.PupilDiaYColumn]));
+            return null;
           }
-          catch (global::System.InvalidCastException e)
-          {
-            throw new StrongTypingException("The value for column \'PupilDiaY\' in table \'Rawdata\' is DBNull.", e);
-          }
+
+          return (double)this[this.tableRawdata.PupilDiaYColumn];
         }
         set
         {
@@ -7918,18 +7914,16 @@ namespace Ogama.DataSet
       /// </summary>
       /// <value>The gaze position x.</value>
       /// <exception cref="System.Data.StrongTypingException">The value for column \'GazePosX\' in table \'Rawdata\' is DBNull.</exception>
-      public double GazePosX
+      public double? GazePosX
       {
         get
         {
-          try
+          if (this.IsNull(this.tableRawdata.GazePosXColumn))
           {
-            return ((double)(this[this.tableRawdata.GazePosXColumn]));
+            return null;
           }
-          catch (global::System.InvalidCastException e)
-          {
-            throw new StrongTypingException("The value for column \'GazePosX\' in table \'Rawdata\' is DBNull.", e);
-          }
+
+          return (double)this[this.tableRawdata.GazePosXColumn];
         }
         set
         {
@@ -7944,18 +7938,16 @@ namespace Ogama.DataSet
       /// </summary>
       /// <value>The gaze position y.</value>
       /// <exception cref="System.Data.StrongTypingException">The value for column \'GazePosY\' in table \'Rawdata\' is DBNull.</exception>
-      public double GazePosY
+      public double? GazePosY
       {
         get
         {
-          try
+          if (this.IsNull(this.tableRawdata.GazePosYColumn))
           {
-            return ((double)(this[this.tableRawdata.GazePosYColumn]));
+            return null;
           }
-          catch (global::System.InvalidCastException e)
-          {
-            throw new StrongTypingException("The value for column \'GazePosY\' in table \'Rawdata\' is DBNull.", e);
-          }
+
+          return (double)this[this.tableRawdata.GazePosYColumn];
         }
         set
         {
@@ -7970,18 +7962,16 @@ namespace Ogama.DataSet
       /// </summary>
       /// <value>The mouse position x.</value>
       /// <exception cref="System.Data.StrongTypingException">The value for column \'MousePosX\' in table \'Rawdata\' is DBNull.</exception>
-      public double MousePosX
+      public double? MousePosX
       {
         get
         {
-          try
+          if (this.IsNull(this.tableRawdata.MousePosXColumn))
           {
-            return ((double)(this[this.tableRawdata.MousePosXColumn]));
+            return null;
           }
-          catch (global::System.InvalidCastException e)
-          {
-            throw new StrongTypingException("The value for column \'MousePosX\' in table \'Rawdata\' is DBNull.", e);
-          }
+
+          return (double)this[this.tableRawdata.MousePosXColumn];
         }
         set
         {
@@ -7996,18 +7986,25 @@ namespace Ogama.DataSet
       /// </summary>
       /// <value>The mouse position y.</value>
       /// <exception cref="System.Data.StrongTypingException">The value for column \'MousePosY\' in table \'Rawdata\' is DBNull.</exception>
-      public double MousePosY
+      public double? MousePosY
       {
         get
         {
-          try
+          if (this.IsNull(this.tableRawdata.MousePosYColumn))
           {
-            return ((double)(this[this.tableRawdata.MousePosYColumn]));
+            return null;
           }
-          catch (global::System.InvalidCastException e)
-          {
-            throw new StrongTypingException("The value for column \'MousePosY\' in table \'Rawdata\' is DBNull.", e);
-          }
+
+          return (double)this[this.tableRawdata.MousePosYColumn];
+
+          //try
+          //{
+          //  return ((double)(this[this.tableRawdata.MousePosYColumn]));
+          //}
+          //catch (global::System.InvalidCastException e)
+          //{
+          //  throw new StrongTypingException("The value for column \'MousePosY\' in table \'Rawdata\' is DBNull.", e);
+          //}
         }
         set
         {
@@ -8022,19 +8019,18 @@ namespace Ogama.DataSet
       /// </summary>
       /// <value>The event identifier.</value>
       /// <exception cref="System.Data.StrongTypingException">The value for column \'EventID\' in table \'Rawdata\' is DBNull.</exception>
-      public int EventID
+      public int? EventID
       {
         get
         {
-          try
+          if (this.IsNull(this.tableRawdata.EventIDColumn))
           {
-            return ((int)(this[this.tableRawdata.EventIDColumn]));
+            return null;
           }
-          catch (global::System.InvalidCastException e)
-          {
-            throw new StrongTypingException("The value for column \'EventID\' in table \'Rawdata\' is DBNull.", e);
-          }
+
+          return (int)this[this.tableRawdata.EventIDColumn];
         }
+
         set
         {
           this[this.tableRawdata.EventIDColumn] = value;
