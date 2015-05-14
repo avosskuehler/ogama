@@ -263,7 +263,7 @@ namespace Ogama.Modules.Recording
     /// <summary>
     ///   The raw data table to write the samples to.
     /// </summary>
-    private OgamaDataSet.RawdataDataTable subjectRawDataTable;
+    private SQLiteOgamaDataSet.RawdataDataTable subjectRawDataTable;
 
     /// <summary>
     ///   This is the sum of all sample values within a region.
@@ -354,11 +354,10 @@ namespace Ogama.Modules.Recording
       {
         Init();
       }
-      catch (Exception e)
+      catch (Exception)
       {
-        //TODO RB
+        // TODO RB
       }
-
     }
 
     private void Init()
@@ -535,7 +534,7 @@ namespace Ogama.Modules.Recording
         this.Cursor = Cursors.WaitCursor;
 
         // create new raw data table for subject
-        this.subjectRawDataTable = new OgamaDataSet.RawdataDataTable
+        this.subjectRawDataTable = new SQLiteOgamaDataSet.RawdataDataTable
                                      {
                                        TableName =
                                          this.currentTracker.Subject.SubjectName

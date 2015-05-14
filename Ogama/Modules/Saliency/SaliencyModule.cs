@@ -1065,8 +1065,7 @@ namespace Ogama.Modules.Saliency
       string line = string.Empty;
       int fixCounter = 0;
       duration = 0;
-      OgamaDataSet.GazeFixationsDataTable fixations =
-        new OgamaDataSet.GazeFixationsDataTable();
+      var fixations = new SQLiteOgamaDataSet.GazeFixationsDataTable();
 
       // Check import file.
       if (!File.Exists(importFile))
@@ -1108,7 +1107,7 @@ namespace Ogama.Modules.Saliency
                 strCoordinatePair = strCoordinatePair.Replace(")", string.Empty);
                 string[] coordinates = strCoordinatePair.Split(',');
 
-                OgamaDataSet.GazeFixationsRow fixationRow = fixations.NewGazeFixationsRow();
+                var fixationRow = fixations.NewGazeFixationsRow();
 
                 // Dummy entries
                 fixationRow.SubjectName = string.Empty;

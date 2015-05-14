@@ -19,6 +19,7 @@ namespace Ogama.MainWindow.ContextPanel
   using System.Drawing;
   using System.Windows.Forms;
 
+  using Ogama.DataSet;
   using Ogama.Modules.Common.CustomRenderer;
   using Ogama.Modules.Common.SlideCollections;
 
@@ -438,7 +439,7 @@ namespace Ogama.MainWindow.ContextPanel
 
     /// <summary>
     /// Populates subject list view with entrys of 
-    /// <see cref="Ogama.DataSet.OgamaDataSet.SubjectsDataTable"/>subjects table.
+    /// <see cref="SQLiteOgamaDataSet.SubjectsDataTable"/>subjects table.
     /// The columns SubjectName, Category, Age and Comments
     /// are shown in the list view detail view.
     /// </summary>

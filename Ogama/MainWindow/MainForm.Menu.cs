@@ -1,15 +1,15 @@
-﻿// <copyright file="MainForm.Menu.cs" company="FU Berlin">
-// ******************************************************
-// OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2013 Dr. Adrian Voßkühler  
-// ------------------------------------------------------------------------
-// This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
-// This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-// You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-// **************************************************************
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="MainForm.Menu.cs" company="FU Berlin">
+//   OGAMA - open gaze and mouse analyzer 
+//   Copyright (C) 2014 Dr. Adrian Voßkühler  
+//   Licensed under GPL V3
 // </copyright>
 // <author>Adrian Voßkühler</author>
 // <email>adrian@ogama.net</email>
+// <summary>
+//   
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Ogama.MainWindow
 {
@@ -155,22 +155,20 @@ namespace Ogama.MainWindow
 
         Document.ActiveDocument.ExperimentSettings = newSettings;
 
-        string mdfSource = Application.StartupPath + "\\DataSet\\OgamaDatabaseTemplate.mdf";
-        string ldfSource = Application.StartupPath + "\\DataSet\\OgamaDatabaseTemplate_log.ldf";
-        if (File.Exists(mdfSource))
+        string sqliteSource = Application.StartupPath + "\\DataSet\\OgamaDatabaseTemplate.db";
+        if (File.Exists(sqliteSource))
         {
-          string mdfDestination = newSettings.DatabaseSQLiteFile;
-          string ldfDestination = mdfDestination.Replace(".mdf", "_log.ldf");
+          string sqliteDBDestination = newSettings.DatabaseSQLiteFile;
 
           bool overwrite = false;
           bool skip = false;
-          if (File.Exists(mdfDestination))
+          if (File.Exists(sqliteDBDestination))
           {
             // Hide loading splash screen
             this.bgwLoad.CancelAsync();
 
             if (MessageBox.Show(
-              "Overwrite existing Database File " + Environment.NewLine + mdfDestination,
+              "Overwrite existing Database File " + Environment.NewLine + sqliteDBDestination,
               Application.ProductName,
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question) == DialogResult.Yes)
@@ -191,14 +189,7 @@ namespace Ogama.MainWindow
           {
             if (!skip)
             {
-              // Always delete ldf file
-              if (File.Exists(ldfDestination))
-              {
-                File.Delete(ldfDestination);
-              }
-
-              File.Copy(mdfSource, mdfDestination, overwrite);
-              File.Copy(ldfSource, ldfDestination, overwrite);
+              File.Copy(sqliteSource, sqliteDBDestination, overwrite);
             }
           }
           catch (ArgumentException ex)
@@ -262,8 +253,8 @@ namespace Ogama.MainWindow
         {
           // DataBaseSourceFile does not exist in the expected directory
           string message = "Could not find DataBaseTemplate File:" + Environment.NewLine;
-          message += mdfSource;
-          message += Environment.NewLine + "Please make sure the File OgamaDatabaseTemplate.mdf (supplied with the application installation) is in the directory listed before and try again.";
+          message += sqliteSource;
+          message += Environment.NewLine + "Please make sure the File OgamaDatabaseTemplate.db (supplied with the application installation) is in the directory listed before and try again.";
 
           ExceptionMethods.ProcessErrorMessage(message);
         }

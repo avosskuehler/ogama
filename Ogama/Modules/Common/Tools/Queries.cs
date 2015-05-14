@@ -628,11 +628,11 @@ namespace Ogama.Modules.Common.Tools
     /// with data given in parameter row.
     /// Uses given subjects raw data table.
     /// </summary>
-    /// <param name="table">A <see cref="OgamaDataSet.RawdataDataTable"/> with the new values</param>
+    /// <param name="table">A <see cref="SQLiteOgamaDataSet.RawdataDataTable"/> with the new values</param>
     /// <param name="subject">A <see cref="string"/> with the subject name to which the data belongs.</param>
     /// <returns>A <see cref="int"/> with the number of updated rows.</returns>
     /// <exception cref="ArgumentNullException">Thrown, when row or subject is null or empty.</exception>
-    public static int UpdateRawDataBySubject(OgamaDataSet.RawdataDataTable table, string subject)
+    public static int UpdateRawDataBySubject(SQLiteOgamaDataSet.RawdataDataTable table, string subject)
     {
       if (table == null)
       {
@@ -742,9 +742,9 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     /// <param name="subject">A <see cref="string"/> with the subject name to which the data belongs.</param>
     /// <param name="trialSequence">A <see cref="int"/> with the trial sequence number. (Param1)</param>
     /// <param name="response">A <see cref="string"/> with the response. (Param2)</param>
-    /// <returns>A <see cref="OgamaDataSet.RawdataDataTable"/> with found rows.</returns>
+    /// <returns>A <see cref="SQLiteOgamaDataSet.RawdataDataTable"/> with found rows.</returns>
     /// <exception cref="ArgumentNullException">Thrown, when subject is null or empty.</exception>
-    public static OgamaDataSet.RawdataDataTable GetDataBySubjectTrialResponse(
+    public static SQLiteOgamaDataSet.RawdataDataTable GetDataBySubjectTrialResponse(
       string subject,
       int trialSequence,
       string response)
@@ -780,7 +780,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
       adapter.SelectCommand.Parameters[1].Value = response;
 
       // Create DataTable
-      OgamaDataSet.RawdataDataTable dataTable = new OgamaDataSet.RawdataDataTable();
+      var dataTable = new SQLiteOgamaDataSet.RawdataDataTable();
 
       // Fill it with Data referring to Subject and Trial
       adapter.Fill(dataTable);
@@ -795,9 +795,9 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     /// </summary>
     /// <param name="subject">A <see cref="string"/> with the subject name to which the data belongs.</param>
     /// <param name="trialSequence">A <see cref="int"/> with the trial sequence number. (Param1)</param>
-    /// <returns>A <see cref="OgamaDataSet.RawdataDataTable"/> with found rows.</returns>
+    /// <returns>A <see cref="SQLiteOgamaDataSet.RawdataDataTable"/> with found rows.</returns>
     /// <exception cref="ArgumentNullException">Thrown, when subject is null or empty.</exception>
-    public static OgamaDataSet.RawdataDataTable GetMouseDataBySubjectTrial(string subject, int trialSequence)
+    public static SQLiteOgamaDataSet.RawdataDataTable GetMouseDataBySubjectTrial(string subject, int trialSequence)
     {
       if (subject == string.Empty)
       {
@@ -828,7 +828,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
       adapter.SelectCommand.Parameters[0].Value = trialSequence;
 
       // Create DataTable
-      OgamaDataSet.RawdataDataTable dataTable = new OgamaDataSet.RawdataDataTable();
+      var dataTable = new SQLiteOgamaDataSet.RawdataDataTable();
 
       // Fill it with Data referring to Subject and Trial
       adapter.Fill(dataTable);
@@ -843,9 +843,9 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     /// </summary>
     /// <param name="subject">A <see cref="string"/> with the subject name to which the data belongs.</param>
     /// <param name="trialSequence">A <see cref="int"/> with the trial sequence number. (Param1)</param>
-    /// <returns>A <see cref="OgamaDataSet.RawdataDataTable"/> with found rows.</returns>
+    /// <returns>A <see cref="SQLiteOgamaDataSet.RawdataDataTable"/> with found rows.</returns>
     /// <exception cref="ArgumentNullException">Thrown, when subject is null or empty.</exception>
-    public static OgamaDataSet.RawdataDataTable GetRawDataBySubjectAndTrialSequence(string subject, int trialSequence)
+    public static SQLiteOgamaDataSet.RawdataDataTable GetRawDataBySubjectAndTrialSequence(string subject, int trialSequence)
     {
       if (subject == string.Empty)
       {
@@ -875,7 +875,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
       adapter.SelectCommand.Parameters[0].Value = trialSequence;
 
       // Create DataTable
-      OgamaDataSet.RawdataDataTable dataTable = new OgamaDataSet.RawdataDataTable();
+      var dataTable = new SQLiteOgamaDataSet.RawdataDataTable();
 
       // Fill it with Data 
       adapter.Fill(dataTable);
@@ -893,7 +893,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     /// </summary>
     /// <param name="subject">A <see cref="string"/> with the subject name to which the data belongs.</param>
     /// <param name="trialSequence">A <see cref="int"/> with the trial sequence number. (Param1)</param>
-    /// <returns>A <see cref="OgamaDataSet.RawdataDataTable"/> with found rows.</returns>
+    /// <returns>A <see cref="SQLiteOgamaDataSet.RawdataDataTable"/> with found rows.</returns>
     /// <exception cref="ArgumentNullException">Thrown, when subject is null or empty.</exception>
     public static DataTable GetRawDataBySubjectAndTrialSequenceWithoutEvents(string subject, int trialSequence)
     {
@@ -925,7 +925,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
       adapter.SelectCommand.Parameters[0].Value = trialSequence;
 
       // Create DataTable
-      OgamaDataSet.RawdataDataTable dataTable = new OgamaDataSet.RawdataDataTable();
+      var dataTable = new SQLiteOgamaDataSet.RawdataDataTable();
 
       // Fill it with Data 
       adapter.Fill(dataTable);
@@ -942,9 +942,9 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     /// Uses given subjects whole raw data table.
     /// </summary>
     /// <param name="subject">A <see cref="string"/> with the subject name to which the data belongs.</param>
-    /// <returns>The whole <see cref="OgamaDataSet.RawdataDataTable"/> for the given subject.</returns>
+    /// <returns>The whole <see cref="SQLiteOgamaDataSet.RawdataDataTable"/> for the given subject.</returns>
     /// <exception cref="ArgumentNullException">Thrown, when subject is null or empty.</exception>
-    public static OgamaDataSet.RawdataDataTable GetRawDataBySubject(string subject)
+    public static SQLiteOgamaDataSet.RawdataDataTable GetRawDataBySubject(string subject)
     {
       if (subject == string.Empty)
       {
@@ -967,7 +967,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
       adapter.SelectCommand = command;
 
       // Create DataTable
-      OgamaDataSet.RawdataDataTable dataTable = new OgamaDataSet.RawdataDataTable();
+      var dataTable = new SQLiteOgamaDataSet.RawdataDataTable();
 
       // Fill it with Data referring to Subject and Trial
       adapter.Fill(dataTable);
@@ -981,9 +981,9 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     /// </summary>
     /// <param name="whereStatement">A <see cref="string"/> with the SQL WHERE 
     /// statement for the query to use.</param>
-    /// <returns>A <see cref="OgamaDataSet.GazeFixationsDataTable"/> with found rows.</returns>
+    /// <returns>A <see cref="SQLiteOgamaDataSet.GazeFixationsDataTable"/> with found rows.</returns>
     /// <exception cref="ArgumentNullException">Thrown, when WhereStatement is empty.</exception>
-    public static OgamaDataSet.GazeFixationsDataTable GetGazeFixDataByWhereStatement(string whereStatement)
+    public static SQLiteOgamaDataSet.GazeFixationsDataTable GetGazeFixDataByWhereStatement(string whereStatement)
     {
       if (whereStatement == string.Empty)
       {
@@ -1017,8 +1017,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
       adapter.SelectCommand = command;
 
       // Create DataTable
-      OgamaDataSet.GazeFixationsDataTable dataTable
-        = new OgamaDataSet.GazeFixationsDataTable();
+      var dataTable = new SQLiteOgamaDataSet.GazeFixationsDataTable();
 
       // Fill it with Data referring to Subject and Trial
       adapter.Fill(dataTable);
@@ -1033,9 +1032,9 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     /// </summary>
     /// <param name="whereStatement">A <see cref="string"/> with the SQL WHERE 
     /// statement for the query to use.</param>
-    /// <returns>A <see cref="OgamaDataSet.MouseFixationsDataTable"/> with found rows.</returns>
+    /// <returns>A <see cref="SQLiteOgamaDataSet.MouseFixationsDataTable"/> with found rows.</returns>
     /// <exception cref="ArgumentNullException">Thrown, when WhereStatement is empty.</exception>
-    public static OgamaDataSet.MouseFixationsDataTable GetMouseFixDataByWhereStatement(string whereStatement)
+    public static SQLiteOgamaDataSet.MouseFixationsDataTable GetMouseFixDataByWhereStatement(string whereStatement)
     {
       if (whereStatement == string.Empty)
       {
@@ -1069,8 +1068,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
       adapter.SelectCommand = command;
 
       // Create DataTable
-      OgamaDataSet.MouseFixationsDataTable dataTable
-        = new OgamaDataSet.MouseFixationsDataTable();
+      var dataTable = new SQLiteOgamaDataSet.MouseFixationsDataTable();
 
       // Fill it with Data referring to Subject and Trial
       adapter.Fill(dataTable);
@@ -1537,7 +1535,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
       var table = Document.ActiveDocument.DocDataSet.Tables[tableName];
       foreach (var row in table.Rows)
       {
-        var rawRow = row as OgamaDataSet.RawdataRow;
+        var rawRow = row as SQLiteOgamaDataSet.RawdataRow;
         sbi.Insert(new object[] { rawRow.ID, rawRow.SubjectName, rawRow.TrialSequence, rawRow.Time, rawRow.PupilDiaX, rawRow.PupilDiaY, rawRow.GazePosX, rawRow.GazePosY, rawRow.MousePosX, rawRow.MousePosY, rawRow.EventID });
       }
       sbi.Flush();
@@ -1578,7 +1576,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
 
       foreach (var row in rawDataTable.Rows)
       {
-        var rawRow = row as OgamaDataSet.RawdataRow;
+        var rawRow = row as SQLiteOgamaDataSet.RawdataRow;
         sbi.Insert(new object[] { rawRow.ID, rawRow.SubjectName, rawRow.TrialSequence, rawRow.Time, rawRow.PupilDiaX, rawRow.PupilDiaY, rawRow.GazePosX, rawRow.GazePosY, rawRow.MousePosX, rawRow.MousePosY, rawRow.EventID });
       }
       sbi.Flush();
@@ -1856,7 +1854,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     public static bool WriteRawDataListToDataSet(string subjectName, List<RawData> lstRawData)
     {
       // Create Subjects rawdata table
-      var subjectRawDataTable = new OgamaDataSet.RawdataDataTable();
+      var subjectRawDataTable = new SQLiteOgamaDataSet.RawdataDataTable();
 
       // Give it correct name
       subjectRawDataTable.TableName = subjectName + "Rawdata";
@@ -1883,12 +1881,12 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
 
     /// <summary>
     /// This method saves the given collection of <see cref="RawData"/> into the
-    /// given <see cref="OgamaDataSet.RawdataDataTable"/>
+    /// given <see cref="SQLiteOgamaDataSet.RawdataDataTable"/>
     /// </summary>
     /// <param name="lstRawData">A <see cref="RawData"/> with the new samples.</param>
-    /// <param name="subjectRawDataTable">The <see cref="OgamaDataSet.RawdataDataTable"/> to be filled.</param>
+    /// <param name="subjectRawDataTable">The <see cref="SQLiteOgamaDataSet.RawdataDataTable"/> to be filled.</param>
     /// <returns><strong>True</strong> if successful otherwise <strong>false</strong>.</returns>
-    public static bool SaveDataToTable(RawData[] lstRawData, OgamaDataSet.RawdataDataTable subjectRawDataTable)
+    public static bool SaveDataToTable(RawData[] lstRawData, SQLiteOgamaDataSet.RawdataDataTable subjectRawDataTable)
     {
       try
       {
@@ -1898,7 +1896,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
         foreach (RawData data in lstRawData)
         {
           // Save data into datarow.
-          OgamaDataSet.RawdataRow workRowRawData =
+          SQLiteOgamaDataSet.RawdataRow workRowRawData =
             subjectRawDataTable.NewRawdataRow();
 
           workRowRawData.SubjectName = data.SubjectName;

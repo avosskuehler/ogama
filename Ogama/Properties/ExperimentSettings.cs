@@ -464,6 +464,15 @@ namespace Ogama.Properties
     }
 
     /// <summary>
+    /// Gets full file path for the database mdf file.
+    /// </summary>
+    /// <value>A <see cref="string"/> with the database file.</value>
+    public string DatabaseMDFFile
+    {
+      get { return Path.Combine(this.CreateDatabasePath(), this.experimentName + ".mdf"); }
+    }
+
+    /// <summary>
     /// Gets or sets the experiments name.
     /// </summary>
     /// <value>A <see cref="string"/> with the experiment name.</value>
@@ -482,14 +491,14 @@ namespace Ogama.Properties
       get { return this.CreateDatabaseConnectionString(); }
     }
 
-    /// <summary>
-    /// Gets the database connection string
-    /// </summary>
-    /// <value>A <see cref="string"/> with the connection string for the database.</value>
-    public string ServerConnectionString
-    {
-      get { return this.CreateServerConnectionString(); }
-    }
+    ///// <summary>
+    ///// Gets the database connection string
+    ///// </summary>
+    ///// <value>A <see cref="string"/> with the connection string for the database.</value>
+    //public string ServerConnectionString
+    //{
+    //  get { return this.CreateServerConnectionString(); }
+    //}
 
     /// <summary>
     /// Gets or sets the sql instance server name.
@@ -779,16 +788,16 @@ namespace Ogama.Properties
       return usedConnection;
     }
 
-    /// <summary>
-    /// Generates connection string to server without an initial catalog
-    /// </summary>
-    /// <returns>A <see cref="string"/> with the server connection string.</returns>
-    private string CreateServerConnectionString()
-    {
-      string usedConnection = @"Data Source=.\" + this.sqlInstanceName + ";Integrated Security=True;User Instance=True;Connection Timeout=30";
+    ///// <summary>
+    ///// Generates connection string to server without an initial catalog
+    ///// </summary>
+    ///// <returns>A <see cref="string"/> with the server connection string.</returns>
+    //private string CreateServerConnectionString()
+    //{
+    //  string usedConnection = @"Data Source=.\" + this.sqlInstanceName + ";Integrated Security=True;User Instance=True;Connection Timeout=30";
 
-      return usedConnection;
-    }
+    //  return usedConnection;
+    //}
 
     /// <summary>
     /// Builds the document filename with path.

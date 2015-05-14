@@ -33,12 +33,8 @@
       </Component>
  
       <Directory Id="DataSetDirectory" Name="DataSet">
-        <Component Id="C_OgamaDatabaseTemplate_log" Guid="{BF6EA906-948E-9D15-28A2-C193F7272EC4}" Win64="$(var.Win64)">
-          <File Id="OgamaDatabaseTemplate_log" Name="OgamaDatabaseTemplate_log.ldf" KeyPath="yes" DiskId="1"
-              Source="$(var.Ogama.TargetDir)DataSet\" />
-        </Component>
         <Component Id="C_OgamaDatabaseTemplate" Guid="{0ADE105C-3474-F79A-FC2E-B857B3222234}" Win64="$(var.Win64)">
-          <File Id="OgamaDatabaseTemplate" Name="OgamaDatabaseTemplate.mdf" KeyPath="yes" DiskId="1"
+          <File Id="OgamaDatabaseTemplate" Name="OgamaDatabaseTemplate.db" KeyPath="yes" DiskId="1"
               Source="$(var.Ogama.TargetDir)DataSet\" />
         </Component>
       </Directory>
@@ -50,7 +46,6 @@
       <ComponentRef Id="C_OgamaConfig" />
       <ComponentRef Id="C_OgamaControls" Primary="yes" />
       <ComponentRef Id="C_VectorGraphics" />
-      <ComponentRef Id="C_OgamaDatabaseTemplate_log" />
       <ComponentRef Id="C_OgamaDatabaseTemplate" />
     </Feature>
 

@@ -713,7 +713,7 @@ namespace Ogama.Modules.Fixations
       int absoluteDriftXCorrection = (int)this.nudDriftXCorrection.Value;
       int absoluteDriftYCorrection = (int)this.nudDriftYCorrection.Value;
 
-      OgamaDataSet.RawdataDataTable rawData = Queries.GetRawDataBySubjectAndTrialSequence(subjectName, trialSequence);
+      SQLiteOgamaDataSet.RawdataDataTable rawData = Queries.GetRawDataBySubjectAndTrialSequence(subjectName, trialSequence);
       foreach (DataRow rawRow in rawData.Rows)
       {
         double gazePosX = rawRow.IsNull("GazePosX") ? 0 : (double)rawRow["GazePosX"];

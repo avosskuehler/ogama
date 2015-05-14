@@ -16,6 +16,7 @@ namespace Ogama.MainWindow.Dialogs
   using System;
   using System.ComponentModel;
   using System.Data.SqlClient;
+  using System.Data.SQLite;
   using System.Windows.Forms;
 
   using Microsoft.SqlServer.Management.Common;
@@ -296,32 +297,32 @@ namespace Ogama.MainWindow.Dialogs
     private bool TestSQLServerConnection(bool showMessage)
     {
       this.Cursor = Cursors.WaitCursor;
-      string oldInstanceName = Document.ActiveDocument.ExperimentSettings.SqlInstanceName;
-      Document.ActiveDocument.ExperimentSettings.SqlInstanceName = this.txbSQLInstanceName.Text;
-      SqlConnection connectionString = new SqlConnection(Document.ActiveDocument.ExperimentSettings.ServerConnectionString);
-      ServerConnection connection = new ServerConnection(connectionString);
-      try
+      string oldConnectionString = Document.ActiveDocument.ExperimentSettings.DatabaseConnectionString;
+      //Document.ActiveDocument.ExperimentSettings.SqlInstanceName = this.txbSQLInstanceName.Text;
+      //SqlConnection connectionString = new SqlConnection(Document.ActiveDocument.ExperimentSettings.ServerConnectionString);
+      //ServerConnection connection = new ServerConnection(connectionString);
+      using (var conn = new SQLiteConnection(this.txbSQLInstanceName.Text))
       {
-        Server sqlServer = new Server(connection);
-        sqlServer.Initialize();
-      }
-      catch (Exception)
-      {
-        if (showMessage)
+        try
         {
-          MessageBox.Show("Connection failed");
+          conn.Open();
         }
+        catch (Exception ex)
+        {
+          if (showMessage)
+          {
+            MessageBox.Show("Connection failed");
+          }
 
-        Document.ActiveDocument.ExperimentSettings.SqlInstanceName = oldInstanceName;
-        this.txbSQLInstanceName.Text = oldInstanceName;
+          this.txbSQLInstanceName.Text = oldConnectionString;
 
-        return false;
+          return false;
+        }
+        finally
+        {
+          this.Cursor = Cursors.Default;
+        }
       }
-      finally
-      {
-        this.Cursor = Cursors.Default;
-      }
-
       if (showMessage)
       {
         MessageBox.Show("Connection successful");

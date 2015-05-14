@@ -15,6 +15,7 @@ namespace Ogama.Modules.Common.CustomEventArgs
 {
   using System;
 
+  using Ogama.DataSet;
   using Ogama.Modules.Common.SlideCollections;
 
   using VectorGraphics.StopConditions;
@@ -145,7 +146,7 @@ namespace Ogama.Modules.Common.CustomEventArgs
     /// </summary>
     /// <value>A <see cref="string"/> with this slides category.</value>
     /// <remarks>Can be for example "BlankSlide" or "MultipleChoiceQuestion" etc.
-    /// This field is stored in the <see cref="DataSet.OgamaDataSet.TrialsDataTable"/> 
+    /// This field is stored in the <see cref="SQLiteOgamaDataSet.TrialsDataTable"/> 
     /// and can be used in the statistics module 
     /// <see cref="Modules.Statistics.StatisticsModule"/></remarks>
     public string Category

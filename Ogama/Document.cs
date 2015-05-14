@@ -21,7 +21,12 @@ namespace Ogama
   using System.Data.SQLite;
   using System.Drawing;
   using System.IO;
+  using System.Runtime.InteropServices;
   using System.Windows.Forms;
+
+  using DbAccess;
+
+  using GTNetworkClient;
 
   using Microsoft.SqlServer.Management.Common;
   using Microsoft.SqlServer.Management.Smo;
@@ -211,7 +216,7 @@ namespace Ogama
     /// <summary>
     /// Gets or sets assigned dataset.
     /// </summary>
-    /// <value>The <see cref="OgamaDataSet"/> for the current document.</value>
+    /// <value>The <see cref="SQLiteOgamaDataSet"/> for the current document.</value>
     public SQLiteOgamaDataSet DocDataSet
     {
       get { return this.dataSet; }
@@ -230,23 +235,23 @@ namespace Ogama
     /// </summary>
     public void CleanUp()
     {
-      SqlConnection connectionString = new SqlConnection(Document.ActiveDocument.ExperimentSettings.ServerConnectionString);
-      ServerConnection connection = new ServerConnection(connectionString);
-      Server sqlServer = new Server(connection);
-       try
+      //SqlConnection connectionString = new SqlConnection(Document.ActiveDocument.ExperimentSettings.ServerConnectionString);
+      //ServerConnection connection = new ServerConnection(connectionString);
+      //Server sqlServer = new Server(connection);
+      try
       {
-        // If there are open connections set offline and online to kill all 
-        // active connections, they are not used anymore.
-        int connections = sqlServer.GetActiveDBConnectionCount(Document.ActiveDocument.ExperimentSettings.Name);
-        if (connections > 0)
-        {
-           string query = "ALTER DATABASE \"" + Document.ActiveDocument.ExperimentSettings.Name +
-            "\" SET OFFLINE WITH ROLLBACK IMMEDIATE;";
-          Queries.ExecuteSQLCommand(query);
-          query = "ALTER DATABASE \"" + Document.ActiveDocument.ExperimentSettings.Name +
-            "\" SET ONLINE;";
-          Queries.ExecuteSQLCommand(query);
-        }
+        //// If there are open connections set offline and online to kill all 
+        //// active connections, they are not used anymore.
+        //int connections = sqlServer.GetActiveDBConnectionCount(Document.ActiveDocument.ExperimentSettings.Name);
+        //if (connections > 0)
+        //{
+        //  string query = "ALTER DATABASE \"" + Document.ActiveDocument.ExperimentSettings.Name +
+        //   "\" SET OFFLINE WITH ROLLBACK IMMEDIATE;";
+        //  Queries.ExecuteSQLCommand(query);
+        //  query = "ALTER DATABASE \"" + Document.ActiveDocument.ExperimentSettings.Name +
+        //    "\" SET ONLINE;";
+        //  Queries.ExecuteSQLCommand(query);
+        //}
 
         // Close database connection
         if (this.dataSet != null)
@@ -254,11 +259,11 @@ namespace Ogama
           this.dataSet.Dispose();
         }
 
-        // Detach database from user instance
-        if (sqlServer.Databases.Contains(Document.ActiveDocument.ExperimentSettings.Name))
-        {
-          sqlServer.DetachDatabase(Document.ActiveDocument.ExperimentSettings.Name, true);
-        }
+        //// Detach database from user instance
+        //if (sqlServer.Databases.Contains(Document.ActiveDocument.ExperimentSettings.Name))
+        //{
+        //  sqlServer.DetachDatabase(Document.ActiveDocument.ExperimentSettings.Name, true);
+        //}
       }
       catch (Exception ex)
       {
@@ -400,6 +405,38 @@ namespace Ogama
       //bool automaticResetConnectionTried = false;
       //bool logRebuild = false;
 
+      if (!File.Exists(this.experimentSettings.DatabaseSQLiteFile))
+      {
+        var result = InformationDialog.Show(
+          "Upgrade Database",
+          "We need to convert the SQL Database to SQLite. Otherwise Ogama will not be able to open the data. Please confirm the conversion process",
+          true,
+          MessageBoxIcon.Question);
+        switch (result)
+        {
+          case DialogResult.Cancel:
+            return false;
+          case DialogResult.Yes:
+            // Show loading splash screen if it is not running
+            var bgwConvert = new BackgroundWorker();
+            bgwConvert.DoWork += this.bgwConvert_DoWork;
+            bgwConvert.WorkerSupportsCancellation = true;
+            bgwConvert.RunWorkerAsync();
+            this.ConvertToSQLiteDatabase();
+
+            bgwConvert.CancelAsync();
+
+            InformationDialog.Show(
+              "Conversion done.",
+              "The database was converted to sqlite format. The original source was not removed.",
+              false,
+              MessageBoxIcon.Information);
+            break;
+          case DialogResult.No:
+            break;
+        }
+      }
+
       // Check for existing database
       if (!File.Exists(this.experimentSettings.DatabaseSQLiteFile))
       {
@@ -412,90 +449,88 @@ namespace Ogama
         return false;
       }
 
-      
-    //Test:
+
       // Show loading splash screen if it is not running
       if (splash != null && !splash.IsBusy)
       {
         splash.RunWorkerAsync();
       }
 
-    //  SqlConnection connectionString = new SqlConnection(Document.ActiveDocument.ExperimentSettings.ServerConnectionString);
-    //  ServerConnection connection = new ServerConnection(connectionString);
-    //  Server sqlServer = new Server(connection);
-    //Attach:
-    //  try
-    //  {
-    //    StringCollection sc = new StringCollection();
-    //    sc.Add(Document.ActiveDocument.ExperimentSettings.DatabaseMDFFile);
-    //    if (logRebuild)
-    //    {
-    //      if (File.Exists(Document.ActiveDocument.ExperimentSettings.DatabaseLDFFile))
-    //      {
-    //        File.Delete(Document.ActiveDocument.ExperimentSettings.DatabaseLDFFile);
-    //      }
-    //    }
-    //    else
-    //    {
-    //      sc.Add(Document.ActiveDocument.ExperimentSettings.DatabaseLDFFile);
-    //    }
+      //  SqlConnection connectionString = new SqlConnection(Document.ActiveDocument.ExperimentSettings.ServerConnectionString);
+      //  ServerConnection connection = new ServerConnection(connectionString);
+      //  Server sqlServer = new Server(connection);
+      //Attach:
+      //  try
+      //  {
+      //    StringCollection sc = new StringCollection();
+      //    sc.Add(Document.ActiveDocument.ExperimentSettings.DatabaseMDFFile);
+      //    if (logRebuild)
+      //    {
+      //      if (File.Exists(Document.ActiveDocument.ExperimentSettings.DatabaseLDFFile))
+      //      {
+      //        File.Delete(Document.ActiveDocument.ExperimentSettings.DatabaseLDFFile);
+      //      }
+      //    }
+      //    else
+      //    {
+      //      sc.Add(Document.ActiveDocument.ExperimentSettings.DatabaseLDFFile);
+      //    }
 
-    //    // Attach database file
-    //    if (!sqlServer.Databases.Contains(Document.ActiveDocument.ExperimentSettings.Name))
-    //    {
-    //      sqlServer.AttachDatabase(
-    //        Document.ActiveDocument.ExperimentSettings.Name,
-    //        sc,
-    //        logRebuild ? AttachOptions.RebuildLog : AttachOptions.None);
-    //    }
+      //    // Attach database file
+      //    if (!sqlServer.Databases.Contains(Document.ActiveDocument.ExperimentSettings.Name))
+      //    {
+      //      sqlServer.AttachDatabase(
+      //        Document.ActiveDocument.ExperimentSettings.Name,
+      //        sc,
+      //        logRebuild ? AttachOptions.RebuildLog : AttachOptions.None);
+      //    }
 
-    //    sqlServer.ConnectionContext.Disconnect();
-    //    logRebuild = false;
-    //  }
-    //  catch (Exception ex)
-    //  {
-    //    // Check for the SQLError 9004, which indicates a failure 
-    //    // in the log file, which can be fixed by rebuilding the log.
-    //    if (ex.InnerException != null)
-    //    {
-    //      if (ex.InnerException.InnerException != null)
-    //      {
-    //        if (ex.InnerException.InnerException is SqlException)
-    //        {
-    //          if (((SqlException)ex.InnerException.InnerException).Number == 9004)
-    //          {
-    //            logRebuild = true;
-    //          }
-    //        }
-    //      }
-    //    }
+      //    sqlServer.ConnectionContext.Disconnect();
+      //    logRebuild = false;
+      //  }
+      //  catch (Exception ex)
+      //  {
+      //    // Check for the SQLError 9004, which indicates a failure 
+      //    // in the log file, which can be fixed by rebuilding the log.
+      //    if (ex.InnerException != null)
+      //    {
+      //      if (ex.InnerException.InnerException != null)
+      //      {
+      //        if (ex.InnerException.InnerException is SqlException)
+      //        {
+      //          if (((SqlException)ex.InnerException.InnerException).Number == 9004)
+      //          {
+      //            logRebuild = true;
+      //          }
+      //        }
+      //      }
+      //    }
 
-    //    if (!logRebuild)
-    //    {
-    //      string message = @"The following error occured: " + ex.Message + Environment.NewLine + Environment.NewLine +
-    //        @"If it is the following: 'Failed to generate a user instance of SQL Server due to a failure in starting the process for the user instance. The connection will be closed.'" +
-    //        @"Please delete the folder 'Local Settings\Application Data\Microsoft\Microsoft SQL Server Data\" + Document.ActiveDocument.ExperimentSettings.SqlInstanceName +
-    //        "' in WinXP or " +
-    //        @"'AppData\Local\Microsoft\Microsoft SQL Server Data\" + Document.ActiveDocument.ExperimentSettings.SqlInstanceName + "' on Vista and Windows 7 and try again.";
-    //      ExceptionMethods.ProcessMessage("SQL Server connection failed.", message);
-    //      ExceptionMethods.ProcessUnhandledException(ex);
-    //      if (splash != null && splash.IsBusy)
-    //      {
-    //        splash.CancelAsync();
-    //      }
+      //    if (!logRebuild)
+      //    {
+      //      string message = @"The following error occured: " + ex.Message + Environment.NewLine + Environment.NewLine +
+      //        @"If it is the following: 'Failed to generate a user instance of SQL Server due to a failure in starting the process for the user instance. The connection will be closed.'" +
+      //        @"Please delete the folder 'Local Settings\Application Data\Microsoft\Microsoft SQL Server Data\" + Document.ActiveDocument.ExperimentSettings.SqlInstanceName +
+      //        "' in WinXP or " +
+      //        @"'AppData\Local\Microsoft\Microsoft SQL Server Data\" + Document.ActiveDocument.ExperimentSettings.SqlInstanceName + "' on Vista and Windows 7 and try again.";
+      //      ExceptionMethods.ProcessMessage("SQL Server connection failed.", message);
+      //      ExceptionMethods.ProcessUnhandledException(ex);
+      //      if (splash != null && splash.IsBusy)
+      //      {
+      //        splash.CancelAsync();
+      //      }
 
-    //      return false;
-    //    }
-    //  }
+      //      return false;
+      //    }
+      //  }
 
-    //  // Go back and rebuild the log file.
-    //  if (logRebuild)
-    //  {
-    //    goto Attach;
-    //  }
+      //  // Go back and rebuild the log file.
+      //  if (logRebuild)
+      //  {
+      //    goto Attach;
+      //  }
 
-      // Now that we successfully attached the file, test the connection
-      // Test connection string
+      // Test connection
       using (var conn = new SQLiteConnection(Document.ActiveDocument.ExperimentSettings.DatabaseConnectionString))
       {
         try
@@ -578,6 +613,16 @@ namespace Ogama
       }
 
       return false;
+    }
+
+    private void bgwConvert_DoWork(object sender, DoWorkEventArgs e)
+    {
+      // Get the BackgroundWorker that raised this event.
+      BackgroundWorker worker = sender as BackgroundWorker;
+
+      var newSplash = new ConvertDatabaseSplash();
+      newSplash.Worker = worker;
+      newSplash.ShowDialog();
     }
 
     /// <summary>
@@ -814,6 +859,17 @@ namespace Ogama
       }
 
       return true;
+    }
+
+    /// <summary>
+    /// Converts to sq lite database.
+    /// </summary>
+    private void ConvertToSQLiteDatabase()
+    {
+      var sqlConnString = @"Server=.\SQLExpress;AttachDbFilename=" + this.experimentSettings.DatabaseMDFFile + ";Database=" +
+       this.experimentSettings.Name + ";Integrated Security=True;User Instance=True;Connection Timeout=30";
+      string sqlitePath = this.experimentSettings.DatabaseSQLiteFile;
+      SqlServerToSQLite.ConvertSqlServerDatabaseToSQLiteFile(sqlConnString, sqlitePath);
     }
 
     #endregion //METHODS

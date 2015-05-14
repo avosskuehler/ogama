@@ -133,6 +133,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\AxShockwaveFlashObjects.dll</HintPath>
     </Reference>
+    <Reference Include="DbAccess">
+      <HintPath>..\Libs\Managed\DbAccess.dll</HintPath>
+    </Reference>
     <Reference Include="DirectShowLib-2005, Version=2.1.0.0, Culture=neutral, PublicKeyToken=67e7b740cdfc2d3f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\DirectShowLib-2005.dll</HintPath>
@@ -248,17 +251,8 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataSet\OgamaDataSet.cs">
-      <DependentUpon>OgamaDataSet.xsd</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="DataSet\OgamaDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OgamaDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="DataSet\SQLiteBulkInsert.cs" />
-    <Compile Include="DataSet\SQLiteDataSet.cs">
+    <Compile Include="DataSet\SQLiteOgamaDataSetTableAdapters.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="DataSet\SQLiteOgamaDataSet.cs">
@@ -289,6 +283,12 @@
       <DependentUpon>ShowLogDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="ExceptionHandling\ExceptionMethods.cs" />
+    <Compile Include="MainWindow\Dialogs\ConvertDatabaseSplash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\ConvertDatabaseSplash.designer.cs">
+      <DependentUpon>ConvertDatabaseSplash.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\AttentionMap\GradientExtensions.cs" />
     <Compile Include="Modules\Common\CustomEventArgs\TrackStatusDataChangedEventArgs.cs" />
     <Compile Include="Modules\Recording\ASLInterface\HowToActivateAsl.cs">
@@ -1252,6 +1252,10 @@
       <SubType>Designer</SubType>
       <DependentUpon>ShowLogDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow\Dialogs\ConvertDatabaseSplash.resx">
+      <DependentUpon>ConvertDatabaseSplash.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\ASLInterface\HowToActivateAsl.resx">
       <DependentUpon>HowToActivateAsl.cs</DependentUpon>
     </EmbeddedResource>
@@ -1694,6 +1698,9 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Content Include="DataSet\OgamaDatabaseTemplate.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -1753,13 +1760,6 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="DataSet\OgamaDatabaseTemplate.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DataSet\OgamaDatabaseTemplate_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>OgamaDatabaseTemplate.mdf</DependentUpon>
-    </Content>
     <None Include="Resources\FolderNew16.png" />
     <None Include="Resources\PS3_61_61.png" />
     <None Include="Resources\ITU_61_61.png" />
@@ -1780,17 +1780,6 @@
     <Content Include="Help\STA.rtf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="DataSet\OgamaDataSet.xsc">
-      <DependentUpon>OgamaDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="DataSet\OgamaDataSet.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>OgamaDataSet.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="DataSet\OgamaDataSet.xss">
-      <DependentUpon>OgamaDataSet.xsd</DependentUpon>
-    </None>
     <Content Include="Help\SCR.rtf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1941,6 +1930,8 @@
     <Content Include="Resources\SmartEyeAuroraFoto16.png" />
     <Content Include="Resources\SmartEyeAuroraFoto64.png" />
     <Content Include="Resources\SmartEyeLogo.png" />
+    <Content Include="Resources\SQLite32.png" />
+    <Content Include="Resources\SQLServer32.png" />
     <Content Include="SaliencyCalculation\cygblas.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
