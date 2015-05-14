@@ -301,28 +301,28 @@ namespace Ogama.MainWindow.Dialogs
       //Document.ActiveDocument.ExperimentSettings.SqlInstanceName = this.txbSQLInstanceName.Text;
       //SqlConnection connectionString = new SqlConnection(Document.ActiveDocument.ExperimentSettings.ServerConnectionString);
       //ServerConnection connection = new ServerConnection(connectionString);
-      using (var conn = new SQLiteConnection(this.txbSQLInstanceName.Text))
-      {
-        try
-        {
-          conn.Open();
-        }
-        catch (Exception ex)
-        {
-          if (showMessage)
-          {
-            MessageBox.Show("Connection failed");
-          }
+      //using (var conn = new SQLiteConnection(this.txbSQLInstanceName.Text))
+      //{
+      //  try
+      //  {
+      //    conn.Open();
+      //  }
+      //  catch (Exception ex)
+      //  {
+      //    if (showMessage)
+      //    {
+      //      MessageBox.Show("Connection failed");
+      //    }
 
-          this.txbSQLInstanceName.Text = oldConnectionString;
+      //    this.txbSQLInstanceName.Text = oldConnectionString;
 
-          return false;
-        }
-        finally
-        {
-          this.Cursor = Cursors.Default;
-        }
-      }
+      //    return false;
+      //  }
+      //  finally
+      //  {
+      //    this.Cursor = Cursors.Default;
+      //  }
+      //}
       if (showMessage)
       {
         MessageBox.Show("Connection successful");

@@ -1400,8 +1400,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
       }
 
       // Create Empty Table from RawDataTemplate in DB
-      string queryString = "CREATE TABLE [" + subjectName + "Rawdata]([ID] [bigint] IDENTITY(1,1) NOT NULL,[SubjectName] [varchar](50) COLLATE Latin1_General_CI_AS NOT NULL,	[TrialSequence]  [int] NOT NULL,	[Time] [bigint] NOT NULL,	[PupilDiaX] [float] NULL,	[PupilDiaY] [float] NULL,	[GazePosX] [float] NULL,	[GazePosY] [float] NULL,	[MousePosX] [float] NULL,	[MousePosY] [float] NULL,	[EventID] [int] NULL,CONSTRAINT [PK_" + subjectName + "Rawdata] PRIMARY KEY CLUSTERED (	[ID] ASC)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]) ON [PRIMARY];";
-
+      string queryString = "CREATE TABLE [" + subjectName + "Rawdata]([ID]	integer PRIMARY KEY AUTOINCREMENT NOT NULL,[SubjectName]	varchar(50) NOT NULL COLLATE NOCASE, [TrialSequence]	integer NOT NULL, [Time]	integer NOT NULL, [PupilDiaX]	float, [PupilDiaY]	float, [GazePosX]	float, [GazePosY]	float, [MousePosX]	float, [MousePosY]	float, [EventID]	integer);";
       var command = new SQLiteCommand(queryString, Document.ActiveDocument.DocDataSet.DatabaseConnection);
       SQLiteDataReader reader = command.ExecuteReader();
       try
@@ -2739,7 +2738,10 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
             ((InputEvent)newEvent).Task = (InputEventTask)Enum.Parse(typeof(InputEventTask), taskString, true);
             newEvent.Time = time;
             newEvent.Type = type;
-            returnList.Add(eventID, newEvent);
+            if (!returnList.ContainsKey(eventID))
+            {
+              returnList.Add(eventID, newEvent);
+            }
             break;
           case EventType.Marker:
             newEvent = new MediaEvent();
