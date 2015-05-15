@@ -150,8 +150,12 @@
         <File Id="TETControls" Name="TETControls.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="TETControls" AssemblyApplication="TETControls" DiskId="1"
               Source="$(var.SolutionDir)Libs\Managed\" />
       </Component>
+      <Component Id="C_SmartEye.Libraries" Guid="{55E642EC-89B5-4BD8-BEC4-1B0FFC05094B}" Win64="$(var.Win64)">
+        <File Id="SmartEye.Libraries" Name="SmartEye.Libraries.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="SmartEye.Libraries" AssemblyApplication="SmartEye.Libraries" DiskId="1"
+              Source="$(var.SolutionDir)Libs\Managed\" />
+      </Component>
 
-      
+
       <Component Id="C_Microsoft.SqlServer.Management.Sdk.Sfc" Guid="{A1F64A66-74A9-79E7-AEB8-8B35D9220060}" Win64="$(var.Win64)">
         <File Id="Microsoft.SqlServer.Management.Sdk.Sfc" Name="Microsoft.SqlServer.Management.Sdk.Sfc.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="Microsoft.SqlServer.Management.Sdk.Sfc" AssemblyApplication="Microsoft.SqlServer.Management.Sdk.Sfc" DiskId="1"
               Source="$(var.SolutionDir)Libs\Managed\" />
@@ -180,6 +184,29 @@
         <File Id="Microsoft.SqlServer.Smo" Name="Microsoft.SqlServer.Smo.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="Microsoft.SqlServer.Smo" AssemblyApplication="Microsoft.SqlServer.Smo" DiskId="1"
               Source="$(var.SolutionDir)Libs\Managed\" />
       </Component>
+
+      <Component Id="C_EntityFramework" Guid="{7B2466AB-C780-4549-BF7A-B65D9E218AFF}" Win64="$(var.Win64)">
+        <File Id="EntityFramework" Name="EntityFramework.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="EntityFramework" AssemblyApplication="EntityFramework" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_EntityFramework.SqlServer" Guid="{0387A8FE-1DDB-4B27-877E-163C53E35600}" Win64="$(var.Win64)">
+        <File Id="EntityFramework.SqlServer" Name="EntityFramework.SqlServer.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="EntityFramework.SqlServer" AssemblyApplication="EntityFramework.SqlServer" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+
+      <Component Id="C_System.Data.SQLite" Guid="{F57BAF8D-3317-4BCC-93F9-32169C4F4C12}" Win64="$(var.Win64)">
+        <File Id="System.Data.SQLite" Name="System.Data.SQLite.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="System.Data.SQLite" AssemblyApplication="System.Data.SQLite" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_System.Data.SQLite.EF6" Guid="{BD508409-DBF0-4840-811E-C8F43BEB848A}" Win64="$(var.Win64)">
+        <File Id="System.Data.SQLite.EF6" Name="System.Data.SQLite.EF6.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="System.Data.SQLite.EF6" AssemblyApplication="System.Data.SQLite.EF6" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+      <Component Id="C_System.Data.SQLite.Linq" Guid="{E4FDFBFB-AA75-4164-A3EA-2E4048E29C13}" Win64="$(var.Win64)">
+        <File Id="System.Data.SQLite.Linq" Name="System.Data.SQLite.Linq.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="System.Data.SQLite.Linq" AssemblyApplication="System.Data.SQLite.Linq" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+      </Component>
+
     </DirectoryRef>
 
     <Feature Id='LibsFeature' Title='Libs' Description='Installs libraries for the application.' Level='1'>
@@ -233,6 +260,7 @@
         <ComponentRef Id='C_Newtonsoft.Json' />
         <ComponentRef Id='C_TETCSharpClient' />
         <ComponentRef Id='C_TETControls' />
+        <ComponentRef Id='C_SmartEye.Libraries' />
       </Feature>
 
       <Feature Id='SQLServerManagementFeature' Title='SQL Server Management' Description='Installs libraries for the connection with the sql server.' Level='1'>
@@ -243,6 +271,11 @@
         <!--<ComponentRef Id='C_Microsoft.Data.ConnectionUI.XML' />-->
         <ComponentRef Id='C_Microsoft.SqlServer.SqlEnum' />
         <ComponentRef Id='C_Microsoft.SqlServer.Smo' />
+        <ComponentRef Id='C_EntityFramework' />
+        <ComponentRef Id='C_EntityFramework.SqlServer' />
+        <ComponentRef Id='C_System.Data.SQLite' />
+        <ComponentRef Id='C_System.Data.SQLite.EF6' />
+        <ComponentRef Id='C_System.Data.SQLite.Linq' />
       </Feature>
     </Feature>
   </Fragment>
