@@ -1825,7 +1825,7 @@ namespace Ogama.Modules.Replay
             validMouseFixationSamples.Add(
               new TimedPoint(sampleTime, newMouseSamplePoint.Value));
 
-            if (!newMouseSamplePoint.Value.IsEmpty && !Queries.OutOfScreen(newMouseSamplePoint.Value, this.PresentationSize))
+            if (!newMouseSamplePoint.Value.IsEmpty && !Queries.OutOfScreen(newMouseSamplePoint.Value, this.StimulusSize))
             {
               if (Point.Round(newMouseSamplePoint.Value) != Point.Round(lastValidMouseSample.Position))
               {
@@ -1851,8 +1851,8 @@ namespace Ogama.Modules.Replay
                 new TimedPoint(sampleTime, newGazeSamplePoint.Value));
 
               if (!newGazeSamplePoint.Value.IsEmpty && !Queries.OutOfScreen(
-                newGazeSamplePoint.Value, 
-                this.PresentationSize))
+                newGazeSamplePoint.Value,
+                this.StimulusSize))
               {
                 if (Point.Round(newGazeSamplePoint.Value) != Point.Round(lastValidGazeSample.Position))
                 {
@@ -2281,7 +2281,7 @@ namespace Ogama.Modules.Replay
       switch (currentState)
       {
         case EyeMotionState.MOVING:
-          if (!Queries.OutOfScreen(newPt, this.PresentationSize))
+          if (!Queries.OutOfScreen(newPt, this.StimulusSize))
           {
             if (lastPointInSampleRange)
             {
@@ -2306,7 +2306,7 @@ namespace Ogama.Modules.Replay
           break;
 
         case EyeMotionState.FIXATION_COMPLETED:
-          if (!Queries.OutOfScreen(fixationCenter, this.PresentationSize))
+          if (!Queries.OutOfScreen(fixationCenter, this.StimulusSize))
           {
             if (this.currentLoopState.IsOutOfMonitor)
             {
@@ -2593,10 +2593,10 @@ namespace Ogama.Modules.Replay
       switch (toDraw)
       {
         case SampleType.Gaze:
-          isValidData = Queries.GetGazeData(row, this.PresentationSize, out newPt);
+          isValidData = Queries.GetGazeData(row, this.StimulusSize, out newPt);
           break;
         case SampleType.Mouse:
-          isValidData = Queries.GetMouseData(row, this.PresentationSize, out newPt);
+          isValidData = Queries.GetMouseData(row, this.StimulusSize, out newPt);
           break;
       }
 

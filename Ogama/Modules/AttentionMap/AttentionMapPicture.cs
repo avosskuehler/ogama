@@ -183,10 +183,10 @@ namespace Ogama.Modules.AttentionMap
     protected override void CalculateTransformMatrix()
     {
       base.CalculateTransformMatrix();
-      if (this.heatMap.Width != this.PresentationSize.Width ||
-         this.heatMap.Height != this.PresentationSize.Height)
+      if ((this.heatMap.Width != this.StimulusSize.Width || this.heatMap.Height != this.StimulusSize.Height)
+        && !this.StimulusSize.IsEmpty)
       {
-        this.CreateHeatMapBitmap(this.PresentationSize);
+        this.CreateHeatMapBitmap(this.StimulusSize);
       }
     }
 
@@ -237,8 +237,8 @@ namespace Ogama.Modules.AttentionMap
       this.Elements.Clear();
 
       // Read Eyetracker settings
-      int eyeMonX = this.PresentationSize.Width;
-      int eyeMonY = this.PresentationSize.Height;
+      int eyeMonX = this.StimulusSize.Width;
+      int eyeMonY = this.StimulusSize.Height;
 
       // init DistributionArray
       float[,] distributionArray = new float[eyeMonX, eyeMonY];
