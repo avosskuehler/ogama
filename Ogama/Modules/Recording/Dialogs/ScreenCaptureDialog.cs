@@ -64,7 +64,7 @@ namespace Ogama.Modules.Recording.Dialogs
       {
         DsDevice compressor = this.videoCompressors[i];
         this.cbbEncoderFilter.Items.Add(compressor.Name);
-        if (compressor.Name.Contains("ffdshow"))
+        if (compressor.Name.Contains("Microsoft Video 1"))
         {
           index = i;
         }

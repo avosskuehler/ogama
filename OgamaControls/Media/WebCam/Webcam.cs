@@ -489,7 +489,7 @@ namespace OgamaControls
       DsDevice[] videoCompressors = DsDevice.GetDevicesOfCat(FilterCategory.VideoCompressorCategory);
       foreach (DsDevice compressor in videoCompressors)
       {
-        if (compressor.Name.Contains("ffdshow"))
+        if (compressor.Name.Contains("Microsoft Video 1"))
         {
           this.properties.VideoCompressor = compressor.Name;
           break;
