@@ -1407,7 +1407,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
       {
         while (reader.Read())
         {
-          Console.WriteLine(string.Format("{0}, {1}", reader[0], reader[1]));
+          //Console.WriteLine(string.Format("{0}, {1}", reader[0], reader[1]));
         }
       }
       finally
@@ -1443,7 +1443,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
         {
           while (reader.Read())
           {
-            Console.WriteLine(string.Format("{0}, {1}", reader[0], reader[1]));
+            //Console.WriteLine(string.Format("{0}, {1}", reader[0], reader[1]));
           }
         }
         finally
@@ -2197,7 +2197,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
       {
         while (reader.Read())
         {
-          Console.WriteLine(string.Format("{0}, {1}", reader[0], reader[1]));
+          //Console.WriteLine(string.Format("{0}, {1}", reader[0], reader[1]));
         }
       }
       finally

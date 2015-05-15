@@ -794,7 +794,7 @@ namespace DmoOverlay
       Point mousePosition)
     {
       // Copy input to output
-      CopyMemory(outputDataPointer, inputDataPointer, inputByteCount);
+      CopyMemory(outputDataPointer, inputDataPointer, this.streamStride * this.streamHeight);
 
       this.DoCursorOverlay(
         outputDataPointer,
@@ -807,7 +807,7 @@ namespace DmoOverlay
         false);
 
       // Copy output to input
-      CopyMemory(inputDataPointer, outputDataPointer, inputByteCount);
+      CopyMemory(inputDataPointer, outputDataPointer, this.streamStride * this.streamHeight);
 
       this.DoCursorOverlay(
         outputDataPointer,

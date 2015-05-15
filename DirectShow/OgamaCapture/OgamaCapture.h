@@ -10,7 +10,7 @@
 #include "IOgamaScreenCapture.h"
 
 /*
-// UNITS = 10 ^ 7  
+// UNITS = 10 ^ 7
 // UNITS / 30 = 30 fps;
 // UNITS / 20 = 20 fps, etc
 const REFERENCE_TIME FPS_50 = UNITS / 50;
@@ -31,167 +31,175 @@ class COgamaCapturePinDesktop;
 
 // parent
 class COgamaCaptureDesktop : public CSource,
-		public IOgamaScreenCapture // public IAMFilterMiscFlags // CSource is CBaseFilter is IBaseFilter is IMediaFilter is IPersist which is IUnknown
+  public IOgamaScreenCapture, public IAMStreamConfig // public IAMFilterMiscFlags // CSource is CBaseFilter is IBaseFilter is IMediaFilter is IPersist which is IUnknown
 {
 
 private:
-    // Constructor is private because you have to use CreateInstance
-    COgamaCaptureDesktop(IUnknown *pUnk, HRESULT *phr);
-    ~COgamaCaptureDesktop();
+  // Constructor is private because you have to use CreateInstance
+  COgamaCaptureDesktop(IUnknown *pUnk, HRESULT *phr);
+  ~COgamaCaptureDesktop();
 
-    COgamaCapturePinDesktop *m_pPin;
+  COgamaCapturePinDesktop *m_pPin;
 public:
-    //////////////////////////////////////////////////////////////////////////
-    //  IUnknown
-    //////////////////////////////////////////////////////////////////////////
-    static CUnknown * WINAPI CreateInstance(LPUNKNOWN lpunk, HRESULT *phr);
-	STDMETHODIMP NonDelegatingQueryInterface(REFIID riid, void **ppv);
-    STDMETHODIMP QueryInterface(REFIID riid, void **ppv);
+  //////////////////////////////////////////////////////////////////////////
+  //  IUnknown
+  //////////////////////////////////////////////////////////////////////////
+  static CUnknown * WINAPI CreateInstance(LPUNKNOWN lpunk, HRESULT *phr);
+  STDMETHODIMP NonDelegatingQueryInterface(REFIID riid, void **ppv);
+  STDMETHODIMP QueryInterface(REFIID riid, void **ppv);
 
-	// ?? compiler error that these be required here? huh?
-	ULONG STDMETHODCALLTYPE AddRef() { return CBaseFilter::AddRef(); };
-	ULONG STDMETHODCALLTYPE Release() { return CBaseFilter::Release(); };
-	
-	////// 
-	// IAMFilterMiscFlags, in case it helps somebody somewhere know we're a source config (probably unnecessary)
-	//////
-	// ULONG STDMETHODCALLTYPE GetMiscFlags() { return AM_FILTER_MISC_FLAGS_IS_SOURCE; } 
-	// not sure if we should define the above without also implementing  IAMOgamaCapture interface.
+  // ?? compiler error that these be required here? huh?
+  ULONG STDMETHODCALLTYPE AddRef() { return CBaseFilter::AddRef(); };
+  ULONG STDMETHODCALLTYPE Release() { return CBaseFilter::Release(); };
 
-	// our own method
-    IFilterGraph *GetGraph() {return m_pGraph;}
+  ////// 
+  // IAMFilterMiscFlags, in case it helps somebody somewhere know we're a source config (probably unnecessary)
+  //////
+  // ULONG STDMETHODCALLTYPE GetMiscFlags() { return AM_FILTER_MISC_FLAGS_IS_SOURCE; } 
+  // not sure if we should define the above without also implementing  IAMOgamaCapture interface.
 
-	// CBaseFilter, some pdf told me I should (msdn agrees)
-	STDMETHODIMP GetState(DWORD dwMilliSecsTimeout, FILTER_STATE *State);
-	STDMETHODIMP Stop(); //http://social.msdn.microsoft.com/Forums/en/windowsdirectshowdevelopment/thread/a9e62057-f23b-4ce7-874a-6dd7abc7dbf7
-	
-	// IOgamaScreenCapture
-	STDMETHODIMP get_Monitor(int *index);
-    STDMETHODIMP set_Monitor(int index);
-    STDMETHODIMP get_Framerate(int *framerate);
-    STDMETHODIMP set_Framerate(int framerate);
+  // our own method
+  IFilterGraph *GetGraph() { return m_pGraph; }
+
+  // CBaseFilter, some pdf told me I should (msdn agrees)
+  STDMETHODIMP GetState(DWORD dwMilliSecsTimeout, FILTER_STATE *State);
+  STDMETHODIMP Stop(); //http://social.msdn.microsoft.com/Forums/en/windowsdirectshowdevelopment/thread/a9e62057-f23b-4ce7-874a-6dd7abc7dbf7
+
+  // IOgamaScreenCapture
+  STDMETHODIMP get_Monitor(int *index);
+  STDMETHODIMP set_Monitor(int index);
+  STDMETHODIMP get_Framerate(int *framerate);
+  STDMETHODIMP set_Framerate(int framerate);
+
+  //////////////////////////////////////////////////////////////////////////
+  //  IAMStreamConfig
+  //////////////////////////////////////////////////////////////////////////
+  HRESULT STDMETHODCALLTYPE SetFormat(AM_MEDIA_TYPE *pmt);
+  HRESULT STDMETHODCALLTYPE GetFormat(AM_MEDIA_TYPE **ppmt);
+  HRESULT STDMETHODCALLTYPE GetNumberOfCapabilities(int *piCount, int *piSize);
+  HRESULT STDMETHODCALLTYPE GetStreamCaps(int iIndex, AM_MEDIA_TYPE **pmt, BYTE *pSCC);
 };
 
 
 // child
 class COgamaCapturePinDesktop : public CSourceStream, public IAMStreamConfig, public IKsPropertySet,
-	public IOgamaScreenCapture //CSourceStream is ... CBasePin
+  public IOgamaScreenCapture   //CSourceStream is ... CBasePin
 {
 
 public:
-    int m_iFrameNumber;
+  int m_iFrameNumber;
 
 protected:
 
-    //int m_FramesWritten;				// To track where we are
-    REFERENCE_TIME m_rtFrameLength; // also used to get the fps
-	// float m_fFps; use the method to get this now
-	REFERENCE_TIME previousFrameEndTime;
+  //int m_FramesWritten;				// To track where we are
+  REFERENCE_TIME m_rtFrameLength; // also used to get the fps
+  // float m_fFps; use the method to get this now
+  REFERENCE_TIME previousFrameEndTime;
 
-    RECT m_rScreen;                     // Rect containing screen coordinates we are currently "capturing"
+  RECT m_rScreen;                     // Rect containing screen coordinates we are currently "capturing"
 
-    int getNegotiatedFinalWidth();
-    int getNegotiatedFinalHeight();                   
+  int getNegotiatedFinalWidth();
+  int getNegotiatedFinalHeight();
 
-	int m_iCaptureConfigWidth;
-	int m_iCaptureConfigHeight;
+  int m_iCaptureConfigWidth;
+  int m_iCaptureConfigHeight;
 
-    //CMediaType m_MediaType;
-    //CImageDisplay m_Display;            // Figures out our media type for us
-	
-	COgamaCaptureDesktop* m_pParent;
+  //CMediaType m_MediaType;
+  //CImageDisplay m_Display;            // Figures out our media type for us
 
-	HDC hScrDc;
-	HBITMAP     hRawBitmap;
+  COgamaCaptureDesktop* m_pParent;
 
-	//CCritSec m_cSharedState;            // Protects our internal state use CAutoLock cAutoLock(m_pFilter->pStateLock()); instead
+  HDC hScrDc;
+  HBITMAP     hRawBitmap;
 
-	bool m_bFormatAlreadySet;
-	bool m_bConvertToI420;
-	bool m_bUseCaptureBlt;
-	//int m_iScreenBitDepth;
+  //CCritSec m_cSharedState;            // Protects our internal state use CAutoLock cAutoLock(m_pFilter->pStateLock()); instead
 
-	float GetFps();
+  bool m_bFormatAlreadySet;
+  bool m_bConvertToI420;
+  bool m_bUseCaptureBlt;
+  //int m_iScreenBitDepth;
 
-	boolean m_bReReadRegistry;
-	boolean m_bDeDupe;
-	int m_millisToSleepBeforePollForChanges;
-	// HWND m_iHwndToTrack;
-    void CopyScreenToDataBlock(HDC hScrDc, BYTE *pData, BITMAPINFO *pHeader, IMediaSample *pSample);
-	void doJustBitBltOrScaling(HDC hMemDC, int nWidth, int nHeight,int nDestWidth,int nDestHeight, HDC hScrDC, int nX, int nY);
-	void doDIBits(HDC hScrDC, HBITMAP hRawBitmap, int nHeightScanLines, BYTE *pData, BITMAPINFO *pHeader);
+  float GetFps();
 
-    BYTE *pOldData;
+  boolean m_bReReadRegistry;
+  boolean m_bDeDupe;
+  int m_millisToSleepBeforePollForChanges;
+  // HWND m_iHwndToTrack;
+  void CopyScreenToDataBlock(HDC hScrDc, BYTE *pData, BITMAPINFO *pHeader, IMediaSample *pSample);
+  void doJustBitBltOrScaling(HDC hMemDC, int nWidth, int nHeight, int nDestWidth, int nDestHeight, HDC hScrDC, int nX, int nY);
+  void doDIBits(HDC hScrDC, HBITMAP hRawBitmap, int nHeightScanLines, BYTE *pData, BITMAPINFO *pHeader);
 
-	int m_iStretchToThisConfigWidth;
-    int m_iStretchToThisConfigHeight;
-    int m_iStretchMode;
+  BYTE *pOldData;
 
-	int m_MonitorIndex;                     // The current captured monitor (true if is primary)
-    CCritSec m_cSharedState;            // Protects our internal state
+  int m_iStretchToThisConfigWidth;
+  int m_iStretchToThisConfigHeight;
+  int m_iStretchMode;
 
-	int getCaptureDesiredFinalWidth();
-	int getCaptureDesiredFinalHeight();
+  int m_MonitorIndex;                     // The current captured monitor (true if is primary)
+  CCritSec m_cSharedState;            // Protects our internal state
+
+  int getCaptureDesiredFinalWidth();
+  int getCaptureDesiredFinalHeight();
 
 public:
 
-	//CSourceStream
-	HRESULT OnThreadCreate(void);
+  //CSourceStream
+  HRESULT OnThreadCreate(void);
 
-    //////////////////////////////////////////////////////////////////////////
-    //  IUnknown
-    //////////////////////////////////////////////////////////////////////////
-    STDMETHODIMP QueryInterface(REFIID riid, void **ppv); 
-    STDMETHODIMP_(ULONG) AddRef() { return GetOwner()->AddRef(); } // gets called often...
-    STDMETHODIMP_(ULONG) Release() { return GetOwner()->Release(); }
+  //////////////////////////////////////////////////////////////////////////
+  //  IUnknown
+  //////////////////////////////////////////////////////////////////////////
+  STDMETHODIMP QueryInterface(REFIID riid, void **ppv);
+  STDMETHODIMP_(ULONG) AddRef() { return GetOwner()->AddRef(); } // gets called often...
+  STDMETHODIMP_(ULONG) Release() { return GetOwner()->Release(); }
 
-    //////////////////////////////////////////////////////////////////////////
-    //  IAMStreamConfig
-    //////////////////////////////////////////////////////////////////////////
-    HRESULT STDMETHODCALLTYPE SetFormat(AM_MEDIA_TYPE *pmt);
-    HRESULT STDMETHODCALLTYPE GetFormat(AM_MEDIA_TYPE **ppmt);
-    HRESULT STDMETHODCALLTYPE GetNumberOfCapabilities(int *piCount, int *piSize);
-    HRESULT STDMETHODCALLTYPE GetStreamCaps(int iIndex, AM_MEDIA_TYPE **pmt, BYTE *pSCC);
+  //////////////////////////////////////////////////////////////////////////
+  //  IAMStreamConfig
+  //////////////////////////////////////////////////////////////////////////
+  HRESULT STDMETHODCALLTYPE SetFormat(AM_MEDIA_TYPE *pmt);
+  HRESULT STDMETHODCALLTYPE GetFormat(AM_MEDIA_TYPE **ppmt);
+  HRESULT STDMETHODCALLTYPE GetNumberOfCapabilities(int *piCount, int *piSize);
+  HRESULT STDMETHODCALLTYPE GetStreamCaps(int iIndex, AM_MEDIA_TYPE **pmt, BYTE *pSCC);
 
-    COgamaCapturePinDesktop(HRESULT *phr, COgamaCaptureDesktop *pFilter);
-    ~COgamaCapturePinDesktop();
+  COgamaCapturePinDesktop(HRESULT *phr, COgamaCaptureDesktop *pFilter);
+  ~COgamaCapturePinDesktop();
 
-    // Override the version that offers exactly one media type
-    HRESULT DecideBufferSize(IMemAllocator *pAlloc, ALLOCATOR_PROPERTIES *pRequest);
-    HRESULT FillBuffer(IMediaSample *pSample);
-    
-    // Set the agreed media type and set up the necessary parameters
-    HRESULT SetMediaType(const CMediaType *pMediaType);
+  // Override the version that offers exactly one media type
+  HRESULT DecideBufferSize(IMemAllocator *pAlloc, ALLOCATOR_PROPERTIES *pRequest);
+  HRESULT FillBuffer(IMediaSample *pSample);
 
-    // Support multiple display formats (CBasePin)
-    HRESULT CheckMediaType(const CMediaType *pMediaType);
-    HRESULT GetMediaType(int iPosition, CMediaType *pmt);
+  // Set the agreed media type and set up the necessary parameters
+  HRESULT SetMediaType(const CMediaType *pMediaType);
 
-	// IOgamaScreenCapture
-    STDMETHODIMP get_Monitor(int *index);
-    STDMETHODIMP set_Monitor(int index);
-    STDMETHODIMP get_Framerate(int *framerate);
-    STDMETHODIMP set_Framerate(int framerate);
-	STDMETHODIMP UpdateTargetScreen(void);
-	STDMETHODIMP ReleaseScreen(void);
+  // Support multiple display formats (CBasePin)
+  HRESULT CheckMediaType(const CMediaType *pMediaType);
+  HRESULT GetMediaType(int iPosition, CMediaType *pmt);
 
-    // IQualityControl
-	// Not implemented because we aren't going in real time.
-	// If the file-writing filter slows the graph down, we just do nothing, which means
-	// wait until we're unblocked. No frames are ever dropped.
-    STDMETHODIMP Notify(IBaseFilter *pSelf, Quality q)
-    {
-        return E_FAIL;
-    }
+  // IOgamaScreenCapture
+  STDMETHODIMP get_Monitor(int *index);
+  STDMETHODIMP set_Monitor(int index);
+  STDMETHODIMP get_Framerate(int *framerate);
+  STDMETHODIMP set_Framerate(int framerate);
+  STDMETHODIMP UpdateTargetScreen(void);
+  STDMETHODIMP ReleaseScreen(void);
 
-    //////////////////////////////////////////////////////////////////////////
-    //  IKsPropertySet
-    //////////////////////////////////////////////////////////////////////////
-    HRESULT STDMETHODCALLTYPE Set(REFGUID guidPropSet, DWORD dwID, void *pInstanceData, DWORD cbInstanceData, void *pPropData, DWORD cbPropData);
-    HRESULT STDMETHODCALLTYPE Get(REFGUID guidPropSet, DWORD dwPropID, void *pInstanceData,DWORD cbInstanceData, void *pPropData, DWORD cbPropData, DWORD *pcbReturned);
-    HRESULT STDMETHODCALLTYPE QuerySupported(REFGUID guidPropSet, DWORD dwPropID, DWORD *pTypeSupport);
+  // IQualityControl
+  // Not implemented because we aren't going in real time.
+  // If the file-writing filter slows the graph down, we just do nothing, which means
+  // wait until we're unblocked. No frames are ever dropped.
+  STDMETHODIMP Notify(IBaseFilter *pSelf, Quality q)
+  {
+    return E_FAIL;
+  }
+
+  //////////////////////////////////////////////////////////////////////////
+  //  IKsPropertySet
+  //////////////////////////////////////////////////////////////////////////
+  HRESULT STDMETHODCALLTYPE Set(REFGUID guidPropSet, DWORD dwID, void *pInstanceData, DWORD cbInstanceData, void *pPropData, DWORD cbPropData);
+  HRESULT STDMETHODCALLTYPE Get(REFGUID guidPropSet, DWORD dwPropID, void *pInstanceData, DWORD cbInstanceData, void *pPropData, DWORD cbPropData, DWORD *pcbReturned);
+  HRESULT STDMETHODCALLTYPE QuerySupported(REFGUID guidPropSet, DWORD dwPropID, DWORD *pTypeSupport);
 
 private:
-	void reReadCurrentPosition(int isReRead);
+  void reReadCurrentPosition(int isReRead);
 
 };
