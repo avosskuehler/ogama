@@ -761,7 +761,7 @@ namespace Ogama.Modules.Recording
       this.screenCaptureProperties = new ScreenCaptureProperties(
         "OgamaCapture",
         string.Empty,
-        "ffdshow video encoder",
+        "Microsoft Video 1",
         string.Empty,
         10,
         Document.ActiveDocument.PresentationSize,

@@ -764,8 +764,6 @@
     <InstallExecuteSequence>
       <Custom Action="ERRCA_CANCELNEWERVERSION" Sequence="201">NEWERPRODUCTFOUND AND NOT Installed</Custom>
       <Custom Action="DIRCA_TARGETDIR" Sequence="750">TARGETDIR=""</Custom>
-      <!--<Custom Action="UninstallFFDSHOW" Sequence="1699">$C_ffdshow=2</Custom>
-      <Custom Action="InstallFFDSHOW" Sequence="5999">$C_ffdshow&gt;2</Custom>-->
       <LaunchConditions Sequence="400">NOT Installed</LaunchConditions>
       <FindRelatedProducts Sequence="200" />
       <AppSearch Sequence="100" />

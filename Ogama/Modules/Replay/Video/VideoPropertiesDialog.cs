@@ -228,7 +228,7 @@ namespace Ogama.Modules.Replay.Video
         int counter = 0;
         foreach (string item in this.cbbVideoCompressor.Items)
         {
-          if (item.Contains("ffdshow"))
+          if (item.Contains("Microsoft Video 1"))
           {
             this.cbbVideoCompressor.SelectedIndex = counter;
             break;

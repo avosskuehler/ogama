@@ -21,8 +21,6 @@
 
     <util:RegistrySearch Root="HKLM" Key="SOFTWARE\Microsoft\Net Framework Setup\NDP\v4\Full" Value="Version" Variable="Net4FullVersion" />
     <util:RegistrySearch Root="HKLM" Key="SOFTWARE\Microsoft\Net Framework Setup\NDP\v4\Full" Value="Version" Variable="Net4x64FullVersion" Win64="yes" />
-    <util:RegistrySearch Variable="FFDShowExists" Root="HKLM" Key="SOFTWARE\Wow6432Node\GNU\ffdshow" Result="exists"/>
-    <util:RegistrySearch Variable="FFDShowRevision" Root="HKLM" Key="SOFTWARE\Wow6432Node\GNU\ffdshow" Value="revision"/>
     <util:RegistrySearch Variable="BonjourExists" Root="HKLM" Key="SOFTWARE\Apple Inc.\Bonjour Print Services" Result="exists"/>
     <util:RegistrySearch Variable="BonjourVersion" Root="HKLM" Key="SOFTWARE\Apple Inc.\Bonjour Print Services" Value="Version"/>
 
@@ -33,12 +31,6 @@
                   DetectCondition="Net4FullVersion AND (NOT VersionNT64 OR Net4x64FullVersion)"
                   InstallCondition="(VersionNT >= v5.0 OR VersionNT64 >= v5.0) AND (NOT (Net4FullVersion OR Net4x64FullVersion))"/>
 
-      <!-- Install ffdshow -->
-      <ExePackage Id="ffdshow" Name="FFDShow Revision 3476 Setup" Cache="no" Compressed="yes" PerMachine="yes" Permanent="yes" Vital="yes" 
-                  SourceFile="$(var.SolutionDir)Libs\Installer\ffdshow.exe"
-                  DetectCondition="FFDShowExists"
-                  InstallCondition="(FFDShowRevision >= 3476)"/>
-      
         <!-- Install apple bonjour -->
       <ExePackage Id="Bonjour" Name="Apple Bonjour" Cache="no" Compressed="yes" PerMachine="yes" Permanent="yes" Vital="yes" 
                   SourceFile="$(var.SolutionDir)Libs\Installer\BonjourPSSetup.exe"
