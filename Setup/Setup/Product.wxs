@@ -127,13 +127,6 @@
     <Property Id="AdminFolderForm_NextArgs" Value="AdminConfirmInstallForm" />
     <Property Id="AdminConfirmInstallForm_PrevArgs" Value="AdminFolderForm" />
     <Property Id="DirectoryTable100_x86.1DEE2A86_2F57_3629_8107_A71DBB4DBED2" Value="DirectoryTable" />
-    <Property Id='FLASHOCX' Value='FlashNotFound'>
-      <RegistrySearch Id='FlashOCXAppRegSearch'
-                               Root='HKLM'
-                               Key='SOFTWARE\Macromedia\FlashPlayerActiveX'
-                               Name='PlayerPath'
-                               Type='raw' Win64='$(var.Win64)' />
-    </Property>
 
     <PropertyRef Id="NETFRAMEWORK40FULL"/>
 

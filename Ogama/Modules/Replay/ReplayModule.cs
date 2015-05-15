@@ -1754,7 +1754,8 @@ namespace Ogama.Modules.Replay
             int indexOfHash = parameter.IndexOf('#');
             int slideCounter = Convert.ToInt32(parameter.Substring(0, indexOfHash));
             Slide newSlide = this.CurrentTrial[slideCounter];
-            if (this.replayPicture.BgSlide != newSlide)
+
+            if (!this.isUsingTrialVideo && this.replayPicture.BgSlide != newSlide)
             {
               this.LoadSlide(newSlide, ActiveXMode.Off);
             }
@@ -2474,7 +2475,7 @@ namespace Ogama.Modules.Replay
     }
 
     /// <summary>
-    /// This method loads the user camera video into the viewer,
+    /// This method loads the screen recorder video into the viewer,
     /// if there is any and seeks it to the start tine of the current trial.
     /// </summary>
     /// <param name="subjectName">A <see cref="String"/> with the subjects name.</param>
@@ -2512,7 +2513,7 @@ namespace Ogama.Modules.Replay
     /// <returns>Always <strong>true</strong>.</returns>
     private bool LoadUsercam(string subjectName, int usercamID)
     {
-      if (usercamID == -1 )//|| !this.btnShowUsercam.Checked)
+      if (usercamID == -1)//|| !this.btnShowUsercam.Checked)
       {
         // No usercam available
         this.usercamVideoPlayer.CloseMovie();
@@ -2628,7 +2629,7 @@ namespace Ogama.Modules.Replay
       if (this.CurrentTrial.Count > 1)
       {
         Slide newSlide = this.CurrentTrial[0];
-        if (this.replayPicture.BgSlide != newSlide)
+        if (this.replayPicture.BgSlide != newSlide && !this.isUsingTrialVideo)
         {
           this.LoadSlide(newSlide, ActiveXMode.Off);
         }
