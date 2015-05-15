@@ -32,7 +32,7 @@
     {
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExceptionDialog));
       this.pnlDescription = new System.Windows.Forms.Panel();
-      this.dialogTop1 = new DialogTop();
+      this.dialogTop1 = new Ogama.Modules.Common.Controls.DialogTop();
       this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
       this.spcMessageDetails = new System.Windows.Forms.SplitContainer();
       this.lblExceptionMessage = new System.Windows.Forms.Label();
@@ -45,6 +45,7 @@
       this.label2 = new System.Windows.Forms.Label();
       this.pnlDescription.SuspendLayout();
       this.tableLayoutPanel1.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.spcMessageDetails)).BeginInit();
       this.spcMessageDetails.Panel1.SuspendLayout();
       this.spcMessageDetails.Panel2.SuspendLayout();
       this.spcMessageDetails.SuspendLayout();
@@ -200,7 +201,7 @@
       this.label2.TabIndex = 4;
       this.label2.Text = resources.GetString("label2.Text");
       // 
-      // frmException
+      // ExceptionDialog
       // 
       this.AcceptButton = this.btnOK;
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -208,7 +209,7 @@
       this.ClientSize = new System.Drawing.Size(440, 431);
       this.Controls.Add(this.tableLayoutPanel1);
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-      this.Name = "frmException";
+      this.Name = "ExceptionDialog";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
       this.Text = "Exception occured ...";
       this.pnlDescription.ResumeLayout(false);
@@ -216,6 +217,7 @@
       this.spcMessageDetails.Panel1.ResumeLayout(false);
       this.spcMessageDetails.Panel2.ResumeLayout(false);
       this.spcMessageDetails.Panel2.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.spcMessageDetails)).EndInit();
       this.spcMessageDetails.ResumeLayout(false);
       this.pnlButtons.ResumeLayout(false);
       this.pnlButtons.PerformLayout();
