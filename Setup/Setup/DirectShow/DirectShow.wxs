@@ -9,12 +9,12 @@
           <File Id="DmoBase" Name="DmoBase.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="DmoBase" AssemblyApplication="DmoBase" DiskId="1"
               Source="$(var.Ogama.TargetDir)" />
         </Component>
-        <?if $(sys.BUILDARCH)=x64?>
+        <!--<?if $(sys.BUILDARCH)=x64?>
         <Component Id="C_OgamaCaptureX64" Guid="{DD74CFEC-89A9-4D90-B270-774967A69BA1}" Win64="$(var.Win64)">
           <File Id="OgamaCapture" Name="OgamaCapture.ax" KeyPath="yes" SelfRegCost="1" DiskId="1"
               Source="$(var.Ogama.TargetDir)" />
         </Component>
-        <?endif?>
+        <?endif?>-->
         <?if $(sys.BUILDARCH)=x86?>
         <Component Id="C_PS3EyeAxFilter" Guid="" Win64="$(var.Win64)">
           <File Id="PS3EyeAxFilter" Name="PS3EyeAxFilter.ax" KeyPath="yes" SelfRegCost="1" DiskId="1"
@@ -30,11 +30,11 @@
       <ComponentRef Id='DmoMixerComponent' />
       <ComponentRef Id='DmoOverlayComponent' />
       <ComponentRef Id='GenericSampleSourceFilterComponent' />
-      <?if $(sys.BUILDARCH)=x86?>
       <ComponentRef Id='OgamaCaptureX86Component' />
+      <?if $(sys.BUILDARCH)=x86?>
       <ComponentRef Id='C_PS3EyeAxFilter' />
-      <?else?>
-      <ComponentRef Id='C_OgamaCaptureX64' />
+      <!--<?else?>-->
+      <!--<ComponentRef Id='C_OgamaCaptureX64' />-->
       <?endif?>
     </Feature>
   </Fragment>
