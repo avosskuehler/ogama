@@ -9,3 +9,6 @@ Ogama.sdf
 *.chm
 *Debug*
 *.opensdf
+packages/*
+Ogama.sln.GhostDoc.xml
+*/Thumbs.db

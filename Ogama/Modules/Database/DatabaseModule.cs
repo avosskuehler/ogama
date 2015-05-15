@@ -1,7 +1,7 @@
 // <copyright file="DatabaseModule.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2013 Dr. Adrian Voßkühler  
+// Copyright (C) 2015 Dr. Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -32,14 +32,14 @@ namespace Ogama.Modules.Database
   /// Derived from <see cref="FormWithAccellerators"/>.
   /// This <see cref="Form"/> is the database module. 
   /// It displays all tables from the database:
-  /// <see cref="OgamaDataSet.SubjectsDataTable"/>
-  /// <see cref="OgamaDataSet.SubjectParametersDataTable"/>
-  /// <see cref="OgamaDataSet.TrialsDataTable"/> 
-  /// <see cref="OgamaDataSet.TrialEventsDataTable"/>
-  /// <see cref="OgamaDataSet.AOIsDataTable"/>
-  /// <see cref="OgamaDataSet.GazeFixationsDataTable"/>
-  /// <see cref="OgamaDataSet.MouseFixationsDataTable"/>
-  /// <see cref="OgamaDataSet.ShapeGroupsDataTable"/>
+  /// <see cref="SQLiteOgamaDataSet.SubjectsDataTable"/>
+  /// <see cref="SQLiteOgamaDataSet.SubjectParametersDataTable"/>
+  /// <see cref="SQLiteOgamaDataSet.TrialsDataTable"/> 
+  /// <see cref="SQLiteOgamaDataSet.TrialEventsDataTable"/>
+  /// <see cref="SQLiteOgamaDataSet.AOIsDataTable"/>
+  /// <see cref="SQLiteOgamaDataSet.GazeFixationsDataTable"/>
+  /// <see cref="SQLiteOgamaDataSet.MouseFixationsDataTable"/>
+  /// <see cref="SQLiteOgamaDataSet.ShapeGroupsDataTable"/>
   /// The user can edit and revise the tables.
   /// </summary>
   /// <remarks>This module is intended to give the option
@@ -1074,7 +1074,7 @@ namespace Ogama.Modules.Database
         this.bsoAOIs.EndEdit();
         this.bsoShapeGroups.EndEdit();
 
-        OgamaDataSet dataset = Document.ActiveDocument.DocDataSet;
+        var dataset = Document.ActiveDocument.DocDataSet;
 
         int affectedRows = dataset.SubjectsAdapter.Update(dataset.Subjects);
         affectedRows = dataset.SubjectParametersAdapter.Update(dataset.SubjectParameters);
@@ -1219,13 +1219,13 @@ namespace Ogama.Modules.Database
 
       string subjectName = dgvRawData.Rows[0].Cells[1].Value.ToString();
 
-      OgamaDataSet.RawdataDataTable subjectRawDataTable = Queries.GetRawDataBySubject(subjectName);
-     
-      List<OgamaDataSet.RawdataRow> dataRows = new List<OgamaDataSet.RawdataRow>();
+      SQLiteOgamaDataSet.RawdataDataTable subjectRawDataTable = Queries.GetRawDataBySubject(subjectName);
+
+      List<SQLiteOgamaDataSet.RawdataRow> dataRows = new List<SQLiteOgamaDataSet.RawdataRow>();
      
       for (int i = 0; i < subjectRawDataTable.Count; i++)
       {
-        OgamaDataSet.RawdataRow row = subjectRawDataTable[i];
+        SQLiteOgamaDataSet.RawdataRow row = subjectRawDataTable[i];
         if (row != null)
         {
           try
@@ -1250,7 +1250,7 @@ namespace Ogama.Modules.Database
     }
 
 
-    private void UpdateDatabaseWithRawDataModified(string subjectName,List<OgamaDataSet.RawdataRow> dataRows)
+    private void UpdateDatabaseWithRawDataModified(string subjectName, List<SQLiteOgamaDataSet.RawdataRow> dataRows)
     {
       DataTable rawTable = null;
       try

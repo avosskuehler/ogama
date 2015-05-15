@@ -1,7 +1,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 // <copyright file="NameShapeDlg.cs" company="Freie Universität Berlin">
 //   OGAMA - open gaze and mouse analyzer 
-//   Copyright (C) 2014 Dr. Adrian Voßkühler  
+//   Copyright (C) 2015 Dr. Adrian Voßkühler  
 //   Licensed under GPL V3
 // </copyright>
 // <author>Adrian Voßkühler</author>
@@ -124,9 +124,9 @@ namespace Ogama.Modules.AOI.Dialogs
       if (this.ShapeName == string.Empty)
       {
         InformationDialog.Show(
-          "Empty shape name", 
-          "Please enter at least one character for the shape name", 
-          false, 
+          "Empty shape name",
+          "Please enter at least one character for the shape name",
+          false,
           MessageBoxIcon.Information);
 
         return;
@@ -135,15 +135,14 @@ namespace Ogama.Modules.AOI.Dialogs
       if (IOHelpers.IsNumeric(this.ShapeName[0]))
       {
         InformationDialog.Show(
-          "Invalid shape name", 
-          "Please do not use a number for the first character of the shape name.", 
-          false, 
+          "Invalid shape name",
+          "Please do not use a number for the first character of the shape name.",
+          false,
           MessageBoxIcon.Information);
         return;
       }
 
-      IEnumerable<OgamaDataSet.AOIsRow> aois =
-        Document.ActiveDocument.DocDataSet.AOIs.Where(o => o.ShapeName == this.ShapeName && o.TrialID == this.trialID);
+      var aois = Document.ActiveDocument.DocDataSet.AOIs.Where(o => o.ShapeName == this.ShapeName && o.TrialID == this.trialID);
 
       // OgamaDataSet.AOIsDataTable aoisTable = Document.ActiveDocument.DocDataSet.AOIsAdapter.GetDataByTrialIDAndShapeName(this.trialID, this.ShapeName);
       if (aois.Any())

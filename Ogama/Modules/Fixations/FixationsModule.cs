@@ -1,7 +1,7 @@
 // <copyright file="FixationsModule.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2013 Dr. Adrian Voßkühler  
+// Copyright (C) 2015 Dr. Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -559,7 +559,7 @@ namespace Ogama.Modules.Fixations
       string activeSubject = Document.ActiveDocument.SelectionState.SubjectName;
       if (activeSubject != null)
       {
-        OgamaDataSet.TrialsDataTable trialsTable = Document.ActiveDocument.DocDataSet.TrialsAdapter.GetDataBySubjectAndSequence(activeSubject, currentTrialSequence);
+        var trialsTable = Document.ActiveDocument.DocDataSet.TrialsAdapter.GetDataBySubjectAndSequence(activeSubject, currentTrialSequence);
         Document.ActiveDocument.DocDataSet.TrialsAdapter.UpdateEliminateByID("yes", (long)trialsTable.Rows[0]["ID"]);
         Document.ActiveDocument.DocDataSet.TrialsAdapter.Fill(Document.ActiveDocument.DocDataSet.Trials);
       }
@@ -713,7 +713,7 @@ namespace Ogama.Modules.Fixations
       int absoluteDriftXCorrection = (int)this.nudDriftXCorrection.Value;
       int absoluteDriftYCorrection = (int)this.nudDriftYCorrection.Value;
 
-      OgamaDataSet.RawdataDataTable rawData = Queries.GetRawDataBySubjectAndTrialSequence(subjectName, trialSequence);
+      SQLiteOgamaDataSet.RawdataDataTable rawData = Queries.GetRawDataBySubjectAndTrialSequence(subjectName, trialSequence);
       foreach (DataRow rawRow in rawData.Rows)
       {
         double gazePosX = rawRow.IsNull("GazePosX") ? 0 : (double)rawRow["GazePosX"];
@@ -725,7 +725,7 @@ namespace Ogama.Modules.Fixations
         }
       }
 
-      int affectedRows = Document.ActiveDocument.DocDataSet.GazeFixationsAdapter.Update((OgamaDataSet.GazeFixationsDataTable)this.fixationsPicture.GazeFixations);
+      int affectedRows = Document.ActiveDocument.DocDataSet.GazeFixationsAdapter.Update((SQLiteOgamaDataSet.GazeFixationsDataTable)this.fixationsPicture.GazeFixations);
       affectedRows = Queries.UpdateRawDataBySubject(rawData, subjectName);
 
       this.ResetDriftCorrections();

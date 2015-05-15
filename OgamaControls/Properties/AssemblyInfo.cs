@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Freie Universität Berlin")]
 [assembly: AssemblyProduct("OGAMA")]
-[assembly: AssemblyCopyright("Copyright © Dr. Adrian Voßkühler 2014")]
+[assembly: AssemblyCopyright("Copyright © Dr. Adrian Voßkühler 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]		
 
@@ -26,7 +26,7 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
 
-[assembly: AssemblyVersion("4.5")]
+[assembly: AssemblyVersion("5.0")]
 
 //
 // In order to sign your assembly you must specify a key to use. Refer to the 
@@ -56,5 +56,5 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDelaySign(false)]
 [assembly: AssemblyKeyName("")]
 [assembly: ComVisibleAttribute(false)]
-[assembly: AssemblyFileVersionAttribute("4.5")]
+[assembly: AssemblyFileVersionAttribute("5.0")]
 [assembly: GuidAttribute("8658EAD6-608B-4dc5-BCDC-930A922833FC")]

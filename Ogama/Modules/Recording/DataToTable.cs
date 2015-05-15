@@ -1,7 +1,7 @@
 ﻿// <copyright file="DataToTable.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2013 Dr. Adrian Voßkühler  
+// Copyright (C) 2015 Dr. Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -30,18 +30,18 @@ namespace Ogama.Modules.Recording
     public RawData[] RawDataList;
 
     /// <summary>
-    /// A <see cref="OgamaDataSet.RawdataDataTable"/> of the current subject
+    /// A <see cref="SQLiteOgamaDataSet.RawdataDataTable"/> of the current subject
     /// where to write the data to.
     /// </summary>
-    public OgamaDataSet.RawdataDataTable RawDataTable;
+    public SQLiteOgamaDataSet.RawdataDataTable RawDataTable;
 
     /// <summary>
     /// Initializes a new instance of the DataToTable structure.
     /// </summary>
     /// <param name="newRawData">A <see cref="List{RawData}"/> with the new data.</param>
-    /// <param name="newRawDataTable">A <see cref="OgamaDataSet.RawdataDataTable"/> of the current subject
+    /// <param name="newRawDataTable">A <see cref="SQLiteOgamaDataSet.RawdataDataTable"/> of the current subject
     /// where to write the data to.</param>
-    public DataToTable(List<RawData> newRawData, OgamaDataSet.RawdataDataTable newRawDataTable)
+    public DataToTable(List<RawData> newRawData, SQLiteOgamaDataSet.RawdataDataTable newRawDataTable)
     {
       this.RawDataList = newRawData.ToArray();
       this.RawDataTable = newRawDataTable;

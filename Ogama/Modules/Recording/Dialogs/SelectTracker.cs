@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="SelectTracker.cs" company="Freie Universität Berlin">
 //   OGAMA - open gaze and mouse analyzer 
-//   Copyright (C) 2014 Dr. Adrian Voßkühler  
+//   Copyright (C) 2015 Dr. Adrian Voßkühler  
 //   Licensed under GPL V3
 // </copyright>
 // <author>Adrian Voßkühler</author>
@@ -26,6 +26,7 @@ namespace Ogama.Modules.Recording.Dialogs
   using Ogama.Modules.Recording.HaythamInterface;
   using Ogama.Modules.Recording.MirametrixInterface;
   using Ogama.Modules.Recording.MouseOnlyInterface;
+  using Ogama.Modules.Recording.SmartEyeInterface;
   using Ogama.Modules.Recording.SMIInterface.iViewX;
   using Ogama.Modules.Recording.SMIInterface.RedM;
   using Ogama.Modules.Recording.TheEyeTribeInterface;
@@ -146,6 +147,11 @@ namespace Ogama.Modules.Recording.Dialogs
         if (this.chbTheEyeTribe.Checked)
         {
           returnValue |= HardwareTracker.TheEyeTribe;
+        }
+
+        if (this.chbSmartEye.Checked)
+        {
+          returnValue |= HardwareTracker.SmartEye;
         }
 
         return returnValue;
@@ -276,6 +282,16 @@ namespace Ogama.Modules.Recording.Dialogs
     private void GrpMouseOnlyEnter(object sender, EventArgs e)
     {
       this.UpdateInfobar(MouseOnlyTracker.IsAvailable, Properties.Resources.Mouse, Properties.Resources.Mouse);
+    }
+
+    /// <summary>
+    /// Update the info bar on hovering over the control.
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+    private void GrpSmartEyeEnter(object sender, System.EventArgs e)
+    {
+      this.UpdateInfobar(SmartEyeTracker.IsAvailable, Properties.Resources.SmartEyeAuroraFoto64, Properties.Resources.SmartEyeLogo);
     }
 
     /// <summary>
@@ -431,6 +447,19 @@ namespace Ogama.Modules.Recording.Dialogs
     private void PcbMirametrixClick(object sender, EventArgs e)
     {
       System.Diagnostics.Process.Start("http://www.mirametrix.com");
+    }
+
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler for
+    /// the <see cref="PictureBox"/>
+    /// User clicked the Smart Eye logo,
+    /// so open Smart Eye website.
+    /// </summary>
+    /// <param name="sender">Source of the event.</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void PcbSmartEyeClick(object sender, EventArgs e)
+    {
+      System.Diagnostics.Process.Start("http://www.smarteye.se");
     }
 
     /// <summary>
@@ -593,6 +622,19 @@ namespace Ogama.Modules.Recording.Dialogs
     {
       var objActivateMirametrix = new HowToActivateMirametrix();
       objActivateMirametrix.ShowDialog();
+    }
+
+    /// <summary>
+    /// The <see cref="Control.Click"/> event handler
+    /// for the <see cref="PictureBox"/> <see cref="pcbHelpSMIRedM"/>
+    /// Displays instructions to activate SMI RedM recording.
+    /// </summary>
+    /// <param name="sender">Source of the event</param>
+    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    private void PcbHelpSmartEyeClick(object sender, EventArgs e)
+    {
+      var objActivateSmartEye = new HowToActivateSmartEye();
+      objActivateSmartEye.ShowDialog();
     }
 
     /// <summary>
@@ -851,6 +893,14 @@ namespace Ogama.Modules.Recording.Dialogs
     }
 
     /// <summary>
+    /// Updates the status of the Smart Eye tracking devices
+    /// </summary>
+    private void UpdateSmartEyeStatus()
+    {
+      this.SetStatus(SmartEyeTracker.IsAvailable, this.chbSmartEye, this.pcbSmartEyeStatus, this.lblSmartEyeStatus);
+    }
+
+    /// <summary>
     ///   Updates the status of the SMI RedM tracking devices
     /// </summary>
     private void UpdateSMIRedMTrackStatus()
@@ -900,6 +950,7 @@ namespace Ogama.Modules.Recording.Dialogs
       this.UpdateSMIRedMTrackStatus();
       this.UpdateHaythamTrackStatus();
       this.UpdateTheEyeTribeStatus();
+      this.UpdateSmartEyeStatus();
     }
 
     #endregion

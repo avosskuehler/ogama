@@ -580,12 +580,14 @@ namespace Ogama.MainWindow
       this.mnuToolsDatabaseConnection.Name = "mnuToolsDatabaseConnection";
       this.mnuToolsDatabaseConnection.Size = new System.Drawing.Size(248, 22);
       this.mnuToolsDatabaseConnection.Text = "Database Connection ...";
+      this.mnuToolsDatabaseConnection.Visible = false;
       this.mnuToolsDatabaseConnection.Click += new System.EventHandler(this.mnuToolsDatabaseConnection_Click);
       // 
       // toolStripSeparator10
       // 
       this.toolStripSeparator10.Name = "toolStripSeparator10";
       this.toolStripSeparator10.Size = new System.Drawing.Size(245, 6);
+      this.toolStripSeparator10.Visible = false;
       // 
       // mnuToolsExperimentSettings
       // 

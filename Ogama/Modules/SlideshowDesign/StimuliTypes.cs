@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="StimuliTypes.cs" company="Freie Universität Berlin">
 //   OGAMA - open gaze and mouse analyzer 
-//   Copyright (C) 2014 Dr. Adrian Voßkühler  
+//   Copyright (C) 2015 Dr. Adrian Voßkühler  
 //   Licensed under GPL V3
 // </copyright>
 // <author>Adrian Voßkühler</author>

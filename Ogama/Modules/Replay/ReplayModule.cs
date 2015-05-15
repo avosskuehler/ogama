@@ -1,7 +1,7 @@
 // <copyright file="ReplayModule.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2013 Dr. Adrian Voßkühler  
+// Copyright (C) 2015 Dr. Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -25,6 +25,7 @@ namespace Ogama.Modules.Replay
 
   using GTHardware.Cameras.DirectShow;
 
+  using Ogama.DataSet;
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
   using Ogama.MainWindow.ContextPanel;
@@ -1534,7 +1535,7 @@ namespace Ogama.Modules.Replay
       markerEvent.Type = EventType.Marker;
 
       // Insert Data in TrialEvents Table
-      Ogama.DataSet.OgamaDataSet.TrialEventsRow workTrialEventRow;
+      SQLiteOgamaDataSet.TrialEventsRow workTrialEventRow;
       workTrialEventRow = Document.ActiveDocument.DocDataSet.TrialEvents.NewTrialEventsRow();
       workTrialEventRow.EventID = markerEvent.EventID;
       workTrialEventRow.EventParam = markerEvent.Param;
@@ -1753,7 +1754,8 @@ namespace Ogama.Modules.Replay
             int indexOfHash = parameter.IndexOf('#');
             int slideCounter = Convert.ToInt32(parameter.Substring(0, indexOfHash));
             Slide newSlide = this.CurrentTrial[slideCounter];
-            if (this.replayPicture.BgSlide != newSlide)
+
+            if (!this.isUsingTrialVideo && this.replayPicture.BgSlide != newSlide)
             {
               this.LoadSlide(newSlide, ActiveXMode.Off);
             }
@@ -2473,7 +2475,7 @@ namespace Ogama.Modules.Replay
     }
 
     /// <summary>
-    /// This method loads the user camera video into the viewer,
+    /// This method loads the screen recorder video into the viewer,
     /// if there is any and seeks it to the start tine of the current trial.
     /// </summary>
     /// <param name="subjectName">A <see cref="String"/> with the subjects name.</param>
@@ -2511,7 +2513,7 @@ namespace Ogama.Modules.Replay
     /// <returns>Always <strong>true</strong>.</returns>
     private bool LoadUsercam(string subjectName, int usercamID)
     {
-      if (usercamID == -1 )//|| !this.btnShowUsercam.Checked)
+      if (usercamID == -1)//|| !this.btnShowUsercam.Checked)
       {
         // No usercam available
         this.usercamVideoPlayer.CloseMovie();
@@ -2627,7 +2629,7 @@ namespace Ogama.Modules.Replay
       if (this.CurrentTrial.Count > 1)
       {
         Slide newSlide = this.CurrentTrial[0];
-        if (this.replayPicture.BgSlide != newSlide)
+        if (this.replayPicture.BgSlide != newSlide && !this.isUsingTrialVideo)
         {
           this.LoadSlide(newSlide, ActiveXMode.Off);
         }

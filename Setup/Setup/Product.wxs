@@ -127,13 +127,6 @@
     <Property Id="AdminFolderForm_NextArgs" Value="AdminConfirmInstallForm" />
     <Property Id="AdminConfirmInstallForm_PrevArgs" Value="AdminFolderForm" />
     <Property Id="DirectoryTable100_x86.1DEE2A86_2F57_3629_8107_A71DBB4DBED2" Value="DirectoryTable" />
-    <Property Id='FLASHOCX' Value='FlashNotFound'>
-      <RegistrySearch Id='FlashOCXAppRegSearch'
-                               Root='HKLM'
-                               Key='SOFTWARE\Macromedia\FlashPlayerActiveX'
-                               Name='PlayerPath'
-                               Type='raw' Win64='$(var.Win64)' />
-    </Property>
 
     <PropertyRef Id="NETFRAMEWORK40FULL"/>
 
@@ -764,8 +757,6 @@
     <InstallExecuteSequence>
       <Custom Action="ERRCA_CANCELNEWERVERSION" Sequence="201">NEWERPRODUCTFOUND AND NOT Installed</Custom>
       <Custom Action="DIRCA_TARGETDIR" Sequence="750">TARGETDIR=""</Custom>
-      <!--<Custom Action="UninstallFFDSHOW" Sequence="1699">$C_ffdshow=2</Custom>
-      <Custom Action="InstallFFDSHOW" Sequence="5999">$C_ffdshow&gt;2</Custom>-->
       <LaunchConditions Sequence="400">NOT Installed</LaunchConditions>
       <FindRelatedProducts Sequence="200" />
       <AppSearch Sequence="100" />

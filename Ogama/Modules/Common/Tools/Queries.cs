@@ -1,7 +1,7 @@
 ﻿// <copyright file="Queries.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2013 Dr. Adrian Voßkühler  
+// Copyright (C) 2015 Dr. Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -18,6 +18,7 @@ namespace Ogama.Modules.Common.Tools
   using System.ComponentModel;
   using System.Data;
   using System.Data.SqlClient;
+  using System.Data.SQLite;
   using System.Drawing;
   using System.Linq;
   using System.Text;
@@ -572,11 +573,11 @@ namespace Ogama.Modules.Common.Tools
         throw new ArgumentNullException();
       }
 
-      SqlDataAdapter adapter = Document.ActiveDocument.DocDataSet.RawDataAdapterDict[subject];
+      SQLiteDataAdapter adapter = Document.ActiveDocument.DocDataSet.RawDataAdapterDict[subject];
 
       // Create the SelectCommand.
-      SqlCommand command = new SqlCommand(
-        "UPDATE [dbo].[" + subject +
+      var command = new SQLiteCommand(
+        "UPDATE [" + subject +
         "Rawdata] SET [SubjectName] = @SubjectName, " +
           "[TrialSequence] = @TrialSequence , [Time] = @Time, [PupilDiaX] = @PupilDiaX, " +
           "[PupilDiaY] = @PupilDiaY , [GazePosX] = @GazePosX, [GazePosY] = @GazePosY, " +
@@ -585,17 +586,17 @@ namespace Ogama.Modules.Common.Tools
           Document.ActiveDocument.DocDataSet.DatabaseConnection);
 
       // Add the parameters for the SelectCommand.
-      command.Parameters.Add("@TrialSequence", SqlDbType.Int);
-      command.Parameters.Add("@SubjectName", SqlDbType.VarChar);
-      command.Parameters.Add("@Time", SqlDbType.BigInt);
-      command.Parameters.Add("@PupilDiaX", SqlDbType.Float);
-      command.Parameters.Add("@PupilDiaY", SqlDbType.Float);
-      command.Parameters.Add("@GazePosX", SqlDbType.Float);
-      command.Parameters.Add("@GazePosY", SqlDbType.Float);
-      command.Parameters.Add("@MousePosX", SqlDbType.Float);
-      command.Parameters.Add("@MousePosY", SqlDbType.Float);
-      command.Parameters.Add("@EventID", SqlDbType.Int);
-      command.Parameters.Add("@Original_ID", SqlDbType.BigInt);
+      command.Parameters.Add("@TrialSequence", DbType.Int32);
+      command.Parameters.Add("@SubjectName", DbType.String);
+      command.Parameters.Add("@Time", DbType.Int64);
+      command.Parameters.Add("@PupilDiaX", DbType.Single);
+      command.Parameters.Add("@PupilDiaY", DbType.Single);
+      command.Parameters.Add("@GazePosX", DbType.Single);
+      command.Parameters.Add("@GazePosY", DbType.Single);
+      command.Parameters.Add("@MousePosX", DbType.Single);
+      command.Parameters.Add("@MousePosY", DbType.Single);
+      command.Parameters.Add("@EventID", DbType.Int32);
+      command.Parameters.Add("@Original_ID", DbType.Int64);
 
       // Set SelectCommand
       adapter.UpdateCommand = command;
@@ -627,11 +628,11 @@ namespace Ogama.Modules.Common.Tools
     /// with data given in parameter row.
     /// Uses given subjects raw data table.
     /// </summary>
-    /// <param name="table">A <see cref="OgamaDataSet.RawdataDataTable"/> with the new values</param>
+    /// <param name="table">A <see cref="SQLiteOgamaDataSet.RawdataDataTable"/> with the new values</param>
     /// <param name="subject">A <see cref="string"/> with the subject name to which the data belongs.</param>
     /// <returns>A <see cref="int"/> with the number of updated rows.</returns>
     /// <exception cref="ArgumentNullException">Thrown, when row or subject is null or empty.</exception>
-    public static int UpdateRawDataBySubject(OgamaDataSet.RawdataDataTable table, string subject)
+    public static int UpdateRawDataBySubject(SQLiteOgamaDataSet.RawdataDataTable table, string subject)
     {
       if (table == null)
       {
@@ -643,42 +644,42 @@ namespace Ogama.Modules.Common.Tools
         throw new ArgumentNullException();
       }
 
-      SqlDataAdapter adapter = Document.ActiveDocument.DocDataSet.RawDataAdapterDict[subject];
+      SQLiteDataAdapter adapter = Document.ActiveDocument.DocDataSet.RawDataAdapterDict[subject];
 
-      adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+      adapter.UpdateCommand = new SQLiteCommand();
       adapter.UpdateCommand.Connection = Document.ActiveDocument.DocDataSet.DatabaseConnection;
       adapter.UpdateCommand.CommandText = @"UPDATE [" + subject + @"Rawdata] SET [SubjectName] = @SubjectName, [TrialSequence] = @TrialSequence, [Time] = @Time, [PupilDiaX] = @PupilDiaX, [PupilDiaY] = @PupilDiaY, [GazePosX] = @GazePosX, [GazePosY] = @GazePosY, [MousePosX] = @MousePosX, [MousePosY] = @MousePosY, [EventID] = @EventID WHERE (([ID] = @Original_ID) AND ([SubjectName] = @Original_SubjectName) AND ([TrialSequence] = @Original_TrialSequence) AND ([Time] = @Original_Time) AND ((@IsNull_PupilDiaX = 1 AND [PupilDiaX] IS NULL) OR ([PupilDiaX] = @Original_PupilDiaX)) AND ((@IsNull_PupilDiaY = 1 AND [PupilDiaY] IS NULL) OR ([PupilDiaY] = @Original_PupilDiaY)) AND ((@IsNull_GazePosX = 1 AND [GazePosX] IS NULL) OR ([GazePosX] = @Original_GazePosX)) AND ((@IsNull_GazePosY = 1 AND [GazePosY] IS NULL) OR ([GazePosY] = @Original_GazePosY)) AND ((@IsNull_MousePosX = 1 AND [MousePosX] IS NULL) OR ([MousePosX] = @Original_MousePosX)) AND ((@IsNull_MousePosY = 1 AND [MousePosY] IS NULL) OR ([MousePosY] = @Original_MousePosY)) AND ((@IsNull_EventID = 1 AND [EventID] IS NULL) OR ([EventID] = @Original_EventID)));
 SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, GazePosY, MousePosX, MousePosY, EventID FROM " + subject + "Rawdata WHERE (ID = @ID)";
-      adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-      adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SubjectName", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SubjectName", global::System.Data.DataRowVersion.Current, false, null, string.Empty, string.Empty, string.Empty));
-      adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TrialSequence", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TrialSequence", global::System.Data.DataRowVersion.Current, false, null, string.Empty, string.Empty, string.Empty));
-      adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Time", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Time", global::System.Data.DataRowVersion.Current, false, null, string.Empty, string.Empty, string.Empty));
-      adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PupilDiaX", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PupilDiaX", global::System.Data.DataRowVersion.Current, false, null, string.Empty, string.Empty, string.Empty));
-      adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PupilDiaY", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PupilDiaY", global::System.Data.DataRowVersion.Current, false, null, string.Empty, string.Empty, string.Empty));
-      adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@GazePosX", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GazePosX", global::System.Data.DataRowVersion.Current, false, null, string.Empty, string.Empty, string.Empty));
-      adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@GazePosY", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GazePosY", global::System.Data.DataRowVersion.Current, false, null, string.Empty, string.Empty, string.Empty));
-      adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MousePosX", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MousePosX", global::System.Data.DataRowVersion.Current, false, null, string.Empty, string.Empty, string.Empty));
-      adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MousePosY", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MousePosY", global::System.Data.DataRowVersion.Current, false, null, string.Empty, string.Empty, string.Empty));
-      adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EventID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "EventID", global::System.Data.DataRowVersion.Current, false, null, string.Empty, string.Empty, string.Empty));
-      adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, string.Empty, string.Empty, string.Empty));
-      adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SubjectName", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SubjectName", global::System.Data.DataRowVersion.Original, false, null, string.Empty, string.Empty, string.Empty));
-      adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TrialSequence", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TrialSequence", global::System.Data.DataRowVersion.Original, false, null, string.Empty, string.Empty, string.Empty));
-      adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Time", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Time", global::System.Data.DataRowVersion.Original, false, null, string.Empty, string.Empty, string.Empty));
-      adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PupilDiaX", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PupilDiaX", global::System.Data.DataRowVersion.Original, true, null, string.Empty, string.Empty, string.Empty));
-      adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PupilDiaX", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PupilDiaX", global::System.Data.DataRowVersion.Original, false, null, string.Empty, string.Empty, string.Empty));
-      adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PupilDiaY", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PupilDiaY", global::System.Data.DataRowVersion.Original, true, null, string.Empty, string.Empty, string.Empty));
-      adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PupilDiaY", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PupilDiaY", global::System.Data.DataRowVersion.Original, false, null, string.Empty, string.Empty, string.Empty));
-      adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_GazePosX", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GazePosX", global::System.Data.DataRowVersion.Original, true, null, string.Empty, string.Empty, string.Empty));
-      adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_GazePosX", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GazePosX", global::System.Data.DataRowVersion.Original, false, null, string.Empty, string.Empty, string.Empty));
-      adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_GazePosY", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GazePosY", global::System.Data.DataRowVersion.Original, true, null, string.Empty, string.Empty, string.Empty));
-      adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_GazePosY", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GazePosY", global::System.Data.DataRowVersion.Original, false, null, string.Empty, string.Empty, string.Empty));
-      adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MousePosX", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MousePosX", global::System.Data.DataRowVersion.Original, true, null, string.Empty, string.Empty, string.Empty));
-      adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MousePosX", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MousePosX", global::System.Data.DataRowVersion.Original, false, null, string.Empty, string.Empty, string.Empty));
-      adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MousePosY", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MousePosY", global::System.Data.DataRowVersion.Original, true, null, string.Empty, string.Empty, string.Empty));
-      adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MousePosY", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MousePosY", global::System.Data.DataRowVersion.Original, false, null, string.Empty, string.Empty, string.Empty));
-      adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_EventID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "EventID", global::System.Data.DataRowVersion.Original, true, null, string.Empty, string.Empty, string.Empty));
-      adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_EventID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "EventID", global::System.Data.DataRowVersion.Original, false, null, string.Empty, string.Empty, string.Empty));
-      adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.BigInt, 8, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, string.Empty, string.Empty, string.Empty));
+      adapter.UpdateCommand.CommandType = CommandType.Text;
+      adapter.UpdateCommand.Parameters.Add(new SQLiteParameter("@SubjectName", DbType.String, 0, ParameterDirection.Input, 0, 0, "SubjectName", DataRowVersion.Current, false, null));
+      adapter.UpdateCommand.Parameters.Add(new SQLiteParameter("@TrialSequence", DbType.Int32, 0, ParameterDirection.Input, 0, 0, "TrialSequence", DataRowVersion.Current, false, null));
+      adapter.UpdateCommand.Parameters.Add(new SQLiteParameter("@Time", DbType.Int64, 0, ParameterDirection.Input, 0, 0, "Time", DataRowVersion.Current, false, null));
+      adapter.UpdateCommand.Parameters.Add(new SQLiteParameter("@PupilDiaX", DbType.Single, 0, ParameterDirection.Input, 0, 0, "PupilDiaX", DataRowVersion.Current, false, null));
+      adapter.UpdateCommand.Parameters.Add(new SQLiteParameter("@PupilDiaY", DbType.Single, 0, ParameterDirection.Input, 0, 0, "PupilDiaY", DataRowVersion.Current, false, null));
+      adapter.UpdateCommand.Parameters.Add(new SQLiteParameter("@GazePosX", DbType.Single, 0, ParameterDirection.Input, 0, 0, "GazePosX", DataRowVersion.Current, false, null));
+      adapter.UpdateCommand.Parameters.Add(new SQLiteParameter("@GazePosY", DbType.Single, 0, ParameterDirection.Input, 0, 0, "GazePosY", DataRowVersion.Current, false, null));
+      adapter.UpdateCommand.Parameters.Add(new SQLiteParameter("@MousePosX", DbType.Single, 0, ParameterDirection.Input, 0, 0, "MousePosX", DataRowVersion.Current, false, null));
+      adapter.UpdateCommand.Parameters.Add(new SQLiteParameter("@MousePosY", DbType.Single, 0, ParameterDirection.Input, 0, 0, "MousePosY", DataRowVersion.Current, false, null));
+      adapter.UpdateCommand.Parameters.Add(new SQLiteParameter("@EventID", DbType.Int32, 0, ParameterDirection.Input, 0, 0, "EventID", DataRowVersion.Current, false, null));
+      adapter.UpdateCommand.Parameters.Add(new SQLiteParameter("@Original_ID", DbType.Int64, 0, ParameterDirection.Input, 0, 0, "ID", DataRowVersion.Original, false, null));
+      adapter.UpdateCommand.Parameters.Add(new SQLiteParameter("@Original_SubjectName", DbType.String, 0, ParameterDirection.Input, 0, 0, "SubjectName", DataRowVersion.Original, false, null));
+      adapter.UpdateCommand.Parameters.Add(new SQLiteParameter("@Original_TrialSequence", DbType.Int32, 0, ParameterDirection.Input, 0, 0, "TrialSequence", DataRowVersion.Original, false, null));
+      adapter.UpdateCommand.Parameters.Add(new SQLiteParameter("@Original_Time", DbType.Int64, 0, ParameterDirection.Input, 0, 0, "Time", DataRowVersion.Original, false, null));
+      adapter.UpdateCommand.Parameters.Add(new SQLiteParameter("@IsNull_PupilDiaX", DbType.Int32, 0, ParameterDirection.Input, 0, 0, "PupilDiaX", DataRowVersion.Original, true, null));
+      adapter.UpdateCommand.Parameters.Add(new SQLiteParameter("@Original_PupilDiaX", DbType.Single, 0, ParameterDirection.Input, 0, 0, "PupilDiaX", DataRowVersion.Original, false, null));
+      adapter.UpdateCommand.Parameters.Add(new SQLiteParameter("@IsNull_PupilDiaY", DbType.Int32, 0, ParameterDirection.Input, 0, 0, "PupilDiaY", DataRowVersion.Original, true, null));
+      adapter.UpdateCommand.Parameters.Add(new SQLiteParameter("@Original_PupilDiaY", DbType.Single, 0, ParameterDirection.Input, 0, 0, "PupilDiaY", DataRowVersion.Original, false, null));
+      adapter.UpdateCommand.Parameters.Add(new SQLiteParameter("@IsNull_GazePosX", DbType.Int32, 0, ParameterDirection.Input, 0, 0, "GazePosX", DataRowVersion.Original, true, null));
+      adapter.UpdateCommand.Parameters.Add(new SQLiteParameter("@Original_GazePosX", DbType.Single, 0, ParameterDirection.Input, 0, 0, "GazePosX", DataRowVersion.Original, false, null));
+      adapter.UpdateCommand.Parameters.Add(new SQLiteParameter("@IsNull_GazePosY", DbType.Int32, 0, ParameterDirection.Input, 0, 0, "GazePosY", DataRowVersion.Original, true, null));
+      adapter.UpdateCommand.Parameters.Add(new SQLiteParameter("@Original_GazePosY", DbType.Single, 0, ParameterDirection.Input, 0, 0, "GazePosY", DataRowVersion.Original, false, null));
+      adapter.UpdateCommand.Parameters.Add(new SQLiteParameter("@IsNull_MousePosX", DbType.Int32, 0, ParameterDirection.Input, 0, 0, "MousePosX", DataRowVersion.Original, true, null));
+      adapter.UpdateCommand.Parameters.Add(new SQLiteParameter("@Original_MousePosX", DbType.Single, 0, ParameterDirection.Input, 0, 0, "MousePosX", DataRowVersion.Original, false, null));
+      adapter.UpdateCommand.Parameters.Add(new SQLiteParameter("@IsNull_MousePosY", DbType.Int32, 0, ParameterDirection.Input, 0, 0, "MousePosY", DataRowVersion.Original, true, null));
+      adapter.UpdateCommand.Parameters.Add(new SQLiteParameter("@Original_MousePosY", DbType.Single, 0, ParameterDirection.Input, 0, 0, "MousePosY", DataRowVersion.Original, false, null));
+      adapter.UpdateCommand.Parameters.Add(new SQLiteParameter("@IsNull_EventID", DbType.Int32, 0, ParameterDirection.Input, 0, 0, "EventID", DataRowVersion.Original, true, null));
+      adapter.UpdateCommand.Parameters.Add(new SQLiteParameter("@Original_EventID", DbType.Int32, 0, ParameterDirection.Input, 0, 0, "EventID", DataRowVersion.Original, false, null));
+      adapter.UpdateCommand.Parameters.Add(new SQLiteParameter("@ID", DbType.Int64, 8, ParameterDirection.Input, 0, 0, "ID", DataRowVersion.Current, false, null));
 
       // Update row
       int numUpdatedRows = adapter.Update(table);
@@ -741,9 +742,9 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     /// <param name="subject">A <see cref="string"/> with the subject name to which the data belongs.</param>
     /// <param name="trialSequence">A <see cref="int"/> with the trial sequence number. (Param1)</param>
     /// <param name="response">A <see cref="string"/> with the response. (Param2)</param>
-    /// <returns>A <see cref="OgamaDataSet.RawdataDataTable"/> with found rows.</returns>
+    /// <returns>A <see cref="SQLiteOgamaDataSet.RawdataDataTable"/> with found rows.</returns>
     /// <exception cref="ArgumentNullException">Thrown, when subject is null or empty.</exception>
-    public static OgamaDataSet.RawdataDataTable GetDataBySubjectTrialResponse(
+    public static SQLiteOgamaDataSet.RawdataDataTable GetDataBySubjectTrialResponse(
       string subject,
       int trialSequence,
       string response)
@@ -758,18 +759,18 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
         return null;
       }
 
-      SqlDataAdapter adapter = Document.ActiveDocument.DocDataSet.RawDataAdapterDict[subject];
+      SQLiteDataAdapter adapter = Document.ActiveDocument.DocDataSet.RawDataAdapterDict[subject];
 
       // Create the SelectCommand.
-      SqlCommand command = new SqlCommand(
-        "SELECT " + subject + "Rawdata.* FROM [dbo].[" +
+      var command = new SQLiteCommand(
+        "SELECT " + subject + "Rawdata.* FROM [" +
         subject + "Rawdata] WHERE (TrialSequence = @Param1) AND (Response = @Param2)" +
         " ORDER BY Time",
         Document.ActiveDocument.DocDataSet.DatabaseConnection);
 
       // Add the parameters for the SelectCommand.
-      command.Parameters.Add("@Param1", SqlDbType.Int);
-      command.Parameters.Add("@Param2", SqlDbType.VarChar);
+      command.Parameters.Add("@Param1", DbType.Int32);
+      command.Parameters.Add("@Param2", DbType.String);
 
       // Set SelectCommand
       adapter.SelectCommand = command;
@@ -779,7 +780,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
       adapter.SelectCommand.Parameters[1].Value = response;
 
       // Create DataTable
-      OgamaDataSet.RawdataDataTable dataTable = new OgamaDataSet.RawdataDataTable();
+      var dataTable = new SQLiteOgamaDataSet.RawdataDataTable();
 
       // Fill it with Data referring to Subject and Trial
       adapter.Fill(dataTable);
@@ -794,9 +795,9 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     /// </summary>
     /// <param name="subject">A <see cref="string"/> with the subject name to which the data belongs.</param>
     /// <param name="trialSequence">A <see cref="int"/> with the trial sequence number. (Param1)</param>
-    /// <returns>A <see cref="OgamaDataSet.RawdataDataTable"/> with found rows.</returns>
+    /// <returns>A <see cref="SQLiteOgamaDataSet.RawdataDataTable"/> with found rows.</returns>
     /// <exception cref="ArgumentNullException">Thrown, when subject is null or empty.</exception>
-    public static OgamaDataSet.RawdataDataTable GetMouseDataBySubjectTrial(string subject, int trialSequence)
+    public static SQLiteOgamaDataSet.RawdataDataTable GetMouseDataBySubjectTrial(string subject, int trialSequence)
     {
       if (subject == string.Empty)
       {
@@ -808,17 +809,17 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
         return null;
       }
 
-      SqlDataAdapter adapter = Document.ActiveDocument.DocDataSet.RawDataAdapterDict[subject];
+      SQLiteDataAdapter adapter = Document.ActiveDocument.DocDataSet.RawDataAdapterDict[subject];
 
       // Create the SelectCommand.
-      SqlCommand command = new SqlCommand(
-        "SELECT " + subject + "Rawdata.* FROM [dbo].[" +
+      var command = new SQLiteCommand(
+        "SELECT " + subject + "Rawdata.* FROM [" +
         subject + "Rawdata] WHERE (TrialSequence = @Param1) AND (MousePosX IS NOT NULL)" +
         " ORDER BY Time",
         Document.ActiveDocument.DocDataSet.DatabaseConnection);
 
       // Add the parameters for the SelectCommand.
-      command.Parameters.Add("@Param1", SqlDbType.Int);
+      command.Parameters.Add("@Param1", DbType.Int32);
 
       // Set SelectCommand
       adapter.SelectCommand = command;
@@ -827,7 +828,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
       adapter.SelectCommand.Parameters[0].Value = trialSequence;
 
       // Create DataTable
-      OgamaDataSet.RawdataDataTable dataTable = new OgamaDataSet.RawdataDataTable();
+      var dataTable = new SQLiteOgamaDataSet.RawdataDataTable();
 
       // Fill it with Data referring to Subject and Trial
       adapter.Fill(dataTable);
@@ -842,9 +843,9 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     /// </summary>
     /// <param name="subject">A <see cref="string"/> with the subject name to which the data belongs.</param>
     /// <param name="trialSequence">A <see cref="int"/> with the trial sequence number. (Param1)</param>
-    /// <returns>A <see cref="OgamaDataSet.RawdataDataTable"/> with found rows.</returns>
+    /// <returns>A <see cref="SQLiteOgamaDataSet.RawdataDataTable"/> with found rows.</returns>
     /// <exception cref="ArgumentNullException">Thrown, when subject is null or empty.</exception>
-    public static OgamaDataSet.RawdataDataTable GetRawDataBySubjectAndTrialSequence(string subject, int trialSequence)
+    public static SQLiteOgamaDataSet.RawdataDataTable GetRawDataBySubjectAndTrialSequence(string subject, int trialSequence)
     {
       if (subject == string.Empty)
       {
@@ -856,16 +857,16 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
         return null;
       }
 
-      SqlDataAdapter adapter = Document.ActiveDocument.DocDataSet.RawDataAdapterDict[subject];
+      SQLiteDataAdapter adapter = Document.ActiveDocument.DocDataSet.RawDataAdapterDict[subject];
 
       // Create the SelectCommand.
-      SqlCommand command = new SqlCommand(
-        "SELECT " + subject + "Rawdata.* FROM [dbo].[" + subject + "Rawdata] WHERE TrialSequence = @TrialSequence" +
+      var command = new SQLiteCommand(
+        "SELECT " + subject + "Rawdata.* FROM [" + subject + "Rawdata] WHERE TrialSequence = @TrialSequence" +
         " ORDER BY SubjectName, TrialSequence, Time",
         Document.ActiveDocument.DocDataSet.DatabaseConnection);
 
       // Add the parameters for the SelectCommand.
-      command.Parameters.Add("@TrialSequence", SqlDbType.Int);
+      command.Parameters.Add("@TrialSequence", DbType.Int32);
 
       // Set SelectCommand
       adapter.SelectCommand = command;
@@ -874,7 +875,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
       adapter.SelectCommand.Parameters[0].Value = trialSequence;
 
       // Create DataTable
-      OgamaDataSet.RawdataDataTable dataTable = new OgamaDataSet.RawdataDataTable();
+      var dataTable = new SQLiteOgamaDataSet.RawdataDataTable();
 
       // Fill it with Data 
       adapter.Fill(dataTable);
@@ -892,7 +893,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     /// </summary>
     /// <param name="subject">A <see cref="string"/> with the subject name to which the data belongs.</param>
     /// <param name="trialSequence">A <see cref="int"/> with the trial sequence number. (Param1)</param>
-    /// <returns>A <see cref="OgamaDataSet.RawdataDataTable"/> with found rows.</returns>
+    /// <returns>A <see cref="SQLiteOgamaDataSet.RawdataDataTable"/> with found rows.</returns>
     /// <exception cref="ArgumentNullException">Thrown, when subject is null or empty.</exception>
     public static DataTable GetRawDataBySubjectAndTrialSequenceWithoutEvents(string subject, int trialSequence)
     {
@@ -906,16 +907,16 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
         return null;
       }
 
-      SqlDataAdapter adapter = Document.ActiveDocument.DocDataSet.RawDataAdapterDict[subject];
+      SQLiteDataAdapter adapter = Document.ActiveDocument.DocDataSet.RawDataAdapterDict[subject];
 
       // Create the SelectCommand.
-      SqlCommand command = new SqlCommand(
-        "SELECT " + subject + "Rawdata.* FROM [dbo].[" + subject + "Rawdata] WHERE (TrialSequence = @TrialSequence) AND (EventID is NULL)" +
+      var command = new SQLiteCommand(
+        "SELECT " + subject + "Rawdata.* FROM [" + subject + "Rawdata] WHERE (TrialSequence = @TrialSequence) AND (EventID is NULL)" +
         " ORDER BY SubjectName, TrialSequence, Time",
         Document.ActiveDocument.DocDataSet.DatabaseConnection);
 
       // Add the parameters for the SelectCommand.
-      command.Parameters.Add("@TrialSequence", SqlDbType.Int);
+      command.Parameters.Add("@TrialSequence", DbType.Int32);
 
       // Set SelectCommand
       adapter.SelectCommand = command;
@@ -924,7 +925,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
       adapter.SelectCommand.Parameters[0].Value = trialSequence;
 
       // Create DataTable
-      OgamaDataSet.RawdataDataTable dataTable = new OgamaDataSet.RawdataDataTable();
+      var dataTable = new SQLiteOgamaDataSet.RawdataDataTable();
 
       // Fill it with Data 
       adapter.Fill(dataTable);
@@ -937,13 +938,13 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
 
     /// <summary>
     /// Gets the whole raw data table for the given subject using the query:
-    /// SELECT SubjectRawdata.* FROM [dbo].[Subject]
+    /// SELECT SubjectRawdata.* FROM [Subject]
     /// Uses given subjects whole raw data table.
     /// </summary>
     /// <param name="subject">A <see cref="string"/> with the subject name to which the data belongs.</param>
-    /// <returns>The whole <see cref="OgamaDataSet.RawdataDataTable"/> for the given subject.</returns>
+    /// <returns>The whole <see cref="SQLiteOgamaDataSet.RawdataDataTable"/> for the given subject.</returns>
     /// <exception cref="ArgumentNullException">Thrown, when subject is null or empty.</exception>
-    public static OgamaDataSet.RawdataDataTable GetRawDataBySubject(string subject)
+    public static SQLiteOgamaDataSet.RawdataDataTable GetRawDataBySubject(string subject)
     {
       if (subject == string.Empty)
       {
@@ -955,18 +956,18 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
         return null;
       }
 
-      SqlDataAdapter adapter = Document.ActiveDocument.DocDataSet.RawDataAdapterDict[subject];
+      SQLiteDataAdapter adapter = Document.ActiveDocument.DocDataSet.RawDataAdapterDict[subject];
 
       // Create the SelectCommand.
-      SqlCommand command = new SqlCommand(
-        "SELECT " + subject + "Rawdata.* FROM [dbo].[" + subject + "Rawdata]",
+      var command = new SQLiteCommand(
+        "SELECT " + subject + "Rawdata.* FROM [" + subject + "Rawdata]",
         Document.ActiveDocument.DocDataSet.DatabaseConnection);
 
       // Set SelectCommand
       adapter.SelectCommand = command;
 
       // Create DataTable
-      OgamaDataSet.RawdataDataTable dataTable = new OgamaDataSet.RawdataDataTable();
+      var dataTable = new SQLiteOgamaDataSet.RawdataDataTable();
 
       // Fill it with Data referring to Subject and Trial
       adapter.Fill(dataTable);
@@ -975,21 +976,21 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
 
     /// <summary>
     /// Gets gaze fixation data table rows by given Where statement using the query:
-    /// SELECT GazeFixations.* FROM [dbo].[GazeFixations] WHERE WhereStatement 
+    /// SELECT GazeFixations.* FROM [GazeFixations] WHERE WhereStatement 
     /// ORDER BY SubjectName,TrialID,Length
     /// </summary>
     /// <param name="whereStatement">A <see cref="string"/> with the SQL WHERE 
     /// statement for the query to use.</param>
-    /// <returns>A <see cref="OgamaDataSet.GazeFixationsDataTable"/> with found rows.</returns>
+    /// <returns>A <see cref="SQLiteOgamaDataSet.GazeFixationsDataTable"/> with found rows.</returns>
     /// <exception cref="ArgumentNullException">Thrown, when WhereStatement is empty.</exception>
-    public static OgamaDataSet.GazeFixationsDataTable GetGazeFixDataByWhereStatement(string whereStatement)
+    public static SQLiteOgamaDataSet.GazeFixationsDataTable GetGazeFixDataByWhereStatement(string whereStatement)
     {
       if (whereStatement == string.Empty)
       {
         throw new ArgumentNullException();
       }
 
-      SqlDataAdapter adapter = new SqlDataAdapter();
+      SQLiteDataAdapter adapter = new SQLiteDataAdapter();
       System.Data.Common.DataTableMapping tableMapping = new System.Data.Common.DataTableMapping();
       tableMapping.SourceTable = "Table";
       tableMapping.DataSetTable = "TableGazeFixations";
@@ -1006,8 +1007,8 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
       adapter.TableMappings.Add(tableMapping);
 
       // Create the SelectCommand.
-      SqlCommand command = new SqlCommand(
-        "SELECT GazeFixations.* FROM [dbo].[GazeFixations] " +
+      var command = new SQLiteCommand(
+        "SELECT GazeFixations.* FROM [GazeFixations] " +
         "WHERE " + whereStatement +
         " ORDER BY SubjectName,TrialID,Length",
         Document.ActiveDocument.DocDataSet.DatabaseConnection);
@@ -1016,8 +1017,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
       adapter.SelectCommand = command;
 
       // Create DataTable
-      OgamaDataSet.GazeFixationsDataTable dataTable
-        = new OgamaDataSet.GazeFixationsDataTable();
+      var dataTable = new SQLiteOgamaDataSet.GazeFixationsDataTable();
 
       // Fill it with Data referring to Subject and Trial
       adapter.Fill(dataTable);
@@ -1027,21 +1027,21 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
 
     /// <summary>
     /// Gets mouse fixation data table rows by given Where statement using the query:
-    /// SELECT MouseFixations.* FROM [dbo].[MouseFixations] WHERE WhereStatement 
+    /// SELECT MouseFixations.* FROM [MouseFixations] WHERE WhereStatement 
     /// ORDER BY SubjectName,TrialID,Length
     /// </summary>
     /// <param name="whereStatement">A <see cref="string"/> with the SQL WHERE 
     /// statement for the query to use.</param>
-    /// <returns>A <see cref="OgamaDataSet.MouseFixationsDataTable"/> with found rows.</returns>
+    /// <returns>A <see cref="SQLiteOgamaDataSet.MouseFixationsDataTable"/> with found rows.</returns>
     /// <exception cref="ArgumentNullException">Thrown, when WhereStatement is empty.</exception>
-    public static OgamaDataSet.MouseFixationsDataTable GetMouseFixDataByWhereStatement(string whereStatement)
+    public static SQLiteOgamaDataSet.MouseFixationsDataTable GetMouseFixDataByWhereStatement(string whereStatement)
     {
       if (whereStatement == string.Empty)
       {
         throw new ArgumentNullException();
       }
 
-      SqlDataAdapter adapter = new SqlDataAdapter();
+      SQLiteDataAdapter adapter = new SQLiteDataAdapter();
       System.Data.Common.DataTableMapping tableMapping = new System.Data.Common.DataTableMapping();
       tableMapping.SourceTable = "Table";
       tableMapping.DataSetTable = "TableMouseFixations";
@@ -1058,8 +1058,8 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
       adapter.TableMappings.Add(tableMapping);
 
       // Create the SelectCommand.
-      SqlCommand command = new SqlCommand(
-        "SELECT MouseFixations.* FROM [dbo].[MouseFixations] " +
+      var command = new SQLiteCommand(
+        "SELECT MouseFixations.* FROM [MouseFixations] " +
         "WHERE " + whereStatement +
         " ORDER BY SubjectName,TrialID,Length",
         Document.ActiveDocument.DocDataSet.DatabaseConnection);
@@ -1068,8 +1068,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
       adapter.SelectCommand = command;
 
       // Create DataTable
-      OgamaDataSet.MouseFixationsDataTable dataTable
-        = new OgamaDataSet.MouseFixationsDataTable();
+      var dataTable = new SQLiteOgamaDataSet.MouseFixationsDataTable();
 
       // Fill it with Data referring to Subject and Trial
       adapter.Fill(dataTable);
@@ -1203,10 +1202,10 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
 
         RemoveColumn(tableName, "ID");
 
-        string identityQuery = "ALTER TABLE dbo." + tableName + " ADD ID bigint NOT NULL IDENTITY (1,1)";
+        string identityQuery = "ALTER TABLE " + tableName + " ADD ID bigint NOT NULL IDENTITY (1,1)";
         Queries.ExecuteSQLCommand(identityQuery);
 
-        string primaryKeyQuery = "ALTER TABLE dbo." + tableName + " ADD CONSTRAINT PK_" + tableName +
+        string primaryKeyQuery = "ALTER TABLE " + tableName + " ADD CONSTRAINT PK_" + tableName +
           " PRIMARY KEY (ID)";
         Queries.ExecuteSQLCommand(primaryKeyQuery);
       }
@@ -1263,13 +1262,13 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     /// e.g. SubjectName, TrialSequence, Time</param>
     public static void RecreateTable(string tableName, string columnDefinitions, string columns)
     {
-      string recreateQuery = "CREATE TABLE dbo.Tmp_" + tableName + "(" + columnDefinitions + " ) ON [PRIMARY]";
-      string identityInsertOffQuery = "SET IDENTITY_INSERT dbo.Tmp_" + tableName + " OFF";
-      string moveQuery = "IF EXISTS(SELECT * FROM dbo." + tableName + ") EXEC('INSERT INTO dbo.Tmp_" + tableName + " (" + columns + ") SELECT " + columns + " FROM dbo." + tableName + " WITH (HOLDLOCK TABLOCKX)')";
-      string identityInsertOnQuery = "SET IDENTITY_INSERT dbo.Tmp_" + tableName + " On";
-      string dropTableQuery = "DROP TABLE dbo." + tableName;
-      string renameTableQuery = "EXECUTE sp_rename N'dbo.Tmp_" + tableName + "', N'" + tableName + "', 'OBJECT' ";
-      string addprimaryKeyQuery = "ALTER TABLE dbo." + tableName + " ADD CONSTRAINT PK_" + tableName + " PRIMARY KEY CLUSTERED ( ID ) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]";
+      string recreateQuery = "CREATE TABLE Tmp_" + tableName + "(" + columnDefinitions + " ) ON [PRIMARY]";
+      string identityInsertOffQuery = "SET IDENTITY_INSERT Tmp_" + tableName + " OFF";
+      string moveQuery = "IF EXISTS(SELECT * FROM " + tableName + ") EXEC('INSERT INTO dbo.Tmp_" + tableName + " (" + columns + ") SELECT " + columns + " FROM dbo." + tableName + " WITH (HOLDLOCK TABLOCKX)')";
+      string identityInsertOnQuery = "SET IDENTITY_INSERT Tmp_" + tableName + " On";
+      string dropTableQuery = "DROP TABLE " + tableName;
+      string renameTableQuery = "EXECUTE sp_rename N'Tmp_" + tableName + "', N'" + tableName + "', 'OBJECT' ";
+      string addprimaryKeyQuery = "ALTER TABLE " + tableName + " ADD CONSTRAINT PK_" + tableName + " PRIMARY KEY CLUSTERED ( ID ) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]";
 
       ExecuteSQLCommand(recreateQuery);
       ExecuteSQLCommand(identityInsertOffQuery);
@@ -1292,7 +1291,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
         // Add primary key to table if not done already.
         if (GetPrimaryKey(tableName) == string.Empty)
         {
-          string primaryKeyQuery = "ALTER TABLE dbo." + tableName + " ADD PRIMARY KEY (ID)";
+          string primaryKeyQuery = "ALTER TABLE " + tableName + " ADD PRIMARY KEY (ID)";
           Queries.ExecuteSQLCommand(primaryKeyQuery);
         }
       }
@@ -1360,9 +1359,9 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
 
     /// <summary>
     /// This static method creates a new raw data table for
-    /// the given subject with the name [dbo].[subjectNameRawdata]
+    /// the given subject with the name [subjectNameRawdata]
     /// using the SQL Statement:
-    /// CREATE TABLE [dbo].[" + subjectName + "Rawdata]([ID] [bigint] IDENTITY(1,1) NOT NULL,
+    /// CREATE TABLE [" + subjectName + "Rawdata]([ID] [bigint] IDENTITY(1,1) NOT NULL,
     /// [SubjectName] [varchar](50) COLLATE Latin1_General_CI_AS NOT NULL,
     /// [TrialID] [int] NOT NULL,[Time][bigint] NOT NULL,[PupilDiaX] [float] NULL,
     /// [PupilDiaY][float] NULL,[GazePosX] [float] NULL,[GazePosY] [float] NULL,
@@ -1401,15 +1400,14 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
       }
 
       // Create Empty Table from RawDataTemplate in DB
-      string queryString = "CREATE TABLE [dbo].[" + subjectName + "Rawdata]([ID] [bigint] IDENTITY(1,1) NOT NULL,[SubjectName] [varchar](50) COLLATE Latin1_General_CI_AS NOT NULL,	[TrialSequence]  [int] NOT NULL,	[Time] [bigint] NOT NULL,	[PupilDiaX] [float] NULL,	[PupilDiaY] [float] NULL,	[GazePosX] [float] NULL,	[GazePosY] [float] NULL,	[MousePosX] [float] NULL,	[MousePosY] [float] NULL,	[EventID] [int] NULL,CONSTRAINT [PK_" + subjectName + "Rawdata] PRIMARY KEY CLUSTERED (	[ID] ASC)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]) ON [PRIMARY];";
-
-      SqlCommand command = new SqlCommand(queryString, Document.ActiveDocument.DocDataSet.DatabaseConnection);
-      SqlDataReader reader = command.ExecuteReader();
+      string queryString = "CREATE TABLE [" + subjectName + "Rawdata]([ID]	integer PRIMARY KEY AUTOINCREMENT NOT NULL,[SubjectName]	varchar(50) NOT NULL COLLATE NOCASE, [TrialSequence]	integer NOT NULL, [Time]	integer NOT NULL, [PupilDiaX]	float, [PupilDiaY]	float, [GazePosX]	float, [GazePosY]	float, [MousePosX]	float, [MousePosY]	float, [EventID]	integer);";
+      var command = new SQLiteCommand(queryString, Document.ActiveDocument.DocDataSet.DatabaseConnection);
+      SQLiteDataReader reader = command.ExecuteReader();
       try
       {
         while (reader.Read())
         {
-          Console.WriteLine(string.Format("{0}, {1}", reader[0], reader[1]));
+          //Console.WriteLine(string.Format("{0}, {1}", reader[0], reader[1]));
         }
       }
       finally
@@ -1422,7 +1420,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     /// <summary>
     /// Deletes the raw data table for the given subject from the database
     /// using the SQL statement:
-    /// DROP TABLE [dbo].[" + Subject + "Rawdata];
+    /// DROP TABLE [" + Subject + "Rawdata];
     /// </summary>
     /// <param name="subject">A <see cref="string"/> with the subject name 
     /// to remove data for.</param>
@@ -1438,14 +1436,14 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
       if (TableExists(tableName))
       {
         // Delete Entrys in Rawdata
-        string queryString = "DROP TABLE [dbo].[" + subject + "Rawdata];";
-        SqlCommand command = new SqlCommand(queryString, Document.ActiveDocument.DocDataSet.DatabaseConnection);
-        SqlDataReader reader = command.ExecuteReader();
+        string queryString = "DROP TABLE [" + subject + "Rawdata];";
+        var command = new SQLiteCommand(queryString, Document.ActiveDocument.DocDataSet.DatabaseConnection);
+        SQLiteDataReader reader = command.ExecuteReader();
         try
         {
           while (reader.Read())
           {
-            Console.WriteLine(string.Format("{0}, {1}", reader[0], reader[1]));
+            //Console.WriteLine(string.Format("{0}, {1}", reader[0], reader[1]));
           }
         }
         finally
@@ -1470,7 +1468,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     public static int ExecuteSQLCommand(string query)
     {
       int retValue = -1;
-      SqlCommand command = new SqlCommand(query, Document.ActiveDocument.DocDataSet.DatabaseConnection);
+      var command = new SQLiteCommand(query, Document.ActiveDocument.DocDataSet.DatabaseConnection);
       retValue = command.ExecuteNonQuery();
 
       return retValue;
@@ -1492,11 +1490,11 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
       // sp_pkeys is SQL Server default stored procedure
       // you pass it only table Name, it will return
       // primary key column
-      SqlCommand command = new SqlCommand("sp_pkeys", Document.ActiveDocument.DocDataSet.DatabaseConnection);
+      var command = new SQLiteCommand("sp_pkeys", Document.ActiveDocument.DocDataSet.DatabaseConnection);
       command.CommandType = CommandType.StoredProcedure;
-      command.Parameters.Add("@table_name", SqlDbType.NVarChar).Value = tableName;
+      command.Parameters.Add("@table_name", DbType.String).Value = tableName;
 
-      SqlDataReader reader = command.ExecuteReader();
+      SQLiteDataReader reader = command.ExecuteReader();
       while (reader.Read())
       {
         // the primary key column resides at index 4 
@@ -1518,15 +1516,38 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     /// <param name="subjectName">A <see cref="string"/> with the subject name.</param>
     public static void WriteRawDataWithBulkStatement(string subjectName)
     {
-      using (SqlBulkCopy bcp = new SqlBulkCopy(Document.ActiveDocument.DocDataSet.DatabaseConnection))
+      var conn = Document.ActiveDocument.DocDataSet.DatabaseConnection;
+      string tableName = subjectName + "Rawdata";
+      var sbi = new SQLiteBulkInsert(conn, tableName);
+      sbi.AddParameter("ID", DbType.Int64);
+      sbi.AddParameter("SubjectName", DbType.String);
+      sbi.AddParameter("TrialSequence", DbType.Int32);
+      sbi.AddParameter("Time", DbType.Int64);
+      sbi.AddParameter("PupilDiaX", DbType.Single);
+      sbi.AddParameter("PupilDiaY", DbType.Single);
+      sbi.AddParameter("GazePosX", DbType.Single);
+      sbi.AddParameter("GazePosY", DbType.Single);
+      sbi.AddParameter("MousePosX", DbType.Single);
+      sbi.AddParameter("MousePosY", DbType.Single);
+      sbi.AddParameter("EventID", DbType.Int32);
+
+      var table = Document.ActiveDocument.DocDataSet.Tables[tableName];
+      foreach (var row in table.Rows)
       {
-        bcp.BulkCopyTimeout = 6000;
-        //// Write from the source to the destination.
-        string tableName = subjectName + "Rawdata";
-        bcp.DestinationTableName = "dbo." + tableName;
-        bcp.WriteToServer(Document.ActiveDocument.DocDataSet.Tables[tableName]);
-        bcp.Close();
+        var rawRow = row as SQLiteOgamaDataSet.RawdataRow;
+        sbi.Insert(new object[] { rawRow.ID, rawRow.SubjectName, rawRow.TrialSequence, rawRow.Time, rawRow.PupilDiaX, rawRow.PupilDiaY, rawRow.GazePosX, rawRow.GazePosY, rawRow.MousePosX, rawRow.MousePosY, rawRow.EventID });
       }
+      sbi.Flush();
+
+      //using (SqlBulkCopy bcp = new SqlBulkCopy(Document.ActiveDocument.DocDataSet.DatabaseConnection))
+      //{
+      //  bcp.BulkCopyTimeout = 6000;
+      //  //// Write from the source to the destination.
+      //  string tableName = subjectName + "Rawdata";
+      //  bcp.DestinationTableName = "dbo." + tableName;
+      //  bcp.WriteToServer(Document.ActiveDocument.DocDataSet.Tables[tableName]);
+      //  bcp.Close();
+      //}
     }
 
     /// <summary>
@@ -1538,15 +1559,36 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     /// <param name="rawDataTable">A <see cref="DataTable"/> with the subjects sampled data.</param>
     public static void WriteRawDataWithBulkStatement(string subjectName, DataTable rawDataTable)
     {
-      using (SqlBulkCopy bcp = new SqlBulkCopy(Document.ActiveDocument.DocDataSet.DatabaseConnection))
+      var conn = Document.ActiveDocument.DocDataSet.DatabaseConnection;
+      var sbi = new SQLiteBulkInsert(conn, rawDataTable.TableName);
+      sbi.AddParameter("ID", DbType.Int64);
+      sbi.AddParameter("SubjectName", DbType.String);
+      sbi.AddParameter("TrialSequence", DbType.Int32);
+      sbi.AddParameter("Time", DbType.Int64);
+      sbi.AddParameter("PupilDiaX", DbType.Single);
+      sbi.AddParameter("PupilDiaY", DbType.Single);
+      sbi.AddParameter("GazePosX", DbType.Single);
+      sbi.AddParameter("GazePosY", DbType.Single);
+      sbi.AddParameter("MousePosX", DbType.Single);
+      sbi.AddParameter("MousePosY", DbType.Single);
+      sbi.AddParameter("EventID", DbType.Int32);
+
+      foreach (var row in rawDataTable.Rows)
       {
-        bcp.BulkCopyTimeout = 300;
-        //// Write from the source to the destination.
-        string tableName = subjectName + "Rawdata";
-        bcp.DestinationTableName = "dbo." + tableName;
-        bcp.WriteToServer(rawDataTable);
-        bcp.Close();
+        var rawRow = row as SQLiteOgamaDataSet.RawdataRow;
+        sbi.Insert(new object[] { rawRow.ID, rawRow.SubjectName, rawRow.TrialSequence, rawRow.Time, rawRow.PupilDiaX, rawRow.PupilDiaY, rawRow.GazePosX, rawRow.GazePosY, rawRow.MousePosX, rawRow.MousePosY, rawRow.EventID });
       }
+      sbi.Flush();
+
+      //using (SqlBulkCopy bcp = new SqlBulkCopy(Document.ActiveDocument.DocDataSet.DatabaseConnection))
+      //{
+      //  bcp.BulkCopyTimeout = 300;
+      //  //// Write from the source to the destination.
+      //  string tableName = subjectName + "Rawdata";
+      //  bcp.DestinationTableName = "dbo." + tableName;
+      //  bcp.WriteToServer(rawDataTable);
+      //  bcp.Close();
+      //}
     }
 
     #endregion DatabaseBulkCopy
@@ -1566,7 +1608,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     /// <returns><strong>True</strong>, if successful otherwise, <strong>false</strong>.</returns>
     public static bool WriteSubjectToDataSet(SubjectsData subjectData)
     {
-      OgamaDataSet.SubjectsRow workSubjectData;
+      SQLiteOgamaDataSet.SubjectsRow workSubjectData;
       workSubjectData = Document.ActiveDocument.DocDataSet.Subjects.NewSubjectsRow();
       workSubjectData.SubjectName = subjectData.SubjectName;
 
@@ -1708,7 +1750,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
         foreach (TrialEventsData trial in lstTrialEventsData)
         {
           // Insert Data in Trials Table
-          OgamaDataSet.TrialEventsRow workTrialEventsData;
+          SQLiteOgamaDataSet.TrialEventsRow workTrialEventsData;
           workTrialEventsData = Document.ActiveDocument.DocDataSet.TrialEvents.NewTrialEventsRow();
           workTrialEventsData.SubjectName = trial.SubjectName;
           workTrialEventsData.EventID = trial.EventID;
@@ -1811,7 +1853,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     public static bool WriteRawDataListToDataSet(string subjectName, List<RawData> lstRawData)
     {
       // Create Subjects rawdata table
-      var subjectRawDataTable = new OgamaDataSet.RawdataDataTable();
+      var subjectRawDataTable = new SQLiteOgamaDataSet.RawdataDataTable();
 
       // Give it correct name
       subjectRawDataTable.TableName = subjectName + "Rawdata";
@@ -1838,12 +1880,12 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
 
     /// <summary>
     /// This method saves the given collection of <see cref="RawData"/> into the
-    /// given <see cref="OgamaDataSet.RawdataDataTable"/>
+    /// given <see cref="SQLiteOgamaDataSet.RawdataDataTable"/>
     /// </summary>
     /// <param name="lstRawData">A <see cref="RawData"/> with the new samples.</param>
-    /// <param name="subjectRawDataTable">The <see cref="OgamaDataSet.RawdataDataTable"/> to be filled.</param>
+    /// <param name="subjectRawDataTable">The <see cref="SQLiteOgamaDataSet.RawdataDataTable"/> to be filled.</param>
     /// <returns><strong>True</strong> if successful otherwise <strong>false</strong>.</returns>
-    public static bool SaveDataToTable(RawData[] lstRawData, OgamaDataSet.RawdataDataTable subjectRawDataTable)
+    public static bool SaveDataToTable(RawData[] lstRawData, SQLiteOgamaDataSet.RawdataDataTable subjectRawDataTable)
     {
       try
       {
@@ -1853,7 +1895,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
         foreach (RawData data in lstRawData)
         {
           // Save data into datarow.
-          OgamaDataSet.RawdataRow workRowRawData =
+          SQLiteOgamaDataSet.RawdataRow workRowRawData =
             subjectRawDataTable.NewRawdataRow();
 
           workRowRawData.SubjectName = data.SubjectName;
@@ -1996,8 +2038,9 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
       {
         return false;
       }
+
       // Insert Data in AOI Table
-      OgamaDataSet.AOIsRow workAOIData;
+      SQLiteOgamaDataSet.AOIsRow workAOIData;
       workAOIData = Document.ActiveDocument.DocDataSet.AOIs.NewAOIsRow();
       workAOIData.ShapeName = aoi.ShapeName;
       workAOIData.ShapeNumPts = aoi.ShapeNumPts;
@@ -2028,7 +2071,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     public static bool WriteFixationListToDataSet(SampleType sampleType, List<FixationData> lstFixations)
     {
       // Get all subjects in the list
-      List<string> subjects = new List<string>();
+      var subjects = new List<string>();
       foreach (FixationData fix in lstFixations)
       {
         if (!subjects.Contains(fix.SubjectName))
@@ -2063,7 +2106,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
             foreach (FixationData fixation in lstFixations)
             {
               // Insert Data in gaze fixations Table
-              OgamaDataSet.GazeFixationsRow workFixationsData;
+              SQLiteOgamaDataSet.GazeFixationsRow workFixationsData;
               workFixationsData = Document.ActiveDocument.DocDataSet.GazeFixations.NewGazeFixationsRow();
               workFixationsData.SubjectName = fixation.SubjectName;
               workFixationsData.TrialID = fixation.TrialID;
@@ -2097,7 +2140,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
             foreach (FixationData fixation in lstFixations)
             {
               // Insert Data in mouse fixations Table
-              OgamaDataSet.MouseFixationsRow workFixationsData;
+              SQLiteOgamaDataSet.MouseFixationsRow workFixationsData;
               workFixationsData = Document.ActiveDocument.DocDataSet.MouseFixations.NewMouseFixationsRow();
               workFixationsData.SubjectName = fixation.SubjectName;
               workFixationsData.TrialID = fixation.TrialID;
@@ -2146,16 +2189,15 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     public static void SetTrialConstraints(bool enable)
     {
       string addon = enable ? string.Empty : "NO";
-      string queryString = "ALTER TABLE dbo.Trials " + addon + "CHECK CONSTRAINT ALL;";
+      string queryString = "ALTER TABLE Trials " + addon + "CHECK CONSTRAINT ALL;";
 
-      SqlCommand command =
-          new SqlCommand(queryString, Document.ActiveDocument.DocDataSet.DatabaseConnection);
-      SqlDataReader reader = command.ExecuteReader();
+      var command = new SQLiteCommand(queryString, Document.ActiveDocument.DocDataSet.DatabaseConnection);
+      SQLiteDataReader reader = command.ExecuteReader();
       try
       {
         while (reader.Read())
         {
-          Console.WriteLine(string.Format("{0}, {1}", reader[0], reader[1]));
+          //Console.WriteLine(string.Format("{0}, {1}", reader[0], reader[1]));
         }
       }
       finally
@@ -2175,7 +2217,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     public static bool CheckDatabaseForExistingSubject(string subjectName)
     {
       // Check for existing subject data
-      OgamaDataSet.SubjectsDataTable subjectsTable =
+      SQLiteOgamaDataSet.SubjectsDataTable subjectsTable =
         Document.ActiveDocument.DocDataSet.SubjectsAdapter.GetDataBySubject(subjectName);
       if (subjectsTable.Rows.Count > 0)
       {
@@ -2370,7 +2412,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
           return false;
         }
 
-        OgamaDataSet.SubjectsDataTable subjectsTable =
+        SQLiteOgamaDataSet.SubjectsDataTable subjectsTable =
           Document.ActiveDocument.DocDataSet.SubjectsAdapter.GetDataBySubject(subjectName);
 
         if (subjectsTable.Rows.Count > 0)
@@ -2400,7 +2442,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     /// otherwise <strong>false</strong>.</returns>
     public static bool IsSubjectNameInDatabase(string subjectName)
     {
-      OgamaDataSet.SubjectsDataTable subjectsTable =
+      SQLiteOgamaDataSet.SubjectsDataTable subjectsTable =
         Document.ActiveDocument.DocDataSet.SubjectsAdapter.GetDataBySubject(subjectName);
       if (subjectsTable.Rows.Count == 0)
       {
@@ -2696,7 +2738,10 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
             ((InputEvent)newEvent).Task = (InputEventTask)Enum.Parse(typeof(InputEventTask), taskString, true);
             newEvent.Time = time;
             newEvent.Type = type;
-            returnList.Add(eventID, newEvent);
+            if (!returnList.ContainsKey(eventID))
+            {
+              returnList.Add(eventID, newEvent);
+            }
             break;
           case EventType.Marker:
             newEvent = new MediaEvent();
@@ -2795,7 +2840,7 @@ SELECT ID, SubjectName, TrialSequence, Time, PupilDiaX, PupilDiaY, GazePosX, Gaz
     /// otherwise <strong>false</strong>.</returns>
     private static bool CheckForAOIDuplicate(AOIData shape, System.ComponentModel.BackgroundWorker splashDialog)
     {
-      OgamaDataSet.AOIsDataTable aoisTable =
+      SQLiteOgamaDataSet.AOIsDataTable aoisTable =
         Document.ActiveDocument.DocDataSet.AOIsAdapter.GetDataByTrialIDAndShapeName(shape.TrialID, shape.ShapeName);
       if (aoisTable.Rows.Count > 0)
       {

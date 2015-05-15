@@ -48,6 +48,7 @@
     <UpgradeBackupLocation />
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
+    <NuGetPackageImportStamp>415c3f62</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -98,6 +99,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>false</Prefer32Bit>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
     <DebugSymbols>true</DebugSymbols>
@@ -132,9 +134,20 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\AxShockwaveFlashObjects.dll</HintPath>
     </Reference>
+    <Reference Include="DbAccess">
+      <HintPath>..\Libs\Managed\DbAccess.dll</HintPath>
+    </Reference>
     <Reference Include="DirectShowLib-2005, Version=2.1.0.0, Culture=neutral, PublicKeyToken=67e7b740cdfc2d3f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\DirectShowLib-2005.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net40\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="EtApi, Version=1.0.3154.19330, Culture=neutral, PublicKeyToken=3c8a8059c193781b, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -189,7 +202,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\ShockwaveFlashObjects.dll</HintPath>
     </Reference>
+    <Reference Include="SmartEye.Libraries">
+      <HintPath>..\Libs\Managed\SmartEye.Libraries.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core">
@@ -198,6 +215,18 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.SQLite, Version=1.0.96.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.96.0\lib\net40\System.Data.SQLite.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.96.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.96.0\lib\net40\System.Data.SQLite.EF6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.96.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.96.0\lib\net40\System.Data.SQLite.Linq.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
@@ -223,14 +252,12 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataSet\OgamaDataSet.cs">
-      <DependentUpon>OgamaDataSet.xsd</DependentUpon>
+    <Compile Include="DataSet\SQLiteBulkInsert.cs" />
+    <Compile Include="DataSet\SQLiteOgamaDataSetTableAdapters.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="DataSet\OgamaDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OgamaDataSet.xsd</DependentUpon>
+    <Compile Include="DataSet\SQLiteOgamaDataSet.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="ExceptionHandling\InformationDialog.cs">
       <SubType>Form</SubType>
@@ -257,6 +284,12 @@
       <DependentUpon>ShowLogDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="ExceptionHandling\ExceptionMethods.cs" />
+    <Compile Include="MainWindow\Dialogs\ConvertDatabaseSplash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow\Dialogs\ConvertDatabaseSplash.designer.cs">
+      <DependentUpon>ConvertDatabaseSplash.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\AttentionMap\GradientExtensions.cs" />
     <Compile Include="Modules\Common\CustomEventArgs\TrackStatusDataChangedEventArgs.cs" />
     <Compile Include="Modules\Recording\ASLInterface\HowToActivateAsl.cs">
@@ -288,6 +321,49 @@
     </Compile>
     <Compile Include="Modules\Recording\GazepointInterface\HowToActivateGazepoint.Designer.cs">
       <DependentUpon>HowToActivateGazepoint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\SmartEyeInterface\CalibrationResult.cs" />
+    <Compile Include="Modules\Recording\SmartEyeInterface\GazeDataReceivedEventHandler.cs" />
+    <Compile Include="Modules\Recording\SmartEyeInterface\HowToActivateSmartEye.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\SmartEyeInterface\HowToActivateSmartEye.designer.cs">
+      <DependentUpon>HowToActivateSmartEye.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\SmartEyeInterface\SmartEyeCalibrationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\SmartEyeInterface\SmartEyeCalibrationForm.Designer.cs">
+      <DependentUpon>SmartEyeCalibrationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\SmartEyeInterface\SmartEyeCalibrationResultPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\SmartEyeInterface\SmartEyeCalibrationResultPanel.Designer.cs">
+      <DependentUpon>SmartEyeCalibrationResultPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\SmartEyeInterface\SmartEyeCalibrationRunner.cs" />
+    <Compile Include="Modules\Recording\SmartEyeInterface\SmartEyeClient.cs" />
+    <Compile Include="Modules\Recording\SmartEyeInterface\SmartEyeGazeData.cs" />
+    <Compile Include="Modules\Recording\SmartEyeInterface\SmartEyeSetting.cs" />
+    <Compile Include="Modules\Recording\SmartEyeInterface\SmartEyeSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\SmartEyeInterface\SmartEyeSettingsDialog.designer.cs">
+      <DependentUpon>SmartEyeSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\SmartEyeInterface\SmartEyeTracker.cs" />
+    <Compile Include="Modules\Recording\SmartEyeInterface\SmartEyeTrackStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\SmartEyeInterface\SmartEyeTrackStatus.Designer.cs">
+      <DependentUpon>SmartEyeTrackStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Recording\SmartEyeInterface\SmartEyeTrackStatusControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Recording\SmartEyeInterface\SmartEyeTrackStatusControl.Designer.cs">
+      <DependentUpon>SmartEyeTrackStatusControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Recording\SMIInterface\RedM\HowToActivateSMIRedM.cs">
       <SubType>Form</SubType>
@@ -1177,6 +1253,10 @@
       <SubType>Designer</SubType>
       <DependentUpon>ShowLogDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow\Dialogs\ConvertDatabaseSplash.resx">
+      <DependentUpon>ConvertDatabaseSplash.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\ASLInterface\HowToActivateAsl.resx">
       <DependentUpon>HowToActivateAsl.cs</DependentUpon>
     </EmbeddedResource>
@@ -1193,6 +1273,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\GazepointInterface\HowToActivateGazepoint.resx">
       <DependentUpon>HowToActivateGazepoint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\SmartEyeInterface\HowToActivateSmartEye.resx">
+      <DependentUpon>HowToActivateSmartEye.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\SmartEyeInterface\SmartEyeCalibrationForm.resx">
+      <DependentUpon>SmartEyeCalibrationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\SmartEyeInterface\SmartEyeCalibrationResultPanel.resx">
+      <DependentUpon>SmartEyeCalibrationResultPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\SmartEyeInterface\SmartEyeSettingsDialog.resx">
+      <DependentUpon>SmartEyeSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\SmartEyeInterface\SmartEyeTrackStatus.resx">
+      <DependentUpon>SmartEyeTrackStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Recording\SmartEyeInterface\SmartEyeTrackStatusControl.resx">
+      <DependentUpon>SmartEyeTrackStatusControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\SMIInterface\RedM\HowToActivateSMIRedM.resx">
       <DependentUpon>HowToActivateSMIRedM.cs</DependentUpon>
@@ -1601,6 +1699,10 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Content Include="DataSet\OgamaDatabaseTemplate.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -1656,14 +1758,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-    <Content Include="DataSet\OgamaDatabaseTemplate.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DataSet\OgamaDatabaseTemplate_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>OgamaDatabaseTemplate.mdf</DependentUpon>
-    </Content>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Resources\FolderNew16.png" />
     <None Include="Resources\PS3_61_61.png" />
     <None Include="Resources\ITU_61_61.png" />
@@ -1684,17 +1781,6 @@
     <Content Include="Help\STA.rtf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="DataSet\OgamaDataSet.xsc">
-      <DependentUpon>OgamaDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="DataSet\OgamaDataSet.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>OgamaDataSet.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="DataSet\OgamaDataSet.xss">
-      <DependentUpon>OgamaDataSet.xsd</DependentUpon>
-    </None>
     <Content Include="Help\SCR.rtf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1842,6 +1928,11 @@
     <None Include="Resources\TheEyeTribeFoto16.png" />
     <None Include="Resources\TheEyeTribeFoto64.png" />
     <None Include="Resources\TheEyeTribeLogo.jpg" />
+    <Content Include="Resources\SmartEyeAuroraFoto16.png" />
+    <Content Include="Resources\SmartEyeAuroraFoto64.png" />
+    <Content Include="Resources\SmartEyeLogo.png" />
+    <Content Include="Resources\SQLite32.png" />
+    <Content Include="Resources\SQLServer32.png" />
     <Content Include="SaliencyCalculation\cygblas.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -2094,4 +2185,11 @@
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.96.0\build\net40\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.96.0\build\net40\System.Data.SQLite.Core.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.96.0\build\net40\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.96.0\build\net40\System.Data.SQLite.Core.targets'))" />
+  </Target>
 </Project>
