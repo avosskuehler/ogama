@@ -59,11 +59,11 @@
                 Source="$(var.SolutionDir)Libs\Installer\Haytham\" />
         </Component>
         <Component Id="C_Newtonsoft.Json2" Guid="{EEB490B6-AB67-430D-BE2E-04F5C78B7106}" Win64="no">
-          <File Id="Newtonsoft.Json" Name="Newtonsoft.Json.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="Newtonsoft.Json" AssemblyApplication="Newtonsoft.Json"
+          <File Id="Newtonsoft.Json2" Name="Newtonsoft.Json.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="Newtonsoft.Json" AssemblyApplication="Newtonsoft.Json"
                 DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\" />
         </Component>
         <Component Id="C_ZedGraph2" Guid="{73959864-7CFE-43FC-98B7-0F7E5E63C9A3}" Win64="no">
-          <File Id="ZedGraph2" Name="ZedGraph2.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="ZedGraph2" AssemblyApplication="ZedGraph2"
+          <File Id="ZedGraph2" Name="ZedGraph.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="ZedGraph" AssemblyApplication="ZedGraph"
                 DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\" />
         </Component>
         <Component Id="C_zxing" Guid="{66501A27-846D-4BC7-934E-BB5B70D4BBB6}" Win64="no">
@@ -74,132 +74,132 @@
 
         <Directory Id="OpenCVDirectory86" Name="x86">
           <Component Id="C_opencv_calib3d242x86" Guid="{2CCFCE24-593A-458D-933B-28D89B22726B}" Win64="no">
-            <File Id="opencv_calib3d242" Name="opencv_calib3d242.dll" KeyPath="yes"
+            <File Id="opencv_calib3d242x86" Name="opencv_calib3d242.dll" KeyPath="yes"
                   DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x86\" />
           </Component>
           <Component Id="C_opencv_contrib242x86" Guid="{0A8B8DB0-C2F4-499C-A223-7766ABE51988}" Win64="no">
-            <File Id="opencv_contrib242" Name="opencv_contrib242.dll" KeyPath="yes"
+            <File Id="opencv_contrib242x86" Name="opencv_contrib242.dll" KeyPath="yes"
                   DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x86\" />
           </Component>
           <Component Id="C_opencv_core242x86" Guid="{CE064216-EBC8-4EA0-8E1A-28E689078411}" Win64="no">
-            <File Id="opencv_core242" Name="opencv_core242.dll" KeyPath="yes"
+            <File Id="opencv_core242x86" Name="opencv_core242.dll" KeyPath="yes"
                   DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x86\" />
           </Component>
           <Component Id="C_opencv_features2d242x86" Guid="{9235C4B0-ABD3-4C70-B32A-61BDB2622913}" Win64="no">
-            <File Id="opencv_features2d242" Name="opencv_features2d242.dll" KeyPath="yes"
+            <File Id="opencv_features2d242x86" Name="opencv_features2d242.dll" KeyPath="yes"
                   DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x86\" />
           </Component>
           <Component Id="C_opencv_ffmpeg242x86" Guid="{2C0882EE-3BC7-4127-AB33-15B29369A54C}" Win64="no">
-            <File Id="opencv_ffmpeg242" Name="opencv_ffmpeg242.dll" KeyPath="yes"
+            <File Id="opencv_ffmpeg242x86" Name="opencv_ffmpeg242.dll" KeyPath="yes"
                   DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x86\" />
           </Component>
           <Component Id="C_opencv_flann242x86" Guid="{61B0FB8C-ABF1-4C88-A240-83F0455D13A4}" Win64="no">
-            <File Id="opencv_flann242" Name="opencv_flann242.dll" KeyPath="yes"
+            <File Id="opencv_flann242x86" Name="opencv_flann242.dll" KeyPath="yes"
                   DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x86\" />
           </Component>
           <Component Id="C_opencv_gpu242x86" Guid="{E347F965-60CC-4B61-A5CB-DD7973FD6257}" Win64="no">
-            <File Id="opencv_gpu242" Name="opencv_gpu242.dll" KeyPath="yes"
+            <File Id="opencv_gpu242x86" Name="opencv_gpu242.dll" KeyPath="yes"
                   DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x86\" />
           </Component>
           <Component Id="C_opencv_highgui242x86" Guid="{CBE37835-267C-44BE-87CA-678362E58795}" Win64="no">
-            <File Id="opencv_highgui242" Name="opencv_highgui242.dll" KeyPath="yes"
+            <File Id="opencv_highgui242x86" Name="opencv_highgui242.dll" KeyPath="yes"
                   DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x86\" />
           </Component>
           <Component Id="C_opencv_imgproc242x86" Guid="{66077710-E972-46C3-8D5C-DDBC0505B2E1}" Win64="no">
-            <File Id="opencv_imgproc242" Name="opencv_imgproc242.dll" KeyPath="yes"
+            <File Id="opencv_imgproc242x86" Name="opencv_imgproc242.dll" KeyPath="yes"
                   DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x86\" />
           </Component>
           <Component Id="C_opencv_legacy242x86" Guid="{6B35CEB1-1A7D-4A50-87E8-4399129D5027}" Win64="no">
-            <File Id="opencv_legacy242" Name="opencv_legacy242.dll" KeyPath="yes"
+            <File Id="opencv_legacy242x86" Name="opencv_legacy242.dll" KeyPath="yes"
                   DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x86\" />
           </Component>
           <Component Id="C_opencv_ml242x86" Guid="{1200248D-8FD3-4DC5-AC93-53251DE1109C}" Win64="no">
-            <File Id="opencv_ml242" Name="opencv_ml242.dll" KeyPath="yes"
+            <File Id="opencv_ml242x86" Name="opencv_ml242.dll" KeyPath="yes"
                   DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x86\" />
           </Component>
           <Component Id="C_opencv_nonfree242x86" Guid="{9159BE82-7101-4090-82A5-A686390C4066}" Win64="no">
-            <File Id="opencv_nonfree242" Name="opencv_nonfree242.dll" KeyPath="yes"
+            <File Id="opencv_nonfree242x86" Name="opencv_nonfree242.dll" KeyPath="yes"
                   DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x86\" />
           </Component>
           <Component Id="C_opencv_objdetect242x86" Guid="{E81957D1-9673-421B-933D-1774B07619D5}" Win64="no">
-            <File Id="opencv_objdetect242" Name="opencv_objdetect242.dll" KeyPath="yes"
+            <File Id="opencv_objdetect242x86" Name="opencv_objdetect242.dll" KeyPath="yes"
                   DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x86\" />
           </Component>
           <Component Id="C_opencv_photo242x86" Guid="{DCA584C1-0133-40CD-B55C-8F7B58086DFF}" Win64="no">
-            <File Id="opencv_photo242" Name="opencv_photo242.dll" KeyPath="yes"
+            <File Id="opencv_photo242x86" Name="opencv_photo242.dll" KeyPath="yes"
                   DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x86\" />
           </Component>
           <Component Id="C_opencv_video242x86" Guid="{295461ED-C3E5-49ED-BD5C-5D0F8E0CF346}" Win64="no">
-            <File Id="opencv_video242" Name="opencv_video242.dll" KeyPath="yes"
+            <File Id="opencv_video242x86" Name="opencv_video242.dll" KeyPath="yes"
                   DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x86\" />
           </Component>
           <Component Id="C_tbbx86" Guid="{D0CB67BF-3C41-4838-A336-43CB9668E3E5}" Win64="no">
-            <File Id="tbb" Name="tbb.dll" KeyPath="yes"
+            <File Id="tbbx86" Name="tbb.dll" KeyPath="yes"
                   DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x86\" />
           </Component>
         </Directory>
         <Directory Id="OpenCVDirectory64" Name="x64">
-          <Component Id="C_opencv_calib3d242x64" Guid="{2CCFCE24-593A-458D-933B-28D89B22726B}" Win64="yes">
+          <Component Id="C_opencv_calib3d242x64" Guid="{0DD8A7D3-5698-464F-A612-A8BF47110BE0}" Win64="no">
             <File Id="opencv_calib3d242" Name="opencv_calib3d242.dll" KeyPath="yes"
                   DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x64\" />
           </Component>
-          <Component Id="C_opencv_contrib242x64" Guid="{0A8B8DB0-C2F4-499C-A223-7766ABE51988}" Win64="yes">
+          <Component Id="C_opencv_contrib242x64" Guid="{4917810E-9660-41B1-8817-279C09331F57}" Win64="no">
             <File Id="opencv_contrib242" Name="opencv_contrib242.dll" KeyPath="yes"
                   DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x64\" />
           </Component>
-          <Component Id="C_opencv_core242x64" Guid="{CE064216-EBC8-4EA0-8E1A-28E689078411}" Win64="yes">
+          <Component Id="C_opencv_core242x64" Guid="{BEA5DB50-F05A-412C-9017-55DD5F864161}" Win64="no">
             <File Id="opencv_core242" Name="opencv_core242.dll" KeyPath="yes"
                   DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x64\" />
           </Component>
-          <Component Id="C_opencv_features2d242x64" Guid="{9235C4B0-ABD3-4C70-B32A-61BDB2622913}" Win64="yes">
+          <Component Id="C_opencv_features2d242x64" Guid="{5813F7B1-705D-40D7-9DAF-64A16432AC38}" Win64="no">
             <File Id="opencv_features2d242" Name="opencv_features2d242.dll" KeyPath="yes"
                   DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x64\" />
           </Component>
-          <Component Id="C_opencv_ffmpeg242x64" Guid="{2C0882EE-3BC7-4127-AB33-15B29369A54C}" Win64="yes">
+          <!--<Component Id="C_opencv_ffmpeg242x64" Guid="{2C0882EE-3BC7-4127-AB33-15B29369A54C}" Win64="no">
             <File Id="opencv_ffmpeg242" Name="opencv_ffmpeg242.dll" KeyPath="yes"
                   DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x64\" />
-          </Component>
-          <Component Id="C_opencv_flann242x64" Guid="{61B0FB8C-ABF1-4C88-A240-83F0455D13A4}" Win64="yes">
+          </Component>-->
+          <Component Id="C_opencv_flann242x64" Guid="{F963E3F4-DE4B-4D54-9124-A6D8EA5EA1E8}" Win64="no">
             <File Id="opencv_flann242" Name="opencv_flann242.dll" KeyPath="yes"
                   DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x64\" />
           </Component>
-          <Component Id="C_opencv_gpu242x64" Guid="{E347F965-60CC-4B61-A5CB-DD7973FD6257}" Win64="yes">
+          <Component Id="C_opencv_gpu242x64" Guid="{C19BDEAB-F5A2-4E84-BDBB-AEEF741C0C75}" Win64="no">
             <File Id="opencv_gpu242" Name="opencv_gpu242.dll" KeyPath="yes"
                   DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x64\" />
           </Component>
-          <Component Id="C_opencv_highgui242x64" Guid="{CBE37835-267C-44BE-87CA-678362E58795}" Win64="yes">
+          <Component Id="C_opencv_highgui242x64" Guid="{8C1ABB67-920D-40C2-86EE-B1B146BA0509}" Win64="no">
             <File Id="opencv_highgui242" Name="opencv_highgui242.dll" KeyPath="yes"
                   DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x64\" />
           </Component>
-          <Component Id="C_opencv_imgproc242x64" Guid="{66077710-E972-46C3-8D5C-DDBC0505B2E1}" Win64="yes">
+          <Component Id="C_opencv_imgproc242x64" Guid="{8512F613-32BB-44AC-BFE4-56F7244795F1}" Win64="no">
             <File Id="opencv_imgproc242" Name="opencv_imgproc242.dll" KeyPath="yes"
                   DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x64\" />
           </Component>
-          <Component Id="C_opencv_legacy242x64" Guid="{6B35CEB1-1A7D-4A50-87E8-4399129D5027}" Win64="yes">
+          <Component Id="C_opencv_legacy242x64" Guid="{35C6BBDA-3B75-4604-A5C0-C8BDD87F853E}" Win64="no">
             <File Id="opencv_legacy242" Name="opencv_legacy242.dll" KeyPath="yes"
                   DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x64\" />
           </Component>
-          <Component Id="C_opencv_ml242x64" Guid="{1200248D-8FD3-4DC5-AC93-53251DE1109C}" Win64="yes">
+          <Component Id="C_opencv_ml242x64" Guid="{EAA53FDC-B4CD-42DF-AEE1-2455AF21CC2A}" Win64="no">
             <File Id="opencv_ml242" Name="opencv_ml242.dll" KeyPath="yes"
                   DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x64\" />
           </Component>
-          <Component Id="C_opencv_nonfree242x64" Guid="{9159BE82-7101-4090-82A5-A686390C4066}" Win64="yes">
+          <Component Id="C_opencv_nonfree242x64" Guid="{5894BDCE-6EDB-4F1D-926D-988B7CFE0AD8}" Win64="no">
             <File Id="opencv_nonfree242" Name="opencv_nonfree242.dll" KeyPath="yes"
                   DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x64\" />
           </Component>
-          <Component Id="C_opencv_objdetect242x64" Guid="{E81957D1-9673-421B-933D-1774B07619D5}" Win64="yes">
+          <Component Id="C_opencv_objdetect242x64" Guid="{23690A60-672E-492E-ADC0-B2E3A985508C}" Win64="no">
             <File Id="opencv_objdetect242" Name="opencv_objdetect242.dll" KeyPath="yes"
                   DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x64\" />
           </Component>
-          <Component Id="C_opencv_photo242x64" Guid="{DCA584C1-0133-40CD-B55C-8F7B58086DFF}" Win64="yes">
+          <Component Id="C_opencv_photo242x64" Guid="{E5D44D8D-D610-4958-B236-8981DEAE3995}" Win64="no">
             <File Id="opencv_photo242" Name="opencv_photo242.dll" KeyPath="yes"
                   DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x64\" />
           </Component>
-          <Component Id="C_opencv_video242x64" Guid="{295461ED-C3E5-49ED-BD5C-5D0F8E0CF346}" Win64="yes">
+          <Component Id="C_opencv_video242x64" Guid="{36B4EBB0-9FDE-4814-9677-9B497B27140A}" Win64="no">
             <File Id="opencv_video242" Name="opencv_video242.dll" KeyPath="yes"
                   DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x64\" />
           </Component>
-          <Component Id="C_tbbx64" Guid="{D0CB67BF-3C41-4838-A336-43CB9668E3E5}" Win64="yes">
+          <Component Id="C_tbbx64" Guid="{7AF7BBDC-A84B-40F8-930B-305D19272FFD}" Win64="no">
             <File Id="tbb" Name="tbb.dll" KeyPath="yes"
                   DiskId="1" Source="$(var.SolutionDir)Libs\Installer\Haytham\x64\" />
           </Component>
@@ -231,7 +231,7 @@
       <ComponentRef Id='C_opencv_features2d242x86' />
       <ComponentRef Id='C_opencv_ffmpeg242x86' />
       <ComponentRef Id='C_opencv_flann242x86' />
-      <ComponentRef Id='C_opencv_gpu242x86x64' />
+      <ComponentRef Id='C_opencv_gpu242x86' />
       <ComponentRef Id='C_opencv_highgui242x86' />
       <ComponentRef Id='C_opencv_imgproc242x86' />
       <ComponentRef Id='C_opencv_legacy242x86' />
@@ -245,7 +245,7 @@
       <ComponentRef Id='C_opencv_contrib242x64' />
       <ComponentRef Id='C_opencv_core242x64' />
       <ComponentRef Id='C_opencv_features2d242x64' />
-      <ComponentRef Id='C_opencv_ffmpeg242x64' />
+      <!--<ComponentRef Id='C_opencv_ffmpeg242x64' />-->
       <ComponentRef Id='C_opencv_flann242x64' />
       <ComponentRef Id='C_opencv_gpu242x64' />
       <ComponentRef Id='C_opencv_highgui242x64' />
