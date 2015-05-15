@@ -1,15 +1,15 @@
-﻿// <copyright file="SlidePresentationContainer.cs" company="alea technologies">
-// ******************************************************
-// OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2015 Dr. Adrian Voßkühler  
-// ------------------------------------------------------------------------
-// This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
-// This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-// You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-// **************************************************************
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="SlidePresentationContainer.cs" company="FU Berlin">
+//   OGAMA - open gaze and mouse analyzer 
+//   Copyright (C) 2015 Dr. Adrian Voßkühler  
+//   Licensed under GPL V3
 // </copyright>
 // <author>Adrian Voßkühler</author>
 // <email>adrian@ogama.net</email>
+// <summary>
+//   
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Ogama.Modules.Recording.Presenter
 {
@@ -97,13 +97,6 @@ namespace Ogama.Modules.Recording.Presenter
     public AudioPlayer AudioPlayer { get; set; }
 
     /// <summary>
-    /// Gets or sets the DirectShow capture class for getting
-    /// a video out of screenshots during recording
-    /// of dynamic flash movie content.
-    /// </summary>
-    public DSScreenCapture ScreenCapture { get; set; }
-
-    /// <summary>
     /// Gets or sets the <see cref="BufferedGraphics"/> 
     /// that is the drawing surface on which the slide contents
     /// should be rendered an presented to the graphics
@@ -161,23 +154,6 @@ namespace Ogama.Modules.Recording.Presenter
     // Methods for doing main class job                                          //
     ///////////////////////////////////////////////////////////////////////////////
     #region PRIVATEMETHODS
-
-    /// <summary>
-    /// This method should be called after the <see cref="CaptureDeviceProperties"/>
-    /// for the screen capturing are set to initialize the <see cref="DSScreenCapture"/>
-    /// one time.
-    /// </summary>
-    /// <param name="screenCaptureProperties">The <see cref="ScreenCaptureProperties"/>
-    /// to be used for the screen capturing.</param>
-    public void InitializeScreenCapture(ScreenCaptureProperties screenCaptureProperties)
-    {
-      this.ScreenCapture = new DSScreenCapture(
-        screenCaptureProperties.VideoCompressor,
-        screenCaptureProperties.FrameRate,
-        screenCaptureProperties.MonitorIndex);
-      this.ScreenCapture.PreviewWindow = screenCaptureProperties.PreviewWindow;
-    }
-
     #endregion //PRIVATEMETHODS
 
     ///////////////////////////////////////////////////////////////////////////////
