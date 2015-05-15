@@ -395,6 +395,7 @@ namespace Ogama.Modules.Common.SlideCollections
       List<object> nodeCollection = this.ParseNodeForRandomizedTrials(this);
       var trials = new TrialCollection();
       this.GetTrialsFromObjectCollection(nodeCollection, ref trials);
+      this.InsertPreSlideTrials(ref trials);
       return trials;
     }
 
@@ -664,6 +665,35 @@ namespace Ogama.Modules.Common.SlideCollections
     }
 
     /// <summary>
+    /// Inserts the pre slide trials.
+    /// </summary>
+    /// <param name="trials">The trials.</param>
+    private void InsertPreSlideTrials(ref TrialCollection trials)
+    {
+      var trialsWithPreSlideTrials = new TrialCollection();
+      foreach (var trial in trials)
+      {
+        foreach (var slideobject in trial)
+        {
+          // if we have a preslide fixation trial add this trial before
+          var preSlideTrialID = slideobject.IdOfPreSlideFixationTrial;
+          if (preSlideTrialID != -1)
+          {
+            var preSlideNode = this.GetNodeByID(preSlideTrialID);
+            var preTrial = new Trial(preSlideNode.Text, preSlideTrialID);
+            preTrial.AddRange(this.GetPreSlideTrialSlides(preSlideNode));
+            trialsWithPreSlideTrials.Add(preTrial);
+          }
+        }
+
+        trialsWithPreSlideTrials.Add(trial);
+      }
+
+      trials = trialsWithPreSlideTrials;
+    }
+
+
+    /// <summary>
     /// This method iterates recursively through the tree to update the
     /// resource path of the slide elements found.
     /// </summary>
@@ -835,6 +865,7 @@ namespace Ogama.Modules.Common.SlideCollections
         var nodeCollection = this.ParseNodeForRandomizedTrials(subNode);
         var trials = new TrialCollection();
         this.GetTrialsFromObjectCollection(nodeCollection, ref trials);
+        this.InsertPreSlideTrials(ref trials);
 
         // Convert to List<object>
         var trialsObjectCollection = new List<object>();
@@ -922,13 +953,13 @@ namespace Ogama.Modules.Common.SlideCollections
           var slide = subNode.Slide;
           if (slide != null && !slide.IsDisabled)
           {
-            // if we have a preslide fixation trial add the slides before
-            var preSlideTrialID = slide.IdOfPreSlideFixationTrial;
-            if (preSlideTrialID != -1)
-            {
-              var preSlideNode = this.GetNodeByID(preSlideTrialID);
-              trial.AddRange(this.GetPreSlideTrialSlides(preSlideNode));
-            }
+            //// if we have a preslide fixation trial add the slides before
+            //var preSlideTrialID = slide.IdOfPreSlideFixationTrial;
+            //if (preSlideTrialID != -1)
+            //{
+            //  var preSlideNode = this.GetNodeByID(preSlideTrialID);
+            //  trial.AddRange(this.GetPreSlideTrialSlides(preSlideNode));
+            //}
 
             trial.Add(slide);
           }
@@ -950,15 +981,15 @@ namespace Ogama.Modules.Common.SlideCollections
             var browserSlide = this.CreateBrowserSlide(subCollectionNode as BrowserTreeNode);
             if (!browserSlide.IsDisabled)
             {
-              // if we have a preslide fixation trial add this trial before
-              var preSlideTrialID = browserSlide.IdOfPreSlideFixationTrial;
-              if (preSlideTrialID != -1)
-              {
-                var preSlideNode = this.GetNodeByID(preSlideTrialID);
-                var preTrial = new Trial(preSlideNode.Text, preSlideTrialID);
-                preTrial.AddRange(this.GetPreSlideTrialSlides(preSlideNode));
-                items.Add(preTrial);
-              }
+              //// if we have a preslide fixation trial add this trial before
+              //var preSlideTrialID = browserSlide.IdOfPreSlideFixationTrial;
+              //if (preSlideTrialID != -1)
+              //{
+              //  var preSlideNode = this.GetNodeByID(preSlideTrialID);
+              //  var preTrial = new Trial(preSlideNode.Text, preSlideTrialID);
+              //  preTrial.AddRange(this.GetPreSlideTrialSlides(preSlideNode));
+              //  items.Add(preTrial);
+              //}
 
               trial.Add(browserSlide);
               items.Add(trial);
@@ -971,15 +1002,15 @@ namespace Ogama.Modules.Common.SlideCollections
             {
               var trial = new Trial(subNode.Text, GetIdOfNode(subNode));
 
-              // if we have a preslide fixation trial add this trial before
-              var preSlideTrialID = slide.IdOfPreSlideFixationTrial;
-              if (preSlideTrialID != -1)
-              {
-                var preSlideNode = this.GetNodeByID(preSlideTrialID);
-                var preTrial = new Trial(preSlideNode.Text, preSlideTrialID);
-                preTrial.AddRange(this.GetPreSlideTrialSlides(preSlideNode));
-                items.Add(preTrial);
-              }
+              //// if we have a preslide fixation trial add this trial before
+              //var preSlideTrialID = slide.IdOfPreSlideFixationTrial;
+              //if (preSlideTrialID != -1)
+              //{
+              //  var preSlideNode = this.GetNodeByID(preSlideTrialID);
+              //  var preTrial = new Trial(preSlideNode.Text, preSlideTrialID);
+              //  preTrial.AddRange(this.GetPreSlideTrialSlides(preSlideNode));
+              //  items.Add(preTrial);
+              //}
 
               trial.Add(slide);
               items.Add(trial);
