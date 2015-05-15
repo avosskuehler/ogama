@@ -1,7 +1,7 @@
 // <copyright file="AttentionMapModule.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2013 Dr. Adrian Voßkühler  
+// Copyright (C) 2015 Dr. Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -20,6 +20,7 @@ namespace Ogama.Modules.AttentionMap
   using System.Drawing;
   using System.Windows.Forms;
 
+  using Ogama.DataSet;
   using Ogama.ExceptionHandling;
   using Ogama.MainWindow;
   using Ogama.Modules.Common.FormTemplates;
@@ -787,12 +788,11 @@ namespace Ogama.Modules.AttentionMap
     /// </summary>
     /// <param name="trialID">An <see cref="Int32"/> with the trial id.</param>
     /// <param name="checkedSubjects">A <see cref="List{String}"/> with the subject names.</param>
-    /// <returns>A <see cref="Ogama.DataSet.OgamaDataSet.MouseFixationsDataTable"/>
+    /// <returns>A <see cref="SQLiteOgamaDataSet.MouseFixationsDataTable"/>
     /// with the mouse clicks.</returns>
     private DataTable GetFilteredMouseClicks(int trialID, List<string> checkedSubjects)
     {
-      Ogama.DataSet.OgamaDataSet.MouseFixationsDataTable clickTable =
-        new Ogama.DataSet.OgamaDataSet.MouseFixationsDataTable();
+      var clickTable = new SQLiteOgamaDataSet.MouseFixationsDataTable();
 
       foreach (string entry in checkedSubjects)
       {
@@ -834,7 +834,7 @@ namespace Ogama.Modules.AttentionMap
                 switch (task)
                 {
                   case InputEventTask.Down:
-                    Ogama.DataSet.OgamaDataSet.MouseFixationsRow newRow =
+                    SQLiteOgamaDataSet.MouseFixationsRow newRow =
                       clickTable.NewMouseFixationsRow();
                     newRow.PosX = msc.ClickLocation.X;
                     newRow.PosY = msc.ClickLocation.Y;
@@ -855,7 +855,7 @@ namespace Ogama.Modules.AttentionMap
                 {
                   MouseStopCondition msc = sc as MouseStopCondition;
                   InputEventTask task = (InputEventTask)Enum.Parse(typeof(InputEventTask), taskString, true);
-                  Ogama.DataSet.OgamaDataSet.MouseFixationsRow newRow =
+                  SQLiteOgamaDataSet.MouseFixationsRow newRow =
                     clickTable.NewMouseFixationsRow();
                   newRow.PosX = msc.ClickLocation.X;
                   newRow.PosY = msc.ClickLocation.Y;

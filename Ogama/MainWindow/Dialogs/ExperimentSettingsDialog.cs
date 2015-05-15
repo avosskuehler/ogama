@@ -1,7 +1,7 @@
 // <copyright file="ExperimentSettingsDialog.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2013 Dr. Adrian Voßkühler  
+// Copyright (C) 2015 Dr. Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -16,6 +16,7 @@ namespace Ogama.MainWindow.Dialogs
   using System;
   using System.ComponentModel;
   using System.Data.SqlClient;
+  using System.Data.SQLite;
   using System.Windows.Forms;
 
   using Microsoft.SqlServer.Management.Common;
@@ -296,32 +297,32 @@ namespace Ogama.MainWindow.Dialogs
     private bool TestSQLServerConnection(bool showMessage)
     {
       this.Cursor = Cursors.WaitCursor;
-      string oldInstanceName = Document.ActiveDocument.ExperimentSettings.SqlInstanceName;
-      Document.ActiveDocument.ExperimentSettings.SqlInstanceName = this.txbSQLInstanceName.Text;
-      SqlConnection connectionString = new SqlConnection(Document.ActiveDocument.ExperimentSettings.ServerConnectionString);
-      ServerConnection connection = new ServerConnection(connectionString);
-      try
-      {
-        Server sqlServer = new Server(connection);
-        sqlServer.Initialize();
-      }
-      catch (Exception)
-      {
-        if (showMessage)
-        {
-          MessageBox.Show("Connection failed");
-        }
+      string oldConnectionString = Document.ActiveDocument.ExperimentSettings.DatabaseConnectionString;
+      //Document.ActiveDocument.ExperimentSettings.SqlInstanceName = this.txbSQLInstanceName.Text;
+      //SqlConnection connectionString = new SqlConnection(Document.ActiveDocument.ExperimentSettings.ServerConnectionString);
+      //ServerConnection connection = new ServerConnection(connectionString);
+      //using (var conn = new SQLiteConnection(this.txbSQLInstanceName.Text))
+      //{
+      //  try
+      //  {
+      //    conn.Open();
+      //  }
+      //  catch (Exception ex)
+      //  {
+      //    if (showMessage)
+      //    {
+      //      MessageBox.Show("Connection failed");
+      //    }
 
-        Document.ActiveDocument.ExperimentSettings.SqlInstanceName = oldInstanceName;
-        this.txbSQLInstanceName.Text = oldInstanceName;
+      //    this.txbSQLInstanceName.Text = oldConnectionString;
 
-        return false;
-      }
-      finally
-      {
-        this.Cursor = Cursors.Default;
-      }
-
+      //    return false;
+      //  }
+      //  finally
+      //  {
+      //    this.Cursor = Cursors.Default;
+      //  }
+      //}
       if (showMessage)
       {
         MessageBox.Show("Connection successful");

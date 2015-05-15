@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="TheEyeTribeTracker.cs" company="Freie Universität Berlin">
 //   OGAMA - open gaze and mouse analyzer 
-//   Copyright (C) 2014 Dr. Adrian Voßkühler  
+//   Copyright (C) 2015 Dr. Adrian Voßkühler  
 //   Licensed under GPL V3
 // </copyright>
 // <author>Adrian Voßkühler</author>
@@ -293,25 +293,8 @@ namespace Ogama.Modules.Recording.TheEyeTribeInterface
         calRunner.PointColor = new System.Windows.Media.SolidColorBrush(ToMediaColor(this.theEyeTribeSettings.CalibrationPointColor));
         calRunner.PointRecordingTime = this.theEyeTribeSettings.PointDisplayTime;
 
-        bool isCalibrated = calRunner.Start(); // blocks until complete
-
-        if (!isCalibrated)
-        {
-          return false;
-        }
-
-        var result = GazeManager.Instance.LastCalibrationResult;
-
-        // Show a calibration plot if everything went OK
-        if (result != null)
-        {
-          this.theEyeTribeCalibrationResultPanel.Initialize(result);
-          this.ShowCalibPlot();
-        }
-        else
-        {
-          MessageBox.Show("Not enough data to create a calibration (or calibration aborted).");
-        }
+        calRunner.Start(); // blocks until complete
+        calRunner.OnResult += calRunner_OnResult;
       }
       catch (Exception ex)
       {
@@ -411,7 +394,7 @@ namespace Ogama.Modules.Recording.TheEyeTribeInterface
           throw new Exception("Could not connect to the eye tribe tracker, please start the server manually and try again.");
         }
 
-        this.eyeTribeTrackStatus.Connect();
+        //this.eyeTribeTrackStatus.Connect();
 
         // Register this class for events
         GazeManager.Instance.AddGazeListener(this);
@@ -573,7 +556,7 @@ namespace Ogama.Modules.Recording.TheEyeTribeInterface
           this.ShowOnSecondaryScreenButton.Text = "Hide from presentation screen";
           this.ShowOnSecondaryScreenButton.BackColor = Color.Red;
           this.dlgTrackStatus.Show();
-          this.dlgTrackStatus.trackBoxStatus.Connect();
+          //this.dlgTrackStatus.trackBoxStatus.Connect();
         }
       }
       else
@@ -583,7 +566,7 @@ namespace Ogama.Modules.Recording.TheEyeTribeInterface
         {
           this.ShowOnSecondaryScreenButton.BackColor = Color.Transparent;
           this.ShowOnSecondaryScreenButton.Text = "Show on presentation screen";
-          this.dlgTrackStatus.trackBoxStatus.Disconnect();
+          //this.dlgTrackStatus.trackBoxStatus.Disconnect();
           this.dlgTrackStatus.Close();
         }
       }
@@ -696,6 +679,28 @@ namespace Ogama.Modules.Recording.TheEyeTribeInterface
     }
 
     /// <summary>
+    /// Handles the OnResult event of the calRunner control.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="CalibrationRunnerEventArgs"/> instance containing the event data.</param>
+    private void calRunner_OnResult(object sender, CalibrationRunnerEventArgs e)
+    {
+      var result = e.CalibrationResult;
+
+      // Show a calibration plot if everything went OK
+      if (result != null)
+      {
+        this.theEyeTribeCalibrationResultPanel.Initialize(result);
+        this.ShowCalibPlot();
+      }
+      else
+      {
+        MessageBox.Show("Not enough data to create a calibration (or calibration aborted).");
+      }
+    }
+
+
+    /// <summary>
     /// Deserializes the <see cref="TheEyeTribeSetting"/> from the given xml file.
     /// </summary>
     /// <param name="filePath">
@@ -745,7 +750,7 @@ namespace Ogama.Modules.Recording.TheEyeTribeInterface
     /// </summary>
     private void DisconnectTracker()
     {
-      this.eyeTribeTrackStatus.Disconnect();
+      //this.eyeTribeTrackStatus.Disconnect();
 
       // Unregister this class for gaze events
       GazeManager.Instance.RemoveGazeListener(this);

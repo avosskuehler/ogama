@@ -1,7 +1,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 // <copyright file="NewRawDataAvailableEventArgs.cs" company="Freie Universität Berlin">
 //   OGAMA - open gaze and mouse analyzer 
-//   Copyright (C) 2014 Dr. Adrian Voßkühler  
+//   Copyright (C) 2015 Dr. Adrian Voßkühler  
 //   Licensed under GPL V3
 // </copyright>
 // <author>Adrian Voßkühler</author>
@@ -14,6 +14,7 @@ namespace Ogama.Modules.Common.CustomEventArgs
 {
   using System;
 
+  using Ogama.DataSet;
   using Ogama.Modules.ImportExport.Common;
 
   /// <summary>
@@ -36,7 +37,7 @@ namespace Ogama.Modules.Common.CustomEventArgs
     /// </summary>
     /// <param name="newRawData">
     /// The raw data row as a
-    ///   <see cref="DataSet.OgamaDataSet.RawdataRow"/> value.
+    ///   <see cref="SQLiteOgamaDataSet.RawdataRow"/> value.
     /// </param>
     public NewRawDataAvailableEventArgs(RawData newRawData)
     {
@@ -50,7 +51,7 @@ namespace Ogama.Modules.Common.CustomEventArgs
     /// <summary>
     ///   Gets the new raw data.
     /// </summary>
-    /// <value>The raw data as a <see cref="DataSet.OgamaDataSet.RawdataRow" /> value.</value>
+    /// <value>The raw data as a <see cref="SQLiteOgamaDataSet.RawdataRow" /> value.</value>
     public RawData RawData { get; private set; }
 
     #endregion

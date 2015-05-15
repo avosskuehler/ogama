@@ -1,16 +1,12 @@
-﻿// <copyright file="DSScreenCapture.cs" company="alea technologies">
-// ******************************************************
-// OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2013 Dr. Adrian Voßkühler  
-// ------------------------------------------------------------------------
-// This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
-// This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-// You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-// **************************************************************
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="DSScreenCapture.cs" company="Freie Universität Berlin">
+//   OGAMA - open gaze and mouse analyzer 
+//   Copyright (C) 2014 Dr. Adrian Voßkühler  
+//   Licensed under GPL V3
 // </copyright>
 // <author>Adrian Voßkühler</author>
 // <email>adrian@ogama.net</email>
-
+// --------------------------------------------------------------------------------------------------------------------
 namespace Ogama.Modules.Recording.Presenter
 {
   using System;
@@ -26,6 +22,7 @@ namespace Ogama.Modules.Recording.Presenter
 
   using Ogama.ExceptionHandling;
   using Ogama.Modules.Common.Tools;
+  using Ogama.Modules.Replay.Video;
 
   using OgamaControls;
 
@@ -41,8 +38,6 @@ namespace Ogama.Modules.Recording.Presenter
     ///////////////////////////////////////////////////////////////////////////////
     // Defining Constants                                                        //
     ///////////////////////////////////////////////////////////////////////////////
-    #region CONSTANTS
-    #endregion //CONSTANTS
 
     ///////////////////////////////////////////////////////////////////////////////
     // Defining Variables, Enumerations, Events                                  //
@@ -50,6 +45,7 @@ namespace Ogama.Modules.Recording.Presenter
     #region FIELDS
 
 #if DEBUG
+
     /// <summary>
     /// Special variable for debugging purposes 
     /// Cookie into the Running Object Table 
@@ -179,12 +175,18 @@ namespace Ogama.Modules.Recording.Presenter
     /// <summary>
     /// Initializes a new instance of the <see cref="DSScreenCapture"/> class.
     /// </summary>
-    /// <param name="videoCompressor">A <see cref="String"/> with the friendly
-    /// name of the video compressor to be used in the file capture stream.</param>
-    /// <param name="newFrameRate">An <see cref="Int32"/> with the framerate
-    /// to use for capturing.</param>
-    /// <param name="monitorIndex">The zero based index of the monitor screen
-    /// to be captured.</param>
+    /// <param name="videoCompressor">
+    /// A <see cref="String"/> with the friendly
+    /// name of the video compressor to be used in the file capture stream.
+    /// </param>
+    /// <param name="newFrameRate">
+    /// An <see cref="Int32"/> with the framerate
+    /// to use for capturing.
+    /// </param>
+    /// <param name="monitorIndex">
+    /// The zero based index of the monitor screen
+    /// to be captured.
+    /// </param>
     public DSScreenCapture(
       string videoCompressor,
       int newFrameRate,
@@ -213,6 +215,14 @@ namespace Ogama.Modules.Recording.Presenter
     #region ENUMS
 
     /// <summary>
+    /// ComImport for CLSID_OgamaCaptureDesktop.
+    /// </summary>
+    [ComImport, Guid("90B82CB3-719B-426E-AE46-28CF7A57B586")]
+    public class OgamaScreenCaptureFilter
+    {
+    }
+
+    /// <summary>
     /// This interface import is for the IOgamaScreenCapture which
     /// has the properties to modify the screen capture filter.
     /// </summary>
@@ -224,38 +234,54 @@ namespace Ogama.Modules.Recording.Presenter
       /// <summary>
       /// Gets the monitor index set in the screen capture filter.
       /// </summary>
-      /// <param name="index">Out. The zero-based index
-      /// of the monitor whichs surface should be captured.</param>
-      /// <returns>An HRESULT value for success or fail.</returns>
+      /// <param name="index">
+      /// Out. The zero-based index
+      /// of the monitor whichs surface should be captured.
+      /// </param>
+      /// <returns>
+      /// An HRESULT value for success or fail.
+      /// </returns>
       [PreserveSig]
       int get_Monitor([Out] out int index);
 
       /// <summary>
       /// Sets the monitor index to use in the screen capture filter.
       /// </summary>
-      /// <param name="index">In. The zero-based index
-      /// of the monitor whichs surface should be captured.</param>
-      /// <returns>An HRESULT value for success or fail.</returns>
+      /// <param name="index">
+      /// In. The zero-based index
+      /// of the monitor whichs surface should be captured.
+      /// </param>
+      /// <returns>
+      /// An HRESULT value for success or fail.
+      /// </returns>
       [PreserveSig]
       int set_Monitor([In] int index);
 
       /// <summary>
       /// Gets the framerate of the screen capture filter.
       /// </summary>
-      /// <param name="framerate">Out. The framerate in frames per second
+      /// <param name="framerate">
+      /// Out. The framerate in frames per second
       /// that the ogama screen capture filter should produce screen captures.
-      /// Is valid from 1 to 30.</param>
-      /// <returns>An HRESULT value for success or fail.</returns>
+      /// Is valid from 1 to 30.
+      /// </param>
+      /// <returns>
+      /// An HRESULT value for success or fail.
+      /// </returns>
       [PreserveSig]
       int get_Framerate([Out] out int framerate);
 
       /// <summary>
       /// Sets the framerate of the screen capture filter.
       /// </summary>
-      /// <param name="framerate">In. The framerate in frames per second
+      /// <param name="framerate">
+      /// In. The framerate in frames per second
       /// that the ogama screen capture filter should produce screen captures.
-      /// Is valid from 1 to 30.</param>
-      /// <returns>An HRESULT value for success or fail.</returns>
+      /// Is valid from 1 to 30.
+      /// </param>
+      /// <returns>
+      /// An HRESULT value for success or fail.
+      /// </returns>
       [PreserveSig]
       int set_Framerate([In] int framerate);
     }
@@ -308,9 +334,9 @@ namespace Ogama.Modules.Recording.Presenter
 
         if (this.fileWriterFilter != null)
         {
-          AMMediaType mediaType = new AMMediaType();
+          var mediaType = new AMMediaType();
           string oldFile;
-          int hr = this.fileWriterFilter.GetCurFile(out oldFile, mediaType);
+          var hr = this.fileWriterFilter.GetCurFile(out oldFile, mediaType);
           DsError.ThrowExceptionForHR(hr);
 
           hr = this.fileWriterFilter.SetFileName(this.tempFilename, mediaType);
@@ -337,7 +363,7 @@ namespace Ogama.Modules.Recording.Presenter
       if (this.mediaControl != null)
       {
         // Start the filter graph: begin capturing
-        int hr = this.mediaControl.Run();
+        var hr = this.mediaControl.Run();
         DsError.ThrowExceptionForHR(hr);
 
         this.IsRunning = true;
@@ -346,7 +372,7 @@ namespace Ogama.Modules.Recording.Presenter
       if (this.videoWindow != null)
       {
         // Set owner
-        int hr = this.videoWindow.put_Owner(ThreadSafe.GetHandle(this.previewWindow));
+        var hr = this.videoWindow.put_Owner(ThreadSafe.GetHandle(this.previewWindow));
         DsError.ThrowExceptionForHR(hr);
 
         // Set video window style
@@ -365,7 +391,7 @@ namespace Ogama.Modules.Recording.Presenter
     /// </summary>
     public void Stop()
     {
-      int hr = 0;
+      var hr = 0;
 
       if (this.mediaControl != null)
       {
@@ -399,12 +425,14 @@ namespace Ogama.Modules.Recording.Presenter
       try
       {
 #if DEBUG
+
         // Remove graph from the ROT 
         if (this.rotCookie != null)
         {
           this.rotCookie.Dispose();
           this.rotCookie = null;
         }
+
 #endif
 
         // Free the preview window (ignore errors)
@@ -487,8 +515,12 @@ namespace Ogama.Modules.Recording.Presenter
     /// Updates the GazeOverlay DMO filter parameters with the new positions
     /// of the gaze and mouse locations.
     /// </summary>
-    /// <param name="gazeLocation">A <see cref="Point"/> with the new gaze location.</param>
-    /// <param name="mouseLocation">A <see cref="Point"/> with the new mouse location.</param>
+    /// <param name="gazeLocation">
+    /// A <see cref="Point"/> with the new gaze location.
+    /// </param>
+    /// <param name="mouseLocation">
+    /// A <see cref="Point"/> with the new mouse location.
+    /// </param>
     public void UpdateDMOParams(Point gazeLocation, Point mouseLocation)
     {
       if (this.dmoParams == null || this.mediaControl == null)
@@ -581,9 +613,11 @@ namespace Ogama.Modules.Recording.Presenter
 #if DEBUG
         this.rotCookie = new DsROTEntry(this.graphBuilder);
 #endif
+
+       // this.screenCaptureFilter = (IBaseFilter)new OgamaScreenCaptureFilter();
+
         // Get the ogama screen capture device and add it to the filter graph
-        this.screenCaptureFilter = DirectShowUtils.CreateFilter(
-          FilterCategory.VideoInputDevice, "OgamaCapture");
+        this.screenCaptureFilter = DirectShowUtils.CreateFilter(FilterCategory.VideoInputDevice, "OgamaCapture");
 
         hr = this.graphBuilder.AddFilter(this.screenCaptureFilter, "OgamaCapture");
         DsError.ThrowExceptionForHR(hr);
@@ -597,6 +631,13 @@ namespace Ogama.Modules.Recording.Presenter
         hr = ogamaFilter.set_Framerate(this.frameRate);
         DsError.ThrowExceptionForHR(hr);
 
+        //// Get the IAMStreamConfig from the filter so we can configure it 
+        //var videoStreamConfig = this.screenCaptureFilter as IAMStreamConfig;
+
+        var resolution = PresentationScreen.GetPresentationResolution();
+        //hr = videoStreamConfig.SetFormat(this.CreateVideoMediaType(24, resolution.Width, resolution.Height));
+        //DsError.ThrowExceptionForHR(hr);
+
         this.smartTeeFilter = new SmartTee() as IBaseFilter;
         hr = this.graphBuilder.AddFilter(this.smartTeeFilter, "Smart Tee");
         DsError.ThrowExceptionForHR(hr);
@@ -608,7 +649,7 @@ namespace Ogama.Modules.Recording.Presenter
           this.dmoWrapperFilter = (IDMOWrapperFilter)this.dmoFilter;
 
           // But it is more useful to show how to scan for the DMO
-          Guid g = this.FindGuid("DmoOverlay", DMOCategory.VideoEffect);
+          var g = this.FindGuid("DmoOverlay", DMOCategory.VideoEffect);
 
           hr = this.dmoWrapperFilter.Init(g, DMOCategory.VideoEffect);
           DMOError.ThrowExceptionForHR(hr);
@@ -617,6 +658,12 @@ namespace Ogama.Modules.Recording.Presenter
 
           // Add it to the Graph
           hr = this.graphBuilder.AddFilter(this.dmoFilter, "DMO Filter");
+          DsError.ThrowExceptionForHR(hr);
+
+          var dmo = (IMediaObject)this.dmoFilter;
+          hr = dmo.SetInputType(0, this.CreateVideoMediaType(24, resolution.Width, resolution.Height), DMOSetType.None);
+          DsError.ThrowExceptionForHR(hr);
+          hr = dmo.SetOutputType(0, this.CreateVideoMediaType(24, resolution.Width, resolution.Height), DMOSetType.None);
           DsError.ThrowExceptionForHR(hr);
         }
 
@@ -639,18 +686,12 @@ namespace Ogama.Modules.Recording.Presenter
         //// Disable overwrite
         //// hr = this.fileWriterFilter.SetMode(AMFileSinkFlags.None);
         //// DsError.ThrowExceptionForHR(hr);
-
         hr = this.captureGraphBuilder.AllocCapFile(this.tempFilename, 10000000);
         DsError.ThrowExceptionForHR(hr);
 
         if (SecondaryScreen.SystemHasSecondaryScreen())
         {
-          hr = this.captureGraphBuilder.RenderStream(
-            null,
-            null,
-            this.screenCaptureFilter,
-            null,
-            this.smartTeeFilter);
+          hr = this.captureGraphBuilder.RenderStream(null, null, this.screenCaptureFilter, null, this.smartTeeFilter);
           DsError.ThrowExceptionForHR(hr);
 
           hr = this.captureGraphBuilder.RenderStream(
@@ -661,20 +702,10 @@ namespace Ogama.Modules.Recording.Presenter
             this.muxFilter);
           DsError.ThrowExceptionForHR(hr);
 
-          hr = this.captureGraphBuilder.RenderStream(
-            null,
-            null,
-            this.smartTeeFilter,
-            null,
-            this.dmoFilter);
+          hr = this.captureGraphBuilder.RenderStream(null, null, this.smartTeeFilter, null, this.dmoFilter);
           DsError.ThrowExceptionForHR(hr);
 
-          hr = this.captureGraphBuilder.RenderStream(
-            null,
-            null,
-            this.dmoFilter,
-            null,
-            null);
+          hr = this.captureGraphBuilder.RenderStream(null, null, this.dmoFilter, null, null);
           DsError.ThrowExceptionForHR(hr);
         }
         else
@@ -706,17 +737,22 @@ namespace Ogama.Modules.Recording.Presenter
       return true;
     }
 
-    /// <summary> 
+    /// <summary>
+    /// 
     /// Resize the preview when the PreviewWindow is resized 
     /// </summary>
-    /// <param name="sender">Source of the event</param>
-    /// <param name="e">An empty <see cref="EventArgs"/></param>
+    /// <param name="sender">
+    /// Source of the event
+    /// </param>
+    /// <param name="e">
+    /// An empty <see cref="EventArgs"/>
+    /// </param>
     protected void onPreviewWindowResize(object sender, EventArgs e)
     {
       if (this.videoWindow != null)
       {
         // Position video window in client rect of owner window
-        Rectangle rc = this.previewWindow.ClientRectangle;
+        var rc = this.previewWindow.ClientRectangle;
         this.videoWindow.SetWindowPosition(0, 0, rc.Right, rc.Bottom);
       }
     }
@@ -734,7 +770,7 @@ namespace Ogama.Modules.Recording.Presenter
     /// <returns>The filename for a temporary zero length file with .avi extension.</returns>
     private string GetTempAVIFilename()
     {
-      string tmpFile = Path.GetTempFileName();
+      var tmpFile = Path.GetTempFileName();
       tmpFile = tmpFile.Replace(".tmp", ".avi");
       return tmpFile;
     }
@@ -743,16 +779,22 @@ namespace Ogama.Modules.Recording.Presenter
     /// Finds the <see cref="Guid"/> for the given 
     /// category and object
     /// </summary>
-    /// <param name="gn">A string containing the name of the DMO.</param>
-    /// <param name="cat">A <see cref="Guid"/> with the dmo category.</param>
-    /// <returns>The <see cref="Guid"/> of the found DMO.</returns>
+    /// <param name="gn">
+    /// A string containing the name of the DMO.
+    /// </param>
+    /// <param name="cat">
+    /// A <see cref="Guid"/> with the dmo category.
+    /// </param>
+    /// <returns>
+    /// The <see cref="Guid"/> of the found DMO.
+    /// </returns>
     private Guid FindGuid(string gn, Guid cat)
     {
       int hr;
 
       IEnumDMO dmoEnum;
-      Guid[] g2 = new Guid[1];
-      string[] sn = new string[1];
+      var g2 = new Guid[1];
+      var sn = new string[1];
 
       hr = DMOUtils.DMOEnum(cat, 0, 0, null, 0, null, out dmoEnum);
       DMOError.ThrowExceptionForHR(hr);
@@ -785,8 +827,10 @@ namespace Ogama.Modules.Recording.Presenter
     /// Creates the parameter connection for the gaze and mouse location
     /// properties of the dmo filter.
     /// </summary>
-    /// <param name="dmoWrapperFilter">The <see cref="IBaseFilter"/> interface
-    /// of the dmo wrapper filter.</param>
+    /// <param name="dmoWrapperFilter">
+    /// The <see cref="IBaseFilter"/> interface
+    /// of the dmo wrapper filter.
+    /// </param>
     private void SetDMOParams(IBaseFilter dmoWrapperFilter)
     {
       if (dmoWrapperFilter == null)
@@ -816,6 +860,151 @@ namespace Ogama.Modules.Recording.Presenter
       this.mouseY.vInt = 0;
       hr = this.dmoParams.SetParam(3, this.mouseY);
       DMOError.ThrowExceptionForHR(hr);
+    }
+
+    ///// <summary>
+    ///// Sets the capture parameters for the video capture device
+    ///// </summary>
+    //private bool SetVideoCaptureParameters(ICaptureGraphBuilder2 capGraph, IBaseFilter captureFilter, Guid mediaSubType)
+    //{
+    //  /* The stream config interface */
+    //  object streamConfig;
+
+    //  /* Get the stream's configuration interface */
+    //  int hr = capGraph.FindInterface(PinCategory.Capture,
+    //                                  MediaType.Video,
+    //                                  captureFilter,
+    //                                  typeof(IAMStreamConfig).GUID,
+    //                                  out streamConfig);
+
+    //  DsError.ThrowExceptionForHR(hr);
+
+    //  var videoStreamConfig = streamConfig as IAMStreamConfig;
+
+    //  /* If QueryInterface fails... */
+    //  if (videoStreamConfig == null)
+    //  {
+    //    throw new Exception("Failed to get IAMStreamConfig");
+    //  }
+
+    //  ///* Make the VIDEOINFOHEADER 'readable' */
+    //  var videoInfo = new VideoInfoHeader();
+
+    //  int iCount = 0;
+    //  int iSize = 0;
+    //  videoStreamConfig.GetNumberOfCapabilities(out iCount, out iSize);
+
+    //  IntPtr TaskMemPointer = Marshal.AllocCoTaskMem(iSize);
+
+
+    //  AMMediaType pmtConfig = null;
+    //  for (int iFormat = 0; iFormat < iCount; iFormat++)
+    //  {
+    //    IntPtr ptr = IntPtr.Zero;
+
+    //    videoStreamConfig.GetStreamCaps(iFormat, out pmtConfig, TaskMemPointer);
+
+    //    videoInfo = (VideoInfoHeader)Marshal.PtrToStructure(pmtConfig.formatPtr, typeof(VideoInfoHeader));
+
+    //    if (videoInfo.BmiHeader.Width == DesiredWidth && videoInfo.BmiHeader.Height == DesiredHeight)
+    //    {
+
+    //      ///* Setup the VIDEOINFOHEADER with the parameters we want */
+    //      videoInfo.AvgTimePerFrame = DSHOW_ONE_SECOND_UNIT / FPS;
+
+    //      if (mediaSubType != Guid.Empty)
+    //      {
+    //        int fourCC = 0;
+    //        byte[] b = mediaSubType.ToByteArray();
+    //        fourCC = b[0];
+    //        fourCC |= b[1] << 8;
+    //        fourCC |= b[2] << 16;
+    //        fourCC |= b[3] << 24;
+
+    //        videoInfo.BmiHeader.Compression = fourCC;
+    //        // pmtConfig.subType = mediaSubType;
+
+    //      }
+
+    //      /* Copy the data back to unmanaged memory */
+    //      Marshal.StructureToPtr(videoInfo, pmtConfig.formatPtr, true);
+
+    //      hr = videoStreamConfig.SetFormat(pmtConfig);
+    //      break;
+    //    }
+
+    //  }
+
+    //  /* Free memory */
+    //  Marshal.FreeCoTaskMem(TaskMemPointer);
+    //  DsUtils.FreeAMMediaType(pmtConfig);
+
+    //  if (hr < 0)
+    //    return false;
+
+    //  return true;
+    //}
+    /// <summary>
+    /// Create a video media type from a few parameters
+    /// </summary>
+    /// <param name="BitCount">
+    /// Bits per pixel (16, 24, 32)
+    /// </param>
+    /// <param name="Width">
+    /// Video width
+    /// </param>
+    /// <param name="Height">
+    /// Video height
+    /// </param>
+    /// <returns>
+    /// The constructed AMMediaType
+    /// </returns>
+    private AMMediaType CreateVideoMediaType(short BitCount, int Width, int Height)
+    {
+      Guid mediaSubType;
+      var videoGroupType = new AMMediaType();
+
+      // Calculate the SubType from the Bit count
+      switch (BitCount)
+      {
+        case 16:
+          mediaSubType = MediaSubType.RGB555;
+          break;
+        case 24:
+          mediaSubType = MediaSubType.RGB24;
+          break;
+        case 32:
+          mediaSubType = MediaSubType.RGB32;
+          break;
+        default:
+          throw new Exception("Unrecognized bit format");
+      }
+
+      videoGroupType.majorType = MediaType.Video;
+      videoGroupType.subType = mediaSubType;
+      videoGroupType.formatType = FormatType.VideoInfo;
+      videoGroupType.fixedSizeSamples = false;
+
+      videoGroupType.formatSize = Marshal.SizeOf(typeof(VideoInfoHeader));
+      var vif = new VideoInfoHeader();
+      vif.BmiHeader = new BitmapInfoHeader();
+
+      // The HEADER macro returns the BITMAPINFO within the VIDEOINFOHEADER
+      vif.BmiHeader.Size = Marshal.SizeOf(typeof(BitmapInfoHeader));
+      vif.BmiHeader.Compression = 0;
+      vif.BmiHeader.BitCount = BitCount;
+      vif.BmiHeader.Width = Width;
+      vif.BmiHeader.Height = Height;
+      vif.BmiHeader.Planes = 1;
+
+      var sampleSize = vif.BmiHeader.Width * vif.BmiHeader.Height * (vif.BmiHeader.BitCount / 8);
+      vif.BmiHeader.ImageSize = sampleSize;
+      videoGroupType.sampleSize = sampleSize;
+      videoGroupType.formatPtr = Marshal.AllocCoTaskMem(Marshal.SizeOf(vif));
+
+      Marshal.StructureToPtr(vif, videoGroupType.formatPtr, false);
+
+      return videoGroupType;
     }
 
     #endregion //HELPER

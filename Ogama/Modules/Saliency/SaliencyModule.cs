@@ -1,7 +1,7 @@
 // <copyright file="SaliencyModule.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2013 Dr. Adrian Voßkühler  
+// Copyright (C) 2015 Dr. Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -1065,8 +1065,7 @@ namespace Ogama.Modules.Saliency
       string line = string.Empty;
       int fixCounter = 0;
       duration = 0;
-      OgamaDataSet.GazeFixationsDataTable fixations =
-        new OgamaDataSet.GazeFixationsDataTable();
+      var fixations = new SQLiteOgamaDataSet.GazeFixationsDataTable();
 
       // Check import file.
       if (!File.Exists(importFile))
@@ -1108,7 +1107,7 @@ namespace Ogama.Modules.Saliency
                 strCoordinatePair = strCoordinatePair.Replace(")", string.Empty);
                 string[] coordinates = strCoordinatePair.Split(',');
 
-                OgamaDataSet.GazeFixationsRow fixationRow = fixations.NewGazeFixationsRow();
+                var fixationRow = fixations.NewGazeFixationsRow();
 
                 // Dummy entries
                 fixationRow.SubjectName = string.Empty;

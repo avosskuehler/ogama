@@ -1,7 +1,7 @@
 // <copyright file="ExperimentSettings.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2013 Dr. Adrian Voßkühler  
+// Copyright (C) 2015 Dr. Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -272,8 +272,8 @@ namespace Ogama.Properties
     /// </summary>
     public bool EliminateFirstFixationSimple
     {
-        get { return this.eliminateFirstFixationSimple; }
-        set { this.eliminateFirstFixationSimple = value; }
+      get { return this.eliminateFirstFixationSimple; }
+      set { this.eliminateFirstFixationSimple = value; }
     }
 
     /// <summary>
@@ -458,18 +458,18 @@ namespace Ogama.Properties
     /// Gets full file path for the database mdf file.
     /// </summary>
     /// <value>A <see cref="string"/> with the database file.</value>
-    public string DatabaseMDFFile
+    public string DatabaseSQLiteFile
     {
-      get { return Path.Combine(this.CreateDatabasePath(), this.experimentName + ".mdf"); }
+      get { return Path.Combine(this.CreateDatabasePath(), this.experimentName + ".db"); }
     }
 
     /// <summary>
-    /// Gets full file path for the database ldf LOG file.
+    /// Gets full file path for the database mdf file.
     /// </summary>
-    /// <value>A <see cref="string"/> with the database log file.</value>
-    public string DatabaseLDFFile
+    /// <value>A <see cref="string"/> with the database file.</value>
+    public string DatabaseMDFFile
     {
-      get { return Path.Combine(this.CreateDatabasePath(), this.experimentName + "_log.ldf"); }
+      get { return Path.Combine(this.CreateDatabasePath(), this.experimentName + ".mdf"); }
     }
 
     /// <summary>
@@ -491,14 +491,14 @@ namespace Ogama.Properties
       get { return this.CreateDatabaseConnectionString(); }
     }
 
-    /// <summary>
-    /// Gets the database connection string
-    /// </summary>
-    /// <value>A <see cref="string"/> with the connection string for the database.</value>
-    public string ServerConnectionString
-    {
-      get { return this.CreateServerConnectionString(); }
-    }
+    ///// <summary>
+    ///// Gets the database connection string
+    ///// </summary>
+    ///// <value>A <see cref="string"/> with the connection string for the database.</value>
+    //public string ServerConnectionString
+    //{
+    //  get { return this.CreateServerConnectionString(); }
+    //}
 
     /// <summary>
     /// Gets or sets the sql instance server name.
@@ -707,7 +707,7 @@ namespace Ogama.Properties
           "and afterwards has beeing renamed." +
           Environment.NewLine +
           "Would you like to use the default database connection to the file:" +
-          Environment.NewLine + this.DatabaseMDFFile + "?";
+          Environment.NewLine + this.DatabaseSQLiteFile + "?";
         DialogResult result = InformationDialog.Show(
           "Database has not default settings",
           message,
@@ -780,23 +780,24 @@ namespace Ogama.Properties
       }
       else
       {
-        usedConnection = @"Data Source=.\" + this.sqlInstanceName + ";Initial Catalog=" +
-          this.experimentName + ";Integrated Security=True;User Instance=True;Connection Timeout=30";
+        //usedConnection = @"Data Source=.\" + this.sqlInstanceName + ";Initial Catalog=" +
+        //  this.experimentName + ";Integrated Security=True;User Instance=True;Connection Timeout=30";
+        usedConnection = @"Data Source=" + this.DatabaseSQLiteFile;
       }
 
       return usedConnection;
     }
 
-    /// <summary>
-    /// Generates connection string to server without an initial catalog
-    /// </summary>
-    /// <returns>A <see cref="string"/> with the server connection string.</returns>
-    private string CreateServerConnectionString()
-    {
-      string usedConnection = @"Data Source=.\" + this.sqlInstanceName + ";Integrated Security=True;User Instance=True;Connection Timeout=30";
+    ///// <summary>
+    ///// Generates connection string to server without an initial catalog
+    ///// </summary>
+    ///// <returns>A <see cref="string"/> with the server connection string.</returns>
+    //private string CreateServerConnectionString()
+    //{
+    //  string usedConnection = @"Data Source=.\" + this.sqlInstanceName + ";Integrated Security=True;User Instance=True;Connection Timeout=30";
 
-      return usedConnection;
-    }
+    //  return usedConnection;
+    //}
 
     /// <summary>
     /// Builds the document filename with path.

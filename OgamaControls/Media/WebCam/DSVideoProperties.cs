@@ -562,7 +562,7 @@ namespace OgamaControls
         int counter = 0;
         foreach (string item in cbbVideoCompressor.Items)
         {
-          if (item.Contains("ffdshow"))
+          if (item.Contains("Microsoft Video 1"))
           {
             cbbVideoCompressor.SelectedIndex = counter;
             break;

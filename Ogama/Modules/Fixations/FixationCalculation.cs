@@ -1,7 +1,7 @@
 ﻿// <copyright file="FixationCalculation.cs" company="FU Berlin">
 // ******************************************************
 // OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2013 Dr. Adrian Voßkühler  
+// Copyright (C) 2015 Dr. Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -18,6 +18,7 @@ namespace Ogama.Modules.Fixations
   using System.ComponentModel;
   using System.Data;
   using System.Data.SqlClient;
+  using System.Data.SQLite;
   using System.Drawing;
   using Ogama.DataSet;
   using Ogama.ExceptionHandling;
@@ -137,8 +138,8 @@ namespace Ogama.Modules.Fixations
     /// <param name="newPt">OUT An <see cref="PointF"/> with the sampling point or null if one of the values is null.</param>
     /// <returns>A <see cref="SampleValidity"/> value for the row.</returns>
     private delegate SampleValidity GetDataDelegate(
-      System.Data.DataRow row, 
-      Size stimulusSize, 
+      System.Data.DataRow row,
+      Size stimulusSize,
       out PointF? newPt);
 
     #endregion ENUMS
@@ -266,7 +267,7 @@ namespace Ogama.Modules.Fixations
         {
           PointF? newPt;
           SampleValidity isValidData = getDataMethod(
-            rowRaw, 
+            rowRaw,
             Document.ActiveDocument.PresentationSize,
             out newPt);
 
@@ -335,17 +336,17 @@ namespace Ogama.Modules.Fixations
 
                   if (this.eliminateFirstFixation && this.eliminateFirstFixationSimple == false && counterFix == 0 && VGPolyline.Distance(fixationCenter, trialLastFixCenter) < maxDistance && fix_duration_delayed_milliseconds < this.limitForFirstFixation)
                   {
-                      // Eliminate if applicable
+                    // Eliminate if applicable
                   }
                   else if (this.eliminateFirstFixationSimple && counterFix == 0)
                   {
-                      // do nothing, just go on with the next fixation eliminating this one
-                      counterFix++;
+                    // do nothing, just go on with the next fixation eliminating this one
+                    counterFix++;
                   }
                   else
                   {
-                      fixations.Add(completedFixation);
-                      counterFix++;
+                    fixations.Add(completedFixation);
+                    counterFix++;
                   }
                 }
 
@@ -538,14 +539,14 @@ namespace Ogama.Modules.Fixations
       this.CalcFixations(
         SampleType.Gaze,
         (string)arguments[0],
-        (OgamaDataSet.TrialsDataTable)arguments[1],
+        (SQLiteOgamaDataSet.TrialsDataTable)arguments[1],
         worker,
         e);
 
       this.CalcFixations(
         SampleType.Mouse,
         (string)arguments[0],
-        (OgamaDataSet.TrialsDataTable)arguments[1],
+        (SQLiteOgamaDataSet.TrialsDataTable)arguments[1],
         worker,
         e);
     }
@@ -613,24 +614,24 @@ namespace Ogama.Modules.Fixations
         DataTable fixTable = null;
         if (sampleType == (sampleType | SampleType.Gaze))
         {
-          fixTableName = "dbo.GazeFixations";
+          fixTableName = "GazeFixations";
           fixTable = Document.ActiveDocument.DocDataSet.GazeFixations;
         }
         else if (sampleType == (sampleType | SampleType.Mouse))
         {
-          fixTableName = "dbo.MouseFixations";
+          fixTableName = "MouseFixations";
           fixTable = Document.ActiveDocument.DocDataSet.MouseFixations;
         }
 
         // Delete Entrys in current tables because BulkInsert will insert all rows again
         string queryString = "DELETE FROM " + fixTableName + ";";
-        SqlCommand command = new SqlCommand(queryString, Document.ActiveDocument.DocDataSet.DatabaseConnection);
-        SqlDataReader reader = command.ExecuteReader();
+        var command = new SQLiteCommand(queryString, Document.ActiveDocument.DocDataSet.DatabaseConnection);
+        SQLiteDataReader reader = command.ExecuteReader();
         try
         {
           while (reader.Read())
           {
-            Console.WriteLine(string.Format("{0}, {1}", reader[0], reader[1]));
+            //Console.WriteLine(string.Format("{0}, {1}", reader[0], reader[1]));
           }
         }
         finally
@@ -639,16 +640,44 @@ namespace Ogama.Modules.Fixations
           reader.Close();
         }
 
-        // Write new Entrys
-        using (SqlBulkCopy bcp = new SqlBulkCopy(Document.ActiveDocument.DocDataSet.DatabaseConnection))
-        {
-          bcp.BulkCopyTimeout = 6000;
+        var conn = Document.ActiveDocument.DocDataSet.DatabaseConnection;
+        var sbi = new SQLiteBulkInsert(conn, fixTableName);
+        sbi.AddParameter("ID", DbType.Int64);
+        sbi.AddParameter("SubjectName", DbType.String);
+        sbi.AddParameter("TrialSequence", DbType.Int32);
+        sbi.AddParameter("TrialId", DbType.Int32);
+        sbi.AddParameter("CountInTrial", DbType.Int32);
+        sbi.AddParameter("StartTime", DbType.Int64);
+        sbi.AddParameter("Length", DbType.Int32);
+        sbi.AddParameter("PosX", DbType.Single);
+        sbi.AddParameter("PosY", DbType.Single);
 
-          // Write from the source to the destination.
-          bcp.DestinationTableName = fixTableName;
-          bcp.WriteToServer(fixTable);
-          bcp.Close();
+        foreach (var row in fixTable.Rows)
+        {
+          if (row is SQLiteOgamaDataSet.GazeFixationsRow)
+          {
+            var rawRow = row as SQLiteOgamaDataSet.GazeFixationsRow;
+            sbi.Insert(new object[] { rawRow.ID, rawRow.SubjectName, rawRow.TrialSequence, rawRow.TrialID, rawRow.CountInTrial, rawRow.StartTime, rawRow.Length, rawRow.PosX, rawRow.PosY });
+          }
+          else if (row is SQLiteOgamaDataSet.MouseFixationsRow)
+          {
+            var rawRow = row as SQLiteOgamaDataSet.MouseFixationsRow;
+            sbi.Insert(new object[] { rawRow.ID, rawRow.SubjectName, rawRow.TrialSequence, rawRow.TrialID, rawRow.CountInTrial, rawRow.StartTime, rawRow.Length, rawRow.PosX, rawRow.PosY });
+          }
         }
+
+        sbi.Flush();
+
+        //// Write new Entrys
+        //using (SqlBulkCopy bcp = new SqlBulkCopy(Document.ActiveDocument.DocDataSet.DatabaseConnection))
+        //{
+        //  bcp.BulkCopyTimeout = 6000;
+
+        //  // Write from the source to the destination.
+        //  bcp.DestinationTableName = fixTableName;
+        //  bcp.WriteToServer(fixTable);
+        //  bcp.Close();
+        //}
       }
       catch (Exception ex)
       {

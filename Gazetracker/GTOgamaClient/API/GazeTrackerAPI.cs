@@ -1,7 +1,7 @@
 ﻿// <copyright file="GazeTrackerAPI.cs" company="FU Berlin">
 // ******************************************************
 // OgamaClient for ITU GazeTracker
-// Copyright (C) 2013 Dr. Adrian Voßkühler  
+// Copyright (C) 2015 Dr. Adrian Voßkühler  
 // ------------------------------------------------------------------------
 // This program is free software; you can redistribute it and/or modify it 
 // under the terms of the GNU General Public License as published by the 
