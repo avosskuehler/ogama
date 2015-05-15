@@ -631,7 +631,7 @@ namespace Ogama.Modules.Fixations
         {
           while (reader.Read())
           {
-            Console.WriteLine(string.Format("{0}, {1}", reader[0], reader[1]));
+            //Console.WriteLine(string.Format("{0}, {1}", reader[0], reader[1]));
           }
         }
         finally

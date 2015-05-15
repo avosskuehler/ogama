@@ -1,16 +1,12 @@
-﻿// <copyright file="ReplayPicture.cs" company="FU Berlin">
-// ******************************************************
-// OGAMA - open gaze and mouse analyzer 
-// Copyright (C) 2015 Dr. Adrian Voßkühler  
-// ------------------------------------------------------------------------
-// This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
-// This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-// You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-// **************************************************************
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ReplayPicture.cs" company="Freie Universität Berlin">
+//   OGAMA - open gaze and mouse analyzer 
+//   Copyright (C) 2014 Dr. Adrian Voßkühler  
+//   Licensed under GPL V3
 // </copyright>
 // <author>Adrian Voßkühler</author>
 // <email>adrian@ogama.net</email>
-
+// --------------------------------------------------------------------------------------------------------------------
 namespace Ogama.Modules.Replay
 {
   using System;
@@ -47,8 +43,6 @@ namespace Ogama.Modules.Replay
     ///////////////////////////////////////////////////////////////////////////////
     // Defining Constants                                                        //
     ///////////////////////////////////////////////////////////////////////////////
-    #region CONSTANTS
-    #endregion //CONSTANTS
 
     ///////////////////////////////////////////////////////////////////////////////
     // Defining Variables, Enumerations, Events                                  //
@@ -459,7 +453,7 @@ namespace Ogama.Modules.Replay
 
       set
       {
-        int timeInSamples = this.GetSynchronizedSampleCount(value);
+        var timeInSamples = this.GetSynchronizedSampleCount(value);
         this.currentLoopState.RowCounter = timeInSamples;
         this.currentLoopState.ProcessBeginningTime = DateTime.Now.AddMilliseconds(-value / this.speed);
       }
@@ -820,16 +814,16 @@ namespace Ogama.Modules.Replay
       if (this.replayTable != null && this.replayTable.Rows.Count > 0)
       {
         // Determine StartTime to Initialize Progress detection
-        DataRow firstRow = this.replayTable.Rows[0];
-        long trialStartTimeInMS = !firstRow.IsNull(3) ? Convert.ToInt64(firstRow[3]) : 0;
-        DateTime processBeginningTime = DateTime.Now;
+        var firstRow = this.replayTable.Rows[0];
+        var trialStartTimeInMS = !firstRow.IsNull(3) ? Convert.ToInt64(firstRow[3]) : 0;
+        var processBeginningTime = DateTime.Now;
 
-        bool gazeDataAvailable = false;
-        bool mouseDataAvailable = false;
+        var gazeDataAvailable = false;
+        var mouseDataAvailable = false;
 
         // Check for first valid eye and mouse sample
         PointF? test;
-        for (int i = 0; i < this.replayTable.Rows.Count; i++)
+        for (var i = 0; i < this.replayTable.Rows.Count; i++)
         {
           if (!gazeDataAvailable)
           {
@@ -856,7 +850,7 @@ namespace Ogama.Modules.Replay
           }
         }
 
-        FormWithPicture parent = (FormWithPicture)this.OwningForm;
+        var parent = (FormWithPicture)this.OwningForm;
         if (parent.MdiParent != null)
         {
           if (!gazeDataAvailable && !mouseDataAvailable)
@@ -969,11 +963,11 @@ namespace Ogama.Modules.Replay
         }
 
         // Init VG Elements referring to DrawingModes
-        Color customColor = Color.FromArgb(200, Color.Black);
-        SolidBrush shadowBrush = new SolidBrush(customColor);
+        var customColor = Color.FromArgb(200, Color.Black);
+        var shadowBrush = new SolidBrush(customColor);
         this.rectBlink = new VGRectangle(
-          ShapeDrawAction.Fill,
-          shadowBrush,
+          ShapeDrawAction.Fill, 
+          shadowBrush, 
           new RectangleF(0, 0, Document.ActiveDocument.ExperimentSettings.WidthStimulusScreen, Document.ActiveDocument.ExperimentSettings.HeightStimulusScreen));
         this.rectBlink.Visible = false;
 
@@ -989,9 +983,9 @@ namespace Ogama.Modules.Replay
       else
       {
         InformationDialog.Show(
-          "Please note",
-          "No gaze or mouse data available for these settings",
-          false,
+          "Please note", 
+          "No gaze or mouse data available for these settings", 
+          false, 
           MessageBoxIcon.Warning);
         return false;
       }
@@ -1000,7 +994,9 @@ namespace Ogama.Modules.Replay
     /// <summary>
     /// Draws all graphic data up to given timing in milliseconds.
     /// </summary>
-    /// <param name="endTime">end time in milliseconds</param>
+    /// <param name="endTime">
+    /// end time in milliseconds
+    /// </param>
     public void RenderUpToGivenTime(long endTime)
     {
       if (endTime == 0)
@@ -1014,28 +1010,42 @@ namespace Ogama.Modules.Replay
     /// <summary>
     /// Draws all graphic data in the given timing range.
     /// </summary>
-    /// <param name="startTimeInMS">start time in milliseconds</param>
-    /// <param name="endTimeInMS">end time in milliseconds</param>
+    /// <param name="startTimeInMS">
+    /// start time in milliseconds
+    /// </param>
+    /// <param name="endTimeInMS">
+    /// end time in milliseconds
+    /// </param>
     public void RenderTimeRangeInMS(int startTimeInMS, int endTimeInMS)
     {
       // Calculate samples in range.
-      int startTimeInSamples = this.GetSynchronizedSampleCount(startTimeInMS);
-      int endTimeInSamples = this.GetSynchronizedSampleCount(endTimeInMS);
+      var startTimeInSamples = this.GetSynchronizedSampleCount(startTimeInMS);
+      var endTimeInSamples = this.GetSynchronizedSampleCount(endTimeInMS);
       this.RenderTimeRange(startTimeInSamples, endTimeInSamples);
     }
 
     /// <summary>
     /// Renders all samples with current drawing settings up to given time into the returned bitmap.
     /// </summary>
-    /// <param name="startSample">Ref. An <see cref="int"/> with the sample number of the start sample.</param>
-    /// <param name="endTime">End time in milliseconds</param>
-    /// <param name="videoSize">size of video</param>
-    /// <param name="reachedEnd">Ref. The picture runs out of data.</param>
-    /// <returns>A <see cref="Bitmap"/> with the rendered frame.</returns>
+    /// <param name="startSample">
+    /// Ref. An <see cref="int"/> with the sample number of the start sample.
+    /// </param>
+    /// <param name="endTime">
+    /// End time in milliseconds
+    /// </param>
+    /// <param name="videoSize">
+    /// size of video
+    /// </param>
+    /// <param name="reachedEnd">
+    /// Ref. The picture runs out of data.
+    /// </param>
+    /// <returns>
+    /// A <see cref="Bitmap"/> with the rendered frame.
+    /// </returns>
     public Bitmap RenderFrame(ref int startSample, long endTime, Size videoSize, ref bool reachedEnd)
     {
       // Calculate samples in range.
-      int endTimeInSamples = this.GetSynchronizedSampleCount(endTime);
+      var endTimeInSamples = this.GetSynchronizedSampleCount(endTime);
 
       if (endTimeInSamples >= this.replayTable.Rows.Count)
       {
@@ -1044,18 +1054,22 @@ namespace Ogama.Modules.Replay
 
       this.RenderTimeRange(startSample, endTimeInSamples);
       startSample = endTimeInSamples + 1;
-      Image currentFrame = this.RenderToImage();
+      var currentFrame = this.RenderToImage();
       return Images.RescaleImage(videoSize, (Bitmap)currentFrame, false);
     }
 
     /// <summary>
     /// Draws a mouse click cursor at the given point
     /// </summary>
-    /// <param name="pt">A <see cref="PointF"/> with the center of the mouse click.</param>
-    /// <param name="button">A <see cref="MouseButtons"/> value that indicates the clicked button.</param>
+    /// <param name="pt">
+    /// A <see cref="PointF"/> with the center of the mouse click.
+    /// </param>
+    /// <param name="button">
+    /// A <see cref="MouseButtons"/> value that indicates the clicked button.
+    /// </param>
     public void DrawMouseClick(PointF pt, MouseButtons button)
     {
-      VGCursor.DrawingCursors cursorType = VGCursor.DrawingCursors.Mouse;
+      var cursorType = VGCursor.DrawingCursors.Mouse;
       switch (button)
       {
         case MouseButtons.Left:
@@ -1068,11 +1082,11 @@ namespace Ogama.Modules.Replay
           break;
       }
 
-      VGCursor mouseClick = new VGCursor(
-        Pens.White,
-        Brushes.Red,
-        cursorType,
-        20f,
+      var mouseClick = new VGCursor(
+        Pens.White, 
+        Brushes.Red, 
+        cursorType, 
+        20f, 
         VGStyleGroup.RPL_MOUSE_CLICK);
 
       mouseClick.Center = pt;
@@ -1139,11 +1153,15 @@ namespace Ogama.Modules.Replay
     /// Updates all graphic elements from the given group
     /// with the new pen.
     /// </summary>
-    /// <param name="sender">Source of the event.</param>
-    /// <param name="e">A <see cref="PenChangedEventArgs"/> that hold new group and pen</param>
+    /// <param name="sender">
+    /// Source of the event.
+    /// </param>
+    /// <param name="e">
+    /// A <see cref="PenChangedEventArgs"/> that hold new group and pen
+    /// </param>
     public void PenChanged(object sender, PenChangedEventArgs e)
     {
-      VGElementCollection sublist = this.Elements.FindAllGroupMembers(e.ElementGroup);
+      var sublist = this.Elements.FindAllGroupMembers(e.ElementGroup);
       foreach (VGElement element in sublist)
       {
         element.Pen = e.Pen;
@@ -1192,8 +1210,12 @@ namespace Ogama.Modules.Replay
     /// Updates all graphic elements from the given group
     /// with the new cursor shape.
     /// </summary>
-    /// <param name="sender">Source of the event.</param>
-    /// <param name="e">A <see cref="ShapeEventArgs"/> with the new cursor shape.</param>
+    /// <param name="sender">
+    /// Source of the event.
+    /// </param>
+    /// <param name="e">
+    /// A <see cref="ShapeEventArgs"/> with the new cursor shape.
+    /// </param>
     public void DrawingCursorChanged(object sender, ShapeEventArgs e)
     {
       switch (e.Shape.StyleGroup)
@@ -1208,10 +1230,10 @@ namespace Ogama.Modules.Replay
           break;
       }
 
-      VGElementCollection sublist = this.Elements.FindAllGroupMembers(e.Shape.StyleGroup);
+      var sublist = this.Elements.FindAllGroupMembers(e.Shape.StyleGroup);
       if (sublist.Count == 1)
       {
-        PointF storeCenter = sublist[0].Center;
+        var storeCenter = sublist[0].Center;
         this.Elements.Remove(sublist[0]);
         e.Shape.Center = storeCenter;
         this.Elements.Add(e.Shape);
@@ -1256,10 +1278,16 @@ namespace Ogama.Modules.Replay
     /// <summary>
     /// Overridden. Calls picture update method. Invoked from Picture Animation timer tick method.
     /// </summary>
-    /// <param name="sender">sending frame, normally base picture class timer</param>
-    /// <param name="e">An empty <see cref="EventArgs"/></param>
-    /// <remarks>Starts updating the readed samples for the timespan that
-    /// is over since the last update.</remarks>
+    /// <param name="sender">
+    /// sending frame, normally base picture class timer
+    /// </param>
+    /// <param name="e">
+    /// An empty <see cref="EventArgs"/>
+    /// </param>
+    /// <remarks>
+    /// Starts updating the readed samples for the timespan that
+    /// is over since the last update.
+    /// </remarks>
     protected override void ForegroundTimerTick(object sender, EventArgs e)
     {
       this.DisplayUpdating();
@@ -1328,7 +1356,10 @@ namespace Ogama.Modules.Replay
     /// The <see cref="TrialEventIDFound"/> event handler.
     /// Raised when trial event id was found in the raw data.
     /// </summary>
-    /// <param name="e">A <see cref="TrialEventIDFoundEventArgs"/> with the new event id.</param>.
+    /// <param name="e">
+    /// A <see cref="TrialEventIDFoundEventArgs"/> with the new event id.
+    /// </param>
+    /// .
     private void OnTrialEventIDFound(TrialEventIDFoundEventArgs e)
     {
       if (this.TrialEventIDFound != null)
@@ -1341,7 +1372,10 @@ namespace Ogama.Modules.Replay
     /// The <see cref="TrialSequenceChanged"/> event handler.
     /// Raised when trial sequence change was found in the raw data.
     /// </summary>
-    /// <param name="e">A <see cref="TrialSequenceChangedEventArgs"/> with the new trial sequence.</param>.
+    /// <param name="e">
+    /// A <see cref="TrialSequenceChangedEventArgs"/> with the new trial sequence.
+    /// </param>
+    /// .
     private void OnTrialSequenceChanged(TrialSequenceChangedEventArgs e)
     {
       if (this.TrialSequenceChanged != null)
@@ -1354,7 +1388,10 @@ namespace Ogama.Modules.Replay
     /// The <see cref="MouseMoved"/> event handler.
     /// Raised when mouse movement was found in the raw data.
     /// </summary>
-    /// <param name="e">A <see cref="MouseEventArgs"/> with the event data.</param>.
+    /// <param name="e">
+    /// A <see cref="MouseEventArgs"/> with the event data.
+    /// </param>
+    /// .
     private void OnMouseMoved(MouseEventArgs e)
     {
       if (this.MouseMoved != null)
@@ -1387,7 +1424,7 @@ namespace Ogama.Modules.Replay
         this.isGazeDiscreteLength = Properties.Settings.Default.GazeModeCutPath;
         this.isMouseDiscreteLength = Properties.Settings.Default.MouseModeCutPath;
 
-        string speedValue = Properties.Settings.Default.ReplaySpeed;
+        var speedValue = Properties.Settings.Default.ReplaySpeed;
         switch (speedValue)
         {
           case "10x": this.speed = 10f;
@@ -1542,14 +1579,14 @@ namespace Ogama.Modules.Replay
         this.mouseFixConLine = new VGLine(ShapeDrawAction.Edge, this.penMouseFixationConnection, VGStyleGroup.RPL_PEN_MOUSE_FIXCON, string.Empty, string.Empty);
         this.mouseFixConLine.ElementGroup = "Default";
 
-        float gazeCursorSize = (float)Properties.Settings.Default.GazeCursorSize;
-        VGCursor.DrawingCursors gazeCursorType = (VGCursor.DrawingCursors)Enum.Parse(
+        var gazeCursorSize = (float)Properties.Settings.Default.GazeCursorSize;
+        var gazeCursorType = (VGCursor.DrawingCursors)Enum.Parse(
           typeof(VGCursor.DrawingCursors), Properties.Settings.Default.GazeCursorType);
         this.gazeCursor = new VGCursor(this.penGazeCursor, gazeCursorType, gazeCursorSize, VGStyleGroup.RPL_PEN_GAZE_CURSOR);
         this.gazeCursor.ElementGroup = "Default";
 
-        float mouseCursorSize = (float)Properties.Settings.Default.MouseCursorSize;
-        VGCursor.DrawingCursors mouseCursorType = (VGCursor.DrawingCursors)Enum.Parse(
+        var mouseCursorSize = (float)Properties.Settings.Default.MouseCursorSize;
+        var mouseCursorType = (VGCursor.DrawingCursors)Enum.Parse(
           typeof(VGCursor.DrawingCursors), Properties.Settings.Default.MouseCursorType);
         this.mouseCursor = new VGCursor(this.penMouseCursor, mouseCursorType, mouseCursorSize, VGStyleGroup.RPL_PEN_MOUSE_CURSOR);
         this.mouseCursor.ElementGroup = "Default";
@@ -1557,8 +1594,8 @@ namespace Ogama.Modules.Replay
         if (Document.ActiveDocument != null)
         {
           this.visiblePartOfScreen = new VGRectangle(
-            ShapeDrawAction.Edge,
-            Pens.Red,
+            ShapeDrawAction.Edge, 
+            Pens.Red, 
             Document.ActiveDocument.PresentationSizeRectangle);
           this.visiblePartOfScreen.Visible = false;
         }
@@ -1577,14 +1614,14 @@ namespace Ogama.Modules.Replay
     private void DisplayUpdating()
     {
       // Initialize progress variables
-      bool isFinished = false;
-      int percentComplete = 0;
+      var isFinished = false;
+      var percentComplete = 0;
 
       if (this.currentLoopState.RowCounter < this.replayTable.Rows.Count)
       {
-        long processEndingTime = DateTime.Now.Ticks - this.pauseTime.Ticks;
-        long differenceInTicks = processEndingTime - this.currentLoopState.ProcessBeginningTime.Ticks;
-        float differenceInMS = differenceInTicks / 10000f * this.speed;
+        var processEndingTime = DateTime.Now.Ticks - this.pauseTime.Ticks;
+        var differenceInTicks = processEndingTime - this.currentLoopState.ProcessBeginningTime.Ticks;
+        var differenceInMS = differenceInTicks / 10000f * this.speed;
 
         this.RenderTimeRange(this.currentLoopState.RowCounter, (long)differenceInMS);
       }
@@ -1593,7 +1630,7 @@ namespace Ogama.Modules.Replay
       percentComplete = Convert.ToInt32(Convert.ToSingle(this.currentLoopState.RowCounter) /
         this.replayTable.Rows.Count * 100);
 
-      int rowTimeInMS = 0;
+      var rowTimeInMS = 0;
 
       if (this.currentLoopState.RowCounter >= this.replayTable.Rows.Count)
       {
@@ -1603,33 +1640,42 @@ namespace Ogama.Modules.Replay
       else
       {
         // Get current DataRow
-        DataRow row = this.replayTable.Rows[this.currentLoopState.RowCounter];
+        var row = this.replayTable.Rows[this.currentLoopState.RowCounter];
 
         // Catch actual TrialTime
         rowTimeInMS = (int)(Convert.ToInt64(row[3]) - this.currentLoopState.TrialStartTimeInMS);
       }
 
-      ProgressEventArgs pea = new ProgressEventArgs(isFinished, percentComplete, rowTimeInMS);
+      var pea = new ProgressEventArgs(isFinished, percentComplete, rowTimeInMS);
       this.OnProgress(pea);
     }
 
     /// <summary>
     /// Draws all graphic data in the given timing range.
     /// </summary>
-    /// <param name="startTimeInSamples">start time in samples</param>
-    /// <param name="endTimeInMS">end time in milliseconds</param>
+    /// <param name="startTimeInSamples">
+    /// start time in samples
+    /// </param>
+    /// <param name="endTimeInMS">
+    /// end time in milliseconds
+    /// </param>
     private void RenderTimeRange(int startTimeInSamples, long endTimeInMS)
     {
       // Calculate samples in range.
-      int endTimeInSamples = this.GetSynchronizedSampleCount(endTimeInMS);
+      var endTimeInSamples = this.GetSynchronizedSampleCount(endTimeInMS);
       this.RenderTimeRange(startTimeInSamples, endTimeInSamples);
+      //Console.WriteLine(startTimeInSamples + "-" + endTimeInSamples);
     }
 
     /// <summary>
     /// Draws all graphic data in the given timing range.
     /// </summary>
-    /// <param name="startTimeInSamples">start time in samples</param>
-    /// <param name="endTimeInSamples">end time in samples</param>
+    /// <param name="startTimeInSamples">
+    /// start time in samples
+    /// </param>
+    /// <param name="endTimeInSamples">
+    /// end time in samples
+    /// </param>
     private void RenderTimeRange(int startTimeInSamples, int endTimeInSamples)
     {
       // avoid empty drawing
@@ -1639,12 +1685,12 @@ namespace Ogama.Modules.Replay
       }
 
       // Get number of sample data rows.
-      int rowsCount = this.replayTable.Rows.Count;
+      var rowsCount = this.replayTable.Rows.Count;
 
       if (endTimeInSamples > startTimeInSamples)
       {
         // Calculate number of samples to render
-        int numberOfSamplesToRender = endTimeInSamples - startTimeInSamples;
+        var numberOfSamplesToRender = endTimeInSamples - startTimeInSamples;
 
         // Paranoia check
         if (startTimeInSamples + numberOfSamplesToRender > rowsCount)
@@ -1652,9 +1698,9 @@ namespace Ogama.Modules.Replay
           numberOfSamplesToRender = rowsCount - startTimeInSamples - 1;
         }
 
-        DataRow[] rows = new DataRow[Math.Abs(numberOfSamplesToRender)];
+        var rows = new DataRow[Math.Abs(numberOfSamplesToRender)];
 
-        for (int i = startTimeInSamples; i < startTimeInSamples + numberOfSamplesToRender; i++)
+        for (var i = startTimeInSamples; i < startTimeInSamples + numberOfSamplesToRender; i++)
         {
           rows[i - startTimeInSamples] = this.replayTable.Rows[i];
         }
@@ -1670,9 +1716,13 @@ namespace Ogama.Modules.Replay
     /// sets the visibility of the blink rectangle.
     /// It calls internally the overload DrawSamples(DataRow[],ReplayDrawingModes,SampleType,Boolean).
     /// </summary>
-    /// <param name="rows">An array of <see cref="DataRow"/> with
-    /// the sampling data.</param>
-    /// <param name="remove">Indicates whether to remove the given samples or not.</param>
+    /// <param name="rows">
+    /// An array of <see cref="DataRow"/> with
+    /// the sampling data.
+    /// </param>
+    /// <param name="remove">
+    /// Indicates whether to remove the given samples or not.
+    /// </param>
     private void DrawSamples(DataRow[] rows, bool remove)
     {
       try
@@ -1680,24 +1730,24 @@ namespace Ogama.Modules.Replay
         // Gaze variables
         PointF? newGazeSamplePoint;
         bool isValidGazeData;
-        TimedPoint lastValidGazeSample = new TimedPoint();
-        TimedPoint firstValidGazeSample = new TimedPoint(-1, PointF.Empty);
-        List<TimedPoint> validGazeFixationSamples = new List<TimedPoint>();
-        List<PointF> validGazePathSamples = new List<PointF>();
+        var lastValidGazeSample = new TimedPoint();
+        var firstValidGazeSample = new TimedPoint(-1, PointF.Empty);
+        var validGazeFixationSamples = new List<TimedPoint>();
+        var validGazePathSamples = new List<PointF>();
 
         // Mouse variables
         PointF? newMouseSamplePoint;
         bool isValidMouseData;
-        TimedPoint lastValidMouseSample = new TimedPoint();
-        TimedPoint firstValidMouseSample = new TimedPoint(-1, PointF.Empty);
-        List<TimedPoint> validMouseFixationSamples = new List<TimedPoint>();
-        List<PointF> validMousePathSamples = new List<PointF>();
-        List<MouseStopCondition> validMouseClicks = new List<MouseStopCondition>();
+        var lastValidMouseSample = new TimedPoint();
+        var firstValidMouseSample = new TimedPoint(-1, PointF.Empty);
+        var validMouseFixationSamples = new List<TimedPoint>();
+        var validMousePathSamples = new List<PointF>();
+        var validMouseClicks = new List<MouseStopCondition>();
 
-        foreach (DataRow row in rows)
+        foreach (var row in rows)
         {
           // Check trial sequence change
-          int trialSequence = (int)row["TrialSequence"];
+          var trialSequence = (int)row["TrialSequence"];
 
           if (trialSequence != this.currentTrialSequence)
           {
@@ -1708,7 +1758,7 @@ namespace Ogama.Modules.Replay
           // Check events
           if (!row.IsNull("EventID"))
           {
-            int eventID = (int)row["EventID"];
+            var eventID = (int)row["EventID"];
             if (((ReplayModule)this.OwningForm).TrialEvents.ContainsKey(eventID))
             {
               if (!remove)
@@ -1716,7 +1766,7 @@ namespace Ogama.Modules.Replay
                 this.OnTrialEventIDFound(new TrialEventIDFoundEventArgs(eventID));
               }
 
-              TrialEvent occuredEvent = ((ReplayModule)this.OwningForm).TrialEvents[eventID];
+              var occuredEvent = ((ReplayModule)this.OwningForm).TrialEvents[eventID];
               switch (occuredEvent.Type)
               {
                 case EventType.None:
@@ -1725,8 +1775,8 @@ namespace Ogama.Modules.Replay
                   switch (((InputEvent)occuredEvent).Task)
                   {
                     case InputEventTask.Down:
-                      string parameter = occuredEvent.Param;
-                      MouseStopCondition msc =
+                      var parameter = occuredEvent.Param;
+                      var msc =
                         (MouseStopCondition)TypeDescriptor.GetConverter(typeof(StopCondition)).ConvertFrom(parameter);
                       validMouseClicks.Add(msc);
                       break;
@@ -1750,10 +1800,11 @@ namespace Ogama.Modules.Replay
                 case EventType.Marker:
                   break;
                 case EventType.Scroll:
+
                   // Update scroll position
-                  string[] scrollOffsets = occuredEvent.Param.Split(';');
-                  Point newScrollPosition = new Point(
-                    Convert.ToInt32(scrollOffsets[0]),
+                  var scrollOffsets = occuredEvent.Param.Split(';');
+                  var newScrollPosition = new Point(
+                    Convert.ToInt32(scrollOffsets[0]), 
                     Convert.ToInt32(scrollOffsets[1]));
                   this.visiblePartOfScreen.Location = newScrollPosition;
                   break;
@@ -1767,7 +1818,7 @@ namespace Ogama.Modules.Replay
 
           // Iterate through rows fetching valid mouse samples and sending move events
           isValidMouseData = this.CheckSamples(row, SampleType.Mouse, out newMouseSamplePoint);
-          long sampleTime = Convert.ToInt64(row[3].ToString());
+          var sampleTime = Convert.ToInt64(row[3].ToString());
 
           if (isValidMouseData)
           {
@@ -1800,7 +1851,7 @@ namespace Ogama.Modules.Replay
                 new TimedPoint(sampleTime, newGazeSamplePoint.Value));
 
               if (!newGazeSamplePoint.Value.IsEmpty && !Queries.OutOfScreen(
-                newGazeSamplePoint.Value,
+                newGazeSamplePoint.Value, 
                 this.PresentationSize))
               {
                 if (Point.Round(newGazeSamplePoint.Value) != Point.Round(lastValidGazeSample.Position))
@@ -1823,38 +1874,38 @@ namespace Ogama.Modules.Replay
         {
           // Remove gaze
           this.RemoveValidSampleRange(
-            this.gazeDrawingMode,
-            SampleType.Gaze,
-            firstValidGazeSample,
-            validGazeFixationSamples,
+            this.gazeDrawingMode, 
+            SampleType.Gaze, 
+            firstValidGazeSample, 
+            validGazeFixationSamples, 
             validGazePathSamples);
 
           // Remove mouse
           this.RemoveValidSampleRange(
-            this.mouseDrawingMode,
-            SampleType.Mouse,
-            firstValidMouseSample,
-            validMouseFixationSamples,
+            this.mouseDrawingMode, 
+            SampleType.Mouse, 
+            firstValidMouseSample, 
+            validMouseFixationSamples, 
             validMousePathSamples);
         }
         else
         {
           // Draw gaze
           this.DrawValidSampleRange(
-            this.gazeDrawingMode,
-            SampleType.Gaze,
-            lastValidGazeSample,
-            validGazeFixationSamples,
-            validGazePathSamples,
+            this.gazeDrawingMode, 
+            SampleType.Gaze, 
+            lastValidGazeSample, 
+            validGazeFixationSamples, 
+            validGazePathSamples, 
             null);
 
           // Draw mouse
           this.DrawValidSampleRange(
-            this.mouseDrawingMode,
-            SampleType.Mouse,
-            lastValidMouseSample,
-            validMouseFixationSamples,
-            validMousePathSamples,
+            this.mouseDrawingMode, 
+            SampleType.Mouse, 
+            lastValidMouseSample, 
+            validMouseFixationSamples, 
+            validMousePathSamples, 
             validMouseClicks);
         }
 
@@ -1880,19 +1931,29 @@ namespace Ogama.Modules.Replay
     /// This method removes all given samples drawing elements from
     /// the canvas.
     /// </summary>
-    /// <param name="drawingMode">The <see cref="ReplayDrawingModes"/> to use.</param>
-    /// <param name="sampleType">The <see cref="SampleType"/> to use</param>
-    /// <param name="firstValidSample">A <see cref="TimedPoint"/> with the first valid sample
-    /// to be removed.</param>
-    /// <param name="validFixationSamples">A <see cref="List{TimedPoint}"/> with 
-    /// valid fixation samples.</param>
-    /// <param name="validPathSamples">A <see cref="List{PointF}"/> with 
-    /// valid path samples.</param>
+    /// <param name="drawingMode">
+    /// The <see cref="ReplayDrawingModes"/> to use.
+    /// </param>
+    /// <param name="sampleType">
+    /// The <see cref="SampleType"/> to use
+    /// </param>
+    /// <param name="firstValidSample">
+    /// A <see cref="TimedPoint"/> with the first valid sample
+    /// to be removed.
+    /// </param>
+    /// <param name="validFixationSamples">
+    /// A <see cref="List{TimedPoint}"/> with 
+    /// valid fixation samples.
+    /// </param>
+    /// <param name="validPathSamples">
+    /// A <see cref="List{PointF}"/> with 
+    /// valid path samples.
+    /// </param>
     private void RemoveValidSampleRange(
-      ReplayDrawingModes drawingMode,
-      SampleType sampleType,
-      TimedPoint firstValidSample,
-      List<TimedPoint> validFixationSamples,
+      ReplayDrawingModes drawingMode, 
+      SampleType sampleType, 
+      TimedPoint firstValidSample, 
+      List<TimedPoint> validFixationSamples, 
       List<PointF> validPathSamples)
     {
       if (((drawingMode & ReplayDrawingModes.Fixations) == ReplayDrawingModes.Fixations)
@@ -1928,34 +1989,46 @@ namespace Ogama.Modules.Replay
     /// <summary>
     /// This method draws the given range of samples with the given drawing modes.
     /// </summary>
-    /// <param name="drawingMode">The <see cref="ReplayDrawingModes"/> to use.</param>
-    /// <param name="sampleType">The <see cref="SampleType"/> to use</param>
-    /// <param name="lastValidSample">A <see cref="TimedPoint"/> with the last valid sample.</param>
-    /// <param name="validFixationSamples">A <see cref="List{TimedPoint}"/> with 
-    /// valid fixation samples.</param>
-    /// <param name="validPathSamples">A <see cref="List{PointF}"/> with 
-    /// valid path samples.</param>
-    /// <param name="validMouseClicks">A <see cref="List{MouseStopCondition}"/> with 
-    /// valid mouse clicks.</param>
+    /// <param name="drawingMode">
+    /// The <see cref="ReplayDrawingModes"/> to use.
+    /// </param>
+    /// <param name="sampleType">
+    /// The <see cref="SampleType"/> to use
+    /// </param>
+    /// <param name="lastValidSample">
+    /// A <see cref="TimedPoint"/> with the last valid sample.
+    /// </param>
+    /// <param name="validFixationSamples">
+    /// A <see cref="List{TimedPoint}"/> with 
+    /// valid fixation samples.
+    /// </param>
+    /// <param name="validPathSamples">
+    /// A <see cref="List{PointF}"/> with 
+    /// valid path samples.
+    /// </param>
+    /// <param name="validMouseClicks">
+    /// A <see cref="List{MouseStopCondition}"/> with 
+    /// valid mouse clicks.
+    /// </param>
     private void DrawValidSampleRange(
-      ReplayDrawingModes drawingMode,
-      SampleType sampleType,
-      TimedPoint lastValidSample,
-      List<TimedPoint> validFixationSamples,
-      List<PointF> validPathSamples,
+      ReplayDrawingModes drawingMode, 
+      SampleType sampleType, 
+      TimedPoint lastValidSample, 
+      List<TimedPoint> validFixationSamples, 
+      List<PointF> validPathSamples, 
       List<MouseStopCondition> validMouseClicks)
     {
       if (((drawingMode & ReplayDrawingModes.Fixations) == ReplayDrawingModes.Fixations)
          || ((drawingMode & ReplayDrawingModes.FixationConnections) == ReplayDrawingModes.FixationConnections))
       {
-        foreach (TimedPoint point in validFixationSamples)
+        foreach (var point in validFixationSamples)
         {
           this.DrawFixations(point.Time, point.Position, sampleType, false);
         }
 
         if (validFixationSamples.Count > 0)
         {
-          TimedPoint lastvalidFixationSample = validFixationSamples[validFixationSamples.Count - 1];
+          var lastvalidFixationSample = validFixationSamples[validFixationSamples.Count - 1];
           this.DrawFixations(lastvalidFixationSample.Time, lastvalidFixationSample.Position, sampleType, true);
         }
       }
@@ -1992,11 +2065,13 @@ namespace Ogama.Modules.Replay
     /// <summary>
     /// Draws the mouse clicks in the given list.
     /// </summary>
-    /// <param name="validMouseClicks">A <see cref="List{MouseStopCondition}"/>
-    /// with the mouse clicks.</param>
+    /// <param name="validMouseClicks">
+    /// A <see cref="List{MouseStopCondition}"/>
+    /// with the mouse clicks.
+    /// </param>
     private void DrawMouseClicks(List<MouseStopCondition> validMouseClicks)
     {
-      foreach (MouseStopCondition msc in validMouseClicks)
+      foreach (var msc in validMouseClicks)
       {
         this.DrawMouseClick(msc.ClickLocation, msc.StopMouseButton);
       }
@@ -2007,15 +2082,19 @@ namespace Ogama.Modules.Replay
     /// </summary>
     private void RemoveMouseClicks()
     {
-      VGElementCollection clickElements = this.Elements.FindAllGroupMembers(VGStyleGroup.RPL_MOUSE_CLICK);
+      var clickElements = this.Elements.FindAllGroupMembers(VGStyleGroup.RPL_MOUSE_CLICK);
       this.Elements.RemoveAll(clickElements);
     }
 
     /// <summary>
     /// Updates mouse or gaze cursor position
     /// </summary>
-    /// <param name="newPt">A <see cref="PointF"/> with the new sampling data.</param>
-    /// <param name="toDraw">The <see cref="SampleType"/> to draw.</param>
+    /// <param name="newPt">
+    /// A <see cref="PointF"/> with the new sampling data.
+    /// </param>
+    /// <param name="toDraw">
+    /// The <see cref="SampleType"/> to draw.
+    /// </param>
     private void DrawCursor(TimedPoint newPt, SampleType toDraw)
     {
       if (newPt.Position.IsEmpty)
@@ -2038,10 +2117,16 @@ namespace Ogama.Modules.Replay
     /// This method adds the new valid sample points to the <see cref="SampleType"/>
     /// specific <see cref="VGPolyline"/>.
     /// </summary>
-    /// <param name="validSamples">A <see cref="List{PointF}"/> with the new
-    /// sample data.</param>
-    /// <param name="toDraw">The <see cref="SampleType"/> to draw.</param>
-    /// <param name="lastSampleTime">The time estimation of the last polyline point.</param>
+    /// <param name="validSamples">
+    /// A <see cref="List{PointF}"/> with the new
+    /// sample data.
+    /// </param>
+    /// <param name="toDraw">
+    /// The <see cref="SampleType"/> to draw.
+    /// </param>
+    /// <param name="lastSampleTime">
+    /// The time estimation of the last polyline point.
+    /// </param>
     private void DrawPaths(List<PointF> validSamples, SampleType toDraw, long lastSampleTime)
     {
       switch (toDraw)
@@ -2059,10 +2144,14 @@ namespace Ogama.Modules.Replay
     /// This method removes the given list of points from the path of
     /// the given sample type.
     /// </summary>
-    /// <param name="validPathSamples">A <see cref="List{PointF}"/>
-    /// with the samples to be removed.</param>
-    /// <param name="sampleType">The <see cref="SampleType"/> this list
-    /// belongs to.</param>
+    /// <param name="validPathSamples">
+    /// A <see cref="List{PointF}"/>
+    /// with the samples to be removed.
+    /// </param>
+    /// <param name="sampleType">
+    /// The <see cref="SampleType"/> this list
+    /// belongs to.
+    /// </param>
     private void RemovePathPoints(List<PointF> validPathSamples, SampleType sampleType)
     {
       if (validPathSamples.Count > 1)
@@ -2083,16 +2172,24 @@ namespace Ogama.Modules.Replay
     /// Draws fixations and fixation connections.
     /// Updates fixation objects and calculates fixation parameters.
     /// </summary>
-    /// <param name="pointTime">The time estimation of the new point.</param>
-    /// <param name="newPt">A <see cref="PointF"/> with the new sampling data.</param>
-    /// <param name="toDraw">The <see cref="SampleType"/> to draw.</param>
-    /// <param name="lastPointInSampleRange">A <see cref="Boolean"/>
+    /// <param name="pointTime">
+    /// The time estimation of the new point.
+    /// </param>
+    /// <param name="newPt">
+    /// A <see cref="PointF"/> with the new sampling data.
+    /// </param>
+    /// <param name="toDraw">
+    /// The <see cref="SampleType"/> to draw.
+    /// </param>
+    /// <param name="lastPointInSampleRange">
+    /// A <see cref="Boolean"/>
     /// indicating whether this sample is the last one in the range of
-    /// the current update, so this is to update the current fixations diameter.</param>
+    /// the current update, so this is to update the current fixations diameter.
+    /// </param>
     private void DrawFixations(
-      long pointTime,
-      PointF newPt,
-      SampleType toDraw,
+      long pointTime, 
+      PointF newPt, 
+      SampleType toDraw, 
       bool lastPointInSampleRange)
     {
       bool point_found_delayed;
@@ -2111,7 +2208,7 @@ namespace Ogama.Modules.Replay
       VGEllipse usedEllipse;
       Pen usedFixationPen;
       PointF usedFixCenterPt;
-      RectangleF usedBoundingRect = new RectangleF();
+      var usedBoundingRect = new RectangleF();
       VGStyleGroup usedGroup;
       EyeMotionState currentState;
       float divisor;
@@ -2120,21 +2217,21 @@ namespace Ogama.Modules.Replay
         case SampleType.Gaze:
         default:
           currentState = this.objFixGazeDetection.DetectFixation(
-            newPt.IsEmpty ? false : true,
-            pointTime,
-            newPt.X,
-            newPt.Y,
-             this.gazeMaxDistance,
-             this.gazeMinSamples,
-            out point_found_delayed,
-            out x_delayed,
-            out y_delayed,
-            out deviation_delayed,
-            out x_fix_delayed,
-            out y_fix_delayed,
-            out saccade_duration_delayed,
-            out fix_start_time,
-            out fix_duration_delayed_milliseconds,
+            newPt.IsEmpty ? false : true, 
+            pointTime, 
+            newPt.X, 
+            newPt.Y, 
+             this.gazeMaxDistance, 
+             this.gazeMinSamples, 
+            out point_found_delayed, 
+            out x_delayed, 
+            out y_delayed, 
+            out deviation_delayed, 
+            out x_fix_delayed, 
+            out y_fix_delayed, 
+            out saccade_duration_delayed, 
+            out fix_start_time, 
+            out fix_duration_delayed_milliseconds, 
             out fix_duration_delayed_samples);
           usedPolyline = this.gazeFixConPolyline;
           usedLine = this.gazeFixConLine;
@@ -2146,21 +2243,21 @@ namespace Ogama.Modules.Replay
           break;
         case SampleType.Mouse:
           currentState = this.objFixMouseDetection.DetectFixation(
-            newPt.IsEmpty ? false : true,
-            pointTime,
-            newPt.X,
-            newPt.Y,
-             this.mouseMaxDistance,
-             this.mouseMinSamples,
-            out point_found_delayed,
-            out x_delayed,
-            out y_delayed,
-            out deviation_delayed,
-            out x_fix_delayed,
-            out y_fix_delayed,
-            out saccade_duration_delayed,
-            out fix_start_time,
-            out fix_duration_delayed_milliseconds,
+            newPt.IsEmpty ? false : true, 
+            pointTime, 
+            newPt.X, 
+            newPt.Y, 
+             this.mouseMaxDistance, 
+             this.mouseMinSamples, 
+            out point_found_delayed, 
+            out x_delayed, 
+            out y_delayed, 
+            out deviation_delayed, 
+            out x_fix_delayed, 
+            out y_fix_delayed, 
+            out saccade_duration_delayed, 
+            out fix_start_time, 
+            out fix_duration_delayed_milliseconds, 
             out fix_duration_delayed_samples);
           usedPolyline = this.mouseFixConPolyline;
           usedLine = this.mouseFixConLine;
@@ -2173,13 +2270,13 @@ namespace Ogama.Modules.Replay
       }
 
       // Calculate Bounding Rectangle
-      float fixationDiameter = Convert.ToSingle(fix_duration_delayed_samples) / divisor;
+      var fixationDiameter = Convert.ToSingle(fix_duration_delayed_samples) / divisor;
       usedBoundingRect.X = x_fix_delayed - fixationDiameter;
       usedBoundingRect.Y = y_fix_delayed - fixationDiameter;
       usedBoundingRect.Width = fixationDiameter * 2;
       usedBoundingRect.Height = fixationDiameter * 2;
 
-      PointF fixationCenter = new PointF(x_fix_delayed, y_fix_delayed);
+      var fixationCenter = new PointF(x_fix_delayed, y_fix_delayed);
 
       switch (currentState)
       {
@@ -2214,7 +2311,7 @@ namespace Ogama.Modules.Replay
             if (this.currentLoopState.IsOutOfMonitor)
             {
               this.currentLoopState.IsOutOfMonitor = false;
-              VGLine dottedLine = new VGLine(ShapeDrawAction.Edge, this.penGazeNoData, VGStyleGroup.RPL_PEN_GAZE_NODATA, string.Empty, string.Empty);
+              var dottedLine = new VGLine(ShapeDrawAction.Edge, this.penGazeNoData, VGStyleGroup.RPL_PEN_GAZE_NODATA, string.Empty, string.Empty);
               dottedLine.FirstPoint = usedFixCenterPt;
               dottedLine.SecondPoint = fixationCenter;
               dottedLine.OnsetTime = pointTime;
@@ -2240,12 +2337,12 @@ namespace Ogama.Modules.Replay
               }
             }
 
-            VGEllipse ellipse2 = new VGEllipse(
-              ShapeDrawAction.Edge,
-              usedFixationPen,
-              usedBoundingRect,
-              usedGroup,
-              string.Empty,
+            var ellipse2 = new VGEllipse(
+              ShapeDrawAction.Edge, 
+              usedFixationPen, 
+              usedBoundingRect, 
+              usedGroup, 
+              string.Empty, 
               string.Empty);
             ellipse2.OnsetTime = this.onsetTime;
             ellipse2.EndTime = pointTime;
@@ -2320,13 +2417,15 @@ namespace Ogama.Modules.Replay
     /// is greater than the time of the given
     /// first valid sample.
     /// </summary>
-    /// <param name="firstValidSample">A <see cref="TimedPoint"/>
-    /// with the sample that is the first one not to be removed</param>
+    /// <param name="firstValidSample">
+    /// A <see cref="TimedPoint"/>
+    /// with the sample that is the first one not to be removed
+    /// </param>
     private void RemoveFixations(TimedPoint firstValidSample)
     {
-      VGElementCollection elementsToRemove = new VGElementCollection();
-      int removedGazeFixationsCount = 0;
-      int removedMouseFixationsCount = 0;
+      var elementsToRemove = new VGElementCollection();
+      var removedGazeFixationsCount = 0;
+      var removedMouseFixationsCount = 0;
       foreach (VGElement element in this.Elements)
       {
         if (element.ElementGroup != "Default")
@@ -2363,29 +2462,35 @@ namespace Ogama.Modules.Replay
     /// <summary>
     /// Updates spotlight circle position with new sampling point.
     /// </summary>
-    /// <param name="newPt">A <see cref="PointF"/> with the new sampling data.</param>
-    /// <param name="toDraw">The <see cref="SampleType"/> to draw.</param>
+    /// <param name="newPt">
+    /// A <see cref="PointF"/> with the new sampling data.
+    /// </param>
+    /// <param name="toDraw">
+    /// The <see cref="SampleType"/> to draw.
+    /// </param>
     private void DrawSpotlight(TimedPoint newPt, SampleType toDraw)
     {
       switch (toDraw)
       {
         case SampleType.Gaze:
+
           // Draw circle
           var gazeRadius = this.gazeFixDiameterDiv * 10;
           var gazeBubbleRect = new RectangleF(
-            newPt.Position.X - gazeRadius,
-            newPt.Position.Y - gazeRadius,
-            2 * gazeRadius,
+            newPt.Position.X - gazeRadius, 
+            newPt.Position.Y - gazeRadius, 
+            2 * gazeRadius, 
             2 * gazeRadius);
           this.gazePicEllipse.Bounds = gazeBubbleRect;
           break;
         case SampleType.Mouse:
+
           // Draw circle
           var mouseRadius = this.mouseFixDiameterDiv * 10;
           var mouseBubbleRect = new RectangleF(
-            newPt.Position.X - mouseRadius,
-            newPt.Position.Y - mouseRadius,
-            2 * mouseRadius,
+            newPt.Position.X - mouseRadius, 
+            newPt.Position.Y - mouseRadius, 
+            2 * mouseRadius, 
             2 * mouseRadius);
           this.mousePicEllipse.Bounds = mouseBubbleRect;
           break;
@@ -2396,9 +2501,13 @@ namespace Ogama.Modules.Replay
     /// This method returns the sample row thats time is as near as possible
     /// to the given time in ms.
     /// </summary>
-    /// <param name="timeInMS">A <see cref="long"/> with the time in milliseconds.</param>
-    /// <returns>The sample rows number thats row time is as near as possible
-    /// to the given time in ms.</returns>
+    /// <param name="timeInMS">
+    /// A <see cref="long"/> with the time in milliseconds.
+    /// </param>
+    /// <returns>
+    /// The sample rows number thats row time is as near as possible
+    /// to the given time in ms.
+    /// </returns>
     private int GetSynchronizedSampleCount(long timeInMS)
     {
       // Skip if there is no data
@@ -2408,14 +2517,14 @@ namespace Ogama.Modules.Replay
       }
 
       // Get number of sample data rows.
-      int rowsCount = this.replayTable.Rows.Count;
+      var rowsCount = this.replayTable.Rows.Count;
 
       if (rowsCount == 0)
       {
         return 0;
       }
 
-      int estimatedTimeInSamples = (int)(timeInMS / (1000f / Document.ActiveDocument.ExperimentSettings.GazeSamplingRate));
+      var estimatedTimeInSamples = (int)(timeInMS / (1000f / Document.ActiveDocument.ExperimentSettings.GazeSamplingRate));
 
       // Paranoia check 
       if (estimatedTimeInSamples >= rowsCount || estimatedTimeInSamples < 0)
@@ -2424,10 +2533,10 @@ namespace Ogama.Modules.Replay
       }
 
       // Get current DataRow
-      DataRow row = this.replayTable.Rows[estimatedTimeInSamples];
+      var row = this.replayTable.Rows[estimatedTimeInSamples];
 
       // measure times
-      long rowTime = Convert.ToInt64(row[3]) - this.currentLoopState.TrialStartTimeInMS;
+      var rowTime = Convert.ToInt64(row[3]) - this.currentLoopState.TrialStartTimeInMS;
 
       // catch actual PointTime
       while (rowTime > timeInMS)
@@ -2464,14 +2573,22 @@ namespace Ogama.Modules.Replay
     /// <summary>
     /// Checks for valid data resp. blinks
     /// </summary>
-    /// <param name="row">current sample row</param>
-    /// <param name="toDraw">gaze or mouse</param>
-    /// <param name="newSamplePoint">Out. Has new sampling point if valid, otherwise null.</param>
-    /// <returns>True if sample is valid.</returns>
+    /// <param name="row">
+    /// current sample row
+    /// </param>
+    /// <param name="toDraw">
+    /// gaze or mouse
+    /// </param>
+    /// <param name="newSamplePoint">
+    /// Out. Has new sampling point if valid, otherwise null.
+    /// </param>
+    /// <returns>
+    /// True if sample is valid.
+    /// </returns>
     private bool CheckSamples(DataRow row, SampleType toDraw, out PointF? newSamplePoint)
     {
       PointF? newPt = null;
-      SampleValidity isValidData = SampleValidity.None;
+      var isValidData = SampleValidity.None;
 
       switch (toDraw)
       {
@@ -2520,9 +2637,15 @@ namespace Ogama.Modules.Replay
     /// This method changes the first point of the <see cref="VGLine"/>
     /// object that holds the current moving point.
     /// </summary>
-    /// <param name="line">The <see cref="VGLine"/> with the line to modify</param>
-    /// <param name="currPt">The <see cref="PointF"/> with the new first point.</param>
-    /// <param name="time">The <see cref="Int64"/> with the points time.</param>
+    /// <param name="line">
+    /// The <see cref="VGLine"/> with the line to modify
+    /// </param>
+    /// <param name="currPt">
+    /// The <see cref="PointF"/> with the new first point.
+    /// </param>
+    /// <param name="time">
+    /// The <see cref="Int64"/> with the points time.
+    /// </param>
     private void UpdateFirstPtInLine(VGLine line, PointF currPt, long time)
     {
       line.FirstPoint = currPt;
@@ -2533,9 +2656,15 @@ namespace Ogama.Modules.Replay
     /// Moves coordinates of last point in line to new position.
     /// If this line has no first point, first add this.
     /// </summary>
-    /// <param name="line">A <see cref="VGLine"/> to modify</param>
-    /// <param name="currPt">The <see cref="PointF"/> with the new last point.</param>
-    /// <param name="time">The <see cref="Int64"/> with the points time.</param>
+    /// <param name="line">
+    /// A <see cref="VGLine"/> to modify
+    /// </param>
+    /// <param name="currPt">
+    /// The <see cref="PointF"/> with the new last point.
+    /// </param>
+    /// <param name="time">
+    /// The <see cref="Int64"/> with the points time.
+    /// </param>
     private void UpdateLastPtInLine(VGLine line, PointF currPt, long time)
     {
       if (line.FirstPoint.IsEmpty)
@@ -2554,11 +2683,19 @@ namespace Ogama.Modules.Replay
     /// Adds new point to given polyline, and truncates to <see cref="maxLengthPath"/>
     /// if DiscreteLength flag is set.
     /// </summary>
-    /// <param name="polyline">Polyline to modify</param>
-    /// <param name="currPt">new Position</param>
-    /// <param name="discreteLength"><strong>True</strong>, if path should be truncated,
-    /// otherwise <strong>false</strong>.</param>
-    /// <param name="time">The <see cref="Int64"/> with the points time.</param>
+    /// <param name="polyline">
+    /// Polyline to modify
+    /// </param>
+    /// <param name="currPt">
+    /// new Position
+    /// </param>
+    /// <param name="discreteLength">
+    /// <strong>True</strong>, if path should be truncated,
+    /// otherwise <strong>false</strong>.
+    /// </param>
+    /// <param name="time">
+    /// The <see cref="Int64"/> with the points time.
+    /// </param>
     private void AddPtToPolyline(VGPolyline polyline, PointF currPt, bool discreteLength, long time)
     {
       // Add Point to Polyline
@@ -2576,12 +2713,20 @@ namespace Ogama.Modules.Replay
     /// Adds new points to given polyline, and truncates to <see cref="maxLengthPath"/>
     /// if DiscreteLength flag is set.
     /// </summary>
-    /// <param name="polyline">Polyline to modify</param>
-    /// <param name="validSamples">A <see cref="List{PointF}"/> with the new samples
-    /// to be added to the <see cref="VGPolyline"/>.</param>
-    /// <param name="discreteLength"><strong>True</strong>, if path should be truncated,
-    /// otherwise <strong>false</strong>.</param>
-    /// <param name="time">The <see cref="Int64"/> with the last points time.</param>
+    /// <param name="polyline">
+    /// Polyline to modify
+    /// </param>
+    /// <param name="validSamples">
+    /// A <see cref="List{PointF}"/> with the new samples
+    /// to be added to the <see cref="VGPolyline"/>.
+    /// </param>
+    /// <param name="discreteLength">
+    /// <strong>True</strong>, if path should be truncated,
+    /// otherwise <strong>false</strong>.
+    /// </param>
+    /// <param name="time">
+    /// The <see cref="Int64"/> with the last points time.
+    /// </param>
     private void AddPtsToPolyline(VGPolyline polyline, List<PointF> validSamples, bool discreteLength, long time)
     {
       // Add Point to Polyline
