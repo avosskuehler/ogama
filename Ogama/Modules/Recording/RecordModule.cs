@@ -1897,6 +1897,8 @@ namespace Ogama.Modules.Recording
           this.currentTrialVideoStartTime = e.WebcamTime;
         }
 
+        this.Invoke(this.delegateNewSlideAvailable);
+
         return;
       }
 
@@ -2371,6 +2373,13 @@ namespace Ogama.Modules.Recording
         Cursor.Current = Cursors.WaitCursor;
 
         string subject = this.currentTracker.Subject.SubjectName;
+
+        if (subject == string.Empty)
+        {
+          var dialog = new AskForSubjectNameDialog(false);
+          dialog.ShowDialog();
+          subject = dialog.SubjectName;
+        }
 
         this.bgwSaveSplash.RunWorkerAsync("Saving to database ...");
 

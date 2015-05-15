@@ -919,7 +919,7 @@ namespace Ogama.Modules.Recording.Presenter
       try
       {
         // Abort presentation, if ESC is pressed.
-        if (this.currentKey == Keys.Escape)
+         if (this.currentKey == Keys.Escape)
         {
           this.EndPresentation(true);
           return true;
