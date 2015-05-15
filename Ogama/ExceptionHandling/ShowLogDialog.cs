@@ -53,7 +53,7 @@ namespace Ogama.ExceptionHandling
       this.InitializeComponent();
       this.PopulateDialogWithFileContents(file);
       var mailtoStatement = new StringBuilder();
-      mailtoStatement.Append("mailto:adrian.vosskuehler@physik.fu-berlin.de");
+      mailtoStatement.Append("mailto:adrian@ogama.net");
       mailtoStatement.Append("?subject=OGAMA%20error%20report");
       mailtoStatement.Append("&body=Please insert a copy of the logfile here by pressing Ctrl+V.");
       this.llbMailTo.Links.Add(0, this.llbMailTo.Text.Length, mailtoStatement.ToString());

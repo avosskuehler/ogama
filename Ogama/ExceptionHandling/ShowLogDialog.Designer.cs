@@ -76,7 +76,7 @@
       this.llbMailTo.Size = new System.Drawing.Size(222, 13);
       this.llbMailTo.TabIndex = 3;
       this.llbMailTo.TabStop = true;
-      this.llbMailTo.Text = "mailto:adrian.vosskuehler@physik.fu-berlin.de";
+      this.llbMailTo.Text = "mailto:adrian@ogama.net";
       this.llbMailTo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbMailTo_LinkClicked);
       // 
       // lblFileName
