@@ -422,6 +422,14 @@ namespace Ogama
             bgwConvert.DoWork += this.bgwConvert_DoWork;
             bgwConvert.WorkerSupportsCancellation = true;
             bgwConvert.RunWorkerAsync();
+
+            // Remove the log, cause it may disable the conversion process
+            // if it comes from another storage location
+            if (File.Exists(this.experimentSettings.DatabaseLDFFile))
+            {
+              File.Delete(this.experimentSettings.DatabaseLDFFile);
+            }
+
             this.ConvertToSQLiteDatabase();
 
             bgwConvert.CancelAsync();

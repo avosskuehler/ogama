@@ -667,7 +667,7 @@ namespace Ogama.Modules.Database
       this.mainWindow_EditCopy(this, EventArgs.Empty);
     }
 
-   
+
 
     #endregion //WINDOWSEVENTHANDLER
 
@@ -812,8 +812,14 @@ namespace Ogama.Modules.Database
             string trialSequence = string.Empty;
             string lastTrialSequence = string.Empty;
             DataRow[] trialRow = null;
-            DataRow[] trialEventsRow = null;
             int progressCounter = 0;
+            int eventCounter = 0;
+            var events = new List<DataRow>();
+            foreach (DataRow eventRow in tableTrialEvents.Rows)
+            {
+              events.Add(eventRow);
+            }
+
             foreach (DataRow dataRow in tableRawData.Rows)
             {
               trialSequence = dataRow["TrialSequence"].ToString();
@@ -826,6 +832,79 @@ namespace Ogama.Modules.Database
               // Avoid data from empty trials to be exported.
               if (trialRow.Length > 0)
               {
+                long currentTime = (long)dataRow["Time"];
+                long eventTime = (long)events[eventCounter]["EventTime"] + (long)trialRow[0]["TrialStartTime"];
+                if (eventCounter < events.Count && currentTime >= eventTime)
+                {
+                  exportFileWriter.Write(tableSubjects.Rows[0]["SubjectName"].ToString().Replace(";", ":"));
+                  exportFileWriter.Write(separator);
+                  exportFileWriter.Write(tableSubjects.Rows[0]["Category"].ToString().Replace(";", ":"));
+                  exportFileWriter.Write(separator);
+                  exportFileWriter.Write(tableSubjects.Rows[0]["Age"].ToString().Replace(";", ":"));
+                  exportFileWriter.Write(separator);
+                  exportFileWriter.Write(tableSubjects.Rows[0]["Sex"].ToString().Replace(";", ":"));
+                  exportFileWriter.Write(separator);
+                  exportFileWriter.Write(tableSubjects.Rows[0]["Handedness"].ToString().Replace(";", ":"));
+                  exportFileWriter.Write(separator);
+                  exportFileWriter.Write(tableSubjects.Rows[0]["Comments"].ToString().Replace(";", ":"));
+                  exportFileWriter.Write(separator);
+
+                  exportFileWriter.Write(trialRow[0]["TrialID"].ToString());
+                  exportFileWriter.Write(separator);
+                  exportFileWriter.Write(trialRow[0]["TrialName"].ToString().Replace(";", ":"));
+                  exportFileWriter.Write(separator);
+                  exportFileWriter.Write(trialRow[0]["TrialSequence"].ToString());
+                  exportFileWriter.Write(separator);
+                  exportFileWriter.Write(trialRow[0]["Category"].ToString().Replace(";", ":"));
+                  exportFileWriter.Write(separator);
+                  exportFileWriter.Write(trialRow[0]["TrialStartTime"].ToString());
+                  exportFileWriter.Write(separator);
+                  exportFileWriter.Write(trialRow[0]["Duration"].ToString());
+                  exportFileWriter.Write(separator);
+                  exportFileWriter.Write(trialRow[0]["EliminateData"].ToString());
+                  exportFileWriter.Write(separator);
+
+                  exportFileWriter.Write(events[eventCounter]["EventID"].ToString());
+                  exportFileWriter.Write(separator);
+                  exportFileWriter.Write(events[eventCounter]["TrialSequence"].ToString());
+                  exportFileWriter.Write(separator);
+                  exportFileWriter.Write(events[eventCounter]["EventTime"].ToString());
+                  exportFileWriter.Write(separator);
+                  exportFileWriter.Write(events[eventCounter]["EventType"].ToString());
+                  exportFileWriter.Write(separator);
+                  exportFileWriter.Write(events[eventCounter]["EventTask"].ToString());
+                  exportFileWriter.Write(separator);
+                  exportFileWriter.Write(events[eventCounter]["EventParam"].ToString());
+                  exportFileWriter.Write(separator);
+
+                  exportFileWriter.Write(currentTime.ToString());
+                  exportFileWriter.Write(separator);
+                  exportFileWriter.Write(string.Empty);
+                  exportFileWriter.Write(separator);
+                  exportFileWriter.Write(string.Empty);
+                  exportFileWriter.Write(separator);
+                  exportFileWriter.Write(string.Empty);
+                  exportFileWriter.Write(separator);
+                  exportFileWriter.Write(string.Empty);
+                  exportFileWriter.Write(separator);
+                  exportFileWriter.Write(string.Empty);
+                  exportFileWriter.Write(separator);
+                  exportFileWriter.Write(string.Empty);
+                  exportFileWriter.Write(separator);
+                  exportFileWriter.Write(events[eventCounter]["EventID"].ToString());
+
+                  exportFileWriter.WriteLine();
+                  eventCounter++;
+                }
+
+                // Write Event row, if there is an EventID.
+                string eventID = dataRow["EventID"].ToString();
+                if (eventID != string.Empty)
+                {
+                  // If the raw data row has an event, this was already added from the event table
+                  continue;
+                }
+
                 exportFileWriter.Write(tableSubjects.Rows[0]["SubjectName"].ToString().Replace(";", ":"));
                 exportFileWriter.Write(separator);
                 exportFileWriter.Write(tableSubjects.Rows[0]["Category"].ToString().Replace(";", ":"));
@@ -854,45 +933,21 @@ namespace Ogama.Modules.Database
                 exportFileWriter.Write(trialRow[0]["EliminateData"].ToString());
                 exportFileWriter.Write(separator);
 
-                // Write Event row, if there is an EventID.
-                string eventID = dataRow["EventID"].ToString();
-                if (eventID != string.Empty)
-                {
-                  trialEventsRow = tableTrialEvents.Select("TrialSequence=" + trialSequence + " AND EventID='" + eventID + "'");
+                // Event section
+                exportFileWriter.Write(string.Empty);
+                exportFileWriter.Write(separator);
+                exportFileWriter.Write(string.Empty);
+                exportFileWriter.Write(separator);
+                exportFileWriter.Write(string.Empty);
+                exportFileWriter.Write(separator);
+                exportFileWriter.Write(string.Empty);
+                exportFileWriter.Write(separator);
+                exportFileWriter.Write(string.Empty);
+                exportFileWriter.Write(separator);
+                exportFileWriter.Write(string.Empty);
+                exportFileWriter.Write(separator);
 
-                  if (trialEventsRow.Length > 0)
-                  {
-                    exportFileWriter.Write(trialEventsRow[0]["EventID"].ToString());
-                    exportFileWriter.Write(separator);
-                    exportFileWriter.Write(trialEventsRow[0]["TrialSequence"].ToString());
-                    exportFileWriter.Write(separator);
-                    exportFileWriter.Write(trialEventsRow[0]["EventTime"].ToString());
-                    exportFileWriter.Write(separator);
-                    exportFileWriter.Write(trialEventsRow[0]["EventType"].ToString());
-                    exportFileWriter.Write(separator);
-                    exportFileWriter.Write(trialEventsRow[0]["EventTask"].ToString());
-                    exportFileWriter.Write(separator);
-                    exportFileWriter.Write(trialEventsRow[0]["EventParam"].ToString());
-                    exportFileWriter.Write(separator);
-                  }
-                }
-                else
-                {
-                  exportFileWriter.Write(string.Empty);
-                  exportFileWriter.Write(separator);
-                  exportFileWriter.Write(string.Empty);
-                  exportFileWriter.Write(separator);
-                  exportFileWriter.Write(string.Empty);
-                  exportFileWriter.Write(separator);
-                  exportFileWriter.Write(string.Empty);
-                  exportFileWriter.Write(separator);
-                  exportFileWriter.Write(string.Empty);
-                  exportFileWriter.Write(separator);
-                  exportFileWriter.Write(string.Empty);
-                  exportFileWriter.Write(separator);
-                }
-
-                exportFileWriter.Write(dataRow["Time"].ToString());
+                exportFileWriter.Write(currentTime.ToString());
                 exportFileWriter.Write(separator);
                 exportFileWriter.Write(dataRow.IsNull("PupilDiaX") ? string.Empty : Convert.ToSingle(dataRow["PupilDiaX"]).ToString("N4"));
                 exportFileWriter.Write(separator);
@@ -928,6 +983,7 @@ namespace Ogama.Modules.Database
             tableSubjects.Dispose();
             tableTrials.Dispose();
             tableRawData.Dispose();
+            tableTrialEvents.Dispose();
 
             if (worker.CancellationPending)
             {
@@ -1163,7 +1219,7 @@ namespace Ogama.Modules.Database
       }
     }
 
-  
+
 
     //
     // modify data form
@@ -1209,7 +1265,7 @@ namespace Ogama.Modules.Database
     /// update raw data position x
     /// </summary>
     /// <param name="deltaX"></param>
-		/// <param name="deltaY"></param>
+    /// <param name="deltaY"></param>
     public void handleRawDataUpdate(int deltaX, int deltaY)
     {
       if (dgvRawData.Rows.Count == 0)
@@ -1222,7 +1278,7 @@ namespace Ogama.Modules.Database
       SQLiteOgamaDataSet.RawdataDataTable subjectRawDataTable = Queries.GetRawDataBySubject(subjectName);
 
       List<SQLiteOgamaDataSet.RawdataRow> dataRows = new List<SQLiteOgamaDataSet.RawdataRow>();
-     
+
       for (int i = 0; i < subjectRawDataTable.Count; i++)
       {
         SQLiteOgamaDataSet.RawdataRow row = subjectRawDataTable[i];
@@ -1234,7 +1290,7 @@ namespace Ogama.Modules.Database
             row.GazePosY += deltaY;
 
             dataRows.Add(row);
-            
+
           }
           catch (Exception error)
           {
@@ -1242,11 +1298,11 @@ namespace Ogama.Modules.Database
           }
         }
       }
-      
-      this.UpdateDatabaseWithRawDataModified(subjectName,dataRows);
+
+      this.UpdateDatabaseWithRawDataModified(subjectName, dataRows);
 
       this.PopulateRawDataFromSubject(subjectName);
-      
+
     }
 
 

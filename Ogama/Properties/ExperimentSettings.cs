@@ -473,6 +473,15 @@ namespace Ogama.Properties
     }
 
     /// <summary>
+    /// Gets full file path for the database mdf file.
+    /// </summary>
+    /// <value>A <see cref="string"/> with the database file.</value>
+    public string DatabaseLDFFile
+    {
+      get { return Path.Combine(this.CreateDatabasePath(), this.experimentName + "_log.ldf"); }
+    }
+
+    /// <summary>
     /// Gets or sets the experiments name.
     /// </summary>
     /// <value>A <see cref="string"/> with the experiment name.</value>
