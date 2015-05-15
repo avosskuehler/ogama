@@ -875,8 +875,8 @@ namespace Ogama.Modules.Common.PictureTemplates
     protected void ResetForegoingFixationLocation()
     {
       this.foregoingFixationLocation = PointF.Empty;
-      int eyeMonX = this.PresentationSize.Width;
-      int eyeMonY = this.PresentationSize.Height;
+      int eyeMonX = this.StimulusSize.Width;
+      int eyeMonY = this.StimulusSize.Height;
 
       // Clear old attentionMaps
       this.distributionArray = new float[eyeMonX, eyeMonY];
@@ -973,10 +973,11 @@ namespace Ogama.Modules.Common.PictureTemplates
     protected override void CalculateTransformMatrix()
     {
       base.CalculateTransformMatrix();
-      if (this.heatMap.Width != this.PresentationSize.Width ||
-         this.heatMap.Height != this.PresentationSize.Height)
+      if ((this.heatMap.Width != this.StimulusSize.Width ||
+         this.heatMap.Height != this.StimulusSize.Height)
+        && !this.StimulusSize.IsEmpty)
       {
-        this.CreateHeatMapBitmap(this.PresentationSize);
+        this.CreateHeatMapBitmap(this.StimulusSize);
       }
     }
 
@@ -1065,8 +1066,8 @@ namespace Ogama.Modules.Common.PictureTemplates
     /// the attention map is created for.</param>
     protected void ApplyAttentionMap(SampleType sampleType)
     {
-      int eyeMonX = this.PresentationSize.Width;
-      int eyeMonY = this.PresentationSize.Height;
+      int eyeMonX = this.StimulusSize.Width;
+      int eyeMonY = this.StimulusSize.Height;
 
       // Finish attention map drawing if applicable
       if ((sampleType == (sampleType | SampleType.Gaze) &&
@@ -1190,8 +1191,8 @@ this.mouseDrawingMode == FixationDrawingMode.Spotlight)
         // Initialize variables
         bool drawLine = false;
         bool drawNumber = false;
-        int eyeMonX = this.PresentationSize.Width;
-        int eyeMonY = this.PresentationSize.Height;
+        int eyeMonX = this.StimulusSize.Width;
+        int eyeMonY = this.StimulusSize.Height;
 
         // Set used variables
         switch (sampleType)

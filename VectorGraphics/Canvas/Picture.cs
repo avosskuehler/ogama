@@ -349,8 +349,8 @@ namespace VectorGraphics.Canvas
     public Image RenderToImage()
     {
       var canvasClone = new Bitmap(
-        this.presentationSize.Width,
-        this.presentationSize.Height,
+        this.StimulusSize.Width,
+        this.StimulusSize.Height,
         PixelFormat.Format32bppArgb);
 
       Graphics copyGraphics = Graphics.FromImage(canvasClone);
@@ -361,7 +361,7 @@ namespace VectorGraphics.Canvas
 
       if (this.BackgroundImage != null)
       {
-        copyGraphics.DrawImage(this.BackgroundImage, 0, 0, this.presentationSize.Width, this.presentationSize.Height);
+        copyGraphics.DrawImage(this.BackgroundImage, 0, 0, this.StimulusSize.Width, this.StimulusSize.Height);
       }
 
       if (this.BgSlide != null)

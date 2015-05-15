@@ -97,9 +97,9 @@ namespace Ogama.Modules.Saliency
       Bitmap heatMap = AttentionMaps.CreateHeatMapFromBWImage(
         this.HeatMap,
         this.ColorMap,
-        this.PresentationSize,
+        this.StimulusSize,
         channelFilename);
-      VGImage newImage = new VGImage(heatMap, ImageLayout.Center, this.PresentationSize);
+      VGImage newImage = new VGImage(heatMap, ImageLayout.Center, this.StimulusSize);
 
       this.Elements.Clear();
       this.Elements.Add(newImage);

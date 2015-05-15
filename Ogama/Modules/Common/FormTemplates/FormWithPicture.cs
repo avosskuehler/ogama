@@ -726,6 +726,10 @@ namespace Ogama.Modules.Common.FormTemplates
       {
         this.Picture.StimulusSize = slide.StimulusSize;
       }
+      else
+      {
+        this.Picture.StimulusSize = slide.PresentationSize;
+      }
 
       this.Picture.PresentationSize = slide.PresentationSize;
 
