@@ -206,6 +206,24 @@
         <File Id="System.Data.SQLite.Linq" Name="System.Data.SQLite.Linq.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="System.Data.SQLite.Linq" AssemblyApplication="System.Data.SQLite.Linq" DiskId="1"
               Source="$(var.Ogama.TargetDir)" />
       </Component>
+      <Component Id="C_DbAccess" Guid="{501DFE30-8500-4014-9DDE-EFEF60E459A6}" Win64="$(var.Win64)">
+        <File Id="DbAccess" Name="DbAccess.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="DbAccess" AssemblyApplication="DbAccess" DiskId="1"
+              Source="$(var.SolutionDir)Libs\Managed\" />
+      </Component>
+      
+      <Directory Id="SQLiteDirectory86" Name="x86">
+        <Component Id="C_SQLite.Interopx86" Guid="{A59892F5-A713-486F-BD86-F57E2E3C8754}" Win64="$(var.Win64)">
+          <File Id="SQLite.Interopx86" Name="SQLite.Interop.dll" KeyPath="yes"
+                DiskId="1" Source="$(var.Ogama.TargetDir)x86\" />
+        </Component>
+      </Directory>
+      <Directory Id="SQLiteDirectory64" Name="x64">
+        <Component Id="C_SQLite.Interopx64" Guid="{F0DAA1E8-E735-48F3-B193-EE7E9E1C880C}" Win64="$(var.Win64)">
+          <File Id="SQLite.Interopx64" Name="SQLite.Interop.dll" KeyPath="yes" 
+                DiskId="1" Source="$(var.Ogama.TargetDir)x64\" />
+        </Component>
+
+      </Directory>
 
     </DirectoryRef>
 
@@ -276,6 +294,9 @@
         <ComponentRef Id='C_System.Data.SQLite' />
         <ComponentRef Id='C_System.Data.SQLite.EF6' />
         <ComponentRef Id='C_System.Data.SQLite.Linq' />
+        <ComponentRef Id='C_DbAccess' />
+        <ComponentRef Id='C_SQLite.Interopx86' />
+        <ComponentRef Id='C_SQLite.Interopx64' />
       </Feature>
     </Feature>
   </Fragment>
