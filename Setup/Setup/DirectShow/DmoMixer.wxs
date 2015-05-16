@@ -3,44 +3,44 @@
   <?include $(sys.CURRENTDIR)Common\Config.wxi?>
   <Fragment>
     <DirectoryRef Id="DIRECTSHOWINSTALLLOCATION">
-      <Component Id="DmoMixerComponent" Guid="{201F00C6-B552-4A34-A427-16B6B3BF50FE}" Win64="$(var.Win64)">
-        <Class Id="{188D2520-FBB0-3D3F-A07B-11C39E75A661}" Context="InprocServer32" Description="DmoMixer.VideoStream" ThreadingModel="both" ForeignServer="mscoree.dll">
+      <Component Id="DmoMixerComponent" Guid="{FBD483BC-5DD2-43E7-98E9-07A13729E628}" Win64="$(var.Win64)">
+        <Class Id="{6591376D-E556-36D6-896F-11031685CF76}" Context="InprocServer32" Description="DmoMixer.VideoStream" ThreadingModel="both" ForeignServer="mscoree.dll">
           <ProgId Id="DmoMixer.VideoStream" Description="DmoMixer.VideoStream" />
         </Class>
         <Class Id="{7686580F-2C96-4DD5-B11B-FAACA183E376}" Context="InprocServer32" Description="DmoMixer.DmoMixer" ThreadingModel="both" ForeignServer="mscoree.dll">
           <ProgId Id="DmoMixer.DmoMixer" Description="DmoMixer.DmoMixer" />
         </Class>
-        <Class Id="{EE738B44-222F-3074-8EC2-2A743CAB946A}" Context="InprocServer32" Description="DmoMixer.RegisterDll" ThreadingModel="both" ForeignServer="mscoree.dll">
+        <Class Id="{A67002EB-9B6A-33C8-AFF5-635F421D3AB0}" Context="InprocServer32" Description="DmoMixer.RegisterDll" ThreadingModel="both" ForeignServer="mscoree.dll">
           <ProgId Id="DmoMixer.RegisterDll" Description="DmoMixer.RegisterDll" />
         </Class>
         <File Id="DmoMixerFile" KeyPath="yes" Source="$(var.Ogama.TargetDir)DmoMixer.dll" Assembly=".net" AssemblyManifest="DmoMixerFile" AssemblyApplication="DmoMixerFile" DiskId="1"/>
-        <RegistryValue Root="HKCR" Key="CLSID\{188D2520-FBB0-3D3F-A07B-11C39E75A661}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{188D2520-FBB0-3D3F-A07B-11C39E75A661}\InprocServer32\4.5" Name="Class" Value="DmoMixer.VideoStream" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{188D2520-FBB0-3D3F-A07B-11C39E75A661}\InprocServer32\4.5" Name="Assembly" Value="DmoMixer, Version=4.5, Culture=neutral, PublicKeyToken=a990574be1a1688e" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{188D2520-FBB0-3D3F-A07B-11C39E75A661}\InprocServer32\4.5" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{188D2520-FBB0-3D3F-A07B-11C39E75A661}\InprocServer32\4.5" Name="CodeBase" Value="file:///[#DmoMixerFile]" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{188D2520-FBB0-3D3F-A07B-11C39E75A661}\InprocServer32" Name="Class" Value="DmoMixer.VideoStream" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{188D2520-FBB0-3D3F-A07B-11C39E75A661}\InprocServer32" Name="Assembly" Value="DmoMixer, Version=4.5, Culture=neutral, PublicKeyToken=a990574be1a1688e" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{188D2520-FBB0-3D3F-A07B-11C39E75A661}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{188D2520-FBB0-3D3F-A07B-11C39E75A661}\InprocServer32" Name="CodeBase" Value="file:///[#DmoMixerFile]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{6591376D-E556-36D6-896F-11031685CF76}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{6591376D-E556-36D6-896F-11031685CF76}\InprocServer32\5.0.0.0" Name="Class" Value="DmoMixer.VideoStream" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{6591376D-E556-36D6-896F-11031685CF76}\InprocServer32\5.0.0.0" Name="Assembly" Value="DmoMixer, Version=5.0.0.0, Culture=neutral, PublicKeyToken=a990574be1a1688e" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{6591376D-E556-36D6-896F-11031685CF76}\InprocServer32\5.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{6591376D-E556-36D6-896F-11031685CF76}\InprocServer32\5.0.0.0" Name="CodeBase" Value="file:///[#DmoMixerFile]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{6591376D-E556-36D6-896F-11031685CF76}\InprocServer32" Name="Class" Value="DmoMixer.VideoStream" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{6591376D-E556-36D6-896F-11031685CF76}\InprocServer32" Name="Assembly" Value="DmoMixer, Version=5.0.0.0, Culture=neutral, PublicKeyToken=a990574be1a1688e" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{6591376D-E556-36D6-896F-11031685CF76}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{6591376D-E556-36D6-896F-11031685CF76}\InprocServer32" Name="CodeBase" Value="file:///[#DmoMixerFile]" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{7686580F-2C96-4DD5-B11B-FAACA183E376}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{7686580F-2C96-4DD5-B11B-FAACA183E376}\InprocServer32\4.5" Name="Class" Value="DmoMixer.DmoMixer" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{7686580F-2C96-4DD5-B11B-FAACA183E376}\InprocServer32\4.5" Name="Assembly" Value="DmoMixer, Version=4.5, Culture=neutral, PublicKeyToken=a990574be1a1688e" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{7686580F-2C96-4DD5-B11B-FAACA183E376}\InprocServer32\4.5" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{7686580F-2C96-4DD5-B11B-FAACA183E376}\InprocServer32\4.5" Name="CodeBase" Value="file:///[#DmoMixerFile]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7686580F-2C96-4DD5-B11B-FAACA183E376}\InprocServer32\5.0.0.0" Name="Class" Value="DmoMixer.DmoMixer" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7686580F-2C96-4DD5-B11B-FAACA183E376}\InprocServer32\5.0.0.0" Name="Assembly" Value="DmoMixer, Version=5.0.0.0, Culture=neutral, PublicKeyToken=a990574be1a1688e" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7686580F-2C96-4DD5-B11B-FAACA183E376}\InprocServer32\5.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7686580F-2C96-4DD5-B11B-FAACA183E376}\InprocServer32\5.0.0.0" Name="CodeBase" Value="file:///[#DmoMixerFile]" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{7686580F-2C96-4DD5-B11B-FAACA183E376}\InprocServer32" Name="Class" Value="DmoMixer.DmoMixer" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{7686580F-2C96-4DD5-B11B-FAACA183E376}\InprocServer32" Name="Assembly" Value="DmoMixer, Version=4.5, Culture=neutral, PublicKeyToken=a990574be1a1688e" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7686580F-2C96-4DD5-B11B-FAACA183E376}\InprocServer32" Name="Assembly" Value="DmoMixer, Version=5.0.0.0, Culture=neutral, PublicKeyToken=a990574be1a1688e" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{7686580F-2C96-4DD5-B11B-FAACA183E376}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{7686580F-2C96-4DD5-B11B-FAACA183E376}\InprocServer32" Name="CodeBase" Value="file:///[#DmoMixerFile]" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{EE738B44-222F-3074-8EC2-2A743CAB946A}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{EE738B44-222F-3074-8EC2-2A743CAB946A}\InprocServer32\4.5" Name="Class" Value="DmoMixer.RegisterDll" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{EE738B44-222F-3074-8EC2-2A743CAB946A}\InprocServer32\4.5" Name="Assembly" Value="DmoMixer, Version=4.5, Culture=neutral, PublicKeyToken=a990574be1a1688e" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{EE738B44-222F-3074-8EC2-2A743CAB946A}\InprocServer32\4.5" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{EE738B44-222F-3074-8EC2-2A743CAB946A}\InprocServer32\4.5" Name="CodeBase" Value="file:///[#DmoMixerFile]" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{EE738B44-222F-3074-8EC2-2A743CAB946A}\InprocServer32" Name="Class" Value="DmoMixer.RegisterDll" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{EE738B44-222F-3074-8EC2-2A743CAB946A}\InprocServer32" Name="Assembly" Value="DmoMixer, Version=4.5, Culture=neutral, PublicKeyToken=a990574be1a1688e" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{EE738B44-222F-3074-8EC2-2A743CAB946A}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{EE738B44-222F-3074-8EC2-2A743CAB946A}\InprocServer32" Name="CodeBase" Value="file:///[#DmoMixerFile]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{A67002EB-9B6A-33C8-AFF5-635F421D3AB0}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{A67002EB-9B6A-33C8-AFF5-635F421D3AB0}\InprocServer32\5.0.0.0" Name="Class" Value="DmoMixer.RegisterDll" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{A67002EB-9B6A-33C8-AFF5-635F421D3AB0}\InprocServer32\5.0.0.0" Name="Assembly" Value="DmoMixer, Version=5.0.0.0, Culture=neutral, PublicKeyToken=a990574be1a1688e" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{A67002EB-9B6A-33C8-AFF5-635F421D3AB0}\InprocServer32\5.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{A67002EB-9B6A-33C8-AFF5-635F421D3AB0}\InprocServer32\5.0.0.0" Name="CodeBase" Value="file:///[#DmoMixerFile]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{A67002EB-9B6A-33C8-AFF5-635F421D3AB0}\InprocServer32" Name="Class" Value="DmoMixer.RegisterDll" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{A67002EB-9B6A-33C8-AFF5-635F421D3AB0}\InprocServer32" Name="Assembly" Value="DmoMixer, Version=5.0.0.0, Culture=neutral, PublicKeyToken=a990574be1a1688e" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{A67002EB-9B6A-33C8-AFF5-635F421D3AB0}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{A67002EB-9B6A-33C8-AFF5-635F421D3AB0}\InprocServer32" Name="CodeBase" Value="file:///[#DmoMixerFile]" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="DirectShow\MediaObjects\7686580f-2c96-4dd5-b11b-faaca183e376" Value="DmoMixer" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="DirectShow\MediaObjects\7686580f-2c96-4dd5-b11b-faaca183e376" Name="InputTypes" Value="7669647300001000800000AA00389B717DEB36E44F52CE119F530020AF0BA7707669647300001000800000AA00389B717EEB36E44F52CE119F530020AF0BA770" Type="binary" Action="write" />
         <RegistryValue Root="HKCR" Key="DirectShow\MediaObjects\7686580f-2c96-4dd5-b11b-faaca183e376" Name="OutputTypes" Value="7669647300001000800000AA00389B717DEB36E44F52CE119F530020AF0BA7707669647300001000800000AA00389B717EEB36E44F52CE119F530020AF0BA770" Type="binary" Action="write" />
