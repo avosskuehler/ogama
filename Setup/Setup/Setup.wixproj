@@ -40,7 +40,7 @@
     <Compile Include="DirectShow\DmoMixer.wxs" />
     <Compile Include="DirectShow\DmoOverlay.wxs" />
     <Compile Include="DirectShow\GenericSampleSourceFilter.wxs" />
-    <Compile Include="DirectShow\OgamaCaptureX86.wxs" />
+    <Compile Include="DirectShow\OgamaCapture.wxs" />
     <Compile Include="DirectShow\proppage.wxs" />
     <Compile Include="Gazetracker.wxs" />
     <Compile Include="Ogama.wxs" />

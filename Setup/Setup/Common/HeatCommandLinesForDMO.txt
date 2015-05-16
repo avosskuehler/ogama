@@ -1,0 +1,7 @@
+"C:\Program Files (x86)\WiX Toolset v3.9\bin\Heat.exe" file "C:\Users\Adrian\VisualStudioProjects\Ogama@Codeplex\Release86\DmoOverlay.dll" -dr DIRECTSHOWINSTALLLOCATION -srd -gg -sfrag -suid -out "C:\Users\Adrian\VisualStudioProjects\Ogama@Codeplex\Setup\Setup\DirectShow\DmoOverlayNew.wxs"
+
+"C:\Program Files (x86)\WiX Toolset v3.9\bin\Heat.exe" file "C:\Users\Adrian\VisualStudioProjects\Ogama@Codeplex\Release86\DmoMixer.dll" -dr DIRECTSHOWINSTALLLOCATION -srd -gg -sfrag -suid -out "C:\Users\Adrian\VisualStudioProjects\Ogama@Codeplex\Setup\Setup\DirectShow\DmoMixerNew.wxs"
+
+"C:\Program Files (x86)\WiX Toolset v3.9\bin\Heat.exe" file "C:\Users\Adrian\VisualStudioProjects\Ogama@Codeplex\Release86\GenericSampleSourceFilter.ax" -dr DIRECTSHOWINSTALLLOCATION -srd -gg -sfrag -suid -out "C:\Users\Adrian\VisualStudioProjects\Ogama@Codeplex\Setup\Setup\DirectShow\GenericSampleSourceFilterNew.wxs"
+
+"C:\Program Files (x86)\WiX Toolset v3.9\bin\Heat.exe" file "C:\Users\Adrian\VisualStudioProjects\Ogama@Codeplex\Release86\OgamaCapture.ax" -dr DIRECTSHOWINSTALLLOCATION -srd -gg -sfrag -suid -out "C:\Users\Adrian\VisualStudioProjects\Ogama@Codeplex\Setup\Setup\DirectShow\OgamaCaptureNew.wxs"
