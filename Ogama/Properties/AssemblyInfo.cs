@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Ogama - open gaze and mouse analyzer")]
 [assembly: AssemblyDescription("eyetracking and mousetracking record and analysis software")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Freie Universität Berlin")]
+[assembly: AssemblyCompany("FUBerlin")]
 [assembly: AssemblyProduct("OGAMA")]
 [assembly: AssemblyCopyright("© Dr. Adrian Voßkühler 2015")]
 [assembly: AssemblyTrademark("")]
