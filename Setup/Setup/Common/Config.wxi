@@ -9,15 +9,15 @@
   <?define SupportPhone = "adrian@ogama.net"?>
   <?define InstallDescription = "Gaze and mouse movement analysis."?>
   <?define UpgradeGuid = "{4F9B223A-EE75-489A-8EDD-C8740626D263}"?>
-  <?define ProductVersion="5.0.1" ?>
+  <?define ProductVersion="5.0.2" ?>
 
   <?if $(var.Platform) = x64 ?>
-  <?define ProductName = "OGAMA 5.0" ?>
+  <?define ProductName = "OGAMA 5.0.1" ?>
   <?define Win64 = "yes" ?>
   <?define PlatformName = "x64"?>
   <?define PlatformProgramFilesFolder = "ProgramFiles64Folder" ?>
   <?else ?>
-  <?define ProductName = "OGAMA 5.0" ?>
+  <?define ProductName = "OGAMA 5.0.1" ?>
   <?define Win64 = "no" ?>
   <?define PlatformName = "x86"?>
   <?define PlatformProgramFilesFolder = "ProgramFilesFolder" ?>
