@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?include $(sys.CURRENTDIR)Common\Config.wxi?>
+
+  <Fragment>
+    <DirectoryRef Id="$(var.PlatformProgramFilesFolder)">
+      <Directory Id="DIRECTSHOWINSTALLLOCATION" Name="$(var.ProductName)">
+        <Component Id="C_DmoBase" Guid="{05ADBB08-88A4-0CA7-8D31-D261F623014D}" Win64="$(var.Win64)">
+          <File Id="DmoBase" Name="DmoBase.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="DmoBase" AssemblyApplication="DmoBase" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+        </Component>
+        <?if $(sys.BUILDARCH)=x86?>
+        <Component Id="C_PS3EyeAxFilter" Guid="" Win64="$(var.Win64)">
+          <File Id="PS3EyeAxFilter" Name="PS3EyeAxFilter.ax" KeyPath="yes" SelfRegCost="1" DiskId="1"
+              Source="$(var.Ogama.TargetDir)" />
+        </Component>
+        <?endif?>
+      </Directory>
+    </DirectoryRef>
+
+    <Feature Id='DirectShowFeature' Title='DirectShow Components' Description='Installs directshow components for the video handling of ogama.' Level='1'>
+      <ComponentRef Id='C_DmoBase' />
+      <ComponentRef Id='ProppageComponent' />
+      <ComponentRef Id='DmoMixerComponent' />
+      <ComponentRef Id='DmoOverlayComponent' />
+      <ComponentRef Id='GenericSampleSourceFilterComponent' />
+      <ComponentRef Id='OgamaCaptureComponent' />
+      <?if $(sys.BUILDARCH)=x86?>
+      <ComponentRef Id='C_PS3EyeAxFilter' />
+      <?endif?>
+    </Feature>
+  </Fragment>
+</Wix>

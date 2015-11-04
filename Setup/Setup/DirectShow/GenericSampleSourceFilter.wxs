@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?include $(sys.CURRENTDIR)Common\Config.wxi?>
+  <Fragment>
+    <DirectoryRef Id="DIRECTSHOWINSTALLLOCATION">
+      <Component Id="GenericSampleSourceFilterComponent" Guid="{F1174C77-1F72-41C7-8C3F-8F6D2EE37E0B}" Win64="$(var.Win64)">
+        <File Id="GenericSampleSourceFilter.ax" KeyPath="yes" Source="$(var.Ogama.TargetDir)GenericSampleSourceFilter.ax">
+          <Class Id="{6F7BCF72-D0C2-4449-BE0E-B12F580D056D}" Context="InprocServer32" Description="Generic Sample Source Filter" ThreadingModel="both" />
+        </File>
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+</Wix>

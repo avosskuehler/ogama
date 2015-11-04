@@ -1,0 +1,15 @@
+syntax: glob
+DesignResources/Video/*
+*/obj/*
+*.user
+*Release*
+Ogama.sdf
+*.DotSettings
+*.suo
+*.chm
+*Debug*
+*.opensdf
+packages/*
+Ogama.sln.GhostDoc.xml
+*/Thumbs.db
+SourceDocumentation/LastBuild.log

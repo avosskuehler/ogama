@@ -1,0 +1,437 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Ogama.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="RecentFileList" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="AOIModuleLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">3, 0</Value>
+    </Setting>
+    <Setting Name="NumberOfRecentFiles" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">4</Value>
+    </Setting>
+    <Setting Name="ReplaySpeed" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1x</Value>
+    </Setting>
+    <Setting Name="MaxPointsPolyline" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">200</Value>
+    </Setting>
+    <Setting Name="MaxNumberFixations" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="GazeModeCursor" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="GazeModePath" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MouseModeCursor" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="MouseModePath" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="GazeModeFixations" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="GazeModeFixCon" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="GazeModeSpotlight" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="GazeModeCutPath" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="GazeModeBlinks" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MouseModeFixations" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MouseModeFixCon" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MouseModeSpotlight" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MouseModeCutPath" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="GazeCursorType" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Circle</Value>
+    </Setting>
+    <Setting Name="GazeCursorColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Red</Value>
+    </Setting>
+    <Setting Name="GazeCursorStyle" Type="System.Drawing.Drawing2D.DashStyle" Scope="User">
+      <Value Profile="(Default)">Solid</Value>
+    </Setting>
+    <Setting Name="GazeCursorWidth" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="GazePathStyle" Type="System.Drawing.Drawing2D.DashStyle" Scope="User">
+      <Value Profile="(Default)">Solid</Value>
+    </Setting>
+    <Setting Name="GazePathColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Green</Value>
+    </Setting>
+    <Setting Name="GazePathWidth" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="GazeFixationsPenColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Yellow</Value>
+    </Setting>
+    <Setting Name="GazeFixationsPenStyle" Type="System.Drawing.Drawing2D.DashStyle" Scope="User">
+      <Value Profile="(Default)">Solid</Value>
+    </Setting>
+    <Setting Name="GazeFixationsPenWidth" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="GazeFixationConnectionsPenColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Green</Value>
+    </Setting>
+    <Setting Name="GazeFixationConnectionsPenStyle" Type="System.Drawing.Drawing2D.DashStyle" Scope="User">
+      <Value Profile="(Default)">Solid</Value>
+    </Setting>
+    <Setting Name="GazeFixationConnectionsPenWidth" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="MouseCursorColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Cyan</Value>
+    </Setting>
+    <Setting Name="MouseCursorStyle" Type="System.Drawing.Drawing2D.DashStyle" Scope="User">
+      <Value Profile="(Default)">Solid</Value>
+    </Setting>
+    <Setting Name="MouseCursorWidth" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="MousePathColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">MediumBlue</Value>
+    </Setting>
+    <Setting Name="MousePathStyle" Type="System.Drawing.Drawing2D.DashStyle" Scope="User">
+      <Value Profile="(Default)">Solid</Value>
+    </Setting>
+    <Setting Name="MousePathWidth" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="MouseFixationsPenColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">DarkOrange</Value>
+    </Setting>
+    <Setting Name="MouseFixationsPenStyle" Type="System.Drawing.Drawing2D.DashStyle" Scope="User">
+      <Value Profile="(Default)">Solid</Value>
+    </Setting>
+    <Setting Name="MouseFixationsPenWidth" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="MouseFixationConnectionsPenColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">MediumBlue</Value>
+    </Setting>
+    <Setting Name="MouseFixationConnectionsPenStyle" Type="System.Drawing.Drawing2D.DashStyle" Scope="User">
+      <Value Profile="(Default)">Solid</Value>
+    </Setting>
+    <Setting Name="MouseFixationConnectionsPenWidth" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="GazeNoDataColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Red</Value>
+    </Setting>
+    <Setting Name="GazeNoDataStyle" Type="System.Drawing.Drawing2D.DashStyle" Scope="User">
+      <Value Profile="(Default)">Dot</Value>
+    </Setting>
+    <Setting Name="GazeNoDataWidth" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="GazeCursorSize" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">80</Value>
+    </Setting>
+    <Setting Name="MouseCursorSize" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">32</Value>
+    </Setting>
+    <Setting Name="MouseCursorType" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Arrow</Value>
+    </Setting>
+    <Setting Name="AOISearchRectColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">SteelBlue</Value>
+    </Setting>
+    <Setting Name="AOISearchRectStyle" Type="System.Drawing.Drawing2D.DashStyle" Scope="User">
+      <Value Profile="(Default)">Solid</Value>
+    </Setting>
+    <Setting Name="AOISearchRectWidth" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="AOITargetColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Yellow</Value>
+    </Setting>
+    <Setting Name="AOITargetStyle" Type="System.Drawing.Drawing2D.DashStyle" Scope="User">
+      <Value Profile="(Default)">Solid</Value>
+    </Setting>
+    <Setting Name="AOITargetWidth" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="AOIStandardColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Magenta</Value>
+    </Setting>
+    <Setting Name="AOIStandardStyle" Type="System.Drawing.Drawing2D.DashStyle" Scope="User">
+      <Value Profile="(Default)">Solid</Value>
+    </Setting>
+    <Setting Name="AOIStandardWidth" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="AOIStandardFont" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Tahoma, 27.75pt</Value>
+    </Setting>
+    <Setting Name="AOIStandardFontColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Magenta</Value>
+    </Setting>
+    <Setting Name="AOITargetFontColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Yellow</Value>
+    </Setting>
+    <Setting Name="AOITargetFont" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Tahoma, 27.75pt</Value>
+    </Setting>
+    <Setting Name="AOISearchRectFontColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">SteelBlue</Value>
+    </Setting>
+    <Setting Name="AOISearchRectFont" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Tahoma, 27.75pt</Value>
+    </Setting>
+    <Setting Name="GazeFixationsFont" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Arial, 27.75pt</Value>
+    </Setting>
+    <Setting Name="GazeFixationsFontColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Red</Value>
+    </Setting>
+    <Setting Name="ReplayModuleLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">0, 0</Value>
+    </Setting>
+    <Setting Name="StatisticsModuleLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">0, 0</Value>
+    </Setting>
+    <Setting Name="FixationsModuleLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">0, 0</Value>
+    </Setting>
+    <Setting Name="DatabaseModuleLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">0, 0</Value>
+    </Setting>
+    <Setting Name="AttentionMapModuleLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">0, 0</Value>
+    </Setting>
+    <Setting Name="MainWindowLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">0, 0</Value>
+    </Setting>
+    <Setting Name="OgamaDatabaseTemplateConnectionString" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=|DataDirectory|\DataSet\OgamaDatabaseTemplate.db;Integrated Security=True&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=|DataDirectory|\DataSet\OgamaDatabaseTemplate.db;Integrated Security=True</Value>
+    </Setting>
+    <Setting Name="EyeTrackerSettingsPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MouseFixationsFontColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">0, 0, 192</Value>
+    </Setting>
+    <Setting Name="MouseFixationsFont" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Arial, 27.75pt</Value>
+    </Setting>
+    <Setting Name="FIXMouseFixationsPenWidth" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="FIXMouseFixationsPenStyle" Type="System.Drawing.Drawing2D.DashStyle" Scope="User">
+      <Value Profile="(Default)">Solid</Value>
+    </Setting>
+    <Setting Name="FIXMouseFixationsPenColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">0, 0, 192</Value>
+    </Setting>
+    <Setting Name="BackgroundColorForms" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Control</Value>
+    </Setting>
+    <Setting Name="FIXMouseToolbarLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">3, 0</Value>
+    </Setting>
+    <Setting Name="FIXGazeToolbarLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">126, 25</Value>
+    </Setting>
+    <Setting Name="FIXOptionsToolbarLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">3, 25</Value>
+    </Setting>
+    <Setting Name="FIXTrialToolbarLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">3, 0</Value>
+    </Setting>
+    <Setting Name="RPLTrialToolbarLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">0, 0</Value>
+    </Setting>
+    <Setting Name="RPLGazeToolbarLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">0, 27</Value>
+    </Setting>
+    <Setting Name="RPLMouseToolbarLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">415, 27</Value>
+    </Setting>
+    <Setting Name="ATMCalculateToolbarLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">317, 25</Value>
+    </Setting>
+    <Setting Name="ATMTrialToolbarLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">3, 0</Value>
+    </Setting>
+    <Setting Name="UpdateUri" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://www.ogama.net/version.txt</Value>
+    </Setting>
+    <Setting Name="OgamaUri" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://www.ogama.net</Value>
+    </Setting>
+    <Setting Name="SCAStimuliToolbarLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">3, 0</Value>
+    </Setting>
+    <Setting Name="SCAGazeToolbarLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">3, 25</Value>
+    </Setting>
+    <Setting Name="SCAMouseToolbarLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">3, 50</Value>
+    </Setting>
+    <Setting Name="GazeFixationsDrawingMode" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Dots</Value>
+    </Setting>
+    <Setting Name="MouseFixationsDrawingMode" Type="System.String" Scope="User">
+      <Value Profile="(Default)">None</Value>
+    </Setting>
+    <Setting Name="GazeConnections" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="GazeNumbers" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MouseConnections" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="MouseNumbers" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SCALevenshteinToolbarLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">3, 75</Value>
+    </Setting>
+    <Setting Name="NoDataPenStyle" Type="System.Drawing.Drawing2D.DashStyle" Scope="User">
+      <Value Profile="(Default)">Dot</Value>
+    </Setting>
+    <Setting Name="NoDataPenSize" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="AOIToolbarLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">3, 0</Value>
+    </Setting>
+    <Setting Name="RecordingModuleLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">0, 0</Value>
+    </Setting>
+    <Setting Name="SaliencyModuleLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">0, 0</Value>
+    </Setting>
+    <Setting Name="ScanpathsModuleLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">0, 0</Value>
+    </Setting>
+    <Setting Name="SlidedesignModuleLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">0, 0</Value>
+    </Setting>
+    <Setting Name="SCRToolbarLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">3, 0</Value>
+    </Setting>
+    <Setting Name="SALToolbarLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">3, 0</Value>
+    </Setting>
+    <Setting Name="SALGazeToolbarLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">3, 25</Value>
+    </Setting>
+    <Setting Name="SALCalculateToolbarLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">3, 50</Value>
+    </Setting>
+    <Setting Name="RECToolbarLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">5, 25</Value>
+    </Setting>
+    <Setting Name="DTBToolbarLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">3, 0</Value>
+    </Setting>
+    <Setting Name="SlideshowModuleLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">0, 0</Value>
+    </Setting>
+    <Setting Name="ActivatedHardwareTracker" Type="System.String" Scope="User">
+      <Value Profile="(Default)">None</Value>
+    </Setting>
+    <Setting Name="PresentationScreenMonitor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Secondary</Value>
+    </Setting>
+    <Setting Name="AOITargetTextAlignment" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Center</Value>
+    </Setting>
+    <Setting Name="AOISearchRectTextAlignment" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Center</Value>
+    </Setting>
+    <Setting Name="AOIDefaultTextAlignment" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Center</Value>
+    </Setting>
+    <Setting Name="AOIBubbleTextAlignment" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Center</Value>
+    </Setting>
+    <Setting Name="AOIArrowTextAlignment" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Center</Value>
+    </Setting>
+    <Setting Name="NoDataPenColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Red</Value>
+    </Setting>
+    <Setting Name="AOIBubbleColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Red</Value>
+    </Setting>
+    <Setting Name="AOIBubbleFontColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">White</Value>
+    </Setting>
+    <Setting Name="AOIArrowColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">SandyBrown</Value>
+    </Setting>
+    <Setting Name="AOIArrowFontColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Green</Value>
+    </Setting>
+    <Setting Name="AOIBubbleStyle" Type="System.Drawing.Drawing2D.DashStyle" Scope="User">
+      <Value Profile="(Default)">Solid</Value>
+    </Setting>
+    <Setting Name="AOIBubbleWidth" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="AOIBubbleFont" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Verdana, 14.25pt, style=Bold</Value>
+    </Setting>
+    <Setting Name="AOIArrowStyle" Type="System.Drawing.Drawing2D.DashStyle" Scope="User">
+      <Value Profile="(Default)">Solid</Value>
+    </Setting>
+    <Setting Name="AOIArrowWidth" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="AOIArrowFont" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Verdana, 12pt</Value>
+    </Setting>
+    <Setting Name="AOIBubbleBrushColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">255, 128, 128</Value>
+    </Setting>
+    <Setting Name="AOIArrowBrushColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Gold</Value>
+    </Setting>
+    <Setting Name="AOIBubbleDrawAction" Type="System.String" Scope="User">
+      <Value Profile="(Default)">NameAndFill</Value>
+    </Setting>
+    <Setting Name="AOIArrowDrawAction" Type="System.String" Scope="User">
+      <Value Profile="(Default)">NameEdgeFill</Value>
+    </Setting>
+    <Setting Name="SaliencyCalculationPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LogfilePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ImportSettingsPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="OgamaScreenCaptureSettingsPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
+</SettingsFile>
