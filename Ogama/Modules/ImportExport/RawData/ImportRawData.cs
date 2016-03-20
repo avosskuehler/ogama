@@ -1043,6 +1043,13 @@ namespace Ogama.Modules.ImportExport.RawData
                 detectionSetting.TrialSequenceToTrialIDAssignments.Add(currentTrialSequence, columnTrialID.Value);
               }
             }
+            else
+            {
+              if (!detectionSetting.TrialSequenceToTrialIDAssignments.ContainsKey(currentTrialSequence))
+              {
+                detectionSetting.TrialSequenceToTrialIDAssignments.Add(currentTrialSequence, currentTrialSequence);
+              }
+            }
 
             // Write Stimulus file to detection settings.
             if (numTrialImageImportColumn != -1 && items.Length > numTrialImageImportColumn)
