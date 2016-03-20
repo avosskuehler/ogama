@@ -1,4 +1,6 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+﻿using System.IO;
+
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="QuickLinkAPI.cs" company="">
 //   
 // </copyright>
@@ -666,7 +668,7 @@ namespace Ogama.Modules.Recording.EyeTechInterface
     /// <summary>
     /// The library location.
     /// </summary>
-    private string libraryLocation = string.Empty;
+    //private static string libraryLocation = string.Empty;
 
     // Function looks in the registry if the API is installed on the current system.
     // "QuickLinkAPI.dll" -> this.libraryLocation
@@ -678,19 +680,34 @@ namespace Ogama.Modules.Recording.EyeTechInterface
     /// <returns>
     /// The <see cref="bool"/>.
     /// </returns>
-    public bool InitNativeMethods()
+    static NativeMethods ()
     {
-      RegistryKey key = Registry.LocalMachine.OpenSubKey(@"Software\EyeTech Digital Systems\QuickLinkAPI", false);
-      if (key != null)
-      {
-        this.libraryLocation = (string)key.GetValue("Path");
-      }
-      else
-      {
-        return false;
-      }
+        // Finding path to installed EyeTeck SDK.
+        RegistryKey key = Registry.LocalMachine.OpenSubKey (
+            @"Software\EyeTech Digital Systems\QuickLinkAPI", false);
 
-      return true;
+        if (key != null)
+        {
+            string libLocation = (string) key.GetValue ("Path");
+            // Full path to QuickLinkAPI.dll, including dll name.
+            
+            libLocation = Path.GetDirectoryName (libLocation);
+            // Extracting folder.
+
+            // Getting PATH environment variable and appending library path to it.
+            string pathEnvVar = Environment.GetEnvironmentVariable ("PATH");
+            pathEnvVar += ";" + libLocation;
+
+            // Modifing PATH for current process so all depending dlls can be found.
+            Environment.SetEnvironmentVariable ("PATH", pathEnvVar,
+                EnvironmentVariableTarget.Process);
+        }
+        else
+        {
+            // If EyeTech SDK is not installed, raising an exception.
+            throw new ApplicationException (
+                "EyeTech Digital Systems\\QuickLinkAPI path not found");
+        }
     }
 
     /// <summary>

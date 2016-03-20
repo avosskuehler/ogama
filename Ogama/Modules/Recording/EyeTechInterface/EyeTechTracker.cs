@@ -563,29 +563,42 @@ namespace Ogama.Modules.Recording.EyeTechInterface
     /// <returns>True if QuickGlance was successfully started.</returns>
     private bool StartQuickGlance()
     {
-      var key = Registry.LocalMachine.OpenSubKey(@"Software\EyeTech Digital Systems\Quick Glance", false);
+      var key = Registry.LocalMachine.OpenSubKey (
+          @"Software\EyeTech Digital Systems\Quick Glance", false);
+
       if (key != null)
       {
-        var value = (string)key.GetValue("Path");
+        string quickGlancePath = (string) key.GetValue ("Path");
 
         // Start QuickGlance with background param
-        var quickGlance = new Process { StartInfo = { FileName = value, Arguments = "background" } };
+        Process quickGlanceProcess = new Process
+        {
+            StartInfo = {
+                FileName = quickGlancePath,
+                Arguments = "background",
+                WorkingDirectory = Path.GetDirectoryName (quickGlancePath)
+                // Without setting working directory for this process
+                // it can't find language translation files.
+            }
+        };
+        
         ////quickGlance.StartInfo.UseShellExecute = false;
         ////quickGlance.StartInfo.UserName = Environment.UserName;
 
-        quickGlance.Start();
+        quickGlanceProcess.Start ();
 
         // Calculate an endtime for the timeout.
-        var deadLine = DateTime.Now.AddSeconds(60);
+        DateTime deadLine = DateTime.Now.AddSeconds (60);
 
         // Keep looping till the deadline expires or break
         // when goals are met.
-        while (DateTime.Compare(DateTime.Now, deadLine) < 0)
+        while (DateTime.Compare (DateTime.Now, deadLine) < 0)
         {
           if (NativeMethods.GetQGOnFlag())
           {
             return true;
           }
+          Thread.Sleep (20); // reducong processor load, may be not nesessery.
         }
       }
 
