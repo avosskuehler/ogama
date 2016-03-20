@@ -121,9 +121,6 @@
       <Component Id="C_ASL_Utilities" Guid="{E825CAF1-0012-DE15-8E11-A35B55B0CADF}" Win64="no">
         <File Id="ASL_Utilities" Name="ASL_Utilities.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="ASL_Utilities" AssemblyApplication="ASL_Utilities" DiskId="1" Source="$(var.Ogama.TargetDir)" />
       </Component>
-      <Component Id="C_QuickLinkAPI" Guid="{8218F315-2AA6-AB37-BB51-C38AAD084118}" Win64="no">
-        <File Id="QuickLinkAPI" Name="QuickLinkAPI.dll" KeyPath="yes" DiskId="1" Source="$(var.Ogama.TargetDir)" />
-      </Component>
       <?endif?>
 
       <Component Id="C_EtApi" Guid="{DEE1B855-98A8-EB3E-BB9D-61AF7A6679BD}" Win64="$(var.Win64)">
@@ -270,7 +267,6 @@
         <ComponentRef Id='C_Interop.ASLSERIALOUTLIB2Lib' />
         <ComponentRef Id='C_ASLSerialOutLib2' />
         <ComponentRef Id='C_ASL_Utilities' />
-        <ComponentRef Id='C_QuickLinkAPI' />
         <?endif?>
         <ComponentRef Id='C_EtApi' />
         <ComponentRef Id='C_tobiisdk' />
