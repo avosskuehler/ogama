@@ -121,6 +121,7 @@ namespace Ogama.MainWindow
       this.btnFIX = new System.Windows.Forms.ToolStripButton();
       this.btnSTA = new System.Windows.Forms.ToolStripButton();
       this.btnAOI = new System.Windows.Forms.ToolStripButton();
+      this.btnChart = new System.Windows.Forms.ToolStripButton();
       this.mnsMain.SuspendLayout();
       this.stsMain.SuspendLayout();
       this.toolStrip1.SuspendLayout();
@@ -550,7 +551,7 @@ namespace Ogama.MainWindow
       this.mnuTools.Enabled = false;
       this.mnuTools.Name = "mnuTools";
       this.mnuTools.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.T)));
-      this.mnuTools.Size = new System.Drawing.Size(48, 20);
+      this.mnuTools.Size = new System.Drawing.Size(47, 20);
       this.mnuTools.Text = "&Tools";
       // 
       // mnuToolsImport
@@ -828,7 +829,8 @@ namespace Ogama.MainWindow
             this.btnDTB,
             this.btnFIX,
             this.btnSTA,
-            this.btnAOI});
+            this.btnAOI,
+            this.btnChart});
       this.toolStrip1.Location = new System.Drawing.Point(0, 24);
       this.toolStrip1.Name = "toolStrip1";
       this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -933,6 +935,16 @@ namespace Ogama.MainWindow
       this.btnAOI.Size = new System.Drawing.Size(23, 22);
       this.btnAOI.Text = "Shows areas of interest module";
       this.btnAOI.Click += new System.EventHandler(this.btnAOI_Click);
+      // 
+      // btnChart
+      // 
+      this.btnChart.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.btnChart.Image = global::Ogama.Properties.Resources.Chart16;
+      this.btnChart.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.btnChart.Name = "btnChart";
+      this.btnChart.Size = new System.Drawing.Size(23, 22);
+      this.btnChart.Text = "Shows Chart module";
+      this.btnChart.Click += new System.EventHandler(this.btnChart_Click);
       // 
       // MainForm
       // 
@@ -1057,6 +1069,7 @@ namespace Ogama.MainWindow
       private System.Windows.Forms.ToolStripMenuItem mnuHelpCheckForUpdates;
       private System.Windows.Forms.ToolStripButton btnSCA;
       private System.Windows.Forms.ToolStripMenuItem mnuViewsNewScanpaths;
+      private System.Windows.Forms.ToolStripButton btnChart;
     }
 }
 

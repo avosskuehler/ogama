@@ -865,4 +865,28 @@
   <data name="SQLite32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SQLite32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Chart16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Chart16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Chart32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Chart32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ChartTypeArea32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ChartTypeArea32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ChartTypeBubble32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ChartTypeBubble32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ChartTypeColumn32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ChartTypeColumn32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ChartTypeLine32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ChartTypeLine32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ChartTypePie32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ChartTypePie32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ChartTypeXYScatter32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ChartTypeXYScatter32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

@@ -255,6 +255,28 @@ namespace Ogama.MainWindow
       }
     }
 
+    private void btnChart_Click(object sender, EventArgs e)
+    {
+      if (Document.ActiveDocument != null)
+      {
+        bool found = false;
+        foreach (Form form in this.MdiChildren)
+        {
+          if (form is Modules.Charts.ChartModule)
+          {
+            form.Select();
+            found = true;
+            break;
+          }
+        }
+
+        if (!found)
+        {
+          this.CreateChartView();
+        }
+      }
+    }
+
     /// <summary>
     /// The <see cref="Control.Click"/> event handler
     /// for the <see cref="ToolStripButton"/> <see cref="btnSAL"/>
@@ -605,6 +627,25 @@ namespace Ogama.MainWindow
         objfrmAOI.Show();
         return true;
       }
+    }
+
+    /// <summary>
+    /// Creates and displays new areas of interest module. 
+    /// Sets help information rtf and binds events.
+    /// </summary>
+    /// <returns><strong>True</strong>, if successful,
+    /// otherwise <strong>false</strong>.</returns>
+    private bool CreateChartView()
+    {
+      var chartModule = new Ogama.Modules.Charts.ChartModule();
+
+        chartModule.MdiParent = this;
+        chartModule.HelpRTF = Application.StartupPath + @"\Help\CRT.rtf";
+        chartModule.FormClosing += new FormClosingEventHandler(this.module_FormClosing);
+        chartModule.Activated += new EventHandler(this.module_Activated);
+        chartModule.HelpRequested += new HelpEventHandler(this.module_HelpButtonClicked);
+        chartModule.Show();
+        return true;
     }
 
     /// <summary>
