@@ -251,13 +251,13 @@
       <Value Profile="(Default)">Control</Value>
     </Setting>
     <Setting Name="FIXMouseToolbarLocation" Type="System.Drawing.Point" Scope="User">
-      <Value Profile="(Default)">3, 0</Value>
+      <Value Profile="(Default)">415, 0</Value>
     </Setting>
     <Setting Name="FIXGazeToolbarLocation" Type="System.Drawing.Point" Scope="User">
       <Value Profile="(Default)">126, 25</Value>
     </Setting>
     <Setting Name="FIXOptionsToolbarLocation" Type="System.Drawing.Point" Scope="User">
-      <Value Profile="(Default)">3, 25</Value>
+      <Value Profile="(Default)">3, 0</Value>
     </Setting>
     <Setting Name="FIXTrialToolbarLocation" Type="System.Drawing.Point" Scope="User">
       <Value Profile="(Default)">3, 0</Value>
@@ -432,6 +432,9 @@
     </Setting>
     <Setting Name="OgamaScreenCaptureSettingsPath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ChartModulLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">0, 0</Value>
     </Setting>
   </Settings>
 </SettingsFile>

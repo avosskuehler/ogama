@@ -13,3 +13,4 @@ packages/*
 Ogama.sln.GhostDoc.xml
 */Thumbs.db
 SourceDocumentation/LastBuild.log
+*StyleCop.Cache
