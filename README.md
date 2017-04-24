@@ -1,4 +1,4 @@
-# ogama
+# ogama - open gaze and mouse analyzer
 Ogama allows recording and analyzing eye- and mouse-tracking data from slideshow eyetracking experiments in parallel. 
 It´s developed in C#.NET and provides attention maps, AOIS, saliency, replay, levensthein distances and many more visualization tools.
 
