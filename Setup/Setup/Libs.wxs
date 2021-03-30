@@ -29,14 +29,6 @@
               Source="$(var.Ogama.TargetDir)" />
       </Component>
 
-      <Component Id="C_AxShockwaveFlashObjects" Guid="{48B293E1-9F27-B5C7-626D-CD6A77235DA8}" Win64="$(var.Win64)">
-        <File Id="AxShockwaveFlashObjects" Name="AxShockwaveFlashObjects.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="AxShockwaveFlashObjects" AssemblyApplication="AxShockwaveFlashObjects" DiskId="1"
-              Source="$(var.Ogama.TargetDir)" />
-      </Component>
-      <Component Id="C_ShockwaveFlashObjects" Guid="{6EB847D7-4192-96D0-7C16-E421E4A28562}" Win64="$(var.Win64)">
-        <File Id="ShockwaveFlashObjects" Name="ShockwaveFlashObjects.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="ShockwaveFlashObjects" AssemblyApplication="ShockwaveFlashObjects" DiskId="1"
-              Source="$(var.Ogama.TargetDir)" />
-      </Component>
       <Component Id="C_Dotway.WPF.Controls" Guid="{1C21B097-31D6-E95E-E476-8449E3C239DB}" Win64="$(var.Win64)">
         <File Id="Dotway.WPF.Controls" Name="Dotway.WPF.Controls.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="Dotway.WPF.Controls" AssemblyApplication="Dotway.WPF.Controls" DiskId="1"
               Source="$(var.Ogama.TargetDir)" />
@@ -235,8 +227,6 @@
       </Feature>
 
       <Feature Id='ExternalLibsFeature' Title='ExternalLibs' Description='Installs external libraries for the application.' Level='1'>
-        <ComponentRef Id='C_AxShockwaveFlashObjects' />
-        <ComponentRef Id='C_ShockwaveFlashObjects' />
         <ComponentRef Id='C_Dotway.WPF.Controls' />
         <ComponentRef Id='C_AvalonControlsLibrary' />
         <ComponentRef Id='C_MediaInfo' />

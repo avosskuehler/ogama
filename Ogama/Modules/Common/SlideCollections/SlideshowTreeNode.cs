@@ -273,12 +273,7 @@ namespace Ogama.Modules.Common.SlideCollections
 
         foreach (VGElement element in newSlideshowTreeNode.slide.ActiveXStimuli)
         {
-          if (element is VGFlash)
-          {
-            newSlideshowTreeNode.ImageKey = "Flash";
-            currentSlideType |= SlideType.Flash;
-          }
-          else if (element is VGBrowser)
+          if (element is VGBrowser)
           {
             newSlideshowTreeNode.ImageKey = "Browser";
             currentSlideType |= SlideType.Browser;

@@ -51,11 +51,6 @@ namespace Ogama.Modules.SlideshowDesign
     Image, 
 
     /// <summary>
-    ///   Macromedia Flash stimuli.
-    /// </summary>
-    Flash, 
-
-    /// <summary>
     ///   Browser based stimuli.
     /// </summary>
     Browser, 

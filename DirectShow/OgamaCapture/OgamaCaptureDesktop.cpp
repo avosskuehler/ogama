@@ -1,5 +1,4 @@
 #include <streams.h>
-
 #include "OgamaCapture.h"
 #include "OgamaCaptureGuids.h"
 #include "DibHelper.h"

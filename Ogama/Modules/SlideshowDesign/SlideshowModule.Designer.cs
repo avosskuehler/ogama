@@ -647,16 +647,6 @@
       this.btnInternet.Text = "Add browser slide ...";
       this.btnInternet.Click += new System.EventHandler(this.btnInternet_Click);
       // 
-      // btnFlash
-      // 
-      this.btnFlash.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.btnFlash.Image = global::Ogama.Properties.Resources.FlashPlayer;
-      this.btnFlash.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.btnFlash.Name = "btnFlash";
-      this.btnFlash.Size = new System.Drawing.Size(23, 25);
-      this.btnFlash.Text = "Add flash movie slide ...";
-      this.btnFlash.Click += new System.EventHandler(this.btnFlash_Click);
-      // 
       // btnDesktop
       // 
       this.btnDesktop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;

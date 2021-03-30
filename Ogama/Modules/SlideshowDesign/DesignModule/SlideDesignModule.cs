@@ -594,9 +594,6 @@ namespace Ogama.Modules.SlideshowDesign.DesignModule
         case StimuliTypes.Image:
           this.OpenNewImageDialog();
           break;
-        case StimuliTypes.Flash:
-          this.OpenNewFlashDialog();
-          break;
         case StimuliTypes.None:
         case StimuliTypes.Mixed:
 
@@ -605,12 +602,6 @@ namespace Ogama.Modules.SlideshowDesign.DesignModule
           // because the control is not visible at this moment.
           foreach (VGElement element in this.designPicture.Elements)
           {
-            if (element is VGFlash)
-            {
-              var flash = element as VGFlash;
-              flash.InitializeOnControl(this.designPicture.Parent, false, this.Picture.StimulusToScreen);
-            }
-
             if (element is VGBrowser)
             {
               var browser = element as VGBrowser;
@@ -620,19 +611,6 @@ namespace Ogama.Modules.SlideshowDesign.DesignModule
 
           this.designPicture.Refresh();
           break;
-      }
-    }
-
-    /// <summary>
-    ///   This method opens a <see cref="FlashDialog" /> to create a new
-    ///   <see cref="VGFlash" /> item on the slide.
-    /// </summary>
-    private void OpenNewFlashDialog()
-    {
-      var dlg = new FlashDialog();
-      if (dlg.ShowDialog() == DialogResult.OK)
-      {
-        this.designPicture.NewFlashStart(dlg.NewFlash);
       }
     }
 
@@ -1381,26 +1359,6 @@ namespace Ogama.Modules.SlideshowDesign.DesignModule
             }
 
             this.tctStimuli.SelectedTab = this.tbpImages;
-          }
-          else if (e.Shape is VGFlash)
-          {
-            var flash = (VGFlash)e.Shape;
-            this.txbFlashFilename.Text = flash.Filename;
-
-            this.toolTip.SetToolTip(
-              this.txbFlashFilename, 
-              Path.Combine(
-                flash.Filepath == string.Empty
-                  ? Document.ActiveDocument.ExperimentSettings.SlideResourcesPath
-                  : flash.Filepath, 
-                flash.Filename));
-
-            if (!this.tctStimuli.TabPages.Contains(this.tbpFlashMovies))
-            {
-              this.tctStimuli.TabPages.Add(this.tbpFlashMovies);
-            }
-
-            this.tctStimuli.SelectedTab = this.tbpFlashMovies;
           }
         }
 

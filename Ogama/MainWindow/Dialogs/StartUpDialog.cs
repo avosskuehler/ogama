@@ -37,12 +37,12 @@ namespace Ogama.MainWindow.Dialogs
     ///////////////////////////////////////////////////////////////////////////////
     #region FIELDS
 
-    /// <summary>
-    /// A unvisible test flash com object.
-    /// If initialization fails, OGAMA does not start,
-    /// because all its flash com objects will fail.
-    /// </summary>
-    private AxShockwaveFlashObjects.AxShockwaveFlash flashTestObject;
+    ///// <summary>
+    ///// A unvisible test flash com object.
+    ///// If initialization fails, OGAMA does not start,
+    ///// because all its flash com objects will fail.
+    ///// </summary>
+    //private AxShockwaveFlashObjects.AxShockwaveFlash flashTestObject;
 
     #endregion //FIELDS
 
@@ -122,16 +122,16 @@ namespace Ogama.MainWindow.Dialogs
     private void frmStartUpDlg_Load(object sender, EventArgs e)
     {
       this.lsbRecentProjects.SelectedIndex = 0;
-      try
-      {
-        this.TryLoadingFlash();
-      }
-      catch (COMException)
-      {
-        FlashMissing errorWindow = new FlashMissing();
-        errorWindow.ShowDialog();
-        Application.Exit();
-      }
+      //try
+      //{
+      //  this.TryLoadingFlash();
+      //}
+      //catch (COMException)
+      //{
+      //  FlashMissing errorWindow = new FlashMissing();
+      //  errorWindow.ShowDialog();
+      //  Application.Exit();
+      //}
     }
 
     /// <summary>
@@ -232,40 +232,6 @@ namespace Ogama.MainWindow.Dialogs
     // Methods for doing main class job                                          //
     ///////////////////////////////////////////////////////////////////////////////
     #region METHODS
-
-    /// <summary>
-    /// This method tries to initialize a flash com object.
-    /// If this is not possible, normally due to missing
-    /// flash player installation, it throws a com exception.
-    /// </summary>
-    /// <exception cref="COMException">Thrown, when activeX com object initalization fails.</exception>
-    private void TryLoadingFlash()
-    {
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StartUpDialog));
-      this.flashTestObject = new AxShockwaveFlashObjects.AxShockwaveFlash();
-
-      ((System.ComponentModel.ISupportInitialize)this.flashTestObject).BeginInit();
-
-      // axFlashTest
-      this.flashTestObject.Enabled = true;
-      this.flashTestObject.Location = new System.Drawing.Point(0, 61);
-      this.flashTestObject.Name = "axFlashTest";
-      this.flashTestObject.OcxState = (System.Windows.Forms.AxHost.State)resources.GetObject("axFlashTest.OcxState");
-      this.flashTestObject.Size = new System.Drawing.Size(34, 32);
-      this.flashTestObject.TabIndex = 1;
-      ((System.ComponentModel.ISupportInitialize)this.flashTestObject).EndInit();
-
-      try
-      {
-        this.dialogTop1.Controls.Add(this.flashTestObject);
-      }
-      catch (COMException)
-      {
-        this.dialogTop1.Controls.Remove(this.flashTestObject);
-        throw;
-      }
-    }
-
     #endregion //METHODS
 
     ///////////////////////////////////////////////////////////////////////////////

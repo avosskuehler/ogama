@@ -591,15 +591,6 @@ namespace Ogama.Modules.Common.SlideCollections
           image.CreateInternalImage();
         }
       }
-      else if (element is VGFlash)
-      {
-        VGFlash flash = (VGFlash)element;
-        if (flash.Filepath != newResourcesPath)
-        {
-          flash.Filename = System.IO.Path.GetFileName(flash.Filename);
-          flash.Filepath = newResourcesPath;
-        }
-      }
     }
 
     /// <summary>

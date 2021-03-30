@@ -91,18 +91,6 @@ namespace Ogama.Modules.SlideshowDesign.DesignModule
       this.OpenNewSoundDialog();
     }
 
-    /// <summary>
-    /// <see cref="Control.Click"/> event handler 
-    /// for the <see cref="Button"/> <see cref="btnAddFlash"/>
-    /// Raises a new <see cref="VGFlash"/> creation of the <see cref="designPicture"/>.
-    /// </summary>
-    /// <param name="sender">Source of the event.</param>
-    /// <param name="e">A empty <see cref="EventArgs"/></param>
-    private void btnAddFlash_Click(object sender, EventArgs e)
-    {
-      this.OpenNewFlashDialog();
-    }
-
     #endregion //NewStimuli
 
     #region Shapes
@@ -245,51 +233,5 @@ namespace Ogama.Modules.SlideshowDesign.DesignModule
     }
 
     #endregion //Images
-
-    #region FlashControls
-
-    /// <summary>
-    /// <see cref="Control.Click"/> event handler 
-    /// for the <see cref="btnSelectFlashMovie"/> <see cref="Button"/>
-    /// Opens file open dialog.
-    /// </summary>
-    /// <param name="sender">Source of the event.</param>
-    /// <param name="e">An empty <see cref="EventArgs"/>.</param>
-    private void btnSelectFlashMovie_Click(object sender, EventArgs e)
-    {
-      if (this.ofdFlashMovie.ShowDialog() == DialogResult.OK)
-      {
-        if (Path.GetFileName(this.ofdFlashMovie.FileName).Contains("#"))
-        {
-          ExceptionMethods.ProcessMessage("Invalid filename", "Please do not use hashes '#' in the filename.");
-        }
-        else
-        {
-          string fileName = this.ofdFlashMovie.FileName;
-          this.txbFlashFilename.Text = fileName;
-          string templatePath = Document.ActiveDocument.ExperimentSettings.SlideResourcesPath;
-
-          if (Path.GetDirectoryName(fileName) != templatePath)
-          {
-            string target = Path.Combine(templatePath, Path.GetFileName(fileName));
-            if (!File.Exists(target))
-            {
-              File.Copy(fileName, target);
-              string message = "A copy of this movie file is saved to the following slide resources folder of the current project :" +
-                Environment.NewLine + target + Environment.NewLine +
-                "This is done because of easy movement of experiments between different computers or locations.";
-
-              ExceptionMethods.ProcessMessage("File is copied", message);
-            }
-
-            this.txbFlashFilename.Text = target;
-          }
-
-          this.designPicture.DrawForeground(true);
-        }
-      }
-    }
-
-    #endregion //FlashControls
   }
 }

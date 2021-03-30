@@ -6,7 +6,7 @@
     <ProductVersion>3.8</ProductVersion>
     <ProjectGuid>14b91359-9a99-4ed7-b5ed-b3786c6f1af8</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>OgamaSetupV5</OutputName>
+    <OutputName>OgamaSetupV51</OutputName>
     <OutputType>Package</OutputType>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
@@ -71,8 +71,7 @@
     <Content Include="Resources\FixationSourceCodePermission.txt" />
     <Content Include="Resources\InstallUtilLib.dll" />
     <Content Include="Resources\License.rtf" />
-    <Content Include="Resources\Microsoft_VC120_CRT_x64.msm" />
-    <Content Include="Resources\Microsoft_VC120_CRT_x86.msm" />
+    <Content Include="Resources\Microsoft_VC142_CRT_x86.msm" />
     <Content Include="Resources\NewFldrBtn.bmp" />
     <Content Include="Resources\UpFldrBtn.bmp" />
   </ItemGroup>

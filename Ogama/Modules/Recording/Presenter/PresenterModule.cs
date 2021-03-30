@@ -30,7 +30,6 @@ namespace Ogama.Modules.Recording.Presenter
 
   using OgamaControls;
 
-  using VectorGraphics.Controls.Flash;
   using VectorGraphics.Controls.Timer;
   using VectorGraphics.Elements;
   using VectorGraphics.Elements.ElementCollections;
@@ -1090,19 +1089,7 @@ namespace Ogama.Modules.Recording.Presenter
       {
         foreach (Control ctrl in slideContainer.ContainerControl.Controls)
         {
-          if (ctrl is AxFlashControl)
-          {
-            if (ctrl.InvokeRequired)
-            {
-              MethodInvoker ctrlDisposeDelegate = ctrl.Dispose;
-              ctrl.Invoke(ctrlDisposeDelegate);
-            }
-            else
-            {
-              ctrl.Dispose();
-            }
-          }
-          else if (ctrl is WebBrowser)
+          if (ctrl is WebBrowser)
           {
             if (ctrl.InvokeRequired)
             {
@@ -1115,12 +1102,7 @@ namespace Ogama.Modules.Recording.Presenter
 
       foreach (VGElement element in slideContainer.Slide.ActiveXStimuli)
       {
-        if (element is VGFlash)
-        {
-          var flash = element as VGFlash;
-          flash.SendMessagesToParent(false);
-        }
-        else if (element is VGBrowser)
+        if (element is VGBrowser)
         {
           var browser = element as VGBrowser;
           browser.SendMessagesToParent(false);
@@ -1302,12 +1284,7 @@ namespace Ogama.Modules.Recording.Presenter
         // flashObject activeX control.
         foreach (VGElement element in slideContainer.Slide.ActiveXStimuli)
         {
-          if (element is VGFlash)
-          {
-            var flash = element as VGFlash;
-            flash.InitializeOnControl(slideContainer.ContainerControl, true, new System.Drawing.Drawing2D.Matrix());
-          }
-          else if (element is VGBrowser)
+          if (element is VGBrowser)
           {
             var browser = element as VGBrowser;
             this.currentVgBrowser = browser;
@@ -1636,14 +1613,7 @@ namespace Ogama.Modules.Recording.Presenter
       {
         foreach (VGElement element in slideContainer.Slide.ActiveXStimuli)
         {
-          if (element is VGFlash)
-          {
-            var flash = element as VGFlash;
-            flash.SendMessagesToParent(true);
-            flash.Play();
-            countFlash++;
-          }
-          else if (element is VGBrowser)
+          if (element is VGBrowser)
           {
             var browser = element as VGBrowser;
 

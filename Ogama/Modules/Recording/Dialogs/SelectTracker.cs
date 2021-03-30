@@ -57,6 +57,19 @@ namespace Ogama.Modules.Recording.Dialogs
     public SelectTracker()
     {
       this.InitializeComponent();
+
+      try
+      {
+        TobiiTracker.StaticInitialize();
+      }
+      catch (Exception ex)
+      {
+        ExceptionMethods.ProcessErrorMessage(
+          "The tobii SDK could not be initialized, the tobii record interface will not be"
+          + "available. Please install apple bonjour, if this is a module load error."
+          + ex.Message);
+      }
+
       this.eyetrackerUpdateTimer = new Timer { Interval = 1000, Enabled = true };
       this.eyetrackerUpdateTimer.Tick += this.EyetrackerUpdateTimerTick;
     }

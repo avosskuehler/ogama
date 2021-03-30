@@ -23,6 +23,13 @@
     <TargetZone>LocalIntranet</TargetZone>
     <StartupObject>Ogama.Program</StartupObject>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <NuGetPackageImportStamp>415c3f62</NuGetPackageImportStamp>
     <PublishUrl>C:\Dokumente und Einstellungen\Adrian\Eigene Dateien\Universitt\Promotion\VSProjects\GMV\SQLGazeAndMouseViewer\publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -42,13 +49,6 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <BootstrapperComponentsLocation>Relative</BootstrapperComponentsLocation>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <OldToolsVersion>3.5</OldToolsVersion>
-    <UpgradeBackupLocation />
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
-    <NuGetPackageImportStamp>415c3f62</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -130,10 +130,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Managed\ASL_Utilities.dll</HintPath>
     </Reference>
-    <Reference Include="AxShockwaveFlashObjects, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Managed\AxShockwaveFlashObjects.dll</HintPath>
-    </Reference>
     <Reference Include="DbAccess">
       <HintPath>..\Libs\Managed\DbAccess.dll</HintPath>
     </Reference>
@@ -197,10 +193,6 @@
     </Reference>
     <Reference Include="PresentationFramework">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="ShockwaveFlashObjects, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Managed\ShockwaveFlashObjects.dll</HintPath>
     </Reference>
     <Reference Include="SmartEye.Libraries">
       <HintPath>..\Libs\Managed\SmartEye.Libraries.dll</HintPath>
@@ -846,12 +838,6 @@
     <Compile Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\SoundDialog.Designer.cs">
       <DependentUpon>SoundDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\FlashDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\FlashDialog.Designer.cs">
-      <DependentUpon>FlashDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\ShapeDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1050,12 +1036,6 @@
     </Compile>
     <Compile Include="Modules\Recording\TobiiInterface\HowToActivateTobii.Designer.cs">
       <DependentUpon>HowToActivateTobii.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MainWindow\Dialogs\FlashMissing.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainWindow\Dialogs\FlashMissing.Designer.cs">
-      <DependentUpon>FlashMissing.cs</DependentUpon>
     </Compile>
     <Compile Include="MainWindow\Dialogs\LoadDocSplash.cs">
       <SubType>Form</SubType>
@@ -1482,10 +1462,6 @@
       <DependentUpon>SoundDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\FlashDialog.resx">
-      <DependentUpon>FlashDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Modules\SlideshowDesign\DesignModule\StimuliDialogs\ShapeDialog.resx">
       <DependentUpon>ShapeDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1592,10 +1568,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Recording\Dialogs\SubjectDetailsDialog.resx">
       <DependentUpon>SubjectDetailsDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MainWindow\Dialogs\FlashMissing.resx">
-      <DependentUpon>FlashMissing.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow\Dialogs\ExperimentSettingsDialog.resx">

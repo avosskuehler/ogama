@@ -349,9 +349,6 @@ namespace Ogama
       // Set thumb sizes to presentation proportions
       this.RescaleThumbSizes();
 
-      // Move flash stimuli to new slide property (V2.5 -> V2.6)
-      this.MoveFlashStimuli();
-
       // Load Database
       if (!this.LoadSQLData(splash))
       {
@@ -715,28 +712,6 @@ namespace Ogama
       }
 
       return false;
-    }
-
-    /// <summary>
-    /// This method moves the ActiveX flash stimuli from the VGStimuli collection
-    /// to the ActiveXStimuli collection. (Update from version 2.5 -> 2.6)
-    /// </summary>
-    private void MoveFlashStimuli()
-    {
-      foreach (Slide slide in this.experimentSettings.SlideShow.Slides)
-      {
-        foreach (VGElement element in slide.VGStimuli)
-        {
-          if (element is VGFlash)
-          {
-            VGFlash clone = (VGFlash)element.Clone();
-            clone.StyleGroup = VGStyleGroup.ACTIVEX;
-            slide.ActiveXStimuli.Add(clone);
-          }
-        }
-
-        slide.VGStimuli.RemoveAll(slide.ActiveXStimuli);
-      }
     }
 
     /// <summary>

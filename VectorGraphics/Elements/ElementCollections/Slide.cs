@@ -21,7 +21,6 @@ namespace VectorGraphics.Elements.ElementCollections
   using System.Xml.Serialization;
 
   using VectorGraphics.Controls;
-  using VectorGraphics.Controls.Flash;
   using VectorGraphics.StopConditions;
   using VectorGraphics.Tools;
   using VectorGraphics.Tools.CustomTypeConverter;
@@ -896,21 +895,6 @@ namespace VectorGraphics.Elements.ElementCollections
     #region METHODS
 
     /// <summary>
-    /// Creates a thumbnail for the given flash by invoking a dialog,
-    /// loads the movie, captures the surface, closes the dialog.
-    /// </summary>
-    /// <param name="filename">Filename with full path to .swf file</param>
-    /// <param name="thumbSize">The <see cref="Size"/> for the thumb.</param>
-    /// <returns>An <see cref="Image"/> with the thumbnail image.</returns>
-    private static Image CreateFlashThumb(string filename, Size thumbSize)
-    {
-      FlashCapture dlg = new FlashCapture(thumbSize, filename);
-      dlg.ShowDialog();
-      Image thumb = dlg.ScreenShot;
-      return thumb;
-    }
-
-    /// <summary>
     /// Creates a thumbnail for the given website by invoking a dialog,
     /// loads the url, captures the surface, closes the dialog.
     /// </summary>
@@ -957,16 +941,7 @@ namespace VectorGraphics.Elements.ElementCollections
 
         foreach (VGElement element in this.ActiveXStimuli)
         {
-          if (element is VGFlash)
-          {
-            VGFlash flash = element as VGFlash;
-            if (File.Exists(flash.FullFilename))
-            {
-              Image flashThumb = CreateFlashThumb(flash.FullFilename, flash.Size.ToSize());
-              g.DrawImage(flashThumb, flash.Location);
-            }
-          }
-          else if (element is VGBrowser)
+          if (element is VGBrowser)
           {
             VGBrowser browser = element as VGBrowser;
             Image browserThumb = CreateBrowserThumb(browser.BrowserURL, this.PresentationSize);

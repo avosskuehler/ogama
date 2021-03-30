@@ -865,18 +865,6 @@ namespace VectorGraphics.Canvas
     }
 
     /// <summary>
-    /// Starts new flash object by setting the <see cref="VGFlash"/>
-    /// in the <see cref="newShape"/> field.
-    /// Then calls <see cref="StartCreation(Cursor)"/>.
-    /// </summary>
-    /// <param name="flash">The <see cref="VGFlash"/> to be added to the <see cref="Picture"/></param>
-    public void NewFlashStart(VGFlash flash)
-    {
-      this.newShape = flash;
-      this.StartCreation(CustomCursors.Image);
-    }
-
-    /// <summary>
     /// Eventhandler for the PenChanged event. 
     /// Updates all graphic elements from the given group
     /// with the new pen.
@@ -1188,12 +1176,6 @@ namespace VectorGraphics.Canvas
               // Cast newShape to VGLine
               VGLine line = (VGLine)this.newShape;
               line.FirstPoint = this.firstClickPoint;
-            }
-            else if (this.newShape is VGFlash)
-            {
-              // Cast newShape to VGFlash
-              VGFlash flash = (VGFlash)this.newShape;
-              flash.InitializeOnControl(this.Parent, false, this.StimulusToScreen);
             }
           }
         }

@@ -241,24 +241,6 @@ namespace Ogama.Modules.SlideshowDesign
 
     /// <summary>
     /// The <see cref="Control.Click"/> event handler for the
-    /// <see cref="Button"/> <see cref="btnFlash"/>.
-    /// Raises the <see cref="OpenStimulusDesignerForm(SlideDesignModule,string)"/>
-    /// form with adapted properties for flash stimuli.
-    /// </summary>
-    /// <param name="sender">Source of the event.</param>
-    /// <param name="e">An empty <see cref="EventArgs"/></param>
-    private void btnFlash_Click(object sender, EventArgs e)
-    {
-      SlideDesignModule newFlash = new SlideDesignModule(StimuliTypes.Flash);
-      newFlash.Text = "Create new flash movie slide ...";
-      newFlash.Icon = Properties.Resources.FlashPlayerIcon;
-      newFlash.Description = "Flash movie stimuli are used to present a shockwave flash object (.swf - file).";
-      newFlash.SlideName = this.GetUnusedSlideName();
-      this.OpenStimulusDesignerForm(newFlash, string.Empty);
-    }
-
-    /// <summary>
-    /// The <see cref="Control.Click"/> event handler for the
     /// <see cref="Button"/> <see cref="btnInternet"/>.
     /// Raises the <see cref="OpenStimulusDesignerForm(SlideDesignModule,string)"/>
     /// form with adapted properties for browser stimuli.

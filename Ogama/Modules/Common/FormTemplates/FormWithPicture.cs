@@ -747,12 +747,7 @@ namespace Ogama.Modules.Common.FormTemplates
 
           foreach (VGElement element in slideCopy.ActiveXStimuli)
           {
-            if (element is VGFlash)
-            {
-              VGFlash flash = element as VGFlash;
-              flash.InitializeOnControl(this.Picture.Parent, false, this.Picture.StimulusToScreen);
-            }
-            else if (element is VGBrowser)
+            if (element is VGBrowser)
             {
               // Don´t show browser control, use screenshot of whole website instead.
               // VGBrowser browser = element as VGBrowser;
@@ -767,12 +762,7 @@ namespace Ogama.Modules.Common.FormTemplates
 
           foreach (VGElement element in slideCopy.ActiveXStimuli)
           {
-            if (element is VGFlash)
-            {
-              VGFlash flash = element as VGFlash;
-              flash.InitializeOnControl(this.Picture, false, this.Picture.StimulusToScreen);
-            }
-            else if (element is VGBrowser)
+            if (element is VGBrowser)
             {
               VGBrowser browser = element as VGBrowser;
               browser.InitializeOnControl(this.Picture, false);
@@ -840,8 +830,8 @@ namespace Ogama.Modules.Common.FormTemplates
         //}
         //else
         //{
-          // Height is correct
-          zoomFactor = canvasHeight / (float)height;
+        // Height is correct
+        zoomFactor = canvasHeight / (float)height;
         //}
 
         // Paranoia Check
