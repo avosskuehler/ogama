@@ -35,8 +35,8 @@ namespace Ogama.Modules.AttentionMap
     {
       this.components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AttentionMapModule));
-      OgamaControls.Gradient gradient2 = new OgamaControls.Gradient();
-      System.Drawing.Drawing2D.ColorBlend colorBlend2 = new System.Drawing.Drawing2D.ColorBlend();
+      OgamaControls.Gradient gradient1 = new OgamaControls.Gradient();
+      System.Drawing.Drawing2D.ColorBlend colorBlend1 = new System.Drawing.Drawing2D.ColorBlend();
       this.bgwCalcMap = new System.ComponentModel.BackgroundWorker();
       this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
       this.trvSubjects = new OgamaControls.CheckboxTreeView(this.components);
@@ -50,7 +50,7 @@ namespace Ogama.Modules.AttentionMap
       this.btnSeekNextSlide = new System.Windows.Forms.ToolStripButton();
       this.btnSeekPreviousSlide = new System.Windows.Forms.ToolStripButton();
       this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-      this.trialTimeLine = new TrialTimeLine(this.components);
+      this.trialTimeLine = new Ogama.Modules.Common.Controls.TrialTimeLine(this.components);
       this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
       this.trbZoom = new OgamaControls.ToolStripTrackBar();
       this.pnlCanvas = new System.Windows.Forms.Panel();
@@ -105,9 +105,11 @@ namespace Ogama.Modules.AttentionMap
       this.toolStripContainer1.ContentPanel.SuspendLayout();
       this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
       this.toolStripContainer1.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.spcPictureGradient)).BeginInit();
       this.spcPictureGradient.Panel1.SuspendLayout();
       this.spcPictureGradient.Panel2.SuspendLayout();
       this.spcPictureGradient.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.spcPicAndList)).BeginInit();
       this.spcPicAndList.Panel1.SuspendLayout();
       this.spcPicAndList.Panel2.SuspendLayout();
       this.spcPicAndList.SuspendLayout();
@@ -126,8 +128,8 @@ namespace Ogama.Modules.AttentionMap
       this.bgwCalcMap.WorkerReportsProgress = true;
       this.bgwCalcMap.WorkerSupportsCancellation = true;
       this.bgwCalcMap.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwCalcMap_DoWork);
-      this.bgwCalcMap.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwCalcMap_RunWorkerCompleted);
       this.bgwCalcMap.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgwCalcMap_ProgressChanged);
+      this.bgwCalcMap.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwCalcMap_RunWorkerCompleted);
       // 
       // trvSubjects
       // 
@@ -152,22 +154,22 @@ namespace Ogama.Modules.AttentionMap
       // 
       // gradientControl
       // 
-      colorBlend2.Colors = new System.Drawing.Color[] {
+      colorBlend1.Colors = new System.Drawing.Color[] {
         System.Drawing.Color.Transparent,
         System.Drawing.Color.Transparent};
-      colorBlend2.Positions = new float[] {
+      colorBlend1.Positions = new float[] {
         0F,
         1F};
-      gradient2.ColorBlend = colorBlend2;
-      gradient2.GradientDirection = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
-      this.gradientControl.Gradient = gradient2;
+      gradient1.ColorBlend = colorBlend1;
+      gradient1.GradientDirection = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
+      this.gradientControl.Gradient = gradient1;
       this.gradientControl.Location = new System.Drawing.Point(0, 0);
       this.gradientControl.Name = "gradientControl";
       this.gradientControl.Size = new System.Drawing.Size(660, 86);
       this.gradientControl.TabIndex = 1;
       this.toolTip1.SetToolTip(this.gradientControl, "Define additional color stops by clicking on the gradient.\r\nModify color stops by" +
-              " clicking on the triangles.\r\nRemove a color stop by dragging it out of the gradi" +
-              "ent.");
+        " clicking on the triangles.\r\nRemove a color stop by dragging it out of the gradi" +
+        "ent.");
       this.gradientControl.GradientChanged += new System.EventHandler(this.gradientControl_GradientChanged);
       // 
       // toolStripContainer1
@@ -469,8 +471,8 @@ namespace Ogama.Modules.AttentionMap
       this.mnuTrafficLight.Name = "mnuTrafficLight";
       this.mnuTrafficLight.Size = new System.Drawing.Size(190, 22);
       this.mnuTrafficLight.Text = "Traffic light";
-      this.mnuTrafficLight.Paint += new System.Windows.Forms.PaintEventHandler(this.mnuTrafficLight_Paint);
       this.mnuTrafficLight.Click += new System.EventHandler(this.mnuTrafficLight_Click);
+      this.mnuTrafficLight.Paint += new System.Windows.Forms.PaintEventHandler(this.mnuTrafficLight_Paint);
       // 
       // mnuRainbow
       // 
@@ -478,8 +480,8 @@ namespace Ogama.Modules.AttentionMap
       this.mnuRainbow.Name = "mnuRainbow";
       this.mnuRainbow.Size = new System.Drawing.Size(190, 22);
       this.mnuRainbow.Text = "Rainbow";
-      this.mnuRainbow.Paint += new System.Windows.Forms.PaintEventHandler(this.mnuRainbow_Paint);
       this.mnuRainbow.Click += new System.EventHandler(this.mnuRainbow_Click);
+      this.mnuRainbow.Paint += new System.Windows.Forms.PaintEventHandler(this.mnuRainbow_Paint);
       // 
       // mnuBlackMask
       // 
@@ -487,16 +489,16 @@ namespace Ogama.Modules.AttentionMap
       this.mnuBlackMask.Name = "mnuBlackMask";
       this.mnuBlackMask.Size = new System.Drawing.Size(190, 22);
       this.mnuBlackMask.Text = "Black Mask";
-      this.mnuBlackMask.Paint += new System.Windows.Forms.PaintEventHandler(this.mnuBlackMask_Paint);
       this.mnuBlackMask.Click += new System.EventHandler(this.mnuBlackMask_Click);
+      this.mnuBlackMask.Paint += new System.Windows.Forms.PaintEventHandler(this.mnuBlackMask_Paint);
       // 
       // mnuCustomGradient
       // 
       this.mnuCustomGradient.Name = "mnuCustomGradient";
       this.mnuCustomGradient.Size = new System.Drawing.Size(190, 22);
       this.mnuCustomGradient.Text = "Custom";
-      this.mnuCustomGradient.Paint += new System.Windows.Forms.PaintEventHandler(this.mnuCustomGradient_Paint);
       this.mnuCustomGradient.Click += new System.EventHandler(this.mnuCustomGradient_Click);
+      this.mnuCustomGradient.Paint += new System.Windows.Forms.PaintEventHandler(this.mnuCustomGradient_Paint);
       // 
       // toolStripSeparator5
       // 
@@ -545,7 +547,7 @@ namespace Ogama.Modules.AttentionMap
       this.nudKernelSize.Size = new System.Drawing.Size(41, 23);
       this.nudKernelSize.Text = "201";
       this.nudKernelSize.ToolTipText = "This size determines the dimension of each fixation in pixel.\r\nIncreasing this va" +
-          "lue smoothes the fixation distribution visualization.";
+    "lue smoothes the fixation distribution visualization.";
       this.nudKernelSize.Value = new decimal(new int[] {
             201,
             0,
@@ -646,7 +648,7 @@ namespace Ogama.Modules.AttentionMap
       this.nudFixNumber.Size = new System.Drawing.Size(41, 22);
       this.nudFixNumber.Text = "1";
       this.nudFixNumber.ToolTipText = "The number of the fixation in this trial to use in calculation.\r\nFor example, sho" +
-          "w only first fixation (1) or second (2).";
+    "w only first fixation (1) or second (2).";
       this.nudFixNumber.Value = new decimal(new int[] {
             1,
             0,
@@ -733,9 +735,11 @@ namespace Ogama.Modules.AttentionMap
       this.toolStripContainer1.PerformLayout();
       this.spcPictureGradient.Panel1.ResumeLayout(false);
       this.spcPictureGradient.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.spcPictureGradient)).EndInit();
       this.spcPictureGradient.ResumeLayout(false);
       this.spcPicAndList.Panel1.ResumeLayout(false);
       this.spcPicAndList.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.spcPicAndList)).EndInit();
       this.spcPicAndList.ResumeLayout(false);
       this.toolStripContainer2.BottomToolStripPanel.ResumeLayout(false);
       this.toolStripContainer2.BottomToolStripPanel.PerformLayout();

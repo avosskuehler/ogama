@@ -1,2 +1,2 @@
-5.0.5614.0
-This introduces SQLite, SmartEye and bugfixes.
+5.1.7759.0
+This removes the flash dependency.

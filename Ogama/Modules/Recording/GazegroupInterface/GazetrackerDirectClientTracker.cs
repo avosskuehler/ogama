@@ -125,6 +125,7 @@ namespace Ogama.Modules.Recording.GazegroupInterface
       Properties.Settings.Default.EyeTrackerSettingsPath + "GazetrackerDirectClientSetting.xml")
     {
       this.adjustButton = trackerAdjustButton;
+      Tracker.RemoveClickEvent(this.adjustButton);
       this.adjustButton.Click += this.AdjustButtonClick;
       this.showOnSecondaryScreenButton = trackerShowOnSecondaryScreenButton;
       this.showOnSecondaryScreenButton.Click += this.BtnShowOnPresentationScreenClick;

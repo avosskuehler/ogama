@@ -17,7 +17,9 @@
 namespace Ogama.Modules.Recording.TrackerBase
 {
   using System;
+  using System.ComponentModel;
   using System.Drawing;
+  using System.Reflection;
   using System.Windows.Forms;
   using System.Xml;
   using System.Xml.Serialization;
@@ -173,19 +175,38 @@ namespace Ogama.Modules.Recording.TrackerBase
       this.subject = new SubjectsData();
 
       // Wire button events.
+      RemoveClickEvent(this.recordButton);
       this.recordButton.Click += this.BtnRecordClick;
 
       if (this.calibrateButton != null)
       {
+        RemoveClickEvent(this.calibrateButton);
         this.calibrateButton.Click += this.BtnCalibrateClick;
       }
 
+      RemoveClickEvent(this.subjectButton);
       this.subjectButton.Click += this.BtnSubjectNameClick;
 
       if (this.connectButton != null)
       {
+        RemoveClickEvent(this.connectButton);
         this.connectButton.Click += this.BtnConnectClick;
       }
+    }
+
+    /// <summary>
+    /// Removes all existing event handlers for the Buttons Click event, if there are any
+    /// </summary>
+    /// <param name="b">The Button to prepare.</param>
+    public static void RemoveClickEvent(Button b)
+    {
+      FieldInfo f1 = typeof(Control).GetField("EventClick", BindingFlags.Static | BindingFlags.NonPublic);
+
+      object obj = f1.GetValue(b);
+      PropertyInfo pi = b.GetType().GetProperty("Events", BindingFlags.NonPublic | BindingFlags.Instance);
+
+      EventHandlerList list = (EventHandlerList)pi.GetValue(b, null);
+      list.RemoveHandler(obj, list[obj]);
     }
 
     #endregion

@@ -197,6 +197,18 @@ namespace Ogama.Modules.Recording.TobiiInterface
         Properties.Settings.Default.EyeTrackerSettingsPath + "TobiiSetting.xml")
     {
       // Call the initialize methods of derived classes
+      try
+      {
+        TobiiTracker.StaticInitialize();
+      }
+      catch (Exception ex)
+      {
+        ExceptionMethods.ProcessErrorMessage(
+          "The tobii SDK could not be initialized, the tobii record interface will not be"
+          + "available. Please install apple bonjour, if this is a module load error."
+          + ex.Message);
+      }
+
       this.Initialize();
     }
 
